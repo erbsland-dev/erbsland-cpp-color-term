@@ -1,0 +1,34 @@
+// Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+// SPDX-License-Identifier: Apache-2.0
+#pragma once
+
+
+#include <erbsland/cterm/all.hpp>
+
+#include <vector>
+
+
+namespace demo::retroplasma {
+
+
+using namespace erbsland::cterm;
+
+
+/// Render an animated plasma effect into a terminal buffer.
+class PlasmaRenderer final {
+public:
+    /// Draw the plasma effect into the selected rectangle.
+    /// @param buffer The destination buffer.
+    /// @param rect The target rectangle.
+    /// @param phase The animation phase.
+    /// @param paletteIndex The selected palette.
+    void render(Buffer &buffer, Rectangle rect, double phase, std::size_t paletteIndex) const noexcept;
+
+private:
+    [[nodiscard]] static auto palettes() -> const std::vector<ColorSequence> &;
+    [[nodiscard]] static auto valueAt(Position position, Rectangle rect, double phase) noexcept -> double;
+    [[nodiscard]] static auto cellForValue(double normalizedValue, std::size_t paletteIndex) -> Char;
+};
+
+
+}
