@@ -1,0 +1,41 @@
+name: Docs
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+
+      - name: Install Python dependencies from requirements.txt
+        run: pip install -r doc/requirements.txt
+
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen -y
+        shell: bash
+
+      - name: Build documentation
+        run: sphinx-build doc _build
+
+      - name: Set CNAME if in public repo
+        id: cname
+        run: |
+          if [ "${{ github.repository }}" = "erbsland-dev/erbsland-cpp-color-term" ]; then
+            echo "CNAME=color-term.erbsland.dev" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/
+          force_orphan: true
+          cname: ${{ env.CNAME }}
