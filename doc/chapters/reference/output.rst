@@ -36,7 +36,7 @@ full-screen terminal applications.
     buffer.drawFilledFrame(
         panel,
         FrameStyle::LightWithRoundedCorners,
-        Char{" ", Color{fg::Default, bg::Blue}});
+        Char{" ", Color{fg::Inherited, bg::Blue}});
     buffer.drawText(
         "Frame and buffer rendering",
         panel.insetBy(Margins{2}),
@@ -49,6 +49,9 @@ full-screen terminal applications.
 In this workflow, the entire screen is prepared in memory and then
 rendered to the terminal in one operation. This approach makes complex
 layouts and animations easier to manage.
+
+Within buffers, ``Inherited`` means “keep the color that is already below”.
+If you need an explicit reset to the terminal default color, use ``Default``.
 
 Combining Frames Automatically
 ------------------------------
@@ -66,6 +69,55 @@ overlapping characters so the resulting frame lines match correctly.
 
 This mechanism ensures that intersecting frames produce consistent box
 drawing characters instead of overlapping glyphs.
+
+Repeating 9-Tile Styles
+-----------------------
+
+``Tile9Style`` fills or frames a rectangle with a repeating 3x3 tile
+layout. This is useful when the border needs different corner, edge,
+and center tiles, but should still stretch cleanly to any size.
+
+.. code-block:: cpp
+
+    const auto panel = Rectangle{2, 2, 30, 10};
+    const auto style = Tile9Style::create("╔═╗║ ║╚═╝");
+
+    buffer.fill(panel, style, Color{fg::BrightBlack, bg::Black});
+    buffer.drawFrame(panel, style, Color{fg::BrightCyan, bg::Black});
+
+The 9-tile layout covers the normal 3x3 cases. If you also need
+special tiles for rectangles that collapse to a single row, a single
+column, or a single cell, construct the style with 16 characters
+instead.
+
+Direct Writes, Line Buffering, and Smart Overwrites
+---------------------------------------------------
+
+``Terminal::print()`` and ``Terminal::write(std::string_view)`` use line
+buffering by default. Partial lines stay buffered until a newline is
+written or ``flush()`` is called. This keeps incremental log output tidy.
+
+For full-screen applications, ``updateScreen()`` can also keep a back
+buffer and only rewrite cells that changed since the previous frame.
+
+.. code-block:: cpp
+
+    terminal.setRefreshMode(Terminal::RefreshMode::Overwrite);
+    terminal.setBackBufferEnabled(true);
+
+    while (running) {
+        terminal.updateScreen(buffer);
+        terminal.flush();
+    }
+
+The smart overwrite path is used when ``RefreshMode::Overwrite`` is
+active and the terminal back buffer is enabled. If you need every text
+write to appear immediately, disable line buffering with
+``setLineBufferEnabled(false)``.
+
+``write(const Buffer &)`` is the low-level escape hatch when you want to
+dump a buffer exactly as-is without clipping, crop marks, or diff-based
+screen updates.
 
 .. figure:: /images/frame-weaver3.jpg
     :width: 100%
@@ -95,6 +147,11 @@ Interface
 .. doxygenclass:: erbsland::cterm::MatrixCombinationStyle
     :members:
 
+.. doxygenclass:: erbsland::cterm::Tile9Style
+    :members:
+
+.. doxygentypedef:: erbsland::cterm::Tile9StylePtr
+
 .. doxygenenum:: erbsland::cterm::FrameStyle
 
 .. doxygenclass:: erbsland::cterm::UpdateSettings
@@ -104,4 +161,3 @@ Interface
     :members:
 
 .. doxygentypedef:: erbsland::cterm::TerminalPtr
-

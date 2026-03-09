@@ -28,10 +28,10 @@ Replace the source file with the following final tutorial version:
     auto buildFooter() -> String {
         auto footer = String{};
         for (const auto &character : String{"[Q]"}) {
-            footer.append(character.withColor({fg::BrightYellow, bg::BrightBlack}));
+            footer.append(character.withColorOverlay({fg::BrightYellow, bg::BrightBlack}));
         }
         for (const auto &character : String{" quit  [C] recolor"}) {
-            footer.append(character.withColor({fg::BrightWhite, bg::BrightBlack}));
+            footer.append(character.withColorOverlay({fg::BrightWhite, bg::BrightBlack}));
         }
         return footer;
     }
@@ -71,7 +71,7 @@ Replace the source file with the following final tutorial version:
             }
 
             auto buffer = Buffer{terminal.size() - Size{1, 1}};
-            buffer.fill(Char{" ", Color{fg::Default, bg::Black}});
+            buffer.fill(Char{" ", {fg::BrightWhite, bg::Black}});
 
             const auto canvas = Rectangle{0, 0, buffer.size().width(), buffer.size().height()};
             const auto titleRect = canvas.subRectangle(Anchor::TopCenter, Size{0, 6}, Margins{1, 2, 0, 2});
@@ -87,14 +87,14 @@ Replace the source file with the following final tutorial version:
             buffer.drawFilledFrame(
                 contentRect,
                 FrameStyle::LightWithRoundedCorners,
-                Char{" ", Color{fg::Default, bg::BrightBlack}});
+                Char{" ", bg::BrightBlack});
             buffer.drawText(
                 "Resize the terminal, press C to switch the title colors, or Q to quit.",
                 contentRect.insetBy(Margins{2, 2, 2, 2}),
                 Alignment::Center,
                 Color{fg::BrightWhite, bg::BrightBlack});
 
-            buffer.fill(footerRect, Char{" ", Color{fg::Default, bg::BrightBlack}});
+            buffer.fill(footerRect, Char{" ", bg::BrightBlack});
             buffer.drawText(Text{buildFooter(), footerRect, Alignment::CenterLeft});
 
             terminal.updateScreen(buffer);
@@ -133,4 +133,3 @@ terminal dashboards, games, and command-line tools.
     :class: sd-fs-5 sd-font-weight-bold sd-p-2 sd-my-4
 
     Continue with the Next Steps →
-

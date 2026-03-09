@@ -5,9 +5,9 @@
 
 #include "ColorRole.hpp"
 
+#include <array>
 #include <string>
 #include <string_view>
-#include <unordered_map>
 
 
 namespace erbsland::cterm {
@@ -18,23 +18,26 @@ class ColorBase {
 public:
     /// Internal color identifiers used for ANSI conversion and parsing.
     enum class Value : uint8_t {
-        Black = 0,
-        Red = 1,
-        Green = 2,
-        Yellow = 3,
-        Blue = 4,
-        Magenta = 5,
-        Cyan = 6,
-        White = 7,
-        Default = 9,
-        BrightBlack = 60,
-        BrightRed = 61,
-        BrightGreen = 62,
-        BrightYellow = 63,
-        BrightBlue = 64,
-        BrightMagenta = 65,
-        BrightCyan = 66,
-        BrightWhite = 67,
+        Black = 0,     ///< Black
+        Red,           ///< Dark red
+        Green,         ///< Dark green
+        Yellow,        ///< Dark yellow
+        Blue,          ///< Dark blue
+        Magenta,       ///< Dark magenta
+        Cyan,          ///< Dark cyan
+        White,         ///< Light gray
+        BrightBlack,   ///< Gray
+        BrightRed,     ///< Bright red
+        BrightGreen,   ///< Bright green
+        BrightYellow,  ///< Yellow
+        BrightBlue,    ///< Blue
+        BrightMagenta, ///< Magenta
+        BrightCyan,    ///< Cyan
+        BrightWhite,   ///< White
+        Default,       ///< The default color of the terminal
+        Inherited,     ///< Inherited color from the layer below, or use the default color.
+
+        _Count,
     };
 
 protected:
@@ -47,17 +50,30 @@ public: // operators
     /// Compare two color base values for inequality.
     auto operator!=(const ColorBase &) const noexcept -> bool = default;
 
+public: // conversion
+    /// Convert the color name to a string.
+    [[nodiscard]] auto toString() const -> std::string;
+
 protected:
     /// Create a color enum from the given string.
     /// @return The color enum.
     /// @throws std::invalid_argument if the color does not exist.
     [[nodiscard]] static auto enumFromString(std::string_view str) -> Value;
-
     /// Create brighter enum
     [[nodiscard]] static auto brighterEnum(Value value) -> Value;
 
 protected:
-    Value _value{Value::Default};
+    struct TableEntry {
+        Value value;
+        int ansiCode;
+        std::string_view name;
+    };
+    using ColorTable = std::array<TableEntry, static_cast<std::size_t>(Value::_Count)>;
+    [[nodiscard]] auto tableEntry() const noexcept -> const TableEntry &;
+    [[nodiscard]] static auto colorTable() noexcept -> const ColorTable &;
+
+protected:
+    Value _value{Value::Inherited};
 };
 
 
@@ -82,7 +98,6 @@ public: // public types
     constexpr static auto Magenta = Hue{Value::Magenta};
     constexpr static auto Cyan = Hue{Value::Cyan};
     constexpr static auto White = Hue{Value::White};
-    constexpr static auto Default = Hue{Value::Default};
     constexpr static auto BrightBlack = Hue{Value::BrightBlack};
     constexpr static auto BrightRed = Hue{Value::BrightRed};
     constexpr static auto BrightGreen = Hue{Value::BrightGreen};
@@ -91,9 +106,12 @@ public: // public types
     constexpr static auto BrightMagenta = Hue{Value::BrightMagenta};
     constexpr static auto BrightCyan = Hue{Value::BrightCyan};
     constexpr static auto BrightWhite = Hue{Value::BrightWhite};
+    constexpr static auto Default = Hue{Value::Default};
+    constexpr static auto Inherited = Hue{Value::Inherited};
 
 public: // ctors/dtor/assign/move
-    /// Create the default terminal color for this role.
+    /// Create the inherited color for this role.
+    /// The inherited color uses the value from the layer below, or the terminal default if no lower layer exists.
     ColorPart() = default;
     /// Create a color from one of the predefined hue constants.
     /// @param color The named hue.
@@ -108,7 +126,7 @@ public: // operators
 public: // conversion
     /// Convert this color part to its ANSI SGR numeric code.
     /// @return The numeric ANSI code for this color role.
-    [[nodiscard]] auto ansiCode() const noexcept -> int { return static_cast<int>(_value) + cCodeBase; }
+    [[nodiscard]] auto ansiCode() const noexcept -> int { return tableEntry().ansiCode + cCodeBase; }
     /// Create the bright variant of this color.
     /// @return The brightened color, or the unchanged color if no brighter variant exists.
     [[nodiscard]] auto brighter() const noexcept -> ColorPart { return ColorPart{Hue{brighterEnum(_value)}}; }
@@ -120,6 +138,25 @@ public: // tools
     /// @throws std::invalid_argument if the color does not exist.
     [[nodiscard]] static auto fromString(const std::string_view str) -> ColorPart {
         return ColorPart{Hue{enumFromString(str)}};
+    }
+    /// Create a color from the given index.
+    /// @param index The index from 0 (black) to 15 (bright white), <0 = inherited, 16+ = default
+    /// @return The color.
+    [[nodiscard]] static auto fromIndex16(const int index) -> ColorPart {
+        if (index < 0) {
+            return ColorPart{Hue{Value::Inherited}};
+        }
+        if (index > 15) {
+            return ColorPart{Hue{Value::Default}};
+        }
+        return ColorPart{Hue{static_cast<Value>(index)}};
+    }
+
+    /// Access an array with all base color.
+    /// Use with `.brigther()` to get the bright color variants.
+    [[nodiscard]] static auto allBaseColors() noexcept
+        -> std::array<ColorPart, static_cast<std::size_t>(Value::_Count)> {
+        return {Black, Red, Green, Yellow, Blue, Magenta, Cyan, White};
     }
 };
 

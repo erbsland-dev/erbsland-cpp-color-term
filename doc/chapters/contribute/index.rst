@@ -22,7 +22,7 @@ We welcome your input in many forms:
 
 - **Found a bug?** Please `open an issue <https://github.com/erbsland-dev/erbsland-cpp-color-term/issues/new>`_ to let us know.
 - **Have a feature request?** We’re happy to hear your ideas—please `open an issue <https://github.com/erbsland-dev/erbsland-cpp-color-term/issues/new>`_.
-- **Have a question?** Feel free to `start a discussion <https://github.com/erbsland-dev/erbsland-cpp-color-term/discussions>`_``. We’re glad to help!
+- **Have a question?** Feel free to `start a discussion <https://github.com/erbsland-dev/erbsland-cpp-color-term/discussions>`_. We’re glad to help!
 
 Pull Requests
 =============

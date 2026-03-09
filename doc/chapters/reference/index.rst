@@ -6,24 +6,11 @@
 Reference
 *********
 
-.. toctree::
-    :hidden:
-    :maxdepth: 1
-
-    bitmap
-    color
-    font
-    geometry
-    input
-    output
-    text
-
-Alphabetical
-============
+.. rubric:: Alphabetical
 
 .. list-table::
     :header-rows: 1
-    :widths: 30 70
+    :widths: 40 60
     :width: 100%
 
     *   - Name
@@ -36,6 +23,12 @@ Alphabetical
         - The background color.
     *   - :doc:`Bitmap<bitmap>`
         - A mutable bitmap storing boolean pixels in row-major order.
+    *   - :doc:`BitmapColorMode<bitmap>`
+        - The mode how color is applied to the bitmap.
+    *   - :doc:`BitmapDrawOptions<bitmap>`
+        - The options to draw a bitmap.
+    *   - :doc:`BitmapScaleMode<bitmap>`
+        - The mode how the bitmap is scaled.
     *   - :doc:`BlockStringLines<text>`
         - A sequence of wrapped terminal text lines.
     *   - :doc:`Buffer<output>`
@@ -45,11 +38,11 @@ Alphabetical
     *   - :doc:`Char16Style<output>`
         - Defines a style for drawing tiles.
     *   - :doc:`Char16StylePtr<output>`
-        - Shared pointer to a ``Char16Style`` instance.
+        - Shared pointer for Char16Style
     *   - :doc:`CharCombinationStyle<output>`
         - A style how two characters are visually combined to a new one.
     *   - :doc:`CharCombinationStylePtr<output>`
-        - Shared pointer to a ``CharCombinationStyle`` instance.
+        - Shared pointer for CharCombinationStyle
     *   - :doc:`Color<color>`
         - A foreground/background color pair for terminal rendering.
     *   - :doc:`ColorBase<color>`
@@ -59,9 +52,9 @@ Alphabetical
     *   - :doc:`ColorPart<color>`
         - A foreground or background color.
     *   - :doc:`ColorRole<color>`
-        - Distinguishes between foreground and background color parts.
+        - The type color.
     *   - :doc:`ColorSequence<color>`
-        - A configurable sequence of complete colors with run-length style counts.
+        - A configurable sequence of complete Color values with run-length style counts.
     *   - :doc:`Direction<geometry>`
         - A direction in a 2D grid.
     *   - :doc:`Font<font>`
@@ -73,7 +66,7 @@ Alphabetical
     *   - :doc:`Foreground<color>`
         - The foreground color.
     *   - :doc:`FrameStyle<output>`
-        - Predefined styles for drawing frames and boxes.
+        - Various box styles
     *   - :doc:`Input<input>`
         - Reads key presses from the console depending on the configured mode.
     *   - :doc:`InputDefinition<input>`
@@ -104,17 +97,20 @@ Alphabetical
         - Describes a text block to render into a Buffer.
     *   - :doc:`TextAnimation<text>`
         - Supported text animation styles used by Buffer::renderText().
+    *   - :doc:`Tile9Style<output>`
+        - Defines a style for repeating a 3x3 tile pattern across a rectangle.
+    *   - :doc:`Tile9StylePtr<output>`
+        - Shared pointer for Tile9Style
     *   - :doc:`UpdateSettings<output>`
-        - Settings controlling how ``Terminal::updateScreen()`` renders a buffer.
+        - Settings controlling how Terminal::updateScreen() renders a buffer.
     *   - :doc:`bg<color>`
-        - Short alias for ``Background``.
+        - Short alias for Background.
     *   - :doc:`createInputForPlatform<input>`
-        - Create the platform-specific input backend for the current process.
+        -
     *   - :doc:`fg<color>`
-        - Short alias for ``Foreground``.
+        - Short alias for Foreground.
 
-By Topic
-========
+.. rubric:: By Topic
 
 .. list-table::
     :header-rows: 1
@@ -124,16 +120,28 @@ By Topic
     *   -   Topic
         -   Description
     *   -   :doc:`Bitmap <bitmap>`
-        -   The low-level bitmap class allows to prepare masks for rendering various shapes on an output buffer.
+        -   Bitmap is the low-level pixel container used by the library whenever a boolean mask needs to be rendered, copied, or transformed. A bitmap stores only on/off pixels; the actual terminal representation is chosen later by Buffer::drawBitmap() and BitmapDrawOptions.
     *   -   :doc:`Color <color>`
-        -   Work with the basic 16 colors using the color classes.
+        -   The color classes provide access to the standard 16 terminal colors and their combinations. They are used to style terminal output, buffer cells, and text elements throughout the library.
     *   -   :doc:`Font <font>`
-        -   With these classes, you can define and render large fonts on a terminal.
+        -   The font classes allow you to render large bitmap-based text directly in the terminal. Fonts are primarily used for titles, banners, and other decorative elements in terminal interfaces.
     *   -   :doc:`Geometry <geometry>`
-        -   The geometry classes provide a simple interface to perform various operations on an output buffer.
+        -   The geometry classes provide the building blocks for positioning and layout inside a terminal buffer. They describe sizes, positions, rectangles, and directions, and allow you to derive new regions from existing ones.
     *   -   :doc:`Input <input>`
-        -   Use the input interface to get interactive keyboard input from the terminal.
+        -   The input classes provide access to keyboard input from the terminal. They are designed for interactive applications such as dashboards, tools, and terminal games that need immediate key handling.
     *   -   :doc:`Output <output>`
-        -   For displaying text, you can prepare a buffer or directly write to the terminal.
+        -   The output classes provide the core rendering workflow for terminal applications. You can either write text directly to the terminal or prepare a full-screen buffer and render it in a single update.
     *   -   :doc:`Text <text>`
-        -   The text classes allow preparing, formatting and animating colored text.
+        -   The text classes provide utilities for constructing, formatting, and rendering colored text in terminal buffers. They support mixed styles, Unicode-aware layout, and animated text effects.
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    bitmap
+    color
+    font
+    geometry
+    input
+    output
+    text

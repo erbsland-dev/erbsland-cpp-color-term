@@ -3,6 +3,8 @@
 #include "InputWin32.hpp"
 
 
+#include "InputFactory.hpp"
+
 #include <conio.h>
 #include <windows.h>
 
@@ -137,7 +139,7 @@ auto InputWin32::readKey(const std::chrono::milliseconds timeout) const -> Key {
 }
 
 
-auto createInputForPlatform() -> std::unique_ptr<Input> {
+auto impl::createInputForPlatform() -> std::unique_ptr<Input> {
     return std::make_unique<InputWin32>();
 }
 

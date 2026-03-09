@@ -14,7 +14,7 @@ namespace erbsland::cterm {
 
 /// Settings controlling how `Terminal::updateScreen()` renders a buffer.
 class UpdateSettings final {
-public: // ctors/dtor/assign/move
+public:
     /// Create default screen update settings.
     UpdateSettings() = default;
     /// Create screen update settings with explicit values.
@@ -24,17 +24,12 @@ public: // ctors/dtor/assign/move
     /// @param cropMarkRight The mark rendered in the last visible column when content is cropped on the right.
     /// @param cropMarkBottom The mark rendered in the last visible row when content is cropped at the bottom.
     UpdateSettings(
-        Size minimumSize,
-        Char minimumSizeMark,
-        bool showCropMarks,
-        Char cropMarkRight,
-        Char cropMarkBottom) noexcept :
+        Size minimumSize, Char minimumSizeMark, bool showCropMarks, Char cropMarkRight, Char cropMarkBottom) noexcept :
         _minimumSize{minimumSize},
         _minimumSizeMark{std::move(minimumSizeMark)},
         _showCropMarks{showCropMarks},
         _cropMarkRight{std::move(cropMarkRight)},
-        _cropMarkBottom{std::move(cropMarkBottom)} {
-    }
+        _cropMarkBottom{std::move(cropMarkBottom)} {}
 
 public: // accessors
     /// Get the minimum terminal size required for rendering the buffer.

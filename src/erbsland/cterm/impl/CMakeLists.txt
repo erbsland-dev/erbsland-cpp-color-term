@@ -4,6 +4,7 @@ target_sources(erbsland-color-term PRIVATE
         CommonBoxFrameStyle.cpp
         FontDefaultAscii.cpp
         TextUtil.hpp
+        TypeTraits.hpp
         U8Buffer.hpp
         UnicodeWidth.cpp
         UnicodeWidth.hpp

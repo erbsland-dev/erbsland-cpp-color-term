@@ -86,19 +86,19 @@ void FrameWeaverApp::addFrame() noexcept {
 void FrameWeaverApp::renderFrame() {
     _terminal.testScreenSize();
     auto buffer = Buffer{canvasSize()};
-    buffer.fill(Char{" ", Color{fg::Default, bg::Black}});
+    buffer.fill(Char{" ", bg::Black});
     if (buffer.size().width() < 32 || buffer.size().height() < 10) {
         buffer.drawText(
             "Resize the terminal to at least 32x10 cells for the frame demo.",
             Rectangle{0, 0, buffer.size().width(), buffer.size().height()},
             Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
+            {fg::BrightWhite, bg::Black});
     } else {
         const auto titleRect = Rectangle{0, 0, buffer.size().width(), 1};
         const auto contentRect = Rectangle{0, 1, buffer.size().width(), buffer.size().height() - 2};
         const auto footerRect = Rectangle{0, buffer.size().height() - 1, buffer.size().width(), 1};
-        buffer.fill(titleRect, Char{" ", Color{fg::Default, bg::Blue}});
-        buffer.fill(footerRect, Char{" ", Color{fg::Default, bg::BrightBlack}});
+        buffer.fill(titleRect, Char{" ", bg::Blue});
+        buffer.fill(footerRect, Char{" ", bg::BrightBlack});
         buffer.drawText(
             std::format(
                 "Frame Weaver  |  frames {:02d}/20  |  interval {:.2f}s  |  mode {}",
@@ -119,8 +119,15 @@ void FrameWeaverApp::renderFrame() {
 
 void FrameWeaverApp::renderFrames(Buffer &buffer, const Rectangle contentRect) const {
     for (const auto &frame : _frames) {
-        buffer.drawFrame(
-            frameRectangle(frame, contentRect), frame.style, CharCombinationStyle::commonBoxFrame(), frame.color);
+        if (frame.customStyle != nullptr) {
+            buffer.drawFrame(
+                frameRectangle(frame, contentRect),
+                frame.customStyle,
+                CharCombinationStyle::commonBoxFrame(),
+                frame.color);
+        } else {
+            buffer.drawFrame(frameRectangle(frame, contentRect), frame.style, frame.color);
+        }
     }
 }
 
@@ -133,14 +140,17 @@ auto FrameWeaverApp::createRandomFrame() -> FrameSpec {
     auto styleDistribution = std::uniform_int_distribution<std::size_t>{0, styles.size() - 1};
     const auto &colorPalette = colors();
     auto colorDistribution = std::uniform_int_distribution<std::size_t>{0, colorPalette.sequenceLength() - 1};
-    return {
+    auto frame = FrameSpec{
         .x = factorDistribution(_rng),
         .y = factorDistribution(_rng),
         .width = widthDistribution(_rng),
         .height = heightDistribution(_rng),
-        .style = styles[styleDistribution(_rng)],
         .color = colorPalette.color(colorDistribution(_rng)),
     };
+    const auto &style = styles[styleDistribution(_rng)];
+    frame.style = style.style;
+    frame.customStyle = style.customStyle;
+    return frame;
 }
 
 
@@ -166,16 +176,16 @@ auto FrameWeaverApp::prismFrameStyle() -> const Char16StylePtr & {
         Char{"∙"},
         Char{"╶"},
         Char{"╷"},
-        Char{"←", Color{fg::BrightRed, bg::Red}},
+        Char{"←", fg::BrightRed, bg::Red},
         Char{"╴"},
         Char{"─"},
-        Char{"→", Color{fg::BrightBlue, bg::Blue}},
+        Char{"→", fg::BrightBlue, bg::Blue},
         Char{"┬"},
         Char{"╵"},
-        Char{"↓", Color{fg::BrightRed, bg::Red}},
+        Char{"↓", fg::BrightRed, bg::Red},
         Char{"│"},
         Char{"├"},
-        Char{"↓", Color{fg::BrightBlue, bg::Blue}},
+        Char{"↓", fg::BrightBlue, bg::Blue},
         Char{"┴"},
         Char{"┤"},
         Char{"┼"},
@@ -196,47 +206,47 @@ auto FrameWeaverApp::colors() -> const ColorSequence & {
 }
 
 
-auto FrameWeaverApp::availableStyles() const -> std::vector<Char16StylePtr> {
+auto FrameWeaverApp::availableStyles() const -> std::vector<FrameSpec> {
     switch (_styleMode) {
     case StyleMode::Light:
-        return {Char16Style::lightFrame()};
+        return {FrameSpec{.style = FrameStyle::Light}};
     case StyleMode::Double:
-        return {Char16Style::doubleFrame()};
+        return {FrameSpec{.style = FrameStyle::Double}};
     case StyleMode::Heavy:
-        return {Char16Style::heavyFrame()};
+        return {FrameSpec{.style = FrameStyle::Heavy}};
     case StyleMode::Mixed:
         return {
-            Char16Style::lightFrame(),
-            Char16Style::doubleFrame(),
-            Char16Style::heavyFrame(),
+            FrameSpec{.style = FrameStyle::Light},
+            FrameSpec{.style = FrameStyle::Double},
+            FrameSpec{.style = FrameStyle::Heavy},
         };
     case StyleMode::Block:
         return {
-            Char16Style::fullBlockFrame(),
-            Char16Style::fullBlockWithChamferFrame(),
-            Char16Style::outerHalfBlockFrame(),
-            Char16Style::innerHalfBlockFrame(),
+            FrameSpec{.style = FrameStyle::FullBlock},
+            FrameSpec{.style = FrameStyle::FullBlockWithChamfer},
+            FrameSpec{.style = FrameStyle::OuterHalfBlock},
+            FrameSpec{.style = FrameStyle::InnerHalfBlock},
         };
     case StyleMode::Custom:
-        return {prismFrameStyle()};
+        return {FrameSpec{.customStyle = prismFrameStyle()}};
     case StyleMode::All:
     default:
         return {
-            Char16Style::lightFrame(),
-            Char16Style::lightRoundedFrame(),
-            Char16Style::lightDoubleDashFrame(),
-            Char16Style::lightTripleDashFrame(),
-            Char16Style::lightQuadrupleDashFrame(),
-            Char16Style::heavyFrame(),
-            Char16Style::heavyDoubleDashFrame(),
-            Char16Style::heavyTripleDashFrame(),
-            Char16Style::heavyQuadrupleDashFrame(),
-            Char16Style::doubleFrame(),
-            Char16Style::fullBlockFrame(),
-            Char16Style::fullBlockWithChamferFrame(),
-            Char16Style::outerHalfBlockFrame(),
-            Char16Style::innerHalfBlockFrame(),
-            prismFrameStyle(),
+            FrameSpec{.style = FrameStyle::Light},
+            FrameSpec{.style = FrameStyle::LightWithRoundedCorners},
+            FrameSpec{.style = FrameStyle::LightDoubleDash},
+            FrameSpec{.style = FrameStyle::LightTripleDash},
+            FrameSpec{.style = FrameStyle::LightQuadrupleDash},
+            FrameSpec{.style = FrameStyle::Heavy},
+            FrameSpec{.style = FrameStyle::HeavyDoubleDash},
+            FrameSpec{.style = FrameStyle::HeavyTripleDash},
+            FrameSpec{.style = FrameStyle::HeavyQuadrupleDash},
+            FrameSpec{.style = FrameStyle::Double},
+            FrameSpec{.style = FrameStyle::FullBlock},
+            FrameSpec{.style = FrameStyle::FullBlockWithChamfer},
+            FrameSpec{.style = FrameStyle::OuterHalfBlock},
+            FrameSpec{.style = FrameStyle::InnerHalfBlock},
+            FrameSpec{.customStyle = prismFrameStyle()},
         };
     }
 }
@@ -265,34 +275,49 @@ auto FrameWeaverApp::modeName() const -> std::string_view {
 
 auto FrameWeaverApp::buildPrompt() const -> String {
     auto result = String{};
-    appendText(result, "[Q]", Color{fg::BrightYellow, bg::BrightBlack});
-    appendText(result, " quit  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[F]/[S]", Color{fg::BrightCyan, bg::BrightBlack});
-    appendText(result, " speed  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[C]", Color{fg::BrightMagenta, bg::BrightBlack});
-    appendText(result, " clear  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[1]", Color{fg::BrightGreen, bg::BrightBlack});
-    appendText(result, " light  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[2]", Color{fg::BrightGreen, bg::BrightBlack});
-    appendText(result, " double  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[3]", Color{fg::BrightGreen, bg::BrightBlack});
-    appendText(result, " heavy  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[4]", Color{fg::BrightGreen, bg::BrightBlack});
-    appendText(result, " mixed  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[5]", Color{fg::BrightGreen, bg::BrightBlack});
-    appendText(result, " block  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[6]", Color{fg::BrightGreen, bg::BrightBlack});
-    appendText(result, " custom  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[7]", Color{fg::BrightGreen, bg::BrightBlack});
-    appendText(result, " all", Color{fg::BrightWhite, bg::BrightBlack});
+    result.append(
+        fg::BrightYellow,
+        bg::BrightBlack,
+        "[Q]",
+        fg::BrightWhite,
+        " quit  ",
+        fg::BrightCyan,
+        "[F]/[S]",
+        fg::BrightWhite,
+        " speed  ",
+        fg::BrightMagenta,
+        "[C]",
+        fg::BrightWhite,
+        " clear  ",
+        fg::BrightGreen,
+        "[1]",
+        fg::BrightWhite,
+        " light  ",
+        fg::BrightGreen,
+        "[2]",
+        fg::BrightWhite,
+        " double  ",
+        fg::BrightGreen,
+        "[3]",
+        fg::BrightWhite,
+        " heavy  ",
+        fg::BrightGreen,
+        "[4]",
+        fg::BrightWhite,
+        " mixed  ",
+        fg::BrightGreen,
+        "[5]",
+        fg::BrightWhite,
+        " block  ",
+        fg::BrightGreen,
+        "[6]",
+        fg::BrightWhite,
+        " custom  ",
+        fg::BrightGreen,
+        "[7]",
+        fg::BrightWhite,
+        " all");
     return result;
-}
-
-
-void FrameWeaverApp::appendText(String &target, const std::string_view text, const Color color) {
-    for (const auto &character : String{text}) {
-        target.append(character.withColor(color));
-    }
 }
 
 

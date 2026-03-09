@@ -1,5 +1,5 @@
-// Copyright © 2026 by Tobias Erbsland / Erbsland DEV.
-// SPDX-License-Identifier: CC-BY-4.0
+// Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+// SPDX-License-Identifier: Apache-2.0
 #include "String.hpp"
 
 
@@ -10,7 +10,10 @@
 namespace erbsland::cterm {
 
 
-String::String(const std::string_view str) : _chars{splitCharacters(str)} {
+String::String(const std::string_view str, const Color color) : _chars{splitCharacters(str, color)} {
+}
+
+String::String(const std::u32string_view str, const Color color) : _chars{splitCharacters(str, color)} {
 }
 
 
@@ -70,7 +73,7 @@ auto String::splitParagraphs() const noexcept -> std::vector<String> {
     auto paragraph = String{};
     paragraph.reserve(_chars.size());
     for (const auto &character : _chars) {
-        if (character.charStr() == "\r" || character.charStr() == "\n") {
+        if (character.codePointCount() == 1 && character.codePoints()[0] == U'\n') {
             if (!paragraph.empty()) {
                 paragraphs.push_back(paragraph);
                 paragraph.clear();
@@ -188,19 +191,49 @@ auto String::wrapParagraphIntoLines(const int width) const noexcept -> std::vect
 }
 
 
-auto String::splitCharacters(const std::string_view str) -> std::vector<Char> {
+auto String::splitCharacters(const std::string_view str, const Color color) -> std::vector<Char> {
+    auto result = std::vector<Char>{};
+    // counting beforehand for memory allocation is more efficient as risk reallocations.
+    std::size_t visibleCharCount = 0;
+    impl::U8Buffer{str}.decodeAll([&](const char32_t codePoint) -> void {
+        if (isStringCharacter(codePoint)) {
+            visibleCharCount += 1;
+        }
+    });
+    result.reserve(visibleCharCount);
+    impl::U8Buffer{str}.decodeAll([&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color); });
+    return result;
+}
+
+auto String::splitCharacters(const std::u32string_view str, const Color color) -> std::vector<Char> {
     auto result = std::vector<Char>{};
     result.reserve(str.size());
-    impl::U8Buffer{str}.decodeAll([&](const char32_t codePoint) -> void {
-        std::string characterText;
-        impl::U8Buffer<const char>::encodeChar(characterText, codePoint);
-        if (impl::consoleCharacterWidth(codePoint) == 0 && codePoint >= 0x20 && !result.empty()) {
-            result.back() = Char{result.back().charStr() + characterText, result.back().color()};
-            return;
-        }
-        result.emplace_back(characterText, Color{});
-    });
+    for (const auto codePoint : str) {
+        appendCodePoint(result, codePoint, color);
+    }
     return result;
+}
+
+auto String::isStringCharacter(const char32_t codePoint) noexcept -> bool {
+    return codePoint == U'\t' || codePoint == U'\n' ||
+        (!isControlCode(codePoint) && codePoint >= 0x20 && impl::consoleCharacterWidth(codePoint) > 1);
+}
+
+void String::appendCodePoint(std::vector<Char> &chars, const char32_t codePoint, const Color color) {
+    if (codePoint == U'\t' || codePoint == U'\n') {
+        chars.emplace_back(codePoint, color);
+        return;
+    }
+    if (isControlCode(codePoint)) {
+        return;
+    }
+    if (impl::consoleCharacterWidth(codePoint) == 0) {
+        if (!chars.empty()) { // drop combining characters at the beginning of a text.
+            chars.back() = chars.back().withCombining(codePoint);
+        }
+        return;
+    }
+    chars.emplace_back(codePoint, color);
 }
 
 

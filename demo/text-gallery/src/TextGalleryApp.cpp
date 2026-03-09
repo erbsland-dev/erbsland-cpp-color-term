@@ -45,7 +45,7 @@ void TextGalleryApp::handleKey(const Key &key) noexcept {
 void TextGalleryApp::renderFrame() {
     _terminal.testScreenSize();
     auto buffer = Buffer{canvasSize()};
-    buffer.fill(Char{" ", Color{fg::Default, bg::Black}});
+    buffer.fill(Char{" ", bg::Black});
     if (buffer.size().width() < 38 || buffer.size().height() < 14) {
         buffer.drawText(
             "Resize the terminal to at least 38x14 cells for the text gallery.",
@@ -93,8 +93,8 @@ void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRec
         "Small panels are an easy way to compare alignment and wrapping side by side.",
         Alignment::TopLeft,
         FrameStyle::Light,
-        Color{fg::Default, bg::BrightBlack},
-        Color{fg::BrightWhite, bg::BrightBlack});
+        Color{fg::White, bg::BrightBlack},
+        Color{fg::White, bg::BrightBlack});
     drawPanel(
         buffer,
         Rectangle{contentRect.x1() + columnWidth + gap, contentRect.y1(), columnWidth, rowHeight},
@@ -102,8 +102,8 @@ void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRec
         "The same paragraph can be centered without a custom layout engine.",
         Alignment::Center,
         FrameStyle::Heavy,
-        Color{fg::Default, bg::Blue},
-        Color{fg::BrightWhite, bg::Blue});
+        Color{fg::BrightBlue, bg::Blue},
+        Color{fg::BrightBlue, bg::Blue});
     drawPanel(
         buffer,
         Rectangle{contentRect.x1(), contentRect.y1() + rowHeight + gap, columnWidth, rowHeight},
@@ -111,8 +111,8 @@ void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRec
         "Right and bottom alignment stay readable even inside narrow frames.",
         Alignment::BottomRight,
         FrameStyle::Double,
-        Color{fg::Default, bg::Magenta},
-        Color{fg::BrightWhite, bg::Magenta});
+        Color{fg::BrightMagenta, bg::Magenta},
+        Color{fg::BrightMagenta, bg::Magenta});
     drawPanel(
         buffer,
         Rectangle{contentRect.x1() + columnWidth + gap, contentRect.y1() + rowHeight + gap, columnWidth, rowHeight},
@@ -120,8 +120,8 @@ void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRec
         "Wrapping respects the box width, while alignment still decides where each line starts.",
         Alignment::TopCenter,
         FrameStyle::LightWithRoundedCorners,
-        Color{fg::Default, bg::Cyan},
-        Color{fg::Black, bg::Cyan});
+        Color{fg::BrightCyan, bg::Cyan},
+        Color{fg::BrightCyan, bg::Cyan});
 }
 
 
@@ -135,7 +135,7 @@ void TextGalleryApp::drawMixedWidthPage(Buffer &buffer, const Rectangle contentR
         "the renderer measures each character width instead of counting bytes.",
         Alignment::Center,
         FrameStyle::Light,
-        Color{fg::Default, bg::BrightBlack},
+        bg::BrightBlack,
         Color{fg::BrightWhite, bg::BrightBlack});
 
     const auto lowerY = contentRect.y1() + topHeight + 1;
@@ -148,7 +148,7 @@ void TextGalleryApp::drawMixedWidthPage(Buffer &buffer, const Rectangle contentR
         "A界B  C東京D  E文字F\nCentered text keeps the wide glyphs balanced.",
         Alignment::Center,
         FrameStyle::Heavy,
-        Color{fg::Default, bg::Blue},
+        bg::Blue,
         Color{fg::BrightWhite, bg::Blue});
     drawPanel(
         buffer,
@@ -157,7 +157,7 @@ void TextGalleryApp::drawMixedWidthPage(Buffer &buffer, const Rectangle contentR
         "右寄せ with ASCII, kana, and kanji.\nZürich, 東京, Kyoto, and 大阪 all line up cleanly.",
         Alignment::BottomRight,
         FrameStyle::Double,
-        Color{fg::Default, bg::Magenta},
+        bg::Magenta,
         Color{fg::BrightWhite, bg::Magenta});
 }
 
@@ -182,7 +182,7 @@ void TextGalleryApp::drawBitmapFontPage(Buffer &buffer, const Rectangle contentR
         "around it, so a page can mix dramatic headlines with practical terminal UI copy.",
         Alignment::TopCenter,
         FrameStyle::LightWithRoundedCorners,
-        Color{fg::Default, bg::BrightBlack},
+        bg::BrightBlack,
         Color{fg::BrightWhite, bg::BrightBlack});
 }
 
@@ -208,7 +208,7 @@ void TextGalleryApp::drawPanel(
 
 
 void TextGalleryApp::drawFooter(Buffer &buffer, const Rectangle rect) const {
-    buffer.fill(rect, Char{" ", Color{fg::Default, bg::BrightBlack}});
+    buffer.fill(rect, Char{" ", bg::BrightBlack});
     auto footer = Text{buildFooterText(), rect, Alignment::CenterLeft};
     buffer.drawText(footer);
 }
@@ -216,22 +216,28 @@ void TextGalleryApp::drawFooter(Buffer &buffer, const Rectangle rect) const {
 
 auto TextGalleryApp::buildFooterText() const -> String {
     auto result = String{};
-    appendText(result, "[←][→]", Color{fg::BrightCyan, bg::BrightBlack});
-    appendText(result, " switch pages  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[Q]", Color{fg::BrightYellow, bg::BrightBlack});
-    appendText(result, " quit  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, std::format("page {}/3", _pageIndex + 1), Color{fg::BrightGreen, bg::BrightBlack});
+    result.append(
+        fg::BrightCyan,
+        "[←][→]",
+        fg::BrightWhite,
+        " switch pages  ",
+        fg::BrightYellow,
+        "[Q]",
+        fg::BrightWhite,
+        " quit  ",
+        fg::BrightGreen,
+        std::format("page {}/3", _pageIndex + 1));
     return result;
 }
 
 
 auto TextGalleryApp::titleColors() -> ColorSequence {
     return ColorSequence{
-        Color{fg::BrightBlue, bg::Black},
-        Color{fg::BrightCyan, bg::Black},
-        Color{fg::BrightMagenta, bg::Black},
-        Color{fg::BrightYellow, bg::Black},
-        Color{fg::BrightGreen, bg::Black},
+        {Color{fg::BrightBlue, bg::Black}, 10},
+        {Color{fg::BrightCyan, bg::Black}, 5},
+        {Color{fg::BrightMagenta, bg::Black}, 3},
+        {Color{fg::BrightYellow, bg::Black}, 2},
+        {Color{fg::BrightGreen, bg::Black}, 5},
     };
 }
 
@@ -247,13 +253,6 @@ auto TextGalleryApp::titleForWidth(const int width) -> std::string_view {
         return "COLOR";
     }
     return "TERM";
-}
-
-
-void TextGalleryApp::appendText(String &target, const std::string_view text, const Color color) {
-    for (const auto &character : String{text}) {
-        target.append(character.withColor(color));
-    }
 }
 
 

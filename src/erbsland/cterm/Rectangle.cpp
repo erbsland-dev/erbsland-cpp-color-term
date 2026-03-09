@@ -2,6 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Rectangle.hpp"
 
+
+#include <stdexcept>
+
+
 namespace erbsland::cterm {
 
 auto Rectangle::operator|=(const Rectangle &other) noexcept -> Rectangle & {
@@ -51,6 +55,43 @@ auto Rectangle::isFrame(const Position testedPosition) const noexcept -> bool {
     return contains(testedPosition) &&
         (testedPosition.x() == _pos.x() || testedPosition.y() == _pos.y() || testedPosition.x() == x2() - 1 ||
          testedPosition.y() == y2() - 1);
+}
+
+auto Rectangle::gridCells(
+    const int rows, const int columns, const int horizontalSpacing, const int verticalSpacing) const
+    -> std::vector<Rectangle> {
+    if (rows < 1) {
+        throw std::invalid_argument{"Rectangle::gridCells() requires at least one row."};
+    }
+    if (columns < 1) {
+        throw std::invalid_argument{"Rectangle::gridCells() requires at least one column."};
+    }
+    if (horizontalSpacing < 0 || verticalSpacing < 0) {
+        throw std::invalid_argument{"Rectangle::gridCells() spacing must not be negative."};
+    }
+    const auto usableWidth = width() - (columns - 1) * horizontalSpacing;
+    const auto usableHeight = height() - (rows - 1) * verticalSpacing;
+    if (usableWidth < columns || usableHeight < rows) {
+        throw std::invalid_argument{"Rectangle::gridCells() cannot create cells of at least 1x1."};
+    }
+    const auto baseCellWidth = usableWidth / columns;
+    const auto extraWidthCells = usableWidth % columns;
+    const auto baseCellHeight = usableHeight / rows;
+    const auto extraHeightCells = usableHeight % rows;
+    auto result = std::vector<Rectangle>{};
+    result.reserve(static_cast<std::size_t>(rows) * static_cast<std::size_t>(columns));
+    auto y = y1();
+    for (int row = 0; row < rows; ++row) {
+        const auto cellHeight = baseCellHeight + (row < extraHeightCells ? 1 : 0);
+        auto x = x1();
+        for (int column = 0; column < columns; ++column) {
+            const auto cellWidth = baseCellWidth + (column < extraWidthCells ? 1 : 0);
+            result.emplace_back(x, y, cellWidth, cellHeight);
+            x += cellWidth + horizontalSpacing;
+        }
+        y += cellHeight + verticalSpacing;
+    }
+    return result;
 }
 
 }

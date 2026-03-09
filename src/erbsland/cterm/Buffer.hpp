@@ -4,6 +4,7 @@
 
 
 #include "Alignment.hpp"
+#include "BitmapDrawOptions.hpp"
 #include "Char.hpp"
 #include "Char16Style.hpp"
 #include "CharCombinationStyle.hpp"
@@ -14,6 +15,7 @@
 #include "Size.hpp"
 #include "String.hpp"
 #include "Text.hpp"
+#include "Tile9Style.hpp"
 
 #include <string_view>
 #include <vector>
@@ -41,6 +43,9 @@ public: // low-level access
     /// Get the configured size of the buffer.
     /// @return The width and height of the buffer.
     [[nodiscard]] auto size() const noexcept -> Size;
+    /// Get a rectangle representing this buffer.
+    /// @return The rectangle for this buffer.
+    [[nodiscard]] auto rect() const noexcept -> Rectangle;
     /// Read the block stored at the given position.
     /// @param pos The coordinates within the buffer.
     /// @return A reference to the stored block.
@@ -69,6 +74,17 @@ public: // drawing methods
     /// @param fillBlock The block for filling.
     /// @param combinationStyle The combination style for overwriting existing characters.
     void fill(Rectangle rect, const Char &fillBlock, const CharCombinationStylePtr &combinationStyle = {}) noexcept;
+    /// Fill the given rectangle using a repeating 9-tile style.
+    /// Positions outside the buffer are ignored.
+    /// @param rect The rectangle to be filled.
+    /// @param style The tile style to repeat across the rectangle.
+    /// @param baseColor The base color underneath the style colors.
+    /// @param combinationStyle The combination style for overwriting existing characters.
+    void fill(
+        Rectangle rect,
+        const Tile9StylePtr &style,
+        Color baseColor = {},
+        const CharCombinationStylePtr &combinationStyle = {}) noexcept;
     /// Draw a frame inside a given rectangle
     /// This will set all blocks at the edge, *inside* the given rectangle
     /// @param rect The rectangle for the frame.
@@ -87,6 +103,17 @@ public: // drawing methods
         const Char16StylePtr &frameStyle,
         const CharCombinationStylePtr &combinationStyle = {},
         Color frameColor = {}) noexcept;
+    /// Draw a frame inside a given rectangle using a repeating 9-tile style.
+    /// This will set all blocks at the edge, *inside* the given rectangle.
+    /// @param rect The rectangle for the frame.
+    /// @param style The tile style for the frame.
+    /// @param frameColor The base frame color. Any color from the style overlays this base color.
+    /// @param combinationStyle The combination style for overwriting existing characters.
+    void drawFrame(
+        Rectangle rect,
+        const Tile9StylePtr &style,
+        Color frameColor = {},
+        const CharCombinationStylePtr &combinationStyle = {}) noexcept;
     /// Draw a frame inside a given rectangle
     /// This will set all blocks at the edge, *inside* the given rectangle
     /// @param rect The rectangle for the frame.
@@ -115,6 +142,18 @@ public: // drawing methods
         const Char &fillBlock,
         const CharCombinationStylePtr &combinationStyle = {},
         Color frameColor = {}) noexcept;
+    /// Draw a box and fill it using a repeating 9-tile style for the frame.
+    /// @param rect The rectangle for the frame.
+    /// @param style The tile style for the frame.
+    /// @param fillBlock The block for filling.
+    /// @param combinationStyle The combination style for overwriting existing characters.
+    /// @param frameColor The base frame color. Any color from the style overlays this base color.
+    void drawFilledFrame(
+        Rectangle rect,
+        const Tile9StylePtr &style,
+        const Char &fillBlock,
+        const CharCombinationStylePtr &combinationStyle = {},
+        Color frameColor = {}) noexcept;
     /// Draw a box and fill it.
     /// @param rect The rectangle for the frame.
     /// @param frameStyle The predefined frame style.
@@ -122,10 +161,12 @@ public: // drawing methods
     /// @param frameColor The base frame color. Any color from the frame style overlays this base color.
     void drawFilledFrame(Rectangle rect, FrameStyle frameStyle, const Char &fillBlock, Color frameColor = {}) noexcept;
     /// Draw simple text into a rectangle.
+    /// If fg or bg is set to `Inherited`, the current color from the buffer is used.
     /// @param text The text description.
     /// @param animationCycle Animation cycle for animated text.
     void drawText(const Text &text, std::size_t animationCycle = 0);
     /// Draw simple text into a rectangle.
+    /// If fg or bg is set to `Inherited`, the current color from the buffer is used.
     /// @param text The UTF-8 text to render.
     /// @param alignment The alignment inside the rectangle.
     /// @param rect The target rectangle.
@@ -134,6 +175,7 @@ public: // drawing methods
     void drawText(
         std::string_view text, Alignment alignment, Rectangle rect, Color color = {}, std::size_t animationCycle = 0);
     /// Draw simple text into a rectangle.
+    /// If fg or bg is set to `Inherited`, the current color from the buffer is used.
     /// @param text The UTF-8 text to render.
     /// @param rect The target rectangle.
     /// @param alignment The alignment inside the rectangle.
@@ -145,16 +187,53 @@ public: // drawing methods
         Alignment alignment = Alignment::TopLeft,
         Color color = {},
         std::size_t animationCycle = 0);
+    /// Draw a bitmap at a given position.
+    /// The bitmap is rendered according to `options.scaleMode()`. If `options.char16Style()` is set,
+    /// it overrides the scale mode and renders one terminal cell per bitmap pixel.
+    /// Pixels or rendered cells outside the buffer are ignored.
+    /// @param bitmap The bitmap to draw.
+    /// @param pos The position of the top left corner.
+    /// @param options Bitmap drawing options.
+    /// @param animationCycle Animation cycle for color animations.
+    void drawBitmap(
+        const Bitmap &bitmap,
+        Position pos,
+        const BitmapDrawOptions &options = BitmapDrawOptions::defaultOptions(),
+        std::size_t animationCycle = 0) noexcept;
+    /// Draw a bitmap into the given rectangle.
+    /// The rendered bitmap is aligned inside `rect`. If it is larger than `rect`, it is cropped according to the
+    /// alignment.
+    /// @note For half-block drawing mode, alignment and cropping happen at rendered cell boundaries, not per pixel.
+    /// @param bitmap The bitmap to draw.
+    /// @param rect The rectangle to draw the bitmap into.
+    /// @param alignment Alignment of the bitmap within the rectangle.
+    /// @param options Bitmap drawing options.
+    /// @param animationCycle Animation cycle for color animations.
+    void drawBitmap(
+        const Bitmap &bitmap,
+        Rectangle rect,
+        Alignment alignment = Alignment::TopLeft,
+        const BitmapDrawOptions &options = BitmapDrawOptions::defaultOptions(),
+        std::size_t animationCycle = 0) noexcept;
 
 private:
-    [[nodiscard]] static auto applyFrameColor(const Char &frameBlock, Color frameColor) -> Char;
-    [[nodiscard]] static auto blockForFrame(Rectangle rect, Position pos, const Char16StylePtr &frameStyle, Color frameColor)
-        -> Char;
-    [[nodiscard]] static auto outerHalfBlockForFrame(Rectangle rect, Position pos, Color frameColor) -> Char;
-    [[nodiscard]] static auto innerHalfBlockForFrame(Rectangle rect, Position pos, Color frameColor) -> Char;
+    [[nodiscard]] static auto applyBaseColor(const Char &block, Color baseColor) -> Char;
+    [[nodiscard]] static auto
+    blockForFrame(Rectangle rect, Position pos, const Char16StylePtr &frameStyle, Color frameColor) -> Char;
     [[nodiscard]] auto buildTextLines(const Text &text) const -> BlockStringLines;
     [[nodiscard]] auto buildFontTextLines(const Text &text) const -> BlockStringLines;
     void applyTextLines(const Text &text, const BlockStringLines &lines, std::size_t animationCycle) noexcept;
+    [[nodiscard]] static auto bitmapRenderSize(const Bitmap &bitmap, const BitmapDrawOptions &options) noexcept
+        -> Size;
+    [[nodiscard]] static auto alignedBitmapOffset(
+        int renderedSize,
+        int availableSize,
+        Alignment alignment,
+        Alignment alignmentMask) noexcept -> int;
+    [[nodiscard]] auto
+    colorForBitmapPosition(const BitmapDrawOptions &options, Position bitmapPosition, std::size_t animationCycle) const
+        noexcept -> Color;
+    void drawBitmapBlock(Position pos, const Char &block, Color baseColor, const BitmapDrawOptions &options) noexcept;
     [[nodiscard]] auto colorForTextPosition(
         const Text &text, const Char &character, Position position, std::size_t animationCycle) const noexcept -> Color;
 

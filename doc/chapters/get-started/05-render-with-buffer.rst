@@ -35,7 +35,7 @@ Replace the contents of the file with the following version:
         buffer.drawFilledFrame(
             rect,
             FrameStyle::LightWithRoundedCorners,
-            Char{" ", Color{fg::Default, bg::Blue}});
+            Char{" ", bg::Blue});
         buffer.drawText(
             "Signal Board",
             Rectangle{2, 1, rect.width() - 4, 1},
@@ -62,6 +62,7 @@ This version introduces several important concepts:
 
 * ``Buffer`` stores a complete screen-sized grid of colored terminal cells.
 * ``fill()`` clears the buffer and defines the background color.
+* ``Inherited`` keeps the color from below, while ``Default`` explicitly resets to the terminal default.
 * ``drawFilledFrame()`` draws both the frame and its interior in a single call.
 * ``drawText()`` places text inside rectangles without manually managing the cursor.
 * ``UpdateSettings`` allows you to define constraints such as the minimum supported terminal size.
@@ -78,4 +79,3 @@ contains multiple panels, text blocks, or animated elements.
     :class: sd-fs-5 sd-font-weight-bold sd-p-2 sd-my-4
 
     Add Layout, Unicode Text, and Fonts →
-

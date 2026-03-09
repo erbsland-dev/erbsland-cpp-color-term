@@ -57,7 +57,7 @@ public: // accessors
     /// Get one complete color entry by effective sequence index.
     /// Indexes wrap around to support cyclic access.
     /// @param index The effective sequence index.
-    /// @return The full color at the wrapped index, or the default color if the sequence is empty.
+    /// @return The full color at the wrapped index, or the inherited color if the sequence is empty.
     [[nodiscard]] auto color(std::size_t index) const noexcept -> Color;
     /// Get a color by normalized position in the range `0.0..1.0`.
     /// Values outside this range are clamped.

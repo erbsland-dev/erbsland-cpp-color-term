@@ -40,7 +40,6 @@ private:
     [[nodiscard]] auto buildFooterText() const -> String;
     [[nodiscard]] static auto titleColors() -> ColorSequence;
     [[nodiscard]] static auto titleForWidth(int width) -> std::string_view;
-    static void appendText(String &target, std::string_view text, Color color = {});
 
 private:
     Terminal _terminal{Size{96, 30}};

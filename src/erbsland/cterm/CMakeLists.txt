@@ -6,6 +6,8 @@ target_sources(erbsland-color-term PRIVATE
         Anchor.hpp
         Bitmap.cpp
         Bitmap.hpp
+        BitmapDrawOptions.cpp
+        BitmapDrawOptions.hpp
         Buffer.cpp
         Buffer.hpp
         Char.cpp
@@ -45,5 +47,7 @@ target_sources(erbsland-color-term PRIVATE
         Terminal.hpp
         Text.hpp
         TextAnimation.hpp
+        Tile9Style.cpp
+        Tile9Style.hpp
         UpdateSettings.hpp
 )

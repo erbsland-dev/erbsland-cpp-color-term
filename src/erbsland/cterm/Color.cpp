@@ -6,17 +6,12 @@
 namespace erbsland::cterm {
 
 
-Color::Color(const Foreground foreground, const Background background) noexcept :
-    _foreground{foreground}, _background{background} {
-}
-
-
 auto Color::overlayWith(const Color &overlay) const -> Color {
     auto result = *this;
-    if (overlay.fg() != Foreground::Default) {
+    if (overlay.fg() != Foreground::Inherited) {
         result.setFg(overlay.fg());
     }
-    if (overlay.bg() != Background::Default) {
+    if (overlay.bg() != Background::Inherited) {
         result.setBg(overlay.bg());
     }
     return result;

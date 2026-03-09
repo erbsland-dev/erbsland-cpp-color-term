@@ -44,14 +44,25 @@ public:
 
     void testBufferKeepsCharacterColorPartsOverTextColor() {
         auto text = term::String{};
-        text.append(term::Char{"A", term::Color{term::fg::Red, term::bg::Default}});
-        text.append(term::Char{"B", term::Color{term::fg::Default, term::bg::Blue}});
+        text.append(term::Char{"A", term::Color{term::fg::Red, term::bg::Inherited}});
+        text.append(term::Char{"B", term::Color{term::fg::Inherited, term::bg::Blue}});
         auto renderedText = term::Text{text, Rectangle{0, 0, 2, 1}, Alignment::TopLeft};
         renderedText.setColor(term::Color{term::fg::Green, term::bg::Yellow});
         auto buffer = term::Buffer{Size{2, 1}};
         buffer.drawText(renderedText);
         REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Red, term::bg::Yellow));
         REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), term::Color(term::fg::Green, term::bg::Blue));
+    }
+
+    void testBufferUsesDefaultAsExplicitTextReset() {
+        auto text = term::String{};
+        text.append(term::Char{"A", term::Color{term::fg::Default, term::bg::Inherited}});
+        auto renderedText = term::Text{text, Rectangle{0, 0, 1, 1}, Alignment::TopLeft};
+        renderedText.setColor(term::Color{term::fg::Green, term::bg::Yellow});
+        auto buffer = term::Buffer{Size{1, 1}};
+        buffer.drawText(renderedText);
+
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Default, term::bg::Yellow));
     }
 
     void testBufferRendersBitmapFontText() {

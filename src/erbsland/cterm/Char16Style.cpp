@@ -3,15 +3,15 @@
 #include "Char16Style.hpp"
 
 
-#include "impl/U8Buffer.hpp"
-#include "impl/UnicodeWidth.hpp"
-
 #include <stdexcept>
 
 
 namespace erbsland::cterm {
 
-Char16Style::Char16Style(const std::string_view tiles) : _tiles(splitTiles(tiles)) {
+Char16Style::Char16Style(const std::string_view tiles) : _tiles(toTiles(String{tiles})) {
+}
+
+Char16Style::Char16Style(const std::u32string_view tiles) : _tiles(toTiles(String{tiles})) {
 }
 
 
@@ -23,83 +23,80 @@ auto Char16Style::block(const uint32_t bitMask) const noexcept -> Char {
 }
 
 auto Char16Style::lightFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("∙╶╷┌╴─┐┬╵└│├┘┴┤┼");
+    static auto style = create("∙╶╷┌╴─┐┬╵└│├┘┴┤┼");
     return style;
 }
 
 auto Char16Style::lightDoubleDashFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("∙╶╷┌╴╌┐┬╵└╎├┘┴┤┼");
+    static auto style = create("∙╶╷┌╴╌┐┬╵└╎├┘┴┤┼");
     return style;
 }
 
 
 auto Char16Style::lightTripleDashFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("∙╶╷┌╴┄┐┬╵└┆├┘┴┤┼");
+    static auto style = create("∙╶╷┌╴┄┐┬╵└┆├┘┴┤┼");
     return style;
 }
 
 
 auto Char16Style::lightQuadrupleDashFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("∙╶╷┌╴┈┐┬╵└┊├┘┴┤┼");
+    static auto style = create("∙╶╷┌╴┈┐┬╵└┊├┘┴┤┼");
     return style;
 }
 
 
 auto Char16Style::lightRoundedFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("∙╶╷╭╴─╮┬╵╰│├╯┴┤┼");
+    static auto style = create("∙╶╷╭╴─╮┬╵╰│├╯┴┤┼");
     return style;
 }
 
 auto Char16Style::heavyFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("▪╺╻┏╸━┓┳╹┗┃┣┛┻┫╋");
+    static auto style = create("▪╺╻┏╸━┓┳╹┗┃┣┛┻┫╋");
     return style;
 }
 
 auto Char16Style::heavyDoubleDashFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("▪╺╻┏╸╍┓┳╹┗╏┣┛┻┫╋");
+    static auto style = create("▪╺╻┏╸╍┓┳╹┗╏┣┛┻┫╋");
     return style;
 }
 
 
 auto Char16Style::heavyTripleDashFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("▪╺╻┏╸┅┓┳╹┗┇┣┛┻┫╋");
+    static auto style = create("▪╺╻┏╸┅┓┳╹┗┇┣┛┻┫╋");
     return style;
 }
 
 
 auto Char16Style::heavyQuadrupleDashFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("▪╺╻┏╸┉┓┳╹┗┋┣┛┻┫╋");
+    static auto style = create("▪╺╻┏╸┉┓┳╹┗┋┣┛┻┫╋");
     return style;
 }
 
 
 auto Char16Style::doubleFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles("▫╒╖╔╕═╗╦╜╚║╠╝╩╣╬");
+    static auto style = create("▫╒╖╔╕═╗╦╜╚║╠╝╩╣╬");
     return style;
 }
 
 
 auto Char16Style::fullBlockFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles(" ███████████████");
+    static auto style = create(" ███████████████");
     return style;
 }
 
 
 auto Char16Style::fullBlockWithChamferFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles(" ██◢██◣██◥██◤███");
+    static auto style = create(" ██◢██◣██◥██◤███");
     return style;
 }
 
-
-auto Char16Style::outerHalfBlockFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles(" ▌▀▛▐█▜█▄▙██▟███");
-    return style;
+auto Char16Style::create(const std::string_view tiles) -> Char16StylePtr {
+    return std::make_shared<Char16Style>(tiles);
 }
 
 
-auto Char16Style::innerHalfBlockFrame() -> Char16StylePtr {
-    static auto style = styleFromTiles(" ▐▄▗▌█▖█▀▝██▘███");
-    return style;
+auto Char16Style::create(const std::u32string_view tiles) -> Char16StylePtr {
+    return std::make_shared<Char16Style>(tiles);
 }
 
 auto Char16Style::forStyle(const FrameStyle frameStyle) -> Char16StylePtr {
@@ -129,40 +126,22 @@ auto Char16Style::forStyle(const FrameStyle frameStyle) -> Char16StylePtr {
     case FrameStyle::FullBlockWithChamfer:
         return fullBlockWithChamferFrame();
     case FrameStyle::OuterHalfBlock:
-        return outerHalfBlockFrame();
     case FrameStyle::InnerHalfBlock:
-        return innerHalfBlockFrame();
+        return {};
     default:
         return lightFrame();
     }
 }
 
-auto Char16Style::splitTiles(const std::string_view tiles) -> std::array<Char, 16> {
-    auto result = std::array<Char, 16>{};
-    auto index = std::size_t{0};
-    impl::U8Buffer{tiles}.decodeAll([&](const char32_t codePoint) -> void {
-        std::string characterText;
-        impl::U8Buffer<const char>::encodeChar(characterText, codePoint);
-        if (impl::consoleCharacterWidth(codePoint) == 0 && codePoint >= 0x20 && index > 0) {
-            const auto previousIndex = index - 1;
-            result[previousIndex] =
-                Char{result[previousIndex].charStr() + characterText, result[previousIndex].color()};
-            return;
-        }
-        if (index >= result.size()) {
-            throw std::invalid_argument{"Char16Style requires exactly 16 terminal characters."};
-        }
-        result[index++] = Char{characterText};
-    });
-    if (index != result.size()) {
+auto Char16Style::toTiles(const String &tiles) -> std::array<Char, 16> {
+    if (tiles.size() != 16) {
         throw std::invalid_argument{"Char16Style requires exactly 16 terminal characters."};
     }
+    auto result = std::array<Char, 16>{};
+    for (std::size_t index = 0; index < result.size(); ++index) {
+        result[index] = tiles[index];
+    }
     return result;
-}
-
-
-auto Char16Style::styleFromTiles(const std::string_view tiles) -> Char16StylePtr {
-    return std::make_shared<Char16Style>(tiles);
 }
 
 }

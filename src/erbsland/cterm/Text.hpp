@@ -38,7 +38,7 @@ public: // accessors
     /// Access the optional text color sequence.
     [[nodiscard]] auto colorSequence() const noexcept -> const ColorSequence & { return _colorSequence; }
     /// Get the first text color from the configured sequence.
-    /// @return The first sequence color, or the default color if no sequence is configured.
+    /// @return The first sequence color, or the inherited color if no sequence is configured.
     [[nodiscard]] auto color() const noexcept -> Color {
         if (_colorSequence.empty()) {
             return {};

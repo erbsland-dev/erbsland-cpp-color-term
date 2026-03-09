@@ -36,7 +36,7 @@ structured results.
                 bg::Blue,
                 fg::BrightWhite,
                 " Signal Board ",
-                Color{},
+                Color::reset(),
                 " ",
                 fg::BrightBlack,
                 "Direct output with readable color arguments.");
@@ -59,7 +59,7 @@ Even this minimal program already demonstrates several useful parts of the API:
 * ``printLine()`` accepts text, full colors, foreground colors, and background
   colors in a single call.
 * ``fg::...`` and ``bg::...`` provide a compact and readable way to apply colors.
-* ``Color{}`` resets the colors in the middle of a line.
+* ``Color::reset()`` resets the colors in the middle of a line.
 
 For small tools, status messages, or diagnostic output, this direct printing
 style is often all you need.
@@ -72,4 +72,3 @@ style is often all you need.
     :class: sd-fs-5 sd-font-weight-bold sd-p-2 sd-my-4
 
     Build and Run the First Version →
-

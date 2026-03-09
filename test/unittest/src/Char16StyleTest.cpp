@@ -22,9 +22,27 @@ public:
         REQUIRE_EQUAL(style.block(15).charStr(), std::string{"F"});
     }
 
+    void testUtf32StringConstructorSplitsExactlySixteenTerminalCharacters() {
+        const auto style = term::Char16Style{U"0123456789ABCDEF"};
+
+        REQUIRE_EQUAL(style.block(0).charStr(), std::string{"0"});
+        REQUIRE_EQUAL(style.block(10).charStr(), std::string{"A"});
+        REQUIRE_EQUAL(style.block(15).charStr(), std::string{"F"});
+    }
+
     void testStringConstructorRejectsInvalidTileCounts() {
         REQUIRE_THROWS_AS(std::invalid_argument, term::Char16Style{"123"});
         REQUIRE_THROWS_AS(std::invalid_argument, term::Char16Style{"0123456789ABCDEFG"});
+    }
+
+    void testCreateFactoryBuildsSharedStyles() {
+        const auto utf8Style = term::Char16Style::create("0123456789ABCDEF");
+        const auto utf32Style = term::Char16Style::create(U"0123456789ABCDEF");
+
+        REQUIRE(utf8Style != nullptr);
+        REQUIRE(utf32Style != nullptr);
+        REQUIRE_EQUAL(utf8Style->block(1).charStr(), std::string{"1"});
+        REQUIRE_EQUAL(utf32Style->block(15).charStr(), std::string{"F"});
     }
 
     void testBlockReturnsConfiguredTilesAndDefaultsForInvalidIndexes() {
@@ -80,8 +98,8 @@ public:
         REQUIRE_EQUAL(term::Char16Style::forStyle(term::FrameStyle::Double)->block(5).charStr(), std::string{"═"});
         REQUIRE_EQUAL(term::Char16Style::forStyle(term::FrameStyle::FullBlock)->block(5).charStr(), std::string{"█"});
         REQUIRE_EQUAL(term::Char16Style::forStyle(term::FrameStyle::FullBlockWithChamfer)->block(3).charStr(), std::string{"◢"});
-        REQUIRE(term::Char16Style::forStyle(term::FrameStyle::OuterHalfBlock) != nullptr);
-        REQUIRE(term::Char16Style::forStyle(term::FrameStyle::InnerHalfBlock) != nullptr);
+        REQUIRE(term::Char16Style::forStyle(term::FrameStyle::OuterHalfBlock) == nullptr);
+        REQUIRE(term::Char16Style::forStyle(term::FrameStyle::InnerHalfBlock) == nullptr);
         REQUIRE_EQUAL(
             term::Char16Style::forStyle(term::FrameStyle::LightWithRoundedCorners)->block(12).charStr(),
             std::string{"╯"});

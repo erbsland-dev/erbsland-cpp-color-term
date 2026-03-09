@@ -11,6 +11,20 @@ class RectangleTest : public el::UnitTest {
 public:
     Rectangle rect;
 
+    void requireRectangleEqual(const Rectangle &actual, const Rectangle &expected) {
+        REQUIRE_EQUAL(actual.topLeft(), expected.topLeft());
+        REQUIRE_EQUAL(actual.size(), expected.size());
+    }
+
+    void requireRectangleSequenceEqual(
+        const std::vector<Rectangle> &actual, const std::vector<Rectangle> &expected) {
+        REQUIRE_EQUAL(actual.size(), expected.size());
+        for (std::size_t index = 0; index < expected.size(); ++index) {
+            WITH_CONTEXT(index);
+            requireRectangleEqual(actual[index], expected[index]);
+        }
+    }
+
     void testDefaultConstructor() {
         rect = Rectangle();
         REQUIRE_EQUAL(rect.topLeft().x(), 0);
@@ -226,5 +240,84 @@ public:
             WITH_CONTEXT(index);
             REQUIRE_EQUAL(indexes[index], static_cast<int>(index));
         }
+    }
+
+    void testGridCellsSplitsEvenlyWithoutSpacing() {
+        rect = Rectangle(10, 20, 8, 6);
+
+        const auto cells = rect.gridCells(2, 4);
+
+        const std::vector<Rectangle> expected = {
+            Rectangle(10, 20, 2, 3),
+            Rectangle(12, 20, 2, 3),
+            Rectangle(14, 20, 2, 3),
+            Rectangle(16, 20, 2, 3),
+            Rectangle(10, 23, 2, 3),
+            Rectangle(12, 23, 2, 3),
+            Rectangle(14, 23, 2, 3),
+            Rectangle(16, 23, 2, 3),
+        };
+        requireRectangleSequenceEqual(cells, expected);
+    }
+
+    void testGridCellsDistributesRemainderToTopLeftCells() {
+        rect = Rectangle(5, 7, 10, 5);
+
+        const auto cells = rect.gridCells(2, 3);
+
+        const std::vector<Rectangle> expected = {
+            Rectangle(5, 7, 4, 3),
+            Rectangle(9, 7, 3, 3),
+            Rectangle(12, 7, 3, 3),
+            Rectangle(5, 10, 4, 2),
+            Rectangle(9, 10, 3, 2),
+            Rectangle(12, 10, 3, 2),
+        };
+        requireRectangleSequenceEqual(cells, expected);
+    }
+
+    void testGridCellsApplySpacingAndRemainRowMajor() {
+        rect = Rectangle(10, 20, 11, 8);
+
+        const auto cells = rect.gridCells(2, 3, 1, 2);
+
+        const std::vector<Rectangle> expected = {
+            Rectangle(10, 20, 3, 3),
+            Rectangle(14, 20, 3, 3),
+            Rectangle(18, 20, 3, 3),
+            Rectangle(10, 25, 3, 3),
+            Rectangle(14, 25, 3, 3),
+            Rectangle(18, 25, 3, 3),
+        };
+        requireRectangleSequenceEqual(cells, expected);
+        REQUIRE_EQUAL(cells[1].x1() - cells[0].x2(), 1);
+        REQUIRE_EQUAL(cells[3].y1() - cells[0].y2(), 2);
+    }
+
+    void testGridCellsAllowMinimalOneByOneCells() {
+        rect = Rectangle(3, 4, 5, 3);
+
+        const auto cells = rect.gridCells(3, 2, 3, 0);
+
+        const std::vector<Rectangle> expected = {
+            Rectangle(3, 4, 1, 1),
+            Rectangle(7, 4, 1, 1),
+            Rectangle(3, 5, 1, 1),
+            Rectangle(7, 5, 1, 1),
+            Rectangle(3, 6, 1, 1),
+            Rectangle(7, 6, 1, 1),
+        };
+        requireRectangleSequenceEqual(cells, expected);
+    }
+
+    void testGridCellsRejectInvalidArguments() {
+        rect = Rectangle(0, 0, 4, 4);
+
+        REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(0, 1));
+        REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(1, 0));
+        REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(1, 1, -1, 0));
+        REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(1, 1, 0, -1));
+        REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(2, 3, 1, 0));
+        REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(3, 2, 0, 2));
     }
 };

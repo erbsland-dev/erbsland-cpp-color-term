@@ -5,6 +5,8 @@
 
 #include "Char.hpp"
 
+#include "impl/TypeTraits.hpp"
+
 #include <string>
 #include <string_view>
 #include <vector>
@@ -15,7 +17,7 @@ namespace erbsland::cterm {
 
 /// A terminal string represented as a sequence of `Char` values.
 class String {
-public: // public types
+public:
     /// Storage container for the characters.
     using Storage = std::vector<Char>;
     /// Mutable forward iterator.
@@ -41,12 +43,21 @@ public: // public types
     /// Immutable element pointer.
     using const_pointer = Storage::const_pointer;
 
-public: // ctors/dtor/assign/move
+public:
     /// Create an empty terminal string.
     String() = default;
     /// Create a terminal string from UTF-8 text.
     /// @param str The UTF-8 text to split into terminal characters.
-    explicit String(std::string_view str);
+    /// @param color The color to use for the characters.
+    /// Control codes are ignored except for tab and newline.
+    /// @throws std::invalid_argument If the text is not valid UTF-8 or contains an unsupported character sequence.
+    explicit String(std::string_view str, Color color = {});
+    /// Create a terminal string from UTF-32 text.
+    /// @param str The UTF-32 text to split into terminal characters.
+    /// @param color The color to use for the characters.
+    /// Control codes are ignored except for tab and newline.
+    /// @throws std::invalid_argument If the text contains an unsupported character sequence.
+    explicit String(std::u32string_view str, Color color = {});
     /// Copy construct a terminal string.
     String(const String &) = default;
     /// Move construct a terminal string.
@@ -139,16 +150,23 @@ public: // modifiers
     void reserve(const size_t size) noexcept { _chars.reserve(size); }
     /// Remove all characters from this string.
     void clear() noexcept { _chars.clear(); }
-    /// Append one character to this string.
-    /// @param character The character to append.
-    void append(const Char &character) noexcept { _chars.emplace_back(character); }
+    /// Append elements to this string.
+    /// This works similar to `Terminal::print()`.
+    /// If you add a color, this color is "active" for all following characters *in the same call*.
+    /// Just adding a color does not change the string.
+    /// @param args The arguments to append.
+    template <PrintableArg... Args>
+    void append(Args... args) noexcept {
+        Color currentColor{};
+        (appendElement(args, currentColor), ...);
+    }
 
 public: // tools
     /// Split the string into words at space, tab, carriage return, or newline characters.
     /// @return A sequence of words.
     [[nodiscard]] auto splitWords() const noexcept -> std::vector<String>;
     /// Wrap this string into lines that have a maximum display width.
-    /// Paragraph breaks from CR/LF characters are preserved as blank lines between paragraphs.
+    /// Paragraph breaks from newline characters are preserved as blank lines between paragraphs.
     /// @param width The maximum terminal width in cells. Must be greater than zero.
     /// @return A sequence of lines.
     [[nodiscard]] auto wrapIntoLines(int width) const noexcept -> std::vector<String>;
@@ -156,7 +174,25 @@ public: // tools
 private:
     [[nodiscard]] auto splitParagraphs() const noexcept -> std::vector<String>;
     [[nodiscard]] auto wrapParagraphIntoLines(int width) const noexcept -> std::vector<String>;
-    [[nodiscard]] static auto splitCharacters(std::string_view str) -> std::vector<Char>;
+    [[nodiscard]] static auto splitCharacters(std::string_view str, Color color = {}) -> std::vector<Char>;
+    [[nodiscard]] static auto splitCharacters(std::u32string_view str, Color color = {}) -> std::vector<Char>;
+    [[nodiscard]] constexpr static auto isControlCode(const char32_t codePoint) noexcept -> bool {
+        return codePoint < 0x20 || (codePoint >= 0x7FU && codePoint <= 0x9FU);
+    }
+    [[nodiscard]] static auto isStringCharacter(char32_t codePoint) noexcept -> bool;
+    static void appendCodePoint(std::vector<Char> &chars, char32_t codePoint, Color color);
+    void appendElement(Foreground foreground, Color &currentColor) noexcept { currentColor.setFg(foreground); }
+    void appendElement(Background background, Color &currentColor) noexcept { currentColor.setBg(background); }
+    void appendElement(const Char &character, [[maybe_unused]] Color &currentColor) noexcept {
+        _chars.emplace_back(character);
+    }
+    void appendElement(const String &other, [[maybe_unused]] Color &currentColor) noexcept {
+        _chars.insert(_chars.end(), other._chars.begin(), other._chars.end());
+    }
+    void appendElement(const std::string_view str, Color &currentColor) noexcept {
+        const auto newCharacters = splitCharacters(str, currentColor);
+        _chars.insert(_chars.end(), newCharacters.begin(), newCharacters.end());
+    }
 
 private:
     std::vector<Char> _chars;

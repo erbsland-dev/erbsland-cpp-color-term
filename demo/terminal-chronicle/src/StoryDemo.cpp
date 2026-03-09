@@ -28,7 +28,7 @@ void StoryDemo::printHeader(Terminal &terminal) noexcept {
         bg::Blue,
         fg::BrightWhite,
         " Terminal Chronicle ",
-        Color{},
+        Color{fg::Default, bg::Default},
         " ",
         fg::BrightBlack,
         "Low-level output with one Terminal instance and readable print calls.");
@@ -133,7 +133,7 @@ void StoryDemo::printOutro(Terminal &terminal) noexcept {
         bg::BrightBlack,
         fg::BrightWhite,
         " Try the other demos next: ",
-        Color{},
+        Color{fg::Default, bg::Default},
         " ",
         fg::BrightCyan,
         "retro-plasma",

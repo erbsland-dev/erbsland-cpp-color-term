@@ -28,7 +28,6 @@ private:
     void renderFrame() noexcept;
     void drawPrompt(Buffer &buffer) const;
     [[nodiscard]] auto buildPrompt() const -> String;
-    static void appendText(String &target, std::string_view text, Color color = {});
 
 private:
     Terminal _terminal{Size{90, 28}};

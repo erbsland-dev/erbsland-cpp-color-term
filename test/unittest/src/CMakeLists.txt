@@ -25,5 +25,6 @@ target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         TerminalUpdateTest.cpp
         TestHelper.hpp
         TextRenderTest.cpp
+        Tile9StyleTest.cpp
         UnicodeWidthTest.cpp
 )

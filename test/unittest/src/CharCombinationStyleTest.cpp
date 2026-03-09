@@ -30,11 +30,11 @@ public:
 
     void testOverwriteAndColorOverlayStylesUseExpectedColorRules() {
         const auto current = term::Char{"A", term::Color{term::fg::Green, term::bg::Blue}};
-        const auto overlay = term::Char{"B", term::Color{term::fg::Default, term::bg::Yellow}};
+        const auto overlay = term::Char{"B", term::Color{term::fg::Inherited, term::bg::Yellow}};
 
         const auto overwritten = term::CharCombinationStyle::overwrite()->combine(current, overlay);
         REQUIRE_EQUAL(overwritten.charStr(), "B");
-        REQUIRE_EQUAL(overwritten.color(), term::Color(term::fg::Default, term::bg::Yellow));
+        REQUIRE_EQUAL(overwritten.color(), term::Color(term::fg::Inherited, term::bg::Yellow));
 
         const auto colorOverlaid = term::CharCombinationStyle::colorOverlay()->combine(current, overlay);
         REQUIRE_EQUAL(colorOverlaid.charStr(), "B");
@@ -47,7 +47,7 @@ public:
 
         const auto result = style.combine(
             term::Char{"a", term::Color{term::fg::Green, term::bg::Blue}},
-            term::Char{"b", term::Color{term::fg::BrightWhite, term::bg::Default}});
+            term::Char{"b", term::Color{term::fg::BrightWhite, term::bg::Inherited}});
 
         REQUIRE_EQUAL(result.charStr(), "c");
         REQUIRE_EQUAL(result.color(), term::Color(term::fg::BrightWhite, term::bg::Blue));
@@ -87,7 +87,7 @@ public:
         const auto style = term::CharCombinationStyle::commonBoxFrame();
 
         const auto current = term::Char{"│", term::Color{term::fg::Green, term::bg::Blue}};
-        const auto overlay = term::Char{"═", term::Color{term::fg::BrightWhite, term::bg::Default}};
+        const auto overlay = term::Char{"═", term::Color{term::fg::BrightWhite, term::bg::Inherited}};
         const auto result = style->combine(current, overlay);
 
         REQUIRE_EQUAL(result.charStr(), "╪");

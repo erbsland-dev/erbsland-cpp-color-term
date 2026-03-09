@@ -61,8 +61,4 @@ private:
 };
 
 
-/// Create the platform-specific input backend for the current process.
-[[nodiscard]] auto createInputForPlatform() -> std::unique_ptr<Input>;
-
-
 }

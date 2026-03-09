@@ -41,11 +41,11 @@ Update the source file with the following version:
         auto title = Text{String{"COLOR TERM"}, titleRect, Alignment::Center};
         title.setFont(Font::defaultAscii());
         title.setColorSequence(ColorSequence{
-            Color{fg::BrightBlue, bg::Black},
-            Color{fg::BrightCyan, bg::Black},
-            Color{fg::BrightMagenta, bg::Black},
-            Color{fg::BrightYellow, bg::Black},
-            Color{fg::BrightGreen, bg::Black},
+            {Color{fg::BrightBlue, bg::Black}, 3},
+            {Color{fg::BrightCyan, bg::Black}, 3},
+            {Color{fg::BrightMagenta, bg::Black}, 3},
+            {Color{fg::BrightYellow, bg::Black}, 3},
+            {Color{fg::BrightGreen, bg::Black}, 3},
         });
         title.setAnimation(TextAnimation::ColorDiagonal);
         buffer.drawText(title, 12);
@@ -53,7 +53,7 @@ Update the source file with the following version:
         buffer.drawFilledFrame(
             leftRect,
             FrameStyle::LightWithRoundedCorners,
-            Char{" ", Color{fg::Default, bg::BrightBlack}});
+            Char{" ", bg::BrightBlack});
         buffer.drawText(
             "Wrapped Text",
             Rectangle{leftRect.x1() + 2, leftRect.y1(), leftRect.width() - 4, 1},
@@ -68,7 +68,7 @@ Update the source file with the following version:
         buffer.drawFilledFrame(
             rightRect,
             FrameStyle::Double,
-            Char{" ", Color{fg::Default, bg::Blue}});
+            Char{" ", bg::Blue});
         buffer.drawText(
             "Unicode Width",
             Rectangle{rightRect.x1() + 2, rightRect.y1(), rightRect.width() - 4, 1},
@@ -113,4 +113,3 @@ This version combines several important layout and text-rendering features:
     :class: sd-fs-5 sd-font-weight-bold sd-p-2 sd-my-4
 
     Add Input and a Redraw Loop →
-

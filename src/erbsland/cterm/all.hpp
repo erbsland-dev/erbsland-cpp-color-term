@@ -8,6 +8,7 @@
 #include "Alignment.hpp"
 #include "Anchor.hpp"
 #include "Bitmap.hpp"
+#include "BitmapDrawOptions.hpp"
 #include "Buffer.hpp"
 #include "Char.hpp"
 #include "Char16Style.hpp"
@@ -31,6 +32,7 @@
 #include "Terminal.hpp"
 #include "Text.hpp"
 #include "TextAnimation.hpp"
+#include "Tile9Style.hpp"
 #include "UpdateSettings.hpp"
 
 

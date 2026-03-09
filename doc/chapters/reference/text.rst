@@ -29,14 +29,21 @@ individual characters may use different colors.
 
     auto footer = String{};
     for (const auto &character : String{"[Q]"}) {
-        footer.append(character.withColor(Color{fg::BrightYellow, bg::BrightBlack}));
+        footer.append(character.withColorOverlay(Color{fg::BrightYellow, bg::BrightBlack}));
     }
     for (const auto &character : String{" quit"}) {
-        footer.append(character.withColor(Color{fg::BrightWhite, bg::BrightBlack}));
+        footer.append(character.withColorOverlay(Color{fg::BrightWhite, bg::BrightBlack}));
     }
 
 Each ``Char`` in the sequence can carry its own color, allowing flexible
 construction of styled text fragments.
+
+When you recolor existing ``Char`` values with ``withColorOverlay()``, inherited
+components keep the original character color while default components reset
+that part to the terminal default.
+
+When ``String`` is built from UTF-8 or UTF-32 text, control codes are filtered
+out automatically except for tab and newline.
 
 Describing a Text Block
 -----------------------
@@ -84,4 +91,3 @@ Interface
     :members:
 
 .. doxygenenum:: erbsland::cterm::TextAnimation
-

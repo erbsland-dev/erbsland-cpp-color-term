@@ -6,6 +6,7 @@
 
 #include "Char.hpp"
 #include "FrameStyle.hpp"
+#include "String.hpp"
 
 #include <array>
 #include <memory>
@@ -16,6 +17,7 @@ namespace erbsland::cterm {
 
 
 class Char16Style;
+/// Shared pointer for Char16Style
 using Char16StylePtr = std::shared_ptr<Char16Style>;
 
 
@@ -30,6 +32,11 @@ public:
     /// @param tiles A sequence of exactly 16 terminal characters.
     /// @throws std::invalid_argument If `tiles` does not contain exactly 16 terminal characters.
     explicit Char16Style(std::string_view tiles);
+    /// Create a new tile 16 style from 16 terminal characters.
+    /// Connection points/bits: E:0, S:1, W:2, N:3
+    /// @param tiles A sequence of exactly 16 terminal characters.
+    /// @throws std::invalid_argument If `tiles` does not contain exactly 16 terminal characters.
+    explicit Char16Style(std::u32string_view tiles);
 
 public: // accessors
     /// Access the block for a given bit combination.
@@ -38,6 +45,16 @@ public: // accessors
     [[nodiscard]] auto block(uint32_t bitMask) const noexcept -> Char;
 
 public:
+    /// Create a new shared style from 16 terminal characters.
+    /// @param tiles A sequence of exactly 16 terminal characters.
+    /// @return A shared style instance.
+    /// @throws std::invalid_argument If `tiles` does not contain exactly 16 terminal characters.
+    [[nodiscard]] static auto create(std::string_view tiles) -> Char16StylePtr;
+    /// Create a new shared style from 16 terminal characters.
+    /// @param tiles A sequence of exactly 16 terminal characters.
+    /// @return A shared style instance.
+    /// @throws std::invalid_argument If `tiles` does not contain exactly 16 terminal characters.
+    [[nodiscard]] static auto create(std::u32string_view tiles) -> Char16StylePtr;
     /// For drawing light frames.
     [[nodiscard]] static auto lightFrame() -> Char16StylePtr;
     /// For drawing light frames with double-dashed lines.
@@ -62,16 +79,13 @@ public:
     [[nodiscard]] static auto fullBlockFrame() -> Char16StylePtr;
     /// For drawing solid block frames with chamfered corners.
     [[nodiscard]] static auto fullBlockWithChamferFrame() -> Char16StylePtr;
-    /// For drawing half-block frames on the outer cell edges.
-    [[nodiscard]] static auto outerHalfBlockFrame() -> Char16StylePtr;
-    /// For drawing half-block frames on the inner cell edges.
-    [[nodiscard]] static auto innerHalfBlockFrame() -> Char16StylePtr;
     /// Get the style for the given frame style.
+    /// @param frameStyle The frame style to resolve.
+    /// @return The shared style instance, or `nullptr` if `frameStyle` requires `Tile9Style`.
     [[nodiscard]] static auto forStyle(FrameStyle frameStyle) -> Char16StylePtr;
 
 private:
-    [[nodiscard]] static auto splitTiles(std::string_view tiles) -> std::array<Char, 16>;
-    [[nodiscard]] static auto styleFromTiles(std::string_view tiles) -> Char16StylePtr;
+    [[nodiscard]] static auto toTiles(const String &tiles) -> std::array<Char, 16>;
 
 private:
     std::array<Char, 16> _tiles;

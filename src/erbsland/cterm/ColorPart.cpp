@@ -5,37 +5,59 @@
 #include "ColorPart.hpp"
 
 
+#include "impl/TextUtil.hpp"
+
+#include <algorithm>
+#include <ranges>
 #include <stdexcept>
 
 
 namespace erbsland::cterm {
 
 
-auto ColorBase::enumFromString(std::string_view str) -> Value {
-    static const std::unordered_map<std::string_view, Value> strMap = {
-        {"black", Value::Black},
-        {"red", Value::Red},
-        {"green", Value::Green},
-        {"yellow", Value::Yellow},
-        {"blue", Value::Blue},
-        {"magenta", Value::Magenta},
-        {"cyan", Value::Cyan},
-        {"white", Value::White},
-        {"default", Value::Default},
-        {"bright_black", Value::BrightBlack},
-        {"bright_red", Value::BrightRed},
-        {"bright_green", Value::BrightGreen},
-        {"bright_yellow", Value::BrightYellow},
-        {"bright_blue", Value::BrightBlue},
-        {"bright_magenta", Value::BrightMagenta},
-        {"bright_cyan", Value::BrightCyan},
-        {"bright_white", Value::BrightWhite},
-    };
-    auto it = strMap.find(str);
-    if (it == strMap.end()) {
+auto ColorBase::tableEntry() const noexcept -> const TableEntry & {
+    return colorTable()[static_cast<std::size_t>(_value)];
+}
+
+
+auto ColorBase::colorTable() noexcept -> const ColorTable & {
+    static const auto table = ColorTable{{
+        {Value::Black, 0, "black"},
+        {Value::Red, 1, "red"},
+        {Value::Green, 2, "green"},
+        {Value::Yellow, 3, "yellow"},
+        {Value::Blue, 4, "blue"},
+        {Value::Magenta, 5, "magenta"},
+        {Value::Cyan, 6, "cyan"},
+        {Value::White, 7, "white"},
+        {Value::BrightBlack, 60, "bright_black"},
+        {Value::BrightRed, 61, "bright_red"},
+        {Value::BrightGreen, 62, "bright_green"},
+        {Value::BrightYellow, 63, "bright_yellow"},
+        {Value::BrightBlue, 64, "bright_blue"},
+        {Value::BrightMagenta, 65, "bright_magenta"},
+        {Value::BrightCyan, 66, "bright_cyan"},
+        {Value::BrightWhite, 67, "bright_white"},
+        {Value::Default, 9, "default"},
+        {Value::Inherited, 9, "inherited"},
+    }};
+    return table;
+}
+
+
+auto ColorBase::toString() const -> std::string {
+    return std::string{tableEntry().name};
+}
+
+
+auto ColorBase::enumFromString(const std::string_view str) -> Value {
+    auto normalizedIdentifier = impl::toNormalizedIdentifier(str);
+    const auto &table = colorTable();
+    auto it = std::ranges::find_if(table, [&](const auto &entry) { return entry.name == normalizedIdentifier; });
+    if (it == table.end()) {
         throw std::invalid_argument("Unknown color '" + std::string(str) + "'.");
     }
-    return it->second;
+    return it->value;
 }
 
 

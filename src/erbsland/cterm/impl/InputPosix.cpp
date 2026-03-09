@@ -3,6 +3,7 @@
 #include "InputPosix.hpp"
 
 
+#include "InputFactory.hpp"
 #include "PosixKeyInputSession.hpp"
 
 #include <sys/select.h>
@@ -72,7 +73,7 @@ auto InputPosix::readKey(const std::chrono::milliseconds timeout) const -> Key {
 }
 
 
-auto createInputForPlatform() -> std::unique_ptr<Input> {
+auto impl::createInputForPlatform() -> std::unique_ptr<Input> {
     return std::make_unique<InputPosix>();
 }
 

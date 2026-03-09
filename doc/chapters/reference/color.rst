@@ -31,6 +31,10 @@ In this example, ``overlayWith()`` combines two colors, allowing you to
 derive variants from an existing style while preserving the other color
 components.
 
+Use ``Default`` when you want to reset a foreground or background to the
+terminal default color. Use ``Inherited`` when a later layer should keep
+the color from the layer below, for example while composing buffer cells.
+
 Building Animated Palettes
 --------------------------
 
@@ -85,4 +89,3 @@ Interface
 
 .. doxygenclass:: erbsland::cterm::ColorSequence
     :members:
-

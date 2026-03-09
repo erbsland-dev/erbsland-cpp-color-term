@@ -15,12 +15,24 @@ namespace erbsland::cterm {
 /// A foreground/background color pair for terminal rendering.
 class Color final {
 public: // ctors/dtor/assign/move
-    /// Create the default terminal color.
+    /// Create a color that inherits both components from the layer below.
+    /// If no lower layer exists, terminal output resolves inherited colors to the terminal defaults.
     Color() = default;
     /// Create a color from explicit foreground and background parts.
     /// @param foreground The foreground color.
     /// @param background The background color.
-    Color(Foreground foreground, Background background = Background::Default) noexcept;
+    constexpr Color(const Foreground foreground, const Background background) noexcept :
+        _foreground{foreground}, _background{background} {}
+    /// Create a color with an explicit foreground and inherited background color.
+    /// @param foreground The background color.
+    constexpr Color(const Foreground foreground) noexcept : _foreground{foreground} {}
+    /// @overload
+    constexpr Color(const Foreground::Hue foreground) noexcept : _foreground{foreground} {}
+    /// Create a color with an explicit background and inherited foreground color.
+    /// @param background The background color.
+    constexpr Color(const Background background) noexcept : _background{background} {}
+    /// @overload
+    constexpr Color(const Background::Hue background) noexcept : _background{background} {}
     /// Destroy the color value.
     ~Color() = default;
     /// Copy construct a color value.
@@ -48,14 +60,13 @@ public: // accessors
 
 public: // conversion and tools
     /// Combine this color with a new overlay color.
-    /// For foreground or background color that is set to default, the new color will use this color.
-    /// The default color acts like a transparent color.
+    /// Foreground or background components set to `Inherited` keep the value from this color.
+    /// Components set to `Default` explicitly reset to the terminal default color.
     ///
     /// Examples:
     ///
-    /// - [this.fg = default] + [new.fg = default] => [result.fg = default]
-    /// - [this.fg = red] + [new.fg = default] => [result.fg = red]
-    /// - [this.fg = red] + [new.fg = green] => [result.fg = green]
+    /// - [this.fg = red] + [new.fg = inherited] => [result.fg = red]
+    /// - [this.fg = red] + [new.fg = default] => [result.fg = default]
     /// - [this.fg = red] + [new.fg = green] => [result.fg = green]
     ///
     /// @param overlay The overlay color.
@@ -67,6 +78,15 @@ public: // conversion and tools
     /// @return The parsed color.
     /// @throws std::invalid_argument if one of the colors does not exist.
     [[nodiscard]] static auto fromString(std::string_view str) -> Color;
+    /// Converts two indexes into a color-pair.
+    /// @see ColorPart::fromIndex16 for details.
+    [[nodiscard]] static auto fromIndex16(const int fgIndex, const int bgIndex) -> Color {
+        return Color{Foreground::fromIndex16(fgIndex), Background::fromIndex16(bgIndex)};
+    }
+    /// Shortcut to set fg and bg to default.
+    [[nodiscard]] constexpr static auto reset() noexcept -> Color {
+        return Color{Foreground::Default, Background::Default};
+    }
 
 public: // data
     /// Foreground component of the color.

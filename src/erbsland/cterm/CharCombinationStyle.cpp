@@ -3,8 +3,6 @@
 #include "CharCombinationStyle.hpp"
 
 
-#include "impl/U8Buffer.hpp"
-
 #include <algorithm>
 #include <limits>
 #include <stdexcept>
@@ -49,7 +47,7 @@ auto SimpleCharCombinationStyle::combine(const Char &current, const Char &overla
     } else {
         result = Char{overlay.charStr()};
     }
-    return result.withColor(current.color().overlayWith(overlay.color()));
+    return result.withColorOverlay(current.color().overlayWith(overlay.color()));
 }
 
 
@@ -93,9 +91,9 @@ MatrixCombinationStyle::MatrixCombinationStyle(std::u32string characters, const 
 
 
 auto MatrixCombinationStyle::combine(const Char &current, const Char &overlay) const noexcept -> Char {
-    auto result = Char{overlay.charStr()};
-    const auto currentIndex = lookupIndex(decodeCodePoint(current.charStr()));
-    const auto overlayIndex = lookupIndex(decodeCodePoint(overlay.charStr()));
+    auto result = overlay;
+    const auto currentIndex = lookupIndex(static_cast<char32_t>(current.mainCodePoint()));
+    const auto overlayIndex = lookupIndex(static_cast<char32_t>(overlay.mainCodePoint()));
     if (currentIndex != cUnsupportedIndex && overlayIndex != cUnsupportedIndex) {
         const auto matrixSize = _characters.size();
         const auto matrixIndex =
@@ -103,30 +101,11 @@ auto MatrixCombinationStyle::combine(const Char &current, const Char &overlay) c
         if (matrixIndex < _resultMatrix.size()) {
             const auto resultIndex = static_cast<uint8_t>(_resultMatrix[matrixIndex]);
             if (resultIndex < _characters.size()) {
-                result = Char{encodeUtf8(_characters[resultIndex])};
+                result = Char{_characters[resultIndex]};
             }
         }
     }
-    return result.withColor(current.color().overlayWith(overlay.color()));
-}
-
-
-auto MatrixCombinationStyle::decodeCodePoint(const std::string_view text) noexcept -> char32_t {
-    if (text.empty()) {
-        return 0;
-    }
-    try {
-        return impl::U8Buffer{text}.decodeOneChar();
-    } catch ([[maybe_unused]] const std::invalid_argument &) {
-        return 0;
-    }
-}
-
-
-auto MatrixCombinationStyle::encodeUtf8(const char32_t codePoint) noexcept -> std::string {
-    auto result = std::string{};
-    impl::U8Buffer<const char>::encodeChar(result, codePoint);
-    return result;
+    return result.withColorOverlay(current.color().overlayWith(overlay.color()));
 }
 
 

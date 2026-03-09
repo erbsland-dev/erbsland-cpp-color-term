@@ -3,7 +3,29 @@
 #include "Bitmap.hpp"
 
 
+#include <algorithm>
+
+
 namespace erbsland::cterm {
+
+
+auto Bitmap::fromPattern(const std::initializer_list<std::string_view> rows) -> Bitmap {
+    auto width = 0;
+    for (const auto row : rows) {
+        width = std::max(width, static_cast<int>(row.size()));
+    }
+    auto bitmap = Bitmap{Size{width, static_cast<int>(rows.size())}};
+    auto y = 0;
+    for (const auto row : rows) {
+        for (auto x = 0; x < static_cast<int>(row.size()); ++x) {
+            if (row[static_cast<std::size_t>(x)] != '.' && row[static_cast<std::size_t>(x)] != ' ') {
+                bitmap.setPixel(Position{x, y}, true);
+            }
+        }
+        ++y;
+    }
+    return bitmap;
+}
 
 
 auto Bitmap::pixel(const Position pos) const noexcept -> bool {

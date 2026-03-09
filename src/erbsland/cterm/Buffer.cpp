@@ -6,6 +6,7 @@
 
 
 #include "Char16Style.hpp"
+#include "Tile9Style.hpp"
 
 #include <algorithm>
 #include <array>
@@ -24,6 +25,10 @@ auto Buffer::size() const noexcept -> Size {
     return _size;
 }
 
+auto Buffer::rect() const noexcept -> Rectangle {
+    return Rectangle{Position{0, 0}, _size};
+}
+
 void Buffer::fill(const Char &fillBlock) noexcept {
     for (auto &dataBlock : _data) {
         dataBlock = fillBlock;
@@ -34,6 +39,20 @@ void Buffer::fill(
     const Rectangle rect, const Char &fillBlock, const CharCombinationStylePtr &combinationStyle) noexcept {
 
     rect.forEach([&, this](const Position pos) -> void { set(pos, fillBlock, combinationStyle); });
+}
+
+void Buffer::fill(
+    const Rectangle rect,
+    const Tile9StylePtr &style,
+    const Color baseColor,
+    const CharCombinationStylePtr &combinationStyle) noexcept {
+
+    if (style == nullptr) {
+        return;
+    }
+    rect.forEach([&, this](const Position pos) -> void {
+        set(pos, applyBaseColor(style->block(rect, pos), baseColor), combinationStyle);
+    });
 }
 
 void Buffer::drawFrame(
@@ -48,13 +67,33 @@ void Buffer::drawFrame(
     const CharCombinationStylePtr &combinationStyle,
     const Color frameColor) noexcept {
 
-    rect.forEachInFrame(
-        [&, this](const Position pos) -> void { set(pos, blockForFrame(rect, pos, frameStyle, frameColor), combinationStyle); });
+    rect.forEachInFrame([&, this](const Position pos) -> void {
+        set(pos, blockForFrame(rect, pos, frameStyle, frameColor), combinationStyle);
+    });
+}
+
+void Buffer::drawFrame(
+    const Rectangle rect,
+    const Tile9StylePtr &style,
+    const Color frameColor,
+    const CharCombinationStylePtr &combinationStyle) noexcept {
+
+    if (style == nullptr) {
+        return;
+    }
+    rect.forEachInFrame([&, this](const Position pos) -> void {
+        set(pos, applyBaseColor(style->block(rect, pos), frameColor), combinationStyle);
+    });
 }
 
 void Buffer::drawFrame(const Rectangle rect, const FrameStyle frameStyle, const Color frameColor) noexcept {
-    const auto style = Char16Style::forStyle(frameStyle);
-    drawFrame(rect, style, CharCombinationStyle::commonBoxFrame(), frameColor);
+    if (const auto tile9Style = Tile9Style::forStyle(frameStyle); tile9Style != nullptr) {
+        drawFrame(rect, tile9Style, frameColor, CharCombinationStyle::commonBoxFrame());
+        return;
+    }
+    if (const auto style = Char16Style::forStyle(frameStyle); style != nullptr) {
+        drawFrame(rect, style, CharCombinationStyle::commonBoxFrame(), frameColor);
+    }
 }
 
 void Buffer::drawFilledFrame(
@@ -88,9 +127,34 @@ void Buffer::drawFilledFrame(
 }
 
 void Buffer::drawFilledFrame(
+    Rectangle rect,
+    const Tile9StylePtr &style,
+    const Char &fillBlock,
+    const CharCombinationStylePtr &combinationStyle,
+    const Color frameColor) noexcept {
+
+    if (style == nullptr) {
+        fill(rect, fillBlock, combinationStyle);
+        return;
+    }
+    rect.forEach([&, this](const Position pos) -> void {
+        if (rect.isFrame(pos)) {
+            set(pos, applyBaseColor(style->block(rect, pos), frameColor), combinationStyle);
+        } else {
+            set(pos, fillBlock, combinationStyle);
+        }
+    });
+}
+
+void Buffer::drawFilledFrame(
     const Rectangle rect, const FrameStyle frameStyle, const Char &fillBlock, const Color frameColor) noexcept {
-    const auto style = Char16Style::forStyle(frameStyle);
-    drawFilledFrame(rect, style, fillBlock, CharCombinationStyle::commonBoxFrame(), frameColor);
+    if (const auto tile9Style = Tile9Style::forStyle(frameStyle); tile9Style != nullptr) {
+        drawFilledFrame(rect, tile9Style, fillBlock, CharCombinationStyle::commonBoxFrame(), frameColor);
+        return;
+    }
+    if (const auto style = Char16Style::forStyle(frameStyle); style != nullptr) {
+        drawFilledFrame(rect, style, fillBlock, CharCombinationStyle::commonBoxFrame(), frameColor);
+    }
 }
 
 void Buffer::set(const Position pos, const Char &block) noexcept {
@@ -154,82 +218,17 @@ auto Buffer::get(const Position pos) const noexcept -> const Char & {
 }
 
 
-auto Buffer::applyFrameColor(const Char &frameBlock, const Color frameColor) -> Char {
-    return Char{frameBlock.charStr(), frameColor.overlayWith(frameBlock.color())};
+auto Buffer::applyBaseColor(const Char &block, const Color baseColor) -> Char {
+    return block.withBaseColor(baseColor);
 }
 
 
 auto Buffer::blockForFrame(
     const Rectangle rect, const Position pos, const Char16StylePtr &frameStyle, const Color frameColor) -> Char {
 
-    if (frameStyle == Char16Style::outerHalfBlockFrame()) {
-        return outerHalfBlockForFrame(rect, pos, frameColor);
-    }
-    if (frameStyle == Char16Style::innerHalfBlockFrame()) {
-        return innerHalfBlockForFrame(rect, pos, frameColor);
-    }
-    const auto bitMask = pos.cardinalFourBitmask([&](const Position deltaPos) -> bool { return rect.isFrame(deltaPos); });
-    return applyFrameColor(frameStyle->block(bitMask), frameColor);
-}
-
-
-auto Buffer::outerHalfBlockForFrame(const Rectangle rect, const Position pos, const Color frameColor) -> Char {
-    const auto isTop = pos.y() == rect.y1();
-    const auto isBottom = pos.y() == rect.y2() - 1;
-    const auto isLeft = pos.x() == rect.x1();
-    const auto isRight = pos.x() == rect.x2() - 1;
-    if (isTop && isLeft) {
-        return Char{"▛", frameColor};
-    }
-    if (isTop && isRight) {
-        return Char{"▜", frameColor};
-    }
-    if (isBottom && isLeft) {
-        return Char{"▙", frameColor};
-    }
-    if (isBottom && isRight) {
-        return Char{"▟", frameColor};
-    }
-    if (isTop) {
-        return Char{"▀", frameColor};
-    }
-    if (isBottom) {
-        return Char{"▄", frameColor};
-    }
-    if (isLeft) {
-        return Char{"▌", frameColor};
-    }
-    return Char{"▐", frameColor};
-}
-
-
-auto Buffer::innerHalfBlockForFrame(const Rectangle rect, const Position pos, const Color frameColor) -> Char {
-    const auto isTop = pos.y() == rect.y1();
-    const auto isBottom = pos.y() == rect.y2() - 1;
-    const auto isLeft = pos.x() == rect.x1();
-    const auto isRight = pos.x() == rect.x2() - 1;
-    if (isTop && isLeft) {
-        return Char{"▗", frameColor};
-    }
-    if (isTop && isRight) {
-        return Char{"▖", frameColor};
-    }
-    if (isBottom && isLeft) {
-        return Char{"▝", frameColor};
-    }
-    if (isBottom && isRight) {
-        return Char{"▘", frameColor};
-    }
-    if (isTop) {
-        return Char{"▄", frameColor};
-    }
-    if (isBottom) {
-        return Char{"▀", frameColor};
-    }
-    if (isLeft) {
-        return Char{"▐", frameColor};
-    }
-    return Char{"▌", frameColor};
+    const auto bitMask =
+        pos.cardinalFourBitmask([&](const Position deltaPos) -> bool { return rect.isFrame(deltaPos); });
+    return applyBaseColor(frameStyle->block(bitMask), frameColor);
 }
 
 
@@ -259,6 +258,206 @@ void Buffer::drawText(
     const std::size_t animationCycle) {
 
     drawText(text, alignment, rect, color, animationCycle);
+}
+
+
+void Buffer::drawBitmap(
+    const Bitmap &bitmap,
+    const Position pos,
+    const BitmapDrawOptions &options,
+    const std::size_t animationCycle) noexcept {
+
+    drawBitmap(bitmap, Rectangle{pos, bitmapRenderSize(bitmap, options)}, Alignment::TopLeft, options, animationCycle);
+}
+
+
+void Buffer::drawBitmap(
+    const Bitmap &bitmap,
+    const Rectangle rect,
+    const Alignment alignment,
+    const BitmapDrawOptions &options,
+    const std::size_t animationCycle) noexcept {
+
+    if (bitmap.size().area() == 0 || rect.width() <= 0 || rect.height() <= 0) {
+        return;
+    }
+    const auto renderedSize = bitmapRenderSize(bitmap, options);
+    if (renderedSize.area() == 0) {
+        return;
+    }
+    auto visibleSize = renderedSize.componentMin(rect.size());
+    auto sourceOffset = Position{};
+    auto targetPos = rect.topLeft();
+    if (renderedSize.width() <= rect.width()) {
+        targetPos += Position{
+            alignedBitmapOffset(renderedSize.width(), rect.width(), alignment, Alignment::HorizontalMask),
+            0};
+    } else {
+        sourceOffset += Position{
+            alignedBitmapOffset(renderedSize.width(), rect.width(), alignment, Alignment::HorizontalMask),
+            0};
+    }
+    if (renderedSize.height() <= rect.height()) {
+        targetPos += Position{
+            0,
+            alignedBitmapOffset(renderedSize.height(), rect.height(), alignment, Alignment::VerticalMask)};
+    } else {
+        sourceOffset += Position{
+            0,
+            alignedBitmapOffset(renderedSize.height(), rect.height(), alignment, Alignment::VerticalMask)};
+    }
+    if (options.char16Style() != nullptr) {
+        for (auto y = 0; y < visibleSize.height(); ++y) {
+            for (auto x = 0; x < visibleSize.width(); ++x) {
+                const auto bitmapPos = sourceOffset + Position{x, y};
+                if (!bitmap.pixel(bitmapPos)) {
+                    continue;
+                }
+                const auto bitMask = bitmapPos.cardinalFourBitmask(
+                    [&](const Position neighborPos) noexcept -> bool { return bitmap.pixel(neighborPos); });
+                drawBitmapBlock(
+                    targetPos + Position{x, y},
+                    options.char16Style()->block(bitMask),
+                    colorForBitmapPosition(options, bitmapPos, animationCycle),
+                    options);
+            }
+        }
+        return;
+    }
+    switch (options.scaleMode()) {
+    case BitmapScaleMode::HalfBlock:
+        for (auto y = 0; y < visibleSize.height(); ++y) {
+            for (auto x = 0; x < visibleSize.width(); ++x) {
+                const auto bitmapCellPos = sourceOffset + Position{x, y};
+                const auto bitMask = bitmap.pixelQuad(bitmapCellPos);
+                drawBitmapBlock(
+                    targetPos + Position{x, y},
+                    options.halfBlocks()[bitMask],
+                    colorForBitmapPosition(options, bitmapCellPos, animationCycle),
+                    options);
+            }
+        }
+        break;
+    case BitmapScaleMode::DoubleBlock:
+        for (auto y = 0; y < visibleSize.height(); ++y) {
+            for (auto x = 0; x < visibleSize.width(); ++x) {
+                const auto renderedBitmapPos = sourceOffset + Position{x, y};
+                const auto bitmapPos = Position{renderedBitmapPos.x() / 2, renderedBitmapPos.y()};
+                if (!bitmap.pixel(bitmapPos)) {
+                    continue;
+                }
+                drawBitmapBlock(
+                    targetPos + Position{x, y},
+                    options.doubleBlocks()[static_cast<std::size_t>(renderedBitmapPos.x() % 2)],
+                    colorForBitmapPosition(options, bitmapPos, animationCycle),
+                    options);
+            }
+        }
+        break;
+    case BitmapScaleMode::FullBlock:
+    default:
+        for (auto y = 0; y < visibleSize.height(); ++y) {
+            for (auto x = 0; x < visibleSize.width(); ++x) {
+                const auto bitmapPos = sourceOffset + Position{x, y};
+                if (!bitmap.pixel(bitmapPos)) {
+                    continue;
+                }
+                drawBitmapBlock(
+                    targetPos + Position{x, y},
+                    options.fullBlock(),
+                    colorForBitmapPosition(options, bitmapPos, animationCycle),
+                    options);
+            }
+        }
+        break;
+    }
+}
+
+
+auto Buffer::bitmapRenderSize(const Bitmap &bitmap, const BitmapDrawOptions &options) noexcept -> Size {
+    if (options.char16Style() != nullptr) {
+        return bitmap.size();
+    }
+    switch (options.scaleMode()) {
+    case BitmapScaleMode::HalfBlock:
+        return {(bitmap.size().width() + 1) / 2, (bitmap.size().height() + 1) / 2};
+    case BitmapScaleMode::DoubleBlock:
+        return {bitmap.size().width() * 2, bitmap.size().height()};
+    case BitmapScaleMode::FullBlock:
+    default:
+        return bitmap.size();
+    }
+}
+
+
+auto Buffer::alignedBitmapOffset(
+    const int renderedSize, const int availableSize, const Alignment alignment, const Alignment alignmentMask) noexcept
+    -> int {
+
+    const auto freeSpace = renderedSize <= availableSize ? (availableSize - renderedSize) : (renderedSize - availableSize);
+    if (alignmentMask == Alignment::HorizontalMask) {
+        switch (alignment & alignmentMask) {
+        case Alignment::HCenter:
+            return freeSpace / 2;
+        case Alignment::Right:
+            return freeSpace;
+        case Alignment::Left:
+        default:
+            return 0;
+        }
+    }
+    switch (alignment & alignmentMask) {
+    case Alignment::VCenter:
+        return freeSpace / 2;
+    case Alignment::Bottom:
+        return freeSpace;
+    case Alignment::Top:
+    default:
+        return 0;
+    }
+}
+
+
+auto Buffer::colorForBitmapPosition(
+    const BitmapDrawOptions &options, const Position bitmapPosition, const std::size_t animationCycle) const noexcept
+    -> Color {
+
+    const auto &colorSequence = options.color();
+    if (colorSequence.empty()) {
+        return {};
+    }
+    auto sequenceIndex = static_cast<int64_t>(animationCycle + options.colorAnimationOffset());
+    switch (options.colorMode()) {
+    case BitmapColorMode::VerticalStripes:
+        sequenceIndex += bitmapPosition.x();
+        break;
+    case BitmapColorMode::HorizontalStripes:
+        sequenceIndex += bitmapPosition.y();
+        break;
+    case BitmapColorMode::ForwardDiagonalStripes:
+        sequenceIndex += bitmapPosition.x() + bitmapPosition.y();
+        break;
+    case BitmapColorMode::BackwardDiagonalStripes:
+        sequenceIndex += bitmapPosition.y() - bitmapPosition.x();
+        break;
+    case BitmapColorMode::OneColor:
+    default:
+        break;
+    }
+    const auto sequenceLength = static_cast<int64_t>(colorSequence.sequenceLength());
+    const auto wrappedSequenceIndex = ((sequenceIndex % sequenceLength) + sequenceLength) % sequenceLength;
+    return colorSequence.color(static_cast<std::size_t>(wrappedSequenceIndex));
+}
+
+
+void Buffer::drawBitmapBlock(
+    const Position pos, const Char &block, const Color baseColor, const BitmapDrawOptions &options) noexcept {
+
+    if (!rect().contains(pos)) {
+        return;
+    }
+    const auto finalColor = get(pos).color().overlayWith(baseColor).overlayWith(block.color());
+    set(pos, block.withColorReplaced(finalColor), options.combinationStyle());
 }
 
 
@@ -367,8 +566,12 @@ void Buffer::applyTextLines(
             if (pos.x() + characterWidth > rect.x2()) {
                 break;
             }
-            const auto finalColor = colorForTextPosition(text, character, pos, animationCycle);
-            set(pos, character.withColor(finalColor));
+            // only do this calculation if we actually change the buffer.
+            if (this->rect().contains(pos)) {
+                auto finalColor = colorForTextPosition(text, character, pos, animationCycle);
+                finalColor = get(pos).color().overlayWith(finalColor);
+                set(pos, character.withColorOverlay(finalColor));
+            }
             pos = pos + Position{characterWidth, 0};
         }
     }

@@ -11,7 +11,9 @@
 #include <bitset>
 #include <cstddef>
 #include <cstdint>
+#include <initializer_list>
 #include <stdexcept>
+#include <string_view>
 #include <vector>
 
 
@@ -64,6 +66,12 @@ public: // modifiers
     void flipHorizontal() noexcept;
 
 public: // tools
+    /// Create a bitmap from an ASCII pattern.
+    /// Each input string becomes one row. Dots (`.`) and spaces create cleared pixels, every other character sets a
+    /// pixel. Shorter rows are padded with cleared pixels to the maximum row width.
+    /// @param rows The pattern rows to parse.
+    /// @return The created bitmap.
+    [[nodiscard]] static auto fromPattern(std::initializer_list<std::string_view> rows) -> Bitmap;
     /// Draw pixels from a numeric bit mask.
     /// @tparam T The unsigned integer type.
     /// @param position The top left corner where to draw the bit mask.

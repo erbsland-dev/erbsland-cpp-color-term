@@ -77,7 +77,7 @@ void RetroPlasmaApp::drawPrompt(Buffer &buffer) const {
         return;
     }
     const auto promptRow = buffer.size().height() - 1;
-    buffer.fill(Rectangle{0, promptRow, buffer.size().width(), 1}, Char{" ", Color{fg::Default, bg::BrightBlack}});
+    buffer.fill(Rectangle{0, promptRow, buffer.size().width(), 1}, Char{" ", bg::BrightBlack});
     auto text = Text{buildPrompt(), Rectangle{0, promptRow, buffer.size().width(), 1}, Alignment::CenterLeft};
     buffer.drawText(text);
 }
@@ -85,28 +85,31 @@ void RetroPlasmaApp::drawPrompt(Buffer &buffer) const {
 
 auto RetroPlasmaApp::buildPrompt() const -> String {
     auto result = String{};
-    appendText(result, "Retro Plasma  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[Q]", Color{fg::BrightYellow, bg::BrightBlack});
-    appendText(result, " quit  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[F]", Color{fg::BrightCyan, bg::BrightBlack});
-    appendText(result, " faster  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[S]", Color{fg::BrightCyan, bg::BrightBlack});
-    appendText(result, " slower  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[P]", Color{fg::BrightMagenta, bg::BrightBlack});
-    appendText(result, _paused ? " resume  " : " pause  ", Color{fg::BrightWhite, bg::BrightBlack});
-    appendText(result, "[C]", Color{fg::BrightGreen, bg::BrightBlack});
-    appendText(
-        result,
-        " palette  speed " + std::to_string(static_cast<int>(_speed * 100.0)) + "%",
-        Color{fg::BrightWhite, bg::BrightBlack});
+    result.append(
+        bg::BrightBlack,
+        fg::BrightWhite,
+        "Retro Plasma  ",
+        fg::BrightYellow,
+        "[Q]",
+        fg::BrightWhite,
+        " quit  ",
+        fg::BrightCyan,
+        "[F]",
+        fg::BrightWhite,
+        " faster  ",
+        fg::BrightCyan,
+        "[S]",
+        fg::BrightWhite,
+        " slower  ",
+        fg::BrightMagenta,
+        "[P]",
+        fg::BrightWhite,
+        (_paused ? " resume  " : " pause  "),
+        fg::BrightGreen,
+        "[C]",
+        fg::BrightWhite,
+        std::format(" palette  speed {}%", (_speed * 100.0)));
     return result;
-}
-
-
-void RetroPlasmaApp::appendText(String &target, const std::string_view text, const Color color) {
-    for (const auto &character : String{text}) {
-        target.append(character.withColor(color));
-    }
 }
 
 

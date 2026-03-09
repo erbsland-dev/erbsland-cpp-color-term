@@ -18,6 +18,14 @@ public:
         REQUIRE_EQUAL(text[2].charStr(), std::string{"ü"});
     }
 
+    void testUtf32StringIsSplitIntoTerminalCharacters() {
+        const auto text = term::String{U"äöü"};
+        REQUIRE_EQUAL(text.size(), std::size_t{3});
+        REQUIRE_EQUAL(text[0].charStr(), std::string{"ä"});
+        REQUIRE_EQUAL(text[1].charStr(), std::string{"ö"});
+        REQUIRE_EQUAL(text[2].charStr(), std::string{"ü"});
+    }
+
     void testDisplayWidth() {
         const auto text = term::String{"A中B"};
         REQUIRE_EQUAL(text.displayWidth(), 4);
@@ -48,16 +56,16 @@ public:
     void testWrapIntoLinesPreservesColoredSpacingBetweenWords() {
         auto text = term::String{};
         text.append(term::Char{"A", term::Color{term::fg::Red, term::bg::Black}});
-        text.append(term::Char{" ", term::Color{term::fg::Default, term::bg::Blue}});
-        text.append(term::Char{" ", term::Color{term::fg::Default, term::bg::Cyan}});
+        text.append(term::Char{" ", term::Color{term::fg::Inherited, term::bg::Blue}});
+        text.append(term::Char{" ", term::Color{term::fg::Inherited, term::bg::Cyan}});
         text.append(term::Char{"B", term::Color{term::fg::Green, term::bg::Black}});
 
         const auto lines = text.wrapIntoLines(8);
 
         REQUIRE_EQUAL(lines.size(), std::size_t{1});
         REQUIRE_EQUAL(lines[0].size(), std::size_t{4});
-        REQUIRE_EQUAL(lines[0][1].color(), term::Color(term::fg::Default, term::bg::Blue));
-        REQUIRE_EQUAL(lines[0][2].color(), term::Color(term::fg::Default, term::bg::Cyan));
+        REQUIRE_EQUAL(lines[0][1].color(), term::Color(term::fg::Inherited, term::bg::Blue));
+        REQUIRE_EQUAL(lines[0][2].color(), term::Color(term::fg::Inherited, term::bg::Cyan));
     }
 
     void testCombiningCharactersStayInOneCell() {
@@ -65,6 +73,16 @@ public:
         REQUIRE_EQUAL(text.size(), std::size_t{1});
         REQUIRE_EQUAL(text.displayWidth(), 1);
         REQUIRE_EQUAL(text[0].charStr(), std::string{"e\xCC\x81"});
+    }
+
+    void testControlCodesAreFilteredExceptTabAndNewline() {
+        const auto text = term::String{"A\r\x01\t\nB"};
+
+        REQUIRE_EQUAL(text.size(), std::size_t{4});
+        REQUIRE_EQUAL(text[0].charStr(), std::string{"A"});
+        REQUIRE_EQUAL(text[1].charStr(), std::string{"\t"});
+        REQUIRE_EQUAL(text[2].charStr(), std::string{"\n"});
+        REQUIRE_EQUAL(text[3].charStr(), std::string{"B"});
     }
 
     void testInvalidUtf8Fails() { REQUIRE_THROWS_AS(std::invalid_argument, term::String{"\xC3"}); }

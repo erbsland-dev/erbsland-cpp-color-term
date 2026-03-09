@@ -54,6 +54,29 @@ custom cursor movement, grid logic, or simple simulations.
 Here a cursor moves one step to the east. The resulting position is then
 checked against the available screen size before rendering a character.
 
+Splitting a Rectangle into Grid Cells
+-------------------------------------
+
+``Rectangle::gridCells()`` divides a larger canvas into evenly spaced
+sub-rectangles. This is useful for dashboards, menu grids, and
+multi-panel layouts where each cell should keep a predictable size.
+
+.. code-block:: cpp
+
+    const auto canvas = Rectangle{0, 0, 80, 24};
+    const auto cells = canvas.gridCells(2, 3, 2, 1);
+
+    for (const auto &cell : cells) {
+        buffer.drawFrame(cell, FrameStyle::Light, Color{fg::BrightCyan, bg::Black});
+    }
+
+    buffer.drawText("Overview", cells[0].insetBy(Margins{1}), Alignment::TopLeft);
+    buffer.drawText("Status", cells[1].insetBy(Margins{1}), Alignment::TopLeft);
+    buffer.drawText("Log", cells[2].insetBy(Margins{1}), Alignment::TopLeft);
+
+If the requested number of rows, columns, and spacing no longer fits
+into the rectangle, ``gridCells()`` throws ``std::invalid_argument``.
+
 .. figure:: /images/text-gallery3.jpg
     :width: 100%
 
@@ -81,4 +104,3 @@ Interface
 
 .. doxygenclass:: erbsland::cterm::Size
     :members:
-

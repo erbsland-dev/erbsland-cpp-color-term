@@ -17,6 +17,7 @@ namespace erbsland::cterm {
 
 
 class CharCombinationStyle;
+/// Shared pointer for CharCombinationStyle
 using CharCombinationStylePtr = std::shared_ptr<CharCombinationStyle>;
 
 
@@ -105,16 +106,6 @@ public: // implement CharCombinationStyle
     [[nodiscard]] auto combine(const Char &current, const Char &overlay) const noexcept -> Char override;
 
 private:
-    /// Decode one UTF-8 encoded code point.
-    /// @param text The UTF-8 encoded text.
-    /// @return The decoded code point, or zero if decoding fails or the text contains more than one code point.
-    [[nodiscard]] static auto decodeCodePoint(std::string_view text) noexcept -> char32_t;
-
-    /// Encode one Unicode code point into a UTF-8 string.
-    /// @param codePoint The Unicode code point to encode.
-    /// @return The encoded UTF-8 string.
-    [[nodiscard]] static auto encodeUtf8(char32_t codePoint) noexcept -> std::string;
-
     /// Resolve one code point to its matrix index.
     /// @param codePoint The Unicode code point to resolve.
     /// @return The matrix index, or 255 if the code point is unsupported.

@@ -6,7 +6,7 @@
 Demos
 *****
 
-This repository includes four small demo applications. Each demo highlights a specific strength of the library and
+This repository includes five small demo applications. Each demo highlights a specific strength of the library and
 shows how you can use it in practice. They are useful both as quick showcases and as reference implementations when
 you start integrating the library into your own projects.
 
@@ -37,3 +37,4 @@ Each executable corresponds to one of the demos listed below.
     retro-plasma
     frame-weaver
     text-gallery
+    bitmap-showcase

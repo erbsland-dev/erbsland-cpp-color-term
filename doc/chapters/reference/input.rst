@@ -77,5 +77,3 @@ Interface
 .. doxygenclass:: erbsland::cterm::Key
     :members:
 
-.. doxygenfunction:: erbsland::cterm::createInputForPlatform
-

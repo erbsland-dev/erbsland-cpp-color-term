@@ -8,6 +8,7 @@
 #include <vector>
 
 
+TESTED_TARGETS(Bitmap)
 class BitmapTest final : public el::UnitTest {
 public:
     void testPixelsCanBeSetAndRead() {
@@ -49,5 +50,36 @@ public:
 
         REQUIRE(destination.pixel(Position{1, 2}));
         REQUIRE_FALSE(destination.pixel(Position{1, 1}));
+    }
+
+    void testFromPatternParsesFilledAndEmptyPixels() {
+        const auto bitmap = Bitmap::fromPattern({
+            "#.X",
+            " o ",
+        });
+
+        REQUIRE_EQUAL(bitmap.size(), Size(3, 2));
+        REQUIRE(bitmap.pixel(Position{0, 0}));
+        REQUIRE_FALSE(bitmap.pixel(Position{1, 0}));
+        REQUIRE(bitmap.pixel(Position{2, 0}));
+        REQUIRE_FALSE(bitmap.pixel(Position{0, 1}));
+        REQUIRE(bitmap.pixel(Position{1, 1}));
+        REQUIRE_FALSE(bitmap.pixel(Position{2, 1}));
+    }
+
+    void testFromPatternPadsShortRowsWithClearedPixels() {
+        const auto bitmap = Bitmap::fromPattern({
+            "##",
+            "#",
+            "",
+        });
+
+        REQUIRE_EQUAL(bitmap.size(), Size(2, 3));
+        REQUIRE(bitmap.pixel(Position{0, 0}));
+        REQUIRE(bitmap.pixel(Position{1, 0}));
+        REQUIRE(bitmap.pixel(Position{0, 1}));
+        REQUIRE_FALSE(bitmap.pixel(Position{1, 1}));
+        REQUIRE_FALSE(bitmap.pixel(Position{0, 2}));
+        REQUIRE_FALSE(bitmap.pixel(Position{1, 2}));
     }
 };

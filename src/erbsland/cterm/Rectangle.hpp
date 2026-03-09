@@ -7,12 +7,16 @@
 #include "Position.hpp"
 #include "Size.hpp"
 
+#include <type_traits>
+#include <vector>
+
 
 namespace erbsland::cterm {
 
 
 /// Axis-aligned rectangle represented by a top-left position and size.
 /// Provides geometry utilities such as containment tests, expansion and iteration.
+/// @tested `RectangleTest`
 class Rectangle {
 public: // ctors/dtor/assign/move
     /// Construct an empty rectangle at (0,0).
@@ -94,6 +98,16 @@ public: // tools
     /// @param testedPosition Position to test.
     /// @return `true` if the position lies on the outer frame of the rectangle.
     [[nodiscard]] auto isFrame(Position testedPosition) const noexcept -> bool;
+    /// Divide this rectangle into equally spaced grid cells.
+    /// Each cell must be at least 1x1 in size, if this isn't possible, `std::invalid_argument` is thrown.
+    /// @param rows The number of rows. Minimum 1.
+    /// @param columns The number of columns. Minimum 1
+    /// @param horizontalSpacing The spacing between cells horizontally.
+    /// @param verticalSpacing The spacing between cells vertically.
+    /// @return A vector of rectangles representing the grid cells from left to right, top to bottom.
+    /// @throws std::invalid_argument if rows or columns are less than 1 or the chosen division is impossible.
+    [[nodiscard]] auto gridCells(int rows, int columns, int horizontalSpacing = 0, int verticalSpacing = 0) const
+        -> std::vector<Rectangle>;
     /// Call a function for each position contained in the rectangle.
     /// @tparam Fn A callable with signature `void(Position)`.
     /// The function definition must be `void fn(Position pos)`.

@@ -99,6 +99,140 @@ public:
         REQUIRE_EQUAL(capture.str(), std::string{"X"});
     }
 
+    void testLineBufferDelaysOutputUntilFlush() {
+        auto terminal = term::Terminal{Size{4, 4}};
+        terminal.setColorEnabled(false);
+
+        auto capture = StdoutCapture{};
+        terminal.write("Hello");
+
+        REQUIRE_EQUAL(capture.str(), std::string{});
+
+        terminal.flush();
+
+        REQUIRE_EQUAL(capture.str(), std::string{"Hello"});
+    }
+
+    void testLineBufferFlushesCompletedLinesImmediately() {
+        auto terminal = term::Terminal{Size{4, 4}};
+        terminal.setColorEnabled(false);
+
+        auto capture = StdoutCapture{};
+        terminal.write("Hello");
+        terminal.write(" World\nTail");
+
+        REQUIRE_EQUAL(capture.str(), std::string{"Hello World\n"});
+
+        terminal.flush();
+
+        REQUIRE_EQUAL(capture.str(), std::string{"Hello World\nTail"});
+    }
+
+    void testDisablingLineBufferWritesImmediately() {
+        auto terminal = term::Terminal{Size{4, 4}};
+        terminal.setColorEnabled(false);
+        terminal.setLineBufferEnabled(false);
+
+        const auto capture = StdoutCapture{};
+        terminal.write("Hello");
+
+        REQUIRE_EQUAL(capture.str(), std::string{"Hello"});
+    }
+
+    void testBackBufferUsesClearSequenceForFirstFrame() {
+        const auto buffer = createBuffer({"AB", "CD"});
+        auto terminal = term::Terminal{Size{6, 4}};
+        terminal.setBackBufferEnabled(true);
+
+        const auto capture = StdoutCapture{};
+        terminal.updateScreen(buffer);
+
+        REQUIRE_EQUAL(capture.str(), std::string{"\x1b[2J\x1b[1;1HAB\nCD\n"});
+    }
+
+    void testBackBufferUsesPatchUpdateForSmallChanges() {
+        const auto initialBuffer = createBuffer({".....", "....."});
+        const auto updatedBuffer = createBuffer({".....", "..X.."});
+        auto terminal = term::Terminal{Size{8, 5}};
+        terminal.setBackBufferEnabled(true);
+
+        {
+            const auto capture = StdoutCapture{};
+            terminal.updateScreen(initialBuffer);
+        }
+        const auto capture = StdoutCapture{};
+        terminal.updateScreen(updatedBuffer);
+
+        REQUIRE_EQUAL(capture.str(), std::string{"\x1b[H\x1b[2;3HX\x1b[3;1H"});
+    }
+
+    void testBackBufferUsesClassicOverwriteWhenManyCharactersChange() {
+        const auto initialBuffer = createBuffer({".....", "....."});
+        const auto updatedBuffer = createBuffer({"XXX..", "....."});
+        auto terminal = term::Terminal{Size{8, 5}};
+        terminal.setBackBufferEnabled(true);
+
+        {
+            const auto capture = StdoutCapture{};
+            terminal.updateScreen(initialBuffer);
+        }
+        const auto capture = StdoutCapture{};
+        terminal.updateScreen(updatedBuffer);
+
+        REQUIRE_EQUAL(capture.str(), std::string{"\x1b[HXXX..\n.....\n"});
+    }
+
+    void testBackBufferUsesClearSequenceWhenRenderedSizeChanges() {
+        const auto initialBuffer = createBuffer({"AB", "CD"});
+        const auto updatedBuffer = createBuffer({"ABC"});
+        auto terminal = term::Terminal{Size{8, 5}};
+        terminal.setBackBufferEnabled(true);
+
+        {
+            const auto capture = StdoutCapture{};
+            terminal.updateScreen(initialBuffer);
+        }
+        const auto capture = StdoutCapture{};
+        terminal.updateScreen(updatedBuffer);
+
+        REQUIRE_EQUAL(capture.str(), std::string{"\x1b[2J\x1b[1;1HABC\n"});
+    }
+
+    void testBackBufferUsesPatchUpdateForCroppedFrames() {
+        const auto initialBuffer = createBuffer({"ABCD", "EFGH", "IJKL", "MNOP"});
+        const auto updatedBuffer = createBuffer({"ZBCD", "EFGH", "IJKL", "MNOP"});
+        auto terminal = term::Terminal{Size{4, 4}};
+        terminal.setBackBufferEnabled(true);
+        auto settings = term::UpdateSettings{};
+        settings.setShowCropMarks(true);
+
+        {
+            const auto capture = StdoutCapture{};
+            terminal.updateScreen(initialBuffer, settings);
+        }
+        const auto capture = StdoutCapture{};
+        terminal.updateScreen(updatedBuffer, settings);
+
+        REQUIRE_EQUAL(capture.str(), std::string{"\x1b[H\x1b[1;1HZ\x1b[4;1H"});
+    }
+
+    void testBackBufferSkipsOutputForUnchangedMinimumSizeMarker() {
+        const auto buffer = createBuffer({"AB", "CD"});
+        auto terminal = term::Terminal{Size{4, 4}};
+        terminal.setBackBufferEnabled(true);
+        auto settings = term::UpdateSettings{};
+        settings.setMinimumSize(Size{5, 5});
+
+        {
+            const auto capture = StdoutCapture{};
+            terminal.updateScreen(buffer, settings);
+        }
+        const auto capture = StdoutCapture{};
+        terminal.updateScreen(buffer, settings);
+
+        REQUIRE_EQUAL(capture.str(), std::string{});
+    }
+
     void testClearScreenUsesConfiguredClearSequence() {
         auto terminal = term::Terminal{Size{4, 4}};
         terminal.setRefreshMode(term::Terminal::RefreshMode::Clear);

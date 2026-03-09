@@ -38,7 +38,8 @@ private:
         double y{};
         double width{};
         double height{};
-        Char16StylePtr style;
+        FrameStyle style = FrameStyle::Light;
+        Char16StylePtr customStyle{};
         Color color{};
     };
 
@@ -53,10 +54,9 @@ private:
     [[nodiscard]] static auto frameRectangle(FrameSpec frame, Rectangle contentRect) -> Rectangle;
     [[nodiscard]] static auto prismFrameStyle() -> const Char16StylePtr &;
     [[nodiscard]] static auto colors() -> const ColorSequence &;
-    [[nodiscard]] auto availableStyles() const -> std::vector<Char16StylePtr>;
+    [[nodiscard]] auto availableStyles() const -> std::vector<FrameSpec>;
     [[nodiscard]] auto modeName() const -> std::string_view;
     [[nodiscard]] auto buildPrompt() const -> String;
-    static void appendText(String &target, std::string_view text, Color color = {});
 
 private:
     Terminal _terminal{Size{78, 25}};
