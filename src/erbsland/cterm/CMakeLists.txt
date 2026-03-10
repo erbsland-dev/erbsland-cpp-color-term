@@ -28,6 +28,8 @@ target_sources(erbsland-color-term PRIVATE
         Font.hpp
         Font.cpp
         FontGlyph.hpp
+        FrameDrawOptions.cpp
+        FrameDrawOptions.hpp
         FrameStyle.hpp
         Input.cpp
         Input.hpp

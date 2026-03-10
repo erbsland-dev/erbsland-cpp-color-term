@@ -228,6 +228,105 @@ public:
         REQUIRE_EQUAL(buffer.get(Position(1, 1)).color(), term::Color(term::fg::Green, term::bg::Yellow));
     }
 
+    void testDrawFrameWithOptionsAppliesFrameAndFillColorOverlayOrder() {
+        term::Buffer buffer(Size(3, 3));
+        buffer.fill(term::Char{" ", term::Color{term::fg::Green, term::bg::Blue}});
+        auto options = term::FrameDrawOptions{};
+        options.setFrameColor(term::Color{term::fg::Red, term::bg::Inherited});
+        options.setFillColor(term::Color{term::fg::Inherited, term::bg::Yellow});
+        options.setFillBlock(term::Char{".", term::Color{term::fg::White, term::bg::Inherited}});
+
+        buffer.drawFrame(Rectangle{0, 0, 3, 3}, options);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"┌─┐", "│.│", "└─┘"}));
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Red, term::bg::Blue));
+        REQUIRE_EQUAL(buffer.get(Position{1, 1}).color(), term::Color(term::fg::White, term::bg::Yellow));
+    }
+
+    void testDrawFrameWithOptionsUsesStripeModesAcrossFrameAndFill() {
+        term::Buffer buffer(Size(4, 3));
+        buffer.fill(term::Char{" ", term::Color{term::fg::White, term::bg::Black}});
+        auto options = term::FrameDrawOptions{};
+        options.setFrameColorSequence(
+            term::ColorSequence{
+                term::Color{term::fg::Red, term::bg::Inherited},
+                term::Color{term::fg::Blue, term::bg::Inherited},
+            },
+            term::FrameColorMode::VerticalStripes);
+        options.setFillColorSequence(
+            term::ColorSequence{
+                term::Color{term::fg::Inherited, term::bg::Yellow},
+                term::Color{term::fg::Inherited, term::bg::Magenta},
+            },
+            term::FrameColorMode::HorizontalStripes);
+        options.setFillBlock(term::Char{" "});
+
+        buffer.drawFrame(Rectangle{0, 0, 4, 3}, options);
+
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Red, term::bg::Black));
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), term::Color(term::fg::Blue, term::bg::Black));
+        REQUIRE_EQUAL(buffer.get(Position{0, 1}).color(), term::Color(term::fg::Red, term::bg::Black));
+        REQUIRE_EQUAL(buffer.get(Position{1, 1}).color(), term::Color(term::fg::Blue, term::bg::Magenta));
+        REQUIRE_EQUAL(buffer.get(Position{2, 1}).color(), term::Color(term::fg::Red, term::bg::Magenta));
+    }
+
+    void testDrawFrameWithOptionsPrefersCustomStylesAndTile9Fill() {
+        auto customTiles = std::array<term::Char, 16>{};
+        customTiles.fill(term::Char{"X"});
+        const auto customStyle = std::make_shared<term::Char16Style>(customTiles);
+        auto options = term::FrameDrawOptions{};
+        options.setStyle(term::FrameStyle::LightWithRoundedCorners);
+        options.setChar16Style(customStyle);
+
+        {
+            term::Buffer buffer(Size(4, 3));
+            buffer.drawFrame(Rectangle{0, 0, 4, 3}, options);
+            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"XXXX", "X  X", "XXXX"}));
+        }
+        {
+            term::Buffer buffer(Size(4, 3));
+            options.setTile9Style(term::Tile9Style::create("ABCDEFGHI"));
+            options.setFillBlock(term::Char{"."});
+            buffer.drawFrame(Rectangle{0, 0, 4, 3}, options);
+            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"ABBC", "DEEF", "GHHI"}));
+        }
+    }
+
+    void testDrawFrameWithOptionsChasingBorderModesAnimateClockwiseAndCounterClockwise() {
+        const auto colors = term::ColorSequence{
+            term::Color{term::fg::Red, term::bg::Black},
+            term::Color{term::fg::Green, term::bg::Black},
+            term::Color{term::fg::Blue, term::bg::Black},
+        };
+
+        {
+            term::Buffer buffer(Size(4, 4));
+            auto options = term::FrameDrawOptions{};
+            options.setFrameColorSequence(colors, term::FrameColorMode::ChasingBorderCW);
+
+            buffer.drawFrame(Rectangle{0, 0, 4, 4}, options, 1);
+
+            REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Blue, term::bg::Black));
+            REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), term::Color(term::fg::Red, term::bg::Black));
+            REQUIRE_EQUAL(buffer.get(Position{2, 0}).color(), term::Color(term::fg::Green, term::bg::Black));
+            REQUIRE_EQUAL(buffer.get(Position{3, 1}).color(), term::Color(term::fg::Red, term::bg::Black));
+            REQUIRE_EQUAL(buffer.get(Position{0, 1}).color(), term::Color(term::fg::Green, term::bg::Black));
+        }
+        {
+            term::Buffer buffer(Size(4, 4));
+            auto options = term::FrameDrawOptions{};
+            options.setFrameColorSequence(colors, term::FrameColorMode::ChasingBorderCCW);
+
+            buffer.drawFrame(Rectangle{0, 0, 4, 4}, options, 1);
+
+            REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Green, term::bg::Black));
+            REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), term::Color(term::fg::Blue, term::bg::Black));
+            REQUIRE_EQUAL(buffer.get(Position{2, 0}).color(), term::Color(term::fg::Red, term::bg::Black));
+            REQUIRE_EQUAL(buffer.get(Position{3, 1}).color(), term::Color(term::fg::Blue, term::bg::Black));
+            REQUIRE_EQUAL(buffer.get(Position{0, 1}).color(), term::Color(term::fg::Red, term::bg::Black));
+        }
+    }
+
     void testDrawBitmapHalfBlocksUseQuadMaskAndBaseColor() {
         term::Buffer buffer(Size(1, 1));
         auto bitmap = Bitmap{Size{2, 2}};

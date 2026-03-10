@@ -7,6 +7,7 @@
 #include "Position.hpp"
 #include "Size.hpp"
 
+#include <cstdint>
 #include <type_traits>
 #include <vector>
 
@@ -98,6 +99,12 @@ public: // tools
     /// @param testedPosition Position to test.
     /// @return `true` if the position lies on the outer frame of the rectangle.
     [[nodiscard]] auto isFrame(Position testedPosition) const noexcept -> bool;
+    /// Get the clockwise border index for a frame position.
+    /// The top-left corner has index `0`, then the index increases clockwise around the perimeter.
+    /// Degenerate rectangles with width or height `1` still produce a continuous index sequence.
+    /// @param testedPosition The position on the frame.
+    /// @return The clockwise border index, or `-1` if the position is not on the frame.
+    [[nodiscard]] auto frameIndex(Position testedPosition) const noexcept -> int64_t;
     /// Divide this rectangle into equally spaced grid cells.
     /// Each cell must be at least 1x1 in size, if this isn't possible, `std::invalid_argument` is thrown.
     /// @param rows The number of rows. Minimum 1.

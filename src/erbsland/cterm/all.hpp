@@ -20,6 +20,7 @@
 #include "Direction.hpp"
 #include "Font.hpp"
 #include "FontGlyph.hpp"
+#include "FrameDrawOptions.hpp"
 #include "FrameStyle.hpp"
 #include "Input.hpp"
 #include "InputDefinition.hpp"

@@ -23,5 +23,8 @@ concept PrintableArg =
     std::same_as<Char, T> || std::same_as<String, T> || std::same_as<std::decay_t<T>, std::string> ||
     std::same_as<std::decay_t<T>, std::string_view> || std::same_as<T, const char *>;
 
+template <typename T>
+concept ColorArg = std::constructible_from<Color, T>;
+
 
 }

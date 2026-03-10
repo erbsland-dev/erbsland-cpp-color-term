@@ -9,6 +9,7 @@
 #include "Char16Style.hpp"
 #include "CharCombinationStyle.hpp"
 #include "ColorSequence.hpp"
+#include "FrameDrawOptions.hpp"
 #include "FrameStyle.hpp"
 #include "Position.hpp"
 #include "Rectangle.hpp"
@@ -120,6 +121,16 @@ public: // drawing methods
     /// @param frameStyle The predefined frame style.
     /// @param frameColor The base frame color. Any color from the frame style overlays this base color.
     void drawFrame(Rectangle rect, FrameStyle frameStyle, Color frameColor = {}) noexcept;
+    /// Draw a frame inside a given rectangle with configurable style, fill, and animated colors.
+    /// This will set all blocks at the edge, *inside* the given rectangle.
+    /// If `options.fillBlock()` is empty and no `Tile9Style` is active, the interior is left unchanged.
+    /// @param rect The rectangle for the frame.
+    /// @param options Frame drawing options.
+    /// @param animationCycle Animation cycle for frame and fill color animations.
+    void drawFrame(
+        Rectangle rect,
+        const FrameDrawOptions &options = FrameDrawOptions::defaultOptions(),
+        std::size_t animationCycle = 0) noexcept;
     /// Draw a box and fill it.
     /// @param rect The rectangle for the frame.
     /// @param frameBlock The block for the frame.
@@ -218,8 +229,7 @@ public: // drawing methods
 
 private:
     [[nodiscard]] static auto applyBaseColor(const Char &block, Color baseColor) -> Char;
-    [[nodiscard]] static auto
-    blockForFrame(Rectangle rect, Position pos, const Char16StylePtr &frameStyle, Color frameColor) -> Char;
+    [[nodiscard]] static auto blockForFrame(Rectangle rect, Position pos, const Char16StylePtr &frameStyle) -> Char;
     [[nodiscard]] auto buildTextLines(const Text &text) const -> BlockStringLines;
     [[nodiscard]] auto buildFontTextLines(const Text &text) const -> BlockStringLines;
     void applyTextLines(const Text &text, const BlockStringLines &lines, std::size_t animationCycle) noexcept;
@@ -234,6 +244,15 @@ private:
     colorForBitmapPosition(const BitmapDrawOptions &options, Position bitmapPosition, std::size_t animationCycle) const
         noexcept -> Color;
     void drawBitmapBlock(Position pos, const Char &block, Color baseColor, const BitmapDrawOptions &options) noexcept;
+    void drawFrameBlock(
+        Position pos, const Char &block, Color baseColor, const CharCombinationStylePtr &combinationStyle) noexcept;
+    [[nodiscard]] static auto colorForFramePosition(
+        const ColorSequence &colorSequence,
+        FrameColorMode colorMode,
+        Rectangle rect,
+        Position pos,
+        std::size_t animationCycle,
+        std::size_t animationOffset) noexcept -> Color;
     [[nodiscard]] auto colorForTextPosition(
         const Text &text, const Char &character, Position position, std::size_t animationCycle) const noexcept -> Color;
 

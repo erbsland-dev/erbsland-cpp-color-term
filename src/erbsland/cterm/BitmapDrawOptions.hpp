@@ -71,21 +71,9 @@ public:
     BitmapDrawOptions() = default;
     /// Create options for one fixed color.
     /// @param color The base color for the bitmap.
-    BitmapDrawOptions(Color color);
-    /// Create options with only a foreground color.
-    /// @param foreground The base foreground color.
-    BitmapDrawOptions(Foreground foreground);
-    /// @overload
-    BitmapDrawOptions(Foreground::Hue foreground);
-    /// Create options with explicit foreground and background colors.
-    /// @param foreground The base foreground color.
-    /// @param background The base background color.
-    BitmapDrawOptions(Foreground foreground, Background background);
-    /// Create options with only a background color.
-    /// @param background The base background color.
-    BitmapDrawOptions(Background background);
-    /// @overload
-    BitmapDrawOptions(Background::Hue background);
+    template <typename tColor>
+        requires ColorArg<tColor>
+    explicit BitmapDrawOptions(tColor color) : _color{color} {}
     /// Create options from a color sequence.
     /// @param colorSequence The base colors for the bitmap.
     /// @param colorMode The mode used to pick colors from the sequence.

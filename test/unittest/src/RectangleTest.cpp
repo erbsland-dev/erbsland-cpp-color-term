@@ -171,6 +171,31 @@ public:
         REQUIRE_FALSE(rect.isFrame(Position(3, 1)));
     }
 
+    void testFrameIndexUsesClockwisePerimeterOrder() {
+        rect = Rectangle(2, 3, 4, 3);
+
+        REQUIRE_EQUAL(rect.frameIndex(Position(2, 3)), 0);
+        REQUIRE_EQUAL(rect.frameIndex(Position(3, 3)), 1);
+        REQUIRE_EQUAL(rect.frameIndex(Position(4, 3)), 2);
+        REQUIRE_EQUAL(rect.frameIndex(Position(5, 3)), 3);
+        REQUIRE_EQUAL(rect.frameIndex(Position(5, 4)), 4);
+        REQUIRE_EQUAL(rect.frameIndex(Position(5, 5)), 5);
+        REQUIRE_EQUAL(rect.frameIndex(Position(4, 5)), 6);
+        REQUIRE_EQUAL(rect.frameIndex(Position(3, 5)), 7);
+        REQUIRE_EQUAL(rect.frameIndex(Position(2, 5)), 8);
+        REQUIRE_EQUAL(rect.frameIndex(Position(2, 4)), 9);
+        REQUIRE_EQUAL(rect.frameIndex(Position(3, 4)), -1);
+    }
+
+    void testFrameIndexHandlesDegenerateRectangles() {
+        REQUIRE_EQUAL(Rectangle(4, 5, 1, 3).frameIndex(Position(4, 5)), 0);
+        REQUIRE_EQUAL(Rectangle(4, 5, 1, 3).frameIndex(Position(4, 6)), 1);
+        REQUIRE_EQUAL(Rectangle(4, 5, 1, 3).frameIndex(Position(4, 7)), 2);
+        REQUIRE_EQUAL(Rectangle(4, 5, 3, 1).frameIndex(Position(4, 5)), 0);
+        REQUIRE_EQUAL(Rectangle(4, 5, 3, 1).frameIndex(Position(5, 5)), 1);
+        REQUIRE_EQUAL(Rectangle(4, 5, 3, 1).frameIndex(Position(6, 5)), 2);
+    }
+
     void testForEach() {
         rect = Rectangle(1, 2, 3, 2); // covers positions x=[1,3], y=[2,3] (exclusive x2=4,y2=4)
         std::vector<Position> visited;

@@ -9,25 +9,6 @@
 namespace erbsland::cterm {
 
 
-BitmapDrawOptions::BitmapDrawOptions(Color color) : _color{color} {
-}
-
-BitmapDrawOptions::BitmapDrawOptions(Foreground foreground) : _color{Color{foreground, bg::Inherited}} {
-}
-
-BitmapDrawOptions::BitmapDrawOptions(Foreground::Hue foreground) : _color{Color{foreground, bg::Inherited}} {
-}
-
-BitmapDrawOptions::BitmapDrawOptions(Foreground foreground, Background background) :
-    _color{Color{foreground, background}} {
-}
-
-BitmapDrawOptions::BitmapDrawOptions(Background background) : _color{Color{fg::Inherited, background}} {
-}
-
-BitmapDrawOptions::BitmapDrawOptions(Background::Hue background) : _color{Color{fg::Inherited, background}} {
-}
-
 BitmapDrawOptions::BitmapDrawOptions(ColorSequence colorSequence, BitmapColorMode colorMode) :
     _color{colorSequence}, _colorMode{colorMode} {
 }

@@ -57,6 +57,28 @@ auto Rectangle::isFrame(const Position testedPosition) const noexcept -> bool {
          testedPosition.y() == y2() - 1);
 }
 
+auto Rectangle::frameIndex(const Position testedPosition) const noexcept -> int64_t {
+    if (!isFrame(testedPosition)) {
+        return -1;
+    }
+    if (width() <= 1) {
+        return testedPosition.y() - y1();
+    }
+    if (height() <= 1) {
+        return testedPosition.x() - x1();
+    }
+    if (testedPosition.y() == y1()) {
+        return testedPosition.x() - x1();
+    }
+    if (testedPosition.x() == x2() - 1) {
+        return (width() - 1) + (testedPosition.y() - y1());
+    }
+    if (testedPosition.y() == y2() - 1) {
+        return (width() - 1) + (height() - 1) + (x2() - 1 - testedPosition.x());
+    }
+    return static_cast<int64_t>(2 * (width() - 1) + (height() - 1) + (y2() - 1 - testedPosition.y()));
+}
+
 auto Rectangle::gridCells(
     const int rows, const int columns, const int horizontalSpacing, const int verticalSpacing) const
     -> std::vector<Rectangle> {
