@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Write a New Unit Test &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Requirements" href="../requirements.html" />
+    <link rel="prev" title="ErbslandDEV C++ Code Style Summary" href="code-style.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing Guidelines</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-you-can-contribute">How You Can Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#about-the-use-of-artificial-intelligence">About the Use of Artificial Intelligence</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="code-of-conduct.html">Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code-style.html">ErbslandDEV C++ Code Style Summary</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Write a New Unit Test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">File Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-test-structure-naming">Basic Test Structure &amp; Naming</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minimal-example">Minimal Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-macros">Test Macros</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shared-test-functions">Shared Test Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#share-functionality-across-multiple-tests">Share Functionality Across Multiple Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-extra-info-on-test-failures">Add Extra Info on Test Failures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Contributing Guidelines</a></li>
+      <li class="breadcrumb-item active">How to Write a New Unit Test</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/contribute/write-a-unittest.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-write-a-new-unit-test">
+<h1>How to Write a New Unit Test<a class="headerlink" href="#how-to-write-a-new-unit-test" title="Link to this heading"></a></h1>
+<p>This project uses the <em>Erbsland Unit Test</em> system as its testing framework. This short guide shows how to add a new unit test.</p>
+<section id="file-structure">
+<h2>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Unit tests go in <code class="file docutils literal notranslate"><span class="pre">test/unittest/src</span></code></p></li>
+<li><p>Test data belongs in <code class="file docutils literal notranslate"><span class="pre">test/unittest/data</span></code></p></li>
+<li><p>The framework and its documentation live in <code class="file docutils literal notranslate"><span class="pre">test/unittest/erbsland-unittest</span></code></p></li>
+</ul>
+</section>
+<section id="basic-test-structure-naming">
+<h2>Basic Test Structure &amp; Naming<a class="headerlink" href="#basic-test-structure-naming" title="Link to this heading"></a></h2>
+<p>The framework automatically registers test classes and methods—<em>if</em> you follow these naming rules:</p>
+<ul class="simple">
+<li><p>Class names must end in <code class="docutils literal notranslate"><span class="pre">...Test</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">IntegerTest</span></code>)</p></li>
+<li><p>Filenames must match the class name and go in <code class="file docutils literal notranslate"><span class="pre">test/unittest/src</span></code> (e.g., <code class="file docutils literal notranslate"><span class="pre">IntegerTest.cpp</span></code>)</p></li>
+<li><p>You must add the file to <code class="file docutils literal notranslate"><span class="pre">test/unittest/src/CMakeLists.txt</span></code></p></li>
+<li><p>Test methods must be named <code class="docutils literal notranslate"><span class="pre">test...()</span></code>, return <code class="docutils literal notranslate"><span class="pre">void</span></code>, and take no parameters</p></li>
+</ul>
+</section>
+<section id="minimal-example">
+<h2>Minimal Example<a class="headerlink" href="#minimal-example" title="Link to this heading"></a></h2>
+<p>For a class <code class="docutils literal notranslate"><span class="pre">Example</span></code>, create <code class="file docutils literal notranslate"><span class="pre">ExampleTest.cpp</span></code> like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Copyright (c) 2025 Tobias Erbsland - https://erbsland.dev</span>
+<span class="c1">// SPDX-License-Identifier: Apache-2.0</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;erbsland/unittest/all.hpp&gt;</span>
+
+<span class="n">TESTED_TARGETS</span><span class="p">(</span><span class="n">Example</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleTest</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">el</span><span class="o">::</span><span class="n">UnitTest</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Example</span><span class="w"> </span><span class="n">example</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testConstruction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Example</span><span class="p">{};</span>
+<span class="w">        </span><span class="n">REQUIRE</span><span class="p">(</span><span class="n">example</span><span class="p">.</span><span class="n">empty</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>You can optionally use <code class="docutils literal notranslate"><span class="pre">TESTED_TARGETS(...)</span></code> or <code class="docutils literal notranslate"><span class="pre">TAGS(...)</span></code> to add metadata for filtering and test selection.</p>
+</section>
+<section id="test-macros">
+<h2>Test Macros<a class="headerlink" href="#test-macros" title="Link to this heading"></a></h2>
+<p>Here’s what you can use to verify results:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE(expr)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_FALSE(expr)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_THROWS(expr)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_THROWS_AS(exception_class,</span> <span class="pre">expr)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_NOTHROW(expr)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_EQUAL(actual,</span> <span class="pre">expected)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_NOT_EQUAL(a,</span> <span class="pre">b)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_LESS(a,</span> <span class="pre">b)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_LESS_EQUAL(a,</span> <span class="pre">b)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_GREATER(a,</span> <span class="pre">b)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_GREATER_EQUAL(a,</span> <span class="pre">b)</span></code></p></li>
+</ul>
+<p>If you’re testing custom types, make sure they can be formatted using <code class="docutils literal notranslate"><span class="pre">std::format</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">formatter</span><span class="o">&lt;</span><span class="n">Example</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">formatter</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Example</span><span class="w"> </span><span class="o">&amp;</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">format_context</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ctx</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">formatter</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;::</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="shared-test-functions">
+<h2>Shared Test Functions<a class="headerlink" href="#shared-test-functions" title="Link to this heading"></a></h2>
+<p>To test multiple cases with the same logic, define helper methods. Use <code class="docutils literal notranslate"><span class="pre">WITH_CONTEXT(...)</span></code> to include calling context in error messages.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleTest</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">el</span><span class="o">::</span><span class="n">UnitTest</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">verifyOutput</span><span class="p">(</span><span class="n">Example</span><span class="w"> </span><span class="n">ex</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">expectedOutput</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="w">        </span><span class="n">REQUIRE_NOTHROW</span><span class="p">(</span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">toString</span><span class="p">());</span>
+<span class="w">        </span><span class="n">REQUIRE_EQUAL</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">expectedOutput</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">testConstruction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">WITH_CONTEXT</span><span class="p">(</span><span class="n">verifyOutput</span><span class="p">(</span><span class="n">Example</span><span class="p">{</span><span class="mi">23</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;good&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">WITH_CONTEXT</span><span class="p">(</span><span class="n">verifyOutput</span><span class="p">(</span><span class="n">Example</span><span class="p">{</span><span class="mi">-2</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bad&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">WITH_CONTEXT</span><span class="p">(</span><span class="n">verifyOutput</span><span class="p">(</span><span class="n">Example</span><span class="p">{</span><span class="mi">20302</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;max&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="share-functionality-across-multiple-tests">
+<h2>Share Functionality Across Multiple Tests<a class="headerlink" href="#share-functionality-across-multiple-tests" title="Link to this heading"></a></h2>
+<p>To reuse functionality across several test classes, create a shared base class. Just make sure the class name <strong>does not</strong> end in <code class="docutils literal notranslate"><span class="pre">...Test</span></code>, or it will be mistakenly registered as a test.</p>
+<p>Example in <code class="docutils literal notranslate"><span class="pre">TestHelper.cpp</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestHelper</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">el</span><span class="o">::</span><span class="n">UnitTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Shared utility functions for tests</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Then inherit from it in your actual test class, using the <code class="docutils literal notranslate"><span class="pre">UNITTEST_SUBCLASS(...)</span></code> macro to ensure correct test registration:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleTest</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">UNITTEST_SUBCLASS</span><span class="p">(</span><span class="n">TestHelper</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Tests go here</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="add-extra-info-on-test-failures">
+<h2>Add Extra Info on Test Failures<a class="headerlink" href="#add-extra-info-on-test-failures" title="Link to this heading"></a></h2>
+<p>To make test failures easier to diagnose, you can either override <code class="docutils literal notranslate"><span class="pre">additionalErrorMessages()</span></code> or use <code class="docutils literal notranslate"><span class="pre">runWithContext()</span></code> for context-aware error reporting.</p>
+<section id="option-1-additionalerrormessages">
+<h3>Option 1: <code class="docutils literal notranslate"><span class="pre">additionalErrorMessages()</span></code><a class="headerlink" href="#option-1-additionalerrormessages" title="Link to this heading"></a></h3>
+<p>This method lets you return more details when a test fails—like the current state of the object under test:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleTest</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">el</span><span class="o">::</span><span class="n">UnitTest</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Example</span><span class="w"> </span><span class="n">example</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">additionalErrorMessages</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;example.state = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">example</span><span class="p">.</span><span class="n">state</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Exception in additionalErrorMessages()&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">testConstruction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Example</span><span class="p">{};</span>
+<span class="w">        </span><span class="n">REQUIRE</span><span class="p">(</span><span class="n">example</span><span class="p">.</span><span class="n">empty</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This message is shown <em>only if</em> a test fails.</p>
+</section>
+<section id="option-2-runwithcontext">
+<h3>Option 2: <code class="docutils literal notranslate"><span class="pre">runWithContext(...)</span></code><a class="headerlink" href="#option-2-runwithcontext" title="Link to this heading"></a></h3>
+<p>Use this when testing multiple cases in a loop, to show which input failed:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleTest</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">el</span><span class="o">::</span><span class="n">UnitTest</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">testConstruction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">TestData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">expectedOutput</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">testData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TestData</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="w">            </span><span class="p">{</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bad&quot;</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;good&quot;</span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;good&quot;</span><span class="p">},</span>
+<span class="w">            </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">data</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">testData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">runWithContext</span><span class="p">(</span><span class="n">SOURCE_LOCATION</span><span class="p">(),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Example</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="w">                </span><span class="n">REQUIRE_NOTHROW</span><span class="p">(</span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">toString</span><span class="p">());</span>
+<span class="w">                </span><span class="n">REQUIRE_EQUAL</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">expectedOutput</span><span class="p">);</span>
+<span class="w">            </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;Failed for value = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="code-style.html" class="btn btn-neutral float-left" title="ErbslandDEV C++ Code Style Summary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../requirements.html" class="btn btn-neutral float-right" title="Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

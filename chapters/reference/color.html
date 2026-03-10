@@ -1,0 +1,877 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Font" href="font.html" />
+    <link rel="prev" title="Bitmap" href="bitmap.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Color</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#applying-colors-directly">Applying Colors Directly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-animated-palettes">Building Animated Palettes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorListE"><code class="docutils literal notranslate"><span class="pre">ColorList</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorBaseE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ColorBase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ColorPart</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorRoleE"><code class="docutils literal notranslate"><span class="pre">ColorRole</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackgroundE"><code class="docutils literal notranslate"><span class="pre">Background</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2bgE"><code class="docutils literal notranslate"><span class="pre">bg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm10ForegroundE"><code class="docutils literal notranslate"><span class="pre">Foreground</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2fgE"><code class="docutils literal notranslate"><span class="pre">fg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm13ColorSequenceE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ColorSequence</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Text</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Color</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/color.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="color">
+<h1>Color<a class="headerlink" href="#color" title="Link to this heading"></a></h1>
+<p>The color classes provide access to the standard 16 terminal colors and
+their combinations. They are used to style terminal output, buffer cells,
+and text elements throughout the library.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="applying-colors-directly">
+<h3>Applying Colors Directly<a class="headerlink" href="#applying-colors-directly" title="Link to this heading"></a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">Foreground</span></code>, <code class="docutils literal notranslate"><span class="pre">Background</span></code>, and <code class="docutils literal notranslate"><span class="pre">Color</span></code> when you want to apply
+explicit styling to terminal output or buffer cells.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">accent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightCyan</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">};</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">warning</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accent</span><span class="p">.</span><span class="n">overlayWith</span><span class="p">(</span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Red</span><span class="p">});</span>
+
+<span class="n">terminal</span><span class="p">.</span><span class="n">printLine</span><span class="p">(</span><span class="n">accent</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Normal status&quot;</span><span class="p">);</span>
+<span class="n">terminal</span><span class="p">.</span><span class="n">printLine</span><span class="p">(</span><span class="n">warning</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Escalated status&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">overlayWith()</span></code> combines two colors, allowing you to
+derive variants from an existing style while preserving the other color
+components.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">Default</span></code> when you want to reset a foreground or background to the
+terminal default color. Use <code class="docutils literal notranslate"><span class="pre">Inherited</span></code> when a later layer should keep
+the color from the layer below, for example while composing buffer cells.</p>
+</section>
+<section id="building-animated-palettes">
+<h3>Building Animated Palettes<a class="headerlink" href="#building-animated-palettes" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ColorSequence</span></code> represents an ordered list of colors. It is useful for
+gradients, rotating palettes, or animated visual effects.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">titleColors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColorSequence</span><span class="p">{</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightBlue</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightCyan</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightMagenta</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">currentColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">titleColors</span><span class="p">.</span><span class="n">colorNormalized</span><span class="p">(</span><span class="mf">0.35</span><span class="p">);</span>
+<span class="n">terminal</span><span class="p">.</span><span class="n">printLine</span><span class="p">(</span><span class="n">currentColor</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Animated headline&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">colorNormalized()</span></code> function selects a color from the sequence
+based on a normalized position between <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. This makes
+it easy to drive color changes with animation cycles or progress values.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/retro-plasma.jpg"><img alt="../../_images/retro-plasma.jpg" src="../../_images/retro-plasma.jpg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The <code class="docutils literal notranslate"><span class="pre">retro-plasma</span></code> demo uses <code class="docutils literal notranslate"><span class="pre">ColorSequence</span></code> values to switch
+between multiple animated palettes.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5ColorE">
+<span id="_CPPv3N8erbsland5cterm5ColorE"></span><span id="_CPPv2N8erbsland5cterm5ColorE"></span><span id="erbsland::cterm::Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_color"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5ColorE" title="Link to this definition"></a><br /></dt>
+<dd><p>A foreground/background color pair for terminal rendering. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5ColorEv">
+<span id="_CPPv3N8erbsland5cterm5Color5ColorEv"></span><span id="_CPPv2N8erbsland5cterm5Color5ColorEv"></span><span id="erbsland::cterm::Color::Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a540fc13345cb42131a84b9e23d229f7e"></span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5ColorEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a color that inherits both components from the layer below. </p>
+<p>If no lower layer exists, terminal output resolves inherited colors to the terminal defaults. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5ColorEK10ForegroundK10Background">
+<span id="_CPPv3N8erbsland5cterm5Color5ColorEK10ForegroundK10Background"></span><span id="_CPPv2N8erbsland5cterm5Color5ColorEK10ForegroundK10Background"></span><span id="erbsland::cterm::Color::Color__ForegroundC.BackgroundCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a0261ccc278369f22b90646d47011f185"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">foreground</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">background</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5ColorEK10ForegroundK10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a color from explicit foreground and background parts. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>foreground</strong> – The foreground color. </p></li>
+<li><p><strong>background</strong> – The background color. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5ColorEK10Foreground">
+<span id="_CPPv3N8erbsland5cterm5Color5ColorEK10Foreground"></span><span id="_CPPv2N8erbsland5cterm5Color5ColorEK10Foreground"></span><span id="erbsland::cterm::Color::Color__ForegroundCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a34caff263d560face80de02040308624"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">foreground</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5ColorEK10Foreground" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a color with an explicit foreground and inherited background color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>foreground</strong> – The background color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5ColorEKN10Foreground3HueE">
+<span id="_CPPv3N8erbsland5cterm5Color5ColorEKN10Foreground3HueE"></span><span id="_CPPv2N8erbsland5cterm5Color5ColorEKN10Foreground3HueE"></span><span id="erbsland::cterm::Color::Color__Foreground::HueCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1ab627769b3ecfba17841fc9ba985834a9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">foreground</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5ColorEKN10Foreground3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5ColorEK10Background">
+<span id="_CPPv3N8erbsland5cterm5Color5ColorEK10Background"></span><span id="_CPPv2N8erbsland5cterm5Color5ColorEK10Background"></span><span id="erbsland::cterm::Color::Color__BackgroundCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a70ac76de34edad81154f99fd426ba7a7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">background</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5ColorEK10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a color with an explicit background and inherited foreground color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>background</strong> – The background color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5ColorEKN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm5Color5ColorEKN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm5Color5ColorEKN10Background3HueE"></span><span id="erbsland::cterm::Color::Color__Background::HueCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a12ac4d935a74c86d65ee1a20762c6b2f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">background</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5ColorEKN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5ColorD0Ev">
+<span id="_CPPv3N8erbsland5cterm5ColorD0Ev"></span><span id="_CPPv2N8erbsland5cterm5ColorD0Ev"></span><span id="erbsland::cterm::Color::~Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a7f3fae527ff0408292421796cba34fa1"></span><span class="sig-name descname"><span class="n"><span class="pre">~Color</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5ColorD0Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Destroy the color value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5ColorERK5Color">
+<span id="_CPPv3N8erbsland5cterm5Color5ColorERK5Color"></span><span id="_CPPv2N8erbsland5cterm5Color5ColorERK5Color"></span><span id="erbsland::cterm::Color::Color__ColorCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a34dc7d654fee0b343c548146641f01bc"></span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5Color5ColorERK5Color" title="erbsland::cterm::Color::Color"><span class="n"><span class="pre">Color</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5ColorERK5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Copy construct a color value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5ColoraSERK5Color">
+<span id="_CPPv3N8erbsland5cterm5ColoraSERK5Color"></span><span id="_CPPv2N8erbsland5cterm5ColoraSERK5Color"></span><span id="erbsland::cterm::Color::assign-operator__ColorCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1ae3f5603ec56e2141e14fbac78da66b30"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5ColoraSERK5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Copy-assign a color value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm5ColoreqERK5Color">
+<span id="_CPPv3NK8erbsland5cterm5ColoreqERK5Color"></span><span id="_CPPv2NK8erbsland5cterm5ColoreqERK5Color"></span><span id="erbsland::cterm::Color::eq-operator__ColorCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1aea7bfe0687997f8da6b903703bc2c55e"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm5ColoreqERK5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two colors for equality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm5ColorneERK5Color">
+<span id="_CPPv3NK8erbsland5cterm5ColorneERK5Color"></span><span id="_CPPv2NK8erbsland5cterm5ColorneERK5Color"></span><span id="erbsland::cterm::Color::neq-operator__ColorCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a13ce4540f5fee5b0fde93c8c82053f45"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm5ColorneERK5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two colors for inequality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm5Color2fgEv">
+<span id="_CPPv3NK8erbsland5cterm5Color2fgEv"></span><span id="_CPPv2NK8erbsland5cterm5Color2fgEv"></span><span id="erbsland::cterm::Color::fgC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a27cfe4f8e8e7d7d0a8e4dad30de9d31c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm5Color2fgEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the foreground color. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5setFgEK10Foreground">
+<span id="_CPPv3N8erbsland5cterm5Color5setFgEK10Foreground"></span><span id="_CPPv2N8erbsland5cterm5Color5setFgEK10Foreground"></span><span id="erbsland::cterm::Color::setFg__ForegroundC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1acf6b9680ed54b20627756765006d1a7c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setFg</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">foreground</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5setFgEK10Foreground" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the foreground color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>foreground</strong> – The new foreground color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm5Color2bgEv">
+<span id="_CPPv3NK8erbsland5cterm5Color2bgEv"></span><span id="_CPPv2NK8erbsland5cterm5Color2bgEv"></span><span id="erbsland::cterm::Color::bgC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1ada549136a6fe9f075fa907303e6ee84d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm5Color2bgEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the background color. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5setBgEK10Background">
+<span id="_CPPv3N8erbsland5cterm5Color5setBgEK10Background"></span><span id="_CPPv2N8erbsland5cterm5Color5setBgEK10Background"></span><span id="erbsland::cterm::Color::setBg__BackgroundC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a1fd86c691abaacae11d5eb135f5e214b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setBg</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">background</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5setBgEK10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the background color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>background</strong> – The new background color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm5Color11overlayWithERK5Color">
+<span id="_CPPv3NK8erbsland5cterm5Color11overlayWithERK5Color"></span><span id="_CPPv2NK8erbsland5cterm5Color11overlayWithERK5Color"></span><span id="erbsland::cterm::Color::overlayWith__ColorCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1abbc9a0612f92111e215ea38e8144eebe"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">overlayWith</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">overlay</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm5Color11overlayWithERK5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Combine this color with a new overlay color. </p>
+<p>Foreground or background components set to <code class="docutils literal notranslate"><span class="pre">Inherited</span></code> keep the value from this color. Components set to <code class="docutils literal notranslate"><span class="pre">Default</span></code> explicitly reset to the terminal default color.</p>
+<p>Examples:</p>
+<p><ul class="simple">
+<li><p>[this.fg = red] + [new.fg = inherited] =&gt; [result.fg = red]</p></li>
+<li><p>[this.fg = red] + [new.fg = default] =&gt; [result.fg = default]</p></li>
+<li><p>[this.fg = red] + [new.fg = green] =&gt; [result.fg = green]</p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>overlay</strong> – The overlay color. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The new color with the overlay applied. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color11_foregroundE">
+<span id="_CPPv3N8erbsland5cterm5Color11_foregroundE"></span><span id="_CPPv2N8erbsland5cterm5Color11_foregroundE"></span><span id="erbsland::cterm::Color::_foreground__Foreground"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a9c476cb98f0c046f4258f2b6e334ea59"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">_foreground</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color11_foregroundE" title="Link to this definition"></a><br /></dt>
+<dd><p>Foreground component of the color. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color11_backgroundE">
+<span id="_CPPv3N8erbsland5cterm5Color11_backgroundE"></span><span id="_CPPv2N8erbsland5cterm5Color11_backgroundE"></span><span id="erbsland::cterm::Color::_background__Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a37f29023f5e2157dc93daeefc5117e8f"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">_background</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color11_backgroundE" title="Link to this definition"></a><br /></dt>
+<dd><p>Background component of the color. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color10fromStringENSt11string_viewE">
+<span id="_CPPv3N8erbsland5cterm5Color10fromStringENSt11string_viewE"></span><span id="_CPPv2N8erbsland5cterm5Color10fromStringENSt11string_viewE"></span><span id="erbsland::cterm::Color::fromString__std::string_view"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1af19e5f6fdfabe58f1028942c91ad6f2c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color10fromStringENSt11string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert a color or color-pair into a block color. </p>
+<p>Format must be either <code class="docutils literal notranslate"><span class="pre">&quot;fg&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;fg:bg&quot;</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>str</strong> – The textual color specification. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if one of the colors does not exist. </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The parsed color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color11fromIndex16EKiKi">
+<span id="_CPPv3N8erbsland5cterm5Color11fromIndex16EKiKi"></span><span id="_CPPv2N8erbsland5cterm5Color11fromIndex16EKiKi"></span><span id="erbsland::cterm::Color::fromIndex16__iC.iC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a2beb94a19d84a0feb6f9ebf50152a271"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromIndex16</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgIndex</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgIndex</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color11fromIndex16EKiKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Converts two indexes into a color-pair. </p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#classerbsland_1_1cterm_1_1_color_part_1a0e9ab025bdfe4eefe670db99b2656d5a"><span class="std std-ref">ColorPart::fromIndex16</span></a> for details. </p>
+</div>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Color5resetEv">
+<span id="_CPPv3N8erbsland5cterm5Color5resetEv"></span><span id="_CPPv2N8erbsland5cterm5Color5resetEv"></span><span id="erbsland::cterm::Color::resetCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_1a96cc1f83f4869d13a63bb0bf3ffabb83"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Color5resetEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Shortcut to set fg and bg to default. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorListE">
+<span id="_CPPv3N8erbsland5cterm9ColorListE"></span><span id="_CPPv2N8erbsland5cterm9ColorListE"></span><span class="target" id="_color_8hpp_1a141649efc48be4c6d1cf5bac5d086270"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">ColorList</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorListE" title="Link to this definition"></a><br /></dt>
+<dd><p>A list of terminal colors. </p>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBaseE">
+<span id="_CPPv3N8erbsland5cterm9ColorBaseE"></span><span id="_CPPv2N8erbsland5cterm9ColorBaseE"></span><span id="erbsland::cterm::ColorBase"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColorBase</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBaseE" title="Link to this definition"></a><br /></dt>
+<dd><p>Shared implementation for foreground and background color values. </p>
+<p>Subclassed by <a class="reference internal" href="#classerbsland_1_1cterm_1_1_color_part"><span class="std std-ref">erbsland::cterm::ColorPart&lt; ColorRole::Foreground &gt;</span></a>, <a class="reference internal" href="#classerbsland_1_1cterm_1_1_color_part"><span class="std std-ref">erbsland::cterm::ColorPart&lt; ColorRole::Background &gt;</span></a>, <a class="reference internal" href="#classerbsland_1_1cterm_1_1_color_part"><span class="std std-ref">erbsland::cterm::ColorPart&lt; tColorType &gt;</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5ValueE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5ValueE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5ValueE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Value</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5ValueE" title="Link to this definition"></a><br /></dt>
+<dd><p>Internal color identifiers used for ANSI conversion and parsing. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value5BlackE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value5BlackE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value5BlackE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33ae90dfb84e30edf611e326eeb04d680de"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Black</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value5BlackE" title="Link to this definition"></a><br /></dt>
+<dd><p>Black. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value3RedE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value3RedE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value3RedE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33aee38e4d5dd68c4e440825018d549cb47"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Red</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value3RedE" title="Link to this definition"></a><br /></dt>
+<dd><p>Dark red. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value5GreenE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value5GreenE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value5GreenE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33ad382816a3cbeed082c9e216e7392eed1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Green</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value5GreenE" title="Link to this definition"></a><br /></dt>
+<dd><p>Dark green. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value6YellowE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value6YellowE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value6YellowE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a51e6cd92b6c45f9affdc158ecca2b8b8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Yellow</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value6YellowE" title="Link to this definition"></a><br /></dt>
+<dd><p>Dark yellow. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value4BlueE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value4BlueE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value4BlueE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a9594eec95be70e7b1710f730fdda33d9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Blue</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value4BlueE" title="Link to this definition"></a><br /></dt>
+<dd><p>Dark blue. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value7MagentaE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value7MagentaE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value7MagentaE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33ab91cc2c1416fcca942b61c7ac5b1a9ac"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Magenta</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value7MagentaE" title="Link to this definition"></a><br /></dt>
+<dd><p>Dark magenta. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value4CyanE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value4CyanE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value4CyanE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a023c239d2f2538f140a20e72c7b73f20"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Cyan</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value4CyanE" title="Link to this definition"></a><br /></dt>
+<dd><p>Dark cyan. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value5WhiteE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value5WhiteE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value5WhiteE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a25a81701fbfa4a1efdf660a950c1d006"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">White</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value5WhiteE" title="Link to this definition"></a><br /></dt>
+<dd><p>Light gray. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value11BrightBlackE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value11BrightBlackE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value11BrightBlackE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a8fbf7e1405c12b2e7b085d51f018a253"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BrightBlack</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value11BrightBlackE" title="Link to this definition"></a><br /></dt>
+<dd><p>Gray. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value9BrightRedE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value9BrightRedE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value9BrightRedE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a37ac9be0fdc65c5558356e3c8438d851"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BrightRed</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value9BrightRedE" title="Link to this definition"></a><br /></dt>
+<dd><p>Bright red. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value11BrightGreenE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value11BrightGreenE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value11BrightGreenE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33ab249e671af05e6d993727a3d4e65a431"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BrightGreen</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value11BrightGreenE" title="Link to this definition"></a><br /></dt>
+<dd><p>Bright green. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value12BrightYellowE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value12BrightYellowE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value12BrightYellowE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a7eef58f3be127af697d00af08dd709ac"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BrightYellow</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value12BrightYellowE" title="Link to this definition"></a><br /></dt>
+<dd><p>Yellow. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value10BrightBlueE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value10BrightBlueE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value10BrightBlueE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a374480f5115466da840c6da08bd6a071"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BrightBlue</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value10BrightBlueE" title="Link to this definition"></a><br /></dt>
+<dd><p>Blue. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value13BrightMagentaE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value13BrightMagentaE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value13BrightMagentaE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a4efcacb8a7d723efe6dfdf83f827fe95"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BrightMagenta</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value13BrightMagentaE" title="Link to this definition"></a><br /></dt>
+<dd><p>Magenta. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value10BrightCyanE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value10BrightCyanE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value10BrightCyanE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33ad0ab251cbfd49b7cc62ea1d25da3bac2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BrightCyan</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value10BrightCyanE" title="Link to this definition"></a><br /></dt>
+<dd><p>Cyan. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value11BrightWhiteE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value11BrightWhiteE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value11BrightWhiteE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a44a07eabeb77868ee704ec159a59e8e4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BrightWhite</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value11BrightWhiteE" title="Link to this definition"></a><br /></dt>
+<dd><p>White. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value7DefaultE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value7DefaultE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value7DefaultE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33a7a1920d61156abc05a60135aefe8bc67"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Default</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value7DefaultE" title="Link to this definition"></a><br /></dt>
+<dd><p>The default color of the terminal. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value9InheritedE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value9InheritedE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value9InheritedE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33ab0b517d3de3f2b55489e488a238a8c25"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Inherited</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value9InheritedE" title="Link to this definition"></a><br /></dt>
+<dd><p>Inherited color from the layer below, or use the default color. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorBase5Value6_CountE">
+<span id="_CPPv3N8erbsland5cterm9ColorBase5Value6_CountE"></span><span id="_CPPv2N8erbsland5cterm9ColorBase5Value6_CountE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1af01884f4ed6ab16cdb8347c47f3b1c33add3ff01c06a07a752666c18e1f7efaf8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">_Count</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorBase5Value6_CountE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9ColorBaseeqERK9ColorBase">
+<span id="_CPPv3NK8erbsland5cterm9ColorBaseeqERK9ColorBase"></span><span id="_CPPv2NK8erbsland5cterm9ColorBaseeqERK9ColorBase"></span><span id="erbsland::cterm::ColorBase::eq-operator__ColorBaseCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1a4924ec01d92dfa0fa828eaa26078a7d5"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorBaseE" title="erbsland::cterm::ColorBase"><span class="n"><span class="pre">ColorBase</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9ColorBaseeqERK9ColorBase" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two color base values for equality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9ColorBaseneERK9ColorBase">
+<span id="_CPPv3NK8erbsland5cterm9ColorBaseneERK9ColorBase"></span><span id="_CPPv2NK8erbsland5cterm9ColorBaseneERK9ColorBase"></span><span id="erbsland::cterm::ColorBase::neq-operator__ColorBaseCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1a4532cbdb6a036ee13a17a06575bef5ae"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorBaseE" title="erbsland::cterm::ColorBase"><span class="n"><span class="pre">ColorBase</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9ColorBaseneERK9ColorBase" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two color base values for inequality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9ColorBase8toStringEv">
+<span id="_CPPv3NK8erbsland5cterm9ColorBase8toStringEv"></span><span id="_CPPv2NK8erbsland5cterm9ColorBase8toStringEv"></span><span id="erbsland::cterm::ColorBase::toStringC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_base_1a0e3fcb4a9d86faa1a6299dae09e9a119"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toString</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9ColorBase8toStringEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert the color name to a string. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE">
+<span id="_CPPv3I_9ColorRoleEN8erbsland5cterm9ColorPartE"></span><span id="_CPPv2I_9ColorRoleEN8erbsland5cterm9ColorPartE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorRoleE" title="erbsland::cterm::ColorRole"><span class="n"><span class="pre">ColorRole</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tColorType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_color_part"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColorPart</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorBaseE" title="erbsland::cterm::ColorBase"><span class="n"><span class="pre">ColorBase</span></span></a><a class="headerlink" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="Link to this definition"></a><br /></dt>
+<dd><p>A foreground or background color. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorPart9ColorPartEv">
+<span id="_CPPv3N8erbsland5cterm9ColorPart9ColorPartEv"></span><span id="_CPPv2N8erbsland5cterm9ColorPart9ColorPartEv"></span><span id="erbsland::cterm::ColorPart::ColorPart"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1a40b1e774982e0b4d1f89f4cdb9a73251"></span><span class="sig-name descname"><span class="n"><span class="pre">ColorPart</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorPart9ColorPartEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create the inherited color for this role. </p>
+<p>The inherited color uses the value from the layer below, or the terminal default if no lower layer exists. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorPart9ColorPartEK3Hue">
+<span id="_CPPv3N8erbsland5cterm9ColorPart9ColorPartEK3Hue"></span><span id="_CPPv2N8erbsland5cterm9ColorPart9ColorPartEK3Hue"></span><span id="erbsland::cterm::ColorPart::ColorPart__HueCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1a4d56e0657ab5151332fc18a20de7ae99"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColorPart</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorPart3HueE" title="erbsland::cterm::ColorPart::Hue"><span class="n"><span class="pre">Hue</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorPart9ColorPartEK3Hue" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a color from one of the predefined hue constants. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The named hue. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9ColorParteqERK9ColorPart">
+<span id="_CPPv3NK8erbsland5cterm9ColorParteqERK9ColorPart"></span><span id="_CPPv2NK8erbsland5cterm9ColorParteqERK9ColorPart"></span><span id="erbsland::cterm::ColorPart::eq-operator__ColorPartCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1a61fd679672bd5de741581877e4f2f1f3"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart"><span class="n"><span class="pre">ColorPart</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9ColorParteqERK9ColorPart" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two color parts for equality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9ColorPartneERK9ColorPart">
+<span id="_CPPv3NK8erbsland5cterm9ColorPartneERK9ColorPart"></span><span id="_CPPv2NK8erbsland5cterm9ColorPartneERK9ColorPart"></span><span id="erbsland::cterm::ColorPart::neq-operator__ColorPartCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1a6df17f6261916b347d9e5e5d3ee324f1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart"><span class="n"><span class="pre">ColorPart</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9ColorPartneERK9ColorPart" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two color parts for inequality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9ColorPart8ansiCodeEv">
+<span id="_CPPv3NK8erbsland5cterm9ColorPart8ansiCodeEv"></span><span id="_CPPv2NK8erbsland5cterm9ColorPart8ansiCodeEv"></span><span id="erbsland::cterm::ColorPart::ansiCodeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1ab8e093675f4291ec9f149c9651dd327d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ansiCode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9ColorPart8ansiCodeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert this color part to its ANSI SGR numeric code. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The numeric ANSI code for this color role. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9ColorPart8brighterEv">
+<span id="_CPPv3NK8erbsland5cterm9ColorPart8brighterEv"></span><span id="_CPPv2NK8erbsland5cterm9ColorPart8brighterEv"></span><span id="erbsland::cterm::ColorPart::brighterC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1a926e733168f174c934b533439092d68a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart"><span class="n"><span class="pre">ColorPart</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">brighter</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9ColorPart8brighterEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create the bright variant of this color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The brightened color, or the unchanged color if no brighter variant exists. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorPart10fromStringEKNSt11string_viewE">
+<span id="_CPPv3N8erbsland5cterm9ColorPart10fromStringEKNSt11string_viewE"></span><span id="_CPPv2N8erbsland5cterm9ColorPart10fromStringEKNSt11string_viewE"></span><span id="erbsland::cterm::ColorPart::fromString__std::string_viewC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1ab43e9d8be6d898a73d1b4ae6699f4538"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart"><span class="n"><span class="pre">ColorPart</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorPart10fromStringEKNSt11string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a color from the given string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>str</strong> – The lowercase color name. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if the color does not exist. </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The parsed color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorPart11fromIndex16EKi">
+<span id="_CPPv3N8erbsland5cterm9ColorPart11fromIndex16EKi"></span><span id="_CPPv2N8erbsland5cterm9ColorPart11fromIndex16EKi"></span><span id="erbsland::cterm::ColorPart::fromIndex16__iC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1a0e9ab025bdfe4eefe670db99b2656d5a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart"><span class="n"><span class="pre">ColorPart</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromIndex16</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorPart11fromIndex16EKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a color from the given index. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The index from 0 (black) to 15 (bright white), &lt;0 = inherited, 16+ = default </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorPart13allBaseColorsEv">
+<span id="_CPPv3N8erbsland5cterm9ColorPart13allBaseColorsEv"></span><span id="_CPPv2N8erbsland5cterm9ColorPart13allBaseColorsEv"></span><span id="erbsland::cterm::ColorPart::allBaseColors"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1a722944f4755ba6a886acca697421d1e4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart"><span class="n"><span class="pre">ColorPart</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">static_cast</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">Value</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">_Count</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">allBaseColors</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorPart13allBaseColorsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access an array with all base color. </p>
+<p>Use with <code class="docutils literal notranslate"><span class="pre">.brigther()</span></code> to get the bright color variants. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorPart9cCodeBaseE">
+<span id="_CPPv3N8erbsland5cterm9ColorPart9cCodeBaseE"></span><span id="_CPPv2N8erbsland5cterm9ColorPart9cCodeBaseE"></span><span id="erbsland::cterm::ColorPart::cCodeBase__auto"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_part_1ab6d92a782abce1a2b8f94b86d2db22f6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cCodeBase</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart::tColorType"><span class="n"><span class="pre">tColorType</span></span></a><span class="w"> </span><span class="o"><span class="pre">==</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorRoleE" title="erbsland::cterm::ColorRole"><span class="n"><span class="pre">ColorRole</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorRole10ForegroundE" title="erbsland::cterm::ColorRole::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="o"><span class="pre">?</span></span><span class="w"> </span><span class="m"><span class="pre">30</span></span><span class="w"> </span><span class="o"><span class="pre">:</span></span><span class="w"> </span><span class="m"><span class="pre">40</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorPart9cCodeBaseE" title="Link to this definition"></a><br /></dt>
+<dd><p>Base ANSI escape code for this color role. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorPart3HueE">
+<span id="_CPPv3N8erbsland5cterm9ColorPart3HueE"></span><span id="_CPPv2N8erbsland5cterm9ColorPart3HueE"></span><span id="erbsland::cterm::ColorPart::Hue"></span><span class="target" id="structerbsland_1_1cterm_1_1_color_part_1_1_hue"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Hue</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorPart3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>Tag type used by the predefined named color constants. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorPart3Hue5valueE">
+<span id="_CPPv3N8erbsland5cterm9ColorPart3Hue5valueE"></span><span id="_CPPv2N8erbsland5cterm9ColorPart3Hue5valueE"></span><span id="erbsland::cterm::ColorPart::Hue::value__Value"></span><span class="target" id="structerbsland_1_1cterm_1_1_color_part_1_1_hue_1a6d50ff639d7e80e23fb7a17129731cad"></span><span class="n"><span class="pre">Value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorPart3Hue5valueE" title="Link to this definition"></a><br /></dt>
+<dd><p>The encoded color value. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorRoleE">
+<span id="_CPPv3N8erbsland5cterm9ColorRoleE"></span><span id="_CPPv2N8erbsland5cterm9ColorRoleE"></span><span class="target" id="_color_role_8hpp_1a9992e238404e94fd31b835b18e7e7c1e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">ColorRole</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorRoleE" title="Link to this definition"></a><br /></dt>
+<dd><p>The type color. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorRole10ForegroundE">
+<span id="_CPPv3N8erbsland5cterm9ColorRole10ForegroundE"></span><span id="_CPPv2N8erbsland5cterm9ColorRole10ForegroundE"></span><span class="target" id="_color_role_8hpp_1a9992e238404e94fd31b835b18e7e7c1ea45bd1d5b32931106efbf1a82fe6a732f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Foreground</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorRole10ForegroundE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9ColorRole10BackgroundE">
+<span id="_CPPv3N8erbsland5cterm9ColorRole10BackgroundE"></span><span id="_CPPv2N8erbsland5cterm9ColorRole10BackgroundE"></span><span class="target" id="_color_role_8hpp_1a9992e238404e94fd31b835b18e7e7c1eaa9ded1e5ce5d75814730bb4caaf49419"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Background</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9ColorRole10BackgroundE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10BackgroundE">
+<span id="_CPPv3N8erbsland5cterm10BackgroundE"></span><span id="_CPPv2N8erbsland5cterm10BackgroundE"></span><span class="target" id="_color_part_8hpp_1ad41d465722e7cb44941652c4e645c118"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Background</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart"><span class="n"><span class="pre">ColorPart</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorRoleE" title="erbsland::cterm::ColorRole"><span class="n"><span class="pre">ColorRole</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorRole10BackgroundE" title="erbsland::cterm::ColorRole::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm10BackgroundE" title="Link to this definition"></a><br /></dt>
+<dd><p>The background color. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2bgE">
+<span id="_CPPv3N8erbsland5cterm2bgE"></span><span id="_CPPv2N8erbsland5cterm2bgE"></span><span class="target" id="_color_part_8hpp_1a9ec6d3764d2ff95fe347191f66d3ea6d"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">bg</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2bgE" title="Link to this definition"></a><br /></dt>
+<dd><p>Short alias for <code class="docutils literal notranslate"><span class="pre">Background</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10ForegroundE">
+<span id="_CPPv3N8erbsland5cterm10ForegroundE"></span><span id="_CPPv2N8erbsland5cterm10ForegroundE"></span><span class="target" id="_color_part_8hpp_1a763f5a288cff8e23b05d8f6969c3edfe"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Foreground</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_9ColorRoleEN8erbsland5cterm9ColorPartE" title="erbsland::cterm::ColorPart"><span class="n"><span class="pre">ColorPart</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorRoleE" title="erbsland::cterm::ColorRole"><span class="n"><span class="pre">ColorRole</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9ColorRole10ForegroundE" title="erbsland::cterm::ColorRole::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm10ForegroundE" title="Link to this definition"></a><br /></dt>
+<dd><p>The foreground color. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2fgE">
+<span id="_CPPv3N8erbsland5cterm2fgE"></span><span id="_CPPv2N8erbsland5cterm2fgE"></span><span class="target" id="_color_part_8hpp_1a8d26dae6a394b0ef7ab632854cdbf926"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">fg</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2fgE" title="Link to this definition"></a><br /></dt>
+<dd><p>Short alias for <code class="docutils literal notranslate"><span class="pre">Foreground</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequenceE">
+<span id="_CPPv3N8erbsland5cterm13ColorSequenceE"></span><span id="_CPPv2N8erbsland5cterm13ColorSequenceE"></span><span id="erbsland::cterm::ColorSequence"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColorSequence</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequenceE" title="Link to this definition"></a><br /></dt>
+<dd><p>A configurable sequence of complete <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_color"><span class="std std-ref"><span class="pre">Color</span></span></a></code> values with run-length style counts. </p>
+<p>Each effective position in the sequence yields one full foreground/background color pair. The sequence can be accessed by cyclic index or by a normalized value in the range <code class="docutils literal notranslate"><span class="pre">0.0..1.0</span></code>. Consumers may perform multiple lookups, for example to combine the foreground of one entry with the background of a neighboring entry. <dl class="simple">
+<dt><strong>Tested:</strong></dt><dd><p><code class="docutils literal notranslate"><span class="pre">ColorSequenceTest</span></code></p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequence13ColorSequenceEv">
+<span id="_CPPv3N8erbsland5cterm13ColorSequence13ColorSequenceEv"></span><span id="_CPPv2N8erbsland5cterm13ColorSequence13ColorSequenceEv"></span><span id="erbsland::cterm::ColorSequence::ColorSequence"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1a025d74f1670c6d830738443d8c469d1e"></span><span class="sig-name descname"><span class="n"><span class="pre">ColorSequence</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequence13ColorSequenceEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty color sequence. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequence13ColorSequenceE5ColorNSt6size_tE">
+<span id="_CPPv3N8erbsland5cterm13ColorSequence13ColorSequenceE5ColorNSt6size_tE"></span><span id="_CPPv2N8erbsland5cterm13ColorSequence13ColorSequenceE5ColorNSt6size_tE"></span><span id="erbsland::cterm::ColorSequence::ColorSequence__Color.std::s"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1a49c11e136d9d2b500e1f5acb3dc5556d"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColorSequence</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequence13ColorSequenceE5ColorNSt6size_tE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a sequence with one repeated full-color entry. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>color</strong> – The color to add. </p></li>
+<li><p><strong>count</strong> – How often the color should repeat. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequence13ColorSequenceENSt16initializer_listI5ColorEE">
+<span id="_CPPv3N8erbsland5cterm13ColorSequence13ColorSequenceENSt16initializer_listI5ColorEE"></span><span id="_CPPv2N8erbsland5cterm13ColorSequence13ColorSequenceENSt16initializer_listI5ColorEE"></span><span id="erbsland::cterm::ColorSequence::ColorSequence__std::initializer_list:Color:"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1ad7ca994753597cd3cbf4d8d5d4077fb0"></span><span class="sig-name descname"><span class="n"><span class="pre">ColorSequence</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">colors</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequence13ColorSequenceENSt16initializer_listI5ColorEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a sequence from individual full-color entries with count <code class="docutils literal notranslate"><span class="pre">1</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>colors</strong> – The colors to add in order. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequence13ColorSequenceENSt16initializer_listI5EntryEE">
+<span id="_CPPv3N8erbsland5cterm13ColorSequence13ColorSequenceENSt16initializer_listI5EntryEE"></span><span id="_CPPv2N8erbsland5cterm13ColorSequence13ColorSequenceENSt16initializer_listI5EntryEE"></span><span id="erbsland::cterm::ColorSequence::ColorSequence__std::initializer_list:Entry:"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1aaf7dc5d3d7084b14f0dee74488df7721"></span><span class="sig-name descname"><span class="n"><span class="pre">ColorSequence</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm13ColorSequence5EntryE" title="erbsland::cterm::ColorSequence::Entry"><span class="n"><span class="pre">Entry</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">entries</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequence13ColorSequenceENSt16initializer_listI5EntryEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a sequence from explicit run-length encoded entries. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entries</strong> – The entries to add in order. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequence3addE5ColorNSt6size_tE">
+<span id="_CPPv3N8erbsland5cterm13ColorSequence3addE5ColorNSt6size_tE"></span><span id="_CPPv2N8erbsland5cterm13ColorSequence3addE5ColorNSt6size_tE"></span><span id="erbsland::cterm::ColorSequence::add__Color.std::s"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1a21700aa01f93a2d8c893b5be4396abb4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequence3addE5ColorNSt6size_tE" title="Link to this definition"></a><br /></dt>
+<dd><p>Add one full-color entry to this sequence. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>color</strong> – The color for this entry. </p></li>
+<li><p><strong>count</strong> – How often this color should repeat in the effective sequence. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm13ColorSequence5colorENSt6size_tE">
+<span id="_CPPv3NK8erbsland5cterm13ColorSequence5colorENSt6size_tE"></span><span id="_CPPv2NK8erbsland5cterm13ColorSequence5colorENSt6size_tE"></span><span id="erbsland::cterm::ColorSequence::color__std::sC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1aa81b36d8883a105cfc72d79901640d9f"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm13ColorSequence5colorENSt6size_tE" title="Link to this definition"></a><br /></dt>
+<dd><p>Get one complete color entry by effective sequence index. </p>
+<p>Indexes wrap around to support cyclic access. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The effective sequence index. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The full color at the wrapped index, or the inherited color if the sequence is empty. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm13ColorSequence15colorNormalizedEd">
+<span id="_CPPv3NK8erbsland5cterm13ColorSequence15colorNormalizedEd"></span><span id="_CPPv2NK8erbsland5cterm13ColorSequence15colorNormalizedEd"></span><span id="erbsland::cterm::ColorSequence::colorNormalized__doubleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1a21fb53204d0d45f47a351d7d753751d4"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">colorNormalized</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">normalized</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm13ColorSequence15colorNormalizedEd" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a color by normalized position in the range <code class="docutils literal notranslate"><span class="pre">0.0..1.0</span></code>. </p>
+<p>Values outside this range are clamped. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>normalized</strong> – The normalized sequence position. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The color at the requested normalized position. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm13ColorSequence14sequenceLengthEv">
+<span id="_CPPv3NK8erbsland5cterm13ColorSequence14sequenceLengthEv"></span><span id="_CPPv2NK8erbsland5cterm13ColorSequence14sequenceLengthEv"></span><span id="erbsland::cterm::ColorSequence::sequenceLengthC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1a05aed5dd5bbe61bfe6ab582c20d346cb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sequenceLength</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm13ColorSequence14sequenceLengthEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Effective sequence length (sum of all counts). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm13ColorSequence10entryCountEv">
+<span id="_CPPv3NK8erbsland5cterm13ColorSequence10entryCountEv"></span><span id="_CPPv2NK8erbsland5cterm13ColorSequence10entryCountEv"></span><span id="erbsland::cterm::ColorSequence::entryCountC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1a7f00f34a92ef7b05d88c81baf27210c7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">entryCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm13ColorSequence10entryCountEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Number of configured entries. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm13ColorSequence5emptyEv">
+<span id="_CPPv3NK8erbsland5cterm13ColorSequence5emptyEv"></span><span id="_CPPv2NK8erbsland5cterm13ColorSequence5emptyEv"></span><span id="erbsland::cterm::ColorSequence::emptyC"></span><span class="target" id="classerbsland_1_1cterm_1_1_color_sequence_1a1eeb5d71b2081c7e6bf57aa98e0d316e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm13ColorSequence5emptyEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this sequence has no effective entries. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequence5EntryE">
+<span id="_CPPv3N8erbsland5cterm13ColorSequence5EntryE"></span><span id="_CPPv2N8erbsland5cterm13ColorSequence5EntryE"></span><span id="erbsland::cterm::ColorSequence::Entry"></span><span class="target" id="structerbsland_1_1cterm_1_1_color_sequence_1_1_entry"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Entry</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequence5EntryE" title="Link to this definition"></a><br /></dt>
+<dd><p>One run-length encoded <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_color"><span class="std std-ref"><span class="pre">Color</span></span></a></code> entry in the sequence. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequence5Entry5colorE">
+<span id="_CPPv3N8erbsland5cterm13ColorSequence5Entry5colorE"></span><span id="_CPPv2N8erbsland5cterm13ColorSequence5Entry5colorE"></span><span id="erbsland::cterm::ColorSequence::Entry::color__Color"></span><span class="target" id="structerbsland_1_1cterm_1_1_color_sequence_1_1_entry_1ae7b83894cab5f8936e0fe611056ad535"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequence5Entry5colorE" title="Link to this definition"></a><br /></dt>
+<dd><p>The color value for this entry. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13ColorSequence5Entry5countE">
+<span id="_CPPv3N8erbsland5cterm13ColorSequence5Entry5countE"></span><span id="_CPPv2N8erbsland5cterm13ColorSequence5Entry5countE"></span><span id="erbsland::cterm::ColorSequence::Entry::count__std::s"></span><span class="target" id="structerbsland_1_1cterm_1_1_color_sequence_1_1_entry_1a61cf5811056a3a9eaab2e578941ca397"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">count</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13ColorSequence5Entry5countE" title="Link to this definition"></a><br /></dt>
+<dd><p>How many effective positions this color occupies. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bitmap.html" class="btn btn-neutral float-left" title="Bitmap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="font.html" class="btn btn-neutral float-right" title="Font" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

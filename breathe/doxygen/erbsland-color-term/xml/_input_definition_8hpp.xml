@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_input_definition_8hpp" kind="file" language="C++">
+    <compoundname>InputDefinition.hpp</compoundname>
+    <includes refid="_key_8hpp" local="yes">Key.hpp</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="all_8hpp" local="yes">erbsland/cterm/all.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>erbsland/cterm/InputDefinition.hpp</label>
+        <link refid="_input_definition_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Key.hpp</label>
+        <link refid="_key_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>erbsland/cterm/InputDefinition.hpp</label>
+        <link refid="_input_definition_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland/cterm/all.hpp</label>
+        <link refid="all_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1_input_definition" prot="public">erbsland::cterm::InputDefinition</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Key.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="classerbsland_1_1cterm_1_1_input_definition" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_input_definition" kindref="compound">InputDefinition</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="20" refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926c" kindref="member">ForMode</ref><sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926ca130c5b3473c57faa76e2a1c54e26f88e" kindref="member">Both</ref>,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926ca299040a8206f805f0a777fc25b6df6a9" kindref="member">ReadLine</ref>,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926ca897356954c2cd3d41b221e3f24f99bba" kindref="member">Key</ref>,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>ctors/dtor/assign/move</highlight></codeline>
+<codeline lineno="31" refid="classerbsland_1_1cterm_1_1_input_definition_1a641ea8413669daee42b01712517cdd4e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1a641ea8413669daee42b01712517cdd4e" kindref="member">InputDefinition</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35" refid="classerbsland_1_1cterm_1_1_input_definition_1a84a13981e801ce3ba71260d1844380db" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1a84a13981e801ce3ba71260d1844380db" kindref="member">InputDefinition</ref>(<ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1afc6b08d21e96950c1a69d85a409e9ed7" kindref="member">keyPress</ref>,<sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926c" kindref="member">ForMode</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1a606c926c73e2173f6cf86785f576e1cf" kindref="member">forMode</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>accessors</highlight></codeline>
+<codeline lineno="39" refid="classerbsland_1_1cterm_1_1_input_definition_1afc6b08d21e96950c1a69d85a409e9ed7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref><sp/>&amp;<sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1afc6b08d21e96950c1a69d85a409e9ed7" kindref="member">keyPress</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_keyPress;<sp/>}</highlight></codeline>
+<codeline lineno="41" refid="classerbsland_1_1cterm_1_1_input_definition_1a606c926c73e2173f6cf86785f576e1cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926c" kindref="member">ForMode</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1a606c926c73e2173f6cf86785f576e1cf" kindref="member">forMode</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_forMode;<sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>tests</highlight></codeline>
+<codeline lineno="45" refid="classerbsland_1_1cterm_1_1_input_definition_1a32e2f282b070afa50a1984d6e0c1cfad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1a32e2f282b070afa50a1984d6e0c1cfad" kindref="member">valid</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_keyPress.<ref refid="classerbsland_1_1cterm_1_1_key_1a9477404abb06a94d2420c88213938a0d" kindref="member">valid</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>conversion</highlight></codeline>
+<codeline lineno="51" refid="classerbsland_1_1cterm_1_1_input_definition_1aa46fc1f78f4e765ec11ee275c8bef9ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition" kindref="compound">InputDefinition</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1aa46fc1f78f4e765ec11ee275c8bef9ec" kindref="member">fromString</ref>(std::string<sp/>text)<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="55" refid="classerbsland_1_1cterm_1_1_input_definition_1af783d006aaa454a5e2f92a9c6d6fcb6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::string<sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1af783d006aaa454a5e2f92a9c6d6fcb6a" kindref="member">toString</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>tools</highlight></codeline>
+<codeline lineno="61" refid="classerbsland_1_1cterm_1_1_input_definition_1a377e456e47f6ba42cfb7ebb9cedf672c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::string<sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1a377e456e47f6ba42cfb7ebb9cedf672c" kindref="member">toDisplayText</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>useBrackets<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>;</highlight></codeline>
+<codeline lineno="64" refid="classerbsland_1_1cterm_1_1_input_definition_1aefb1615d9ce52560fb973ba6d39e34c6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::string<sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1aefb1615d9ce52560fb973ba6d39e34c6" kindref="member">displayText</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1a377e456e47f6ba42cfb7ebb9cedf672c" kindref="member">toDisplayText</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref><sp/>_keyPress;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926c" kindref="member">ForMode</ref><sp/>_forMode{<ref refid="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926ca130c5b3473c57faa76e2a1c54e26f88e" kindref="member">ForMode::Both</ref>};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="keyword">using<sp/></highlight><highlight class="normal">InputDefinitionList<sp/>=<sp/>std::vector&lt;InputDefinition&gt;;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/InputDefinition.hpp"/>
+  </compounddef>
+</doxygen>

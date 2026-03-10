@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ErbslandDEV C++ Code Style Summary &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to Write a New Unit Test" href="write-a-unittest.html" />
+    <link rel="prev" title="Code of Conduct" href="code-of-conduct.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing Guidelines</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-you-can-contribute">How You Can Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#about-the-use-of-artificial-intelligence">About the Use of Artificial Intelligence</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="code-of-conduct.html">Code of Conduct</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ErbslandDEV C++ Code Style Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#naming-conventions">Naming Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-organization">File Organization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#formatting">Formatting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comments">Comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#constants-literals">Constants &amp; Literals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modern-c-usage">Modern C++ Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quality-and-safety-first">Quality and Safety First</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="write-a-unittest.html">How to Write a New Unit Test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Contributing Guidelines</a></li>
+      <li class="breadcrumb-item active">ErbslandDEV C++ Code Style Summary</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/contribute/code-style.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="erbslanddev-c-code-style-summary">
+<h1>ErbslandDEV C++ Code Style Summary<a class="headerlink" href="#erbslanddev-c-code-style-summary" title="Link to this heading"></a></h1>
+<p>This guide defines the basic C++ style conventions used across ErbslandDEV codebases. It is focused on clarity, maintainability, and practical modern C++ usage.</p>
+<section id="naming-conventions">
+<h2>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Classes</strong>: PascalCase (e.g., <code class="docutils literal notranslate"><span class="pre">Controller</span></code>, <code class="docutils literal notranslate"><span class="pre">TestClassBase</span></code>)</p></li>
+<li><p><strong>Methods and Functions</strong>: camelCase (e.g., <code class="docutils literal notranslate"><span class="pre">addTestClass</span></code>, <code class="docutils literal notranslate"><span class="pre">parseCommandLine</span></code>)</p></li>
+<li><p><strong>Member Variables</strong>: <code class="docutils literal notranslate"><span class="pre">_underscorePrefix</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">_console</span></code>, <code class="docutils literal notranslate"><span class="pre">_testClasses</span></code>)</p></li>
+<li><p><strong>Global Constants</strong>: <code class="docutils literal notranslate"><span class="pre">cExample</span></code> if not in dedicated namespace.</p></li>
+<li><p><strong>Namespaces</strong>: all lowercase with nested structure (e.g., <code class="docutils literal notranslate"><span class="pre">erbsland::unittest</span></code>)</p></li>
+<li><p><strong>Preprocessor Macros</strong>: all uppercase <code class="docutils literal notranslate"><span class="pre">EXAMPLE</span></code></p></li>
+</ul>
+</section>
+<section id="file-organization">
+<h2>File Organization<a class="headerlink" href="#file-organization" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Header Guards</strong>: Use <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">once</span></code></p></li>
+<li><p><strong>Include Order</strong> (separate blocks with empty lines):
+1. Corresponding header (if in <code class="docutils literal notranslate"><span class="pre">.cpp</span></code>) — <em>followed by two empty lines</em>
+2. Local includes: <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;Example.hpp&quot;</span></code>
+3. Local subdirectory includes: <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;sub/sub/Example.hpp&quot;</span></code>
+4. Local relative includes: <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;../../Example.hpp&quot;</span></code>
+5. Project libraries: <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;erbsland/core/String.hpp&gt;</span></code>
+6. Standard library headers: <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;vector&gt;</span></code>
+7. <em>Two</em> empty lines after the include block</p></li>
+<li><p><strong>File Extensions</strong>: Use <code class="docutils literal notranslate"><span class="pre">.hpp</span></code> for headers, <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> for implementations</p></li>
+<li><p><strong>File Scope</strong>: Aim for one class per file, with matching name</p></li>
+<li><p><strong>Maximum File Length</strong>: Try to keep files under 500 lines</p></li>
+</ul>
+</section>
+<section id="formatting">
+<h2>Formatting<a class="headerlink" href="#formatting" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Indentation</strong>: 4 spaces, no tabs</p></li>
+<li><p><strong>Line Length</strong>: Target a maximum of 120 characters per line</p></li>
+<li><p><strong>Braces</strong>: Opening brace stays on the same line</p></li>
+<li><p><strong>Spacing and Separation</strong>:
+- Use empty lines to separate logical blocks
+- One empty line between function definitions if they span &gt;3 lines or have documentation
+- Two empty lines around <code class="docutils literal notranslate"><span class="pre">struct</span></code>, <code class="docutils literal notranslate"><span class="pre">class</span></code>, or <code class="docutils literal notranslate"><span class="pre">enum</span></code> definitions
+- Two empty lines around function implementations in <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> files</p></li>
+</ul>
+</section>
+<section id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Public API Docs</strong>: Use <code class="docutils literal notranslate"><span class="pre">///</span></code> and Doxygen <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>-syntax</p></li>
+<li><p><strong>Inline Comments</strong>: Use <code class="docutils literal notranslate"><span class="pre">//</span></code> for short clarifying notes</p></li>
+<li><p><strong>Block Comments</strong>: Avoid <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">...</span> <span class="pre">*/</span></code> unless necessary</p></li>
+<li><p><strong>Special Doxygen Tags</strong>:
+- <code class="docutils literal notranslate"><span class="pre">&#64;tested</span></code>: Indicates this is covered by a unit test (name or path to the tests)
+- <code class="docutils literal notranslate"><span class="pre">&#64;notest</span></code>: Explains why a unit test is not applicable
+- <code class="docutils literal notranslate"><span class="pre">&#64;needtest</span></code>: Flags untested functionality
+- <code class="docutils literal notranslate"><span class="pre">&#64;wip</span></code>: This part is work in progress—talk to the author before modifying</p></li>
+</ul>
+</section>
+<section id="constants-literals">
+<h2>Constants &amp; Literals<a class="headerlink" href="#constants-literals" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Prefer <code class="docutils literal notranslate"><span class="pre">constexpr</span></code> or <code class="docutils literal notranslate"><span class="pre">const</span></code> where applicable</p></li>
+<li><p>Never use macros for constants</p></li>
+<li><p>Move mechanic requires mutable instances!</p></li>
+</ul>
+</section>
+<section id="modern-c-usage">
+<h2>Modern C++ Usage<a class="headerlink" href="#modern-c-usage" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use C++20 syntax</p></li>
+<li><p>Always use <strong>trailing return types</strong> for all non-void functions: <code class="docutils literal notranslate"><span class="pre">auto</span> <span class="pre">create()</span> <span class="pre">-&gt;</span> <span class="pre">std::string;</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">auto</span></code> when the type is obvious or improves readability</p></li>
+<li><p>Use structured binding <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">auto</span> <span class="pre">&amp;[a,</span> <span class="pre">b]</span> <span class="pre">=</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">[[nodiscard]]</span></code> and <code class="docutils literal notranslate"><span class="pre">noexcept</span></code> where applicable</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">override</span></code> for overwritten/implemented functions</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">final</span></code> for final classes</p></li>
+<li><p>Use <strong>designated initialization</strong> if it improves the readability of the code</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">std::unique_ptr</span></code> / <code class="docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> instead of raw pointers</p></li>
+<li><p>Prefer range-based <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">std::format</span></code> and <code class="docutils literal notranslate"><span class="pre">std::chrono</span></code> for formatted output and timing</p></li>
+<li><p>Prefer <code class="docutils literal notranslate"><span class="pre">std::ranges</span></code> and <code class="docutils literal notranslate"><span class="pre">std::views</span></code> for expressive algorithms</p></li>
+</ul>
+</section>
+<section id="quality-and-safety-first">
+<h2>Quality and Safety First<a class="headerlink" href="#quality-and-safety-first" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Avoid manual memory management and raw pointers</p></li>
+<li><p>Trust the compiler to optimize; prioritize clarity over micro-optimization</p></li>
+<li><p>Perform bounds and range checks</p></li>
+<li><p>Write unit tests for all modules and key functions</p></li>
+<li><p>Ensure good test coverage and fail clearly when things go wrong</p></li>
+<li><p>A crash is better than silent failure or undefined behavior</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="code-of-conduct.html" class="btn btn-neutral float-left" title="Code of Conduct" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="write-a-unittest.html" class="btn btn-neutral float-right" title="How to Write a New Unit Test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

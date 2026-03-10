@@ -1,0 +1,1231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Demos" href="../demos/index.html" />
+    <link rel="prev" title="Output" href="output.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Text</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#building-colored-text-fragments">Building Colored Text Fragments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#describing-a-text-block">Describing a Text Block</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Char</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::String</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm16BlockStringLinesE"><code class="docutils literal notranslate"><span class="pre">BlockStringLines</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm4TextE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm13TextAnimationE"><code class="docutils literal notranslate"><span class="pre">TextAnimation</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Text</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/text.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="text">
+<h1>Text<a class="headerlink" href="#text" title="Link to this heading"></a></h1>
+<p>The text classes provide utilities for constructing, formatting, and
+rendering colored text in terminal buffers. They support mixed styles,
+Unicode-aware layout, and animated text effects.</p>
+<p>At the lowest level, <code class="docutils literal notranslate"><span class="pre">Char</span></code> represents a single colored terminal cell.
+Higher-level classes such as <code class="docutils literal notranslate"><span class="pre">String</span></code> and <code class="docutils literal notranslate"><span class="pre">Text</span></code> build on this
+foundation to describe larger text fragments and layout-aware text
+blocks.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="building-colored-text-fragments">
+<h3>Building Colored Text Fragments<a class="headerlink" href="#building-colored-text-fragments" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">String</span></code> stores a sequence of colored terminal characters. This makes
+it useful for prompts, status bars, and other mixed-style text where
+individual characters may use different colors.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">footer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">{};</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">character</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">String</span><span class="p">{</span><span class="s">&quot;[Q]&quot;</span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">footer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">character</span><span class="p">.</span><span class="n">withColorOverlay</span><span class="p">(</span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">BrightBlack</span><span class="p">}));</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">character</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">String</span><span class="p">{</span><span class="s">&quot; quit&quot;</span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">footer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">character</span><span class="p">.</span><span class="n">withColorOverlay</span><span class="p">(</span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightWhite</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">BrightBlack</span><span class="p">}));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Char</span></code> in the sequence can carry its own color, allowing flexible
+construction of styled text fragments.</p>
+<p>When you recolor existing <code class="docutils literal notranslate"><span class="pre">Char</span></code> values with <code class="docutils literal notranslate"><span class="pre">withColorOverlay()</span></code>, inherited
+components keep the original character color while default components reset
+that part to the terminal default.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">String</span></code> is built from UTF-8 or UTF-32 text, control codes are filtered
+out automatically except for tab and newline.</p>
+</section>
+<section id="describing-a-text-block">
+<h3>Describing a Text Block<a class="headerlink" href="#describing-a-text-block" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Text</span></code> describes a complete text element for buffer rendering. It
+combines the content with layout information such as the target
+rectangle, alignment, font, and animation settings.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Text</span><span class="p">{</span><span class="n">String</span><span class="p">{</span><span class="s">&quot;COLOR TERM&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">Center</span><span class="p">};</span>
+<span class="n">title</span><span class="p">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">Font</span><span class="o">::</span><span class="n">defaultAscii</span><span class="p">());</span>
+<span class="n">title</span><span class="p">.</span><span class="n">setColorSequence</span><span class="p">(</span><span class="n">ColorSequence</span><span class="p">{</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightBlue</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightCyan</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightMagenta</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="p">});</span>
+<span class="n">title</span><span class="p">.</span><span class="n">setAnimation</span><span class="p">(</span><span class="n">TextAnimation</span><span class="o">::</span><span class="n">ColorDiagonal</span><span class="p">);</span>
+
+<span class="n">buffer</span><span class="p">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">animationCycle</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">Text</span></code> integrates with the geometry and color systems, it
+supports wrapped paragraphs, Unicode-aware layout, animated titles,
+and large bitmap fonts.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/text-gallery2.jpg"><img alt="../../_images/text-gallery2.jpg" src="../../_images/text-gallery2.jpg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The <code class="docutils literal notranslate"><span class="pre">text-gallery</span></code> demo shows wrapped text, mixed-width Unicode
+text, and animated titles built with these classes.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4CharE">
+<span id="_CPPv3N8erbsland5cterm4CharE"></span><span id="_CPPv2N8erbsland5cterm4CharE"></span><span id="erbsland::cterm::Char"></span><span class="target" id="classerbsland_1_1cterm_1_1_char"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4CharE" title="Link to this definition"></a><br /></dt>
+<dd><p>Represents a character string with foreground and background colors. </p>
+<p>Used by the UI code to render colored text blocks on the console. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEv">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEv"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEv"></span><span id="erbsland::cterm::Char::CharCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1aea52be2d8edc9d4805683e8ab043a8a7"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct an empty block character using inherited colors. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEKDi">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEKDi"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEKDi"></span><span id="erbsland::cterm::Char::Char__char32_tCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ac47a8b5b012ae46f0234e763b1b3ad3f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEKDi" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character from a single Unicode code point using inherited colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>codePoint</strong> – The base Unicode code point. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEKDiK5Color">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEKDiK5Color"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEKDiK5Color"></span><span id="erbsland::cterm::Char::Char__char32_tC.ColorCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ae1e025920f57f1493fbf46c26cd0d738"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEKDiK5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character from a single Unicode code point and a color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>codePoint</strong> – The base Unicode code point. </p></li>
+<li><p><strong>color</strong> – The color for the character. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEKDiK10ForegroundK10Background">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEKDiK10ForegroundK10Background"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEKDiK10ForegroundK10Background"></span><span id="erbsland::cterm::Char::Char__char32_tC.ForegroundC.BackgroundCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ae507bdc4355006022dd2e511d8dbbbdb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEKDiK10ForegroundK10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character from a single Unicode code point and explicit colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>codePoint</strong> – The base Unicode code point. </p></li>
+<li><p><strong>fgColor</strong> – The foreground color. </p></li>
+<li><p><strong>bgColor</strong> – The background color. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEKDiKN10Foreground3HueEKN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEKDiKN10Foreground3HueEKN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEKDiKN10Foreground3HueEKN10Background3HueE"></span><span id="erbsland::cterm::Char::Char__char32_tC.Foreground::HueC.Background::HueCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a953f8cfc42f9f6047c9e06c05d5d5203"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEKDiKN10Foreground3HueEKN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEKDiK10Foreground">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEKDiK10Foreground"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEKDiK10Foreground"></span><span id="erbsland::cterm::Char::Char__char32_tC.ForegroundCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1afca91a4563125cb66a550b8328b59a89"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEKDiK10Foreground" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEKDiKN10Foreground3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEKDiKN10Foreground3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEKDiKN10Foreground3HueE"></span><span id="erbsland::cterm::Char::Char__char32_tC.Foreground::HueCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a2a2f2417f86401971fdfe28d2498d4a5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEKDiKN10Foreground3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEKDiK10Background">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEKDiK10Background"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEKDiK10Background"></span><span id="erbsland::cterm::Char::Char__char32_tC.BackgroundCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a76d5f78f6c8a4ec61c4a6b70d1c2387e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEKDiK10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEKDiKN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEKDiKN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEKDiKN10Background3HueE"></span><span id="erbsland::cterm::Char::Char__char32_tC.Background::HueCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a3cc7d1a6661f19cf7114531f9e44c0d5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEKDiKN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt11string_viewE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt11string_viewE"></span><span id="erbsland::cterm::Char::Char__std::string_view"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a0d12862e69f36d526dc737c9c63687df"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with inherited colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>charStr</strong> – The UTF-8 encoded text to display. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the text is not valid UTF-8, contains U+0000, or uses more than three code points. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt14u32string_viewE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt14u32string_viewE"></span><span id="erbsland::cterm::Char::Char__std::u32string_view"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ab0c57a6595963d63a30fd722b273833f"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with inherited colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>charStr</strong> – The UTF-32 encoded text to display. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the text contains U+0000 or uses more than three code points. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEPKDi">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEPKDi"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEPKDi"></span><span id="erbsland::cterm::Char::Char__char32_tCP"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a8d8854877c5cfe0f220b50167afbd215"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">charStr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEPKDi" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with inherited colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>charStr</strong> – The zero-terminated UTF-32 encoded text to display. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the text contains U+0000 or uses more than three code points. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE10Foreground10Background">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt11string_viewE10Foreground10Background"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt11string_viewE10Foreground10Background"></span><span id="erbsland::cterm::Char::Char__std::string_view.Foreground.Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a08343ca408a051012c07b6a5a0f5bdcc"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE10Foreground10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with explicit text and colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>charStr</strong> – The UTF-8 encoded text to display. </p></li>
+<li><p><strong>fgColor</strong> – The foreground color. </p></li>
+<li><p><strong>bgColor</strong> – The background color. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewEN10Foreground3HueEN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt11string_viewEN10Foreground3HueEN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt11string_viewEN10Foreground3HueEN10Background3HueE"></span><span id="erbsland::cterm::Char::Char__std::string_view.Foreground::Hue.Background::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a1cc10f1d1e5cf136d476f82f672f3873"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewEN10Foreground3HueEN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE10Foreground">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt11string_viewE10Foreground"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt11string_viewE10Foreground"></span><span id="erbsland::cterm::Char::Char__std::string_view.Foreground"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a5b53d6c1adc7e742d975c33b054e5d45"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE10Foreground" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewEN10Foreground3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt11string_viewEN10Foreground3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt11string_viewEN10Foreground3HueE"></span><span id="erbsland::cterm::Char::Char__std::string_view.Foreground::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ad3aa5b4eeac714e95ecb8b26084689fa"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewEN10Foreground3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE10Background">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt11string_viewE10Background"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt11string_viewE10Background"></span><span id="erbsland::cterm::Char::Char__std::string_view.Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a4d71e18b22101867384b89b2b9c1e1bf"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewEN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt11string_viewEN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt11string_viewEN10Background3HueE"></span><span id="erbsland::cterm::Char::Char__std::string_view.Background::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a783d4af99bcc004c210bc5173ac0b737"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewEN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE5Color">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt11string_viewE5Color"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt11string_viewE5Color"></span><span id="erbsland::cterm::Char::Char__std::string_view.Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a8d59e271eccd93c663f23b1c28b044ec"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt11string_viewE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with explicit text and colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>charStr</strong> – The UTF-8 encoded text to display. </p></li>
+<li><p><strong>color</strong> – The color of the block. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the text is not valid UTF-8, contains U+0000, or uses more than three code points. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE10Foreground10Background">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt14u32string_viewE10Foreground10Background"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt14u32string_viewE10Foreground10Background"></span><span id="erbsland::cterm::Char::Char__std::u32string_view.Foreground.Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a8f8a352e783f1225d562354ea4f406e2"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE10Foreground10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with explicit text and colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>charStr</strong> – The UTF-32 encoded text to display. </p></li>
+<li><p><strong>fgColor</strong> – The foreground color. </p></li>
+<li><p><strong>bgColor</strong> – The background color. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Foreground3HueEN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Foreground3HueEN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Foreground3HueEN10Background3HueE"></span><span id="erbsland::cterm::Char::Char__std::u32string_view.Foreground::Hue.Background::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1aa27125d0cd330efd8f3c72d10acd8968"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Foreground3HueEN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE10Foreground">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt14u32string_viewE10Foreground"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt14u32string_viewE10Foreground"></span><span id="erbsland::cterm::Char::Char__std::u32string_view.Foreground"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a761855c97ff0fecf0dbe10b7cef56889"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE10Foreground" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Foreground3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Foreground3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Foreground3HueE"></span><span id="erbsland::cterm::Char::Char__std::u32string_view.Foreground::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a4fead75d9c3084a1b5a0963dfda52146"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Foreground3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE10Background">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt14u32string_viewE10Background"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt14u32string_viewE10Background"></span><span id="erbsland::cterm::Char::Char__std::u32string_view.Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ae5a5ebc55e3c7b43ba71a380de1e0081"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Background3HueE"></span><span id="erbsland::cterm::Char::Char__std::u32string_view.Background::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a11029b45c0a52d0cfe8fe9ef3cb2b711"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewEN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE5Color">
+<span id="_CPPv3N8erbsland5cterm4Char4CharENSt14u32string_viewE5Color"></span><span id="_CPPv2N8erbsland5cterm4Char4CharENSt14u32string_viewE5Color"></span><span id="erbsland::cterm::Char::Char__std::u32string_view.Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ab4d10d4560ee9bd8739fbc19b921fc9a"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharENSt14u32string_viewE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with explicit text and colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>charStr</strong> – The UTF-32 encoded text to display. </p></li>
+<li><p><strong>color</strong> – The color of the block. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the text contains U+0000 or uses more than three code points. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEPKDi10Foreground10Background">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEPKDi10Foreground10Background"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEPKDi10Foreground10Background"></span><span id="erbsland::cterm::Char::Char__char32_tCP.Foreground.Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ab8e2d2d17b5da24c859c215bec1da893"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEPKDi10Foreground10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with explicit text and colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>charStr</strong> – The zero-terminated UTF-32 encoded text to display. </p></li>
+<li><p><strong>fgColor</strong> – The foreground color. </p></li>
+<li><p><strong>bgColor</strong> – The background color. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEPKDiN10Foreground3HueEN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEPKDiN10Foreground3HueEN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEPKDiN10Foreground3HueEN10Background3HueE"></span><span id="erbsland::cterm::Char::Char__char32_tCP.Foreground::Hue.Background::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a197e910e364b5539b50df56781ec9e52"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEPKDiN10Foreground3HueEN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEPKDi10Foreground">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEPKDi10Foreground"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEPKDi10Foreground"></span><span id="erbsland::cterm::Char::Char__char32_tCP.Foreground"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a78b7b835dea2658af647afdf43211d8e"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEPKDi10Foreground" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEPKDiN10Foreground3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEPKDiN10Foreground3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEPKDiN10Foreground3HueE"></span><span id="erbsland::cterm::Char::Char__char32_tCP.Foreground::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a116854a3a3ee33d80cd4b18d59cc5df9"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEPKDiN10Foreground3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEPKDi10Background">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEPKDi10Background"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEPKDi10Background"></span><span id="erbsland::cterm::Char::Char__char32_tCP.Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ae7bc601d393e665acc1a9a0a8003023e"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEPKDi10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEPKDiN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEPKDiN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEPKDiN10Background3HueE"></span><span id="erbsland::cterm::Char::Char__char32_tCP.Background::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a8bef28f2f2938fb2492715de66efbcdc"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bgColor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEPKDiN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Char4CharEPKDi5Color">
+<span id="_CPPv3N8erbsland5cterm4Char4CharEPKDi5Color"></span><span id="_CPPv2N8erbsland5cterm4Char4CharEPKDi5Color"></span><span id="erbsland::cterm::Char::Char__char32_tCP.Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a677733c75d63d3a028fb5e5d146a2348"></span><span class="sig-name descname"><span class="n"><span class="pre">Char</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">charStr</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Char4CharEPKDi5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a block character with explicit text and colors. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>charStr</strong> – The zero-terminated UTF-32 encoded text to display. </p></li>
+<li><p><strong>color</strong> – The color of the block. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the text contains U+0000 or uses more than three code points. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4ChareqERK4Char">
+<span id="_CPPv3NK8erbsland5cterm4ChareqERK4Char"></span><span id="_CPPv2NK8erbsland5cterm4ChareqERK4Char"></span><span id="erbsland::cterm::Char::eq-operator__CharCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1afa0c73d12d3253d4217f33c4f18b434d"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4ChareqERK4Char" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two terminal characters for equality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4CharneERK4Char">
+<span id="_CPPv3NK8erbsland5cterm4CharneERK4Char"></span><span id="_CPPv2NK8erbsland5cterm4CharneERK4Char"></span><span id="erbsland::cterm::Char::neq-operator__CharCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1af3d6f307f3479e31da74c366863676d0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4CharneERK4Char" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two terminal characters for inequality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char7charStrEv">
+<span id="_CPPv3NK8erbsland5cterm4Char7charStrEv"></span><span id="_CPPv2NK8erbsland5cterm4Char7charStrEv"></span><span id="erbsland::cterm::Char::charStrC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a2c7d711fc1a6bc2d4445e82070c7055e"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">charStr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char7charStrEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the character string as UTF-8 text. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A UTF-8 encoded copy of the stored character sequence. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char13mainCodePointEv">
+<span id="_CPPv3NK8erbsland5cterm4Char13mainCodePointEv"></span><span id="_CPPv2NK8erbsland5cterm4Char13mainCodePointEv"></span><span id="erbsland::cterm::Char::mainCodePointCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a78c2c2b00720329ca55d984bcd3d250b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mainCodePoint</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char13mainCodePointEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the leading Unicode code point. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The base code point, or <code class="docutils literal notranslate"><span class="pre">0</span></code> if this character is empty. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char10codePointsEv">
+<span id="_CPPv3NK8erbsland5cterm4Char10codePointsEv"></span><span id="_CPPv2NK8erbsland5cterm4Char10codePointsEv"></span><span id="erbsland::cterm::Char::codePointsCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a8218632f09fe07292783eb877972a051"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">char32_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">codePoints</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char10codePointsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the stored Unicode code points. </p>
+<p>Unused entries are set to <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char14codePointCountEv">
+<span id="_CPPv3NK8erbsland5cterm4Char14codePointCountEv"></span><span id="_CPPv2NK8erbsland5cterm4Char14codePointCountEv"></span><span id="erbsland::cterm::Char::codePointCountCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a11599cf483aac668c3939d2e72a99e5d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">codePointCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char14codePointCountEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the number of stored Unicode code points. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char5colorEv">
+<span id="_CPPv3NK8erbsland5cterm4Char5colorEv"></span><span id="_CPPv2NK8erbsland5cterm4Char5colorEv"></span><span id="erbsland::cterm::Char::colorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a4875dd40ff247bd6ba0d59cefbd3a173"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char5colorEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the character color. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char12displayWidthEv">
+<span id="_CPPv3NK8erbsland5cterm4Char12displayWidthEv"></span><span id="_CPPv2NK8erbsland5cterm4Char12displayWidthEv"></span><span id="erbsland::cterm::Char::displayWidthC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a8fc070dfe541072e64d673afd868a55b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">displayWidth</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char12displayWidthEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the display width on a terminal in cells. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char9byteCountEv">
+<span id="_CPPv3NK8erbsland5cterm4Char9byteCountEv"></span><span id="_CPPv2NK8erbsland5cterm4Char9byteCountEv"></span><span id="erbsland::cterm::Char::byteCountC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a98891d6a1c88e6d3588dc7ca170bbddd"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">byteCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char9byteCountEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the number of UTF-8 bytes needed to encode this character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char8appendToERNSt6stringE">
+<span id="_CPPv3NK8erbsland5cterm4Char8appendToERNSt6stringE"></span><span id="_CPPv2NK8erbsland5cterm4Char8appendToERNSt6stringE"></span><span id="erbsland::cterm::Char::appendTo__ssRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1af31a07c96b6cf85e2103ec757ddcf89a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">appendTo</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">buffer</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char8appendToERNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Append the UTF-8 representation to an existing buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>buffer</strong> – The destination buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char13withCombiningEDi">
+<span id="_CPPv3NK8erbsland5cterm4Char13withCombiningEDi"></span><span id="_CPPv2NK8erbsland5cterm4Char13withCombiningEDi"></span><span id="erbsland::cterm::Char::withCombining__char32_tC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a3fea77beef8a3a8f27cfc2223a21dd37"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">withCombining</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">codePoint</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char13withCombiningEDi" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a character with an additional combining code point appended. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>codePoint</strong> – The combining code point to append. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If <code class="docutils literal notranslate"><span class="pre">codePoint</span></code> is a control code, is not zero-width, or if this character already stores three code points. </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of this character with the combining code point appended. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char16withColorOverlayE5Color">
+<span id="_CPPv3NK8erbsland5cterm4Char16withColorOverlayE5Color"></span><span id="_CPPv2NK8erbsland5cterm4Char16withColorOverlayE5Color"></span><span id="erbsland::cterm::Char::withColorOverlay__ColorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a6cb7a9f35066c925b8c5ad029841c3bc"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">withColorOverlay</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char16withColorOverlayE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a character with the given colors applied as an overlay. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The color override to apply. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A copy of this character with the adjusted colors. If the applied colors contain <code class="docutils literal notranslate"><span class="pre">Inherited</span></code>, the existing component from this character is kept unchanged. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char17withColorReplacedE5Color">
+<span id="_CPPv3NK8erbsland5cterm4Char17withColorReplacedE5Color"></span><span id="_CPPv2NK8erbsland5cterm4Char17withColorReplacedE5Color"></span><span id="erbsland::cterm::Char::withColorReplaced__ColorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1aedf2af37808a43632b396220d64d7a15"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">withColorReplaced</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char17withColorReplacedE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a character with the given color replacing the stored color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The replacement color. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A copy of this character with exactly <code class="docutils literal notranslate"><span class="pre">color</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char13withBaseColorE5Color">
+<span id="_CPPv3NK8erbsland5cterm4Char13withBaseColorE5Color"></span><span id="_CPPv2NK8erbsland5cterm4Char13withBaseColorE5Color"></span><span id="erbsland::cterm::Char::withBaseColor__ColorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1ab316a2b90e71dcd90545a95c56127f67"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">withBaseColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char13withBaseColorE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a character with a base color underneath the stored color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The base color. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A copy of this character where this character color overlays <code class="docutils literal notranslate"><span class="pre">color</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char9isSpacingEv">
+<span id="_CPPv3NK8erbsland5cterm4Char9isSpacingEv"></span><span id="_CPPv2NK8erbsland5cterm4Char9isSpacingEv"></span><span id="erbsland::cterm::Char::isSpacingC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a15c71490e0f24817058a8a915806afa6"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isSpacing</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char9isSpacingEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this character is spacing. </p>
+<p>Tests for space, tab, newline, and CR. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Char14renderedEqualsERK4Charb">
+<span id="_CPPv3NK8erbsland5cterm4Char14renderedEqualsERK4Charb"></span><span id="_CPPv2NK8erbsland5cterm4Char14renderedEqualsERK4Charb"></span><span id="erbsland::cterm::Char::renderedEquals__CharCR.bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_char_1a191d03dfe50829c1025070bc57966529"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">renderedEquals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">colorEnabled</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Char14renderedEqualsERK4Charb" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare how two characters would appear on screen. </p>
+<p>Code points must match exactly. When <code class="docutils literal notranslate"><span class="pre">colorEnabled</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, inherited color components are treated as the terminal default color before comparing. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> – The character to compare with. </p></li>
+<li><p><strong>colorEnabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to include colors in the comparison. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if both characters render identically. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6StringE">
+<span id="_CPPv3N8erbsland5cterm6StringE"></span><span id="_CPPv2N8erbsland5cterm6StringE"></span><span id="erbsland::cterm::String"></span><span class="target" id="classerbsland_1_1cterm_1_1_string"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6StringE" title="Link to this definition"></a><br /></dt>
+<dd><p>A terminal string represented as a sequence of <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_char"><span class="std std-ref"><span class="pre">Char</span></span></a></code> values. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String7StorageE">
+<span id="_CPPv3N8erbsland5cterm6String7StorageE"></span><span id="_CPPv2N8erbsland5cterm6String7StorageE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a19b743a392fa7e84e50739fab4b43b4f"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Storage</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="Link to this definition"></a><br /></dt>
+<dd><p>Storage container for the characters. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String8iteratorE">
+<span id="_CPPv3N8erbsland5cterm6String8iteratorE"></span><span id="_CPPv2N8erbsland5cterm6String8iteratorE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1aa6d781874cb49d8142cf20ed9396de35"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iterator</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">iterator</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String8iteratorE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mutable forward iterator. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String14const_iteratorE">
+<span id="_CPPv3N8erbsland5cterm6String14const_iteratorE"></span><span id="_CPPv2N8erbsland5cterm6String14const_iteratorE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ab5248508d0ae60f975c35e9a859cd947"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_iterator</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">const_iterator</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String14const_iteratorE" title="Link to this definition"></a><br /></dt>
+<dd><p>Immutable forward iterator. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String16reverse_iteratorE">
+<span id="_CPPv3N8erbsland5cterm6String16reverse_iteratorE"></span><span id="_CPPv2N8erbsland5cterm6String16reverse_iteratorE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a50f9407ee47e0b98be3bb6a05b07eeea"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reverse_iterator</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">reverse_iterator</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String16reverse_iteratorE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mutable reverse iterator. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String22const_reverse_iteratorE">
+<span id="_CPPv3N8erbsland5cterm6String22const_reverse_iteratorE"></span><span id="_CPPv2N8erbsland5cterm6String22const_reverse_iteratorE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a767de09d39315709c2f8fad3672a2c88"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_reverse_iterator</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">const_reverse_iterator</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String22const_reverse_iteratorE" title="Link to this definition"></a><br /></dt>
+<dd><p>Immutable reverse iterator. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String9size_typeE">
+<span id="_CPPv3N8erbsland5cterm6String9size_typeE"></span><span id="_CPPv2N8erbsland5cterm6String9size_typeE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a953178afe03ee47d626f6ebf39032b85"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String9size_typeE" title="Link to this definition"></a><br /></dt>
+<dd><p>Unsigned size type. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String15difference_typeE">
+<span id="_CPPv3N8erbsland5cterm6String15difference_typeE"></span><span id="_CPPv2N8erbsland5cterm6String15difference_typeE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1aff338c996233b6b0cccde3c0f670a35f"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">difference_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">difference_type</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String15difference_typeE" title="Link to this definition"></a><br /></dt>
+<dd><p>Signed distance type. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String10value_typeE">
+<span id="_CPPv3N8erbsland5cterm6String10value_typeE"></span><span id="_CPPv2N8erbsland5cterm6String10value_typeE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ab96cb93c83d2127b7daaf35ae5646aac"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">value_type</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String10value_typeE" title="Link to this definition"></a><br /></dt>
+<dd><p>Stored value type. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String9referenceE">
+<span id="_CPPv3N8erbsland5cterm6String9referenceE"></span><span id="_CPPv2N8erbsland5cterm6String9referenceE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ac513ccbeb93b48e95792968fbd25a2c3"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reference</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">reference</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String9referenceE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mutable element reference. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String15const_referenceE">
+<span id="_CPPv3N8erbsland5cterm6String15const_referenceE"></span><span id="_CPPv2N8erbsland5cterm6String15const_referenceE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a33547ed7206c655931fc0d9dbd87390e"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_reference</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">const_reference</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String15const_referenceE" title="Link to this definition"></a><br /></dt>
+<dd><p>Immutable element reference. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String7pointerE">
+<span id="_CPPv3N8erbsland5cterm6String7pointerE"></span><span id="_CPPv2N8erbsland5cterm6String7pointerE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ad357d69af4f85c2e4fcda8e8043dfa47"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointer</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pointer</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String7pointerE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mutable element pointer. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String13const_pointerE">
+<span id="_CPPv3N8erbsland5cterm6String13const_pointerE"></span><span id="_CPPv2N8erbsland5cterm6String13const_pointerE"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a452ad7dd371074cbad08f2a4256ed6e6"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_pointer</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String7StorageE" title="erbsland::cterm::String::Storage"><span class="n"><span class="pre">Storage</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">const_pointer</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String13const_pointerE" title="Link to this definition"></a><br /></dt>
+<dd><p>Immutable element pointer. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String6StringEv">
+<span id="_CPPv3N8erbsland5cterm6String6StringEv"></span><span id="_CPPv2N8erbsland5cterm6String6StringEv"></span><span id="erbsland::cterm::String::String"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a197dd7b0df88193db9fbad9072c3f883"></span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String6StringEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty terminal string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String6StringENSt11string_viewE5Color">
+<span id="_CPPv3N8erbsland5cterm6String6StringENSt11string_viewE5Color"></span><span id="_CPPv2N8erbsland5cterm6String6StringENSt11string_viewE5Color"></span><span id="erbsland::cterm::String::String__std::string_view.Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a1ca82d0a2f06403b3e8b51f70500597e"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">str</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String6StringENSt11string_viewE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a terminal string from UTF-8 text. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> – The UTF-8 text to split into terminal characters. </p></li>
+<li><p><strong>color</strong> – The color to use for the characters. Control codes are ignored except for tab and newline. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the text is not valid UTF-8 or contains an unsupported character sequence. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String6StringENSt14u32string_viewE5Color">
+<span id="_CPPv3N8erbsland5cterm6String6StringENSt14u32string_viewE5Color"></span><span id="_CPPv2N8erbsland5cterm6String6StringENSt14u32string_viewE5Color"></span><span id="erbsland::cterm::String::String__std::u32string_view.Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a1222bd02e52f1c20ba89b5a4d704be71"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">str</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String6StringENSt14u32string_viewE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a terminal string from UTF-32 text. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> – The UTF-32 text to split into terminal characters. </p></li>
+<li><p><strong>color</strong> – The color to use for the characters. Control codes are ignored except for tab and newline. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the text contains an unsupported character sequence. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String6StringERK6String">
+<span id="_CPPv3N8erbsland5cterm6String6StringERK6String"></span><span id="_CPPv2N8erbsland5cterm6String6StringERK6String"></span><span id="erbsland::cterm::String::String__StringCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a157f7592063f518eee3ed5f254595c57"></span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String6StringERK6String" title="erbsland::cterm::String::String"><span class="n"><span class="pre">String</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String6StringERK6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Copy construct a terminal string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String6StringERR6String">
+<span id="_CPPv3N8erbsland5cterm6String6StringERR6String"></span><span id="_CPPv2N8erbsland5cterm6String6StringERR6String"></span><span id="erbsland::cterm::String::String__StringRR"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a3ba3a1cdef2de19dfa7048cf9d6eab23"></span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6String6StringERR6String" title="erbsland::cterm::String::String"><span class="n"><span class="pre">String</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String6StringERR6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Move construct a terminal string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6StringaSERK6String">
+<span id="_CPPv3N8erbsland5cterm6StringaSERK6String"></span><span id="_CPPv2N8erbsland5cterm6StringaSERK6String"></span><span id="erbsland::cterm::String::assign-operator__StringCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a5f83c8e3e0c1b1ca5a3fd4ea45310d8d"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6StringaSERK6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Copy-assign a terminal string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6StringaSERR6String">
+<span id="_CPPv3N8erbsland5cterm6StringaSERR6String"></span><span id="_CPPv2N8erbsland5cterm6StringaSERR6String"></span><span id="erbsland::cterm::String::assign-operator__StringRR"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a27129cbd070a1f7ec4f777f541d3c474"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6StringaSERR6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Move-assign a terminal string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6StringixEK6size_t">
+<span id="_CPPv3NK8erbsland5cterm6StringixEK6size_t"></span><span id="_CPPv2NK8erbsland5cterm6StringixEK6size_t"></span><span id="erbsland::cterm::String::subscript-operator__sCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ac1caa213c86808ffef37a81be23142e2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6StringixEK6size_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Access one character without bounds checking. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The character index. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A copy of the character at <code class="docutils literal notranslate"><span class="pre">index</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6StringixEK6size_t">
+<span id="_CPPv3N8erbsland5cterm6StringixEK6size_t"></span><span id="_CPPv2N8erbsland5cterm6StringixEK6size_t"></span><span id="erbsland::cterm::String::subscript-operator__sC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a242b627df2f18456dc95de5193dec68c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6StringixEK6size_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Access one character without bounds checking. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The character index. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A mutable reference to the character at <code class="docutils literal notranslate"><span class="pre">index</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6StringpLERK4Char">
+<span id="_CPPv3N8erbsland5cterm6StringpLERK4Char"></span><span id="_CPPv2N8erbsland5cterm6StringpLERK4Char"></span><span id="erbsland::cterm::String::add-assign-operator__CharCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a759482edfeb4d461e884d8d015d062bc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">character</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6StringpLERK4Char" title="Link to this definition"></a><br /></dt>
+<dd><p>Append one character to this string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>character</strong> – The character to append. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reference to this string. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6StringpLERK6String">
+<span id="_CPPv3N8erbsland5cterm6StringpLERK6String"></span><span id="_CPPv2N8erbsland5cterm6StringpLERK6String"></span><span id="erbsland::cterm::String::add-assign-operator__StringCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1aa7589ffc88300245cbd0e77a7e4cca92"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6StringpLERK6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Append another terminal string to this string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The string to append. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reference to this string. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6StringplERK4Char">
+<span id="_CPPv3NK8erbsland5cterm6StringplERK4Char"></span><span id="_CPPv2NK8erbsland5cterm6StringplERK4Char"></span><span id="erbsland::cterm::String::add-operator__CharCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a1ac105237c8b42ab5d21f8a2c41c42d8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">character</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6StringplERK4Char" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a new string with one appended character. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>character</strong> – The character to append. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The concatenated string. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6StringplERK6String">
+<span id="_CPPv3NK8erbsland5cterm6StringplERK6String"></span><span id="_CPPv2NK8erbsland5cterm6StringplERK6String"></span><span id="erbsland::cterm::String::add-operator__StringCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a3f820b2020fae40d8f763edbf0bd4d29"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6StringplERK6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a new string with another appended string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The string to append. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The concatenated string. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String4sizeEv">
+<span id="_CPPv3NK8erbsland5cterm6String4sizeEv"></span><span id="_CPPv2NK8erbsland5cterm6String4sizeEv"></span><span id="erbsland::cterm::String::sizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a7893ae1a3a87a31d4106d017c6c64801"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String4sizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the number of stored characters. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String12displayWidthEv">
+<span id="_CPPv3NK8erbsland5cterm6String12displayWidthEv"></span><span id="_CPPv2NK8erbsland5cterm6String12displayWidthEv"></span><span id="erbsland::cterm::String::displayWidthC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1af05e339beacf2cbaec7e5f99a99c66ec"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">displayWidth</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String12displayWidthEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the width of the string in terminal cells. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The sum of all character display widths. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String2atEK6size_t">
+<span id="_CPPv3NK8erbsland5cterm6String2atEK6size_t"></span><span id="_CPPv2NK8erbsland5cterm6String2atEK6size_t"></span><span id="erbsland::cterm::String::at__sCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ae95f7c19b2940b104e7258c571f37750"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String2atEK6size_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Access one character with bounds checking. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The character index. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A copy of the character at <code class="docutils literal notranslate"><span class="pre">index</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String5emptyEv">
+<span id="_CPPv3NK8erbsland5cterm6String5emptyEv"></span><span id="_CPPv2NK8erbsland5cterm6String5emptyEv"></span><span id="erbsland::cterm::String::emptyC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a7cd414c741cce076150dc601409230a4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String5emptyEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this string is empty. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String5beginEv">
+<span id="_CPPv3N8erbsland5cterm6String5beginEv"></span><span id="_CPPv2N8erbsland5cterm6String5beginEv"></span><span id="erbsland::cterm::String::begin"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ac04d567ba3350e37b2d90fcadb8b8b8a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String5beginEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get an iterator to the first character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String3endEv">
+<span id="_CPPv3N8erbsland5cterm6String3endEv"></span><span id="_CPPv2N8erbsland5cterm6String3endEv"></span><span id="erbsland::cterm::String::end"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a2fc47fd5d5a63ee0d1581c4018073042"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String3endEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get an iterator past the last character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String5beginEv">
+<span id="_CPPv3NK8erbsland5cterm6String5beginEv"></span><span id="_CPPv2NK8erbsland5cterm6String5beginEv"></span><span id="erbsland::cterm::String::beginC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a1821885051ef08565b3f604b3db17989"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String5beginEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a const iterator to the first character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String3endEv">
+<span id="_CPPv3NK8erbsland5cterm6String3endEv"></span><span id="_CPPv2NK8erbsland5cterm6String3endEv"></span><span id="erbsland::cterm::String::endC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a06f69180eccd2c261266686575550f46"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String3endEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a const iterator past the last character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String6cbeginEv">
+<span id="_CPPv3NK8erbsland5cterm6String6cbeginEv"></span><span id="_CPPv2NK8erbsland5cterm6String6cbeginEv"></span><span id="erbsland::cterm::String::cbeginC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a1a157996c1beab7a2881f46094769e02"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String6cbeginEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a const iterator to the first character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String4cendEv">
+<span id="_CPPv3NK8erbsland5cterm6String4cendEv"></span><span id="_CPPv2NK8erbsland5cterm6String4cendEv"></span><span id="erbsland::cterm::String::cendC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a7803f186d06c9723bbe64cb7d00272e9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String4cendEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a const iterator past the last character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String6rbeginEv">
+<span id="_CPPv3N8erbsland5cterm6String6rbeginEv"></span><span id="_CPPv2N8erbsland5cterm6String6rbeginEv"></span><span id="erbsland::cterm::String::rbegin"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ae20e3be6c12c7c6bde9bbfb6e3195fe2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String6rbeginEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a reverse iterator to the last character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String4rendEv">
+<span id="_CPPv3N8erbsland5cterm6String4rendEv"></span><span id="_CPPv2N8erbsland5cterm6String4rendEv"></span><span id="erbsland::cterm::String::rend"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ae38a3129193d2cfe0f3691985c1d5b68"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String4rendEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a reverse iterator past the first character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String6rbeginEv">
+<span id="_CPPv3NK8erbsland5cterm6String6rbeginEv"></span><span id="_CPPv2NK8erbsland5cterm6String6rbeginEv"></span><span id="erbsland::cterm::String::rbeginC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a0c573a77feb50373e3d71ad71650cd6e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String6rbeginEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a const reverse iterator to the last character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String4rendEv">
+<span id="_CPPv3NK8erbsland5cterm6String4rendEv"></span><span id="_CPPv2NK8erbsland5cterm6String4rendEv"></span><span id="erbsland::cterm::String::rendC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a3b9a87c235b745088324deb9e0bb233a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String4rendEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a const reverse iterator past the first character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String7crbeginEv">
+<span id="_CPPv3NK8erbsland5cterm6String7crbeginEv"></span><span id="_CPPv2NK8erbsland5cterm6String7crbeginEv"></span><span id="erbsland::cterm::String::crbeginC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a113d4def2247922fced00e1652b64df9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">crbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String7crbeginEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a const reverse iterator to the last character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String5crendEv">
+<span id="_CPPv3NK8erbsland5cterm6String5crendEv"></span><span id="_CPPv2NK8erbsland5cterm6String5crendEv"></span><span id="erbsland::cterm::String::crendC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1ab804916f75174d05829afe0b115464a0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">crend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String5crendEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a const reverse iterator past the first character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String7reserveEK6size_t">
+<span id="_CPPv3N8erbsland5cterm6String7reserveEK6size_t"></span><span id="_CPPv2N8erbsland5cterm6String7reserveEK6size_t"></span><span id="erbsland::cterm::String::reserve__sC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1acfd4f6b9f83889d0202b464c404a6977"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reserve</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String7reserveEK6size_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Reserve storage for at least the given number of characters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> – The requested capacity. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6String5clearEv">
+<span id="_CPPv3N8erbsland5cterm6String5clearEv"></span><span id="_CPPv2N8erbsland5cterm6String5clearEv"></span><span id="erbsland::cterm::String::clear"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a5cabcafa889bc6c5b515289bea7d5bc2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6String5clearEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Remove all characters from this string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_Dp12PrintableArgEN8erbsland5cterm6String6appendEvDp4Args">
+<span id="_CPPv3I_Dp12PrintableArgEN8erbsland5cterm6String6appendEDp4Args"></span><span id="_CPPv2I_Dp12PrintableArgEN8erbsland5cterm6String6appendEDp4Args"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">PrintableArg</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_string_1acf3ef384d3f8054c18fe84bc2354d81c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_Dp12PrintableArgEN8erbsland5cterm6String6appendEvDp4Args" title="erbsland::cterm::String::append::Args"><span class="n"><span class="pre">Args</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I_Dp12PrintableArgEN8erbsland5cterm6String6appendEvDp4Args" title="Link to this definition"></a><br /></dt>
+<dd><p>Append elements to this string. </p>
+<p>This works similar to <code class="docutils literal notranslate"><a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_terminal_1acbd0430b17a535ce7f2fb865115e70bb"><span class="std std-ref"><span class="pre">Terminal::print()</span></span></a></code>. If you add a color, this color is “active” for all following characters <em>in the same call</em>. Just adding a color does not change the string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – The arguments to append. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String10splitWordsEv">
+<span id="_CPPv3NK8erbsland5cterm6String10splitWordsEv"></span><span id="_CPPv2NK8erbsland5cterm6String10splitWordsEv"></span><span id="erbsland::cterm::String::splitWordsC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a8ed9950dc7aca848e6b53959e510dffa"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">splitWords</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String10splitWordsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Split the string into words at space, tab, carriage return, or newline characters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A sequence of words. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6String13wrapIntoLinesEi">
+<span id="_CPPv3NK8erbsland5cterm6String13wrapIntoLinesEi"></span><span id="_CPPv2NK8erbsland5cterm6String13wrapIntoLinesEi"></span><span id="erbsland::cterm::String::wrapIntoLines__iC"></span><span class="target" id="classerbsland_1_1cterm_1_1_string_1a02e09d43641f3f045594835b6d30d2eb"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">wrapIntoLines</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6String13wrapIntoLinesEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Wrap this string into lines that have a maximum display width. </p>
+<p>Paragraph breaks from newline characters are preserved as blank lines between paragraphs. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>width</strong> – The maximum terminal width in cells. Must be greater than zero. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A sequence of lines. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm16BlockStringLinesE">
+<span id="_CPPv3N8erbsland5cterm16BlockStringLinesE"></span><span id="_CPPv2N8erbsland5cterm16BlockStringLinesE"></span><span class="target" id="_string_8hpp_1a6d908e3ae2992a6c3ea4652de8ad5106"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">BlockStringLines</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm16BlockStringLinesE" title="Link to this definition"></a><br /></dt>
+<dd><p>A sequence of wrapped terminal text lines. </p>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4TextE">
+<span id="_CPPv3N8erbsland5cterm4TextE"></span><span id="_CPPv2N8erbsland5cterm4TextE"></span><span id="erbsland::cterm::Text"></span><span class="target" id="classerbsland_1_1cterm_1_1_text"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Text</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4TextE" title="Link to this definition"></a><br /></dt>
+<dd><p>Describes a text block to render into a <code class="docutils literal notranslate"><a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_buffer"><span class="std std-ref"><span class="pre">Buffer</span></span></a></code>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text4TextEv">
+<span id="_CPPv3N8erbsland5cterm4Text4TextEv"></span><span id="_CPPv2N8erbsland5cterm4Text4TextEv"></span><span id="erbsland::cterm::Text::Text"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1af801bbc27a3964eca61488e3a013052a"></span><span class="sig-name descname"><span class="n"><span class="pre">Text</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text4TextEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty text description. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text4TextE6String9RectangleK9Alignment">
+<span id="_CPPv3N8erbsland5cterm4Text4TextE6String9RectangleK9Alignment"></span><span id="_CPPv2N8erbsland5cterm4Text4TextE6String9RectangleK9Alignment"></span><span id="erbsland::cterm::Text::Text__String.Rectangle.AlignmentC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a1f83253e384afcb8e2e1bffb96be138c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Text</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">text</span></span>, <a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">rect</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9AlignmentE" title="erbsland::cterm::Alignment"><span class="n"><span class="pre">Alignment</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">alignment</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9AlignmentE" title="erbsland::cterm::Alignment"><span class="n"><span class="pre">Alignment</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9Alignment7TopLeftE" title="erbsland::cterm::Alignment::TopLeft"><span class="n"><span class="pre">TopLeft</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text4TextE6String9RectangleK9Alignment" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a text description for the given content and target rectangle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> – The text content to render. </p></li>
+<li><p><strong>rect</strong> – The target rectangle. </p></li>
+<li><p><strong>alignment</strong> – The text alignment inside the rectangle. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Text4textEv">
+<span id="_CPPv3NK8erbsland5cterm4Text4textEv"></span><span id="_CPPv2NK8erbsland5cterm4Text4textEv"></span><span id="erbsland::cterm::Text::textC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1aed23057e3ea4d95c403b82ea6e86cfc1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">text</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Text4textEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the text content. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Text9rectangleEv">
+<span id="_CPPv3NK8erbsland5cterm4Text9rectangleEv"></span><span id="_CPPv2NK8erbsland5cterm4Text9rectangleEv"></span><span id="erbsland::cterm::Text::rectangleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1aae9953b3c3b5557a8695cfbf2b157a5f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">rectangle</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Text9rectangleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the target rectangle. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Text9alignmentEv">
+<span id="_CPPv3NK8erbsland5cterm4Text9alignmentEv"></span><span id="_CPPv2NK8erbsland5cterm4Text9alignmentEv"></span><span id="erbsland::cterm::Text::alignmentC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a7a75dda2dbd58fc6105dc20d167f1b19"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9AlignmentE" title="erbsland::cterm::Alignment"><span class="n"><span class="pre">Alignment</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alignment</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Text9alignmentEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the text alignment inside the rectangle. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Text13colorSequenceEv">
+<span id="_CPPv3NK8erbsland5cterm4Text13colorSequenceEv"></span><span id="_CPPv2NK8erbsland5cterm4Text13colorSequenceEv"></span><span id="erbsland::cterm::Text::colorSequenceC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a1cd37ea334f475f60f24adb3ae6e3aba"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm13ColorSequenceE" title="erbsland::cterm::ColorSequence"><span class="n"><span class="pre">ColorSequence</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">colorSequence</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Text13colorSequenceEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the optional text color sequence. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Text5colorEv">
+<span id="_CPPv3NK8erbsland5cterm4Text5colorEv"></span><span id="_CPPv2NK8erbsland5cterm4Text5colorEv"></span><span id="erbsland::cterm::Text::colorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a7e28e338e8a3207fac0811f8a5b6be25"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Text5colorEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the first text color from the configured sequence. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The first sequence color, or the inherited color if no sequence is configured. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Text4fontEv">
+<span id="_CPPv3NK8erbsland5cterm4Text4fontEv"></span><span id="_CPPv2NK8erbsland5cterm4Text4fontEv"></span><span id="erbsland::cterm::Text::fontC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a0bc6469300a5289322ff82377010091b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="font.html#_CPPv4N8erbsland5cterm7FontPtrE" title="erbsland::cterm::FontPtr"><span class="n"><span class="pre">FontPtr</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">font</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Text4fontEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the optional font. If this is empty, regular text rendering is used. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Text9animationEv">
+<span id="_CPPv3NK8erbsland5cterm4Text9animationEv"></span><span id="_CPPv2NK8erbsland5cterm4Text9animationEv"></span><span id="erbsland::cterm::Text::animationC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1ac4438e30e084ce0be4205fa905276367"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm13TextAnimationE" title="erbsland::cterm::TextAnimation"><span class="n"><span class="pre">TextAnimation</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animation</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Text9animationEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the animation mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text7setTextE6String">
+<span id="_CPPv3N8erbsland5cterm4Text7setTextE6String"></span><span id="_CPPv2N8erbsland5cterm4Text7setTextE6String"></span><span id="erbsland::cterm::Text::setText__String"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a3d679867867f75324f30fd722cb6be7e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setText</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text7setTextE6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the text content. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text12setRectangleEK9Rectangle">
+<span id="_CPPv3N8erbsland5cterm4Text12setRectangleEK9Rectangle"></span><span id="_CPPv2N8erbsland5cterm4Text12setRectangleEK9Rectangle"></span><span id="erbsland::cterm::Text::setRectangle__RectangleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a680b08ef7ad967d5c50b99b2818e6c9a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setRectangle</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">rect</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text12setRectangleEK9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the target rectangle. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text12setAlignmentEK9Alignment">
+<span id="_CPPv3N8erbsland5cterm4Text12setAlignmentEK9Alignment"></span><span id="_CPPv2N8erbsland5cterm4Text12setAlignmentEK9Alignment"></span><span id="erbsland::cterm::Text::setAlignment__AlignmentC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a51a660c9dff8e39e1010b07a5a0704a3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setAlignment</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9AlignmentE" title="erbsland::cterm::Alignment"><span class="n"><span class="pre">Alignment</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">alignment</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text12setAlignmentEK9Alignment" title="Link to this definition"></a><br /></dt>
+<dd><p>Change the text alignment. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text16setColorSequenceE13ColorSequence">
+<span id="_CPPv3N8erbsland5cterm4Text16setColorSequenceE13ColorSequence"></span><span id="_CPPv2N8erbsland5cterm4Text16setColorSequenceE13ColorSequence"></span><span id="erbsland::cterm::Text::setColorSequence__ColorSequence"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a7030ec16f902e3d8e1846dccf746296c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColorSequence</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm13ColorSequenceE" title="erbsland::cterm::ColorSequence"><span class="n"><span class="pre">ColorSequence</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">colorSequence</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text16setColorSequenceE13ColorSequence" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the text color sequence. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text8setColorEK5Color">
+<span id="_CPPv3N8erbsland5cterm4Text8setColorEK5Color"></span><span id="_CPPv2N8erbsland5cterm4Text8setColorEK5Color"></span><span id="erbsland::cterm::Text::setColor__ColorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a7d3dbb905de375605146c9edc390d4ba"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text8setColorEK5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Set a single text color. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text7setFontERK7FontPtr">
+<span id="_CPPv3N8erbsland5cterm4Text7setFontERK7FontPtr"></span><span id="_CPPv2N8erbsland5cterm4Text7setFontERK7FontPtr"></span><span id="erbsland::cterm::Text::setFont__FontPtrCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1a604041d4dbb1055a4190112ae2183223"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setFont</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="font.html#_CPPv4N8erbsland5cterm7FontPtrE" title="erbsland::cterm::FontPtr"><span class="n"><span class="pre">FontPtr</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">font</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text7setFontERK7FontPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Change the font. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Text12setAnimationEK13TextAnimation">
+<span id="_CPPv3N8erbsland5cterm4Text12setAnimationEK13TextAnimation"></span><span id="_CPPv2N8erbsland5cterm4Text12setAnimationEK13TextAnimation"></span><span id="erbsland::cterm::Text::setAnimation__TextAnimationC"></span><span class="target" id="classerbsland_1_1cterm_1_1_text_1ab5f59b090d0e9b3db8fa9b08c8fadf00"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setAnimation</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm13TextAnimationE" title="erbsland::cterm::TextAnimation"><span class="n"><span class="pre">TextAnimation</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">animation</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Text12setAnimationEK13TextAnimation" title="Link to this definition"></a><br /></dt>
+<dd><p>Change the animation mode. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13TextAnimationE">
+<span id="_CPPv3N8erbsland5cterm13TextAnimationE"></span><span id="_CPPv2N8erbsland5cterm13TextAnimationE"></span><span class="target" id="_text_animation_8hpp_1a2c8febb6196560943ada6fe625742ab9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">TextAnimation</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13TextAnimationE" title="Link to this definition"></a><br /></dt>
+<dd><p>Supported text animation styles used by <code class="docutils literal notranslate"><span class="pre">Buffer::renderText()</span></code>. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13TextAnimation4NoneE">
+<span id="_CPPv3N8erbsland5cterm13TextAnimation4NoneE"></span><span id="_CPPv2N8erbsland5cterm13TextAnimation4NoneE"></span><span class="target" id="_text_animation_8hpp_1a2c8febb6196560943ada6fe625742ab9a6adf97f83acf6453d4a6a4b1070f3754"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">None</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13TextAnimation4NoneE" title="Link to this definition"></a><br /></dt>
+<dd><p>No animation. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm13TextAnimation13ColorDiagonalE">
+<span id="_CPPv3N8erbsland5cterm13TextAnimation13ColorDiagonalE"></span><span id="_CPPv2N8erbsland5cterm13TextAnimation13ColorDiagonalE"></span><span class="target" id="_text_animation_8hpp_1a2c8febb6196560943ada6fe625742ab9a91c2bd5787da3925c1d8bad8ff05587a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColorDiagonal</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm13TextAnimation13ColorDiagonalE" title="Link to this definition"></a><br /></dt>
+<dd><p>Diagonal color animation. Requires a color sequence. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="output.html" class="btn btn-neutral float-left" title="Output" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../demos/index.html" class="btn btn-neutral float-right" title="Demos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

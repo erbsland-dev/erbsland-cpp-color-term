@@ -1,0 +1,1876 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_terminal" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::Terminal</compoundname>
+    <includes refid="_terminal_8hpp" local="no">erbsland/cterm/Terminal.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>RefreshMode</name>
+        <qualifiedname>erbsland::cterm::Terminal::RefreshMode</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687a02bce93bff905887ad2233110bf9c49e" prot="public">
+          <name>Keep</name>
+          <briefdescription>
+<para>Do not emit cursor or clear-screen control sequences automatically. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687adc30bc0c7914db5918da4263fce93ad2" prot="public">
+          <name>Clear</name>
+          <briefdescription>
+<para>Clear the full screen before rendering the next frame. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687ada364eb37e143f6b2b5559aa03f5913a" prot="public">
+          <name>Overwrite</name>
+          <briefdescription>
+<para>Move the cursor to the top-left corner before rendering the next frame. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Screen clearing strategy used between rendered frames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="42" column="5" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="42" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1_terminal_1a6093fdfb9a01d70783e99b24063a1969" prot="public" static="no">
+        <type>std::function&lt; void(<ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>)&gt;</type>
+        <definition>using erbsland::cterm::Terminal::ScreenSizeChangedCallback =  std::function&lt;void(Size)&gt;</definition>
+        <argsstring></argsstring>
+        <name>ScreenSizeChangedCallback</name>
+        <qualifiedname>erbsland::cterm::Terminal::ScreenSizeChangedCallback</qualifiedname>
+        <briefdescription>
+<para>Callback invoked when the terminal size changes or is initialized. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="38" column="5" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a1fe5ac3ca044ec8988f94b8c679aa9be" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::_colorEnabled</definition>
+        <argsstring></argsstring>
+        <name>_colorEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::_colorEnabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="236" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="236" bodyend="236"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1ac38f4bbeaeb3c58bfdc79fd92c67a2af" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::_sizeDetectionEnabled</definition>
+        <argsstring></argsstring>
+        <name>_sizeDetectionEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::_sizeDetectionEnabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="237" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="237" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a816726eba7c5059dc1eae5f6b89ba20a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::_lineBufferEnabled</definition>
+        <argsstring></argsstring>
+        <name>_lineBufferEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::_lineBufferEnabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="238" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="238" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a8d5f619bd17fa5567c16e7c0eb2157b4" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::_clearScreenAfterResize</definition>
+        <argsstring></argsstring>
+        <name>_clearScreenAfterResize</name>
+        <qualifiedname>erbsland::cterm::Terminal::_clearScreenAfterResize</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="239" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="239" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a5c2fd3d08eb2032be6c35ddf34f28c31" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" kindref="member">RefreshMode</ref></type>
+        <definition>RefreshMode erbsland::cterm::Terminal::_refreshMode</definition>
+        <argsstring></argsstring>
+        <name>_refreshMode</name>
+        <qualifiedname>erbsland::cterm::Terminal::_refreshMode</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687ada364eb37e143f6b2b5559aa03f5913a" kindref="member">RefreshMode::Overwrite</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="240" column="17" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="240" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a735753a96777f6414d478f19c48cce8e" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Terminal::_size</definition>
+        <argsstring></argsstring>
+        <name>_size</name>
+        <qualifiedname>erbsland::cterm::Terminal::_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="241" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a4024173e20eec72e7ec452e89bb16e0a" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::Terminal::_color</definition>
+        <argsstring></argsstring>
+        <name>_color</name>
+        <qualifiedname>erbsland::cterm::Terminal::_color</qualifiedname>
+        <initializer>{Foreground::Default, Background::Default}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="242" column="11" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="242" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1aebde9b8e1071dada2b794c361385d04f" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string erbsland::cterm::Terminal::_lineBuffer</definition>
+        <argsstring></argsstring>
+        <name>_lineBuffer</name>
+        <qualifiedname>erbsland::cterm::Terminal::_lineBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="243" column="17" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a74d207d4e300be07455aa8505a6e9579" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &gt;</type>
+        <definition>std::optional&lt;Buffer&gt; erbsland::cterm::Terminal::_backBuffer</definition>
+        <argsstring></argsstring>
+        <name>_backBuffer</name>
+        <qualifiedname>erbsland::cterm::Terminal::_backBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="244" column="19" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a06f268edb5ecf765a9e342dde0c78145" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_terminal_1a6093fdfb9a01d70783e99b24063a1969" kindref="member">ScreenSizeChangedCallback</ref></type>
+        <definition>ScreenSizeChangedCallback erbsland::cterm::Terminal::_screenSizeChangedCallback</definition>
+        <argsstring></argsstring>
+        <name>_screenSizeChangedCallback</name>
+        <qualifiedname>erbsland::cterm::Terminal::_screenSizeChangedCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="245" column="31" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a20e50e2c75d67bc4368a9581cd91742f" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classerbsland_1_1cterm_1_1_input" kindref="compound">Input</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;Input&gt; erbsland::cterm::Terminal::_input</definition>
+        <argsstring></argsstring>
+        <name>_input</name>
+        <qualifiedname>erbsland::cterm::Terminal::_input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="246" column="21" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1ad2714ef40ae6c7c9644c84af6e14aa8a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::_cursorStateSaved</definition>
+        <argsstring></argsstring>
+        <name>_cursorStateSaved</name>
+        <qualifiedname>erbsland::cterm::Terminal::_cursorStateSaved</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="248" column="11" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="248" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_terminal_1a1a037d23eccf13ed990b182dfc2484f4" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::_cursorVisible</definition>
+        <argsstring></argsstring>
+        <name>_cursorVisible</name>
+        <qualifiedname>erbsland::cterm::Terminal::_cursorVisible</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="249" column="11" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="249" bodyend="249"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a6c12b2b9266ca8ae0763f0ea7ed53c7f" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Terminal::Terminal</definition>
+        <argsstring>(Size size={80, 25})</argsstring>
+        <name>Terminal</name>
+        <qualifiedname>erbsland::cterm::Terminal::Terminal</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+          <defval>{80, 25}</defval>
+        </param>
+        <briefdescription>
+<para>Create a new terminal instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fallback terminal size used when automatic detection is unavailable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="54" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ac1b19041694d7e0ebd59829ce692d9f4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Terminal::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::Terminal::size</qualifiedname>
+        <briefdescription>
+<para>Get the currently configured or detected terminal size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="58" column="11" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ab27d72b5a55ae5842a2e915094a632d7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_input" kindref="compound">Input</ref> &amp;</type>
+        <definition>Input &amp; erbsland::cterm::Terminal::input</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>input</name>
+        <qualifiedname>erbsland::cterm::Terminal::input</qualifiedname>
+        <briefdescription>
+<para>Access the input interface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The platform-specific input backend owned by this terminal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="61" column="13" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a98c3bda51bd68e067e40db00eaaa19b3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" kindref="member">RefreshMode</ref></type>
+        <definition>RefreshMode erbsland::cterm::Terminal::refreshMode</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>refreshMode</name>
+        <qualifiedname>erbsland::cterm::Terminal::refreshMode</qualifiedname>
+        <briefdescription>
+<para>Get the refresh mode. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="63" column="18" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1abc89cabe726677b2e451ee054b23244b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::colorEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>colorEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::colorEnabled</qualifiedname>
+        <briefdescription>
+<para>Test if colors are enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="65" column="11" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a0cbfce3a3a7917a463ea48758d7deb59" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::sizeDetectionEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>sizeDetectionEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::sizeDetectionEnabled</qualifiedname>
+        <briefdescription>
+<para>Check whether dynamic terminal size detection is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="67" column="11" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ac722c25ead843a60a21615777dc7f8d2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::lineBufferEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>lineBufferEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::lineBufferEnabled</qualifiedname>
+        <briefdescription>
+<para>Check whether line buffering is enabled for incremental writes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if text output is collected until a newline or <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1a72dacb1271a728ecb8cb385acbc0efe2" kindref="member">flush()</ref></computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="70" column="11" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1abc1e974d4c21909b6539ee7fe5cac905" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Terminal::backBufferEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>backBufferEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::backBufferEnabled</qualifiedname>
+        <briefdescription>
+<para>Check whether the optional back buffer is enabled for smart overwrite updates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1a16cced448885723c5ebc0120ba07bbdc" kindref="member">updateScreen()</ref></computeroutput> keeps the previous rendered frame for diff-based updates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="73" column="11" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a27434165d629851f23558fefbf8264bd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setSize</definition>
+        <argsstring>(Size size) noexcept</argsstring>
+        <name>setSize</name>
+        <qualifiedname>erbsland::cterm::Terminal::setSize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Modify the size of the terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the terminal is not yet initialized, the size will be set when <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" kindref="member">initializeScreen()</ref></computeroutput> is called. This method is only used when the terminal size is manually set. If size detection is enabled, the terminal size will be automatically detected and updated. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new terminal size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ac9087278ec1e349a6cca1b65b880e8cf" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setSizeDetectionEnabled</definition>
+        <argsstring>(const bool enabled) noexcept</argsstring>
+        <name>setSizeDetectionEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::setSizeDetectionEnabled</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Set if dynamic terminal size detection is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> to enable automatic size detection. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="84" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1acbefd7c17222a6515ed4eb1003a6db46" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setLineBufferEnabled</definition>
+        <argsstring>(bool enabled) noexcept</argsstring>
+        <name>setLineBufferEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::setLineBufferEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Enable or disable line buffering for incremental writes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When enabled, output is accumulated until a newline or <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1a72dacb1271a728ecb8cb385acbc0efe2" kindref="member">flush()</ref></computeroutput> is reached. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> to enable buffered writes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="88" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1af3eeaacc7fc291593466e3d5e15c2291" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setBackBufferEnabled</definition>
+        <argsstring>(bool enabled) noexcept</argsstring>
+        <name>setBackBufferEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::setBackBufferEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Enable or disable the optional back buffer used by smart overwrite updates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Enabling the back buffer forces the next <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1a16cced448885723c5ebc0120ba07bbdc" kindref="member">updateScreen()</ref></computeroutput> call to redraw the full frame once. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> to enable the back buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="92" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a850644aa01d08d8a600ffb8de7344389" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setScreenSizeChangedCallback</definition>
+        <argsstring>(ScreenSizeChangedCallback callback) noexcept</argsstring>
+        <name>setScreenSizeChangedCallback</name>
+        <qualifiedname>erbsland::cterm::Terminal::setScreenSizeChangedCallback</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_terminal_1a6093fdfb9a01d70783e99b24063a1969" kindref="member">ScreenSizeChangedCallback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>Set a callback called when a detected terminal size is submitted. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback invoked from <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" kindref="member">initializeScreen()</ref></computeroutput> and <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1a18d1cc547fd39f055b4d6d66566e0f6d" kindref="member">testScreenSize()</ref></computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="95" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="95" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a381ffda672a7e8f422fa0d543f60436c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setColorEnabled</definition>
+        <argsstring>(const bool enabled) noexcept</argsstring>
+        <name>setColorEnabled</name>
+        <qualifiedname>erbsland::cterm::Terminal::setColorEnabled</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Set if colors are enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> to emit ANSI color and cursor control sequences. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="100" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a49f4db63181b66fed8f99fbafa5f2471" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setRefreshMode</definition>
+        <argsstring>(const RefreshMode mode) noexcept</argsstring>
+        <name>setRefreshMode</name>
+        <qualifiedname>erbsland::cterm::Terminal::setRefreshMode</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" kindref="member">RefreshMode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>Set the refresh mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The screen refresh strategy to use. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="103" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::initializeScreen</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>initializeScreen</name>
+        <qualifiedname>erbsland::cterm::Terminal::initializeScreen</qualifiedname>
+        <briefdescription>
+<para>Initialize the console once before the application starts. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Applies platform-specific setup, optionally clears the screen, and submits the initial size. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="108" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a18d1cc547fd39f055b4d6d66566e0f6d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::testScreenSize</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>testScreenSize</name>
+        <qualifiedname>erbsland::cterm::Terminal::testScreenSize</qualifiedname>
+        <briefdescription>
+<para>Detect terminal resize changes and submit them through the callback. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="110" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ad9a7e443f0415eacef58ac1f642131b2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::clearScreen</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clearScreen</name>
+        <qualifiedname>erbsland::cterm::Terminal::clearScreen</qualifiedname>
+        <briefdescription>
+<para>Clear the screen before a new one is displayed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The emitted control sequence depends on the configured refresh mode. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="113" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a9a7e105284fe7fc7c9f0331358541ce4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::restoreScreen</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>restoreScreen</name>
+        <qualifiedname>erbsland::cterm::Terminal::restoreScreen</qualifiedname>
+        <briefdescription>
+<para>Restore terminal settings when the application is quit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="115" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1adc3c75a58f743f0fdd3e6c7f878fac95" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::Terminal::color</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>color</name>
+        <qualifiedname>erbsland::cterm::Terminal::color</qualifiedname>
+        <briefdescription>
+<para>Get the current color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The currently tracked terminal color state. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="120" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a4f798128e8086bd4fa7ef6aa4749b965" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setColor</definition>
+        <argsstring>(Color color) noexcept</argsstring>
+        <name>setColor</name>
+        <qualifiedname>erbsland::cterm::Terminal::setColor</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set foreground and background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new combined terminal color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="124" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a9d7ddc9b25e2741338814b8b80dedfdf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setColor</definition>
+        <argsstring>(Foreground foregroundColor, Background backgroundColor) noexcept</argsstring>
+        <name>setColor</name>
+        <qualifiedname>erbsland::cterm::Terminal::setColor</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>foregroundColor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>backgroundColor</declname>
+        </param>
+        <briefdescription>
+<para>Set foreground and background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>foregroundColor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new foreground color. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>backgroundColor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="129" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a84d071aee44934033634e4c980566765" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setForeground</definition>
+        <argsstring>(Foreground color) noexcept</argsstring>
+        <name>setForeground</name>
+        <qualifiedname>erbsland::cterm::Terminal::setForeground</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set the foreground color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new foreground color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="133" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a7d55ee1bd4f927487976404f570f6e88" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setBackground</definition>
+        <argsstring>(Background color) noexcept</argsstring>
+        <name>setBackground</name>
+        <qualifiedname>erbsland::cterm::Terminal::setBackground</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set the background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="137" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a1a60c649e67c6b273f931bdbe956fad4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::setDefaultColor</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>setDefaultColor</name>
+        <qualifiedname>erbsland::cterm::Terminal::setDefaultColor</qualifiedname>
+        <briefdescription>
+<para>Set the terminal default foreground and background colors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="139" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a2d604dfda09bd287cf100b7dde737889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::moveLeft</definition>
+        <argsstring>(int count)</argsstring>
+        <name>moveLeft</name>
+        <qualifiedname>erbsland::cterm::Terminal::moveLeft</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Move the cursor to the left. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of terminal cells to move. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="142" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a72dacb1271a728ecb8cb385acbc0efe2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::flush</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>flush</name>
+        <qualifiedname>erbsland::cterm::Terminal::flush</qualifiedname>
+        <briefdescription>
+<para>Flush the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="144" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a16cced448885723c5ebc0120ba07bbdc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::updateScreen</definition>
+        <argsstring>(const Buffer &amp;buffer, const UpdateSettings &amp;settings={}) noexcept</argsstring>
+        <name>updateScreen</name>
+        <qualifiedname>erbsland::cterm::Terminal::updateScreen</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref> &amp;</type>
+          <declname>settings</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Render a buffer onto the terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The buffer is clipped to the visible area of the terminal and optionally annotated with crop marks. If the terminal is smaller than the configured minimum size, only the minimum-size marker is rendered. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to render. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>settings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Additional rendering settings for crop marks and minimum terminal size handling. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="150" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1af6e92f31b0c8229dc094d7fca38ccd0f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::write</definition>
+        <argsstring>(const Char &amp;character) noexcept</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::Terminal::write</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Write a character to the console. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="155" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1acb5414216ba9fc30b9c81bf6cdbd3797" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::write</definition>
+        <argsstring>(const String &amp;str) noexcept</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::Terminal::write</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Write a string to the console. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="158" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a4aa4db966bb332f867a7516ea6379d17" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::write</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::Terminal::write</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Write text to the console. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Please use <computeroutput>print</computeroutput> and <computeroutput>printLine</computeroutput> for the high-level API. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to display. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="162" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a96c77becfcb4744bb74601effe3c700d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::write</definition>
+        <argsstring>(const Buffer &amp;buffer) noexcept</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::Terminal::write</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Write a buffer to the console. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will not perform any additional formatting, clipping, or processing. Each line of the buffer will be written to the console. <simplesect kind="note"><para>For interactive apps, use <computeroutput>updateScreen</computeroutput>. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="168" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a8969616674e67efc8967336e1cd82f46" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::lineBreak</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>lineBreak</name>
+        <qualifiedname>erbsland::cterm::Terminal::lineBreak</qualifiedname>
+        <briefdescription>
+<para>Add a line-break. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="170" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1acbd0430b17a535ce7f2fb865115e70bb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>PrintableArg...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::print</definition>
+        <argsstring>(Args... args) noexcept</argsstring>
+        <name>print</name>
+        <qualifiedname>erbsland::cterm::Terminal::print</qualifiedname>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Print elements on the screen. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The arguments to display. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="174" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="174" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1aa3ffaaa5820a06ccfce7683c7c67bceb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>PrintableArg...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLine</definition>
+        <argsstring>(Args... args) noexcept</argsstring>
+        <name>printLine</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLine</qualifiedname>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Print elements on the screen adding a line break. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The arguments to display. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="180" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="180" bodyend="183"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a7ab95d762e640262b84502abbc6cceaa" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::Terminal::appendClearSequence</definition>
+        <argsstring>(std::string &amp;output) noexcept</argsstring>
+        <name>appendClearSequence</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendClearSequence</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="186" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a6c96b58d63c506f14390cef8b3053079" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::Terminal::appendResizeClearSequence</definition>
+        <argsstring>(std::string &amp;output) noexcept</argsstring>
+        <name>appendResizeClearSequence</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendResizeClearSequence</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="187" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a49a7e0e92c8a041d68fd231ef067e9e5" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::Terminal::appendCursorHomeSequence</definition>
+        <argsstring>(std::string &amp;output) noexcept</argsstring>
+        <name>appendCursorHomeSequence</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendCursorHomeSequence</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="188" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a33310b4736e185bea90761fe0c03b961" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::Terminal::appendCursorMoveSequence</definition>
+        <argsstring>(std::string &amp;output, Position pos) noexcept</argsstring>
+        <name>appendCursorMoveSequence</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendCursorMoveSequence</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="189" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a1a4ad5f676f2cd9d0030dc497ec1c722" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool erbsland::cterm::Terminal::isMinimumSizeOnly</definition>
+        <argsstring>(Size terminalSize, const UpdateSettings &amp;settings) noexcept</argsstring>
+        <name>isMinimumSizeOnly</name>
+        <qualifiedname>erbsland::cterm::Terminal::isMinimumSizeOnly</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>terminalSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="208" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a0c08a96692af9d4d2ff7243a24ec6026" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto erbsland::cterm::Terminal::renderedFrameSize</definition>
+        <argsstring>(const Buffer &amp;buffer, Size terminalSize, const UpdateSettings &amp;settings) noexcept -&gt; Size</argsstring>
+        <name>renderedFrameSize</name>
+        <qualifiedname>erbsland::cterm::Terminal::renderedFrameSize</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>terminalSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="209" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a6113fa4bfcc7fa91620a65744d1b6890" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        <definition>static const Char &amp; erbsland::cterm::Terminal::getCropped</definition>
+        <argsstring>(const Buffer &amp;buffer, Size terminalSize, const UpdateSettings &amp;settings, Position pos)</argsstring>
+        <name>getCropped</name>
+        <qualifiedname>erbsland::cterm::Terminal::getCropped</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>terminalSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="213" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a023ab5e63c88a8434322d737a6aaab86" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::appendDefaultColorSequence</definition>
+        <argsstring>(std::string &amp;output, Color &amp;currentColor) const noexcept</argsstring>
+        <name>appendDefaultColorSequence</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendDefaultColorSequence</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &amp;</type>
+          <declname>currentColor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="190" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a922cde22e646d15a885639bcae5addd5" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::appendCharacterOutput</definition>
+        <argsstring>(std::string &amp;output, const Char &amp;character, Color &amp;currentColor) const noexcept</argsstring>
+        <name>appendCharacterOutput</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendCharacterOutput</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &amp;</type>
+          <declname>currentColor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="191" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a847b38ef3892bcf82b4ff21c6829f8d7" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::appendFullFrameOutput</definition>
+        <argsstring>(std::string &amp;output, const Buffer &amp;buffer, Size terminalSize, const UpdateSettings &amp;settings) const noexcept</argsstring>
+        <name>appendFullFrameOutput</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendFullFrameOutput</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>terminalSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="192" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1aac0b7aadf913c6077dbb76f2f16e7da4" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::appendDiffFrameOutput</definition>
+        <argsstring>(std::string &amp;output, const Buffer &amp;previousFrame, const Buffer &amp;buffer, Size terminalSize, const UpdateSettings &amp;settings) const noexcept</argsstring>
+        <name>appendDiffFrameOutput</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendDiffFrameOutput</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>previousFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>terminalSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="197" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1af5f9ba1c17054a0e4c25cdaecb31f0c9" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::appendRefreshSequence</definition>
+        <argsstring>(std::string &amp;output, bool forceFullClear) const noexcept</argsstring>
+        <name>appendRefreshSequence</name>
+        <qualifiedname>erbsland::cterm::Terminal::appendRefreshSequence</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>forceFullClear</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="203" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1adeab3480a60bcbe529935098d4e069b8" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::emitBufferedOutput</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>emitBufferedOutput</name>
+        <qualifiedname>erbsland::cterm::Terminal::emitBufferedOutput</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="204" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1afb9efbfcbf84c41f783e4c75de1ef295" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::emitDirectOutput</definition>
+        <argsstring>(std::string_view text, bool flushConsole=false) noexcept</argsstring>
+        <name>emitDirectOutput</name>
+        <qualifiedname>erbsland::cterm::Terminal::emitDirectOutput</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>flushConsole</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="205" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a448828ec465d9f74d1d25301ce896f1c" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::flushLineBuffer</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>flushLineBuffer</name>
+        <qualifiedname>erbsland::cterm::Terminal::flushLineBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="206" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a93702bf3152f26fcfa7112b3f19fa5ee" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::invalidateBackBuffer</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>invalidateBackBuffer</name>
+        <qualifiedname>erbsland::cterm::Terminal::invalidateBackBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="207" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ac8d373f88ef999c7a2eee5de14b8b8ba" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::updateBackBuffer</definition>
+        <argsstring>(const Buffer &amp;buffer, Size terminalSize, const UpdateSettings &amp;settings) noexcept</argsstring>
+        <name>updateBackBuffer</name>
+        <qualifiedname>erbsland::cterm::Terminal::updateBackBuffer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>terminalSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="214" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ada7ee562ad412867234eee6edd54bafb" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::Terminal::changedCharacterCount</definition>
+        <argsstring>(const Buffer &amp;previousFrame, const Buffer &amp;buffer, Size terminalSize, const UpdateSettings &amp;settings) const noexcept -&gt; int</argsstring>
+        <name>changedCharacterCount</name>
+        <qualifiedname>erbsland::cterm::Terminal::changedCharacterCount</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>previousFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>terminalSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="215" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a6d9e32bb7f8f0cad637223b253289c42" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const Color color) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="220" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="220" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a46e9043d5ea81c165d63b3110c2ec703" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const Foreground color) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="221" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="221" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a7c144fde0d7193494b965578147dbe80" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const Foreground::Hue color) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const Foreground::Hue</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="222" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="222" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a1b99a59525fc5f9639a8b78c934f924e" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const Background color) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="223" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="223" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1ac8e1abc01c919f3d5431c45c5ef7cd0c" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const Background::Hue color) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const Background::Hue</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="224" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="224" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a7aba0c8929fc6e6c709302cf683840ee" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const Char &amp;charStr) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>charStr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="225" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="225" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a25f1e67316064a6b56fe92dd0194d1a4" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const String &amp;str) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="226" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="226" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1aae29e1ccbe7c5953738c554ca4ce910b" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const std::string &amp;text) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="227" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="227" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a01931b35e0d7abfc0211f90f45a0ae6f" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const std::string_view text) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="228" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="228" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a0c1738e8fa59e65267a492ec4019d16b" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::printLinePart</definition>
+        <argsstring>(const char text[]) noexcept</argsstring>
+        <name>printLinePart</name>
+        <qualifiedname>erbsland::cterm::Terminal::printLinePart</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>text</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="229" column="10" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="229" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a6cbd16ead7c8ddbb78b5fd83aeecbec5" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::initializePlatform</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>initializePlatform</name>
+        <qualifiedname>erbsland::cterm::Terminal::initializePlatform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="230" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a5f66e122717c15e33bdc8812f8778a16" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::restorePlatform</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>restorePlatform</name>
+        <qualifiedname>erbsland::cterm::Terminal::restorePlatform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="231" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1af1dc2d4e88df82988dc6b548feab379a" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &gt;</type>
+        <definition>std::optional&lt; Size &gt; erbsland::cterm::Terminal::detectScreenSize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>detectScreenSize</name>
+        <qualifiedname>erbsland::cterm::Terminal::detectScreenSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="232" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_terminal_1a215471ab8dd20cb4cfdc338c16c876b4" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Terminal::submitScreenSize</definition>
+        <argsstring>(Size size, bool fromTestScreenSize) noexcept</argsstring>
+        <name>submitScreenSize</name>
+        <qualifiedname>erbsland::cterm::Terminal::submitScreenSize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>fromTestScreenSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Terminal.hpp" line="233" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>High-level terminal interface for screen control, color output, and key input. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/Terminal.hpp" line="35" column="1" bodyfile="erbsland/cterm/Terminal.hpp" bodystart="35" bodyend="250"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a74d207d4e300be07455aa8505a6e9579" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_backBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a8d5f619bd17fa5567c16e7c0eb2157b4" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_clearScreenAfterResize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a4024173e20eec72e7ec452e89bb16e0a" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a1fe5ac3ca044ec8988f94b8c679aa9be" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_colorEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ad2714ef40ae6c7c9644c84af6e14aa8a" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_cursorStateSaved</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a1a037d23eccf13ed990b182dfc2484f4" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_cursorVisible</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a20e50e2c75d67bc4368a9581cd91742f" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_input</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1aebde9b8e1071dada2b794c361385d04f" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_lineBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a816726eba7c5059dc1eae5f6b89ba20a" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_lineBufferEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a5c2fd3d08eb2032be6c35ddf34f28c31" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_refreshMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a06f268edb5ecf765a9e342dde0c78145" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_screenSizeChangedCallback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a735753a96777f6414d478f19c48cce8e" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ac38f4bbeaeb3c58bfdc79fd92c67a2af" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>_sizeDetectionEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a922cde22e646d15a885639bcae5addd5" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendCharacterOutput</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a7ab95d762e640262b84502abbc6cceaa" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendClearSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a49a7e0e92c8a041d68fd231ef067e9e5" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendCursorHomeSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a33310b4736e185bea90761fe0c03b961" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendCursorMoveSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a023ab5e63c88a8434322d737a6aaab86" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendDefaultColorSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1aac0b7aadf913c6077dbb76f2f16e7da4" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendDiffFrameOutput</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a847b38ef3892bcf82b4ff21c6829f8d7" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendFullFrameOutput</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1af5f9ba1c17054a0e4c25cdaecb31f0c9" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendRefreshSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a6c96b58d63c506f14390cef8b3053079" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>appendResizeClearSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1abc1e974d4c21909b6539ee7fe5cac905" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>backBufferEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ada7ee562ad412867234eee6edd54bafb" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>changedCharacterCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ad9a7e443f0415eacef58ac1f642131b2" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>clearScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1adc3c75a58f743f0fdd3e6c7f878fac95" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1abc89cabe726677b2e451ee054b23244b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>colorEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1af1dc2d4e88df82988dc6b548feab379a" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>detectScreenSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1adeab3480a60bcbe529935098d4e069b8" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>emitBufferedOutput</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1afb9efbfcbf84c41f783e4c75de1ef295" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>emitDirectOutput</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a72dacb1271a728ecb8cb385acbc0efe2" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>flush</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a448828ec465d9f74d1d25301ce896f1c" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>flushLineBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a6113fa4bfcc7fa91620a65744d1b6890" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>getCropped</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a6cbd16ead7c8ddbb78b5fd83aeecbec5" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>initializePlatform</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>initializeScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ab27d72b5a55ae5842a2e915094a632d7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>input</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a93702bf3152f26fcfa7112b3f19fa5ee" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>invalidateBackBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a1a4ad5f676f2cd9d0030dc497ec1c722" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>isMinimumSizeOnly</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a8969616674e67efc8967336e1cd82f46" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>lineBreak</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ac722c25ead843a60a21615777dc7f8d2" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>lineBufferEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a2d604dfda09bd287cf100b7dde737889" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>moveLeft</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1acbd0430b17a535ce7f2fb865115e70bb" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>print</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1aa3ffaaa5820a06ccfce7683c7c67bceb" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a6d9e32bb7f8f0cad637223b253289c42" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a46e9043d5ea81c165d63b3110c2ec703" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a7c144fde0d7193494b965578147dbe80" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a1b99a59525fc5f9639a8b78c934f924e" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ac8e1abc01c919f3d5431c45c5ef7cd0c" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a7aba0c8929fc6e6c709302cf683840ee" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a25f1e67316064a6b56fe92dd0194d1a4" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1aae29e1ccbe7c5953738c554ca4ce910b" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a01931b35e0d7abfc0211f90f45a0ae6f" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a0c1738e8fa59e65267a492ec4019d16b" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a98c3bda51bd68e067e40db00eaaa19b3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>refreshMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>RefreshMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a0c08a96692af9d4d2ff7243a24ec6026" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>renderedFrameSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a5f66e122717c15e33bdc8812f8778a16" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>restorePlatform</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a9a7e105284fe7fc7c9f0331358541ce4" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>restoreScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a6093fdfb9a01d70783e99b24063a1969" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>ScreenSizeChangedCallback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1af3eeaacc7fc291593466e3d5e15c2291" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setBackBufferEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a7d55ee1bd4f927487976404f570f6e88" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setBackground</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a4f798128e8086bd4fa7ef6aa4749b965" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a9d7ddc9b25e2741338814b8b80dedfdf" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a381ffda672a7e8f422fa0d543f60436c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setColorEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a1a60c649e67c6b273f931bdbe956fad4" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setDefaultColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a84d071aee44934033634e4c980566765" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setForeground</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1acbefd7c17222a6515ed4eb1003a6db46" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setLineBufferEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a49f4db63181b66fed8f99fbafa5f2471" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setRefreshMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a850644aa01d08d8a600ffb8de7344389" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setScreenSizeChangedCallback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a27434165d629851f23558fefbf8264bd" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ac9087278ec1e349a6cca1b65b880e8cf" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>setSizeDetectionEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ac1b19041694d7e0ebd59829ce692d9f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a0cbfce3a3a7917a463ea48758d7deb59" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>sizeDetectionEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a215471ab8dd20cb4cfdc338c16c876b4" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>submitScreenSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a6c12b2b9266ca8ae0763f0ea7ed53c7f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>Terminal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a18d1cc547fd39f055b4d6d66566e0f6d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>testScreenSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1ac8d373f88ef999c7a2eee5de14b8b8ba" prot="private" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>updateBackBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a16cced448885723c5ebc0120ba07bbdc" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>updateScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1af6e92f31b0c8229dc094d7fca38ccd0f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1acb5414216ba9fc30b9c81bf6cdbd3797" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a4aa4db966bb332f867a7516ea6379d17" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_terminal_1a96c77becfcb4744bb74601effe3c700d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Terminal</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Font &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Geometry" href="geometry.html" />
+    <link rel="prev" title="Color" href="color.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Font</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rendering-a-bitmap-font-title">Rendering a Bitmap-Font Title</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm4FontE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Font</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm7FontPtrE"><code class="docutils literal notranslate"><span class="pre">FontPtr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm9FontGlyphE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::FontGlyph</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Text</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Font</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/font.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="font">
+<h1>Font<a class="headerlink" href="#font" title="Link to this heading"></a></h1>
+<p>The font classes allow you to render large bitmap-based text directly
+in the terminal. Fonts are primarily used for titles, banners, and
+other decorative elements in terminal interfaces.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Font</span></code> defines how characters are rendered as bitmap glyphs,
+which are then drawn onto the terminal buffer.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="rendering-a-bitmap-font-title">
+<h3>Rendering a Bitmap-Font Title<a class="headerlink" href="#rendering-a-bitmap-font-title" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Font</span></code> integrates directly with <code class="docutils literal notranslate"><span class="pre">Text</span></code>. Assign a font to a
+<code class="docutils literal notranslate"><span class="pre">Text</span></code> object and render it like any other text block.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Text</span><span class="p">{</span><span class="n">String</span><span class="p">{</span><span class="s">&quot;COLOR TERM&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">Center</span><span class="p">};</span>
+<span class="n">title</span><span class="p">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">Font</span><span class="o">::</span><span class="n">defaultAscii</span><span class="p">());</span>
+<span class="n">title</span><span class="p">.</span><span class="n">setColorSequence</span><span class="p">(</span><span class="n">ColorSequence</span><span class="p">{</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightBlue</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightCyan</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightMagenta</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="p">});</span>
+<span class="n">title</span><span class="p">.</span><span class="n">setAnimation</span><span class="p">(</span><span class="n">TextAnimation</span><span class="o">::</span><span class="n">ColorDiagonal</span><span class="p">);</span>
+
+<span class="n">buffer</span><span class="p">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">animationCycle</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The built-in <code class="docutils literal notranslate"><span class="pre">defaultAscii()</span></code> font renders large ASCII characters
+using a bitmap representation. Because fonts integrate with <code class="docutils literal notranslate"><span class="pre">Text</span></code>,
+all existing features—such as alignment, color sequences, and text
+animation—work automatically.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/text-gallery1.jpg"><img alt="../../_images/text-gallery1.jpg" src="../../_images/text-gallery1.jpg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The <code class="docutils literal notranslate"><span class="pre">text-gallery</span></code> demo uses the built-in ASCII font for its
+animated headline.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4FontE">
+<span id="_CPPv3N8erbsland5cterm4FontE"></span><span id="_CPPv2N8erbsland5cterm4FontE"></span><span id="erbsland::cterm::Font"></span><span class="target" id="classerbsland_1_1cterm_1_1_font"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Font</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4FontE" title="Link to this definition"></a><br /></dt>
+<dd><p>A bitmap font used to render stylized terminal text. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Font8GlyphMapE">
+<span id="_CPPv3N8erbsland5cterm4Font8GlyphMapE"></span><span id="_CPPv2N8erbsland5cterm4Font8GlyphMapE"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1a652cf40f5cd604e7ed4a2a13fad65d79"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GlyphMap</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9FontGlyphE" title="erbsland::cterm::FontGlyph"><span class="n"><span class="pre">FontGlyph</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Font8GlyphMapE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mapping from UTF-8 character strings to glyph bitmaps. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Font4FontEv">
+<span id="_CPPv3N8erbsland5cterm4Font4FontEv"></span><span id="_CPPv2N8erbsland5cterm4Font4FontEv"></span><span id="erbsland::cterm::Font::Font"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1a8f711a3af2928c0df61f85292d5e63a9"></span><span class="sig-name descname"><span class="n"><span class="pre">Font</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Font4FontEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty font with height <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Font4FontEi">
+<span id="_CPPv3N8erbsland5cterm4Font4FontEi"></span><span id="_CPPv2N8erbsland5cterm4Font4FontEi"></span><span id="erbsland::cterm::Font::Font__i"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1a45998d209d31c64620ddff3b4f73017c"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Font</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Font4FontEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty font with the given glyph height. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>height</strong> – The glyph height in bitmap rows. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Font4FontEi8GlyphMap">
+<span id="_CPPv3N8erbsland5cterm4Font4FontEi8GlyphMap"></span><span id="_CPPv2N8erbsland5cterm4Font4FontEi8GlyphMap"></span><span id="erbsland::cterm::Font::Font__i.GlyphMap"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1a0c3f98df38d694b388fa1c2296989cb2"></span><span class="sig-name descname"><span class="n"><span class="pre">Font</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm4Font8GlyphMapE" title="erbsland::cterm::Font::GlyphMap"><span class="n"><span class="pre">GlyphMap</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">glyphs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Font4FontEi8GlyphMap" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a font with the given glyph height and glyph map. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>height</strong> – The glyph height in bitmap rows. </p></li>
+<li><p><strong>glyphs</strong> – The initial glyph map. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Font8addGlyphENSt6stringE9FontGlyph">
+<span id="_CPPv3N8erbsland5cterm4Font8addGlyphENSt6stringE9FontGlyph"></span><span id="_CPPv2N8erbsland5cterm4Font8addGlyphENSt6stringE9FontGlyph"></span><span id="erbsland::cterm::Font::addGlyph__ss.FontGlyph"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1a1749118d4a3714b6955e0d085be02894"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addGlyph</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm9FontGlyphE" title="erbsland::cterm::FontGlyph"><span class="n"><span class="pre">FontGlyph</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">glyph</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Font8addGlyphENSt6stringE9FontGlyph" title="Link to this definition"></a><br /></dt>
+<dd><p>Add or replace one glyph in this font. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The UTF-8 encoded character represented by the glyph. </p></li>
+<li><p><strong>glyph</strong> – The bitmap glyph. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Font9setHeightEi">
+<span id="_CPPv3N8erbsland5cterm4Font9setHeightEi"></span><span id="_CPPv2N8erbsland5cterm4Font9setHeightEi"></span><span id="erbsland::cterm::Font::setHeight__i"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1ab41a0660ebc5636f2d01f20db8548bfb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setHeight</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Font9setHeightEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the configured font height in bitmap rows. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>height</strong> – The new glyph height. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Font6heightEv">
+<span id="_CPPv3NK8erbsland5cterm4Font6heightEv"></span><span id="_CPPv2NK8erbsland5cterm4Font6heightEv"></span><span id="erbsland::cterm::Font::heightC"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1ad1f384dadf32b3996eed95cfca4974f3"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Font6heightEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the configured font height in bitmap rows. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Font6glyphsEv">
+<span id="_CPPv3NK8erbsland5cterm4Font6glyphsEv"></span><span id="_CPPv2NK8erbsland5cterm4Font6glyphsEv"></span><span id="erbsland::cterm::Font::glyphsC"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1a1cf15861e75bde31f33ddb916ea43e58"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4Font8GlyphMapE" title="erbsland::cterm::Font::GlyphMap"><span class="n"><span class="pre">GlyphMap</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">glyphs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Font6glyphsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the configured glyph map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Font5glyphENSt11string_viewE">
+<span id="_CPPv3NK8erbsland5cterm4Font5glyphENSt11string_viewE"></span><span id="_CPPv2NK8erbsland5cterm4Font5glyphENSt11string_viewE"></span><span id="erbsland::cterm::Font::glyph__std::string_viewC"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1aa985ed50da55df939144d6ede225effc"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9FontGlyphE" title="erbsland::cterm::FontGlyph"><span class="n"><span class="pre">FontGlyph</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">glyph</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Font5glyphENSt11string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>Find one glyph by its UTF-8 character string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The UTF-8 encoded character to look up. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A pointer to the glyph, or <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> if no glyph exists for <code class="docutils literal notranslate"><span class="pre">name</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Font12defaultAsciiEv">
+<span id="_CPPv3N8erbsland5cterm4Font12defaultAsciiEv"></span><span id="_CPPv2N8erbsland5cterm4Font12defaultAsciiEv"></span><span id="erbsland::cterm::Font::defaultAscii"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_1a52690e00c675461c12258e1e84d1ee86"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm7FontPtrE" title="erbsland::cterm::FontPtr"><span class="n"><span class="pre">FontPtr</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">defaultAscii</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Font12defaultAsciiEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a new font instance with the built-in ASCII-centric default glyph set. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new shared font instance containing the default Latin letters, punctuation, and spacing glyphs. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7FontPtrE">
+<span id="_CPPv3N8erbsland5cterm7FontPtrE"></span><span id="_CPPv2N8erbsland5cterm7FontPtrE"></span><span class="target" id="_font_8hpp_1a8896cb5b2bd3917420a41b46c76fad6b"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">FontPtr</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4FontE" title="erbsland::cterm::Font"><span class="n"><span class="pre">Font</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7FontPtrE" title="Link to this definition"></a><br /></dt>
+<dd><p>Shared pointer to a terminal font. </p>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9FontGlyphE">
+<span id="_CPPv3N8erbsland5cterm9FontGlyphE"></span><span id="_CPPv2N8erbsland5cterm9FontGlyphE"></span><span id="erbsland::cterm::FontGlyph"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_glyph"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FontGlyph</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="bitmap.html#_CPPv4N8erbsland5cterm6BitmapE" title="erbsland::cterm::Bitmap"><span class="n"><span class="pre">Bitmap</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm9FontGlyphE" title="Link to this definition"></a><br /></dt>
+<dd><p>A bitmap glyph that can be used by a terminal text font. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9FontGlyph9FontGlyphEv">
+<span id="_CPPv3N8erbsland5cterm9FontGlyph9FontGlyphEv"></span><span id="_CPPv2N8erbsland5cterm9FontGlyph9FontGlyphEv"></span><span id="erbsland::cterm::FontGlyph::FontGlyph"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_glyph_1a7cbf7d8db034b15ba1b03878e7aca409"></span><span class="sig-name descname"><span class="n"><span class="pre">FontGlyph</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9FontGlyph9FontGlyphEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty glyph. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9FontGlyph9FontGlyphEK4Size">
+<span id="_CPPv3N8erbsland5cterm9FontGlyph9FontGlyphEK4Size"></span><span id="_CPPv2N8erbsland5cterm9FontGlyph9FontGlyphEK4Size"></span><span id="erbsland::cterm::FontGlyph::FontGlyph__SizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_glyph_1a740119d4e76e2caca57186d1e3205a77"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FontGlyph</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9FontGlyph9FontGlyphEK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty glyph with the given size. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> – The glyph dimensions. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN8erbsland5cterm9FontGlyph9FontGlyphERKNSt6vectorI1TEE">
+<span id="_CPPv3I0EN8erbsland5cterm9FontGlyph9FontGlyphERKNSt6vectorI1TEE"></span><span id="_CPPv2I0EN8erbsland5cterm9FontGlyph9FontGlyphERKNSt6vectorI1TEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_font_glyph_1a7f471112dc5e55d8a200899a62295ff0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FontGlyph</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN8erbsland5cterm9FontGlyph9FontGlyphERKNSt6vectorI1TEE" title="erbsland::cterm::FontGlyph::FontGlyph::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN8erbsland5cterm9FontGlyph9FontGlyphERKNSt6vectorI1TEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a glyph from numeric row masks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – One 64-bit mask per bitmap row. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9FontGlyph14cMaxGlyphWidthE">
+<span id="_CPPv3N8erbsland5cterm9FontGlyph14cMaxGlyphWidthE"></span><span id="_CPPv2N8erbsland5cterm9FontGlyph14cMaxGlyphWidthE"></span><span id="erbsland::cterm::FontGlyph::cMaxGlyphWidth__auto"></span><span class="target" id="classerbsland_1_1cterm_1_1_font_glyph_1a082626697b2fffdd8497e00841ca906e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cMaxGlyphWidth</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">64</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9FontGlyph14cMaxGlyphWidthE" title="Link to this definition"></a><br /></dt>
+<dd><p>Maximum supported glyph width when importing numeric row masks. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="color.html" class="btn btn-neutral float-left" title="Color" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="geometry.html" class="btn btn-neutral float-right" title="Geometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

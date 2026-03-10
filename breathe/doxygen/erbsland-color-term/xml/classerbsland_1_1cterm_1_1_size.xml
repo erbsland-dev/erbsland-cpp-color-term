@@ -1,0 +1,745 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_size" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::Size</compoundname>
+    <includes refid="_size_8hpp" local="no">erbsland/cterm/Size.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_size_1a483fa8378fe1655e78a1be64e0533da4" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::Size::_width</definition>
+        <argsstring></argsstring>
+        <name>_width</name>
+        <qualifiedname>erbsland::cterm::Size::_width</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="188" column="9" bodyfile="erbsland/cterm/Size.hpp" bodystart="188" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_size_1a08c3b4ff790b5956a9600d1edd028b97" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::Size::_height</definition>
+        <argsstring></argsstring>
+        <name>_height</name>
+        <qualifiedname>erbsland::cterm::Size::_height</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="189" column="9" bodyfile="erbsland/cterm/Size.hpp" bodystart="189" bodyend="189"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a31972f4a2ddcf98062b91def18c922c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Size::Size</definition>
+        <argsstring>()=default</argsstring>
+        <name>Size</name>
+        <qualifiedname>erbsland::cterm::Size::Size</qualifiedname>
+        <briefdescription>
+<para>Construct a zero size (0 × 0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="23" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a113fdb382d257295eeb458046e9ef25e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Size::Size</definition>
+        <argsstring>(int width, int height) noexcept</argsstring>
+        <name>Size</name>
+        <qualifiedname>erbsland::cterm::Size::Size</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Construct a size from explicit width and height. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Negative inputs are clamped to 0. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired width (clamped to &gt;= 0). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired height (clamped to &gt;= 0). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="29" column="15" bodyfile="erbsland/cterm/Size.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ab5b2a30c76e43aed023f308c2f75e992" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Size::Size</definition>
+        <argsstring>(Position pos1, Position pos2) noexcept</argsstring>
+        <name>Size</name>
+        <qualifiedname>erbsland::cterm::Size::Size</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos1</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos2</declname>
+        </param>
+        <briefdescription>
+<para>Construct a size from the axis-aligned distance between two positions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second position. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The order of the positions does not matter; absolute differences are used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="35" column="15" bodyfile="erbsland/cterm/Size.hpp" bodystart="35" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a3b470121ca64fd2edeaf1631837c0fb3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Size::operator==</definition>
+        <argsstring>(const Size &amp;other) const noexcept=default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::Size::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Equality comparison on width and height. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="40" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a625ff846717be99a46cc8363c53b181b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Size::operator!=</definition>
+        <argsstring>(const Size &amp;other) const noexcept=default</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>erbsland::cterm::Size::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Inequality comparison on width and height. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="43" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a2358dcbd6aec350e6e13314c39f76692" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::operator+</definition>
+        <argsstring>(const Size &amp;other) const noexcept</argsstring>
+        <name>operator+</name>
+        <qualifiedname>erbsland::cterm::Size::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Add two sizes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The component-wise sum. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="48" column="10" bodyfile="erbsland/cterm/Size.hpp" bodystart="48" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ab7786b5f30bd6c6ac8c78b590820a77c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::operator-</definition>
+        <argsstring>(const Size &amp;other) const noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>erbsland::cterm::Size::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Subtract two sizes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to subtract. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The component-wise difference, clamped to non-negative values by the constructor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="55" column="10" bodyfile="erbsland/cterm/Size.hpp" bodystart="55" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a5571a3d4bf53aa1fe100dc0736d886a1" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::Size::width</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>width</name>
+        <qualifiedname>erbsland::cterm::Size::width</qualifiedname>
+        <briefdescription>
+<para>Get the width (&gt;= 0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="61" column="20" bodyfile="erbsland/cterm/Size.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a58259ee302c998821adfe2db38c2ec84" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Size::setWidth</definition>
+        <argsstring>(int width) noexcept</argsstring>
+        <name>setWidth</name>
+        <qualifiedname>erbsland::cterm::Size::setWidth</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <briefdescription>
+<para>Set the width. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Negative values are clamped to 0. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New width (clamped to &gt;= 0). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="66" column="10" bodyfile="erbsland/cterm/Size.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a7146b0875ebf00a5a2def8c9e340d289" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::Size::height</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>height</name>
+        <qualifiedname>erbsland::cterm::Size::height</qualifiedname>
+        <briefdescription>
+<para>Get the height (&gt;= 0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="70" column="20" bodyfile="erbsland/cterm/Size.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a4f8defd8ac11d2878cabdeec21fadbaa" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Size::setHeight</definition>
+        <argsstring>(int height) noexcept</argsstring>
+        <name>setHeight</name>
+        <qualifiedname>erbsland::cterm::Size::setHeight</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Set the height. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Negative values are clamped to 0. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New height (clamped to &gt;= 0). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="75" column="10" bodyfile="erbsland/cterm/Size.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a16ad189f1da80b2009bdded06495cec0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Size::fitsInto</definition>
+        <argsstring>(const Size other) const noexcept</argsstring>
+        <name>fitsInto</name>
+        <qualifiedname>erbsland::cterm::Size::fitsInto</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Check if this size fits completely into another size (component-wise &lt;=). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The candidate container size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if width &lt;= other.width and height &lt;= other.height. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="81" column="11" bodyfile="erbsland/cterm/Size.hpp" bodystart="81" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a759e8e0fead0181ebe9caf8bd1b2236b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::Size::area</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>area</name>
+        <qualifiedname>erbsland::cterm::Size::area</qualifiedname>
+        <briefdescription>
+<para>Compute the area (width * height). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The area. Note: returns 0 if either dimension is 0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="87" column="10" bodyfile="erbsland/cterm/Size.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ac6299672b591848d4542eff401213db7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::Size::anchor</definition>
+        <argsstring>(const Anchor anchor) const noexcept</argsstring>
+        <name>anchor</name>
+        <qualifiedname>erbsland::cterm::Size::anchor</qualifiedname>
+        <param>
+          <type>const Anchor</type>
+          <declname>anchor</declname>
+        </param>
+        <briefdescription>
+<para>Compute a position inside the rectangle defined by this size for a given anchor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Bottom-right resolves to (width-1, height-1), top-left to (0,0), etc. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>anchor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The anchor describing the target corner/edge/center. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The position inside the [0,width-1]×[0,height-1] grid (or (0,0) for empty dimensions). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="93" column="15" bodyfile="erbsland/cterm/Size.hpp" bodystart="93" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ac8544fa0077f3d4ff749c07abb451884" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Size::isInRange</definition>
+        <argsstring>(const Size minimum, const Size maximum) const noexcept</argsstring>
+        <name>isInRange</name>
+        <qualifiedname>erbsland::cterm::Size::isInRange</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>minimum</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>maximum</declname>
+        </param>
+        <briefdescription>
+<para>Test if the width and height of this size is in the given range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>minimum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The minimum size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maximum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true If this size is in the range <computeroutput>minimum</computeroutput>-<computeroutput>maximum</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="129" column="11" bodyfile="erbsland/cterm/Size.hpp" bodystart="129" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a00efff8634757ff92d724895b75b5d59" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::componentMax</definition>
+        <argsstring>(Size other) const noexcept</argsstring>
+        <name>componentMax</name>
+        <qualifiedname>erbsland::cterm::Size::componentMax</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Component-wise maximum with another size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Other size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A size whose width is max(this.width, other.width) and height is max(this.height, other.height). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="137" column="11" bodyfile="erbsland/cterm/Size.hpp" bodystart="137" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1af9a096da54546864488b5946ef0cb932" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::componentMin</definition>
+        <argsstring>(Size other) const noexcept</argsstring>
+        <name>componentMin</name>
+        <qualifiedname>erbsland::cterm::Size::componentMin</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Component-wise minimum with another size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Other size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A size whose width is min(this.width, other.width) and height is min(this.height, other.height). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="144" column="11" bodyfile="erbsland/cterm/Size.hpp" bodystart="144" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a77bd8c25ec0bf2e5fe019b173bcb617b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Size::contains</definition>
+        <argsstring>(const Position &amp;pos) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>erbsland::cterm::Size::contains</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref> &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Check if a position lies strictly inside the bounds [0,width) × [0,height). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if 0 &lt;= x &lt; width and 0 &lt;= y &lt; height. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="151" column="21" bodyfile="erbsland/cterm/Size.hpp" bodystart="151" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ada2dc1b457e2593364c30abcc18016be" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::Size::index</definition>
+        <argsstring>(const Position &amp;pos) const noexcept</argsstring>
+        <name>index</name>
+        <qualifiedname>erbsland::cterm::Size::index</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref> &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Convert a 2D position to a row-major linear index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position. Behavior is undefined if not contained by this size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>y * width + x. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="159" column="20" bodyfile="erbsland/cterm/Size.hpp" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a5e9259d8e36a6d653790f51526049044" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Fn</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::Size::forEach</definition>
+        <argsstring>(Fn fn) const</argsstring>
+        <name>forEach</name>
+        <qualifiedname>erbsland::cterm::Size::forEach</qualifiedname>
+        <param>
+          <type>Fn</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Visit all positions inside the size in row-major order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A callable taking <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function to invoke for each <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref> (x from 0..width-1, y from 0..height-1). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="166" column="10" bodyfile="erbsland/cterm/Size.hpp" bodystart="194" bodyend="200"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a3de9360a8cc707ed809643e23cc996b4" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>static constexpr int erbsland::cterm::Size::absoluteDifference</definition>
+        <argsstring>(int value1, int value2) noexcept</argsstring>
+        <name>absoluteDifference</name>
+        <qualifiedname>erbsland::cterm::Size::absoluteDifference</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>value1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>value2</declname>
+        </param>
+        <briefdescription>
+<para>Compute the absolute difference between two integer values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="170" column="27" bodyfile="erbsland/cterm/Size.hpp" bodystart="170" bodyend="172"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a1203b4d86142268e30cd4912bb0e659c" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::Size::widthForPosition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>widthForPosition</name>
+        <qualifiedname>erbsland::cterm::Size::widthForPosition</qualifiedname>
+        <briefdescription>
+<para>The maximum valid x coordinate inside the size, or 0 if width == 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="176" column="20" bodyfile="erbsland/cterm/Size.hpp" bodystart="176" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a72f9f61a6ef3d93a9a5e00fcfcd59519" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::Size::halfWidthForPosition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>halfWidthForPosition</name>
+        <qualifiedname>erbsland::cterm::Size::halfWidthForPosition</qualifiedname>
+        <briefdescription>
+<para>Half of the valid x range endpoint used for horizontal center positioning. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="179" column="20" bodyfile="erbsland/cterm/Size.hpp" bodystart="179" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a39de29770d1a93b700803b05d535b94d" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::Size::heightForPosition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>heightForPosition</name>
+        <qualifiedname>erbsland::cterm::Size::heightForPosition</qualifiedname>
+        <briefdescription>
+<para>The maximum valid y coordinate inside the size, or 0 if height == 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="182" column="20" bodyfile="erbsland/cterm/Size.hpp" bodystart="182" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a32fe5bcb9b3de4e77b25b7b6e3b4b725" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::Size::halfHeightForPosition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>halfHeightForPosition</name>
+        <qualifiedname>erbsland::cterm::Size::halfHeightForPosition</qualifiedname>
+        <briefdescription>
+<para>Half of the valid y range endpoint used for vertical center positioning. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Size.hpp" line="185" column="20" bodyfile="erbsland/cterm/Size.hpp" bodystart="185" bodyend="185"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A non-negative 2D size (width × height). </para>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para>Width and height are clamped to be &gt;= 0.</para>
+</listitem><listitem><para>Many operations assume a grid indexed from (0,0) to (width-1,height-1). </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="erbsland/cterm/Size.hpp" line="20" column="1" bodyfile="erbsland/cterm/Size.hpp" bodystart="20" bodyend="190"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a08c3b4ff790b5956a9600d1edd028b97" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>_height</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a483fa8378fe1655e78a1be64e0533da4" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>_width</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a3de9360a8cc707ed809643e23cc996b4" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>absoluteDifference</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ac6299672b591848d4542eff401213db7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>anchor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a759e8e0fead0181ebe9caf8bd1b2236b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>area</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a00efff8634757ff92d724895b75b5d59" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>componentMax</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1af9a096da54546864488b5946ef0cb932" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>componentMin</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a77bd8c25ec0bf2e5fe019b173bcb617b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>contains</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a16ad189f1da80b2009bdded06495cec0" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>fitsInto</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a5e9259d8e36a6d653790f51526049044" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>forEach</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a32fe5bcb9b3de4e77b25b7b6e3b4b725" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>halfHeightForPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a72f9f61a6ef3d93a9a5e00fcfcd59519" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>halfWidthForPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a7146b0875ebf00a5a2def8c9e340d289" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>height</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a39de29770d1a93b700803b05d535b94d" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>heightForPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ada2dc1b457e2593364c30abcc18016be" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>index</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ac8544fa0077f3d4ff749c07abb451884" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>isInRange</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a625ff846717be99a46cc8363c53b181b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator!=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a2358dcbd6aec350e6e13314c39f76692" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator+</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ab7786b5f30bd6c6ac8c78b590820a77c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator-</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a3b470121ca64fd2edeaf1631837c0fb3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a4f8defd8ac11d2878cabdeec21fadbaa" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>setHeight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a58259ee302c998821adfe2db38c2ec84" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>setWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a31972f4a2ddcf98062b91def18c922c8" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>Size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a113fdb382d257295eeb458046e9ef25e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>Size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ab5b2a30c76e43aed023f308c2f75e992" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>Size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a5571a3d4bf53aa1fe100dc0736d886a1" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>width</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a1203b4d86142268e30cd4912bb0e659c" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>widthForPosition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

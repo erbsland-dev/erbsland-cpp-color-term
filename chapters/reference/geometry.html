@@ -1,0 +1,1475 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geometry &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Input" href="input.html" />
+    <link rel="prev" title="Font" href="font.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#building-a-layout-from-rectangles">Building a Layout from Rectangles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#working-with-positions-and-directions">Working with Positions and Directions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#splitting-a-rectangle-into-grid-cells">Splitting a Rectangle into Grid Cells</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm9AlignmentE"><code class="docutils literal notranslate"><span class="pre">Alignment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm6AnchorE"><code class="docutils literal notranslate"><span class="pre">Anchor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm9DirectionE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Direction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm7MarginsE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Margins</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm9RectangleE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Rectangle</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Text</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Geometry</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/geometry.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="geometry">
+<h1>Geometry<a class="headerlink" href="#geometry" title="Link to this heading"></a></h1>
+<p>The geometry classes provide the building blocks for positioning and
+layout inside a terminal buffer. They describe sizes, positions,
+rectangles, and directions, and allow you to derive new regions from
+existing ones.</p>
+<p>Using explicit geometry types keeps layout code readable and makes it
+easy to construct structured terminal interfaces.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="building-a-layout-from-rectangles">
+<h3>Building a Layout from Rectangles<a class="headerlink" href="#building-a-layout-from-rectangles" title="Link to this heading"></a></h3>
+<p>The geometry types are designed to make screen layout explicit and easy
+to understand. Instead of calculating coordinates manually, you derive
+smaller regions from a larger canvas.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">canvas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">};</span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">canvas</span><span class="p">.</span><span class="n">subRectangle</span><span class="p">(</span><span class="n">Anchor</span><span class="o">::</span><span class="n">TopCenter</span><span class="p">,</span><span class="w"> </span><span class="n">Size</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="n">Margins</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">});</span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">canvas</span><span class="p">.</span><span class="n">insetBy</span><span class="p">(</span><span class="n">Margins</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">});</span>
+
+<span class="n">buffer</span><span class="p">.</span><span class="n">drawText</span><span class="p">(</span><span class="s">&quot;Header&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">Center</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightWhite</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Blue</span><span class="p">});</span>
+<span class="n">buffer</span><span class="p">.</span><span class="n">drawText</span><span class="p">(</span><span class="s">&quot;Main content&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">TopLeft</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightWhite</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>In this example, the screen is divided into a header area and a content
+region derived from the main canvas.</p>
+</section>
+<section id="working-with-positions-and-directions">
+<h3>Working with Positions and Directions<a class="headerlink" href="#working-with-positions-and-directions" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Position</span></code>, <code class="docutils literal notranslate"><span class="pre">Size</span></code>, and <code class="docutils literal notranslate"><span class="pre">Direction</span></code> are useful when implementing
+custom cursor movement, grid logic, or simple simulations.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">cursor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Position</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
+<span class="n">cursor</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">Direction</span><span class="o">::</span><span class="n">fromString</span><span class="p">(</span><span class="s">&quot;east&quot;</span><span class="p">).</span><span class="n">toDelta</span><span class="p">();</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Size</span><span class="p">{</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">}.</span><span class="n">contains</span><span class="p">(</span><span class="n">cursor</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">buffer</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span><span class="w"> </span><span class="n">Char</span><span class="p">{</span><span class="s">&quot;@&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">}});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here a cursor moves one step to the east. The resulting position is then
+checked against the available screen size before rendering a character.</p>
+</section>
+<section id="splitting-a-rectangle-into-grid-cells">
+<h3>Splitting a Rectangle into Grid Cells<a class="headerlink" href="#splitting-a-rectangle-into-grid-cells" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Rectangle::gridCells()</span></code> divides a larger canvas into evenly spaced
+sub-rectangles. This is useful for dashboards, menu grids, and
+multi-panel layouts where each cell should keep a predictable size.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">canvas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">};</span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">canvas</span><span class="p">.</span><span class="n">gridCells</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cell</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">cells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">buffer</span><span class="p">.</span><span class="n">drawFrame</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span><span class="w"> </span><span class="n">FrameStyle</span><span class="o">::</span><span class="n">Light</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightCyan</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="n">buffer</span><span class="p">.</span><span class="n">drawText</span><span class="p">(</span><span class="s">&quot;Overview&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cells</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">insetBy</span><span class="p">(</span><span class="n">Margins</span><span class="p">{</span><span class="mi">1</span><span class="p">}),</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">TopLeft</span><span class="p">);</span>
+<span class="n">buffer</span><span class="p">.</span><span class="n">drawText</span><span class="p">(</span><span class="s">&quot;Status&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cells</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">insetBy</span><span class="p">(</span><span class="n">Margins</span><span class="p">{</span><span class="mi">1</span><span class="p">}),</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">TopLeft</span><span class="p">);</span>
+<span class="n">buffer</span><span class="p">.</span><span class="n">drawText</span><span class="p">(</span><span class="s">&quot;Log&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cells</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">insetBy</span><span class="p">(</span><span class="n">Margins</span><span class="p">{</span><span class="mi">1</span><span class="p">}),</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">TopLeft</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the requested number of rows, columns, and spacing no longer fits
+into the rectangle, <code class="docutils literal notranslate"><span class="pre">gridCells()</span></code> throws <code class="docutils literal notranslate"><span class="pre">std::invalid_argument</span></code>.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/text-gallery3.jpg"><img alt="../../_images/text-gallery3.jpg" src="../../_images/text-gallery3.jpg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The <code class="docutils literal notranslate"><span class="pre">text-gallery</span></code> demo uses rectangles and alignment to place
+multiple panels on one screen.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9AlignmentE">
+<span id="_CPPv3N8erbsland5cterm9AlignmentE"></span><span id="_CPPv2N8erbsland5cterm9AlignmentE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Alignment</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9AlignmentE" title="Link to this definition"></a><br /></dt>
+<dd><p>Alignment of text or graphics in a box. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment4LeftE">
+<span id="_CPPv3N8erbsland5cterm9Alignment4LeftE"></span><span id="_CPPv2N8erbsland5cterm9Alignment4LeftE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a945d5e233cf7d6240f6b783b36a374ff"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Left</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment4LeftE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the left edge of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment7HCenterE">
+<span id="_CPPv3N8erbsland5cterm9Alignment7HCenterE"></span><span id="_CPPv2N8erbsland5cterm9Alignment7HCenterE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0ac71c5820d2d850cc208d3b4f6bb2e4eb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HCenter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment7HCenterE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the horizontal center of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment5RightE">
+<span id="_CPPv3N8erbsland5cterm9Alignment5RightE"></span><span id="_CPPv2N8erbsland5cterm9Alignment5RightE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a92b09c7c48c520c3c55e497875da437c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Right</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment5RightE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the right edge of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment3TopE">
+<span id="_CPPv3N8erbsland5cterm9Alignment3TopE"></span><span id="_CPPv2N8erbsland5cterm9Alignment3TopE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0aa4ffdcf0dc1f31b9acaf295d75b51d00"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Top</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment3TopE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the top edge of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment7VCenterE">
+<span id="_CPPv3N8erbsland5cterm9Alignment7VCenterE"></span><span id="_CPPv2N8erbsland5cterm9Alignment7VCenterE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a0c008dad767075dab996c133e44d5d2f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VCenter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment7VCenterE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the vertical center of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment6BottomE">
+<span id="_CPPv3N8erbsland5cterm9Alignment6BottomE"></span><span id="_CPPv2N8erbsland5cterm9Alignment6BottomE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a2ad9d63b69c4a10a5cc9cad923133bc4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bottom</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment6BottomE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the bottom edge of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment7TopLeftE">
+<span id="_CPPv3N8erbsland5cterm9Alignment7TopLeftE"></span><span id="_CPPv2N8erbsland5cterm9Alignment7TopLeftE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0ab32beb056fbfe36afbabc6c88c81ab36"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TopLeft</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment7TopLeftE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the top-left corner of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment9TopCenterE">
+<span id="_CPPv3N8erbsland5cterm9Alignment9TopCenterE"></span><span id="_CPPv2N8erbsland5cterm9Alignment9TopCenterE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a91b8ede24b7f93a98ae4dcaade15d468"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TopCenter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment9TopCenterE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the top-center of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment8TopRightE">
+<span id="_CPPv3N8erbsland5cterm9Alignment8TopRightE"></span><span id="_CPPv2N8erbsland5cterm9Alignment8TopRightE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a1d85a557894c340c318493f33bfa8efb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TopRight</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment8TopRightE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the top-right corner of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment10CenterLeftE">
+<span id="_CPPv3N8erbsland5cterm9Alignment10CenterLeftE"></span><span id="_CPPv2N8erbsland5cterm9Alignment10CenterLeftE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a9f44821a7b58abb265709f49e54ef8ca"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CenterLeft</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment10CenterLeftE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the center-left of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment6CenterE">
+<span id="_CPPv3N8erbsland5cterm9Alignment6CenterE"></span><span id="_CPPv2N8erbsland5cterm9Alignment6CenterE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a4f1f6016fc9f3f2353c0cc7c67b292bd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Center</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment6CenterE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the center of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment11CenterRightE">
+<span id="_CPPv3N8erbsland5cterm9Alignment11CenterRightE"></span><span id="_CPPv2N8erbsland5cterm9Alignment11CenterRightE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0aa538ef718186c9e0967239bb60043d1f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CenterRight</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment11CenterRightE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the center-right of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment10BottomLeftE">
+<span id="_CPPv3N8erbsland5cterm9Alignment10BottomLeftE"></span><span id="_CPPv2N8erbsland5cterm9Alignment10BottomLeftE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a98e5a1c44509157ebcaf46c515c78875"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BottomLeft</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment10BottomLeftE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the bottom-left corner of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment12BottomCenterE">
+<span id="_CPPv3N8erbsland5cterm9Alignment12BottomCenterE"></span><span id="_CPPv2N8erbsland5cterm9Alignment12BottomCenterE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0abf7d9c8ad2f89a37cf5378b5fec0b420"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BottomCenter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment12BottomCenterE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the bottom-center of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment11BottomRightE">
+<span id="_CPPv3N8erbsland5cterm9Alignment11BottomRightE"></span><span id="_CPPv2N8erbsland5cterm9Alignment11BottomRightE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a9146bfc669fddc88db2c4d89297d0e9a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BottomRight</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment11BottomRightE" title="Link to this definition"></a><br /></dt>
+<dd><p>Aligned to the bottom-right corner of the box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment14HorizontalMaskE">
+<span id="_CPPv3N8erbsland5cterm9Alignment14HorizontalMaskE"></span><span id="_CPPv2N8erbsland5cterm9Alignment14HorizontalMaskE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0acfa70f03270dcc2bfc0634c716ab45fc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HorizontalMask</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment14HorizontalMaskE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mask for extracting the horizontal component. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Alignment12VerticalMaskE">
+<span id="_CPPv3N8erbsland5cterm9Alignment12VerticalMaskE"></span><span id="_CPPv2N8erbsland5cterm9Alignment12VerticalMaskE"></span><span class="target" id="_alignment_8hpp_1abb3ebb04876926ed4252b0ec334b75d0a3ad195164a96b004121f484dd12c21aa"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VerticalMask</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Alignment12VerticalMaskE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mask for extracting the vertical component. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6AnchorE">
+<span id="_CPPv3N8erbsland5cterm6AnchorE"></span><span id="_CPPv2N8erbsland5cterm6AnchorE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Anchor</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6AnchorE" title="Link to this definition"></a><br /></dt>
+<dd><p>Anchor describes a location inside a rectangular area using a combination of a vertical and a horizontal component. </p>
+<p><ul class="simple">
+<li><p>Vertical components occupy the lower two bits (VMask).</p></li>
+<li><p>Horizontal components occupy the next two bits (HMask). Common composite anchors (e.g. TopLeft, Center) are provided for convenience. </p></li>
+</ul>
+</p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor3TopE">
+<span id="_CPPv3N8erbsland5cterm6Anchor3TopE"></span><span id="_CPPv2N8erbsland5cterm6Anchor3TopE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1aa4ffdcf0dc1f31b9acaf295d75b51d00"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Top</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor3TopE" title="Link to this definition"></a><br /></dt>
+<dd><p>Top aligned vertically. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor7VCenterE">
+<span id="_CPPv3N8erbsland5cterm6Anchor7VCenterE"></span><span id="_CPPv2N8erbsland5cterm6Anchor7VCenterE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a0c008dad767075dab996c133e44d5d2f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VCenter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor7VCenterE" title="Link to this definition"></a><br /></dt>
+<dd><p>Vertically centered. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor6BottomE">
+<span id="_CPPv3N8erbsland5cterm6Anchor6BottomE"></span><span id="_CPPv2N8erbsland5cterm6Anchor6BottomE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a2ad9d63b69c4a10a5cc9cad923133bc4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bottom</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor6BottomE" title="Link to this definition"></a><br /></dt>
+<dd><p>Bottom aligned vertically. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor4LeftE">
+<span id="_CPPv3N8erbsland5cterm6Anchor4LeftE"></span><span id="_CPPv2N8erbsland5cterm6Anchor4LeftE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a945d5e233cf7d6240f6b783b36a374ff"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Left</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor4LeftE" title="Link to this definition"></a><br /></dt>
+<dd><p>Left aligned horizontally. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor7HCenterE">
+<span id="_CPPv3N8erbsland5cterm6Anchor7HCenterE"></span><span id="_CPPv2N8erbsland5cterm6Anchor7HCenterE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1ac71c5820d2d850cc208d3b4f6bb2e4eb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HCenter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor7HCenterE" title="Link to this definition"></a><br /></dt>
+<dd><p>Horizontally centered. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor5RightE">
+<span id="_CPPv3N8erbsland5cterm6Anchor5RightE"></span><span id="_CPPv2N8erbsland5cterm6Anchor5RightE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a92b09c7c48c520c3c55e497875da437c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Right</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor5RightE" title="Link to this definition"></a><br /></dt>
+<dd><p>Right aligned horizontally. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor7TopLeftE">
+<span id="_CPPv3N8erbsland5cterm6Anchor7TopLeftE"></span><span id="_CPPv2N8erbsland5cterm6Anchor7TopLeftE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1ab32beb056fbfe36afbabc6c88c81ab36"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TopLeft</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor7TopLeftE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor9TopCenterE">
+<span id="_CPPv3N8erbsland5cterm6Anchor9TopCenterE"></span><span id="_CPPv2N8erbsland5cterm6Anchor9TopCenterE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a91b8ede24b7f93a98ae4dcaade15d468"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TopCenter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor9TopCenterE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor8TopRightE">
+<span id="_CPPv3N8erbsland5cterm6Anchor8TopRightE"></span><span id="_CPPv2N8erbsland5cterm6Anchor8TopRightE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a1d85a557894c340c318493f33bfa8efb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TopRight</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor8TopRightE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor10CenterLeftE">
+<span id="_CPPv3N8erbsland5cterm6Anchor10CenterLeftE"></span><span id="_CPPv2N8erbsland5cterm6Anchor10CenterLeftE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a9f44821a7b58abb265709f49e54ef8ca"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CenterLeft</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor10CenterLeftE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor6CenterE">
+<span id="_CPPv3N8erbsland5cterm6Anchor6CenterE"></span><span id="_CPPv2N8erbsland5cterm6Anchor6CenterE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a4f1f6016fc9f3f2353c0cc7c67b292bd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Center</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor6CenterE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor11CenterRightE">
+<span id="_CPPv3N8erbsland5cterm6Anchor11CenterRightE"></span><span id="_CPPv2N8erbsland5cterm6Anchor11CenterRightE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1aa538ef718186c9e0967239bb60043d1f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CenterRight</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor11CenterRightE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor10BottomLeftE">
+<span id="_CPPv3N8erbsland5cterm6Anchor10BottomLeftE"></span><span id="_CPPv2N8erbsland5cterm6Anchor10BottomLeftE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a98e5a1c44509157ebcaf46c515c78875"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BottomLeft</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor10BottomLeftE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor12BottomCenterE">
+<span id="_CPPv3N8erbsland5cterm6Anchor12BottomCenterE"></span><span id="_CPPv2N8erbsland5cterm6Anchor12BottomCenterE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1abf7d9c8ad2f89a37cf5378b5fec0b420"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BottomCenter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor12BottomCenterE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor11BottomRightE">
+<span id="_CPPv3N8erbsland5cterm6Anchor11BottomRightE"></span><span id="_CPPv2N8erbsland5cterm6Anchor11BottomRightE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a9146bfc669fddc88db2c4d89297d0e9a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BottomRight</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor11BottomRightE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor5VMaskE">
+<span id="_CPPv3N8erbsland5cterm6Anchor5VMaskE"></span><span id="_CPPv2N8erbsland5cterm6Anchor5VMaskE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a990fcca702b6f46d5f2fc8fc1c93ef00"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VMask</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor5VMaskE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mask for extracting the vertical component. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Anchor5HMaskE">
+<span id="_CPPv3N8erbsland5cterm6Anchor5HMaskE"></span><span id="_CPPv2N8erbsland5cterm6Anchor5HMaskE"></span><span class="target" id="_anchor_8hpp_1a3f50acaa43df8186c09cb8c1fcadc6e1a95a77fc3f0a504c3ffbc424aa8b348bf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HMask</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Anchor5HMaskE" title="Link to this definition"></a><br /></dt>
+<dd><p>Mask for extracting the horizontal component. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9DirectionE">
+<span id="_CPPv3N8erbsland5cterm9DirectionE"></span><span id="_CPPv2N8erbsland5cterm9DirectionE"></span><span id="erbsland::cterm::Direction"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Direction</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9DirectionE" title="Link to this definition"></a><br /></dt>
+<dd><p>A direction in a 2D grid. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4EnumE">
+<span id="_CPPv3N8erbsland5cterm9Direction4EnumE"></span><span id="_CPPv2N8erbsland5cterm9Direction4EnumE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53b"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Enum</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4EnumE" title="Link to this definition"></a><br /></dt>
+<dd><p>The enum for the direction. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum4NoneE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum4NoneE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum4NoneE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53baab48d6d6be732434cd8bf5ed670a597f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">None</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum4NoneE" title="Link to this definition"></a><br /></dt>
+<dd><p>No direction. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum5NorthE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum5NorthE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum5NorthE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53bab60ec8e3c72541313e1384c65f0e33bf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">North</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum5NorthE" title="Link to this definition"></a><br /></dt>
+<dd><p>North. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum9NorthEastE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum9NorthEastE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum9NorthEastE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53ba93d7f8cafe9836d210dfbfa88379a365"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NorthEast</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum9NorthEastE" title="Link to this definition"></a><br /></dt>
+<dd><p>North-east. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum4EastE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum4EastE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum4EastE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53ba197abfe29bee0011beaed2a0d9bd883c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">East</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum4EastE" title="Link to this definition"></a><br /></dt>
+<dd><p>East. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum9SouthEastE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum9SouthEastE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum9SouthEastE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53ba4d5552eb5f83dac503f463772c1bf9c6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SouthEast</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum9SouthEastE" title="Link to this definition"></a><br /></dt>
+<dd><p>South-east. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum5SouthE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum5SouthE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum5SouthE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53ba120ba8813ab7bd5d4f89ea0b458ae004"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">South</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum5SouthE" title="Link to this definition"></a><br /></dt>
+<dd><p>South. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum9SouthWestE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum9SouthWestE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum9SouthWestE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53bade4053d7215007d0224d96ce98e32eaf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SouthWest</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum9SouthWestE" title="Link to this definition"></a><br /></dt>
+<dd><p>South-west. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum4WestE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum4WestE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum4WestE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53bafcbbedc0a01bf23345128777c3d0074e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">West</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum4WestE" title="Link to this definition"></a><br /></dt>
+<dd><p>West. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction4Enum9NorthWestE">
+<span id="_CPPv3N8erbsland5cterm9Direction4Enum9NorthWestE"></span><span id="_CPPv2N8erbsland5cterm9Direction4Enum9NorthWestE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53ba01d835e1fea3316e22117d3c6abc3773"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NorthWest</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction4Enum9NorthWestE" title="Link to this definition"></a><br /></dt>
+<dd><p>North-west. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction9DirectionEv">
+<span id="_CPPv3N8erbsland5cterm9Direction9DirectionEv"></span><span id="_CPPv2N8erbsland5cterm9Direction9DirectionEv"></span><span id="erbsland::cterm::Direction::DirectionCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a6793e3e26511c35bb8f93de1c538ee2a"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Direction</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction9DirectionEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a direction with value <code class="docutils literal notranslate"><span class="pre">None</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction9DirectionEK4Enum">
+<span id="_CPPv3N8erbsland5cterm9Direction9DirectionEK4Enum"></span><span id="_CPPv2N8erbsland5cterm9Direction9DirectionEK4Enum"></span><span id="erbsland::cterm::Direction::Direction__EnumCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1ab234a33703b538f2dbf31ea9063a5aa5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Direction</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9Direction4EnumE" title="erbsland::cterm::Direction::Enum"><span class="n"><span class="pre">Enum</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction9DirectionEK4Enum" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a direction from an enum value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9DirectionD0Ev">
+<span id="_CPPv3N8erbsland5cterm9DirectionD0Ev"></span><span id="_CPPv2N8erbsland5cterm9DirectionD0Ev"></span><span id="erbsland::cterm::Direction::~Direction"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1ad578b04369cbc402e0aafd0bdd5034b3"></span><span class="sig-name descname"><span class="n"><span class="pre">~Direction</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9DirectionD0Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Default destructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction9DirectionERK9Direction">
+<span id="_CPPv3N8erbsland5cterm9Direction9DirectionERK9Direction"></span><span id="_CPPv2N8erbsland5cterm9Direction9DirectionERK9Direction"></span><span id="erbsland::cterm::Direction::Direction__DirectionCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1ad737407f1ec15bb3cb08ae698a9a9bac"></span><span class="sig-name descname"><span class="n"><span class="pre">Direction</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9Direction9DirectionERK9Direction" title="erbsland::cterm::Direction::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction9DirectionERK9Direction" title="Link to this definition"></a><br /></dt>
+<dd><p>Default copy constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9DirectionaSERK9Direction">
+<span id="_CPPv3N8erbsland5cterm9DirectionaSERK9Direction"></span><span id="_CPPv2N8erbsland5cterm9DirectionaSERK9Direction"></span><span id="erbsland::cterm::Direction::assign-operator__DirectionCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1adf17a980ea2b9c920a52f302b1c7cd26"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9DirectionaSERK9Direction" title="Link to this definition"></a><br /></dt>
+<dd><p>Default copy assignment. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9DirectionaSEK4Enum">
+<span id="_CPPv3N8erbsland5cterm9DirectionaSEK4Enum"></span><span id="_CPPv2N8erbsland5cterm9DirectionaSEK4Enum"></span><span id="erbsland::cterm::Direction::assign-operator__EnumC"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a020abd27b1de7e5067e1f2e3f0a74453"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9Direction4EnumE" title="erbsland::cterm::Direction::Enum"><span class="n"><span class="pre">Enum</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9DirectionaSEK4Enum" title="Link to this definition"></a><br /></dt>
+<dd><p>Assign an enum value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Directioncv4EnumEv">
+<span id="_CPPv3NK8erbsland5cterm9Directioncv4EnumEv"></span><span id="_CPPv2NK8erbsland5cterm9Directioncv4EnumEv"></span><span id="erbsland::cterm::Direction::castto-Enum-operatorCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a6bb85fb87caf6c913c03f05fa46b01dd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9Direction4EnumE" title="erbsland::cterm::Direction::Enum"><span class="n"><span class="pre">Enum</span></span></a></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Directioncv4EnumEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert to the enum value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9DirectioneqERK9Direction">
+<span id="_CPPv3NK8erbsland5cterm9DirectioneqERK9Direction"></span><span id="_CPPv2NK8erbsland5cterm9DirectioneqERK9Direction"></span><span id="erbsland::cterm::Direction::eq-operator__DirectionCRCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a94132dfb77de2879771b33305a31324e"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9DirectioneqERK9Direction" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two directions. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9DirectioneqEK4Enum">
+<span id="_CPPv3NK8erbsland5cterm9DirectioneqEK4Enum"></span><span id="_CPPv2NK8erbsland5cterm9DirectioneqEK4Enum"></span><span id="erbsland::cterm::Direction::eq-operator__EnumCCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1ab2334319c5ce95533e128ae7229983c2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9Direction4EnumE" title="erbsland::cterm::Direction::Enum"><span class="n"><span class="pre">Enum</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9DirectioneqEK4Enum" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare with an enum value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Direction7toDeltaEv">
+<span id="_CPPv3NK8erbsland5cterm9Direction7toDeltaEv"></span><span id="_CPPv2NK8erbsland5cterm9Direction7toDeltaEv"></span><span id="erbsland::cterm::Direction::toDeltaC"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a39a861c3f3e2638943f458f0e74274fc"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toDelta</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Direction7toDeltaEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert this direction into a position delta. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The unit delta for this direction, or <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code> for <code class="docutils literal notranslate"><span class="pre">None</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Direction8toStringEv">
+<span id="_CPPv3NK8erbsland5cterm9Direction8toStringEv"></span><span id="_CPPv2NK8erbsland5cterm9Direction8toStringEv"></span><span id="erbsland::cterm::Direction::toStringC"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a09ac0b981f6874d3d37f0d3b67483590"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toString</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Direction8toStringEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert this direction into a canonical lowercase string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The normalized direction name. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Direction10fromStringENSt11string_viewE">
+<span id="_CPPv3N8erbsland5cterm9Direction10fromStringENSt11string_viewE"></span><span id="_CPPv2N8erbsland5cterm9Direction10fromStringENSt11string_viewE"></span><span id="erbsland::cterm::Direction::fromString__std::string_view"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1a0e1838f89a29998b05882d86c32bd957"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Direction10fromStringENSt11string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>Parse a direction from text. </p>
+<p>Accepts empty text, abbreviations and normalized names. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – The direction text. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parsed direction. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9DirectioneqEK4EnumRK9Direction">
+<span id="_CPPv3N8erbsland5cterm9DirectioneqEK4EnumRK9Direction"></span><span id="_CPPv2N8erbsland5cterm9DirectioneqEK4EnumRK9Direction"></span><span id="erbsland::cterm::Direction::eq-operator__EnumC.DirectionCRCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_direction_1ab786024362c4ba505e92bd3b137b04ef"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">friend</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9Direction4EnumE" title="erbsland::cterm::Direction::Enum"><span class="n"><span class="pre">Enum</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">direction</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9DirectioneqEK4EnumRK9Direction" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare an enum value with a direction. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7MarginsE">
+<span id="_CPPv3N8erbsland5cterm7MarginsE"></span><span id="_CPPv2N8erbsland5cterm7MarginsE"></span><span id="erbsland::cterm::Margins"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Margins</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7MarginsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Represents margins (top, right, bottom, left) around a rectangle. </p>
+<p><ul class="simple">
+<li><p>Immutable-like value type for representing padding or insets.</p></li>
+<li><p>Provides convenience constructors for uniform or symmetric margins. </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Margins7MarginsEv">
+<span id="_CPPv3N8erbsland5cterm7Margins7MarginsEv"></span><span id="_CPPv2N8erbsland5cterm7Margins7MarginsEv"></span><span id="erbsland::cterm::Margins::Margins"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a5139fd845f496bb08e0d762e8a6e51c7"></span><span class="sig-name descname"><span class="n"><span class="pre">Margins</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Margins7MarginsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Default construct with uninitialized values (useful for aggregate-style construction). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Margins7MarginsEKi">
+<span id="_CPPv3N8erbsland5cterm7Margins7MarginsEKi"></span><span id="_CPPv2N8erbsland5cterm7Margins7MarginsEKi"></span><span id="erbsland::cterm::Margins::Margins__iCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a0663a825c9ec995ab4d1cfca6b052f10"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Margins</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">allSides</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Margins7MarginsEKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct margins with the same value on all sides. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>allSides</strong> – Value applied to top, right, bottom and left. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Margins7MarginsEKiKi">
+<span id="_CPPv3N8erbsland5cterm7Margins7MarginsEKiKi"></span><span id="_CPPv2N8erbsland5cterm7Margins7MarginsEKiKi"></span><span id="erbsland::cterm::Margins::Margins__iC.iCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a2b07ebd493fb53f5641948103c5f3d76"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Margins</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">horizontal</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vertical</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Margins7MarginsEKiKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct margins with separate horizontal and vertical values. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>horizontal</strong> – Value applied to left and right. </p></li>
+<li><p><strong>vertical</strong> – Value applied to top and bottom. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Margins7MarginsEKiKiKiKi">
+<span id="_CPPv3N8erbsland5cterm7Margins7MarginsEKiKiKiKi"></span><span id="_CPPv2N8erbsland5cterm7Margins7MarginsEKiKiKiKi"></span><span id="erbsland::cterm::Margins::Margins__iC.iC.iC.iCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a11d718313d1f8640d18a62ad37773aab"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Margins</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">top</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">right</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bottom</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">left</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Margins7MarginsEKiKiKiKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct margins with individually specified sides. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>top</strong> – Top margin. </p></li>
+<li><p><strong>right</strong> – Right margin. </p></li>
+<li><p><strong>bottom</strong> – Bottom margin. </p></li>
+<li><p><strong>left</strong> – Left margin. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7MarginseqERK7Margins">
+<span id="_CPPv3NK8erbsland5cterm7MarginseqERK7Margins"></span><span id="_CPPv2NK8erbsland5cterm7MarginseqERK7Margins"></span><span id="erbsland::cterm::Margins::eq-operator__MarginsCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a56cea101adff8abff1b25e1c3fdc8669"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7MarginseqERK7Margins" title="Link to this definition"></a><br /></dt>
+<dd><p>Equality comparison (all sides must be equal). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7MarginsneERK7Margins">
+<span id="_CPPv3NK8erbsland5cterm7MarginsneERK7Margins"></span><span id="_CPPv2NK8erbsland5cterm7MarginsneERK7Margins"></span><span id="erbsland::cterm::Margins::neq-operator__MarginsCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a8cee790bade958f5c36fd3f40e2ee30f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7MarginsneERK7Margins" title="Link to this definition"></a><br /></dt>
+<dd><p>Inequality comparison. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7MarginsmiEv">
+<span id="_CPPv3NK8erbsland5cterm7MarginsmiEv"></span><span id="_CPPv2NK8erbsland5cterm7MarginsmiEv"></span><span id="erbsland::cterm::Margins::sub-operatorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1aa802fdaf55ecddfadc04b5ad96f9e853"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7MarginsmiEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Unary negation producing margins with all sides negated. </p>
+<p>Useful for reversing an inset/expansion operation. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Margins3topEv">
+<span id="_CPPv3NK8erbsland5cterm7Margins3topEv"></span><span id="_CPPv2NK8erbsland5cterm7Margins3topEv"></span><span id="erbsland::cterm::Margins::topCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a2b483445e54f3046d0ff9712be960c07"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">top</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Margins3topEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get top margin. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Margins5rightEv">
+<span id="_CPPv3NK8erbsland5cterm7Margins5rightEv"></span><span id="_CPPv2NK8erbsland5cterm7Margins5rightEv"></span><span id="erbsland::cterm::Margins::rightCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a7bd65ae7773ece79fbd69c3a613ed521"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">right</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Margins5rightEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get right margin. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Margins6bottomEv">
+<span id="_CPPv3NK8erbsland5cterm7Margins6bottomEv"></span><span id="_CPPv2NK8erbsland5cterm7Margins6bottomEv"></span><span id="erbsland::cterm::Margins::bottomCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1aa83bc1552e42643b861cce25edbf809e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bottom</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Margins6bottomEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get bottom margin. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Margins4leftEv">
+<span id="_CPPv3NK8erbsland5cterm7Margins4leftEv"></span><span id="_CPPv2NK8erbsland5cterm7Margins4leftEv"></span><span id="erbsland::cterm::Margins::leftCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_margins_1a37ee9def44326fa566e27027ef5a26ac"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">left</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Margins4leftEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get left margin. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8PositionE">
+<span id="_CPPv3N8erbsland5cterm8PositionE"></span><span id="_CPPv2N8erbsland5cterm8PositionE"></span><span id="erbsland::cterm::Position"></span><span class="target" id="classerbsland_1_1cterm_1_1_position"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Position</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8PositionE" title="Link to this definition"></a><br /></dt>
+<dd><p>Represents a 2D integer position or vector (x, y). </p>
+<p><ul class="simple">
+<li><p>Lightweight value type with default construction to (0,0).</p></li>
+<li><p>Useful both for coordinates in a grid and for 2D vector arithmetic. </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8Position8PositionEv">
+<span id="_CPPv3N8erbsland5cterm8Position8PositionEv"></span><span id="_CPPv2N8erbsland5cterm8Position8PositionEv"></span><span id="erbsland::cterm::Position::Position"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a81395d2aeaee3092e8f0f2a82097e1ef"></span><span class="sig-name descname"><span class="n"><span class="pre">Position</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8Position8PositionEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Default construct to (0,0). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8Position8PositionEii">
+<span id="_CPPv3N8erbsland5cterm8Position8PositionEii"></span><span id="_CPPv2N8erbsland5cterm8Position8PositionEii"></span><span id="erbsland::cterm::Position::Position__i.iCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a02722afa31dd5316ee04505ec7ca99ad"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Position</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8Position8PositionEii" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct from explicit coordinates. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – The x-coordinate. </p></li>
+<li><p><strong>y</strong> – The y-coordinate. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8PositioneqERK8Position">
+<span id="_CPPv3NK8erbsland5cterm8PositioneqERK8Position"></span><span id="_CPPv2NK8erbsland5cterm8PositioneqERK8Position"></span><span id="erbsland::cterm::Position::eq-operator__PositionCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a3fbe0ff4ebe1a8763844bc1eed5f8bdd"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8PositioneqERK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Equality comparison (component-wise). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8PositionneERK8Position">
+<span id="_CPPv3NK8erbsland5cterm8PositionneERK8Position"></span><span id="_CPPv2NK8erbsland5cterm8PositionneERK8Position"></span><span id="erbsland::cterm::Position::neq-operator__PositionCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a47f6c4ee3c1fb064a8839a1f51c6a141"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8PositionneERK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Inequality comparison (component-wise). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8PositionplERK8Position">
+<span id="_CPPv3NK8erbsland5cterm8PositionplERK8Position"></span><span id="_CPPv2NK8erbsland5cterm8PositionplERK8Position"></span><span id="erbsland::cterm::Position::add-operator__PositionCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1ae8ba6b71cd86d34965a0768b387883c4"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8PositionplERK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Vector addition (component-wise). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The other position to add. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a> with coordinates (_x + other._x, _y + other._y). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8PositionmiERK8Position">
+<span id="_CPPv3NK8erbsland5cterm8PositionmiERK8Position"></span><span id="_CPPv2NK8erbsland5cterm8PositionmiERK8Position"></span><span id="erbsland::cterm::Position::sub-operator__PositionCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1adb49eb86823c61407c4c11ad09ad0c60"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8PositionmiERK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Vector subtraction (component-wise). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The other position to subtract. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a> with coordinates (_x - other._x, _y - other._y). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8PositionpLERK8Position">
+<span id="_CPPv3N8erbsland5cterm8PositionpLERK8Position"></span><span id="_CPPv2N8erbsland5cterm8PositionpLERK8Position"></span><span id="erbsland::cterm::Position::add-assign-operator__PositionCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a12fbb08c2f61126132edd8f5bda6a19d"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8PositionpLERK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Add another position to this one in-place. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The other position to add. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reference to this position. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8PositionmIERK8Position">
+<span id="_CPPv3N8erbsland5cterm8PositionmIERK8Position"></span><span id="_CPPv2N8erbsland5cterm8PositionmIERK8Position"></span><span id="erbsland::cterm::Position::sub-assign-operator__PositionCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1aa630482ce4c3a1380ce1ec62bb9cf150"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8PositionmIERK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Subtract another position from this one in-place. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The other position to subtract. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reference to this position. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8Position1xEv">
+<span id="_CPPv3NK8erbsland5cterm8Position1xEv"></span><span id="_CPPv2NK8erbsland5cterm8Position1xEv"></span><span id="erbsland::cterm::Position::xCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1ae283899b6d259191216fa9b522503cc4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8Position1xEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the x coordinate. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8Position1yEv">
+<span id="_CPPv3NK8erbsland5cterm8Position1yEv"></span><span id="_CPPv2NK8erbsland5cterm8Position1yEv"></span><span id="erbsland::cterm::Position::yCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a39d020020cb2846ac5856dab78111299"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8Position1yEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the y coordinate. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8Position4setXEi">
+<span id="_CPPv3N8erbsland5cterm8Position4setXEi"></span><span id="_CPPv2N8erbsland5cterm8Position4setXEi"></span><span id="erbsland::cterm::Position::setX__i"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a3bf5ad9f3b74145d4985ec08728c5c59"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setX</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8Position4setXEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the x coordinate. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – New x value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8Position4setYEi">
+<span id="_CPPv3N8erbsland5cterm8Position4setYEi"></span><span id="_CPPv2N8erbsland5cterm8Position4setYEi"></span><span id="erbsland::cterm::Position::setY__i"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a7d4032fe1e612faf5fd0c6f5f1400c32"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setY</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8Position4setYEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the y coordinate. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>y</strong> – New y value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8Position10distanceToE8Position">
+<span id="_CPPv3NK8erbsland5cterm8Position10distanceToE8Position"></span><span id="_CPPv2NK8erbsland5cterm8Position10distanceToE8Position"></span><span id="erbsland::cterm::Position::distanceTo__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a05d001a2d398a9792c1fe7ac574d464d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">distanceTo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8Position10distanceToE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Manhattan (L1) distance to another position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The other position. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>|x - other.x| + |y - other.y|. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8Position12componentMaxE8Position">
+<span id="_CPPv3NK8erbsland5cterm8Position12componentMaxE8Position"></span><span id="_CPPv2NK8erbsland5cterm8Position12componentMaxE8Position"></span><span id="erbsland::cterm::Position::componentMax__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a54194427e27a4e77706cbef48a9829cb"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">componentMax</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8Position12componentMaxE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Component-wise maximum with another position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The other position. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a> containing the max of each component. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm8Position12componentMinE8Position">
+<span id="_CPPv3NK8erbsland5cterm8Position12componentMinE8Position"></span><span id="_CPPv2NK8erbsland5cterm8Position12componentMinE8Position"></span><span id="erbsland::cterm::Position::componentMin__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a2635d2ce0fcb7b27618071a9b3883e55"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">componentMin</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm8Position12componentMinE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Component-wise minimum with another position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The other position. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a> containing the min of each component. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK8erbsland5cterm8Position19cardinalFourBitmaskE8uint32_t2Fn">
+<span id="_CPPv3I0ENK8erbsland5cterm8Position19cardinalFourBitmaskE2Fn"></span><span id="_CPPv2I0ENK8erbsland5cterm8Position19cardinalFourBitmaskE2Fn"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Fn</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_position_1aa277043402c57628afd2e37df7ce271b"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cardinalFourBitmask</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK8erbsland5cterm8Position19cardinalFourBitmaskE8uint32_t2Fn" title="erbsland::cterm::Position::cardinalFourBitmask::Fn"><span class="n"><span class="pre">Fn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fn</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I0ENK8erbsland5cterm8Position19cardinalFourBitmaskE8uint32_t2Fn" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a bitmask testing the four cardinal positions. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fn</strong> – The function to test each cardinal delta position, relative to this one. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8Position18cardinalFourDeltasEv">
+<span id="_CPPv3N8erbsland5cterm8Position18cardinalFourDeltasEv"></span><span id="_CPPv2N8erbsland5cterm8Position18cardinalFourDeltasEv"></span><span id="erbsland::cterm::Position::cardinalFourDeltas"></span><span class="target" id="classerbsland_1_1cterm_1_1_position_1a9607bfb15f528e0b1bc9bdb9516ae08d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">cardinalFourDeltas</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8Position18cardinalFourDeltasEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the four cardinal position deltas. </p>
+<p>Order: right, down, left, up </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9RectangleE">
+<span id="_CPPv3N8erbsland5cterm9RectangleE"></span><span id="_CPPv2N8erbsland5cterm9RectangleE"></span><span id="erbsland::cterm::Rectangle"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Rectangle</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9RectangleE" title="Link to this definition"></a><br /></dt>
+<dd><p>Axis-aligned rectangle represented by a top-left position and size. </p>
+<p>Provides geometry utilities such as containment tests, expansion and iteration. <dl class="simple">
+<dt><strong>Tested:</strong></dt><dd><p><code class="docutils literal notranslate"><span class="pre">RectangleTest</span></code></p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Rectangle9RectangleEv">
+<span id="_CPPv3N8erbsland5cterm9Rectangle9RectangleEv"></span><span id="_CPPv2N8erbsland5cterm9Rectangle9RectangleEv"></span><span id="erbsland::cterm::Rectangle::Rectangle"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a7ac8005ee8fd5f781a6374918cd5bd74"></span><span class="sig-name descname"><span class="n"><span class="pre">Rectangle</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Rectangle9RectangleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct an empty rectangle at (0,0). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Rectangle9RectangleEiiii">
+<span id="_CPPv3N8erbsland5cterm9Rectangle9RectangleEiiii"></span><span id="_CPPv2N8erbsland5cterm9Rectangle9RectangleEiiii"></span><span id="erbsland::cterm::Rectangle::Rectangle__i.i.i.iCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a6586954acb637059fe167dd4a4bddb59"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Rectangle</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Rectangle9RectangleEiiii" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct from explicit position and size values. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – X-coordinate of the top-left corner. </p></li>
+<li><p><strong>y</strong> – Y-coordinate of the top-left corner. </p></li>
+<li><p><strong>width</strong> – <a class="reference internal" href="#classerbsland_1_1cterm_1_1_rectangle"><span class="std std-ref">Rectangle</span></a> width. </p></li>
+<li><p><strong>height</strong> – <a class="reference internal" href="#classerbsland_1_1cterm_1_1_rectangle"><span class="std std-ref">Rectangle</span></a> height. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Rectangle9RectangleE8Position4Size">
+<span id="_CPPv3N8erbsland5cterm9Rectangle9RectangleE8Position4Size"></span><span id="_CPPv2N8erbsland5cterm9Rectangle9RectangleE8Position4Size"></span><span id="erbsland::cterm::Rectangle::Rectangle__Position.SizeCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1ad5cfb06b6cd3a29ec9041bb3b0761a4b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Rectangle</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Rectangle9RectangleE8Position4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct from position and size objects. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> – Top-left corner position. </p></li>
+<li><p><strong>size</strong> – <a class="reference internal" href="#classerbsland_1_1cterm_1_1_rectangle"><span class="std std-ref">Rectangle</span></a> size. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9RectangleoRERK9Rectangle">
+<span id="_CPPv3N8erbsland5cterm9RectangleoRERK9Rectangle"></span><span id="_CPPv2N8erbsland5cterm9RectangleoRERK9Rectangle"></span><span id="erbsland::cterm::Rectangle::or-assign-operator__RectangleCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a655bb2873c54a6a3d2c3552de034db9d"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">|=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9RectangleoRERK9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Expand this rectangle to include another rectangle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – Other rectangle to merge. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reference to this rectangle. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle2x1Ev">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle2x1Ev"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle2x1Ev"></span><span id="erbsland::cterm::Rectangle::x1C"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a9adfa6330652ae34f90f4c0d487cee18"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle2x1Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Left x-coordinate. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle2y1Ev">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle2y1Ev"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle2y1Ev"></span><span id="erbsland::cterm::Rectangle::y1C"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a6eb8df70ae450987e01ee21817aefbbd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle2y1Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Top y-coordinate. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle2x2Ev">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle2x2Ev"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle2x2Ev"></span><span id="erbsland::cterm::Rectangle::x2C"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a0bf6f21eacc9f60f16ec90593919b9aa"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x2</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle2x2Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Right x-coordinate (exclusive). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle2y2Ev">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle2y2Ev"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle2y2Ev"></span><span id="erbsland::cterm::Rectangle::y2C"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a5c1eb5196e1af2742aa6e2f8fdba8216"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y2</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle2y2Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Bottom y-coordinate (exclusive). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle7topLeftEv">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle7topLeftEv"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle7topLeftEv"></span><span id="erbsland::cterm::Rectangle::topLeftC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1afbe7c547d7ffc3b5eba22c6b17a3459f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">topLeft</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle7topLeftEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Top-left corner position. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle8topRightEv">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle8topRightEv"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle8topRightEv"></span><span id="erbsland::cterm::Rectangle::topRightC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a39697434fca987124f75cf700d3d6b1a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">topRight</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle8topRightEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Top-right corner position. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle10bottomLeftEv">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle10bottomLeftEv"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle10bottomLeftEv"></span><span id="erbsland::cterm::Rectangle::bottomLeftC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a0569147bcce1f894f5e3c85d5d2f6218"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bottomLeft</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle10bottomLeftEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Bottom-left corner position. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle11bottomRightEv">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle11bottomRightEv"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle11bottomRightEv"></span><span id="erbsland::cterm::Rectangle::bottomRightC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a20a1865027097802363ee5fb203e0b74"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bottomRight</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle11bottomRightEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Bottom-right corner position. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle5widthEv">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle5widthEv"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle5widthEv"></span><span id="erbsland::cterm::Rectangle::widthC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1ac982ef6ec55480a4a961a65d6c2e86d3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle5widthEv" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="#classerbsland_1_1cterm_1_1_rectangle"><span class="std std-ref">Rectangle</span></a> width. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle6heightEv">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle6heightEv"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle6heightEv"></span><span id="erbsland::cterm::Rectangle::heightC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a83a38396f8402f2a21fdd44555c75a86"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle6heightEv" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="#classerbsland_1_1cterm_1_1_rectangle"><span class="std std-ref">Rectangle</span></a> height. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle4sizeEv">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle4sizeEv"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle4sizeEv"></span><span id="erbsland::cterm::Rectangle::sizeCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a70775c44098aa2f588843c3a2c190d08"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle4sizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the size of the rectangle. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle6anchorE6Anchor">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle6anchorE6Anchor"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle6anchorE6Anchor"></span><span id="erbsland::cterm::Rectangle::anchor__AnchorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a4d8dbf3e7cb32670d0b786e617bcb08e"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">anchor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6AnchorE" title="erbsland::cterm::Anchor"><span class="n"><span class="pre">Anchor</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">anchor</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6AnchorE" title="erbsland::cterm::Anchor"><span class="n"><span class="pre">Anchor</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6Anchor7TopLeftE" title="erbsland::cterm::Anchor::TopLeft"><span class="n"><span class="pre">TopLeft</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle6anchorE6Anchor" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a> of a given anchor within this rectangle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>anchor</strong> – Anchor to query. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The position inside this rectangle matching the requested anchor. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Rectangle6setPosE8Position">
+<span id="_CPPv3N8erbsland5cterm9Rectangle6setPosE8Position"></span><span id="_CPPv2N8erbsland5cterm9Rectangle6setPosE8Position"></span><span id="erbsland::cterm::Rectangle::setPos__Position"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a0885c9efc28e7dbdb22c3be360e28db4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setPos</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Rectangle6setPosE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the top-left corner position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pos</strong> – New position value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9Rectangle7setSizeE4Size">
+<span id="_CPPv3N8erbsland5cterm9Rectangle7setSizeE4Size"></span><span id="_CPPv2N8erbsland5cterm9Rectangle7setSizeE4Size"></span><span id="erbsland::cterm::Rectangle::setSize__Size"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a9a0f6ff460c41331515aeb88e54f7dee"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setSize</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9Rectangle7setSizeE4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the size of the rectangle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> – New size value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle10expandedByE7Margins">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle10expandedByE7Margins"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle10expandedByE7Margins"></span><span id="erbsland::cterm::Rectangle::expandedBy__MarginsC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1ab1831b6d81216fadc92201b7cdaa9725"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">expandedBy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">margins</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle10expandedByE7Margins" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a rectangle expanded by the provided margins. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>margins</strong> – <a class="reference internal" href="#classerbsland_1_1cterm_1_1_margins"><span class="std std-ref">Margins</span></a> to apply; positive values expand outward. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The expanded rectangle. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle7insetByE7Margins">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle7insetByE7Margins"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle7insetByE7Margins"></span><span id="erbsland::cterm::Rectangle::insetBy__MarginsC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1aa6392496432c210f19b13ba9d83f9b19"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">insetBy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">margins</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle7insetByE7Margins" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a rectangle inset by the provided margins. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>margins</strong> – <a class="reference internal" href="#classerbsland_1_1cterm_1_1_margins"><span class="std std-ref">Margins</span></a> to remove from each side. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The inset rectangle. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle12subRectangleE6Anchor4Size7Margins">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle12subRectangleE6Anchor4Size7Margins"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle12subRectangleE6Anchor4Size7Margins"></span><span id="erbsland::cterm::Rectangle::subRectangle__Anchor.Size.MarginsC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1aaf1eacc93cc3d8ce8fddfdffcdc61a3b"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">subRectangle</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6AnchorE" title="erbsland::cterm::Anchor"><span class="n"><span class="pre">Anchor</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">anchor</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">margins</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle12subRectangleE6Anchor4Size7Margins" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a sub-rectangle inside this rectangle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>anchor</strong> – The anchor of the rectangle. </p></li>
+<li><p><strong>size</strong> – The size. Zero means full width/height. </p></li>
+<li><p><strong>margins</strong> – The margins around the sub rectangle. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The aligned sub-rectangle. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle8containsE8Position">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle8containsE8Position"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle8containsE8Position"></span><span id="erbsland::cterm::Rectangle::contains__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a5a197b2601c1175f48c02c95d191a86a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contains</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">testedPosition</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle8containsE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Check if a position is inside the rectangle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>testedPosition</strong> – <a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a> to test. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the position lies inside the rectangle bounds. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle7isFrameE8Position">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle7isFrameE8Position"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle7isFrameE8Position"></span><span id="erbsland::cterm::Rectangle::isFrame__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1aa28e5b57e648172a74e86006d553a230"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isFrame</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">testedPosition</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle7isFrameE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Check if a position lies on the rectangle frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>testedPosition</strong> – <a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a> to test. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the position lies on the outer frame of the rectangle. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle10frameIndexE8Position">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle10frameIndexE8Position"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle10frameIndexE8Position"></span><span id="erbsland::cterm::Rectangle::frameIndex__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a335ec3ef9d930dc44f0006937299bef8"></span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">frameIndex</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">testedPosition</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle10frameIndexE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the clockwise border index for a frame position. </p>
+<p>The top-left corner has index <code class="docutils literal notranslate"><span class="pre">0</span></code>, then the index increases clockwise around the perimeter. Degenerate rectangles with width or height <code class="docutils literal notranslate"><span class="pre">1</span></code> still produce a continuous index sequence. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>testedPosition</strong> – The position on the frame. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The clockwise border index, or <code class="docutils literal notranslate"><span class="pre">-1</span></code> if the position is not on the frame. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9Rectangle9gridCellsEiiii">
+<span id="_CPPv3NK8erbsland5cterm9Rectangle9gridCellsEiiii"></span><span id="_CPPv2NK8erbsland5cterm9Rectangle9gridCellsEiiii"></span><span id="erbsland::cterm::Rectangle::gridCells__i.i.i.iC"></span><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1accfa9cc11bccd94ffb733a8533c47ba8"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gridCells</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rows</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">columns</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">horizontalSpacing</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">verticalSpacing</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9Rectangle9gridCellsEiiii" title="Link to this definition"></a><br /></dt>
+<dd><p>Divide this rectangle into equally spaced grid cells. </p>
+<p>Each cell must be at least 1x1 in size, if this isn’t possible, <code class="docutils literal notranslate"><span class="pre">std::invalid_argument</span></code> is thrown. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rows</strong> – The number of rows. Minimum 1. </p></li>
+<li><p><strong>columns</strong> – The number of columns. Minimum 1 </p></li>
+<li><p><strong>horizontalSpacing</strong> – The spacing between cells horizontally. </p></li>
+<li><p><strong>verticalSpacing</strong> – The spacing between cells vertically. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – if rows or columns are less than 1 or the chosen division is impossible. </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A vector of rectangles representing the grid cells from left to right, top to bottom. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK8erbsland5cterm9Rectangle7forEachEv2Fn">
+<span id="_CPPv3I0ENK8erbsland5cterm9Rectangle7forEachE2Fn"></span><span id="_CPPv2I0ENK8erbsland5cterm9Rectangle7forEachE2Fn"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Fn</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1aac72b1a91df1af0eea3965374433dfbb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forEach</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK8erbsland5cterm9Rectangle7forEachEv2Fn" title="erbsland::cterm::Rectangle::forEach::Fn"><span class="n"><span class="pre">Fn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fn</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK8erbsland5cterm9Rectangle7forEachEv2Fn" title="Link to this definition"></a><br /></dt>
+<dd><p>Call a function for each position contained in the rectangle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Fn</strong> – A callable with signature <code class="docutils literal notranslate"><span class="pre">void(Position)</span></code>. The function definition must be <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">fn(Position</span> <span class="pre">pos)</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK8erbsland5cterm9Rectangle14forEachInFrameEv2Fn">
+<span id="_CPPv3I0ENK8erbsland5cterm9Rectangle14forEachInFrameE2Fn"></span><span id="_CPPv2I0ENK8erbsland5cterm9Rectangle14forEachInFrameE2Fn"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Fn</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_rectangle_1a39c48b36405f30f21c78cdca7d6ec382"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forEachInFrame</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK8erbsland5cterm9Rectangle14forEachInFrameEv2Fn" title="erbsland::cterm::Rectangle::forEachInFrame::Fn"><span class="n"><span class="pre">Fn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fn</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK8erbsland5cterm9Rectangle14forEachInFrameEv2Fn" title="Link to this definition"></a><br /></dt>
+<dd><p>Call a function for each position around the frame, clockwise with index. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Fn</strong> – A callable with signature <code class="docutils literal notranslate"><span class="pre">void(Position,</span> <span class="pre">int)</span></code>. The function definition must be <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">fn(Position</span> <span class="pre">pos,</span> <span class="pre">int</span> <span class="pre">index)</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4SizeE">
+<span id="_CPPv3N8erbsland5cterm4SizeE"></span><span id="_CPPv2N8erbsland5cterm4SizeE"></span><span id="erbsland::cterm::Size"></span><span class="target" id="classerbsland_1_1cterm_1_1_size"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Size</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4SizeE" title="Link to this definition"></a><br /></dt>
+<dd><p>A non-negative 2D size (width × height). </p>
+<p><ul class="simple">
+<li><p>Width and height are clamped to be &gt;= 0.</p></li>
+<li><p>Many operations assume a grid indexed from (0,0) to (width-1,height-1). </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Size4SizeEv">
+<span id="_CPPv3N8erbsland5cterm4Size4SizeEv"></span><span id="_CPPv2N8erbsland5cterm4Size4SizeEv"></span><span id="erbsland::cterm::Size::Size"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a31972f4a2ddcf98062b91def18c922c8"></span><span class="sig-name descname"><span class="n"><span class="pre">Size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Size4SizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a zero size (0 × 0). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Size4SizeEii">
+<span id="_CPPv3N8erbsland5cterm4Size4SizeEii"></span><span id="_CPPv2N8erbsland5cterm4Size4SizeEii"></span><span id="erbsland::cterm::Size::Size__i.iCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a113fdb382d257295eeb458046e9ef25e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Size</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Size4SizeEii" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a size from explicit width and height. </p>
+<p>Negative inputs are clamped to 0. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> – The desired width (clamped to &gt;= 0). </p></li>
+<li><p><strong>height</strong> – The desired height (clamped to &gt;= 0). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Size4SizeE8Position8Position">
+<span id="_CPPv3N8erbsland5cterm4Size4SizeE8Position8Position"></span><span id="_CPPv2N8erbsland5cterm4Size4SizeE8Position8Position"></span><span id="erbsland::cterm::Size::Size__Position.PositionCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1ab5b2a30c76e43aed023f308c2f75e992"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Size</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos1</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos2</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Size4SizeE8Position8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Construct a size from the axis-aligned distance between two positions. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The order of the positions does not matter; absolute differences are used. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos1</strong> – First position. </p></li>
+<li><p><strong>pos2</strong> – Second position. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4SizeeqERK4Size">
+<span id="_CPPv3NK8erbsland5cterm4SizeeqERK4Size"></span><span id="_CPPv2NK8erbsland5cterm4SizeeqERK4Size"></span><span id="erbsland::cterm::Size::eq-operator__SizeCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a3b470121ca64fd2edeaf1631837c0fb3"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4SizeeqERK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Equality comparison on width and height. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4SizeneERK4Size">
+<span id="_CPPv3NK8erbsland5cterm4SizeneERK4Size"></span><span id="_CPPv2NK8erbsland5cterm4SizeneERK4Size"></span><span id="erbsland::cterm::Size::neq-operator__SizeCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a625ff846717be99a46cc8363c53b181b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4SizeneERK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Inequality comparison on width and height. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4SizeplERK4Size">
+<span id="_CPPv3NK8erbsland5cterm4SizeplERK4Size"></span><span id="_CPPv2NK8erbsland5cterm4SizeplERK4Size"></span><span id="erbsland::cterm::Size::add-operator__SizeCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a2358dcbd6aec350e6e13314c39f76692"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4SizeplERK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Add two sizes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The size to add. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The component-wise sum. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4SizemiERK4Size">
+<span id="_CPPv3NK8erbsland5cterm4SizemiERK4Size"></span><span id="_CPPv2NK8erbsland5cterm4SizemiERK4Size"></span><span id="erbsland::cterm::Size::sub-operator__SizeCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1ab7786b5f30bd6c6ac8c78b590820a77c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4SizemiERK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Subtract two sizes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The size to subtract. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The component-wise difference, clamped to non-negative values by the constructor. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size5widthEv">
+<span id="_CPPv3NK8erbsland5cterm4Size5widthEv"></span><span id="_CPPv2NK8erbsland5cterm4Size5widthEv"></span><span id="erbsland::cterm::Size::widthCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a5571a3d4bf53aa1fe100dc0736d886a1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size5widthEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the width (&gt;= 0). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Size8setWidthEi">
+<span id="_CPPv3N8erbsland5cterm4Size8setWidthEi"></span><span id="_CPPv2N8erbsland5cterm4Size8setWidthEi"></span><span id="erbsland::cterm::Size::setWidth__i"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a58259ee302c998821adfe2db38c2ec84"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setWidth</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Size8setWidthEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the width. </p>
+<p>Negative values are clamped to 0. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>width</strong> – New width (clamped to &gt;= 0). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size6heightEv">
+<span id="_CPPv3NK8erbsland5cterm4Size6heightEv"></span><span id="_CPPv2NK8erbsland5cterm4Size6heightEv"></span><span id="erbsland::cterm::Size::heightCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a7146b0875ebf00a5a2def8c9e340d289"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size6heightEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the height (&gt;= 0). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm4Size9setHeightEi">
+<span id="_CPPv3N8erbsland5cterm4Size9setHeightEi"></span><span id="_CPPv2N8erbsland5cterm4Size9setHeightEi"></span><span id="erbsland::cterm::Size::setHeight__i"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a4f8defd8ac11d2878cabdeec21fadbaa"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setHeight</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm4Size9setHeightEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the height. </p>
+<p>Negative values are clamped to 0. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>height</strong> – New height (clamped to &gt;= 0). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size8fitsIntoEK4Size">
+<span id="_CPPv3NK8erbsland5cterm4Size8fitsIntoEK4Size"></span><span id="_CPPv2NK8erbsland5cterm4Size8fitsIntoEK4Size"></span><span id="erbsland::cterm::Size::fitsInto__SizeCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a16ad189f1da80b2009bdded06495cec0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fitsInto</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size8fitsIntoEK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Check if this size fits completely into another size (component-wise &lt;=). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The candidate container size. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if width &lt;= other.width and height &lt;= other.height. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size4areaEv">
+<span id="_CPPv3NK8erbsland5cterm4Size4areaEv"></span><span id="_CPPv2NK8erbsland5cterm4Size4areaEv"></span><span id="erbsland::cterm::Size::areaC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a759e8e0fead0181ebe9caf8bd1b2236b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">area</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size4areaEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Compute the area (width * height). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The area. Note: returns 0 if either dimension is 0. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size6anchorEK6Anchor">
+<span id="_CPPv3NK8erbsland5cterm4Size6anchorEK6Anchor"></span><span id="_CPPv2NK8erbsland5cterm4Size6anchorEK6Anchor"></span><span id="erbsland::cterm::Size::anchor__AnchorCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1ac6299672b591848d4542eff401213db7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">anchor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6AnchorE" title="erbsland::cterm::Anchor"><span class="n"><span class="pre">Anchor</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">anchor</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size6anchorEK6Anchor" title="Link to this definition"></a><br /></dt>
+<dd><p>Compute a position inside the rectangle defined by this size for a given anchor. </p>
+<p>Bottom-right resolves to (width-1, height-1), top-left to (0,0), etc. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>anchor</strong> – The anchor describing the target corner/edge/center. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The position inside the [0,width-1]×[0,height-1] grid (or (0,0) for empty dimensions). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size9isInRangeEK4SizeK4Size">
+<span id="_CPPv3NK8erbsland5cterm4Size9isInRangeEK4SizeK4Size"></span><span id="_CPPv2NK8erbsland5cterm4Size9isInRangeEK4SizeK4Size"></span><span id="erbsland::cterm::Size::isInRange__SizeC.SizeCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1ac8544fa0077f3d4ff749c07abb451884"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isInRange</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">minimum</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">maximum</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size9isInRangeEK4SizeK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the width and height of this size is in the given range. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>minimum</strong> – The minimum size. </p></li>
+<li><p><strong>maximum</strong> – The maximum size. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true If this size is in the range <code class="docutils literal notranslate"><span class="pre">minimum</span></code>-<code class="docutils literal notranslate"><span class="pre">maximum</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size12componentMaxE4Size">
+<span id="_CPPv3NK8erbsland5cterm4Size12componentMaxE4Size"></span><span id="_CPPv2NK8erbsland5cterm4Size12componentMaxE4Size"></span><span id="erbsland::cterm::Size::componentMax__SizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a00efff8634757ff92d724895b75b5d59"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">componentMax</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size12componentMaxE4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Component-wise maximum with another size. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – Other size. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A size whose width is max(this.width, other.width) and height is max(this.height, other.height). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size12componentMinE4Size">
+<span id="_CPPv3NK8erbsland5cterm4Size12componentMinE4Size"></span><span id="_CPPv2NK8erbsland5cterm4Size12componentMinE4Size"></span><span id="erbsland::cterm::Size::componentMin__SizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1af9a096da54546864488b5946ef0cb932"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">componentMin</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size12componentMinE4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Component-wise minimum with another size. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – Other size. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A size whose width is min(this.width, other.width) and height is min(this.height, other.height). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size8containsERK8Position">
+<span id="_CPPv3NK8erbsland5cterm4Size8containsERK8Position"></span><span id="_CPPv2NK8erbsland5cterm4Size8containsERK8Position"></span><span id="erbsland::cterm::Size::contains__PositionCRCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1a77bd8c25ec0bf2e5fe019b173bcb617b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contains</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size8containsERK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Check if a position lies strictly inside the bounds [0,width) × [0,height). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pos</strong> – The position to test. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if 0 &lt;= x &lt; width and 0 &lt;= y &lt; height. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm4Size5indexERK8Position">
+<span id="_CPPv3NK8erbsland5cterm4Size5indexERK8Position"></span><span id="_CPPv2NK8erbsland5cterm4Size5indexERK8Position"></span><span id="erbsland::cterm::Size::index__PositionCRCCE"></span><span class="target" id="classerbsland_1_1cterm_1_1_size_1ada2dc1b457e2593364c30abcc18016be"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">index</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm4Size5indexERK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert a 2D position to a row-major linear index. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pos</strong> – The position. Behavior is undefined if not contained by this size. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>y * width + x. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK8erbsland5cterm4Size7forEachEv2Fn">
+<span id="_CPPv3I0ENK8erbsland5cterm4Size7forEachE2Fn"></span><span id="_CPPv2I0ENK8erbsland5cterm4Size7forEachE2Fn"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Fn</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_size_1a5e9259d8e36a6d653790f51526049044"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forEach</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK8erbsland5cterm4Size7forEachEv2Fn" title="erbsland::cterm::Size::forEach::Fn"><span class="n"><span class="pre">Fn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fn</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK8erbsland5cterm4Size7forEachEv2Fn" title="Link to this definition"></a><br /></dt>
+<dd><p>Visit all positions inside the size in row-major order. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Fn</strong> – A callable taking <a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a>. </p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>fn</strong> – The function to invoke for each <a class="reference internal" href="#classerbsland_1_1cterm_1_1_position"><span class="std std-ref">Position</span></a> (x from 0..width-1, y from 0..height-1). </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="font.html" class="btn btn-neutral float-left" title="Font" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="input.html" class="btn btn-neutral float-right" title="Input" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

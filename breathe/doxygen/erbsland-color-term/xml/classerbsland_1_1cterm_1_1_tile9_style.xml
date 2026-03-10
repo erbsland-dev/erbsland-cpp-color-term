@@ -1,0 +1,464 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_tile9_style" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::Tile9Style</compoundname>
+    <includes refid="_tile9_style_8hpp" local="no">erbsland/cterm/Tile9Style.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1_tile9_style_1_1_parsed_tiles" prot="private">erbsland::cterm::Tile9Style::ParsedTiles</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_tile9_style_1a528f02f7b03c1766dbb4a16592a5dfd8" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>, 16 &gt;</type>
+        <definition>std::array&lt;Char, 16&gt; erbsland::cterm::Tile9Style::_tiles</definition>
+        <argsstring></argsstring>
+        <name>_tiles</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::_tiles</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="94" column="16" bodyfile="erbsland/cterm/Tile9Style.hpp" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_tile9_style_1a84d77aae1d317e3e20360dc0802ed995" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Tile9Style::_hasExtendedTiles</definition>
+        <argsstring></argsstring>
+        <name>_hasExtendedTiles</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::_hasExtendedTiles</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="95" column="10" bodyfile="erbsland/cterm/Tile9Style.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1a513b32a945b40d05ef29e3e1ccd31388" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Tile9Style::Tile9Style</definition>
+        <argsstring>(std::array&lt; Char, 9 &gt; tiles) noexcept</argsstring>
+        <name>Tile9Style</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::Tile9Style</qualifiedname>
+        <param>
+          <type>std::array&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>, 9 &gt;</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+<para>Create a new 9-tile style from the repeating 3x3 tile layout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tiles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 3x3 tiles in row-major order. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="40" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1acc1a1d55732318c56deed5d7d89cff28" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Tile9Style::Tile9Style</definition>
+        <argsstring>(std::array&lt; Char, 16 &gt; tiles) noexcept</argsstring>
+        <name>Tile9Style</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::Tile9Style</qualifiedname>
+        <param>
+          <type>std::array&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>, 16 &gt;</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+<para>Create a new 9-tile style with explicit tiles for degenerate rectangles. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tiles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 3x3 tiles followed by 7 degenerate tiles. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1abbc6b8f7a39db8a06d393948f460ae52" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Tile9Style::Tile9Style</definition>
+        <argsstring>(std::string_view tiles)</argsstring>
+        <name>Tile9Style</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::Tile9Style</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+<para>Create a new 9-tile style from 9 or 16 terminal characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tiles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A sequence of 9 tiles, or 16 tiles including the degenerate cases. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>tiles</computeroutput> does not contain exactly 9 or 16 terminal characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1a3d1f8e74873fbcb0666dc8128ceee103" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Tile9Style::Tile9Style</definition>
+        <argsstring>(std::u32string_view tiles)</argsstring>
+        <name>Tile9Style</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::Tile9Style</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+<para>Create a new 9-tile style from 9 or 16 terminal characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tiles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A sequence of 9 tiles, or 16 tiles including the degenerate cases. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>tiles</computeroutput> does not contain exactly 9 or 16 terminal characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1a2d1e66c07e7e5c865d8a9a80b986c9f5" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Tile9Style::block</definition>
+        <argsstring>(Rectangle rect, Position pos) const noexcept</argsstring>
+        <name>block</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::block</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Resolve the tile for a given position inside a rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The center and edge tiles are repeated as needed. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The styled rectangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A position inside <computeroutput>rect</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The resolved tile, or an empty character if <computeroutput>pos</computeroutput> is outside <computeroutput>rect</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="59" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1a5fd1bf220c8755651baa6035bd17097a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Tile9StylePtr</type>
+        <definition>static Tile9StylePtr erbsland::cterm::Tile9Style::create</definition>
+        <argsstring>(std::string_view tiles)</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::create</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+<para>Create a new shared style from 9 or 16 terminal characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tiles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A sequence of 9 tiles, or 16 tiles including the degenerate cases. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A shared style instance. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>tiles</computeroutput> does not contain exactly 9 or 16 terminal characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="66" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1a95dff2e383702afe87bcd5aea46a439e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Tile9StylePtr</type>
+        <definition>static Tile9StylePtr erbsland::cterm::Tile9Style::create</definition>
+        <argsstring>(std::u32string_view tiles)</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::create</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+<para>Create a new shared style from 9 or 16 terminal characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tiles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A sequence of 9 tiles, or 16 tiles including the degenerate cases. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A shared style instance. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>tiles</computeroutput> does not contain exactly 9 or 16 terminal characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="71" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1a0f6e217c4dbdd5a4d5b0bebeee0d89be" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Tile9StylePtr</type>
+        <definition>static Tile9StylePtr erbsland::cterm::Tile9Style::outerHalfBlockFrame</definition>
+        <argsstring>()</argsstring>
+        <name>outerHalfBlockFrame</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::outerHalfBlockFrame</qualifiedname>
+        <briefdescription>
+<para>For drawing half-block frames on the outer cell edges. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="73" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1a612a33b9b7f23141db4e38e75c5b264a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Tile9StylePtr</type>
+        <definition>static Tile9StylePtr erbsland::cterm::Tile9Style::innerHalfBlockFrame</definition>
+        <argsstring>()</argsstring>
+        <name>innerHalfBlockFrame</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::innerHalfBlockFrame</qualifiedname>
+        <briefdescription>
+<para>For drawing half-block frames on the inner cell edges. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="75" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1aecd3ce1d6fb7644f9f12d152781f105b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Tile9StylePtr</type>
+        <definition>static Tile9StylePtr erbsland::cterm::Tile9Style::forStyle</definition>
+        <argsstring>(FrameStyle frameStyle)</argsstring>
+        <name>forStyle</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::forStyle</qualifiedname>
+        <param>
+          <type>FrameStyle</type>
+          <declname>frameStyle</declname>
+        </param>
+        <briefdescription>
+<para>Get the tile-9 style for a predefined frame style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameStyle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The frame style to resolve. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The matching tile-9 style, or <computeroutput>nullptr</computeroutput> if the frame style uses <computeroutput><ref refid="classerbsland_1_1cterm_1_1_char16_style" kindref="compound">Char16Style</ref></computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="79" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1ad32881bfdd20997ea2552245d9439e56" prot="private" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Tile9Style::Tile9Style</definition>
+        <argsstring>(const ParsedTiles &amp;parsed) noexcept</argsstring>
+        <name>Tile9Style</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::Tile9Style</qualifiedname>
+        <param>
+          <type>const ParsedTiles &amp;</type>
+          <declname>parsed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="88" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1af4f27a7a3d38c05b04712dc061777389" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ParsedTiles</type>
+        <definition>static ParsedTiles erbsland::cterm::Tile9Style::parseTiles</definition>
+        <argsstring>(const String &amp;tiles)</argsstring>
+        <name>parseTiles</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::parseTiles</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="89" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1ae15b94baff32cbb860ae050a527bd916" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>ParsedTiles</type>
+        <definition>static ParsedTiles erbsland::cterm::Tile9Style::toParsedTiles</definition>
+        <argsstring>(const std::array&lt; Char, 9 &gt; &amp;tiles) noexcept</argsstring>
+        <name>toParsedTiles</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::toParsedTiles</qualifiedname>
+        <param>
+          <type>const std::array&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>, 9 &gt; &amp;</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="90" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_tile9_style_1ab0ebbd38efcaa34fa7bacc6000b9a124" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>ParsedTiles</type>
+        <definition>static ParsedTiles erbsland::cterm::Tile9Style::toParsedTiles</definition>
+        <argsstring>(const std::array&lt; Char, 16 &gt; &amp;tiles) noexcept</argsstring>
+        <name>toParsedTiles</name>
+        <qualifiedname>erbsland::cterm::Tile9Style::toParsedTiles</qualifiedname>
+        <param>
+          <type>const std::array&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>, 16 &gt; &amp;</type>
+          <declname>tiles</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Tile9Style.hpp" line="91" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Defines a style for repeating a 3x3 tile pattern across a rectangle. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The 9-tile layout uses this arrangement: top-left, top, top-right, left, center, right, bottom-left, bottom, bottom-right.</para>
+<para>Optionally, 7 additional tiles can be provided for degenerate rectangles: single-row left, single-row center, single-row right, single-column top, single-column center, single-column bottom, and the single-cell tile. </para>
+    </detaileddescription>
+    <location file="erbsland/cterm/Tile9Style.hpp" line="36" column="1" bodyfile="erbsland/cterm/Tile9Style.hpp" bodystart="36" bodyend="96"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a84d77aae1d317e3e20360dc0802ed995" prot="private" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>_hasExtendedTiles</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a528f02f7b03c1766dbb4a16592a5dfd8" prot="private" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>_tiles</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a2d1e66c07e7e5c865d8a9a80b986c9f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>block</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a5fd1bf220c8755651baa6035bd17097a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a95dff2e383702afe87bcd5aea46a439e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1aecd3ce1d6fb7644f9f12d152781f105b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>forStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a612a33b9b7f23141db4e38e75c5b264a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>innerHalfBlockFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a0f6e217c4dbdd5a4d5b0bebeee0d89be" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>outerHalfBlockFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1af4f27a7a3d38c05b04712dc061777389" prot="private" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>parseTiles</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a513b32a945b40d05ef29e3e1ccd31388" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>Tile9Style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1acc1a1d55732318c56deed5d7d89cff28" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>Tile9Style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1abbc6b8f7a39db8a06d393948f460ae52" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>Tile9Style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1a3d1f8e74873fbcb0666dc8128ceee103" prot="public" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>Tile9Style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1ad32881bfdd20997ea2552245d9439e56" prot="private" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>Tile9Style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1ae15b94baff32cbb860ae050a527bd916" prot="private" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>toParsedTiles</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_tile9_style_1ab0ebbd38efcaa34fa7bacc6000b9a124" prot="private" virt="non-virtual"><scope>erbsland::cterm::Tile9Style</scope><name>toParsedTiles</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

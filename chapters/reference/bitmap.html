@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bitmap &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Color" href="color.html" />
+    <link rel="prev" title="Reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Bitmap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-a-small-pixel-mask">Preparing a Small Pixel Mask</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-bitmaps-from-text-patterns">Building Bitmaps from Text Patterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rendering-a-bitmap-to-a-buffer">Rendering a Bitmap to a Buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#choosing-the-scale-mode">Choosing the Scale Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#color-and-animation-rules">Color and Animation Rules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm6BitmapE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Bitmap</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptionsE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::BitmapDrawOptions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorModeE"><code class="docutils literal notranslate"><span class="pre">BitmapColorMode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapScaleModeE"><code class="docutils literal notranslate"><span class="pre">BitmapScaleMode</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Text</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Bitmap</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/bitmap.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bitmap">
+<h1>Bitmap<a class="headerlink" href="#bitmap" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Bitmap</span></code> is the low-level pixel container used by the library whenever a
+boolean mask needs to be rendered, copied, or transformed. A bitmap stores
+only on/off pixels; the actual terminal representation is chosen later by
+<code class="docutils literal notranslate"><span class="pre">Buffer::drawBitmap()</span></code> and <code class="docutils literal notranslate"><span class="pre">BitmapDrawOptions</span></code>.</p>
+<p>The class is primarily used internally for glyph rendering and similar
+pixel-based operations, but it is also useful when implementing custom
+rendering helpers, small icons, line maps, or procedural effects.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="preparing-a-small-pixel-mask">
+<h3>Preparing a Small Pixel Mask<a class="headerlink" href="#preparing-a-small-pixel-mask" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Bitmap</span></code> stores a two-dimensional grid of pixels. Each pixel can be
+set individually and later queried or copied into another bitmap.</p>
+<p>This makes it easy to construct reusable masks or small procedural
+patterns.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">bitmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Bitmap</span><span class="p">{</span><span class="n">Size</span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">}};</span>
+<span class="n">bitmap</span><span class="p">.</span><span class="n">setPixel</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">bitmap</span><span class="p">.</span><span class="n">setPixel</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">bitmap</span><span class="p">.</span><span class="n">setPixel</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Bitmap</span><span class="p">{</span><span class="n">Size</span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">}};</span>
+<span class="n">copy</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">Position</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="n">bitmap</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">copy</span><span class="p">.</span><span class="n">pixelQuad</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">})</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Use the encoded 2x2 mask for custom rendering.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">draw()</span></code> function copies one bitmap into another at a given
+position.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pixelQuad()</span></code> function reads a 2×2 group of pixels and encodes
+them as a small integer value. This is useful when converting bitmap
+patterns into terminal cell representations.</p>
+</section>
+<section id="building-bitmaps-from-text-patterns">
+<h3>Building Bitmaps from Text Patterns<a class="headerlink" href="#building-bitmaps-from-text-patterns" title="Link to this heading"></a></h3>
+<p>For small icons and handcrafted masks, <code class="docutils literal notranslate"><span class="pre">Bitmap::fromPattern()</span></code> is
+usually the fastest way to define the pixels. Each input string becomes
+one bitmap row. Dots and spaces are treated as cleared pixels; every
+other character sets a pixel.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">rocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Bitmap</span><span class="o">::</span><span class="n">fromPattern</span><span class="p">({</span>
+<span class="w">    </span><span class="s">&quot;.....#.....&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;....###....&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;...#####...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;....###....&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;...#####...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;..#######..&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;...#####...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;..#######..&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;.#########.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;.....#.....&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;.....#.....&quot;</span><span class="p">,</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Rows may have different lengths. <code class="docutils literal notranslate"><span class="pre">fromPattern()</span></code> uses the longest row
+as the bitmap width and pads shorter rows with cleared pixels on the
+right.</p>
+</section>
+<section id="rendering-a-bitmap-to-a-buffer">
+<h3>Rendering a Bitmap to a Buffer<a class="headerlink" href="#rendering-a-bitmap-to-a-buffer" title="Link to this heading"></a></h3>
+<p>Once a bitmap is prepared, <code class="docutils literal notranslate"><span class="pre">Buffer::drawBitmap()</span></code> converts it into
+terminal cells. <code class="docutils literal notranslate"><span class="pre">BitmapDrawOptions</span></code> controls the scale mode, the block
+characters that are used, the base colors, and the optional line style
+for neighbor-aware rendering.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">bitmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Bitmap</span><span class="p">{</span><span class="n">Size</span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">}};</span>
+<span class="n">bitmap</span><span class="p">.</span><span class="n">setPixel</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">bitmap</span><span class="p">.</span><span class="n">setPixel</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">bitmap</span><span class="p">.</span><span class="n">setPixel</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">bitmap</span><span class="p">.</span><span class="n">setPixel</span><span class="p">({</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BitmapDrawOptions</span><span class="p">{};</span>
+<span class="n">options</span><span class="p">.</span><span class="n">setColorSequence</span><span class="p">(</span>
+<span class="w">    </span><span class="n">ColorSequence</span><span class="p">{</span>
+<span class="w">        </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightBlue</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">        </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightCyan</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">        </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightMagenta</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">},</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="n">BitmapColorMode</span><span class="o">::</span><span class="n">ForwardDiagonalStripes</span><span class="p">);</span>
+
+<span class="n">buffer</span><span class="p">.</span><span class="n">drawBitmap</span><span class="p">(</span><span class="n">bitmap</span><span class="p">,</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">},</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">Center</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">animationCycle</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The rectangle overload aligns the <em>rendered</em> bitmap inside the target
+rectangle. If the rendered bitmap is larger, it is cropped according to
+the chosen alignment.</p>
+</section>
+<section id="choosing-the-scale-mode">
+<h3>Choosing the Scale Mode<a class="headerlink" href="#choosing-the-scale-mode" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">BitmapScaleMode</span></code> decides how pixels are grouped into terminal cells:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HalfBlock</span></code> uses one character for each 2x2 pixel group. This is the
+default mode and allows colored empty cells because the zero entry in
+<code class="docutils literal notranslate"><span class="pre">halfBlocks()</span></code> is rendered too.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FullBlock</span></code> uses one character per set bitmap pixel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DoubleBlock</span></code> also uses one character per set bitmap pixel, but
+doubles the width in terminal cells to compensate for rectangular
+terminal proportions.</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">char16Style()</span></code> is set, it overrides the scale mode completely.
+Each set pixel becomes one terminal cell, and the chosen <code class="docutils literal notranslate"><span class="pre">Char16Style</span></code>
+selects the block from the east, south, west, and north neighbors of the
+pixel. This is useful for circuit maps, line art, and bitmap-derived
+frame structures.</p>
+</section>
+<section id="color-and-animation-rules">
+<h3>Color and Animation Rules<a class="headerlink" href="#color-and-animation-rules" title="Link to this heading"></a></h3>
+<p>The base color comes from <code class="docutils literal notranslate"><span class="pre">BitmapDrawOptions::color()</span></code>. A single-color
+sequence paints the whole bitmap uniformly, while the stripe modes look up
+the sequence by rendered bitmap coordinates plus <code class="docutils literal notranslate"><span class="pre">animationCycle</span></code> and
+<code class="docutils literal notranslate"><span class="pre">colorAnimationOffset()</span></code>.</p>
+<p>If the sequence is empty, the color is inherited from the buffer below.
+After the base color is selected, the color stored in <code class="docutils literal notranslate"><span class="pre">fullBlock()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">doubleBlocks()</span></code>, <code class="docutils literal notranslate"><span class="pre">halfBlocks()</span></code>, or the chosen <code class="docutils literal notranslate"><span class="pre">Char16Style</span></code> block
+is overlaid on top of it.</p>
+<p>To see all combinations in action, run the <code class="docutils literal notranslate"><span class="pre">bitmap-showcase</span></code> demo.</p>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6BitmapE">
+<span id="_CPPv3N8erbsland5cterm6BitmapE"></span><span id="_CPPv2N8erbsland5cterm6BitmapE"></span><span id="erbsland::cterm::Bitmap"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bitmap</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6BitmapE" title="Link to this definition"></a><br /></dt>
+<dd><p>A mutable bitmap storing boolean pixels in row-major order. </p>
+<p>Subclassed by <a class="reference internal" href="font.html#classerbsland_1_1cterm_1_1_font_glyph"><span class="std std-ref">erbsland::cterm::FontGlyph</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Bitmap6BitmapEv">
+<span id="_CPPv3N8erbsland5cterm6Bitmap6BitmapEv"></span><span id="_CPPv2N8erbsland5cterm6Bitmap6BitmapEv"></span><span id="erbsland::cterm::Bitmap::Bitmap"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1a7ecf67ceb9c5455e65120c82e08ef1d4"></span><span class="sig-name descname"><span class="n"><span class="pre">Bitmap</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Bitmap6BitmapEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty bitmap with the size <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Bitmap6BitmapEK4Size">
+<span id="_CPPv3N8erbsland5cterm6Bitmap6BitmapEK4Size"></span><span id="_CPPv2N8erbsland5cterm6Bitmap6BitmapEK4Size"></span><span id="erbsland::cterm::Bitmap::Bitmap__SizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1a665244b95823d49ae0e4ccad1fdbc028"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bitmap</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Bitmap6BitmapEK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a bitmap with the given size and all pixels cleared. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> – The bitmap dimensions. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6BitmapD0Ev">
+<span id="_CPPv3N8erbsland5cterm6BitmapD0Ev"></span><span id="_CPPv2N8erbsland5cterm6BitmapD0Ev"></span><span id="erbsland::cterm::Bitmap::~Bitmap"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1ab6d102b22dd25496a34badc0d3546124"></span><span class="sig-name descname"><span class="n"><span class="pre">~Bitmap</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6BitmapD0Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Destroy the bitmap. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6Bitmap4sizeEv">
+<span id="_CPPv3NK8erbsland5cterm6Bitmap4sizeEv"></span><span id="_CPPv2NK8erbsland5cterm6Bitmap4sizeEv"></span><span id="erbsland::cterm::Bitmap::sizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1ae1f3d14030b5aa43548c39a30778ea11"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6Bitmap4sizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the bitmap dimensions. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6Bitmap4dataEv">
+<span id="_CPPv3NK8erbsland5cterm6Bitmap4dataEv"></span><span id="_CPPv2NK8erbsland5cterm6Bitmap4dataEv"></span><span id="erbsland::cterm::Bitmap::dataC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1ae4a0983b91510e9ee12796b13dded22c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6Bitmap4dataEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the raw pixel storage. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Bitmap4dataEv">
+<span id="_CPPv3N8erbsland5cterm6Bitmap4dataEv"></span><span id="_CPPv2N8erbsland5cterm6Bitmap4dataEv"></span><span id="erbsland::cterm::Bitmap::data"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1aea308a7e1835c5e2685ca20d71fbde62"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Bitmap4dataEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the raw pixel storage for modification. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6Bitmap5pixelE8Position">
+<span id="_CPPv3NK8erbsland5cterm6Bitmap5pixelE8Position"></span><span id="_CPPv2NK8erbsland5cterm6Bitmap5pixelE8Position"></span><span id="erbsland::cterm::Bitmap::pixel__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1aeb9bd69611cf8d8af7c01f4d061f00a9"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pixel</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6Bitmap5pixelE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Read one pixel. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pos</strong> – The pixel position. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The pixel state, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if <code class="docutils literal notranslate"><span class="pre">pos</span></code> is outside the bitmap. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm6Bitmap9pixelQuadE8Position">
+<span id="_CPPv3NK8erbsland5cterm6Bitmap9pixelQuadE8Position"></span><span id="_CPPv2NK8erbsland5cterm6Bitmap9pixelQuadE8Position"></span><span id="erbsland::cterm::Bitmap::pixelQuad__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1ad7c9fca179c403837c717049d79db983"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pixelQuad</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm6Bitmap9pixelQuadE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Read a 2x2 pixel block encoded as four bits. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pos</strong> – The quad position in half-resolution coordinates. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Bit mask with top-left/top-right/bottom-left/bottom-right pixels in bits <code class="docutils literal notranslate"><span class="pre">0..3</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Bitmap8setPixelE8Positionb">
+<span id="_CPPv3N8erbsland5cterm6Bitmap8setPixelE8Positionb"></span><span id="_CPPv2N8erbsland5cterm6Bitmap8setPixelE8Positionb"></span><span id="erbsland::cterm::Bitmap::setPixel__Position.b"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1abe4c9bc98cbf2a49594e72aba840e1c2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setPixel</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Bitmap8setPixelE8Positionb" title="Link to this definition"></a><br /></dt>
+<dd><p>Set one pixel in the bitmap. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Positions outside the bitmap are ignored. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> – The pixel position. </p></li>
+<li><p><strong>value</strong> – The new pixel state. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Bitmap14flipHorizontalEv">
+<span id="_CPPv3N8erbsland5cterm6Bitmap14flipHorizontalEv"></span><span id="_CPPv2N8erbsland5cterm6Bitmap14flipHorizontalEv"></span><span id="erbsland::cterm::Bitmap::flipHorizontal"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1a0405205a1bb3dd6535d3ed665a242359"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flipHorizontal</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Bitmap14flipHorizontalEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Mirror the bitmap horizontally in-place. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN8erbsland5cterm6Bitmap4drawEv8PositionRKNSt6vectorI1TEE">
+<span id="_CPPv3I0EN8erbsland5cterm6Bitmap4drawE8PositionRKNSt6vectorI1TEE"></span><span id="_CPPv2I0EN8erbsland5cterm6Bitmap4drawE8PositionRKNSt6vectorI1TEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1a306505b478b3b93744b02a91f43de53b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN8erbsland5cterm6Bitmap4drawEv8PositionRKNSt6vectorI1TEE" title="erbsland::cterm::Bitmap::draw::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I0EN8erbsland5cterm6Bitmap4drawEv8PositionRKNSt6vectorI1TEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Draw pixels from a numeric bit mask. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The unsigned integer type. </p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>position</strong> – The top left corner where to draw the bit mask. </p></li>
+<li><p><strong>data</strong> – The array with the data. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Bitmap4drawEK8PositionRK6Bitmap">
+<span id="_CPPv3N8erbsland5cterm6Bitmap4drawEK8PositionRK6Bitmap"></span><span id="_CPPv2N8erbsland5cterm6Bitmap4drawEK8PositionRK6Bitmap"></span><span id="erbsland::cterm::Bitmap::draw__PositionC.BitmapCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1a6d5ab0810bab3e533d3e7e462b6d955e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6BitmapE" title="erbsland::cterm::Bitmap"><span class="n"><span class="pre">Bitmap</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">bitmap</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Bitmap4drawEK8PositionRK6Bitmap" title="Link to this definition"></a><br /></dt>
+<dd><p>Draw another bitmap to the given position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> – The top left corner of the bitmap to draw. </p></li>
+<li><p><strong>bitmap</strong> – The bitmap to draw. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Bitmap11toDataIndexEKi">
+<span id="_CPPv3N8erbsland5cterm6Bitmap11toDataIndexEKi"></span><span id="_CPPv2N8erbsland5cterm6Bitmap11toDataIndexEKi"></span><span id="erbsland::cterm::Bitmap::toDataIndex__iC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1ac2d8dd5c971f3187de0a31e450c53cb7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toDataIndex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Bitmap11toDataIndexEKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert a signed pixel index to the storage index type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The row-major pixel index. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The corresponding storage index. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm6Bitmap11fromPatternENSt16initializer_listINSt11string_viewEEE">
+<span id="_CPPv3N8erbsland5cterm6Bitmap11fromPatternENSt16initializer_listINSt11string_viewEEE"></span><span id="_CPPv2N8erbsland5cterm6Bitmap11fromPatternENSt16initializer_listINSt11string_viewEEE"></span><span id="erbsland::cterm::Bitmap::fromPattern__std::initializer_list:std::string_view:"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_1aa71af37f75c2002606e5e8a3eee0ba09"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm6BitmapE" title="erbsland::cterm::Bitmap"><span class="n"><span class="pre">Bitmap</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromPattern</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rows</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm6Bitmap11fromPatternENSt16initializer_listINSt11string_viewEEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a bitmap from an ASCII pattern. </p>
+<p>Each input string becomes one row. Dots (<code class="docutils literal notranslate"><span class="pre">.</span></code>) and spaces create cleared pixels, every other character sets a pixel. Shorter rows are padded with cleared pixels to the maximum row width. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rows</strong> – The pattern rows to parse. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created bitmap. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptionsE">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptionsE"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptionsE"></span><span id="erbsland::cterm::BitmapDrawOptions"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BitmapDrawOptions</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptionsE" title="Link to this definition"></a><br /></dt>
+<dd><p>The options to draw a bitmap. </p>
+<p>These options define how <code class="docutils literal notranslate"><a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_buffer_1a169e20be2b2bb0e3c56582d91fd14628"><span class="std std-ref"><span class="pre">Buffer::drawBitmap()</span></span></a></code> converts bitmap pixels into terminal cells. For color animation and stripe modes, the color position is calculated in the rendered bitmap grid: <code class="docutils literal notranslate"><span class="pre">FullBlock</span></code>, <code class="docutils literal notranslate"><span class="pre">DoubleBlock</span></code>, and <code class="docutils literal notranslate"><a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_char16_style"><span class="std std-ref"><span class="pre">Char16Style</span></span></a></code> use one logical position per bitmap pixel, while <code class="docutils literal notranslate"><span class="pre">HalfBlock</span></code> uses one logical position per 2x2 pixel cell. The rectangle overload of <code class="docutils literal notranslate"><span class="pre">drawBitmap()</span></code> aligns this rendered grid inside the target rectangle and crops it if needed. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Creating custom option instances is expensive. For that reason, create them once and keep the instances for multiple <code class="docutils literal notranslate"><span class="pre">drawBitmap</span></code> calls. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsEv">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsEv"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsEv"></span><span id="erbsland::cterm::BitmapDrawOptions::BitmapDrawOptions"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1ab817223ba7036b8b4b5e66040625a0e6"></span><span class="sig-name descname"><span class="n"><span class="pre">BitmapDrawOptions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create default bitmap draw options. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE6tColor">
+<span id="_CPPv3I0EN8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE6tColor"></span><span id="_CPPv2I0EN8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE6tColor"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tColor</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1ac11b27c7b3fce91a09ea5f0d9642f297"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BitmapDrawOptions</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE6tColor" title="erbsland::cterm::BitmapDrawOptions::BitmapDrawOptions::tColor"><span class="n"><span class="pre">tColor</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE6tColor" title="Link to this definition"></a><br /></dt>
+<dd><p>Create options for one fixed color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The base color for the bitmap. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE13ColorSequence15BitmapColorMode">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE13ColorSequence15BitmapColorMode"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE13ColorSequence15BitmapColorMode"></span><span id="erbsland::cterm::BitmapDrawOptions::BitmapDrawOptions__ColorSequence.BitmapColorMode"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a4295d6f7c714dd3631f73f9b8dfb1cb0"></span><span class="sig-name descname"><span class="n"><span class="pre">BitmapDrawOptions</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm13ColorSequenceE" title="erbsland::cterm::ColorSequence"><span class="n"><span class="pre">ColorSequence</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">colorSequence</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorModeE" title="erbsland::cterm::BitmapColorMode"><span class="n"><span class="pre">BitmapColorMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">colorMode</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorModeE" title="erbsland::cterm::BitmapColorMode"><span class="n"><span class="pre">BitmapColorMode</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorMode8OneColorE" title="erbsland::cterm::BitmapColorMode::OneColor"><span class="n"><span class="pre">OneColor</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions17BitmapDrawOptionsE13ColorSequence15BitmapColorMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Create options from a color sequence. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>colorSequence</strong> – The base colors for the bitmap. </p></li>
+<li><p><strong>colorMode</strong> – The mode used to pick colors from the sequence. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions5colorEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions5colorEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions5colorEv"></span><span id="erbsland::cterm::BitmapDrawOptions::colorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a0dd6ec27820cdf92bbf993118eb46d4f"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm13ColorSequenceE" title="erbsland::cterm::ColorSequence"><span class="n"><span class="pre">ColorSequence</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions5colorEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The color to use for drawing the bitmap. </p>
+<p>The color can be either a single color or a sequence of colors. If this is an empty sequence, the color is inherited from the buffer. Colors are applied using the <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_bitmap_draw_options_1a510134e47391fc4cb0a032072b267336"><span class="std std-ref"><span class="pre">colorMode()</span></span></a></code>. If the characters in <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_bitmap_draw_options_1a94e15b83b6e6ef62d18d92b762f37ec7"><span class="std std-ref"><span class="pre">fullBlock()</span></span></a></code>, <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_bitmap_draw_options_1a7ff1c827684f0a1cc82dd20803fe82c9"><span class="std std-ref"><span class="pre">doubleBlocks()</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_bitmap_draw_options_1ab48346d7e079f29227107dca83d663f3"><span class="std std-ref"><span class="pre">halfBlocks()</span></span></a></code> have colors set, these colors are overlaid <em>after</em> calculating this base color. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For full-block and double-block mode, the background color is only applied to set pixels. Fill the bitmap area if you need a custom background color for unset pixels. </p>
+</div>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorE5Color">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions8setColorE5Color"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions8setColorE5Color"></span><span id="erbsland::cterm::BitmapDrawOptions::setColor__Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a74a710d34f3c3da7bd9fa8d0acef80e7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Set a single color. </p>
+<p>Replaces the current color sequence with one entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorE10Foreground10Background">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions8setColorE10Foreground10Background"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions8setColorE10Foreground10Background"></span><span id="erbsland::cterm::BitmapDrawOptions::setColor__Foreground.Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a8c3c3ac2a3c23f86f2982ef53b8223de"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">foreground</span></span>, <a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">background</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorE10Foreground10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorE10Foreground">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions8setColorE10Foreground"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions8setColorE10Foreground"></span><span id="erbsland::cterm::BitmapDrawOptions::setColor__Foreground"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a4313bae7c74cf5ad5bb84d18186ff648"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">foreground</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorE10Foreground" title="Link to this definition"></a><br /></dt>
+<dd><p>Set only a foreground color. </p>
+<p>The background remains inherited from the buffer below. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorEN10Foreground3HueE">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions8setColorEN10Foreground3HueE"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions8setColorEN10Foreground3HueE"></span><span id="erbsland::cterm::BitmapDrawOptions::setColor__Foreground::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1ae309a6a579bdb6ea4caa067a71fd6031"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">foreground</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorEN10Foreground3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorE10Background">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions8setColorE10Background"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions8setColorE10Background"></span><span id="erbsland::cterm::BitmapDrawOptions::setColor__Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1afa3da8a15c694be62a723630e585ab71"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">background</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorE10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Set only a background color. </p>
+<p>The foreground remains inherited from the buffer below. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorEN10Background3HueE">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions8setColorEN10Background3HueE"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions8setColorEN10Background3HueE"></span><span id="erbsland::cterm::BitmapDrawOptions::setColor__Background::Hue"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1aebb7cb518ae7abb171dd85f0d4ed2c09"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Hue</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">background</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions8setColorEN10Background3HueE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions16setColorSequenceE13ColorSequence15BitmapColorMode">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions16setColorSequenceE13ColorSequence15BitmapColorMode"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions16setColorSequenceE13ColorSequence15BitmapColorMode"></span><span id="erbsland::cterm::BitmapDrawOptions::setColorSequence__ColorSequence.BitmapColorMode"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a33eab2b742b3960bf6c2f8fb786b9487"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColorSequence</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm13ColorSequenceE" title="erbsland::cterm::ColorSequence"><span class="n"><span class="pre">ColorSequence</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">colorSequence</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorModeE" title="erbsland::cterm::BitmapColorMode"><span class="n"><span class="pre">BitmapColorMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">colorMode</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorModeE" title="erbsland::cterm::BitmapColorMode"><span class="n"><span class="pre">BitmapColorMode</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorMode8OneColorE" title="erbsland::cterm::BitmapColorMode::OneColor"><span class="n"><span class="pre">OneColor</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions16setColorSequenceE13ColorSequence15BitmapColorMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Set a color sequence. </p>
+<p>Pass an empty <code class="docutils literal notranslate"><a class="reference internal" href="color.html#classerbsland_1_1cterm_1_1_color_sequence"><span class="std std-ref"><span class="pre">ColorSequence</span></span></a><span class="pre">{}</span></code> to inherit the complete color from the buffer below. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions9colorModeEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions9colorModeEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions9colorModeEv"></span><span id="erbsland::cterm::BitmapDrawOptions::colorModeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a510134e47391fc4cb0a032072b267336"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorModeE" title="erbsland::cterm::BitmapColorMode"><span class="n"><span class="pre">BitmapColorMode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">colorMode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions9colorModeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The color mode. </p>
+<p>This mode controls how colors are applied to the bitmap. See <code class="docutils literal notranslate"><span class="pre">BitmapColorMode</span></code> for more information. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions12setColorModeE15BitmapColorMode">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions12setColorModeE15BitmapColorMode"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions12setColorModeE15BitmapColorMode"></span><span id="erbsland::cterm::BitmapDrawOptions::setColorMode__BitmapColorMode"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a26b1a7f77c0cb0211ade2f67d6002110"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColorMode</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapColorModeE" title="erbsland::cterm::BitmapColorMode"><span class="n"><span class="pre">BitmapColorMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">colorMode</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions12setColorModeE15BitmapColorMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the color mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions20colorAnimationOffsetEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions20colorAnimationOffsetEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions20colorAnimationOffsetEv"></span><span id="erbsland::cterm::BitmapDrawOptions::colorAnimationOffsetC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1ad8f5b16895ac605623b2fc455dcd56bd"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">colorAnimationOffset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions20colorAnimationOffsetEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The offset for color animations. </p>
+<p>This offset is added to the <code class="docutils literal notranslate"><span class="pre">animationCycle</span></code> passed to <code class="docutils literal notranslate"><span class="pre">drawBitmap</span></code>. Animate <code class="docutils literal notranslate"><span class="pre">animationCycle</span></code> and keep this offset static. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions23setColorAnimationOffsetENSt6size_tE">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions23setColorAnimationOffsetENSt6size_tE"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions23setColorAnimationOffsetENSt6size_tE"></span><span id="erbsland::cterm::BitmapDrawOptions::setColorAnimationOffset__std::s"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1adc83af1f188baaed7b4fbba571595110"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColorAnimationOffset</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">offset</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions23setColorAnimationOffsetENSt6size_tE" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the offset for color animations. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions11char16StyleEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions11char16StyleEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions11char16StyleEv"></span><span id="erbsland::cterm::BitmapDrawOptions::char16StyleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1afc3bad9e7323d1807a53390dc87bb095"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="output.html#_CPPv4N8erbsland5cterm14Char16StylePtrE" title="erbsland::cterm::Char16StylePtr"><span class="n"><span class="pre">Char16StylePtr</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">char16Style</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions11char16StyleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The <a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_char16_style"><span class="std std-ref">Char16Style</span></a> instance. </p>
+<p>If a <a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_char16_style"><span class="std std-ref">Char16Style</span></a> instance is set, it <em>overrides</em> the scale mode and renders one terminal cell for each set bitmap pixel. The selected block depends on the four direct neighbors of the set pixel: east=bit 0, south=bit 1, west=bit 2, north=bit 3. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions14setChar16StyleE14Char16StylePtr">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions14setChar16StyleE14Char16StylePtr"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions14setChar16StyleE14Char16StylePtr"></span><span id="erbsland::cterm::BitmapDrawOptions::setChar16Style__Char16StylePtr"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a456d5a06bcdf2559aa3402637252fe3b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setChar16Style</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="output.html#_CPPv4N8erbsland5cterm14Char16StylePtrE" title="erbsland::cterm::Char16StylePtr"><span class="n"><span class="pre">Char16StylePtr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">char16Style</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions14setChar16StyleE14Char16StylePtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Set a <a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_char16_style"><span class="std std-ref">Char16Style</span></a> instance. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions16combinationStyleEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions16combinationStyleEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions16combinationStyleEv"></span><span id="erbsland::cterm::BitmapDrawOptions::combinationStyleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a8e527caa423f26680567e56037ae516f"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="output.html#_CPPv4N8erbsland5cterm23CharCombinationStylePtrE" title="erbsland::cterm::CharCombinationStylePtr"><span class="n"><span class="pre">CharCombinationStylePtr</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">combinationStyle</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions16combinationStyleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The combination style. </p>
+<p>If a combination style is set, every block that is set in the buffer is first passed to this combination style. This happens for every mode used to draw the bitmap. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions19setCombinationStyleE23CharCombinationStylePtr">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions19setCombinationStyleE23CharCombinationStylePtr"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions19setCombinationStyleE23CharCombinationStylePtr"></span><span id="erbsland::cterm::BitmapDrawOptions::setCombinationStyle__CharCombinationStylePtr"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a924454d4cfe1a817e80c09c3bdf09d46"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCombinationStyle</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="output.html#_CPPv4N8erbsland5cterm23CharCombinationStylePtrE" title="erbsland::cterm::CharCombinationStylePtr"><span class="n"><span class="pre">CharCombinationStylePtr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">combinationStyle</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions19setCombinationStyleE23CharCombinationStylePtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the combination style. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions9fullBlockEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions9fullBlockEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions9fullBlockEv"></span><span id="erbsland::cterm::BitmapDrawOptions::fullBlockC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a94e15b83b6e6ef62d18d92b762f37ec7"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">fullBlock</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions9fullBlockEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The full block. </p>
+<p>The full block is only used when the scale mode <code class="docutils literal notranslate"><span class="pre">FullBlock</span></code> is used and no <code class="docutils literal notranslate"><a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_char16_style"><span class="std std-ref"><span class="pre">Char16Style</span></span></a></code> is set. Character colors are overlaid on the color from the color mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions12setFullBlockE4Char">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions12setFullBlockE4Char"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions12setFullBlockE4Char"></span><span id="erbsland::cterm::BitmapDrawOptions::setFullBlock__Char"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a53bb43ac3472b3e043c16b0a88bbb62a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setFullBlock</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fullBlock</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions12setFullBlockE4Char" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the full block. </p>
+<p>The full block must have a display width of 1. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions12doubleBlocksEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions12doubleBlocksEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions12doubleBlocksEv"></span><span id="erbsland::cterm::BitmapDrawOptions::doubleBlocksC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a7ff1c827684f0a1cc82dd20803fe82c9"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">doubleBlocks</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions12doubleBlocksEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The double blocks. </p>
+<p>The double blocks are only used when the scale mode <code class="docutils literal notranslate"><span class="pre">DoubleBlock</span></code> is used and no <code class="docutils literal notranslate"><a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_char16_style"><span class="std std-ref"><span class="pre">Char16Style</span></span></a></code> is set. Character index 0 is used for the left half and index 1 for the right half of each set bitmap pixel. Character colors are overlaid on the color from the color mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions15setDoubleBlocksE6String">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions15setDoubleBlocksE6String"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions15setDoubleBlocksE6String"></span><span id="erbsland::cterm::BitmapDrawOptions::setDoubleBlocks__String"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a761a1f473d7dd2cf631a902bf2b5929c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setDoubleBlocks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">doubleBlocks</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions15setDoubleBlocksE6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the double block <a class="reference internal" href="text.html#classerbsland_1_1cterm_1_1_string"><span class="std std-ref">String</span></a>. </p>
+<p>The string must have exactly two characters. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions10halfBlocksEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions10halfBlocksEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions10halfBlocksEv"></span><span id="erbsland::cterm::BitmapDrawOptions::halfBlocksC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1ab48346d7e079f29227107dca83d663f3"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">halfBlocks</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions10halfBlocksEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The string with the half-blocks. </p>
+<p>The half-blocks are only used when the scale mode <code class="docutils literal notranslate"><span class="pre">HalfBlock</span></code> is used and no <code class="docutils literal notranslate"><a class="reference internal" href="output.html#classerbsland_1_1cterm_1_1_char16_style"><span class="std std-ref"><span class="pre">Char16Style</span></span></a></code> is set. Entry <code class="docutils literal notranslate"><span class="pre">0</span></code> is used for an empty 2x2 block and entry <code class="docutils literal notranslate"><span class="pre">15</span></code> for a full 2x2 block. Character colors are overlaid on the color from the color mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions13setHalfBlocksE6String">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions13setHalfBlocksE6String"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions13setHalfBlocksE6String"></span><span id="erbsland::cterm::BitmapDrawOptions::setHalfBlocks__String"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1abddfca283c8003c46214d72fda800901"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setHalfBlocks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">halfBlocks</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions13setHalfBlocksE6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the half-blocks string. </p>
+<p>The half-blocks string must have exactly 16 characters. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm17BitmapDrawOptions9scaleModeEv">
+<span id="_CPPv3NK8erbsland5cterm17BitmapDrawOptions9scaleModeEv"></span><span id="_CPPv2NK8erbsland5cterm17BitmapDrawOptions9scaleModeEv"></span><span id="erbsland::cterm::BitmapDrawOptions::scaleModeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a45cb50dd370b74ad4b6ccca9fe4bea12"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapScaleModeE" title="erbsland::cterm::BitmapScaleMode"><span class="n"><span class="pre">BitmapScaleMode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scaleMode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm17BitmapDrawOptions9scaleModeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The scale mode. </p>
+<p>See <code class="docutils literal notranslate"><span class="pre">BitmapScaleMode</span></code> for more details. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions12setScaleModeE15BitmapScaleMode">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions12setScaleModeE15BitmapScaleMode"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions12setScaleModeE15BitmapScaleMode"></span><span id="erbsland::cterm::BitmapDrawOptions::setScaleMode__BitmapScaleMode"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1af3bb6b73c5e92640c57c69cde14f4c29"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setScaleMode</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15BitmapScaleModeE" title="erbsland::cterm::BitmapScaleMode"><span class="n"><span class="pre">BitmapScaleMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">scaleMode</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions12setScaleModeE15BitmapScaleMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the scale mode. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm17BitmapDrawOptions14defaultOptionsEv">
+<span id="_CPPv3N8erbsland5cterm17BitmapDrawOptions14defaultOptionsEv"></span><span id="_CPPv2N8erbsland5cterm17BitmapDrawOptions14defaultOptionsEv"></span><span id="erbsland::cterm::BitmapDrawOptions::defaultOptions"></span><span class="target" id="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a0d68b97069862387e08c59eb651a4469"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptionsE" title="erbsland::cterm::BitmapDrawOptions"><span class="n"><span class="pre">BitmapDrawOptions</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">defaultOptions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm17BitmapDrawOptions14defaultOptionsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the shared object with the default options. </p>
+<p>Default options use default terminal colors, half-block rendering, and the standard Unicode half-block characters. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapColorModeE">
+<span id="_CPPv3N8erbsland5cterm15BitmapColorModeE"></span><span id="_CPPv2N8erbsland5cterm15BitmapColorModeE"></span><span class="target" id="_bitmap_draw_options_8hpp_1a0180ff73e2c86ea9ba8524e624f9e60e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">BitmapColorMode</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapColorModeE" title="Link to this definition"></a><br /></dt>
+<dd><p>The mode how color is applied to the bitmap. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapColorMode8OneColorE">
+<span id="_CPPv3N8erbsland5cterm15BitmapColorMode8OneColorE"></span><span id="_CPPv2N8erbsland5cterm15BitmapColorMode8OneColorE"></span><span class="target" id="_bitmap_draw_options_8hpp_1a0180ff73e2c86ea9ba8524e624f9e60ea0c8f5a9ec9d29d3f98de501c16144109"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OneColor</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapColorMode8OneColorE" title="Link to this definition"></a><br /></dt>
+<dd><p>Uses one color from the sequence for the whole bitmap. </p>
+<p>The selected sequence entry is <code class="docutils literal notranslate"><span class="pre">animationCycle</span> <span class="pre">+</span> <span class="pre">colorAnimationOffset</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapColorMode15VerticalStripesE">
+<span id="_CPPv3N8erbsland5cterm15BitmapColorMode15VerticalStripesE"></span><span id="_CPPv2N8erbsland5cterm15BitmapColorMode15VerticalStripesE"></span><span class="target" id="_bitmap_draw_options_8hpp_1a0180ff73e2c86ea9ba8524e624f9e60ea94a36b065fd35f5220bab7f4a13bf999"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VerticalStripes</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapColorMode15VerticalStripesE" title="Link to this definition"></a><br /></dt>
+<dd><p>Uses the color sequence in vertical stripes. </p>
+<p>The selected sequence entry is <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">animationCycle</span> <span class="pre">+</span> <span class="pre">colorAnimationOffset</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapColorMode17HorizontalStripesE">
+<span id="_CPPv3N8erbsland5cterm15BitmapColorMode17HorizontalStripesE"></span><span id="_CPPv2N8erbsland5cterm15BitmapColorMode17HorizontalStripesE"></span><span class="target" id="_bitmap_draw_options_8hpp_1a0180ff73e2c86ea9ba8524e624f9e60ea9b528cabcb54364d8e30a9584968b089"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HorizontalStripes</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapColorMode17HorizontalStripesE" title="Link to this definition"></a><br /></dt>
+<dd><p>Uses the color sequence in horizontal stripes. </p>
+<p>The selected sequence entry is <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">+</span> <span class="pre">animationCycle</span> <span class="pre">+</span> <span class="pre">colorAnimationOffset</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapColorMode22ForwardDiagonalStripesE">
+<span id="_CPPv3N8erbsland5cterm15BitmapColorMode22ForwardDiagonalStripesE"></span><span id="_CPPv2N8erbsland5cterm15BitmapColorMode22ForwardDiagonalStripesE"></span><span class="target" id="_bitmap_draw_options_8hpp_1a0180ff73e2c86ea9ba8524e624f9e60eaaf4c2284311566f9a1a5685286640d8d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ForwardDiagonalStripes</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapColorMode22ForwardDiagonalStripesE" title="Link to this definition"></a><br /></dt>
+<dd><p>Uses the color sequence in forward diagonal stripes. </p>
+<p>The selected sequence entry is <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span> <span class="pre">+</span> <span class="pre">animationCycle</span> <span class="pre">+</span> <span class="pre">colorAnimationOffset</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapColorMode23BackwardDiagonalStripesE">
+<span id="_CPPv3N8erbsland5cterm15BitmapColorMode23BackwardDiagonalStripesE"></span><span id="_CPPv2N8erbsland5cterm15BitmapColorMode23BackwardDiagonalStripesE"></span><span class="target" id="_bitmap_draw_options_8hpp_1a0180ff73e2c86ea9ba8524e624f9e60ea3bef2b4423553939805d7e35c79af2f3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BackwardDiagonalStripes</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapColorMode23BackwardDiagonalStripesE" title="Link to this definition"></a><br /></dt>
+<dd><p>Uses the color sequence in backward diagonal stripes. </p>
+<p>The selected sequence entry is <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">+</span> <span class="pre">y</span> <span class="pre">+</span> <span class="pre">animationCycle</span> <span class="pre">+</span> <span class="pre">colorAnimationOffset</span></code>. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapScaleModeE">
+<span id="_CPPv3N8erbsland5cterm15BitmapScaleModeE"></span><span id="_CPPv2N8erbsland5cterm15BitmapScaleModeE"></span><span class="target" id="_bitmap_draw_options_8hpp_1ac27f0f86de8c522864e36afb82c4c7bf"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">BitmapScaleMode</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapScaleModeE" title="Link to this definition"></a><br /></dt>
+<dd><p>The mode how the bitmap is scaled. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapScaleMode9HalfBlockE">
+<span id="_CPPv3N8erbsland5cterm15BitmapScaleMode9HalfBlockE"></span><span id="_CPPv2N8erbsland5cterm15BitmapScaleMode9HalfBlockE"></span><span class="target" id="_bitmap_draw_options_8hpp_1ac27f0f86de8c522864e36afb82c4c7bfaa8d676f6251d12b454b9ffd792d5ce46"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HalfBlock</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapScaleMode9HalfBlockE" title="Link to this definition"></a><br /></dt>
+<dd><p>Draw the bitmap with half-blocks. </p>
+<p>This mode uses the 16 characters from <code class="docutils literal notranslate"><span class="pre">halfBlocks()</span></code>. Each 2x2 pixel block creates a 4-bit index in this order: bit 0 = top-left, bit 1 = top-right, bit 2 = bottom-left, bit 3 = bottom-right. This renders the bitmap at half width and half height, rounded up. Character colors are overlaid on the color from the color mode. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapScaleMode9FullBlockE">
+<span id="_CPPv3N8erbsland5cterm15BitmapScaleMode9FullBlockE"></span><span id="_CPPv2N8erbsland5cterm15BitmapScaleMode9FullBlockE"></span><span class="target" id="_bitmap_draw_options_8hpp_1ac27f0f86de8c522864e36afb82c4c7bfaf0d02acf8caf951ae624c2c2843397d6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FullBlock</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapScaleMode9FullBlockE" title="Link to this definition"></a><br /></dt>
+<dd><p>Draw the bitmap with full-blocks. </p>
+<p>This mode uses <code class="docutils literal notranslate"><span class="pre">fullBlock()</span></code> to draw each set pixel of the bitmap. Character colors are overlaid on the color from the color mode. To color the unset pixels, you must fill the bitmap area first. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15BitmapScaleMode11DoubleBlockE">
+<span id="_CPPv3N8erbsland5cterm15BitmapScaleMode11DoubleBlockE"></span><span id="_CPPv2N8erbsland5cterm15BitmapScaleMode11DoubleBlockE"></span><span class="target" id="_bitmap_draw_options_8hpp_1ac27f0f86de8c522864e36afb82c4c7bfae59dc8d20b0052b7a7a1f61f162b80cc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DoubleBlock</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15BitmapScaleMode11DoubleBlockE" title="Link to this definition"></a><br /></dt>
+<dd><p>Draw the bitmap with double-blocks. </p>
+<p>This mode uses <code class="docutils literal notranslate"><span class="pre">doubleBlocks()</span></code> to draw each set pixel of the bitmap. The bitmap is twice as large in the X axis, to compensate for the rectangular shape of terminal characters. Character colors are overlaid on the color from the color mode. To color the unset pixels, you must fill the bitmap area first. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="color.html" class="btn btn-neutral float-right" title="Color" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

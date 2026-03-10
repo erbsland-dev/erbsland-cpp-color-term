@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Run the Unit Tests &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reference" href="../reference/index.html" />
+    <link rel="prev" title="Install the Library as Static Library" href="install-as-library.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="integrate-as-submodule.html">Integrate the Library as Submodule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-as-library.html">Install the Library as Static Library</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to Run the Unit Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compile-the-unit-tests">Compile the Unit Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-all-unit-tests">Run All Unit Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-individual-tests">Run Individual Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filter-syntax">Filter Syntax</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#available-types">Available Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#options-for-automation">Options for Automation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more-information">More Information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Usage</a></li>
+      <li class="breadcrumb-item active">How to Run the Unit Tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/usage/run-unit-tests.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-run-the-unit-tests">
+<span id="index-0"></span><h1>How to Run the Unit Tests<a class="headerlink" href="#how-to-run-the-unit-tests" title="Link to this heading"></a></h1>
+<p>Unit tests are an essential part of maintaining a reliable terminal library. This project uses the
+<a class="reference external" href="https://unittest.erbsland.dev">Erbsland Unit Test</a> framework.</p>
+<p>Follow the steps below to compile and run the tests locally.</p>
+<section id="compile-the-unit-tests">
+<h2>Compile the Unit Tests<a class="headerlink" href="#compile-the-unit-tests" title="Link to this heading"></a></h2>
+<p>To build the unit tests in debug mode using CMake and Ninja:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>cmake-build-debug<span class="w"> </span>-G<span class="w"> </span>Ninja<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug
+<span class="gp">$ </span>cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build-debug<span class="w"> </span>--target<span class="w"> </span>erbsland-color-term-unittest
+</pre></div>
+</div>
+<p>Alternatively, you can create your build directory outside the repository. In that case, adjust the paths accordingly in the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>~/build
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>~/build
+<span class="gp">$ </span>cmake<span class="w"> </span>-S<span class="w"> </span>/path/to/src/erbsland-cpp-color-term<span class="w"> </span>-G<span class="w"> </span>Ninja<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug
+<span class="gp">$ </span>cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </span>--config<span class="w"> </span>Debug
+</pre></div>
+</div>
+<p>The option <code class="docutils literal notranslate"><span class="pre">-G</span> <span class="pre">Ninja</span></code> selects the Ninja build system, which we recommend for its speed and efficiency. You can omit this option to fall back to the default generator available on your system.</p>
+</section>
+<section id="run-all-unit-tests">
+<h2>Run All Unit Tests<a class="headerlink" href="#run-all-unit-tests" title="Link to this heading"></a></h2>
+<p>After compiling, you can execute all unit tests with the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>cmake-build-debug
+<span class="gp">$ </span>ctest<span class="w"> </span>.
+</pre></div>
+</div>
+<p>This tells CTest to run all tests defined in the current build directory. Be sure you’re inside the right directory—otherwise, it won’t find the tests.</p>
+</section>
+<section id="run-individual-tests">
+<h2>Run Individual Tests<a class="headerlink" href="#run-individual-tests" title="Link to this heading"></a></h2>
+<p>During development, it’s often more efficient to run only a specific test suite. You can do this directly via the test binary:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./cmake-build-debug/test/unittest/erbsland-color-term-unittest<span class="w"> </span>name:ColorSequence
+</pre></div>
+</div>
+<p>In this example, only the <code class="docutils literal notranslate"><span class="pre">ColorSequence</span></code> suite is executed.</p>
+<p>To explore all available test suites, targets, and tags, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./cmake-build-debug/test/unittest/erbsland-color-term-unittest<span class="w"> </span>--list
+</pre></div>
+</div>
+</section>
+<section id="filter-syntax">
+<h2>Filter Syntax<a class="headerlink" href="#filter-syntax" title="Link to this heading"></a></h2>
+<p>You can filter which tests to run using the format <code class="docutils literal notranslate"><span class="pre">[+|-]&lt;type&gt;:&lt;name&gt;</span></code>. This makes it easy to include or exclude specific tests:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name:TestX</span></code> — runs only the specified test or suite</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+tag:Slow</span></code> — explicitly includes tests tagged <code class="docutils literal notranslate"><span class="pre">Slow</span></code>, even if they’re skipped by default</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-name:DateTest</span></code> — runs all tests except <code class="docutils literal notranslate"><span class="pre">DateTest</span></code></p></li>
+</ul>
+<section id="available-types">
+<h3>Available Types<a class="headerlink" href="#available-types" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Name of a test class or individual test method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tag</span></code>: A custom tag you’ve assigned to tests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target</span></code>: A logical target or component under test</p></li>
+</ul>
+</section>
+</section>
+<section id="options-for-automation">
+<h2>Options for Automation<a class="headerlink" href="#options-for-automation" title="Link to this heading"></a></h2>
+<p>These options are especially useful in CI environments or automated scripts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--no-color</span></code> — disables colorized terminal output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-e</span></code> — stops test execution after the first error</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s</span></code>, <code class="docutils literal notranslate"><span class="pre">--no-summary</span></code> — skips the end-of-run summary output</p></li>
+</ul>
+</section>
+<section id="more-information">
+<h2>More Information<a class="headerlink" href="#more-information" title="Link to this heading"></a></h2>
+<p>You’ll find comprehensive documentation in the local path: <code class="file docutils literal notranslate"><span class="pre">test/erbsland-unittest/doc</span></code>
+Or check the online docs at: <a class="reference external" href="https://unittest.erbsland.dev">Erbsland Unit Test Documentation</a></p>
+<p>For a quick overview of all supported options, simply run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./cmake-build-debug/test/unittest/erbsland-color-term-unittest --help</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install-as-library.html" class="btn btn-neutral float-left" title="Install the Library as Static Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/index.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

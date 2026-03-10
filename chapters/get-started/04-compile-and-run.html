@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compile and Run the Application &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Render the Screen from a Buffer" href="05-render-with-buffer.html" />
+    <link rel="prev" title="Write a Minimal Main Function" href="03-write-minimal-main.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-project-structure.html">The Project Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-cmake-configuration.html">The CMake Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-write-minimal-main.html">Write a Minimal Main Function</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Compile and Run the Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-the-tutorial-project">Build the Tutorial Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-program">Run the Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-we-move-to-a-buffer-next">Why We Move to a Buffer Next</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="05-render-with-buffer.html">Render the Screen from a Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-render-with-buffer.html#replace-signal-board-src-main-cpp">Replace <code class="file docutils literal notranslate"><span class="pre">signal-board/src/main.cpp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-render-with-buffer.html#what-changed">What Changed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-layout-text-and-fonts.html">Add Layout, Text, and Fonts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-input-and-animation.html">Add Input and Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08-the-next-steps.html">The Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting Started</a></li>
+      <li class="breadcrumb-item active">Compile and Run the Application</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/get-started/04-compile-and-run.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="compile-and-run-the-application">
+<h1>Compile and Run the Application<a class="headerlink" href="#compile-and-run-the-application" title="Link to this heading"></a></h1>
+<section id="build-the-tutorial-project">
+<h2>Build the Tutorial Project<a class="headerlink" href="#build-the-tutorial-project" title="Link to this heading"></a></h2>
+<p>Create an out-of-source build directory and configure the project:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>cmake-build
+<span class="gp">$ </span>cmake<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span>-G<span class="w"> </span>Ninja<span class="w"> </span>.
+<span class="go">...</span>
+</pre></div>
+</div>
+<p>Then compile the executable:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build
+<span class="go">...</span>
+<span class="go">[100%] Built target signal-board</span>
+</pre></div>
+</div>
+</section>
+<section id="run-the-program">
+<h2>Run the Program<a class="headerlink" href="#run-the-program" title="Link to this heading"></a></h2>
+<p>Start the application from the project directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./cmake-build/signal-board/signal-board
+</pre></div>
+</div>
+<p>You should now see a few colored lines printed to the terminal.
+If the program runs successfully, your project structure, CMake configuration,
+and basic terminal output pipeline are all working as expected.</p>
+</section>
+<section id="why-we-move-to-a-buffer-next">
+<h2>Why We Move to a Buffer Next<a class="headerlink" href="#why-we-move-to-a-buffer-next" title="Link to this heading"></a></h2>
+<p>Direct terminal output is perfect for logs, prompts, and small command-line
+tools. However, when an application behaves more like a terminal UI or
+animated screen, managing the output through a back buffer becomes much
+simpler.</p>
+<p>Using a buffer provides several advantages:</p>
+<ul class="simple">
+<li><p>you can redraw the entire screen from a clean state</p></li>
+<li><p>layout logic becomes independent from the terminal cursor position</p></li>
+<li><p>complex elements such as frames, wrapped text, and animations become easier to manage</p></li>
+</ul>
+<p>In the next step, we will replace the direct print calls with a
+<code class="docutils literal notranslate"><span class="pre">Buffer</span></code>-based rendering approach.</p>
+<p class="sd-text-center"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-success sd-fs-5 sd-font-weight-bold sd-p-2 sd-my-4 reference internal" href="05-render-with-buffer.html"><span class="doc">Render the Screen from a Buffer →</span></a></span></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="03-write-minimal-main.html" class="btn btn-neutral float-left" title="Write a Minimal Main Function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="05-render-with-buffer.html" class="btn btn-neutral float-right" title="Render the Screen from a Buffer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

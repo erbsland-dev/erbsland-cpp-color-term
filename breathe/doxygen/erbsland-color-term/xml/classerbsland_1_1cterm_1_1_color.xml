@@ -1,0 +1,550 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_color" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::Color</compoundname>
+    <includes refid="_color_8hpp" local="no">erbsland/cterm/Color.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_color_1a9c476cb98f0c046f4258f2b6e334ea59" prot="public" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+        <definition>Foreground erbsland::cterm::Color::_foreground</definition>
+        <argsstring></argsstring>
+        <name>_foreground</name>
+        <qualifiedname>erbsland::cterm::Color::_foreground</qualifiedname>
+        <briefdescription>
+<para>Foreground component of the color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="93" column="16" bodyfile="erbsland/cterm/Color.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_color_1a37f29023f5e2157dc93daeefc5117e8f" prot="public" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+        <definition>Background erbsland::cterm::Color::_background</definition>
+        <argsstring></argsstring>
+        <name>_background</name>
+        <qualifiedname>erbsland::cterm::Color::_background</qualifiedname>
+        <briefdescription>
+<para>Background component of the color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="95" column="16" bodyfile="erbsland/cterm/Color.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a540fc13345cb42131a84b9e23d229f7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Color::Color</definition>
+        <argsstring>()=default</argsstring>
+        <name>Color</name>
+        <qualifiedname>erbsland::cterm::Color::Color</qualifiedname>
+        <briefdescription>
+<para>Create a color that inherits both components from the layer below. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If no lower layer exists, terminal output resolves inherited colors to the terminal defaults. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="20" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a0261ccc278369f22b90646d47011f185" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Color::Color</definition>
+        <argsstring>(const Foreground foreground, const Background background) noexcept</argsstring>
+        <name>Color</name>
+        <qualifiedname>erbsland::cterm::Color::Color</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>foreground</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>background</declname>
+        </param>
+        <briefdescription>
+<para>Create a color from explicit foreground and background parts. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>foreground</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The foreground color. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>background</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="24" column="15" bodyfile="erbsland/cterm/Color.hpp" bodystart="24" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a34caff263d560face80de02040308624" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Color::Color</definition>
+        <argsstring>(const Foreground foreground) noexcept</argsstring>
+        <name>Color</name>
+        <qualifiedname>erbsland::cterm::Color::Color</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>foreground</declname>
+        </param>
+        <briefdescription>
+<para>Create a color with an explicit foreground and inherited background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>foreground</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="28" column="15" bodyfile="erbsland/cterm/Color.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1ab627769b3ecfba17841fc9ba985834a9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Color::Color</definition>
+        <argsstring>(const Foreground::Hue foreground) noexcept</argsstring>
+        <name>Color</name>
+        <qualifiedname>erbsland::cterm::Color::Color</qualifiedname>
+        <param>
+          <type>const Foreground::Hue</type>
+          <declname>foreground</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="30" column="15" bodyfile="erbsland/cterm/Color.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a70ac76de34edad81154f99fd426ba7a7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Color::Color</definition>
+        <argsstring>(const Background background) noexcept</argsstring>
+        <name>Color</name>
+        <qualifiedname>erbsland::cterm::Color::Color</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>background</declname>
+        </param>
+        <briefdescription>
+<para>Create a color with an explicit background and inherited foreground color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>background</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="33" column="15" bodyfile="erbsland/cterm/Color.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a12ac4d935a74c86d65ee1a20762c6b2f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Color::Color</definition>
+        <argsstring>(const Background::Hue background) noexcept</argsstring>
+        <name>Color</name>
+        <qualifiedname>erbsland::cterm::Color::Color</qualifiedname>
+        <param>
+          <type>const Background::Hue</type>
+          <declname>background</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="35" column="15" bodyfile="erbsland/cterm/Color.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a7f3fae527ff0408292421796cba34fa1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Color::~Color</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Color</name>
+        <qualifiedname>erbsland::cterm::Color::~Color</qualifiedname>
+        <briefdescription>
+<para>Destroy the color value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="37" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a34dc7d654fee0b343c548146641f01bc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Color::Color</definition>
+        <argsstring>(const Color &amp;) noexcept=default</argsstring>
+        <name>Color</name>
+        <qualifiedname>erbsland::cterm::Color::Color</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Copy construct a color value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1ae3f5603ec56e2141e14fbac78da66b30" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &amp;</type>
+        <definition>Color &amp; erbsland::cterm::Color::operator=</definition>
+        <argsstring>(const Color &amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::Color::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Copy-assign a color value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="41" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1aea7bfe0687997f8da6b903703bc2c55e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Color::operator==</definition>
+        <argsstring>(const Color &amp;other) const =default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::Color::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare two colors for equality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="45" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a13ce4540f5fee5b0fde93c8c82053f45" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Color::operator!=</definition>
+        <argsstring>(const Color &amp;other) const =default</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>erbsland::cterm::Color::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare two colors for inequality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="47" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a27cfe4f8e8e7d7d0a8e4dad30de9d31c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+        <definition>Foreground erbsland::cterm::Color::fg</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>fg</name>
+        <qualifiedname>erbsland::cterm::Color::fg</qualifiedname>
+        <briefdescription>
+<para>Get the foreground color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="51" column="17" bodyfile="erbsland/cterm/Color.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1acf6b9680ed54b20627756765006d1a7c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Color::setFg</definition>
+        <argsstring>(const Foreground foreground) noexcept</argsstring>
+        <name>setFg</name>
+        <qualifiedname>erbsland::cterm::Color::setFg</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>foreground</declname>
+        </param>
+        <briefdescription>
+<para>Set the foreground color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>foreground</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new foreground color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="54" column="10" bodyfile="erbsland/cterm/Color.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1ada549136a6fe9f075fa907303e6ee84d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+        <definition>Background erbsland::cterm::Color::bg</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bg</name>
+        <qualifiedname>erbsland::cterm::Color::bg</qualifiedname>
+        <briefdescription>
+<para>Get the background color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="56" column="17" bodyfile="erbsland/cterm/Color.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a1fd86c691abaacae11d5eb135f5e214b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Color::setBg</definition>
+        <argsstring>(const Background background) noexcept</argsstring>
+        <name>setBg</name>
+        <qualifiedname>erbsland::cterm::Color::setBg</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>background</declname>
+        </param>
+        <briefdescription>
+<para>Set the background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>background</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="59" column="10" bodyfile="erbsland/cterm/Color.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1abbc9a0612f92111e215ea38e8144eebe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::Color::overlayWith</definition>
+        <argsstring>(const Color &amp;overlay) const</argsstring>
+        <name>overlayWith</name>
+        <qualifiedname>erbsland::cterm::Color::overlayWith</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &amp;</type>
+          <declname>overlay</declname>
+        </param>
+        <briefdescription>
+<para>Combine this color with a new overlay color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Foreground or background components set to <computeroutput>Inherited</computeroutput> keep the value from this color. Components set to <computeroutput>Default</computeroutput> explicitly reset to the terminal default color.</para>
+<para>Examples:</para>
+<para><itemizedlist>
+<listitem><para>[this.fg = red] + [new.fg = inherited] =&gt; [result.fg = red]</para>
+</listitem><listitem><para>[this.fg = red] + [new.fg = default] =&gt; [result.fg = default]</para>
+</listitem><listitem><para>[this.fg = red] + [new.fg = green] =&gt; [result.fg = green]</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>overlay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The overlay color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new color with the overlay applied. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="74" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1af19e5f6fdfabe58f1028942c91ad6f2c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>static Color erbsland::cterm::Color::fromString</definition>
+        <argsstring>(std::string_view str)</argsstring>
+        <name>fromString</name>
+        <qualifiedname>erbsland::cterm::Color::fromString</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Convert a color or color-pair into a block color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Format must be either <computeroutput>&quot;fg&quot;</computeroutput> or <computeroutput>&quot;fg:bg&quot;</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The textual color specification. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The parsed color. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if one of the colors does not exist. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="80" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a2beb94a19d84a0feb6f9ebf50152a271" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>static Color erbsland::cterm::Color::fromIndex16</definition>
+        <argsstring>(const int fgIndex, const int bgIndex)</argsstring>
+        <name>fromIndex16</name>
+        <qualifiedname>erbsland::cterm::Color::fromIndex16</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>fgIndex</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>bgIndex</declname>
+        </param>
+        <briefdescription>
+<para>Converts two indexes into a color-pair. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classerbsland_1_1cterm_1_1_color_part_1a0e9ab025bdfe4eefe670db99b2656d5a" kindref="member">ColorPart::fromIndex16</ref> for details. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="83" column="19" bodyfile="erbsland/cterm/Color.hpp" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_1a96cc1f83f4869d13a63bb0bf3ffabb83" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>static constexpr Color erbsland::cterm::Color::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>erbsland::cterm::Color::reset</qualifiedname>
+        <briefdescription>
+<para>Shortcut to set fg and bg to default. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Color.hpp" line="87" column="29" bodyfile="erbsland/cterm/Color.hpp" bodystart="87" bodyend="89"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A foreground/background color pair for terminal rendering. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>erbsland::cterm::ColorPart&lt; ColorRole::Background &gt;</label>
+        <link refid="classerbsland_1_1cterm_1_1_color_part"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ColorPart&lt; ColorRole::Foreground &gt;</label>
+        <link refid="classerbsland_1_1cterm_1_1_color_part"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::Color</label>
+        <link refid="classerbsland_1_1cterm_1_1_color"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_foreground</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>_background</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ColorBase</label>
+        <link refid="classerbsland_1_1cterm_1_1_color_base"/>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/Color.hpp" line="16" column="1" bodyfile="erbsland/cterm/Color.hpp" bodystart="16" bodyend="96"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a37f29023f5e2157dc93daeefc5117e8f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>_background</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a9c476cb98f0c046f4258f2b6e334ea59" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>_foreground</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1ada549136a6fe9f075fa907303e6ee84d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>bg</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a540fc13345cb42131a84b9e23d229f7e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>Color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a0261ccc278369f22b90646d47011f185" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>Color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a34caff263d560face80de02040308624" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>Color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1ab627769b3ecfba17841fc9ba985834a9" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>Color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a70ac76de34edad81154f99fd426ba7a7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>Color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a12ac4d935a74c86d65ee1a20762c6b2f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>Color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a34dc7d654fee0b343c548146641f01bc" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>Color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a27cfe4f8e8e7d7d0a8e4dad30de9d31c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>fg</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a2beb94a19d84a0feb6f9ebf50152a271" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>fromIndex16</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1af19e5f6fdfabe58f1028942c91ad6f2c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>fromString</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a13ce4540f5fee5b0fde93c8c82053f45" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>operator!=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1ae3f5603ec56e2141e14fbac78da66b30" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1aea7bfe0687997f8da6b903703bc2c55e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1abbc9a0612f92111e215ea38e8144eebe" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>overlayWith</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a96cc1f83f4869d13a63bb0bf3ffabb83" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>reset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a1fd86c691abaacae11d5eb135f5e214b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>setBg</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1acf6b9680ed54b20627756765006d1a7c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>setFg</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_1a7f3fae527ff0408292421796cba34fa1" prot="public" virt="non-virtual"><scope>erbsland::cterm::Color</scope><name>~Color</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

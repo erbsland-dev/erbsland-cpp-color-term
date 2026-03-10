@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_font" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::Font</compoundname>
+    <includes refid="_font_8hpp" local="no">erbsland/cterm/Font.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1_font_1a652cf40f5cd604e7ed4a2a13fad65d79" prot="public" static="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="classerbsland_1_1cterm_1_1_font_glyph" kindref="compound">FontGlyph</ref> &gt;</type>
+        <definition>using erbsland::cterm::Font::GlyphMap =  std::unordered_map&lt;std::string, FontGlyph&gt;</definition>
+        <argsstring></argsstring>
+        <name>GlyphMap</name>
+        <qualifiedname>erbsland::cterm::Font::GlyphMap</qualifiedname>
+        <briefdescription>
+<para>Mapping from UTF-8 character strings to glyph bitmaps. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="27" column="5" bodyfile="erbsland/cterm/Font.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_font_1a66fa06a42b6f1ed8fd140a3b6262cf3b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::Font::_height</definition>
+        <argsstring></argsstring>
+        <name>_height</name>
+        <qualifiedname>erbsland::cterm::Font::_height</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="63" column="9" bodyfile="erbsland/cterm/Font.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_font_1a8b960f77f4311fdefd09502703691921" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_font_1a652cf40f5cd604e7ed4a2a13fad65d79" kindref="member">GlyphMap</ref></type>
+        <definition>GlyphMap erbsland::cterm::Font::_glyphs</definition>
+        <argsstring></argsstring>
+        <name>_glyphs</name>
+        <qualifiedname>erbsland::cterm::Font::_glyphs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="64" column="14" bodyfile="erbsland/cterm/Font.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1a8f711a3af2928c0df61f85292d5e63a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Font::Font</definition>
+        <argsstring>()=default</argsstring>
+        <name>Font</name>
+        <qualifiedname>erbsland::cterm::Font::Font</qualifiedname>
+        <briefdescription>
+<para>Create an empty font with height <computeroutput>0</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="31" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1a45998d209d31c64620ddff3b4f73017c" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Font::Font</definition>
+        <argsstring>(int height) noexcept</argsstring>
+        <name>Font</name>
+        <qualifiedname>erbsland::cterm::Font::Font</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Create an empty font with the given glyph height. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The glyph height in bitmap rows. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1a0c3f98df38d694b388fa1c2296989cb2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Font::Font</definition>
+        <argsstring>(int height, GlyphMap glyphs) noexcept</argsstring>
+        <name>Font</name>
+        <qualifiedname>erbsland::cterm::Font::Font</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_font_1a652cf40f5cd604e7ed4a2a13fad65d79" kindref="member">GlyphMap</ref></type>
+          <declname>glyphs</declname>
+        </param>
+        <briefdescription>
+<para>Create a font with the given glyph height and glyph map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The glyph height in bitmap rows. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>glyphs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial glyph map. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1a1749118d4a3714b6955e0d085be02894" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Font::addGlyph</definition>
+        <argsstring>(std::string name, FontGlyph glyph)</argsstring>
+        <name>addGlyph</name>
+        <qualifiedname>erbsland::cterm::Font::addGlyph</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_font_glyph" kindref="compound">FontGlyph</ref></type>
+          <declname>glyph</declname>
+        </param>
+        <briefdescription>
+<para>Add or replace one glyph in this font. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded character represented by the glyph. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>glyph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bitmap glyph. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="44" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1ab41a0660ebc5636f2d01f20db8548bfb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Font::setHeight</definition>
+        <argsstring>(int height) noexcept</argsstring>
+        <name>setHeight</name>
+        <qualifiedname>erbsland::cterm::Font::setHeight</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Set the configured font height in bitmap rows. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new glyph height. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="47" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1ad1f384dadf32b3996eed95cfca4974f3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::Font::height</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>height</name>
+        <qualifiedname>erbsland::cterm::Font::height</qualifiedname>
+        <briefdescription>
+<para>Get the configured font height in bitmap rows. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="51" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1a1cf15861e75bde31f33ddb916ea43e58" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_font_1a652cf40f5cd604e7ed4a2a13fad65d79" kindref="member">GlyphMap</ref> &amp;</type>
+        <definition>const GlyphMap &amp; erbsland::cterm::Font::glyphs</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>glyphs</name>
+        <qualifiedname>erbsland::cterm::Font::glyphs</qualifiedname>
+        <briefdescription>
+<para>Access the configured glyph map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="53" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1aa985ed50da55df939144d6ede225effc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_font_glyph" kindref="compound">FontGlyph</ref> *</type>
+        <definition>const FontGlyph * erbsland::cterm::Font::glyph</definition>
+        <argsstring>(std::string_view name) const</argsstring>
+        <name>glyph</name>
+        <qualifiedname>erbsland::cterm::Font::glyph</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Find one glyph by its UTF-8 character string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded character to look up. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the glyph, or <computeroutput>nullptr</computeroutput> if no glyph exists for <computeroutput>name</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="57" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_1a52690e00c675461c12258e1e84d1ee86" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FontPtr</type>
+        <definition>static FontPtr erbsland::cterm::Font::defaultAscii</definition>
+        <argsstring>()</argsstring>
+        <name>defaultAscii</name>
+        <qualifiedname>erbsland::cterm::Font::defaultAscii</qualifiedname>
+        <briefdescription>
+<para>Create a new font instance with the built-in ASCII-centric default glyph set. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A new shared font instance containing the default Latin letters, punctuation, and spacing glyphs. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Font.hpp" line="60" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A bitmap font used to render stylized terminal text. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/Font.hpp" line="24" column="1" bodyfile="erbsland/cterm/Font.hpp" bodystart="24" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a8b960f77f4311fdefd09502703691921" prot="private" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>_glyphs</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a66fa06a42b6f1ed8fd140a3b6262cf3b" prot="private" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>_height</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a1749118d4a3714b6955e0d085be02894" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>addGlyph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a52690e00c675461c12258e1e84d1ee86" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>defaultAscii</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a8f711a3af2928c0df61f85292d5e63a9" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>Font</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a45998d209d31c64620ddff3b4f73017c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>Font</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a0c3f98df38d694b388fa1c2296989cb2" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>Font</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1aa985ed50da55df939144d6ede225effc" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>glyph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a652cf40f5cd604e7ed4a2a13fad65d79" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>GlyphMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1a1cf15861e75bde31f33ddb916ea43e58" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>glyphs</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1ad1f384dadf32b3996eed95cfca4974f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>height</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_1ab41a0660ebc5636f2d01f20db8548bfb" prot="public" virt="non-virtual"><scope>erbsland::cterm::Font</scope><name>setHeight</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

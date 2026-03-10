@@ -1,0 +1,512 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_bitmap" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::Bitmap</compoundname>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1_font_glyph" prot="public" virt="non-virtual">erbsland::cterm::FontGlyph</derivedcompoundref>
+    <includes refid="_bitmap_8hpp" local="no">erbsland/cterm/Bitmap.hpp</includes>
+    <sectiondef kind="protected-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1_bitmap_1a5b18d24a380eea19613d95efb830abaa" prot="protected" static="no">
+        <type>std::vector&lt; bool &gt;</type>
+        <definition>using erbsland::cterm::Bitmap::Data =  std::vector&lt;bool&gt;</definition>
+        <argsstring></argsstring>
+        <name>Data</name>
+        <qualifiedname>erbsland::cterm::Bitmap::Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="26" column="5" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_bitmap_1a6d63dff2771b83e9e0bf02ec2664ddc4" prot="protected" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Bitmap::_size</definition>
+        <argsstring></argsstring>
+        <name>_size</name>
+        <qualifiedname>erbsland::cterm::Bitmap::_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="98" column="10" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_bitmap_1ab6e6c8bb4a09190488f7416a5737de33" prot="protected" static="no" mutable="no">
+        <type>Data</type>
+        <definition>Data erbsland::cterm::Bitmap::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>erbsland::cterm::Bitmap::_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="99" column="10" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1a7ecf67ceb9c5455e65120c82e08ef1d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Bitmap::Bitmap</definition>
+        <argsstring>()=default</argsstring>
+        <name>Bitmap</name>
+        <qualifiedname>erbsland::cterm::Bitmap::Bitmap</qualifiedname>
+        <briefdescription>
+<para>Create an empty bitmap with the size <computeroutput>(0,0)</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1a665244b95823d49ae0e4ccad1fdbc028" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Bitmap::Bitmap</definition>
+        <argsstring>(const Size size)</argsstring>
+        <name>Bitmap</name>
+        <qualifiedname>erbsland::cterm::Bitmap::Bitmap</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Create a bitmap with the given size and all pixels cleared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bitmap dimensions. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="33" column="14" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1ab6d102b22dd25496a34badc0d3546124" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Bitmap::~Bitmap</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Bitmap</name>
+        <qualifiedname>erbsland::cterm::Bitmap::~Bitmap</qualifiedname>
+        <briefdescription>
+<para>Destroy the bitmap. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="35" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1ae1f3d14030b5aa43548c39a30778ea11" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Bitmap::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::Bitmap::size</qualifiedname>
+        <briefdescription>
+<para>Get the bitmap dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="39" column="11" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1ae4a0983b91510e9ee12796b13dded22c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; bool &gt; &amp;</type>
+        <definition>const std::vector&lt; bool &gt; &amp; erbsland::cterm::Bitmap::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>erbsland::cterm::Bitmap::data</qualifiedname>
+        <briefdescription>
+<para>Access the raw pixel storage. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="41" column="25" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1aea308a7e1835c5e2685ca20d71fbde62" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::vector&lt; bool &gt; &amp;</type>
+        <definition>std::vector&lt; bool &gt; &amp; erbsland::cterm::Bitmap::data</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>erbsland::cterm::Bitmap::data</qualifiedname>
+        <briefdescription>
+<para>Access the raw pixel storage for modification. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="43" column="19" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1aeb9bd69611cf8d8af7c01f4d061f00a9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Bitmap::pixel</definition>
+        <argsstring>(Position pos) const noexcept</argsstring>
+        <name>pixel</name>
+        <qualifiedname>erbsland::cterm::Bitmap::pixel</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Read one pixel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pixel position. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The pixel state, or <computeroutput>false</computeroutput> if <computeroutput>pos</computeroutput> is outside the bitmap. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="53" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1ad7c9fca179c403837c717049d79db983" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t erbsland::cterm::Bitmap::pixelQuad</definition>
+        <argsstring>(Position pos) const noexcept</argsstring>
+        <name>pixelQuad</name>
+        <qualifiedname>erbsland::cterm::Bitmap::pixelQuad</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Read a 2x2 pixel block encoded as four bits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The quad position in half-resolution coordinates. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Bit mask with top-left/top-right/bottom-left/bottom-right pixels in bits <computeroutput>0..3</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="57" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1abe4c9bc98cbf2a49594e72aba840e1c2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Bitmap::setPixel</definition>
+        <argsstring>(Position pos, bool value) noexcept</argsstring>
+        <name>setPixel</name>
+        <qualifiedname>erbsland::cterm::Bitmap::setPixel</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Set one pixel in the bitmap. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pixel position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new pixel state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Positions outside the bitmap are ignored. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="64" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1a0405205a1bb3dd6535d3ed665a242359" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Bitmap::flipHorizontal</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>flipHorizontal</name>
+        <qualifiedname>erbsland::cterm::Bitmap::flipHorizontal</qualifiedname>
+        <briefdescription>
+<para>Mirror the bitmap horizontally in-place. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1a306505b478b3b93744b02a91f43de53b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::Bitmap::draw</definition>
+        <argsstring>(Position position, const std::vector&lt; T &gt; &amp;data) noexcept</argsstring>
+        <name>draw</name>
+        <qualifiedname>erbsland::cterm::Bitmap::draw</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+    <requiresclause>std::is_integral_v&lt;T&gt; &amp;&amp; std::is_unsigned_v&lt;T&gt;    </requiresclause>
+        <briefdescription>
+<para>Draw pixels from a numeric bit mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unsigned integer type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The top left corner where to draw the bit mask. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array with the data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="81" column="10" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="105" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1a6d5ab0810bab3e533d3e7e462b6d955e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Bitmap::draw</definition>
+        <argsstring>(const Position position, const Bitmap &amp;bitmap) noexcept</argsstring>
+        <name>draw</name>
+        <qualifiedname>erbsland::cterm::Bitmap::draw</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_bitmap" kindref="compound">Bitmap</ref> &amp;</type>
+          <declname>bitmap</declname>
+        </param>
+        <briefdescription>
+<para>Draw another bitmap to the given position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The top left corner of the bitmap to draw. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bitmap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bitmap to draw. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="85" column="10" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="85" bodyend="87"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1ac2d8dd5c971f3187de0a31e450c53cb7" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Data::size_type</type>
+        <definition>static Data::size_type erbsland::cterm::Bitmap::toDataIndex</definition>
+        <argsstring>(const int index) noexcept</argsstring>
+        <name>toDataIndex</name>
+        <qualifiedname>erbsland::cterm::Bitmap::toDataIndex</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Convert a signed pixel index to the storage index type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The row-major pixel index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding storage index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="47" column="29" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="47" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1aa71af37f75c2002606e5e8a3eee0ba09" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_bitmap" kindref="compound">Bitmap</ref></type>
+        <definition>static Bitmap erbsland::cterm::Bitmap::fromPattern</definition>
+        <argsstring>(std::initializer_list&lt; std::string_view &gt; rows)</argsstring>
+        <name>fromPattern</name>
+        <qualifiedname>erbsland::cterm::Bitmap::fromPattern</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; std::string_view &gt;</type>
+          <declname>rows</declname>
+        </param>
+        <briefdescription>
+<para>Create a bitmap from an ASCII pattern. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each input string becomes one row. Dots (<computeroutput>.</computeroutput>) and spaces create cleared pixels, every other character sets a pixel. Shorter rows are padded with cleared pixels to the maximum row width. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rows</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pattern rows to parse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created bitmap. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="74" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_bitmap_1a4be79dc2a7086be44f25e2ac5b0cf7f0" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Data::reference</type>
+        <definition>Data::reference erbsland::cterm::Bitmap::pixelRef</definition>
+        <argsstring>(const Position pos)</argsstring>
+        <name>pixelRef</name>
+        <qualifiedname>erbsland::cterm::Bitmap::pixelRef</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Bitmap.hpp" line="90" column="22" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="90" bodyend="95"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A mutable bitmap storing boolean pixels in row-major order. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::Bitmap</label>
+        <link refid="classerbsland_1_1cterm_1_1_bitmap"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::FontGlyph</label>
+        <link refid="classerbsland_1_1cterm_1_1_font_glyph"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::Bitmap</label>
+        <link refid="classerbsland_1_1cterm_1_1_bitmap"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_size</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::Size</label>
+        <link refid="classerbsland_1_1cterm_1_1_size"/>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/Bitmap.hpp" line="24" column="1" bodyfile="erbsland/cterm/Bitmap.hpp" bodystart="24" bodyend="100"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ab6e6c8bb4a09190488f7416a5737de33" prot="protected" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>_data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a6d63dff2771b83e9e0bf02ec2664ddc4" prot="protected" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>_size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a7ecf67ceb9c5455e65120c82e08ef1d4" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>Bitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a665244b95823d49ae0e4ccad1fdbc028" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>Bitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a5b18d24a380eea19613d95efb830abaa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>Data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ae4a0983b91510e9ee12796b13dded22c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1aea308a7e1835c5e2685ca20d71fbde62" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a306505b478b3b93744b02a91f43de53b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>draw</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a6d5ab0810bab3e533d3e7e462b6d955e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>draw</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a0405205a1bb3dd6535d3ed665a242359" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>flipHorizontal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1aa71af37f75c2002606e5e8a3eee0ba09" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>fromPattern</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1aeb9bd69611cf8d8af7c01f4d061f00a9" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>pixel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ad7c9fca179c403837c717049d79db983" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>pixelQuad</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a4be79dc2a7086be44f25e2ac5b0cf7f0" prot="protected" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>pixelRef</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1abe4c9bc98cbf2a49594e72aba840e1c2" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>setPixel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ae1f3d14030b5aa43548c39a30778ea11" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ac2d8dd5c971f3187de0a31e450c53cb7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>toDataIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ab6d102b22dd25496a34badc0d3546124" prot="public" virt="non-virtual"><scope>erbsland::cterm::Bitmap</scope><name>~Bitmap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

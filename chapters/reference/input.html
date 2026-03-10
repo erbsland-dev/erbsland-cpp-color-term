@@ -1,0 +1,710 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Output" href="output.html" />
+    <link rel="prev" title="Geometry" href="geometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#polling-for-keys-in-a-redraw-loop">Polling for Keys in a Redraw Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#describing-key-bindings">Describing Key Bindings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm5InputE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Input</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm15InputDefinitionE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::InputDefinition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm19InputDefinitionListE"><code class="docutils literal notranslate"><span class="pre">InputDefinitionList</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm3KeyE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Key</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Text</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Input</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/input.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="input">
+<h1>Input<a class="headerlink" href="#input" title="Link to this heading"></a></h1>
+<p>The input classes provide access to keyboard input from the terminal.
+They are designed for interactive applications such as dashboards,
+tools, and terminal games that need immediate key handling.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="polling-for-keys-in-a-redraw-loop">
+<h3>Polling for Keys in a Redraw Loop<a class="headerlink" href="#polling-for-keys-in-a-redraw-loop" title="Link to this heading"></a></h3>
+<p>For interactive applications, switch the input backend to key mode and
+poll for input with a timeout. This allows your application to update
+the screen regularly while still reacting to keyboard events.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">chrono_literals</span><span class="p">;</span>
+
+<span class="n">terminal</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">setMode</span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">Mode</span><span class="o">::</span><span class="n">Key</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">quitRequested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">quitRequested</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terminal</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">read</span><span class="p">(</span><span class="mi">90</span><span class="n">ms</span><span class="p">);</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="n">valid</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Key</span><span class="p">{</span><span class="n">Key</span><span class="o">::</span><span class="n">Character</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">quitRequested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Key</span><span class="p">{</span><span class="n">Key</span><span class="o">::</span><span class="n">Left</span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Move selection.</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using a timeout keeps the redraw loop responsive without busy waiting.</p>
+</section>
+<section id="describing-key-bindings">
+<h3>Describing Key Bindings<a class="headerlink" href="#describing-key-bindings" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">InputDefinition</span></code> represents a key binding together with the input
+mode it applies to. It is useful when describing configurable shortcuts
+or when displaying the currently active bindings.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">quitKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InputDefinition</span><span class="p">{</span><span class="n">Key</span><span class="p">{</span><span class="n">Key</span><span class="o">::</span><span class="n">Character</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">},</span><span class="w"> </span><span class="n">InputDefinition</span><span class="o">::</span><span class="n">ForMode</span><span class="o">::</span><span class="n">Key</span><span class="p">};</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">helpKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InputDefinition</span><span class="p">{</span><span class="n">Key</span><span class="p">{</span><span class="n">Key</span><span class="o">::</span><span class="n">F1</span><span class="p">},</span><span class="w"> </span><span class="n">InputDefinition</span><span class="o">::</span><span class="n">ForMode</span><span class="o">::</span><span class="n">Key</span><span class="p">};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Quit: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">quitKey</span><span class="p">.</span><span class="n">toDisplayText</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Help: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">helpKey</span><span class="p">.</span><span class="n">toString</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The helper functions <code class="docutils literal notranslate"><span class="pre">toDisplayText()</span></code> and <code class="docutils literal notranslate"><span class="pre">toString()</span></code> make it easy
+to present key bindings in help screens or configuration output.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/retro-plasma.jpg"><img alt="../../_images/retro-plasma.jpg" src="../../_images/retro-plasma.jpg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The animated demos use <code class="docutils literal notranslate"><span class="pre">Input</span></code> in key mode so screen redraws and
+keyboard handling remain responsive.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5InputE">
+<span id="_CPPv3N8erbsland5cterm5InputE"></span><span id="_CPPv2N8erbsland5cterm5InputE"></span><span id="erbsland::cterm::Input"></span><span class="target" id="classerbsland_1_1cterm_1_1_input"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Input</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5InputE" title="Link to this definition"></a><br /></dt>
+<dd><p>Reads key presses from the console depending on the configured mode. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Input4ModeE">
+<span id="_CPPv3N8erbsland5cterm5Input4ModeE"></span><span id="_CPPv2N8erbsland5cterm5Input4ModeE"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Mode</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Input4ModeE" title="Link to this definition"></a><br /></dt>
+<dd><p>Supported reading modes for the input backend. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Input4Mode8ReadLineE">
+<span id="_CPPv3N8erbsland5cterm5Input4Mode8ReadLineE"></span><span id="_CPPv2N8erbsland5cterm5Input4Mode8ReadLineE"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a299040a8206f805f0a777fc25b6df6a9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReadLine</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Input4Mode8ReadLineE" title="Link to this definition"></a><br /></dt>
+<dd><p>Read one full line from standard input. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Input4Mode3KeyE">
+<span id="_CPPv3N8erbsland5cterm5Input4Mode3KeyE"></span><span id="_CPPv2N8erbsland5cterm5Input4Mode3KeyE"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a897356954c2cd3d41b221e3f24f99bba"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Key</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Input4Mode3KeyE" title="Link to this definition"></a><br /></dt>
+<dd><p>Read raw key presses from the terminal backend. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Input5InputEv">
+<span id="_CPPv3N8erbsland5cterm5Input5InputEv"></span><span id="_CPPv2N8erbsland5cterm5Input5InputEv"></span><span id="erbsland::cterm::Input::Input"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_1a4369365e8bfbc40f9f7ad574b62cbc6a"></span><span class="sig-name descname"><span class="n"><span class="pre">Input</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Input5InputEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an input object in <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a299040a8206f805f0a777fc25b6df6a9"><span class="std std-ref"><span class="pre">Mode::ReadLine</span></span></a></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5InputD0Ev">
+<span id="_CPPv3N8erbsland5cterm5InputD0Ev"></span><span id="_CPPv2N8erbsland5cterm5InputD0Ev"></span><span id="erbsland::cterm::Input::~Input"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_1a9b1a70588fba1ed83cd25ce24e9cc533"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Input</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5InputD0Ev" title="Link to this definition"></a><br /></dt>
+<dd><p>Destroy the input object. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm5Input7setModeE4Mode">
+<span id="_CPPv3N8erbsland5cterm5Input7setModeE4Mode"></span><span id="_CPPv2N8erbsland5cterm5Input7setModeE4Mode"></span><span id="erbsland::cterm::Input::setMode__Mode"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_1a16860fd6b57bc48ec6fa790ae6daab34"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setMode</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5Input4ModeE" title="erbsland::cterm::Input::Mode"><span class="n"><span class="pre">Mode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm5Input7setModeE4Mode" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the current reading mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> – The new input mode. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm5Input4modeEv">
+<span id="_CPPv3NK8erbsland5cterm5Input4modeEv"></span><span id="_CPPv2NK8erbsland5cterm5Input4modeEv"></span><span id="erbsland::cterm::Input::modeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_1a243ca8827fdb17027fea63c7fafef676"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm5Input4ModeE" title="erbsland::cterm::Input::Mode"><span class="n"><span class="pre">Mode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm5Input4modeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current reading mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm5Input4readENSt6chrono12millisecondsE">
+<span id="_CPPv3NK8erbsland5cterm5Input4readENSt6chrono12millisecondsE"></span><span id="_CPPv2NK8erbsland5cterm5Input4readENSt6chrono12millisecondsE"></span><span id="erbsland::cterm::Input::read__std::chrono::millisecondsC"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_1aa25e52b883c306e2e1c86fc8cb7191b0"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">milliseconds</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm5Input4readENSt6chrono12millisecondsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Read one key event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> – Maximum wait time in <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a897356954c2cd3d41b221e3f24f99bba"><span class="std std-ref"><span class="pre">Mode::Key</span></span></a></code>; ignored in <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a299040a8206f805f0a777fc25b6df6a9"><span class="std std-ref"><span class="pre">Mode::ReadLine</span></span></a></code>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parsed key event, or an invalid key if no supported input was read. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15InputDefinitionE">
+<span id="_CPPv3N8erbsland5cterm15InputDefinitionE"></span><span id="_CPPv2N8erbsland5cterm15InputDefinitionE"></span><span id="erbsland::cterm::InputDefinition"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InputDefinition</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15InputDefinitionE" title="Link to this definition"></a><br /></dt>
+<dd><p>Definition of a single key mapping for a specific input mode. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15InputDefinition7ForModeE">
+<span id="_CPPv3N8erbsland5cterm15InputDefinition7ForModeE"></span><span id="_CPPv2N8erbsland5cterm15InputDefinition7ForModeE"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926c"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ForMode</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15InputDefinition7ForModeE" title="Link to this definition"></a><br /></dt>
+<dd><p>The input modes to which a key definition can apply. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15InputDefinition7ForMode4BothE">
+<span id="_CPPv3N8erbsland5cterm15InputDefinition7ForMode4BothE"></span><span id="_CPPv2N8erbsland5cterm15InputDefinition7ForMode4BothE"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926ca130c5b3473c57faa76e2a1c54e26f88e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Both</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15InputDefinition7ForMode4BothE" title="Link to this definition"></a><br /></dt>
+<dd><p>The key can be used in both input modes. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15InputDefinition7ForMode8ReadLineE">
+<span id="_CPPv3N8erbsland5cterm15InputDefinition7ForMode8ReadLineE"></span><span id="_CPPv2N8erbsland5cterm15InputDefinition7ForMode8ReadLineE"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926ca299040a8206f805f0a777fc25b6df6a9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReadLine</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15InputDefinition7ForMode8ReadLineE" title="Link to this definition"></a><br /></dt>
+<dd><p>The key only applies when reading a full line. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15InputDefinition7ForMode3KeyE">
+<span id="_CPPv3N8erbsland5cterm15InputDefinition7ForMode3KeyE"></span><span id="_CPPv2N8erbsland5cterm15InputDefinition7ForMode3KeyE"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1ad48b5cb423dbf71421ae6817c690926ca897356954c2cd3d41b221e3f24f99bba"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Key</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15InputDefinition7ForMode3KeyE" title="Link to this definition"></a><br /></dt>
+<dd><p>The key only applies when reading single key presses. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15InputDefinition15InputDefinitionEv">
+<span id="_CPPv3N8erbsland5cterm15InputDefinition15InputDefinitionEv"></span><span id="_CPPv2N8erbsland5cterm15InputDefinition15InputDefinitionEv"></span><span id="erbsland::cterm::InputDefinition::InputDefinition"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1a641ea8413669daee42b01712517cdd4e"></span><span class="sig-name descname"><span class="n"><span class="pre">InputDefinition</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15InputDefinition15InputDefinitionEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an invalid input definition. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15InputDefinition15InputDefinitionE3Key7ForMode">
+<span id="_CPPv3N8erbsland5cterm15InputDefinition15InputDefinitionE3Key7ForMode"></span><span id="_CPPv2N8erbsland5cterm15InputDefinition15InputDefinitionE3Key7ForMode"></span><span id="erbsland::cterm::InputDefinition::InputDefinition__Key.ForMode"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1a84a13981e801ce3ba71260d1844380db"></span><span class="sig-name descname"><span class="n"><span class="pre">InputDefinition</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">keyPress</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm15InputDefinition7ForModeE" title="erbsland::cterm::InputDefinition::ForMode"><span class="n"><span class="pre">ForMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">forMode</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15InputDefinition15InputDefinitionE3Key7ForMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a definition for the given key and input mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keyPress</strong> – The key to match. </p></li>
+<li><p><strong>forMode</strong> – The input mode in which the definition is valid. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm15InputDefinition8keyPressEv">
+<span id="_CPPv3NK8erbsland5cterm15InputDefinition8keyPressEv"></span><span id="_CPPv2NK8erbsland5cterm15InputDefinition8keyPressEv"></span><span id="erbsland::cterm::InputDefinition::keyPressC"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1afc6b08d21e96950c1a69d85a409e9ed7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">keyPress</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm15InputDefinition8keyPressEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Return the represented key press. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm15InputDefinition7forModeEv">
+<span id="_CPPv3NK8erbsland5cterm15InputDefinition7forModeEv"></span><span id="_CPPv2NK8erbsland5cterm15InputDefinition7forModeEv"></span><span id="erbsland::cterm::InputDefinition::forModeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1a606c926c73e2173f6cf86785f576e1cf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15InputDefinition7ForModeE" title="erbsland::cterm::InputDefinition::ForMode"><span class="n"><span class="pre">ForMode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forMode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm15InputDefinition7forModeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Return the mode for which this definition is valid. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm15InputDefinition5validEv">
+<span id="_CPPv3NK8erbsland5cterm15InputDefinition5validEv"></span><span id="_CPPv2NK8erbsland5cterm15InputDefinition5validEv"></span><span id="erbsland::cterm::InputDefinition::validC"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1a32e2f282b070afa50a1984d6e0c1cfad"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">valid</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm15InputDefinition5validEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Check whether this definition contains a valid key press. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm15InputDefinition8toStringEv">
+<span id="_CPPv3NK8erbsland5cterm15InputDefinition8toStringEv"></span><span id="_CPPv2NK8erbsland5cterm15InputDefinition8toStringEv"></span><span id="erbsland::cterm::InputDefinition::toStringC"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1af783d006aaa454a5e2f92a9c6d6fcb6a"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toString</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm15InputDefinition8toStringEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert the key definition to its configuration text. </p>
+<p>The serialized configuration text includes the optional mode prefix. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The serialized configuration text. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm15InputDefinition13toDisplayTextEb">
+<span id="_CPPv3NK8erbsland5cterm15InputDefinition13toDisplayTextEb"></span><span id="_CPPv2NK8erbsland5cterm15InputDefinition13toDisplayTextEb"></span><span id="erbsland::cterm::InputDefinition::toDisplayText__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1a377e456e47f6ba42cfb7ebb9cedf672c"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toDisplayText</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">useBrackets</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm15InputDefinition13toDisplayTextEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Return a display label for prompts and help texts. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>useBrackets</strong> – If <code class="docutils literal notranslate"><span class="pre">true</span></code>, wrap the text in <code class="docutils literal notranslate"><span class="pre">[</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A human-readable key label. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm15InputDefinition11displayTextEv">
+<span id="_CPPv3NK8erbsland5cterm15InputDefinition11displayTextEv"></span><span id="_CPPv2NK8erbsland5cterm15InputDefinition11displayTextEv"></span><span id="erbsland::cterm::InputDefinition::displayTextC"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1aefb1615d9ce52560fb973ba6d39e34c6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">displayText</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm15InputDefinition11displayTextEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Compatibility wrapper for older code that used <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_input_definition_1aefb1615d9ce52560fb973ba6d39e34c6"><span class="std std-ref"><span class="pre">displayText()</span></span></a></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A human-readable key label with stylized brackets. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm15InputDefinition10fromStringENSt6stringE">
+<span id="_CPPv3N8erbsland5cterm15InputDefinition10fromStringENSt6stringE"></span><span id="_CPPv2N8erbsland5cterm15InputDefinition10fromStringENSt6stringE"></span><span id="erbsland::cterm::InputDefinition::fromString__ss"></span><span class="target" id="classerbsland_1_1cterm_1_1_input_definition_1aa46fc1f78f4e765ec11ee275c8bef9ec"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15InputDefinitionE" title="erbsland::cterm::InputDefinition"><span class="n"><span class="pre">InputDefinition</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm15InputDefinition10fromStringENSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Parse the textual representation of a key definition. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – The configuration text, optionally prefixed with <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">+</span></code> for the input mode. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parsed input definition. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm19InputDefinitionListE">
+<span id="_CPPv3N8erbsland5cterm19InputDefinitionListE"></span><span id="_CPPv2N8erbsland5cterm19InputDefinitionListE"></span><span class="target" id="_input_definition_8hpp_1a09de6a02ed0a0e884edbd54fb8d9b58f"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">InputDefinitionList</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm15InputDefinitionE" title="erbsland::cterm::InputDefinition"><span class="n"><span class="pre">InputDefinition</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm19InputDefinitionListE" title="Link to this definition"></a><br /></dt>
+<dd><p>A list of input definitions. </p>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3KeyE">
+<span id="_CPPv3N8erbsland5cterm3KeyE"></span><span id="_CPPv2N8erbsland5cterm3KeyE"></span><span id="erbsland::cterm::Key"></span><span class="target" id="classerbsland_1_1cterm_1_1_key"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Key</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3KeyE" title="Link to this definition"></a><br /></dt>
+<dd><p>A simple representation of a key press. </p>
+<p>Supports alphanumeric characters and common special keys. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4TypeE">
+<span id="_CPPv3N8erbsland5cterm3Key4TypeE"></span><span id="_CPPv2N8erbsland5cterm3Key4TypeE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Type</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4TypeE" title="Link to this definition"></a><br /></dt>
+<dd><p>Supported key kinds. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type4NoneE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type4NoneE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type4NoneE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1af668c4b83d48117e3f0781ba93895c2d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">None</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type4NoneE" title="Link to this definition"></a><br /></dt>
+<dd><p>No supported key was decoded. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type9CharacterE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type9CharacterE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type9CharacterE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1ab1d40ca4b5b36c9081797d52657d65f2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Character</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type9CharacterE" title="Link to this definition"></a><br /></dt>
+<dd><p>A single alphanumeric character. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type5EnterE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type5EnterE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type5EnterE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1af06fe6cf3fe361dd13aeb27ef2b49892"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Enter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type5EnterE" title="Link to this definition"></a><br /></dt>
+<dd><p>The Enter/Return key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type3TabE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type3TabE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type3TabE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a0f41211ae36823609ff59b02cf23ba04"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Tab</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type3TabE" title="Link to this definition"></a><br /></dt>
+<dd><p>The tab key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type5SpaceE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type5SpaceE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type5SpaceE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a1b798ec90f79f67f10f1dcf1e4db6c05"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Space</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type5SpaceE" title="Link to this definition"></a><br /></dt>
+<dd><p>The space key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type6EscapeE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type6EscapeE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type6EscapeE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1af2cc3cd513a410cfdf3a650a36b1b136"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Escape</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type6EscapeE" title="Link to this definition"></a><br /></dt>
+<dd><p>The escape key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type9BackspaceE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type9BackspaceE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type9BackspaceE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1aab172c3100f4e4e55969fc6e91841d05"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Backspace</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type9BackspaceE" title="Link to this definition"></a><br /></dt>
+<dd><p>The backspace key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type6InsertE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type6InsertE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type6InsertE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a5bcab4e854da42bd3d82723ca3cd0881"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Insert</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type6InsertE" title="Link to this definition"></a><br /></dt>
+<dd><p>The insert key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type6DeleteE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type6DeleteE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type6DeleteE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1acde0c49d95934792195738019826c3e0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Delete</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type6DeleteE" title="Link to this definition"></a><br /></dt>
+<dd><p>The delete key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type4HomeE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type4HomeE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type4HomeE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a19e52ccf71181051b602ce8f94fdf73a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Home</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type4HomeE" title="Link to this definition"></a><br /></dt>
+<dd><p>The home key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type3EndE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type3EndE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type3EndE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1aedeb0af0fccad44c7eb1541189a8c729"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">End</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type3EndE" title="Link to this definition"></a><br /></dt>
+<dd><p>The end key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type6PageUpE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type6PageUpE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type6PageUpE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a0eb6e194e005962324bbae6f0e3db61a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PageUp</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type6PageUpE" title="Link to this definition"></a><br /></dt>
+<dd><p>The page up key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type8PageDownE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type8PageDownE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type8PageDownE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a398d1c7fb82b044a9a801f79b520f512"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PageDown</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type8PageDownE" title="Link to this definition"></a><br /></dt>
+<dd><p>The page down key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type4LeftE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type4LeftE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type4LeftE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1ade124153662ffe7ac554634d411bca7c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Left</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type4LeftE" title="Link to this definition"></a><br /></dt>
+<dd><p>The left cursor key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type5RightE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type5RightE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type5RightE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a8709347716a86c5b676b2a00fd6edfcb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Right</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type5RightE" title="Link to this definition"></a><br /></dt>
+<dd><p>The right cursor key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2UpE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2UpE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2UpE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1ab44a29d4689957d3a550b23bb7682388"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Up</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2UpE" title="Link to this definition"></a><br /></dt>
+<dd><p>The up cursor key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type4DownE">
+<span id="_CPPv3N8erbsland5cterm3Key4Type4DownE"></span><span id="_CPPv2N8erbsland5cterm3Key4Type4DownE"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1aad4491e2c808b5401d6d76d720edf552"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Down</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type4DownE" title="Link to this definition"></a><br /></dt>
+<dd><p>The down cursor key. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F1E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F1E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F1E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a007065f64ee147dddac60d42ac5a8dff"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F1</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F1E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F1. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F2E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F2E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F2E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1ae41699d0a25851eee336b80e04fd2ff0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F2</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F2E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F2. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F3E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F3E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F3E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1ad7d3e3fefdb082b20e231648474d110d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F3</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F3E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F3. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F4E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F4E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F4E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a0c54c4dae64abb7e13ae3e4336f33a0a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F4</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F4E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F4. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F5E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F5E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F5E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1aa69d97151913d3c3f74600b0b49a2922"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F5</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F5E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F5. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F6E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F6E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F6E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a65b2085a5dd9a3b677adff4d05a312fb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F6</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F6E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F6. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F7E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F7E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F7E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a5d79a03abe4d8c4f145cdd5a1773f435"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F7</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F7E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F7. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F8E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F8E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F8E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a6ef3d06f7a92ad88c3321a3fe24b29bd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F8</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F8E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F8. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type2F9E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type2F9E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type2F9E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a1410ec66816ab3f3013986c0ab909ebb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F9</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type2F9E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F9. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type3F10E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type3F10E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type3F10E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1aed1e5caad1f743135efbf52e564e4d58"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F10</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type3F10E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F10. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type3F11E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type3F11E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type3F11E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1aeea5d58fcd56f112a99a4971737653df"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F11</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type3F11E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F11. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key4Type3F12E">
+<span id="_CPPv3N8erbsland5cterm3Key4Type3F12E"></span><span id="_CPPv2N8erbsland5cterm3Key4Type3F12E"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1a63890896b757e2fea9f0e537de251707"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F12</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key4Type3F12E" title="Link to this definition"></a><br /></dt>
+<dd><p>The function key F12. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key3KeyEv">
+<span id="_CPPv3N8erbsland5cterm3Key3KeyEv"></span><span id="_CPPv2N8erbsland5cterm3Key3KeyEv"></span><span id="erbsland::cterm::Key::Key"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a1b79648b08fc559594cb1dc0eb8797a9"></span><span class="sig-name descname"><span class="n"><span class="pre">Key</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key3KeyEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an invalid key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key3KeyE4Typec">
+<span id="_CPPv3N8erbsland5cterm3Key3KeyE4Typec"></span><span id="_CPPv2N8erbsland5cterm3Key3KeyE4Typec"></span><span id="erbsland::cterm::Key::Key__Type.c"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1ad21810302b2627d675a88f4ac54399bb"></span><span class="sig-name descname"><span class="n"><span class="pre">Key</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm3Key4TypeE" title="erbsland::cterm::Key::Type"><span class="n"><span class="pre">Type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ch</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key3KeyE4Typec" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a key with explicit type and optional character payload. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – The key type. </p></li>
+<li><p><strong>ch</strong> – The character value for <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1ab1d40ca4b5b36c9081797d52657d65f2"><span class="std std-ref"><span class="pre">Type::Character</span></span></a></code>. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm3Key8toStringEv">
+<span id="_CPPv3NK8erbsland5cterm3Key8toStringEv"></span><span id="_CPPv2NK8erbsland5cterm3Key8toStringEv"></span><span id="erbsland::cterm::Key::toStringC"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1ac22889ff75aba6759036cc0cd4d05501"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toString</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm3Key8toStringEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert the key to configuration text. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The canonical textual key name. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm3Key13toDisplayTextEb">
+<span id="_CPPv3NK8erbsland5cterm3Key13toDisplayTextEb"></span><span id="_CPPv2NK8erbsland5cterm3Key13toDisplayTextEb"></span><span id="erbsland::cterm::Key::toDisplayText__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1ab1f10c4d3889f757fe41a20cac81ccaf"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toDisplayText</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">useBrackets</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm3Key13toDisplayTextEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Convert the key to human-readable display text. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>useBrackets</strong> – If <code class="docutils literal notranslate"><span class="pre">true</span></code>, wrap the text in <code class="docutils literal notranslate"><span class="pre">[</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The display text for prompts and help texts. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm3KeyeqERK3Key">
+<span id="_CPPv3NK8erbsland5cterm3KeyeqERK3Key"></span><span id="_CPPv2NK8erbsland5cterm3KeyeqERK3Key"></span><span id="erbsland::cterm::Key::eq-operator__KeyCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a94d6fb1a6473fab6512b13090791a125"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm3KeyeqERK3Key" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two key events for equality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm3Key4typeEv">
+<span id="_CPPv3NK8erbsland5cterm3Key4typeEv"></span><span id="_CPPv2NK8erbsland5cterm3Key4typeEv"></span><span id="erbsland::cterm::Key::typeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a79a4a232f28d37a7b09433719d80bab2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm3Key4TypeE" title="erbsland::cterm::Key::Type"><span class="n"><span class="pre">Type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm3Key4typeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the key type. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm3Key9characterEv">
+<span id="_CPPv3NK8erbsland5cterm3Key9characterEv"></span><span id="_CPPv2NK8erbsland5cterm3Key9characterEv"></span><span id="erbsland::cterm::Key::characterC"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a4c948d7e8e08b3b8c83a592f28520de5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">character</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm3Key9characterEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the character payload. </p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">0</span></code> for non-character keys. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm3Key5validEv">
+<span id="_CPPv3NK8erbsland5cterm3Key5validEv"></span><span id="_CPPv2NK8erbsland5cterm3Key5validEv"></span><span id="erbsland::cterm::Key::validC"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a9477404abb06a94d2420c88213938a0d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">valid</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm3Key5validEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this object represents a supported key. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key10fromStringENSt6stringE">
+<span id="_CPPv3N8erbsland5cterm3Key10fromStringENSt6stringE"></span><span id="_CPPv2N8erbsland5cterm3Key10fromStringENSt6stringE"></span><span id="erbsland::cterm::Key::fromString__ss"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1a79acbcd765f7c349b5aae0e4a2dd3f1c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key10fromStringENSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Decode a key from configuration text. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – The textual key name. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded key, or <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1af668c4b83d48117e3f0781ba93895c2d"><span class="std std-ref"><span class="pre">Type::None</span></span></a></code> if the text is unsupported. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm3Key16fromConsoleInputERKNSt6stringE">
+<span id="_CPPv3N8erbsland5cterm3Key16fromConsoleInputERKNSt6stringE"></span><span id="_CPPv2N8erbsland5cterm3Key16fromConsoleInputERKNSt6stringE"></span><span id="erbsland::cterm::Key::fromConsoleInput__ssCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_key_1aeed4aed84775030d6aef6e6292084f50"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromConsoleInput</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm3Key16fromConsoleInputERKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Decode a key from console input text. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – The input text or escape sequence. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded key, or <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1af668c4b83d48117e3f0781ba93895c2d"><span class="std std-ref"><span class="pre">Type::None</span></span></a></code> if the input is unsupported. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="geometry.html" class="btn btn-neutral float-left" title="Geometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="output.html" class="btn btn-neutral float-right" title="Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

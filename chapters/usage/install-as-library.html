@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Install the Library as Static Library &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=76679ccf" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12e642ad" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to Run the Unit Tests" href="run-unit-tests.html" />
+    <link rel="prev" title="Integrate the Library as Submodule" href="integrate-as-submodule.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="integrate-as-submodule.html">Integrate the Library as Submodule</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install the Library as Static Library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-and-install">Build and Install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation-prefix">Installation Prefix</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#linking-from-a-consumer-project">Linking from a Consumer Project</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="run-unit-tests.html">How to Run the Unit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Usage</a></li>
+      <li class="breadcrumb-item active">Install the Library as Static Library</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/usage/install-as-library.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="install-the-library-as-static-library">
+<span id="index-0"></span><h1>Install the Library as Static Library<a class="headerlink" href="#install-the-library-as-static-library" title="Link to this heading"></a></h1>
+<p>You can build and install Erbsland Color Terminal as a standalone static library.
+This approach is useful if you:</p>
+<ul class="simple">
+<li><p>Want to reuse the terminal library across multiple independent projects.</p></li>
+<li><p>Prefer a system-wide installation.</p></li>
+<li><p>Integrate it into an existing build or packaging workflow.</p></li>
+</ul>
+<p>For most use cases, source-based integration with <a class="reference internal" href="integrate-as-submodule.html"><span class="doc">Integrate the Library as Submodule</span></a> is still the simplest approach.</p>
+<section id="build-and-install">
+<h2>Build and Install<a class="headerlink" href="#build-and-install" title="Link to this heading"></a></h2>
+<p>Follow these steps to clone, build, and install the library:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/erbsland-dev/erbsland-cpp-color-term.git
+<span class="gp">$ </span>mkdir<span class="w"> </span>build
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>build
+<span class="gp">$ </span>cmake<span class="w"> </span>../erbsland-cpp-color-term<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+<span class="go">-- The CXX compiler identification is (...)</span>
+<span class="gp gp-VirtualEnv">(...)</span>
+<span class="go">-- Build files have been written to: (...)/build</span>
+
+<span class="gp">$ </span>cmake<span class="w"> </span>--build<span class="w"> </span>.
+<span class="go">[  1%] Building CXX object (...)/Color.cpp.o</span>
+<span class="go">[  3%] Building CXX object (...)/Terminal.cpp.o</span>
+<span class="gp gp-VirtualEnv">(...)</span>
+<span class="go">[100%] Linking CXX static library liberbsland-color-term.a</span>
+<span class="go">[100%] Built target erbsland-color-term</span>
+
+<span class="gp">$ </span>cmake<span class="w"> </span>--install<span class="w"> </span>.
+<span class="go">-- Install configuration: &quot;Release&quot;</span>
+<span class="go">-- Installing: (...)/lib/liberbsland-color-term.a</span>
+<span class="go">-- Installing: (...)/include</span>
+<span class="gp gp-VirtualEnv">(...)</span>
+</pre></div>
+</div>
+<p>After installation, you will have:</p>
+<ul class="simple">
+<li><p>The static library <code class="docutils literal notranslate"><span class="pre">liberbsland-color-term.a</span></code>.</p></li>
+<li><p>All public header files in the install include directory.</p></li>
+<li><p>An exported CMake package configuration for <code class="docutils literal notranslate"><span class="pre">find_package</span></code>.</p></li>
+</ul>
+<section id="installation-prefix">
+<h3>Installation Prefix<a class="headerlink" href="#installation-prefix" title="Link to this heading"></a></h3>
+<p>By default, CMake installs to a platform-specific location:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> on most Unix-like systems</p></li>
+<li><p>A platform-dependent directory on Windows</p></li>
+</ul>
+<p>If you want to control the install location, set the prefix explicitly:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cmake<span class="w"> </span>--install<span class="w"> </span>.<span class="w"> </span>--prefix<span class="w"> </span>/your/custom/path
+</pre></div>
+</div>
+<p>Alternatively, you can define <code class="docutils literal notranslate"><span class="pre">CMAKE_INSTALL_PREFIX</span></code> during configuration:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cmake<span class="w"> </span>../erbsland-cpp-color-term<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/your/custom/path
+</pre></div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Faster Builds Using Ninja</div>
+<p class="sd-card-text">For faster and more reliable incremental builds, we recommend using <em>Ninja</em> as your build tool on all platforms.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/erbsland-dev/erbsland-cpp-color-term.git
+<span class="gp">$ </span>mkdir<span class="w"> </span>build
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>build
+<span class="gp">$ </span>cmake<span class="w"> </span>../erbsland-cpp-color-term<span class="w"> </span>-G<span class="w"> </span>Ninja<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+<span class="gp">$ </span>cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </span>-j<span class="w"> </span><span class="m">8</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="linking-from-a-consumer-project">
+<h2>Linking from a Consumer Project<a class="headerlink" href="#linking-from-a-consumer-project" title="Link to this heading"></a></h2>
+<p>The installation exports a CMake package that provides the color terminal target.</p>
+<p>In your consuming project:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">erbsland-color-term</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">example</span><span class="w"> </span><span class="s">src/main.cpp</span><span class="p">)</span>
+<span class="nb">target_compile_features</span><span class="p">(</span><span class="s">example</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">cxx_std_20</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">example</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="w">    </span><span class="s">ErbslandDEV::erbsland-color-term</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This ensures:</p>
+<ul class="simple">
+<li><p>Proper include directories</p></li>
+<li><p>A modern imported CMake target</p></li>
+<li><p>A static library that can be packaged with your application</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="integrate-as-submodule.html" class="btn btn-neutral float-left" title="Integrate the Library as Submodule" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="run-unit-tests.html" class="btn btn-neutral float-right" title="How to Run the Unit Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

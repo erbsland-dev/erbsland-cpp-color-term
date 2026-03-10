@@ -1,0 +1,400 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_color_sequence" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ColorSequence</compoundname>
+    <includes refid="_color_sequence_8hpp" local="no">erbsland/cterm/ColorSequence.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1_color_sequence_1_1_entry" prot="public">erbsland::cterm::ColorSequence::Entry</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_color_sequence_1af3dc9075d5a3a6e79bc5debbcbb795df" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structerbsland_1_1cterm_1_1_color_sequence_1_1_entry" kindref="compound">Entry</ref> &gt;</type>
+        <definition>std::vector&lt;Entry&gt; erbsland::cterm::ColorSequence::_entries</definition>
+        <argsstring></argsstring>
+        <name>_entries</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::_entries</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="80" column="17" bodyfile="erbsland/cterm/ColorSequence.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_color_sequence_1a58dee2055f55196f9edcd4ba4e5bcd97" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ColorSequence::_sequenceLength</definition>
+        <argsstring></argsstring>
+        <name>_sequenceLength</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::_sequenceLength</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="81" column="17" bodyfile="erbsland/cterm/ColorSequence.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a025d74f1670c6d830738443d8c469d1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ColorSequence::ColorSequence</definition>
+        <argsstring>()=default</argsstring>
+        <name>ColorSequence</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::ColorSequence</qualifiedname>
+        <briefdescription>
+<para>Create an empty color sequence. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="35" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a49c11e136d9d2b500e1f5acb3dc5556d" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ColorSequence::ColorSequence</definition>
+        <argsstring>(Color color, std::size_t count=1) noexcept</argsstring>
+        <name>ColorSequence</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::ColorSequence</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Create a sequence with one repeated full-color entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color to add. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How often the color should repeat. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1ad7ca994753597cd3cbf4d8d5d4077fb0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ColorSequence::ColorSequence</definition>
+        <argsstring>(std::initializer_list&lt; Color &gt; colors) noexcept</argsstring>
+        <name>ColorSequence</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::ColorSequence</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &gt;</type>
+          <declname>colors</declname>
+        </param>
+        <briefdescription>
+<para>Create a sequence from individual full-color entries with count <computeroutput>1</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>colors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The colors to add in order. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="42" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1aaf7dc5d3d7084b14f0dee74488df7721" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ColorSequence::ColorSequence</definition>
+        <argsstring>(std::initializer_list&lt; Entry &gt; entries) noexcept</argsstring>
+        <name>ColorSequence</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::ColorSequence</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structerbsland_1_1cterm_1_1_color_sequence_1_1_entry" kindref="compound">Entry</ref> &gt;</type>
+          <declname>entries</declname>
+        </param>
+        <briefdescription>
+<para>Create a sequence from explicit run-length encoded entries. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entries</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entries to add in order. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="45" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1af5968b2b9886e1568c57cf57c9d7e6ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ColorSequence::~ColorSequence</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ColorSequence</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::~ColorSequence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a921b10f8b75e26d448034990fbca5052" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ColorSequence::ColorSequence</definition>
+        <argsstring>(const ColorSequence &amp;) noexcept=default</argsstring>
+        <name>ColorSequence</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::ColorSequence</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_sequence" kindref="compound">ColorSequence</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a7e5335858090d1190b6f081efec3c718" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color_sequence" kindref="compound">ColorSequence</ref> &amp;</type>
+        <definition>ColorSequence &amp; erbsland::cterm::ColorSequence::operator=</definition>
+        <argsstring>(const ColorSequence &amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_sequence" kindref="compound">ColorSequence</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="48" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a21700aa01f93a2d8c893b5be4396abb4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ColorSequence::add</definition>
+        <argsstring>(Color color, std::size_t count=1) noexcept</argsstring>
+        <name>add</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::add</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Add one full-color entry to this sequence. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color for this entry. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How often this color should repeat in the effective sequence. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="54" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1aa81b36d8883a105cfc72d79901640d9f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::ColorSequence::color</definition>
+        <argsstring>(std::size_t index) const noexcept</argsstring>
+        <name>color</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::color</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get one complete color entry by effective sequence index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Indexes wrap around to support cyclic access. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The effective sequence index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The full color at the wrapped index, or the inherited color if the sequence is empty. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="61" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a21fb53204d0d45f47a351d7d753751d4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::ColorSequence::colorNormalized</definition>
+        <argsstring>(double normalized) const noexcept</argsstring>
+        <name>colorNormalized</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::colorNormalized</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>normalized</declname>
+        </param>
+        <briefdescription>
+<para>Get a color by normalized position in the range <computeroutput>0.0..1.0</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Values outside this range are clamped. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>normalized</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The normalized sequence position. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The color at the requested normalized position. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="66" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a05aed5dd5bbe61bfe6ab582c20d346cb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ColorSequence::sequenceLength</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>sequenceLength</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::sequenceLength</qualifiedname>
+        <briefdescription>
+<para>Effective sequence length (sum of all counts). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="68" column="18" bodyfile="erbsland/cterm/ColorSequence.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a7f00f34a92ef7b05d88c81baf27210c7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ColorSequence::entryCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>entryCount</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::entryCount</qualifiedname>
+        <briefdescription>
+<para>Number of configured entries. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="70" column="18" bodyfile="erbsland/cterm/ColorSequence.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1a1eeb5d71b2081c7e6bf57aa98e0d316e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ColorSequence::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::empty</qualifiedname>
+        <briefdescription>
+<para>Test if this sequence has no effective entries. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="74" column="11" bodyfile="erbsland/cterm/ColorSequence.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_color_sequence_1aa19a4ea16d178c8eefa9d4970c68f461" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::ColorSequence::colorAtEffectiveIndex</definition>
+        <argsstring>(std::size_t index) const noexcept</argsstring>
+        <name>colorAtEffectiveIndex</name>
+        <qualifiedname>erbsland::cterm::ColorSequence::colorAtEffectiveIndex</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ColorSequence.hpp" line="77" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A configurable sequence of complete <computeroutput><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></computeroutput> values with run-length style counts. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Each effective position in the sequence yields one full foreground/background color pair. The sequence can be accessed by cyclic index or by a normalized value in the range <computeroutput>0.0..1.0</computeroutput>. Consumers may perform multiple lookups, for example to combine the foreground of one entry with the background of a neighboring entry. <simplesect kind="par"><title>Tested:</title><para><computeroutput>ColorSequenceTest</computeroutput> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="erbsland/cterm/ColorSequence.hpp" line="23" column="1" bodyfile="erbsland/cterm/ColorSequence.hpp" bodystart="23" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1af3dc9075d5a3a6e79bc5debbcbb795df" prot="private" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>_entries</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a58dee2055f55196f9edcd4ba4e5bcd97" prot="private" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>_sequenceLength</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a21700aa01f93a2d8c893b5be4396abb4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>add</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1aa81b36d8883a105cfc72d79901640d9f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1aa19a4ea16d178c8eefa9d4970c68f461" prot="private" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>colorAtEffectiveIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a21fb53204d0d45f47a351d7d753751d4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>colorNormalized</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a025d74f1670c6d830738443d8c469d1e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>ColorSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a49c11e136d9d2b500e1f5acb3dc5556d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>ColorSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1ad7ca994753597cd3cbf4d8d5d4077fb0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>ColorSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1aaf7dc5d3d7084b14f0dee74488df7721" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>ColorSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a921b10f8b75e26d448034990fbca5052" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>ColorSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a1eeb5d71b2081c7e6bf57aa98e0d316e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>empty</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a7f00f34a92ef7b05d88c81baf27210c7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>entryCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a7e5335858090d1190b6f081efec3c718" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1a05aed5dd5bbe61bfe6ab582c20d346cb" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>sequenceLength</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_color_sequence_1af5968b2b9886e1568c57cf57c9d7e6ba" prot="public" virt="non-virtual"><scope>erbsland::cterm::ColorSequence</scope><name>~ColorSequence</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
