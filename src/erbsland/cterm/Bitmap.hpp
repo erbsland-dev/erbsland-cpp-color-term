@@ -4,6 +4,7 @@
 
 
 #include "Position.hpp"
+#include "Rectangle.hpp"
 #include "Size.hpp"
 
 #include <array>
@@ -25,28 +26,29 @@ class Bitmap {
 protected:
     using Data = std::vector<bool>;
 
-public: // ctors/dtor/assign/move
+public:
     /// Create an empty bitmap with the size `(0,0)`.
     Bitmap() = default;
     /// Create a bitmap with the given size and all pixels cleared.
     /// @param size The bitmap dimensions.
     explicit Bitmap(const Size size) : _size{size}, _data(static_cast<Data::size_type>(size.area()), false) {}
-    /// Destroy the bitmap.
+
+    // defaults
     ~Bitmap() = default;
+    Bitmap(const Bitmap &) = default;
+    Bitmap(Bitmap &&) = default;
+    auto operator=(const Bitmap &) -> Bitmap & = default;
+    auto operator=(Bitmap &&) -> Bitmap & = default;
 
 public: // accessors
     /// Get the bitmap dimensions.
     [[nodiscard]] auto size() const noexcept -> Size { return _size; }
+    /// Get a rectangle that represents the bitmap bounds.
+    [[nodiscard]] auto rect() const noexcept -> Rectangle { return Rectangle{Position{0, 0}, _size}; }
     /// Access the raw pixel storage.
     [[nodiscard]] auto data() const noexcept -> const std::vector<bool> & { return _data; }
     /// Access the raw pixel storage for modification.
     [[nodiscard]] auto data() noexcept -> std::vector<bool> & { return _data; }
-    /// Convert a signed pixel index to the storage index type.
-    /// @param index The row-major pixel index.
-    /// @return The corresponding storage index.
-    [[nodiscard]] static auto toDataIndex(const int index) noexcept -> Data::size_type {
-        return static_cast<Data::size_type>(index);
-    }
     /// Read one pixel.
     /// @param pos The pixel position.
     /// @return The pixel state, or `false` if `pos` is outside the bitmap.
@@ -55,6 +57,18 @@ public: // accessors
     /// @param pos The quad position in half-resolution coordinates.
     /// @return Bit mask with top-left/top-right/bottom-left/bottom-right pixels in bits `0..3`.
     [[nodiscard]] auto pixelQuad(Position pos) const noexcept -> uint8_t;
+    /// Read the ring of eight pixels surrounding the given position as a bitmask.
+    /// Bit-order: 0:E, 1:SE, 2:S, 3:SW, 4:W, 5:NW, 6:N, 7:NE
+    /// @param pos The center pixel position.
+    /// @return The bit mask, where bits `0..7` represent the pixels in clockwise order starting from the right.
+    [[nodiscard]] auto pixelRing(Position pos) const noexcept -> uint8_t;
+    /// Get a rectangle around all set/cleared pixels.
+    /// @param value If true, return the bounding box of set pixels, otherwise cleared pixels.
+    /// @return The bounding rectangle of the specified pixels or an empty rectangle if none are set/cleared.
+    [[nodiscard]] auto boundingRect(bool value = true) const noexcept -> Rectangle;
+    /// Get the number of set/cleared pixels in this bitmap.
+    /// @param value The pixel type to count.
+    [[nodiscard]] auto pixelCount(bool value = true) const noexcept -> std::size_t;
 
 public: // modifiers
     /// Set one pixel in the bitmap.
@@ -64,14 +78,19 @@ public: // modifiers
     void setPixel(Position pos, bool value) noexcept;
     /// Mirror the bitmap horizontally in-place.
     void flipHorizontal() noexcept;
+    /// Invert the bitmap in-place.
+    void invert() noexcept;
 
-public: // tools
-    /// Create a bitmap from an ASCII pattern.
-    /// Each input string becomes one row. Dots (`.`) and spaces create cleared pixels, every other character sets a
-    /// pixel. Shorter rows are padded with cleared pixels to the maximum row width.
-    /// @param rows The pattern rows to parse.
-    /// @return The created bitmap.
-    [[nodiscard]] static auto fromPattern(std::initializer_list<std::string_view> rows) -> Bitmap;
+public: // transformation
+    /// Get an inverted version of this bitmap.
+    /// @return The inverted bitmap.
+    [[nodiscard]] auto inverted() const noexcept -> Bitmap;
+    /// Convert this bitmap to an outlined version.
+    /// The bitmap needs to have a margin large enough for the outline.
+    /// Algorithm: If at a cleared source pixel is surrounded by at least one set pixel, the target pixel is set.
+    [[nodiscard]] auto outlined() const noexcept -> Bitmap;
+
+public: // drawing
     /// Draw pixels from a numeric bit mask.
     /// @tparam T The unsigned integer type.
     /// @param position The top left corner where to draw the bit mask.
@@ -85,13 +104,48 @@ public: // tools
     void draw(const Position position, const Bitmap &bitmap) noexcept {
         bitmap.size().forEach([&](const Position delta) -> void { setPixel(position + delta, bitmap.pixel(delta)); });
     }
+    /// Fill a rectangle with a given pixel state.
+    /// Positions outside this bitmap are ignored.
+    /// @param rect The rectangle to fill.
+    /// @param value The new pixel state.
+    void fillRect(Rectangle rect, bool value) noexcept;
+    /// Perform a flood fill from the given position.
+    /// If the pixel at the given position is already set to the given value, nothing happens.
+    /// If the start position is outside the bitmap, nothing happens.
+    /// @param pos The start position.
+    /// @param value The new pixel state.
+    void floodFill(Position pos, bool value) noexcept;
+
+public: // conversion
+    /// Build a new bitmap using a function.
+    /// @param size The size of the new bitmap.
+    /// @param fn The function to use for building the bitmap. Takes a position and returns a boolean.
+    /// @return The new bitmap.
+    template <typename Fn>
+        requires std::is_invocable_r_v<bool, Fn, Position>
+    [[nodiscard]] static auto fromFunction(const Size size, Fn fn) noexcept -> Bitmap {
+        Bitmap bitmap{size};
+        bitmap.size().forEach([&](const Position pos) -> void { bitmap.setPixel(pos, fn(pos)); });
+        return bitmap;
+    }
+    /// Create a bitmap from an ASCII pattern.
+    /// Each input string becomes one row. Dots (`.`) and spaces create cleared pixels, every other character sets a
+    /// pixel. Shorter rows are padded with cleared pixels to the maximum row width.
+    /// @param rows The pattern rows to parse.
+    /// @return The created bitmap.
+    [[nodiscard]] static auto fromPattern(std::initializer_list<std::string_view> rows) -> Bitmap;
+    /// Convert this bitmap to a simple ASCII representation.
+    /// This function is meant for debugging and visualization.
+    /// Use `Buffer` for a true character matrix.
+    /// Cleared pixels are represented by dots (`.`), set pixels by a hash (`#`).
+    [[nodiscard]] auto toPattern() const -> std::string;
 
 protected:
     [[nodiscard]] auto pixelRef(const Position pos) -> Data::reference {
         if (!_size.contains(pos)) {
             throw std::out_of_range{"Position out of bounds."};
         }
-        return _data[toDataIndex(_size.index(pos))];
+        return _data[_size.index(pos)];
     }
 
 protected:

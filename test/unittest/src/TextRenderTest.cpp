@@ -1,87 +1,119 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
+#include "TestHelper.hpp"
+
 #include <erbsland/unittest/UnitTest.hpp>
 
 #include <memory>
 
-#include "TestHelper.hpp"
-
 
 class TextRenderTest : public el::UnitTest {
 public:
+    void testTextUsesSingleParagraphSpacingByDefault() {
+        auto text = Text{};
+        REQUIRE_EQUAL(text.paragraphSpacing(), ParagraphSpacing::SingleLine);
+    }
+
     void testBufferRendersAlignedText() {
-        auto buffer = term::Buffer{Size{8, 3}};
-        buffer.drawText("Hi", Alignment::Center, Rectangle{0, 0, 8, 3}, term::Color{term::fg::Yellow, term::bg::Black});
-        REQUIRE_EQUAL(buffer.get(Position{3, 1}).charStr(), std::string{"H"});
-        REQUIRE_EQUAL(buffer.get(Position{4, 1}).charStr(), std::string{"i"});
-        REQUIRE_EQUAL(buffer.get(Position{3, 1}).color(), term::Color(term::fg::Yellow, term::bg::Black));
+        auto buffer = Buffer{Size{8, 3}};
+        buffer.drawText("Hi", Rectangle{0, 0, 8, 3}, Alignment::Center, Color{fg::Yellow, bg::Black});
+        REQUIRE_EQUAL(buffer.get(Position{3, 1}), U'H');
+        REQUIRE_EQUAL(buffer.get(Position{4, 1}), U'i');
+        REQUIRE_EQUAL(buffer.get(Position{3, 1}).color(), Color(fg::Yellow, bg::Black));
+    }
+
+    void testBufferRendersNewParagraphsWithSingleParagraphSpacing() {
+        auto text = Text{String{"A\nB"}, Rectangle{0, 0, 1, 2}, Alignment::TopLeft};
+        auto buffer = Buffer{Size{1, 2}};
+        buffer.drawText(text);
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}), U'A');
+        REQUIRE_EQUAL(buffer.get(Position{0, 1}), U'B');
+    }
+
+    void testBufferDoesNotInsertSpacingBetweenWrappedLines() {
+        auto text = Text{String{"AA BB"}, Rectangle{0, 0, 2, 2}, Alignment::TopLeft};
+        text.setParagraphSpacing(ParagraphSpacing::DoubleLine);
+        auto buffer = Buffer{Size{2, 2}};
+        buffer.drawText(text);
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}), U'A');
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}), U'A');
+        REQUIRE_EQUAL(buffer.get(Position{0, 1}), U'B');
+        REQUIRE_EQUAL(buffer.get(Position{1, 1}), U'B');
+    }
+
+    void testBufferRendersDoubleParagraphSpacingWithVerticalAlignment() {
+        auto text = Text{String{"A\nB"}, Rectangle{0, 0, 3, 5}, Alignment::Center};
+        text.setParagraphSpacing(ParagraphSpacing::DoubleLine);
+        auto buffer = Buffer{Size{3, 5}};
+        buffer.drawText(text);
+        REQUIRE_EQUAL(buffer.get(Position{1, 1}), U'A');
+        REQUIRE_EQUAL(buffer.get(Position{1, 3}), U'B');
+        REQUIRE_EQUAL(buffer.get(Position{1, 2}), U' ');
     }
 
     void testBufferKeepsCharacterColorsIfNoColorSequenceIsDefined() {
-        auto text = term::String{};
-        text.append(term::Char{"A", term::Color{term::fg::Red, term::bg::Black}});
-        text.append(term::Char{"B", term::Color{term::fg::Green, term::bg::Black}});
-        auto buffer = term::Buffer{Size{4, 1}};
-        buffer.drawText(term::Text{text, Rectangle{0, 0, 4, 1}, Alignment::TopLeft});
-        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Red, term::bg::Black));
-        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), term::Color(term::fg::Green, term::bg::Black));
+        auto text = String{};
+        text.append(Char{U'A', fg::Red, bg::Black});
+        text.append(Char{U'B', fg::Green, bg::Black});
+        auto buffer = Buffer{Size{4, 1}};
+        buffer.drawText(Text{text, Rectangle{0, 0, 4, 1}, Alignment::TopLeft});
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Red, bg::Black));
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Green, bg::Black));
     }
 
     void testBufferUsesExplicitAnimationCycleForFlashAnimation() {
-        auto buffer = term::Buffer{Size{3, 1}};
-        auto text = term::Text{term::String{"ABC"}, Rectangle{0, 0, 3, 1}, Alignment::TopLeft};
-        text.setColorSequence(term::ColorSequence{
-            term::Color{term::fg::Red, term::bg::Black},
-            term::Color{term::fg::Green, term::bg::Black},
-            term::Color{term::fg::Blue, term::bg::Black}});
-        text.setAnimation(term::TextAnimation::ColorDiagonal);
+        auto buffer = Buffer{Size{3, 1}};
+        auto text = Text{String{"ABC"}, Rectangle{0, 0, 3, 1}, Alignment::TopLeft};
+        text.setColorSequence(
+            ColorSequence{Color{fg::Red, bg::Black}, Color{fg::Green, bg::Black}, Color{fg::Blue, bg::Black}});
+        text.setAnimation(TextAnimation::ColorDiagonal);
         buffer.drawText(text, 1);
-        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Green, term::bg::Black));
-        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), term::Color(term::fg::Blue, term::bg::Black));
-        REQUIRE_EQUAL(buffer.get(Position{2, 0}).color(), term::Color(term::fg::Red, term::bg::Black));
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Green, bg::Black));
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Blue, bg::Black));
+        REQUIRE_EQUAL(buffer.get(Position{2, 0}).color(), Color(fg::Red, bg::Black));
     }
 
     void testBufferKeepsCharacterColorPartsOverTextColor() {
-        auto text = term::String{};
-        text.append(term::Char{"A", term::Color{term::fg::Red, term::bg::Inherited}});
-        text.append(term::Char{"B", term::Color{term::fg::Inherited, term::bg::Blue}});
-        auto renderedText = term::Text{text, Rectangle{0, 0, 2, 1}, Alignment::TopLeft};
-        renderedText.setColor(term::Color{term::fg::Green, term::bg::Yellow});
-        auto buffer = term::Buffer{Size{2, 1}};
+        auto text = String{};
+        text.append(Char{U'A', fg::Red, bg::Inherited});
+        text.append(Char{U'B', fg::Inherited, bg::Blue});
+        auto renderedText = Text{text, Rectangle{0, 0, 2, 1}, Alignment::TopLeft};
+        renderedText.setColor(Color{fg::Green, bg::Yellow});
+        auto buffer = Buffer{Size{2, 1}};
         buffer.drawText(renderedText);
-        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Red, term::bg::Yellow));
-        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), term::Color(term::fg::Green, term::bg::Blue));
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Red, bg::Yellow));
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Green, bg::Blue));
     }
 
     void testBufferUsesDefaultAsExplicitTextReset() {
-        auto text = term::String{};
-        text.append(term::Char{"A", term::Color{term::fg::Default, term::bg::Inherited}});
-        auto renderedText = term::Text{text, Rectangle{0, 0, 1, 1}, Alignment::TopLeft};
-        renderedText.setColor(term::Color{term::fg::Green, term::bg::Yellow});
-        auto buffer = term::Buffer{Size{1, 1}};
+        auto text = String{};
+        text.append(Char{U'A', fg::Default, bg::Inherited});
+        auto renderedText = Text{text, Rectangle{0, 0, 1, 1}, Alignment::TopLeft};
+        renderedText.setColor(Color{fg::Green, bg::Yellow});
+        auto buffer = Buffer{Size{1, 1}};
         buffer.drawText(renderedText);
 
-        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::Default, term::bg::Yellow));
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Default, bg::Yellow));
     }
 
     void testBufferRendersBitmapFontText() {
-        auto font = std::make_shared<term::Font>(2);
-        font->addGlyph("A", term::FontGlyph{std::vector<uint64_t>{0b11U, 0b11U}});
-        auto text = term::Text{term::String{"A"}, Rectangle{0, 0, 2, 1}, Alignment::TopLeft};
-        text.setColor(term::Color{term::fg::BrightWhite, term::bg::Black});
+        auto font = std::make_shared<Font>(2);
+        font->addGlyph("A", FontGlyph{std::vector<uint64_t>{0b11U, 0b11U}});
+        auto text = Text{String{"A"}, Rectangle{0, 0, 2, 1}, Alignment::TopLeft};
+        text.setColor(Color{fg::BrightWhite, bg::Black});
         text.setFont(font);
-        auto buffer = term::Buffer{Size{2, 1}};
+        auto buffer = Buffer{Size{2, 1}};
         buffer.drawText(text);
-        REQUIRE_EQUAL(buffer.get(Position{0, 0}).charStr(), std::string{"█"});
-        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), term::Color(term::fg::BrightWhite, term::bg::Black));
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}), U'█');
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::BrightWhite, bg::Black));
     }
 
     void testTextSetColorCreatesSingleEntryColorSequence() {
-        auto text = term::Text{term::String{"A"}, Rectangle{0, 0, 1, 1}, Alignment::TopLeft};
-        REQUIRE_EQUAL(text.color(), term::Color{});
-        text.setColor(term::Color{term::fg::Cyan, term::bg::Black});
-        REQUIRE_EQUAL(text.color(), term::Color(term::fg::Cyan, term::bg::Black));
+        auto text = Text{String{"A"}, Rectangle{0, 0, 1, 1}, Alignment::TopLeft};
+        REQUIRE_EQUAL(text.color(), Color{});
+        text.setColor(Color{fg::Cyan, bg::Black});
+        REQUIRE_EQUAL(text.color(), Color(fg::Cyan, bg::Black));
         REQUIRE_EQUAL(text.colorSequence().sequenceLength(), std::size_t{1});
     }
 };

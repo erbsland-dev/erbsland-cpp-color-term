@@ -1,9 +1,11 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
+#include "TestHelper.hpp"
+
 #include <erbsland/unittest/UnitTest.hpp>
 
-#include "TestHelper.hpp"
+#include <limits>
 
 
 class PositionTest : public el::UnitTest {
@@ -74,17 +76,37 @@ public:
         REQUIRE_EQUAL(pos.componentMin(pos2), Position(1, 2));
     }
 
+    void testCardinalFourReturnsNeighborsInRightDownLeftUpOrder() {
+        pos = Position(5, 6);
+
+        const auto neighbors = pos.cardinalFour();
+
+        REQUIRE_EQUAL(neighbors[0], Position(6, 6));
+        REQUIRE_EQUAL(neighbors[1], Position(5, 7));
+        REQUIRE_EQUAL(neighbors[2], Position(4, 6));
+        REQUIRE_EQUAL(neighbors[3], Position(5, 5));
+    }
+
+    void testMinimumAndMaximumReturnIntegerLimits() {
+        REQUIRE_EQUAL(Position::minimum(), Position(std::numeric_limits<int>::min(), std::numeric_limits<int>::min()));
+        REQUIRE_EQUAL(Position::maximum(), Position(std::numeric_limits<int>::max(), std::numeric_limits<int>::max()));
+    }
+
     void testCardinalFourBitmaskUsesEastSouthWestNorthBits() {
         pos = Position(5, 6);
 
         REQUIRE_EQUAL(
-            pos.cardinalFourBitmask([&](const Position testedPosition) { return testedPosition == Position{6, 6}; }), 1U);
+            pos.cardinalFourBitmask([&](const Position testedPosition) { return testedPosition == Position{6, 6}; }),
+            1U);
         REQUIRE_EQUAL(
-            pos.cardinalFourBitmask([&](const Position testedPosition) { return testedPosition == Position{5, 7}; }), 2U);
+            pos.cardinalFourBitmask([&](const Position testedPosition) { return testedPosition == Position{5, 7}; }),
+            2U);
         REQUIRE_EQUAL(
-            pos.cardinalFourBitmask([&](const Position testedPosition) { return testedPosition == Position{4, 6}; }), 4U);
+            pos.cardinalFourBitmask([&](const Position testedPosition) { return testedPosition == Position{4, 6}; }),
+            4U);
         REQUIRE_EQUAL(
-            pos.cardinalFourBitmask([&](const Position testedPosition) { return testedPosition == Position{5, 5}; }), 8U);
+            pos.cardinalFourBitmask([&](const Position testedPosition) { return testedPosition == Position{5, 5}; }),
+            8U);
         REQUIRE_EQUAL(
             pos.cardinalFourBitmask([&](const Position testedPosition) {
                 return testedPosition == Position{6, 6} || testedPosition == Position{5, 5};

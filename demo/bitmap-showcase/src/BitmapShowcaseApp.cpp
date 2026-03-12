@@ -17,6 +17,11 @@ namespace demo::bitmapshowcase {
 
 
 void BitmapShowcaseApp::run() {
+    _updateSettings.setMinimumSize(Size{68, 20});
+    _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
+    _updateSettings.setMinimumSizeMessage(
+        String{
+            "Resize the terminal to at least 68x20 cells for the bitmap showcase.", Color{fg::BrightWhite, bg::Black}});
     auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
     while (!_quitRequested) {
         const auto key = _terminal.input().read(std::chrono::milliseconds{90});
@@ -30,7 +35,7 @@ void BitmapShowcaseApp::run() {
 
 
 auto BitmapShowcaseApp::canvasSize() const noexcept -> Size {
-    return _terminal.size() - Size{1, 1};
+    return _terminal.size();
 }
 
 
@@ -51,43 +56,34 @@ void BitmapShowcaseApp::handleKey(const Key &key) noexcept {
 
 void BitmapShowcaseApp::renderFrame() {
     _terminal.testScreenSize();
-    auto buffer = Buffer{canvasSize()};
-    buffer.fill(Char{" ", bg::Black});
-    if (buffer.size().width() < 68 || buffer.size().height() < 20) {
-        buffer.drawText(
-            "Resize the terminal to at least 68x20 cells for the bitmap showcase.",
-            Rectangle{0, 0, buffer.size().width(), buffer.size().height()},
-            Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
-    } else {
-        const auto outerRect = Rectangle{0, 0, buffer.size().width(), buffer.size().height()};
-        const auto titleRect = Rectangle{2, 1, buffer.size().width() - 4, 1};
-        const auto contentRect = Rectangle{2, 3, buffer.size().width() - 4, buffer.size().height() - 7};
-        const auto footerRect = Rectangle{2, buffer.size().height() - 3, buffer.size().width() - 4, 1};
-        auto selectorWidth = std::clamp(contentRect.width() / 3, 22, 30);
-        if (contentRect.width() - selectorWidth - 2 < 36) {
-            selectorWidth = std::max(18, contentRect.width() / 4);
-        }
-        const auto selectorRect = Rectangle{contentRect.x1(), contentRect.y1(), selectorWidth, contentRect.height()};
-        const auto previewRect = Rectangle{
-            selectorRect.x2() + 2, contentRect.y1(), contentRect.x2() - selectorRect.x2() - 2, contentRect.height()};
-
-        buffer.drawFrame(outerRect, FrameStyle::LightWithRoundedCorners);
-        buffer.drawText(
-            std::format("Bitmap Showcase  |  {}", pageTitle()),
-            titleRect,
-            Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
-        drawSelector(buffer, selectorRect);
-        drawPreview(buffer, previewRect);
-        drawFooter(buffer, footerRect);
+    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+    _buffer.fill(Char{" ", bg::Black});
+    const auto outerRect = Rectangle{0, 0, _buffer.size().width(), _buffer.size().height()};
+    const auto titleRect = Rectangle{2, 1, _buffer.size().width() - 4, 1};
+    const auto contentRect = Rectangle{2, 3, _buffer.size().width() - 4, _buffer.size().height() - 7};
+    const auto footerRect = Rectangle{2, _buffer.size().height() - 3, _buffer.size().width() - 4, 1};
+    auto selectorWidth = std::clamp(contentRect.width() / 3, 22, 30);
+    if (contentRect.width() - selectorWidth - 2 < 36) {
+        selectorWidth = std::max(18, contentRect.width() / 4);
     }
-    _terminal.updateScreen(buffer);
-    _terminal.flush();
+    const auto selectorRect = Rectangle{contentRect.x1(), contentRect.y1(), selectorWidth, contentRect.height()};
+    const auto previewRect = Rectangle{
+        selectorRect.x2() + 2, contentRect.y1(), contentRect.x2() - selectorRect.x2() - 2, contentRect.height()};
+
+    _buffer.drawFrame(outerRect, FrameStyle::LightWithRoundedCorners);
+    _buffer.drawText(
+        std::format("Bitmap Showcase  |  {}", pageTitle()),
+        titleRect,
+        Alignment::Center,
+        Color{fg::BrightWhite, bg::Black});
+    drawSelector(selectorRect);
+    drawPreview(previewRect);
+    drawFooter(footerRect);
+    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 
-void BitmapShowcaseApp::drawSelector(Buffer &buffer, const Rectangle rect) const {
+void BitmapShowcaseApp::drawSelector(const Rectangle rect) {
     const auto count = static_cast<int>(variantCount(_pageIndex));
     if (count <= 0 || rect.height() <= 2) {
         return;
@@ -108,7 +104,7 @@ void BitmapShowcaseApp::drawSelector(Buffer &buffer, const Rectangle rect) const
         const auto lineRect = Rectangle{rect.x1(), y, rect.width(), 1};
         const auto isSelected = itemIndex == selected;
         if (isSelected) {
-            buffer.fill(lineRect, Char{" ", bg::BrightBlack});
+            _buffer.fill(lineRect, Char{" ", bg::BrightBlack});
         }
         auto label = String{};
         if (isSelected) {
@@ -116,32 +112,31 @@ void BitmapShowcaseApp::drawSelector(Buffer &buffer, const Rectangle rect) const
         } else {
             label.append(fg::BrightBlack, "  ", fg::White, variantTitle(_pageIndex, itemIndexAsSize));
         }
-        buffer.drawText(Text{label, lineRect, Alignment::CenterLeft});
+        _buffer.drawText(Text{label, lineRect, Alignment::CenterLeft});
     }
 }
 
 
-void BitmapShowcaseApp::drawPreview(Buffer &buffer, const Rectangle rect) const {
+void BitmapShowcaseApp::drawPreview(const Rectangle rect) {
     switch (_pageIndex) {
     case 0:
-        drawScaleModeVariant(buffer, rect, selectedVariantIndex());
+        drawScaleModeVariant(rect, selectedVariantIndex());
         break;
     case 1:
-        drawColorModeVariant(buffer, rect, selectedVariantIndex());
+        drawColorModeVariant(rect, selectedVariantIndex());
         break;
     case 2:
-        drawLayoutVariant(buffer, rect, selectedVariantIndex());
+        drawLayoutVariant(rect, selectedVariantIndex());
         break;
     case 3:
     default:
-        drawStyleVariant(buffer, rect, selectedVariantIndex());
+        drawStyleVariant(rect, selectedVariantIndex());
         break;
     }
 }
 
 
-void BitmapShowcaseApp::drawScaleModeVariant(
-    Buffer &buffer, const Rectangle rect, const std::size_t variantIndex) const {
+void BitmapShowcaseApp::drawScaleModeVariant(const Rectangle rect, const std::size_t variantIndex) {
 
     static constexpr auto cPanelColors = std::array<Color, 4>{
         Color{fg::BrightWhite, bg::BrightBlack},
@@ -160,43 +155,42 @@ void BitmapShowcaseApp::drawScaleModeVariant(
     };
 
     const auto panelColor = cPanelColors[std::min(variantIndex, cPanelColors.size() - 1)];
-    drawPreviewPanel(buffer, rect, variantTitle(_pageIndex, variantIndex), panelColor);
+    drawPreviewPanel(rect, variantTitle(_pageIndex, variantIndex), panelColor);
     const auto demoRect = Rectangle{rect.x1() + 3, rect.y1() + 2, rect.width() - 6, rect.height() - 7};
     const auto descriptionRect = Rectangle{rect.x1() + 2, rect.y2() - 3, rect.width() - 4, 2};
 
     switch (variantIndex) {
     case 0: {
         auto options = BitmapDrawOptions{Color{fg::BrightCyan, bg::Blue}};
-        buffer.drawBitmap(ringBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+        _buffer.drawBitmap(ringBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     case 1: {
         auto options = BitmapDrawOptions{Color{fg::BrightYellow, bg::Blue}};
         options.setScaleMode(BitmapScaleMode::FullBlock);
-        buffer.drawBitmap(rocketBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+        _buffer.drawBitmap(rocketBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     case 2: {
         auto options = BitmapDrawOptions{Color{fg::BrightWhite, bg::Magenta}};
         options.setScaleMode(BitmapScaleMode::DoubleBlock);
-        buffer.drawBitmap(waveBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+        _buffer.drawBitmap(waveBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     case 3:
     default: {
         auto options = BitmapDrawOptions{Color{fg::BrightWhite, bg::Green}};
         options.setChar16Style(Char16Style::lightRoundedFrame());
-        buffer.drawBitmap(circuitBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+        _buffer.drawBitmap(circuitBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     }
-    buffer.drawText(
+    _buffer.drawText(
         cDescriptions[std::min(variantIndex, cDescriptions.size() - 1)], descriptionRect, Alignment::Center);
 }
 
 
-void BitmapShowcaseApp::drawColorModeVariant(
-    Buffer &buffer, const Rectangle rect, const std::size_t variantIndex) const {
+void BitmapShowcaseApp::drawColorModeVariant(const Rectangle rect, const std::size_t variantIndex) {
 
     static constexpr auto cModes = std::array<BitmapColorMode, 5>{
         BitmapColorMode::OneColor,
@@ -213,7 +207,7 @@ void BitmapShowcaseApp::drawColorModeVariant(
         "Backward diagonals use -x + y, which makes the palette drift in the opposite direction.",
     };
 
-    drawPreviewPanel(buffer, rect, variantTitle(_pageIndex, variantIndex), Color{fg::BrightWhite, bg::BrightBlack});
+    drawPreviewPanel(rect, variantTitle(_pageIndex, variantIndex), Color{fg::BrightWhite, bg::BrightBlack});
     const auto demoRect = Rectangle{rect.x1() + 3, rect.y1() + 2, rect.width() - 6, rect.height() - 7};
     const auto descriptionRect = Rectangle{rect.x1() + 2, rect.y2() - 3, rect.width() - 4, 2};
 
@@ -221,13 +215,13 @@ void BitmapShowcaseApp::drawColorModeVariant(
     options.setColorSequence(rainbowColors(), cModes[std::min(variantIndex, cModes.size() - 1)]);
     options.setScaleMode(BitmapScaleMode::DoubleBlock);
     options.setColorAnimationOffset(variantIndex * 2);
-    buffer.drawBitmap(waveBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
-    buffer.drawText(
+    _buffer.drawBitmap(waveBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+    _buffer.drawText(
         cDescriptions[std::min(variantIndex, cDescriptions.size() - 1)], descriptionRect, Alignment::Center);
 }
 
 
-void BitmapShowcaseApp::drawLayoutVariant(Buffer &buffer, const Rectangle rect, const std::size_t variantIndex) const {
+void BitmapShowcaseApp::drawLayoutVariant(const Rectangle rect, const std::size_t variantIndex) {
 
     static constexpr auto cAlignments = std::array<Alignment, 5>{
         Alignment::TopLeft,
@@ -244,11 +238,11 @@ void BitmapShowcaseApp::drawLayoutVariant(Buffer &buffer, const Rectangle rect, 
         "A centered viewport keeps the bitmap readable on narrower screens.",
     };
 
-    drawPreviewPanel(buffer, rect, variantTitle(_pageIndex, variantIndex), Color{fg::BrightWhite, bg::BrightBlack});
+    drawPreviewPanel(rect, variantTitle(_pageIndex, variantIndex), Color{fg::BrightWhite, bg::BrightBlack});
     const auto frameRect = Rectangle{rect.x1() + 6, rect.y1() + 3, rect.width() - 12, rect.height() - 10};
     const auto viewport = frameRect.insetBy(Margins{1});
     const auto descriptionRect = Rectangle{rect.x1() + 2, rect.y2() - 3, rect.width() - 4, 2};
-    buffer.drawFrame(frameRect, FrameStyle::Double, Color{fg::BrightCyan, bg::BrightBlack});
+    _buffer.drawFrame(frameRect, FrameStyle::Double, Color{fg::BrightCyan, bg::BrightBlack});
 
     auto options = BitmapDrawOptions{};
     options.setColorSequence(rainbowColors(), BitmapColorMode::ForwardDiagonalStripes);
@@ -258,23 +252,23 @@ void BitmapShowcaseApp::drawLayoutVariant(Buffer &buffer, const Rectangle rect, 
     case 1:
     case 2:
         options.setScaleMode(BitmapScaleMode::FullBlock);
-        buffer.drawBitmap(rocketBitmap(), viewport, cAlignments[variantIndex], options, _animationCycle / 2);
+        _buffer.drawBitmap(rocketBitmap(), viewport, cAlignments[variantIndex], options, _animationCycle / 2);
         break;
     case 3:
-        buffer.drawBitmap(ringBitmap(), viewport, cAlignments[variantIndex], options, _animationCycle / 2);
+        _buffer.drawBitmap(ringBitmap(), viewport, cAlignments[variantIndex], options, _animationCycle / 2);
         break;
     case 4:
     default:
         options.setScaleMode(BitmapScaleMode::DoubleBlock);
-        buffer.drawBitmap(waveBitmap(), viewport, cAlignments[variantIndex], options, _animationCycle / 2);
+        _buffer.drawBitmap(waveBitmap(), viewport, cAlignments[variantIndex], options, _animationCycle / 2);
         break;
     }
-    buffer.drawText(
+    _buffer.drawText(
         cDescriptions[std::min(variantIndex, cDescriptions.size() - 1)], descriptionRect, Alignment::Center);
 }
 
 
-void BitmapShowcaseApp::drawStyleVariant(Buffer &buffer, const Rectangle rect, const std::size_t variantIndex) const {
+void BitmapShowcaseApp::drawStyleVariant(const Rectangle rect, const std::size_t variantIndex) {
 
     static constexpr auto cPanelColors = std::array<Color, 5>{
         Color{fg::BrightWhite, bg::Blue},
@@ -296,7 +290,7 @@ void BitmapShowcaseApp::drawStyleVariant(Buffer &buffer, const Rectangle rect, c
     };
 
     const auto panelColor = cPanelColors[std::min(variantIndex, cPanelColors.size() - 1)];
-    drawPreviewPanel(buffer, rect, variantTitle(_pageIndex, variantIndex), panelColor);
+    drawPreviewPanel(rect, variantTitle(_pageIndex, variantIndex), panelColor);
     const auto demoRect = Rectangle{rect.x1() + 3, rect.y1() + 2, rect.width() - 6, rect.height() - 7};
     const auto descriptionRect = Rectangle{rect.x1() + 2, rect.y2() - 3, rect.width() - 4, 2};
 
@@ -304,56 +298,55 @@ void BitmapShowcaseApp::drawStyleVariant(Buffer &buffer, const Rectangle rect, c
     case 0: {
         auto options = BitmapDrawOptions{Color{fg::BrightWhite, bg::Blue}};
         options.setScaleMode(BitmapScaleMode::FullBlock);
-        options.setFullBlock(Char{"●", fg::BrightYellow});
-        buffer.drawBitmap(ringBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+        options.setFullBlock(Char{U'●', fg::BrightYellow});
+        _buffer.drawBitmap(ringBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     case 1: {
         auto options = BitmapDrawOptions{Color{fg::BrightWhite, bg::Magenta}};
         options.setScaleMode(BitmapScaleMode::DoubleBlock);
         options.setDoubleBlocks(String{"<>"});
-        buffer.drawBitmap(waveBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+        _buffer.drawBitmap(waveBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     case 2: {
         auto options = BitmapDrawOptions{Color{fg::BrightWhite, bg::Green}};
         options.setHalfBlocks(String{" 123456789ABCDEF"});
-        buffer.drawBitmap(ringBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+        _buffer.drawBitmap(ringBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     case 3: {
         auto options = BitmapDrawOptions{Color{fg::BrightCyan, bg::BrightBlack}};
         options.setChar16Style(Char16Style::lightRoundedFrame());
-        buffer.drawBitmap(circuitBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
+        _buffer.drawBitmap(circuitBitmap(), demoRect, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     case 4:
     default: {
         const auto viewport = demoRect.insetBy(Margins{2, 1});
-        buffer.drawFrame(viewport, FrameStyle::Light, Color{fg::BrightBlack, bg::BrightBlack});
+        _buffer.drawFrame(viewport, FrameStyle::Light, Color{fg::BrightBlack, bg::BrightBlack});
         for (auto x = viewport.x1() + 4; x < viewport.x2() - 4; x += 5) {
-            buffer.drawFrame(Rectangle{x, viewport.y1() + 1, 4, viewport.height() - 2}, FrameStyle::Light);
+            _buffer.drawFrame(Rectangle{x, viewport.y1() + 1, 4, viewport.height() - 2}, FrameStyle::Light);
         }
         auto options = BitmapDrawOptions{Color{fg::BrightCyan, bg::BrightBlack}};
         options.setChar16Style(Char16Style::lightFrame());
         options.setCombinationStyle(CharCombinationStyle::commonBoxFrame());
-        buffer.drawBitmap(circuitBitmap(), viewport, Alignment::Center, options, _animationCycle / 2);
+        _buffer.drawBitmap(circuitBitmap(), viewport, Alignment::Center, options, _animationCycle / 2);
         break;
     }
     }
-    buffer.drawText(
+    _buffer.drawText(
         cDescriptions[std::min(variantIndex, cDescriptions.size() - 1)], descriptionRect, Alignment::Center);
 }
 
 
-void BitmapShowcaseApp::drawPreviewPanel(
-    Buffer &buffer, const Rectangle rect, const std::string_view title, const Color fillColor) const {
+void BitmapShowcaseApp::drawPreviewPanel(const Rectangle rect, const std::string_view title, const Color fillColor) {
 
     if (rect.width() <= 4 || rect.height() <= 4) {
         return;
     }
-    buffer.drawFilledFrame(rect, FrameStyle::LightWithRoundedCorners, Char{" ", fillColor});
-    buffer.drawText(
+    _buffer.drawFilledFrame(rect, FrameStyle::LightWithRoundedCorners, Char{" ", fillColor});
+    _buffer.drawText(
         title,
         Rectangle{rect.x1() + 2, rect.y1(), rect.width() - 4, 1},
         Alignment::Center,
@@ -361,10 +354,10 @@ void BitmapShowcaseApp::drawPreviewPanel(
 }
 
 
-void BitmapShowcaseApp::drawFooter(Buffer &buffer, const Rectangle rect) const {
-    buffer.fill(rect, Char{" ", bg::BrightBlack});
+void BitmapShowcaseApp::drawFooter(const Rectangle rect) {
+    _buffer.fill(rect, Char{" ", bg::BrightBlack});
     auto footer = Text{footerText(), rect, Alignment::CenterLeft};
-    buffer.drawText(footer);
+    _buffer.drawText(footer);
 }
 
 

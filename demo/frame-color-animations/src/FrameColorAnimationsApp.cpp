@@ -14,6 +14,12 @@ namespace demo::framecoloranimations {
 
 
 void FrameColorAnimationsApp::run() {
+    _updateSettings.setMinimumSize(Size{78, 22});
+    _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
+    _updateSettings.setMinimumSizeMessage(
+        String{
+            "Resize the terminal to at least 78x22 cells for the frame color animation demo.",
+            Color{fg::BrightWhite, bg::Black}});
     auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
     while (!_quitRequested) {
         const auto key = _terminal.input().read(std::chrono::milliseconds{90});
@@ -27,7 +33,7 @@ void FrameColorAnimationsApp::run() {
 
 
 auto FrameColorAnimationsApp::canvasSize() const noexcept -> Size {
-    return _terminal.size() - Size{1, 1};
+    return _terminal.size();
 }
 
 
@@ -40,62 +46,51 @@ void FrameColorAnimationsApp::handleKey(const Key &key) noexcept {
 
 void FrameColorAnimationsApp::renderFrame() {
     _terminal.testScreenSize();
-    auto buffer = Buffer{canvasSize()};
-    buffer.fill(Char{" ", bg::Black});
-    if (buffer.size().width() < 78 || buffer.size().height() < 22) {
-        buffer.drawText(
-            "Resize the terminal to at least 78x22 cells for the frame color animation demo.",
-            Rectangle{0, 0, buffer.size().width(), buffer.size().height()},
-            Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
-        _terminal.updateScreen(buffer);
-        _terminal.flush();
-        return;
-    }
+    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+    _buffer.fill(Char{" ", bg::Black});
 
-    const auto outerRect = Rectangle{0, 0, buffer.size().width(), buffer.size().height()};
-    const auto headerRect = Rectangle{2, 1, buffer.size().width() - 4, 3};
-    const auto contentRect = Rectangle{2, 5, buffer.size().width() - 4, buffer.size().height() - 9};
-    const auto footerRect = Rectangle{2, buffer.size().height() - 3, buffer.size().width() - 4, 1};
+    const auto outerRect = Rectangle{0, 0, _buffer.size().width(), _buffer.size().height()};
+    const auto headerRect = Rectangle{2, 1, _buffer.size().width() - 4, 3};
+    const auto contentRect = Rectangle{2, 5, _buffer.size().width() - 4, _buffer.size().height() - 9};
+    const auto footerRect = Rectangle{2, _buffer.size().height() - 3, _buffer.size().width() - 4, 1};
 
     auto outerOptions = FrameDrawOptions{};
     outerOptions.setStyle(FrameStyle::LightWithRoundedCorners);
     outerOptions.setFrameColorSequence(outerFrameColors(), FrameColorMode::ChasingBorderCW);
-    outerOptions.setFillBlock(Char{" "});
+    outerOptions.setFillBlock(Char{U' '});
     outerOptions.setFillColorSequence(fillColors(), FrameColorMode::ForwardDiagonalStripes);
-    buffer.drawFrame(outerRect, outerOptions, _animationCycle);
+    _buffer.drawFrame(outerRect, outerOptions, _animationCycle);
 
-    drawHeader(buffer, headerRect);
+    drawHeader(headerRect);
 
     const auto cells = contentRect.gridCells(2, 4);
     const auto &panels = panelSpecs();
     for (std::size_t index = 0; index < panels.size(); ++index) {
-        drawPanel(buffer, cells[index].insetBy(Margins{1, 0}), panels[index]);
+        drawPanel(cells[index].insetBy(Margins{1, 0}), panels[index]);
     }
-    drawFooter(buffer, footerRect);
-    _terminal.updateScreen(buffer);
-    _terminal.flush();
+    drawFooter(footerRect);
+    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 
-void FrameColorAnimationsApp::drawPanel(Buffer &buffer, const Rectangle rect, const PanelSpec &panel) const {
+void FrameColorAnimationsApp::drawPanel(const Rectangle rect, const PanelSpec &panel) {
     auto options = FrameDrawOptions{};
     options.setStyle(panel.style);
     options.setFrameColorSequence(colorSequence(panel.sequenceIndex), panel.mode);
-    options.setFillBlock(Char{" "});
+    options.setFillBlock(Char{U' '});
     options.setFillColorSequence(ColorSequence{Color{fg::Inherited, bg::Black}, 1}, FrameColorMode::OneColor);
 
     if (panel.mode == FrameColorMode::ForwardDiagonalStripes || panel.mode == FrameColorMode::BackwardDiagonalStripes) {
-        buffer.drawFrame(rect, options, _animationCycle * 6);
+        _buffer.drawFrame(rect, options, _animationCycle * 6);
     } else {
-        buffer.drawFrame(rect, options, _animationCycle);
+        _buffer.drawFrame(rect, options, _animationCycle);
     }
-    buffer.drawText(
+    _buffer.drawText(
         panel.title,
         Rectangle{rect.x1() + 2, rect.y1() + 1, rect.width() - 4, 1},
         Alignment::Center,
         Color{fg::BrightWhite, bg::Inherited});
-    buffer.drawText(
+    _buffer.drawText(
         "animated frame",
         Rectangle{rect.x1() + 2, rect.y1() + 3, rect.width() - 4, 1},
         Alignment::Center,
@@ -103,13 +98,13 @@ void FrameColorAnimationsApp::drawPanel(Buffer &buffer, const Rectangle rect, co
 }
 
 
-void FrameColorAnimationsApp::drawHeader(Buffer &buffer, const Rectangle rect) const {
-    buffer.drawText(
+void FrameColorAnimationsApp::drawHeader(const Rectangle rect) {
+    _buffer.drawText(
         "Frame Color Animations",
         Rectangle{rect.x1(), rect.y1(), rect.width(), 1},
         Alignment::Center,
         Color{fg::BrightWhite, bg::Black});
-    buffer.drawText(
+    _buffer.drawText(
         "This is a demo of various frame animation modes.",
         Rectangle{rect.x1(), rect.y1() + 2, rect.width(), 1},
         Alignment::Center,
@@ -117,8 +112,8 @@ void FrameColorAnimationsApp::drawHeader(Buffer &buffer, const Rectangle rect) c
 }
 
 
-void FrameColorAnimationsApp::drawFooter(Buffer &buffer, const Rectangle rect) const {
-    buffer.drawText("Press q to quit.", rect, Alignment::CenterRight, Color{fg::BrightBlack, bg::Inherited});
+void FrameColorAnimationsApp::drawFooter(const Rectangle rect) {
+    _buffer.drawText("Press q to quit.", rect, Alignment::CenterRight, Color{fg::BrightBlack, bg::Inherited});
 }
 
 

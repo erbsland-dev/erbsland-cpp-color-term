@@ -12,6 +12,10 @@
 namespace demo::retroplasma {
 
 void RetroPlasmaApp::run() noexcept {
+    _updateSettings.setMinimumSize(Size{28, 8});
+    _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
+    _updateSettings.setMinimumSizeMessage(
+        String{"Resize the terminal to at least 28x8 cells for the plasma demo.", Color{fg::BrightWhite, bg::Black}});
     auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
     _lastFrameTime = std::chrono::steady_clock::now();
     while (!_quitRequested) {
@@ -31,7 +35,7 @@ void RetroPlasmaApp::run() noexcept {
 
 
 auto RetroPlasmaApp::canvasSize() const noexcept -> Size {
-    return _terminal.size() - Size{1, 1};
+    return _terminal.size();
 }
 
 
@@ -52,34 +56,23 @@ void RetroPlasmaApp::handleKey(const Key &key) noexcept {
 
 void RetroPlasmaApp::renderFrame() noexcept {
     _terminal.testScreenSize();
-    auto buffer = Buffer{canvasSize()};
-    buffer.fill(Char{" ", Color{fg::Default, bg::Black}});
-    if (buffer.size().width() < 28 || buffer.size().height() < 8) {
-        buffer.drawText(
-            "Resize the terminal to at least 28x8 cells for the plasma demo.",
-            Rectangle{0, 0, buffer.size().width(), std::max(0, buffer.size().height() - 1)},
-            Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
-    } else {
-        const auto contentHeight = std::max(0, buffer.size().height() - 1);
-        _renderer.render(buffer, Rectangle{0, 0, buffer.size().width(), contentHeight}, _phase, _paletteIndex);
-        drawPrompt(buffer);
-    }
-    auto settings = UpdateSettings{};
-    settings.setMinimumSize(Size{20, 6});
-    _terminal.updateScreen(buffer, settings);
-    _terminal.flush();
+    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+    _buffer.fill(Char{U' ', fg::Default, bg::Black});
+    const auto contentHeight = std::max(0, _buffer.size().height() - 1);
+    _renderer.render(_buffer, Rectangle{0, 0, _buffer.size().width(), contentHeight}, _phase, _paletteIndex);
+    drawPrompt();
+    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 
-void RetroPlasmaApp::drawPrompt(Buffer &buffer) const {
-    if (buffer.size().height() <= 0) {
+void RetroPlasmaApp::drawPrompt() noexcept {
+    if (_buffer.size().height() <= 0) {
         return;
     }
-    const auto promptRow = buffer.size().height() - 1;
-    buffer.fill(Rectangle{0, promptRow, buffer.size().width(), 1}, Char{" ", bg::BrightBlack});
-    auto text = Text{buildPrompt(), Rectangle{0, promptRow, buffer.size().width(), 1}, Alignment::CenterLeft};
-    buffer.drawText(text);
+    const auto promptRow = _buffer.size().height() - 1;
+    _buffer.fill(Rectangle{0, promptRow, _buffer.size().width(), 1}, Char{" ", bg::BrightBlack});
+    auto text = Text{buildPrompt(), Rectangle{0, promptRow, _buffer.size().width(), 1}, Alignment::CenterLeft};
+    _buffer.drawText(text);
 }
 
 

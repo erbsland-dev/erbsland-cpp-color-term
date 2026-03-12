@@ -40,7 +40,7 @@ structured results.
                 " ",
                 fg::BrightBlack,
                 "Direct output with readable color arguments.");
-            terminal.lineBreak();
+            terminal.writeLineBreak();
             terminal.printLine(fg::BrightGreen, "Status", fg::BrightBlack, ": online");
             terminal.printLine(fg::BrightCyan, "Mode", fg::BrightBlack, ": tutorial step 1");
 

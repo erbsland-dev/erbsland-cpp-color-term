@@ -5,6 +5,7 @@
 
 #include "Char.hpp"
 #include "Size.hpp"
+#include "String.hpp"
 
 #include <utility>
 
@@ -12,65 +13,93 @@
 namespace erbsland::cterm {
 
 
+class BufferViewBase;
+
+
 /// Settings controlling how `Terminal::updateScreen()` renders a buffer.
 class UpdateSettings final {
 public:
     /// Create default screen update settings.
     UpdateSettings() = default;
-    /// Create screen update settings with explicit values.
-    /// @param minimumSize The minimum terminal size required for rendering the buffer.
-    /// @param minimumSizeMark The marker rendered when the terminal is smaller than `minimumSize`.
-    /// @param showCropMarks `true` to render crop marks when the buffer does not fully fit on screen.
-    /// @param cropMarkRight The mark rendered in the last visible column when content is cropped on the right.
-    /// @param cropMarkBottom The mark rendered in the last visible row when content is cropped at the bottom.
-    UpdateSettings(
-        Size minimumSize, Char minimumSizeMark, bool showCropMarks, Char cropMarkRight, Char cropMarkBottom) noexcept :
-        _minimumSize{minimumSize},
-        _minimumSizeMark{std::move(minimumSizeMark)},
-        _showCropMarks{showCropMarks},
-        _cropMarkRight{std::move(cropMarkRight)},
-        _cropMarkBottom{std::move(cropMarkBottom)} {}
 
-public: // accessors
+    // defaults
+    ~UpdateSettings() = default;
+    UpdateSettings(const UpdateSettings &) = default;
+    UpdateSettings(UpdateSettings &&) noexcept = default;
+    auto operator=(const UpdateSettings &) -> UpdateSettings & = default;
+    auto operator=(UpdateSettings &&) -> UpdateSettings & = default;
+
+public:
     /// Get the minimum terminal size required for rendering the buffer.
     /// @return The minimum supported terminal size.
-    [[nodiscard]] auto minimumSize() const noexcept -> Size { return _minimumSize; }
-    /// Get the marker rendered when the terminal is too small.
-    /// @return The minimum-size marker.
-    [[nodiscard]] auto minimumSizeMark() const noexcept -> const Char & { return _minimumSizeMark; }
-    /// Check if crop marks are enabled.
-    /// @return `true` if crop marks are rendered for truncated content.
-    [[nodiscard]] auto showCropMarks() const noexcept -> bool { return _showCropMarks; }
-    /// Get the mark rendered when content is cropped on the right.
-    /// @return The right crop mark.
-    [[nodiscard]] auto cropMarkRight() const noexcept -> const Char & { return _cropMarkRight; }
-    /// Get the mark rendered when content is cropped at the bottom.
-    /// @return The bottom crop mark.
-    [[nodiscard]] auto cropMarkBottom() const noexcept -> const Char & { return _cropMarkBottom; }
-
-public: // modifiers
+    [[nodiscard]] auto minimumSize() const noexcept -> Size;
     /// Set the minimum terminal size required for rendering the buffer.
     /// @param minimumSize The minimum supported terminal size.
-    void setMinimumSize(const Size minimumSize) noexcept { _minimumSize = minimumSize; }
-    /// Set the marker rendered when the terminal is too small.
-    /// @param minimumSizeMark The minimum-size marker.
-    void setMinimumSizeMark(Char minimumSizeMark) noexcept { _minimumSizeMark = std::move(minimumSizeMark); }
+    void setMinimumSize(Size minimumSize) noexcept;
+    /// Get the background character used if the terminal is too small.
+    [[nodiscard]] auto minimumSizeBackground() const noexcept -> const Char &;
+    /// Set the background fill character when the terminal is too small.
+    /// @param character The background character
+    void setMinimumSizeBackground(Char character) noexcept;
+    /// Get the message displayed if the terminal size is too small
+    [[nodiscard]] auto minimumSizeMessage() const noexcept -> const String &;
+    /// Set the message displayed if the terminal is too small.
+    /// @param message The displayed message.
+    void setMinimumSizeMessage(String message) noexcept;
+    /// Check if crop marks are enabled.
+    [[nodiscard]] auto showCropMarks() const noexcept -> bool;
     /// Enable or disable crop marks.
     /// @param showCropMarks `true` to render crop marks for truncated content.
-    void setShowCropMarks(const bool showCropMarks) noexcept { _showCropMarks = showCropMarks; }
-    /// Set the mark rendered when content is cropped on the right.
+    void setShowCropMarks(bool showCropMarks) noexcept;
+    /// Get the mark rendered when content is cropped on the right.
+    [[nodiscard]] auto cropMarkRight() const noexcept -> const Char &;
+    /// Set the mark rendered if the content is cropped on the right.
     /// @param cropMarkRight The right crop mark.
-    void setCropMarkRight(Char cropMarkRight) noexcept { _cropMarkRight = std::move(cropMarkRight); }
-    /// Set the mark rendered when content is cropped at the bottom.
+    void setCropMarkRight(Char cropMarkRight) noexcept;
+    /// Get the mark rendered in the bottom right corner when content is cropped.
+    [[nodiscard]] auto cropMarkBottomRight() const noexcept -> const Char &;
+    /// Set the mark in the bottom right corner if content is cropped on the bottom and right.
+    /// @param cropMarkBottomRight The bottom-right crop mark.
+    void setCropMarkBottomRight(Char cropMarkBottomRight) noexcept;
+    /// Get the mark rendered when content is cropped at the bottom.
+    [[nodiscard]] auto cropMarkBottom() const noexcept -> const Char &;
+    /// Set the mark rendered if the content is cropped at the bottom.
     /// @param cropMarkBottom The bottom crop mark.
-    void setCropMarkBottom(Char cropMarkBottom) noexcept { _cropMarkBottom = std::move(cropMarkBottom); }
+    void setCropMarkBottom(Char cropMarkBottom) noexcept;
+    /// Test if the update shall switch to the alternate screen buffer.
+    [[nodiscard]] auto switchToAlternateBuffer() const noexcept -> bool;
+    /// Enable or disable switching to the alternate screen buffer.
+    /// @param switchToAlternateBuffer `true` to switch to the alternate screen buffer.
+    void setSwitchToAlternateBuffer(bool switchToAlternateBuffer) noexcept;
+
+public: // tools
+    /// Apply these settings to a BufferView
+    void applyTo(BufferViewBase &view) const noexcept;
+    /// Shared default value.
+    [[nodiscard]] static auto defaultSettings() noexcept -> const UpdateSettings &;
+
+public: // compatibility
+    [[deprecated("Use setMinimumSizeBackground() instead.")]]
+    void setMinimumSizeMark(Char minimumSizeMark) noexcept;
+    [[deprecated("Use minimumSizeBackground() instead.")]] [[nodiscard]] auto minimumSizeMark() const noexcept
+        -> const Char &;
+    [[deprecated("Construct and use setters to change defaults.")]]
+    UpdateSettings(
+        Size minimumSize,
+        Char minimumSizeBackground,
+        bool showCropMarks,
+        Char cropMarkRight,
+        Char cropMarkBottom) noexcept;
 
 private:
-    Size _minimumSize{};
-    Char _minimumSizeMark{"X", {fg::BrightRed, bg::Black}};
-    bool _showCropMarks{false};
-    Char _cropMarkRight{"▶︎", {fg::BrightYellow, bg::Black}};
-    Char _cropMarkBottom{"▼", {fg::BrightYellow, bg::Black}};
+    Size _minimumSize{};                        ///< The minimum required terminal size.
+    Char _minimumSizeBackground{Char::space()}; ///< Background character if the terminal size is too small.
+    String _minimumSizeMessage;      ///< A message that is displayed centered if the terminal size is too small.
+    bool _showCropMarks{false};      ///< If crop marks are enabled.
+    Char _cropMarkRight{U'▶'};       ///< Crop mark at the right edge.
+    Char _cropMarkBottomRight{U'◢'}; ///< Crop mark in the bottom-right corner.
+    Char _cropMarkBottom{U'▼'};      ///< Crop mark at the bottom edge.
+    bool _switchToAlternateBuffer{true}; ///< Switches to the alternate screen buffer if supported.
 };
 
 

@@ -1,36 +1,59 @@
 # Erbsland Color Terminal Library for C++
+[![CI](https://github.com/erbsland-dev/erbsland-cpp-color-term/actions/workflows/ci.yml/badge.svg)](https://github.com/erbsland-dev/erbsland-cpp-color-term/actions/workflows/ci.yml) [![Docs](https://github.com/erbsland-dev/erbsland-cpp-color-term/actions/workflows/build-docs.yml/badge.svg)](https://github.com/erbsland-dev/erbsland-cpp-color-term/actions/workflows/build-docs.yml)
 
 ✔ Unicode-safe terminal layout  
 ✔ Cross-platform terminal abstraction  
 ✔ Clean C++20 API for colorful terminal output
 
-The *Erbsland Color Terminal Library* is a small and focused **C++20 static library** for building rich terminal applications.
+The **Erbsland Color Terminal Library** is a lightweight **C++20 static library** for building rich terminal applications.
 
-It provides reliable building blocks for **colorful terminal output**, **Unicode-aware text handling**, **key-based input**, and **2D geometry helpers** that simplify the development of terminal user interfaces, command-line tools, and terminal games.
+It provides reliable building blocks for **colorful terminal output**, **Unicode-aware text handling**, **interactive input**, and **2D geometry utilities**. These components help you build terminal user interfaces, command-line tools, and even terminal games with far less low-level boilerplate.
 
-The library is designed to be lightweight, expressive, and portable across **Linux, macOS, and Windows**.
+The library is designed to be **lightweight**, **expressive**, and **portable**, with native support for **Linux**, **macOS**, and **Windows** terminals.
 
 ![Screenshot](doc/images/retro-plasma.jpg)
 
 # Features
 
-- ANSI foreground and background colors with typed color parts and color sequences
-- Correct handling of **zero-width and full-width Unicode characters**
-- Terminal writing, screen handling, and platform-specific key input
-- Unicode-aware terminal strings and **per-cell character buffers**
-- Automatic terminal size detection with resize callbacks
-- Geometry helpers for positions, sizes, rectangles, anchors, alignments, margins, and bitmaps
+## Low-Level Terminal Abstraction
+
+The low-level layer provides portable building blocks for terminal interaction.
+
+- Cross-platform terminal backend for **Linux, macOS, and Windows** — write once and compile everywhere
+- Direct control over **colors, cursor positioning, and screen management**
+- Automatic terminal detection and initialization
+- Convenient colored text output using **ANSI escape sequences**
+- Optional **text-only mode** for non-interactive applications
+- **Unicode-aware terminal strings** with accurate display-width calculation
+- Automatic handling of **wide and combined Unicode code points**
+- Detection and rejection of **invalid UTF-8 sequences**
+- **Interactive key input** and traditional **line-based input**
+- Geometry utilities for positions, sizes, rectangles, anchors, alignment, margins, and bitmaps
+- Efficient **line buffering** for handling large amounts of terminal output
+- Automatic **terminal state restoration on exit**, including unexpected exits caused by signals
+
+## High-Level Terminal Utilities
+
+The high-level layer builds on the low-level primitives to simplify the implementation of complex terminal interfaces.
+
+- Efficient **cell buffer classes** for preparing terminal output
+- Automatic **back-buffering and delta screen updates**
+- Automatic switching to the **alternate screen** and restoration on exit
+- **View system** to render sections of buffers on screen
 - Frame and rectangle drawing utilities
-- Text wrapping and alignment helpers
-- Bitmap font rendering for large terminal text
-- Standalone unit tests for the extracted terminal and geometry modules
-- Cross-platform support for **Linux, macOS, and Windows**
+- Character-combination framework for building block-based terminal graphics
+- **Tile-9 fill** and **tile-16 frame** drawing helpers
+- **Custom font support**
+- Text wrapping and alignment utilities
+- **Bitmap font rendering** for large terminal text
+- Color sequences and **animated color effects**
+- Bitmap utilities for generating masks and rendering bitmaps to the screen
 
 # Documentation
 
-Full documentation, tutorials, and API reference are available here:
+Full documentation, tutorials, and API references are available at:
 
-→ [https://color-term.erbsland.dev](https://color-term.erbsland.dev)
+→ https://color-term.erbsland.dev
 
 The documentation includes:
 
@@ -41,7 +64,7 @@ The documentation includes:
 
 # Installation
 
-The recommended way to use the library is by including it directly in your CMake project.
+The recommended way to use the library is by including it directly in your **CMake project**.
 
 Clone the repository and add it as a subdirectory:
 

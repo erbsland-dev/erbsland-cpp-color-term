@@ -19,38 +19,12 @@ namespace erbsland::cterm {
 /// Represents a character string with foreground and background colors.
 /// Used by the UI code to render colored text blocks on the console.
 class Char {
-public: // ctors/dtor/assign/move
+public:
     /// Construct an empty block character using inherited colors.
     constexpr Char() noexcept = default;
     /// Construct a block character from a single Unicode code point using inherited colors.
     /// @param codePoint The base Unicode code point.
     constexpr explicit Char(const char32_t codePoint) noexcept : _codePoints{codePoint, 0, 0} {}
-    /// Construct a block character from a single Unicode code point and a color.
-    /// @param codePoint The base Unicode code point.
-    /// @param color The color for the character.
-    constexpr Char(const char32_t codePoint, const Color color) noexcept :
-        _codePoints{codePoint, 0, 0}, _color{color} {}
-    /// Construct a block character from a single Unicode code point and explicit colors.
-    /// @param codePoint The base Unicode code point.
-    /// @param fgColor The foreground color.
-    /// @param bgColor The background color.
-    constexpr Char(const char32_t codePoint, const Foreground fgColor, const Background bgColor) noexcept :
-        Char{codePoint, {fgColor, bgColor}} {}
-    /// @overload
-    constexpr Char(const char32_t codePoint, const Foreground::Hue fgColor, const Background::Hue bgColor) noexcept :
-        Char{codePoint, {fgColor, bgColor}} {}
-    /// @overload
-    constexpr Char(const char32_t codePoint, const Foreground fgColor) noexcept :
-        Char{codePoint, {fgColor, Background::Inherited}} {}
-    /// @overload
-    constexpr Char(const char32_t codePoint, const Foreground::Hue fgColor) noexcept :
-        Char{codePoint, {fgColor, Background::Inherited}} {}
-    /// @overload
-    constexpr Char(const char32_t codePoint, const Background bgColor) noexcept :
-        Char{codePoint, {Foreground::Inherited, bgColor}} {}
-    /// @overload
-    constexpr Char(const char32_t codePoint, const Background::Hue bgColor) noexcept :
-        Char{codePoint, {Foreground::Inherited, bgColor}} {}
     /// Construct a block character with inherited colors.
     /// @param charStr The UTF-8 encoded text to display.
     /// @throws std::invalid_argument If the text is not valid UTF-8, contains U+0000, or uses more than three
@@ -60,77 +34,43 @@ public: // ctors/dtor/assign/move
     /// @param charStr The UTF-32 encoded text to display.
     /// @throws std::invalid_argument If the text contains U+0000 or uses more than three code points.
     explicit Char(std::u32string_view charStr);
-    /// Construct a block character with inherited colors.
-    /// @param charStr The zero-terminated UTF-32 encoded text to display.
-    /// @throws std::invalid_argument If the text contains U+0000 or uses more than three code points.
-    explicit Char(const char32_t *charStr);
+    /// Construct a block character from a single Unicode code point and a color.
+    /// @param codePoint The base Unicode code point.
+    /// @param color The color for the character.
+    template <typename... tColorArgs>
+        requires(sizeof...(tColorArgs) >= 1 && std::is_constructible_v<Color, tColorArgs...>)
+    constexpr Char(const char32_t codePoint, tColorArgs... color) noexcept :
+        _codePoints{codePoint, 0, 0}, _color(color...) {}
     /// Construct a block character with explicit text and colors.
     /// @param charStr The UTF-8 encoded text to display.
-    /// @param fgColor The foreground color.
-    /// @param bgColor The background color.
-    Char(std::string_view charStr, Foreground fgColor, Background bgColor);
-    /// @overload
-    Char(std::string_view charStr, Foreground::Hue fgColor, Background::Hue bgColor);
-    /// @overload
-    Char(std::string_view charStr, Foreground fgColor);
-    /// @overload
-    Char(std::string_view charStr, Foreground::Hue fgColor);
-    /// @overload
-    Char(std::string_view charStr, Background bgColor);
-    /// @overload
-    Char(std::string_view charStr, Background::Hue bgColor);
-    /// Construct a block character with explicit text and colors.
-    /// @param charStr The UTF-8 encoded text to display.
-    /// @param color The color of the block.
-    /// @throws std::invalid_argument If the text is not valid UTF-8, contains U+0000, or uses more than three
-    /// code points.
-    Char(std::string_view charStr, Color color);
+    /// @param color The color for the character.
+    template <typename... tColorArgs>
+        requires(sizeof...(tColorArgs) >= 1 && std::is_constructible_v<Color, tColorArgs...>)
+    explicit Char(const std::string_view charStr, tColorArgs... color) :
+        _codePoints{decodeUtf8(charStr)}, _color(color...) {}
     /// Construct a block character with explicit text and colors.
     /// @param charStr The UTF-32 encoded text to display.
-    /// @param fgColor The foreground color.
-    /// @param bgColor The background color.
-    Char(std::u32string_view charStr, Foreground fgColor, Background bgColor);
-    /// @overload
-    Char(std::u32string_view charStr, Foreground::Hue fgColor, Background::Hue bgColor);
-    /// @overload
-    Char(std::u32string_view charStr, Foreground fgColor);
-    /// @overload
-    Char(std::u32string_view charStr, Foreground::Hue fgColor);
-    /// @overload
-    Char(std::u32string_view charStr, Background bgColor);
-    /// @overload
-    Char(std::u32string_view charStr, Background::Hue bgColor);
-    /// Construct a block character with explicit text and colors.
-    /// @param charStr The UTF-32 encoded text to display.
-    /// @param color The color of the block.
-    /// @throws std::invalid_argument If the text contains U+0000 or uses more than three code points.
-    Char(std::u32string_view charStr, Color color);
-    /// Construct a block character with explicit text and colors.
-    /// @param charStr The zero-terminated UTF-32 encoded text to display.
-    /// @param fgColor The foreground color.
-    /// @param bgColor The background color.
-    Char(const char32_t *charStr, Foreground fgColor, Background bgColor);
-    /// @overload
-    Char(const char32_t *charStr, Foreground::Hue fgColor, Background::Hue bgColor);
-    /// @overload
-    Char(const char32_t *charStr, Foreground fgColor);
-    /// @overload
-    Char(const char32_t *charStr, Foreground::Hue fgColor);
-    /// @overload
-    Char(const char32_t *charStr, Background bgColor);
-    /// @overload
-    Char(const char32_t *charStr, Background::Hue bgColor);
-    /// Construct a block character with explicit text and colors.
-    /// @param charStr The zero-terminated UTF-32 encoded text to display.
-    /// @param color The color of the block.
-    /// @throws std::invalid_argument If the text contains U+0000 or uses more than three code points.
-    Char(const char32_t *charStr, Color color);
+    /// @param color The color for the character.
+    template <typename... tColorArgs>
+        requires(sizeof...(tColorArgs) >= 1 && std::is_constructible_v<Color, tColorArgs...>)
+    explicit Char(const std::u32string_view charStr, tColorArgs... color) :
+        _codePoints{decodeUtf32(charStr)}, _color(color...) {}
+
+    // defaults
+    Char(const Char &) = default;
+    Char(Char &&) = default;
+    auto operator=(const Char &) -> Char & = default;
+    auto operator=(Char &&) -> Char & = default;
 
 public: // operators
     /// Compare two terminal characters for equality.
     [[nodiscard]] auto operator==(const Char &other) const noexcept -> bool = default;
     /// Compare two terminal characters for inequality.
     [[nodiscard]] auto operator!=(const Char &other) const noexcept -> bool = default;
+    /// Compare just a single-code point character, without the color.
+    [[nodiscard]] auto operator==(char32_t other) const noexcept -> bool;
+    /// Compare just a single-code point character, without the color.
+    [[nodiscard]] auto operator!=(char32_t other) const noexcept -> bool;
 
 public: // accessors
     /// Get the character string as UTF-8 text.
@@ -138,9 +78,7 @@ public: // accessors
     [[nodiscard]] auto charStr() const -> std::string;
     /// Get the leading Unicode code point.
     /// @return The base code point, or `0` if this character is empty.
-    [[nodiscard]] constexpr auto mainCodePoint() const noexcept -> uint32_t {
-        return static_cast<uint32_t>(_codePoints[0]);
-    }
+    [[nodiscard]] constexpr auto mainCodePoint() const noexcept -> char32_t { return _codePoints[0]; }
     /// Get the stored Unicode code points.
     /// Unused entries are set to `0`.
     [[nodiscard]] constexpr auto codePoints() const noexcept -> const std::array<char32_t, 3> & { return _codePoints; }
@@ -178,9 +116,22 @@ public: // modifiers
     [[nodiscard]] auto withBaseColor(Color color) const noexcept -> Char;
 
 public: // tests
+    /// Test if this character is empty (has no code-point).
+    [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool { return _codePoints[0] == 0; }
     /// Test if this character is spacing.
     /// Tests for space, tab, newline, and CR.
     [[nodiscard]] auto isSpacing() const noexcept -> bool;
+    /// Test if this character is one of the given characters.
+    /// Tests only the character, not the color. Only tests one code-point characters.
+    [[nodiscard]] auto isOneOf(std::u32string_view characters) const noexcept -> bool;
+    /// @overload
+    [[nodiscard]] auto isOneOf(std::initializer_list<char32_t> characters) const noexcept -> bool;
+    /// @overload
+    template <typename... tCharacters>
+        requires(sizeof...(tCharacters) >= 1 && (std::convertible_to<tCharacters, char32_t> && ...))
+    [[nodiscard]] auto isOneOf(tCharacters... characters) const noexcept -> bool {
+        return ((*this == characters) || ...);
+    }
     /// Compare how two characters would appear on screen.
     /// Code points must match exactly. When `colorEnabled` is `true`, inherited color components are treated as the
     /// terminal default color before comparing.
@@ -189,44 +140,55 @@ public: // tests
     /// @return `true` if both characters render identically.
     [[nodiscard]] auto renderedEquals(const Char &other, bool colorEnabled = true) const noexcept -> bool;
 
+public: // predefined characters.
+    /// A space with inherited colors.
+    [[nodiscard]] static auto space() noexcept -> Char { return Char{U' '}; }
+
 private:
     [[nodiscard]] static auto decodeUtf8(std::string_view charStr) -> std::array<char32_t, 3>;
     [[nodiscard]] static auto decodeUtf32(std::u32string_view charStr) -> std::array<char32_t, 3>;
-    [[nodiscard]] constexpr static auto isControlCode(const char32_t codePoint) noexcept -> bool {
-        return codePoint < 0x20 || (codePoint >= 0x7FU && codePoint <= 0x9FU);
-    }
+    [[nodiscard]] constexpr static auto isControlCode(char32_t codePoint) noexcept -> bool;
     [[nodiscard]] constexpr static auto countCodePoints(const std::array<char32_t, 3> &codePoints) noexcept
-        -> std::size_t {
-        for (std::size_t index = 0; index < codePoints.size(); ++index) {
-            if (codePoints[index] == 0) {
-                return index;
-            }
-        }
-        return codePoints.size();
-    }
-    [[nodiscard]] constexpr static auto utf8ByteCount(const char32_t codePoint) noexcept -> std::size_t {
-        const auto value = static_cast<uint32_t>(codePoint);
-        if (value <= 0x7FU) {
-            return 1;
-        }
-        if (value <= 0x7FFU) {
-            return 2;
-        }
-        if (value <= 0xFFFFU) {
-            return 3;
-        }
-        return 4;
-    }
+        -> std::size_t;
+    [[nodiscard]] constexpr static auto utf8ByteCount(char32_t codePoint) noexcept -> std::size_t;
 
 private:
     /// Special value to mark that the display width was not yet calculated.
     constexpr static auto cNoDisplayWidth = std::numeric_limits<uint8_t>::max();
 
 private:
-    std::array<char32_t, 3> _codePoints{}; ///< The base code point followed by up to two combining code points.
-    Color _color;                          ///< The color for this character.
+    std::array<char32_t, 3U> _codePoints{}; ///< The base code point followed by up to two combining code points.
+    Color _color;                           ///< The color for this character.
     mutable uint8_t _displayWidthCache = cNoDisplayWidth; ///< The cached display width of this character.
 };
+
+
+constexpr auto Char::isControlCode(const char32_t codePoint) noexcept -> bool {
+    return codePoint < 0x20 || (codePoint >= 0x7FU && codePoint <= 0x9FU);
+}
+
+constexpr auto Char::countCodePoints(const std::array<char32_t, 3> &codePoints) noexcept -> std::size_t {
+    for (std::size_t index = 0; index < codePoints.size(); ++index) {
+        if (codePoints[index] == 0) {
+            return index;
+        }
+    }
+    return codePoints.size();
+}
+
+constexpr auto Char::utf8ByteCount(const char32_t codePoint) noexcept -> std::size_t {
+    const auto value = static_cast<uint32_t>(codePoint);
+    if (value <= 0x7FU) {
+        return 1;
+    }
+    if (value <= 0x7FFU) {
+        return 2;
+    }
+    if (value <= 0xFFFFU) {
+        return 3;
+    }
+    return 4;
+}
 
 
 }

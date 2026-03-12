@@ -26,11 +26,13 @@ private:
     [[nodiscard]] auto canvasSize() const noexcept -> Size;
     void handleKey(const Key &key) noexcept;
     void renderFrame() noexcept;
-    void drawPrompt(Buffer &buffer) const;
+    void drawPrompt() noexcept;
     [[nodiscard]] auto buildPrompt() const -> String;
 
 private:
     Terminal _terminal{Size{90, 28}};
+    UpdateSettings _updateSettings;
+    Buffer _buffer;
     PlasmaRenderer _renderer;
     double _phase{0.0};
     double _speed{1.0};

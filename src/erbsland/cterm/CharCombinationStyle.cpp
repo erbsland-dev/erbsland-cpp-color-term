@@ -18,7 +18,7 @@ auto CharCombinationStyle::combine([[maybe_unused]] const Char &current, const C
 
 
 auto CharCombinationStyle::combine(
-    [[maybe_unused]] const std::array<Char *, 9> &current, const Char &overlay) const noexcept -> Char {
+    [[maybe_unused]] const std::array<const Char *, 9> &current, const Char &overlay) const noexcept -> Char {
     return overlay;
 }
 

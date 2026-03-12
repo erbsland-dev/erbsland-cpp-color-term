@@ -3,8 +3,13 @@
 #include "String.hpp"
 
 
+#include "impl/StringWrapper.hpp"
+#include "impl/TextUtil.hpp"
 #include "impl/U8Buffer.hpp"
 #include "impl/UnicodeWidth.hpp"
+
+#include <algorithm>
+#include <ranges>
 
 
 namespace erbsland::cterm {
@@ -25,6 +30,54 @@ auto String::displayWidth() const noexcept -> int {
     return result;
 }
 
+auto String::count(Char character) const noexcept -> std::size_t {
+    return static_cast<std::size_t>(
+        std::ranges::count_if(_chars, [&](const Char &c) -> bool { return c == character; }));
+}
+
+auto String::count(char32_t character) const noexcept -> std::size_t {
+    return static_cast<std::size_t>(std::ranges::count_if(
+        _chars, [&](const Char &c) -> bool { return c.codePoints() == std::array<char32_t, 3>{character, 0, 0}; }));
+}
+
+auto String::indexOf(const Char character, const std::size_t startIndex) const noexcept -> std::size_t {
+    if (startIndex >= _chars.size()) {
+        return npos;
+    }
+    for (auto index = startIndex; index < _chars.size(); ++index) {
+        if (_chars[index] == character) {
+            return index;
+        }
+    }
+    return npos;
+}
+
+auto String::indexOf(const char32_t character, const std::size_t startIndex) const noexcept -> std::size_t {
+    if (startIndex >= _chars.size()) {
+        return npos;
+    }
+    for (auto index = startIndex; index < _chars.size(); ++index) {
+        if (_chars[index].codePoints() == std::array<char32_t, 3>{character, 0, 0}) {
+            return index;
+        }
+    }
+    return npos;
+}
+
+auto String::substr(const std::size_t startIndex, std::size_t length) const noexcept -> String {
+    if (startIndex >= _chars.size()) {
+        return {};
+    }
+    if (length == 0) {
+        return {};
+    }
+    if (length == npos || length > _chars.size() - startIndex) {
+        length = _chars.size() - startIndex;
+    }
+    return String{Storage{
+        _chars.cbegin() + static_cast<difference_type>(startIndex),
+        _chars.cbegin() + static_cast<difference_type>(startIndex) + static_cast<difference_type>(length)}};
+}
 
 auto String::splitWords() const noexcept -> std::vector<String> {
     std::vector<String> words;
@@ -46,168 +99,92 @@ auto String::splitWords() const noexcept -> std::vector<String> {
     return words;
 }
 
+auto String::wrapIntoLines(const int width, const ParagraphSpacing paragraphSpacing) const noexcept
+    -> std::vector<String> {
+    return impl::StringWrapper{*this}.wrapIntoLines(width, paragraphSpacing);
+}
 
-auto String::wrapIntoLines(const int width) const noexcept -> std::vector<String> {
-    if (width <= 0) {
+auto String::splitLines() const noexcept -> std::vector<String> {
+    return impl::StringWrapper{*this}.splitLines();
+}
+
+auto String::fromLines(const std::initializer_list<std::string_view> lines, const Color color) noexcept -> String {
+    if (lines.size() == 0) {
         return {};
     }
-    auto lines = BlockStringLines{};
-    auto isFirstParagraph = true;
-    for (const auto &paragraph : splitParagraphs()) {
-        const auto paragraphLines = paragraph.wrapParagraphIntoLines(width);
-        if (paragraphLines.empty()) {
-            continue;
-        }
-        if (!isFirstParagraph) {
-            lines.emplace_back();
-        }
-        lines.insert(lines.end(), paragraphLines.begin(), paragraphLines.end());
-        isFirstParagraph = false;
+    std::size_t characterCount = lines.size() - 1; // count newlines
+    for (auto &line : lines) {
+        characterCount += countCharacters(line);
     }
-    return lines;
+    Storage result;
+    result.reserve(characterCount);
+    bool isFirstLine = true;
+    for (const auto &line : lines) {
+        if (isFirstLine) {
+            isFirstLine = false;
+        } else {
+            result.emplace_back(Char{U'\n', color});
+        }
+        impl::U8Buffer{line}.decodeAll(
+            [&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color); });
+    }
+    return String{std::move(result)};
 }
 
-
-auto String::splitParagraphs() const noexcept -> std::vector<String> {
-    auto paragraphs = std::vector<String>{};
-    auto paragraph = String{};
-    paragraph.reserve(_chars.size());
-    for (const auto &character : _chars) {
-        if (character.codePointCount() == 1 && character.codePoints()[0] == U'\n') {
-            if (!paragraph.empty()) {
-                paragraphs.push_back(paragraph);
-                paragraph.clear();
-            }
-            continue;
-        }
-        paragraph.append(character);
-    }
-    if (!paragraph.empty()) {
-        paragraphs.push_back(paragraph);
-    }
-    return paragraphs;
-}
-
-
-auto String::wrapParagraphIntoLines(const int width) const noexcept -> std::vector<String> {
-    if (width <= 0) {
+auto String::fromLines(const std::initializer_list<std::u32string_view> lines, const Color color) noexcept -> String {
+    if (lines.size() == 0) {
         return {};
     }
-    BlockStringLines lines;
-    String line;
-    String pendingSpacing;
-    int lineWidth = 0;
-    auto appendSplitWord = [&](const String &word) -> void {
-        const auto wordWidth = word.displayWidth();
-        if (wordWidth > width) {
-            if (!line.empty()) {
-                lines.push_back(line);
-                line.clear();
-                lineWidth = 0;
-            }
-            std::size_t index = 0;
-            while (index < word.size()) {
-                String part;
-                int partWidth = 0;
-                while (index < word.size()) {
-                    const auto characterWidth = word[index].displayWidth();
-                    if (!part.empty() && partWidth + characterWidth > width) {
-                        break;
-                    }
-                    if (part.empty() && characterWidth > width) {
-                        part += word[index++];
-                        partWidth += characterWidth;
-                        break;
-                    }
-                    if (partWidth + characterWidth > width) {
-                        break;
-                    }
-                    part += word[index++];
-                    partWidth += characterWidth;
-                }
-                lines.push_back(part);
-            }
-            return;
-        }
-        line = word;
-        lineWidth = wordWidth;
-    };
-    auto processWord = [&](const String &word) -> void {
-        const auto wordWidth = word.displayWidth();
-        const auto spacingWidth = pendingSpacing.displayWidth();
-        if (lineWidth == 0) {
-            pendingSpacing.clear();
-            appendSplitWord(word);
-            return;
-        }
-        if (lineWidth + spacingWidth + wordWidth <= width) {
-            line += pendingSpacing;
-            line += word;
-            lineWidth += spacingWidth + wordWidth;
-            pendingSpacing.clear();
-            return;
-        }
-        lines.push_back(line);
-        line.clear();
-        lineWidth = 0;
-        pendingSpacing.clear();
-        appendSplitWord(word);
-    };
-    auto token = String{};
-    auto isSpacingToken = false;
-    auto processToken = [&](const String &currentToken, const bool currentIsSpacing) -> void {
-        if (currentToken.empty()) {
-            return;
-        }
-        if (currentIsSpacing) {
-            if (!line.empty()) {
-                pendingSpacing += currentToken;
-            }
-            return;
-        }
-        processWord(currentToken);
-    };
-    for (const auto &character : *this) {
-        const auto currentIsSpacing = character.isSpacing();
-        if (token.empty()) {
-            token.append(character);
-            isSpacingToken = currentIsSpacing;
-            continue;
-        }
-        if (currentIsSpacing == isSpacingToken) {
-            token.append(character);
-            continue;
-        }
-        processToken(token, isSpacingToken);
-        token.clear();
-        token.append(character);
-        isSpacingToken = currentIsSpacing;
+    std::size_t characterCount = lines.size() - 1; // count newlines
+    for (auto &line : lines) {
+        characterCount += countCharacters(line);
     }
-    processToken(token, isSpacingToken);
-    if (!line.empty()) {
-        lines.push_back(line);
+    Storage result;
+    result.reserve(characterCount);
+    bool isFirstLine = true;
+    for (const auto &line : lines) {
+        if (isFirstLine) {
+            isFirstLine = false;
+        } else {
+            result.emplace_back(Char{U'\n', color});
+        }
+        for (const auto codePoint : line) {
+            appendCodePoint(result, codePoint, color);
+        }
     }
-    return lines;
+    return String{std::move(result)};
 }
 
-
-auto String::splitCharacters(const std::string_view str, const Color color) -> std::vector<Char> {
-    auto result = std::vector<Char>{};
-    // counting beforehand for memory allocation is more efficient as risk reallocations.
-    std::size_t visibleCharCount = 0;
+auto String::countCharacters(const std::string_view str) -> std::size_t {
+    std::size_t displayCharCount = 0;
     impl::U8Buffer{str}.decodeAll([&](const char32_t codePoint) -> void {
         if (isStringCharacter(codePoint)) {
-            visibleCharCount += 1;
+            displayCharCount += static_cast<std::size_t>(Char{codePoint}.displayWidth());
         }
     });
-    result.reserve(visibleCharCount);
+    return displayCharCount;
+}
+
+auto String::countCharacters(const std::u32string_view str) -> std::size_t {
+    std::size_t displayCharCount = 0;
+    for (const auto codePoint : str) {
+        if (isStringCharacter(codePoint)) {
+            displayCharCount += static_cast<std::size_t>(Char{codePoint}.displayWidth());
+        }
+    }
+    return displayCharCount;
+}
+
+auto String::splitCharacters(const std::string_view str, const Color color) -> Storage {
+    auto result = Storage{};
+    result.reserve(countCharacters(str));
     impl::U8Buffer{str}.decodeAll([&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color); });
     return result;
 }
 
-auto String::splitCharacters(const std::u32string_view str, const Color color) -> std::vector<Char> {
-    auto result = std::vector<Char>{};
-    result.reserve(str.size());
+auto String::splitCharacters(const std::u32string_view str, const Color color) -> Storage {
+    auto result = Storage{};
+    result.reserve(countCharacters(str));
     for (const auto codePoint : str) {
         appendCodePoint(result, codePoint, color);
     }
@@ -216,10 +193,10 @@ auto String::splitCharacters(const std::u32string_view str, const Color color) -
 
 auto String::isStringCharacter(const char32_t codePoint) noexcept -> bool {
     return codePoint == U'\t' || codePoint == U'\n' ||
-        (!isControlCode(codePoint) && codePoint >= 0x20 && impl::consoleCharacterWidth(codePoint) > 1);
+        (!isControlCode(codePoint) && codePoint >= 0x20 && impl::consoleCharacterWidth(codePoint) > 0);
 }
 
-void String::appendCodePoint(std::vector<Char> &chars, const char32_t codePoint, const Color color) {
+void String::appendCodePoint(Storage &chars, const char32_t codePoint, const Color color) {
     if (codePoint == U'\t' || codePoint == U'\n') {
         chars.emplace_back(codePoint, color);
         return;

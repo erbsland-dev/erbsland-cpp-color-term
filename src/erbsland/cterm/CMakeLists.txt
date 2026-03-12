@@ -4,12 +4,15 @@ add_subdirectory(impl)
 target_sources(erbsland-color-term PRIVATE
         Alignment.hpp
         Anchor.hpp
+        Backend.hpp
         Bitmap.cpp
         Bitmap.hpp
         BitmapDrawOptions.cpp
         BitmapDrawOptions.hpp
         Buffer.cpp
         Buffer.hpp
+        BufferView.cpp
+        BufferView.hpp
         Char.cpp
         Char.hpp
         Char16Style.cpp
@@ -23,23 +26,26 @@ target_sources(erbsland-color-term PRIVATE
         ColorRole.hpp
         ColorSequence.cpp
         ColorSequence.hpp
+        CropEdges.hpp
         Direction.cpp
         Direction.hpp
-        Font.hpp
         Font.cpp
+        Font.hpp
         FontGlyph.hpp
         FrameDrawOptions.cpp
         FrameDrawOptions.hpp
         FrameStyle.hpp
-        Input.cpp
         Input.hpp
         InputDefinition.cpp
         InputDefinition.hpp
         Key.cpp
         Key.hpp
         Margins.hpp
+        MoveMode.hpp
         Position.cpp
         Position.hpp
+        ReadableBuffer.cpp
+        ReadableBuffer.hpp
         Rectangle.cpp
         Rectangle.hpp
         Size.hpp
@@ -51,5 +57,8 @@ target_sources(erbsland-color-term PRIVATE
         TextAnimation.hpp
         Tile9Style.cpp
         Tile9Style.hpp
+        UpdateSettings.cpp
         UpdateSettings.hpp
+        WritableBuffer.cpp
+        WritableBuffer.hpp
 )

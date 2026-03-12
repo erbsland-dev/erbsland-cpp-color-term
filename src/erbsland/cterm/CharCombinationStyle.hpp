@@ -45,7 +45,7 @@ public:
     /// @param current A 3x3 matrix with nullptr for locations outside the buffer.
     /// @param overlay The new (upper) character that overlays the current one.
     /// @return The combined character.
-    [[nodiscard]] virtual auto combine(const std::array<Char *, 9> &current, const Char &overlay) const noexcept
+    [[nodiscard]] virtual auto combine(const std::array<const Char *, 9> &current, const Char &overlay) const noexcept
         -> Char;
 
 public: // predefined styles

@@ -10,7 +10,7 @@ The font classes allow you to render large bitmap-based text directly
 in the terminal. Fonts are primarily used for titles, banners, and
 other decorative elements in terminal interfaces.
 
-A ``Font`` defines how characters are rendered as bitmap glyphs,
+A :cpp:any:`Font <erbsland::cterm::Font>` defines how characters are rendered as bitmap glyphs,
 which are then drawn onto the terminal buffer.
 
 Usage
@@ -19,8 +19,8 @@ Usage
 Rendering a Bitmap-Font Title
 -----------------------------
 
-``Font`` integrates directly with ``Text``. Assign a font to a
-``Text`` object and render it like any other text block.
+:cpp:any:`Font <erbsland::cterm::Font>` integrates directly with :cpp:any:`Text <erbsland::cterm::Text>`. Assign a font to a
+:cpp:any:`Text <erbsland::cterm::Text>` object and render it like any other text block.
 
 .. code-block:: cpp
 
@@ -37,7 +37,7 @@ Rendering a Bitmap-Font Title
     buffer.drawText(title, animationCycle);
 
 The built-in ``defaultAscii()`` font renders large ASCII characters
-using a bitmap representation. Because fonts integrate with ``Text``,
+using a bitmap representation. Because fonts integrate with :cpp:any:`Text <erbsland::cterm::Text>`,
 all existing features—such as alignment, color sequences, and text
 animation—work automatically.
 

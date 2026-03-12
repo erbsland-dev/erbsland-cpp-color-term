@@ -3,9 +3,9 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "UpdateScreenModesState.hpp"
 
-#include <chrono>
+#include <erbsland/cterm/all.hpp>
 
 
 namespace demo::updatescreenmodes {
@@ -21,30 +21,24 @@ public:
     void run();
 
 private:
-    enum class Mode : uint8_t {
-        Clear,
-        Overwrite,
-        OverwriteWithBackBuffer,
-    };
-
-private:
     [[nodiscard]] auto canvasSize() const noexcept -> Size;
     void handleKey(const Key &key) noexcept;
-    void updateAnimation(std::chrono::milliseconds elapsed) noexcept;
-    void advanceMode(int delta) noexcept;
-    void applyMode() noexcept;
+    void updateAnimation() noexcept;
+    void applyTerminalSettings() noexcept;
     void renderFrame();
-    void drawScene(Buffer &buffer, Rectangle contentRect) const noexcept;
-    void drawFooter(Buffer &buffer, Rectangle footerRect) const;
-    [[nodiscard]] auto modeTitle() const noexcept -> std::string_view;
-    [[nodiscard]] auto modeDescription() const noexcept -> std::string_view;
+    void drawScene(Rectangle contentRect) noexcept;
+    void drawFooter(Rectangle footerRect);
+    static void appendStateLine(String &text, std::string_view label, bool enabled) noexcept;
+    static void appendTimingLine(String &text, std::string_view label, double milliseconds) noexcept;
+    [[nodiscard]] static auto matchesCharacterKey(const Key &key, char lowerCase) noexcept -> bool;
 
 private:
     Terminal _terminal{Size{94, 28}};
-    std::chrono::steady_clock::time_point _lastTick{std::chrono::steady_clock::now()};
-    std::chrono::milliseconds _modeCycleAccumulator{};
+    UpdateSettings _updateSettings;
+    UpdateScreenModesState _state;
+    FlushSpeedTracker _flushSpeedTracker;
+    Buffer _buffer;
     std::size_t _animationStep{0};
-    Mode _mode{Mode::Clear};
     bool _quitRequested{false};
 };
 

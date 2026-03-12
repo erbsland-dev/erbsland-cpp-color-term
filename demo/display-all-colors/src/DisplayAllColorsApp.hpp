@@ -24,7 +24,7 @@ private:
     void renderRainbow();
 
 private:
-    Buffer _buffer{Size{1, 1}};
+    Buffer _buffer;
 };
 
 

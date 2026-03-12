@@ -16,6 +16,10 @@ namespace demo::frameweaver {
 
 
 void FrameWeaverApp::run() {
+    _updateSettings.setMinimumSize(Size{32, 10});
+    _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
+    _updateSettings.setMinimumSizeMessage(
+        String{"Resize the terminal to at least 32x10 cells for the frame demo.", Color{fg::BrightWhite, bg::Black}});
     auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
     _lastTick = std::chrono::steady_clock::now();
     while (!_quitRequested) {
@@ -32,7 +36,7 @@ void FrameWeaverApp::run() {
 
 
 auto FrameWeaverApp::canvasSize() const noexcept -> Size {
-    return _terminal.size() - Size{1, 2};
+    return _terminal.size();
 }
 
 
@@ -85,48 +89,39 @@ void FrameWeaverApp::addFrame() noexcept {
 
 void FrameWeaverApp::renderFrame() {
     _terminal.testScreenSize();
-    auto buffer = Buffer{canvasSize()};
-    buffer.fill(Char{" ", bg::Black});
-    if (buffer.size().width() < 32 || buffer.size().height() < 10) {
-        buffer.drawText(
-            "Resize the terminal to at least 32x10 cells for the frame demo.",
-            Rectangle{0, 0, buffer.size().width(), buffer.size().height()},
-            Alignment::Center,
-            {fg::BrightWhite, bg::Black});
-    } else {
-        const auto titleRect = Rectangle{0, 0, buffer.size().width(), 1};
-        const auto contentRect = Rectangle{0, 1, buffer.size().width(), buffer.size().height() - 2};
-        const auto footerRect = Rectangle{0, buffer.size().height() - 1, buffer.size().width(), 1};
-        buffer.fill(titleRect, Char{" ", bg::Blue});
-        buffer.fill(footerRect, Char{" ", bg::BrightBlack});
-        buffer.drawText(
-            std::format(
-                "Frame Weaver  |  frames {:02d}/20  |  interval {:.2f}s  |  mode {}",
-                static_cast<int>(_frames.size()),
-                static_cast<double>(_frameDelay.count()) / 1000.0,
-                modeName()),
-            titleRect,
-            Alignment::CenterLeft,
-            Color{fg::BrightWhite, bg::Blue});
-        renderFrames(buffer, contentRect);
-        auto prompt = Text{buildPrompt(), footerRect, Alignment::CenterLeft};
-        buffer.drawText(prompt);
-    }
-    _terminal.updateScreen(buffer);
-    _terminal.flush();
+    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+    _buffer.fill(Char{" ", bg::Black});
+    const auto titleRect = Rectangle{0, 0, _buffer.size().width(), 1};
+    const auto contentRect = Rectangle{0, 1, _buffer.size().width(), _buffer.size().height() - 2};
+    const auto footerRect = Rectangle{0, _buffer.size().height() - 1, _buffer.size().width(), 1};
+    _buffer.fill(titleRect, Char{" ", bg::Blue});
+    _buffer.fill(footerRect, Char{" ", bg::BrightBlack});
+    _buffer.drawText(
+        std::format(
+            "Frame Weaver  |  frames {:02d}/20  |  interval {:.2f}s  |  mode {}",
+            static_cast<int>(_frames.size()),
+            static_cast<double>(_frameDelay.count()) / 1000.0,
+            modeName()),
+        titleRect,
+        Alignment::CenterLeft,
+        Color{fg::BrightWhite, bg::Blue});
+    renderFrames(contentRect);
+    auto prompt = Text{buildPrompt(), footerRect, Alignment::CenterLeft};
+    _buffer.drawText(prompt);
+    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 
-void FrameWeaverApp::renderFrames(Buffer &buffer, const Rectangle contentRect) const {
+void FrameWeaverApp::renderFrames(const Rectangle contentRect) {
     for (const auto &frame : _frames) {
         if (frame.customStyle != nullptr) {
-            buffer.drawFrame(
+            _buffer.drawFrame(
                 frameRectangle(frame, contentRect),
                 frame.customStyle,
                 CharCombinationStyle::commonBoxFrame(),
                 frame.color);
         } else {
-            buffer.drawFrame(frameRectangle(frame, contentRect), frame.style, frame.color);
+            _buffer.drawFrame(frameRectangle(frame, contentRect), frame.style, frame.color);
         }
     }
 }
@@ -173,22 +168,22 @@ auto FrameWeaverApp::frameRectangle(const FrameSpec frame, const Rectangle conte
 
 auto FrameWeaverApp::prismFrameStyle() -> const Char16StylePtr & {
     static const auto style = std::make_shared<Char16Style>(std::array<Char, 16>{
-        Char{"∙"},
-        Char{"╶"},
-        Char{"╷"},
-        Char{"←", fg::BrightRed, bg::Red},
-        Char{"╴"},
-        Char{"─"},
-        Char{"→", fg::BrightBlue, bg::Blue},
-        Char{"┬"},
-        Char{"╵"},
-        Char{"↓", fg::BrightRed, bg::Red},
-        Char{"│"},
-        Char{"├"},
-        Char{"↓", fg::BrightBlue, bg::Blue},
-        Char{"┴"},
-        Char{"┤"},
-        Char{"┼"},
+        Char{U'∙'},
+        Char{U'╶'},
+        Char{U'╷'},
+        Char{U'←', fg::BrightRed, bg::Red},
+        Char{U'╴'},
+        Char{U'─'},
+        Char{U'→', fg::BrightBlue, bg::Blue},
+        Char{U'┬'},
+        Char{U'╵'},
+        Char{U'↓', fg::BrightRed, bg::Red},
+        Char{U'│'},
+        Char{U'├'},
+        Char{U'↓', fg::BrightBlue, bg::Blue},
+        Char{U'┴'},
+        Char{U'┤'},
+        Char{U'┼'},
     });
     return style;
 }

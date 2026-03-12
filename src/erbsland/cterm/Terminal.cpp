@@ -3,379 +3,440 @@
 #include "Terminal.hpp"
 
 
-#include "impl/InputFactory.hpp"
+#include "Buffer.hpp"
+#include "BufferView.hpp"
 
 #include <algorithm>
 #include <cassert>
 #include <format>
-#include <iostream>
 
 
 namespace erbsland::cterm {
 
 
-Terminal::Terminal(const Size size) : _size{size} {
-    _input = impl::createInputForPlatform();
+Terminal::Terminal(const Size size) : _size{size.componentMin(cMaximumSize).componentMax(cMinimumSize)} {
+    _backend = Backend::createPlatformDefault();
+    _input.setBackend(_backend);
+    _lineBuffer.setBackend(_backend);
 }
 
 void Terminal::setSize(const Size size) noexcept {
-    const auto hasChanged = (size != _size);
-    _size = size;
-    if (hasChanged) {
-        _clearScreenAfterResize = true;
+    if (_size != size) {
+        _size = size.componentMin(cMaximumSize).componentMax(cMinimumSize);
+        _afterResize = true;
     }
+}
+
+void Terminal::setOutputMode(const OutputMode outputMode) noexcept {
+    if (_outputMode != outputMode) {
+        _outputMode = outputMode;
+        if (_outputMode == OutputMode::Text) {
+            setSizeDetectionEnabled(false);
+            setRefreshMode(RefreshMode::Keep);
+            setBackBufferEnabled(false);
+        }
+    }
+}
+
+auto Terminal::sizeDetectionEnabled() const noexcept -> bool {
+    return _sizeDetectionEnabled;
+}
+
+void Terminal::setSizeDetectionEnabled(const bool enabled) noexcept {
+    if (_outputMode == OutputMode::Text && enabled) {
+        return;
+    }
+    _sizeDetectionEnabled = enabled;
+}
+
+auto Terminal::lineBufferEnabled() const noexcept -> bool {
+    return _lineBuffer.cachingEnabled();
 }
 
 void Terminal::setLineBufferEnabled(const bool enabled) noexcept {
-    if (_lineBufferEnabled == enabled) {
+    if ((_outputMode == OutputMode::Text || !_backend->supportsColorCodes() || !_backend->supportsCursorCodes()) &&
+        enabled) {
         return;
     }
-    if (!enabled) {
-        flushLineBuffer();
+    _lineBuffer.setCachingEnabled(enabled);
+}
+
+auto Terminal::safeMarginEnabled() const noexcept -> bool {
+    return _safeMarginEnabled;
+}
+
+void Terminal::setSafeMarginEnabled(const bool enabled) noexcept {
+    _safeMarginEnabled = enabled;
+    if (_terminalSize == Size{}) {
+        return; // ignore if we have no detected terminal size.
     }
-    _lineBufferEnabled = enabled;
+    setSize(applySafeMargin(_terminalSize));
+}
+
+auto Terminal::backBufferEnabled() const noexcept -> bool {
+    return _backBufferEnabled;
 }
 
 void Terminal::setBackBufferEnabled(const bool enabled) noexcept {
+    if (_outputMode == OutputMode::Text && enabled) {
+        return;
+    }
+    if (_backBufferEnabled != enabled) {
+        _backBufferEnabled = enabled;
+        if (enabled) {
+            // enforce a full rebuild on the next update.
+            _backBuffer = {};
+            _afterResize = true;
+        } else {
+            _backBuffer.reset();
+        }
+    }
+}
+
+void Terminal::setBackend(BackendPtr backend) noexcept {
+    if (_backend != backend) {
+        if (backend == nullptr) {
+            _backend = Backend::createPlatformDefault();
+        } else {
+            _backend = std::move(backend);
+        }
+        _input.setBackend(_backend);
+        _lineBuffer.setBackend(_backend);
+        if (!_backend->supportsColorCodes() || !_backend->supportsCursorCodes()) {
+            _lineBuffer.setCachingEnabled(false);
+        }
+    }
+}
+
+auto Terminal::input() noexcept -> Input & {
+    return _input;
+}
+
+void Terminal::clearScreen() noexcept {
+    if (_outputMode == OutputMode::Text) {
+        return;
+    }
+    if (!_backend->supportsCursorCodes()) {
+        _backend->clearScreen();
+        return;
+    }
+    _lineBuffer.write("\x1b[2J\x1b[1;1H");
+    _lineBuffer.handleEmit();
+}
+auto Terminal::isAlternateScreenActive() const noexcept -> bool {
+    return _isAlternateScreenActive;
+}
+
+void Terminal::setAlternateScreen(const bool enabled) noexcept {
+    if (_isAlternateScreenActive == enabled) {
+        return;
+    }
+    if (_backend->supportsAlternateScreenBufferCodes()) {
+        if (enabled) {
+            _lineBuffer.write("\x1b[?1049h");
+        } else {
+            _lineBuffer.write("\x1b[?1049l");
+        }
+        _lineBuffer.handleEmit();
+        flush(); // make sure this is done before any rendering is started.
+    }
+    // always notify the backend about the alternate screen buffer switch.
+    _backend->setAlternateScreenBuffer(enabled);
+    _isAlternateScreenActive = enabled;
+}
+
+void Terminal::updateScreen(const ReadableBuffer &buffer, const UpdateSettings &settings) noexcept {
+    if (_outputMode == OutputMode::Text) {
+        write(buffer);
+        flush();
+        return;
+    }
+    if (settings.switchToAlternateBuffer() && !isAlternateScreenActive()) {
+        setAlternateScreen(true);
+    }
+    {
+        impl::LineBuffer::EmitLockGuard guard(_lineBuffer);
+        updateSizeTooSmallBuffer(settings);
+        refreshScreen();
+        setAutoWrap(false); // disable auto wrapping.
+        if (_sizeTooSmallBuffer) {
+            if (backBufferEnabled()) {
+                updateScreenWithBackBuffer(*_sizeTooSmallBuffer, UpdateSettings::defaultSettings());
+            } else {
+                updateScreenWithoutBackBuffer(*_sizeTooSmallBuffer, UpdateSettings::defaultSettings());
+            }
+        } else {
+            if (backBufferEnabled()) {
+                updateScreenWithBackBuffer(buffer, settings);
+            } else {
+                updateScreenWithoutBackBuffer(buffer, settings);
+            }
+        }
+        moveCursor(Position{0, _size.height() - 1}, MoveMode::Absolute);
+        setAutoWrap(true); // activate auto wrapping again.
+    }
+    flush();
+}
+
+void Terminal::moveHome() noexcept {
+    if (_outputMode == OutputMode::Text) {
+        return;
+    }
+    if (!_backend->supportsCursorCodes()) {
+        _backend->moveCursor(Position{0, 0}, MoveMode::Absolute);
+        return;
+    }
+    _lineBuffer.write("\x1b[H");
+    _lineBuffer.handleEmit();
+}
+
+void Terminal::moveCursor(const Position posOrDelta, const MoveMode mode) noexcept {
+    if (!_backend->supportsCursorCodes()) {
+        _backend->moveCursor(posOrDelta, mode);
+        return;
+    }
+    if (mode == MoveMode::Absolute) {
+        moveTo(posOrDelta);
+    } else {
+        if (posOrDelta.x() < 0) {
+            moveLeft(-posOrDelta.x());
+        } else if (posOrDelta.x() > 0) {
+            moveRight(posOrDelta.x());
+        }
+        if (posOrDelta.y() < 0) {
+            moveUp(-posOrDelta.y());
+        } else if (posOrDelta.y() > 0) {
+            moveDown(posOrDelta.y());
+        }
+    }
+}
+
+void Terminal::setAutoWrap(const bool enabled) noexcept {
+    if (_outputMode == OutputMode::Text || !_backend->supportsCursorCodes()) {
+        return;
+    }
     if (enabled) {
-        if (!_backBuffer.has_value()) {
-            _backBuffer = Buffer{Size{}};
-        }
+        _lineBuffer.write("\x1b[?7h");
+    } else {
+        _lineBuffer.write("\x1b[?7l");
+    }
+    _lineBuffer.handleEmit();
+}
+
+void Terminal::setCursorVisible(const bool visible) noexcept {
+    if (_outputMode == OutputMode::Text) {
         return;
     }
-    _backBuffer.reset();
-}
-
-void Terminal::appendClearSequence(std::string &output) noexcept {
-    output += "\x1b[2J\x1b[1;1H";
-}
-
-void Terminal::appendResizeClearSequence(std::string &output) noexcept {
-    output += "\x1b[2J\x1b[1;1H";
-}
-
-void Terminal::appendCursorHomeSequence(std::string &output) noexcept {
-    output += "\x1b[H";
-}
-
-void Terminal::appendCursorMoveSequence(std::string &output, const Position pos) noexcept {
-    output += std::format("\x1b[{};{}H", pos.y() + 1, pos.x() + 1);
-}
-
-void Terminal::appendDefaultColorSequence(std::string &output, Color &currentColor) const noexcept {
-    if (!colorEnabled()) {
-        return;
-    }
-    const auto defaultColor = Color::reset();
-    if (currentColor == defaultColor) {
-        return;
-    }
-    output += std::format("\x1b[{};{}m", defaultColor.fg().ansiCode(), defaultColor.bg().ansiCode());
-    currentColor = defaultColor;
-}
-
-void Terminal::appendCharacterOutput(std::string &output, const Char &character, Color &currentColor) const noexcept {
-    if (colorEnabled()) {
-        auto targetColor = character.color();
-        if (targetColor.fg() == Foreground::Inherited) {
-            targetColor.setFg(Foreground::Default);
-        }
-        if (targetColor.bg() == Background::Inherited) {
-            targetColor.setBg(Background::Default);
-        }
-        if (targetColor != currentColor) {
-            if (targetColor.fg() != currentColor.fg() && targetColor.bg() != currentColor.bg()) {
-                output += std::format("\x1b[{};{}m", targetColor.fg().ansiCode(), targetColor.bg().ansiCode());
-            } else if (targetColor.fg() != currentColor.fg()) {
-                output += std::format("\x1b[{}m", targetColor.fg().ansiCode());
-            } else if (targetColor.bg() != currentColor.bg()) {
-                output += std::format("\x1b[{}m", targetColor.bg().ansiCode());
-            }
-            currentColor = targetColor;
-        }
-    }
-    character.appendTo(output);
-}
-
-void Terminal::appendFullFrameOutput(
-    std::string &output, const Buffer &buffer, const Size terminalSize, const UpdateSettings &settings) const noexcept {
-
-    auto currentColor = _color;
-    appendDefaultColorSequence(output, currentColor);
-    if (isMinimumSizeOnly(terminalSize, settings)) {
-        appendCharacterOutput(output, getCropped(buffer, terminalSize, settings, Position{0, 0}), currentColor);
-        appendDefaultColorSequence(output, currentColor);
-        return;
-    }
-    const auto frameSize = renderedFrameSize(buffer, terminalSize, settings);
-    for (int y = 0; y < frameSize.height(); ++y) {
-        for (int x = 0; x < frameSize.width(); ++x) {
-            appendCharacterOutput(output, getCropped(buffer, terminalSize, settings, Position{x, y}), currentColor);
-        }
-        appendDefaultColorSequence(output, currentColor);
-        output.push_back('\n');
+    if (_backend->supportsCursorVisibilityCodes()) {
+        _lineBuffer.write(visible ? "\x1b[?25h" : "\x1b[?25l");
+    } else {
+        _backend->setCursorVisible(visible);
     }
 }
 
-void Terminal::appendDiffFrameOutput(
-    std::string &output,
-    const Buffer &previousFrame,
-    const Buffer &buffer,
-    const Size terminalSize,
-    const UpdateSettings &settings) const noexcept {
-
-    auto currentColor = _color;
-    for (int y = 0; y < previousFrame.size().height(); ++y) {
-        auto x = 0;
-        while (x < previousFrame.size().width()) {
-            const auto startPos = Position{x, y};
-            if (previousFrame.get(startPos).renderedEquals(
-                    getCropped(buffer, terminalSize, settings, startPos), colorEnabled())) {
-                ++x;
-                continue;
-            }
-            appendCursorMoveSequence(output, startPos);
-            appendDefaultColorSequence(output, currentColor);
-            while (x < previousFrame.size().width()) {
-                const auto pos = Position{x, y};
-                const auto &nextCharacter = getCropped(buffer, terminalSize, settings, pos);
-                if (previousFrame.get(pos).renderedEquals(nextCharacter, colorEnabled())) {
-                    break;
-                }
-                appendCharacterOutput(output, nextCharacter, currentColor);
-                ++x;
-            }
-        }
-    }
-    appendDefaultColorSequence(output, currentColor);
-    appendCursorMoveSequence(output, Position{0, previousFrame.size().height()});
+void Terminal::setColorEnabled(const bool enabled) noexcept {
+    setOutputMode(enabled ? OutputMode::FullControl : OutputMode::Text);
 }
 
-void Terminal::appendRefreshSequence(std::string &output, const bool forceFullClear) const noexcept {
-    if (!colorEnabled()) {
-        return;
-    }
-    if (forceFullClear) {
-        appendResizeClearSequence(output);
+void Terminal::refreshScreen() noexcept {
+    if (_afterResize) {
+        _afterResize = false;
+        clearScreen();
         return;
     }
     switch (refreshMode()) {
     case RefreshMode::Clear:
-        appendClearSequence(output);
+        clearScreen();
         break;
     case RefreshMode::Overwrite:
-        appendCursorHomeSequence(output);
+        moveHome();
         break;
-    case RefreshMode::Keep:
     default:
         break;
     }
 }
 
-void Terminal::emitBufferedOutput(const std::string_view text) noexcept {
-    if (!_lineBufferEnabled) {
-        std::cout << text;
-        return;
-    }
-    _lineBuffer.append(text);
-    while (true) {
-        const auto newlinePos = _lineBuffer.find('\n');
-        if (newlinePos == std::string::npos) {
-            break;
+auto Terminal::updateScreenWithBackBuffer(const ReadableBuffer &buffer, const UpdateSettings &settings) -> void {
+    setAutoWrap(false); // disable auto wrapping.
+    if (_backBuffer == nullptr) {
+        updateScreenAndCreateNewBackBuffer(buffer, settings);
+    } else if (_backBuffer->size() != _size) {
+        updateScreenAndResizeBackBuffer(buffer, settings);
+    } else {
+        BufferConstRefView view(buffer, _size);
+        settings.applyTo(view);
+        const auto differences = _backBuffer->countDifferencesTo(view);
+        const auto percent = differences * 100U / static_cast<std::size_t>(buffer.size().area());
+        if (percent <= 20) {
+            updateScreenPartialWithBackBuffer(view);
+        } else {
+            writeImpl(view, true);
+            _backBuffer->setAndResizeFrom(view);
         }
-        std::cout << _lineBuffer.substr(0, newlinePos + 1);
-        _lineBuffer.erase(0, newlinePos + 1);
     }
 }
 
-void Terminal::emitDirectOutput(const std::string_view text, const bool flushConsole) noexcept {
-    flushLineBuffer();
-    std::cout << text;
-    if (flushConsole) {
-        std::cout.flush();
-    }
+auto Terminal::updateScreenAndCreateNewBackBuffer(const ReadableBuffer &buffer, const UpdateSettings &settings)
+    -> void {
+    BufferConstRefView view(buffer, _size);
+    settings.applyTo(view);
+    writeImpl(view, true);
+    _backBuffer = view.clone();
 }
 
-void Terminal::flushLineBuffer() noexcept {
-    if (_lineBuffer.empty()) {
-        return;
+auto Terminal::updateScreenAndResizeBackBuffer(const ReadableBuffer &buffer, const UpdateSettings &settings) -> void {
+    if (_backBuffer == nullptr) {
+        throw std::runtime_error("Back buffer is not initialized.");
     }
-    std::cout << _lineBuffer;
-    _lineBuffer.clear();
+    BufferConstRefView view(buffer, _size);
+    settings.applyTo(view);
+    writeImpl(view, true);
+    _backBuffer->setAndResizeFrom(view);
 }
 
-void Terminal::invalidateBackBuffer() noexcept {
-    if (_backBuffer.has_value()) {
-        _backBuffer = Buffer{Size{}};
+auto Terminal::updateScreenPartialWithBackBuffer(const ReadableBuffer &view) -> void {
+    if (_backBuffer == nullptr) {
+        throw std::runtime_error("Back buffer is not initialized.");
     }
-}
-
-auto Terminal::isMinimumSizeOnly(const Size terminalSize, const UpdateSettings &settings) noexcept -> bool {
-    return !settings.minimumSize().fitsInto(terminalSize);
-}
-
-
-auto Terminal::renderedFrameSize(const Buffer &buffer, const Size terminalSize, const UpdateSettings &settings) noexcept
-    -> Size {
-
-    if (isMinimumSizeOnly(terminalSize, settings)) {
-        return {1, 1};
-    }
-    const auto visibleWidth = std::min(buffer.size().width(), std::max(terminalSize.width() - 1, 0));
-    const auto visibleHeight = std::min(buffer.size().height(), std::max(terminalSize.height() - 1, 0));
-    return {visibleWidth, visibleHeight};
-}
-
-
-auto Terminal::getCropped(
-    const Buffer &buffer, const Size terminalSize, const UpdateSettings &settings, const Position pos) -> const Char & {
-
-    if (isMinimumSizeOnly(terminalSize, settings)) {
-        return settings.minimumSizeMark();
-    }
-    const auto frameSize = renderedFrameSize(buffer, terminalSize, settings);
-    const auto isCroppedOnRight = frameSize.width() < buffer.size().width();
-    const auto isCroppedAtBottom = frameSize.height() < buffer.size().height();
-    const auto isLastVisibleColumn = (pos.x() == frameSize.width() - 1);
-    const auto isLastVisibleRow = (pos.y() == frameSize.height() - 1);
-    if (settings.showCropMarks() && isCroppedAtBottom && isLastVisibleRow) {
-        return settings.cropMarkBottom();
-    }
-    if (settings.showCropMarks() && isCroppedOnRight && isLastVisibleColumn) {
-        return settings.cropMarkRight();
-    }
-    return buffer.get(pos);
-}
-
-
-void Terminal::updateBackBuffer(
-    const Buffer &buffer, const Size terminalSize, const UpdateSettings &settings) noexcept {
-    if (!_backBuffer.has_value()) {
-        return;
-    }
-    const auto frameSize = renderedFrameSize(buffer, terminalSize, settings);
-    if (_backBuffer->size() != frameSize) {
-        *_backBuffer = Buffer{frameSize};
-    }
-    frameSize.forEach(
-        [&](const Position pos) { _backBuffer->set(pos, getCropped(buffer, terminalSize, settings, pos)); });
-}
-
-
-auto Terminal::changedCharacterCount(
-    const Buffer &previousFrame,
-    const Buffer &buffer,
-    const Size terminalSize,
-    const UpdateSettings &settings) const noexcept -> int {
-
-    const auto frameSize = renderedFrameSize(buffer, terminalSize, settings);
-    if (previousFrame.size() != frameSize) {
-        return frameSize.area();
-    }
-    auto result = 0;
-    frameSize.forEach([&](const Position pos) {
-        if (!previousFrame.get(pos).renderedEquals(getCropped(buffer, terminalSize, settings, pos), colorEnabled())) {
-            ++result;
+    impl::LineBuffer::EmitLockGuard guard(_lineBuffer);
+    auto lastWriteCursor = Position{0, 0};
+    view.size().forEach([&](const Position pos) -> void {
+        const auto &newCharacter = view.get(pos);
+        const auto &oldCharacter = _backBuffer->get(pos);
+        if (newCharacter == oldCharacter) {
+            return;
+        }
+        if (lastWriteCursor != pos) {
+            moveTo(pos);
+            lastWriteCursor = pos;
+        }
+        write(newCharacter);
+        _backBuffer->set(pos, newCharacter);
+        lastWriteCursor += Position{newCharacter.displayWidth(), 0};
+        if (newCharacter.displayWidth() == 2) {
+            // if we have a 2-width character, copy the second position as well (it should be empty).
+            const auto secondPosition = pos + Position{1, 0};
+            _backBuffer->set(secondPosition, view.get(secondPosition));
         }
     });
-    return result;
+}
+
+void Terminal::moveTo(const Position pos) noexcept {
+    if (_outputMode == OutputMode::Text) {
+        return;
+    }
+    if (!_backend->supportsCursorCodes()) {
+        _backend->moveCursor(pos, MoveMode::Absolute);
+        return;
+    }
+    _lineBuffer.write(std::format("\x1b[{};{}H", pos.y() + 1, pos.x() + 1));
+    _lineBuffer.handleEmit();
+}
+
+auto Terminal::updateScreenWithoutBackBuffer(const ReadableBuffer &buffer, const UpdateSettings &settings) -> void {
+    BufferConstRefView view(buffer, _size);
+    settings.applyTo(view);
+    writeImpl(view, true); // Output the view, line by line.
+}
+
+void Terminal::updateSizeTooSmallBuffer(const UpdateSettings &settings) noexcept {
+    if (!settings.minimumSize().fitsInto(_size)) {
+        if (_sizeTooSmallBuffer == nullptr) {
+            _sizeTooSmallBuffer = std::make_unique<Buffer>(_size);
+        } else {
+            _sizeTooSmallBuffer->resize(_size);
+        }
+        _sizeTooSmallBuffer->fill(settings.minimumSizeBackground());
+        if (!settings.minimumSizeMessage().empty()) {
+            _sizeTooSmallBuffer->drawText(
+                settings.minimumSizeMessage(), _sizeTooSmallBuffer->rect(), Alignment::Center);
+        }
+    } else {
+        _sizeTooSmallBuffer = {};
+    }
+}
+
+void Terminal::writeImpl(const ReadableBuffer &buffer, bool withRowMove) noexcept {
+    for (int y = 0; y < buffer.size().height(); ++y) {
+        if (withRowMove && y != 0) {
+            moveTo(Position{0, y});
+        }
+        for (int x = 0; x < buffer.size().width(); ++x) {
+            auto &character = buffer.get(Position{x, y});
+            setColor(character.color().fg(), character.color().bg());
+            _lineBuffer.write(character);
+        }
+        if (!withRowMove) {
+            setDefaultColor();
+            _lineBuffer.write("\n");
+        }
+    }
+}
+
+auto Terminal::applySafeMargin(const Size terminalSize) const noexcept -> Size {
+    if (!_safeMarginEnabled) {
+        return terminalSize;
+    }
+    return terminalSize - Size{1, 1};
 }
 
 void Terminal::initializeScreen() noexcept {
-    initializePlatform();
-    invalidateBackBuffer();
-    auto output = std::string{};
-    if (colorEnabled()) {
-        switch (refreshMode()) {
-        case RefreshMode::Clear:
-        case RefreshMode::Overwrite:
-            appendClearSequence(output);
-            break;
-        case RefreshMode::Keep:
-        default:
-            break;
-        }
-    }
-    if (!output.empty()) {
-        emitDirectOutput(output, true);
-        _color = Color::reset();
-    }
-    auto initialSize = _size;
-    if (_sizeDetectionEnabled) {
-        if (const auto detectedSize = detectScreenSize(); detectedSize.has_value()) {
-            initialSize = *detectedSize;
-        }
-    }
-    submitScreenSize(initialSize, false);
-}
-
-void Terminal::clearScreen() noexcept {
-    const auto forceFullClear = _clearScreenAfterResize;
-    _clearScreenAfterResize = false;
-    auto output = std::string{};
-    appendRefreshSequence(output, forceFullClear);
-    if (!output.empty()) {
-        emitDirectOutput(output, true);
-        _color = Color::reset();
-        invalidateBackBuffer();
-    }
+    _backend->initializePlatform();
+    _color = Color::reset();
+    testScreenSize();
+    setCursorVisible(false);
+    flush();
 }
 
 void Terminal::testScreenSize() noexcept {
     if (!_sizeDetectionEnabled) {
         return;
     }
-    const auto detectedSize = detectScreenSize();
-    if (!detectedSize.has_value() || *detectedSize == _size) {
-        return;
+    if (const auto detectedSize = _backend->detectScreenSize(); detectedSize.has_value()) {
+        _terminalSize = *detectedSize;
+        setSize(applySafeMargin(_terminalSize));
     }
-    submitScreenSize(*detectedSize, true);
 }
 
 void Terminal::restoreScreen() noexcept {
-    auto output = std::string{};
-    if (colorEnabled()) {
-        auto currentColor = _color;
-        appendDefaultColorSequence(output, currentColor);
-        _color = Color::reset();
-    }
-    if (!output.empty()) {
-        emitDirectOutput(output, true);
-    }
-    restorePlatform();
-    invalidateBackBuffer();
+    setDefaultColor();
+    setCursorVisible(true);
+    flush();
+    _lineBuffer.shutdown();
+    _backBuffer = {}; // free the back buffer resources
+    _backend->restorePlatform();
 }
 
 void Terminal::write(const Char &character) noexcept {
     setColor(character.color().fg(), character.color().bg());
-    auto buffer = std::string{};
-    buffer.reserve(character.byteCount());
-    character.appendTo(buffer);
-    write(buffer);
+    _lineBuffer.write(character);
+    _lineBuffer.handleEmit();
 }
 
 void Terminal::write(const String &str) noexcept {
     for (const auto &character : str) {
-        write(character);
+        setColor(character.color().fg(), character.color().bg());
+        _lineBuffer.write(character);
     }
+    _lineBuffer.handleEmit();
 }
 
 void Terminal::write(const std::string_view text) noexcept {
-    emitBufferedOutput(text);
+    _lineBuffer.write(text);
+    _lineBuffer.handleEmit();
 }
 
-void Terminal::write(const Buffer &buffer) noexcept {
-    for (int y = 0; y < buffer.size().height(); ++y) {
-        for (int x = 0; x < buffer.size().width(); ++x) {
-            write(buffer.get(Position{x, y}));
-        }
-        setDefaultColor();
-        lineBreak();
+void Terminal::write(const ReadableBuffer &buffer) noexcept {
+    {
+        impl::LineBuffer::EmitLockGuard emitLock{_lineBuffer};
+        writeImpl(buffer, false);
     }
+    _lineBuffer.handleEmit();
 }
 
-void Terminal::lineBreak() noexcept {
-    emitBufferedOutput("\n");
+void Terminal::writeLineBreak() noexcept {
+    _lineBuffer.write("\n");
+    _lineBuffer.handleEmit();
 }
 
 auto Terminal::color() const noexcept -> Color {
@@ -383,28 +444,38 @@ auto Terminal::color() const noexcept -> Color {
 }
 
 void Terminal::setForeground(Foreground color) noexcept {
-    if (!colorEnabled()) {
+    if (_outputMode == OutputMode::Text) {
         return;
     }
     if (color == Foreground::Inherited) {
         color = Foreground::Default;
     }
     if (color != _color.fg()) {
-        emitBufferedOutput(std::format("\x1b[{}m", color.ansiCode()));
         _color.setFg(color);
+        if (_backend->supportsColorCodes()) {
+            _lineBuffer.write(std::format("\x1b[{}m", color.ansiCode()));
+            _lineBuffer.handleEmit();
+        } else {
+            _backend->emitColor(_color);
+        }
     }
 }
 
 void Terminal::setBackground(Background color) noexcept {
-    if (!colorEnabled()) {
+    if (_outputMode == OutputMode::Text) {
         return;
     }
     if (color == Background::Inherited) {
         color = Background::Default;
     }
     if (color != _color.bg()) {
-        emitBufferedOutput(std::format("\x1b[{}m", color.ansiCode()));
         _color.setBg(color);
+        if (_backend->supportsColorCodes()) {
+            _lineBuffer.write(std::format("\x1b[{}m", color.ansiCode()));
+            _lineBuffer.handleEmit();
+        } else {
+            _backend->emitColor(_color);
+        }
     }
 }
 
@@ -413,7 +484,7 @@ void Terminal::setColor(const Foreground foregroundColor, const Background backg
 }
 
 void Terminal::setColor(Color color) noexcept {
-    if (!colorEnabled()) {
+    if (_outputMode == OutputMode::Text) {
         return;
     }
     if (color.fg() == Foreground::Inherited) {
@@ -425,84 +496,76 @@ void Terminal::setColor(Color color) noexcept {
     if (color == _color) {
         return;
     }
-    if (color.fg() != _color.fg() && color.bg() != _color.bg()) {
-        emitBufferedOutput(std::format("\x1b[{};{}m", color.fg().ansiCode(), color.bg().ansiCode()));
-    } else if (color.fg() != _color.fg()) {
-        emitBufferedOutput(std::format("\x1b[{}m", color.fg().ansiCode()));
-    } else if (color.bg() != _color.bg()) {
-        emitBufferedOutput(std::format("\x1b[{}m", color.bg().ansiCode()));
+    if (_backend->supportsColorCodes()) {
+        if (color.fg() != _color.fg() && color.bg() != _color.bg()) {
+            _lineBuffer.write(std::format("\x1b[{};{}m", color.fg().ansiCode(), color.bg().ansiCode()));
+        } else if (color.fg() != _color.fg()) {
+            _lineBuffer.write(std::format("\x1b[{}m", color.fg().ansiCode()));
+        } else if (color.bg() != _color.bg()) {
+            _lineBuffer.write(std::format("\x1b[{}m", color.bg().ansiCode()));
+        }
+        _lineBuffer.handleEmit();
+    } else {
+        _backend->emitColor(color);
     }
     _color = color;
 }
 
 void Terminal::setDefaultColor() noexcept {
-    setColor(Color{});
+    setColor(Color::reset());
 }
 
 void Terminal::moveLeft(int count) {
-    if (!colorEnabled()) {
+    if (_outputMode == OutputMode::Text) {
         return;
     }
-    write(std::format("\x1b[{}D", count));
+    if (!_backend->supportsCursorCodes()) {
+        _backend->moveCursor(Position{-count, 0}, MoveMode::Relative);
+        return;
+    }
+    _lineBuffer.write(std::format("\x1b[{}D", count));
+    _lineBuffer.handleEmit();
+}
+
+void Terminal::moveRight(int count) {
+    if (_outputMode == OutputMode::Text) {
+        return;
+    }
+    if (!_backend->supportsCursorCodes()) {
+        _backend->moveCursor(Position{count, 0}, MoveMode::Relative);
+        return;
+    }
+    _lineBuffer.write(std::format("\x1b[{}C", count));
+    _lineBuffer.handleEmit();
+}
+
+void Terminal::moveUp(int count) {
+    if (_outputMode == OutputMode::Text) {
+        return;
+    }
+    if (!_backend->supportsCursorCodes()) {
+        _backend->moveCursor(Position{0, -count}, MoveMode::Relative);
+        return;
+    }
+    _lineBuffer.write(std::format("\x1b[{}A", count));
+    _lineBuffer.handleEmit();
+}
+
+void Terminal::moveDown(int count) {
+    if (_outputMode == OutputMode::Text) {
+        return;
+    }
+    if (!_backend->supportsCursorCodes()) {
+        _backend->moveCursor(Position{0, count}, MoveMode::Relative);
+        return;
+    }
+    _lineBuffer.write(std::format("\x1b[{}B", count));
+    _lineBuffer.handleEmit();
 }
 
 void Terminal::flush() noexcept {
-    flushLineBuffer();
-    std::cout.flush();
+    _lineBuffer.handleEmit(true); // force-emit the line buffer.
+    _backend->emitFlush();        // flush the output to the terminal.
 }
-
-void Terminal::updateScreen(const Buffer &buffer, const UpdateSettings &settings) noexcept {
-    const auto forceFullClear = _clearScreenAfterResize;
-    _clearScreenAfterResize = false;
-    const auto terminalSize = size();
-    const auto frameSize = renderedFrameSize(buffer, terminalSize, settings);
-    auto output = std::string{};
-    const auto useSmartBackBuffer = colorEnabled() && refreshMode() == RefreshMode::Overwrite && backBufferEnabled();
-    if (useSmartBackBuffer) {
-        const auto &previousFrame = *_backBuffer;
-        if (forceFullClear || previousFrame.size() != frameSize) {
-            if (forceFullClear) {
-                appendResizeClearSequence(output);
-            } else {
-                appendClearSequence(output);
-            }
-            appendFullFrameOutput(output, buffer, terminalSize, settings);
-        } else {
-            const auto changedCount = changedCharacterCount(previousFrame, buffer, terminalSize, settings);
-            const auto totalCharacters = frameSize.area();
-            if (changedCount > 0) {
-                if (changedCount * 5 >= totalCharacters) {
-                    appendCursorHomeSequence(output);
-                    appendFullFrameOutput(output, buffer, terminalSize, settings);
-                } else {
-                    appendCursorHomeSequence(output);
-                    appendDiffFrameOutput(output, previousFrame, buffer, terminalSize, settings);
-                }
-            }
-        }
-    } else {
-        appendRefreshSequence(output, forceFullClear);
-        appendFullFrameOutput(output, buffer, terminalSize, settings);
-    }
-    if (!output.empty()) {
-        emitDirectOutput(output);
-        if (colorEnabled()) {
-            _color = Color::reset();
-        }
-    }
-    updateBackBuffer(buffer, terminalSize, settings);
-}
-
-void Terminal::submitScreenSize(const Size size, const bool fromTestScreenSize) noexcept {
-    const auto hasChanged = (size != _size);
-    _size = size;
-    if (fromTestScreenSize && hasChanged) {
-        _clearScreenAfterResize = true;
-    }
-    if (_screenSizeChangedCallback) {
-        _screenSizeChangedCallback(size);
-    }
-}
-
 
 }

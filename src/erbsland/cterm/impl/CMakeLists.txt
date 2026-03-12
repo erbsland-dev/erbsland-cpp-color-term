@@ -1,8 +1,19 @@
 cmake_minimum_required(VERSION 3.28)
 
 target_sources(erbsland-color-term PRIVATE
+        BitmapPainter.cpp
+        BitmapPainter.hpp
         CommonBoxFrameStyle.cpp
         FontDefaultAscii.cpp
+        FramePainter.cpp
+        FramePainter.hpp
+        InputBackend.cpp
+        InputBackend.hpp
+        LineBuffer.hpp
+        StringWrapper.cpp
+        StringWrapper.hpp
+        TextPainter.cpp
+        TextPainter.hpp
         TextUtil.hpp
         TypeTraits.hpp
         U8Buffer.hpp
@@ -13,18 +24,12 @@ target_sources(erbsland-color-term PRIVATE
 
 if (WIN32)
     target_sources(erbsland-color-term PRIVATE
-            InputWin32.cpp
-            InputWin32.hpp
-            TerminalWin32.cpp
+            WindowsBackend.cpp
+            WindowsBackend.hpp
     )
 else ()
     target_sources(erbsland-color-term PRIVATE
-            InputPosix.cpp
-            InputPosix.hpp
-            PosixKeyInputSession.cpp
-            PosixKeyInputSession.hpp
-            PosixKeyInputSessionStorage.cpp
-            PosixKeyInputSessionStorage.hpp
-            TerminalPosix.cpp
+            PosixBackend.cpp
+            PosixBackend.hpp
     )
 endif ()

@@ -8,150 +8,129 @@
 #include <algorithm>
 #include <cmath>
 #include <format>
+#include <string>
 
 
 namespace demo::updatescreenmodes {
 
 
 void UpdateScreenModesApp::run() {
+    _updateSettings.setMinimumSize(Size{70, 18});
+    _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
+    _updateSettings.setMinimumSizeMessage(
+        String{
+            "Resize the terminal to at least 70x18 cells for the update-screen demo.",
+            Color{fg::BrightWhite, bg::Black}});
     auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
-    applyMode();
-    _lastTick = std::chrono::steady_clock::now();
+    applyTerminalSettings();
     while (!_quitRequested) {
         const auto key = _terminal.input().read(std::chrono::milliseconds{70});
         if (key.valid()) {
             handleKey(key);
         }
-        const auto now = std::chrono::steady_clock::now();
-        updateAnimation(std::chrono::duration_cast<std::chrono::milliseconds>(now - _lastTick));
-        _lastTick = now;
+        updateAnimation();
+        applyTerminalSettings();
         renderFrame();
     }
 }
 
 
 auto UpdateScreenModesApp::canvasSize() const noexcept -> Size {
-    return _terminal.size() - Size{1, 1};
+    return _terminal.size();
 }
 
 
 void UpdateScreenModesApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, 'q'}) {
+    if (matchesCharacterKey(key, 'q')) {
         _quitRequested = true;
-    } else if (key == Key{Key::Left}) {
-        advanceMode(-1);
-    } else if (key == Key{Key::Right} || key == Key{Key::Space} || key == Key{Key::Character, 'n'}) {
-        advanceMode(1);
+    } else if (matchesCharacterKey(key, 'o')) {
+        _state.toggleOverwriteMode();
+    } else if (matchesCharacterKey(key, 'l')) {
+        _state.toggleLineBuffer();
+    } else if (matchesCharacterKey(key, 's')) {
+        _state.toggleSafeMargin();
+    } else if (matchesCharacterKey(key, 'b')) {
+        _state.toggleBackBuffer();
     }
 }
 
 
-void UpdateScreenModesApp::updateAnimation(const std::chrono::milliseconds elapsed) noexcept {
-    static constexpr auto cModeCycle = std::chrono::seconds{6};
-
-    _modeCycleAccumulator += elapsed;
-    while (_modeCycleAccumulator >= cModeCycle) {
-        _modeCycleAccumulator -= cModeCycle;
-        advanceMode(1);
-    }
+void UpdateScreenModesApp::updateAnimation() noexcept {
     ++_animationStep;
 }
 
 
-void UpdateScreenModesApp::advanceMode(const int delta) noexcept {
-    const auto modeCount = 3;
-    auto index = static_cast<int>(_mode);
-    index = (index + delta) % modeCount;
-    if (index < 0) {
-        index += modeCount;
-    }
-    _mode = static_cast<Mode>(index);
-    _modeCycleAccumulator = std::chrono::milliseconds{};
-    applyMode();
-}
-
-
-void UpdateScreenModesApp::applyMode() noexcept {
-    switch (_mode) {
-    case Mode::Clear:
+void UpdateScreenModesApp::applyTerminalSettings() noexcept {
+    if (_state.overwriteModeEnabled()) {
+        _terminal.setRefreshMode(Terminal::RefreshMode::Overwrite);
+    } else {
         _terminal.setRefreshMode(Terminal::RefreshMode::Clear);
-        _terminal.setBackBufferEnabled(false);
-        break;
-    case Mode::Overwrite:
-        _terminal.setRefreshMode(Terminal::RefreshMode::Overwrite);
-        _terminal.setBackBufferEnabled(false);
-        break;
-    case Mode::OverwriteWithBackBuffer:
-        _terminal.setRefreshMode(Terminal::RefreshMode::Overwrite);
-        _terminal.setBackBufferEnabled(true);
-        break;
     }
+    _terminal.setLineBufferEnabled(_state.lineBufferEnabled());
+    _terminal.setSafeMarginEnabled(_state.safeMarginEnabled());
+    _terminal.setBackBufferEnabled(_state.backBufferActive());
 }
 
 
 void UpdateScreenModesApp::renderFrame() {
     _terminal.testScreenSize();
-    auto buffer = Buffer{canvasSize()};
-    buffer.fill(Char{" ", bg::Black});
-    if (buffer.size().width() < 70 || buffer.size().height() < 18) {
-        buffer.drawText(
-            "Resize the terminal to at least 70x18 cells for the update-screen demo.",
-            Rectangle{0, 0, buffer.size().width(), buffer.size().height()},
-            Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
-    } else {
-        const auto outerRect = Rectangle{0, 0, buffer.size().width(), buffer.size().height()};
-        const auto titleRect = Rectangle{2, 1, buffer.size().width() - 4, 1};
-        const auto contentRect = Rectangle{2, 3, buffer.size().width() - 4, buffer.size().height() - 7};
-        const auto footerRect = Rectangle{2, buffer.size().height() - 3, buffer.size().width() - 4, 1};
-        buffer.drawFrame(outerRect, FrameStyle::LightWithRoundedCorners);
-        buffer.drawText(
-            std::format("updateScreen Demo  |  mode: {}", modeTitle()),
-            titleRect,
-            Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
-        drawScene(buffer, contentRect);
-        drawFooter(buffer, footerRect);
-    }
-    _terminal.updateScreen(buffer);
-    _terminal.flush();
+    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+    _buffer.fill(Char{" ", bg::Black});
+    const auto outerRect = Rectangle{0, 0, _buffer.size().width(), _buffer.size().height()};
+    const auto titleRect = Rectangle{2, 1, _buffer.size().width() - 4, 1};
+    const auto contentRect = Rectangle{2, 3, _buffer.size().width() - 4, _buffer.size().height() - 7};
+    const auto footerRect = Rectangle{2, _buffer.size().height() - 3, _buffer.size().width() - 4, 1};
+    _buffer.drawFrame(outerRect, FrameStyle::LightWithRoundedCorners);
+    _buffer.drawText(
+        std::format("Screen Update Demo  |  refresh mode: {}", _state.modeTitle()),
+        titleRect,
+        Alignment::Center,
+        Color{fg::BrightWhite, bg::Black});
+    drawScene(contentRect);
+    drawFooter(footerRect);
+    const auto updateScreenStarted = std::chrono::steady_clock::now();
+    _terminal.updateScreen(_buffer, _updateSettings);
+    _flushSpeedTracker.addSample(
+        std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() - updateScreenStarted));
 }
 
 
-void UpdateScreenModesApp::drawScene(Buffer &buffer, const Rectangle contentRect) const noexcept {
+void UpdateScreenModesApp::drawScene(const Rectangle contentRect) noexcept {
     const auto infoWidth = std::clamp(contentRect.width() / 3, 24, 30);
     const auto infoRect = Rectangle{contentRect.x1(), contentRect.y1(), infoWidth, contentRect.height()};
     const auto arenaRect =
         Rectangle{infoRect.x2() + 2, contentRect.y1(), contentRect.x2() - infoRect.x2() - 2, contentRect.height()};
-    buffer.drawFilledFrame(infoRect, FrameStyle::Light, Char{" ", bg::BrightBlack});
-    buffer.drawFilledFrame(arenaRect, FrameStyle::Light, Char{" ", bg::Black});
+    _buffer.drawFilledFrame(infoRect, FrameStyle::Light, Char{" ", bg::BrightBlack});
+    _buffer.drawFilledFrame(arenaRect, FrameStyle::Light, Char{" ", bg::Black});
 
-    buffer.drawText(
-        "Refresh Mode",
-        Rectangle{infoRect.x1() + 1, infoRect.y1() + 1, infoRect.width() - 2, 1},
-        Alignment::Center);
-    buffer.drawText(
-        modeTitle(),
-        Rectangle{infoRect.x1() + 1, infoRect.y1() + 3, infoRect.width() - 2, 2},
+    _buffer.drawText(
+        "Refresh Mode", Rectangle{infoRect.x1() + 1, infoRect.y1() + 1, infoRect.width() - 2, 1}, Alignment::Center);
+    _buffer.drawText(
+        _state.modeTitle(),
+        Rectangle{infoRect.x1() + 1, infoRect.y1() + 3, infoRect.width() - 2, 1},
         Alignment::Center,
         Color{fg::BrightYellow, bg::BrightBlack});
-    buffer.drawText(
-        modeDescription(),
-        Rectangle{infoRect.x1() + 1, infoRect.y1() + 6, infoRect.width() - 2, infoRect.height() - 10},
-        Alignment::TopLeft,
-        Color{fg::BrightWhite, bg::BrightBlack});
-    buffer.drawText(
-        "The scene on the right stays mostly static.\nOnly the spark and the short trail move.\nThat makes the back "
-        "buffer path useful because it can patch just a handful of cells.",
-        Rectangle{infoRect.x1() + 1, infoRect.y2() - 4, infoRect.width() - 2, 3},
-        Alignment::TopLeft,
-        Color{fg::White, bg::BrightBlack});
+
+    auto statusText = String{};
+    appendTimingLine(statusText, "Last Update", _flushSpeedTracker.lastMilliseconds());
+    appendTimingLine(statusText, "Average Update", _flushSpeedTracker.averageMilliseconds());
+    appendStateLine(statusText, "Overwrite Mode", _state.overwriteModeEnabled());
+    appendStateLine(statusText, "Line Buffer", _state.lineBufferEnabled());
+    appendStateLine(statusText, "Back Buffer", _state.backBufferEnabled());
+    appendStateLine(statusText, "Safe Margins", _state.safeMarginEnabled());
+    _buffer.drawText(
+        Text{
+            statusText,
+            Rectangle{infoRect.x1() + 1, infoRect.y1() + 4, infoRect.width() - 2, infoRect.height() - 5},
+            Alignment::TopLeft});
 
     const auto labelRect = Rectangle{arenaRect.x1() + 2, arenaRect.y1() + 1, arenaRect.width() - 4, 1};
-    buffer.drawText(
+    _buffer.drawText(
         std::format(
-            "Sparse animation field  |  frame {:05d}  |  mode switches every 6s",
-            static_cast<int>(_animationStep)),
+            "Sparse animation field  |  frame {:05d}  |  line buffer: {}  |  back buffer: {}",
+            static_cast<int>(_animationStep),
+            _state.lineBufferEnabled() ? "on" : "off",
+            _state.backBufferActive() ? "active" : "inactive"),
         labelRect,
         Alignment::Center,
         Color{fg::BrightCyan, bg::Black});
@@ -163,12 +142,12 @@ void UpdateScreenModesApp::drawScene(Buffer &buffer, const Rectangle contentRect
     for (int y = waveRect.y1(); y < waveRect.y2(); ++y) {
         for (int x = waveRect.x1(); x < waveRect.x2(); ++x) {
             if ((x + y) % 4 == 0) {
-                buffer.set(Position{x, y}, Char{".", fg::BrightBlack, bg::Black});
+                _buffer.set(Position{x, y}, Char{U'.', fg::BrightBlack, bg::Black});
             }
         }
     }
     for (int x = waveRect.x1(); x < waveRect.x2(); ++x) {
-        buffer.set(Position{x, centerY}, Char{"-", fg::BrightBlack, bg::Black});
+        _buffer.set(Position{x, centerY}, Char{U'-', fg::BrightBlack, bg::Black});
     }
     for (auto trail = 0; trail < 6; ++trail) {
         if (_animationStep < static_cast<std::size_t>(trail * 2)) {
@@ -183,59 +162,76 @@ void UpdateScreenModesApp::drawScene(Buffer &buffer, const Rectangle contentRect
         const auto color = (trail == 0) ? Color{fg::BrightYellow, bg::Black} : Color{fg::BrightBlue, bg::Black};
         const auto glyph = (trail == 0) ? "@" : "*";
         if (waveRect.size().contains(pos - waveRect.topLeft())) {
-            buffer.set(pos, Char{glyph, color});
+            _buffer.set(pos, Char{glyph, color});
         }
     }
 }
 
 
-void UpdateScreenModesApp::drawFooter(Buffer &buffer, const Rectangle footerRect) const {
-    buffer.fill(footerRect, Char{" ", bg::BrightBlack});
-    auto footer = String{};
-    footer.append(
+void UpdateScreenModesApp::drawFooter(const Rectangle footerRect) {
+    _buffer.fill(footerRect, Char{" ", bg::BrightBlack});
+
+    auto line = String{};
+    line.append(
         bg::BrightBlack,
+        fg::BrightCyan,
+        "[O]",
+        fg::BrightWhite,
+        " overwrite  ",
         fg::BrightYellow,
-        "[Left][Right]",
+        "[L]",
         fg::BrightWhite,
-        " switch mode  ",
-        fg::BrightGreen,
-        "[Space]",
-        fg::BrightWhite,
-        " next mode  ",
+        " line buf  ",
         fg::BrightMagenta,
+        "[B]",
+        fg::BrightWhite,
+        " back buf  ",
+        fg::BrightBlue,
+        "[S]",
+        fg::BrightWhite,
+        " margins  ",
+        fg::BrightGreen,
         "[Q]",
         fg::BrightWhite,
         " quit");
-    buffer.drawText(Text{footer, footerRect, Alignment::CenterLeft});
+    _buffer.drawText(
+        Text{line, Rectangle{footerRect.x1(), footerRect.y1(), footerRect.width(), 1}, Alignment::CenterLeft});
 }
 
 
-auto UpdateScreenModesApp::modeTitle() const noexcept -> std::string_view {
-    switch (_mode) {
-    case Mode::Clear:
-        return "Clear";
-    case Mode::Overwrite:
-        return "Overwrite";
-    case Mode::OverwriteWithBackBuffer:
-    default:
-        return "Overwrite + Back Buffer";
+void UpdateScreenModesApp::appendStateLine(String &text, const std::string_view label, const bool enabled) noexcept {
+    constexpr auto cLabelWidth = std::size_t{18};
+
+    text.append(bg::BrightBlack, fg::BrightWhite, label);
+    if (label.size() < cLabelWidth) {
+        text.append(bg::BrightBlack, fg::White, std::string(cLabelWidth - label.size(), '.'));
     }
+    text.append(bg::BrightBlack, fg::White, "[");
+    if (enabled) {
+        text.append(bg::BrightBlack, fg::BrightGreen, "✓");
+    } else {
+        text.append(bg::BrightBlack, fg::BrightRed, "✕");
+    }
+    text.append(bg::BrightBlack, fg::White, "]\n");
 }
 
 
-auto UpdateScreenModesApp::modeDescription() const noexcept -> std::string_view {
-    switch (_mode) {
-    case Mode::Clear:
-        return "Every frame clears the full screen and redraws everything. This is the simplest refresh strategy and "
-               "works well when the entire scene changes.";
-    case Mode::Overwrite:
-        return "The cursor jumps back to the top-left corner and the whole frame is redrawn. This avoids the explicit "
-               "clear, but it still rewrites every visible cell.";
-    case Mode::OverwriteWithBackBuffer:
-    default:
-        return "Overwrite mode keeps a rendered back buffer. If only a small fraction of the cells changed, "
-               "updateScreen() emits a compact patch instead of repainting the whole frame.";
+void UpdateScreenModesApp::appendTimingLine(
+    String &text, const std::string_view label, const double milliseconds) noexcept {
+
+    constexpr auto cLabelWidth = std::size_t{18};
+
+    text.append(bg::BrightBlack, fg::BrightWhite, label);
+    if (label.size() < cLabelWidth) {
+        text.append(bg::BrightBlack, fg::White, std::string(cLabelWidth - label.size(), '.'));
     }
+    text.append(bg::BrightBlack, fg::BrightWhite, std::format("{:>6.3f} ms\n", milliseconds));
+}
+
+
+auto UpdateScreenModesApp::matchesCharacterKey(const Key &key, const char lowerCase) noexcept -> bool {
+    const auto upperCase = static_cast<char>(lowerCase - ('a' - 'A'));
+    return key == Key{Key::Character, lowerCase} || key == Key{Key::Character, upperCase};
 }
 
 

@@ -7,9 +7,11 @@
 
 #include "Alignment.hpp"
 #include "Anchor.hpp"
+#include "Backend.hpp"
 #include "Bitmap.hpp"
 #include "BitmapDrawOptions.hpp"
 #include "Buffer.hpp"
+#include "BufferView.hpp"
 #include "Char.hpp"
 #include "Char16Style.hpp"
 #include "CharCombinationStyle.hpp"
@@ -17,6 +19,7 @@
 #include "ColorPart.hpp"
 #include "ColorRole.hpp"
 #include "ColorSequence.hpp"
+#include "CropEdges.hpp"
 #include "Direction.hpp"
 #include "Font.hpp"
 #include "FontGlyph.hpp"
@@ -26,7 +29,10 @@
 #include "InputDefinition.hpp"
 #include "Key.hpp"
 #include "Margins.hpp"
+#include "MoveMode.hpp"
+#include "ParagraphSpacing.hpp"
 #include "Position.hpp"
+#include "ReadableBuffer.hpp"
 #include "Rectangle.hpp"
 #include "Size.hpp"
 #include "String.hpp"
@@ -35,5 +41,6 @@
 #include "TextAnimation.hpp"
 #include "Tile9Style.hpp"
 #include "UpdateSettings.hpp"
+#include "WritableBuffer.hpp"
 
 

@@ -44,6 +44,12 @@ protected:
     ColorBase() = default;
     constexpr explicit ColorBase(const Value value) : _value{value} {}
 
+    // defaults
+    ColorBase(const ColorBase &) = default;
+    ColorBase(ColorBase &&) = default;
+    auto operator=(const ColorBase &) -> ColorBase & = default;
+    auto operator=(ColorBase &&) -> ColorBase & = default;
+
 public: // operators
     /// Compare two color base values for equality.
     auto operator==(const ColorBase &) const noexcept -> bool = default;
@@ -84,7 +90,7 @@ public:
     /// Base ANSI escape code for this color role.
     constexpr static auto cCodeBase = (tColorType == ColorRole::Foreground ? 30 : 40);
 
-public: // public types
+public:
     /// Tag type used by the predefined named color constants.
     struct Hue {
         /// The encoded color value.
@@ -109,13 +115,19 @@ public: // public types
     constexpr static auto Default = Hue{Value::Default};
     constexpr static auto Inherited = Hue{Value::Inherited};
 
-public: // ctors/dtor/assign/move
+public:
     /// Create the inherited color for this role.
     /// The inherited color uses the value from the layer below, or the terminal default if no lower layer exists.
     ColorPart() = default;
     /// Create a color from one of the predefined hue constants.
     /// @param color The named hue.
     constexpr ColorPart(const Hue color) : ColorBase{color.value} {}
+
+    // defaults
+    ColorPart(const ColorPart &) = default;
+    ColorPart(ColorPart &&) = default;
+    auto operator=(const ColorPart &) -> ColorPart & = default;
+    auto operator=(ColorPart &&) -> ColorPart & = default;
 
 public: // operators
     /// Compare two color parts for equality.

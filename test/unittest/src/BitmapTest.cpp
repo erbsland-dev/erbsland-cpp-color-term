@@ -1,9 +1,9 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include <erbsland/unittest/UnitTest.hpp>
-
 #include "TestHelper.hpp"
+
+#include <erbsland/unittest/UnitTest.hpp>
 
 #include <vector>
 
@@ -11,6 +11,24 @@
 TESTED_TARGETS(Bitmap)
 class BitmapTest final : public el::UnitTest {
 public:
+    void requireRowsEqual(const Bitmap &bitmap, const std::vector<std::string> &expectedRows) {
+        REQUIRE_EQUAL(bitmap.size().height(), static_cast<int>(expectedRows.size()));
+        for (std::size_t y = 0; y < expectedRows.size(); ++y) {
+            WITH_CONTEXT(y);
+            REQUIRE_EQUAL(bitmap.size().width(), static_cast<int>(expectedRows[y].size()));
+            for (std::size_t x = 0; x < expectedRows[y].size(); ++x) {
+                WITH_CONTEXT(x);
+                REQUIRE_EQUAL(
+                    bitmap.pixel(Position{static_cast<int>(x), static_cast<int>(y)}), expectedRows[y][x] == '#');
+            }
+        }
+    }
+
+    void requireRectangleEqual(const Rectangle &actual, const Rectangle &expected) {
+        REQUIRE_EQUAL(actual.topLeft(), expected.topLeft());
+        REQUIRE_EQUAL(actual.size(), expected.size());
+    }
+
     void testPixelsCanBeSetAndRead() {
         auto bitmap = Bitmap{Size{4, 3}};
         bitmap.setPixel(Position{1, 2}, true);
@@ -18,6 +36,13 @@ public:
         REQUIRE(bitmap.pixel(Position{1, 2}));
         REQUIRE_FALSE(bitmap.pixel(Position{0, 0}));
         REQUIRE_FALSE(bitmap.pixel(Position{99, 99}));
+    }
+
+    void testRectMatchesBitmapBounds() {
+        const auto bitmap = Bitmap{Size{4, 3}};
+
+        REQUIRE_EQUAL(bitmap.rect().topLeft(), Position(0, 0));
+        REQUIRE_EQUAL(bitmap.rect().size(), Size(4, 3));
     }
 
     void testFlipHorizontalMirrorsContent() {
@@ -33,12 +58,210 @@ public:
         REQUIRE(bitmap.pixel(Position{3, 0}));
     }
 
+    void testInvertTogglesAllPixelsInPlace() {
+        auto bitmap = Bitmap::fromPattern({
+            "#.",
+            " .",
+        });
+
+        bitmap.invert();
+
+        REQUIRE_FALSE(bitmap.pixel(Position{0, 0}));
+        REQUIRE(bitmap.pixel(Position{1, 0}));
+        REQUIRE(bitmap.pixel(Position{0, 1}));
+        REQUIRE(bitmap.pixel(Position{1, 1}));
+
+        bitmap.invert();
+
+        REQUIRE(bitmap.pixel(Position{0, 0}));
+        REQUIRE_FALSE(bitmap.pixel(Position{1, 0}));
+        REQUIRE_FALSE(bitmap.pixel(Position{0, 1}));
+        REQUIRE_FALSE(bitmap.pixel(Position{1, 1}));
+    }
+
+    void testPixelCountCountsSetAndClearedPixels() {
+        const auto bitmap = Bitmap::fromPattern({
+            "#.#",
+            ".#.",
+        });
+
+        REQUIRE_EQUAL(bitmap.pixelCount(), static_cast<std::size_t>(3));
+        REQUIRE_EQUAL(bitmap.pixelCount(false), static_cast<std::size_t>(3));
+    }
+
+    void testInvertedReturnsAnInvertedCopyWithoutChangingTheOriginal() {
+        const auto bitmap = Bitmap::fromPattern({
+            "#..",
+            ".##",
+        });
+
+        const auto inverted = bitmap.inverted();
+
+        requireRowsEqual(
+            bitmap,
+            {
+                "#..",
+                ".##",
+            });
+        requireRowsEqual(
+            inverted,
+            {
+                ".##",
+                "#..",
+            });
+    }
+
     void testPixelQuadBuildsExpectedMask() {
         auto bitmap = Bitmap{Size{2, 2}};
         bitmap.setPixel(Position{0, 0}, true);
         bitmap.setPixel(Position{1, 1}, true);
 
         REQUIRE_EQUAL(bitmap.pixelQuad(Position{0, 0}), static_cast<std::uint8_t>(0b1001U));
+    }
+
+    void testPixelRingBuildsExpectedMaskInClockwiseOrder() {
+        const auto bitmap = Bitmap::fromPattern({
+            "###",
+            "#.#",
+            ".##",
+        });
+
+        REQUIRE_EQUAL(bitmap.pixelRing(Position{1, 1}), static_cast<std::uint8_t>(0b11110111U));
+    }
+
+    void testPixelRingIgnoresTheCenterPixelAndOutOfBoundsNeighbors() {
+        auto bitmap = Bitmap{Size{2, 2}};
+        bitmap.setPixel(Position{0, 0}, true);
+        bitmap.setPixel(Position{1, 1}, true);
+
+        REQUIRE_EQUAL(bitmap.pixelRing(Position{0, 0}), static_cast<std::uint8_t>(0b00000010U));
+        REQUIRE_EQUAL(bitmap.pixelRing(Position{-1, -1}), static_cast<std::uint8_t>(0b00000010U));
+    }
+
+    void testBoundingRectReturnsTheCoveredAreaForSetPixels() {
+        const auto bitmap = Bitmap::fromPattern({
+            "......",
+            ".#..#.",
+            "..##..",
+            "......",
+        });
+
+        requireRectangleEqual(bitmap.boundingRect(), Rectangle(1, 1, 4, 2));
+    }
+
+    void testBoundingRectSupportsSinglePixelAndSingleRowSpans() {
+        auto singlePixel = Bitmap{Size{5, 4}};
+        singlePixel.setPixel(Position{3, 2}, true);
+        requireRectangleEqual(singlePixel.boundingRect(), Rectangle(3, 2, 1, 1));
+
+        auto singleRow = Bitmap{Size{6, 4}};
+        singleRow.fillRect(Rectangle{1, 3, 4, 1}, true);
+        requireRectangleEqual(singleRow.boundingRect(), Rectangle(1, 3, 4, 1));
+    }
+
+    void testBoundingRectReturnsEmptyRectangleWhenTheRequestedValueDoesNotExist() {
+        requireRectangleEqual(Bitmap{Size{3, 2}}.boundingRect(), Rectangle{});
+
+        auto filled = Bitmap{Size{3, 2}};
+        filled.fillRect(filled.rect(), true);
+        requireRectangleEqual(filled.boundingRect(false), Rectangle{});
+    }
+
+    void testBoundingRectCanLocateClearedPixelsInsideAFilledBitmap() {
+        auto bitmap = Bitmap{Size{5, 4}};
+        bitmap.fillRect(bitmap.rect(), true);
+        bitmap.fillRect(Rectangle{1, 1, 3, 2}, false);
+
+        requireRectangleEqual(bitmap.boundingRect(false), Rectangle(1, 1, 3, 2));
+    }
+
+    void testFromFunctionCreatesPixelsFromTheGenerator() {
+        const auto bitmap =
+            Bitmap::fromFunction(Size{4, 3}, [](const Position pos) -> bool { return (pos.x() + pos.y()) % 2 == 0; });
+
+        requireRowsEqual(
+            bitmap,
+            {
+                "#.#.",
+                ".#.#",
+                "#.#.",
+            });
+    }
+
+    void testFromFunctionDoesNotInvokeTheGeneratorForAnEmptyBitmap() {
+        auto calls = 0;
+
+        const auto bitmap = Bitmap::fromFunction(Size{0, 0}, [&](const Position) -> bool {
+            ++calls;
+            return true;
+        });
+
+        REQUIRE_EQUAL(bitmap.size(), Size(0, 0));
+        REQUIRE_EQUAL(calls, 0);
+    }
+
+    void testOutlinedCreatesAnEightConnectedBorderAroundFilledPixels() {
+        const auto bitmap = Bitmap::fromPattern({
+            ".....",
+            ".....",
+            "..#..",
+            ".....",
+            ".....",
+        });
+
+        const auto outlined = bitmap.outlined();
+
+        requireRowsEqual(
+            outlined,
+            {
+                ".....",
+                ".###.",
+                ".#.#.",
+                ".###.",
+                ".....",
+            });
+    }
+
+    void testOutlinedReturnsEmptyForAnEmptyBitmapAndMarksInteriorHoles() {
+        requireRowsEqual(
+            Bitmap{Size{3, 3}}.outlined(),
+            {
+                "...",
+                "...",
+                "...",
+            });
+
+        const auto bitmapWithHole = Bitmap::fromPattern({
+            "###",
+            "#.#",
+            "###",
+        });
+
+        requireRowsEqual(
+            bitmapWithHole.outlined(),
+            {
+                "...",
+                ".#.",
+                "...",
+            });
+    }
+
+    void testOutlinedMarksAllEmptyNeighborsOfAComplexShape() {
+        const auto bitmap = Bitmap::fromPattern({
+            ".....",
+            ".##..",
+            "..#..",
+            ".....",
+        });
+
+        requireRowsEqual(
+            bitmap.outlined(),
+            {
+                "####.",
+                "#..#.",
+                "##.#.",
+                ".###.",
+            });
     }
 
     void testDrawCopiesOtherBitmap() {
@@ -50,6 +273,83 @@ public:
 
         REQUIRE(destination.pixel(Position{1, 2}));
         REQUIRE_FALSE(destination.pixel(Position{1, 1}));
+    }
+
+    void testFillRectFillsTheWholeInteriorAndCanClearPixels() {
+        auto bitmap = Bitmap{Size{5, 5}};
+
+        bitmap.fillRect(Rectangle{1, 1, 3, 3}, true);
+        requireRowsEqual(
+            bitmap,
+            {
+                ".....",
+                ".###.",
+                ".###.",
+                ".###.",
+                ".....",
+            });
+
+        bitmap.fillRect(Rectangle{2, 2, 1, 1}, false);
+        requireRowsEqual(
+            bitmap,
+            {
+                ".....",
+                ".###.",
+                ".#.#.",
+                ".###.",
+                ".....",
+            });
+    }
+
+    void testFillRectClipsToTheBitmapBounds() {
+        auto bitmap = Bitmap{Size{4, 3}};
+
+        bitmap.fillRect(Rectangle{-1, 1, 3, 3}, true);
+
+        requireRowsEqual(
+            bitmap,
+            {
+                "....",
+                "##..",
+                "##..",
+            });
+    }
+
+    void testFloodFillOnlyChangesTheConnectedRegionWithTheOriginalValue() {
+        auto bitmap = Bitmap::fromPattern({
+            "##..",
+            "##..",
+            "..##",
+            "..##",
+        });
+
+        bitmap.floodFill(Position{0, 0}, false);
+
+        requireRowsEqual(
+            bitmap,
+            {
+                "....",
+                "....",
+                "..##",
+                "..##",
+            });
+    }
+
+    void testFloodFillIgnoresOutsideStartPositionsAndMatchingValues() {
+        auto bitmap = Bitmap::fromPattern({
+            "#.",
+            ".#",
+        });
+
+        bitmap.floodFill(Position{-1, 0}, true);
+        bitmap.floodFill(Position{0, 0}, true);
+
+        requireRowsEqual(
+            bitmap,
+            {
+                "#.",
+                ".#",
+            });
     }
 
     void testFromPatternParsesFilledAndEmptyPixels() {
@@ -81,5 +381,15 @@ public:
         REQUIRE_FALSE(bitmap.pixel(Position{1, 1}));
         REQUIRE_FALSE(bitmap.pixel(Position{0, 2}));
         REQUIRE_FALSE(bitmap.pixel(Position{1, 2}));
+    }
+
+    void testToPatternReturnsHashDotRowsWithTrailingNewlines() {
+        const auto bitmap = Bitmap::fromPattern({
+            "#.",
+            " #",
+            "..",
+        });
+
+        REQUIRE_EQUAL(bitmap.toPattern(), std::string("#.\n.#\n..\n"));
     }
 };

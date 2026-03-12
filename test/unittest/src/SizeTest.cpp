@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 
-#include <erbsland/unittest/UnitTest.hpp>
-
 #include "TestHelper.hpp"
+
+#include <erbsland/unittest/UnitTest.hpp>
 
 
 class SizeTest : public el::UnitTest {
@@ -135,7 +135,7 @@ public:
 
     void testForEach() {
         size = Size(2, 3);
-        std::vector<Position> positions;
+        PositionList positions;
         size.forEach([&](const Position pos) { positions.push_back(pos); });
         REQUIRE_EQUAL(positions.size(), 6);
         REQUIRE_EQUAL(positions[0], Position(0, 0));

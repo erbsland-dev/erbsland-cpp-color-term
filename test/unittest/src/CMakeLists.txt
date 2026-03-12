@@ -5,6 +5,7 @@ set(_erbsland_color_term_unittest_target erbsland-color-term-unittest)
 target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         AlignmentTest.cpp
         AnchorTest.cpp
+        BackendTest.cpp
         BitmapTest.cpp
         BlockBufferTest.cpp
         Char16StyleTest.cpp
@@ -12,6 +13,7 @@ target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         CharTest.cpp
         ColorSequenceTest.cpp
         ColorTest.cpp
+        CropEdgesTest.cpp
         DirectionTest.cpp
         FontTest.cpp
         InputDefinitionTest.cpp
@@ -21,10 +23,12 @@ target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         PositionTest.cpp
         RectangleTest.cpp
         SizeTest.cpp
+        TerminalTest.cpp
+        TerminalTestSupport.hpp
         TermStringTest.cpp
-        TerminalUpdateTest.cpp
         TestHelper.hpp
         TextRenderTest.cpp
         Tile9StyleTest.cpp
         UnicodeWidthTest.cpp
+        UpdateScreenModesStateTest.cpp
 )

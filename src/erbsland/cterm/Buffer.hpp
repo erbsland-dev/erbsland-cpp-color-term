@@ -17,12 +17,17 @@
 #include "String.hpp"
 #include "Text.hpp"
 #include "Tile9Style.hpp"
+#include "WritableBuffer.hpp"
 
 #include <string_view>
 #include <vector>
 
 
 namespace erbsland::cterm {
+
+
+class Buffer;
+using BufferPtr = std::shared_ptr<Buffer>;
 
 
 /// A mutable 2D buffer storing characters and colors for rendering.
@@ -34,231 +39,86 @@ namespace erbsland::cterm {
 ///   - Both cells will have the same color.
 ///   - A 2-width block at the right edge is ignored.
 /// - Blocks with a display width > 2 are ignored.
-class Buffer {
+class Buffer final : public WritableBuffer {
 public:
+    constexpr static auto cMaximumSize = Size{10'000, 10'000};
+    constexpr static auto cMinimumSize = Size{1, 1};
+
+    using WritableBuffer::set;
+    using WritableBuffer::get;
+    using WritableBuffer::resize;
+    using WritableBuffer::fill;
+    using WritableBuffer::drawText;
+    using WritableBuffer::drawBitmap;
+
+public:
+    /// Creates a 1x1 buffer filled with a space.
+    /// Usually only used as a placeholder until resized.
+    Buffer();
+
     /// Construct a buffer with the given size and fill it with an initial block.
-    /// @param size The dimensions of the buffer.
-    explicit Buffer(Size size) noexcept;
+    /// @param size The dimensions of the buffer. Size must be at least 1x1.
+    /// @param fillChar The optional fill character for the buffer.
+    /// @throws std::invalid_argument if size is invalid
+    explicit Buffer(Size size, Char fillChar = Char::space());
 
-public: // low-level access
-    /// Get the configured size of the buffer.
-    /// @return The width and height of the buffer.
-    [[nodiscard]] auto size() const noexcept -> Size;
-    /// Get a rectangle representing this buffer.
-    /// @return The rectangle for this buffer.
-    [[nodiscard]] auto rect() const noexcept -> Rectangle;
-    /// Read the block stored at the given position.
-    /// @param pos The coordinates within the buffer.
-    /// @return A reference to the stored block.
-    [[nodiscard]] auto get(Position pos) const noexcept -> const Char &;
-    /// Write a block at the given position.
-    /// @param pos The coordinates within the buffer.
-    /// @param block The block value to store.
-    /// @note Writes outside the buffer are ignored.
-    void set(Position pos, const Char &block) noexcept;
-    /// @overload
-    void set(Position pos, Char &&block) noexcept;
-    /// Write a block at the given position using a combination style
-    /// @param pos The coordinates within the buffer.
-    /// @param block The block value to store.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    /// @note Writes outside the buffer are ignored.
-    void set(Position pos, const Char &block, const CharCombinationStylePtr &combinationStyle) noexcept;
+    // defaults
+    ~Buffer() override = default;
+    Buffer(const Buffer &) = default;
+    Buffer(Buffer &&) = default;
+    Buffer &operator=(const Buffer &) = default;
+    Buffer &operator=(Buffer &&) = default;
 
-public: // drawing methods
+public: // implement ReadableBuffer
+    [[nodiscard]] auto size() const noexcept -> Size override;
+    [[nodiscard]] auto rect() const noexcept -> Rectangle override;
+    [[nodiscard]] auto get(Position pos) const noexcept -> const Char & override;
+    [[nodiscard]] auto clone() const -> WritableBufferPtr override;
+
+public: // implement WritableBuffer
+    void resize(Size newSize) override;
+    void set(Position pos, const Char &block) noexcept override;
+    void setAndResizeFrom(const ReadableBuffer &other) override;
+
+public:
+    /// Resize this buffer.
+    /// Resizing the buffer *will not clear* it.
+    /// If `reorder` is `true`, the content will either be expanded with space blocks or cropped.
+    /// If `reorder` is `false`, the state of the resized buffer is undefined (you must clear it yourself).
+    /// @param size The new size.
+    /// @param reorder Whether to reorder the content when resizing.
+    /// @param fillChar The character to fill the new space with.
+    /// @throws std::invalid_argument if size is invalid
+    void resize(Size size, bool reorder, Char fillChar = Char::space());
+
+public: // faster implementations
     /// Fill/clear the buffer with the given character.
     /// @param fillBlock The block to use to fill the buffer.
-    void fill(const Char &fillBlock) noexcept;
-    /// Fill the given rectangle.
-    /// Positions outside the buffer are ignored.
-    /// @param rect The rectangle to be filled.
-    /// @param fillBlock The block for filling.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    void fill(Rectangle rect, const Char &fillBlock, const CharCombinationStylePtr &combinationStyle = {}) noexcept;
-    /// Fill the given rectangle using a repeating 9-tile style.
-    /// Positions outside the buffer are ignored.
-    /// @param rect The rectangle to be filled.
-    /// @param style The tile style to repeat across the rectangle.
-    /// @param baseColor The base color underneath the style colors.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    void fill(
-        Rectangle rect,
-        const Tile9StylePtr &style,
-        Color baseColor = {},
-        const CharCombinationStylePtr &combinationStyle = {}) noexcept;
-    /// Draw a frame inside a given rectangle
-    /// This will set all blocks at the edge, *inside* the given rectangle
-    /// @param rect The rectangle for the frame.
-    /// @param frameBlock The block for the frame.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    void
-    drawFrame(Rectangle rect, const Char &frameBlock, const CharCombinationStylePtr &combinationStyle = {}) noexcept;
-    /// Draw a frame inside a given rectangle
-    /// This will set all blocks at the edge, *inside* the given rectangle
-    /// @param rect The rectangle for the frame.
-    /// @param frameStyle A custom frame style.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    /// @param frameColor The base frame color. Any color from the frame style overlays this base color.
-    void drawFrame(
-        Rectangle rect,
-        const Char16StylePtr &frameStyle,
-        const CharCombinationStylePtr &combinationStyle = {},
-        Color frameColor = {}) noexcept;
-    /// Draw a frame inside a given rectangle using a repeating 9-tile style.
-    /// This will set all blocks at the edge, *inside* the given rectangle.
-    /// @param rect The rectangle for the frame.
-    /// @param style The tile style for the frame.
-    /// @param frameColor The base frame color. Any color from the style overlays this base color.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    void drawFrame(
-        Rectangle rect,
-        const Tile9StylePtr &style,
-        Color frameColor = {},
-        const CharCombinationStylePtr &combinationStyle = {}) noexcept;
-    /// Draw a frame inside a given rectangle
-    /// This will set all blocks at the edge, *inside* the given rectangle
-    /// @param rect The rectangle for the frame.
-    /// @param frameStyle The predefined frame style.
-    /// @param frameColor The base frame color. Any color from the frame style overlays this base color.
-    void drawFrame(Rectangle rect, FrameStyle frameStyle, Color frameColor = {}) noexcept;
-    /// Draw a frame inside a given rectangle with configurable style, fill, and animated colors.
-    /// This will set all blocks at the edge, *inside* the given rectangle.
-    /// If `options.fillBlock()` is empty and no `Tile9Style` is active, the interior is left unchanged.
-    /// @param rect The rectangle for the frame.
-    /// @param options Frame drawing options.
-    /// @param animationCycle Animation cycle for frame and fill color animations.
-    void drawFrame(
-        Rectangle rect,
-        const FrameDrawOptions &options = FrameDrawOptions::defaultOptions(),
-        std::size_t animationCycle = 0) noexcept;
-    /// Draw a box and fill it.
-    /// @param rect The rectangle for the frame.
-    /// @param frameBlock The block for the frame.
-    /// @param fillBlock The block for filling.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    void drawFilledFrame(
-        Rectangle rect,
-        const Char &frameBlock,
-        const Char &fillBlock,
-        const CharCombinationStylePtr &combinationStyle = {}) noexcept;
-    /// Draw a box and fill it.
-    /// @param rect The rectangle for the frame.
-    /// @param frameStyle A custom frame style.
-    /// @param fillBlock The block for filling.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    /// @param frameColor The base frame color. Any color from the frame style overlays this base color.
-    void drawFilledFrame(
-        Rectangle rect,
-        const Char16StylePtr &frameStyle,
-        const Char &fillBlock,
-        const CharCombinationStylePtr &combinationStyle = {},
-        Color frameColor = {}) noexcept;
-    /// Draw a box and fill it using a repeating 9-tile style for the frame.
-    /// @param rect The rectangle for the frame.
-    /// @param style The tile style for the frame.
-    /// @param fillBlock The block for filling.
-    /// @param combinationStyle The combination style for overwriting existing characters.
-    /// @param frameColor The base frame color. Any color from the style overlays this base color.
-    void drawFilledFrame(
-        Rectangle rect,
-        const Tile9StylePtr &style,
-        const Char &fillBlock,
-        const CharCombinationStylePtr &combinationStyle = {},
-        Color frameColor = {}) noexcept;
-    /// Draw a box and fill it.
-    /// @param rect The rectangle for the frame.
-    /// @param frameStyle The predefined frame style.
-    /// @param fillBlock The block for filling.
-    /// @param frameColor The base frame color. Any color from the frame style overlays this base color.
-    void drawFilledFrame(Rectangle rect, FrameStyle frameStyle, const Char &fillBlock, Color frameColor = {}) noexcept;
-    /// Draw simple text into a rectangle.
-    /// If fg or bg is set to `Inherited`, the current color from the buffer is used.
-    /// @param text The text description.
-    /// @param animationCycle Animation cycle for animated text.
-    void drawText(const Text &text, std::size_t animationCycle = 0);
-    /// Draw simple text into a rectangle.
-    /// If fg or bg is set to `Inherited`, the current color from the buffer is used.
-    /// @param text The UTF-8 text to render.
-    /// @param alignment The alignment inside the rectangle.
-    /// @param rect The target rectangle.
-    /// @param color The text color.
-    /// @param animationCycle Animation cycle for animated text.
+    void fill(const Char &fillBlock) noexcept override;
+
+public: // builders
+    /// Creates a buffer from the lines in a string.
+    /// This function splits the given string into lines and creates a buffer with a matching size.
+    /// @param text The string to split into lines and create a buffer from. Must not be empty.
+    /// @return A buffer containing the lines from the input string.
+    [[nodiscard]] static auto fromLinesInString(const String &text) -> Buffer;
+
+    /// Creates a buffer from the lines in a string.
+    /// @param lines The lines to create the buffer from. Must not be empty.
+    /// @return A buffer containing the lines from the input string.
+    [[nodiscard]] static auto fromLines(const StringLines &lines) -> Buffer;
+
+public: // compatibility
+    [[deprecated("Use drawText(std::string_view, Rectangle, ...) instead")]]
     void drawText(
         std::string_view text, Alignment alignment, Rectangle rect, Color color = {}, std::size_t animationCycle = 0);
-    /// Draw simple text into a rectangle.
-    /// If fg or bg is set to `Inherited`, the current color from the buffer is used.
-    /// @param text The UTF-8 text to render.
-    /// @param rect The target rectangle.
-    /// @param alignment The alignment inside the rectangle.
-    /// @param color The text color.
-    /// @param animationCycle Animation cycle for animated text.
-    void drawText(
-        std::string_view text,
-        Rectangle rect,
-        Alignment alignment = Alignment::TopLeft,
-        Color color = {},
-        std::size_t animationCycle = 0);
-    /// Draw a bitmap at a given position.
-    /// The bitmap is rendered according to `options.scaleMode()`. If `options.char16Style()` is set,
-    /// it overrides the scale mode and renders one terminal cell per bitmap pixel.
-    /// Pixels or rendered cells outside the buffer are ignored.
-    /// @param bitmap The bitmap to draw.
-    /// @param pos The position of the top left corner.
-    /// @param options Bitmap drawing options.
-    /// @param animationCycle Animation cycle for color animations.
-    void drawBitmap(
-        const Bitmap &bitmap,
-        Position pos,
-        const BitmapDrawOptions &options = BitmapDrawOptions::defaultOptions(),
-        std::size_t animationCycle = 0) noexcept;
-    /// Draw a bitmap into the given rectangle.
-    /// The rendered bitmap is aligned inside `rect`. If it is larger than `rect`, it is cropped according to the
-    /// alignment.
-    /// @note For half-block drawing mode, alignment and cropping happen at rendered cell boundaries, not per pixel.
-    /// @param bitmap The bitmap to draw.
-    /// @param rect The rectangle to draw the bitmap into.
-    /// @param alignment Alignment of the bitmap within the rectangle.
-    /// @param options Bitmap drawing options.
-    /// @param animationCycle Animation cycle for color animations.
-    void drawBitmap(
-        const Bitmap &bitmap,
-        Rectangle rect,
-        Alignment alignment = Alignment::TopLeft,
-        const BitmapDrawOptions &options = BitmapDrawOptions::defaultOptions(),
-        std::size_t animationCycle = 0) noexcept;
 
 private:
-    [[nodiscard]] static auto applyBaseColor(const Char &block, Color baseColor) -> Char;
-    [[nodiscard]] static auto blockForFrame(Rectangle rect, Position pos, const Char16StylePtr &frameStyle) -> Char;
-    [[nodiscard]] auto buildTextLines(const Text &text) const -> BlockStringLines;
-    [[nodiscard]] auto buildFontTextLines(const Text &text) const -> BlockStringLines;
-    void applyTextLines(const Text &text, const BlockStringLines &lines, std::size_t animationCycle) noexcept;
-    [[nodiscard]] static auto bitmapRenderSize(const Bitmap &bitmap, const BitmapDrawOptions &options) noexcept
-        -> Size;
-    [[nodiscard]] static auto alignedBitmapOffset(
-        int renderedSize,
-        int availableSize,
-        Alignment alignment,
-        Alignment alignmentMask) noexcept -> int;
-    [[nodiscard]] auto
-    colorForBitmapPosition(const BitmapDrawOptions &options, Position bitmapPosition, std::size_t animationCycle) const
-        noexcept -> Color;
-    void drawBitmapBlock(Position pos, const Char &block, Color baseColor, const BitmapDrawOptions &options) noexcept;
-    void drawFrameBlock(
-        Position pos, const Char &block, Color baseColor, const CharCombinationStylePtr &combinationStyle) noexcept;
-    [[nodiscard]] static auto colorForFramePosition(
-        const ColorSequence &colorSequence,
-        FrameColorMode colorMode,
-        Rectangle rect,
-        Position pos,
-        std::size_t animationCycle,
-        std::size_t animationOffset) noexcept -> Color;
-    [[nodiscard]] auto colorForTextPosition(
-        const Text &text, const Char &character, Position position, std::size_t animationCycle) const noexcept -> Color;
+    static void validateBufferSize(Size size);
 
 private:
-    Size _size;
-    std::vector<Char> _data;
+    Size _size{cMinimumSize};
+    std::vector<Char> _data{Char::space()};
 };
 
 

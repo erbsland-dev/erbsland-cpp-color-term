@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 
-#include <erbsland/unittest/UnitTest.hpp>
-
 #include "TestHelper.hpp"
+
+#include <erbsland/unittest/UnitTest.hpp>
 
 
 class AnchorTest : public el::UnitTest {

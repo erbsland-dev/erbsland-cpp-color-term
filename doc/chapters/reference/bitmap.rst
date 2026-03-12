@@ -6,10 +6,10 @@
 Bitmap
 ******
 
-``Bitmap`` is the low-level pixel container used by the library whenever a
+:cpp:any:`Bitmap <erbsland::cterm::Bitmap>` is the low-level pixel container used by the library whenever a
 boolean mask needs to be rendered, copied, or transformed. A bitmap stores
 only on/off pixels; the actual terminal representation is chosen later by
-``Buffer::drawBitmap()`` and ``BitmapDrawOptions``.
+:cpp:any:`Buffer::drawBitmap() <erbsland::cterm::Buffer::drawBitmap()>` and :cpp:any:`BitmapDrawOptions <erbsland::cterm::BitmapDrawOptions>`.
 
 The class is primarily used internally for glyph rendering and similar
 pixel-based operations, but it is also useful when implementing custom
@@ -21,7 +21,7 @@ Usage
 Preparing a Small Pixel Mask
 ----------------------------
 
-``Bitmap`` stores a two-dimensional grid of pixels. Each pixel can be
+:cpp:any:`Bitmap <erbsland::cterm::Bitmap>` stores a two-dimensional grid of pixels. Each pixel can be
 set individually and later queried or copied into another bitmap.
 
 This makes it easy to construct reusable masks or small procedural
@@ -41,17 +41,17 @@ patterns.
         // Use the encoded 2x2 mask for custom rendering.
     }
 
-The ``draw()`` function copies one bitmap into another at a given
+The :cpp:any:`draw() <erbsland::cterm::Bitmap::draw()>` function copies one bitmap into another at a given
 position.
 
-The ``pixelQuad()`` function reads a 2×2 group of pixels and encodes
+The :cpp:any:`pixelQuad() <erbsland::cterm::Bitmap::pixelQuad()>` function reads a 2×2 group of pixels and encodes
 them as a small integer value. This is useful when converting bitmap
 patterns into terminal cell representations.
 
 Building Bitmaps from Text Patterns
 -----------------------------------
 
-For small icons and handcrafted masks, ``Bitmap::fromPattern()`` is
+For small icons and handcrafted masks, :cpp:any:`Bitmap::fromPattern() <erbsland::cterm::Bitmap::fromPattern()>` is
 usually the fastest way to define the pixels. Each input string becomes
 one bitmap row. Dots and spaces are treated as cleared pixels; every
 other character sets a pixel.
@@ -72,15 +72,15 @@ other character sets a pixel.
         ".....#.....",
     });
 
-Rows may have different lengths. ``fromPattern()`` uses the longest row
+Rows may have different lengths. :cpp:any:`fromPattern() <erbsland::cterm::Bitmap::fromPattern()>` uses the longest row
 as the bitmap width and pads shorter rows with cleared pixels on the
 right.
 
 Rendering a Bitmap to a Buffer
 ------------------------------
 
-Once a bitmap is prepared, ``Buffer::drawBitmap()`` converts it into
-terminal cells. ``BitmapDrawOptions`` controls the scale mode, the block
+Once a bitmap is prepared, :cpp:any:`Buffer::drawBitmap() <erbsland::cterm::Buffer::drawBitmap()>` converts it into
+terminal cells. :cpp:any:`BitmapDrawOptions <erbsland::cterm::BitmapDrawOptions>` controls the scale mode, the block
 characters that are used, the base colors, and the optional line style
 for neighbor-aware rendering.
 
@@ -110,18 +110,18 @@ the chosen alignment.
 Choosing the Scale Mode
 -----------------------
 
-``BitmapScaleMode`` decides how pixels are grouped into terminal cells:
+:cpp:any:`BitmapScaleMode <erbsland::cterm::BitmapScaleMode>` decides how pixels are grouped into terminal cells:
 
-* ``HalfBlock`` uses one character for each 2x2 pixel group. This is the
+* :cpp:any:`HalfBlock <erbsland::cterm::BitmapScaleMode::HalfBlock>` uses one character for each 2x2 pixel group. This is the
   default mode and allows colored empty cells because the zero entry in
-  ``halfBlocks()`` is rendered too.
-* ``FullBlock`` uses one character per set bitmap pixel.
-* ``DoubleBlock`` also uses one character per set bitmap pixel, but
+  :cpp:any:`halfBlocks() <erbsland::cterm::BitmapDrawOptions::halfBlocks()>` is rendered too.
+* :cpp:any:`FullBlock <erbsland::cterm::BitmapScaleMode::FullBlock>` uses one character per set bitmap pixel.
+* :cpp:any:`DoubleBlock <erbsland::cterm::BitmapScaleMode::DoubleBlock>` also uses one character per set bitmap pixel, but
   doubles the width in terminal cells to compensate for rectangular
   terminal proportions.
 
-If ``char16Style()`` is set, it overrides the scale mode completely.
-Each set pixel becomes one terminal cell, and the chosen ``Char16Style``
+If :cpp:any:`char16Style() <erbsland::cterm::BitmapDrawOptions::char16Style()>` is set, it overrides the scale mode completely.
+Each set pixel becomes one terminal cell, and the chosen :cpp:any:`Char16Style <erbsland::cterm::Char16Style>`
 selects the block from the east, south, west, and north neighbors of the
 pixel. This is useful for circuit maps, line art, and bitmap-derived
 frame structures.
@@ -129,14 +129,14 @@ frame structures.
 Color and Animation Rules
 -------------------------
 
-The base color comes from ``BitmapDrawOptions::color()``. A single-color
+The base color comes from :cpp:any:`BitmapDrawOptions::color() <erbsland::cterm::BitmapDrawOptions::color()>`. A single-color
 sequence paints the whole bitmap uniformly, while the stripe modes look up
 the sequence by rendered bitmap coordinates plus ``animationCycle`` and
-``colorAnimationOffset()``.
+:cpp:any:`colorAnimationOffset() <erbsland::cterm::BitmapDrawOptions::colorAnimationOffset()>`.
 
 If the sequence is empty, the color is inherited from the buffer below.
-After the base color is selected, the color stored in ``fullBlock()``,
-``doubleBlocks()``, ``halfBlocks()``, or the chosen ``Char16Style`` block
+After the base color is selected, the color stored in :cpp:any:`fullBlock() <erbsland::cterm::BitmapDrawOptions::fullBlock()>`,
+:cpp:any:`doubleBlocks() <erbsland::cterm::BitmapDrawOptions::doubleBlocks()>`, :cpp:any:`halfBlocks() <erbsland::cterm::BitmapDrawOptions::halfBlocks()>`, or the chosen :cpp:any:`Char16Style <erbsland::cterm::Char16Style>` block
 is overlaid on top of it.
 
 To see all combinations in action, run the ``bitmap-showcase`` demo.

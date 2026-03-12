@@ -39,7 +39,7 @@ region derived from the main canvas.
 Working with Positions and Directions
 -------------------------------------
 
-``Position``, ``Size``, and ``Direction`` are useful when implementing
+:cpp:any:`Position <erbsland::cterm::Position>`, :cpp:any:`Size <erbsland::cterm::Size>`, and :cpp:any:`Direction <erbsland::cterm::Direction>` are useful when implementing
 custom cursor movement, grid logic, or simple simulations.
 
 .. code-block:: cpp
@@ -54,10 +54,15 @@ custom cursor movement, grid logic, or simple simulations.
 Here a cursor moves one step to the east. The resulting position is then
 checked against the available screen size before rendering a character.
 
+:cpp:any:`Direction <erbsland::cterm::Direction>` is a lightweight wrapper around :cpp:any:`Direction::Enum <erbsland::cterm::Direction::Enum>`. Use
+the wrapper when you want conversion helpers such as ``toDelta()``,
+``toString()``, and ``fromString()``, and use the enum values directly
+when storing or switching on one of the canonical directions.
+
 Splitting a Rectangle into Grid Cells
 -------------------------------------
 
-``Rectangle::gridCells()`` divides a larger canvas into evenly spaced
+:cpp:any:`Rectangle::gridCells() <erbsland::cterm::Rectangle::gridCells()>` divides a larger canvas into evenly spaced
 sub-rectangles. This is useful for dashboards, menu grids, and
 multi-panel layouts where each cell should keep a predictable size.
 

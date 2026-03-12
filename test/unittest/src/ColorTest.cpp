@@ -1,52 +1,52 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
+#include "TestHelper.hpp"
+
 #include <erbsland/unittest/UnitTest.hpp>
 
 #include <array>
 
-#include "TestHelper.hpp"
-
 class ColorTest : public el::UnitTest {
 public:
     void testCodeBase() {
-        REQUIRE_EQUAL(term::ColorPart<term::ColorRole::Foreground>::cCodeBase, 30);
-        REQUIRE_EQUAL(term::ColorPart<term::ColorRole::Background>::cCodeBase, 40);
+        REQUIRE_EQUAL(ColorPart<ColorRole::Foreground>::cCodeBase, 30);
+        REQUIRE_EQUAL(ColorPart<ColorRole::Background>::cCodeBase, 40);
     }
 
     void testDefaultColors() {
-        term::fg fgDefault;
-        term::bg bgDefault;
+        fg fgDefault;
+        bg bgDefault;
         REQUIRE_EQUAL(fgDefault.ansiCode(), 39);
         REQUIRE_EQUAL(bgDefault.ansiCode(), 49);
-        REQUIRE_EQUAL(fgDefault, term::fg(term::fg::Inherited));
-        REQUIRE_EQUAL(bgDefault, term::bg(term::bg::Inherited));
+        REQUIRE_EQUAL(fgDefault, fg(fg::Inherited));
+        REQUIRE_EQUAL(bgDefault, bg(bg::Inherited));
     }
 
     void testAnsiCodesForeground() {
         struct Entry {
-            term::fg value;
+            fg value;
             int code;
         };
         constexpr std::array<Entry, 18> entries{{
-            {term::fg::Black, 30},
-            {term::fg::Red, 31},
-            {term::fg::Green, 32},
-            {term::fg::Yellow, 33},
-            {term::fg::Blue, 34},
-            {term::fg::Magenta, 35},
-            {term::fg::Cyan, 36},
-            {term::fg::White, 37},
-            {term::fg::Default, 39},
-            {term::fg::BrightBlack, 90},
-            {term::fg::BrightRed, 91},
-            {term::fg::BrightGreen, 92},
-            {term::fg::BrightYellow, 93},
-            {term::fg::BrightBlue, 94},
-            {term::fg::BrightMagenta, 95},
-            {term::fg::BrightCyan, 96},
-            {term::fg::BrightWhite, 97},
-            {term::fg::Inherited, 39},
+            {fg::Black, 30},
+            {fg::Red, 31},
+            {fg::Green, 32},
+            {fg::Yellow, 33},
+            {fg::Blue, 34},
+            {fg::Magenta, 35},
+            {fg::Cyan, 36},
+            {fg::White, 37},
+            {fg::Default, 39},
+            {fg::BrightBlack, 90},
+            {fg::BrightRed, 91},
+            {fg::BrightGreen, 92},
+            {fg::BrightYellow, 93},
+            {fg::BrightBlue, 94},
+            {fg::BrightMagenta, 95},
+            {fg::BrightCyan, 96},
+            {fg::BrightWhite, 97},
+            {fg::Inherited, 39},
         }};
         for (const auto &entry : entries) {
             REQUIRE_EQUAL(entry.value.ansiCode(), entry.code);
@@ -55,28 +55,28 @@ public:
 
     void testAnsiCodesBackground() {
         struct Entry {
-            term::bg value;
+            bg value;
             int code;
         };
         constexpr std::array<Entry, 18> entries{{
-            {term::bg::Black, 40},
-            {term::bg::Red, 41},
-            {term::bg::Green, 42},
-            {term::bg::Yellow, 43},
-            {term::bg::Blue, 44},
-            {term::bg::Magenta, 45},
-            {term::bg::Cyan, 46},
-            {term::bg::White, 47},
-            {term::bg::Default, 49},
-            {term::bg::BrightBlack, 100},
-            {term::bg::BrightRed, 101},
-            {term::bg::BrightGreen, 102},
-            {term::bg::BrightYellow, 103},
-            {term::bg::BrightBlue, 104},
-            {term::bg::BrightMagenta, 105},
-            {term::bg::BrightCyan, 106},
-            {term::bg::BrightWhite, 107},
-            {term::bg::Inherited, 49},
+            {bg::Black, 40},
+            {bg::Red, 41},
+            {bg::Green, 42},
+            {bg::Yellow, 43},
+            {bg::Blue, 44},
+            {bg::Magenta, 45},
+            {bg::Cyan, 46},
+            {bg::White, 47},
+            {bg::Default, 49},
+            {bg::BrightBlack, 100},
+            {bg::BrightRed, 101},
+            {bg::BrightGreen, 102},
+            {bg::BrightYellow, 103},
+            {bg::BrightBlue, 104},
+            {bg::BrightMagenta, 105},
+            {bg::BrightCyan, 106},
+            {bg::BrightWhite, 107},
+            {bg::Inherited, 49},
         }};
         for (const auto &entry : entries) {
             REQUIRE_EQUAL(entry.value.ansiCode(), entry.code);
@@ -84,39 +84,31 @@ public:
     }
 
     void testEqualityOperators() {
-        auto red = term::fg(term::fg::Red);
-        auto blue = term::fg(term::fg::Blue);
-        REQUIRE(red == term::fg(term::fg::Red));
+        auto red = fg(fg::Red);
+        auto blue = fg(fg::Blue);
+        REQUIRE(red == fg(fg::Red));
         REQUIRE(red != blue);
     }
 
     void testDefaultConstructedColorUsesInheritedComponents() {
-        const auto color = term::Color{};
+        const auto color = Color{};
 
-        REQUIRE_EQUAL(color.fg(), term::fg(term::fg::Inherited));
-        REQUIRE_EQUAL(color.bg(), term::bg(term::bg::Inherited));
+        REQUIRE_EQUAL(color.fg(), fg(fg::Inherited));
+        REQUIRE_EQUAL(color.bg(), bg(bg::Inherited));
     }
 
     void testOverlayWithKeepsInheritedOverlayComponentsTransparent() {
-        const auto base = term::Color{term::fg::Green, term::bg::Blue};
+        const auto base = Color{fg::Green, bg::Blue};
 
-        REQUIRE_EQUAL(base.overlayWith(term::Color{}), base);
-        REQUIRE_EQUAL(
-            base.overlayWith(term::Color{term::fg::BrightWhite, term::bg::Inherited}),
-            term::Color(term::fg::BrightWhite, term::bg::Blue));
-        REQUIRE_EQUAL(
-            base.overlayWith(term::Color{term::fg::Inherited, term::bg::Black}),
-            term::Color(term::fg::Green, term::bg::Black));
+        REQUIRE_EQUAL(base.overlayWith(Color{}), base);
+        REQUIRE_EQUAL(base.overlayWith(Color{fg::BrightWhite, bg::Inherited}), Color(fg::BrightWhite, bg::Blue));
+        REQUIRE_EQUAL(base.overlayWith(Color{fg::Inherited, bg::Black}), Color(fg::Green, bg::Black));
     }
 
     void testOverlayWithAppliesDefaultAsOpaqueColor() {
-        const auto base = term::Color{term::fg::Green, term::bg::Blue};
+        const auto base = Color{fg::Green, bg::Blue};
 
-        REQUIRE_EQUAL(
-            base.overlayWith(term::Color{term::fg::Default, term::bg::Black}),
-            term::Color(term::fg::Default, term::bg::Black));
-        REQUIRE_EQUAL(
-            base.overlayWith(term::Color{term::fg::BrightWhite, term::bg::Default}),
-            term::Color(term::fg::BrightWhite, term::bg::Default));
+        REQUIRE_EQUAL(base.overlayWith(Color{fg::Default, bg::Black}), Color(fg::Default, bg::Black));
+        REQUIRE_EQUAL(base.overlayWith(Color{fg::BrightWhite, bg::Default}), Color(fg::BrightWhite, bg::Default));
     }
 };

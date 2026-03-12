@@ -1,18 +1,18 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include <erbsland/unittest/UnitTest.hpp>
-
 #include "TestHelper.hpp"
+
+#include <erbsland/unittest/UnitTest.hpp>
 
 
 TESTED_TARGETS(Char)
 class CharTest final : public el::UnitTest {
 public:
     void testDisplayWidthUsesUnicodeCellWidth() {
-        const auto asciiChar = term::Char{"A", term::Color{}};
-        const auto wideChar = term::Char{U'界', term::Color{}};
-        const auto combiningChar = term::Char{"e\xCC\x81", term::Color{}};
+        const auto asciiChar = Char{"A", Color{}};
+        const auto wideChar = Char{U'界', Color{}};
+        const auto combiningChar = Char{"e\xCC\x81", Color{}};
 
         REQUIRE_EQUAL(asciiChar.displayWidth(), 1);
         REQUIRE_EQUAL(wideChar.displayWidth(), 2);
@@ -20,9 +20,9 @@ public:
     }
 
     void testConstructorsDecodeUtf8Utf32AndCodePoints() {
-        const auto fromUtf8 = term::Char{"e\xCC\x81"};
-        const auto fromUtf32Text = term::Char{U"e\u0301"};
-        constexpr auto fromCodePoint = term::Char{U'★'};
+        const auto fromUtf8 = Char{"e\xCC\x81"};
+        const auto fromUtf32Text = Char{U"e\u0301"};
+        constexpr auto fromCodePoint = Char{U'★'};
 
         REQUIRE_EQUAL(fromUtf8.codePointCount(), std::size_t{2});
         REQUIRE_EQUAL(fromUtf32Text.codePointCount(), std::size_t{2});
@@ -36,7 +36,7 @@ public:
     }
 
     void testAppendToAndByteCountEncodeUtf8() {
-        const auto character = term::Char{U"e\u0301", term::Color{term::fg::BrightWhite, term::bg::Blue}};
+        const auto character = Char{U"e\u0301", fg::BrightWhite, bg::Blue};
         auto buffer = std::string{"prefix:"};
 
         character.appendTo(buffer);
@@ -47,7 +47,7 @@ public:
     }
 
     void testWithCombiningAppendsZeroWidthCodePoints() {
-        const auto combined = term::Char{U'e'}.withCombining(U'\u0301');
+        const auto combined = Char{U'e'}.withCombining(U'\u0301');
 
         REQUIRE_EQUAL(combined.codePointCount(), std::size_t{2});
         REQUIRE_EQUAL(combined.codePoints(), (std::array<char32_t, 3>{U'e', U'\u0301', 0}));
@@ -55,17 +55,17 @@ public:
     }
 
     void testWithCombiningRejectsInvalidCodePoints() {
-        REQUIRE_THROWS_AS(std::invalid_argument, term::Char{}.withCombining(U'\u0301'));
-        REQUIRE_THROWS_AS(std::invalid_argument, term::Char{U'e'}.withCombining(U'x'));
-        REQUIRE_THROWS_AS(std::invalid_argument, term::Char{U'e'}.withCombining(U'\n'));
-        REQUIRE_THROWS_AS(std::invalid_argument, term::Char{U"e\u0301\u0302"}.withCombining(U'\u0303'));
+        REQUIRE_THROWS_AS(std::invalid_argument, Char{}.withCombining(U'\u0301'));
+        REQUIRE_THROWS_AS(std::invalid_argument, Char{U'e'}.withCombining(U'x'));
+        REQUIRE_THROWS_AS(std::invalid_argument, Char{U'e'}.withCombining(U'\n'));
+        REQUIRE_THROWS_AS(std::invalid_argument, Char{U"e\u0301\u0302"}.withCombining(U'\u0303'));
     }
 
     void testEqualityComparesCodePointsAndColors() {
-        const auto left = term::Char{U'★', term::Color{term::fg::Yellow, term::bg::Blue}};
-        const auto equal = term::Char{"★", term::Color{term::fg::Yellow, term::bg::Blue}};
-        const auto differentColor = term::Char{U'★', term::Color{term::fg::Yellow, term::bg::Black}};
-        const auto differentCodePoint = term::Char{U'☆', term::Color{term::fg::Yellow, term::bg::Blue}};
+        const auto left = Char{U'★', fg::Yellow, bg::Blue};
+        const auto equal = Char{U'★', fg::Yellow, bg::Blue};
+        const auto differentColor = Char{U'★', fg::Yellow, bg::Black};
+        const auto differentCodePoint = Char{U'☆', fg::Yellow, bg::Blue};
 
         REQUIRE(left == equal);
         REQUIRE_FALSE(left != equal);
@@ -75,67 +75,89 @@ public:
         REQUIRE(differentCodePoint != left);
     }
 
+    void testSingleCodePointComparisonsIgnoreColorButRejectMultiCodePointCharacters() {
+        const auto colored = Char{U'★', fg::Yellow, bg::Blue};
+        const auto combined = Char{U"e\u0301"};
+
+        REQUIRE(colored == U'★');
+        REQUIRE_FALSE(colored != U'★');
+        REQUIRE(colored != U'☆');
+        REQUIRE_FALSE(combined == U'e');
+        REQUIRE(combined != U'e');
+    }
+
     void testWithColorOverlayPreservesInheritedComponents() {
-        const auto base = term::Char{"X", term::Color{term::fg::Green, term::bg::Blue}};
+        const auto base = Char{U'X', fg::Green, bg::Blue};
 
-        const auto changedForeground =
-            base.withColorOverlay(term::Color{term::fg::BrightWhite, term::bg::Inherited});
-        REQUIRE_EQUAL(changedForeground.color(), term::Color(term::fg::BrightWhite, term::bg::Blue));
+        const auto changedForeground = base.withColorOverlay(Color{fg::BrightWhite, bg::Inherited});
+        REQUIRE_EQUAL(changedForeground.color(), Color(fg::BrightWhite, bg::Blue));
 
-        const auto changedBackground = base.withColorOverlay(term::Color{term::fg::Inherited, term::bg::Black});
-        REQUIRE_EQUAL(changedBackground.color(), term::Color(term::fg::Green, term::bg::Black));
+        const auto changedBackground = base.withColorOverlay(Color{fg::Inherited, bg::Black});
+        REQUIRE_EQUAL(changedBackground.color(), Color(fg::Green, bg::Black));
     }
 
     void testWithColorOverlayAppliesDefaultAsExplicitReset() {
-        const auto base = term::Char{"X", term::Color{term::fg::Green, term::bg::Blue}};
+        const auto base = Char{U'X', fg::Green, bg::Blue};
 
-        const auto resetForeground = base.withColorOverlay(term::Color{term::fg::Default, term::bg::Inherited});
-        REQUIRE_EQUAL(resetForeground.color(), term::Color(term::fg::Default, term::bg::Blue));
+        const auto resetForeground = base.withColorOverlay(Color{fg::Default, bg::Inherited});
+        REQUIRE_EQUAL(resetForeground.color(), Color(fg::Default, bg::Blue));
 
-        const auto resetBackground = base.withColorOverlay(term::Color{term::fg::Inherited, term::bg::Default});
-        REQUIRE_EQUAL(resetBackground.color(), term::Color(term::fg::Green, term::bg::Default));
+        const auto resetBackground = base.withColorOverlay(Color{fg::Inherited, bg::Default});
+        REQUIRE_EQUAL(resetBackground.color(), Color(fg::Green, bg::Default));
     }
 
     void testWithColorReplacedAndWithBaseColorUseExpectedRules() {
-        const auto base = term::Char{U'X', term::Color{term::fg::Green, term::bg::Blue}};
-        const auto overlaid =
-            term::Char{U'X', term::Color{term::fg::Inherited, term::bg::Yellow}}
-                .withBaseColor(term::Color{term::fg::BrightWhite, term::bg::Blue});
+        const auto base = Char{U'X', fg::Green, bg::Blue};
+        const auto overlaid = Char{U'X', fg::Inherited, bg::Yellow}.withBaseColor(Color{fg::BrightWhite, bg::Blue});
 
         REQUIRE_EQUAL(
-            base.withColorReplaced(term::Color{term::fg::BrightWhite, term::bg::Black}).color(),
-            term::Color(term::fg::BrightWhite, term::bg::Black));
-        REQUIRE_EQUAL(
-            base.withBaseColor(term::Color{term::fg::Inherited, term::bg::BrightBlack}).color(),
-            term::Color(term::fg::Green, term::bg::Blue));
-        REQUIRE_EQUAL(overlaid.color(), term::Color(term::fg::BrightWhite, term::bg::Yellow));
+            base.withColorReplaced(Color{fg::BrightWhite, bg::Black}).color(), Color(fg::BrightWhite, bg::Black));
+        REQUIRE_EQUAL(base.withBaseColor(Color{fg::Inherited, bg::BrightBlack}).color(), Color(fg::Green, bg::Blue));
+        REQUIRE_EQUAL(overlaid.color(), Color(fg::BrightWhite, bg::Yellow));
     }
 
     void testSpacingRecognizesSingleWhitespaceCodePoints() {
-        REQUIRE(term::Char{U' '}.isSpacing());
-        REQUIRE(term::Char{U'\t'}.isSpacing());
-        REQUIRE_FALSE(term::Char{U"e\u0301"}.isSpacing());
-        REQUIRE_FALSE(term::Char{}.isSpacing());
+        REQUIRE(Char{U' '}.isSpacing());
+        REQUIRE(Char{U'\t'}.isSpacing());
+        REQUIRE_FALSE(Char{U"e\u0301"}.isSpacing());
+        REQUIRE_FALSE(Char{}.isSpacing());
+    }
+
+    void testIsEmptySpaceAndIsOneOfHelpersUseSingleCodePoints() {
+        const auto empty = Char{};
+        const auto space = Char::space();
+        const auto symbol = Char{U'X', fg::Red, bg::Black};
+        const auto combined = Char{U"e\u0301"};
+
+        REQUIRE(empty.isEmpty());
+        REQUIRE_FALSE(space.isEmpty());
+        REQUIRE(space == U' ');
+        REQUIRE_EQUAL(space.color(), Color{});
+        REQUIRE(symbol.isOneOf(U"ABCX"));
+        REQUIRE(symbol.isOneOf({U'A', U'X', U'Z'}));
+        REQUIRE(symbol.isOneOf(U'A', U'X', U'Z'));
+        REQUIRE_FALSE(symbol.isOneOf(U"ABC"));
+        REQUIRE_FALSE(combined.isOneOf(U"e"));
     }
 
     void testRenderedEqualsTreatsInheritedColorsLikeDefaults() {
-        const auto inherited = term::Char{"X", term::Color{term::fg::Inherited, term::bg::Inherited}};
-        const auto defaults = term::Char{"X", term::Color{term::fg::Default, term::bg::Default}};
+        const auto inherited = Char{U'X', fg::Inherited, bg::Inherited};
+        const auto defaults = Char{U'X', fg::Default, bg::Default};
 
         REQUIRE(inherited.renderedEquals(defaults));
         REQUIRE(defaults.renderedEquals(inherited));
     }
 
     void testRenderedEqualsCanIgnoreColorDifferences() {
-        const auto left = term::Char{"X", term::Color{term::fg::Red, term::bg::Black}};
-        const auto right = term::Char{"X", term::Color{term::fg::Blue, term::bg::Yellow}};
+        const auto left = Char{U'X', fg::Red, bg::Black};
+        const auto right = Char{U'X', fg::Blue, bg::Yellow};
 
         REQUIRE_FALSE(left.renderedEquals(right));
         REQUIRE(left.renderedEquals(right, false));
     }
 
     void testRejectsTooManyCodePoints() {
-        REQUIRE_THROWS_AS(std::invalid_argument, term::Char{U"ab\u0301\u0302"});
-        REQUIRE_THROWS_AS(std::invalid_argument, term::Char{"a\xCC\x81\xCC\x82\xCC\x83"});
+        REQUIRE_THROWS_AS(std::invalid_argument, Char{U"ab\u0301\u0302"});
+        REQUIRE_THROWS_AS(std::invalid_argument, Char{"a\xCC\x81\xCC\x82\xCC\x83"});
     }
 };

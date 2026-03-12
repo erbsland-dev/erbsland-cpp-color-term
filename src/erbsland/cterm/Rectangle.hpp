@@ -3,6 +3,7 @@
 #pragma once
 
 
+#include "Direction.hpp"
 #include "Margins.hpp"
 #include "Position.hpp"
 #include "Size.hpp"
@@ -15,11 +16,15 @@
 namespace erbsland::cterm {
 
 
+class Rectangle;
+using RectangleList = std::vector<Rectangle>;
+
+
 /// Axis-aligned rectangle represented by a top-left position and size.
 /// Provides geometry utilities such as containment tests, expansion and iteration.
 /// @tested `RectangleTest`
 class Rectangle {
-public: // ctors/dtor/assign/move
+public:
     /// Construct an empty rectangle at (0,0).
     Rectangle() = default;
     /// Construct from explicit position and size values.
@@ -32,12 +37,30 @@ public: // ctors/dtor/assign/move
     /// @param pos Top-left corner position.
     /// @param size Rectangle size.
     constexpr Rectangle(Position pos, Size size) noexcept : _pos{pos}, _size{size} {}
+    /// Construct from a top-left and bottom-right (exclusive) corner position.
+    /// If the bottom right is left or above the top-left corner, the rectangle will be empty.
+    /// @param topLeft The top-left corner *inside* the new rectangle.
+    /// @param bottomRight The bottom-right corner *outside* the new rectangle.
+    constexpr Rectangle(const Position topLeft, const Position bottomRight) noexcept :
+        _pos{topLeft}, _size{bottomRight.x() - topLeft.x(), bottomRight.y() - topLeft.y()} {}
 
 public: // operators
+    /// Compare two rectangles.
+    auto operator==(const Rectangle &other) const noexcept -> bool = default;
+    /// Compare two rectangles.
+    auto operator!=(const Rectangle &other) const noexcept -> bool = default;
+    /// Merge two rectangles into a larger one that holds both rectangles.
+    auto operator|(const Rectangle &other) const noexcept -> Rectangle;
     /// Expand this rectangle to include another rectangle.
-    /// @param other Other rectangle to merge.
+    /// @param other The other rectangle to merge.
     /// @return Reference to this rectangle.
     auto operator|=(const Rectangle &other) noexcept -> Rectangle &;
+    /// Intersect two rectangles to get only the overlapping part.
+    /// If the two rectangles don't overlap, return an empty rectangle.
+    auto operator&(const Rectangle &other) const noexcept -> Rectangle;
+    /// Change this rectangle to the intersection of both rectangles.
+    /// If the two rectangles don't overlap, its size will be (0,0).
+    auto operator&=(const Rectangle &other) noexcept -> Rectangle &;
 
 public: // accessors
     /// Left x-coordinate.
@@ -95,10 +118,23 @@ public: // tools
     /// @param testedPosition Position to test.
     /// @return `true` if the position lies inside the rectangle bounds.
     [[nodiscard]] auto contains(Position testedPosition) const noexcept -> bool;
+    /// Checks if another rectangle fits into this one.
+    /// Only `true` if every position of the tested rectangle is inside this one.
+    /// @param testedRectangle The rectangle to test for containment.
+    /// @return `true` if the tested rectangle is fully contained within this one.
+    [[nodiscard]] auto contains(Rectangle testedRectangle) const noexcept -> bool;
+    /// Check if another rectangle overlaps this one.
+    /// Overlapping is when both rectangles share at least one position.
+    /// @param testedRectangle The rectangle to test for overlap.
+    [[nodiscard]] auto overlaps(Rectangle testedRectangle) const noexcept -> bool;
     /// Check if a position lies on the rectangle frame.
     /// @param testedPosition Position to test.
     /// @return `true` if the position lies on the outer frame of the rectangle.
     [[nodiscard]] auto isFrame(Position testedPosition) const noexcept -> bool;
+    /// Get the frame direction for a given position in this rectangle.
+    /// @return The direction of the frame at the given position, or Direction::None if the position is not on the
+    /// frame.
+    [[nodiscard]] auto frameDirection(Position testedPosition) const noexcept -> Direction;
     /// Get the clockwise border index for a frame position.
     /// The top-left corner has index `0`, then the index increases clockwise around the perimeter.
     /// Degenerate rectangles with width or height `1` still produce a continuous index sequence.
@@ -126,6 +162,10 @@ public: // tools
     template <typename Fn>
         requires(std::is_invocable_r_v<void, Fn, Position, int> || std::is_invocable_r_v<void, Fn, Position>)
     void forEachInFrame(Fn fn) const;
+    /// Get the bounds from the given positions.
+    /// @param positions The positions to get the bounds from.
+    /// @return A rectangle that contains all positions.
+    [[nodiscard]] static auto bounds(const PositionList &positions) noexcept -> Rectangle;
 
 private:
     Position _pos;

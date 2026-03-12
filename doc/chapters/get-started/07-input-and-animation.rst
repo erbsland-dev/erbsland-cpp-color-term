@@ -8,8 +8,8 @@ Add Input and Animation
 
 In this final step, the static dashboard becomes a small interactive
 application. The program switches the input backend into key-reading
-mode, redraws the screen continuously, reacts to terminal resize
-events, and updates the animated title on every frame.
+mode, redraws the screen continuously, polls for terminal size changes,
+and updates the animated title on every frame.
 
 Replace :file:`signal-board/src/main.cpp`
 =========================================
@@ -70,7 +70,7 @@ Replace the source file with the following final tutorial version:
                 }
             }
 
-            auto buffer = Buffer{terminal.size() - Size{1, 1}};
+            auto buffer = Buffer{terminal.size()};
             buffer.fill(Char{" ", {fg::BrightWhite, bg::Black}});
 
             const auto canvas = Rectangle{0, 0, buffer.size().width(), buffer.size().height()};
@@ -116,7 +116,7 @@ applications:
   key handling.
 * ``read(timeout)`` allows the redraw loop to remain responsive
   without busy waiting.
-* ``testScreenSize()`` updates the detected terminal size between frames.
+* ``testScreenSize()`` polls for terminal size changes between frames.
 * ``RefreshMode::Overwrite`` redraws the screen cleanly without leaving
   old content behind.
 * ``String`` is useful for constructing colored prompts or status bars

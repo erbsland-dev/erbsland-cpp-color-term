@@ -1,6 +1,5 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
-
 #pragma once
 
 
@@ -156,7 +155,9 @@ public: // conversion
     /// Convert a 2D position to a row-major linear index.
     /// @param pos The position. Behavior is undefined if not contained by this size.
     /// @return y * width + x.
-    [[nodiscard]] constexpr auto index(const Position &pos) const noexcept -> int { return pos.y() * _width + pos.x(); }
+    [[nodiscard]] constexpr auto index(const Position &pos) const noexcept -> std::size_t {
+        return static_cast<std::size_t>(pos.y()) * static_cast<std::size_t>(_width) + static_cast<std::size_t>(pos.x());
+    }
 
 public: // tools
     /// Visit all positions inside the size in row-major order.

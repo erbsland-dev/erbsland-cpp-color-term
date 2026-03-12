@@ -14,6 +14,10 @@ namespace demo::textgallery {
 
 void TextGalleryApp::run() {
     _font = Font::defaultAscii();
+    _updateSettings.setMinimumSize(Size{38, 14});
+    _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
+    _updateSettings.setMinimumSizeMessage(
+        String{"Resize the terminal to at least 38x14 cells for the text gallery.", Color{fg::BrightWhite, bg::Black}});
     auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
     while (!_quitRequested) {
         const auto key = _terminal.input().read(std::chrono::milliseconds{90});
@@ -27,7 +31,7 @@ void TextGalleryApp::run() {
 
 
 auto TextGalleryApp::canvasSize() const noexcept -> Size {
-    return _terminal.size() - Size{1, 1};
+    return _terminal.size();
 }
 
 
@@ -44,50 +48,40 @@ void TextGalleryApp::handleKey(const Key &key) noexcept {
 
 void TextGalleryApp::renderFrame() {
     _terminal.testScreenSize();
-    auto buffer = Buffer{canvasSize()};
-    buffer.fill(Char{" ", bg::Black});
-    if (buffer.size().width() < 38 || buffer.size().height() < 14) {
-        buffer.drawText(
-            "Resize the terminal to at least 38x14 cells for the text gallery.",
-            Rectangle{0, 0, buffer.size().width(), buffer.size().height()},
-            Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
-    } else {
-        const auto outerRect = Rectangle{0, 0, buffer.size().width(), buffer.size().height()};
-        buffer.drawFrame(outerRect, FrameStyle::LightWithRoundedCorners);
-        const auto titleRect = Rectangle{2, 1, buffer.size().width() - 4, 1};
-        const auto contentRect = Rectangle{2, 3, buffer.size().width() - 4, buffer.size().height() - 7};
-        const auto footerRect = Rectangle{2, buffer.size().height() - 3, buffer.size().width() - 4, 1};
-        buffer.drawText(
-            "Text Gallery  |  alignment, wrapping, wide characters, and bitmap fonts",
-            titleRect,
-            Alignment::Center,
-            Color{fg::BrightWhite, bg::Black});
-        switch (_pageIndex) {
-        case 0:
-            drawOverviewPage(buffer, contentRect);
-            break;
-        case 1:
-            drawMixedWidthPage(buffer, contentRect);
-            break;
-        case 2:
-        default:
-            drawBitmapFontPage(buffer, contentRect);
-            break;
-        }
-        drawFooter(buffer, footerRect);
+    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+    _buffer.fill(Char{" ", bg::Black});
+    const auto outerRect = Rectangle{0, 0, _buffer.size().width(), _buffer.size().height()};
+    _buffer.drawFrame(outerRect, FrameStyle::LightWithRoundedCorners);
+    const auto titleRect = Rectangle{2, 1, _buffer.size().width() - 4, 1};
+    const auto contentRect = Rectangle{2, 3, _buffer.size().width() - 4, _buffer.size().height() - 7};
+    const auto footerRect = Rectangle{2, _buffer.size().height() - 3, _buffer.size().width() - 4, 1};
+    _buffer.drawText(
+        "Text Gallery  |  alignment, wrapping, wide characters, and bitmap fonts",
+        titleRect,
+        Alignment::Center,
+        Color{fg::BrightWhite, bg::Black});
+    switch (_pageIndex) {
+    case 0:
+        drawOverviewPage(contentRect);
+        break;
+    case 1:
+        drawMixedWidthPage(contentRect);
+        break;
+    case 2:
+    default:
+        drawBitmapFontPage(contentRect);
+        break;
     }
-    _terminal.updateScreen(buffer);
-    _terminal.flush();
+    drawFooter(footerRect);
+    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 
-void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRect) {
+void TextGalleryApp::drawOverviewPage(const Rectangle contentRect) {
     const auto gap = 1;
     const auto columnWidth = std::max(12, (contentRect.width() - gap) / 2);
     const auto rowHeight = std::max(5, (contentRect.height() - gap) / 2);
     drawPanel(
-        buffer,
         Rectangle{contentRect.x1(), contentRect.y1(), columnWidth, rowHeight},
         "Top Left",
         "Small panels are an easy way to compare alignment and wrapping side by side.",
@@ -96,7 +90,6 @@ void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRec
         Color{fg::White, bg::BrightBlack},
         Color{fg::White, bg::BrightBlack});
     drawPanel(
-        buffer,
         Rectangle{contentRect.x1() + columnWidth + gap, contentRect.y1(), columnWidth, rowHeight},
         "Center",
         "The same paragraph can be centered without a custom layout engine.",
@@ -105,7 +98,6 @@ void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRec
         Color{fg::BrightBlue, bg::Blue},
         Color{fg::BrightBlue, bg::Blue});
     drawPanel(
-        buffer,
         Rectangle{contentRect.x1(), contentRect.y1() + rowHeight + gap, columnWidth, rowHeight},
         "Bottom Right",
         "Right and bottom alignment stay readable even inside narrow frames.",
@@ -114,7 +106,6 @@ void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRec
         Color{fg::BrightMagenta, bg::Magenta},
         Color{fg::BrightMagenta, bg::Magenta});
     drawPanel(
-        buffer,
         Rectangle{contentRect.x1() + columnWidth + gap, contentRect.y1() + rowHeight + gap, columnWidth, rowHeight},
         "Top Center",
         "Wrapping respects the box width, while alignment still decides where each line starts.",
@@ -125,10 +116,9 @@ void TextGalleryApp::drawOverviewPage(Buffer &buffer, const Rectangle contentRec
 }
 
 
-void TextGalleryApp::drawMixedWidthPage(Buffer &buffer, const Rectangle contentRect) {
+void TextGalleryApp::drawMixedWidthPage(const Rectangle contentRect) {
     const auto topHeight = std::max(5, contentRect.height() / 2 - 1);
     drawPanel(
-        buffer,
         Rectangle{contentRect.x1(), contentRect.y1(), contentRect.width(), topHeight},
         "Mixed Width Layout",
         "English meets 日本語 and 漢字 in the same wrapped paragraph. The frame and alignment stay stable because "
@@ -142,7 +132,6 @@ void TextGalleryApp::drawMixedWidthPage(Buffer &buffer, const Rectangle contentR
     const auto lowerHeight = contentRect.y2() - lowerY;
     const auto leftWidth = std::max(12, (contentRect.width() - 1) / 2);
     drawPanel(
-        buffer,
         Rectangle{contentRect.x1(), lowerY, leftWidth, lowerHeight},
         "Center",
         "A界B  C東京D  E文字F\nCentered text keeps the wide glyphs balanced.",
@@ -151,7 +140,6 @@ void TextGalleryApp::drawMixedWidthPage(Buffer &buffer, const Rectangle contentR
         bg::Blue,
         Color{fg::BrightWhite, bg::Blue});
     drawPanel(
-        buffer,
         Rectangle{contentRect.x1() + leftWidth + 1, lowerY, leftWidth, lowerHeight},
         "Right",
         "右寄せ with ASCII, kana, and kanji.\nZürich, 東京, Kyoto, and 大阪 all line up cleanly.",
@@ -162,7 +150,7 @@ void TextGalleryApp::drawMixedWidthPage(Buffer &buffer, const Rectangle contentR
 }
 
 
-void TextGalleryApp::drawBitmapFontPage(Buffer &buffer, const Rectangle contentRect) {
+void TextGalleryApp::drawBitmapFontPage(const Rectangle contentRect) {
     const auto titleHeight = std::min(6, contentRect.height());
     auto title = Text{
         String{titleForWidth(contentRect.width())},
@@ -171,10 +159,9 @@ void TextGalleryApp::drawBitmapFontPage(Buffer &buffer, const Rectangle contentR
     title.setFont(_font);
     title.setColorSequence(titleColors());
     title.setAnimation(TextAnimation::ColorDiagonal);
-    buffer.drawText(title, _animationCycle);
+    _buffer.drawText(title, _animationCycle);
 
     drawPanel(
-        buffer,
         Rectangle{
             contentRect.x1(), contentRect.y1() + titleHeight, contentRect.width(), contentRect.height() - titleHeight},
         "Bitmap Font",
@@ -188,7 +175,6 @@ void TextGalleryApp::drawBitmapFontPage(Buffer &buffer, const Rectangle contentR
 
 
 void TextGalleryApp::drawPanel(
-    Buffer &buffer,
     const Rectangle rect,
     const std::string_view title,
     const std::string_view text,
@@ -200,17 +186,17 @@ void TextGalleryApp::drawPanel(
     if (rect.width() <= 2 || rect.height() <= 2) {
         return;
     }
-    buffer.drawFilledFrame(rect, frameStyle, Char{" ", fillColor});
-    buffer.drawText(title, Rectangle{rect.x1() + 2, rect.y1(), rect.width() - 4, 1}, Alignment::Center, textColor);
-    buffer.drawText(
+    _buffer.drawFilledFrame(rect, frameStyle, Char{" ", fillColor});
+    _buffer.drawText(title, Rectangle{rect.x1() + 2, rect.y1(), rect.width() - 4, 1}, Alignment::Center, textColor);
+    _buffer.drawText(
         text, Rectangle{rect.x1() + 1, rect.y1() + 1, rect.width() - 2, rect.height() - 2}, alignment, textColor);
 }
 
 
-void TextGalleryApp::drawFooter(Buffer &buffer, const Rectangle rect) const {
-    buffer.fill(rect, Char{" ", bg::BrightBlack});
+void TextGalleryApp::drawFooter(const Rectangle rect) {
+    _buffer.fill(rect, Char{" ", bg::BrightBlack});
     auto footer = Text{buildFooterText(), rect, Alignment::CenterLeft};
-    buffer.drawText(footer);
+    _buffer.drawText(footer);
 }
 
 

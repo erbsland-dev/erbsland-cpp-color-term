@@ -6,6 +6,8 @@
 #include "impl/U8Buffer.hpp"
 #include "impl/UnicodeWidth.hpp"
 
+#include <algorithm>
+#include <ranges>
 #include <stdexcept>
 
 
@@ -18,85 +20,13 @@ Char::Char(const std::string_view charStr) : Char{charStr, Color{}} {
 Char::Char(const std::u32string_view charStr) : Char{charStr, Color{}} {
 }
 
-Char::Char(const char32_t *charStr) : Char{charStr, Color{}} {
+auto Char::operator==(const char32_t other) const noexcept -> bool {
+    return _codePoints == std::array<char32_t, 3>{other, 0, 0};
 }
 
-Char::Char(const std::string_view charStr, const Foreground fgColor, const Background bgColor) :
-    Char{charStr, {fgColor, bgColor}} {
+auto Char::operator!=(const char32_t other) const noexcept -> bool {
+    return _codePoints != std::array<char32_t, 3>{other, 0, 0};
 }
-
-Char::Char(const std::string_view charStr, const Foreground::Hue fgColor, const Background::Hue bgColor) :
-    Char{charStr, {fgColor, bgColor}} {
-}
-
-Char::Char(const std::string_view charStr, const Foreground fgColor) : Char{charStr, {fgColor, Background::Inherited}} {
-}
-
-Char::Char(const std::string_view charStr, const Foreground::Hue fgColor) :
-    Char{charStr, {fgColor, Background::Inherited}} {
-}
-
-Char::Char(const std::string_view charStr, const Background bgColor) : Char{charStr, {Foreground::Inherited, bgColor}} {
-}
-
-Char::Char(const std::string_view charStr, const Background::Hue bgColor) :
-    Char{charStr, {Foreground::Inherited, bgColor}} {
-}
-
-Char::Char(const std::string_view charStr, const Color color) : _codePoints{decodeUtf8(charStr)}, _color{color} {
-}
-
-Char::Char(const std::u32string_view charStr, const Foreground fgColor, const Background bgColor) :
-    Char{charStr, {fgColor, bgColor}} {
-}
-
-Char::Char(const std::u32string_view charStr, const Foreground::Hue fgColor, const Background::Hue bgColor) :
-    Char{charStr, {fgColor, bgColor}} {
-}
-
-Char::Char(const std::u32string_view charStr, const Foreground fgColor) :
-    Char{charStr, {fgColor, Background::Inherited}} {
-}
-
-Char::Char(const std::u32string_view charStr, const Foreground::Hue fgColor) :
-    Char{charStr, {fgColor, Background::Inherited}} {
-}
-
-Char::Char(const std::u32string_view charStr, const Background bgColor) :
-    Char{charStr, {Foreground::Inherited, bgColor}} {
-}
-
-Char::Char(const std::u32string_view charStr, const Background::Hue bgColor) :
-    Char{charStr, {Foreground::Inherited, bgColor}} {
-}
-
-Char::Char(const std::u32string_view charStr, const Color color) : _codePoints{decodeUtf32(charStr)}, _color{color} {
-}
-
-Char::Char(const char32_t *charStr, const Foreground fgColor, const Background bgColor) :
-    Char{charStr, {fgColor, bgColor}} {
-}
-
-Char::Char(const char32_t *charStr, const Foreground::Hue fgColor, const Background::Hue bgColor) :
-    Char{charStr, {fgColor, bgColor}} {
-}
-
-Char::Char(const char32_t *charStr, const Foreground fgColor) : Char{charStr, {fgColor, Background::Inherited}} {
-}
-
-Char::Char(const char32_t *charStr, const Foreground::Hue fgColor) : Char{charStr, {fgColor, Background::Inherited}} {
-}
-
-Char::Char(const char32_t *charStr, const Background bgColor) : Char{charStr, {Foreground::Inherited, bgColor}} {
-}
-
-Char::Char(const char32_t *charStr, const Background::Hue bgColor) : Char{charStr, {Foreground::Inherited, bgColor}} {
-}
-
-Char::Char(const char32_t *charStr, const Color color) :
-    Char{charStr != nullptr ? std::u32string_view{charStr} : std::u32string_view{}, color} {
-}
-
 
 auto Char::charStr() const -> std::string {
     auto result = std::string{};
@@ -104,7 +34,6 @@ auto Char::charStr() const -> std::string {
     appendTo(result);
     return result;
 }
-
 
 auto Char::displayWidth() const noexcept -> int {
     if (_displayWidthCache != cNoDisplayWidth) {
@@ -201,6 +130,13 @@ auto Char::isSpacing() const noexcept -> bool {
     return _codePoints[0] == U' ' || _codePoints[0] == U'\t' || _codePoints[0] == U'\n' || _codePoints[0] == U'\r';
 }
 
+auto Char::isOneOf(std::u32string_view characters) const noexcept -> bool {
+    return std::ranges::any_of(characters, [this](const char32_t character) -> bool { return *this == character; });
+}
+
+auto Char::isOneOf(std::initializer_list<char32_t> characters) const noexcept -> bool {
+    return std::ranges::any_of(characters, [this](const char32_t character) -> bool { return *this == character; });
+}
 
 auto Char::renderedEquals(const Char &other, const bool colorEnabled) const noexcept -> bool {
     if (codePoints() != other.codePoints()) {
@@ -210,9 +146,8 @@ auto Char::renderedEquals(const Char &other, const bool colorEnabled) const noex
         return true;
     }
     return color().fg().ansiCode() == other.color().fg().ansiCode() &&
-           color().bg().ansiCode() == other.color().bg().ansiCode();
+        color().bg().ansiCode() == other.color().bg().ansiCode();
 }
-
 
 auto Char::decodeUtf8(const std::string_view charStr) -> std::array<char32_t, 3> {
     auto result = std::array<char32_t, 3>{};
@@ -222,7 +157,8 @@ auto Char::decodeUtf8(const std::string_view charStr) -> std::array<char32_t, 3>
             throw std::invalid_argument{"Char does not support the Unicode code point U+0000."};
         }
         if (isControlCode(codePoint) && codePoint != U'\t' && codePoint != U'\n' && codePoint != U'\r') {
-            throw std::invalid_argument{"Char does not support control codes except tab, newline, and carriage return."};
+            throw std::invalid_argument{
+                "Char does not support control codes except tab, newline, and carriage return."};
         }
         if (index >= result.size()) {
             throw std::invalid_argument{"Char supports at most three Unicode code points."};
@@ -231,7 +167,6 @@ auto Char::decodeUtf8(const std::string_view charStr) -> std::array<char32_t, 3>
     });
     return result;
 }
-
 
 auto Char::decodeUtf32(const std::u32string_view charStr) -> std::array<char32_t, 3> {
     auto result = std::array<char32_t, 3>{};
@@ -244,7 +179,8 @@ auto Char::decodeUtf32(const std::u32string_view charStr) -> std::array<char32_t
         }
         if (isControlCode(charStr[index]) && charStr[index] != U'\t' && charStr[index] != U'\n' &&
             charStr[index] != U'\r') {
-            throw std::invalid_argument{"Char does not support control codes except tab, newline, and carriage return."};
+            throw std::invalid_argument{
+                "Char does not support control codes except tab, newline, and carriage return."};
         }
         result[index] = charStr[index];
     }

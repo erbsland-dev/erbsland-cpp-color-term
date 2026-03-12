@@ -29,7 +29,7 @@ Update the source file with the following version:
         auto terminal = Terminal{Size{96, 28}};
         terminal.initializeScreen();
 
-        auto buffer = Buffer{terminal.size() - Size{1, 1}};
+        auto buffer = Buffer{terminal.size()};
         buffer.fill(Char{" ", Color{fg::Default, bg::Black}});
 
         const auto canvas = Rectangle{0, 0, buffer.size().width(), buffer.size().height()};
@@ -80,7 +80,9 @@ Update the source file with the following version:
             Alignment::Center,
             Color{fg::BrightWhite, bg::Blue});
 
-        terminal.updateScreen(buffer);
+        auto settings = UpdateSettings{};
+        settings.setSwitchToAlternateBuffer(false);
+        terminal.updateScreen(buffer, settings);
         terminal.flush();
         terminal.restoreScreen();
         return 0;
@@ -98,6 +100,8 @@ This version combines several important layout and text-rendering features:
 * ``Font::defaultAscii()`` renders large bitmap text directly in the terminal.
 * ``ColorSequence`` and ``TextAnimation`` make animated titles or highlights easy to implement.
 * Wrapped Unicode text remains visually aligned even when mixing characters with different terminal widths.
+* ``UpdateSettings`` can keep a short-lived rendered example on the main screen by disabling alternate-screen
+  switching.
 
 .. figure:: /images/text-gallery1.jpg
     :width: 100%

@@ -14,19 +14,24 @@ namespace erbsland::cterm {
 
 /// A direction in a 2D grid.
 class Direction final {
-public: // ctors/dtor/assign/move
+public:
     /// The enum for the direction.
     enum Enum : uint8_t {
-        None = 0,  ///< No direction.
-        North,     ///< North.
-        NorthEast, ///< North-east.
-        East,      ///< East.
-        SouthEast, ///< South-east.
-        South,     ///< South.
-        SouthWest, ///< South-west.
-        West,      ///< West.
-        NorthWest, ///< North-west.
+        None = 0,   ///< No direction.
+        North,      ///< North.
+        NorthEast,  ///< North-east.
+        East,       ///< East.
+        SouthEast,  ///< South-east.
+        South,      ///< South.
+        SouthWest,  ///< South-west.
+        West,       ///< West.
+        NorthWest,  ///< North-west.
+
+        _EnumCount, ///< The number of directions enums.
     };
+
+    /// The number of directions enums.
+    constexpr static auto cCount = static_cast<std::size_t>(_EnumCount);
 
 public:
     /// Create a direction with value `None`.
@@ -59,6 +64,16 @@ public: // operators
         return direction == value;
     }
 
+public: // tests
+    /// Test if this direction contains (lexically) another direction.
+    /// Examples:
+    /// - NW contains N
+    /// - NW contains W
+    /// - NW contains NW
+    /// - NW does not contain S
+    /// - NW does not contain SW (they just overlap).
+    [[nodiscard]] auto contains(Direction direction) const noexcept -> bool;
+
 public: // conversion
     /// Convert this direction into a position delta.
     /// @return The unit delta for this direction, or `(0,0)` for `None`.
@@ -73,6 +88,18 @@ public: // conversion
     /// @param text The direction text.
     /// @return The parsed direction.
     [[nodiscard]] static auto fromString(std::string_view text) -> Direction;
+
+private:
+    using DirectionToDeltaEntry = std::tuple<Enum, Position>;
+    using DirectionToDeltaMap = std::array<DirectionToDeltaEntry, static_cast<std::size_t>(_EnumCount)>;
+    using DirectionToStringEntry = std::tuple<Enum, std::string_view>;
+    using DirectionToStringMap = std::array<DirectionToStringEntry, static_cast<std::size_t>(_EnumCount)>;
+    using StringToDirectionEntry = std::tuple<std::string_view, Direction>;
+    using StringToDirectionMap = std::array<StringToDirectionEntry, 22>;
+
+    [[nodiscard]] static auto directionToDeltaMap() noexcept -> const DirectionToDeltaMap &;
+    [[nodiscard]] static auto directionToStringMap() noexcept -> const DirectionToStringMap &;
+    [[nodiscard]] static auto stringToDirectionMap() noexcept -> const StringToDirectionMap &;
 
 private:
     Enum _value{None}; ///< The internal enum value.

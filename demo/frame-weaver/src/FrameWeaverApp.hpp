@@ -49,7 +49,7 @@ private:
     void updateAnimation(std::chrono::milliseconds elapsed) noexcept;
     void addFrame() noexcept;
     void renderFrame();
-    void renderFrames(Buffer &buffer, Rectangle contentRect) const;
+    void renderFrames(Rectangle contentRect);
     [[nodiscard]] auto createRandomFrame() -> FrameSpec;
     [[nodiscard]] static auto frameRectangle(FrameSpec frame, Rectangle contentRect) -> Rectangle;
     [[nodiscard]] static auto prismFrameStyle() -> const Char16StylePtr &;
@@ -60,6 +60,8 @@ private:
 
 private:
     Terminal _terminal{Size{78, 25}};
+    UpdateSettings _updateSettings;
+    Buffer _buffer;
     std::mt19937 _rng{std::random_device{}()};
     std::vector<FrameSpec> _frames;
     std::chrono::milliseconds _frameDelay{1000};

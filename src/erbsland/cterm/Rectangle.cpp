@@ -8,11 +8,26 @@
 
 namespace erbsland::cterm {
 
+auto Rectangle::operator|(const Rectangle &other) const noexcept -> Rectangle {
+    return Rectangle{topLeft().componentMin(other.topLeft()), bottomRight().componentMax(other.bottomRight())};
+}
+
 auto Rectangle::operator|=(const Rectangle &other) noexcept -> Rectangle & {
-    auto newPos1 = _pos.componentMin(other._pos);
-    auto newPos2 = bottomRight().componentMax(other.bottomRight());
-    _pos = newPos1;
-    _size = Size{newPos1, newPos2};
+    *this = *this | other;
+    return *this;
+}
+
+auto Rectangle::operator&(const Rectangle &other) const noexcept -> Rectangle {
+    if (!overlaps(other)) {
+        return Rectangle{};
+    }
+    const auto newTopLeft = topLeft().componentMax(other.topLeft());
+    const auto newBottomRight = bottomRight().componentMin(other.bottomRight());
+    return Rectangle{newTopLeft, newBottomRight};
+}
+
+auto Rectangle::operator&=(const Rectangle &other) noexcept -> Rectangle & {
+    *this = *this & other;
     return *this;
 }
 
@@ -51,10 +66,58 @@ auto Rectangle::contains(const Position testedPosition) const noexcept -> bool {
         testedPosition.y() < y2();
 }
 
+auto Rectangle::contains(const Rectangle testedRectangle) const noexcept -> bool {
+    return testedRectangle.x1() >= x1() && testedRectangle.x2() <= x2() && testedRectangle.y1() >= y1() &&
+        testedRectangle.y2() <= y2();
+}
+
+auto Rectangle::overlaps(const Rectangle testedRectangle) const noexcept -> bool {
+    return x1() < testedRectangle.x2() && x2() > testedRectangle.x1() && y1() < testedRectangle.y2() &&
+        y2() > testedRectangle.y1();
+}
+
 auto Rectangle::isFrame(const Position testedPosition) const noexcept -> bool {
     return contains(testedPosition) &&
         (testedPosition.x() == _pos.x() || testedPosition.y() == _pos.y() || testedPosition.x() == x2() - 1 ||
          testedPosition.y() == y2() - 1);
+}
+
+auto Rectangle::frameDirection(const Position testedPosition) const noexcept -> Direction {
+    if (!isFrame(testedPosition)) {
+        return Direction::None;
+    }
+    // We can't reliably return a frame direction for 1x1 or degenerate rectangles.
+    if (width() < 2 || height() < 2) {
+        return Direction::None;
+    }
+
+    const bool north = testedPosition.y() == y1();
+    const bool east = testedPosition.x() == x2() - 1;
+    const bool south = testedPosition.y() == y2() - 1;
+    const bool west = testedPosition.x() == x1();
+
+    if (north && west) {
+        return Direction::NorthWest;
+    }
+    if (north && east) {
+        return Direction::NorthEast;
+    }
+    if (south && east) {
+        return Direction::SouthEast;
+    }
+    if (south && west) {
+        return Direction::SouthWest;
+    }
+    if (north) {
+        return Direction::North;
+    }
+    if (east) {
+        return Direction::East;
+    }
+    if (south) {
+        return Direction::South;
+    }
+    return Direction::West;
 }
 
 auto Rectangle::frameIndex(const Position testedPosition) const noexcept -> int64_t {
@@ -79,9 +142,8 @@ auto Rectangle::frameIndex(const Position testedPosition) const noexcept -> int6
     return static_cast<int64_t>(2 * (width() - 1) + (height() - 1) + (y2() - 1 - testedPosition.y()));
 }
 
-auto Rectangle::gridCells(
-    const int rows, const int columns, const int horizontalSpacing, const int verticalSpacing) const
-    -> std::vector<Rectangle> {
+auto Rectangle::gridCells(const int rows, const int columns, const int horizontalSpacing, const int verticalSpacing)
+    const -> std::vector<Rectangle> {
     if (rows < 1) {
         throw std::invalid_argument{"Rectangle::gridCells() requires at least one row."};
     }
@@ -114,6 +176,19 @@ auto Rectangle::gridCells(
         y += cellHeight + verticalSpacing;
     }
     return result;
+}
+
+auto Rectangle::bounds(const PositionList &positions) noexcept -> Rectangle {
+    if (positions.empty()) {
+        return Rectangle{};
+    }
+    auto topLeft = Position::maximum();
+    auto bottomRight = Position::minimum();
+    for (const auto &position : positions) {
+        topLeft = topLeft.componentMin(position);
+        bottomRight = bottomRight.componentMax(position);
+    }
+    return Rectangle{topLeft, bottomRight + Position{1, 1}};
 }
 
 }

@@ -2,9 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 
+#include "TestHelper.hpp"
+
 #include <erbsland/unittest/UnitTest.hpp>
 
-#include "TestHelper.hpp"
+
+// Keep this check at compile time so the constexpr Rectangle constructor cannot regress unnoticed.
+static_assert([]() constexpr {
+    return Rectangle(Position(5, 6), Position(12, 15)).size() == Size(7, 9) &&
+        Rectangle(Position(5, 6), Position(2, 4)).size() == Size(0, 0);
+}());
 
 
 class RectangleTest : public el::UnitTest {
@@ -16,8 +23,7 @@ public:
         REQUIRE_EQUAL(actual.size(), expected.size());
     }
 
-    void requireRectangleSequenceEqual(
-        const std::vector<Rectangle> &actual, const std::vector<Rectangle> &expected) {
+    void requireRectangleSequenceEqual(const std::vector<Rectangle> &actual, const std::vector<Rectangle> &expected) {
         REQUIRE_EQUAL(actual.size(), expected.size());
         for (std::size_t index = 0; index < expected.size(); ++index) {
             WITH_CONTEXT(index);
@@ -45,6 +51,26 @@ public:
         rect = Rectangle(Position(5, 6), Size(7, 8));
         REQUIRE_EQUAL(rect.topLeft(), Position(5, 6));
         REQUIRE_EQUAL(rect.size(), Size(7, 8));
+    }
+
+    void testConstructorWithTopLeftAndBottomRightUsesExclusiveBottomRight() {
+        rect = Rectangle(Position(5, 6), Position(12, 15));
+        REQUIRE_EQUAL(rect.topLeft(), Position(5, 6));
+        REQUIRE_EQUAL(rect.bottomRight(), Position(12, 15));
+        REQUIRE_EQUAL(rect.size(), Size(7, 9));
+
+        const auto emptyRectangle = Rectangle(Position(5, 6), Position(2, 4));
+        REQUIRE_EQUAL(emptyRectangle.topLeft(), Position(5, 6));
+        REQUIRE_EQUAL(emptyRectangle.size(), Size(0, 0));
+    }
+
+    void testComparisonOperators() {
+        const auto baseline = Rectangle(1, 2, 3, 4);
+
+        REQUIRE(baseline == Rectangle(1, 2, 3, 4));
+        REQUIRE_FALSE(baseline != Rectangle(1, 2, 3, 4));
+        REQUIRE_FALSE(baseline == Rectangle(1, 2, 4, 4));
+        REQUIRE(baseline != Rectangle(1, 3, 3, 4));
     }
 
     void testSetPos() {
@@ -100,6 +126,41 @@ public:
         REQUIRE_EQUAL(rect.size(), Size(4, 4));
     }
 
+    void testUnionOperatorOrCreatesTheBoundingRectangle() {
+        const auto left = Rectangle(1, 1, 2, 2);
+        const auto right = Rectangle(Position(0, 2), Size(4, 3));
+
+        const auto united = left | right;
+
+        REQUIRE_EQUAL(united.topLeft(), Position(0, 1));
+        REQUIRE_EQUAL(united.bottomRight(), Position(4, 5));
+        REQUIRE_EQUAL(united.size(), Size(4, 4));
+    }
+
+    void testIntersectionOperatorsReturnOnlyTheOverlappingArea() {
+        rect = Rectangle(1, 1, 4, 4);
+        const auto other = Rectangle(3, 0, 3, 3);
+
+        const auto intersection = rect & other;
+
+        REQUIRE_EQUAL(intersection.topLeft(), Position(3, 1));
+        REQUIRE_EQUAL(intersection.bottomRight(), Position(5, 3));
+        REQUIRE_EQUAL(intersection.size(), Size(2, 2));
+
+        rect &= other;
+        requireRectangleEqual(rect, intersection);
+    }
+
+    void testIntersectionOfNonOverlappingRectanglesReturnsAnEmptyRectangle() {
+        const auto left = Rectangle(0, 0, 2, 2);
+        const auto right = Rectangle(3, 3, 2, 2);
+
+        const auto intersection = left & right;
+
+        REQUIRE_EQUAL(intersection.topLeft(), Position(0, 0));
+        REQUIRE_EQUAL(intersection.size(), Size(0, 0));
+    }
+
     void testExpandedByAndInsetBy() {
         rect = Rectangle(5, 6, 7, 8);
         Margins mAll(1);
@@ -153,6 +214,25 @@ public:
         REQUIRE_FALSE(rect.contains(Position(6, 3))); // x == x2 is outside
     }
 
+    void testContainsRectangleRequiresFullContainment() {
+        rect = Rectangle(2, 3, 6, 5);
+
+        REQUIRE(rect.contains(Rectangle(2, 3, 6, 5)));
+        REQUIRE(rect.contains(Rectangle(3, 4, 2, 2)));
+        REQUIRE_FALSE(rect.contains(Rectangle(1, 3, 2, 2)));
+        REQUIRE_FALSE(rect.contains(Rectangle(3, 7, 2, 2)));
+    }
+
+    void testOverlapsDetectsSharedAreaAndRejectsTouchingEdges() {
+        const auto horizontal = Rectangle(0, 1, 4, 2);
+        const auto vertical = Rectangle(1, 0, 2, 4);
+        const auto touching = Rectangle(4, 1, 2, 2);
+
+        REQUIRE(horizontal.overlaps(vertical));
+        REQUIRE(vertical.overlaps(horizontal));
+        REQUIRE_FALSE(horizontal.overlaps(touching));
+    }
+
     void testIsFrame() {
         rect = Rectangle(0, 0, 3, 3); // positions inside: (0..2,0..2)
         // corners and edges are frame
@@ -196,12 +276,27 @@ public:
         REQUIRE_EQUAL(Rectangle(4, 5, 3, 1).frameIndex(Position(6, 5)), 2);
     }
 
+    void testFrameDirectionReturnsCardinalAndCornerDirections() {
+        rect = Rectangle(10, 20, 4, 3);
+
+        REQUIRE_EQUAL(rect.frameDirection(Position(10, 20)), Direction::NorthWest);
+        REQUIRE_EQUAL(rect.frameDirection(Position(11, 20)), Direction::North);
+        REQUIRE_EQUAL(rect.frameDirection(Position(13, 20)), Direction::NorthEast);
+        REQUIRE_EQUAL(rect.frameDirection(Position(13, 21)), Direction::East);
+        REQUIRE_EQUAL(rect.frameDirection(Position(13, 22)), Direction::SouthEast);
+        REQUIRE_EQUAL(rect.frameDirection(Position(12, 22)), Direction::South);
+        REQUIRE_EQUAL(rect.frameDirection(Position(10, 22)), Direction::SouthWest);
+        REQUIRE_EQUAL(rect.frameDirection(Position(10, 21)), Direction::West);
+        REQUIRE_EQUAL(rect.frameDirection(Position(11, 21)), Direction::None);
+        REQUIRE_EQUAL(Rectangle(10, 20, 1, 1).frameDirection(Position(10, 20)), Direction::None);
+    }
+
     void testForEach() {
         rect = Rectangle(1, 2, 3, 2); // covers positions x=[1,3], y=[2,3] (exclusive x2=4,y2=4)
-        std::vector<Position> visited;
+        PositionList visited;
         rect.forEach([&](const Position pos) { visited.push_back(pos); });
         // order should be row-major: y=2: x=1,2,3 ; y=3: x=1,2,3
-        std::vector<Position> expected = {
+        PositionList expected = {
             Position(1, 2),
             Position(2, 2),
             Position(3, 2),
@@ -217,11 +312,11 @@ public:
 
     void testForEachInFrameVisitsAllFramePositions() {
         rect = Rectangle(2, 3, 3, 3);
-        std::vector<Position> visited;
+        PositionList visited;
 
         rect.forEachInFrame([&](const Position pos) { visited.push_back(pos); });
 
-        const std::vector<Position> expected = {
+        const PositionList expected = {
             Position(2, 3),
             Position(3, 3),
             Position(4, 3),
@@ -240,7 +335,7 @@ public:
 
     void testForEachInFrameWithIndexUsesClockwisePerimeterOrder() {
         rect = Rectangle(2, 3, 4, 3);
-        std::vector<Position> visited;
+        PositionList visited;
         std::vector<int> indexes;
 
         rect.forEachInFrame([&](const Position pos, const int index) {
@@ -248,7 +343,7 @@ public:
             indexes.push_back(index);
         });
 
-        const std::vector<Position> expectedPositions = {
+        const PositionList expectedPositions = {
             Position(2, 3),
             Position(3, 3),
             Position(4, 3),
@@ -344,5 +439,21 @@ public:
         REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(1, 1, 0, -1));
         REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(2, 3, 1, 0));
         REQUIRE_THROWS_AS(std::invalid_argument, rect.gridCells(3, 2, 0, 2));
+    }
+
+    void testBoundsCreatesTheInclusiveEnvelopeAroundPositions() {
+        const PositionList positions = {
+            Position(5, 7),
+            Position(-1, 4),
+            Position(3, 10),
+            Position(2, 3),
+        };
+
+        const auto bounds = Rectangle::bounds(positions);
+
+        REQUIRE_EQUAL(bounds.topLeft(), Position(-1, 3));
+        REQUIRE_EQUAL(bounds.bottomRight(), Position(6, 11));
+        REQUIRE_EQUAL(bounds.size(), Size(7, 8));
+        REQUIRE_EQUAL(Rectangle::bounds(PositionList{}), Rectangle());
     }
 };

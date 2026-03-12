@@ -28,11 +28,24 @@ auto Bitmap::fromPattern(const std::initializer_list<std::string_view> rows) -> 
 }
 
 
+auto Bitmap::toPattern() const -> std::string {
+    std::string result;
+    result.reserve(static_cast<std::size_t>(_size.area() + _size.height()));
+    for (auto y = 0; y < _size.height(); ++y) {
+        for (auto x = 0; x < _size.width(); ++x) {
+            result.push_back(pixel(Position{x, y}) ? '#' : '.');
+        }
+        result.push_back('\n');
+    }
+    return result;
+}
+
+
 auto Bitmap::pixel(const Position pos) const noexcept -> bool {
     if (!_size.contains(pos)) {
         return false;
     }
-    return _data[toDataIndex(_size.index(pos))];
+    return _data[_size.index(pos)];
 }
 
 auto Bitmap::pixelQuad(const Position pos) const noexcept -> uint8_t {
@@ -52,11 +65,89 @@ auto Bitmap::pixelQuad(const Position pos) const noexcept -> uint8_t {
     return result;
 }
 
+auto Bitmap::pixelRing(const Position pos) const noexcept -> uint8_t {
+    constexpr auto positions = std::array<std::pair<Position, uint8_t>, 8U>{
+        std::pair{Position{1, 0}, static_cast<uint8_t>(0b00000001U)},
+        std::pair{Position{1, 1}, static_cast<uint8_t>(0b00000010U)},
+        std::pair{Position{0, 1}, static_cast<uint8_t>(0b00000100U)},
+        std::pair{Position{-1, 1}, static_cast<uint8_t>(0b00001000U)},
+        std::pair{Position{-1, 0}, static_cast<uint8_t>(0b00010000U)},
+        std::pair{Position{-1, -1}, static_cast<uint8_t>(0b00100000U)},
+        std::pair{Position{0, -1}, static_cast<uint8_t>(0b01000000U)},
+        std::pair{Position{1, -1}, static_cast<uint8_t>(0b10000000U)},
+    };
+    uint8_t result = 0;
+    for (const auto &[delta, mask] : positions) {
+        if (pixel(pos + delta)) {
+            result |= mask;
+        }
+    }
+    return result;
+}
+
+auto Bitmap::boundingRect(bool value) const noexcept -> Rectangle {
+    const int w = _size.width();
+    const int h = _size.height();
+
+    auto rowHasValue = [&](int y) noexcept {
+        for (int x = 0; x < w; ++x) {
+            if (pixel({x, y}) == value) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    auto colHasValue = [&](int x) noexcept {
+        for (int y = 0; y < h; ++y) {
+            if (pixel({x, y}) == value) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    int top = 0;
+    while (top < h && !rowHasValue(top)) {
+        ++top;
+    }
+    if (top == h) {
+        return Rectangle{};
+    }
+
+    int bottom = h - 1;
+    while (bottom > top && !rowHasValue(bottom)) {
+        --bottom;
+    }
+
+    int left = 0;
+    while (left < w && !colHasValue(left)) {
+        ++left;
+    }
+
+    int right = w - 1;
+    while (right > left && !colHasValue(right)) {
+        --right;
+    }
+
+    return Rectangle{left, top, right - left + 1, bottom - top + 1};
+}
+
+auto Bitmap::pixelCount(const bool value) const noexcept -> std::size_t {
+    std::size_t result = 0;
+    _size.forEach([&](const Position pos) -> void {
+        if (pixel(pos) == value) {
+            ++result;
+        }
+    });
+    return result;
+}
+
 void Bitmap::setPixel(const Position pos, const bool value) noexcept {
     if (!_size.contains(pos)) {
         return;
     }
-    _data[toDataIndex(_size.index(pos))] = value;
+    _data[_size.index(pos)] = value;
 }
 
 void Bitmap::flipHorizontal() noexcept {
@@ -69,6 +160,48 @@ void Bitmap::flipHorizontal() noexcept {
                 const auto pixel2 = static_cast<bool>(pixelRef(p2));
                 pixelRef(p1) = pixel2;
                 pixelRef(p2) = pixel1;
+            }
+        }
+    }
+}
+
+void Bitmap::invert() noexcept {
+    _size.forEach([this](const Position pos) -> void { pixelRef(pos) = !pixelRef(pos); });
+}
+
+auto Bitmap::inverted() const noexcept -> Bitmap {
+    auto result = *this;
+    result.invert();
+    return result;
+}
+
+auto Bitmap::outlined() const noexcept -> Bitmap {
+    return fromFunction(_size, [&](const Position pos) -> bool { return !pixel(pos) && pixelRing(pos) != 0U; });
+}
+
+void Bitmap::fillRect(const Rectangle rect, const bool value) noexcept {
+    if (!this->rect().overlaps(rect)) {
+        return;
+    }
+    (this->rect() & rect).forEach([&](const Position pos) -> void { pixelRef(pos) = value; });
+}
+
+void Bitmap::floodFill(const Position pos, const bool value) noexcept {
+    if (!_size.contains(pos) || pixelRef(pos) == value) {
+        return;
+    }
+    PositionList queue;
+    queue.reserve(100);
+    queue.push_back(pos);
+    while (!queue.empty()) {
+        const auto current = queue.back();
+        queue.pop_back();
+        if (pixelRef(current) != value) {
+            pixelRef(current) = value;
+        }
+        for (const auto neighbor : current.cardinalFour()) {
+            if (_size.contains(neighbor) && pixelRef(neighbor) != value) {
+                queue.push_back(neighbor);
             }
         }
     }

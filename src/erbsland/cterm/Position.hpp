@@ -8,13 +8,19 @@
 #include <cstdint>
 #include <cstdlib>
 #include <format>
+#include <limits>
 #include <numeric>
 #include <string>
 #include <string_view>
 #include <utility>
+#include <vector>
 
 
 namespace erbsland::cterm {
+
+
+class Position;
+using PositionList = std::vector<Position>;
 
 
 /// Represents a 2D integer position or vector (x, y).
@@ -76,6 +82,11 @@ public: // modifiers
     /// @param other The other position.
     /// @return A Position containing the min of each component.
     [[nodiscard]] auto componentMin(Position other) const noexcept -> Position;
+    /// Get the four cardinal positions, relative to this one.
+    /// Order: right, down, left, up
+    [[nodiscard]] auto cardinalFour() const noexcept -> std::array<Position, 4> {
+        return {Position{_x + 1, _y}, Position{_x, _y + 1}, Position{_x - 1, _y}, Position{_x, _y - 1}};
+    }
     /// Get the four cardinal position deltas.
     /// Order: right, down, left, up
     [[nodiscard]] static auto cardinalFourDeltas() noexcept -> const std::array<Position, 4> &;
@@ -84,6 +95,16 @@ public: // modifiers
     template <typename Fn>
         requires std::invocable<Fn, Position> && std::convertible_to<std::invoke_result_t<Fn, Position>, bool>
     [[nodiscard]] auto cardinalFourBitmask(Fn fn) const noexcept -> uint32_t;
+
+public: // useful constants
+    /// Get the point with the minimum coordinates.
+    static auto minimum() noexcept -> Position {
+        return Position{std::numeric_limits<int>::min(), std::numeric_limits<int>::min()};
+    }
+    /// Get the point with the maximum coordinates.
+    static auto maximum() noexcept -> Position {
+        return Position{std::numeric_limits<int>::max(), std::numeric_limits<int>::max()};
+    }
 
 private:
     int _x{};

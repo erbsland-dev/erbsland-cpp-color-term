@@ -1,9 +1,9 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include <erbsland/unittest/UnitTest.hpp>
-
 #include "TestHelper.hpp"
+
+#include <erbsland/unittest/UnitTest.hpp>
 
 
 class AlignmentTest final : public el::UnitTest {

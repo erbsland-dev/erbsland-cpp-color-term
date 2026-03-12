@@ -3,10 +3,10 @@
 #pragma once
 
 
+#include <erbsland/cterm/all.hpp>
+
 #include <array>
 #include <string_view>
-
-#include <erbsland/cterm/all.hpp>
 
 
 namespace demo::framecoloranimations {
@@ -33,9 +33,9 @@ private:
     [[nodiscard]] auto canvasSize() const noexcept -> Size;
     void handleKey(const Key &key) noexcept;
     void renderFrame();
-    void drawPanel(Buffer &buffer, Rectangle rect, const PanelSpec &panel) const;
-    void drawHeader(Buffer &buffer, Rectangle rect) const;
-    void drawFooter(Buffer &buffer, Rectangle rect) const;
+    void drawPanel(Rectangle rect, const PanelSpec &panel);
+    void drawHeader(Rectangle rect);
+    void drawFooter(Rectangle rect);
 
 private:
     [[nodiscard]] static auto panelSpecs() -> const std::array<PanelSpec, 7> &;
@@ -45,6 +45,8 @@ private:
 
 private:
     Terminal _terminal{Size{112, 34}};
+    UpdateSettings _updateSettings;
+    Buffer _buffer;
     std::size_t _animationCycle{0};
     bool _quitRequested{false};
 };

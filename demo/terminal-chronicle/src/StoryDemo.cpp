@@ -12,8 +12,8 @@ namespace demo::terminalchronicle {
 
 
 void StoryDemo::run() noexcept {
-    auto terminal = Terminal{Size{100, 30}};
-    auto session = demo::ScopedTerminalSession{terminal, Terminal::RefreshMode::Clear, Input::Mode::ReadLine, false};
+    auto terminal = Terminal{Size{80, 30}};
+    auto session = ScopedTerminalSession{terminal, Terminal::RefreshMode::Clear, Input::Mode::ReadLine, false};
     printHeader(terminal);
     printTimeline(terminal);
     printStory(terminal);
@@ -24,15 +24,16 @@ void StoryDemo::run() noexcept {
 
 
 void StoryDemo::printHeader(Terminal &terminal) noexcept {
+    terminal.writeLineBreak();
     terminal.printLine(
         bg::Blue,
         fg::BrightWhite,
         " Terminal Chronicle ",
-        Color{fg::Default, bg::Default},
+        Color::reset(),
         " ",
         fg::BrightBlack,
-        "Low-level output with one Terminal instance and readable print calls.");
-    terminal.lineBreak();
+        "Low-level output with readable print calls.");
+    terminal.writeLineBreak();
 }
 
 
@@ -53,8 +54,8 @@ void StoryDemo::printTimeline(Terminal &terminal) noexcept {
         " -> ",
         fg::BrightMagenta,
         "modern ANSI consoles");
-    terminal.lineBreak();
-    terminal.lineBreak();
+    terminal.writeLineBreak();
+    terminal.writeLineBreak();
 }
 
 
@@ -64,9 +65,9 @@ void StoryDemo::printStory(Terminal &terminal) noexcept {
         "1968",
         fg::BrightBlack,
         "  Video terminals began to replace noisy paper with phosphor screens.");
-    terminal.printLine("      A cursor could move, lines could be rewritten, and suddenly the console felt alive.");
-    terminal.lineBreak();
-
+    terminal.printLine("      A cursor could move, lines could be rewritten, and suddenly the console");
+    terminal.printLine("      felt alive.");
+    terminal.writeLineBreak();
     terminal.printLine(
         fg::BrightGreen,
         "1978",
@@ -75,9 +76,9 @@ void StoryDemo::printStory(Terminal &terminal) noexcept {
         fg::BrightWhite,
         "VT100",
         fg::BrightBlack,
-        ", a terminal that spoke a compact language of escape sequences.");
+        ", a terminal that had a language of escape ");
     terminal.printLine(
-        "      ",
+        "      sequences: ",
         fg::Yellow,
         "Move the cursor",
         fg::BrightBlack,
@@ -90,22 +91,23 @@ void StoryDemo::printStory(Terminal &terminal) noexcept {
         "redraw only what changed",
         fg::BrightBlack,
         ".");
-    terminal.lineBreak();
+    terminal.writeLineBreak();
 
     terminal.printLine(
         fg::BrightYellow,
         "1980s",
         fg::BrightBlack,
-        " Bulletin boards, editors, and debuggers discovered that text mode did not have to look dull.");
-    terminal.printLine(
-        "      Progress bars, highlighted menus, and boxed dialogs were all just carefully printed characters.");
-    terminal.lineBreak();
+        " Bulletin boards, editors, and debuggers discovered that text mode did");
+    terminal.printLine("      not have to look dull. Progress bars, highlighted menus, and boxed");
+    terminal.printLine("      dialogs were all just carefully printed characters.");
+    terminal.writeLineBreak();
 
     terminal.printLine(
         fg::BrightMagenta,
         "Today",
         fg::BrightBlack,
-        " The idea is unchanged: emit text, switch styles, keep the code compact, and let the terminal shine.");
+        " The idea is unchanged: emit text, switch styles, keep the code compact,");
+    terminal.printLine("      and let the terminal shine.");
     terminal.printLine(
         "      This demo uses ",
         fg::BrightWhite,
@@ -123,8 +125,9 @@ void StoryDemo::printStory(Terminal &terminal) noexcept {
         fg::BrightWhite,
         ")",
         fg::BrightBlack,
-        " to tell a story without building a custom renderer first.");
-    terminal.lineBreak();
+        " to tell a story");
+    terminal.printLine("      without building a custom renderer first.");
+    terminal.writeLineBreak();
 }
 
 
@@ -147,6 +150,7 @@ void StoryDemo::printOutro(Terminal &terminal) noexcept {
         "text-gallery",
         fg::BrightBlack,
         ".");
+    terminal.writeLineBreak();
 }
 
 

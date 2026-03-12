@@ -10,51 +10,164 @@ The text classes provide utilities for constructing, formatting, and
 rendering colored text in terminal buffers. They support mixed styles,
 Unicode-aware layout, and animated text effects.
 
-At the lowest level, ``Char`` represents a single colored terminal cell.
-Higher-level classes such as ``String`` and ``Text`` build on this
+At the lowest level, :cpp:any:`Char <erbsland::cterm::Char>` represents a single colored terminal cell.
+Higher-level classes such as :cpp:any:`String <erbsland::cterm::String>` and :cpp:any:`Text <erbsland::cterm::Text>` build on this
 foundation to describe larger text fragments and layout-aware text
 blocks.
 
 Usage
 =====
 
-Building Colored Text Fragments
--------------------------------
+Working with Char
+-----------------
 
-``String`` stores a sequence of colored terminal characters. This makes
-it useful for prompts, status bars, and other mixed-style text where
-individual characters may use different colors.
+:cpp:any:`Char <erbsland::cterm::Char>` represents one terminal character cell together with its
+foreground and background color. Start with :cpp:any:`Char <erbsland::cterm::Char>` when you need
+precise control over individual Unicode characters.
+
+Constructing Characters
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Use a Unicode code point when you create a regular character. This is the
+recommended form because it is explicit and avoids text decoding.
+
+.. code-block:: cpp
+
+    const auto checkMark = Char{U'✓'};
+
+For combined characters, construct :cpp:any:`Char <erbsland::cterm::Char>` from UTF-8 or UTF-32 text.
+UTF-32 is faster if you already have Unicode code points available.
+
+.. code-block:: cpp
+
+    const auto combinedFromUtf8 = Char{"e\xCC\x81"};
+    const auto combinedFromUtf32 = Char{U"e\u0301"};
+
+You can add colors directly in several forms:
+
+.. code-block:: cpp
+
+    const auto whiteOnBlue = Char{U'a', fg::White, bg::Blue};
+    const auto whiteOnly = Char{U'a', fg::White};
+    const auto blueOnly = Char{U'a', bg::Blue};
+    const auto colorObject = Char{U'b', Color{fg::White, bg::Blue}};
+
+Testing and Recoloring Characters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For single-code-point characters, compare against a Unicode code point to
+test only the character and ignore the color:
+
+.. code-block:: cpp
+
+    if (character == U'?') {
+        // ...
+    }
+
+Use ``isOneOf()`` when several alternatives are valid:
+
+.. code-block:: cpp
+
+    if (character.isOneOf(U'Y', U'y', U'J', U'j')) {
+        // ...
+    }
+
+To adjust colors on an existing :cpp:any:`Char <erbsland::cterm::Char>`, choose the method that matches
+your intent:
+
+.. code-block:: cpp
+
+    const auto base = Char{U'X', fg::Green, bg::Blue};
+
+    const auto overlay = base.withColorOverlay(Color{fg::BrightWhite, bg::Inherited});
+    const auto replaced = base.withColorReplaced(Color{fg::White, bg::Black});
+    const auto basedOnTheme = base.withBaseColor(Color{fg::Inherited, bg::BrightBlack});
+
+With ``withColorOverlay()``, any ``Inherited`` component keeps the
+existing color, while ``Default`` resets that component to the terminal
+default color.
+
+Building Strings
+----------------
+
+:cpp:any:`String <erbsland::cterm::String>` stores a sequence of :cpp:any:`Char <erbsland::cterm::Char>` values. It is the right type for
+status bars, prompts, labels, and any other text where different
+characters may have different colors.
+
+Building Colored Text Fragments
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prefer ``append(...)`` to build mixed-style strings. It is easier to read
+than manually iterating over temporary strings, and it appends all parts
+in one place.
 
 .. code-block:: cpp
 
     auto footer = String{};
-    for (const auto &character : String{"[Q]"}) {
-        footer.append(character.withColorOverlay(Color{fg::BrightYellow, bg::BrightBlack}));
-    }
-    for (const auto &character : String{" quit"}) {
-        footer.append(character.withColorOverlay(Color{fg::BrightWhite, bg::BrightBlack}));
-    }
+    footer.append(
+        bg::BrightBlack,
+        fg::BrightYellow,
+        "[Q]",
+        fg::BrightWhite,
+        " quit");
 
-Each ``Char`` in the sequence can carry its own color, allowing flexible
-construction of styled text fragments.
+``append(...)`` accepts colors, :cpp:any:`Char <erbsland::cterm::Char>` values, strings, and other
+:cpp:any:`String <erbsland::cterm::String>` objects. Colors stay active for the following text within the
+same call.
 
-When you recolor existing ``Char`` values with ``withColorOverlay()``, inherited
-components keep the original character color while default components reset
-that part to the terminal default.
+You can also construct :cpp:any:`String <erbsland::cterm::String>` directly from UTF-8 or UTF-32 text:
 
-When ``String`` is built from UTF-8 or UTF-32 text, control codes are filtered
-out automatically except for tab and newline.
+.. code-block:: cpp
+
+    const auto utf8Text = String{"Gruezi"};
+    const auto utf32Text = String{U"Gru\u0308ezi"};
+
+When :cpp:any:`String <erbsland::cterm::String>` is built from text, control codes are filtered out
+automatically except for tab and newline.
+
+Measuring and Counting Text
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use ``size()`` to count stored characters and ``displayWidth()`` to count
+terminal cells. The two differ for full-width and combining characters.
+
+.. code-block:: cpp
+
+    const auto text = String{"A界e\xCC\x81"};
+
+    const auto characterCount = text.size();         // 3 terminal characters
+    const auto terminalWidth = text.displayWidth();  // 4 cells
+
+Use ``count()`` when you need the number of occurrences of a specific
+character:
+
+.. code-block:: cpp
+
+    const auto warningCount = String{"!?!!"}.count(U'!');
+
+Splitting Text
+^^^^^^^^^^^^^^
+
+``splitWords()`` separates text at spaces, tabs, carriage returns, and
+newlines. ``splitLines()`` keeps empty lines and splits only at newline
+characters.
+
+.. code-block:: cpp
+
+    const auto words = String{"alpha  beta\ngamma"}.splitWords();
+    const auto lines = String{"first\n\nthird"}.splitLines();
 
 Describing a Text Block
 -----------------------
 
-``Text`` describes a complete text element for buffer rendering. It
+:cpp:any:`Text <erbsland::cterm::Text>` describes a complete text element for buffer rendering. It
 combines the content with layout information such as the target
 rectangle, alignment, font, and animation settings.
 
 .. code-block:: cpp
 
-    auto title = Text{String{"COLOR TERM"}, Rectangle{0, 0, 60, 6}, Alignment::Center};
+    auto titleText = String{"COLOR TERM"};
+    auto title = Text{titleText, Rectangle{0, 0, 60, 6}, Alignment::Center};
     title.setFont(Font::defaultAscii());
     title.setColorSequence(ColorSequence{
         Color{fg::BrightBlue, bg::Black},
@@ -66,9 +179,30 @@ rectangle, alignment, font, and animation settings.
 
     buffer.drawText(title, animationCycle);
 
-Because ``Text`` integrates with the geometry and color systems, it
+Because :cpp:any:`Text <erbsland::cterm::Text>` integrates with the geometry and color systems, it
 supports wrapped paragraphs, Unicode-aware layout, animated titles,
 and large bitmap fonts.
+
+Controlling Paragraph Spacing
+-----------------------------
+
+Explicit newlines in :cpp:any:`Text <erbsland::cterm::Text>` create separate paragraphs. Use
+:cpp:any:`ParagraphSpacing <erbsland::cterm::ParagraphSpacing>` when those paragraphs should either stay compact or
+leave a blank line between them.
+
+.. code-block:: cpp
+
+    auto help = Text{
+        String{"Navigation\nUse arrow keys to move.\n\nActions\nPress Enter to select."},
+        Rectangle{2, 2, 36, 12},
+        Alignment::TopLeft};
+    help.setParagraphSpacing(ParagraphSpacing::DoubleLine);
+
+    buffer.drawText(help);
+
+:cpp:any:`ParagraphSpacing::SingleLine <erbsland::cterm::ParagraphSpacing::SingleLine>` keeps the rendered paragraphs tight,
+while ``DoubleLine`` makes sectioned help text and descriptive panels
+easier to scan.
 
 .. figure:: /images/text-gallery2.jpg
     :width: 100%
@@ -85,9 +219,11 @@ Interface
 .. doxygenclass:: erbsland::cterm::String
     :members:
 
-.. doxygentypedef:: erbsland::cterm::BlockStringLines
+.. doxygentypedef:: erbsland::cterm::StringLines
 
 .. doxygenclass:: erbsland::cterm::Text
     :members:
+
+.. doxygenenum:: erbsland::cterm::ParagraphSpacing
 
 .. doxygenenum:: erbsland::cterm::TextAnimation

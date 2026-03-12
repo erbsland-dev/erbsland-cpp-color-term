@@ -1,0 +1,200 @@
+// Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+// SPDX-License-Identifier: Apache-2.0
+#include "BitmapPainter.hpp"
+
+
+namespace erbsland::cterm::impl {
+
+
+void BitmapPainter::drawBitmap(
+    const Bitmap &bitmap,
+    const Position pos,
+    const BitmapDrawOptions &options,
+    const std::size_t animationCycle) noexcept {
+
+    drawBitmap(bitmap, Rectangle{pos, bitmapRenderSize(bitmap, options)}, Alignment::TopLeft, options, animationCycle);
+}
+
+void BitmapPainter::drawBitmap(
+    const Bitmap &bitmap,
+    const Rectangle rect,
+    const Alignment alignment,
+    const BitmapDrawOptions &options,
+    const std::size_t animationCycle) noexcept {
+
+    if (bitmap.size().area() == 0 || rect.width() <= 0 || rect.height() <= 0) {
+        return;
+    }
+    const auto renderedSize = bitmapRenderSize(bitmap, options);
+    if (renderedSize.area() == 0) {
+        return;
+    }
+    auto visibleSize = renderedSize.componentMin(rect.size());
+    auto sourceOffset = Position{};
+    auto targetPos = rect.topLeft();
+    if (renderedSize.width() <= rect.width()) {
+        targetPos +=
+            Position{alignedBitmapOffset(renderedSize.width(), rect.width(), alignment, Alignment::HorizontalMask), 0};
+    } else {
+        sourceOffset +=
+            Position{alignedBitmapOffset(renderedSize.width(), rect.width(), alignment, Alignment::HorizontalMask), 0};
+    }
+    if (renderedSize.height() <= rect.height()) {
+        targetPos +=
+            Position{0, alignedBitmapOffset(renderedSize.height(), rect.height(), alignment, Alignment::VerticalMask)};
+    } else {
+        sourceOffset +=
+            Position{0, alignedBitmapOffset(renderedSize.height(), rect.height(), alignment, Alignment::VerticalMask)};
+    }
+    if (options.char16Style() != nullptr) {
+        for (auto y = 0; y < visibleSize.height(); ++y) {
+            for (auto x = 0; x < visibleSize.width(); ++x) {
+                const auto bitmapPos = sourceOffset + Position{x, y};
+                if (!bitmap.pixel(bitmapPos)) {
+                    continue;
+                }
+                const auto bitMask = bitmapPos.cardinalFourBitmask(
+                    [&](const Position neighborPos) noexcept -> bool { return bitmap.pixel(neighborPos); });
+                drawBitmapBlock(
+                    targetPos + Position{x, y},
+                    options.char16Style()->block(bitMask),
+                    colorForBitmapPosition(options, bitmapPos, animationCycle),
+                    options);
+            }
+        }
+        return;
+    }
+    switch (options.scaleMode()) {
+    case BitmapScaleMode::HalfBlock:
+        for (auto y = 0; y < visibleSize.height(); ++y) {
+            for (auto x = 0; x < visibleSize.width(); ++x) {
+                const auto bitmapCellPos = sourceOffset + Position{x, y};
+                const auto bitMask = bitmap.pixelQuad(bitmapCellPos);
+                drawBitmapBlock(
+                    targetPos + Position{x, y},
+                    options.halfBlocks()[bitMask],
+                    colorForBitmapPosition(options, bitmapCellPos, animationCycle),
+                    options);
+            }
+        }
+        break;
+    case BitmapScaleMode::DoubleBlock:
+        for (auto y = 0; y < visibleSize.height(); ++y) {
+            for (auto x = 0; x < visibleSize.width(); ++x) {
+                const auto renderedBitmapPos = sourceOffset + Position{x, y};
+                const auto bitmapPos = Position{renderedBitmapPos.x() / 2, renderedBitmapPos.y()};
+                if (!bitmap.pixel(bitmapPos)) {
+                    continue;
+                }
+                drawBitmapBlock(
+                    targetPos + Position{x, y},
+                    options.doubleBlocks()[static_cast<std::size_t>(renderedBitmapPos.x() % 2)],
+                    colorForBitmapPosition(options, bitmapPos, animationCycle),
+                    options);
+            }
+        }
+        break;
+    case BitmapScaleMode::FullBlock:
+    default:
+        for (auto y = 0; y < visibleSize.height(); ++y) {
+            for (auto x = 0; x < visibleSize.width(); ++x) {
+                const auto bitmapPos = sourceOffset + Position{x, y};
+                if (!bitmap.pixel(bitmapPos)) {
+                    continue;
+                }
+                drawBitmapBlock(
+                    targetPos + Position{x, y},
+                    options.fullBlock(),
+                    colorForBitmapPosition(options, bitmapPos, animationCycle),
+                    options);
+            }
+        }
+        break;
+    }
+}
+
+auto BitmapPainter::bitmapRenderSize(const Bitmap &bitmap, const BitmapDrawOptions &options) noexcept -> Size {
+    if (options.char16Style() != nullptr) {
+        return bitmap.size();
+    }
+    switch (options.scaleMode()) {
+    case BitmapScaleMode::HalfBlock:
+        return {(bitmap.size().width() + 1) / 2, (bitmap.size().height() + 1) / 2};
+    case BitmapScaleMode::DoubleBlock:
+        return {bitmap.size().width() * 2, bitmap.size().height()};
+    case BitmapScaleMode::FullBlock:
+    default:
+        return bitmap.size();
+    }
+}
+
+auto BitmapPainter::alignedBitmapOffset(
+    const int renderedSize, const int availableSize, const Alignment alignment, const Alignment alignmentMask) noexcept
+    -> int {
+
+    const auto freeSpace =
+        renderedSize <= availableSize ? (availableSize - renderedSize) : (renderedSize - availableSize);
+    if (alignmentMask == Alignment::HorizontalMask) {
+        switch (alignment & alignmentMask) {
+        case Alignment::HCenter:
+            return freeSpace / 2;
+        case Alignment::Right:
+            return freeSpace;
+        case Alignment::Left:
+        default:
+            return 0;
+        }
+    }
+    switch (alignment & alignmentMask) {
+    case Alignment::VCenter:
+        return freeSpace / 2;
+    case Alignment::Bottom:
+        return freeSpace;
+    case Alignment::Top:
+    default:
+        return 0;
+    }
+}
+
+auto BitmapPainter::colorForBitmapPosition(
+    const BitmapDrawOptions &options, const Position bitmapPosition, const std::size_t animationCycle) const noexcept
+    -> Color {
+
+    const auto &colorSequence = options.color();
+    if (colorSequence.empty()) {
+        return {};
+    }
+    auto sequenceIndex = static_cast<int64_t>(animationCycle + options.colorAnimationOffset());
+    switch (options.colorMode()) {
+    case BitmapColorMode::VerticalStripes:
+        sequenceIndex += bitmapPosition.x();
+        break;
+    case BitmapColorMode::HorizontalStripes:
+        sequenceIndex += bitmapPosition.y();
+        break;
+    case BitmapColorMode::ForwardDiagonalStripes:
+        sequenceIndex += bitmapPosition.x() + bitmapPosition.y();
+        break;
+    case BitmapColorMode::BackwardDiagonalStripes:
+        sequenceIndex += bitmapPosition.y() - bitmapPosition.x();
+        break;
+    case BitmapColorMode::OneColor:
+    default:
+        break;
+    }
+    const auto sequenceLength = static_cast<int64_t>(colorSequence.sequenceLength());
+    const auto wrappedSequenceIndex = ((sequenceIndex % sequenceLength) + sequenceLength) % sequenceLength;
+    return colorSequence.color(static_cast<std::size_t>(wrappedSequenceIndex));
+}
+
+void BitmapPainter::drawBitmapBlock(
+    const Position pos, const Char &block, const Color baseColor, const BitmapDrawOptions &options) noexcept {
+
+    if (!rect().contains(pos)) {
+        return;
+    }
+    const auto finalColor = get(pos).color().overlayWith(baseColor).overlayWith(block.color());
+    set(pos, block.withColorReplaced(finalColor), options.combinationStyle());
+}
+
+}

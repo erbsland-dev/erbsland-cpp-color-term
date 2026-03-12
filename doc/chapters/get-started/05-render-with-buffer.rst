@@ -28,7 +28,7 @@ Replace the contents of the file with the following version:
         auto terminal = Terminal{Size{80, 25}};
         terminal.initializeScreen();
 
-        auto buffer = Buffer{terminal.size() - Size{1, 1}};
+        auto buffer = Buffer{terminal.size()};
         buffer.fill(Char{" ", Color{fg::Default, bg::Black}});
 
         const auto rect = Rectangle{0, 0, buffer.size().width(), 6};
@@ -49,6 +49,7 @@ Replace the contents of the file with the following version:
 
         auto settings = UpdateSettings{};
         settings.setMinimumSize(Size{40, 8});
+        settings.setSwitchToAlternateBuffer(false);
         terminal.updateScreen(buffer, settings);
         terminal.flush();
         terminal.restoreScreen();
@@ -66,10 +67,18 @@ This version introduces several important concepts:
 * ``drawFilledFrame()`` draws both the frame and its interior in a single call.
 * ``drawText()`` places text inside rectangles without manually managing the cursor.
 * ``UpdateSettings`` allows you to define constraints such as the minimum supported terminal size.
+* ``setSwitchToAlternateBuffer(false)`` keeps this short example on the main screen instead of using the alternate
+  full-screen buffer.
+* ``Terminal`` starts in ``OutputMode::FullControl``, which enables screen refresh, cursor control, and buffer-based
+  rendering. Use ``OutputMode::Text`` only for plain-text output without terminal control features.
 
 Because the entire scene is prepared in memory, the application can update the
 terminal in a single operation. This approach scales much better once the layout
 contains multiple panels, text blocks, or animated elements.
+
+By default, ``Terminal::size()`` already returns the safe drawable size for
+screen updates. If you need to use the full detected terminal size, disable the
+compatibility margin with ``setSafeMarginEnabled(false)``.
 
 .. button-ref:: 06-layout-text-and-fonts
     :ref-type: doc
