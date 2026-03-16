@@ -9,6 +9,7 @@
 #include "MoveMode.hpp"
 #include "Size.hpp"
 #include "String.hpp"
+#include "TerminalFlags.hpp"
 #include "UpdateSettings.hpp"
 #include "WritableBuffer.hpp"
 
@@ -64,10 +65,21 @@ public:
     };
 
 public:
+    /// Create a new terminal instance with default values.
+    explicit Terminal();
+    /// Create a new terminal instance.
+    /// @param flags The terminal flags to use.
+    explicit Terminal(TerminalFlags flags = {});
     /// Create a new terminal instance.
     /// The size is automatically bounded to the minimum and maximum supported sizes.
     /// @param size The fallback terminal size used when automatic detection is unavailable.
-    explicit Terminal(Size size = {80, 25});
+    /// @param flags The terminal flags to use.
+    explicit Terminal(Size size = {80, 25}, TerminalFlags flags = {});
+    /// Create a new terminal instance with a custom backend.
+    /// The size is automatically bounded to the minimum and maximum supported sizes.
+    /// @param backend The backend to use for the terminal.
+    /// @param size The fallback terminal size used when automatic detection is unavailable.
+    explicit Terminal(BackendPtr backend, Size size = {80, 25});
 
 public: // settings
     /// Get the currently configured or detected drawable terminal size.
@@ -93,7 +105,7 @@ public: // settings
     /// Set if dynamic terminal size detection is enabled.
     /// Can only be enabled while the output mode is `OutputMode::FullControl`.
     /// @param enabled `true` to enable automatic size detection.
-    void setSizeDetectionEnabled(const bool enabled) noexcept;
+    void setSizeDetectionEnabled(bool enabled) noexcept;
     /// Check whether line buffering is enabled for incremental writes.
     /// @return `true` if text output is collected until a newline or `flush()`.
     [[nodiscard]] auto lineBufferEnabled() const noexcept -> bool;
@@ -294,6 +306,7 @@ private:
     void printLinePart(const char text[]) noexcept { write(text); }
 
 private:
+    TerminalFlags _flags;                             ///< Flags for the terminal behaviour.
     BackendPtr _backend;                              ///< The backend that is used by the terminal.
     OutputMode _outputMode{OutputMode::FullControl};  ///< The current output mode.
     bool _sizeDetectionEnabled{true};                 ///< If size detection is enabled.

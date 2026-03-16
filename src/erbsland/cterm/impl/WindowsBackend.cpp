@@ -3,6 +3,8 @@
 #include "WindowsBackend.hpp"
 
 
+#include "WindowsSignalDispatcher.hpp"
+
 #include <conio.h>
 #include <fcntl.h>
 #include <windows.h>
@@ -10,10 +12,11 @@
 #include <chrono>
 #include <iostream>
 
+
 namespace erbsland::cterm {
 
-auto Backend::createPlatformDefault() -> BackendPtr {
-    return impl::WindowsBackend::getOrCreate();
+auto Backend::createPlatformDefault(const TerminalFlags terminalFlags) -> BackendPtr {
+    return impl::WindowsBackend::getOrCreate(terminalFlags);
 }
 
 }
@@ -23,17 +26,19 @@ namespace erbsland::cterm::impl {
 
 std::mutex WindowsBackend::_instanceMutex;
 WindowsBackend *WindowsBackend::_instance = nullptr;
-std::array<WindowsBackend::SignalHandler, WindowsBackend::cSignals.size()> WindowsBackend::_previousSignalHandlers{};
 
-WindowsBackend::WindowsBackend() {
+WindowsBackend::WindowsBackend(TerminalFlags terminalFlags) : _terminalFlags{terminalFlags} {
     // called once per application.
     _instance = this;
-    registerExitHandlers();
+    if (!_terminalFlags.has(TerminalFlag::NoSignalHandling)) {
+        _signalHandler = std::make_unique<WindowsSignalDispatcher>(
+            [this](const int signalNumber) -> void { handleProcessSignal(signalNumber); });
+    }
 }
 
 WindowsBackend::~WindowsBackend() {
-    unregisterExitHandlers();
-    std::lock_guard lock{_instanceMutex};
+    _signalHandler.reset();
+    std::scoped_lock lock{_instanceMutex};
     if (_instance != nullptr) {
         _instance->restorePlatform();
         _instance = nullptr;
@@ -59,8 +64,8 @@ void WindowsBackend::restorePlatform() {
     if (_isAlternateScreenActive) {
         std::cout << "\x1b[?1049l"; // disable alternative screen buffer
     }
-    std::cout << "\x1b[0m"; // restore to default color
-    std::cout << "\x1b[?25h"; // make the cursor visible.
+    std::cout << "\x1b[0m";         // restore to default color
+    std::cout << "\x1b[?25h";       // make the cursor visible.
     std::cout << "\n";
     std::cout.flush();
 }
@@ -87,7 +92,7 @@ auto WindowsBackend::detectScreenSize() -> std::optional<Size> {
         return std::nullopt;
     }
     CONSOLE_SCREEN_BUFFER_INFO info{};
-    if (!::GetConsoleScreenBufferInfo(outputHandle, &info)) {
+    if (::GetConsoleScreenBufferInfo(outputHandle, &info) == 0) {
         return std::nullopt;
     }
     const auto width = static_cast<int>(info.srWindow.Right - info.srWindow.Left + 1);
@@ -253,21 +258,21 @@ auto WindowsBackend::readLine() -> std::string {
     return input;
 }
 
-auto WindowsBackend::getOrCreate() noexcept -> BackendPtr {
-    std::lock_guard lock{_instanceMutex};
+auto WindowsBackend::getOrCreate(const TerminalFlags terminalFlags) noexcept -> BackendPtr {
+    std::scoped_lock lock{_instanceMutex};
     if (_instance == nullptr) {
-        return std::make_shared<WindowsBackend>();
+        return std::make_shared<WindowsBackend>(terminalFlags);
     }
     return _instance->shared_from_this();
 }
 
 auto WindowsBackend::instance() noexcept -> WindowsBackend * {
-    std::lock_guard lock(_instanceMutex);
+    std::scoped_lock lock(_instanceMutex);
     return _instance;
 }
 
 void WindowsBackend::restoreGlobalPlatform() noexcept {
-    std::lock_guard lock(_instanceMutex);
+    std::scoped_lock lock(_instanceMutex);
     if (_instance == nullptr) {
         return;
     }
@@ -296,7 +301,7 @@ auto WindowsBackend::changeCursorVisibility(bool visible) -> bool {
         return true;
     }
     CONSOLE_CURSOR_INFO cursorInfo{};
-    if (!::GetConsoleCursorInfo(outputHandle, &cursorInfo)) {
+    if (::GetConsoleCursorInfo(outputHandle, &cursorInfo) == 0) {
         return true;
     }
     bool previousState = cursorInfo.bVisible != FALSE;
@@ -305,28 +310,9 @@ auto WindowsBackend::changeCursorVisibility(bool visible) -> bool {
     return previousState;
 }
 
-void WindowsBackend::registerExitHandlers() {
-    std::atexit(&WindowsBackend::onExit);
-    for (std::size_t index = 0; index < cSignals.size(); ++index) {
-        _previousSignalHandlers[index] = std::signal(cSignals[index], &WindowsBackend::onSignal);
-    }
-}
-
-void WindowsBackend::unregisterExitHandlers() {
-    for (std::size_t index = 0; index < cSignals.size(); ++index) {
-        std::signal(cSignals[index], _previousSignalHandlers[index]);
-    }
-}
-
-void WindowsBackend::onExit() noexcept {
+void WindowsBackend::handleProcessSignal(const int exitCode) noexcept {
     restoreGlobalPlatform();
-}
-
-void WindowsBackend::onSignal(const int signalNumber) noexcept {
-    restoreGlobalPlatform();
-    std::signal(signalNumber, SIG_DFL);
-    std::raise(signalNumber);
-    std::_Exit(128 + signalNumber);
+    std::_Exit(exitCode);
 }
 
 

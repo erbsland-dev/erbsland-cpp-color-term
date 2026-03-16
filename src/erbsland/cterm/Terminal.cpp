@@ -14,8 +14,24 @@
 namespace erbsland::cterm {
 
 
-Terminal::Terminal(const Size size) : _size{size.componentMin(cMaximumSize).componentMax(cMinimumSize)} {
-    _backend = Backend::createPlatformDefault();
+Terminal::Terminal() : Terminal(Size{80, 25}, TerminalFlags{}) {
+}
+
+Terminal::Terminal(const TerminalFlags flags) : Terminal(Size{80, 25}, flags) {
+}
+
+Terminal::Terminal(const Size size, const TerminalFlags flags) :
+    _flags{flags}, _size{size.componentMin(cMaximumSize).componentMax(cMinimumSize)} {
+    _backend = Backend::createPlatformDefault(flags);
+    _input.setBackend(_backend);
+    _lineBuffer.setBackend(_backend);
+}
+
+Terminal::Terminal(BackendPtr backend, const Size size) :
+    _backend{std::move(backend)}, _size{size.componentMin(cMaximumSize).componentMax(cMinimumSize)} {
+    if (_backend == nullptr) {
+        _backend = Backend::createPlatformDefault(TerminalFlags{});
+    }
     _input.setBackend(_backend);
     _lineBuffer.setBackend(_backend);
 }
@@ -96,7 +112,7 @@ void Terminal::setBackBufferEnabled(const bool enabled) noexcept {
 void Terminal::setBackend(BackendPtr backend) noexcept {
     if (_backend != backend) {
         if (backend == nullptr) {
-            _backend = Backend::createPlatformDefault();
+            _backend = Backend::createPlatformDefault(_flags);
         } else {
             _backend = std::move(backend);
         }

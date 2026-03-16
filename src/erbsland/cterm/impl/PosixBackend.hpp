@@ -5,27 +5,30 @@
 
 #include "../Backend.hpp"
 
-#include <signal.h>
 #include <termios.h>
 #include <unistd.h>
 
 #include <chrono>
 #include <cstdint>
+#include <memory>
+#include <mutex>
 
 
 namespace erbsland::cterm::impl {
 
 
+class PosixSignalDispatcher;
+
+
 class PosixBackend final : public Backend {
     using clock = std::chrono::steady_clock;
     constexpr static auto cMinimumDelayBetweenScreenSizeDetection = std::chrono::milliseconds{100};
-    static constexpr std::array<int, 8> cSignals = {SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGABRT, SIGSEGV, SIGILL, SIGFPE};
 
 public:
     enum class SizeDetectionResult : uint8_t { NoTerminalAttached, NoTerminalSize, Success };
 
 public:
-    PosixBackend(); // must never be called directly
+    explicit PosixBackend(TerminalFlags terminalFlags); // must never be called directly
     ~PosixBackend() override;
 
 public:
@@ -46,7 +49,7 @@ public:
 
 public:
     /// Create or access the global instance.
-    static auto getOrCreate() noexcept -> BackendPtr;
+    static auto getOrCreate(TerminalFlags terminalFlags) noexcept -> BackendPtr;
     /// Access the global instance.
     static auto instance() noexcept -> PosixBackend *;
     /// Restore the platform using the global instance.
@@ -64,23 +67,15 @@ private:
     void initializeKeyInputSession();
     /// Restore a key interactive session.
     void restoreKeyInputSession();
-
-    /// Register all exit handlers
-    void registerExitHandlers();
-    /// Unregister all exit handlers
-    void unregisterExitHandlers();
-
-    /// Registered exit handler.
-    static void onExit() noexcept;
-    /// Registered signal handler.
-    static void onSignal(int signalNumber) noexcept;
+    /// Restore the terminal and terminate the process for one handled signal.
+    void handleProcessSignal(int signalNumber) noexcept;
 
 private:
-    static std::mutex _instanceMutex; ///< The mutex to protect the instance.
-    static PosixBackend *_instance;   ///< The global instance of the PosixBackend.
-    static std::array<struct sigaction, cSignals.size()> _previousSignalActions; ///< Previous signal actions.
+    static std::mutex _instanceMutex;                ///< The mutex to protect the instance.
+    static PosixBackend *_instance;                  ///< The global instance of the PosixBackend.
 
-    bool _isInitialized = false;                                                 ///< If the platform was initialized.
+    TerminalFlags _terminalFlags;                    ///< The terminal flags.
+    bool _isInitialized = false;                     ///< If the platform was initialized.
     bool _keyInputSessionActive = false;             ///< If we have an input session that needs to be restored.
     clock::time_point _lastScreenSizeDetection = {}; ///< Time of last screen size detection.
     std::optional<Size> _lastScreenSize;             ///< The last cached screen size.
@@ -88,9 +83,10 @@ private:
     bool _hasNoTerminalAttached = false;             ///< If we definitely know that screen detection will never work.
     int _ttyFdForDetection = -1;                     ///< The open /dev/tty we use for screen size detection
     std::size_t _noSizeFailureCount = 0; ///< A failure count to escalate if we repeatedly cannot detect screen size.
-    Input::Mode _inputMode{Input::Mode::ReadLine}; ///< The current input mode.
-    bool _isAlternateScreenActive = false;         ///< remember if we are in alternate screen mode.
-    termios _originalState{};                      ///< state backup.
+    Input::Mode _inputMode{Input::Mode::ReadLine};         ///< The current input mode.
+    bool _isAlternateScreenActive = false;                 ///< remember if we are in alternate screen mode.
+    termios _originalState{};                              ///< state backup.
+    std::unique_ptr<PosixSignalDispatcher> _signalHandler; ///< Helper that forwards termination signals safely.
 };
 
 

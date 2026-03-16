@@ -8,19 +8,19 @@
 #include <signal.h>
 
 #include <csignal>
+#include <memory>
 #include <mutex>
 
 
 namespace erbsland::cterm::impl {
 
 
+class WindowsSignalDispatcher;
+
+
 class WindowsBackend : public Backend {
 public:
-    static constexpr std::array<int, 8> cSignals = {SIGINT, SIGTERM, SIGABRT, SIGSEGV, SIGILL, SIGFPE};
-    using SignalHandler = void (*)(int);
-
-public:
-    WindowsBackend();
+    explicit WindowsBackend(TerminalFlags terminalFlags);
     ~WindowsBackend() override;
 
 public: // implement backend
@@ -44,7 +44,7 @@ public: // input
 
 public:
     /// Create or access the global instance.
-    static auto getOrCreate() noexcept -> BackendPtr;
+    static auto getOrCreate(TerminalFlags terminalFlags) noexcept -> BackendPtr;
     /// Access the global instance.
     static auto instance() noexcept -> WindowsBackend *;
     /// Restore the platform using the global instance.
@@ -59,27 +59,20 @@ private:
     /// @param visible true to show the cursor, false to hide it
     /// @return The previous cursor visibility state
     auto changeCursorVisibility(bool visible) -> bool;
-
-    /// Register all exit handlers
-    void registerExitHandlers();
-    /// Unregister all exit handlers
-    void unregisterExitHandlers();
-
-    /// Registered exit handler.
-    static void onExit() noexcept;
-    /// Registered signal handler.
-    static void onSignal(int signalNumber) noexcept;
+    /// Restore the terminal and terminate the process for one handled event.
+    void handleProcessSignal(int exitCode) noexcept;
 
 private:
-    static std::mutex _instanceMutex; ///< The mutex to protect the instance.
-    static WindowsBackend *_instance;   ///< The global instance of the PosixBackend.
-    static std::array<SignalHandler, cSignals.size()> _previousSignalHandlers; ///< Previous signal handlers.
+    static std::mutex _instanceMutex;                        ///< The mutex to protect the instance.
+    static WindowsBackend *_instance;                        ///< The global instance of the PosixBackend.
 
-    bool _initialized{false}; ///< If the platform was initialized.
-    bool _cursorStateSaved{false}; ///< If the backend saved the cursor state.
-    bool _cursorVisible{true}; ///< The current cursor visibility state.
-    Input::Mode _inputMode{Input::Mode::ReadLine}; ///< The current input mode.
-    bool _isAlternateScreenActive{false}; ///< Flag if the alternate screen is active.
+    TerminalFlags _terminalFlags;                            ///< The terminal flags.
+    bool _initialized{false};                                ///< If the platform was initialized.
+    bool _cursorStateSaved{false};                           ///< If the backend saved the cursor state.
+    bool _cursorVisible{true};                               ///< The current cursor visibility state.
+    Input::Mode _inputMode{Input::Mode::ReadLine};           ///< The current input mode.
+    bool _isAlternateScreenActive{false};                    ///< Flag if the alternate screen is active.
+    std::unique_ptr<WindowsSignalDispatcher> _signalHandler; ///< Helper that forwards termination events safely.
 };
 
 }
