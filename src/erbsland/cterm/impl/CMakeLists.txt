@@ -26,10 +26,14 @@ if (WIN32)
     target_sources(erbsland-color-term PRIVATE
             WindowsBackend.cpp
             WindowsBackend.hpp
+            WindowsSignalDispatcher.cpp
+            WindowsSignalDispatcher.hpp
     )
 else ()
     target_sources(erbsland-color-term PRIVATE
             PosixBackend.cpp
             PosixBackend.hpp
+            PosixSignalDispatcher.cpp
+            PosixSignalDispatcher.hpp
     )
 endif ()

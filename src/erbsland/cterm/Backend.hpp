@@ -7,6 +7,7 @@
 #include "Input.hpp"
 #include "MoveMode.hpp"
 #include "Size.hpp"
+#include "TerminalFlags.hpp"
 
 #include <memory>
 #include <optional>
@@ -119,7 +120,7 @@ public: // input handling.
     /// In `Input::Mode::ReadLine` mode, the user has to enter a character and press enter.
     /// @param timeout Maximum wait time in `Mode::Key`; ignored in `Mode::ReadLine`.
     /// @return The parsed key event, or an invalid key if no supported input was read.
-    [[nodiscard]] virtual auto readKey(std::chrono::milliseconds timeout = {}) -> Key = 0;
+    [[nodiscard]] virtual auto readKey(std::chrono::milliseconds timeout) -> Key = 0;
     /// Read text input in the terminal.
     /// Can be ignored in `Input::Mode::Key` mode.
     /// @return The read text, without line breaks.
@@ -127,7 +128,7 @@ public: // input handling.
 
 public:
     /// Create the default backend for this platform.
-    [[nodiscard]] static auto createPlatformDefault() -> BackendPtr;
+    [[nodiscard]] static auto createPlatformDefault(TerminalFlags terminalFlags) -> BackendPtr;
 };
 
 

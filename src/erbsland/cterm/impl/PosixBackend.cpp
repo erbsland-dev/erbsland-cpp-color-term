@@ -2,21 +2,22 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "PosixBackend.hpp"
 
+
+#include "PosixSignalDispatcher.hpp"
+
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/select.h>
 #include <unistd.h>
 
-#include <array>
-#include <csignal>
 #include <iostream>
 #include <thread>
 
 
 namespace erbsland::cterm {
 
-auto Backend::createPlatformDefault() -> BackendPtr {
-    return impl::PosixBackend::getOrCreate();
+auto Backend::createPlatformDefault(const TerminalFlags terminalFlags) -> BackendPtr {
+    return impl::PosixBackend::getOrCreate(terminalFlags);
 }
 
 }
@@ -25,17 +26,19 @@ namespace erbsland::cterm::impl {
 
 std::mutex PosixBackend::_instanceMutex;
 PosixBackend *PosixBackend::_instance = nullptr;
-std::array<struct sigaction, PosixBackend::cSignals.size()> PosixBackend::_previousSignalActions{};
 
-PosixBackend::PosixBackend() {
+PosixBackend::PosixBackend(TerminalFlags terminalFlags) : _terminalFlags{terminalFlags} {
     // called once per application.
     _instance = this;
-    registerExitHandlers();
+    if (!_terminalFlags.has(TerminalFlag::NoSignalHandling)) {
+        _signalHandler = std::make_unique<PosixSignalDispatcher>(
+            [this](const int signalNumber) -> void { handleProcessSignal(signalNumber); });
+    }
 }
 
 PosixBackend::~PosixBackend() {
-    unregisterExitHandlers();
-    std::lock_guard lock{_instanceMutex};
+    _signalHandler.reset();
+    std::scoped_lock lock{_instanceMutex};
     if (_instance != nullptr) {
         _instance->restorePlatform();
         _instance = nullptr;
@@ -57,9 +60,9 @@ void PosixBackend::restorePlatform() {
         if (_isAlternateScreenActive) {
             std::cout << "\x1b[?1049l"; // disable alternative screen buffer
         }
-        std::cout << "\x1b[0m"; // restore to default color
-        std::cout << "\x1b[?25h"; // make the cursor visible.
-        std::cout << "\n"; // add a newline for compatibility.
+        std::cout << "\x1b[0m";         // restore to default color
+        std::cout << "\x1b[?25h";       // make the cursor visible.
+        std::cout << "\n";              // add a newline for compatibility.
         std::cout.flush();
     }
     if (_keyInputSessionActive) {
@@ -191,21 +194,21 @@ auto PosixBackend::readLine() -> std::string {
     return input;
 }
 
-auto PosixBackend::getOrCreate() noexcept -> BackendPtr {
-    std::lock_guard lock{_instanceMutex};
+auto PosixBackend::getOrCreate(const TerminalFlags terminalFlags) noexcept -> BackendPtr {
+    std::scoped_lock lock{_instanceMutex};
     if (_instance == nullptr) {
-        return std::make_shared<PosixBackend>();
+        return std::make_shared<PosixBackend>(terminalFlags);
     }
     return _instance->shared_from_this();
 }
 
 auto PosixBackend::instance() noexcept -> PosixBackend * {
-    std::lock_guard lock(_instanceMutex);
+    std::scoped_lock lock(_instanceMutex);
     return _instance;
 }
 
 void PosixBackend::restoreGlobalPlatform() noexcept {
-    std::lock_guard lock(_instanceMutex);
+    std::scoped_lock lock(_instanceMutex);
     if (_instance == nullptr) {
         return;
     }
@@ -300,31 +303,14 @@ void PosixBackend::restoreKeyInputSession() {
     _keyInputSessionActive = false;
 }
 
-void PosixBackend::registerExitHandlers() {
-    std::atexit(&PosixBackend::onExit);
+void PosixBackend::handleProcessSignal(const int signalNumber) noexcept {
+    restoreGlobalPlatform();
     struct sigaction action{};
-    action.sa_handler = &PosixBackend::onSignal;
+    action.sa_handler = SIG_DFL;
     sigemptyset(&action.sa_mask);
     action.sa_flags = 0;
-    for (std::size_t index = 0; index < cSignals.size(); ++index) {
-        sigaction(cSignals[index], &action, &_previousSignalActions[index]);
-    }
-}
-
-void PosixBackend::unregisterExitHandlers() {
-    for (std::size_t index = 0; index < cSignals.size(); ++index) {
-        sigaction(cSignals[index], &_previousSignalActions[index], nullptr);
-    }
-}
-
-void PosixBackend::onExit() noexcept {
-    restoreGlobalPlatform();
-}
-
-void PosixBackend::onSignal(const int signalNumber) noexcept {
-    restoreGlobalPlatform();
-    std::signal(signalNumber, SIG_DFL);
-    std::raise(signalNumber);
+    sigaction(signalNumber, &action, nullptr);
+    kill(getpid(), signalNumber);
     std::_Exit(128 + signalNumber);
 }
 

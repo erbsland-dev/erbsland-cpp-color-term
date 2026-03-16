@@ -37,6 +37,7 @@
 #include "Size.hpp"
 #include "String.hpp"
 #include "Terminal.hpp"
+#include "TerminalFlags.hpp"
 #include "Text.hpp"
 #include "TextAnimation.hpp"
 #include "Tile9Style.hpp"

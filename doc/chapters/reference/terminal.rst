@@ -235,3 +235,8 @@ Interface
     :members:
 
 .. doxygentypedef:: erbsland::cterm::TerminalPtr
+
+.. doxygenenum:: erbsland::cterm::TerminalFlag
+
+.. doxygenclass:: erbsland::cterm::TerminalFlags
+    :members:

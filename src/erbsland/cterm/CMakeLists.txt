@@ -53,6 +53,7 @@ target_sources(erbsland-color-term PRIVATE
         String.hpp
         Terminal.cpp
         Terminal.hpp
+        TerminalFlags.hpp
         Text.hpp
         TextAnimation.hpp
         Tile9Style.cpp
