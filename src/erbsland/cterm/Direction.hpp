@@ -6,6 +6,7 @@
 #include "Position.hpp"
 
 #include <cstdint>
+#include <functional>
 #include <string_view>
 
 
@@ -75,9 +76,19 @@ public: // tests
     [[nodiscard]] auto contains(Direction direction) const noexcept -> bool;
 
 public: // conversion
+    /// Get a hash for this direction.
+    [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
+        return impl::hashCreate(static_cast<uint8_t>(_value));
+    }
     /// Convert this direction into a position delta.
     /// @return The unit delta for this direction, or `(0,0)` for `None`.
     [[nodiscard]] auto toDelta() const noexcept -> Position;
+
+    /// Convert a position delta into a direction.
+    /// Only tests the signs of the x and y value in the given position.
+    /// @param delta The position delta to convert.
+    /// @return The direction for the given delta, or `None` if the delta is zero.
+    [[nodiscard]] static auto fromDelta(Position delta) noexcept -> Direction;
 
     /// Convert this direction into a canonical lowercase string.
     /// @return The normalized direction name.
@@ -107,3 +118,11 @@ private:
 
 
 }
+
+
+template <>
+struct std::hash<erbsland::cterm::Direction> {
+    auto operator()(const erbsland::cterm::Direction &direction) const noexcept -> std::size_t {
+        return direction.hash();
+    }
+};

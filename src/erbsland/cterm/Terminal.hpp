@@ -228,9 +228,11 @@ public: // screen handling
 
 public: // writing tools
     /// Write a character to the console.
+    /// Inherited color components resolve against the currently active terminal color.
     /// @param character The character to write.
     void write(const Char &character) noexcept;
     /// Write a string to the console.
+    /// Inherited color components in each character resolve against the currently active terminal color.
     /// @param str The string to write.
     void write(const String &str) noexcept;
     /// Write text to the console.

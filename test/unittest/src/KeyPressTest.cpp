@@ -6,6 +6,8 @@
 #include <erbsland/unittest/UnitTest.hpp>
 
 #include <array>
+#include <format>
+#include <functional>
 
 TESTED_TARGETS(Key)
 class KeyPressTest final : public el::UnitTest {
@@ -44,10 +46,22 @@ public:
             {"\x1b[20~", Key{Key::F9}},      {"\x1b[21~", Key{Key::F10}},   {"\x1b[23~", Key{Key::F11}},
             {"\x1b[24~", Key{Key::F12}},
         }};
-        for (const auto &entry : entries) {
-            auto key = Key::fromConsoleInput(entry.input);
-            REQUIRE_EQUAL(key, entry.expected);
-            REQUIRE(key.valid());
+        for (std::size_t index = 0; index < entries.size(); ++index) {
+            const auto &entry = entries[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() {
+                    const auto key = Key::fromConsoleInput(entry.input);
+                    REQUIRE_EQUAL(key, entry.expected);
+                    REQUIRE(key.valid());
+                },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / inputSize = {} / expectedKey = {}",
+                        index,
+                        std::string_view{entry.input}.size(),
+                        entry.expected.toString());
+                });
         }
     }
 
@@ -84,10 +98,16 @@ public:
             {"F12", Key{Key::F12}, "f12"},
             {"X", Key{Key::Character, 'x'}, "x"},
         }};
-        for (const auto &entry : entries) {
-            auto key = Key::fromString(entry.input);
-            REQUIRE_EQUAL(key, entry.expected);
-            REQUIRE_EQUAL(key.toString(), entry.text);
+        for (std::size_t index = 0; index < entries.size(); ++index) {
+            const auto &entry = entries[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() {
+                    const auto key = Key::fromString(entry.input);
+                    REQUIRE_EQUAL(key, entry.expected);
+                    REQUIRE_EQUAL(key.toString(), entry.text);
+                },
+                [&]() -> std::string { return std::format("index = {} / input = \"{}\"", index, entry.input); });
         }
 
         REQUIRE_EQUAL(Key::fromString("?"), Key{Key::None});
@@ -110,12 +130,35 @@ public:
             {Key{Key::F5}, "[F5]", "F5"},
             {Key{Key::Character, 'x'}, "[x]", "x"},
         }};
-        for (const auto &entry : entries) {
-            REQUIRE_EQUAL(entry.key.toDisplayText(), entry.withBrackets);
-            REQUIRE_EQUAL(entry.key.toDisplayText(false), entry.withoutBrackets);
+        for (std::size_t index = 0; index < entries.size(); ++index) {
+            const auto &entry = entries[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() {
+                    REQUIRE_EQUAL(entry.key.toDisplayText(), entry.withBrackets);
+                    REQUIRE_EQUAL(entry.key.toDisplayText(false), entry.withoutBrackets);
+                },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / expectedWithBrackets = \"{}\" / expectedWithoutBrackets = \"{}\"",
+                        index,
+                        entry.withBrackets,
+                        entry.withoutBrackets);
+                });
         }
 
         REQUIRE_EQUAL(Key{}.toDisplayText(), "");
         REQUIRE_EQUAL(Key{}.toDisplayText(false), "");
+    }
+
+    void testHashMatchesStdHashAndIncludesCharacterPayload() {
+        const auto characterA = Key{Key::Character, 'a'};
+        const auto characterB = Key{Key::Character, 'b'};
+        const auto special = Key{Key::Enter};
+
+        REQUIRE_EQUAL(characterA.hash(), std::hash<Key>{}(characterA));
+        REQUIRE_EQUAL(special.hash(), std::hash<Key>{}(special));
+        REQUIRE_NOT_EQUAL(characterA.hash(), characterB.hash());
+        REQUIRE_NOT_EQUAL(characterA.hash(), special.hash());
     }
 };

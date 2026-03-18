@@ -1,13 +1,13 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-
 #include "TestHelper.hpp"
 
 #include <erbsland/unittest/UnitTest.hpp>
 
 
-class AnchorTest : public el::UnitTest {
+TESTED_TARGETS(Anchor)
+class AnchorTest final : public el::UnitTest {
 public:
     void testCombinationWithOrOperator() {
         REQUIRE_EQUAL(Anchor::Top | Anchor::Left, Anchor::TopLeft);

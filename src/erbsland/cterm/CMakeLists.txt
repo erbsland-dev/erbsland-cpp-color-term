@@ -48,6 +48,7 @@ target_sources(erbsland-color-term PRIVATE
         ReadableBuffer.hpp
         Rectangle.cpp
         Rectangle.hpp
+        Size.cpp
         Size.hpp
         String.cpp
         String.hpp

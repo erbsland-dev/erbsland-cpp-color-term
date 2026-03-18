@@ -57,8 +57,13 @@ public: // accessors
     /// @param pos The quad position in half-resolution coordinates.
     /// @return Bit mask with top-left/top-right/bottom-left/bottom-right pixels in bits `0..3`.
     [[nodiscard]] auto pixelQuad(Position pos) const noexcept -> uint8_t;
+    /// Read the four cardinal pixels as a bit-mask.
+    /// Clockwise bit-order: right, down, left, up
+    /// @param pos The center pixel position.
+    /// @return The bit mask, where bits `0..3` represent the pixels in clockwise order starting from the right.
+    [[nodiscard]] auto pixelCardinal(Position pos) const noexcept -> uint8_t;
     /// Read the ring of eight pixels surrounding the given position as a bitmask.
-    /// Bit-order: 0:E, 1:SE, 2:S, 3:SW, 4:W, 5:NW, 6:N, 7:NE
+    /// Clockwise bit-order: 0:E, 1:SE, 2:S, 3:SW, 4:W, 5:NW, 6:N, 7:NE
     /// @param pos The center pixel position.
     /// @return The bit mask, where bits `0..7` represent the pixels in clockwise order starting from the right.
     [[nodiscard]] auto pixelRing(Position pos) const noexcept -> uint8_t;
@@ -89,6 +94,12 @@ public: // transformation
     /// The bitmap needs to have a margin large enough for the outline.
     /// Algorithm: If at a cleared source pixel is surrounded by at least one set pixel, the target pixel is set.
     [[nodiscard]] auto outlined() const noexcept -> Bitmap;
+    /// Create a new bitmap expanded with a given margin.
+    /// Negative margins cut sections from the bitmap.
+    /// @param margins The margins for the expansion.
+    /// @param value The value to fill the expanded area with.
+    /// @return The expanded/shrunk bitmap. If the new width or height is zero, an empty bitmap is returned.
+    [[nodiscard]] auto expanded(Margins margins, bool value) const noexcept -> Bitmap;
 
 public: // drawing
     /// Draw pixels from a numeric bit mask.

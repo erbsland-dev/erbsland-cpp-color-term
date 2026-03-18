@@ -10,37 +10,8 @@
 
 
 TESTED_TARGETS(Backend)
-class BackendTest final : public el::UnitTest {
+class BackendTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {
 public:
-    auto createTerminal(const std::shared_ptr<TerminalTestBackend> &backend, const Size size = Size{80, 25})
-        -> std::unique_ptr<Terminal> {
-        auto terminal = std::make_unique<Terminal>(size);
-        terminal->setBackend(backend);
-        return terminal;
-    }
-
-    auto createBuffer(const std::initializer_list<std::string_view> rows) -> Buffer {
-        auto width = 0;
-        for (const auto row : rows) {
-            REQUIRE_FALSE(row.empty());
-            if (width == 0) {
-                width = static_cast<int>(row.size());
-            } else {
-                REQUIRE_EQUAL(static_cast<int>(row.size()), width);
-            }
-        }
-        REQUIRE_FALSE(rows.size() == 0);
-        auto buffer = Buffer{Size{width, static_cast<int>(rows.size())}};
-        auto y = 0;
-        for (const auto row : rows) {
-            for (auto x = 0; x < width; ++x) {
-                buffer.set(Position{x, y}, Char{static_cast<char32_t>(static_cast<unsigned char>(row[x]))});
-            }
-            y += 1;
-        }
-        return buffer;
-    }
-
     void testTerminalUsesEmitColorWhenColorCodesAreUnavailable() {
         const auto backend = std::make_shared<TerminalTestBackend>();
         backend->_supportsColorCodes = false;

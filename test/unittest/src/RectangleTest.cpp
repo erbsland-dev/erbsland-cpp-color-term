@@ -1,11 +1,12 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-
 #include "TestHelper.hpp"
 
 #include <erbsland/unittest/UnitTest.hpp>
 
+#include <format>
+#include <functional>
 
 // Keep this check at compile time so the constexpr Rectangle constructor cannot regress unnoticed.
 static_assert([]() constexpr {
@@ -13,8 +14,14 @@ static_assert([]() constexpr {
         Rectangle(Position(5, 6), Position(2, 4)).size() == Size(0, 0);
 }());
 
+static_assert([]() constexpr {
+    const auto rect = Rectangle(1, 2, 3, 4);
+    return rect.hash() == rect.hash();
+}());
 
-class RectangleTest : public el::UnitTest {
+
+TESTED_TARGETS(Rectangle)
+class RectangleTest final : public el::UnitTest {
 public:
     Rectangle rect;
 
@@ -26,8 +33,40 @@ public:
     void requireRectangleSequenceEqual(const std::vector<Rectangle> &actual, const std::vector<Rectangle> &expected) {
         REQUIRE_EQUAL(actual.size(), expected.size());
         for (std::size_t index = 0; index < expected.size(); ++index) {
-            WITH_CONTEXT(index);
-            requireRectangleEqual(actual[index], expected[index]);
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { requireRectangleEqual(actual[index], expected[index]); },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / actual = ({}, {}, {}, {}) / expected = ({}, {}, {}, {})",
+                        index,
+                        actual[index].x1(),
+                        actual[index].y1(),
+                        actual[index].width(),
+                        actual[index].height(),
+                        expected[index].x1(),
+                        expected[index].y1(),
+                        expected[index].width(),
+                        expected[index].height());
+                });
+        }
+    }
+
+    void requirePositionSequenceEqual(const PositionList &actual, const PositionList &expected) {
+        REQUIRE_EQUAL(actual.size(), expected.size());
+        for (std::size_t index = 0; index < expected.size(); ++index) {
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE_EQUAL(actual[index], expected[index]); },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / actual = ({}, {}) / expected = ({}, {})",
+                        index,
+                        actual[index].x(),
+                        actual[index].y(),
+                        expected[index].x(),
+                        expected[index].y());
+                });
         }
     }
 
@@ -223,6 +262,48 @@ public:
         REQUIRE_FALSE(rect.contains(Rectangle(3, 7, 2, 2)));
     }
 
+    void testHashMatchesStdHashAndDependsOnGeometry() {
+        const auto first = Rectangle(2, 3, 6, 5);
+        const auto second = Rectangle(2, 3, 5, 6);
+
+        REQUIRE_EQUAL(first.hash(), std::hash<Rectangle>{}(first));
+        REQUIRE_NOT_EQUAL(first.hash(), second.hash());
+    }
+
+    void testClamp() {
+        struct ClampCase {
+            Rectangle rectangle;
+            Position input;
+            Position expected;
+        };
+        const std::vector<ClampCase> cases = {
+            {.rectangle = Rectangle(10, 20, 5, 4), .input = Position(12, 21), .expected = Position(12, 21)},
+            {.rectangle = Rectangle(10, 20, 5, 4), .input = Position(2, 9), .expected = Position(10, 20)},
+            {.rectangle = Rectangle(10, 20, 5, 4), .input = Position(99, 99), .expected = Position(14, 23)},
+            {.rectangle = Rectangle(10, 20, 1, 4), .input = Position(99, 22), .expected = Position(10, 22)},
+            {.rectangle = Rectangle(10, 20, 5, 1), .input = Position(12, -5), .expected = Position(12, 20)},
+        };
+        for (std::size_t index = 0; index < cases.size(); ++index) {
+            const auto &[rectangle, input, expected] = cases[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE_EQUAL(rectangle.clamp(input), expected); },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / rectangle = ({}, {}, {}, {}) / input = ({}, {}) / expected = ({}, {})",
+                        index,
+                        rectangle.x1(),
+                        rectangle.y1(),
+                        rectangle.width(),
+                        rectangle.height(),
+                        input.x(),
+                        input.y(),
+                        expected.x(),
+                        expected.y());
+                });
+        }
+    }
+
     void testOverlapsDetectsSharedAreaAndRejectsTouchingEdges() {
         const auto horizontal = Rectangle(0, 1, 4, 2);
         const auto vertical = Rectangle(1, 0, 2, 4);
@@ -304,10 +385,7 @@ public:
             Position(2, 3),
             Position(3, 3),
         };
-        REQUIRE_EQUAL(visited.size(), expected.size());
-        for (std::size_t i = 0; i < expected.size(); ++i) {
-            REQUIRE_EQUAL(visited[i], expected[i]);
-        }
+        requirePositionSequenceEqual(visited, expected);
     }
 
     void testForEachInFrameVisitsAllFramePositions() {
@@ -327,9 +405,15 @@ public:
             Position(4, 5),
         };
         REQUIRE_EQUAL(visited.size(), expected.size());
-        for (const auto &expectedPosition : expected) {
-            WITH_CONTEXT(expectedPosition);
-            REQUIRE(std::ranges::find(visited, expectedPosition) != visited.end());
+        for (std::size_t index = 0; index < expected.size(); ++index) {
+            const auto &expectedPosition = expected[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE(std::ranges::find(visited, expectedPosition) != visited.end()); },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / expectedPosition = ({}, {})", index, expectedPosition.x(), expectedPosition.y());
+                });
         }
     }
 
@@ -355,10 +439,15 @@ public:
             Position(2, 5),
             Position(2, 4),
         };
-        REQUIRE_EQUAL(visited, expectedPositions);
+        requirePositionSequenceEqual(visited, expectedPositions);
         for (std::size_t index = 0; index < indexes.size(); ++index) {
-            WITH_CONTEXT(index);
-            REQUIRE_EQUAL(indexes[index], static_cast<int>(index));
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE_EQUAL(indexes[index], static_cast<int>(index)); },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / actualIndex = {} / expectedIndex = {}", index, indexes[index], index);
+                });
         }
     }
 

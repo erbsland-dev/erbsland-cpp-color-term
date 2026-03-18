@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Terminal.hpp"
 
-
 #include "Buffer.hpp"
 #include "BufferView.hpp"
 
@@ -424,15 +423,17 @@ void Terminal::restoreScreen() noexcept {
 }
 
 void Terminal::write(const Char &character) noexcept {
-    setColor(character.color().fg(), character.color().bg());
-    _lineBuffer.write(character);
+    const auto resolvedCharacter = character.withBaseColor(_color);
+    setColor(resolvedCharacter.color().fg(), resolvedCharacter.color().bg());
+    _lineBuffer.write(resolvedCharacter);
     _lineBuffer.handleEmit();
 }
 
 void Terminal::write(const String &str) noexcept {
     for (const auto &character : str) {
-        setColor(character.color().fg(), character.color().bg());
-        _lineBuffer.write(character);
+        const auto resolvedCharacter = character.withBaseColor(_color);
+        setColor(resolvedCharacter.color().fg(), resolvedCharacter.color().bg());
+        _lineBuffer.write(resolvedCharacter);
     }
     _lineBuffer.handleEmit();
 }

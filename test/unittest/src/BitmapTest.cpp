@@ -5,7 +5,22 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
+#include <format>
 #include <vector>
+
+
+class BitmapAccessor final : public Bitmap {
+public:
+    using Bitmap::Bitmap;
+
+    auto readPixelRef(const Position pos) -> bool {
+        return pixelRef(pos);
+    }
+
+    void writePixelRef(const Position pos, const bool value) {
+        pixelRef(pos) = value;
+    }
+};
 
 
 TESTED_TARGETS(Bitmap)
@@ -14,12 +29,32 @@ public:
     void requireRowsEqual(const Bitmap &bitmap, const std::vector<std::string> &expectedRows) {
         REQUIRE_EQUAL(bitmap.size().height(), static_cast<int>(expectedRows.size()));
         for (std::size_t y = 0; y < expectedRows.size(); ++y) {
-            WITH_CONTEXT(y);
-            REQUIRE_EQUAL(bitmap.size().width(), static_cast<int>(expectedRows[y].size()));
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE_EQUAL(bitmap.size().width(), static_cast<int>(expectedRows[y].size())); },
+                [&]() -> std::string {
+                    return std::format(
+                        "row = {} / bitmapWidth = {} / expectedWidth = {}",
+                        y,
+                        bitmap.size().width(),
+                        expectedRows[y].size());
+                });
             for (std::size_t x = 0; x < expectedRows[y].size(); ++x) {
-                WITH_CONTEXT(x);
-                REQUIRE_EQUAL(
-                    bitmap.pixel(Position{static_cast<int>(x), static_cast<int>(y)}), expectedRows[y][x] == '#');
+                runWithContext(
+                    SOURCE_LOCATION(),
+                    [&]() {
+                        REQUIRE_EQUAL(
+                            bitmap.pixel(Position{static_cast<int>(x), static_cast<int>(y)}),
+                            expectedRows[y][x] == '#');
+                    },
+                    [&]() -> std::string {
+                        return std::format(
+                            "x = {} / y = {} / expectedPixel = {} / expectedRow = \"{}\"",
+                            x,
+                            y,
+                            expectedRows[y][x] == '#',
+                            expectedRows[y]);
+                    });
             }
         }
     }
@@ -38,11 +73,53 @@ public:
         REQUIRE_FALSE(bitmap.pixel(Position{99, 99}));
     }
 
+    void testSetPixelIgnoresOutsideCoordinatesWithoutChangingTheBitmap() {
+        auto bitmap = Bitmap::fromPattern({
+            "#.",
+            ".#",
+        });
+
+        bitmap.setPixel(Position{-1, 0}, true);
+        bitmap.setPixel(Position{2, 1}, true);
+        bitmap.setPixel(Position{0, 2}, false);
+
+        requireRowsEqual(
+            bitmap,
+            {
+                "#.",
+                ".#",
+            });
+    }
+
     void testRectMatchesBitmapBounds() {
         const auto bitmap = Bitmap{Size{4, 3}};
 
         REQUIRE_EQUAL(bitmap.rect().topLeft(), Position(0, 0));
         REQUIRE_EQUAL(bitmap.rect().size(), Size(4, 3));
+    }
+
+    void testDataAccessorsExposeTheUnderlyingPixelStorage() {
+        auto bitmap = Bitmap{Size{2, 2}};
+
+        bitmap.data()[1] = true;
+        bitmap.data()[2] = true;
+
+        const auto &constData = static_cast<const Bitmap &>(bitmap).data();
+        REQUIRE_EQUAL(constData.size(), static_cast<std::size_t>(4));
+        REQUIRE(constData[1]);
+        REQUIRE(constData[2]);
+        REQUIRE(bitmap.pixel(Position{1, 0}));
+        REQUIRE(bitmap.pixel(Position{0, 1}));
+    }
+
+    void testProtectedPixelRefAllowsMutationAndThrowsForOutOfBoundsAccess() {
+        auto bitmap = BitmapAccessor{Size{2, 1}};
+
+        bitmap.writePixelRef(Position{1, 0}, true);
+
+        REQUIRE(bitmap.pixel(Position{1, 0}));
+        REQUIRE(bitmap.readPixelRef(Position{1, 0}));
+        REQUIRE_THROWS_AS(std::out_of_range, bitmap.readPixelRef(Position{2, 0}));
     }
 
     void testFlipHorizontalMirrorsContent() {
@@ -117,6 +194,25 @@ public:
         bitmap.setPixel(Position{1, 1}, true);
 
         REQUIRE_EQUAL(bitmap.pixelQuad(Position{0, 0}), static_cast<std::uint8_t>(0b1001U));
+    }
+
+    void testPixelCardinalBuildsExpectedMaskInClockwiseOrder() {
+        const auto bitmap = Bitmap::fromPattern({
+            ".#.",
+            "..#",
+            ".#.",
+        });
+
+        REQUIRE_EQUAL(bitmap.pixelCardinal(Position{1, 1}), static_cast<std::uint8_t>(0b1011U));
+    }
+
+    void testPixelCardinalIgnoresTheCenterPixelAndOutOfBoundsNeighbors() {
+        auto bitmap = Bitmap{Size{2, 1}};
+        bitmap.setPixel(Position{0, 0}, true);
+        bitmap.setPixel(Position{1, 0}, true);
+
+        REQUIRE_EQUAL(bitmap.pixelCardinal(Position{0, 0}), static_cast<std::uint8_t>(0b0001U));
+        REQUIRE_EQUAL(bitmap.pixelCardinal(Position{-1, 0}), static_cast<std::uint8_t>(0b0001U));
     }
 
     void testPixelRingBuildsExpectedMaskInClockwiseOrder() {
@@ -264,6 +360,79 @@ public:
             });
     }
 
+    void testExpandedAddsClearedMarginsAroundTheBitmap() {
+        const auto bitmap = Bitmap::fromPattern({
+            "#.",
+            ".#",
+        });
+
+        const auto expanded = bitmap.expanded(Margins{1, 2, 1, 3}, false);
+
+        requireRowsEqual(
+            expanded,
+            {
+                ".......",
+                "...#...",
+                "....#..",
+                ".......",
+            });
+        requireRowsEqual(
+            bitmap,
+            {
+                "#.",
+                ".#",
+            });
+    }
+
+    void testExpandedCanFillTheAddedMarginArea() {
+        const auto bitmap = Bitmap::fromPattern({
+            "#.",
+            "##",
+        });
+
+        const auto expanded = bitmap.expanded(Margins{1, 1, 0, 2}, true);
+
+        requireRowsEqual(
+            expanded,
+            {
+                "#####",
+                "###.#",
+                "#####",
+            });
+    }
+
+    void testExpandedWithNegativeMarginsCropsTheBitmap() {
+        const auto bitmap = Bitmap::fromPattern({
+            ".....",
+            ".##..",
+            "..#..",
+            ".##..",
+        });
+
+        const auto expanded = bitmap.expanded(Margins{-1, -2, 0, -1}, false);
+
+        requireRowsEqual(
+            expanded,
+            {
+                "##",
+                ".#",
+                "##",
+            });
+    }
+
+    void testExpandedReturnsAnEmptyBitmapIfMarginsRemoveAWholeDimension() {
+        const auto bitmap = Bitmap::fromPattern({
+            "##",
+            "##",
+        });
+
+        const auto emptyWidth = bitmap.expanded(Margins{0, -2, 0, 0}, false);
+        const auto emptyHeight = bitmap.expanded(Margins{-2, 0, 0, 0}, false);
+
+        REQUIRE_EQUAL(emptyWidth.size(), Size(0, 0));
+        REQUIRE_EQUAL(emptyHeight.size(), Size(0, 0));
+    }
+
     void testDrawCopiesOtherBitmap() {
         auto source = Bitmap{Size{2, 2}};
         source.setPixel(Position{0, 1}, true);
@@ -273,6 +442,19 @@ public:
 
         REQUIRE(destination.pixel(Position{1, 2}));
         REQUIRE_FALSE(destination.pixel(Position{1, 1}));
+    }
+
+    void testDrawFromUnsignedBitRowsUsesLeastSignificantBitsFromLeftToRight() {
+        auto bitmap = Bitmap{Size{4, 2}};
+
+        bitmap.draw(Position{0, 0}, std::vector<std::uint8_t>{0b0101U, 0b1010U});
+
+        requireRowsEqual(
+            bitmap,
+            {
+                "#.#.",
+                ".#.#",
+            });
     }
 
     void testFillRectFillsTheWholeInteriorAndCanClearPixels() {

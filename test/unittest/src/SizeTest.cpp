@@ -1,13 +1,16 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-
 #include "TestHelper.hpp"
 
 #include <erbsland/unittest/UnitTest.hpp>
 
+#include <format>
+#include <vector>
 
-class SizeTest : public el::UnitTest {
+
+TESTED_TARGETS(Size)
+class SizeTest final : public el::UnitTest {
 public:
     Size size;
 
@@ -115,6 +118,39 @@ public:
         REQUIRE_FALSE(size.contains(Position(8, 4)));
         REQUIRE_FALSE(size.contains(Position(-1, 0)));
         REQUIRE_FALSE(size.contains(Position(0, -1)));
+    }
+
+    void testClamp() {
+        struct ClampCase {
+            Size size;
+            Position input;
+            Position expected;
+        };
+        const std::vector<ClampCase> cases = {
+            {.size = Size(8, 4), .input = Position(3, 2), .expected = Position(3, 2)},
+            {.size = Size(8, 4), .input = Position(-2, -3), .expected = Position(0, 0)},
+            {.size = Size(8, 4), .input = Position(99, 99), .expected = Position(7, 3)},
+            {.size = Size(0, 4), .input = Position(5, 2), .expected = Position(0, 2)},
+            {.size = Size(3, 0), .input = Position(2, 9), .expected = Position(2, 0)},
+            {.size = Size(0, 0), .input = Position(-5, 9), .expected = Position(0, 0)},
+        };
+        for (std::size_t index = 0; index < cases.size(); ++index) {
+            const auto &[testedSize, input, expected] = cases[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE_EQUAL(testedSize.clamp(input), expected); },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / size = ({}, {}) / input = ({}, {}) / expected = ({}, {})",
+                        index,
+                        testedSize.width(),
+                        testedSize.height(),
+                        input.x(),
+                        input.y(),
+                        expected.x(),
+                        expected.y());
+                });
+        }
     }
 
     void testIndex() {

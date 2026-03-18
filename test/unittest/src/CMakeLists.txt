@@ -7,15 +7,22 @@ target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         AnchorTest.cpp
         BackendTest.cpp
         BitmapTest.cpp
+        BitmapDrawOptionsTest.cpp
         BlockBufferTest.cpp
+        BufferConvenienceTest.cpp
+        BufferViewTest.cpp
         Char16StyleTest.cpp
         CharCombinationStyleTest.cpp
         CharTest.cpp
+        ColorParsingTest.cpp
         ColorSequenceTest.cpp
         ColorTest.cpp
         CropEdgesTest.cpp
         DirectionTest.cpp
         FontTest.cpp
+        FontAccessTest.cpp
+        FrameDrawOptionsTest.cpp
+        HashHelperTest.cpp
         InputDefinitionTest.cpp
         KeyPressTest.cpp
         main.cpp
@@ -23,12 +30,16 @@ target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         PositionTest.cpp
         RectangleTest.cpp
         SizeTest.cpp
+        StringConversionTest.cpp
         TerminalTest.cpp
+        TerminalFlagsTest.cpp
         TerminalTestSupport.hpp
         TermStringTest.cpp
+        TerminalConvenienceTest.cpp
         TestHelper.hpp
         TextRenderTest.cpp
         Tile9StyleTest.cpp
         UnicodeWidthTest.cpp
+        UpdateSettingsTest.cpp
         UpdateScreenModesStateTest.cpp
 )

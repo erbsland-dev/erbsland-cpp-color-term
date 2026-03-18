@@ -4,8 +4,6 @@
 
 
 namespace erbsland::cterm {
-
-
 auto Position::operator+(const Position &other) const noexcept -> Position {
     return {_x + other._x, _y + other._y};
 }
@@ -47,7 +45,21 @@ auto Position::componentMin(Position other) const noexcept -> Position {
 }
 
 auto Position::cardinalFourDeltas() noexcept -> const std::array<Position, 4> & {
-    static std::array<Position, 4> deltas = {{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};
+    static const std::array<Position, 4> deltas = {{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};
+    return deltas;
+}
+
+auto Position::ringEightDeltas() noexcept -> const std::array<Position, 8U> & {
+    static const std::array<Position, 8U> deltas = {{
+        {1, 0},
+        {1, 1},
+        {0, 1},
+        {-1, 1},
+        {-1, 0},
+        {-1, -1},
+        {0, -1},
+        {1, -1},
+    }};
     return deltas;
 }
 

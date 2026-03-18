@@ -185,6 +185,8 @@ public: // modifiers
     /// Append elements to this string.
     /// This works similar to `Terminal::print()`.
     /// If you add a color, this color is "active" for all following characters *in the same call*.
+    /// Appended `Char` and `String` values with inherited color components resolve these components against the
+    /// currently active color.
     /// Just adding a color does not change the string.
     /// @param args The arguments to append.
     template <PrintableArg... Args>
@@ -237,11 +239,13 @@ private:
     static void appendCodePoint(Storage &chars, char32_t codePoint, Color color);
     void appendElement(const Foreground foreground, Color &currentColor) noexcept { currentColor.setFg(foreground); }
     void appendElement(const Background background, Color &currentColor) noexcept { currentColor.setBg(background); }
-    void appendElement(const Char &character, [[maybe_unused]] Color &currentColor) noexcept {
-        _chars.emplace_back(character);
+    void appendElement(const Char &character, Color &currentColor) noexcept {
+        _chars.emplace_back(character.withBaseColor(currentColor));
     }
-    void appendElement(const String &other, [[maybe_unused]] Color &currentColor) noexcept {
-        _chars.insert(_chars.end(), other._chars.begin(), other._chars.end());
+    void appendElement(const String &other, Color &currentColor) noexcept {
+        for (const auto &character : other._chars) {
+            _chars.emplace_back(character.withBaseColor(currentColor));
+        }
     }
     void appendElement(const std::string_view str, Color &currentColor) noexcept {
         const auto newCharacters = splitCharacters(str, currentColor);

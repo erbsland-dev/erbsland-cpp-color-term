@@ -5,6 +5,7 @@
 
 #include "ColorPart.hpp"
 
+#include <functional>
 #include <string_view>
 #include <vector>
 
@@ -74,6 +75,7 @@ public: // conversion and tools
     [[nodiscard]] auto overlayWith(const Color &overlay) const -> Color;
     /// Convert a color or color-pair into a block color.
     /// Format must be either `"fg"` or `"fg:bg"`.
+    /// Foreground and background names accept spaces, underscores, and hyphens between words.
     /// @param str The textual color specification.
     /// @return The parsed color.
     /// @throws std::invalid_argument if one of the colors does not exist.
@@ -86,6 +88,10 @@ public: // conversion and tools
     /// Shortcut to set fg and bg to default.
     [[nodiscard]] constexpr static auto reset() noexcept -> Color {
         return Color{Foreground::Default, Background::Default};
+    }
+    /// Get a hash for this color pair.
+    [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
+        return impl::hashCreate(_foreground.hash(), _background.hash());
     }
 
 public: // data
@@ -101,3 +107,9 @@ using ColorList = std::vector<Color>;
 
 
 }
+
+
+template <>
+struct std::hash<erbsland::cterm::Color> {
+    auto operator()(const erbsland::cterm::Color &color) const noexcept -> std::size_t { return color.hash(); }
+};

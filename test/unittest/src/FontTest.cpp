@@ -7,6 +7,7 @@
 #include <erbsland/unittest/UnitTest.hpp>
 
 #include <array>
+#include <format>
 #include <string_view>
 #include <vector>
 
@@ -22,9 +23,12 @@ public:
         const auto punctuation =
             std::array<std::string_view, 23>{"!", "?", "<", ">", ":", ";", ".", ",", "'", "\"", "/", "[",
                                              "]", "-", "+", "=", "_", "(", ")", "*", "%", "$",  "#"};
-        for (const auto name : punctuation) {
-            WITH_CONTEXT(std::string{name});
-            REQUIRE(font->glyph(name) != nullptr);
+        for (std::size_t index = 0; index < punctuation.size(); ++index) {
+            const auto name = punctuation[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE(font->glyph(name) != nullptr); },
+                [&]() -> std::string { return std::format("index = {} / glyph = \"{}\"", index, name); });
         }
         REQUIRE(font->glyph("\u3042") == nullptr);
     }

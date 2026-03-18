@@ -5,7 +5,11 @@
 
 #include "ColorRole.hpp"
 
+#include "impl/HashHelper.hpp"
+
 #include <array>
+#include <cstddef>
+#include <functional>
 #include <string>
 #include <string_view>
 
@@ -139,13 +143,19 @@ public: // conversion
     /// Convert this color part to its ANSI SGR numeric code.
     /// @return The numeric ANSI code for this color role.
     [[nodiscard]] auto ansiCode() const noexcept -> int { return tableEntry().ansiCode + cCodeBase; }
+    /// Get a hash for this color part.
+    /// The color role is included so foreground and background values use distinct hash domains.
+    [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
+        return impl::hashCreate(static_cast<uint8_t>(tColorType), static_cast<uint8_t>(_value));
+    }
     /// Create the bright variant of this color.
     /// @return The brightened color, or the unchanged color if no brighter variant exists.
     [[nodiscard]] auto brighter() const noexcept -> ColorPart { return ColorPart{Hue{brighterEnum(_value)}}; }
 
 public: // tools
     /// Create a color from the given string.
-    /// @param str The lowercase color name.
+    /// Accepts lowercase names as well as space-, underscore-, or hyphen-separated variants.
+    /// @param str The color name.
     /// @return The parsed color.
     /// @throws std::invalid_argument if the color does not exist.
     [[nodiscard]] static auto fromString(const std::string_view str) -> ColorPart {
@@ -164,10 +174,9 @@ public: // tools
         return ColorPart{Hue{static_cast<Value>(index)}};
     }
 
-    /// Access an array with all base color.
-    /// Use with `.brigther()` to get the bright color variants.
-    [[nodiscard]] static auto allBaseColors() noexcept
-        -> std::array<ColorPart, static_cast<std::size_t>(Value::_Count)> {
+    /// Access the eight non-bright base colors in ANSI order.
+    /// Use with `.brighter()` to get the bright color variants.
+    [[nodiscard]] static auto allBaseColors() noexcept -> std::array<ColorPart, 8> {
         return {Black, Red, Green, Yellow, Blue, Magenta, Cyan, White};
     }
 };
@@ -185,3 +194,15 @@ using fg = Foreground;
 
 
 }
+
+
+template <>
+struct std::hash<erbsland::cterm::Foreground> {
+    auto operator()(const erbsland::cterm::Foreground &color) const noexcept -> std::size_t { return color.hash(); }
+};
+
+
+template <>
+struct std::hash<erbsland::cterm::Background> {
+    auto operator()(const erbsland::cterm::Background &color) const noexcept -> std::size_t { return color.hash(); }
+};

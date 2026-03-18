@@ -5,6 +5,7 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
+#include <functional>
 
 TESTED_TARGETS(Char)
 class CharTest final : public el::UnitTest {
@@ -73,6 +74,17 @@ public:
         REQUIRE_FALSE(left == differentCodePoint);
         REQUIRE(differentColor != left);
         REQUIRE(differentCodePoint != left);
+    }
+
+    void testEqualityIgnoresTheDisplayWidthCache() {
+        auto left = Char{U'界', fg::Yellow, bg::Blue};
+        auto right = Char{U'界', fg::Yellow, bg::Blue};
+
+        REQUIRE_EQUAL(left.displayWidth(), 2);
+        REQUIRE(left == right);
+
+        REQUIRE_EQUAL(right.displayWidth(), 2);
+        REQUIRE(left == right);
     }
 
     void testSingleCodePointComparisonsIgnoreColorButRejectMultiCodePointCharacters() {
@@ -159,5 +171,15 @@ public:
     void testRejectsTooManyCodePoints() {
         REQUIRE_THROWS_AS(std::invalid_argument, Char{U"ab\u0301\u0302"});
         REQUIRE_THROWS_AS(std::invalid_argument, Char{"a\xCC\x81\xCC\x82\xCC\x83"});
+    }
+
+    void testHashMatchesStdHashAndReflectsTextAndColor() {
+        const auto base = Char{U'★', fg::Yellow, bg::Blue};
+        const auto differentText = Char{U'☆', fg::Yellow, bg::Blue};
+        const auto differentColor = Char{U'★', fg::Yellow, bg::Black};
+
+        REQUIRE_EQUAL(base.hash(), std::hash<Char>{}(base));
+        REQUIRE_NOT_EQUAL(base.hash(), differentText.hash());
+        REQUIRE_NOT_EQUAL(base.hash(), differentColor.hash());
     }
 };

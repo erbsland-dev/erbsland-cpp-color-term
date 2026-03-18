@@ -1,12 +1,10 @@
-#  Copyright © 2026 by Tobias Erbsland / Erbsland DEV.
-#  SPDX-License-Identifier: CC-BY-4.0
+#  Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+#  SPDX-License-Identifier: Apache-2.0
 
 import re
 import shutil
 import sys
 from pathlib import Path
-
-import erbsland.conf_pygments.lexer
 
 sys.path.insert(0, str(Path(__file__).parent))
 

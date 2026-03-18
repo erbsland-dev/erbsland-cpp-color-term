@@ -8,7 +8,8 @@
 #include <memory>
 
 
-class TextRenderTest : public el::UnitTest {
+TESTED_TARGETS(Text Buffer)
+class TextRenderTest final : public el::UnitTest {
 public:
     void testTextUsesSingleParagraphSpacingByDefault() {
         auto text = Text{};

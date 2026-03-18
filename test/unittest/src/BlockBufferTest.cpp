@@ -76,6 +76,32 @@ public:
         REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AB"}));
     }
 
+    void testResizeWithReorderShrinkingWidthFillsRowsAddedByHeightExpansion() {
+        auto buffer = Buffer{Size{3, 2}};
+        buffer.set(Position{0, 0}, Char{U'A'});
+        buffer.set(Position{1, 0}, Char{U'B'});
+        buffer.set(Position{2, 0}, Char{U'C'});
+        buffer.set(Position{0, 1}, Char{U'D'});
+        buffer.set(Position{1, 1}, Char{U'E'});
+        buffer.set(Position{2, 1}, Char{U'F'});
+
+        buffer.resize(Size{2, 3}, true, Char{U'.'});
+
+        REQUIRE_EQUAL(buffer.size(), Size(2, 3));
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AB", "DE", ".."}));
+    }
+
+    void testResizeWithoutReorderFillsExpandedTailWithExplicitCharacter() {
+        auto buffer = Buffer{Size{2, 1}};
+        buffer.set(Position{0, 0}, Char{U'A'});
+        buffer.set(Position{1, 0}, Char{U'B'});
+
+        buffer.resize(Size{4, 1}, false, Char{U'.'});
+
+        REQUIRE_EQUAL(buffer.size(), Size(4, 1));
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AB.."}));
+    }
+
     void testResizeRejectsInvalidSizes() {
         auto buffer = Buffer{Size{2, 2}};
 
@@ -122,6 +148,17 @@ public:
         REQUIRE_EQUAL(buffer.get(Position(2, 0)).color(), Color{});
     }
 
+    void testSetWideCharacterAtTheRightEdgeIsIgnored() {
+        auto buffer = Buffer{Size{2, 1}};
+        buffer.fill(Char{U'.'});
+
+        buffer.set(Position{1, 0}, Char{U'界', fg::Yellow, bg::Blue});
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({".."}));
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}), U'.');
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}), U'.');
+    }
+
     void testSetStringWritesMultipleLinesAndSkipsZeroWidthCharacters() {
         auto buffer = Buffer{Size{4, 2}, Char{U'.'}};
         auto text = String{};
@@ -163,6 +200,53 @@ public:
     void testFromLinesFactoriesRejectEmptyInput() {
         REQUIRE_THROWS_AS(std::invalid_argument, Buffer::fromLines(StringLines{}));
         REQUIRE_THROWS_AS(std::invalid_argument, Buffer::fromLinesInString(String{}));
+    }
+
+    void testCloneCreatesAnIndependentWritableCopy() {
+        auto buffer = Buffer{Size{2, 1}};
+        buffer.set(Position{0, 0}, Char{U'A'});
+
+        const auto cloned = buffer.clone();
+
+        REQUIRE(cloned != nullptr);
+        cloned->set(Position{1, 0}, Char{U'B', fg::Red, bg::Black});
+
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}), U'A');
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}), U' ');
+        REQUIRE_EQUAL(cloned->get(Position{0, 0}), U'A');
+        REQUIRE_EQUAL(cloned->get(Position{1, 0}), U'B');
+        REQUIRE_EQUAL(cloned->get(Position{1, 0}).color(), Color(fg::Red, bg::Black));
+    }
+
+    void testSetAndResizeFromCopiesBufferInstances() {
+        auto source = Buffer{Size{2, 2}};
+        source.set(Position{0, 0}, Char{U'A'});
+        source.set(Position{1, 0}, Char{U'B'});
+        source.set(Position{0, 1}, Char{U'C'});
+        source.set(Position{1, 1}, Char{U'D'});
+        auto target = Buffer{Size{1, 1}};
+
+        target.setAndResizeFrom(source);
+
+        REQUIRE_EQUAL(target.size(), Size(2, 2));
+        REQUIRE_EQUAL(renderRows(target), std::vector<std::string>({"AB", "CD"}));
+    }
+
+    void testSetAndResizeFromAlsoSupportsReadableViews() {
+        auto source = Buffer{Size{3, 2}};
+        source.set(Position{0, 0}, Char{U'A'});
+        source.set(Position{1, 0}, Char{U'B'});
+        source.set(Position{2, 0}, Char{U'C'});
+        source.set(Position{0, 1}, Char{U'D'});
+        source.set(Position{1, 1}, Char{U'E'});
+        source.set(Position{2, 1}, Char{U'F'});
+        const auto view = BufferConstRefView{source, Rectangle{1, 0, 2, 2}};
+        auto target = Buffer{Size{1, 1}};
+
+        target.setAndResizeFrom(view);
+
+        REQUIRE_EQUAL(target.size(), Size(2, 2));
+        REQUIRE_EQUAL(renderRows(target), std::vector<std::string>({"BC", "EF"}));
     }
 
     void testToMaskMatchesCharactersFromStringAndCanInvertTheSelection() {
@@ -610,6 +694,28 @@ public:
         REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Red, bg::Black));
         REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Blue, bg::Black));
     }
+
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+    void testDeprecatedDrawTextOverloadRemainsCompatible() {
+        auto buffer = Buffer{Size{5, 3}};
+
+        buffer.drawText("Hi", Alignment::Center, Rectangle{0, 0, 5, 3}, Color{fg::Yellow, bg::Blue});
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"     ", " Hi  ", "     "}));
+        REQUIRE_EQUAL(buffer.get(Position{1, 1}).color(), Color(fg::Yellow, bg::Blue));
+        REQUIRE_EQUAL(buffer.get(Position{2, 1}).color(), Color(fg::Yellow, bg::Blue));
+    }
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
 private:
     [[nodiscard]] static auto renderRows(const Buffer &buffer) -> std::vector<std::string> {

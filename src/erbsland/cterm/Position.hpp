@@ -3,11 +3,14 @@
 #pragma once
 
 
+#include "impl/HashHelper.hpp"
+
 #include <algorithm>
 #include <array>
 #include <cstdint>
 #include <cstdlib>
 #include <format>
+#include <functional>
 #include <limits>
 #include <numeric>
 #include <string>
@@ -57,19 +60,23 @@ public: // operators
     /// @return Reference to this position.
     auto operator-=(const Position &other) noexcept -> Position &;
 
-public: // accessors
+public: // attributes
     /// Get the x coordinate.
     [[nodiscard]] constexpr auto x() const noexcept -> int { return _x; }
-    /// Get the y coordinate.
-    [[nodiscard]] constexpr auto y() const noexcept -> int { return _y; }
-
-public: // modifiers
     /// Set the x coordinate.
     /// @param x New x value.
     void setX(int x) noexcept;
+    /// Get the y coordinate.
+    [[nodiscard]] constexpr auto y() const noexcept -> int { return _y; }
     /// Set the y coordinate.
     /// @param y New y value.
     void setY(int y) noexcept;
+
+public: // tools
+    /// Get a hash for this position.
+    /// This hash is designed to be fast and uniform for both 32-bit and 64-bit platforms.
+    /// It is not only optimized to be used in a map but also as a source for pseudo-randomness.
+    [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t { return impl::hashCreate(_x, _y); }
     /// Manhattan (L1) distance to another position.
     /// @param other The other position.
     /// @return |x - other.x| + |y - other.y|.
@@ -95,6 +102,23 @@ public: // modifiers
     template <typename Fn>
         requires std::invocable<Fn, Position> && std::convertible_to<std::invoke_result_t<Fn, Position>, bool>
     [[nodiscard]] auto cardinalFourBitmask(Fn fn) const noexcept -> uint32_t;
+    /// Get the eight positions that form a ring around this position.
+    /// Clockwise order: 0:E, 1:SE, 2:S, 3:SW, 4:W, 5:NW, 6:N, 7:NE
+    /// @return An array with all the eight positions.
+    [[nodiscard]] auto ringEight() const noexcept -> std::array<Position, 8U> {
+        return {
+            Position{_x + 1, _y},
+            Position{_x + 1, _y + 1},
+            Position{_x, _y + 1},
+            Position{_x - 1, _y + 1},
+            Position{_x - 1, _y},
+            Position{_x - 1, _y - 1},
+            Position{_x, _y - 1},
+            Position{_x + 1, _y - 1}};
+    }
+    /// Get the eight deltas that form a ring around this position.
+    /// Clockwise order: 0:E, 1:SE, 2:S, 3:SW, 4:W, 5:NW, 6:N, 7:NE
+    [[nodiscard]] static auto ringEightDeltas() noexcept -> const std::array<Position, 8U> &;
 
 public: // useful constants
     /// Get the point with the minimum coordinates.
@@ -124,6 +148,12 @@ auto Position::cardinalFourBitmask(Fn fn) const noexcept -> uint32_t {
 
 
 }
+
+
+template <>
+struct std::hash<erbsland::cterm::Position> {
+    auto operator()(const erbsland::cterm::Position &pos) const noexcept -> std::size_t { return pos.hash(); }
+};
 
 
 template <>

@@ -7,6 +7,7 @@ target_sources(erbsland-color-term PRIVATE
         FontDefaultAscii.cpp
         FramePainter.cpp
         FramePainter.hpp
+        HashHelper.hpp
         InputBackend.cpp
         InputBackend.hpp
         LineBuffer.hpp

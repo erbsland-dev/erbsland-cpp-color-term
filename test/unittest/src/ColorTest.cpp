@@ -6,8 +6,12 @@
 #include <erbsland/unittest/UnitTest.hpp>
 
 #include <array>
+#include <format>
+#include <functional>
 
-class ColorTest : public el::UnitTest {
+
+TESTED_TARGETS(Color)
+class ColorTest final : public el::UnitTest {
 public:
     void testCodeBase() {
         REQUIRE_EQUAL(ColorPart<ColorRole::Foreground>::cCodeBase, 30);
@@ -48,8 +52,18 @@ public:
             {fg::BrightWhite, 97},
             {fg::Inherited, 39},
         }};
-        for (const auto &entry : entries) {
-            REQUIRE_EQUAL(entry.value.ansiCode(), entry.code);
+        for (std::size_t index = 0; index < entries.size(); ++index) {
+            const auto &entry = entries[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE_EQUAL(entry.value.ansiCode(), entry.code); },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / actualAnsiCode = {} / expectedAnsiCode = {}",
+                        index,
+                        entry.value.ansiCode(),
+                        entry.code);
+                });
         }
     }
 
@@ -78,8 +92,18 @@ public:
             {bg::BrightWhite, 107},
             {bg::Inherited, 49},
         }};
-        for (const auto &entry : entries) {
-            REQUIRE_EQUAL(entry.value.ansiCode(), entry.code);
+        for (std::size_t index = 0; index < entries.size(); ++index) {
+            const auto &entry = entries[index];
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE_EQUAL(entry.value.ansiCode(), entry.code); },
+                [&]() -> std::string {
+                    return std::format(
+                        "index = {} / actualAnsiCode = {} / expectedAnsiCode = {}",
+                        index,
+                        entry.value.ansiCode(),
+                        entry.code);
+                });
         }
     }
 
@@ -110,5 +134,20 @@ public:
 
         REQUIRE_EQUAL(base.overlayWith(Color{fg::Default, bg::Black}), Color(fg::Default, bg::Black));
         REQUIRE_EQUAL(base.overlayWith(Color{fg::BrightWhite, bg::Default}), Color(fg::BrightWhite, bg::Default));
+    }
+
+    void testHashesMatchStdHashAndReactToRoleAndComponentChanges() {
+        const auto foreground = fg{fg::Green};
+        const auto background = bg{bg::Green};
+        const auto color = Color{fg::Green, bg::Blue};
+        const auto otherForeground = Color{fg::Blue, bg::Blue};
+        const auto otherBackground = Color{fg::Green, bg::Black};
+
+        REQUIRE_EQUAL(foreground.hash(), std::hash<fg>{}(foreground));
+        REQUIRE_EQUAL(background.hash(), std::hash<bg>{}(background));
+        REQUIRE_EQUAL(color.hash(), std::hash<Color>{}(color));
+        REQUIRE_NOT_EQUAL(foreground.hash(), background.hash());
+        REQUIRE_NOT_EQUAL(color.hash(), otherForeground.hash());
+        REQUIRE_NOT_EQUAL(color.hash(), otherBackground.hash());
     }
 };

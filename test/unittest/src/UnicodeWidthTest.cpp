@@ -5,7 +5,9 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-class UnicodeWidthTest : public el::UnitTest {
+
+TESTED_TARGETS(UnicodeWidth)
+class UnicodeWidthTest final : public el::UnitTest {
 public:
     void testAsciiCharacterWidth() { REQUIRE_EQUAL(impl::consoleCharacterWidth(U'A'), 1U); }
 

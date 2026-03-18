@@ -10,7 +10,7 @@ namespace erbsland::cterm {
 /// - Immutable-like value type for representing padding or insets.
 /// - Provides convenience constructors for uniform or symmetric margins.
 class Margins final {
-public: // ctors/dtor/assign/move
+public:
     /// Default construct with uninitialized values (useful for aggregate-style construction).
     Margins() = default;
     /// Construct margins with the same value on all sides.
@@ -38,16 +38,16 @@ public: // operators
 
     /// Unary negation producing margins with all sides negated.
     /// Useful for reversing an inset/expansion operation.
-    auto operator-() const noexcept -> Margins { return Margins(-_top, -_right, -_bottom, -_left); }
+    auto operator-() const noexcept -> Margins { return {-_top, -_right, -_bottom, -_left}; }
 
 public: // accessors
     /// Get top margin.
     [[nodiscard]] constexpr auto top() const noexcept -> int { return _top; }
-    /// Get right margin.
+    /// Get the right margin.
     [[nodiscard]] constexpr auto right() const noexcept -> int { return _right; }
-    /// Get bottom margin.
+    /// Get the bottom margin.
     [[nodiscard]] constexpr auto bottom() const noexcept -> int { return _bottom; }
-    /// Get left margin.
+    /// Get the left margin.
     [[nodiscard]] constexpr auto left() const noexcept -> int { return _left; }
 
 private:

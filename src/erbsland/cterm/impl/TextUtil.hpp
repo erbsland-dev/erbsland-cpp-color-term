@@ -21,7 +21,7 @@ namespace erbsland::cterm::impl {
         if (unsignedCharacter < 128U) {
             ch = static_cast<char>(std::tolower(unsignedCharacter));
         }
-        if (ch == ' ' || ch == '\t') {
+        if (ch == ' ' || ch == '\t' || ch == '-') {
             if (seenContent) {
                 pendingSpace = true;
             }

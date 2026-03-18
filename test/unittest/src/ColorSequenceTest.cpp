@@ -6,7 +6,8 @@
 #include <erbsland/unittest/UnitTest.hpp>
 
 
-class ColorSequenceTest : public el::UnitTest {
+TESTED_TARGETS(ColorSequence)
+class ColorSequenceTest final : public el::UnitTest {
 public:
     void testDefaultSequenceIsEmpty() {
         const auto sequence = ColorSequence{};

@@ -5,6 +5,9 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
+#include <array>
+#include <format>
+#include <functional>
 #include <stdexcept>
 
 
@@ -17,10 +20,37 @@ public:
         REQUIRE_EQUAL(direction, Direction::None);
     }
 
-    void testDirectionToDetla() {
+    void testDirectionToDelta() {
         REQUIRE_EQUAL(Direction{Direction::NorthWest}.toDelta(), Position(-1, -1));
         REQUIRE_EQUAL(Direction{Direction::East}.toDelta(), Position(1, 0));
         REQUIRE_EQUAL(Direction{Direction::None}.toDelta(), Position(0, 0));
+    }
+
+    void testDirectionFromDeltaUsesOnlyTheCoordinateSigns() {
+        struct TestCase {
+            Position delta;
+            Direction expected;
+        };
+        constexpr auto testCases = std::array<TestCase, 9>{{
+            {Position(-3, -7), Direction::NorthWest},
+            {Position(0, -2), Direction::North},
+            {Position(5, -1), Direction::NorthEast},
+            {Position(-4, 0), Direction::West},
+            {Position(0, 0), Direction::None},
+            {Position(9, 0), Direction::East},
+            {Position(-8, 6), Direction::SouthWest},
+            {Position(0, 4), Direction::South},
+            {Position(2, 3), Direction::SouthEast},
+        }};
+
+        for (const auto &[delta, expected] : testCases) {
+            runWithContext(
+                SOURCE_LOCATION(),
+                [&]() { REQUIRE_EQUAL(Direction::fromDelta(delta), expected); },
+                [&]() -> std::string {
+                    return std::format("delta = ({}, {}) / expected = {}", delta.x(), delta.y(), expected.toString());
+                });
+        }
     }
 
     void testDirectionToString() {
@@ -52,5 +82,13 @@ public:
         REQUIRE_FALSE(Direction{Direction::NorthWest}.contains(Direction::SouthWest));
         REQUIRE_FALSE(Direction{Direction::East}.contains(Direction::NorthEast));
         REQUIRE_FALSE(Direction{Direction::None}.contains(Direction::None));
+    }
+
+    void testHashMatchesStdHashAndDirectionValue() {
+        const auto northWest = Direction{Direction::NorthWest};
+        const auto southEast = Direction{Direction::SouthEast};
+
+        REQUIRE_EQUAL(northWest.hash(), std::hash<Direction>{}(northWest));
+        REQUIRE_NOT_EQUAL(northWest.hash(), southEast.hash());
     }
 };

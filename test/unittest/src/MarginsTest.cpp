@@ -1,13 +1,13 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-
 #include "TestHelper.hpp"
 
 #include <erbsland/unittest/UnitTest.hpp>
 
 
-class MarginsTest : public el::UnitTest {
+TESTED_TARGETS(Margins)
+class MarginsTest final : public el::UnitTest {
 public:
     Margins margins;
 
@@ -43,7 +43,7 @@ public:
 
     void testUnaryNegation() {
         margins = Margins(1, 2, 3, 4);
-        Margins neg = -margins;
+        const auto neg = -margins;
         REQUIRE_EQUAL(neg.top(), -1);
         REQUIRE_EQUAL(neg.right(), -2);
         REQUIRE_EQUAL(neg.bottom(), -3);

@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Rectangle.hpp"
 
-
 #include <stdexcept>
 
 
@@ -80,6 +79,10 @@ auto Rectangle::isFrame(const Position testedPosition) const noexcept -> bool {
     return contains(testedPosition) &&
         (testedPosition.x() == _pos.x() || testedPosition.y() == _pos.y() || testedPosition.x() == x2() - 1 ||
          testedPosition.y() == y2() - 1);
+}
+
+auto Rectangle::clamp(Position position) const noexcept -> Position {
+    return Position{std::clamp(position.x(), x1(), x2() - 1), std::clamp(position.y(), y1(), y2() - 1)};
 }
 
 auto Rectangle::frameDirection(const Position testedPosition) const noexcept -> Direction {

@@ -6,6 +6,7 @@
 #include <erbsland/unittest/UnitTest.hpp>
 
 
+TESTED_TARGETS(Alignment)
 class AlignmentTest final : public el::UnitTest {
 public:
     void testCombinationWithOrOperator() {

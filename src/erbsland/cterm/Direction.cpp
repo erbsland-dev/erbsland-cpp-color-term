@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Direction.hpp"
 
-
 #include "impl/TextUtil.hpp"
 
 #include <algorithm>
@@ -45,6 +44,31 @@ auto Direction::toDelta() const noexcept -> Position {
         return {};
     }
     return std::get<1>(*it);
+}
+
+auto Direction::fromDelta(const Position delta) noexcept -> Direction {
+    const auto mask = (delta.x() > 0 ? 0b0001 : 0) | (delta.x() < 0 ? 0b0010 : 0) | (delta.y() > 0 ? 0b0100 : 0) |
+        (delta.y() < 0 ? 0b1000 : 0);
+    switch (mask) {
+    case 0b0001:
+        return East;
+    case 0b0010:
+        return West;
+    case 0b0100:
+        return South;
+    case 0b0101:
+        return SouthEast;
+    case 0b0110:
+        return SouthWest;
+    case 0b1000:
+        return North;
+    case 0b1001:
+        return NorthEast;
+    case 0b1010:
+        return NorthWest;
+    default:
+        return None;
+    }
 }
 
 auto Direction::toString() const noexcept -> std::string_view {

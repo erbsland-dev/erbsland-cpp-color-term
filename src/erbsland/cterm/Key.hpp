@@ -3,7 +3,10 @@
 #pragma once
 
 
+#include "impl/HashHelper.hpp"
+
 #include <cstdint>
+#include <functional>
 #include <string>
 
 
@@ -113,6 +116,10 @@ public: // accessors
     [[nodiscard]] auto character() const noexcept -> char { return _ch; }
     /// Test if this object represents a supported key.
     [[nodiscard]] auto valid() const noexcept -> bool { return _type != None; }
+    /// Get a hash for this key.
+    [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
+        return impl::hashCreate(static_cast<uint8_t>(_type), static_cast<unsigned char>(_ch));
+    }
 
 private:
     Type _type{None};
@@ -121,3 +128,9 @@ private:
 
 
 }
+
+
+template <>
+struct std::hash<erbsland::cterm::Key> {
+    auto operator()(const erbsland::cterm::Key &key) const noexcept -> std::size_t { return key.hash(); }
+};

@@ -8,6 +8,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <functional>
 #include <limits>
 #include <string>
 #include <string_view>
@@ -64,9 +65,11 @@ public:
 
 public: // operators
     /// Compare two terminal characters for equality.
-    [[nodiscard]] auto operator==(const Char &other) const noexcept -> bool = default;
+    [[nodiscard]] auto operator==(const Char &other) const noexcept -> bool {
+        return _codePoints == other._codePoints && _color == other._color;
+    }
     /// Compare two terminal characters for inequality.
-    [[nodiscard]] auto operator!=(const Char &other) const noexcept -> bool = default;
+    [[nodiscard]] auto operator!=(const Char &other) const noexcept -> bool { return !(*this == other); }
     /// Compare just a single-code point character, without the color.
     [[nodiscard]] auto operator==(char32_t other) const noexcept -> bool;
     /// Compare just a single-code point character, without the color.
@@ -139,6 +142,10 @@ public: // tests
     /// @param colorEnabled `true` to include colors in the comparison.
     /// @return `true` if both characters render identically.
     [[nodiscard]] auto renderedEquals(const Char &other, bool colorEnabled = true) const noexcept -> bool;
+    /// Get a hash for this character and its color.
+    [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
+        return impl::hashCreate(_codePoints[0], _codePoints[1], _codePoints[2], _color.hash());
+    }
 
 public: // predefined characters.
     /// A space with inherited colors.
@@ -192,3 +199,9 @@ constexpr auto Char::utf8ByteCount(const char32_t codePoint) noexcept -> std::si
 
 
 }
+
+
+template <>
+struct std::hash<erbsland::cterm::Char> {
+    auto operator()(const erbsland::cterm::Char &character) const noexcept -> std::size_t { return character.hash(); }
+};

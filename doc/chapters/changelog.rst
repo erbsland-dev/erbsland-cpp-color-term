@@ -10,6 +10,47 @@
 Changelog
 *********
 
+Version 1.5.0 - 2026-03-21
+==========================
+
+Release 1.5.0 sharpens the library's low-level building blocks for bitmap processing, geometry, and hash-based containers, while also fixing how inherited colors are resolved when strings and characters are appended or written incrementally. From the user perspective, the most noticeable additions are new helpers for expanding and probing bitmaps, new geometry clamping and neighbor APIs, and direct support for using core value types in ``std::unordered_map`` and ``std::unordered_set``.
+
+Highlights
+----------
+
+*   Added :cpp:any:`Bitmap::expanded() <erbsland::cterm::Bitmap::expanded()>`, :cpp:any:`Bitmap::pixelCardinal() <erbsland::cterm::Bitmap::pixelCardinal()>`, :cpp:any:`Position::ringEight() <erbsland::cterm::Position::ringEight()>`, :cpp:any:`Position::ringEightDeltas() <erbsland::cterm::Position::ringEightDeltas()>`, and :cpp:any:`Direction::fromDelta() <erbsland::cterm::Direction::fromDelta()>` to make neighborhood analysis, contour detection, and grid navigation easier to express with the public API.
+*   Added :cpp:any:`Size::clamp() <erbsland::cterm::Size::clamp()>` and :cpp:any:`Rectangle::clamp() <erbsland::cterm::Rectangle::clamp()>` so positions can be forced into valid drawable bounds without repeating manual ``min``/``max`` code throughout applications and demos.
+*   Added ``hash()`` methods and ``std::hash`` specializations for :cpp:any:`Foreground <erbsland::cterm::Foreground>`, :cpp:any:`Background <erbsland::cterm::Background>`, :cpp:any:`Color <erbsland::cterm::Color>`, :cpp:any:`Char <erbsland::cterm::Char>`, :cpp:any:`Direction <erbsland::cterm::Direction>`, :cpp:any:`Position <erbsland::cterm::Position>`, :cpp:any:`Rectangle <erbsland::cterm::Rectangle>`, and :cpp:any:`Key <erbsland::cterm::Key>`, which makes these value types directly usable in ``std::unordered_map`` and ``std::unordered_set``.
+*   Added :cpp:any:`TerminalFlag <erbsland::cterm::TerminalFlag>` and :cpp:any:`TerminalFlags <erbsland::cterm::TerminalFlags>` so applications can control built-in terminal signal handling explicitly, including an opt-out for environments that already manage process shutdown and terminal restoration.
+*   Improved color parsing and color inheritance: color names now accept spaces, underscores, and hyphens, and inherited color components in :cpp:any:`String::append() <erbsland::cterm::String::append()>` and :cpp:any:`Terminal::write() <erbsland::cterm::Terminal::write()>` now resolve against the currently active color as users expect.
+
+Added
+-----
+
+*   Added :cpp:any:`Bitmap::expanded() <erbsland::cterm::Bitmap::expanded()>` to grow a bitmap by margins or crop it with negative margins, with a configurable fill value for newly created cells.
+*   Added :cpp:any:`Bitmap::pixelCardinal() <erbsland::cterm::Bitmap::pixelCardinal()>` as a four-neighbor bitmask helper, complementing :cpp:any:`pixelQuad() <erbsland::cterm::Bitmap::pixelQuad()>` and :cpp:any:`pixelRing() <erbsland::cterm::Bitmap::pixelRing()>` for cellular automata, pathfinding, and shape-analysis code.
+*   Added :cpp:any:`Position::ringEight() <erbsland::cterm::Position::ringEight()>` and :cpp:any:`Position::ringEightDeltas() <erbsland::cterm::Position::ringEightDeltas()>` for clockwise access to the eight surrounding positions, plus :cpp:any:`Direction::fromDelta() <erbsland::cterm::Direction::fromDelta()>` for converting arbitrary deltas into one of the canonical directions by sign.
+*   Added :cpp:any:`Size::componentClamp() <erbsland::cterm::Size::componentClamp()>`, :cpp:any:`Size::clamp() <erbsland::cterm::Size::clamp()>`, :cpp:any:`Rectangle::clamp() <erbsland::cterm::Rectangle::clamp()>`, and :cpp:any:`Rectangle::center() <erbsland::cterm::Rectangle::center()>` for layout and cursor-position calculations that need safe in-bounds coordinates.
+*   Added :cpp:any:`TerminalFlag <erbsland::cterm::TerminalFlag>` and :cpp:any:`TerminalFlags <erbsland::cterm::TerminalFlags>` and corresponding :cpp:any:`Terminal <erbsland::cterm::Terminal>` constructors, so applications can opt out of the built-in signal restoration logic when integrating with another framework or host environment.
+*   Added hashing support through ``hash()`` methods and ``std::hash`` specializations on the most common value objects, including geometry types, colors, characters, directions, and keys.
+
+Improved
+--------
+
+*   :cpp:any:`String::append() <erbsland::cterm::String::append()>` now applies the currently active color to appended :cpp:any:`Char <erbsland::cterm::Char>` and :cpp:any:`String <erbsland::cterm::String>` values when those values contain inherited foreground or background components. This makes mixed argument lists behave consistently with plain text arguments.
+*   :cpp:any:`Terminal::write() <erbsland::cterm::Terminal::write()>` now resolves inherited colors against the terminal's tracked current color before output. Incremental writes therefore keep foreground and background inheritance consistent with previous terminal output.
+*   Built-in terminal backends now restore the terminal state more robustly on POSIX and Windows when an application is interrupted, which reduces the chance of leaving the shell in an inconsistent state after ``Ctrl+C`` or similar termination events.
+*   :cpp:any:`Foreground::fromString() <erbsland::cterm::Foreground::fromString()>`, :cpp:any:`Background::fromString() <erbsland::cterm::Background::fromString()>`, and :cpp:any:`Color::fromString() <erbsland::cterm::Color::fromString()>` now accept more forgiving names such as ``"bright blue"``, ``"bright_blue"``, and ``"bright-blue"``, which simplifies configuration parsing and hand-written theme definitions.
+*   :cpp:any:`TerminalFlag <erbsland::cterm::TerminalFlag>` values can now be combined directly with the bitwise OR operator, which makes terminal construction code more concise.
+
+Implementation
+--------------
+
+*   Expanded unit test coverage significantly across bitmap helpers, buffer conveniences, buffer views, color parsing, geometry helpers, terminal convenience APIs, update settings, and hashing behavior.
+*   Reworked built-in signal handling with platform-specific dispatchers for POSIX and Windows and refreshed the terminal reference documentation for the new terminal flag API.
+*   Added shared hash utilities and refreshed API documentation for the new public methods and behavior clarifications.
+
+
 Version 1.4.0 - 2026-03-15
 ==========================
 
@@ -29,7 +70,7 @@ Added
 
 *   Added :cpp:any:`ReadableBuffer::countDifferencesTo() <erbsland::cterm::ReadableBuffer::countDifferencesTo()>` and :cpp:any:`ReadableBuffer::toMask() <erbsland::cterm::ReadableBuffer::toMask()>` to compare rendered frames and derive bitmap masks from visible buffer content.
 *   Added :cpp:any:`WritableBuffer::setFrom() <erbsland::cterm::WritableBuffer::setFrom()>`, :cpp:any:`WritableBuffer::setAndResizeFrom() <erbsland::cterm::WritableBuffer::setAndResizeFrom()>`, shared drawing helpers, and :cpp:any:`Buffer::clone() <erbsland::cterm::Buffer::clone()>` so frame-generation code can work against abstract writable targets and keep copies of previous frames.
-*   Added a default :cpp:any:`Buffer() <erbsland::cterm::Buffer()>` constructor, validating :cpp:any:`Buffer(Size, Char) <erbsland::cterm::Buffer(Size, Char)>` construction, :cpp:any:`Buffer::resize(Size, bool, Char) <erbsland::cterm::Buffer::resize(Size, bool, Char)>`, and :cpp:any:`Buffer::fromLinesInString() <erbsland::cterm::Buffer::fromLinesInString()>`/:cpp:any:`Buffer::fromLines() <erbsland::cterm::Buffer::fromLines()>` for more flexible buffer lifecycle management.
+*   Added a default :cpp:any:`Buffer() <erbsland::cterm::Buffer::Buffer()>` constructor, validating ``Buffer(Size, Char)`` construction, ``Buffer::resize(Size, bool, Char)``, and :cpp:any:`Buffer::fromLinesInString() <erbsland::cterm::Buffer::fromLinesInString()>`/:cpp:any:`Buffer::fromLines() <erbsland::cterm::Buffer::fromLines()>` for more flexible buffer lifecycle management.
 *   Added :cpp:any:`Backend <erbsland::cterm::Backend>` as a public extension point for custom platform output and input handling, and changed :cpp:any:`Input <erbsland::cterm::Input>` into a public interface that backends can implement.
 *   Added :cpp:any:`Terminal::OutputMode <erbsland::cterm::Terminal::OutputMode>` with :cpp:any:`FullControl <erbsland::cterm::FullControl>` and :cpp:any:`Text <erbsland::cterm::Text>` modes, plus :cpp:any:`Terminal::setBackend() <erbsland::cterm::Terminal::setBackend()>`, :cpp:any:`setAlternateScreen() <erbsland::cterm::Terminal::setAlternateScreen()>`, :cpp:any:`moveTo() <erbsland::cterm::Terminal::moveTo()>`, :cpp:any:`moveHome() <erbsland::cterm::Terminal::moveHome()>`, :cpp:any:`moveCursor() <erbsland::cterm::Terminal::moveCursor()>`, :cpp:any:`moveRight() <erbsland::cterm::Terminal::moveRight()>`, :cpp:any:`moveUp() <erbsland::cterm::Terminal::moveUp()>`, :cpp:any:`moveDown() <erbsland::cterm::Terminal::moveDown()>`, :cpp:any:`setAutoWrap() <erbsland::cterm::Terminal::setAutoWrap()>`, and :cpp:any:`setCursorVisible() <erbsland::cterm::Terminal::setCursorVisible()>`.
 *   Added :cpp:any:`Bitmap::rect() <erbsland::cterm::Bitmap::rect()>`, :cpp:any:`pixelRing() <erbsland::cterm::Bitmap::pixelRing()>`, :cpp:any:`boundingRect() <erbsland::cterm::Bitmap::boundingRect()>`, :cpp:any:`pixelCount() <erbsland::cterm::Bitmap::pixelCount()>`, :cpp:any:`invert() <erbsland::cterm::Bitmap::invert()>`/:cpp:any:`inverted() <erbsland::cterm::Bitmap::inverted()>`, :cpp:any:`outlined() <erbsland::cterm::Bitmap::outlined()>`, :cpp:any:`fillRect() <erbsland::cterm::Bitmap::fillRect()>`, :cpp:any:`floodFill() <erbsland::cterm::Bitmap::floodFill()>`, :cpp:any:`fromFunction() <erbsland::cterm::Bitmap::fromFunction()>`, and :cpp:any:`toPattern() <erbsland::cterm::Bitmap::toPattern()>`.

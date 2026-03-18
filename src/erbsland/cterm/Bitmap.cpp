@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Bitmap.hpp"
 
-
 #include <algorithm>
 
 
@@ -59,6 +58,22 @@ auto Bitmap::pixelQuad(const Position pos) const noexcept -> uint8_t {
     uint8_t result = 0;
     for (const auto &[delta, mask] : positions) {
         if (pixel(base + delta)) {
+            result |= mask;
+        }
+    }
+    return result;
+}
+
+auto Bitmap::pixelCardinal(Position pos) const noexcept -> uint8_t {
+    constexpr auto positions = std::array<std::pair<Position, uint8_t>, 4U>{
+        std::pair{Position{1, 0}, static_cast<uint8_t>(0b0001U)},
+        std::pair{Position{0, 1}, static_cast<uint8_t>(0b0010U)},
+        std::pair{Position{-1, 0}, static_cast<uint8_t>(0b0100U)},
+        std::pair{Position{0, -1}, static_cast<uint8_t>(0b1000U)},
+    };
+    uint8_t result = 0;
+    for (const auto &[delta, mask] : positions) {
+        if (pixel(pos + delta)) {
             result |= mask;
         }
     }
@@ -177,6 +192,26 @@ auto Bitmap::inverted() const noexcept -> Bitmap {
 
 auto Bitmap::outlined() const noexcept -> Bitmap {
     return fromFunction(_size, [&](const Position pos) -> bool { return !pixel(pos) && pixelRing(pos) != 0U; });
+}
+
+auto Bitmap::expanded(const Margins margins, const bool value) const noexcept -> Bitmap {
+    const auto newSize =
+        Size{_size.width() + margins.left() + margins.right(), _size.height() + margins.top() + margins.bottom()};
+    if (newSize.width() <= 0 || newSize.height() <= 0) {
+        return {};
+    }
+    auto result = Bitmap{newSize};
+    if (value) {
+        result.fillRect(result.rect(), true);
+    }
+    const auto sourceToTargetOffset = Position{margins.left(), margins.top()};
+    const auto targetRectInSourceCoordinates = Rectangle{
+        Position{-sourceToTargetOffset.x(), -sourceToTargetOffset.y()},
+        newSize,
+    };
+    const auto copyRect = targetRectInSourceCoordinates & rect();
+    copyRect.forEach([&](const Position pos) -> void { result.setPixel(pos + sourceToTargetOffset, pixel(pos)); });
+    return result;
 }
 
 void Bitmap::fillRect(const Rectangle rect, const bool value) noexcept {

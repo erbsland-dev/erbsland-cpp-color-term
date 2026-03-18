@@ -44,9 +44,6 @@ public:
     friend auto operator|(const TerminalFlag flag, const TerminalFlags flags) -> TerminalFlags {
         return TerminalFlags{static_cast<Mask>(flags._flags | static_cast<Mask>(flag))};
     }
-    friend auto operator|(const TerminalFlag flag1, const TerminalFlag flag2) -> TerminalFlags {
-        return TerminalFlags{flag1, flag2};
-    }
     friend auto operator|(const TerminalFlags flags1, const TerminalFlags flags2) -> TerminalFlags {
         return TerminalFlags{static_cast<Mask>(flags1._flags | flags2._flags)};
     }
@@ -73,5 +70,13 @@ private:
 private:
     Mask _flags{0};
 };
+
+/// Combine two terminal flags into one flag set.
+/// @param flag1 The first terminal flag.
+/// @param flag2 The second terminal flag.
+/// @return A flag set containing both flags.
+inline auto operator|(const TerminalFlag flag1, const TerminalFlag flag2) -> TerminalFlags {
+    return TerminalFlags{flag1, flag2};
+}
 
 }
