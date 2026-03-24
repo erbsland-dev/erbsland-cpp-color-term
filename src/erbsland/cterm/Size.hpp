@@ -24,7 +24,9 @@ public:
     /// Negative inputs are clamped to 0.
     /// @param width The desired width (clamped to >= 0).
     /// @param height The desired height (clamped to >= 0).
-    constexpr Size(int width, int height) noexcept : _width{std::max(0, width)}, _height{std::max(0, height)} {}
+    constexpr Size(Coordinate width, Coordinate height) noexcept :
+        _width{std::max(Coordinate{0}, width)},
+        _height{std::max(Coordinate{0}, height)} {}
     /// Construct a size from the axis-aligned distance between two positions.
     /// @param pos1 First position.
     /// @param pos2 Second position.
@@ -52,15 +54,15 @@ public: // operators
 
 public: // attributes
     /// Get the width (>= 0).
-    [[nodiscard]] constexpr auto width() const noexcept -> int { return _width; }
+    [[nodiscard]] constexpr auto width() const noexcept -> Coordinate { return _width; }
     /// Set the width. Negative values are clamped to 0.
     /// @param width New width (clamped to >= 0).
-    void setWidth(int width) noexcept { _width = std::max(0, width); }
+    void setWidth(Coordinate width) noexcept { _width = std::max(Coordinate{0}, width); }
     /// Get the height (>= 0).
-    [[nodiscard]] constexpr auto height() const noexcept -> int { return _height; }
+    [[nodiscard]] constexpr auto height() const noexcept -> Coordinate { return _height; }
     /// Set the height. Negative values are clamped to 0.
     /// @param height New height (clamped to >= 0).
-    void setHeight(int height) noexcept { _height = std::max(0, height); }
+    void setHeight(Coordinate height) noexcept { _height = std::max(Coordinate{0}, height); }
     /// Compute a position inside the rectangle defined by this size for a given anchor.
     /// Bottom-right resolves to (width-1, height-1), top-left to (0,0), etc.
     /// @param anchor The anchor describing the target corner/edge/center.
@@ -137,30 +139,37 @@ public: // tools
 
 private:
     /// Compute the absolute difference between two integer values.
-    [[nodiscard]] static constexpr auto absoluteDifference(int value1, int value2) noexcept -> int {
+    [[nodiscard]] static constexpr auto absoluteDifference(Coordinate value1, Coordinate value2) noexcept
+        -> Coordinate {
         return (value1 >= value2) ? (value1 - value2) : (value2 - value1);
     }
 
 private:
     /// The maximum valid x coordinate inside the size, or 0 if width == 0.
-    [[nodiscard]] constexpr auto widthForPosition() const noexcept -> int { return std::max(0, _width - 1); }
+    [[nodiscard]] constexpr auto widthForPosition() const noexcept -> Coordinate {
+        return std::max(Coordinate{0}, _width - 1);
+    }
     /// Half of the valid x range endpoint used for horizontal center positioning.
-    [[nodiscard]] constexpr auto halfWidthForPosition() const noexcept -> int { return widthForPosition() / 2; }
+    [[nodiscard]] constexpr auto halfWidthForPosition() const noexcept -> Coordinate { return widthForPosition() / 2; }
     /// The maximum valid y coordinate inside the size, or 0 if height == 0.
-    [[nodiscard]] constexpr auto heightForPosition() const noexcept -> int { return std::max(0, _height - 1); }
+    [[nodiscard]] constexpr auto heightForPosition() const noexcept -> Coordinate {
+        return std::max(Coordinate{0}, _height - 1);
+    }
     /// Half of the valid y range endpoint used for vertical center positioning.
-    [[nodiscard]] constexpr auto halfHeightForPosition() const noexcept -> int { return heightForPosition() / 2; }
+    [[nodiscard]] constexpr auto halfHeightForPosition() const noexcept -> Coordinate {
+        return heightForPosition() / 2;
+    }
 
 private:
-    int _width{};
-    int _height{};
+    Coordinate _width{};
+    Coordinate _height{};
 };
 
 
 template <typename Fn>
 void Size::forEach(Fn fn) const {
-    for (int y = 0; y < height(); ++y) {
-        for (int x = 0; x < width(); ++x) {
+    for (Coordinate y = 0; y < height(); ++y) {
+        for (Coordinate x = 0; x < width(); ++x) {
             fn(Position{x, y});
         }
     }

@@ -41,15 +41,17 @@ using BufferPtr = std::shared_ptr<Buffer>;
 /// - Blocks with a display width > 2 are ignored.
 class Buffer final : public WritableBuffer {
 public:
+    /// Largest buffer size accepted for this buffer.
     constexpr static auto cMaximumSize = Size{10'000, 10'000};
+    /// Smallest valid buffer size.
     constexpr static auto cMinimumSize = Size{1, 1};
 
-    using WritableBuffer::set;
+    using WritableBuffer::drawBitmap;
+    using WritableBuffer::drawText;
+    using WritableBuffer::fill;
     using WritableBuffer::get;
     using WritableBuffer::resize;
-    using WritableBuffer::fill;
-    using WritableBuffer::drawText;
-    using WritableBuffer::drawBitmap;
+    using WritableBuffer::set;
 
 public:
     /// Creates a 1x1 buffer filled with a space.
@@ -66,8 +68,8 @@ public:
     ~Buffer() override = default;
     Buffer(const Buffer &) = default;
     Buffer(Buffer &&) = default;
-    Buffer &operator=(const Buffer &) = default;
-    Buffer &operator=(Buffer &&) = default;
+    auto operator=(const Buffer &) -> Buffer & = default;
+    auto operator=(Buffer &&) -> Buffer & = default;
 
 public: // implement ReadableBuffer
     [[nodiscard]] auto size() const noexcept -> Size override;
@@ -109,6 +111,13 @@ public: // builders
     [[nodiscard]] static auto fromLines(const StringLines &lines) -> Buffer;
 
 public: // compatibility
+    /// Draw text into a rectangle using the legacy parameter order.
+    /// @deprecated Use `drawText(std::string_view, Rectangle, ...)` instead.
+    /// @param text The text to render.
+    /// @param alignment The alignment inside the rectangle.
+    /// @param rect The target rectangle.
+    /// @param color The text color.
+    /// @param animationCycle Animation cycle for animated text.
     [[deprecated("Use drawText(std::string_view, Rectangle, ...) instead")]]
     void drawText(
         std::string_view text, Alignment alignment, Rectangle rect, Color color = {}, std::size_t animationCycle = 0);

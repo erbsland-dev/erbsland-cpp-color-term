@@ -124,6 +124,8 @@ public: // tests
     /// Test if this character is spacing.
     /// Tests for space, tab, newline, and CR.
     [[nodiscard]] auto isSpacing() const noexcept -> bool;
+    /// Test if this character is a control character.
+    [[nodiscard]] auto isControl() const noexcept -> bool;
     /// Test if this character is one of the given characters.
     /// Tests only the character, not the color. Only tests one code-point characters.
     [[nodiscard]] auto isOneOf(std::u32string_view characters) const noexcept -> bool;
@@ -149,7 +151,7 @@ public: // tests
 
 public: // predefined characters.
     /// A space with inherited colors.
-    [[nodiscard]] static auto space() noexcept -> Char { return Char{U' '}; }
+    [[nodiscard]] static auto space() noexcept -> const Char &;
 
 private:
     [[nodiscard]] static auto decodeUtf8(std::string_view charStr) -> std::array<char32_t, 3>;

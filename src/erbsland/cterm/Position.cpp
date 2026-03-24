@@ -4,6 +4,7 @@
 
 
 namespace erbsland::cterm {
+
 auto Position::operator+(const Position &other) const noexcept -> Position {
     return {_x + other._x, _y + other._y};
 }
@@ -24,23 +25,23 @@ auto Position::operator-=(const Position &other) noexcept -> Position & {
     return *this;
 }
 
-void Position::setX(int x) noexcept {
+void Position::setX(const Coordinate x) noexcept {
     _x = x;
 }
 
-void Position::setY(int y) noexcept {
+void Position::setY(const Coordinate y) noexcept {
     _y = y;
 }
 
-auto Position::distanceTo(Position other) const noexcept -> int {
+auto Position::distanceTo(const Position other) const noexcept -> Coordinate {
     return std::abs(_x - other._x) + std::abs(_y - other._y);
 }
 
-auto Position::componentMax(Position other) const noexcept -> Position {
+auto Position::componentMax(const Position other) const noexcept -> Position {
     return {std::max(_x, other._x), std::max(_y, other._y)};
 }
 
-auto Position::componentMin(Position other) const noexcept -> Position {
+auto Position::componentMin(const Position other) const noexcept -> Position {
     return {std::min(_x, other._x), std::min(_y, other._y)};
 }
 
@@ -62,6 +63,5 @@ auto Position::ringEightDeltas() noexcept -> const std::array<Position, 8U> & {
     }};
     return deltas;
 }
-
 
 }

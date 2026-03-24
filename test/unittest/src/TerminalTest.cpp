@@ -91,6 +91,18 @@ public:
         REQUIRE_EQUAL(terminal->size(), Size(9, 7));
     }
 
+    void testIsInteractiveDelegatesToTheBackend() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        backend->_isInteractive = false;
+        auto terminal = createTerminal(backend);
+
+        terminal->initializeScreen();
+        REQUIRE_FALSE(terminal->isInteractive());
+
+        backend->_isInteractive = true;
+        REQUIRE(terminal->isInteractive());
+    }
+
     void testTextOutputModeFallsBackToPlainTextAndLocksAnsiFeatures() {
         const auto backend = std::make_shared<TerminalTestBackend>();
         auto terminal = createTerminal(backend, Size{2, 1});

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Bitmap.hpp"
 
+
 #include <algorithm>
 
 
@@ -9,14 +10,14 @@ namespace erbsland::cterm {
 
 
 auto Bitmap::fromPattern(const std::initializer_list<std::string_view> rows) -> Bitmap {
-    auto width = 0;
+    auto width = Coordinate{0};
     for (const auto row : rows) {
-        width = std::max(width, static_cast<int>(row.size()));
+        width = std::max(width, static_cast<Coordinate>(row.size()));
     }
-    auto bitmap = Bitmap{Size{width, static_cast<int>(rows.size())}};
-    auto y = 0;
+    auto bitmap = Bitmap{Size{width, static_cast<Coordinate>(rows.size())}};
+    auto y = Coordinate{0};
     for (const auto row : rows) {
-        for (auto x = 0; x < static_cast<int>(row.size()); ++x) {
+        for (auto x = Coordinate{0}; x < static_cast<Coordinate>(row.size()); ++x) {
             if (row[static_cast<std::size_t>(x)] != '.' && row[static_cast<std::size_t>(x)] != ' ') {
                 bitmap.setPixel(Position{x, y}, true);
             }
@@ -30,8 +31,8 @@ auto Bitmap::fromPattern(const std::initializer_list<std::string_view> rows) -> 
 auto Bitmap::toPattern() const -> std::string {
     std::string result;
     result.reserve(static_cast<std::size_t>(_size.area() + _size.height()));
-    for (auto y = 0; y < _size.height(); ++y) {
-        for (auto x = 0; x < _size.width(); ++x) {
+    for (auto y = Coordinate{0}; y < _size.height(); ++y) {
+        for (auto x = Coordinate{0}; x < _size.width(); ++x) {
             result.push_back(pixel(Position{x, y}) ? '#' : '.');
         }
         result.push_back('\n');
@@ -101,11 +102,11 @@ auto Bitmap::pixelRing(const Position pos) const noexcept -> uint8_t {
 }
 
 auto Bitmap::boundingRect(bool value) const noexcept -> Rectangle {
-    const int w = _size.width();
-    const int h = _size.height();
+    const Coordinate w = _size.width();
+    const Coordinate h = _size.height();
 
-    auto rowHasValue = [&](int y) noexcept {
-        for (int x = 0; x < w; ++x) {
+    auto rowHasValue = [&](Coordinate y) noexcept {
+        for (Coordinate x = 0; x < w; ++x) {
             if (pixel({x, y}) == value) {
                 return true;
             }
@@ -113,8 +114,8 @@ auto Bitmap::boundingRect(bool value) const noexcept -> Rectangle {
         return false;
     };
 
-    auto colHasValue = [&](int x) noexcept {
-        for (int y = 0; y < h; ++y) {
+    auto colHasValue = [&](Coordinate x) noexcept {
+        for (Coordinate y = 0; y < h; ++y) {
             if (pixel({x, y}) == value) {
                 return true;
             }
@@ -122,7 +123,7 @@ auto Bitmap::boundingRect(bool value) const noexcept -> Rectangle {
         return false;
     };
 
-    int top = 0;
+    Coordinate top = 0;
     while (top < h && !rowHasValue(top)) {
         ++top;
     }
@@ -130,17 +131,17 @@ auto Bitmap::boundingRect(bool value) const noexcept -> Rectangle {
         return Rectangle{};
     }
 
-    int bottom = h - 1;
+    Coordinate bottom = h - 1;
     while (bottom > top && !rowHasValue(bottom)) {
         --bottom;
     }
 
-    int left = 0;
+    Coordinate left = 0;
     while (left < w && !colHasValue(left)) {
         ++left;
     }
 
-    int right = w - 1;
+    Coordinate right = w - 1;
     while (right > left && !colHasValue(right)) {
         --right;
     }
@@ -166,8 +167,8 @@ void Bitmap::setPixel(const Position pos, const bool value) noexcept {
 }
 
 void Bitmap::flipHorizontal() noexcept {
-    for (auto y = 0; y < _size.height(); ++y) {
-        for (auto x = 0; x < _size.width() / 2; ++x) {
+    for (auto y = Coordinate{0}; y < _size.height(); ++y) {
+        for (auto x = Coordinate{0}; x < _size.width() / 2; ++x) {
             const auto p1 = Position{x, y};
             const auto p2 = Position{_size.width() - 1 - x, y};
             if (p1 != p2) {

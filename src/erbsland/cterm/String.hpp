@@ -19,30 +19,19 @@ namespace erbsland::cterm {
 /// A terminal string represented as a sequence of `Char` values.
 class String {
 public:
-    /// Storage container for the characters.
-    using Storage = std::vector<Char>;
-    /// Mutable forward iterator.
-    using iterator = Storage::iterator;
-    /// Immutable forward iterator.
-    using const_iterator = Storage::const_iterator;
-    /// Mutable reverse iterator.
-    using reverse_iterator = Storage::reverse_iterator;
-    /// Immutable reverse iterator.
-    using const_reverse_iterator = Storage::const_reverse_iterator;
-    /// Unsigned size type.
-    using size_type = Storage::size_type;
-    /// Signed distance type.
-    using difference_type = Storage::difference_type;
-    /// Stored value type.
-    using value_type = Storage::value_type;
-    /// Mutable element reference.
-    using reference = Storage::reference;
-    /// Immutable element reference.
-    using const_reference = Storage::const_reference;
-    /// Mutable element pointer.
-    using pointer = Storage::pointer;
-    /// Immutable element pointer.
-    using const_pointer = Storage::const_pointer;
+    using Storage = std::vector<Char>;                              ///< Storage container for the characters.
+    using iterator = Storage::iterator;                             ///< Mutable forward iterator.
+    using const_iterator = Storage::const_iterator;                 ///< Immutable forward iterator.
+    using reverse_iterator = Storage::reverse_iterator;             ///< Mutable reverse iterator.
+    using const_reverse_iterator = Storage::const_reverse_iterator; ///< Immutable reverse iterator.
+    using size_type = Storage::size_type;                           ///< Unsigned size type.
+    using difference_type = Storage::difference_type;               ///< Signed distance type.
+    using value_type = Storage::value_type;                         ///< Stored value type.
+    using reference = Storage::reference;                           ///< Mutable element reference.
+    using const_reference = Storage::const_reference;               ///< Immutable element reference.
+    using pointer = Storage::pointer;                               ///< Mutable element pointer.
+    using const_pointer = Storage::const_pointer;                   ///< Immutable element pointer.
+
     /// No valid position
     static constexpr std::size_t npos = std::numeric_limits<std::size_t>::max();
 
@@ -61,13 +50,16 @@ public:
     /// Control codes are ignored except for tab and newline.
     /// @throws std::invalid_argument If the text contains an unsupported character sequence.
     explicit String(std::u32string_view str, Color color = {});
-    /// Copy construct a terminal string.
+    /// Create a terminal string repeating the same `Char`.
+    /// @param count The repetition count. Limited to 10'000'000.
+    /// @param character The character to repeat.
+    explicit String(std::size_t count, Char character) noexcept;
+
+    // defaults
+    ~String() = default;
     String(const String &) = default;
-    /// Move construct a terminal string.
     String(String &&) = default;
-    /// Copy-assign a terminal string.
     auto operator=(const String &) -> String & = default;
-    /// Move-assign a terminal string.
     auto operator=(String &&) -> String & = default;
 
 public: // operators
@@ -176,6 +168,11 @@ public: // accessors
     /// @return The substring or an empty string if startIndex is out of bounds.
     [[nodiscard]] auto substr(std::size_t startIndex, std::size_t length = npos) const noexcept -> String;
 
+public: // tests
+    /// Test if this string contains control characters.
+    /// As most control codes are filtered on construction, this mainly tests for NL and TAB.
+    [[nodiscard]] auto containsControlCharacters() const noexcept -> bool;
+
 public: // modifiers
     /// Reserve storage for at least the given number of characters.
     /// @param size The requested capacity.
@@ -207,6 +204,12 @@ public: // tools
     [[nodiscard]] auto
     wrapIntoLines(int width, ParagraphSpacing paragraphSpacing = ParagraphSpacing::SingleLine) const noexcept
         -> std::vector<String>;
+    /// Count how many terminal lines this string occupies for a given terminal width.
+    /// Newline characters start a new terminal line and printable characters wrap at the given width.
+    /// The result is undefined for abstract terminal widths smaller than 10 cells.
+    /// @param width The available terminal width in cells. Must be greater than zero.
+    /// @return The number of occupied terminal lines.
+    [[nodiscard]] auto terminalLines(int width) const noexcept -> int;
     /// Splits this string into individual lines.
     /// The string is split at the NL character that is not included in the result.
     /// Empty lines are preserved.

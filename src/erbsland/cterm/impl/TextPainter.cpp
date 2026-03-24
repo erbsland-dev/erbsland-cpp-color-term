@@ -2,6 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "TextPainter.hpp"
 
+
+#include "ParagraphLayout.hpp"
+#include "ParagraphPainter.hpp"
+#include "StringWrapper.hpp"
+
+
 namespace erbsland::cterm::impl {
 
 void TextPainter::drawText(Position pos, const String &str) {
@@ -26,7 +32,39 @@ void TextPainter::drawText(Position pos, const String &str) {
 }
 
 void TextPainter::drawText(const Text &text, const std::size_t animationCycle) {
-    applyTextLines(text, buildTextLines(text), animationCycle);
+    if (text.font() != nullptr) {
+        auto lines = StringLines{};
+        for (const auto &paragraph : text.text().splitLines()) {
+            const auto fontLines = buildFontTextLines(text, paragraph);
+            lines.insert(lines.end(), fontLines.begin(), fontLines.end());
+        }
+        applyTextLines(text, lines, animationCycle);
+        return;
+    }
+    const auto layout =
+        ParagraphLayout{
+            text.text(),
+            text.rectangle().width(),
+            text.textOptions().paragraphOptions(),
+            ParagraphLayout::NewlineMode::ParagraphBreak}
+            .build();
+    if (!layout.valid) {
+        if (text.onError() == ParagraphOnError::Empty) {
+            return;
+        }
+        applyTextLines(text, buildSimpleTextLines(text), animationCycle);
+        return;
+    }
+    ParagraphPainter{
+        _buffer,
+        text.rectangle(),
+        text.alignment(),
+        layout,
+        text.backgroundMode(),
+        [&](const Char &character, const Position position) -> Color {
+            return colorForTextPosition(text, character, position, animationCycle);
+        }}
+        .paint();
 }
 
 void TextPainter::drawText(
@@ -47,16 +85,8 @@ void TextPainter::drawText(String text, Rectangle rect, Alignment alignment, Col
     drawText(renderedText, animationCycle);
 }
 
-auto TextPainter::buildTextLines(const Text &text) const -> StringLines {
-    if (text.font() == nullptr) {
-        return text.text().wrapIntoLines(text.rectangle().width(), text.paragraphSpacing());
-    }
-    auto lines = StringLines{};
-    for (const auto &paragraph : text.text().splitLines()) {
-        const auto fontLines = buildFontTextLines(text, paragraph);
-        lines.insert(lines.end(), fontLines.begin(), fontLines.end());
-    }
-    return lines;
+auto TextPainter::buildSimpleTextLines(const Text &text) const -> StringLines {
+    return StringWrapper{text.text()}.wrapIntoLines(text.rectangle().width(), text.paragraphSpacing());
 }
 
 auto TextPainter::buildFontTextLines(const Text &text, const String &paragraph) const -> StringLines {

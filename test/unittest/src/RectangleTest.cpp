@@ -7,6 +7,7 @@
 
 #include <format>
 #include <functional>
+#include <type_traits>
 
 // Keep this check at compile time so the constexpr Rectangle constructor cannot regress unnoticed.
 static_assert([]() constexpr {
@@ -18,6 +19,13 @@ static_assert([]() constexpr {
     const auto rect = Rectangle(1, 2, 3, 4);
     return rect.hash() == rect.hash();
 }());
+
+static_assert(std::is_same_v<decltype(Rectangle{}.x1()), Coordinate>);
+static_assert(std::is_same_v<decltype(Rectangle{}.y1()), Coordinate>);
+static_assert(std::is_same_v<decltype(Rectangle{}.x2()), Coordinate>);
+static_assert(std::is_same_v<decltype(Rectangle{}.y2()), Coordinate>);
+static_assert(std::is_same_v<decltype(Rectangle{}.width()), Coordinate>);
+static_assert(std::is_same_v<decltype(Rectangle{}.height()), Coordinate>);
 
 
 TESTED_TARGETS(Rectangle)

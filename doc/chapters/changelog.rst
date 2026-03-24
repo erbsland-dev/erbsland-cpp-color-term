@@ -10,6 +10,57 @@
 Changelog
 *********
 
+Version 1.6.0 - 2026-03-25
+==========================
+
+Release 1.6.0 makes text-heavy terminal applications much easier to build. The biggest user-facing addition is a new paragraph layout system that works both for direct terminal output and for text rendered into buffers. This release also adds a new remapped buffer type for row- and column-oriented editing workloads, improves terminal capability detection, and substantially expands the documentation and demos around wrapped text output.
+
+Highlights
+----------
+
+*   Added :cpp:any:`ParagraphOptions <erbsland::cterm::ParagraphOptions>`, :cpp:any:`ParagraphBackgroundMode <erbsland::cterm::ParagraphBackgroundMode>`, :cpp:any:`ParagraphOnError <erbsland::cterm::ParagraphOnError>`, :cpp:any:`TabOverflowBehavior <erbsland::cterm::TabOverflowBehavior>`, and :cpp:any:`TextOptions <erbsland::cterm::TextOptions>` to configure alignment, indentation, wrap markers, word splitting, tab handling, ellipsis behavior, background fill, and fallback behavior in one reusable model.
+*   Added :cpp:any:`Terminal::printParagraph() <erbsland::cterm::Terminal::printParagraph()>` so applications can print structured, width-aware paragraphs directly to the terminal without first building a full-screen buffer.
+*   Added :cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>` and :cpp:any:`Orientation <erbsland::cterm::Orientation>` for efficient row and column insertion, deletion, movement, shifting, and rotation in editors, log viewers, scrollback panes, and other large grid-based views.
+*   Expanded :cpp:any:`Text <erbsland::cterm::Text>`, :cpp:any:`String <erbsland::cterm::String>`, and :cpp:any:`Char <erbsland::cterm::Char>` with paragraph-aware rendering options and new helpers such as :cpp:any:`String::terminalLines() <erbsland::cterm::String::terminalLines()>`, :cpp:any:`String::containsControlCharacters() <erbsland::cterm::String::containsControlCharacters()>`, and :cpp:any:`Char::isControl() <erbsland::cterm::Char::isControl()>`.
+*   Added :cpp:any:`Terminal::isInteractive() <erbsland::cterm::Terminal::isInteractive()>`, a new ``command-line-help`` demo, and a much broader documentation set for paragraph layout, backends, and Unicode width handling.
+
+Added
+-----
+
+*   Added :cpp:any:`ParagraphOptions <erbsland::cterm::ParagraphOptions>` as a reusable public configuration object for wrapped paragraph rendering in :cpp:any:`Terminal <erbsland::cterm::Terminal>`, :cpp:any:`TextOptions <erbsland::cterm::TextOptions>`, and :cpp:any:`Text <erbsland::cterm::Text>`.
+*   Added :cpp:any:`ParagraphBackgroundMode <erbsland::cterm::ParagraphBackgroundMode>` so wrapped paragraphs can optionally extend their background color into continuation indents, the remaining cells at the right edge, or both. This makes highlighted help blocks and callout text look consistent even when they wrap.
+*   Added :cpp:any:`ParagraphOnError <erbsland::cterm::ParagraphOnError>` and :cpp:any:`TabOverflowBehavior <erbsland::cterm::TabOverflowBehavior>` to control narrow-layout fallbacks and non-advancing tab stops in a predictable way.
+*   Added :cpp:any:`TextOptions <erbsland::cterm::TextOptions>` so color, font, animation, and paragraph layout settings can be bundled and reused independently from the :cpp:any:`Text <erbsland::cterm::Text>` content object.
+*   Added :cpp:any:`Terminal::printParagraph() <erbsland::cterm::Terminal::printParagraph()>` for direct terminal output with indentation, wrap markers, tab stops, paragraph spacing, wrap limits, ellipsis markers, and layout fallback handling.
+*   Added :cpp:any:`Terminal::isInteractive() <erbsland::cterm::Terminal::isInteractive()>` so applications can detect after initialization whether a real interactive terminal is attached and switch to a plain-text output path when needed.
+*   Added :cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>` with efficient operations for resizing, shifting, rotating, erasing, inserting, and moving complete rows and columns while keeping the visible grid model intact.
+*   Added :cpp:any:`Orientation <erbsland::cterm::Orientation>` and :cpp:any:`Coordinate <erbsland::cterm::Coordinate>` as public support types used by the new buffer and geometry APIs.
+*   Added :cpp:any:`String::String(std::size_t, Char) <erbsland::cterm::String::String()>`, :cpp:any:`String::terminalLines() <erbsland::cterm::String::terminalLines()>`, :cpp:any:`String::containsControlCharacters() <erbsland::cterm::String::containsControlCharacters()>`, and :cpp:any:`Char::isControl() <erbsland::cterm::Char::isControl()>` for common text-processing and validation tasks.
+*   Added the ``command-line-help`` demo application to show how paragraph-aware output can keep a classic command-line help screen readable across narrow and wide terminal widths.
+
+Improved
+--------
+
+*   :cpp:any:`Text <erbsland::cterm::Text>` now renders through a structured paragraph pipeline instead of only using the earlier simpler layout settings. The same paragraph configuration can therefore be reused for direct terminal printing and for text rendered inside rectangles.
+*   Tab handling in left-aligned paragraphs is now much more practical for help text and option lists. Applications can define explicit tab stops and choose whether a non-advancing tab inserts a space or starts a wrapped continuation line.
+*   Paragraph rendering now supports visible wrap markers, word-break markers, wrap limits with ellipsis, configurable paragraph spacing, and clearer fallback handling when a layout becomes too narrow to render safely.
+*   The terminal backends now expose whether the process is attached to an interactive terminal, making it easier to produce a rich UI in a real terminal while keeping redirected output, logs, and CI runs readable.
+*   Geometry and buffer APIs now consistently use :cpp:any:`Coordinate <erbsland::cterm::Coordinate>`, and :cpp:any:`Buffer::get() <erbsland::cterm::Buffer::get()>` returns a shared space for out-of-range reads, which simplifies caller code that inspects the edges of a buffer.
+
+Documentation
+-------------
+
+*   Added a detailed new :doc:`Paragraph Options <reference/paragraph-options>` reference chapter with rendered examples for alignment, indentation, wrap markers, background modes, word splitting, tab stops, wrap limits, and error handling.
+*   Added documentation for the new ``command-line-help`` demo, showing a practical end-to-end use of :cpp:any:`Terminal::printParagraph() <erbsland::cterm::Terminal::printParagraph()>`.
+*   Expanded the reference documentation for buffer, terminal, and text APIs.
+*   Added implementation chapters for paragraph layout and painting, Unicode width handling, and the POSIX and Windows backends, plus a helper tool used to generate consistent paragraph-layout examples for the documentation.
+
+Implementation
+--------------
+
+*   Refactored the text rendering internals into dedicated paragraph layout and paragraph painting components, which improves consistency between terminal output and buffer-based text rendering.
+*   Refactored writable and readable buffer convenience APIs into explicit internal wrapper implementations and expanded unit test coverage for text rendering, terminal convenience methods, and :cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>`.
+
 Version 1.5.0 - 2026-03-21
 ==========================
 

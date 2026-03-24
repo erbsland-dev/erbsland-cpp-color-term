@@ -47,6 +47,12 @@ Topics
 
         Explore the public modules, classes, and functions that make up the color terminal API.
 
+    .. grid-item-card:: :fas:`microchip;sd-text-success` Implementation Notes
+        :link: chapters/implementation/index
+        :link-type: doc
+
+        Read internal backend notes intended for contributors who extend or debug the library itself.
+
     .. grid-item-card:: :fas:`images;sd-text-success` Demo Gallery
         :link: chapters/demos/index
         :link-type: doc
@@ -168,6 +174,7 @@ Contents at a Glance
     chapters/usage/index
     chapters/reference/index
     chapters/demos/index
+    chapters/implementation/index
     chapters/contribute/index
     chapters/requirements
     chapters/changelog

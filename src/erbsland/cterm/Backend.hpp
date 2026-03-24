@@ -63,6 +63,11 @@ public:
     /// If this method returns `false`, `Terminal` *only* calls `setAlternateScreenBuffer()` instead.
     [[nodiscard]] virtual auto supportsAlternateScreenBufferCodes() const noexcept -> bool { return true; }
 
+    /// Check if an interactive terminal is attached to the process.
+    /// This state is typically established during `Terminal::initializeScreen()`.
+    /// @return `true` if interactive terminal features such as resize and cursor control are available.
+    [[nodiscard]] virtual auto isInteractive() const noexcept -> bool = 0;
+
     /// Detect the current terminal screen size.
     ///
     /// This method is invoked by `Terminal::initializeScreen()` and `Terminal::testScreenSize()`

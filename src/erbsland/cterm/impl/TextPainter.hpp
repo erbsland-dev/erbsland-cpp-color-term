@@ -3,31 +3,33 @@
 #pragma once
 
 
-#include "WritableBuffer.hpp"
+#include "../WritableBuffer.hpp"
 
 
 namespace erbsland::cterm::impl {
 
-class TextPainter {
+
+class TextPainter final {
 public:
     explicit TextPainter(WritableBuffer &buffer) : _buffer{buffer} {}
 
     // delete copy/move
+    ~TextPainter() = default;
     TextPainter(const TextPainter &) = delete;
     TextPainter(TextPainter &&) = delete;
-    TextPainter &operator=(const TextPainter &) = delete;
-    TextPainter &operator=(TextPainter &&) = delete;
+    auto operator=(const TextPainter &) -> TextPainter & = delete;
+    auto operator=(TextPainter &&) -> TextPainter & = delete;
 
 public:
-    virtual void drawText(Position pos, const String &str);
-    virtual void drawText(const Text &text, std::size_t animationCycle = 0);
-    virtual void drawText(
+    void drawText(Position pos, const String &str);
+    void drawText(const Text &text, std::size_t animationCycle = 0);
+    void drawText(
         std::string_view text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
         Color color = {},
         std::size_t animationCycle = 0);
-    virtual void drawText(
+    void drawText(
         String text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
@@ -46,7 +48,7 @@ private: // wrapper (to keep code simple)
     }
 
 private: // helper
-    [[nodiscard]] auto buildTextLines(const Text &text) const -> StringLines;
+    [[nodiscard]] auto buildSimpleTextLines(const Text &text) const -> StringLines;
     [[nodiscard]] auto buildFontTextLines(const Text &text, const String &paragraph) const -> StringLines;
     void applyTextLines(const Text &text, const StringLines &lines, std::size_t animationCycle) noexcept;
     [[nodiscard]] auto colorForTextPosition(

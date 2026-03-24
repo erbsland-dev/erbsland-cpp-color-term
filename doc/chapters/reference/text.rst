@@ -160,9 +160,9 @@ characters.
 Describing a Text Block
 -----------------------
 
-:cpp:any:`Text <erbsland::cterm::Text>` describes a complete text element for buffer rendering. It
-combines the content with layout information such as the target
-rectangle, alignment, font, and animation settings.
+:cpp:any:`TextOptions <erbsland::cterm::TextOptions>` stores the reusable rendering configuration for a text element:
+colors, fonts, animation, and paragraph layout rules. :cpp:any:`Text <erbsland::cterm::Text>` combines the content
+with that configuration plus the target rectangle.
 
 .. code-block:: cpp
 
@@ -183,12 +183,13 @@ Because :cpp:any:`Text <erbsland::cterm::Text>` integrates with the geometry and
 supports wrapped paragraphs, Unicode-aware layout, animated titles,
 and large bitmap fonts.
 
-Controlling Paragraph Spacing
------------------------------
+Formatting Paragraphs
+---------------------
 
 Explicit newlines in :cpp:any:`Text <erbsland::cterm::Text>` create separate paragraphs. Use
-:cpp:any:`ParagraphSpacing <erbsland::cterm::ParagraphSpacing>` when those paragraphs should either stay compact or
-leave a blank line between them.
+:cpp:any:`ParagraphOptions <erbsland::cterm::ParagraphOptions>` and
+:cpp:any:`ParagraphSpacing <erbsland::cterm::ParagraphSpacing>` to control spacing, indentation, wrap marks, word
+breaking, tab stops, background fill, and narrow-layout fallbacks.
 
 .. code-block:: cpp
 
@@ -203,6 +204,9 @@ leave a blank line between them.
 :cpp:any:`ParagraphSpacing::SingleLine <erbsland::cterm::ParagraphSpacing::SingleLine>` keeps the rendered paragraphs tight,
 while ``DoubleLine`` makes sectioned help text and descriptive panels
 easier to scan.
+
+The full paragraph-formatting reference, including all option groups and related enums, is available on
+:doc:`Paragraph Options <paragraph-options>`.
 
 .. figure:: /images/text-gallery2.jpg
     :width: 100%
@@ -221,9 +225,10 @@ Interface
 
 .. doxygentypedef:: erbsland::cterm::StringLines
 
-.. doxygenclass:: erbsland::cterm::Text
+.. doxygenclass:: erbsland::cterm::TextOptions
     :members:
 
-.. doxygenenum:: erbsland::cterm::ParagraphSpacing
+.. doxygenclass:: erbsland::cterm::Text
+    :members:
 
 .. doxygenenum:: erbsland::cterm::TextAnimation

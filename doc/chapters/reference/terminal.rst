@@ -107,6 +107,12 @@ The most important rule is to call
 :cpp:any:`Terminal::restoreScreen() <erbsland::cterm::Terminal::restoreScreen()>`
 **once** just before the application exits.
 
+After initialization, you can call
+:cpp:any:`Terminal::isInteractive() <erbsland::cterm::Terminal::isInteractive()>`
+to check whether an interactive terminal is attached. This is useful for
+switching to a plain-text fallback when the process output is redirected
+or no real terminal screen is available.
+
 If your application is interrupted between these calls (for example by ``Ctrl+C`` or other signals), the library automatically restores the terminal state before control returns to the shell.
 
 You should also create **exactly one instance** of
@@ -195,6 +201,7 @@ existing console framework, test harness, or platform abstraction.
         void restorePlatform() override {}
         [[nodiscard]] auto supportsColorCodes() const noexcept -> bool override { return false; }
         [[nodiscard]] auto supportsCursorCodes() const noexcept -> bool override { return false; }
+        [[nodiscard]] auto isInteractive() const noexcept -> bool override { return true; }
         [[nodiscard]] auto detectScreenSize() -> std::optional<Size> override { return Size{80, 25}; }
         void moveCursor(Position posOrDelta, MoveMode mode) override {
             if (mode == MoveMode::Absolute) {

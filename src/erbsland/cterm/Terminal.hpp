@@ -7,6 +7,7 @@
 #include "Char.hpp"
 #include "Color.hpp"
 #include "MoveMode.hpp"
+#include "ParagraphOptions.hpp"
 #include "Size.hpp"
 #include "String.hpp"
 #include "TerminalFlags.hpp"
@@ -145,6 +146,10 @@ public: // initialization
     /// Also hides the cursor by default, as it is usually only made visible when the user makes input.
     /// Call this at the start of your application.
     void initializeScreen() noexcept;
+    /// Check whether an interactive terminal is attached to the process.
+    /// Call this after `initializeScreen()` to see if screen-size detection and terminal control features are active.
+    /// @return `true` if the backend detected an interactive terminal.
+    [[nodiscard]] auto isInteractive() const noexcept -> bool;
     /// Detect terminal resize changes.
     /// After calling this method, `size()` returns a safe size for the terminal.
     void testScreenSize() noexcept;
@@ -179,16 +184,16 @@ public: // cursor state
     void setDefaultColor() noexcept;
     /// Move the cursor to the left.
     /// @param count The number of terminal cells to move.
-    void moveLeft(int count);
+    void moveLeft(Coordinate count);
     /// Move the cursor to the right.
     /// @param count The number of terminal cells to move.
-    void moveRight(int count);
+    void moveRight(Coordinate count);
     /// Move the cursor up.
     /// @param count The number of terminal cells to move.
-    void moveUp(int count);
+    void moveUp(Coordinate count);
     /// Move the cursor down.
     /// @param count The number of terminal cells to move.
-    void moveDown(int count);
+    void moveDown(Coordinate count);
     /// Move the cursor to the given position.
     /// If you need the cursor moved immediately, call `flush()` after this method.
     void moveTo(Position pos) noexcept;
@@ -200,6 +205,9 @@ public: // cursor state
     /// @param mode The move mode, either absolute or relative.
     void moveCursor(Position posOrDelta, MoveMode mode) noexcept;
     /// Enabled/disable auto-wrap.
+    /// Auto wrap controls if the cursor automatically wraps to the next line when reaching the right margin.
+    /// This is a feature of the terminal that can be enabled or disabled.
+    /// Do not confuse this with line wrapping, which is a different feature.
     void setAutoWrap(bool enabled) noexcept;
     /// Make the cursor visible/invisible.
     void setCursorVisible(bool visible) noexcept;
@@ -260,15 +268,34 @@ public: // writing tools
         (printLinePart(args), ...);
         writeLineBreak();
     }
+    /// Print a word-wrapped paragraph on the screen.
+    /// @param paragraph The paragraph text to write. Can use line breaks and tabs, see documentation.
+    /// @param options The paragraph options to use.
+    /// @return The number of terminal lines written (including empty lines).
+    auto printParagraph(
+        const String &paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept -> int;
+    /// @overload
+    auto printParagraph(
+        const std::string &paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept
+        -> int;
+
 
 public: // backward compatibility.
+    /// Write a terminal line break.
+    /// @deprecated Use `writeLineBreak()` instead.
     [[deprecated("use writeLineBreak()")]]
     void lineBreak() noexcept {
         writeLineBreak();
     }
+    /// Test if non-text output mode is active.
+    /// @deprecated Use `outputMode()` instead.
+    /// @return `true` if the terminal is not in `OutputMode::Text`.
     [[deprecated("use outputMode()")]] [[nodiscard]] auto colorEnabled() const noexcept -> bool {
         return _outputMode != OutputMode::Text;
     }
+    /// Enable or disable text-only output mode through the legacy boolean API.
+    /// @deprecated Use `setOutputMode()` instead.
+    /// @param enabled `true` to allow color/control output, `false` for plain text mode.
     [[deprecated("use setOutputMode()")]]
     void setColorEnabled(bool enabled) noexcept;
 
@@ -293,6 +320,18 @@ private:
     /// @param withRowMove Whether to move the cursor to the next row after writing (`true`)
     ///                    or use newline for the next row.
     void writeImpl(const ReadableBuffer &buffer, bool withRowMove) noexcept;
+    /// Print a paragraph using plain terminal output as fallback.
+    /// @param paragraph The paragraph to write.
+    /// @param options The paragraph options for error handling and spacing.
+    /// @return The number of terminal lines written.
+    [[nodiscard]] auto printParagraphPlainOutput(const String &paragraph, const ParagraphOptions &options) noexcept
+        -> int;
+    /// Finish a paragraph by writing one or two explicit line breaks.
+    /// @param renderedLines The number of already rendered paragraph lines.
+    /// @param paragraphSpacing The spacing to append after the paragraph.
+    /// @return The total number of paragraph lines written.
+    [[nodiscard]] auto
+    finishParagraphWithExplicitLineBreaks(int renderedLines, ParagraphSpacing paragraphSpacing) noexcept -> int;
     /// Get the safety margins applied to the terminal size.
     [[nodiscard]] auto applySafeMargin(Size terminalSize) const noexcept -> Size;
 

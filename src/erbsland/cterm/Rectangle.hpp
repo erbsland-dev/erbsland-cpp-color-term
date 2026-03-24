@@ -33,7 +33,9 @@ public:
     /// @param y Y-coordinate of the top-left corner.
     /// @param width Rectangle width.
     /// @param height Rectangle height.
-    constexpr Rectangle(int x, int y, int width, int height) noexcept : _pos{x, y}, _size{width, height} {}
+    constexpr Rectangle(Coordinate x, Coordinate y, Coordinate width, Coordinate height) noexcept :
+        _pos{x, y},
+        _size{width, height} {}
     /// Construct from position and size objects.
     /// @param pos Top-left corner position.
     /// @param size Rectangle size.
@@ -77,13 +79,13 @@ public: // attributes
 
 public: // accessors
     /// Left x-coordinate.
-    [[nodiscard]] constexpr auto x1() const noexcept -> int { return _pos.x(); }
+    [[nodiscard]] constexpr auto x1() const noexcept -> Coordinate { return _pos.x(); }
     /// Top y-coordinate.
-    [[nodiscard]] constexpr auto y1() const noexcept -> int { return _pos.y(); }
+    [[nodiscard]] constexpr auto y1() const noexcept -> Coordinate { return _pos.y(); }
     /// Right x-coordinate (exclusive).
-    [[nodiscard]] constexpr auto x2() const noexcept -> int { return _pos.x() + _size.width(); }
+    [[nodiscard]] constexpr auto x2() const noexcept -> Coordinate { return _pos.x() + _size.width(); }
     /// Bottom y-coordinate (exclusive).
-    [[nodiscard]] constexpr auto y2() const noexcept -> int { return _pos.y() + _size.height(); }
+    [[nodiscard]] constexpr auto y2() const noexcept -> Coordinate { return _pos.y() + _size.height(); }
     /// Top-left corner position.
     /// Is equivalent to `pos()`.
     [[nodiscard]] constexpr auto topLeft() const noexcept -> Position { return _pos; }
@@ -94,9 +96,9 @@ public: // accessors
     /// Bottom-right corner position (x-coordinate exclusive, y-coordinate exclusive).
     [[nodiscard]] constexpr auto bottomRight() const noexcept -> Position { return {x2(), y2()}; }
     /// Rectangle width.
-    [[nodiscard]] constexpr auto width() const noexcept -> int { return _size.width(); }
+    [[nodiscard]] constexpr auto width() const noexcept -> Coordinate { return _size.width(); }
     /// Rectangle height.
-    [[nodiscard]] constexpr auto height() const noexcept -> int { return _size.height(); }
+    [[nodiscard]] constexpr auto height() const noexcept -> Coordinate { return _size.height(); }
     /// Position of a given anchor within this rectangle.
     /// @param anchor Anchor to query.
     /// @return The position *inside* this rectangle matching the requested anchor.
@@ -165,8 +167,11 @@ public: // tools
     /// @param verticalSpacing The spacing between cells vertically.
     /// @return A vector of rectangles representing the grid cells from left to right, top to bottom.
     /// @throws std::invalid_argument if rows or columns are less than 1 or the chosen division is impossible.
-    [[nodiscard]] auto gridCells(int rows, int columns, int horizontalSpacing = 0, int verticalSpacing = 0) const
-        -> std::vector<Rectangle>;
+    [[nodiscard]] auto gridCells(
+        int rows,
+        int columns,
+        Coordinate horizontalSpacing = 0,
+        Coordinate verticalSpacing = 0) const -> std::vector<Rectangle>;
     /// Call a function for each position contained in the rectangle.
     /// @tparam Fn A callable with signature `void(Position)`.
     /// The function definition must be `void fn(Position pos)`.
@@ -191,8 +196,8 @@ private:
 
 template <typename Fn>
 void Rectangle::forEach(Fn fn) const {
-    for (int y = 0; y < _size.height(); ++y) {
-        for (int x = 0; x < _size.width(); ++x) {
+    for (Coordinate y = 0; y < _size.height(); ++y) {
+        for (Coordinate x = 0; x < _size.width(); ++x) {
             fn(Position{x, y} + _pos);
         }
     }
@@ -207,35 +212,35 @@ void Rectangle::forEachInFrame(Fn fn) const {
     }
     if constexpr (std::is_invocable_r_v<void, Fn, Position, int>) {
         int index = 0;
-        for (int x = 0; x < _size.width(); ++x) {
+        for (Coordinate x = 0; x < _size.width(); ++x) {
             fn(Position{x1() + x, y1()}, index++);
         }
         if (_size.height() > 1) {
-            for (int y = 1; y < _size.height(); ++y) {
+            for (Coordinate y = 1; y < _size.height(); ++y) {
                 fn(Position{x2() - 1, y1() + y}, index++);
             }
-            for (int x = _size.width() - 2; x >= 0; --x) {
+            for (Coordinate x = _size.width() - 2; x >= 0; --x) {
                 fn(Position{x1() + x, y2() - 1}, index++);
             }
             if (_size.width() > 1) {
-                for (int y = _size.height() - 2; y > 0; --y) {
+                for (Coordinate y = _size.height() - 2; y > 0; --y) {
                     fn(Position{x1(), y1() + y}, index++);
                 }
             }
         }
     } else {
-        for (int x = 0; x < _size.width(); ++x) {
+        for (Coordinate x = 0; x < _size.width(); ++x) {
             fn(Position{x1() + x, y1()});
         }
         if (_size.height() > 1) {
-            for (int y = 1; y < _size.height(); ++y) {
+            for (Coordinate y = 1; y < _size.height(); ++y) {
                 fn(Position{x2() - 1, y1() + y});
             }
-            for (int x = _size.width() - 2; x >= 0; --x) {
+            for (Coordinate x = _size.width() - 2; x >= 0; --x) {
                 fn(Position{x1() + x, y2() - 1});
             }
             if (_size.width() > 1) {
-                for (int y = _size.height() - 2; y > 0; --y) {
+                for (Coordinate y = _size.height() - 2; y > 0; --y) {
                     fn(Position{x1(), y1() + y});
                 }
             }

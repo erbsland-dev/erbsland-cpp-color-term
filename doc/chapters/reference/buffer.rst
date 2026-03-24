@@ -10,6 +10,8 @@ The buffer classes represent rendered terminal content in memory before
 it is written to the screen. :cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` provides the inspection
 API, :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` adds mutation and drawing operations, and
 :cpp:any:`Buffer <erbsland::cterm::Buffer>` is the concrete 2D storage type used in most applications.
+:cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>` adds efficient row- and column-based reordering for
+editors, scrollback views, and other applications that frequently insert, delete, rotate, or move whole lines.
 
 Use these types when you want to build a frame off-screen, compare two
 frames, copy content between buffers, or derive masks from the rendered
@@ -63,6 +65,27 @@ current state, and resizing a buffer when the terminal size changes.
 makes it easy to store previous frames for diffing or rollback logic.
 When resizing a concrete :cpp:any:`Buffer <erbsland::cterm::Buffer>`, use the reorder overload if you want
 to preserve existing content while expanding or cropping the canvas.
+
+Working with Remapped Buffers
+-----------------------------
+
+:cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>` is built for workloads where the visible content stays
+logically grid-based, but the application constantly reshuffles rows or columns. Instead of rewriting every cell for
+line-oriented edits, the buffer keeps remap tables and only refills the rows or columns that become newly empty.
+
+.. code-block:: cpp
+
+    auto history = RemappedBuffer{Size{80, 2'000}, Orientation::Vertical};
+    history.fill(Char::space());
+
+    history.eraseRows(0, Char::space(), 1);      // Scroll everything up by one row.
+    history.set(Position{0, 1'999}, String{"new log line"});
+
+    history.resize(Size{100, 2'000}, true, Char::space());
+
+Use the plain :cpp:any:`RemappedBuffer::resize() <erbsland::cterm::RemappedBuffer::resize>` overload when you want
+the fastest possible resize and you plan to redraw the content anyway. Use the reorder overload when the visible order
+must stay intact while expanding or cropping the canvas.
 
 .. important::
 
@@ -137,4 +160,7 @@ Interface
     :members:
 
 .. doxygenclass:: erbsland::cterm::Buffer
+    :members:
+
+.. doxygenclass:: erbsland::cterm::RemappedBuffer
     :members:

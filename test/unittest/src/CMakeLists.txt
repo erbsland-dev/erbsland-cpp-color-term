@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.28)
 set(_erbsland_color_term_unittest_target erbsland-color-term-unittest)
 
 target_sources(${_erbsland_color_term_unittest_target} PRIVATE
+        ApiWrapperDispatchTest.cpp
         AlignmentTest.cpp
         AnchorTest.cpp
         BackendTest.cpp
@@ -27,8 +28,10 @@ target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         KeyPressTest.cpp
         main.cpp
         MarginsTest.cpp
+        ParagraphOptionsTest.cpp
         PositionTest.cpp
         RectangleTest.cpp
+        RemappedBufferTest.cpp
         SizeTest.cpp
         StringConversionTest.cpp
         TerminalTest.cpp

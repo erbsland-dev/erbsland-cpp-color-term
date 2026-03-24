@@ -130,6 +130,10 @@ auto Char::isSpacing() const noexcept -> bool {
     return _codePoints[0] == U' ' || _codePoints[0] == U'\t' || _codePoints[0] == U'\n' || _codePoints[0] == U'\r';
 }
 
+auto Char::isControl() const noexcept -> bool {
+    return isControlCode(_codePoints[0]);
+}
+
 auto Char::isOneOf(std::u32string_view characters) const noexcept -> bool {
     return std::ranges::any_of(characters, [this](const char32_t character) -> bool { return *this == character; });
 }
@@ -147,6 +151,11 @@ auto Char::renderedEquals(const Char &other, const bool colorEnabled) const noex
     }
     return color().fg().ansiCode() == other.color().fg().ansiCode() &&
         color().bg().ansiCode() == other.color().bg().ansiCode();
+}
+
+auto Char::space() noexcept -> const Char & {
+    static const Char space{U' '};
+    return space;
 }
 
 auto Char::decodeUtf8(const std::string_view charStr) -> std::array<char32_t, 3> {

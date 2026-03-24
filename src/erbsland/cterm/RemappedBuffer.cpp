@@ -1,0 +1,412 @@
+// Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+// SPDX-License-Identifier: Apache-2.0
+#include "RemappedBuffer.hpp"
+
+
+#include <algorithm>
+#include <cassert>
+#include <format>
+#include <ranges>
+
+
+namespace erbsland::cterm {
+
+
+RemappedBuffer::RemappedBuffer() : RemappedBuffer{Size{1, 1}, Orientation::Vertical, Char{U' '}} {
+}
+
+RemappedBuffer::RemappedBuffer(const Size size, Orientation orientation, const Char fillChar) :
+    _size{validatedBufferSize(size)},
+    _orientation{orientation},
+    _buffer(static_cast<std::size_t>(_size.area()), fillChar),
+    _rowRemap(linearIndex(static_cast<std::size_t>(_size.height()))),
+    _columnRemap(linearIndex(static_cast<std::size_t>(_size.width()))) {
+}
+
+auto RemappedBuffer::size() const noexcept -> Size {
+    return _size;
+}
+
+auto RemappedBuffer::rect() const noexcept -> Rectangle {
+    return Rectangle{Position{0, 0}, _size};
+}
+
+auto RemappedBuffer::get(const Position pos) const noexcept -> const Char & {
+    assert(_size.contains(pos));
+    if (!_size.contains(pos)) {
+        return Char::space();
+    }
+    const auto remappedPos = remapPosition(pos);
+    assert(_size.contains(remappedPos));
+    return _buffer[bufferIndex(remappedPos)];
+}
+
+auto RemappedBuffer::clone() const -> WritableBufferPtr {
+    return std::make_shared<RemappedBuffer>(*this);
+}
+
+void RemappedBuffer::resize(const Size newSize) {
+    resize(newSize, false, Char{});
+}
+
+void RemappedBuffer::resize(const Size newSize, const bool reorder, const Char fillChar) {
+    const auto validatedSize = validatedBufferSize(newSize);
+    if (_size == validatedSize) {
+        return;
+    }
+    if (reorder) {
+        reorderedResize(validatedSize, fillChar);
+        return;
+    }
+    fastResize(validatedSize, fillChar);
+}
+
+void RemappedBuffer::set(const Position pos, const Char &block) noexcept {
+    if (!_size.contains(pos) || block.displayWidth() == 0 || block.displayWidth() > 2) {
+        return;
+    }
+    if (block.displayWidth() == 1) {
+        const auto remappedPos = remapPosition(pos);
+        assert(_size.contains(remappedPos));
+        _buffer[bufferIndex(remappedPos)] = block;
+        return;
+    }
+    const auto secondPosition = pos + Position{1, 0};
+    if (!_size.contains(secondPosition)) {
+        return;
+    }
+    const auto remappedFirstPosition = remapPosition(pos);
+    const auto remappedSecondPosition = remapPosition(secondPosition);
+    assert(_size.contains(remappedFirstPosition));
+    assert(_size.contains(remappedSecondPosition));
+    _buffer[bufferIndex(remappedSecondPosition)] = Char{"", block.color()};
+    _buffer[bufferIndex(remappedFirstPosition)] = block;
+}
+
+void RemappedBuffer::reserve(Size size) noexcept {
+    _buffer.reserve(static_cast<std::size_t>(size.area()));
+    _rowRemap.reserve(static_cast<std::size_t>(size.height()));
+    _columnRemap.reserve(static_cast<std::size_t>(size.width()));
+}
+
+void RemappedBuffer::shift(const Direction direction, const Char fillChar, const int count) {
+    validateDirectionalCount(direction, count);
+    if (count == 0 || direction == Direction::None) {
+        return;
+    }
+    if (direction.contains(Direction::North)) {
+        eraseRows(0, fillChar, count);
+    }
+    if (direction.contains(Direction::South)) {
+        insertRows(0, fillChar, count);
+    }
+    if (direction.contains(Direction::West)) {
+        eraseColumns(0, fillChar, count);
+    }
+    if (direction.contains(Direction::East)) {
+        insertColumns(0, fillChar, count);
+    }
+}
+
+void RemappedBuffer::rotate(const Direction direction, const int count) {
+    validateDirectionalCount(direction, count);
+    if (count == 0 || direction == Direction::None) {
+        return;
+    }
+    if (direction.contains(Direction::North)) {
+        rotateMap(_rowRemap, count, true);
+    }
+    if (direction.contains(Direction::South)) {
+        rotateMap(_rowRemap, count, false);
+    }
+    if (direction.contains(Direction::West)) {
+        rotateMap(_columnRemap, count, true);
+    }
+    if (direction.contains(Direction::East)) {
+        rotateMap(_columnRemap, count, false);
+    }
+}
+
+void RemappedBuffer::eraseRows(const Coordinate startRow, const Char fillChar, const int count) {
+    validateExistingSpan(startRow, count, _size.height(), "startRow", "count");
+    if (count == 0) {
+        return;
+    }
+    fillStoredRows(eraseFromMap(_rowRemap, startRow, count), fillChar);
+}
+
+void RemappedBuffer::eraseColumns(const Coordinate startColumn, const Char fillChar, const int count) {
+    validateExistingSpan(startColumn, count, _size.width(), "startColumn", "count");
+    if (count == 0) {
+        return;
+    }
+    fillStoredColumns(eraseFromMap(_columnRemap, startColumn, count), fillChar);
+}
+
+void RemappedBuffer::insertRows(const Coordinate startRow, const Char fillChar, const int count) {
+    validateInsertArguments(startRow, count, _size.height(), "startRow", "count");
+    if (count == 0) {
+        return;
+    }
+    fillStoredRows(insertIntoMap(_rowRemap, startRow, count), fillChar);
+}
+
+void RemappedBuffer::insertColumns(const Coordinate startColumn, const Char fillChar, const int count) {
+    validateInsertArguments(startColumn, count, _size.width(), "startColumn", "count");
+    if (count == 0) {
+        return;
+    }
+    fillStoredColumns(insertIntoMap(_columnRemap, startColumn, count), fillChar);
+}
+
+void RemappedBuffer::moveRows(const Coordinate startRow, const int count, const Coordinate delta, const Char fillChar) {
+    validateExistingSpan(startRow, count, _size.height(), "startRow", "count");
+    if (count == 0 || delta == 0) {
+        return;
+    }
+    const auto result = moveInMap(_rowRemap, startRow, count, delta);
+    _rowRemap = result.reorderedMap;
+    fillStoredRows(result.recycled, fillChar);
+}
+
+void RemappedBuffer::moveColumns(
+    const Coordinate startColumn, const int count, const Coordinate delta, const Char fillChar) {
+    validateExistingSpan(startColumn, count, _size.width(), "startColumn", "count");
+    if (count == 0 || delta == 0) {
+        return;
+    }
+    const auto result = moveInMap(_columnRemap, startColumn, count, delta);
+    _columnRemap = result.reorderedMap;
+    fillStoredColumns(result.recycled, fillChar);
+}
+
+void RemappedBuffer::fill(const Char &fillBlock) noexcept {
+    for (auto &character : _buffer) {
+        character = fillBlock;
+    }
+    for (std::size_t i = 0; i < _rowRemap.size(); ++i) {
+        _rowRemap[i] = static_cast<Coordinate>(i);
+    }
+    for (std::size_t i = 0; i < _columnRemap.size(); ++i) {
+        _columnRemap[i] = static_cast<Coordinate>(i);
+    }
+}
+
+auto RemappedBuffer::validatedBufferSize(const Size size) -> Size {
+    if (size.width() < 1 || size.height() < 1) {
+        throw std::invalid_argument("Buffer size must be at least 1x1");
+    }
+    if (!size.fitsInto(cMaximumSize)) {
+        throw std::invalid_argument("Buffer size must not exceed 10'000x10'000");
+    }
+    return size;
+}
+
+auto RemappedBuffer::linearIndex(std::size_t size) -> CoordinateMap {
+    CoordinateMap result;
+    result.resize(size);
+    for (std::size_t index = 0; index < size; ++index) {
+        result[index] = static_cast<Coordinate>(index);
+    }
+    return result;
+}
+
+void RemappedBuffer::validateCount(const int count, const int maximum, const std::string_view parameterName) {
+    if (count < 0) {
+        throw std::invalid_argument(std::format("{} must not be negative", parameterName));
+    }
+    if (count > maximum) {
+        throw std::invalid_argument(std::format("{} must not exceed the buffer dimension", parameterName));
+    }
+}
+
+void RemappedBuffer::validateExistingSpan(
+    const Coordinate start,
+    const int count,
+    const int limit,
+    const std::string_view startName,
+    const std::string_view countName) {
+    validateCount(count, limit, countName);
+    if (count == 0) {
+        if (start < 0 || start > limit) {
+            throw std::invalid_argument(std::format("{} is out of bounds", startName));
+        }
+        return;
+    }
+    if (start < 0 || start >= limit) {
+        throw std::invalid_argument(std::format("{} is out of bounds", startName));
+    }
+    if (start + count > limit) {
+        throw std::invalid_argument(std::format("{} exceeds the remaining buffer dimension", countName));
+    }
+}
+
+void RemappedBuffer::validateInsertArguments(
+    const Coordinate start,
+    const int count,
+    const int limit,
+    const std::string_view startName,
+    const std::string_view countName) {
+    validateCount(count, limit, countName);
+    if (count == 0) {
+        if (start < 0 || start > limit) {
+            throw std::invalid_argument(std::format("{} is out of bounds", startName));
+        }
+        return;
+    }
+    if (start < 0 || start >= limit) {
+        throw std::invalid_argument(std::format("{} is out of bounds", startName));
+    }
+    if (start + count > limit) {
+        throw std::invalid_argument(std::format("{} exceeds the remaining buffer dimension", countName));
+    }
+}
+
+void RemappedBuffer::validateDirectionalCount(const Direction direction, const int count) const {
+    if (count < 0) {
+        throw std::invalid_argument("count must not be negative");
+    }
+    if (direction.contains(Direction::North) || direction.contains(Direction::South)) {
+        validateCount(count, _size.height(), "count");
+    }
+    if (direction.contains(Direction::West) || direction.contains(Direction::East)) {
+        validateCount(count, _size.width(), "count");
+    }
+}
+
+auto RemappedBuffer::bufferIndex(const Position pos, const Size size, const Orientation orientation) noexcept
+    -> std::size_t {
+    if (orientation == Orientation::Vertical) {
+        return static_cast<std::size_t>(pos.y()) * static_cast<std::size_t>(size.width()) +
+            static_cast<std::size_t>(pos.x());
+    }
+    return static_cast<std::size_t>(pos.x()) * static_cast<std::size_t>(size.height()) +
+        static_cast<std::size_t>(pos.y());
+}
+
+void RemappedBuffer::rotateMap(CoordinateMap &map, const int count, const bool towardFront) noexcept {
+    if (map.empty() || count == 0) {
+        return;
+    }
+    const auto normalizedCount = static_cast<std::size_t>(count) % map.size();
+    if (normalizedCount == 0) {
+        return;
+    }
+    if (towardFront) {
+        std::ranges::rotate(map, map.begin() + static_cast<std::ptrdiff_t>(normalizedCount));
+        return;
+    }
+    std::ranges::rotate(map, map.end() - static_cast<std::ptrdiff_t>(normalizedCount));
+}
+
+auto RemappedBuffer::eraseFromMap(CoordinateMap &map, const Coordinate start, const int count) -> CoordinateMap {
+    auto recycled = CoordinateMap{};
+    recycled.reserve(static_cast<std::size_t>(count));
+    const auto first = map.begin() + start;
+    const auto last = first + count;
+    recycled.insert(recycled.end(), first, last);
+    std::move(last, map.end(), first);
+    std::ranges::move(recycled, map.end() - count);
+    return recycled;
+}
+
+auto RemappedBuffer::insertIntoMap(CoordinateMap &map, const Coordinate start, const int count) -> CoordinateMap {
+    auto recycled = CoordinateMap{};
+    recycled.reserve(static_cast<std::size_t>(count));
+    recycled.insert(recycled.end(), map.end() - count, map.end());
+    if (count == static_cast<int>(map.size())) {
+        return recycled;
+    }
+    std::move_backward(map.begin() + start, map.end() - count, map.end());
+    std::ranges::move(recycled, map.begin() + start);
+    return recycled;
+}
+
+auto RemappedBuffer::moveInMap(CoordinateMap map, const Coordinate start, const int count, const Coordinate delta)
+    -> MoveMapResult {
+    auto moved = CoordinateMap{};
+    moved.reserve(static_cast<std::size_t>(count));
+    moved.insert(moved.end(), map.begin() + start, map.begin() + start + count);
+
+    auto remaining = CoordinateMap{};
+    remaining.reserve(map.size() - static_cast<std::size_t>(count));
+    remaining.insert(remaining.end(), map.begin(), map.begin() + start);
+    remaining.insert(remaining.end(), map.begin() + start + count, map.end());
+
+    const auto targetStart = start + delta;
+    const auto droppedBefore = std::clamp(-targetStart, 0, count);
+    const auto droppedAfter = std::clamp(targetStart + count - static_cast<Coordinate>(map.size()), 0, count);
+    const auto keptBegin = static_cast<std::size_t>(droppedBefore);
+    const auto keptEnd = static_cast<std::size_t>(count - droppedAfter);
+
+    auto kept = CoordinateMap{};
+    kept.reserve(keptEnd - keptBegin);
+    kept.insert(
+        kept.end(),
+        moved.begin() + static_cast<std::ptrdiff_t>(keptBegin),
+        moved.begin() + static_cast<std::ptrdiff_t>(keptEnd));
+
+    auto recycled = CoordinateMap{};
+    recycled.reserve(static_cast<std::size_t>(droppedBefore + droppedAfter));
+    recycled.insert(recycled.end(), moved.begin(), moved.begin() + static_cast<std::ptrdiff_t>(keptBegin));
+    recycled.insert(recycled.end(), moved.begin() + static_cast<std::ptrdiff_t>(keptEnd), moved.end());
+
+    auto reorderedMap = CoordinateMap{};
+    reorderedMap.reserve(map.size());
+    if (droppedAfter > 0) {
+        reorderedMap.insert(reorderedMap.end(), recycled.begin(), recycled.end());
+    }
+    const auto insertIndex =
+        static_cast<std::size_t>(std::clamp(targetStart, 0, static_cast<Coordinate>(remaining.size())));
+    reorderedMap.insert(
+        reorderedMap.end(), remaining.begin(), remaining.begin() + static_cast<std::ptrdiff_t>(insertIndex));
+    reorderedMap.insert(reorderedMap.end(), kept.begin(), kept.end());
+    reorderedMap.insert(
+        reorderedMap.end(), remaining.begin() + static_cast<std::ptrdiff_t>(insertIndex), remaining.end());
+    if (droppedBefore > 0) {
+        reorderedMap.insert(reorderedMap.end(), recycled.begin(), recycled.end());
+    }
+    return {.reorderedMap = std::move(reorderedMap), .recycled = std::move(recycled)};
+}
+
+void RemappedBuffer::fillStoredRows(const CoordinateMap &rows, const Char &fillChar) noexcept {
+    for (const auto storedRow : rows) {
+        for (Coordinate x = 0; x < _size.width(); ++x) {
+            _buffer[bufferIndex(Position{x, storedRow})] = fillChar;
+        }
+    }
+}
+
+void RemappedBuffer::fillStoredColumns(const CoordinateMap &columns, const Char &fillChar) noexcept {
+    for (const auto storedColumn : columns) {
+        for (Coordinate y = 0; y < _size.height(); ++y) {
+            _buffer[bufferIndex(Position{storedColumn, y})] = fillChar;
+        }
+    }
+}
+
+void RemappedBuffer::fastResize(const Size newSize, const Char &fillChar) {
+    const auto oldArea = _buffer.size();
+    _size = newSize;
+    _buffer.resize(static_cast<std::size_t>(_size.area()));
+    if (!fillChar.isEmpty() && _buffer.size() > oldArea) {
+        for (auto index = oldArea; index < _buffer.size(); ++index) {
+            _buffer[index] = fillChar;
+        }
+    }
+    _rowRemap = linearIndex(static_cast<std::size_t>(_size.height()));
+    _columnRemap = linearIndex(static_cast<std::size_t>(_size.width()));
+}
+
+void RemappedBuffer::reorderedResize(const Size newSize, const Char &fillChar) {
+    auto newBuffer = std::vector<Char>(static_cast<std::size_t>(newSize.area()), fillChar);
+    const auto copySize = _size.componentMin(newSize);
+    copySize.forEach(
+        [&](const Position pos) -> void { newBuffer[bufferIndex(pos, newSize, _orientation)] = get(pos); });
+    _size = newSize;
+    _buffer = std::move(newBuffer);
+    _rowRemap = linearIndex(static_cast<std::size_t>(_size.height()));
+    _columnRemap = linearIndex(static_cast<std::size_t>(_size.width()));
+}
+
+}

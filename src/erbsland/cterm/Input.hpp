@@ -42,9 +42,16 @@ public:
     /// Read one key event.
     /// @param timeout Maximum wait time in `Mode::Key`; ignored in `Mode::ReadLine`.
     /// @return The parsed key event, or an invalid key if no supported input was read.
-    [[nodiscard]] virtual auto read(std::chrono::milliseconds timeout = {}) const -> Key = 0;
+    [[nodiscard]] auto read(std::chrono::milliseconds timeout = {}) const -> Key { return readImpl(timeout); }
     /// Read a line of text from the terminal.
     [[nodiscard]] virtual auto readLine() -> std::string = 0;
+
+protected:
+    /// Implement `read()`.
+    /// The public `read()` wrapper forwards to this method.
+    /// @param timeout Maximum wait time in `Mode::Key`; ignored in `Mode::ReadLine`.
+    /// @return The parsed key event, or an invalid key if no supported input was read.
+    [[nodiscard]] virtual auto readImpl(std::chrono::milliseconds timeout) const -> Key = 0;
 };
 
 

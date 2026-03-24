@@ -8,12 +8,12 @@
 
 namespace erbsland::cterm::impl {
 
-
-class FramePainter {
+class FramePainter final {
 public:
     explicit FramePainter(WritableBuffer &buffer) : _buffer(buffer) {}
 
     // delete move/copy
+    ~FramePainter() = default;
     FramePainter(const FramePainter &) = delete;
     FramePainter(FramePainter &&) = delete;
     auto operator=(const FramePainter &) -> FramePainter & = delete;

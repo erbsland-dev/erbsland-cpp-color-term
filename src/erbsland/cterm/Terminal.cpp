@@ -2,8 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Terminal.hpp"
 
+
 #include "Buffer.hpp"
 #include "BufferView.hpp"
+
+#include "impl/ParagraphLayout.hpp"
+#include "impl/ParagraphPainter.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -372,11 +376,11 @@ void Terminal::updateSizeTooSmallBuffer(const UpdateSettings &settings) noexcept
 }
 
 void Terminal::writeImpl(const ReadableBuffer &buffer, bool withRowMove) noexcept {
-    for (int y = 0; y < buffer.size().height(); ++y) {
+    for (Coordinate y = 0; y < buffer.size().height(); ++y) {
         if (withRowMove && y != 0) {
             moveTo(Position{0, y});
         }
-        for (int x = 0; x < buffer.size().width(); ++x) {
+        for (Coordinate x = 0; x < buffer.size().width(); ++x) {
             auto &character = buffer.get(Position{x, y});
             setColor(character.color().fg(), character.color().bg());
             _lineBuffer.write(character);
@@ -401,6 +405,10 @@ void Terminal::initializeScreen() noexcept {
     testScreenSize();
     setCursorVisible(false);
     flush();
+}
+
+auto Terminal::isInteractive() const noexcept -> bool {
+    return _backend->isInteractive();
 }
 
 void Terminal::testScreenSize() noexcept {
@@ -454,6 +462,49 @@ void Terminal::write(const ReadableBuffer &buffer) noexcept {
 void Terminal::writeLineBreak() noexcept {
     _lineBuffer.write("\n");
     _lineBuffer.handleEmit();
+}
+
+auto Terminal::printParagraph(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
+    const auto width = size().width();
+    const auto layout =
+        impl::ParagraphLayout{paragraph, width, options, impl::ParagraphLayout::NewlineMode::HardLineBreak}.build();
+    if (!layout.valid) {
+        return printParagraphPlainOutput(paragraph, options);
+    }
+    if (layout.lines.empty()) {
+        return finishParagraphWithExplicitLineBreaks(0, options.paragraphSpacing());
+    }
+    auto buffer = Buffer{Size{width, static_cast<Coordinate>(layout.lines.size())}, Char{U' ', _color}};
+    impl::ParagraphPainter{buffer, buffer.rect(), options.alignment(), layout, options.backgroundMode()}.paint();
+    write(buffer);
+    if (options.paragraphSpacing() == ParagraphSpacing::DoubleLine) {
+        writeLineBreak();
+        return static_cast<int>(layout.lines.size()) + 1;
+    }
+    return static_cast<int>(layout.lines.size());
+}
+
+auto Terminal::printParagraph(const std::string &paragraph, const ParagraphOptions &options) noexcept -> int {
+    return printParagraph(String{paragraph}, options);
+}
+
+auto Terminal::printParagraphPlainOutput(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
+    if (options.onError() == ParagraphOnError::Empty) {
+        return 0;
+    }
+    write(paragraph);
+    return finishParagraphWithExplicitLineBreaks(paragraph.terminalLines(size().width()), options.paragraphSpacing());
+}
+
+auto Terminal::finishParagraphWithExplicitLineBreaks(
+    const int renderedLines, const ParagraphSpacing paragraphSpacing) noexcept -> int {
+    writeLineBreak();
+    auto totalLines = std::max(renderedLines, 1);
+    if (paragraphSpacing == ParagraphSpacing::DoubleLine) {
+        writeLineBreak();
+        totalLines += 1;
+    }
+    return totalLines;
 }
 
 auto Terminal::color() const noexcept -> Color {
@@ -532,7 +583,7 @@ void Terminal::setDefaultColor() noexcept {
     setColor(Color::reset());
 }
 
-void Terminal::moveLeft(int count) {
+void Terminal::moveLeft(const Coordinate count) {
     if (_outputMode == OutputMode::Text) {
         return;
     }
@@ -544,7 +595,7 @@ void Terminal::moveLeft(int count) {
     _lineBuffer.handleEmit();
 }
 
-void Terminal::moveRight(int count) {
+void Terminal::moveRight(const Coordinate count) {
     if (_outputMode == OutputMode::Text) {
         return;
     }
@@ -556,7 +607,7 @@ void Terminal::moveRight(int count) {
     _lineBuffer.handleEmit();
 }
 
-void Terminal::moveUp(int count) {
+void Terminal::moveUp(const Coordinate count) {
     if (_outputMode == OutputMode::Text) {
         return;
     }
@@ -568,7 +619,7 @@ void Terminal::moveUp(int count) {
     _lineBuffer.handleEmit();
 }
 
-void Terminal::moveDown(int count) {
+void Terminal::moveDown(const Coordinate count) {
     if (_outputMode == OutputMode::Text) {
         return;
     }

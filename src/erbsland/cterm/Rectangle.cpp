@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Rectangle.hpp"
 
+
 #include <stdexcept>
 
 
@@ -145,8 +146,9 @@ auto Rectangle::frameIndex(const Position testedPosition) const noexcept -> int6
     return static_cast<int64_t>(2 * (width() - 1) + (height() - 1) + (y2() - 1 - testedPosition.y()));
 }
 
-auto Rectangle::gridCells(const int rows, const int columns, const int horizontalSpacing, const int verticalSpacing)
-    const -> std::vector<Rectangle> {
+auto Rectangle::gridCells(
+    const int rows, const int columns, const Coordinate horizontalSpacing, const Coordinate verticalSpacing) const
+    -> std::vector<Rectangle> {
     if (rows < 1) {
         throw std::invalid_argument{"Rectangle::gridCells() requires at least one row."};
     }

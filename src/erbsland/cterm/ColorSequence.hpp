@@ -21,7 +21,7 @@ namespace erbsland::cterm {
 /// a neighboring entry.
 /// @tested `ColorSequenceTest`
 class ColorSequence final {
-public: // public types
+public:
     /// One run-length encoded `Color` entry in the sequence.
     struct Entry final {
         /// The color value for this entry.
@@ -30,7 +30,7 @@ public: // public types
         std::size_t count{1};
     };
 
-public: // ctors/dtor/assign/move
+public:
     /// Create an empty color sequence.
     ColorSequence() = default;
     /// Create a sequence with one repeated full-color entry.
@@ -43,9 +43,13 @@ public: // ctors/dtor/assign/move
     /// Create a sequence from explicit run-length encoded entries.
     /// @param entries The entries to add in order.
     ColorSequence(std::initializer_list<Entry> entries) noexcept;
+
+    // defaults
     ~ColorSequence() = default;
     ColorSequence(const ColorSequence &) noexcept = default;
+    ColorSequence(ColorSequence &&) noexcept = default;
     auto operator=(const ColorSequence &) noexcept -> ColorSequence & = default;
+    auto operator=(ColorSequence &&) noexcept -> ColorSequence & = default;
 
 public: // modifiers
     /// Add one full-color entry to this sequence.

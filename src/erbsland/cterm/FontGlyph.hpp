@@ -31,7 +31,7 @@ public:
     template <typename T>
         requires std::is_integral_v<T> && std::is_unsigned_v<T>
     explicit FontGlyph(const std::vector<T> &data) :
-        Bitmap{Size{calculateGlyphWidth(data), static_cast<int>(data.size())}} {
+        Bitmap{Size{calculateGlyphWidth(data), static_cast<Coordinate>(data.size())}} {
         draw(Position{0, 0}, data);
         flipHorizontal();
     }
@@ -39,10 +39,10 @@ public:
 private:
     template <typename T>
         requires std::is_integral_v<T> && std::is_unsigned_v<T>
-    [[nodiscard]] constexpr static auto calculateGlyphWidth(const std::vector<T> &data) noexcept -> int {
-        int width = 0;
+    [[nodiscard]] constexpr static auto calculateGlyphWidth(const std::vector<T> &data) noexcept -> Coordinate {
+        auto width = Coordinate{0};
         for (const auto &mask : data) {
-            width = std::max(width, std::bit_width(mask));
+            width = std::max(width, static_cast<Coordinate>(std::bit_width(mask)));
         }
         return width;
     }

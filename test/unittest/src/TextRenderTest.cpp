@@ -117,4 +117,152 @@ public:
         REQUIRE_EQUAL(text.color(), Color(fg::Cyan, bg::Black));
         REQUIRE_EQUAL(text.colorSequence().sequenceLength(), std::size_t{1});
     }
+
+    void testBufferRendersParagraphIndentAndWrapMarks() {
+        auto text = Text{String{"AA BB CC"}, Rectangle{0, 0, 6, 2}, Alignment::TopLeft};
+        text.setWrappedLineIndent(3);
+        text.setLineBreakStartMark(String{">"});
+        text.setLineBreakEndMark(String{"<"});
+        auto buffer = Buffer{Size{6, 2}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AA BB<", "   >CC"}));
+    }
+
+    void testBufferUsesTabStopsForParagraphRendering() {
+        auto text = Text{String{"A\tB"}, Rectangle{0, 0, 5, 1}, Alignment::TopLeft};
+        text.setTabStops({4});
+        auto buffer = Buffer{Size{5, 1}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"A   B"}));
+    }
+
+    void testBufferBreaksAtNonAdvancingTabStopsWhenRequested() {
+        auto text = Text{String{"Heading\ttext"}, Rectangle{0, 0, 12, 2}, Alignment::TopLeft};
+        text.setWrappedLineIndent(6);
+        text.setLineBreakEndMark(String{"<"});
+        text.setTabStops({6});
+        text.setTabOverflowBehavior(TabOverflowBehavior::LineBreak);
+        auto buffer = Buffer{Size{12, 2}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"Heading    <", "      text  "}));
+    }
+
+    void testBufferReplacesNonAdvancingTabsWithSpacesByDefault() {
+        auto text = Text{String{"Heading\ttext"}, Rectangle{0, 0, 12, 1}, Alignment::TopLeft};
+        text.setTabStops({6});
+        auto buffer = Buffer{Size{12, 1}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"Heading text"}));
+    }
+
+    void testBufferBreaksWhenTabStopsAreExhaustedAndLineBreakIsRequested() {
+        auto text = Text{String{"A\tB\tC"}, Rectangle{0, 0, 5, 2}, Alignment::TopLeft};
+        text.setWrappedLineIndent(2);
+        text.setLineBreakEndMark(String{"<"});
+        text.setTabStops({2});
+        text.setTabOverflowBehavior(TabOverflowBehavior::LineBreak);
+        auto buffer = Buffer{Size{5, 2}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"A B <", "  C  "}));
+    }
+
+    void testBufferUsesWordSeparatorsAsCollapsedSpacing() {
+        auto text = Text{String{"A..B"}, Rectangle{0, 0, 3, 1}, Alignment::TopLeft};
+        text.setWordSeparators(U".");
+        auto buffer = Buffer{Size{3, 1}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"A B"}));
+    }
+
+    void testBufferTreatsTabsAsCollapsedWordSeparatorsForCenteredParagraphs() {
+        auto text = Text{String{"A\tB"}, Rectangle{0, 0, 5, 1}, Alignment::Center};
+        auto buffer = Buffer{Size{5, 1}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({" A B "}));
+    }
+
+    void testBufferSplitsLongWordsUsingTheConfiguredWordBreakMark() {
+        auto text = Text{String{"ABCDEFG"}, Rectangle{0, 0, 5, 2}, Alignment::TopLeft};
+        auto buffer = Buffer{Size{5, 2}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"ABCD-", "EFG  "}));
+    }
+
+    void testBufferUsesParagraphEllipsisAfterMaximumWraps() {
+        auto text = Text{String{"AA BB CC DD EE"}, Rectangle{0, 0, 5, 2}, Alignment::TopLeft};
+        text.setMaximumLineWraps(1);
+        auto buffer = Buffer{Size{5, 2}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AA BB", "CC…  "}));
+    }
+
+    void testBufferUsesParagraphBackgroundModesForWrappedParagraphs() {
+        auto text = Text{String{"AAAA BBBB"}, Rectangle{0, 0, 6, 2}, Alignment::TopLeft};
+        text.setColor(Color{fg::White, bg::Red});
+        text.setWrappedLineIndent(2);
+        text.setBackgroundMode(ParagraphBackgroundMode::WrappedBoth);
+        auto buffer = Buffer{Size{6, 2}, Char{U' ', fg::White, bg::Blue}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(buffer.get(Position{4, 0}).color(), Color(fg::White, bg::Red));
+        REQUIRE_EQUAL(buffer.get(Position{5, 0}).color(), Color(fg::White, bg::Red));
+        REQUIRE_EQUAL(buffer.get(Position{0, 1}).color(), Color(fg::White, bg::Red));
+        REQUIRE_EQUAL(buffer.get(Position{1, 1}).color(), Color(fg::White, bg::Red));
+    }
+
+    void testBufferFallsBackToTheLegacySimpleDrawForInvalidParagraphSettings() {
+        auto text = Text{String{"AA BB"}, Rectangle{0, 0, 2, 2}, Alignment::TopLeft};
+        text.setLineBreakEndMark(String{">>"});
+        text.setOnError(ParagraphOnError::PlainOutput);
+        auto buffer = Buffer{Size{2, 2}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AA", "BB"}));
+    }
+
+    void testBufferSkipsInvalidParagraphsWhenOnErrorIsEmpty() {
+        auto text = Text{String{"AA BB"}, Rectangle{0, 0, 2, 2}, Alignment::TopLeft};
+        text.setLineBreakEndMark(String{">>"});
+        text.setOnError(ParagraphOnError::Empty);
+        auto buffer = Buffer{Size{2, 2}, Char{U'X', fg::White, bg::Blue}};
+
+        buffer.drawText(text);
+
+        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"XX", "XX"}));
+    }
+
+private:
+    [[nodiscard]] static auto renderRows(const Buffer &buffer) -> std::vector<std::string> {
+        auto rows = std::vector<std::string>{};
+        rows.reserve(static_cast<std::size_t>(buffer.size().height()));
+        for (int y = 0; y < buffer.size().height(); ++y) {
+            auto row = std::string{};
+            row.reserve(static_cast<std::size_t>(buffer.size().width()));
+            for (int x = 0; x < buffer.size().width(); ++x) {
+                buffer.get(Position{x, y}).appendTo(row);
+            }
+            rows.push_back(row);
+        }
+        return rows;
+    }
 };

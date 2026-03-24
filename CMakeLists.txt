@@ -10,6 +10,7 @@ project(erbsland-color-term LANGUAGES CXX)
 # - Set of 'ON' if you are working on this library.
 option(ERBSLAND_COLOR_TERM_ENABLE_TESTS "Enable unit tests" OFF)
 option(ERBSLAND_COLOR_TERM_ENABLE_DEMOS "Build the demo applications" ${PROJECT_IS_TOP_LEVEL})
+option(ERBSLAND_COLOR_TERM_ENABLE_DOC_TOOLS "Build documentation helper tools" ${PROJECT_IS_TOP_LEVEL})
 
 include(cmake/debug-warnings.cmake)
 include(cmake/compiler-options.cmake)
@@ -23,6 +24,10 @@ add_subdirectory(src/erbsland/cterm)
 
 if (ERBSLAND_COLOR_TERM_ENABLE_DEMOS)
     add_subdirectory(demo)
+endif ()
+
+if (ERBSLAND_COLOR_TERM_ENABLE_DOC_TOOLS)
+    add_subdirectory(doc/tools)
 endif ()
 
 # Add the include path for integrations and installations

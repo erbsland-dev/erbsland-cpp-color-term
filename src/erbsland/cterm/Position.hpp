@@ -3,6 +3,8 @@
 #pragma once
 
 
+#include "Coordinate.hpp"
+
 #include "impl/HashHelper.hpp"
 
 #include <algorithm>
@@ -36,7 +38,7 @@ public:
     /// Construct from explicit coordinates.
     /// @param x The x-coordinate.
     /// @param y The y-coordinate.
-    constexpr Position(int x, int y) noexcept : _x{x}, _y{y} {}
+    constexpr Position(Coordinate x, Coordinate y) noexcept : _x{x}, _y{y} {}
 
 public: // operators
     /// Equality comparison (component-wise).
@@ -62,15 +64,15 @@ public: // operators
 
 public: // attributes
     /// Get the x coordinate.
-    [[nodiscard]] constexpr auto x() const noexcept -> int { return _x; }
+    [[nodiscard]] constexpr auto x() const noexcept -> Coordinate { return _x; }
     /// Set the x coordinate.
     /// @param x New x value.
-    void setX(int x) noexcept;
+    void setX(Coordinate x) noexcept;
     /// Get the y coordinate.
-    [[nodiscard]] constexpr auto y() const noexcept -> int { return _y; }
+    [[nodiscard]] constexpr auto y() const noexcept -> Coordinate { return _y; }
     /// Set the y coordinate.
     /// @param y New y value.
-    void setY(int y) noexcept;
+    void setY(Coordinate y) noexcept;
 
 public: // tools
     /// Get a hash for this position.
@@ -80,7 +82,7 @@ public: // tools
     /// Manhattan (L1) distance to another position.
     /// @param other The other position.
     /// @return |x - other.x| + |y - other.y|.
-    [[nodiscard]] auto distanceTo(Position other) const noexcept -> int;
+    [[nodiscard]] auto distanceTo(Position other) const noexcept -> Coordinate;
     /// Component-wise maximum with another position.
     /// @param other The other position.
     /// @return A Position containing the max of each component.
@@ -123,16 +125,16 @@ public: // tools
 public: // useful constants
     /// Get the point with the minimum coordinates.
     static auto minimum() noexcept -> Position {
-        return Position{std::numeric_limits<int>::min(), std::numeric_limits<int>::min()};
+        return Position{std::numeric_limits<Coordinate>::min(), std::numeric_limits<Coordinate>::min()};
     }
     /// Get the point with the maximum coordinates.
     static auto maximum() noexcept -> Position {
-        return Position{std::numeric_limits<int>::max(), std::numeric_limits<int>::max()};
+        return Position{std::numeric_limits<Coordinate>::max(), std::numeric_limits<Coordinate>::max()};
     }
 
 private:
-    int _x{};
-    int _y{};
+    Coordinate _x{};
+    Coordinate _y{};
 };
 
 

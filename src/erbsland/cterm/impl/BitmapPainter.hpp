@@ -9,23 +9,24 @@
 namespace erbsland::cterm::impl {
 
 
-class BitmapPainter {
+class BitmapPainter final {
 public:
     explicit BitmapPainter(WritableBuffer &buffer) : _buffer{buffer} {}
 
     // delete copy/move
+    ~BitmapPainter() = default;
     BitmapPainter(const BitmapPainter &) = delete;
     BitmapPainter(BitmapPainter &&) = delete;
-    BitmapPainter &operator=(const BitmapPainter &) = delete;
-    BitmapPainter &operator=(BitmapPainter &&) = delete;
+    auto operator=(const BitmapPainter &) -> BitmapPainter & = delete;
+    auto operator=(BitmapPainter &&) -> BitmapPainter & = delete;
 
 public:
-    virtual void drawBitmap(
+    void drawBitmap(
         const Bitmap &bitmap,
         Position pos,
         const BitmapDrawOptions &options = BitmapDrawOptions::defaultOptions(),
         std::size_t animationCycle = 0) noexcept;
-    virtual void drawBitmap(
+    void drawBitmap(
         const Bitmap &bitmap,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,

@@ -6,7 +6,12 @@
 #include <erbsland/unittest/UnitTest.hpp>
 
 #include <format>
+#include <type_traits>
 #include <vector>
+
+
+static_assert(std::is_same_v<decltype(Size{}.width()), Coordinate>);
+static_assert(std::is_same_v<decltype(Size{}.height()), Coordinate>);
 
 
 TESTED_TARGETS(Size)

@@ -27,11 +27,11 @@ TESTED_TARGETS(Bitmap)
 class BitmapTest final : public el::UnitTest {
 public:
     void requireRowsEqual(const Bitmap &bitmap, const std::vector<std::string> &expectedRows) {
-        REQUIRE_EQUAL(bitmap.size().height(), static_cast<int>(expectedRows.size()));
+        REQUIRE_EQUAL(bitmap.size().height(), static_cast<Coordinate>(expectedRows.size()));
         for (std::size_t y = 0; y < expectedRows.size(); ++y) {
             runWithContext(
                 SOURCE_LOCATION(),
-                [&]() { REQUIRE_EQUAL(bitmap.size().width(), static_cast<int>(expectedRows[y].size())); },
+                [&]() { REQUIRE_EQUAL(bitmap.size().width(), static_cast<Coordinate>(expectedRows[y].size())); },
                 [&]() -> std::string {
                     return std::format(
                         "row = {} / bitmapWidth = {} / expectedWidth = {}",
@@ -44,7 +44,7 @@ public:
                     SOURCE_LOCATION(),
                     [&]() {
                         REQUIRE_EQUAL(
-                            bitmap.pixel(Position{static_cast<int>(x), static_cast<int>(y)}),
+                            bitmap.pixel(Position{static_cast<Coordinate>(x), static_cast<Coordinate>(y)}),
                             expectedRows[y][x] == '#');
                     },
                     [&]() -> std::string {

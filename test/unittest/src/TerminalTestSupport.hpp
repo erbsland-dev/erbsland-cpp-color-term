@@ -42,6 +42,8 @@ public:
         return _supportsAlternateScreenBufferCodes;
     }
 
+    [[nodiscard]] auto isInteractive() const noexcept -> bool override { return _isInteractive; }
+
     [[nodiscard]] auto detectScreenSize() -> std::optional<Size> override {
         _detectScreenSizeCallCount += 1;
         return _detectedScreenSize;
@@ -121,6 +123,7 @@ public:
     bool _supportsCursorCodes = true;
     bool _supportsCursorVisibilityCodes = true;
     bool _supportsAlternateScreenBufferCodes = true;
+    bool _isInteractive = true;
     bool _isAlternateScreenActive = false;
     std::optional<Size> _detectedScreenSize{};
     Input::Mode _inputMode = Input::Mode::ReadLine;
@@ -154,7 +157,7 @@ public:
 
     auto createBuffer(const std::initializer_list<std::string_view> rows) -> Buffer {
         REQUIRE_FALSE(rows.size() == 0);
-        auto width = 0;
+        auto width = Coordinate{0};
         auto rowIndex = 0;
         for (const auto row : rows) {
             runWithContext(
@@ -162,9 +165,9 @@ public:
                 [&]() {
                     REQUIRE_FALSE(row.empty());
                     if (width == 0) {
-                        width = static_cast<int>(row.size());
+                        width = static_cast<Coordinate>(row.size());
                     } else {
-                        REQUIRE_EQUAL(static_cast<int>(row.size()), width);
+                        REQUIRE_EQUAL(static_cast<Coordinate>(row.size()), width);
                     }
                 },
                 [&]() -> std::string {
@@ -177,10 +180,10 @@ public:
                 });
             rowIndex += 1;
         }
-        auto buffer = Buffer{Size{width, static_cast<int>(rows.size())}};
-        auto y = 0;
+        auto buffer = Buffer{Size{width, static_cast<Coordinate>(rows.size())}};
+        auto y = Coordinate{0};
         for (const auto row : rows) {
-            for (auto x = 0; x < width; ++x) {
+            for (auto x = Coordinate{0}; x < width; ++x) {
                 buffer.set(Position{x, y}, Char{static_cast<char32_t>(static_cast<unsigned char>(row[x]))});
             }
             y += 1;

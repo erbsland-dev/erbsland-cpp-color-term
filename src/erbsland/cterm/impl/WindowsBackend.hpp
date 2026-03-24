@@ -30,6 +30,7 @@ public: // implement backend
     [[nodiscard]] auto supportsCursorCodes() const noexcept -> bool override;
     [[nodiscard]] auto supportsCursorVisibilityCodes() const noexcept -> bool override;
     [[nodiscard]] auto supportsAlternateScreenBufferCodes() const noexcept -> bool override;
+    [[nodiscard]] auto isInteractive() const noexcept -> bool override;
     [[nodiscard]] auto detectScreenSize() -> std::optional<Size> override;
     void setCursorVisible(bool visible) override;
     void emitText(std::string_view text) override;
@@ -51,6 +52,8 @@ public:
     static void restoreGlobalPlatform() noexcept;
 
 private:
+    /// Detect the size of the visible interactive console window.
+    [[nodiscard]] static auto detectVisibleConsoleSize() noexcept -> std::optional<Size>;
     /// Enabled UTF-8 in the Windows terminal.
     void enableUtf8Mode();
     /// Enables ANSI mode in the Windows terminal.

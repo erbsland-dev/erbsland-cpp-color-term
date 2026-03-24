@@ -8,6 +8,7 @@
 #include "Size.hpp"
 
 #include <memory>
+#include <string>
 
 
 namespace erbsland::cterm {
@@ -40,7 +41,7 @@ public: // API
     /// This will copy every block from this buffer into a new independent instance.
     [[nodiscard]] virtual auto clone() const -> WritableBufferPtr = 0;
 
-public: // ----- convenience methods -----
+public: // convenience methods
     /// Count the differences from this to another buffer.
     /// If the size of `other` is smaller or larger than this buffer, the size change counts to the difference.
     /// @param other The other buffer to compare with.
@@ -51,9 +52,17 @@ public: // ----- convenience methods -----
     /// @param characters The characters to match. Only one code-point characters are supported.
     /// @param invert If true, *not*-matching characters result in a pixel set in the mask.
     /// @return A bitmap mask with the same size as this buffer.
-    [[nodiscard]] virtual auto toMask(const std::u32string &characters, bool invert = false) -> Bitmap;
+    [[nodiscard]] auto toMask(const std::u32string &characters, bool invert = false) -> Bitmap;
     /// @overload
-    [[nodiscard]] virtual auto toMask(std::initializer_list<char32_t> characters, bool invert = false) -> Bitmap;
+    [[nodiscard]] auto toMask(std::initializer_list<char32_t> characters, bool invert = false) -> Bitmap;
+
+protected: // implementation
+    /// Implement `toMask()`.
+    /// The public `toMask()` overloads forward to this method.
+    /// @param characters The characters to match. Only one code-point characters are supported.
+    /// @param invert If true, *not*-matching characters result in a pixel set in the mask.
+    /// @return A bitmap mask with the same size as this buffer.
+    [[nodiscard]] virtual auto toMaskImpl(const std::u32string &characters, bool invert) -> Bitmap;
 };
 
 

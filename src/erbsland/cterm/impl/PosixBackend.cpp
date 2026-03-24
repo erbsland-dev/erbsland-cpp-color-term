@@ -79,6 +79,10 @@ auto PosixBackend::supportsCursorCodes() const noexcept -> bool {
     return true;
 }
 
+auto PosixBackend::isInteractive() const noexcept -> bool {
+    return _isInitialized && !_hasNoTerminalAttached;
+}
+
 auto PosixBackend::detectScreenSize() -> std::optional<Size> {
     if (!_firstScreenSizeDetection) {
         if (_hasNoTerminalAttached) {

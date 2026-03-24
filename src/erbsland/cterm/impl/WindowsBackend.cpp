@@ -86,7 +86,15 @@ bool WindowsBackend::supportsAlternateScreenBufferCodes() const noexcept {
     return true;
 }
 
+auto WindowsBackend::isInteractive() const noexcept -> bool {
+    return detectVisibleConsoleSize().has_value();
+}
+
 auto WindowsBackend::detectScreenSize() -> std::optional<Size> {
+    return detectVisibleConsoleSize();
+}
+
+auto WindowsBackend::detectVisibleConsoleSize() noexcept -> std::optional<Size> {
     const auto outputHandle = ::GetStdHandle(STD_OUTPUT_HANDLE);
     if (outputHandle == nullptr || outputHandle == INVALID_HANDLE_VALUE) {
         return std::nullopt;

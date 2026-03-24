@@ -34,6 +34,9 @@ auto Buffer::rect() const noexcept -> Rectangle {
 
 auto Buffer::get(const Position pos) const noexcept -> const Char & {
     assert(_size.contains(pos));
+    if (!_size.contains(pos)) {
+        return Char::space();
+    }
     return _data[_size.index(pos)];
 }
 
@@ -139,7 +142,7 @@ auto Buffer::fromLines(const StringLines &lines) -> Buffer {
     if (lines.empty()) {
         throw std::invalid_argument{"lines is empty"};
     }
-    Size size{1, static_cast<int>(lines.size())};
+    Size size{1, static_cast<Coordinate>(lines.size())};
     for (const auto &line : lines) {
         if (size.width() < line.displayWidth()) {
             size.setWidth(line.displayWidth());

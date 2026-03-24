@@ -170,8 +170,8 @@ template <typename T>
 void Bitmap::draw(const Position position, const std::vector<T> &data) noexcept {
     for (std::size_t y = 0; y < data.size(); ++y) {
         std::bitset<sizeof(T) * 8> row(data[y]);
-        for (int x = 0; x < _size.width(); ++x) {
-            setPixel(position + Position{x, static_cast<int>(y)}, row[static_cast<std::size_t>(x)]);
+        for (Coordinate x = 0; x < _size.width(); ++x) {
+            setPixel(position + Position{x, static_cast<Coordinate>(y)}, row[static_cast<std::size_t>(x)]);
         }
     }
 }

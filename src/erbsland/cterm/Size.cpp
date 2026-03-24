@@ -6,8 +6,8 @@
 namespace erbsland::cterm {
 
 auto Size::anchor(const Anchor anchor) const noexcept -> Position {
-    int x = 0;
-    int y = 0;
+    Coordinate x = 0;
+    Coordinate y = 0;
     switch (anchor & Anchor::HMask) {
     case Anchor::Left:
         x = 0;

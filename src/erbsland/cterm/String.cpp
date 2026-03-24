@@ -21,6 +21,10 @@ String::String(const std::string_view str, const Color color) : _chars{splitChar
 String::String(const std::u32string_view str, const Color color) : _chars{splitCharacters(str, color)} {
 }
 
+String::String(const std::size_t count, Char character) noexcept :
+    _chars(std::min(count, static_cast<std::size_t>(10'000'000U)), character) {
+}
+
 
 auto String::displayWidth() const noexcept -> int {
     auto result = 0;
@@ -30,12 +34,12 @@ auto String::displayWidth() const noexcept -> int {
     return result;
 }
 
-auto String::count(Char character) const noexcept -> std::size_t {
+auto String::count(const Char character) const noexcept -> std::size_t {
     return static_cast<std::size_t>(
         std::ranges::count_if(_chars, [&](const Char &c) -> bool { return c == character; }));
 }
 
-auto String::count(char32_t character) const noexcept -> std::size_t {
+auto String::count(const char32_t character) const noexcept -> std::size_t {
     return static_cast<std::size_t>(std::ranges::count_if(
         _chars, [&](const Char &c) -> bool { return c.codePoints() == std::array<char32_t, 3>{character, 0, 0}; }));
 }
@@ -79,6 +83,10 @@ auto String::substr(const std::size_t startIndex, std::size_t length) const noex
         _chars.cbegin() + static_cast<difference_type>(startIndex) + static_cast<difference_type>(length)}};
 }
 
+auto String::containsControlCharacters() const noexcept -> bool {
+    return std::ranges::any_of(_chars, [](const Char &c) -> bool { return c.isControl(); });
+}
+
 auto String::splitWords() const noexcept -> std::vector<String> {
     std::vector<String> words;
     String word;
@@ -102,6 +110,34 @@ auto String::splitWords() const noexcept -> std::vector<String> {
 auto String::wrapIntoLines(const int width, const ParagraphSpacing paragraphSpacing) const noexcept
     -> std::vector<String> {
     return impl::StringWrapper{*this}.wrapIntoLines(width, paragraphSpacing);
+}
+
+auto String::terminalLines(const int width) const noexcept -> int {
+    if (width <= 0) {
+        return 0;
+    }
+    if (width == 1) {
+        return static_cast<int>(size());
+    }
+    auto renderedLines = 0;
+    auto currentWidth = 0;
+    for (const auto &character : *this) {
+        if (character == U'\n') {
+            renderedLines += 1;
+            currentWidth = 0;
+            continue;
+        }
+        const auto characterWidth = character.displayWidth();
+        currentWidth += characterWidth;
+        if (currentWidth >= width) {
+            renderedLines += 1;
+            currentWidth = currentWidth > width ? characterWidth : 0;
+        }
+    }
+    if (currentWidth > 0) {
+        renderedLines += 1;
+    }
+    return renderedLines;
 }
 
 auto String::splitLines() const noexcept -> std::vector<String> {

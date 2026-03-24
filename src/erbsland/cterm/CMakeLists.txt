@@ -26,6 +26,7 @@ target_sources(erbsland-color-term PRIVATE
         ColorRole.hpp
         ColorSequence.cpp
         ColorSequence.hpp
+        Coordinate.hpp
         CropEdges.hpp
         Direction.cpp
         Direction.hpp
@@ -42,12 +43,19 @@ target_sources(erbsland-color-term PRIVATE
         Key.hpp
         Margins.hpp
         MoveMode.hpp
+        ParagraphBackgroundMode.hpp
+        ParagraphOnError.hpp
+        ParagraphOptions.cpp
+        ParagraphOptions.hpp
+        ParagraphSpacing.hpp
         Position.cpp
         Position.hpp
         ReadableBuffer.cpp
         ReadableBuffer.hpp
         Rectangle.cpp
         Rectangle.hpp
+        RemappedBuffer.cpp
+        RemappedBuffer.hpp
         Size.cpp
         Size.hpp
         String.cpp
@@ -55,8 +63,11 @@ target_sources(erbsland-color-term PRIVATE
         Terminal.cpp
         Terminal.hpp
         TerminalFlags.hpp
+        TabOverflowBehavior.hpp
         Text.hpp
         TextAnimation.hpp
+        TextOptions.cpp
+        TextOptions.hpp
         Tile9Style.cpp
         Tile9Style.hpp
         UpdateSettings.cpp

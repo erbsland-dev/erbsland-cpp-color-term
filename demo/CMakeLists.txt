@@ -17,6 +17,7 @@ function(erbsland_color_term_add_demo target_name)
 endfunction()
 
 add_subdirectory(bitmap-showcase)
+add_subdirectory(command-line-help)
 add_subdirectory(display-all-colors)
 add_subdirectory(frame-color-animations)
 add_subdirectory(frame-weaver)

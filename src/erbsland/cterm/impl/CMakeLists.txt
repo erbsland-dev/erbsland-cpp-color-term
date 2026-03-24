@@ -11,6 +11,10 @@ target_sources(erbsland-color-term PRIVATE
         InputBackend.cpp
         InputBackend.hpp
         LineBuffer.hpp
+        ParagraphLayout.cpp
+        ParagraphLayout.hpp
+        ParagraphPainter.cpp
+        ParagraphPainter.hpp
         StringWrapper.cpp
         StringWrapper.hpp
         TextPainter.cpp

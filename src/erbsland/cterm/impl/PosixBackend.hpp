@@ -36,6 +36,7 @@ public:
     void restorePlatform() override;
     [[nodiscard]] auto supportsColorCodes() const noexcept -> bool override;
     [[nodiscard]] auto supportsCursorCodes() const noexcept -> bool override;
+    [[nodiscard]] auto isInteractive() const noexcept -> bool override;
     [[nodiscard]] auto detectScreenSize() -> std::optional<Size> override;
     void emitText(std::string_view text) override;
     void emitFlush() override;

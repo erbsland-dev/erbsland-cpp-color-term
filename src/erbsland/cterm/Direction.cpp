@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Direction.hpp"
 
+
 #include "impl/TextUtil.hpp"
 
 #include <algorithm>

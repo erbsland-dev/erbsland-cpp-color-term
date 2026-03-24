@@ -174,6 +174,13 @@ public:
             std::vector<std::string>({"Text Gallery  |  alignment, wrapping, wide characters, and bitmap fonts"}));
     }
 
+    void testTerminalLinesCountsWrappedAndExplicitLineBreaks() {
+        REQUIRE_EQUAL(String{}.terminalLines(4), 0);
+        REQUIRE_EQUAL(String{"AA BB"}.terminalLines(2), 3);
+        REQUIRE_EQUAL(String{"AA\nBB"}.terminalLines(2), 3);
+        REQUIRE_EQUAL(String{"AA\n"}.terminalLines(2), 2);
+    }
+
     void testCombiningCharactersStayInOneCell() {
         const auto text = String{"e\xCC\x81"};
         REQUIRE_EQUAL(text.size(), std::size_t{1});

@@ -100,16 +100,16 @@ public:
 private:
     [[nodiscard]] static auto createBuffer(const std::initializer_list<std::string_view> rows)
         -> std::shared_ptr<Buffer> {
-        auto width = 0;
+        auto width = Coordinate{0};
         for (const auto row : rows) {
             if (width == 0) {
-                width = static_cast<int>(row.size());
+                width = static_cast<Coordinate>(row.size());
             }
         }
-        auto buffer = std::make_shared<Buffer>(Size{width, static_cast<int>(rows.size())});
-        auto y = 0;
+        auto buffer = std::make_shared<Buffer>(Size{width, static_cast<Coordinate>(rows.size())});
+        auto y = Coordinate{0};
         for (const auto row : rows) {
-            auto x = 0;
+            auto x = Coordinate{0};
             for (const auto value : row) {
                 buffer->set(Position{x, y}, Char{static_cast<char32_t>(static_cast<unsigned char>(value))});
                 x += 1;
