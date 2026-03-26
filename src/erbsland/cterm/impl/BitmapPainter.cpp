@@ -31,20 +31,17 @@ void BitmapPainter::drawBitmap(
     }
     auto visibleSize = renderedSize.componentMin(rect.size());
     auto sourceOffset = Position{};
-    auto targetPos = rect.topLeft();
+    auto targetPos = rect.alignmentOffset(renderedSize, alignment);
+    const auto alignmentOffset = rect.size().alignmentOffset(renderedSize, alignment);
     if (renderedSize.width() <= rect.width()) {
-        targetPos +=
-            Position{alignedBitmapOffset(renderedSize.width(), rect.width(), alignment, Alignment::HorizontalMask), 0};
     } else {
-        sourceOffset +=
-            Position{alignedBitmapOffset(renderedSize.width(), rect.width(), alignment, Alignment::HorizontalMask), 0};
+        sourceOffset += Position{-alignmentOffset.x(), 0};
+        targetPos.setX(rect.x1());
     }
     if (renderedSize.height() <= rect.height()) {
-        targetPos +=
-            Position{0, alignedBitmapOffset(renderedSize.height(), rect.height(), alignment, Alignment::VerticalMask)};
     } else {
-        sourceOffset +=
-            Position{0, alignedBitmapOffset(renderedSize.height(), rect.height(), alignment, Alignment::VerticalMask)};
+        sourceOffset += Position{0, -alignmentOffset.y()};
+        targetPos.setY(rect.y1());
     }
     if (options.char16Style() != nullptr) {
         for (auto y = 0; y < visibleSize.height(); ++y) {
@@ -125,34 +122,6 @@ auto BitmapPainter::bitmapRenderSize(const Bitmap &bitmap, const BitmapDrawOptio
     case BitmapScaleMode::FullBlock:
     default:
         return bitmap.size();
-    }
-}
-
-auto BitmapPainter::alignedBitmapOffset(
-    const int renderedSize, const int availableSize, const Alignment alignment, const Alignment alignmentMask) noexcept
-    -> int {
-
-    const auto freeSpace =
-        renderedSize <= availableSize ? (availableSize - renderedSize) : (renderedSize - availableSize);
-    if (alignmentMask == Alignment::HorizontalMask) {
-        switch (alignment & alignmentMask) {
-        case Alignment::HCenter:
-            return freeSpace / 2;
-        case Alignment::Right:
-            return freeSpace;
-        case Alignment::Left:
-        default:
-            return 0;
-        }
-    }
-    switch (alignment & alignmentMask) {
-    case Alignment::VCenter:
-        return freeSpace / 2;
-    case Alignment::Bottom:
-        return freeSpace;
-    case Alignment::Top:
-    default:
-        return 0;
     }
 }
 

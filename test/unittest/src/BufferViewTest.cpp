@@ -7,10 +7,10 @@
 
 
 TESTED_TARGETS(BufferView)
-class BufferViewTest final : public el::UnitTest {
+class BufferViewTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
 public:
     void testCloneCopiesTheVisibleAreaAndTracksTheAssignedContent() {
-        auto content = createBuffer({
+        auto content = createSharedBuffer({
             "ABC",
             "DEF",
             "GHI",
@@ -36,7 +36,7 @@ public:
         REQUIRE_EQUAL(clone->get(Position{0, 1}), U'H');
         REQUIRE_EQUAL(clone->get(Position{1, 1}), U'I');
 
-        auto replacement = createBuffer({"Z"});
+        auto replacement = createSharedBuffer({"Z"});
         view.setContent(replacement);
         view.setViewRect(Rectangle{Position{0, 0}, Size{1, 1}});
         const auto expectedReplacementRect = Rectangle{Position{0, 0}, Size{1, 1}};
@@ -47,7 +47,7 @@ public:
     }
 
     void testCropCharactersCanBeConfiguredAndAreIgnoredForInvalidDirections() {
-        auto content = createBuffer({"A"});
+        auto content = createSharedBuffer({"A"});
         auto view = BufferView{content, Size{0, 0}};
 
         REQUIRE_FALSE(view.showCropCharacters());
@@ -69,7 +69,7 @@ public:
     }
 
     void testViewsRenderConfiguredCropMarksForSharedAndReferencedContent() {
-        auto content = createBuffer({
+        auto content = createSharedBuffer({
             "ABC",
             "DEF",
             "GHI",
@@ -95,27 +95,5 @@ public:
         REQUIRE_EQUAL(refView.get(Position{1, 0}), U']');
         REQUIRE_EQUAL(refView.get(Position{0, 1}), U'_');
         REQUIRE_EQUAL(refView.get(Position{1, 1}), U'+');
-    }
-
-private:
-    [[nodiscard]] static auto createBuffer(const std::initializer_list<std::string_view> rows)
-        -> std::shared_ptr<Buffer> {
-        auto width = Coordinate{0};
-        for (const auto row : rows) {
-            if (width == 0) {
-                width = static_cast<Coordinate>(row.size());
-            }
-        }
-        auto buffer = std::make_shared<Buffer>(Size{width, static_cast<Coordinate>(rows.size())});
-        auto y = Coordinate{0};
-        for (const auto row : rows) {
-            auto x = Coordinate{0};
-            for (const auto value : row) {
-                buffer->set(Position{x, y}, Char{static_cast<char32_t>(static_cast<unsigned char>(value))});
-                x += 1;
-            }
-            y += 1;
-        }
-        return buffer;
     }
 };

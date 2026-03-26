@@ -6,6 +6,7 @@
 #include "Backend.hpp"
 #include "Char.hpp"
 #include "Color.hpp"
+#include "CursorWriter.hpp"
 #include "MoveMode.hpp"
 #include "ParagraphOptions.hpp"
 #include "Size.hpp"
@@ -18,14 +19,8 @@
 #include "impl/LineBuffer.hpp"
 #include "impl/TypeTraits.hpp"
 
-#include <cstdint>
 #include <functional>
 #include <memory>
-#include <optional>
-#include <string>
-#include <string_view>
-#include <type_traits>
-#include <utility>
 
 
 namespace erbsland::cterm {
@@ -37,7 +32,7 @@ using TerminalPtr = std::shared_ptr<Terminal>;
 
 
 /// High-level terminal interface for screen control, color output, and key input.
-class Terminal {
+class Terminal final : public CursorWriter {
     /// The minimum supported size of a terminal.
     constexpr static auto cMinimumSize = Size{1, 1};
     /// The maximum supported size of a terminal.
@@ -82,9 +77,33 @@ public:
     /// @param size The fallback terminal size used when automatic detection is unavailable.
     explicit Terminal(BackendPtr backend, Size size = {80, 25});
 
+public: // implement CursorWriter
+    using CursorWriter::setColor;
+    using CursorWriter::write;
+    using CursorWriter::writeLineBreak;
+    [[nodiscard]] auto size() const noexcept -> Size override { return _size; }
+    [[nodiscard]] auto color() const noexcept -> Color override;
+    [[nodiscard]] auto charAttributes() const noexcept -> CharAttributes override;
+    void setColor(Color color) noexcept override;
+    void setCharAttributes(CharAttributes attributes) noexcept override;
+    void setForeground(Foreground color) noexcept override;
+    void setBackground(Background color) noexcept override;
+    [[nodiscard]] auto supportedCharAttributes() const noexcept -> CharAttributes override;
+    void moveLeft(Coordinate count) noexcept override;
+    void moveRight(Coordinate count) noexcept override;
+    void moveUp(Coordinate count) noexcept override;
+    void moveDown(Coordinate count) noexcept override;
+    void moveTo(Position pos) noexcept override;
+    void moveHome() noexcept override;
+    void moveCursor(Position posOrDelta, MoveMode mode) noexcept override;
+    void setAutoWrap(bool enabled) noexcept override;
+    void setCursorVisible(bool visible) noexcept override;
+    void write(const Char &character) noexcept override;
+    void write(const String &str) noexcept override;
+    void write(const ReadableBuffer &buffer) noexcept override;
+    void writeLineBreak() noexcept override;
+
 public: // settings
-    /// Get the currently configured or detected drawable terminal size.
-    [[nodiscard]] auto size() const noexcept -> Size { return _size; }
     /// Modify the size of the terminal.
     /// The size is automatically bounded to the minimum and maximum supported sizes.
     /// If size detection is enabled, the terminal size will be automatically detected and updated.
@@ -159,64 +178,11 @@ public: // initialization
     /// settings that were modified during initialization.
     void restoreScreen() noexcept;
 
-public: // cursor state
-    /// Get the current color.
-    /// @return The currently tracked terminal color state.
-    [[nodiscard]] auto color() const noexcept -> Color;
-    /// Set foreground and background color.
-    /// @note `Inherited` colors are converted to `Default` colors.
-    /// @param color The new combined terminal color.
-    void setColor(Color color) noexcept;
-    /// Set foreground and background color.
-    /// @note `Inherited` colors are converted to `Default` colors.
-    /// @param foregroundColor The new foreground color.
-    /// @param backgroundColor The new background color.
-    void setColor(Foreground foregroundColor, Background backgroundColor) noexcept;
-    /// Set the foreground color.
-    /// @note `Inherited` colors are converted to `Default` colors.
-    /// @param color The new foreground color.
-    void setForeground(Foreground color) noexcept;
-    /// Set the background color.
-    /// @note `Inherited` colors are converted to `Default` colors.
-    /// @param color The new background color.
-    void setBackground(Background color) noexcept;
-    /// Set the terminal default foreground and background colors.
-    void setDefaultColor() noexcept;
-    /// Move the cursor to the left.
-    /// @param count The number of terminal cells to move.
-    void moveLeft(Coordinate count);
-    /// Move the cursor to the right.
-    /// @param count The number of terminal cells to move.
-    void moveRight(Coordinate count);
-    /// Move the cursor up.
-    /// @param count The number of terminal cells to move.
-    void moveUp(Coordinate count);
-    /// Move the cursor down.
-    /// @param count The number of terminal cells to move.
-    void moveDown(Coordinate count);
-    /// Move the cursor to the given position.
-    /// If you need the cursor moved immediately, call `flush()` after this method.
-    void moveTo(Position pos) noexcept;
-    /// Moves the cursor to the home position.
-    /// If you need the cursor moved immediately, call `flush()` after this method.
-    void moveHome() noexcept;
-    /// Move the cursor absolute or relative.
-    /// @param posOrDelta The absolute position or delta for the move.
-    /// @param mode The move mode, either absolute or relative.
-    void moveCursor(Position posOrDelta, MoveMode mode) noexcept;
-    /// Enabled/disable auto-wrap.
-    /// Auto wrap controls if the cursor automatically wraps to the next line when reaching the right margin.
-    /// This is a feature of the terminal that can be enabled or disabled.
-    /// Do not confuse this with line wrapping, which is a different feature.
-    void setAutoWrap(bool enabled) noexcept;
-    /// Make the cursor visible/invisible.
-    void setCursorVisible(bool visible) noexcept;
-
 public: // screen handling
     /// Clears the screen.
     /// In `OutputMode::Text`, this method has no effect.
     /// If you need the screen cleared immediately, call `flush()` after this method.
-    void clearScreen() noexcept;
+    void clearScreen() noexcept override;
     /// Test if the alternate screen is active.
     /// This is no terminal detection, it just returns the internal state.
     [[nodiscard]] auto isAlternateScreenActive() const noexcept -> bool;
@@ -233,52 +199,6 @@ public: // screen handling
     void updateScreen(const ReadableBuffer &buffer, const UpdateSettings &settings = {}) noexcept;
     /// Flush the all buffer immediately to the terminal.
     void flush() noexcept;
-
-public: // writing tools
-    /// Write a character to the console.
-    /// Inherited color components resolve against the currently active terminal color.
-    /// @param character The character to write.
-    void write(const Char &character) noexcept;
-    /// Write a string to the console.
-    /// Inherited color components in each character resolve against the currently active terminal color.
-    /// @param str The string to write.
-    void write(const String &str) noexcept;
-    /// Write text to the console.
-    /// Please use `print` and `printLine` for the high-level API.
-    /// @param text The text to display.
-    void write(std::string_view text) noexcept;
-    /// Write a buffer to the console.
-    /// This will not perform any additional formatting, clipping, or processing.
-    /// Each line of the buffer will be written to the console.
-    /// @note For interactive apps, use `updateScreen`.
-    /// @param buffer The buffer to write.
-    void write(const ReadableBuffer &buffer) noexcept;
-    /// Add a line-break.
-    void writeLineBreak() noexcept;
-    /// Print elements on the screen.
-    /// @param args The arguments to display.
-    template <PrintableArg... Args>
-    void print(Args... args) noexcept {
-        (printLinePart(args), ...);
-    }
-    /// Print elements on the screen adding a line break.
-    /// @param args The arguments to display.
-    template <PrintableArg... Args>
-    void printLine(Args... args) noexcept {
-        (printLinePart(args), ...);
-        writeLineBreak();
-    }
-    /// Print a word-wrapped paragraph on the screen.
-    /// @param paragraph The paragraph text to write. Can use line breaks and tabs, see documentation.
-    /// @param options The paragraph options to use.
-    /// @return The number of terminal lines written (including empty lines).
-    auto printParagraph(
-        const String &paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept -> int;
-    /// @overload
-    auto printParagraph(
-        const std::string &paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept
-        -> int;
-
 
 public: // backward compatibility.
     /// Write a terminal line break.
@@ -299,7 +219,18 @@ public: // backward compatibility.
     [[deprecated("use setOutputMode()")]]
     void setColorEnabled(bool enabled) noexcept;
 
+protected: // implement CursorWriter
+    auto printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int override;
+
 private:
+    /// Test whether the current backend combination supports full ANSI buffering.
+    [[nodiscard]] auto canUseLineBuffer() const noexcept -> bool;
+    /// Normalize requested attributes to the supported fully specified state.
+    [[nodiscard]] auto normalizedSupportedAttributes(CharAttributes attributes) const noexcept -> CharAttributes;
+    /// Emit ANSI SGR codes for character attribute changes.
+    /// @param previousAttributes The previous supported ANSI attribute state.
+    /// @param newAttributes The new supported ANSI attribute state.
+    void emitCharAttributeCodes(CharAttributes previousAttributes, CharAttributes newAttributes) noexcept;
     /// Either clears the screen or moves the cursor to the home position.
     /// Depends on the refresh mode set.
     void refreshScreen() noexcept;
@@ -335,17 +266,6 @@ private:
     /// Get the safety margins applied to the terminal size.
     [[nodiscard]] auto applySafeMargin(Size terminalSize) const noexcept -> Size;
 
-    void printLinePart(const Color color) noexcept { setColor(color); }
-    void printLinePart(const Foreground color) noexcept { setForeground(color); }
-    void printLinePart(const Foreground::Hue color) noexcept { setForeground(color); }
-    void printLinePart(const Background color) noexcept { setBackground(color); }
-    void printLinePart(const Background::Hue color) noexcept { setBackground(color); }
-    void printLinePart(const Char &charStr) noexcept { write(charStr); }
-    void printLinePart(const String &str) noexcept { write(str); }
-    void printLinePart(const std::string &text) noexcept { write(text); }
-    void printLinePart(const std::string_view text) noexcept { write(text); }
-    void printLinePart(const char text[]) noexcept { write(text); }
-
 private:
     TerminalFlags _flags;                             ///< Flags for the terminal behaviour.
     BackendPtr _backend;                              ///< The backend that is used by the terminal.
@@ -357,6 +277,7 @@ private:
     Size _size;                                       ///< The configured size of the terminal that is safe to use.
     Size _terminalSize; ///< The actual, reported size of the terminal. Zero if we have no detected size.
     Color _color{Foreground::Default, Background::Default}; ///< The current terminal colors.
+    CharAttributes _charAttributes{CharAttributes::reset()}; ///< The current terminal character attributes.
     bool _backBufferEnabled{false};                         ///< If the back buffer feature is enabled.
     bool _isAlternateScreenActive{false};                   ///< If the alternate screen is active or not.
     WritableBufferPtr _sizeTooSmallBuffer;                  ///< Buffer for size too small message.

@@ -63,9 +63,9 @@ Replace the source file with the following final tutorial version:
         while (!quitRequested) {
             terminal.testScreenSize();
             if (const auto key = terminal.input().read(std::chrono::milliseconds{90}); key.valid()) {
-                if (key == Key{Key::Character, 'q'}) {
+                if (key == Key{Key::Character, U'q'}) {
                     quitRequested = true;
-                } else if (key == Key{Key::Character, 'c'}) {
+                } else if (key == Key{Key::Character, U'c'}) {
                     paletteIndex = (paletteIndex + 1) % palettes.size();
                 }
             }

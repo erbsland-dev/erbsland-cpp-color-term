@@ -3,8 +3,12 @@
 #include "Key.hpp"
 
 
+#include "impl/CombinedChar.hpp"
+#include "impl/KeyDecoder.hpp"
+
 #include <array>
 #include <cctype>
+#include <optional>
 #include <string_view>
 
 
@@ -25,48 +29,27 @@ struct KeyAliasDefinition final {
     Key::Type type;
 };
 
-
-struct ConsoleSequenceDefinition final {
-    std::string_view sequence;
-    Key::Type type;
-};
-
-
-constexpr auto cKeyTextDefinitions = std::array<KeyTextDefinition, 27>{{
-    {Key::Enter, "enter", "↵"},
-    {Key::Tab, "tab", "tab"},
-    {Key::Space, "space", "space"},
-    {Key::Escape, "escape", "esc"},
-    {Key::Backspace, "backspace", "⌫"},
-    {Key::Insert, "insert", "ins"},
-    {Key::Delete, "delete", "del"},
-    {Key::Home, "home", "home"},
-    {Key::End, "end", "end"},
-    {Key::PageUp, "pageup", "pgup"},
-    {Key::PageDown, "pagedown", "pgdn"},
-    {Key::Left, "left", "←"},
-    {Key::Right, "right", "→"},
-    {Key::Up, "up", "↑"},
-    {Key::Down, "down", "↓"},
-    {Key::F1, "f1", "F1"},
-    {Key::F2, "f2", "F2"},
-    {Key::F3, "f3", "F3"},
-    {Key::F4, "f4", "F4"},
-    {Key::F5, "f5", "F5"},
-    {Key::F6, "f6", "F6"},
-    {Key::F7, "f7", "F7"},
-    {Key::F8, "f8", "F8"},
-    {Key::F9, "f9", "F9"},
-    {Key::F10, "f10", "F10"},
-    {Key::F11, "f11", "F11"},
+constexpr auto cKeyTextDefinitions = std::array<KeyTextDefinition, 28>{{
+    {Key::Enter, "enter", "↵"},     {Key::Tab, "tab", "tab"},        {Key::BackTab, "backtab", "⇤"},
+    {Key::Space, "space", "space"}, {Key::Escape, "escape", "esc"},  {Key::Backspace, "backspace", "⌫"},
+    {Key::Insert, "insert", "ins"}, {Key::Delete, "delete", "del"},  {Key::Home, "home", "home"},
+    {Key::End, "end", "end"},       {Key::PageUp, "pageup", "pgup"}, {Key::PageDown, "pagedown", "pgdn"},
+    {Key::Left, "left", "←"},       {Key::Right, "right", "→"},      {Key::Up, "up", "↑"},
+    {Key::Down, "down", "↓"},       {Key::F1, "f1", "F1"},           {Key::F2, "f2", "F2"},
+    {Key::F3, "f3", "F3"},          {Key::F4, "f4", "F4"},           {Key::F5, "f5", "F5"},
+    {Key::F6, "f6", "F6"},          {Key::F7, "f7", "F7"},           {Key::F8, "f8", "F8"},
+    {Key::F9, "f9", "F9"},          {Key::F10, "f10", "F10"},        {Key::F11, "f11", "F11"},
     {Key::F12, "f12", "F12"},
 }};
 
 
-constexpr auto cKeyAliasDefinitions = std::array<KeyAliasDefinition, 36>{{
+constexpr auto cKeyAliasDefinitions = std::array<KeyAliasDefinition, 39>{{
     {"enter", Key::Enter},
     {"return", Key::Enter},
     {"tab", Key::Tab},
+    {"backtab", Key::BackTab},
+    {"back_tab", Key::BackTab},
+    {"shift_tab", Key::BackTab},
     {"space", Key::Space},
     {"escape", Key::Escape},
     {"esc", Key::Escape},
@@ -103,18 +86,6 @@ constexpr auto cKeyAliasDefinitions = std::array<KeyAliasDefinition, 36>{{
 }};
 
 
-constexpr auto cConsoleSequenceDefinitions = std::array<ConsoleSequenceDefinition, 31>{{
-    {"\n", Key::Enter},       {"\r", Key::Enter},       {"\t", Key::Tab},           {" ", Key::Space},
-    {"\x1b", Key::Escape},    {"\x08", Key::Backspace}, {"\x7f", Key::Backspace},   {"\x1b[A", Key::Up},
-    {"\x1b[B", Key::Down},    {"\x1b[C", Key::Right},   {"\x1b[D", Key::Left},      {"\x1b[H", Key::Home},
-    {"\x1b[F", Key::End},     {"\x1bOH", Key::Home},    {"\x1bOF", Key::End},       {"\x1b[2~", Key::Insert},
-    {"\x1b[3~", Key::Delete}, {"\x1b[5~", Key::PageUp}, {"\x1b[6~", Key::PageDown}, {"\x1bOP", Key::F1},
-    {"\x1bOQ", Key::F2},      {"\x1bOR", Key::F3},      {"\x1bOS", Key::F4},        {"\x1b[15~", Key::F5},
-    {"\x1b[17~", Key::F6},    {"\x1b[18~", Key::F7},    {"\x1b[19~", Key::F8},      {"\x1b[20~", Key::F9},
-    {"\x1b[21~", Key::F10},   {"\x1b[23~", Key::F11},   {"\x1b[24~", Key::F12},
-}};
-
-
 auto findKeyTextDefinition(const Key::Type type) noexcept -> const KeyTextDefinition * {
     for (const auto &definition : cKeyTextDefinitions) {
         if (definition.type == type) {
@@ -146,40 +117,84 @@ auto wrapDisplayText(const std::string_view text, const bool useBrackets) -> std
 }
 
 
+auto createCharacterKey(const impl::CombinedChar &character) noexcept -> Key {
+    if (character.codePointCount() <= 1) {
+        return {Key::Character, character.mainCodePoint()};
+    }
+    return {Key::Combined, character.utf32()};
+}
+
+
+auto parseCharacterKeyText(const std::string_view text) -> std::optional<Key> {
+    try {
+        if (const auto character = impl::CombinedChar::fromTextUtf8(text); character.has_value()) {
+            return createCharacterKey(*character);
+        }
+    } catch (...) {
+        return std::nullopt;
+    }
+    return std::nullopt;
+}
+
+
 } // namespace
 
 
-Key::Key(const Type type, const char ch) noexcept : _type{type}, _ch{ch} {
+Key::Key(const Type type, const char32_t codePoint) noexcept : _type{type} {
+    if (type == Character || type == Combined) {
+        _character = impl::CombinedChar{codePoint};
+    }
+}
+
+Key::Key(const Type type, const std::u32string_view character) : _type{type} {
+    if (type == Character || type == Combined) {
+        _character = impl::CombinedChar{character};
+    }
+}
+
+auto Key::character() const noexcept -> char {
+    const auto codePoint = unicode();
+    if (codePoint > 0x7fU) {
+        return 0;
+    }
+    return static_cast<char>(codePoint);
+}
+
+auto Key::unicode() const noexcept -> char32_t {
+    if (_type != Character || _character.codePointCount() != 1) {
+        return 0;
+    }
+    return _character.mainCodePoint();
+}
+
+auto Key::combined() const -> std::u32string {
+    if (_type != Character && _type != Combined) {
+        return {};
+    }
+    return _character.utf32();
 }
 
 auto Key::fromString(std::string text) noexcept -> Key {
+    const auto originalText = text;
     text = normalizeKeyText(std::move(text));
-    if (text.size() == 1 && std::isalnum(static_cast<unsigned char>(text[0]))) {
-        return {Character, text[0]};
-    }
     for (const auto &definition : cKeyAliasDefinitions) {
         if (definition.text == text) {
             return {definition.type};
         }
     }
+    if (const auto key = parseCharacterKeyText(originalText); key.has_value()) {
+        return *key;
+    }
     return {None};
 }
 
 auto Key::fromConsoleInput(const std::string &text) noexcept -> Key {
-    for (const auto &definition : cConsoleSequenceDefinitions) {
-        if (definition.sequence == text) {
-            return {definition.type};
-        }
-    }
-    if (text.size() == 1 && std::isalnum(static_cast<unsigned char>(text[0]))) {
-        return {Character, text[0]};
-    }
-    return {None};
+    return impl::KeyDecoder{text}.decodeConsoleInput();
 }
 
 auto Key::toString() const -> std::string {
-    if (_type == Character) {
-        return std::string(1, _ch);
+    if (_type == Character || _type == Combined) {
+        return _character.utf8();
     }
     if (const auto *definition = findKeyTextDefinition(_type)) {
         return std::string{definition->text};
@@ -188,8 +203,8 @@ auto Key::toString() const -> std::string {
 }
 
 auto Key::toDisplayText(const bool useBrackets) const -> std::string {
-    if (_type == Character) {
-        return wrapDisplayText(std::string_view{&_ch, 1}, useBrackets);
+    if (_type == Character || _type == Combined) {
+        return wrapDisplayText(_character.utf8(), useBrackets);
     }
     if (const auto *definition = findKeyTextDefinition(_type)) {
         return wrapDisplayText(definition->displayText, useBrackets);

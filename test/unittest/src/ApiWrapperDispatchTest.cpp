@@ -114,10 +114,7 @@ protected:
         _lastFillChar = fillChar;
     }
 
-    void fillImpl(
-        const Rectangle rect,
-        const Char &fillBlock,
-        const CharCombinationStylePtr &) noexcept override {
+    void fillImpl(const Rectangle rect, const Char &fillBlock, const CharCombinationStylePtr &) noexcept override {
         _lastCall = Call::FillBlock;
         _lastRect = rect;
         _lastFillChar = fillBlock;
@@ -171,8 +168,8 @@ protected:
         _lastFrameColor = frameColor;
     }
 
-    void drawFrameImpl(
-        const Rectangle rect, const FrameDrawOptions &, const std::size_t animationCycle) noexcept override {
+    void
+    drawFrameImpl(const Rectangle rect, const FrameDrawOptions &, const std::size_t animationCycle) noexcept override {
         _lastCall = Call::FrameOptions;
         _lastRect = rect;
         _lastAnimationCycle = animationCycle;
@@ -340,7 +337,8 @@ public:
         REQUIRE_EQUAL(buffer._lastAnimationCycle, std::size_t{0});
 
         buffer.clearRecording();
-        buffer.drawBitmap(bitmap, Rectangle{0, 0, 4, 5}, Alignment::BottomRight, BitmapDrawOptions::defaultOptions(), 3);
+        buffer.drawBitmap(
+            bitmap, Rectangle{0, 0, 4, 5}, Alignment::BottomRight, BitmapDrawOptions::defaultOptions(), 3);
         REQUIRE_EQUAL(buffer._lastCall, WritableBufferDispatchProbe::Call::BitmapRect);
         REQUIRE_EQUAL(buffer._lastBitmapSize, (Size{2, 3}));
         REQUIRE_EQUAL(buffer._lastRect, (Rectangle{0, 0, 4, 5}));

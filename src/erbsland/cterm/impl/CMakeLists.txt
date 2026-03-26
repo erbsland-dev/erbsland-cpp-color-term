@@ -4,17 +4,25 @@ target_sources(erbsland-color-term PRIVATE
         BitmapPainter.cpp
         BitmapPainter.hpp
         CommonBoxFrameStyle.cpp
+        CombinedChar.cpp
+        CombinedChar.hpp
         FontDefaultAscii.cpp
         FramePainter.cpp
         FramePainter.hpp
         HashHelper.hpp
         InputBackend.cpp
         InputBackend.hpp
+        KeyDecoder.cpp
+        KeyDecoder.hpp
         LineBuffer.hpp
         ParagraphLayout.cpp
         ParagraphLayout.hpp
         ParagraphPainter.cpp
         ParagraphPainter.hpp
+        ParagraphPrinter.cpp
+        ParagraphPrinter.hpp
+        ParagraphRendererBase.cpp
+        ParagraphRendererBase.hpp
         StringWrapper.cpp
         StringWrapper.hpp
         TextPainter.cpp

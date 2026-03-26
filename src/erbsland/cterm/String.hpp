@@ -44,12 +44,24 @@ public:
     /// Control codes are ignored except for tab and newline.
     /// @throws std::invalid_argument If the text is not valid UTF-8 or contains an unsupported character sequence.
     explicit String(std::string_view str, Color color = {});
+    /// Create a terminal string from UTF-8 text.
+    /// @param str The UTF-8 text to split into terminal characters.
+    /// @param style The style to use for the characters.
+    /// Control codes are ignored except for tab and newline.
+    /// @throws std::invalid_argument If the text is not valid UTF-8 or contains an unsupported character sequence.
+    explicit String(std::string_view str, CharStyle style);
     /// Create a terminal string from UTF-32 text.
     /// @param str The UTF-32 text to split into terminal characters.
     /// @param color The color to use for the characters.
     /// Control codes are ignored except for tab and newline.
     /// @throws std::invalid_argument If the text contains an unsupported character sequence.
     explicit String(std::u32string_view str, Color color = {});
+    /// Create a terminal string from UTF-32 text.
+    /// @param str The UTF-32 text to split into terminal characters.
+    /// @param style The style to use for the characters.
+    /// Control codes are ignored except for tab and newline.
+    /// @throws std::invalid_argument If the text contains an unsupported character sequence.
+    explicit String(std::u32string_view str, CharStyle style);
     /// Create a terminal string repeating the same `Char`.
     /// @param count The repetition count. Limited to 10'000'000.
     /// @param character The character to repeat.
@@ -182,14 +194,15 @@ public: // modifiers
     /// Append elements to this string.
     /// This works similar to `Terminal::print()`.
     /// If you add a color, this color is "active" for all following characters *in the same call*.
-    /// Appended `Char` and `String` values with inherited color components resolve these components against the
-    /// currently active color.
+    /// If you add character attributes, these attributes are active for all following characters *in the same call*.
+    /// Appended `Char` and `String` values with inherited color components or inherited attributes resolve against the
+    /// currently active state.
     /// Just adding a color does not change the string.
     /// @param args The arguments to append.
     template <PrintableArg... Args>
     void append(Args... args) noexcept {
-        Color currentColor{};
-        (appendElement(args, currentColor), ...);
+        auto style = CharStyle{};
+        (appendElement(args, style), ...);
     }
 
 public: // tools
@@ -222,36 +235,56 @@ public: // conversion
     /// All lines are joined using a new-line character.
     /// @param lines The lines for the string.
     /// @param color The base color to use for each character.
+    /// @param attributes The base attributes to use for each character.
     /// @return The new string.
-    [[nodiscard]] static auto fromLines(std::initializer_list<std::string_view> lines, Color color = {}) noexcept
+    [[nodiscard]] static auto
+    fromLines(std::initializer_list<std::string_view> lines, Color color = {}, CharAttributes attributes = {}) noexcept
         -> String;
     /// @overload
-    [[nodiscard]] static auto fromLines(std::initializer_list<std::u32string_view> lines, Color color = {}) noexcept
+    [[nodiscard]] static auto fromLines(std::initializer_list<std::string_view> lines, CharStyle style) noexcept
+        -> String;
+    /// @overload
+    [[nodiscard]] static auto fromLines(
+        std::initializer_list<std::u32string_view> lines, Color color = {}, CharAttributes attributes = {}) noexcept
+        -> String;
+    /// @overload
+    [[nodiscard]] static auto fromLines(std::initializer_list<std::u32string_view> lines, CharStyle style) noexcept
         -> String;
 
 private:
     explicit String(std::vector<Char> &&chars) noexcept : _chars(std::move(chars)) {}
     [[nodiscard]] static auto countCharacters(std::string_view str) -> std::size_t;
     [[nodiscard]] static auto countCharacters(std::u32string_view str) -> std::size_t;
-    [[nodiscard]] static auto splitCharacters(std::string_view str, Color color = {}) -> Storage;
-    [[nodiscard]] static auto splitCharacters(std::u32string_view str, Color color = {}) -> Storage;
+    [[nodiscard]] static auto splitCharacters(std::string_view str, Color color = {}, CharAttributes attributes = {})
+        -> Storage;
+    [[nodiscard]] static auto splitCharacters(std::u32string_view str, Color color = {}, CharAttributes attributes = {})
+        -> Storage;
     [[nodiscard]] constexpr static auto isControlCode(const char32_t codePoint) noexcept -> bool {
         return codePoint < 0x20 || (codePoint >= 0x7FU && codePoint <= 0x9FU);
     }
     [[nodiscard]] static auto isStringCharacter(char32_t codePoint) noexcept -> bool;
-    static void appendCodePoint(Storage &chars, char32_t codePoint, Color color);
-    void appendElement(const Foreground foreground, Color &currentColor) noexcept { currentColor.setFg(foreground); }
-    void appendElement(const Background background, Color &currentColor) noexcept { currentColor.setBg(background); }
-    void appendElement(const Char &character, Color &currentColor) noexcept {
-        _chars.emplace_back(character.withBaseColor(currentColor));
+    static void appendCodePoint(Storage &chars, char32_t codePoint, Color color, CharAttributes attributes);
+    void appendElement(const Color color, CharStyle &style) noexcept { style.setColor(color); }
+    void appendElement(const Foreground::Hue foreground, CharStyle &style) noexcept { style.setFg(foreground); }
+    void appendElement(const Foreground foreground, CharStyle &style) noexcept { style.setFg(foreground); }
+    void appendElement(const Background::Hue background, CharStyle &style) noexcept { style.setBg(background); }
+    void appendElement(const Background background, CharStyle &style) noexcept { style.setBg(background); }
+    void appendElement(const CharStyle overlayStyle, CharStyle &style) noexcept {
+        style = style.withOverlay(overlayStyle);
     }
-    void appendElement(const String &other, Color &currentColor) noexcept {
+    void appendElement(const CharAttributes attributes, CharStyle &style) noexcept {
+        style.setAttributes(attributes.resolvedWith(style.attributes()));
+    }
+    void appendElement(const Char &character, CharStyle &style) noexcept {
+        _chars.emplace_back(character.withBase(style.color(), style.attributes()));
+    }
+    void appendElement(const String &other, CharStyle &style) noexcept {
         for (const auto &character : other._chars) {
-            _chars.emplace_back(character.withBaseColor(currentColor));
+            _chars.emplace_back(character.withBase(style.color(), style.attributes()));
         }
     }
-    void appendElement(const std::string_view str, Color &currentColor) noexcept {
-        const auto newCharacters = splitCharacters(str, currentColor);
+    void appendElement(const std::string_view str, CharStyle &style) noexcept {
+        const auto newCharacters = splitCharacters(str, style.color(), style.attributes());
         _chars.insert(_chars.end(), newCharacters.begin(), newCharacters.end());
     }
 

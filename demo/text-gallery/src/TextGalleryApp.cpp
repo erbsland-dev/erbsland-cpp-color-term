@@ -36,7 +36,7 @@ auto TextGalleryApp::canvasSize() const noexcept -> Size {
 
 
 void TextGalleryApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, 'q'}) {
+    if (key == Key{Key::Character, U'q'}) {
         _quitRequested = true;
     } else if (key == Key{Key::Left}) {
         _pageIndex = (_pageIndex + 2) % 3;

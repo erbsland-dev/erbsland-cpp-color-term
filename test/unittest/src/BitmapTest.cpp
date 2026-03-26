@@ -13,13 +13,9 @@ class BitmapAccessor final : public Bitmap {
 public:
     using Bitmap::Bitmap;
 
-    auto readPixelRef(const Position pos) -> bool {
-        return pixelRef(pos);
-    }
+    auto readPixelRef(const Position pos) -> bool { return pixelRef(pos); }
 
-    void writePixelRef(const Position pos, const bool value) {
-        pixelRef(pos) = value;
-    }
+    void writePixelRef(const Position pos, const bool value) { pixelRef(pos) = value; }
 };
 
 

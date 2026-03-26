@@ -16,20 +16,18 @@ ParagraphPainter::ParagraphPainter(
     const ParagraphLayout::Result &layout,
     const ParagraphBackgroundMode backgroundMode,
     const ColorResolver &colorResolver) noexcept :
+    ParagraphRendererBase{alignment, layout, backgroundMode},
     _buffer{buffer},
     _rect{rect},
-    _alignment{alignment},
-    _layout{layout},
-    _backgroundMode{backgroundMode},
     _colorResolver{colorResolver} {
 }
 
 void ParagraphPainter::paint() {
-    const auto maxLines = std::min(static_cast<int>(_layout.lines.size()), _rect.height());
+    const auto maxLines = std::min(static_cast<int>(layout().lines.size()), _rect.height());
     const auto leftFillEnabled = usesLeftFill();
     const auto rightFillEnabled = usesRightFill();
     auto yStart = _rect.y1();
-    switch (_alignment & Alignment::VerticalMask) {
+    switch (alignment() & Alignment::VerticalMask) {
     case Alignment::VCenter:
         yStart += (_rect.height() - maxLines) / 2;
         break;
@@ -41,39 +39,26 @@ void ParagraphPainter::paint() {
     }
     auto previousWrapColor = std::optional<Color>{};
     for (auto lineIndex = 0; lineIndex < maxLines; ++lineIndex) {
-        const auto &line = _layout.lines[static_cast<std::size_t>(lineIndex)];
+        const auto &line = layout().lines[static_cast<std::size_t>(lineIndex)];
         const auto y = yStart + lineIndex;
-        const auto endMarkWidth = line.endMark.displayWidth();
-        const auto availableWidth = _rect.width() - endMarkWidth;
-        const auto textWidth = line.text.displayWidth();
-        auto textX = _rect.x1();
-        switch (_alignment & Alignment::HorizontalMask) {
-        case Alignment::Right:
-            textX = _rect.x1() + availableWidth - textWidth;
-            break;
-        case Alignment::HCenter:
-            textX = _rect.x1() + (availableWidth - textWidth) / 2;
-            break;
-        default:
-            break;
-        }
-        auto lastColor = drawSegment(line.text, Position{textX, y});
+        const auto placement = linePlacement(line, _rect.x1(), _rect.width());
+        auto lastColor = drawSegment(line.text, Position{placement.textX, y});
         auto rightFillColor = std::optional<Color>{};
         auto rightFillStart = 0;
         auto rightFillEnd = 0;
         if (!line.endMark.empty()) {
-            const auto endMarkX = _rect.x2() - endMarkWidth;
-            if (const auto markColor = drawSegment(line.endMark, Position{endMarkX, y}); markColor.has_value()) {
+            if (const auto markColor = drawSegment(line.endMark, Position{placement.endMarkX, y});
+                markColor.has_value()) {
                 lastColor = markColor;
             }
             if (rightFillEnabled && lastColor.has_value()) {
                 rightFillColor = lastColor;
-                rightFillStart = textX + textWidth;
-                rightFillEnd = endMarkX;
+                rightFillStart = placement.textX + placement.textWidth;
+                rightFillEnd = placement.endMarkX;
             }
         } else if (lastColor.has_value() && usesRightFillForLine(line)) {
             rightFillColor = lastColor;
-            rightFillStart = textX + textWidth;
+            rightFillStart = placement.textX + placement.textWidth;
             rightFillEnd = _rect.x2();
         }
         if (previousWrapColor.has_value() && leftFillEnabled && line.indentWidth > 0) {
@@ -88,26 +73,6 @@ void ParagraphPainter::paint() {
             previousWrapColor.reset();
         }
     }
-}
-
-auto ParagraphPainter::usesLeftFill() const noexcept -> bool {
-    return _backgroundMode == ParagraphBackgroundMode::WrappedLeft ||
-        _backgroundMode == ParagraphBackgroundMode::WrappedBoth || _backgroundMode == ParagraphBackgroundMode::FullBoth;
-}
-
-auto ParagraphPainter::usesRightFill() const noexcept -> bool {
-    return _backgroundMode == ParagraphBackgroundMode::WrappedRight ||
-        _backgroundMode == ParagraphBackgroundMode::WrappedBoth ||
-        _backgroundMode == ParagraphBackgroundMode::FullRight || _backgroundMode == ParagraphBackgroundMode::FullBoth;
-}
-
-auto ParagraphPainter::usesRightFillForLine(const ParagraphLayout::Line &line) const noexcept -> bool {
-    if (_backgroundMode == ParagraphBackgroundMode::FullRight || _backgroundMode == ParagraphBackgroundMode::FullBoth) {
-        return true;
-    }
-    return line.wrapsToNext &&
-        (_backgroundMode == ParagraphBackgroundMode::WrappedRight ||
-         _backgroundMode == ParagraphBackgroundMode::WrappedBoth);
 }
 
 auto ParagraphPainter::drawSegment(const String &text, Position pos) -> std::optional<Color> {

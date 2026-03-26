@@ -15,6 +15,7 @@ namespace erbsland::cterm {
 /// Flags for crop edges and corners.
 class CropEdges {
 public:
+    /// Bitset type storing the eight crop-edge directions.
     using Flags = std::bitset<8>;
 
 public:

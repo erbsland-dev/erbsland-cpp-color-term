@@ -5,6 +5,20 @@
 
 namespace erbsland::cterm {
 
+static auto unescapeKeyText(std::string text) -> std::string {
+    if (text.size() >= 2 && text[0] == '\\' && (text[1] == '+' || text[1] == '>' || text[1] == '\\')) {
+        text.erase(0, 1);
+    }
+    return text;
+}
+
+static auto escapeKeyText(std::string text) -> std::string {
+    if (!text.empty() && (text[0] == '+' || text[0] == '>' || text[0] == '\\')) {
+        text.insert(text.begin(), '\\');
+    }
+    return text;
+}
+
 
 InputDefinition::InputDefinition(const Key keyPress, const ForMode forMode) noexcept :
     _keyPress{keyPress}, _forMode{forMode} {
@@ -19,11 +33,11 @@ auto InputDefinition::fromString(std::string text) noexcept -> InputDefinition {
         text.erase(0, 1);
         forMode = ForMode::Key;
     }
-    return {Key::fromString(std::move(text)), forMode};
+    return {Key::fromString(unescapeKeyText(std::move(text))), forMode};
 }
 
 auto InputDefinition::toString() const -> std::string {
-    auto text = _keyPress.toString();
+    auto text = escapeKeyText(_keyPress.toString());
     if (text.empty()) {
         return {};
     }

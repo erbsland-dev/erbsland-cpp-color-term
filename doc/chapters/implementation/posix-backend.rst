@@ -12,6 +12,9 @@ POSIX Backend
 This page documents the internal POSIX backend used on Linux, macOS, and similar systems.
 It explains how the backend configures the terminal, reads key input, detects terminal size, and restores the screen when the process is terminated by a signal.
 
+For the public backend API contract that this implementation satisfies,
+see :doc:`../reference/backend`.
+
 Relevant Source Files
 =====================
 

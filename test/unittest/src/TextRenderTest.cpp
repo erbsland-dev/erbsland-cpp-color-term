@@ -5,11 +5,8 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-#include <memory>
-
-
 TESTED_TARGETS(Text Buffer)
-class TextRenderTest final : public el::UnitTest {
+class TextRenderTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
 public:
     void testTextUsesSingleParagraphSpacingByDefault() {
         auto text = Text{};
@@ -127,7 +124,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AA BB<", "   >CC"}));
+        requireRowsEqual(buffer, {"AA BB<", "   >CC"});
     }
 
     void testBufferUsesTabStopsForParagraphRendering() {
@@ -137,7 +134,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"A   B"}));
+        requireRowsEqual(buffer, {"A   B"});
     }
 
     void testBufferBreaksAtNonAdvancingTabStopsWhenRequested() {
@@ -150,7 +147,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"Heading    <", "      text  "}));
+        requireRowsEqual(buffer, {"Heading    <", "      text  "});
     }
 
     void testBufferReplacesNonAdvancingTabsWithSpacesByDefault() {
@@ -160,7 +157,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"Heading text"}));
+        requireRowsEqual(buffer, {"Heading text"});
     }
 
     void testBufferBreaksWhenTabStopsAreExhaustedAndLineBreakIsRequested() {
@@ -173,7 +170,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"A B <", "  C  "}));
+        requireRowsEqual(buffer, {"A B <", "  C  "});
     }
 
     void testBufferUsesWordSeparatorsAsCollapsedSpacing() {
@@ -183,7 +180,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"A B"}));
+        requireRowsEqual(buffer, {"A B"});
     }
 
     void testBufferTreatsTabsAsCollapsedWordSeparatorsForCenteredParagraphs() {
@@ -192,7 +189,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({" A B "}));
+        requireRowsEqual(buffer, {" A B "});
     }
 
     void testBufferSplitsLongWordsUsingTheConfiguredWordBreakMark() {
@@ -201,7 +198,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"ABCD-", "EFG  "}));
+        requireRowsEqual(buffer, {"ABCD-", "EFG  "});
     }
 
     void testBufferUsesParagraphEllipsisAfterMaximumWraps() {
@@ -211,7 +208,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AA BB", "CC…  "}));
+        requireRowsEqual(buffer, {"AA BB", "CC…  "});
     }
 
     void testBufferUsesParagraphBackgroundModesForWrappedParagraphs() {
@@ -237,7 +234,7 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AA", "BB"}));
+        requireRowsEqual(buffer, {"AA", "BB"});
     }
 
     void testBufferSkipsInvalidParagraphsWhenOnErrorIsEmpty() {
@@ -248,21 +245,6 @@ public:
 
         buffer.drawText(text);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"XX", "XX"}));
-    }
-
-private:
-    [[nodiscard]] static auto renderRows(const Buffer &buffer) -> std::vector<std::string> {
-        auto rows = std::vector<std::string>{};
-        rows.reserve(static_cast<std::size_t>(buffer.size().height()));
-        for (int y = 0; y < buffer.size().height(); ++y) {
-            auto row = std::string{};
-            row.reserve(static_cast<std::size_t>(buffer.size().width()));
-            for (int x = 0; x < buffer.size().width(); ++x) {
-                buffer.get(Position{x, y}).appendTo(row);
-            }
-            rows.push_back(row);
-        }
-        return rows;
+        requireRowsEqual(buffer, {"XX", "XX"});
     }
 };

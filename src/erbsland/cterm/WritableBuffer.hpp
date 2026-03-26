@@ -4,6 +4,7 @@
 
 
 #include "BitmapDrawOptions.hpp"
+#include "BufferDrawOptions.hpp"
 #include "Char16Style.hpp"
 #include "CharCombinationStyle.hpp"
 #include "FrameDrawOptions.hpp"
@@ -226,6 +227,24 @@ public: // drawing methods
         Alignment alignment = Alignment::TopLeft,
         const BitmapDrawOptions &options = BitmapDrawOptions::defaultOptions(),
         std::size_t animationCycle = 0) noexcept;
+    /// Draw the contents of another buffer into this one.
+    /// Resulting positions outside the target rectangle are clipped.
+    /// @param buffer The buffer to draw.
+    /// @param targetPos The target position where to draw the top-left corner of the buffer.
+    /// @throws std::invalid_argument if `buffer` is this buffer.
+    void drawBuffer(const ReadableBuffer &buffer, Position targetPos = Position{});
+    /// Draw the contents of another buffer into this one.
+    /// Resulting positions outside the target rectangle are clipped.
+    /// @param buffer The buffer to draw.
+    /// @param targetRect The target rectangle where to draw the buffer. Clips `buffer` if larger.
+    /// @param alignment The alignment of the buffer within the target rectangle.
+    /// @throws std::invalid_argument if `buffer` is this buffer.
+    void drawBuffer(const ReadableBuffer &buffer, Rectangle targetRect, Alignment alignment = Alignment::TopLeft);
+    /// Draw the contents of another buffer into this one.
+    /// @param buffer The buffer to draw.
+    /// @param options The options for drawing the buffer.
+    /// @throws std::invalid_argument if `buffer` is this buffer.
+    virtual void drawBuffer(const ReadableBuffer &buffer, const BufferDrawOptions &options);
 
 protected: // implementation
     /// Implement `setFrom()`.

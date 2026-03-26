@@ -66,7 +66,8 @@ public:
         options.setColor(bg::Blue);
         REQUIRE_EQUAL(options.color().color(0), Color(fg::Inherited, bg::Blue));
 
-        options.setColorSequence(ColorSequence{Color{fg::BrightWhite, bg::Red}}, BitmapColorMode::BackwardDiagonalStripes);
+        options.setColorSequence(
+            ColorSequence{Color{fg::BrightWhite, bg::Red}}, BitmapColorMode::BackwardDiagonalStripes);
         REQUIRE_EQUAL(options.color().sequenceLength(), static_cast<std::size_t>(1));
         REQUIRE_EQUAL(options.color().color(0), Color(fg::BrightWhite, bg::Red));
         REQUIRE_EQUAL(options.colorMode(), BitmapColorMode::BackwardDiagonalStripes);

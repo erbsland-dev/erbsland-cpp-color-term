@@ -3,6 +3,7 @@
 #include "PosixBackend.hpp"
 
 
+#include "KeyDecoder.hpp"
 #include "PosixSignalDispatcher.hpp"
 
 #include <fcntl.h>
@@ -155,41 +156,43 @@ auto PosixBackend::readKey(std::chrono::milliseconds timeout) -> Key {
     if (_inputMode == Input::Mode::ReadLine) {
         return Key::fromConsoleInput(readLine());
     }
-    fd_set set;
-    FD_ZERO(&set);
-    FD_SET(STDIN_FILENO, &set);
-    timeval tv{};
-    timeval *ptv = nullptr;
-    if (timeout.count() > 0) {
-        tv.tv_sec = timeout.count() / 1000;
-        tv.tv_usec = (static_cast<int>(timeout.count()) % 1000) * 1000;
-        ptv = &tv;
-    }
-    std::string consoleInput;
-    if (select(STDIN_FILENO + 1, &set, nullptr, nullptr, ptv) > 0) {
-        char buf[32];
-        auto len = ::read(STDIN_FILENO, buf, sizeof(buf));
-        if (len > 0) {
-            consoleInput.assign(buf, static_cast<std::size_t>(len));
-        }
-        if (!consoleInput.empty() && consoleInput[0] == '\x1b') {
-            while (true) {
-                FD_ZERO(&set);
-                FD_SET(STDIN_FILENO, &set);
-                tv.tv_sec = 0;
-                tv.tv_usec = 1000;
-                if (select(STDIN_FILENO + 1, &set, nullptr, nullptr, &tv) > 0) {
-                    len = ::read(STDIN_FILENO, buf, sizeof(buf));
-                    if (len > 0) {
-                        consoleInput.append(buf, static_cast<std::size_t>(len));
-                    }
-                } else {
-                    break;
-                }
+    constexpr auto cFollowUpReadTimeout = std::chrono::milliseconds{1};
+
+    while (true) {
+        if (_pendingKeyInput.empty()) {
+            appendInputChunks(timeout);
+            if (_pendingKeyInput.empty()) {
+                return {};
             }
         }
+        if (_pendingKeyInput[0] == '\x1b') {
+            appendInputChunks(cFollowUpReadTimeout);
+        }
+        const auto parseResult = KeyDecoder{_pendingKeyInput}.parseConsoleInputPrefix();
+        if (parseResult.status == U8ParseStatus::Parsed) {
+            _pendingKeyInput.erase(0, parseResult.consumedByteCount);
+            return parseResult.key;
+        }
+        if (parseResult.status == U8ParseStatus::NeedMoreData) {
+            appendInputChunks(timeout);
+            const auto retriedResult = KeyDecoder{_pendingKeyInput}.parseConsoleInputPrefix();
+            if (retriedResult.status == U8ParseStatus::Parsed) {
+                _pendingKeyInput.erase(0, retriedResult.consumedByteCount);
+                return retriedResult.key;
+            }
+            if (retriedResult.status == U8ParseStatus::Invalid && retriedResult.consumedByteCount > 0) {
+                _pendingKeyInput.erase(0, retriedResult.consumedByteCount);
+                continue;
+            }
+            return {};
+        }
+        if (parseResult.consumedByteCount == 0) {
+            _pendingKeyInput.clear();
+            return {};
+        }
+        _pendingKeyInput.erase(0, parseResult.consumedByteCount);
     }
-    return Key::fromConsoleInput(consoleInput);
+    return {};
 }
 
 auto PosixBackend::readLine() -> std::string {
@@ -305,6 +308,54 @@ void PosixBackend::initializeKeyInputSession() {
 void PosixBackend::restoreKeyInputSession() {
     tcsetattr(STDIN_FILENO, TCSANOW, &_originalState);
     _keyInputSessionActive = false;
+    _pendingKeyInput.clear();
+}
+
+auto PosixBackend::waitForInput(const std::chrono::milliseconds timeout) -> bool {
+    fd_set set;
+    FD_ZERO(&set);
+    FD_SET(STDIN_FILENO, &set);
+    auto tv = timeval{};
+    auto *ptv = static_cast<timeval *>(nullptr);
+    if (timeout.count() > 0) {
+        tv.tv_sec = timeout.count() / 1000;
+        tv.tv_usec = (static_cast<int>(timeout.count()) % 1000) * 1000;
+        ptv = &tv;
+    }
+    return select(STDIN_FILENO + 1, &set, nullptr, nullptr, ptv) > 0;
+}
+
+auto PosixBackend::pollForInput() -> bool {
+    fd_set set;
+    FD_ZERO(&set);
+    FD_SET(STDIN_FILENO, &set);
+    auto tv = timeval{};
+    return select(STDIN_FILENO + 1, &set, nullptr, nullptr, &tv) > 0;
+}
+
+auto PosixBackend::readInputChunk() -> std::string {
+    char buffer[64];
+    const auto length = ::read(STDIN_FILENO, buffer, sizeof(buffer));
+    if (length <= 0) {
+        return {};
+    }
+    return {buffer, static_cast<std::size_t>(length)};
+}
+
+void PosixBackend::appendInputChunks(const std::chrono::milliseconds timeout) {
+    if (!waitForInput(timeout)) {
+        return;
+    }
+    while (true) {
+        const auto chunk = readInputChunk();
+        if (chunk.empty()) {
+            return;
+        }
+        _pendingKeyInput += chunk;
+        if (!pollForInput()) {
+            return;
+        }
+    }
 }
 
 void PosixBackend::handleProcessSignal(const int signalNumber) noexcept {

@@ -18,7 +18,15 @@ namespace erbsland::cterm {
 String::String(const std::string_view str, const Color color) : _chars{splitCharacters(str, color)} {
 }
 
+String::String(const std::string_view str, const CharStyle style) :
+    _chars{splitCharacters(str, style.color(), style.attributes())} {
+}
+
 String::String(const std::u32string_view str, const Color color) : _chars{splitCharacters(str, color)} {
+}
+
+String::String(const std::u32string_view str, const CharStyle style) :
+    _chars{splitCharacters(str, style.color(), style.attributes())} {
 }
 
 String::String(const std::size_t count, Char character) noexcept :
@@ -144,7 +152,9 @@ auto String::splitLines() const noexcept -> std::vector<String> {
     return impl::StringWrapper{*this}.splitLines();
 }
 
-auto String::fromLines(const std::initializer_list<std::string_view> lines, const Color color) noexcept -> String {
+auto String::fromLines(
+    const std::initializer_list<std::string_view> lines, const Color color, const CharAttributes attributes) noexcept
+    -> String {
     if (lines.size() == 0) {
         return {};
     }
@@ -159,15 +169,21 @@ auto String::fromLines(const std::initializer_list<std::string_view> lines, cons
         if (isFirstLine) {
             isFirstLine = false;
         } else {
-            result.emplace_back(Char{U'\n', color});
+            result.emplace_back(Char{U'\n', color, attributes});
         }
         impl::U8Buffer{line}.decodeAll(
-            [&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color); });
+            [&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color, attributes); });
     }
     return String{std::move(result)};
 }
 
-auto String::fromLines(const std::initializer_list<std::u32string_view> lines, const Color color) noexcept -> String {
+auto String::fromLines(const std::initializer_list<std::string_view> lines, const CharStyle style) noexcept -> String {
+    return fromLines(lines, style.color(), style.attributes());
+}
+
+auto String::fromLines(
+    const std::initializer_list<std::u32string_view> lines, const Color color, const CharAttributes attributes) noexcept
+    -> String {
     if (lines.size() == 0) {
         return {};
     }
@@ -182,13 +198,18 @@ auto String::fromLines(const std::initializer_list<std::u32string_view> lines, c
         if (isFirstLine) {
             isFirstLine = false;
         } else {
-            result.emplace_back(Char{U'\n', color});
+            result.emplace_back(Char{U'\n', color, attributes});
         }
         for (const auto codePoint : line) {
-            appendCodePoint(result, codePoint, color);
+            appendCodePoint(result, codePoint, color, attributes);
         }
     }
     return String{std::move(result)};
+}
+
+auto String::fromLines(const std::initializer_list<std::u32string_view> lines, const CharStyle style) noexcept
+    -> String {
+    return fromLines(lines, style.color(), style.attributes());
 }
 
 auto String::countCharacters(const std::string_view str) -> std::size_t {
@@ -211,18 +232,21 @@ auto String::countCharacters(const std::u32string_view str) -> std::size_t {
     return displayCharCount;
 }
 
-auto String::splitCharacters(const std::string_view str, const Color color) -> Storage {
+auto String::splitCharacters(const std::string_view str, const Color color, const CharAttributes attributes)
+    -> Storage {
     auto result = Storage{};
     result.reserve(countCharacters(str));
-    impl::U8Buffer{str}.decodeAll([&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color); });
+    impl::U8Buffer{str}.decodeAll(
+        [&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color, attributes); });
     return result;
 }
 
-auto String::splitCharacters(const std::u32string_view str, const Color color) -> Storage {
+auto String::splitCharacters(const std::u32string_view str, const Color color, const CharAttributes attributes)
+    -> Storage {
     auto result = Storage{};
     result.reserve(countCharacters(str));
     for (const auto codePoint : str) {
-        appendCodePoint(result, codePoint, color);
+        appendCodePoint(result, codePoint, color, attributes);
     }
     return result;
 }
@@ -232,9 +256,10 @@ auto String::isStringCharacter(const char32_t codePoint) noexcept -> bool {
         (!isControlCode(codePoint) && codePoint >= 0x20 && impl::consoleCharacterWidth(codePoint) > 0);
 }
 
-void String::appendCodePoint(Storage &chars, const char32_t codePoint, const Color color) {
+void String::appendCodePoint(
+    Storage &chars, const char32_t codePoint, const Color color, const CharAttributes attributes) {
     if (codePoint == U'\t' || codePoint == U'\n') {
-        chars.emplace_back(codePoint, color);
+        chars.emplace_back(codePoint, color, attributes);
         return;
     }
     if (isControlCode(codePoint)) {
@@ -246,7 +271,7 @@ void String::appendCodePoint(Storage &chars, const char32_t codePoint, const Col
         }
         return;
     }
-    chars.emplace_back(codePoint, color);
+    chars.emplace_back(codePoint, color, attributes);
 }
 
 

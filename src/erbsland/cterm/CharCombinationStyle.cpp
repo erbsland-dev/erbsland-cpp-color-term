@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "CharCombinationStyle.hpp"
 
-
 #include <algorithm>
 #include <limits>
 #include <stdexcept>
@@ -47,7 +46,8 @@ auto SimpleCharCombinationStyle::combine(const Char &current, const Char &overla
     } else {
         result = Char{overlay.charStr()};
     }
-    return result.withColorOverlay(current.color().overlayWith(overlay.color()));
+    result.setStyle(result.style().withBase(current.style()).withOverlay(overlay.style()));
+    return result;
 }
 
 
@@ -105,7 +105,8 @@ auto MatrixCombinationStyle::combine(const Char &current, const Char &overlay) c
             }
         }
     }
-    return result.withColorOverlay(current.color().overlayWith(overlay.color()));
+    result.setStyle(result.style().withBase(current.style()).withOverlay(overlay.style()));
+    return result;
 }
 
 

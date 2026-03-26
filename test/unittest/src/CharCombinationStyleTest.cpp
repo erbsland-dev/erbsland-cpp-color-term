@@ -46,10 +46,14 @@ public:
         auto style = SimpleCharCombinationStyle{};
         style.add("a", "b", "c");
 
-        const auto result = style.combine(Char{U'a', fg::Green, bg::Blue}, Char{U'b', fg::BrightWhite, bg::Inherited});
+        auto attributes = CharAttributes{};
+        attributes.setUnderline(true);
+        const auto result = style.combine(
+            Char{U'a', fg::Green, bg::Blue}, Char{U'b', Color{fg::BrightWhite, bg::Inherited}, attributes});
 
         REQUIRE_EQUAL(result, U'c');
         REQUIRE_EQUAL(result.color(), Color(fg::BrightWhite, bg::Blue));
+        REQUIRE(result.attributes().isUnderline());
     }
 
     void testMatrixCombinationStyleRejectsInvalidDefinitions() {
@@ -91,5 +95,21 @@ public:
 
         REQUIRE_EQUAL(result, U'╪');
         REQUIRE_EQUAL(result.color(), Color(fg::BrightWhite, bg::Blue));
+    }
+
+    void testCombinationStylesResolveCharacterAttributesLikeColors() {
+        const auto style = SimpleCharCombinationStyle{};
+        auto currentAttributes = CharAttributes{};
+        currentAttributes.setBold(true);
+        auto overlayAttributes = CharAttributes{};
+        overlayAttributes.setBold(false);
+        overlayAttributes.setItalic(true);
+
+        const auto result = style.combine(
+            Char{U'a', Color{fg::Green, bg::Blue}, currentAttributes},
+            Char{U'b', Color{fg::BrightWhite, bg::Inherited}, overlayAttributes});
+
+        REQUIRE_FALSE(result.attributes().isBold());
+        REQUIRE(result.attributes().isItalic());
     }
 };

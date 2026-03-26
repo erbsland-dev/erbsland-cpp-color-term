@@ -37,5 +37,28 @@ auto Size::anchor(const Anchor anchor) const noexcept -> Position {
     return Position{x, y};
 }
 
+auto Size::alignmentOffset(const Size contentSize, const Alignment alignment) const noexcept -> Position {
+    const auto axisOffset = [](const Coordinate availableSize,
+                               const Coordinate renderedSize,
+                               const Alignment axisAlignment) noexcept -> Coordinate {
+        const auto freeSpace = availableSize - renderedSize;
+        switch (axisAlignment) {
+        case Alignment::HCenter:
+        case Alignment::VCenter:
+            return freeSpace / 2;
+        case Alignment::Right:
+        case Alignment::Bottom:
+            return freeSpace;
+        case Alignment::Left:
+        case Alignment::Top:
+        default:
+            return 0;
+        }
+    };
+    return {
+        axisOffset(_width, contentSize.width(), alignment & Alignment::HorizontalMask),
+        axisOffset(_height, contentSize.height(), alignment & Alignment::VerticalMask)};
+}
+
 
 }

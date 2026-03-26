@@ -10,6 +10,49 @@
 Changelog
 *********
 
+Version 1.7.0 - 2026-03-27
+==========================
+
+Release 1.7.0 unifies direct terminal output and buffer-based text rendering around a shared cursor-oriented API. The biggest additions are :cpp:any:`CursorWriter <erbsland::cterm::CursorWriter>` and :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>`, which make it much easier to reuse output code between live terminals, scrollback buffers, and rich text views. This release also introduces explicit character attributes and reusable text styles, expands buffer composition APIs, adds several new demos and reference pages, and improves key decoding and UTF-8 recovery for interactive applications.
+
+Highlights
+----------
+
+*   Added :cpp:any:`CursorWriter <erbsland::cterm::CursorWriter>` as a shared cursor-based output interface implemented by :cpp:any:`Terminal <erbsland::cterm::Terminal>` and :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>`, so the same printing helpers can target both live terminals and in-memory buffers.
+*   Added :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>` with VT100-style wrapping, configurable overflow behavior, paragraph printing, inherited color resolution, and fill-character based screen clearing, which makes scrollback panes, log viewers, and text consoles much easier to implement.
+*   Added :cpp:any:`CharAttributes <erbsland::cterm::CharAttributes>` and :cpp:any:`CharStyle <erbsland::cterm::CharStyle>` so ANSI text attributes and color can be configured, combined, inherited, and reused consistently across direct terminal output, strings, and buffer rendering.
+*   Added :cpp:any:`BufferDrawOptions <erbsland::cterm::BufferDrawOptions>` plus improved :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` buffer-to-buffer drawing support for aligned placement, source cropping, and character-combination based composition.
+*   Added the ``display-all-attributes``, ``key-input-demo``, and ``log-viewer`` demos together with substantially expanded reference and demo documentation for cursor output, text rendering, geometry, fonts, backends, and input handling.
+
+Added
+-----
+
+*   Added :cpp:any:`CursorWriter <erbsland::cterm::CursorWriter>` and :cpp:any:`CursorWriterPtr <erbsland::cterm::CursorWriterPtr>` as the shared public abstraction for cursor-based text output, style changes, cursor movement, paragraph printing, and screen clearing.
+*   Added :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>` with :cpp:any:`CursorBuffer::OverflowMode <erbsland::cterm::CursorBuffer::OverflowMode>` options for shifting, wrapping, or growing scrollback-style buffers at the bottom edge.
+*   Added :cpp:any:`CharAttributes <erbsland::cterm::CharAttributes>` for bold, dim, italic, underline, blink, reverse, hidden, and strikethrough state with explicit specified-versus-inherited semantics.
+*   Added :cpp:any:`CharStyle <erbsland::cterm::CharStyle>` as a reusable combined style object for color plus character attributes, including overlay/base resolution and stable hashing.
+*   Added :cpp:any:`BufferDrawOptions <erbsland::cterm::BufferDrawOptions>` so callers can draw buffers into other buffers with explicit target rectangles, source rectangles, color overwrite behavior, and optional :cpp:any:`CharCombinationStyle <erbsland::cterm::CharCombinationStyle>` composition.
+*   Added the ``display-all-attributes`` demo to show supported ANSI text attributes and style combinations.
+*   Added the ``key-input-demo`` demo to visualize interactive key handling, printable text input, special keys, and live terminal resizing behavior.
+*   Added the ``log-viewer`` demo to demonstrate cursor-based text generation, scrollback handling, follow mode, and :cpp:any:`BufferView <erbsland::cterm::BufferView>` based viewport rendering.
+*   Added new reference chapters for backend integration, cursor output, and text rendering, plus new generated documentation helpers for drawing, drawing text, fonts, and geometry.
+
+Improved
+--------
+
+*   :cpp:any:`Terminal <erbsland::cterm::Terminal>` now implements :cpp:any:`CursorWriter <erbsland::cterm::CursorWriter>`, so direct terminal printing and in-memory cursor output share one conceptual API for colors, character attributes, cursor movement, auto-wrap, and paragraph rendering.
+*   :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` now has broader buffer composition support, making it easier to place pre-rendered regions, cropped views, and combined character artwork inside larger layouts.
+*   :cpp:any:`Char <erbsland::cterm::Char>`, :cpp:any:`String <erbsland::cterm::String>`, and related text-rendering paths now integrate more cleanly with reusable styles, inherited attributes, and multi-codepoint rendering support.
+*   Key decoding and console input handling are more robust, including better handling for printable single-character input, broken UTF-8 lead bytes, chunked input timing, and polling-based POSIX readiness checks.
+*   The documentation now covers cursor-oriented output, ANSI character attributes, text rendering, geometry, fonts, demo applications, and backend behavior in much greater depth.
+
+Implementation
+--------------
+
+*   Added focused unit tests for :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>`, :cpp:any:`CharAttributes <erbsland::cterm::CharAttributes>`, :cpp:any:`CharStyle <erbsland::cterm::CharStyle>`, combined character handling, key decoding, and UTF-8 resynchronization.
+*   Refactored paragraph rendering and related internal helpers so terminal output and cursor-buffer output can share more behavior.
+*   Improved backend internals for attribute emission, input polling, and UTF-8 recovery while keeping the public API higher-level and easier to reuse.
+
 Version 1.6.0 - 2026-03-25
 ==========================
 

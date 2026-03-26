@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "RemappedBuffer.hpp"
 
-
 #include <algorithm>
 #include <cassert>
 #include <format>
@@ -79,7 +78,7 @@ void RemappedBuffer::set(const Position pos, const Char &block) noexcept {
     const auto remappedSecondPosition = remapPosition(secondPosition);
     assert(_size.contains(remappedFirstPosition));
     assert(_size.contains(remappedSecondPosition));
-    _buffer[bufferIndex(remappedSecondPosition)] = Char{"", block.color()};
+    _buffer[bufferIndex(remappedSecondPosition)] = Char{"", block.style()};
     _buffer[bufferIndex(remappedFirstPosition)] = block;
 }
 

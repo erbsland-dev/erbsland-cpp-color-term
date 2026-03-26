@@ -7,14 +7,21 @@ Buffer
 ******
 
 The buffer classes represent rendered terminal content in memory before
-it is written to the screen. :cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` provides the inspection
-API, :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` adds mutation and drawing operations, and
-:cpp:any:`Buffer <erbsland::cterm::Buffer>` is the concrete 2D storage type used in most applications.
-:cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>` adds efficient row- and column-based reordering for
-editors, scrollback views, and other applications that frequently insert, delete, rotate, or move whole lines.
+it is written to the screen.
 
-Use these types when you want to build a frame off-screen, compare two
-frames, copy content between buffers, or derive masks from the rendered
+:cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` provides a read-only inspection API,
+:cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` extends this with mutation and drawing operations, and
+:cpp:any:`Buffer <erbsland::cterm::Buffer>` is the concrete 2D storage type used in most applications.
+
+For more specialized use cases, :cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>` adds efficient
+row- and column-based reordering. This is ideal for editors, scrollback views, or any workload that frequently inserts,
+deletes, or moves whole lines.
+
+Building on top of that, :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>` provides a VT-style
+cursor-writing interface via :cpp:any:`CursorWriter <erbsland::cterm::CursorWriter>`.
+
+Use these types whenever you want to build frames off-screen, compare
+frames, copy content between buffers, or derive masks from rendered
 characters.
 
 Usage
@@ -23,8 +30,8 @@ Usage
 Reading and Writing Through Buffer Interfaces
 ---------------------------------------------
 
-:cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` and :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` let helper functions operate on
-terminal content without depending on one specific implementation.
+:cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` and :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>`
+allow helper functions to operate on terminal content without depending on a specific implementation.
 
 .. code-block:: cpp
 
@@ -40,17 +47,17 @@ terminal content without depending on one specific implementation.
     auto screen = Buffer{Size{80, 24}};
     renderStatusPanel(screen, Rectangle{2, 2, 24, 8});
 
-Use :cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` when a function only needs to inspect content,
-count differences, or create a bitmap mask. Use :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` when
-the function should be able to modify the target buffer without caring
-whether it is a standalone :cpp:any:`Buffer <erbsland::cterm::Buffer>` or another writable implementation.
+Use :cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` when your function only needs to inspect content,
+count differences, or derive masks.
+
+Use :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` when your function should modify the target buffer
+without caring whether it operates on a standalone :cpp:any:`Buffer <erbsland::cterm::Buffer>` or another writable implementation.
 
 Cloning, Copying, and Resizing
 ------------------------------
 
-:cpp:any:`Buffer <erbsland::cterm::Buffer>` supports the common frame-management tasks needed by
-interactive terminal applications: creating a new frame, cloning the
-current state, and resizing a buffer when the terminal size changes.
+:cpp:any:`Buffer <erbsland::cterm::Buffer>` supports the typical frame-management tasks required by interactive
+terminal applications: creating new frames, cloning the current state, and resizing buffers when the terminal size changes.
 
 .. code-block:: cpp
 
@@ -61,17 +68,20 @@ current state, and resizing a buffer when the terminal size changes.
     current.resize(Size{100, 30}, true, Char::space());
     current.setFrom(*previous, Char{" ", Color{fg::Inherited, bg::Black}});
 
-``clone()`` returns a writable copy through the abstract interface, which
-makes it easy to store previous frames for diffing or rollback logic.
-When resizing a concrete :cpp:any:`Buffer <erbsland::cterm::Buffer>`, use the reorder overload if you want
-to preserve existing content while expanding or cropping the canvas.
+``clone()`` returns a writable copy through the abstract interface. This makes it easy to store previous frames for
+diffing, animation steps, or rollback logic.
+
+When resizing a concrete :cpp:any:`Buffer <erbsland::cterm::Buffer>`, use the reorder overload if you want to preserve
+existing content while expanding or cropping the canvas.
 
 Working with Remapped Buffers
 -----------------------------
 
-:cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>` is built for workloads where the visible content stays
-logically grid-based, but the application constantly reshuffles rows or columns. Instead of rewriting every cell for
-line-oriented edits, the buffer keeps remap tables and only refills the rows or columns that become newly empty.
+:cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>` is designed for workloads where the content remains
+logically grid-based, but rows or columns are frequently reshuffled.
+
+Instead of rewriting every affected cell, the buffer maintains remapping tables and only updates rows or columns that
+become newly visible. This keeps operations like scrolling or line insertion efficient, even for large buffers.
 
 .. code-block:: cpp
 
@@ -84,12 +94,56 @@ line-oriented edits, the buffer keeps remap tables and only refills the rows or 
     history.resize(Size{100, 2'000}, true, Char::space());
 
 Use the plain :cpp:any:`RemappedBuffer::resize() <erbsland::cterm::RemappedBuffer::resize>` overload when you want
-the fastest possible resize and you plan to redraw the content anyway. Use the reorder overload when the visible order
-must stay intact while expanding or cropping the canvas.
+maximum performance and plan to redraw the content anyway.
+
+Use the reorder overload when the visible order must remain stable while expanding or cropping the buffer.
+
+Streaming Scrollback with CursorBuffer
+--------------------------------------
+
+:cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>` is the right choice when text is appended over time, as if it
+were written directly to a terminal.
+
+It tracks a cursor position, maintains an active color, and supports streaming writes via
+:cpp:any:`CursorWriter <erbsland::cterm::CursorWriter>`. When the cursor reaches the bottom edge, it can wrap, scroll,
+or grow vertically depending on the configured overflow mode.
+
+Newly created cells are initialized using ``fillChar()``, allowing you to keep a consistent background color or
+placeholder glyph as the buffer grows.
+
+.. code-block:: cpp
+
+    auto logHistory = CursorBuffer{
+        Size{120, 10},
+        CursorBuffer::OverflowMode::ExpandThenShift,
+        Size{120, 500},
+        Char{" ", Color{fg::Default, bg::Black}}};
+
+    logHistory.setColor(Color{fg::BrightBlue, bg::Black});
+    logHistory.printParagraph("2026-03-26 09:02:23 INF Request completed in 43 ms");
+
+    logHistory.setColor(Color{fg::BrightYellow, bg::Black});
+    logHistory.printParagraph("2026-03-26 09:03:04 WRN Cache refresh is still pending");
+
+    const auto visibleTop = std::max(0, logHistory.size().height() - 20);
+    auto view = BufferConstRefView{logHistory, Rectangle{0, visibleTop, 120, 20}};
+    terminal.updateScreen(view);
+
+This pattern works especially well for log viewers, REPL-style tools, dashboards, or any application that needs a
+growing history buffer with a live viewport onto the most recent content.
+
+If your fill strategy changes later, update it with
+:cpp:any:`CursorBuffer::setFillChar <erbsland::cterm::CursorBuffer::setFillChar>`.
+
+For details about the streaming API itself—such as ``print()``, ``printLine()``, and cursor movement—see
+:doc:`Cursor Output <cursor-output>`.
 
 .. important::
 
-    For an efficient render loop, keep a persistent instance of :cpp:any:`Buffer <erbsland::cterm::Buffer>` and simply resize it when the terminal size changes. Reusing the same buffer avoids unnecessary memory allocations and keeps rendering fast.
+    For an efficient render loop, keep a persistent instance of :cpp:any:`Buffer <erbsland::cterm::Buffer>` and
+    simply resize it when the terminal size changes.
+
+    Reusing the same buffer avoids unnecessary memory allocations and helps keep rendering predictable and fast.
 
     A typical render loop might look like this:
 
@@ -115,8 +169,8 @@ must stay intact while expanding or cropping the canvas.
 Building Buffers from Text Lines
 --------------------------------
 
-For status panes, generated reports, and static panels, :cpp:any:`Buffer <erbsland::cterm::Buffer>` can be
-created directly from line-oriented text.
+For status panels, generated reports, or static UI elements,
+:cpp:any:`Buffer <erbsland::cterm::Buffer>` can be constructed directly from line-oriented text.
 
 .. code-block:: cpp
 
@@ -129,13 +183,13 @@ created directly from line-oriented text.
     screen.setFrom(help, Char::space());
 
 This is often the fastest way to turn preformatted terminal text into a
-buffer that can later be positioned inside a larger layout.
+buffer that can later be positioned within a larger layout.
 
 Comparing Frames and Deriving Masks
 -----------------------------------
 
-:cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` also provides analysis helpers that are useful for
-tests, animation pipelines, and bitmap-based effects.
+:cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>` also provides analysis helpers that are useful for tests,
+animation pipelines, and bitmap-based effects.
 
 .. code-block:: cpp
 
@@ -146,9 +200,8 @@ tests, animation pipelines, and bitmap-based effects.
         // React to the changed frame content.
     }
 
-``toMask()`` is especially handy when a rendered buffer should drive a
-later bitmap transformation or when a test wants to reason about the
-visible structure instead of raw cell colors.
+Use ``toMask()`` when you want to reason about the *structure* of rendered content (for example, line art or borders)
+instead of raw character or color data.
 
 Interface
 =========
@@ -164,3 +217,7 @@ Interface
 
 .. doxygenclass:: erbsland::cterm::RemappedBuffer
     :members:
+
+.. doxygenclass:: erbsland::cterm::CursorBuffer
+    :members:
+

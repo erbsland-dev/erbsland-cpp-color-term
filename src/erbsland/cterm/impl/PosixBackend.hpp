@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <memory>
 #include <mutex>
+#include <string>
 
 
 namespace erbsland::cterm::impl {
@@ -68,6 +69,14 @@ private:
     void initializeKeyInputSession();
     /// Restore a key interactive session.
     void restoreKeyInputSession();
+    /// Wait until stdin becomes readable.
+    [[nodiscard]] static auto waitForInput(std::chrono::milliseconds timeout) -> bool;
+    /// Poll whether stdin is currently readable without blocking.
+    [[nodiscard]] static auto pollForInput() -> bool;
+    /// Read one chunk of raw input from stdin.
+    [[nodiscard]] static auto readInputChunk() -> std::string;
+    /// Read one or more available chunks and append them to the pending key buffer.
+    void appendInputChunks(std::chrono::milliseconds timeout);
     /// Restore the terminal and terminate the process for one handled signal.
     void handleProcessSignal(int signalNumber) noexcept;
 
@@ -87,6 +96,7 @@ private:
     Input::Mode _inputMode{Input::Mode::ReadLine};         ///< The current input mode.
     bool _isAlternateScreenActive = false;                 ///< remember if we are in alternate screen mode.
     termios _originalState{};                              ///< state backup.
+    std::string _pendingKeyInput;                          ///< Buffered raw input that was not yet decoded.
     std::unique_ptr<PosixSignalDispatcher> _signalHandler; ///< Helper that forwards termination signals safely.
 };
 

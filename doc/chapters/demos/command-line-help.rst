@@ -30,6 +30,7 @@ The following excerpt shows the rich help output with a deterministic simulated 
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[?25l␛[92mcommand-line-help␛[37m [␛[35m<options>␛[37m]
     

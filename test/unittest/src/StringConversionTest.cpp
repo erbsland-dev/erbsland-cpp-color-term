@@ -30,17 +30,57 @@ public:
         REQUIRE(String::fromLines(std::initializer_list<std::u32string_view>{}).empty());
     }
 
-    void testSplitWordsSkipsSpacingAndAppendUsesTheCurrentColorWithinOneCall() {
+    void testFromLinesCanApplyBaseAttributes() {
+        auto attributes = CharAttributes{};
+        attributes.setBold(true);
+        attributes.setUnderline(true);
+
+        const auto text = String::fromLines({"A", "B"}, Color{fg::Red, bg::Blue}, attributes);
+
+        REQUIRE_EQUAL(render(text), std::string{"A\nB"});
+        REQUIRE(text[0].attributes().isBold());
+        REQUIRE(text[0].attributes().isUnderline());
+        REQUIRE(text[1].attributes().isBold());
+        REQUIRE(text[1].attributes().isUnderline());
+        REQUIRE(text[2].attributes().isBold());
+        REQUIRE(text[2].attributes().isUnderline());
+    }
+
+    void testStringAndFromLinesAcceptCharStyleForUniformFormatting() {
+        auto attributes = CharAttributes{};
+        attributes.setItalic(true);
+        const auto style = CharStyle{Color{fg::Green, bg::Black}, attributes};
+
+        const auto text = String{"AB", style};
+        const auto lines = String::fromLines({"A", "B"}, style);
+
+        REQUIRE_EQUAL(text[0].color(), Color(fg::Green, bg::Black));
+        REQUIRE(text[1].attributes().isItalic());
+        REQUIRE_EQUAL(lines[0].color(), Color(fg::Green, bg::Black));
+        REQUIRE(lines[2].attributes().isItalic());
+    }
+
+    void testSplitWordsSkipsSpacingAndAppendUsesTheCurrentFormattingWithinOneCall() {
         auto text = String{};
-        text.append(fg::Yellow, bg::Blue, "alpha beta", String{"!"}, Char{U'?'});
+        auto bold = CharAttributes{};
+        bold.setBold(true);
+        auto noBold = CharAttributes{};
+        noBold.setBold(false);
+        auto emphasis = CharStyle{Color{fg::Yellow, bg::Blue}, bold};
+        text.append(emphasis, "alpha beta", String{"!"}, noBold, Char{U'?'});
 
         REQUIRE_EQUAL(text.size(), std::size_t{12});
         REQUIRE_EQUAL(text[0].color(), Color(fg::Yellow, bg::Blue));
+        REQUIRE(text[0].attributes().isBold());
         REQUIRE_EQUAL(text[5].color(), Color(fg::Yellow, bg::Blue));
+        REQUIRE(text[5].attributes().isBold());
         REQUIRE_EQUAL(text[9].color(), Color(fg::Yellow, bg::Blue));
+        REQUIRE(text[9].attributes().isBold());
         REQUIRE_EQUAL(text[10].color(), Color(fg::Yellow, bg::Blue));
+        REQUIRE(text[10].attributes().isBold());
         REQUIRE_EQUAL(text[10], U'!');
         REQUIRE_EQUAL(text[11].color(), Color(fg::Yellow, bg::Blue));
+        REQUIRE_FALSE(text[11].attributes().isBold());
         REQUIRE_EQUAL(text[11], U'?');
 
         const auto words = String{"  alpha\tbeta\n\ngamma  "}.splitWords();

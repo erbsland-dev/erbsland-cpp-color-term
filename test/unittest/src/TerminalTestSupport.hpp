@@ -4,10 +4,7 @@
 
 #include "TestHelper.hpp"
 
-#include <erbsland/unittest/UnitTest.hpp>
-
 #include <chrono>
-#include <format>
 #include <memory>
 #include <optional>
 #include <queue>
@@ -42,6 +39,14 @@ public:
         return _supportsAlternateScreenBufferCodes;
     }
 
+    [[nodiscard]] auto supportedCharAttributes() const noexcept -> CharAttributes override {
+        return _supportedCharAttributes;
+    }
+
+    [[nodiscard]] auto supportedCharAttributeCodes() const noexcept -> CharAttributes override {
+        return _supportedCharAttributeCodes;
+    }
+
     [[nodiscard]] auto isInteractive() const noexcept -> bool override { return _isInteractive; }
 
     [[nodiscard]] auto detectScreenSize() -> std::optional<Size> override {
@@ -50,6 +55,8 @@ public:
     }
 
     void emitColor(const Color color) override { _emittedColors.push_back(color); }
+
+    void emitCharAttributes(const CharAttributes attributes) override { _emittedCharAttributes.push_back(attributes); }
 
     void moveCursor(const Position pos, const MoveMode mode) override { _cursorMoves.push_back(CursorMove{pos, mode}); }
 
@@ -107,6 +114,7 @@ public:
     void clearRecordedOperations() {
         _emittedText.clear();
         _emittedColors.clear();
+        _emittedCharAttributes.clear();
         _cursorMoves.clear();
         _clearScreenCallCount = 0;
         _cursorVisibilityChanges.clear();
@@ -123,6 +131,8 @@ public:
     bool _supportsCursorCodes = true;
     bool _supportsCursorVisibilityCodes = true;
     bool _supportsAlternateScreenBufferCodes = true;
+    CharAttributes _supportedCharAttributes = CharAttributes::all();
+    CharAttributes _supportedCharAttributeCodes = CharAttributes::all();
     bool _isInteractive = true;
     bool _isAlternateScreenActive = false;
     std::optional<Size> _detectedScreenSize{};
@@ -136,6 +146,7 @@ public:
     int _readKeyCallCount = 0;
     int _readLineCallCount = 0;
     std::vector<Color> _emittedColors;
+    std::vector<CharAttributes> _emittedCharAttributes;
     std::vector<CursorMove> _cursorMoves;
     std::vector<bool> _cursorVisibilityChanges;
     std::vector<bool> _alternateScreenBufferChanges;
@@ -146,48 +157,12 @@ public:
 };
 
 
-class TerminalTestHelper : public el::UnitTest {
+class TerminalTestHelper : public BufferTestHelper {
 public:
     auto createTerminal(const std::shared_ptr<TerminalTestBackend> &backend, const Size size = Size{80, 25})
         -> std::unique_ptr<Terminal> {
         auto terminal = std::make_unique<Terminal>(size);
         terminal->setBackend(backend);
         return terminal;
-    }
-
-    auto createBuffer(const std::initializer_list<std::string_view> rows) -> Buffer {
-        REQUIRE_FALSE(rows.size() == 0);
-        auto width = Coordinate{0};
-        auto rowIndex = 0;
-        for (const auto row : rows) {
-            runWithContext(
-                SOURCE_LOCATION(),
-                [&]() {
-                    REQUIRE_FALSE(row.empty());
-                    if (width == 0) {
-                        width = static_cast<Coordinate>(row.size());
-                    } else {
-                        REQUIRE_EQUAL(static_cast<Coordinate>(row.size()), width);
-                    }
-                },
-                [&]() -> std::string {
-                    return std::format(
-                        "rowIndex = {} / row = \"{}\" / rowSize = {} / expectedWidth = {}",
-                        rowIndex,
-                        row,
-                        row.size(),
-                        width);
-                });
-            rowIndex += 1;
-        }
-        auto buffer = Buffer{Size{width, static_cast<Coordinate>(rows.size())}};
-        auto y = Coordinate{0};
-        for (const auto row : rows) {
-            for (auto x = Coordinate{0}; x < width; ++x) {
-                buffer.set(Position{x, y}, Char{static_cast<char32_t>(static_cast<unsigned char>(row[x]))});
-            }
-            y += 1;
-        }
-        return buffer;
     }
 };

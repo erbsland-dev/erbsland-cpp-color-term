@@ -41,28 +41,28 @@ auto FrameWeaverApp::canvasSize() const noexcept -> Size {
 
 
 void FrameWeaverApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, 'q'}) {
+    if (key == Key{Key::Character, U'q'}) {
         _quitRequested = true;
-    } else if (key == Key{Key::Character, 'c'}) {
+    } else if (key == Key{Key::Character, U'c'}) {
         _frames.clear();
         _accumulator = std::chrono::milliseconds{};
-    } else if (key == Key{Key::Character, 'f'}) {
+    } else if (key == Key{Key::Character, U'f'}) {
         _frameDelay = std::max(std::chrono::milliseconds{250}, _frameDelay - std::chrono::milliseconds{150});
-    } else if (key == Key{Key::Character, 's'}) {
+    } else if (key == Key{Key::Character, U's'}) {
         _frameDelay = std::min(std::chrono::milliseconds{2000}, _frameDelay + std::chrono::milliseconds{150});
-    } else if (key == Key{Key::Character, '1'}) {
+    } else if (key == Key{Key::Character, U'1'}) {
         _styleMode = StyleMode::Light;
-    } else if (key == Key{Key::Character, '2'}) {
+    } else if (key == Key{Key::Character, U'2'}) {
         _styleMode = StyleMode::Double;
-    } else if (key == Key{Key::Character, '3'}) {
+    } else if (key == Key{Key::Character, U'3'}) {
         _styleMode = StyleMode::Heavy;
-    } else if (key == Key{Key::Character, '4'}) {
+    } else if (key == Key{Key::Character, U'4'}) {
         _styleMode = StyleMode::Mixed;
-    } else if (key == Key{Key::Character, '5'}) {
+    } else if (key == Key{Key::Character, U'5'}) {
         _styleMode = StyleMode::Block;
-    } else if (key == Key{Key::Character, '6'}) {
+    } else if (key == Key{Key::Character, U'6'}) {
         _styleMode = StyleMode::Custom;
-    } else if (key == Key{Key::Character, '7'}) {
+    } else if (key == Key{Key::Character, U'7'}) {
         _styleMode = StyleMode::All;
     }
 }

@@ -5,19 +5,15 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-#include <string>
-#include <vector>
-
-
 TESTED_TARGETS(Buffer)
-class BufferConvenienceTest final : public el::UnitTest {
+class BufferConvenienceTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
 public:
     void testFillWritesTheWholeBuffer() {
         auto buffer = Buffer{Size{3, 2}};
 
         buffer.fill(Char{U'X', fg::Green, bg::Black});
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"XXX", "XXX"}));
+        requireRowsEqual(buffer, {"XXX", "XXX"});
         REQUIRE_EQUAL(buffer.get(Position{1, 1}).color(), Color(fg::Green, bg::Black));
     }
 
@@ -26,7 +22,7 @@ public:
 
         buffer.drawFilledFrame(Rectangle{0, 0, 5, 3}, Tile9Style::create("ABCDEFGHI"), Char{U'.'});
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"ABBBC", "D...F", "GHHHI"}));
+        requireRowsEqual(buffer, {"ABBBC", "D...F", "GHHHI"});
     }
 
     void testDrawTextAtPositionUsesTheExistingBufferColorAsBaseColor() {
@@ -35,23 +31,54 @@ public:
 
         buffer.drawText(Position{1, 0}, String{"A\nB"});
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({" A  ", " B  "}));
+        requireRowsEqual(buffer, {" A  ", " B  "});
         REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::White, bg::Blue));
         REQUIRE_EQUAL(buffer.get(Position{1, 1}).color(), Color(fg::White, bg::Blue));
     }
 
-private:
-    [[nodiscard]] static auto renderRows(const Buffer &buffer) -> std::vector<std::string> {
-        auto rows = std::vector<std::string>{};
-        rows.reserve(static_cast<std::size_t>(buffer.size().height()));
-        for (int y = 0; y < buffer.size().height(); ++y) {
-            auto row = std::string{};
-            row.reserve(static_cast<std::size_t>(buffer.size().width()));
-            for (int x = 0; x < buffer.size().width(); ++x) {
-                buffer.get(Position{x, y}).appendTo(row);
-            }
-            rows.push_back(row);
-        }
-        return rows;
+    void testDrawBufferAtPositionUsesExistingTargetColorAsBaseColor() {
+        auto source = Buffer{Size{2, 1}};
+        source.set(Position{0, 0}, Char{U'A', fg::Red});
+        source.set(Position{1, 0}, Char{U'B', fg::Green});
+        auto buffer = Buffer{Size{4, 1}};
+        buffer.fill(Char{U' ', fg::White, bg::Blue});
+
+        buffer.drawBuffer(source, Position{1, 0});
+
+        requireRowsEqual(buffer, {" AB "});
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Red, bg::Blue));
+        REQUIRE_EQUAL(buffer.get(Position{2, 0}).color(), Color(fg::Green, bg::Blue));
+    }
+
+    void testDrawBufferRectangleUsesAlignmentWhenCroppingTheSource() {
+        auto source = createBuffer({"ABCD"});
+        auto buffer = Buffer{Size{2, 1}};
+
+        buffer.drawBuffer(source, Rectangle{0, 0, 2, 1}, Alignment::Right);
+
+        requireRowsEqual(buffer, {"CD"});
+    }
+
+    void testDrawBufferOptionsCanOverwriteColorsAndCropTheSourceRectangle() {
+        auto source = createBuffer({"ABCD"});
+        source.set(Position{1, 0}, Char{U'B', fg::Red});
+        source.set(Position{2, 0}, Char{U'C', fg::Green});
+        auto buffer = Buffer{Size{2, 1}};
+        buffer.fill(Char{U' ', fg::White, bg::Blue});
+        auto options = BufferDrawOptions{};
+        options.setSourceRect(Rectangle{1, 0, 2, 1});
+        options.setOverwriteColors(true);
+
+        buffer.drawBuffer(source, options);
+
+        requireRowsEqual(buffer, {"BC"});
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Red, bg::Inherited));
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Green, bg::Inherited));
+    }
+
+    void testDrawBufferRejectsDrawingOntoTheSameBuffer() {
+        auto buffer = createBuffer({"ABC "});
+
+        REQUIRE_THROWS_AS(std::invalid_argument, buffer.drawBuffer(buffer, Position{1, 0}));
     }
 };

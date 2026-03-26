@@ -133,4 +133,35 @@ public:
         REQUIRE_EQUAL(backend->_cursorMoves[0], (TerminalTestBackend::CursorMove{Position{0, 0}, MoveMode::Absolute}));
         REQUIRE_EQUAL(backend->output(), std::string{"ABCDE"});
     }
+
+    void testTerminalUsesEmitCharAttributesWhenAnsiAttributeCodesAreUnavailable() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        backend->_supportedCharAttributes = CharAttributes::fromMask(CharAttributes::Underline.value);
+        backend->_supportedCharAttributeCodes = CharAttributes::fromMask(0);
+        auto terminal = createTerminal(backend);
+
+        REQUIRE_FALSE(terminal->lineBufferEnabled());
+
+        terminal->setUnderline(true);
+        terminal->write(Char{U'A'});
+        terminal->flush();
+
+        REQUIRE_EQUAL(backend->_emittedCharAttributes.size(), std::size_t{1});
+        REQUIRE(backend->_emittedCharAttributes[0].isUnderline());
+        REQUIRE_EQUAL(backend->output(), std::string{"A"});
+        REQUIRE(backend->output().find("\x1b[4m") == std::string::npos);
+    }
+
+    void testUnsupportedCharacterAttributesAreIgnored() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        backend->_supportedCharAttributes = CharAttributes::fromMask(0);
+        backend->_supportedCharAttributeCodes = CharAttributes::fromMask(0);
+        auto terminal = createTerminal(backend);
+
+        terminal->setBold(true);
+
+        REQUIRE_FALSE(terminal->charAttributes().isBold());
+        REQUIRE_EQUAL(backend->_emittedCharAttributes.size(), std::size_t{0});
+        REQUIRE(backend->output().find("\x1b[1m") == std::string::npos);
+    }
 };

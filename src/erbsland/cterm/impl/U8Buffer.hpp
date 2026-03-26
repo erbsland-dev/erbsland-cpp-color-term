@@ -14,6 +14,25 @@
 namespace erbsland::cterm::impl {
 
 
+/// Status for parsing one UTF-8 code point from the front of a byte buffer.
+enum class U8ParseStatus : uint8_t {
+    /// A full code point was parsed successfully.
+    Parsed,
+    /// More bytes are required to decide.
+    NeedMoreData,
+    /// The leading bytes are invalid or unsupported.
+    Invalid,
+};
+
+
+/// Result of parsing one UTF-8 code point from a byte buffer.
+struct U8ParseResult final {
+    U8ParseStatus status{U8ParseStatus::Invalid}; ///< The parsing status.
+    char32_t codePoint{0};                        ///< The parsed code point for `Parsed`.
+    std::size_t consumedByteCount{0};             ///< Number of bytes consumed or rejected.
+};
+
+
 /// A safe and reliable UTF-8 decoder/encoder.
 template <typename T>
     requires(std::is_integral_v<T> && sizeof(T) == 1)
@@ -59,13 +78,38 @@ public:
     /// Expects that the given view contains exactly one UTF-8 encoded code point.
     /// @return The decoded code point.
     /// @throws std::invalid_argument if the view does not contain exactly one code point.
-    auto decodeOneChar() -> char32_t {
+    [[nodiscard]] auto decodeOneChar() const -> char32_t {
         auto position = std::size_t{0};
         const auto codePoint = decodeChar(_buffer, position);
         if (position != _buffer.size()) {
             throw std::invalid_argument{"decodeOneChar() expects a single code point."};
         }
         return codePoint;
+    }
+
+    /// Parse one UTF-8 code point from the buffer at the given byte offset.
+    /// @param offset The byte offset into the buffer.
+    /// @return The parsing status, code point, and consumed byte count.
+    [[nodiscard]] auto parseCodePointPrefix(const std::size_t offset = 0) const noexcept -> U8ParseResult {
+        if (offset >= _buffer.size()) {
+            return {.status = U8ParseStatus::Invalid, .consumedByteCount = offset};
+        }
+        const auto firstByte = static_cast<Byte>(_buffer[offset]);
+        const auto byteCount = expectedByteCount(firstByte);
+        if (byteCount == 0) {
+            return {.status = U8ParseStatus::Invalid, .consumedByteCount = offset + 1};
+        }
+        if ((offset + byteCount) > _buffer.size()) {
+            return {.status = U8ParseStatus::NeedMoreData, .consumedByteCount = offset};
+        }
+        try {
+            auto position = offset;
+            const auto codePoint = decodeChar(_buffer, position);
+            return {.status = U8ParseStatus::Parsed, .codePoint = codePoint, .consumedByteCount = position};
+        } catch (...) {
+            // Resynchronize one byte at a time so a broken multi-byte prefix does not swallow following valid input.
+            return {.status = U8ParseStatus::Invalid, .consumedByteCount = offset + 1};
+        }
     }
 
     /// Throw an encoding error.
@@ -76,6 +120,42 @@ public:
     /// Test if the given Unicode code point is valid.
     [[nodiscard]] constexpr static auto isValidUnicode(const char32_t unicode) noexcept -> bool {
         return unicode <= 0x10FFFFU && (unicode < 0xD800U || unicode > 0xDFFFU);
+    }
+
+    /// Get the number of UTF-8 bytes required to encode a Unicode code point.
+    /// @param unicode The Unicode code point.
+    /// @return The encoded byte count.
+    [[nodiscard]] constexpr static auto encodedByteCount(const char32_t unicode) noexcept -> std::size_t {
+        const auto value = static_cast<uint32_t>(unicode);
+        if (value <= 0x7FU) {
+            return 1;
+        }
+        if (value <= 0x7FFU) {
+            return 2;
+        }
+        if (value <= 0xFFFFU) {
+            return 3;
+        }
+        return 4;
+    }
+
+    /// Get the number of bytes expected for a UTF-8 sequence from its first byte.
+    /// @param firstByte The leading byte of the sequence.
+    /// @return The expected byte count, or `0` for an invalid leading byte.
+    [[nodiscard]] constexpr static auto expectedByteCount(const Byte firstByte) noexcept -> std::size_t {
+        if (firstByte < 0x80U) {
+            return 1;
+        }
+        if ((firstByte & 0b11100000U) == 0b11000000U && firstByte >= 0b11000010U) {
+            return 2;
+        }
+        if ((firstByte & 0b11110000U) == 0b11100000U) {
+            return 3;
+        }
+        if ((firstByte & 0b11111000U) == 0b11110000U && firstByte < 0b11110101U) {
+            return 4;
+        }
+        return 0;
     }
 
     /// Decode a single UTF-8 character in the buffer and advance the position.
@@ -94,19 +174,21 @@ public:
             position = index;
             return result;
         }
-        std::size_t cSize = 0;
+        const auto cSize = expectedByteCount(c);
+        if (cSize == 0) {
+            throwEncodingError("Invalid or out-of-range start byte sequence.");
+        }
         char32_t unicodeValue{};
-        if ((c & Byte{0b11100000U}) == Byte{0b11000000U} && c >= Byte{0b11000010U}) {
-            cSize = 2; // 2-byte sequence
+        if (cSize == 2) {
             unicodeValue = static_cast<char32_t>(c & Byte{0b00011111U});
-        } else if ((c & Byte{0b11110000U}) == Byte{0b11100000U}) {
-            cSize = 3; // 3-byte sequence
+        } else if (cSize == 3) {
             unicodeValue = static_cast<char32_t>(c & Byte{0b00001111U});
-        } else if ((c & Byte{0b11111000U}) == Byte{0b11110000U} && c < Byte{0b11110101U}) {
-            cSize = 4; // 4-byte sequence
+        } else if (cSize == 4) {
             unicodeValue = static_cast<char32_t>(c & Byte{0b00000111U});
         } else {
-            throwEncodingError("Invalid or out-of-range start byte sequence.");
+            const auto result = static_cast<char32_t>(c);
+            position = index;
+            return result;
         }
         for (std::size_t i = 1; i < cSize; ++i) {
             if (index >= buffer.size()) {

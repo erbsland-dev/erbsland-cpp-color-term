@@ -100,23 +100,41 @@ public:
         /// The encoded color value.
         Value value;
     };
+    /// ANSI black.
     constexpr static auto Black = Hue{Value::Black};
+    /// ANSI red.
     constexpr static auto Red = Hue{Value::Red};
+    /// ANSI green.
     constexpr static auto Green = Hue{Value::Green};
+    /// ANSI yellow.
     constexpr static auto Yellow = Hue{Value::Yellow};
+    /// ANSI blue.
     constexpr static auto Blue = Hue{Value::Blue};
+    /// ANSI magenta.
     constexpr static auto Magenta = Hue{Value::Magenta};
+    /// ANSI cyan.
     constexpr static auto Cyan = Hue{Value::Cyan};
+    /// ANSI white / light gray.
     constexpr static auto White = Hue{Value::White};
+    /// Bright black / gray.
     constexpr static auto BrightBlack = Hue{Value::BrightBlack};
+    /// Bright red.
     constexpr static auto BrightRed = Hue{Value::BrightRed};
+    /// Bright green.
     constexpr static auto BrightGreen = Hue{Value::BrightGreen};
+    /// Bright yellow.
     constexpr static auto BrightYellow = Hue{Value::BrightYellow};
+    /// Bright blue.
     constexpr static auto BrightBlue = Hue{Value::BrightBlue};
+    /// Bright magenta.
     constexpr static auto BrightMagenta = Hue{Value::BrightMagenta};
+    /// Bright cyan.
     constexpr static auto BrightCyan = Hue{Value::BrightCyan};
+    /// Bright white.
     constexpr static auto BrightWhite = Hue{Value::BrightWhite};
+    /// Reset this color role to the terminal default.
     constexpr static auto Default = Hue{Value::Default};
+    /// Preserve the color from the layer below.
     constexpr static auto Inherited = Hue{Value::Inherited};
 
 public:

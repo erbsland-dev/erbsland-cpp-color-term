@@ -33,9 +33,16 @@ Each executable corresponds to one of the demos listed below.
 .. toctree::
     :maxdepth: 1
 
+    minimum-effort
     terminal-chronicle
     command-line-help
+    display-all-attributes
+    display-all-colors
+    frame-color-animations
     retro-plasma
     frame-weaver
+    key-input-demo
+    log-viewer
     text-gallery
     bitmap-showcase
+    update-screen-modes

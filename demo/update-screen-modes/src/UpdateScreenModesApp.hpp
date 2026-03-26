@@ -30,7 +30,7 @@ private:
     void drawFooter(Rectangle footerRect);
     static void appendStateLine(String &text, std::string_view label, bool enabled) noexcept;
     static void appendTimingLine(String &text, std::string_view label, double milliseconds) noexcept;
-    [[nodiscard]] static auto matchesCharacterKey(const Key &key, char lowerCase) noexcept -> bool;
+    [[nodiscard]] static auto matchesCharacterKey(const Key &key, char32_t lowerCase) noexcept -> bool;
 
 private:
     Terminal _terminal{Size{94, 28}};

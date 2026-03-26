@@ -12,6 +12,7 @@
 
 static_assert(std::is_same_v<decltype(Size{}.width()), Coordinate>);
 static_assert(std::is_same_v<decltype(Size{}.height()), Coordinate>);
+static_assert(std::is_same_v<decltype(Size{}.alignmentOffset(Size{}, Alignment::TopLeft)), Position>);
 
 
 TESTED_TARGETS(Size)
@@ -95,6 +96,16 @@ public:
         REQUIRE_EQUAL(size.anchor(Anchor::BottomLeft), Position(0, 20));
         REQUIRE_EQUAL(size.anchor(Anchor::BottomCenter), Position(5, 20));
         REQUIRE_EQUAL(size.anchor(Anchor::BottomRight), Position(10, 20));
+    }
+
+    void testAlignmentOffset() {
+        size = Size(10, 6);
+        REQUIRE_EQUAL(size.alignmentOffset(Size(4, 2), Alignment::TopLeft), Position(0, 0));
+        REQUIRE_EQUAL(size.alignmentOffset(Size(4, 2), Alignment::Center), Position(3, 2));
+        REQUIRE_EQUAL(size.alignmentOffset(Size(4, 2), Alignment::BottomRight), Position(6, 4));
+        REQUIRE_EQUAL(size.alignmentOffset(Size(14, 8), Alignment::TopLeft), Position(0, 0));
+        REQUIRE_EQUAL(size.alignmentOffset(Size(14, 8), Alignment::Center), Position(-2, -1));
+        REQUIRE_EQUAL(size.alignmentOffset(Size(14, 8), Alignment::BottomRight), Position(-4, -2));
     }
 
     void testIsInRange() {

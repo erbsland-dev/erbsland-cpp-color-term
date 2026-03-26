@@ -3,6 +3,7 @@
 #include "WindowsBackend.hpp"
 
 
+#include "UnicodeWidth.hpp"
 #include "WindowsSignalDispatcher.hpp"
 
 #include <conio.h>
@@ -139,13 +140,17 @@ auto WindowsBackend::readKey(std::chrono::milliseconds timeout) -> Key {
     if (_inputMode == Input::Mode::ReadLine) {
         return Key::fromConsoleInput(readLine());
     }
+    if (!_pendingKeys.empty()) {
+        const auto key = _pendingKeys.front();
+        _pendingKeys.pop_front();
+        return key;
+    }
     using namespace std::chrono;
     const auto inputHandle = GetStdHandle(STD_INPUT_HANDLE);
     const auto timeoutMilliseconds = (timeout.count() == 0) ? INFINITE : static_cast<DWORD>(timeout.count() / 2);
     if (WaitForSingleObject(inputHandle, timeoutMilliseconds) != WAIT_OBJECT_0) {
         return {};
     }
-    Key lastKey{};
     for (;;) {
         DWORD available = 0;
         if ((GetNumberOfConsoleInputEvents(inputHandle, &available) == 0) || available == 0) {
@@ -169,95 +174,132 @@ auto WindowsBackend::readKey(std::chrono::milliseconds timeout) -> Key {
 
         switch (keyEvent.wVirtualKeyCode) {
         case VK_UP:
-            lastKey = {Key::Up};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Up}, keyEvent.wRepeatCount);
             break;
         case VK_DOWN:
-            lastKey = {Key::Down};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Down}, keyEvent.wRepeatCount);
             break;
         case VK_LEFT:
-            lastKey = {Key::Left};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Left}, keyEvent.wRepeatCount);
             break;
         case VK_RIGHT:
-            lastKey = {Key::Right};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Right}, keyEvent.wRepeatCount);
             break;
         case VK_RETURN:
-            lastKey = {Key::Enter};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Enter}, keyEvent.wRepeatCount);
             break;
         case VK_TAB:
-            lastKey = {Key::Tab};
+            flushPendingTextInput();
+            if ((keyEvent.dwControlKeyState & SHIFT_PRESSED) != 0) {
+                enqueueKey(Key{Key::BackTab}, keyEvent.wRepeatCount);
+            } else {
+                enqueueKey(Key{Key::Tab}, keyEvent.wRepeatCount);
+            }
             break;
         case VK_SPACE:
-            lastKey = {Key::Space};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Space}, keyEvent.wRepeatCount);
             break;
         case VK_ESCAPE:
-            lastKey = {Key::Escape};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Escape}, keyEvent.wRepeatCount);
             break;
         case VK_BACK:
-            lastKey = {Key::Backspace};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Backspace}, keyEvent.wRepeatCount);
             break;
         case VK_INSERT:
-            lastKey = {Key::Insert};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Insert}, keyEvent.wRepeatCount);
             break;
         case VK_DELETE:
-            lastKey = {Key::Delete};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Delete}, keyEvent.wRepeatCount);
             break;
         case VK_HOME:
-            lastKey = {Key::Home};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::Home}, keyEvent.wRepeatCount);
             break;
         case VK_END:
-            lastKey = {Key::End};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::End}, keyEvent.wRepeatCount);
             break;
         case VK_PRIOR:
-            lastKey = {Key::PageUp};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::PageUp}, keyEvent.wRepeatCount);
             break;
         case VK_NEXT:
-            lastKey = {Key::PageDown};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::PageDown}, keyEvent.wRepeatCount);
             break;
         case VK_F1:
-            lastKey = {Key::F1};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F1}, keyEvent.wRepeatCount);
             break;
         case VK_F2:
-            lastKey = {Key::F2};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F2}, keyEvent.wRepeatCount);
             break;
         case VK_F3:
-            lastKey = {Key::F3};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F3}, keyEvent.wRepeatCount);
             break;
         case VK_F4:
-            lastKey = {Key::F4};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F4}, keyEvent.wRepeatCount);
             break;
         case VK_F5:
-            lastKey = {Key::F5};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F5}, keyEvent.wRepeatCount);
             break;
         case VK_F6:
-            lastKey = {Key::F6};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F6}, keyEvent.wRepeatCount);
             break;
         case VK_F7:
-            lastKey = {Key::F7};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F7}, keyEvent.wRepeatCount);
             break;
         case VK_F8:
-            lastKey = {Key::F8};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F8}, keyEvent.wRepeatCount);
             break;
         case VK_F9:
-            lastKey = {Key::F9};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F9}, keyEvent.wRepeatCount);
             break;
         case VK_F10:
-            lastKey = {Key::F10};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F10}, keyEvent.wRepeatCount);
             break;
         case VK_F11:
-            lastKey = {Key::F11};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F11}, keyEvent.wRepeatCount);
             break;
         case VK_F12:
-            lastKey = {Key::F12};
+            flushPendingTextInput();
+            enqueueKey(Key{Key::F12}, keyEvent.wRepeatCount);
             break;
         default:
-            if (keyEvent.uChar.AsciiChar != 0) {
-                lastKey = {Key::Character, static_cast<char>(keyEvent.uChar.AsciiChar)};
+            if (const auto codePoint = decodeUtf16CodeUnit(static_cast<char16_t>(keyEvent.uChar.UnicodeChar));
+                codePoint.has_value()) {
+                appendTextCodePoint(*codePoint, keyEvent.wRepeatCount);
             }
             break;
         }
     }
-
-    return lastKey;
+    flushPendingTextInput();
+    if (_pendingKeys.empty()) {
+        return {};
+    }
+    const auto key = _pendingKeys.front();
+    _pendingKeys.pop_front();
+    return key;
 }
 
 auto WindowsBackend::readLine() -> std::string {
@@ -316,6 +358,67 @@ auto WindowsBackend::changeCursorVisibility(bool visible) -> bool {
     cursorInfo.bVisible = visible ? TRUE : FALSE;
     ::SetConsoleCursorInfo(outputHandle, &cursorInfo);
     return previousState;
+}
+
+void WindowsBackend::enqueueKey(const Key &key, const std::size_t repeatCount) {
+    for (std::size_t index = 0; index < repeatCount; ++index) {
+        _pendingKeys.push_back(key);
+    }
+}
+
+void WindowsBackend::flushPendingTextInput() {
+    if (!_pendingTextInput.has_value()) {
+        return;
+    }
+    if (_pendingTextInput->codePointCount() <= 1) {
+        _pendingKeys.emplace_back(Key::Character, _pendingTextInput->mainCodePoint());
+    } else {
+        _pendingKeys.emplace_back(Key::Combined, _pendingTextInput->utf32());
+    }
+    _pendingTextInput.reset();
+}
+
+void WindowsBackend::appendTextCodePoint(const char32_t codePoint, const std::size_t repeatCount) {
+    for (std::size_t index = 0; index < repeatCount; ++index) {
+        if (codePoint == 0 || CombinedChar::isControlCode(codePoint)) {
+            continue;
+        }
+        if (consoleCharacterWidth(codePoint) == 0) {
+            if (_pendingTextInput.has_value()) {
+                try {
+                    _pendingTextInput = _pendingTextInput->withCombining(codePoint);
+                } catch (...) {
+                    flushPendingTextInput();
+                }
+            }
+            continue;
+        }
+        flushPendingTextInput();
+        _pendingTextInput = CombinedChar{codePoint};
+    }
+}
+
+auto WindowsBackend::decodeUtf16CodeUnit(const char16_t codeUnit) -> std::optional<char32_t> {
+    constexpr auto cHighSurrogateStart = char16_t{0xd800U};
+    constexpr auto cHighSurrogateEnd = char16_t{0xdbffU};
+    constexpr auto cLowSurrogateStart = char16_t{0xdc00U};
+    constexpr auto cLowSurrogateEnd = char16_t{0xdfffU};
+
+    if (codeUnit >= cHighSurrogateStart && codeUnit <= cHighSurrogateEnd) {
+        _pendingHighSurrogate = codeUnit;
+        return std::nullopt;
+    }
+    if (codeUnit >= cLowSurrogateStart && codeUnit <= cLowSurrogateEnd) {
+        if (!_pendingHighSurrogate.has_value()) {
+            return std::nullopt;
+        }
+        const auto high = static_cast<uint32_t>(*_pendingHighSurrogate - cHighSurrogateStart);
+        const auto low = static_cast<uint32_t>(codeUnit - cLowSurrogateStart);
+        _pendingHighSurrogate.reset();
+        return static_cast<char32_t>(0x10000U + ((high << 10U) | low));
+    }
+    _pendingHighSurrogate.reset();
+    return static_cast<char32_t>(codeUnit);
 }
 
 void WindowsBackend::handleProcessSignal(const int exitCode) noexcept {

@@ -3,13 +3,17 @@
 #pragma once
 
 
+#include "CombinedChar.hpp"
+
 #include "../Backend.hpp"
 
 #include <signal.h>
 
 #include <csignal>
+#include <deque>
 #include <memory>
 #include <mutex>
+#include <optional>
 
 
 namespace erbsland::cterm::impl {
@@ -62,6 +66,14 @@ private:
     /// @param visible true to show the cursor, false to hide it
     /// @return The previous cursor visibility state
     auto changeCursorVisibility(bool visible) -> bool;
+    /// Queue a decoded key one or more times.
+    void enqueueKey(const Key &key, std::size_t repeatCount = 1);
+    /// Flush one buffered Unicode text input into the key queue.
+    void flushPendingTextInput();
+    /// Append a translated Unicode code point to the buffered text input.
+    void appendTextCodePoint(char32_t codePoint, std::size_t repeatCount);
+    /// Decode one UTF-16 code unit from the console into a Unicode code point.
+    [[nodiscard]] auto decodeUtf16CodeUnit(char16_t codeUnit) -> std::optional<char32_t>;
     /// Restore the terminal and terminate the process for one handled event.
     void handleProcessSignal(int exitCode) noexcept;
 
@@ -75,6 +87,9 @@ private:
     bool _cursorVisible{true};                               ///< The current cursor visibility state.
     Input::Mode _inputMode{Input::Mode::ReadLine};           ///< The current input mode.
     bool _isAlternateScreenActive{false};                    ///< Flag if the alternate screen is active.
+    std::deque<Key> _pendingKeys;                            ///< Queued decoded key events.
+    std::optional<CombinedChar> _pendingTextInput;           ///< Buffered translated Unicode text input.
+    std::optional<char16_t> _pendingHighSurrogate;           ///< Stored first UTF-16 surrogate for the next event.
     std::unique_ptr<WindowsSignalDispatcher> _signalHandler; ///< Helper that forwards termination events safely.
 };
 

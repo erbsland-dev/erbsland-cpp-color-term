@@ -29,7 +29,7 @@ the screen regularly while still reacting to keyboard events.
 
     while (!quitRequested) {
         if (const auto key = terminal.input().read(90ms); key.valid()) {
-            if (key == Key{Key::Character, 'q'}) {
+            if (key == Key{Key::Character, U'q'}) {
                 quitRequested = true;
             } else if (key == Key{Key::Left}) {
                 // Move selection.
@@ -69,7 +69,7 @@ or when displaying the currently active bindings.
 
 .. code-block:: cpp
 
-    auto quitKey = InputDefinition{Key{Key::Character, 'q'}, InputDefinition::ForMode::Key};
+    auto quitKey = InputDefinition{Key{Key::Character, U'q'}, InputDefinition::ForMode::Key};
     auto helpKey = InputDefinition{Key{Key::F1}, InputDefinition::ForMode::Key};
 
     std::cout << "Quit: " << quitKey.toDisplayText() << "\n";
@@ -83,14 +83,17 @@ Matching Decoded Key Types
 
 When you only care about the general kind of a key event, inspect
 :cpp:any:`Key::Type <erbsland::cterm::Key::Type>` instead of comparing against a long list of individual keys.
+For character comparisons, prefer Unicode code points such as ``U'q'`` and
+use :cpp:any:`Key::unicode() <erbsland::cterm::Key::unicode()>` or
+:cpp:any:`Key::combined() <erbsland::cterm::Key::combined()>` instead of the deprecated ASCII accessor.
 
 .. code-block:: cpp
 
     using namespace std::chrono_literals;
 
     if (const auto key = terminal.input().read(50ms); key.valid()) {
-        if (key.type() == Key::Character) {
-            terminal.printLine("Typed: ", std::string{1, key.character()});
+        if (key.type() == Key::Character || key.type() == Key::Combined) {
+            terminal.printLine("Typed: ", String{key.combined()});
         } else if (key.type() == Key::Escape) {
             terminal.printLine("Leaving key mode.");
         }

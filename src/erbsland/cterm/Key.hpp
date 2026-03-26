@@ -3,30 +3,36 @@
 #pragma once
 
 
+#include "impl/CombinedChar.hpp"
 #include "impl/HashHelper.hpp"
 
 #include <cstdint>
 #include <functional>
 #include <string>
+#include <string_view>
 
 
 namespace erbsland::cterm {
 
 
 /// A simple representation of a key press.
-/// Supports alphanumeric characters and common special keys.
+/// Supports Unicode text input and common special keys.
 class Key {
 public:
     /// Supported key kinds.
     enum Type : uint8_t {
         /// No supported key was decoded.
         None,
-        /// A single alphanumeric character.
+        /// A single Unicode code point.
         Character,
+        /// Multiple code points that form one combined text input.
+        Combined,
         /// The Enter/Return key.
         Enter,
         /// The tab key.
         Tab,
+        /// Reverse tab / Shift+Tab.
+        BackTab,
         /// The space key.
         Space,
         /// The escape key.
@@ -79,13 +85,42 @@ public:
         F12,
     };
 
-public: // ctors/dtor/assign/move
+public:
     /// Create an invalid key.
     Key() = default;
-    /// Create a key with explicit type and optional character payload.
+    /// Create a key with explicit type and optional Unicode payload.
     /// @param type The key type.
-    /// @param ch The character value for `Type::Character`.
-    Key(Type type, char ch = 0) noexcept;
+    /// @param codePoint The Unicode value for `Type::Character`.
+    Key(Type type, char32_t codePoint = 0) noexcept;
+    /// Create a key with explicit combined Unicode payload.
+    /// @param type The key type.
+    /// @param character The combined Unicode text for `Type::Character` or `Type::Combined`.
+    /// @throws std::invalid_argument If `character` is not a supported Unicode character sequence.
+    Key(Type type, std::u32string_view character);
+
+public: // operators
+    /// Compare two key events for equality.
+    auto operator==(const Key &other) const noexcept -> bool = default;
+
+public: // accessors
+    /// Get the key type.
+    [[nodiscard]] auto type() const noexcept -> Type { return _type; }
+    /// Legacy ASCII accessor for `Type::Character`.
+    /// @deprecated Use `unicode()` or `combined()` to support full Unicode input.
+    /// @return The ASCII character for single-code-point character input, otherwise `0`.
+    [[nodiscard]] auto character() const noexcept -> char;
+    /// Get the Unicode code point for `Type::Character`.
+    /// @return The single Unicode code point, or `0` if this key does not store exactly one code point.
+    [[nodiscard]] auto unicode() const noexcept -> char32_t;
+    /// Get the full combined Unicode payload for character input.
+    /// @return The stored Unicode text, or an empty string for non-character keys.
+    [[nodiscard]] auto combined() const -> std::u32string;
+    /// Test if this object represents a supported key.
+    [[nodiscard]] auto valid() const noexcept -> bool { return _type != None; }
+    /// Get a hash for this key.
+    [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
+        return impl::hashCreate(static_cast<uint8_t>(_type), _character.hash());
+    }
 
 public: // conversion
     /// Decode a key from configuration text.
@@ -104,26 +139,9 @@ public: // conversion
     /// @return The display text for prompts and help texts.
     [[nodiscard]] auto toDisplayText(bool useBrackets = true) const -> std::string;
 
-public: // operators
-    /// Compare two key events for equality.
-    auto operator==(const Key &other) const noexcept -> bool = default;
-
-public: // accessors
-    /// Get the key type.
-    [[nodiscard]] auto type() const noexcept -> Type { return _type; }
-    /// Get the character payload.
-    /// Returns `0` for non-character keys.
-    [[nodiscard]] auto character() const noexcept -> char { return _ch; }
-    /// Test if this object represents a supported key.
-    [[nodiscard]] auto valid() const noexcept -> bool { return _type != None; }
-    /// Get a hash for this key.
-    [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
-        return impl::hashCreate(static_cast<uint8_t>(_type), static_cast<unsigned char>(_ch));
-    }
-
 private:
     Type _type{None};
-    char _ch{0};
+    impl::CombinedChar _character;
 };
 
 

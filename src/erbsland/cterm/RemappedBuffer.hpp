@@ -303,7 +303,7 @@ private:
     /// @param fillChar The fill character for newly created logical cells.
     void reorderedResize(Size newSize, const Char &fillChar);
 
-private:
+protected:
     Size _size;                 ///< The current size of the buffer.
     Orientation _orientation;   ///< The orientation of the buffer layout.
     std::vector<Char> _buffer;  ///< The characters in the buffer.

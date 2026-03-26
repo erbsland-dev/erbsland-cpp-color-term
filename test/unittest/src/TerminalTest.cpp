@@ -141,6 +141,21 @@ public:
         REQUIRE_EQUAL(backend->output(), std::string{"A\n"});
     }
 
+    void testPrintParagraphResetsTheBackgroundBeforeNewlinesInFullControlMode() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        auto terminal = createTerminal(backend, Size{4, 4});
+        auto paragraph = String{};
+        paragraph.append(bg::Blue, "AB CD");
+        auto options = ParagraphOptions{};
+        options.setBackgroundMode(ParagraphBackgroundMode::FullRight);
+
+        const auto writtenLines = terminal->printParagraph(paragraph, options);
+        terminal->flush();
+
+        REQUIRE_EQUAL(writtenLines, 2);
+        REQUIRE_EQUAL(backend->output(), std::string{"\x1b[44mAB  \x1b[49m\n\x1b[44mCD  \x1b[49m\n"});
+    }
+
     void testLineBufferCanBeDisabledForImmediateEmission() {
         const auto backend = std::make_shared<TerminalTestBackend>();
         auto terminal = createTerminal(backend);

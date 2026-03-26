@@ -22,6 +22,9 @@ This chapter is written for developers working on the library itself.
 It provides technical background information about internal implementation details,
 code structure, and platform-specific behavior that are intentionally not part of the public API documentation.
 
+For the stable public backend contract and custom-backend extension
+points, see :doc:`../reference/backend`.
+
 Use these notes when you want to:
 
 * extend or adapt an existing backend

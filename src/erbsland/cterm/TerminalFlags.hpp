@@ -22,7 +22,9 @@ enum class TerminalFlag : uint8_t {
 /// These flags can only be set at construction time and cannot be modified after that.
 class TerminalFlags {
 public:
+    /// Unsigned storage type used for the combined flag bits.
     using Mask = uint8_t;
+    /// The enum type combined by this flag set.
     using Enum = TerminalFlag;
 
 public:
@@ -38,12 +40,23 @@ public:
     auto operator=(const TerminalFlags &) -> TerminalFlags & = default;
 
 public:
+    /// Combine this flag set with one additional flag.
+    /// @param flag The flag to add.
+    /// @return The combined flag set.
     auto operator|(const TerminalFlag flag) const -> TerminalFlags {
         return TerminalFlags{static_cast<Mask>(_flags | static_cast<Mask>(flag))};
     }
+    /// Combine one flag with an existing flag set.
+    /// @param flag The flag to add.
+    /// @param flags The existing flag set.
+    /// @return The combined flag set.
     friend auto operator|(const TerminalFlag flag, const TerminalFlags flags) -> TerminalFlags {
         return TerminalFlags{static_cast<Mask>(flags._flags | static_cast<Mask>(flag))};
     }
+    /// Combine two flag sets.
+    /// @param flags1 The first flag set.
+    /// @param flags2 The second flag set.
+    /// @return The combined flag set.
     friend auto operator|(const TerminalFlags flags1, const TerminalFlags flags2) -> TerminalFlags {
         return TerminalFlags{static_cast<Mask>(flags1._flags | flags2._flags)};
     }

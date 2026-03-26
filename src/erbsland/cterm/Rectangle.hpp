@@ -3,6 +3,7 @@
 #pragma once
 
 
+#include "Alignment.hpp"
 #include "Direction.hpp"
 #include "Margins.hpp"
 #include "Position.hpp"
@@ -18,6 +19,7 @@ namespace erbsland::cterm {
 
 
 class Rectangle;
+struct AlignedSource;
 using RectangleList = std::vector<Rectangle>;
 
 
@@ -149,6 +151,20 @@ public: // tools
     /// @param margins The margins around the sub rectangle.
     /// @return The aligned sub-rectangle.
     [[nodiscard]] auto subRectangle(Anchor anchor, Size size, Margins margins) const noexcept -> Rectangle;
+    /// Compute the position for content aligned inside this rectangle.
+    /// If `contentSize` is larger than this rectangle on an axis, the returned position on that axis lies before
+    /// `topLeft()` on that axis.
+    /// @param contentSize The aligned content size.
+    /// @param alignment The alignment for the content.
+    /// @return The aligned content position relative to the global coordinate space.
+    [[nodiscard]] auto alignmentOffset(Size contentSize, Alignment alignment) const noexcept -> Position;
+    /// Align a source rectangle inside this rectangle and crop the larger side according to the alignment.
+    /// If the source is smaller than this rectangle on an axis, the returned target rectangle is moved inside this
+    /// rectangle. If the source is larger on an axis, the returned source rectangle is cropped on that axis.
+    /// @param sourceRect The source rectangle before alignment and cropping.
+    /// @param alignment The alignment used for placement or cropping.
+    /// @return The effective target rectangle and source rectangle after alignment.
+    [[nodiscard]] auto alignedSource(Rectangle sourceRect, Alignment alignment) const noexcept -> AlignedSource;
     /// Get the clockwise border index for a frame position.
     /// The top-left corner has index `0`, then the index increases clockwise around the perimeter.
     /// Degenerate rectangles with width or height `1` still produce a continuous index sequence.
@@ -191,6 +207,15 @@ public: // tools
 private:
     Position _pos;
     Size _size;
+};
+
+
+/// Effective source and target rectangles after alignment.
+struct AlignedSource final {
+    Rectangle targetRect; ///< The target rectangle inside the alignment box.
+    Rectangle sourceRect; ///< The source rectangle after alignment-based cropping.
+
+    auto operator==(const AlignedSource &other) const noexcept -> bool = default;
 };
 
 

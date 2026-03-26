@@ -3,6 +3,7 @@
 #pragma once
 
 
+#include "Alignment.hpp"
 #include "Anchor.hpp"
 #include "Position.hpp"
 
@@ -25,8 +26,7 @@ public:
     /// @param width The desired width (clamped to >= 0).
     /// @param height The desired height (clamped to >= 0).
     constexpr Size(Coordinate width, Coordinate height) noexcept :
-        _width{std::max(Coordinate{0}, width)},
-        _height{std::max(Coordinate{0}, height)} {}
+        _width{std::max(Coordinate{0}, width)}, _height{std::max(Coordinate{0}, height)} {}
     /// Construct a size from the axis-aligned distance between two positions.
     /// @param pos1 First position.
     /// @param pos2 Second position.
@@ -68,8 +68,16 @@ public: // attributes
     /// @param anchor The anchor describing the target corner/edge/center.
     /// @return The position inside the [0,width-1]×[0,height-1] grid (or (0,0) for empty dimensions).
     [[nodiscard]] auto anchor(Anchor anchor) const noexcept -> Position;
+    /// Compute the offset for content aligned inside this size.
+    /// If `contentSize` is larger than this size on an axis, the returned offset on that axis is negative.
+    /// @param contentSize The aligned content size.
+    /// @param alignment The alignment for the content.
+    /// @return The zero-based offset for placing the content inside this size.
+    [[nodiscard]] auto alignmentOffset(Size contentSize, Alignment alignment) const noexcept -> Position;
 
 public: // tests
+    /// Test if this size is zero.
+    [[nodiscard]] constexpr auto isZero() const noexcept -> bool { return _width == 0 || _height == 0; }
     /// Check if this size fits completely into another size (component-wise <=).
     /// @param other The candidate container size.
     /// @return true if width <= other.width and height <= other.height.

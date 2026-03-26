@@ -12,12 +12,11 @@ terminal paragraphs. The same object model is used by
 :cpp:any:`TextOptions <erbsland::cterm::TextOptions>`, and :cpp:any:`Text <erbsland::cterm::Text>`, so one paragraph
 configuration can be reused for direct terminal output and buffer-based text rendering.
 
-Use this page when you want to control alignment, indentation, wrap markers, word splitting, tab stops, paragraph
-spacing, background fill, or error handling for narrow layouts.
+.. dropdown:: Details about the example output on this page
 
-The examples below were rendered with the dedicated documentation helper
-``./cmake-build-debug/doc-tools/paragraph-options-reference`` at a fixed width of 78 terminal columns. Each example
-starts with the same ruler line so it is easy to see exactly where the available width ends.
+    The examples below were rendered with the dedicated documentation helper
+    :file:`doc/tools/paragraph-options-reference.cpp` at a fixed width of 78 terminal columns. Each example
+    starts with the same ruler line so it is easy to see exactly where the available width ends.
 
 Usage
 =====
@@ -108,6 +107,7 @@ Alignment is the first setting most users reach for, so it is worth seeing the t
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mA paragraph can announce its theme at once: ␛[37mthe winter lantern swung above the␛[39m
@@ -125,6 +125,7 @@ Alignment is the first setting most users reach for, so it is worth seeing the t
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mA paragraph can announce its theme at once: ␛[37mthe winter lantern swung above the␛[39m
@@ -142,6 +143,7 @@ Alignment is the first setting most users reach for, so it is worth seeing the t
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mA paragraph can announce its theme at once: ␛[37mthe winter lantern swung above the␛[39m
@@ -169,6 +171,7 @@ Indentation is only applied for left-aligned paragraphs. The three related setti
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m        ␛[97mIndented paragraphs are excellent for guidance text: ␛[37mthey let a short␛[39m 
@@ -187,6 +190,7 @@ Indentation is only applied for left-aligned paragraphs. The three related setti
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mIndented paragraphs are excellent for guidance text: ␛[37mthey let a short heading␛[39m 
@@ -205,6 +209,7 @@ Indentation is only applied for left-aligned paragraphs. The three related setti
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m        ␛[97mFirst line: ␛[37mA wrapped continuation should move to the deeper␛[39m          
@@ -233,6 +238,7 @@ space.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mVisible wrap markers turn layout into something the reader can trust: ␛[37mthey␛[39m    
@@ -250,6 +256,7 @@ space.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mVisible wrap markers turn layout into something the reader can trust: ␛[37mthey␛[39m   ⤦
@@ -269,6 +276,7 @@ space.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mVisible wrap markers turn layout into something the reader can trust: ␛[37mthey␛[39m   ⤦
@@ -295,6 +303,7 @@ the call finishes.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mSynopsis: ␛[37mThe watchman trimmed the lamp, checked the gate, and listened for␛[39m   
@@ -312,6 +321,7 @@ the call finishes.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mSynopsis: ␛[37mThe watchman trimmed the lamp, checked the gate, and listened for␛[39m   
@@ -335,6 +345,7 @@ source line into words. Consecutive separators collapse into one rendered space.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mdocs/reference/paragraph-options/with/illustrated/examples/for/layout/choices␛[39m-
@@ -351,6 +362,7 @@ source line into words. Consecutive separators collapse into one rendered space.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mdocs reference paragraph-options with illustrated examples for layout choices␛[39m 
@@ -373,6 +385,7 @@ one.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mParagraphLayoutDemonstrationIdentifierForReadersWhoPrefer␛[37mVeryLongNamesThatSti␛[39m-
@@ -389,6 +402,7 @@ one.
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mParagraphLayoutDemonstrationIdentifierForReadersWhoPrefer␛[37mVeryLongNamesThatSti␛[39m~
@@ -411,6 +425,7 @@ single source line may produce. Once the limit is reached, the paragraph stops a
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mSometimes a paragraph should stop politely instead of taking over the screen:␛[39m 
@@ -429,6 +444,7 @@ single source line may produce. Once the limit is reached, the paragraph stops a
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mSometimes a paragraph should stop politely instead of taking over the screen:␛[39m 
@@ -450,6 +466,7 @@ handled through :cpp:any:`wordSeparators() <erbsland::cterm::ParagraphOptions::w
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mbuild␛[37m         Compile the project tree and refresh the generated headers␛[39m      
@@ -468,6 +485,7 @@ handled through :cpp:any:`wordSeparators() <erbsland::cterm::ParagraphOptions::w
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mName␛[37m      Start     Middle    Finish    Notes     Owner     State␛[39m             
@@ -487,6 +505,7 @@ handled through :cpp:any:`wordSeparators() <erbsland::cterm::ParagraphOptions::w
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97m--color␛[37m        Choose the accent colors for the preview panels and the footer␛[39m 
@@ -518,6 +537,7 @@ different one. In the following examples the paragraph is blue and the surroundi
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97;44mBackground fill is easier to judge with a sentence that keeps moving: ␛[37mthe blue␛[39;49m
@@ -535,6 +555,7 @@ different one. In the following examples the paragraph is blue and the surroundi
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97;44mBackground fill is easier to judge with a sentence that keeps moving: ␛[37mthe blue␛[39;49m
@@ -552,6 +573,7 @@ different one. In the following examples the paragraph is blue and the surroundi
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97;44mBackground fill is easier to judge with a sentence that keeps moving: ␛[37mthe blue␛[39;49m
@@ -569,6 +591,7 @@ different one. In the following examples the paragraph is blue and the surroundi
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97;44mBackground fill is easier to judge with a sentence that keeps moving: ␛[37mthe blue␛[39;49m
@@ -586,6 +609,7 @@ different one. In the following examples the paragraph is blue and the surroundi
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97;44mBackground fill is easier to judge with a sentence that keeps moving: ␛[37mthe blue␛[39;49m
@@ -603,6 +627,7 @@ different one. In the following examples the paragraph is blue and the surroundi
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97;44mBackground fill is easier to judge with a sentence that keeps moving: ␛[37mthe blue␛[39;49m
@@ -631,6 +656,7 @@ Some combinations of width and paragraph settings are impossible to render. Typi
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[97mAA␛[39m                                                                            
@@ -647,6 +673,7 @@ Some combinations of width and paragraph settings are impossible to render. Typi
 
 .. erbsland-ansi::
     :escape-char: ␛
+    :theme: ela-term
 
     ␛[90m012345678901234567890123456789012345678901234567890123456789012345678901234567
     ␛[39m␛[90m··············································································␛[39m

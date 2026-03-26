@@ -13,6 +13,9 @@ This page documents the internal Windows backend used by
 :cpp:any:`Terminal <erbsland::cterm::Terminal>`.
 It is intended for contributors who need to understand where Windows-specific terminal behavior lives and how shutdown cleanup is coordinated.
 
+For the public backend API contract that this implementation satisfies,
+see :doc:`../reference/backend`.
+
 Relevant Source Files
 =====================
 
@@ -72,13 +75,14 @@ In ``Input::Mode::Key``, ``readKey()`` works directly with the Windows console i
 #. It ignores all non-key events.
 #. It ignores key-release events and only reacts to records with ``bKeyDown != 0``.
 #. It maps well-known virtual key codes such as arrows, page navigation keys, insert, delete, enter, escape, tab, backspace, and ``F1`` through ``F12`` to the corresponding :cpp:any:`Key <erbsland::cterm::Key>` values.
-#. For other keys, it only creates a character key when ``uChar.AsciiChar`` is non-zero.
+#. For other keys, it decodes ``uChar.UnicodeChar`` as UTF-16, including surrogate pairs, and collects the resulting Unicode text input.
 
 The return value is the last recognized key seen while draining the queue.
 As a result, one call can consume multiple queued key events but returns only one library key.
 
-Another important implementation detail is that character input currently relies on ``AsciiChar`` even though the console record is read with ``ReadConsoleInputW()``.
-Special keys are handled through virtual key codes, but direct character conversion in this backend path is currently limited to single-byte ASCII characters.
+Character input therefore no longer depends on the legacy ASCII field of the console record.
+Special keys are still handled through virtual key codes, while textual input is decoded from the UTF-16 payload that
+``ReadConsoleInputW()`` provides.
 
 Detecting Terminal Size and Interactive Console Availability
 ============================================================
@@ -136,4 +140,3 @@ When the backend or dispatcher is destroyed during normal shutdown, the dispatch
 For maintainers, the key point is that screen restoration never happens inside the raw Windows console-control callback itself.
 The callback only forwards the event.
 The actual cleanup runs on the dedicated watcher thread, where mutexes, iostreams, and the usual backend code are safe to use.
-

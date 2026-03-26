@@ -3,6 +3,7 @@
 #pragma once
 
 
+#include "CharAttributes.hpp"
 #include "Color.hpp"
 #include "Input.hpp"
 #include "MoveMode.hpp"
@@ -85,6 +86,23 @@ public:
     /// Only called if `supportsColorCodes()` returns `false`.
     /// @param color The new color to set.
     virtual void emitColor([[maybe_unused]] Color color) {}
+    /// Get the character attributes supported by this backend.
+    /// The returned value is a fully specified bit mask.
+    /// @return The supported character attributes.
+    [[nodiscard]] virtual auto supportedCharAttributes() const noexcept -> CharAttributes {
+        return CharAttributes::all();
+    }
+    /// Get the character attributes that can be emitted directly via ANSI codes.
+    /// The returned value is a fully specified bit mask.
+    /// @return The character attributes supported through ANSI codes.
+    [[nodiscard]] virtual auto supportedCharAttributeCodes() const noexcept -> CharAttributes {
+        return supportedCharAttributes();
+    }
+    /// Change the current character attributes.
+    /// Only called if one or more supported attributes cannot be emitted through ANSI codes.
+    /// The backend receives the current supported attribute state and can diff it against its own local state.
+    /// @param attributes The current supported attribute state.
+    virtual void emitCharAttributes([[maybe_unused]] CharAttributes attributes) {}
 
     /// Move the cursor.
     /// Only called if `supportsCursorCodes()` returns `false`.

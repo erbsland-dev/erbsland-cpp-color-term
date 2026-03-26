@@ -7,6 +7,8 @@
 #include "impl/FramePainter.hpp"
 #include "impl/TextPainter.hpp"
 
+#include <stdexcept>
+
 
 namespace erbsland::cterm {
 
@@ -269,6 +271,54 @@ void WritableBuffer::drawBitmap(
     const BitmapDrawOptions &options,
     std::size_t animationCycle) noexcept {
     drawBitmapImpl(bitmap, rect, alignment, options, animationCycle);
+}
+
+void WritableBuffer::drawBuffer(const ReadableBuffer &buffer, const Position targetPos) {
+    drawBuffer(buffer, BufferDrawOptions{targetPos});
+}
+
+void WritableBuffer::drawBuffer(const ReadableBuffer &buffer, const Rectangle targetRect, const Alignment alignment) {
+    if (buffer.size().area() == 0 || targetRect.width() <= 0 || targetRect.height() <= 0) {
+        return;
+    }
+    const auto alignedSource = targetRect.alignedSource(buffer.rect(), alignment);
+    drawBuffer(buffer, BufferDrawOptions{alignedSource.targetRect, alignedSource.sourceRect});
+}
+
+void WritableBuffer::drawBuffer(const ReadableBuffer &buffer, const BufferDrawOptions &options) {
+    if (static_cast<const ReadableBuffer *>(this) == &buffer) {
+        throw std::invalid_argument{"WritableBuffer::drawBuffer() does not support drawing a buffer onto itself."};
+    }
+    const auto *source = &buffer;
+    auto sourceRect = options.useFullSource() ? source->rect() : options.sourceRect();
+    sourceRect &= source->rect();
+    if (sourceRect.width() <= 0 || sourceRect.height() <= 0) {
+        return;
+    }
+    auto targetRect = options.isTargetPosition() ? Rectangle{options.targetRect().topLeft(), sourceRect.size()}
+                                                 : options.targetRect();
+    targetRect.setSize(targetRect.size().componentMin(sourceRect.size()));
+    if (targetRect.width() <= 0 || targetRect.height() <= 0) {
+        return;
+    }
+    const auto visibleTargetRect = targetRect & rect();
+    if (visibleTargetRect.width() <= 0 || visibleTargetRect.height() <= 0) {
+        return;
+    }
+    const auto clippedOffset = visibleTargetRect.topLeft() - targetRect.topLeft();
+    const auto sourceStartPos = sourceRect.topLeft() + clippedOffset;
+    const auto &combinationStyle = options.combinationStyle();
+    visibleTargetRect.forEach([&](const Position targetPos) -> void {
+        auto sourceBlock = source->get(sourceStartPos + targetPos - visibleTargetRect.topLeft());
+        if (combinationStyle != nullptr) {
+            set(targetPos, sourceBlock, combinationStyle);
+            return;
+        }
+        if (!options.overwriteColors()) {
+            sourceBlock = sourceBlock.withBaseColor(get(targetPos).color());
+        }
+        set(targetPos, sourceBlock);
+    });
 }
 
 void WritableBuffer::drawBitmapImpl(

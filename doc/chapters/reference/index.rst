@@ -19,8 +19,10 @@ Reference
         - Alignment of text or graphics in a box.
     *   - :doc:`Anchor<geometry>`
         - Anchor describes a location inside a rectangular area using a combination of a vertical and a horizontal component.
-    *   - :doc:`Backend<terminal>`
+    *   - :doc:`Backend<backend>`
         - The interface to the underlying platform.
+    *   - :doc:`BackendPtr<backend>`
+        - Shared pointer to a backend instance.
     *   - :doc:`Background<color>`
         - The background color.
     *   - :doc:`Bitmap<bitmap>`
@@ -41,6 +43,10 @@ Reference
         - The base class for all buffer views.
     *   - :doc:`Char<text>`
         - Represents a character string with foreground and background colors.
+    *   - :doc:`CharAttributes<text>`
+        - Represents optional ANSI text attributes such as bold, underline, or strikethrough.
+    *   - :doc:`CharStyle<text>`
+        - Combines a Color value with CharAttributes into one reusable text style.
     *   - :doc:`Char16Style<drawing>`
         - Defines a style for drawing tiles.
     *   - :doc:`Char16StylePtr<drawing>`
@@ -65,6 +71,12 @@ Reference
         - A configurable sequence of complete Color values with run-length style counts.
     *   - :doc:`CropEdges<buffer-view>`
         - Flags for crop edges and corners.
+    *   - :doc:`CursorBuffer<buffer>`
+        - A remapped buffer with cursor-style writing, wrapping, and scrollback behavior.
+    *   - :doc:`CursorBuffer::OverflowMode<buffer>`
+        - Controls whether cursor writes wrap, scroll, or grow the buffer at the bottom edge.
+    *   - :doc:`CursorWriter<cursor-output>`
+        - The shared interface for buffers and terminals that support cursor-based output.
     *   - :doc:`Direction<geometry>`
         - A direction in a 2D grid.
     *   - :doc:`Direction::Enum<geometry>`
@@ -101,7 +113,7 @@ Reference
         - Represents margins (top, right, bottom, left) around a rectangle.
     *   - :doc:`MatrixCombinationStyle<drawing>`
         - A class that combines characters through an indexed result matrix.
-    *   - :doc:`MoveMode<terminal>`
+    *   - :doc:`MoveMode<cursor-output>`
         - The cursor move mode.
     *   - :doc:`ParagraphBackgroundMode<paragraph-options>`
         - How paragraph rendering extends the background color beyond the visible text.
@@ -141,12 +153,12 @@ Reference
         - Screen clearing strategy used between rendered frames.
     *   - :doc:`TerminalPtr<terminal>`
         - Shared pointer to a terminal instance.
-    *   - :doc:`Text<text>`
+    *   - :doc:`Text<drawing-text>`
         - Describes a text block to render into a Buffer.
-    *   - :doc:`TextOptions<text>`
+    *   - :doc:`TextOptions<drawing-text>`
         - Options for text rendering.
-    *   - :doc:`TextAnimation<text>`
-        - Supported text animation styles used by Buffer::renderText().
+    *   - :doc:`TextAnimation<drawing-text>`
+        - Supported text animation styles used by Buffer::drawText().
     *   - :doc:`Tile9Style<drawing>`
         - Defines a style for repeating a 3x3 tile pattern across a rectangle.
     *   - :doc:`Tile9StylePtr<drawing>`
@@ -173,14 +185,20 @@ Reference
         -   Bitmap is the low-level pixel container used by the library whenever a boolean mask needs to be rendered, copied, or transformed. A bitmap stores only on/off pixels; the actual terminal representation is chosen later by Buffer::drawBitmap() and BitmapDrawOptions.
     *   -   :doc:`Buffer Views <buffer-view>`
         -   Buffer views expose a rectangular window onto a larger readable buffer. They are useful whenever the logical content is bigger than the visible terminal area, for example in scrollable panels, minimaps, editors, and diagnostic tools.
+    *   -   :doc:`Backend <backend>`
+        -   The backend classes connect Terminal to the actual console, host environment, or test harness. Most applications use the built-in backend, while advanced integrations can inject a custom implementation.
     *   -   :doc:`Buffer <buffer>`
-        -   The buffer classes represent rendered terminal content in memory before it is written to the screen. ReadableBuffer provides the inspection API, WritableBuffer adds mutation and drawing operations, and Buffer is the concrete 2D storage type used in most applications.
+        -   The buffer classes represent rendered terminal content in memory before it is written to the screen. ReadableBuffer provides the inspection API, WritableBuffer adds mutation and drawing operations, Buffer is the concrete 2D storage type used in most applications, and CursorBuffer adds cursor-based streaming output.
     *   -   :doc:`Color <color>`
         -   The color classes provide access to the standard 16 terminal colors and their combinations. They are used to style terminal output, buffer cells, and text elements throughout the library.
-    *   -   :doc:`Drawing <drawing>`
+    *   -   :doc:`Cursor Output <cursor-output>`
+        -   CursorWriter defines the shared streaming API used by Terminal and CursorBuffer. It focuses on incremental output, active color and attribute state, cursor movement, and wrapped paragraph printing.
+    *   -   :doc:`Frames, Borders, and Tiles <drawing>`
         -   The drawing types define how frames, borders, filled areas, and character combinations are rendered into writable buffers. They are the main building blocks for boxes, panels, decorative borders, tiled fills, and line-art style layouts.
     *   -   :doc:`Font <font>`
         -   The font classes allow you to render large bitmap-based text directly in the terminal. Fonts are primarily used for titles, banners, and other decorative elements in terminal interfaces.
+    *   -   :doc:`Strings and Chars <text>`
+        -   Char, CharAttributes, CharStyle, and String are the reusable terminal-text value types used to store styled characters, measure Unicode-aware width, and split or wrap terminal text before rendering.
     *   -   :doc:`Geometry <geometry>`
         -   The geometry classes provide the building blocks for positioning and layout inside a terminal buffer. They describe sizes, positions, rectangles, and directions, and allow you to derive new regions from existing ones.
     *   -   :doc:`Input <input>`
@@ -188,19 +206,22 @@ Reference
     *   -   :doc:`Paragraph Options <paragraph-options>`
         -   ParagraphOptions collects the low-level layout rules for wrapped terminal paragraphs. The same object model is used by Terminal::printParagraph(), TextOptions, and Text, so one paragraph configuration can be reused for direct terminal output and buffer-based text rendering.
     *   -   :doc:`Terminal <terminal>`
-        -   The terminal classes provide the runtime connection between your rendered content and the real console. Terminal manages the application lifecycle, refresh strategy, cursor control, direct text writes, and the platform backend that ultimately emits text and control sequences.
-    *   -   :doc:`Text <text>`
-        -   The text classes provide utilities for constructing, formatting, and rendering colored text in terminal buffers. They support mixed styles, Unicode-aware layout, and animated text effects.
+        -   The terminal classes provide the runtime connection between your rendered content and the real console. Terminal manages initialization, refresh strategy, full-screen updates, input access, and direct output for interactive applications.
+    *   -   :doc:`Text Rendering <drawing-text>`
+        -   Text, TextOptions, and TextAnimation render strings into rectangles, wrapped paragraphs, animated labels, and reusable text presets inside writable buffers.
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
     bitmap
+    backend
     buffer
     buffer-view
     color
+    cursor-output
     drawing
+    drawing-text
     font
     geometry
     input

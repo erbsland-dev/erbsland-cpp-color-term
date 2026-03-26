@@ -2,16 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Terminal.hpp"
 
-
 #include "Buffer.hpp"
 #include "BufferView.hpp"
 
 #include "impl/ParagraphLayout.hpp"
-#include "impl/ParagraphPainter.hpp"
+#include "impl/ParagraphPrinter.hpp"
 
 #include <algorithm>
 #include <cassert>
 #include <format>
+#include <vector>
 
 
 namespace erbsland::cterm {
@@ -73,8 +73,7 @@ auto Terminal::lineBufferEnabled() const noexcept -> bool {
 }
 
 void Terminal::setLineBufferEnabled(const bool enabled) noexcept {
-    if ((_outputMode == OutputMode::Text || !_backend->supportsColorCodes() || !_backend->supportsCursorCodes()) &&
-        enabled) {
+    if ((_outputMode == OutputMode::Text || !canUseLineBuffer()) && enabled) {
         return;
     }
     _lineBuffer.setCachingEnabled(enabled);
@@ -121,7 +120,7 @@ void Terminal::setBackend(BackendPtr backend) noexcept {
         }
         _input.setBackend(_backend);
         _lineBuffer.setBackend(_backend);
-        if (!_backend->supportsColorCodes() || !_backend->supportsCursorCodes()) {
+        if (!canUseLineBuffer()) {
             _lineBuffer.setCachingEnabled(false);
         }
     }
@@ -142,6 +141,7 @@ void Terminal::clearScreen() noexcept {
     _lineBuffer.write("\x1b[2J\x1b[1;1H");
     _lineBuffer.handleEmit();
 }
+
 auto Terminal::isAlternateScreenActive() const noexcept -> bool {
     return _isAlternateScreenActive;
 }
@@ -375,18 +375,19 @@ void Terminal::updateSizeTooSmallBuffer(const UpdateSettings &settings) noexcept
     }
 }
 
-void Terminal::writeImpl(const ReadableBuffer &buffer, bool withRowMove) noexcept {
+void Terminal::writeImpl(const ReadableBuffer &buffer, const bool withRowMove) noexcept {
     for (Coordinate y = 0; y < buffer.size().height(); ++y) {
         if (withRowMove && y != 0) {
             moveTo(Position{0, y});
         }
         for (Coordinate x = 0; x < buffer.size().width(); ++x) {
             auto &character = buffer.get(Position{x, y});
-            setColor(character.color().fg(), character.color().bg());
+            setStyle(character.style());
             _lineBuffer.write(character);
         }
         if (!withRowMove) {
             setDefaultColor();
+            setCharAttributes(CharAttributes::reset());
             _lineBuffer.write("\n");
         }
     }
@@ -402,6 +403,7 @@ auto Terminal::applySafeMargin(const Size terminalSize) const noexcept -> Size {
 void Terminal::initializeScreen() noexcept {
     _backend->initializePlatform();
     _color = Color::reset();
+    _charAttributes = CharAttributes::reset();
     testScreenSize();
     setCursorVisible(false);
     flush();
@@ -423,6 +425,7 @@ void Terminal::testScreenSize() noexcept {
 
 void Terminal::restoreScreen() noexcept {
     setDefaultColor();
+    setCharAttributes(CharAttributes::reset());
     setCursorVisible(true);
     flush();
     _lineBuffer.shutdown();
@@ -431,23 +434,18 @@ void Terminal::restoreScreen() noexcept {
 }
 
 void Terminal::write(const Char &character) noexcept {
-    const auto resolvedCharacter = character.withBaseColor(_color);
-    setColor(resolvedCharacter.color().fg(), resolvedCharacter.color().bg());
+    const auto resolvedCharacter = character.withBase(_color, _charAttributes);
+    setStyle(resolvedCharacter.style());
     _lineBuffer.write(resolvedCharacter);
     _lineBuffer.handleEmit();
 }
 
 void Terminal::write(const String &str) noexcept {
     for (const auto &character : str) {
-        const auto resolvedCharacter = character.withBaseColor(_color);
-        setColor(resolvedCharacter.color().fg(), resolvedCharacter.color().bg());
+        const auto resolvedCharacter = character.withBase(_color, _charAttributes);
+        setStyle(resolvedCharacter.style());
         _lineBuffer.write(resolvedCharacter);
     }
-    _lineBuffer.handleEmit();
-}
-
-void Terminal::write(const std::string_view text) noexcept {
-    _lineBuffer.write(text);
     _lineBuffer.handleEmit();
 }
 
@@ -464,7 +462,7 @@ void Terminal::writeLineBreak() noexcept {
     _lineBuffer.handleEmit();
 }
 
-auto Terminal::printParagraph(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
+auto Terminal::printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
     const auto width = size().width();
     const auto layout =
         impl::ParagraphLayout{paragraph, width, options, impl::ParagraphLayout::NewlineMode::HardLineBreak}.build();
@@ -474,18 +472,16 @@ auto Terminal::printParagraph(const String &paragraph, const ParagraphOptions &o
     if (layout.lines.empty()) {
         return finishParagraphWithExplicitLineBreaks(0, options.paragraphSpacing());
     }
-    auto buffer = Buffer{Size{width, static_cast<Coordinate>(layout.lines.size())}, Char{U' ', _color}};
-    impl::ParagraphPainter{buffer, buffer.rect(), options.alignment(), layout, options.backgroundMode()}.paint();
-    write(buffer);
+    const auto lineCount = [&]() -> int {
+        impl::LineBuffer::EmitLockGuard emitLock{_lineBuffer};
+        return impl::ParagraphPrinter{*this, width, options.alignment(), layout, options.backgroundMode()}.print();
+    }();
+    _lineBuffer.handleEmit();
     if (options.paragraphSpacing() == ParagraphSpacing::DoubleLine) {
         writeLineBreak();
-        return static_cast<int>(layout.lines.size()) + 1;
+        return lineCount + 1;
     }
-    return static_cast<int>(layout.lines.size());
-}
-
-auto Terminal::printParagraph(const std::string &paragraph, const ParagraphOptions &options) noexcept -> int {
-    return printParagraph(String{paragraph}, options);
+    return lineCount;
 }
 
 auto Terminal::printParagraphPlainOutput(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
@@ -511,6 +507,14 @@ auto Terminal::color() const noexcept -> Color {
     return _color;
 }
 
+auto Terminal::charAttributes() const noexcept -> CharAttributes {
+    return _charAttributes;
+}
+
+auto Terminal::supportedCharAttributes() const noexcept -> CharAttributes {
+    return CharAttributes::fromMask(_backend->supportedCharAttributes().mask());
+}
+
 void Terminal::setForeground(Foreground color) noexcept {
     if (_outputMode == OutputMode::Text) {
         return;
@@ -529,6 +533,31 @@ void Terminal::setForeground(Foreground color) noexcept {
     }
 }
 
+void Terminal::setCharAttributes(CharAttributes attributes) noexcept {
+    if (_outputMode == OutputMode::Text) {
+        return;
+    }
+    attributes = normalizedSupportedAttributes(attributes);
+    if (attributes == _charAttributes) {
+        return;
+    }
+    const auto supportedCodeMask = static_cast<uint8_t>(
+        _backend->supportedCharAttributes().mask() & _backend->supportedCharAttributeCodes().mask());
+    const auto previousCodeAttributes =
+        CharAttributes::fromMasks(_charAttributes.enabledMask() & supportedCodeMask, supportedCodeMask);
+    const auto newCodeAttributes =
+        CharAttributes::fromMasks(attributes.enabledMask() & supportedCodeMask, supportedCodeMask);
+    if (previousCodeAttributes != newCodeAttributes) {
+        emitCharAttributeCodes(previousCodeAttributes, newCodeAttributes);
+    }
+    const auto callbackMask = static_cast<uint8_t>(_backend->supportedCharAttributes().mask() & ~supportedCodeMask);
+    if (((_charAttributes.enabledMask() ^ attributes.enabledMask()) & callbackMask) != 0) {
+        flush();
+        _backend->emitCharAttributes(CharAttributes::fromMasks(attributes.enabledMask() & callbackMask, callbackMask));
+    }
+    _charAttributes = attributes;
+}
+
 void Terminal::setBackground(Background color) noexcept {
     if (_outputMode == OutputMode::Text) {
         return;
@@ -545,10 +574,6 @@ void Terminal::setBackground(Background color) noexcept {
             _backend->emitColor(_color);
         }
     }
-}
-
-void Terminal::setColor(const Foreground foregroundColor, const Background backgroundColor) noexcept {
-    setColor(Color(foregroundColor, backgroundColor));
 }
 
 void Terminal::setColor(Color color) noexcept {
@@ -579,11 +604,70 @@ void Terminal::setColor(Color color) noexcept {
     _color = color;
 }
 
-void Terminal::setDefaultColor() noexcept {
-    setColor(Color::reset());
+auto Terminal::canUseLineBuffer() const noexcept -> bool {
+    return _backend->supportsColorCodes() && _backend->supportsCursorCodes() &&
+        _backend->supportedCharAttributes().mask() == _backend->supportedCharAttributeCodes().mask();
 }
 
-void Terminal::moveLeft(const Coordinate count) {
+auto Terminal::normalizedSupportedAttributes(CharAttributes attributes) const noexcept -> CharAttributes {
+    const auto supportedMask = _backend->supportedCharAttributes().mask();
+    attributes = attributes.resolvedWith(CharAttributes::reset());
+    return CharAttributes::fromMasks(attributes.enabledMask() & supportedMask, supportedMask)
+        .resolvedWith(CharAttributes::reset());
+}
+
+void Terminal::emitCharAttributeCodes(
+    const CharAttributes previousAttributes, const CharAttributes newAttributes) noexcept {
+    auto codes = std::vector<int>{};
+    if (previousAttributes.isBold() != newAttributes.isBold() || previousAttributes.isDim() != newAttributes.isDim()) {
+        if (!newAttributes.isBold() && !newAttributes.isDim()) {
+            codes.push_back(22);
+        } else {
+            if (previousAttributes.isBold() || previousAttributes.isDim()) {
+                codes.push_back(22);
+            }
+            if (newAttributes.isBold()) {
+                codes.push_back(1);
+            }
+            if (newAttributes.isDim()) {
+                codes.push_back(2);
+            }
+        }
+    }
+    if (previousAttributes.isItalic() != newAttributes.isItalic()) {
+        codes.push_back(newAttributes.isItalic() ? 3 : 23);
+    }
+    if (previousAttributes.isUnderline() != newAttributes.isUnderline()) {
+        codes.push_back(newAttributes.isUnderline() ? 4 : 24);
+    }
+    if (previousAttributes.isBlink() != newAttributes.isBlink()) {
+        codes.push_back(newAttributes.isBlink() ? 5 : 25);
+    }
+    if (previousAttributes.isReverse() != newAttributes.isReverse()) {
+        codes.push_back(newAttributes.isReverse() ? 7 : 27);
+    }
+    if (previousAttributes.isHidden() != newAttributes.isHidden()) {
+        codes.push_back(newAttributes.isHidden() ? 8 : 28);
+    }
+    if (previousAttributes.isStrikethrough() != newAttributes.isStrikethrough()) {
+        codes.push_back(newAttributes.isStrikethrough() ? 9 : 29);
+    }
+    if (codes.empty()) {
+        return;
+    }
+    auto sequence = std::string{"\x1b["};
+    for (auto index = std::size_t{0}; index < codes.size(); ++index) {
+        if (index != 0) {
+            sequence += ';';
+        }
+        sequence += std::to_string(codes[index]);
+    }
+    sequence += 'm';
+    _lineBuffer.write(sequence);
+    _lineBuffer.handleEmit();
+}
+
+void Terminal::moveLeft(const Coordinate count) noexcept {
     if (_outputMode == OutputMode::Text) {
         return;
     }
@@ -595,7 +679,7 @@ void Terminal::moveLeft(const Coordinate count) {
     _lineBuffer.handleEmit();
 }
 
-void Terminal::moveRight(const Coordinate count) {
+void Terminal::moveRight(const Coordinate count) noexcept {
     if (_outputMode == OutputMode::Text) {
         return;
     }
@@ -607,7 +691,7 @@ void Terminal::moveRight(const Coordinate count) {
     _lineBuffer.handleEmit();
 }
 
-void Terminal::moveUp(const Coordinate count) {
+void Terminal::moveUp(const Coordinate count) noexcept {
     if (_outputMode == OutputMode::Text) {
         return;
     }
@@ -619,7 +703,7 @@ void Terminal::moveUp(const Coordinate count) {
     _lineBuffer.handleEmit();
 }
 
-void Terminal::moveDown(const Coordinate count) {
+void Terminal::moveDown(const Coordinate count) noexcept {
     if (_outputMode == OutputMode::Text) {
         return;
     }

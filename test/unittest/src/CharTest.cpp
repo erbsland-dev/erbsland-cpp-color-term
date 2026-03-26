@@ -63,22 +63,30 @@ public:
     }
 
     void testEqualityComparesCodePointsAndColors() {
-        const auto left = Char{U'★', fg::Yellow, bg::Blue};
-        const auto equal = Char{U'★', fg::Yellow, bg::Blue};
+        auto attributes = CharAttributes{};
+        attributes.setBold(true);
+        const auto left = Char{U'★', Color{fg::Yellow, bg::Blue}, attributes};
+        const auto equal = Char{U'★', Color{fg::Yellow, bg::Blue}, attributes};
         const auto differentColor = Char{U'★', fg::Yellow, bg::Black};
+        auto differentAttributes = attributes;
+        differentAttributes.setUnderline(true);
+        const auto differentAttributeChar = Char{U'★', Color{fg::Yellow, bg::Blue}, differentAttributes};
         const auto differentCodePoint = Char{U'☆', fg::Yellow, bg::Blue};
 
         REQUIRE(left == equal);
         REQUIRE_FALSE(left != equal);
         REQUIRE_FALSE(left == differentColor);
+        REQUIRE_FALSE(left == differentAttributeChar);
         REQUIRE_FALSE(left == differentCodePoint);
         REQUIRE(differentColor != left);
         REQUIRE(differentCodePoint != left);
     }
 
     void testEqualityIgnoresTheDisplayWidthCache() {
-        auto left = Char{U'界', fg::Yellow, bg::Blue};
-        auto right = Char{U'界', fg::Yellow, bg::Blue};
+        auto attributes = CharAttributes{};
+        attributes.setItalic(true);
+        auto left = Char{U'界', Color{fg::Yellow, bg::Blue}, attributes};
+        auto right = Char{U'界', Color{fg::Yellow, bg::Blue}, attributes};
 
         REQUIRE_EQUAL(left.displayWidth(), 2);
         REQUIRE(left == right);
@@ -128,6 +136,67 @@ public:
         REQUIRE_EQUAL(overlaid.color(), Color(fg::BrightWhite, bg::Yellow));
     }
 
+    void testConstructorsAndWithAttributesPreserveCharacterAttributes() {
+        auto attributes = CharAttributes{};
+        attributes.setBold(true);
+        attributes.setUnderline(true);
+
+        const auto coloredCharacter = Char{U'X', Color{fg::Green, bg::Blue}, attributes};
+        REQUIRE(coloredCharacter.attributes().isBold());
+        REQUIRE(coloredCharacter.attributes().isUnderline());
+
+        auto replacedAttributes = CharAttributes::reset();
+        replacedAttributes.setItalic(true);
+        const auto updatedCharacter = coloredCharacter.withAttributes(replacedAttributes);
+        REQUIRE_FALSE(updatedCharacter.attributes().isBold());
+        REQUIRE(updatedCharacter.attributes().isItalic());
+    }
+
+    void testStyleConstructorAccessorAndSetterExposeTheCombinedStyle() {
+        auto attributes = CharAttributes{};
+        attributes.setItalic(true);
+        auto style = CharStyle{Color{fg::Green, bg::Blue}, attributes};
+
+        auto character = Char{U'X', style};
+
+        REQUIRE_EQUAL(character.style(), style);
+        REQUIRE_EQUAL(character.color(), Color(fg::Green, bg::Blue));
+        REQUIRE(character.attributes().isItalic());
+
+        auto replacementAttributes = CharAttributes{};
+        replacementAttributes.setBold(true);
+        style = CharStyle{Color{fg::BrightWhite, bg::Black}, replacementAttributes};
+        character.setStyle(style);
+
+        REQUIRE_EQUAL(character.style(), style);
+        REQUIRE(character.attributes().isBold());
+        REQUIRE_FALSE(character.attributes().isItalic());
+    }
+
+    void testWithOverlayAndWithBaseResolveColorAndAttributesTogether() {
+        auto currentAttributes = CharAttributes{};
+        currentAttributes.setBold(true);
+        auto overlayAttributes = CharAttributes{};
+        overlayAttributes.setBold(false);
+        overlayAttributes.setUnderline(true);
+        auto baseAttributes = CharAttributes{};
+        baseAttributes.setItalic(true);
+        const auto character = Char{U'X', Color{fg::Green, bg::Blue}, currentAttributes};
+
+        const auto overlaid = character.withOverlay(Color{fg::Inherited, bg::Black}, overlayAttributes);
+        REQUIRE_EQUAL(overlaid.color(), Color(fg::Green, bg::Black));
+        REQUIRE_FALSE(overlaid.attributes().isBold());
+        REQUIRE(overlaid.attributes().isUnderline());
+
+        const auto based = character.withBase(Color{fg::BrightWhite, bg::Default}, baseAttributes);
+        REQUIRE_EQUAL(based.color(), Color(fg::Green, bg::Blue));
+        REQUIRE(based.attributes().isBold());
+        REQUIRE(based.attributes().isItalic());
+
+        const auto fromBaseCharacter = Char{U'Y', Color{fg::BrightWhite, bg::Default}, baseAttributes};
+        REQUIRE_EQUAL(character.withBase(fromBaseCharacter), based);
+    }
+
     void testSpacingRecognizesSingleWhitespaceCodePoints() {
         REQUIRE(Char{U' '}.isSpacing());
         REQUIRE(Char{U'\t'}.isSpacing());
@@ -168,18 +237,41 @@ public:
         REQUIRE(left.renderedEquals(right, false));
     }
 
+    void testRenderedEqualsTreatsInheritedAttributesLikeDisabled() {
+        auto disabledAttributes = CharAttributes::reset();
+        disabledAttributes.setBold(false);
+        disabledAttributes.setUnderline(false);
+        const auto inherited = Char{U'X', Color{}, CharAttributes{}};
+        const auto disabled = Char{U'X', Color{}, disabledAttributes};
+
+        REQUIRE(inherited.renderedEquals(disabled));
+        REQUIRE(disabled.renderedEquals(inherited));
+
+        auto boldAttributes = CharAttributes{};
+        boldAttributes.setBold(true);
+        const auto bold = Char{U'X', Color{}, boldAttributes};
+        REQUIRE_FALSE(inherited.renderedEquals(bold));
+        REQUIRE(inherited.renderedEquals(bold, true, false));
+    }
+
     void testRejectsTooManyCodePoints() {
         REQUIRE_THROWS_AS(std::invalid_argument, Char{U"ab\u0301\u0302"});
         REQUIRE_THROWS_AS(std::invalid_argument, Char{"a\xCC\x81\xCC\x82\xCC\x83"});
     }
 
     void testHashMatchesStdHashAndReflectsTextAndColor() {
-        const auto base = Char{U'★', fg::Yellow, bg::Blue};
+        auto attributes = CharAttributes{};
+        attributes.setStrikethrough(true);
+        const auto base = Char{U'★', Color{fg::Yellow, bg::Blue}, attributes};
         const auto differentText = Char{U'☆', fg::Yellow, bg::Blue};
         const auto differentColor = Char{U'★', fg::Yellow, bg::Black};
+        auto differentAttributes = attributes;
+        differentAttributes.setStrikethrough(false);
+        const auto differentAttributeChar = Char{U'★', Color{fg::Yellow, bg::Blue}, differentAttributes};
 
         REQUIRE_EQUAL(base.hash(), std::hash<Char>{}(base));
         REQUIRE_NOT_EQUAL(base.hash(), differentText.hash());
         REQUIRE_NOT_EQUAL(base.hash(), differentColor.hash());
+        REQUIRE_NOT_EQUAL(base.hash(), differentAttributeChar.hash());
     }
 };

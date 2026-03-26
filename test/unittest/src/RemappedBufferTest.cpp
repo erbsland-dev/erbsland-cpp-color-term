@@ -15,7 +15,7 @@
 
 
 TESTED_TARGETS(RemappedBuffer)
-class RemappedBufferTest final : public el::UnitTest {
+class RemappedBufferTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
 public:
     using Line = std::vector<Char>;
 
@@ -648,19 +648,6 @@ private:
                 [&]() -> void { REQUIRE_EQUAL(buffer.get(pos), model.get(pos)); },
                 [&]() -> std::string { return std::format("{} at {}", trace, pos); });
         });
-    }
-
-    [[nodiscard]] static auto renderRows(const auto &buffer) -> std::vector<std::string> {
-        auto rows = std::vector<std::string>{};
-        rows.reserve(static_cast<std::size_t>(buffer.size().height()));
-        for (Coordinate y = 0; y < buffer.size().height(); ++y) {
-            auto row = std::string{};
-            for (Coordinate x = 0; x < buffer.size().width(); ++x) {
-                buffer.get(Position{x, y}).appendTo(row);
-            }
-            rows.push_back(std::move(row));
-        }
-        return rows;
     }
 
     [[nodiscard]] static auto randomInt(std::mt19937 &rng, const int minValue, const int maxValue) -> int {

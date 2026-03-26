@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Buffer.hpp"
 
-
 #include "Char16Style.hpp"
 #include "Tile9Style.hpp"
 
@@ -103,7 +102,7 @@ void Buffer::set(const Position pos, const Char &block) noexcept {
         if (!_size.contains(secondPosition)) {
             return;
         }
-        _data[_size.index(secondPosition)] = Char{"", block.color()};
+        _data[_size.index(secondPosition)] = Char{"", block.style()};
         _data[_size.index(pos)] = block;
     }
 }

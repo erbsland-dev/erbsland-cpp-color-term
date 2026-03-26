@@ -7,14 +7,15 @@ Buffer Views
 ************
 
 Buffer views expose a rectangular window onto a larger readable buffer.
-They are useful whenever the logical content is bigger than the visible
-terminal area, for example in scrollable panels, minimaps, editors, and
-diagnostic tools.
 
-:cpp:any:`BufferViewBase <erbsland::cterm::BufferViewBase>` provides the shared view behavior, :cpp:any:`BufferView <erbsland::cterm::BufferView>`
-owns a shared pointer to the underlying content, and
-:cpp:any:`BufferConstRefView <erbsland::cterm::BufferConstRefView>` is the lightweight stack-friendly variant for
-temporary rendering.
+They are the right tool whenever your logical content is larger than the
+visible terminal area—for example in scrollable panels, editors, minimaps,
+or diagnostic tools.
+
+:cpp:any:`BufferViewBase <erbsland::cterm::BufferViewBase>` provides the shared view behavior,
+:cpp:any:`BufferView <erbsland::cterm::BufferView>` owns a shared pointer to the underlying content, and
+:cpp:any:`BufferConstRefView <erbsland::cterm::BufferConstRefView>` is the lightweight, stack-friendly variant
+for temporary rendering.
 
 Usage
 =====
@@ -22,8 +23,8 @@ Usage
 Viewing a Portion of a Larger Buffer
 ------------------------------------
 
-Use a buffer view when only part of a large logical canvas should be
-shown on screen.
+Use a buffer view when you want to render only a specific region of a
+larger logical canvas.
 
 .. code-block:: cpp
 
@@ -37,32 +38,35 @@ shown on screen.
     settings.setShowCropMarks(true);
     terminal.updateScreen(view, settings);
 
-The view translates local coordinates back into the underlying content.
-That makes it ideal for rendering only the visible part of a larger
-document or world buffer.
+The view translates its local coordinates into the corresponding
+positions of the underlying buffer. This allows you to render just the
+visible portion without copying or modifying the original content.
 
 Scrolling by Moving the View Rectangle
 --------------------------------------
 
-:cpp:any:`BufferViewBase <erbsland::cterm::BufferViewBase>` stores the currently visible rectangle and can be
-reused while the user scrolls or pans around a larger buffer.
+:cpp:any:`BufferViewBase <erbsland::cterm::BufferViewBase>` stores the currently visible rectangle, which you can
+update as the user scrolls or pans through the content.
 
 .. code-block:: cpp
 
     auto sharedWorld = std::make_shared<Buffer>(world);
     auto view = BufferView{sharedWorld, Rectangle{0, 0, 40, 12}};
+
     view.setViewRect(Rectangle{16, 10, 40, 12});
     terminal.updateScreen(view);
 
-Moving the view rectangle changes which part of the content is visible
-without requiring the underlying buffer to be copied or redrawn.
+By moving the view rectangle, you change which part of the content is
+visible—without copying, reallocating, or redrawing the underlying buffer.
 
 Choosing Between Shared and Referenced Views
 --------------------------------------------
 
-:cpp:any:`BufferView <erbsland::cterm::BufferView>` is the right choice when the view needs to outlive the
-current scope or be stored in a larger object. :cpp:any:`BufferConstRefView <erbsland::cterm::BufferConstRefView>` is
-the better fit for short-lived wrappers around an existing buffer.
+Choose :cpp:any:`BufferView <erbsland::cterm::BufferView>` when the view needs to outlive the current scope or be
+stored as part of a larger object.
+
+Choose :cpp:any:`BufferConstRefView <erbsland::cterm::BufferConstRefView>` when you only need a short-lived wrapper
+around an existing buffer.
 
 .. code-block:: cpp
 
@@ -72,20 +76,23 @@ the better fit for short-lived wrappers around an existing buffer.
     auto preview = BufferConstRefView{*sharedBuffer, Rectangle{0, 0, 20, 6}};
     terminal.updateScreen(preview);
 
-Both variants implement :cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>`, so the rest of the rendering
-pipeline can treat them like any other source of terminal cells.
+Both variants implement :cpp:any:`ReadableBuffer <erbsland::cterm::ReadableBuffer>`, so the rest of your rendering
+pipeline can treat them just like any other source of terminal cells.
 
 Showing Cropped Edges Explicitly
 --------------------------------
 
-:cpp:any:`CropEdges <erbsland::cterm::CropEdges>` describes which sides of a view are clipped by the
-available content. :cpp:any:`BufferViewBase <erbsland::cterm::BufferViewBase>` can use that information to render
-custom per-edge crop characters inside the view itself.
+:cpp:any:`CropEdges <erbsland::cterm::CropEdges>` describes which sides of a view are clipped by the available
+content.
+
+:cpp:any:`BufferViewBase <erbsland::cterm::BufferViewBase>` can use this information to render custom crop indicators
+directly inside the view.
 
 .. code-block:: cpp
 
     auto sharedBuffer = std::make_shared<Buffer>(world);
     auto view = BufferView{sharedBuffer, Rectangle{8, 4, 40, 12}};
+
     view.setShowCropCharacters(true);
     view.setCropCharacter(Direction::East, Char{U'▶', fg::BrightYellow});
     view.setCropCharacter(Direction::South, Char{U'▼', fg::BrightYellow});
@@ -95,8 +102,9 @@ custom per-edge crop characters inside the view itself.
         terminal.printLine("There is more content to the right.");
     }
 
-This is useful for scrollable views where the user should immediately see
-that additional content exists beyond the visible window.
+This is especially helpful in scrollable views, where users should
+immediately recognize that additional content exists beyond the visible
+window.
 
 Interface
 =========
@@ -112,3 +120,4 @@ Interface
 
 .. doxygenclass:: erbsland::cterm::CropEdges
     :members:
+

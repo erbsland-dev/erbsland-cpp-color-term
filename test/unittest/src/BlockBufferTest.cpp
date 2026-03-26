@@ -11,7 +11,7 @@
 #include <vector>
 
 TESTED_TARGETS(Buffer)
-class BlockBufferTest final : public el::UnitTest {
+class BlockBufferTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
 public:
     void testConstructorAndFill() {
         Buffer buffer(Size(2, 3));
@@ -58,7 +58,7 @@ public:
         buffer.resize(Size{3, 3}, true, Char{U'.'});
 
         REQUIRE_EQUAL(buffer.size(), Size(3, 3));
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AB.", "CD.", "..."}));
+        requireRowsEqual(buffer, {"AB.", "CD.", "..."});
     }
 
     void testResizeWithReorderCropsToTheNewRectangle() {
@@ -73,7 +73,7 @@ public:
         buffer.resize(Size{2, 1}, true, Char{U'.'});
 
         REQUIRE_EQUAL(buffer.size(), Size(2, 1));
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AB"}));
+        requireRowsEqual(buffer, {"AB"});
     }
 
     void testResizeWithReorderShrinkingWidthFillsRowsAddedByHeightExpansion() {
@@ -88,7 +88,7 @@ public:
         buffer.resize(Size{2, 3}, true, Char{U'.'});
 
         REQUIRE_EQUAL(buffer.size(), Size(2, 3));
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AB", "DE", ".."}));
+        requireRowsEqual(buffer, {"AB", "DE", ".."});
     }
 
     void testResizeWithoutReorderFillsExpandedTailWithExplicitCharacter() {
@@ -99,7 +99,7 @@ public:
         buffer.resize(Size{4, 1}, false, Char{U'.'});
 
         REQUIRE_EQUAL(buffer.size(), Size(4, 1));
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"AB.."}));
+        requireRowsEqual(buffer, {"AB.."});
     }
 
     void testResizeRejectsInvalidSizes() {
@@ -123,14 +123,18 @@ public:
 
     void testSetWideCharacterWithLvalueFillsTheFollowingCell() {
         Buffer buffer(Size(4, 1));
-        const auto block = Char{U'界', fg::Green, bg::Blue};
+        auto attributes = CharAttributes{};
+        attributes.setItalic(true);
+        const auto block = Char{U'界', Color{fg::Green, bg::Blue}, attributes};
 
         buffer.set(Position(1, 0), block);
 
         REQUIRE_EQUAL(buffer.get(Position(1, 0)), U'界');
         REQUIRE_EQUAL(buffer.get(Position(1, 0)).color(), Color(fg::Green, bg::Blue));
+        REQUIRE(buffer.get(Position(1, 0)).attributes().isItalic());
         REQUIRE(buffer.get(Position(2, 0)).isEmpty());
         REQUIRE_EQUAL(buffer.get(Position(2, 0)).color(), Color(fg::Green, bg::Blue));
+        REQUIRE(buffer.get(Position(2, 0)).attributes().isItalic());
         REQUIRE_EQUAL(buffer.get(Position(3, 0)), U' ');
         REQUIRE_EQUAL(buffer.get(Position(3, 0)).color(), Color{});
     }
@@ -154,7 +158,7 @@ public:
 
         buffer.set(Position{1, 0}, Char{U'界', fg::Yellow, bg::Blue});
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({".."}));
+        requireRowsEqual(buffer, {".."});
         REQUIRE_EQUAL(buffer.get(Position{0, 0}), U'.');
         REQUIRE_EQUAL(buffer.get(Position{1, 0}), U'.');
     }
@@ -186,7 +190,7 @@ public:
         const auto fromLines = Buffer::fromLines(lines);
 
         REQUIRE_EQUAL(fromLines.size(), Size(2, 3));
-        REQUIRE_EQUAL(renderRows(fromLines), std::vector<std::string>({"ab", "  ", "c "}));
+        requireRowsEqual(fromLines, {"ab", "  ", "c "});
 
         const auto fromText = Buffer::fromLinesInString(String{"界\nA"});
 
@@ -194,7 +198,7 @@ public:
         REQUIRE_EQUAL(fromText.get(Position{0, 0}), U'界');
         REQUIRE(fromText.get(Position{1, 0}).isEmpty());
         REQUIRE_EQUAL(fromText.get(Position{1, 0}).color(), Color{});
-        REQUIRE_EQUAL(renderRows(fromText), std::vector<std::string>({"界 ", "A "}));
+        requireRowsEqual(fromText, {"界 ", "A "});
     }
 
     void testFromLinesFactoriesRejectEmptyInput() {
@@ -229,7 +233,7 @@ public:
         target.setAndResizeFrom(source);
 
         REQUIRE_EQUAL(target.size(), Size(2, 2));
-        REQUIRE_EQUAL(renderRows(target), std::vector<std::string>({"AB", "CD"}));
+        requireRowsEqual(target, {"AB", "CD"});
     }
 
     void testSetAndResizeFromAlsoSupportsReadableViews() {
@@ -246,7 +250,7 @@ public:
         target.setAndResizeFrom(view);
 
         REQUIRE_EQUAL(target.size(), Size(2, 2));
-        REQUIRE_EQUAL(renderRows(target), std::vector<std::string>({"BC", "EF"}));
+        requireRowsEqual(target, {"BC", "EF"});
     }
 
     void testToMaskMatchesCharactersFromStringAndCanInvertTheSelection() {
@@ -329,7 +333,7 @@ public:
 
         buffer.fill(Rectangle{0, 0, 4, 3}, Tile9Style::create("ABCDEFGHI"));
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"ABBC", "DEEF", "GHHI"}));
+        requireRowsEqual(buffer, {"ABBC", "DEEF", "GHHI"});
     }
 
     void testFillRectangleWithTile9StyleAppliesBaseColorBeforeTileColor() {
@@ -357,7 +361,7 @@ public:
 
         buffer.drawFrame(Rectangle{0, 0, 3, 3}, Char{U'#'});
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"###", "# #", "###"}));
+        requireRowsEqual(buffer, {"###", "# #", "###"});
     }
 
     void testDrawFrameWithStyleRendersExpectedBoxCharacters() {
@@ -365,7 +369,7 @@ public:
 
         buffer.drawFrame(Rectangle{0, 0, 4, 3}, FrameStyle::LightWithRoundedCorners);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"╭──╮", "│  │", "╰──╯"}));
+        requireRowsEqual(buffer, {"╭──╮", "│  │", "╰──╯"});
     }
 
     void testDrawFrameWithTile9StyleOmitsTheCenterTile() {
@@ -373,39 +377,39 @@ public:
 
         buffer.drawFrame(Rectangle{0, 0, 4, 3}, Tile9Style::create("ABCDEFGHI"));
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"ABBC", "D  F", "GHHI"}));
+        requireRowsEqual(buffer, {"ABBC", "D  F", "GHHI"});
     }
 
     void testDrawFrameWithNewPredefinedStylesRendersExpectedShapes() {
         {
             Buffer buffer(Size(4, 3));
             buffer.drawFrame(Rectangle{0, 0, 4, 3}, FrameStyle::LightDoubleDash);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"┌╌╌┐", "╎  ╎", "└╌╌┘"}));
+            requireRowsEqual(buffer, {"┌╌╌┐", "╎  ╎", "└╌╌┘"});
         }
         {
             Buffer buffer(Size(4, 3));
             buffer.drawFrame(Rectangle{0, 0, 4, 3}, FrameStyle::HeavyQuadrupleDash);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"┏┉┉┓", "┋  ┋", "┗┉┉┛"}));
+            requireRowsEqual(buffer, {"┏┉┉┓", "┋  ┋", "┗┉┉┛"});
         }
         {
             Buffer buffer(Size(4, 3));
             buffer.drawFrame(Rectangle{0, 0, 4, 3}, FrameStyle::FullBlock);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"████", "█  █", "████"}));
+            requireRowsEqual(buffer, {"████", "█  █", "████"});
         }
         {
             Buffer buffer(Size(4, 3));
             buffer.drawFrame(Rectangle{0, 0, 4, 3}, FrameStyle::FullBlockWithChamfer);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"◢██◣", "█  █", "◥██◤"}));
+            requireRowsEqual(buffer, {"◢██◣", "█  █", "◥██◤"});
         }
         {
             Buffer buffer(Size(4, 3));
             buffer.drawFrame(Rectangle{0, 0, 4, 3}, FrameStyle::OuterHalfBlock);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"▛▀▀▜", "▌  ▐", "▙▄▄▟"}));
+            requireRowsEqual(buffer, {"▛▀▀▜", "▌  ▐", "▙▄▄▟"});
         }
         {
             Buffer buffer(Size(4, 3));
             buffer.drawFrame(Rectangle{0, 0, 4, 3}, FrameStyle::InnerHalfBlock);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"▗▄▄▖", "▐  ▌", "▝▀▀▘"}));
+            requireRowsEqual(buffer, {"▗▄▄▖", "▐  ▌", "▝▀▀▘"});
         }
     }
 
@@ -413,17 +417,17 @@ public:
         {
             Buffer buffer(Size(1, 1));
             buffer.drawFrame(Rectangle{0, 0, 1, 1}, FrameStyle::OuterHalfBlock);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"█"}));
+            requireRowsEqual(buffer, {"█"});
         }
         {
             Buffer buffer(Size(3, 1));
             buffer.drawFrame(Rectangle{0, 0, 3, 1}, FrameStyle::OuterHalfBlock);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"███"}));
+            requireRowsEqual(buffer, {"███"});
         }
         {
             Buffer buffer(Size(1, 3));
             buffer.drawFrame(Rectangle{0, 0, 1, 3}, FrameStyle::InnerHalfBlock);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"█", "█", "█"}));
+            requireRowsEqual(buffer, {"█", "█", "█"});
         }
     }
 
@@ -449,7 +453,7 @@ public:
 
         buffer.drawFilledFrame(Rectangle{0, 0, 4, 3}, FrameStyle::OuterHalfBlock, Char{U'.'});
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"▛▀▀▜", "▌..▐", "▙▄▄▟"}));
+        requireRowsEqual(buffer, {"▛▀▀▜", "▌..▐", "▙▄▄▟"});
     }
 
     void testDrawFilledFrameWithStyleAppliesCombinationStyleToFill() {
@@ -476,7 +480,7 @@ public:
 
         buffer.drawFrame(Rectangle{0, 0, 3, 3}, options);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"┌─┐", "│.│", "└─┘"}));
+        requireRowsEqual(buffer, {"┌─┐", "│.│", "└─┘"});
         REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Red, bg::Blue));
         REQUIRE_EQUAL(buffer.get(Position{1, 1}).color(), Color(fg::White, bg::Yellow));
     }
@@ -519,14 +523,14 @@ public:
         {
             Buffer buffer(Size(4, 3));
             buffer.drawFrame(Rectangle{0, 0, 4, 3}, options);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"XXXX", "X  X", "XXXX"}));
+            requireRowsEqual(buffer, {"XXXX", "X  X", "XXXX"});
         }
         {
             Buffer buffer(Size(4, 3));
             options.setTile9Style(Tile9Style::create("ABCDEFGHI"));
             options.setFillBlock(Char{U'.'});
             buffer.drawFrame(Rectangle{0, 0, 4, 3}, options);
-            REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"ABBC", "DEEF", "GHHI"}));
+            requireRowsEqual(buffer, {"ABBC", "DEEF", "GHHI"});
         }
     }
 
@@ -590,7 +594,7 @@ public:
 
         buffer.drawBitmap(bitmap, Position{0, 0}, options);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({" █ ", "   "}));
+        requireRowsEqual(buffer, {" █ ", "   "});
         REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::BrightYellow, bg::Blue));
         REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::White, bg::Black));
     }
@@ -606,7 +610,7 @@ public:
 
         buffer.drawBitmap(bitmap, Position{0, 0}, options);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"[]"}));
+        requireRowsEqual(buffer, {"[]"});
         REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::BrightCyan, bg::Black));
         REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::BrightCyan, bg::Black));
     }
@@ -621,7 +625,7 @@ public:
 
         buffer.drawBitmap(bitmap, Rectangle{0, 0, 2, 1}, Alignment::Right, options);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({" █"}));
+        requireRowsEqual(buffer, {" █"});
     }
 
     void testDrawBitmapChar16StyleUsesNeighborConnections() {
@@ -635,7 +639,7 @@ public:
 
         buffer.drawBitmap(bitmap, Position{0, 0}, options);
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"╶─╴"}));
+        requireRowsEqual(buffer, {"╶─╴"});
     }
 
     void testDrawBitmapVerticalStripesUseBitmapPixelsForDoubleBlocks() {
@@ -707,7 +711,7 @@ public:
 
         buffer.drawText("Hi", Alignment::Center, Rectangle{0, 0, 5, 3}, Color{fg::Yellow, bg::Blue});
 
-        REQUIRE_EQUAL(renderRows(buffer), std::vector<std::string>({"     ", " Hi  ", "     "}));
+        requireRowsEqual(buffer, {"     ", " Hi  ", "     "});
         REQUIRE_EQUAL(buffer.get(Position{1, 1}).color(), Color(fg::Yellow, bg::Blue));
         REQUIRE_EQUAL(buffer.get(Position{2, 1}).color(), Color(fg::Yellow, bg::Blue));
     }
@@ -716,19 +720,4 @@ public:
 #elif defined(__GNUC__)
 #pragma GCC diagnostic pop
 #endif
-
-private:
-    [[nodiscard]] static auto renderRows(const Buffer &buffer) -> std::vector<std::string> {
-        auto rows = std::vector<std::string>{};
-        rows.reserve(static_cast<std::size_t>(buffer.size().height()));
-        for (auto y = 0; y < buffer.size().height(); ++y) {
-            auto row = std::string{};
-            for (auto x = 0; x < buffer.size().width(); ++x) {
-                const auto &block = buffer.get(Position{x, y});
-                row += block.charStr().empty() ? " " : block.charStr();
-            }
-            rows.push_back(row);
-        }
-        return rows;
-    }
 };

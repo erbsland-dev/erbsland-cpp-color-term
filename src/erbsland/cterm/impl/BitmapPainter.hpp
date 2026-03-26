@@ -45,9 +45,6 @@ private: // wrapper (to keep code simple)
 
 private: // helper
     [[nodiscard]] static auto bitmapRenderSize(const Bitmap &bitmap, const BitmapDrawOptions &options) noexcept -> Size;
-    [[nodiscard]] static auto
-    alignedBitmapOffset(int renderedSize, int availableSize, Alignment alignment, Alignment alignmentMask) noexcept
-        -> int;
     [[nodiscard]] auto colorForBitmapPosition(
         const BitmapDrawOptions &options, Position bitmapPosition, std::size_t animationCycle) const noexcept -> Color;
     void drawBitmapBlock(Position pos, const Char &block, Color baseColor, const BitmapDrawOptions &options) noexcept;

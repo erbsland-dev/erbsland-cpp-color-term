@@ -40,15 +40,15 @@ auto RetroPlasmaApp::canvasSize() const noexcept -> Size {
 
 
 void RetroPlasmaApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, 'q'}) {
+    if (key == Key{Key::Character, U'q'}) {
         _quitRequested = true;
-    } else if (key == Key{Key::Character, 'f'}) {
+    } else if (key == Key{Key::Character, U'f'}) {
         _speed = std::min(_speed + 0.25, 4.0);
-    } else if (key == Key{Key::Character, 's'}) {
+    } else if (key == Key{Key::Character, U's'}) {
         _speed = std::max(_speed - 0.25, 0.25);
-    } else if (key == Key{Key::Character, 'p'} || key == Key{Key::Space}) {
+    } else if (key == Key{Key::Character, U'p'} || key == Key{Key::Space}) {
         _paused = !_paused;
-    } else if (key == Key{Key::Character, 'c'}) {
+    } else if (key == Key{Key::Character, U'c'}) {
         ++_paletteIndex;
     }
 }

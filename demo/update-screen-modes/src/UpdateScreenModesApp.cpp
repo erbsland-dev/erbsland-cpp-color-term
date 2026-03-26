@@ -41,15 +41,15 @@ auto UpdateScreenModesApp::canvasSize() const noexcept -> Size {
 
 
 void UpdateScreenModesApp::handleKey(const Key &key) noexcept {
-    if (matchesCharacterKey(key, 'q')) {
+    if (matchesCharacterKey(key, U'q')) {
         _quitRequested = true;
-    } else if (matchesCharacterKey(key, 'o')) {
+    } else if (matchesCharacterKey(key, U'o')) {
         _state.toggleOverwriteMode();
-    } else if (matchesCharacterKey(key, 'l')) {
+    } else if (matchesCharacterKey(key, U'l')) {
         _state.toggleLineBuffer();
-    } else if (matchesCharacterKey(key, 's')) {
+    } else if (matchesCharacterKey(key, U's')) {
         _state.toggleSafeMargin();
-    } else if (matchesCharacterKey(key, 'b')) {
+    } else if (matchesCharacterKey(key, U'b')) {
         _state.toggleBackBuffer();
     }
 }
@@ -229,8 +229,8 @@ void UpdateScreenModesApp::appendTimingLine(
 }
 
 
-auto UpdateScreenModesApp::matchesCharacterKey(const Key &key, const char lowerCase) noexcept -> bool {
-    const auto upperCase = static_cast<char>(lowerCase - ('a' - 'A'));
+auto UpdateScreenModesApp::matchesCharacterKey(const Key &key, const char32_t lowerCase) noexcept -> bool {
+    const auto upperCase = lowerCase - (U'a' - U'A');
     return key == Key{Key::Character, lowerCase} || key == Key{Key::Character, upperCase};
 }
 

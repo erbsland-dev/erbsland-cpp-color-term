@@ -43,16 +43,69 @@ public:
         REQUIRE_EQUAL(backend->output(), std::string{"\x1b[31m\x1b[44mA\x1b[42mB"});
     }
 
+    void testAttributeAccessorsAndStringWritesUseTheTrackedTerminalAttributes() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        auto terminal = createTerminal(backend);
+        terminal->setLineBufferEnabled(false);
+
+        terminal->setBold(true);
+        terminal->setUnderline(true);
+        terminal->write(String{"A"});
+
+        auto attributes = CharAttributes{};
+        attributes.setBold(false);
+        terminal->write(Char{U'B', Color{}, attributes});
+        terminal->flush();
+
+        REQUIRE(terminal->charAttributes().isUnderline());
+        REQUIRE_FALSE(terminal->charAttributes().isBold());
+        REQUIRE_EQUAL(backend->output(), std::string{"\x1b[1m\x1b[4mA\x1b[22mB"});
+    }
+
     void testPrintAndPrintLineAcceptAllSupportedArgumentKindsInTextMode() {
         const auto backend = std::make_shared<TerminalTestBackend>();
         auto terminal = createTerminal(backend);
         terminal->setOutputMode(Terminal::OutputMode::Text);
 
-        terminal->print(fg::Green, bg::Blue, Char{U'A'}, String{"B"}, std::string{"C"}, std::string_view{"D"}, "E");
+        auto bold = CharAttributes{};
+        bold.setBold(true);
+        const auto style = CharStyle{Color{fg::Green, bg::Blue}, bold};
+        terminal->print(style, Char{U'A'}, String{"B"}, std::string{"C"}, std::string_view{"D"}, "E");
         terminal->printLine("F");
         terminal->flush();
 
         REQUIRE_EQUAL(backend->output(), std::string{"ABCDEF\n"});
+    }
+
+    void testStyleWrappersExposeAndApplyTheTrackedWriterStyle() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        auto terminal = createTerminal(backend);
+        terminal->setLineBufferEnabled(false);
+
+        auto emphasis = CharAttributes{};
+        emphasis.setUnderline(true);
+        terminal->setStyle(CharStyle{Color{fg::Red, bg::Blue}, emphasis});
+        terminal->print(
+            CharStyle{Color{fg::Inherited, bg::Green}, CharAttributes{}.withFlag(CharAttributes::Underline, false)},
+            "A");
+        terminal->flush();
+
+        REQUIRE_EQUAL(terminal->style().color(), Color(fg::Red, bg::Green));
+        REQUIRE_FALSE(terminal->style().attributes().isUnderline());
+        REQUIRE_EQUAL(backend->output(), std::string{"\x1b[31;44m\x1b[4m\x1b[42m\x1b[24mA"});
+    }
+
+    void testBoldAndDimUseStableResetAndReapplySequences() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        auto terminal = createTerminal(backend);
+        terminal->setLineBufferEnabled(false);
+
+        terminal->setBold(true);
+        terminal->setDim(true);
+        terminal->setBold(false);
+        terminal->flush();
+
+        REQUIRE_EQUAL(backend->output(), std::string{"\x1b[1m\x1b[22;1;2m\x1b[22;2m"});
     }
 
     void testPrintParagraphRendersWrapMarksAndReturnsTheWrittenLineCount() {
@@ -83,7 +136,7 @@ public:
         terminal->flush();
 
         REQUIRE_EQUAL(writtenLines, 2);
-        REQUIRE_EQUAL(backend->output(), std::string{"AA  BB  \n    CC  \n"});
+        REQUIRE_EQUAL(backend->output(), std::string{"AA  BB\n    CC\n"});
     }
 
     void testPrintParagraphBreaksAtNonAdvancingTabStopsWhenRequested() {
@@ -100,7 +153,7 @@ public:
         terminal->flush();
 
         REQUIRE_EQUAL(writtenLines, 2);
-        REQUIRE_EQUAL(backend->output(), std::string{"Heading    <\n      text  \n"});
+        REQUIRE_EQUAL(backend->output(), std::string{"Heading    <\n      text\n"});
     }
 
     void testPrintParagraphReplacesNonAdvancingTabsWithSpacesByDefault() {
@@ -155,7 +208,7 @@ public:
         terminal->flush();
 
         REQUIRE_EQUAL(writtenLines, 2);
-        REQUIRE_EQUAL(backend->output(), std::string{"A   \n\n"});
+        REQUIRE_EQUAL(backend->output(), std::string{"A\n\n"});
     }
 
     void testPrintParagraphTreatsNewlinesAsHardBreaksAndResetsWrapCounting() {
@@ -169,7 +222,21 @@ public:
         terminal->flush();
 
         REQUIRE_EQUAL(writtenLines, 4);
-        REQUIRE_EQUAL(backend->output(), std::string{"AA BB\nCC…  \nFF GG\nHH…  \n"});
+        REQUIRE_EQUAL(backend->output(), std::string{"AA BB\nCC…\nFF GG\nHH…\n"});
+    }
+
+    void testPrintParagraphKeepsRightSidePaddingWhenFullRightBackgroundIsRequested() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        auto terminal = createTerminal(backend, Size{4, 4});
+        terminal->setOutputMode(Terminal::OutputMode::Text);
+        auto options = ParagraphOptions{};
+        options.setBackgroundMode(ParagraphBackgroundMode::FullRight);
+
+        const auto writtenLines = terminal->printParagraph("AB CD", options);
+        terminal->flush();
+
+        REQUIRE_EQUAL(writtenLines, 2);
+        REQUIRE_EQUAL(backend->output(), std::string{"AB  \nCD  \n"});
     }
 
     void testPrintParagraphFallsBackToPlainOutputWhenRequested() {

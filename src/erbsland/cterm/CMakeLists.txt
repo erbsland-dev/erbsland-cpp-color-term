@@ -11,14 +11,20 @@ target_sources(erbsland-color-term PRIVATE
         BitmapDrawOptions.hpp
         Buffer.cpp
         Buffer.hpp
+        BufferDrawOptions.hpp
         BufferView.cpp
         BufferView.hpp
         Char.cpp
         Char.hpp
+        CharAttributes.hpp
+        CharStyle.hpp
         Char16Style.cpp
         Char16Style.hpp
         CharCombinationStyle.cpp
         CharCombinationStyle.hpp
+        CursorBuffer.cpp
+        CursorBuffer.hpp
+        CursorWriter.hpp
         Color.cpp
         Color.hpp
         ColorPart.cpp
@@ -43,6 +49,7 @@ target_sources(erbsland-color-term PRIVATE
         Key.hpp
         Margins.hpp
         MoveMode.hpp
+        Orientation.hpp
         ParagraphBackgroundMode.hpp
         ParagraphOnError.hpp
         ParagraphOptions.cpp

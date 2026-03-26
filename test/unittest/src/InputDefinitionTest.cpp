@@ -39,7 +39,7 @@ public:
 
     void testFromStringCharacter() {
         auto definition = InputDefinition::fromString("a");
-        REQUIRE_EQUAL(definition.keyPress(), Key(Key::Character, 'a'));
+        REQUIRE_EQUAL(definition.keyPress(), Key(Key::Character, U'a'));
         REQUIRE(definition.valid());
     }
 
@@ -53,9 +53,23 @@ public:
     }
 
     void testFromStringInvalid() {
-        auto definition = InputDefinition::fromString("?");
+        auto definition = InputDefinition::fromString("");
         REQUIRE_EQUAL(definition.keyPress(), Key{Key::None});
         REQUIRE(!definition.valid());
+    }
+
+    void testFromStringEscapedPrefixCharacters() {
+        auto definition = InputDefinition::fromString("\\+");
+        REQUIRE_EQUAL(definition.keyPress(), (Key{Key::Character, U'+'}));
+        REQUIRE_EQUAL(definition.forMode(), InputDefinition::ForMode::Both);
+
+        definition = InputDefinition::fromString("\\>");
+        REQUIRE_EQUAL(definition.keyPress(), (Key{Key::Character, U'>'}));
+        REQUIRE_EQUAL(definition.forMode(), InputDefinition::ForMode::Both);
+
+        definition = InputDefinition::fromString("+\\+");
+        REQUIRE_EQUAL(definition.keyPress(), (Key{Key::Character, U'+'}));
+        REQUIRE_EQUAL(definition.forMode(), InputDefinition::ForMode::Key);
     }
 
     void testToString() {
@@ -68,8 +82,14 @@ public:
         definition = InputDefinition{Key{Key::F5}, InputDefinition::ForMode::Key};
         REQUIRE_EQUAL(definition.toString(), "+f5");
 
-        definition = InputDefinition{Key{Key::Character, 'x'}, InputDefinition::ForMode::Both};
+        definition = InputDefinition{Key{Key::Character, U'x'}, InputDefinition::ForMode::Both};
         REQUIRE_EQUAL(definition.toString(), "x");
+
+        definition = InputDefinition{Key{Key::Character, U'+'}, InputDefinition::ForMode::Both};
+        REQUIRE_EQUAL(definition.toString(), "\\+");
+
+        definition = InputDefinition{Key{Key::Character, U'>'}, InputDefinition::ForMode::Key};
+        REQUIRE_EQUAL(definition.toString(), "+\\>");
 
         definition = InputDefinition{Key{Key::None}, InputDefinition::ForMode::Both};
         REQUIRE_EQUAL(definition.toString(), "");
@@ -92,7 +112,7 @@ public:
         REQUIRE_EQUAL(definition.toDisplayText(), "[F12]");
         REQUIRE_EQUAL(definition.toDisplayText(false), "F12");
 
-        definition = InputDefinition{Key{Key::Character, 'x'}, InputDefinition::ForMode::Both};
+        definition = InputDefinition{Key{Key::Character, U'x'}, InputDefinition::ForMode::Both};
         REQUIRE_EQUAL(definition.toDisplayText(), "[x]");
         REQUIRE_EQUAL(definition.toDisplayText(false), "x");
 

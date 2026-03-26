@@ -26,6 +26,8 @@ static_assert(std::is_same_v<decltype(Rectangle{}.x2()), Coordinate>);
 static_assert(std::is_same_v<decltype(Rectangle{}.y2()), Coordinate>);
 static_assert(std::is_same_v<decltype(Rectangle{}.width()), Coordinate>);
 static_assert(std::is_same_v<decltype(Rectangle{}.height()), Coordinate>);
+static_assert(std::is_same_v<decltype(Rectangle{}.alignmentOffset(Size{}, Alignment::TopLeft)), Position>);
+static_assert(std::is_same_v<decltype(Rectangle{}.alignedSource(Rectangle{}, Alignment::TopLeft)), AlignedSource>);
 
 
 TESTED_TARGETS(Rectangle)
@@ -249,6 +251,41 @@ public:
         // 4) requested size larger than inner area -> clamped to inner area
         auto tooLarge = rect.subRectangle(Anchor::TopLeft, Size(100, 100), Margins(5));
         REQUIRE_EQUAL(tooLarge.size(), Size(20 - 10, 10 - 10));
+    }
+
+    void testAlignedSourcePlacesASmallerSourceInsideTheTargetRectangle() {
+        rect = Rectangle(10, 20, 8, 5);
+
+        const auto aligned = rect.alignedSource(Rectangle(3, 4, 3, 2), Alignment::BottomRight);
+
+        requireRectangleEqual(aligned.targetRect, Rectangle(15, 23, 3, 2));
+        requireRectangleEqual(aligned.sourceRect, Rectangle(3, 4, 3, 2));
+    }
+
+    void testAlignmentOffsetAddsTheRectangleTopLeftCorner() {
+        rect = Rectangle(10, 20, 8, 5);
+
+        REQUIRE_EQUAL(rect.alignmentOffset(Size(3, 2), Alignment::TopLeft), Position(10, 20));
+        REQUIRE_EQUAL(rect.alignmentOffset(Size(3, 2), Alignment::BottomRight), Position(15, 23));
+        REQUIRE_EQUAL(rect.alignmentOffset(Size(10, 7), Alignment::Center), Position(9, 19));
+    }
+
+    void testAlignedSourceCropsALargerSourceAccordingToAlignment() {
+        rect = Rectangle(10, 20, 4, 2);
+
+        const auto aligned = rect.alignedSource(Rectangle(3, 4, 8, 5), Alignment::Center);
+
+        requireRectangleEqual(aligned.targetRect, Rectangle(10, 20, 4, 2));
+        requireRectangleEqual(aligned.sourceRect, Rectangle(5, 5, 4, 2));
+    }
+
+    void testAlignedSourceCanCropAndPlaceOnDifferentAxes() {
+        rect = Rectangle(10, 20, 10, 3);
+
+        const auto aligned = rect.alignedSource(Rectangle(2, 4, 4, 5), Alignment::BottomCenter);
+
+        requireRectangleEqual(aligned.targetRect, Rectangle(13, 20, 4, 3));
+        requireRectangleEqual(aligned.sourceRect, Rectangle(2, 6, 4, 3));
     }
 
     void testContains() {

@@ -61,6 +61,32 @@ auto Rectangle::subRectangle(const Anchor anchor, Size size, const Margins margi
     return Rectangle{innerRect.topLeft() + offset, size};
 }
 
+auto Rectangle::alignmentOffset(const Size contentSize, const Alignment alignment) const noexcept -> Position {
+    return topLeft() + size().alignmentOffset(contentSize, alignment);
+}
+
+auto Rectangle::alignedSource(Rectangle sourceRect, const Alignment alignment) const noexcept -> AlignedSource {
+    auto targetRect = *this;
+    const auto originalSourceSize = sourceRect.size();
+    const auto originalTargetSize = targetRect.size();
+    const auto localOffset = size().alignmentOffset(originalSourceSize, alignment);
+    const auto targetOffset = topLeft() + localOffset;
+    const auto visibleSize = originalSourceSize.componentMin(originalTargetSize);
+    sourceRect.setSize(visibleSize);
+    targetRect.setSize(visibleSize);
+    if (originalSourceSize.width() <= originalTargetSize.width()) {
+        targetRect.setPos(Position{targetOffset.x(), targetRect.y1()});
+    } else {
+        sourceRect.setPos(Position{sourceRect.x1() - localOffset.x(), sourceRect.y1()});
+    }
+    if (originalSourceSize.height() <= originalTargetSize.height()) {
+        targetRect.setPos(Position{targetRect.x1(), targetOffset.y()});
+    } else {
+        sourceRect.setPos(Position{sourceRect.x1(), sourceRect.y1() - localOffset.y()});
+    }
+    return {targetRect, sourceRect};
+}
+
 auto Rectangle::contains(const Position testedPosition) const noexcept -> bool {
     return testedPosition.x() >= _pos.x() && testedPosition.y() >= _pos.y() && testedPosition.x() < x2() &&
         testedPosition.y() < y2();

@@ -38,7 +38,7 @@ auto FrameColorAnimationsApp::canvasSize() const noexcept -> Size {
 
 
 void FrameColorAnimationsApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, 'q'}) {
+    if (key == Key{Key::Character, U'q'}) {
         _quitRequested = true;
     }
 }
