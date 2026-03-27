@@ -1,6 +1,11 @@
+# Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+# SPDX-License-Identifier: Apache-2.0
+
 cmake_minimum_required(VERSION 3.28)
 
 add_subdirectory(impl)
+add_subdirectory(text)
+add_subdirectory(ui)
 target_sources(erbsland-color-term PRIVATE
         Alignment.hpp
         Anchor.hpp
@@ -36,6 +41,9 @@ target_sources(erbsland-color-term PRIVATE
         CropEdges.hpp
         Direction.cpp
         Direction.hpp
+        EncodingErrors.hpp
+        FastCharSet.cpp
+        FastCharSet.hpp
         Font.cpp
         Font.hpp
         FontGlyph.hpp
@@ -51,6 +59,7 @@ target_sources(erbsland-color-term PRIVATE
         MoveMode.hpp
         Orientation.hpp
         ParagraphBackgroundMode.hpp
+        ParagraphIndents.hpp
         ParagraphOnError.hpp
         ParagraphOptions.cpp
         ParagraphOptions.hpp
@@ -70,6 +79,7 @@ target_sources(erbsland-color-term PRIVATE
         Terminal.cpp
         Terminal.hpp
         TerminalFlags.hpp
+        TerminalSession.hpp
         TabOverflowBehavior.hpp
         Text.hpp
         TextAnimation.hpp

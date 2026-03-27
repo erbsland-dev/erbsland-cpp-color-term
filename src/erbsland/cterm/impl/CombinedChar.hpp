@@ -4,6 +4,9 @@
 
 
 #include "HashHelper.hpp"
+#include "UnicodeWidth.hpp"
+
+#include "../EncodingErrors.hpp"
 
 #include <array>
 #include <cstddef>
@@ -30,12 +33,16 @@ public:
     constexpr explicit CombinedChar(const char32_t codePoint) noexcept : _codePoints{codePoint, 0, 0} {}
     /// Construct a character from UTF-8 text.
     /// @param text The UTF-8 text for exactly one terminal character.
-    /// @throws std::invalid_argument If the text is invalid or stores an unsupported sequence.
-    explicit CombinedChar(std::string_view text);
+    /// Invalid UTF-8 bytes are replaced per byte, and unsupported text normalizes to `U+FFFD`.
+    /// Empty input, control codes, and leading zero-width code points normalize to `U+FFFD`.
+    /// Later visible code points also collapse the result to `U+FFFD`, while a third combining mark is ignored.
+    explicit CombinedChar(std::string_view text) noexcept;
     /// Construct a character from UTF-32 text.
     /// @param text The UTF-32 text for exactly one terminal character.
-    /// @throws std::invalid_argument If the text stores an unsupported sequence.
-    explicit CombinedChar(std::u32string_view text);
+    /// Invalid Unicode scalar values and unsupported text normalize to `U+FFFD`.
+    /// Empty input, control codes, and leading zero-width code points normalize to `U+FFFD`.
+    /// Later visible code points also collapse the result to `U+FFFD`, while a third combining mark is ignored.
+    explicit CombinedChar(std::u32string_view text) noexcept;
 
     // defaults
     CombinedChar(const CombinedChar &) = default;
@@ -45,11 +52,13 @@ public:
 
 public: // operators
     /// Compare two stored character sequences.
-    auto operator==(const CombinedChar &other) const noexcept -> bool;
+    auto operator==(const CombinedChar &other) const noexcept -> bool { return _codePoints == other._codePoints; }
+    /// Compare two stored character sequences.
+    auto operator!=(const CombinedChar &other) const noexcept -> bool { return _codePoints != other._codePoints; }
     /// Compare against a single code point.
-    [[nodiscard]] auto operator==(char32_t other) const noexcept -> bool;
+    [[nodiscard]] auto operator==(char32_t other) const noexcept -> bool { return singleCodePoint() == other; }
     /// Compare against a single code point.
-    [[nodiscard]] auto operator!=(char32_t other) const noexcept -> bool;
+    [[nodiscard]] auto operator!=(char32_t other) const noexcept -> bool { return !operator==(other); }
 
 public: // accessors
     /// Convert the stored sequence to UTF-8.
@@ -58,12 +67,31 @@ public: // accessors
     [[nodiscard]] auto utf32() const -> std::u32string;
     /// Get the leading code point.
     [[nodiscard]] constexpr auto mainCodePoint() const noexcept -> char32_t { return _codePoints[0]; }
+    /// Get a single Unicode code point or zero for combined or empty characters.
+    /// This is a fast-path method for comparing a single-code point character, without the color.
+    /// @return The single code point, or `0` if this character is combined or empty.
+    [[nodiscard]] constexpr auto singleCodePoint() const noexcept -> char32_t {
+        return _codePoints[1] != 0 ? 0 : _codePoints[0];
+    }
     /// Get the raw stored code points.
     [[nodiscard]] constexpr auto codePoints() const noexcept -> const Storage & { return _codePoints; }
     /// Get the number of stored code points.
     [[nodiscard]] constexpr auto codePointCount() const noexcept -> std::size_t { return countCodePoints(_codePoints); }
     /// Get the terminal display width in cells.
-    [[nodiscard]] auto displayWidth() const noexcept -> int;
+    [[nodiscard]] auto displayWidth() const noexcept -> int {
+        if (_displayWidthCache != cNoDisplayWidth) {
+            return static_cast<int>(_displayWidthCache);
+        }
+        auto result = 0;
+        for (const auto codePoint : _codePoints) {
+            if (codePoint == 0) {
+                break;
+            }
+            result += static_cast<int>(consoleCharacterWidth(codePoint));
+        }
+        _displayWidthCache = static_cast<uint8_t>(result);
+        return result;
+    }
     /// Get the UTF-8 byte count for this sequence.
     [[nodiscard]] auto byteCount() const noexcept -> std::size_t;
     /// Append the UTF-8 representation to a buffer.
@@ -73,17 +101,26 @@ public: // accessors
 public: // modifiers
     /// Create a copy with one additional combining code point.
     /// @param codePoint The combining code point to append.
+    /// @param encodingErrors How invalid combining code points are handled.
     /// @return The updated character.
-    /// @throws std::invalid_argument If the code point is unsupported or the storage is full.
-    [[nodiscard]] auto withCombining(char32_t codePoint) const -> CombinedChar;
+    /// `EncodingErrors::Replace` and `EncodingErrors::Ignore` keep the original character unchanged for invalid
+    /// combining code points or when the storage is already full.
+    /// @throws std::invalid_argument If `encodingErrors` is `Throw` and the code point is unsupported.
+    [[nodiscard]] auto withCombining(char32_t codePoint, EncodingErrors encodingErrors = EncodingErrors::Replace) const
+        -> CombinedChar;
 
 public: // tests
     /// Test if the character is empty.
     [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool { return _codePoints[0] == 0; }
     /// Test if the character is spacing.
-    [[nodiscard]] auto isSpacing() const noexcept -> bool;
+    [[nodiscard]] auto isSpacing() const noexcept -> bool {
+        if (codePointCount() != 1) {
+            return false;
+        }
+        return _codePoints[0] == U' ' || _codePoints[0] == U'\t' || _codePoints[0] == U'\n' || _codePoints[0] == U'\r';
+    }
     /// Test if the leading code point is a control code.
-    [[nodiscard]] auto isControl() const noexcept -> bool;
+    [[nodiscard]] auto isControl() const noexcept -> bool { return isControlCode(_codePoints[0]); }
     /// Get a stable hash for the stored code points.
     [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
         return hashCreate(_codePoints[0], _codePoints[1], _codePoints[2]);
@@ -91,25 +128,36 @@ public: // tests
 
 public: // tools
     /// Parse exactly one visible text character from UTF-8 input.
-    /// Control codes are rejected. Leading combining marks are ignored.
+    /// Invalid or unsupported input normalizes to `U+FFFD`.
     /// @param text The UTF-8 text to parse.
-    /// @return The parsed character, or `std::nullopt` if the text does not encode exactly one character.
-    [[nodiscard]] static auto fromTextUtf8(std::string_view text) -> std::optional<CombinedChar>;
+    /// @return The parsed character wrapped in `std::optional` for API compatibility.
+    /// This function currently always returns a value and uses normalization instead of `std::nullopt`.
+    [[nodiscard]] static auto fromTextUtf8(std::string_view text) noexcept -> std::optional<CombinedChar>;
     /// Parse exactly one visible text character from UTF-32 input.
-    /// Control codes are rejected. Leading combining marks are ignored.
+    /// Invalid or unsupported input normalizes to `U+FFFD`.
     /// @param text The UTF-32 text to parse.
-    /// @return The parsed character, or `std::nullopt` if the text does not encode exactly one character.
-    [[nodiscard]] static auto fromTextUtf32(std::u32string_view text) -> std::optional<CombinedChar>;
+    /// @return The parsed character wrapped in `std::optional` for API compatibility.
+    /// This function currently always returns a value and uses normalization instead of `std::nullopt`.
+    [[nodiscard]] static auto fromTextUtf32(std::u32string_view text) noexcept -> std::optional<CombinedChar>;
     /// Test if a code point is a control code.
     [[nodiscard]] constexpr static auto isControlCode(char32_t codePoint) noexcept -> bool;
     /// Test whether the code point is encoded as a standalone terminal character in text parsing.
     [[nodiscard]] static auto isTextCodePoint(char32_t codePoint) noexcept -> bool;
 
 private:
-    [[nodiscard]] static auto decodeUtf8(std::string_view text) -> Storage;
-    [[nodiscard]] static auto decodeUtf32(std::u32string_view text) -> Storage;
-    [[nodiscard]] static auto parseSingleTextCharacter(std::u32string_view text) -> std::optional<CombinedChar>;
+    [[nodiscard]] static auto decodeUtf8(std::string_view text) noexcept -> Storage;
+    [[nodiscard]] static auto decodeUtf32(std::u32string_view text) noexcept -> Storage;
+    [[nodiscard]] static auto normalizeTextCodePoint(char32_t codePoint) noexcept -> char32_t;
+    [[nodiscard]] static auto normalizeDecodedText(std::u32string_view text) noexcept -> Storage;
+    [[nodiscard]] static auto replacementStorage() noexcept -> Storage;
+    static void normalizeDecodedTextCodePoint(
+        Storage &result,
+        std::size_t &combiningCount,
+        bool &hasBaseCodePoint,
+        bool &mustReplace,
+        char32_t codePoint) noexcept;
     [[nodiscard]] constexpr static auto countCodePoints(const Storage &codePoints) noexcept -> std::size_t;
+
 private:
     constexpr static auto cNoDisplayWidth = std::numeric_limits<uint8_t>::max();
 

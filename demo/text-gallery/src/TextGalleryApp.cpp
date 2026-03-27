@@ -3,8 +3,6 @@
 
 #include "TextGalleryApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <algorithm>
 #include <format>
 
@@ -12,43 +10,32 @@
 namespace demo::textgallery {
 
 
-void TextGalleryApp::run() {
-    _font = Font::defaultAscii();
+void TextGalleryApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{38, 14});
     _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
     _updateSettings.setMinimumSizeMessage(
         String{"Resize the terminal to at least 38x14 cells for the text gallery.", Color{fg::BrightWhite, bg::Black}});
-    auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
-    while (!_quitRequested) {
-        const auto key = _terminal.input().read(std::chrono::milliseconds{90});
-        if (key.valid()) {
-            handleKey(key);
-        }
-        renderFrame();
-        ++_animationCycle;
-    }
 }
 
 
-auto TextGalleryApp::canvasSize() const noexcept -> Size {
-    return _terminal.size();
+auto TextGalleryApp::beforeRun() -> int {
+    _font = Font::defaultAscii();
+    return 0;
 }
 
 
-void TextGalleryApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, U'q'}) {
-        _quitRequested = true;
-    } else if (key == Key{Key::Left}) {
+void TextGalleryApp::onKey(const Key &key) {
+    if (key == Key::Left) {
         _pageIndex = (_pageIndex + 2) % 3;
-    } else if (key == Key{Key::Right}) {
+    } else if (key == Key::Right) {
         _pageIndex = (_pageIndex + 1) % 3;
+    } else {
+        TerminalApplication::onKey(key);
     }
 }
 
 
-void TextGalleryApp::renderFrame() {
-    _terminal.testScreenSize();
-    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+void TextGalleryApp::onRenderToBuffer() {
     _buffer.fill(Char{" ", bg::Black});
     const auto outerRect = Rectangle{0, 0, _buffer.size().width(), _buffer.size().height()};
     _buffer.drawFrame(outerRect, FrameStyle::LightWithRoundedCorners);
@@ -73,7 +60,6 @@ void TextGalleryApp::renderFrame() {
         break;
     }
     drawFooter(footerRect);
-    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 

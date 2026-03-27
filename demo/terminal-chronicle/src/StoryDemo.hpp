@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 
 namespace demo::terminalchronicle {
@@ -13,10 +13,10 @@ using namespace erbsland::cterm;
 
 
 /// Tell a short, colorful story using only `Terminal::print()` and `Terminal::printLine()`.
-class StoryDemo final {
+class StoryDemo final : public TerminalApplication {
 public:
-    /// Run the demo.
-    void run() noexcept;
+    /// Render the story once and exit the demo.
+    auto beforeRun() -> int override;
 
 private:
     static void printHeader(Terminal &terminal) noexcept;

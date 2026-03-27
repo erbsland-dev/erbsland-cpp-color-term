@@ -4,6 +4,7 @@
 
 
 #include "Coordinate.hpp"
+#include "Orientation.hpp"
 
 #include "impl/HashHelper.hpp"
 
@@ -73,6 +74,12 @@ public: // attributes
     /// Set the y coordinate.
     /// @param y New y value.
     void setY(Coordinate y) noexcept;
+    /// Get the coordinate for the selected orientation.
+    /// @param orientation The orientation that selects the x or y coordinate.
+    /// @return `x()` for `Orientation::Horizontal`, otherwise `y()`.
+    [[nodiscard]] constexpr auto coordinate(const Orientation orientation) const noexcept -> Coordinate {
+        return orientation == Orientation::Horizontal ? _x : _y;
+    }
 
 public: // tools
     /// Get a hash for this position.

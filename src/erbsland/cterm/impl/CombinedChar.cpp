@@ -12,22 +12,10 @@
 namespace erbsland::cterm::impl {
 
 
-CombinedChar::CombinedChar(const std::string_view text) : _codePoints{decodeUtf8(text)} {
+CombinedChar::CombinedChar(const std::string_view text) noexcept : _codePoints{decodeUtf8(text)} {
 }
 
-CombinedChar::CombinedChar(const std::u32string_view text) : _codePoints{decodeUtf32(text)} {
-}
-
-auto CombinedChar::operator==(const CombinedChar &other) const noexcept -> bool {
-    return _codePoints == other._codePoints;
-}
-
-auto CombinedChar::operator==(const char32_t other) const noexcept -> bool {
-    return _codePoints == Storage{other, 0, 0};
-}
-
-auto CombinedChar::operator!=(const char32_t other) const noexcept -> bool {
-    return _codePoints != Storage{other, 0, 0};
+CombinedChar::CombinedChar(const std::u32string_view text) noexcept : _codePoints{decodeUtf32(text)} {
 }
 
 auto CombinedChar::utf8() const -> std::string {
@@ -46,21 +34,6 @@ auto CombinedChar::utf32() const -> std::u32string {
         }
         result.push_back(codePoint);
     }
-    return result;
-}
-
-auto CombinedChar::displayWidth() const noexcept -> int {
-    if (_displayWidthCache != cNoDisplayWidth) {
-        return static_cast<int>(_displayWidthCache);
-    }
-    auto result = 0;
-    for (const auto codePoint : _codePoints) {
-        if (codePoint == 0) {
-            break;
-        }
-        result += static_cast<int>(consoleCharacterWidth(codePoint));
-    }
-    _displayWidthCache = static_cast<uint8_t>(result);
     return result;
 }
 
@@ -85,49 +58,60 @@ void CombinedChar::appendTo(std::string &buffer) const noexcept {
     }
 }
 
-auto CombinedChar::withCombining(const char32_t codePoint) const -> CombinedChar {
+auto CombinedChar::withCombining(const char32_t codePoint, const EncodingErrors encodingErrors) const -> CombinedChar {
     if (codePointCount() == 0) {
-        throw std::invalid_argument{"A base code point is required before combining code points can be appended."};
+        if (encodingErrors == EncodingErrors::Throw) {
+            throw std::invalid_argument{"A base code point is required before combining code points can be appended."};
+        }
+        return *this;
+    }
+    if (!isValidUnicode(codePoint)) {
+        if (encodingErrors == EncodingErrors::Throw) {
+            throw std::invalid_argument{"CombinedChar requires a valid Unicode code point."};
+        }
+        return *this;
     }
     if (codePoint == 0) {
-        throw std::invalid_argument{"CombinedChar does not support the Unicode code point U+0000."};
+        if (encodingErrors == EncodingErrors::Throw) {
+            throw std::invalid_argument{"CombinedChar does not support the Unicode code point U+0000."};
+        }
+        return *this;
     }
     if (isControlCode(codePoint)) {
-        throw std::invalid_argument{"CombinedChar combining code points must not be control codes."};
+        if (encodingErrors == EncodingErrors::Throw) {
+            throw std::invalid_argument{"CombinedChar combining code points must not be control codes."};
+        }
+        return *this;
     }
     if (consoleCharacterWidth(codePoint) != 0) {
-        throw std::invalid_argument{"CombinedChar combining code points must have zero display width."};
+        if (encodingErrors == EncodingErrors::Throw) {
+            throw std::invalid_argument{"CombinedChar combining code points must have zero display width."};
+        }
+        return *this;
     }
     auto result = *this;
     const auto index = countCodePoints(result._codePoints);
     if (index >= result._codePoints.size()) {
-        throw std::invalid_argument{"CombinedChar supports at most three Unicode code points."};
+        if (encodingErrors == EncodingErrors::Throw) {
+            throw std::invalid_argument{"CombinedChar supports at most three Unicode code points."};
+        }
+        return *this;
     }
     result._codePoints[index] = codePoint;
     result._displayWidthCache = cNoDisplayWidth;
     return result;
 }
 
-auto CombinedChar::isSpacing() const noexcept -> bool {
-    if (codePointCount() != 1) {
-        return false;
-    }
-    return _codePoints[0] == U' ' || _codePoints[0] == U'\t' || _codePoints[0] == U'\n' || _codePoints[0] == U'\r';
+auto CombinedChar::fromTextUtf8(const std::string_view text) noexcept -> std::optional<CombinedChar> {
+    auto result = CombinedChar{};
+    result._codePoints = decodeUtf8(text);
+    return result;
 }
 
-auto CombinedChar::isControl() const noexcept -> bool {
-    return isControlCode(_codePoints[0]);
-}
-
-auto CombinedChar::fromTextUtf8(const std::string_view text) -> std::optional<CombinedChar> {
-    auto decoded = std::u32string{};
-    decoded.reserve(text.size());
-    U8Buffer{text}.decodeAll([&](const char32_t codePoint) -> void { decoded.push_back(codePoint); });
-    return parseSingleTextCharacter(decoded);
-}
-
-auto CombinedChar::fromTextUtf32(const std::u32string_view text) -> std::optional<CombinedChar> {
-    return parseSingleTextCharacter(text);
+auto CombinedChar::fromTextUtf32(const std::u32string_view text) noexcept -> std::optional<CombinedChar> {
+    auto result = CombinedChar{};
+    result._codePoints = decodeUtf32(text);
+    return result;
 }
 
 auto CombinedChar::isTextCodePoint(const char32_t codePoint) noexcept -> bool {
@@ -135,62 +119,81 @@ auto CombinedChar::isTextCodePoint(const char32_t codePoint) noexcept -> bool {
         (!isControlCode(codePoint) && codePoint >= 0x20 && consoleCharacterWidth(codePoint) > 0);
 }
 
-auto CombinedChar::decodeUtf8(const std::string_view text) -> Storage {
+auto CombinedChar::decodeUtf8(const std::string_view text) noexcept -> Storage {
     auto result = Storage{};
-    auto index = std::size_t{0};
-    U8Buffer{text}.decodeAll([&](const char32_t codePoint) -> void {
-        if (codePoint == 0) {
-            throw std::invalid_argument{"CombinedChar does not support the Unicode code point U+0000."};
-        }
-        if (isControlCode(codePoint) && codePoint != U'\t' && codePoint != U'\n' && codePoint != U'\r') {
-            throw std::invalid_argument{
-                "CombinedChar does not support control codes except tab, newline, and carriage return."};
-        }
-        if (index >= result.size()) {
-            throw std::invalid_argument{"CombinedChar supports at most three Unicode code points."};
-        }
-        result[index++] = codePoint;
+    auto combiningCount = std::size_t{0};
+    auto hasBaseCodePoint = false;
+    auto mustReplace = false;
+    U8Buffer{text}.decodeAllReplacingErrors([&](const char32_t codePoint) noexcept -> void {
+        normalizeDecodedTextCodePoint(result, combiningCount, hasBaseCodePoint, mustReplace, codePoint);
     });
+    if (mustReplace || !hasBaseCodePoint) {
+        return replacementStorage();
+    }
     return result;
 }
 
-auto CombinedChar::decodeUtf32(const std::u32string_view text) -> Storage {
+auto CombinedChar::decodeUtf32(const std::u32string_view text) noexcept -> Storage {
+    return normalizeDecodedText(text);
+}
+
+auto CombinedChar::normalizeTextCodePoint(const char32_t codePoint) noexcept -> char32_t {
+    if (!isValidUnicode(codePoint)) {
+        return U8Buffer<const char>::cReplacementCharacter;
+    }
+    return codePoint;
+}
+
+auto CombinedChar::normalizeDecodedText(const std::u32string_view text) noexcept -> Storage {
     auto result = Storage{};
-    if (text.size() > result.size()) {
-        throw std::invalid_argument{"CombinedChar supports at most three Unicode code points."};
+    auto combiningCount = std::size_t{0};
+    auto hasBaseCodePoint = false;
+    auto mustReplace = false;
+    for (const auto codePoint : text) {
+        normalizeDecodedTextCodePoint(
+            result, combiningCount, hasBaseCodePoint, mustReplace, normalizeTextCodePoint(codePoint));
     }
-    for (std::size_t index = 0; index < text.size(); ++index) {
-        if (text[index] == 0) {
-            throw std::invalid_argument{"CombinedChar does not support the Unicode code point U+0000."};
-        }
-        if (isControlCode(text[index]) && text[index] != U'\t' && text[index] != U'\n' && text[index] != U'\r') {
-            throw std::invalid_argument{
-                "CombinedChar does not support control codes except tab, newline, and carriage return."};
-        }
-        result[index] = text[index];
+    if (mustReplace || !hasBaseCodePoint) {
+        return replacementStorage();
     }
     return result;
 }
 
-auto CombinedChar::parseSingleTextCharacter(const std::u32string_view text) -> std::optional<CombinedChar> {
-    auto result = std::optional<CombinedChar>{};
-    for (const auto codePoint : text) {
-        if (codePoint == 0 || isControlCode(codePoint) || codePoint == U'\t' || codePoint == U'\n' ||
-            codePoint == U'\r') {
-            return std::nullopt;
-        }
-        if (consoleCharacterWidth(codePoint) == 0) {
-            if (result.has_value()) {
-                result = result->withCombining(codePoint);
-            }
-            continue;
-        }
-        if (result.has_value()) {
-            return std::nullopt;
-        }
-        result = CombinedChar{codePoint};
+auto CombinedChar::replacementStorage() noexcept -> Storage {
+    return {U8Buffer<const char>::cReplacementCharacter, 0, 0};
+}
+
+void CombinedChar::normalizeDecodedTextCodePoint(
+    Storage &result,
+    std::size_t &combiningCount,
+    bool &hasBaseCodePoint,
+    bool &mustReplace,
+    const char32_t codePoint) noexcept {
+    if (mustReplace) {
+        return;
     }
-    return result;
+    if (!hasBaseCodePoint) {
+        if (codePoint == 0 || isControlCode(codePoint) || consoleCharacterWidth(codePoint) == 0) {
+            mustReplace = true;
+            return;
+        }
+        result[0] = codePoint;
+        hasBaseCodePoint = true;
+        return;
+    }
+    if (codePoint == 0 || isControlCode(codePoint)) {
+        mustReplace = true;
+        return;
+    }
+    if (consoleCharacterWidth(codePoint) != 0) {
+        mustReplace = true;
+        return;
+    }
+    if (combiningCount >= 2) {
+        return;
+    }
+    result[1 + combiningCount] = codePoint;
+    ++combiningCount;
 }
 
 

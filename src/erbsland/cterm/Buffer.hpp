@@ -3,20 +3,6 @@
 #pragma once
 
 
-#include "Alignment.hpp"
-#include "BitmapDrawOptions.hpp"
-#include "Char.hpp"
-#include "Char16Style.hpp"
-#include "CharCombinationStyle.hpp"
-#include "ColorSequence.hpp"
-#include "FrameDrawOptions.hpp"
-#include "FrameStyle.hpp"
-#include "Position.hpp"
-#include "Rectangle.hpp"
-#include "Size.hpp"
-#include "String.hpp"
-#include "Text.hpp"
-#include "Tile9Style.hpp"
 #include "WritableBuffer.hpp"
 
 #include <string_view>
@@ -79,19 +65,9 @@ public: // implement ReadableBuffer
 
 public: // implement WritableBuffer
     void resize(Size newSize) override;
+    void resize(Size size, BufferResizeMode mode, Char fillChar) override;
     void set(Position pos, const Char &block) noexcept override;
     void setAndResizeFrom(const ReadableBuffer &other) override;
-
-public:
-    /// Resize this buffer.
-    /// Resizing the buffer *will not clear* it.
-    /// If `reorder` is `true`, the content will either be expanded with space blocks or cropped.
-    /// If `reorder` is `false`, the state of the resized buffer is undefined (you must clear it yourself).
-    /// @param size The new size.
-    /// @param reorder Whether to reorder the content when resizing.
-    /// @param fillChar The character to fill the new space with.
-    /// @throws std::invalid_argument if size is invalid
-    void resize(Size size, bool reorder, Char fillChar = Char::space());
 
 public: // faster implementations
     /// Fill/clear the buffer with the given character.
@@ -118,6 +94,7 @@ public: // compatibility
     /// @param rect The target rectangle.
     /// @param color The text color.
     /// @param animationCycle Animation cycle for animated text.
+    /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
     [[deprecated("Use drawText(std::string_view, Rectangle, ...) instead")]]
     void drawText(
         std::string_view text, Alignment alignment, Rectangle rect, Color color = {}, std::size_t animationCycle = 0);

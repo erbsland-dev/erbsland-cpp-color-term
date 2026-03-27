@@ -9,6 +9,7 @@ add_executable(${_erbsland_color_term_unittest_target})
 erbsland_set_required_compiler_options(${_erbsland_color_term_unittest_target})
 target_link_libraries(${_erbsland_color_term_unittest_target} PRIVATE erbsland-color-term)
 target_include_directories(${_erbsland_color_term_unittest_target} PRIVATE
+        ${PROJECT_SOURCE_DIR}/demo
         ${PROJECT_SOURCE_DIR}/src
         src
 )

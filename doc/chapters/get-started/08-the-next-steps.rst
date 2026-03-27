@@ -40,7 +40,14 @@ complete API details for all types introduced in this tutorial.
 If you prefer learning from complete applications instead of a guided
 walk-through, continue with the :doc:`demo gallery</chapters/demos/index>`.
 The demos provide focused examples for direct terminal output, animated
-buffers, frame drawing, Unicode text layout, and bitmap fonts.
+buffers, frame drawing, paragraph layout, Unicode text handling, HTML
+rendering, and the beta UI framework.
+
+If you want to go beyond the tutorial's direct rendering style, the
+:doc:`Rich Text and HTML reference</chapters/reference/rich-text>` shows
+how to render structured documents, and the :doc:`UI Framework reference
+</chapters/reference/ui>` introduces the surface-based application layer
+for event-driven terminal interfaces.
 
 .. button-ref:: ../demos/index
     :ref-type: doc
@@ -61,4 +68,3 @@ buffers, frame drawing, Unicode text layout, and bitmap fonts.
     :class: sd-fs-5 sd-font-weight-bold sd-p-2 sd-mb-4
 
     Open the API Reference →
-

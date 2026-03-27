@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Buffer.hpp"
 
+
 #include "Char16Style.hpp"
 #include "Tile9Style.hpp"
 
@@ -40,15 +41,15 @@ auto Buffer::get(const Position pos) const noexcept -> const Char & {
 }
 
 void Buffer::resize(const Size newSize) {
-    resize(newSize, false, Char{}); // fastest possible resize
+    resize(newSize, BufferResizeMode::Fast, Char{}); // fastest possible resize
 }
 
-void Buffer::resize(const Size size, const bool reorder, const Char fillChar) {
+void Buffer::resize(const Size size, const BufferResizeMode mode, const Char fillChar) {
     if (_size == size) {
         return;
     }
     validateBufferSize(size);
-    if (reorder) {
+    if (mode != BufferResizeMode::Fast) {
         if (size.area() > _size.area()) {
             // if the data expands, do resize before reordering.
             _data.resize(static_cast<std::size_t>(size.area()));
@@ -102,7 +103,8 @@ void Buffer::set(const Position pos, const Char &block) noexcept {
         if (!_size.contains(secondPosition)) {
             return;
         }
-        _data[_size.index(secondPosition)] = Char{"", block.style()};
+        // The continuation cell for a wide character must stay logically empty while preserving the style.
+        _data[_size.index(secondPosition)] = Char::emptyBlock(block.style());
         _data[_size.index(pos)] = block;
     }
 }
@@ -173,7 +175,7 @@ void Buffer::drawText(
     const std::size_t animationCycle) {
 
     // for backward compatibility
-    auto renderedText = Text{String{text}, rect, alignment};
+    auto renderedText = Text{String{text, EncodingErrors::Replace}, rect, alignment};
     renderedText.setColor(color);
     drawText(renderedText, animationCycle);
 }

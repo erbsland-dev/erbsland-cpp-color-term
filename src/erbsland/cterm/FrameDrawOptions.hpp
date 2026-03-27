@@ -76,16 +76,8 @@ public:
     [[nodiscard]] auto frameColor() const noexcept -> const ColorSequence &;
     /// Set a single frame color.
     void setFrameColor(Color frameColor) noexcept;
-    /// @overload
+    /// Set explicit foreground and background colors for the frame.
     void setFrameColor(Foreground foreground, Background background) noexcept;
-    /// Set only a frame foreground color.
-    void setFrameColor(Foreground foreground) noexcept;
-    /// @overload
-    void setFrameColor(Foreground::Hue foreground) noexcept;
-    /// Set only a frame background color.
-    void setFrameColor(Background background) noexcept;
-    /// @overload
-    void setFrameColor(Background::Hue background) noexcept;
     /// Set the frame color sequence.
     void
     setFrameColorSequence(ColorSequence frameColor, FrameColorMode frameColorMode = FrameColorMode::OneColor) noexcept;
@@ -94,16 +86,8 @@ public:
     [[nodiscard]] auto fillColor() const noexcept -> const ColorSequence &;
     /// Set a single fill color.
     void setFillColor(Color fillColor) noexcept;
-    /// @overload
+    /// Set explicit foreground and background colors for the fill.
     void setFillColor(Foreground foreground, Background background) noexcept;
-    /// Set only a fill foreground color.
-    void setFillColor(Foreground foreground) noexcept;
-    /// @overload
-    void setFillColor(Foreground::Hue foreground) noexcept;
-    /// Set only a fill background color.
-    void setFillColor(Background background) noexcept;
-    /// @overload
-    void setFillColor(Background::Hue background) noexcept;
     /// Set the fill color sequence.
     void
     setFillColorSequence(ColorSequence fillColor, FrameColorMode fillColorMode = FrameColorMode::OneColor) noexcept;

@@ -5,8 +5,8 @@
 #include "Buffer.hpp"
 #include "BufferView.hpp"
 
-#include "impl/ParagraphLayout.hpp"
-#include "impl/ParagraphPrinter.hpp"
+#include "impl/paragraph/Layout.hpp"
+#include "impl/paragraph/Printer.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -449,6 +449,20 @@ void Terminal::write(const String &str) noexcept {
     _lineBuffer.handleEmit();
 }
 
+void Terminal::writeResolved(const Char &character) noexcept {
+    setStyle(character.style());
+    _lineBuffer.write(character);
+    _lineBuffer.handleEmit();
+}
+
+void Terminal::writeResolved(const String &str) noexcept {
+    for (const auto &character : str) {
+        setStyle(character.style());
+        _lineBuffer.write(character);
+    }
+    _lineBuffer.handleEmit();
+}
+
 void Terminal::write(const ReadableBuffer &buffer) noexcept {
     {
         impl::LineBuffer::EmitLockGuard emitLock{_lineBuffer};
@@ -463,18 +477,22 @@ void Terminal::writeLineBreak() noexcept {
 }
 
 auto Terminal::printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
-    const auto width = size().width();
+    const auto margins = options.margins();
+    const auto x1 = std::max(margins.left(), 0);
+    const auto width = std::max(size().width() - std::max(margins.left(), 0) - std::max(margins.right(), 0), 0);
     const auto layout =
-        impl::ParagraphLayout{paragraph, width, options, impl::ParagraphLayout::NewlineMode::HardLineBreak}.build();
-    if (!layout.valid) {
+        impl::paragraph::Layout{paragraph, width, options, impl::paragraph::LayoutNewlineMode::HardLineBreak}.build();
+    if (!layout.valid()) {
         return printParagraphPlainOutput(paragraph, options);
     }
-    if (layout.lines.empty()) {
+    if (layout.empty()) {
         return finishParagraphWithExplicitLineBreaks(0, options.paragraphSpacing());
     }
     const auto lineCount = [&]() -> int {
         impl::LineBuffer::EmitLockGuard emitLock{_lineBuffer};
-        return impl::ParagraphPrinter{*this, width, options.alignment(), layout, options.backgroundMode()}.print();
+        return impl::paragraph::Printer{
+            *this, x1, width, options.alignment(), layout, paragraph, options, options.backgroundMode()}
+            .print();
     }();
     _lineBuffer.handleEmit();
     if (options.paragraphSpacing() == ParagraphSpacing::DoubleLine) {
@@ -489,7 +507,9 @@ auto Terminal::printParagraphPlainOutput(const String &paragraph, const Paragrap
         return 0;
     }
     write(paragraph);
-    return finishParagraphWithExplicitLineBreaks(paragraph.terminalLines(size().width()), options.paragraphSpacing());
+    const auto margins = options.margins();
+    const auto width = std::max(size().width() - std::max(margins.left(), 0) - std::max(margins.right(), 0), 1);
+    return finishParagraphWithExplicitLineBreaks(paragraph.terminalLines(width), options.paragraphSpacing());
 }
 
 auto Terminal::finishParagraphWithExplicitLineBreaks(

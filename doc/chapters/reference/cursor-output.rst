@@ -155,6 +155,10 @@ When writing to a :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>`, the o
 content and can later be rendered using
 :cpp:any:`Terminal::updateScreen() <erbsland::cterm::Terminal::updateScreen()>` or displayed through a buffer view.
 
+`printParagraph()` uses the current writer style as the base for any indentation or trailing padding that must be
+materialized as spaces. If the wrapped paragraph should visually sit on a colored panel, set the writer background
+before printing.
+
 Choosing Between Terminal and CursorBuffer
 ------------------------------------------
 

@@ -4,6 +4,7 @@
 
 
 #include "CommandLineHelpModel.hpp"
+#include "TerminalApplication.hpp"
 
 #include <optional>
 
@@ -12,12 +13,12 @@ namespace demo::command_line_help {
 
 
 /// Demonstrate colorful command help output together with `Terminal::printParagraph()`.
-class CommandLineHelpDemo final {
+class CommandLineHelpDemo final : public TerminalApplication {
 public:
-    /// Parse the command line and print the demo help output.
-    /// @param argc Number of command-line arguments.
-    /// @param argv Raw command-line arguments.
-    void run(int argc, char **argv);
+    /// Parse the command line and store the rendering configuration.
+    auto onCommandLine(const std::vector<std::string_view> &args) -> int override;
+    /// Render the help output once and exit the demo.
+    auto beforeRun() -> int override;
 
 private:
     struct ParsedArguments final {
@@ -27,7 +28,7 @@ private:
 
 private:
     [[nodiscard]] static auto optionSpecs() -> const std::vector<OptionSpec> &;
-    [[nodiscard]] static auto parseArguments(int argc, char **argv) -> ParsedArguments;
+    [[nodiscard]] static auto parseArguments(const std::vector<std::string_view> &args) -> ParsedArguments;
     static void parseLongOption(
         std::string_view argument,
         std::optional<std::string_view> nextArgument,
@@ -96,6 +97,10 @@ private:
     static void printNarrowParagraph(Terminal &terminal, const String &paragraph) noexcept;
     static void printNarrowOption(Terminal &terminal, const OptionSpec &spec) noexcept;
     static void prepareTerminal(Terminal &terminal, const DemoConfig &config) noexcept;
+
+private:
+    DemoConfig _config;
+    std::vector<std::string> _errors;
 };
 
 

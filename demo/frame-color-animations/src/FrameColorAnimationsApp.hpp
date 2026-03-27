@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 #include <array>
 #include <string_view>
@@ -16,10 +16,12 @@ using namespace erbsland::cterm;
 
 
 /// Interactive demo showing the animated frame color modes.
-class FrameColorAnimationsApp final {
+class FrameColorAnimationsApp final : public TerminalApplication {
 public:
-    /// Run the demo until the user quits.
-    void run();
+    /// Prepare the shared terminal update settings before the terminal is initialized.
+    void beforeInitialize() override;
+    /// Render the animated frame showcase into the shared demo buffer.
+    void onRenderToBuffer() override;
 
 private:
     struct PanelSpec final {
@@ -30,9 +32,6 @@ private:
     };
 
 private:
-    [[nodiscard]] auto canvasSize() const noexcept -> Size;
-    void handleKey(const Key &key) noexcept;
-    void renderFrame();
     void drawPanel(Rectangle rect, const PanelSpec &panel);
     void drawHeader(Rectangle rect);
     void drawFooter(Rectangle rect);
@@ -42,13 +41,6 @@ private:
     [[nodiscard]] static auto colorSequence(std::size_t index) -> const ColorSequence &;
     [[nodiscard]] static auto outerFrameColors() -> const ColorSequence &;
     [[nodiscard]] static auto fillColors() -> const ColorSequence &;
-
-private:
-    Terminal _terminal{Size{112, 34}};
-    UpdateSettings _updateSettings;
-    Buffer _buffer;
-    std::size_t _animationCycle{0};
-    bool _quitRequested{false};
 };
 
 

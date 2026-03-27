@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 
 namespace demo::display_all_colors {
@@ -13,18 +13,15 @@ using namespace erbsland::cterm;
 
 
 /// Display and label all available colors.
-class DisplayAllColorsApp final {
+class DisplayAllColorsApp final : public TerminalApplication {
 public:
-    /// Run the demo.
-    void run() noexcept;
+    /// Render the color overview once and exit the demo.
+    auto beforeRun() -> int override;
 
 private:
     void renderTable();
     void renderMatrix();
     void renderRainbow();
-
-private:
-    Buffer _buffer;
 };
 
 

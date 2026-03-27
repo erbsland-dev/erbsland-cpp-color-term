@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 #include <chrono>
 #include <memory>
@@ -19,10 +19,20 @@ using namespace erbsland::cterm;
 
 
 /// Demonstrate a live log viewport backed by a growing cursor buffer.
-class LogViewerApp final {
+class LogViewerApp final : public TerminalApplication {
 public:
-    /// Run the demo until the user quits.
-    void run();
+    /// Prepare the shared terminal update settings before the terminal is initialized.
+    void beforeInitialize() override;
+    /// Seed the first simulated log event after the terminal is ready.
+    auto beforeRun() -> int override;
+    /// Handle viewport navigation and playback control keys.
+    void onKey(const Key &key) override;
+    /// Render the current viewport of the simulated log stream.
+    void onRenderToBuffer() override;
+    /// Keep the shared render loop responsive enough for the live log feed.
+    [[nodiscard]] auto loopInterval() const noexcept -> std::chrono::milliseconds override {
+        return std::chrono::milliseconds{50};
+    }
 
 private:
     enum class LogLevel : uint8_t {
@@ -45,11 +55,9 @@ private:
 
 private:
     [[nodiscard]] auto canvasSize() const noexcept -> Size;
-    void handleKey(const Key &key) noexcept;
     void adjustDelayPreset(int delta) noexcept;
     void scheduleNextMessage() noexcept;
     void appendGeneratedMessage();
-    void renderFrame();
     void drawHeader(Rectangle rect);
     void drawFooter(Rectangle rect);
     void drawLogView(Rectangle rect);
@@ -88,9 +96,6 @@ private:
     [[nodiscard]] static auto traceChoices() noexcept -> std::span<const std::string_view>;
 
 private:
-    Terminal _terminal{Size{96, 28}};
-    UpdateSettings _updateSettings;
-    Buffer _buffer;
     std::shared_ptr<CursorBuffer> _logBuffer = std::make_shared<CursorBuffer>(
         Size{250, 10}, CursorBuffer::OverflowMode::ExpandThenShift, Size{250, 500}, Char{U' ', fg::Default, bg::Black});
     BufferView _logView{_logBuffer, Rectangle{0, 0, 1, 1}};
@@ -102,7 +107,6 @@ private:
     std::size_t _messageCount{0};
     std::size_t _delayPresetIndex{2};
     bool _followMode{true};
-    bool _quitRequested{false};
 };
 
 

@@ -22,7 +22,9 @@ namespace erbsland::cterm {
 /// - In the horizontal orientation, the buffer can efficiently grow horizontally, keeping the existing data intact.
 /// - When growing the buffer, memory reallocation may be necessary. Use `reserve` to reserve
 ///   enough memory to avoid frequent reallocations.
-/// - Use `resize(size, true, fillChar)` when you need to preserve the visible order while resizing.
+/// - Use `resize(size, BufferResizeMode::PreserveContent, fillChar)` when you need to preserve the visible content.
+/// - A preserve-content resize that changes only the primary orientation axis is optimized and fast.
+/// - A preserve-content resize that changes the secondary axis must rebuild the logical content and can be expensive.
 ///
 class RemappedBuffer : public WritableBuffer {
 public:
@@ -79,26 +81,27 @@ public: // implement WritableBuffer
     /// Resize this buffer.
     ///
     /// This is the fast resize path. The internal mapping is rebuilt and the visible content order is undefined after
-    /// the operation. Use `resize(size, true, fillChar)` if you need to preserve the visible order.
+    /// the operation. Use `resize(size, BufferResizeMode::PreserveContent, fillChar)` if you need to preserve the
+    /// visible order.
     /// @param newSize The new size of the buffer.
     /// @throws std::invalid_argument if `newSize` is invalid.
     void resize(Size newSize) override;
+    /// Resize this buffer and optionally keep the visible content order.
+    /// A preserve-content resize is fast when only the primary orientation axis changes.
+    /// If the secondary axis changes, preserving content requires rebuilding the logical content and is expensive.
+    /// @param size The new size.
+    /// @param mode `BufferResizeMode::PreserveContent` keeps the visible order and fills new cells with `fillChar`.
+    ///   `BufferResizeMode::Fast` resizes using the fastest path and leaves the visible order undefined.
+    /// @param fillChar The fill character for newly created cells in preserve-content mode. In fast mode it is only
+    ///   used to initialize newly appended storage cells.
+    /// @throws std::invalid_argument if `size` is invalid.
+    void resize(Size size, BufferResizeMode mode, Char fillChar) override;
     /// Write a block at the given logical position.
     /// This mirrors the wide-character handling from `Buffer`: zero-width blocks are ignored, width-2 blocks occupy
     /// the next logical cell as an empty continuation cell, and width-2 blocks at the right edge are ignored.
     /// @param pos The logical coordinates within the buffer.
     /// @param block The block to write.
     void set(Position pos, const Char &block) noexcept override;
-
-public:
-    /// Resize this buffer and optionally keep the visible content order.
-    /// @param size The new size.
-    /// @param reorder If `true`, keep the visible order and fill new cells with `fillChar`. If `false`, resize using
-    ///   the fast path and leave the visible order undefined.
-    /// @param fillChar The fill character for newly created cells in reordered mode. In fast mode it is only used to
-    ///   initialize newly appended storage cells.
-    /// @throws std::invalid_argument if `size` is invalid.
-    void resize(Size size, bool reorder, Char fillChar = Char::space());
 
 public: // manage memory
     /// Reserve memory for the given buffer size.
@@ -249,6 +252,25 @@ private:
             ? Position{_columnRemap[static_cast<std::size_t>(pos.x())], _rowRemap[static_cast<std::size_t>(pos.y())]}
             : pos;
     }
+    /// Calculate the storage index for a stored coordinate pair.
+    /// @param storedX The stored x coordinate.
+    /// @param storedY The stored y coordinate.
+    /// @return The linear storage index.
+    [[nodiscard]] auto storedBufferIndex(Coordinate storedX, Coordinate storedY) const noexcept -> std::size_t {
+        if (_orientation == Orientation::Vertical) {
+            return static_cast<std::size_t>(storedY) * static_cast<std::size_t>(_size.width()) +
+                static_cast<std::size_t>(storedX);
+        }
+        return static_cast<std::size_t>(storedX) * static_cast<std::size_t>(_size.height()) +
+            static_cast<std::size_t>(storedY);
+    }
+    /// Calculate the storage index for a logical coordinate pair.
+    /// @param x The logical x coordinate.
+    /// @param y The logical y coordinate.
+    /// @return The linear storage index after remapping.
+    [[nodiscard]] auto bufferIndex(Coordinate x, Coordinate y) const noexcept -> std::size_t {
+        return storedBufferIndex(_columnRemap[static_cast<std::size_t>(x)], _rowRemap[static_cast<std::size_t>(y)]);
+    }
     /// Get the buffer index for the given orientation and size.
     /// @param pos The stored position.
     /// @param size The size used to linearize the position.
@@ -259,7 +281,7 @@ private:
     /// @param pos The position for the index.
     /// @return The buffer index.
     [[nodiscard]] auto bufferIndex(Position pos) const noexcept -> std::size_t {
-        return bufferIndex(pos, _size, _orientation);
+        return storedBufferIndex(pos.x(), pos.y());
     }
     /// Rotate a coordinate map to the logical front or back.
     /// @param map The map to rotate.
@@ -298,10 +320,27 @@ private:
     /// @param newSize The validated new size.
     /// @param fillChar The fill character for newly appended storage cells.
     void fastResize(Size newSize, const Char &fillChar);
+    /// Execute the fast preserve-content path for primary-axis-only resizes.
+    /// @param newSize The validated new size.
+    /// @param fillChar The fill character for newly created logical cells.
+    void primaryAxisResize(Size newSize, const Char &fillChar);
     /// Execute the ordered resize path.
     /// @param newSize The validated new size.
     /// @param fillChar The fill character for newly created logical cells.
     void reorderedResize(Size newSize, const Char &fillChar);
+    /// Check whether the resize changes only the primary axis of the buffer orientation.
+    /// @param newSize The validated new size.
+    /// @return `true` if only the orientation axis changes.
+    [[nodiscard]] auto isPrimaryAxisOnlyResize(Size newSize) const noexcept -> bool;
+    /// Access the remap for the orientation axis.
+    /// @return The row map for vertical buffers or the column map for horizontal buffers.
+    [[nodiscard]] auto primaryMap() noexcept -> CoordinateMap &;
+    /// @overload
+    [[nodiscard]] auto primaryMap() const noexcept -> const CoordinateMap &;
+    /// Copy one stored primary line to another stored primary line.
+    /// @param source The stored source row/column coordinate.
+    /// @param destination The stored destination row/column coordinate.
+    void copyStoredPrimaryLine(Coordinate source, Coordinate destination) noexcept;
 
 protected:
     Size _size;                 ///< The current size of the buffer.

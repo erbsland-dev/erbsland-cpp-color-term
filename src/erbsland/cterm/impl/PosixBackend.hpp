@@ -27,6 +27,7 @@ class PosixBackend final : public Backend {
 
 public:
     enum class SizeDetectionResult : uint8_t { NoTerminalAttached, NoTerminalSize, Success };
+    using OptionalTimeout = std::optional<std::chrono::milliseconds>;
 
 public:
     explicit PosixBackend(TerminalFlags terminalFlags); // must never be called directly
@@ -47,6 +48,7 @@ public:
     [[nodiscard]] auto inputMode() const noexcept -> Input::Mode override;
     void setInputMode(Input::Mode mode) override;
     [[nodiscard]] auto readKey(std::chrono::milliseconds timeout) -> Key override;
+    [[nodiscard]] auto waitForKey() -> Key override;
     [[nodiscard]] auto readLine() -> std::string override;
 
 public:
@@ -70,13 +72,15 @@ private:
     /// Restore a key interactive session.
     void restoreKeyInputSession();
     /// Wait until stdin becomes readable.
-    [[nodiscard]] static auto waitForInput(std::chrono::milliseconds timeout) -> bool;
+    [[nodiscard]] static auto waitForInput(OptionalTimeout timeout) -> bool;
     /// Poll whether stdin is currently readable without blocking.
     [[nodiscard]] static auto pollForInput() -> bool;
     /// Read one chunk of raw input from stdin.
     [[nodiscard]] static auto readInputChunk() -> std::string;
     /// Read one or more available chunks and append them to the pending key buffer.
-    void appendInputChunks(std::chrono::milliseconds timeout);
+    void appendInputChunks(OptionalTimeout timeout);
+    /// Decode one pending key using either a timeout-based poll or a blocking wait.
+    [[nodiscard]] auto readDecodedKey(OptionalTimeout timeout) -> Key;
     /// Restore the terminal and terminate the process for one handled signal.
     void handleProcessSignal(int signalNumber) noexcept;
 

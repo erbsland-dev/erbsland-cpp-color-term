@@ -65,12 +65,12 @@ public:
     explicit Terminal();
     /// Create a new terminal instance.
     /// @param flags The terminal flags to use.
-    explicit Terminal(TerminalFlags flags = {});
+    explicit Terminal(TerminalFlags flags);
     /// Create a new terminal instance.
     /// The size is automatically bounded to the minimum and maximum supported sizes.
     /// @param size The fallback terminal size used when automatic detection is unavailable.
     /// @param flags The terminal flags to use.
-    explicit Terminal(Size size = {80, 25}, TerminalFlags flags = {});
+    explicit Terminal(Size size, TerminalFlags flags = {});
     /// Create a new terminal instance with a custom backend.
     /// The size is automatically bounded to the minimum and maximum supported sizes.
     /// @param backend The backend to use for the terminal.
@@ -100,6 +100,8 @@ public: // implement CursorWriter
     void setCursorVisible(bool visible) noexcept override;
     void write(const Char &character) noexcept override;
     void write(const String &str) noexcept override;
+    void writeResolved(const Char &character) noexcept override;
+    void writeResolved(const String &str) noexcept override;
     void write(const ReadableBuffer &buffer) noexcept override;
     void writeLineBreak() noexcept override;
 
@@ -276,14 +278,14 @@ private:
     RefreshMode _refreshMode{RefreshMode::Overwrite}; ///< The refresh mode to use.
     Size _size;                                       ///< The configured size of the terminal that is safe to use.
     Size _terminalSize; ///< The actual, reported size of the terminal. Zero if we have no detected size.
-    Color _color{Foreground::Default, Background::Default}; ///< The current terminal colors.
+    Color _color{Foreground::Default, Background::Default};  ///< The current terminal colors.
     CharAttributes _charAttributes{CharAttributes::reset()}; ///< The current terminal character attributes.
-    bool _backBufferEnabled{false};                         ///< If the back buffer feature is enabled.
-    bool _isAlternateScreenActive{false};                   ///< If the alternate screen is active or not.
-    WritableBufferPtr _sizeTooSmallBuffer;                  ///< Buffer for size too small message.
-    WritableBufferPtr _backBuffer;                          ///< The back buffer.
-    impl::InputBackend _input;                              ///< The input backend.
-    impl::LineBuffer _lineBuffer;                           ///< The line buffer.
+    bool _backBufferEnabled{false};                          ///< If the back buffer feature is enabled.
+    bool _isAlternateScreenActive{false};                    ///< If the alternate screen is active or not.
+    WritableBufferPtr _sizeTooSmallBuffer;                   ///< Buffer for size too small message.
+    WritableBufferPtr _backBuffer;                           ///< The back buffer.
+    impl::InputBackend _input;                               ///< The input backend.
+    impl::LineBuffer _lineBuffer;                            ///< The line buffer.
 };
 
 

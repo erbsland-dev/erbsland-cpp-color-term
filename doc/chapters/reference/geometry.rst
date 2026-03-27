@@ -310,6 +310,36 @@ spilling outside the drawable area.
     ␛[97;40m  ␛[90mderive one enclosing rectangle␛[97m           ␛[90mclamped to nearest edge␛[97m      ␛[39;49m
     ␛[97;40m                                                                        ␛[39;49m
 
+Orientation Helpers and Coordinate Values
+-----------------------------------------
+
+:cpp:any:`Orientation <erbsland::cterm::Orientation>` and
+:cpp:any:`Coordinate <erbsland::cterm::Coordinate>` are the small glue
+types that keep geometry code readable when logic needs to switch
+between horizontal and vertical behavior.
+
+.. code-block:: cpp
+
+    auto axis = Orientation::Horizontal;
+    auto size = Size{24, 7};
+    auto cursor = Position{4, 2};
+
+    const auto primaryExtent = size.coordinate(axis);
+    const auto primaryOffset = cursor.coordinate(axis);
+    const auto crossAxis = axis.crossed();
+
+    if (crossAxis == Orientation::Vertical) {
+        buffer.drawText(
+            std::format("axis={} offset={}", primaryExtent, primaryOffset),
+            Rectangle{2, 2, 24, 1},
+            Alignment::Left);
+    }
+
+The ``coordinate()`` helpers on :cpp:any:`Size <erbsland::cterm::Size>`
+and :cpp:any:`Position <erbsland::cterm::Position>` let one code path
+serve both axes without branching on ``x/y`` or ``width/height`` names
+all the way through the implementation.
+
 Interface
 =========
 
@@ -317,10 +347,15 @@ Interface
 
 .. doxygenenum:: erbsland::cterm::Anchor
 
+.. doxygentypedef:: erbsland::cterm::Coordinate
+
 .. doxygenclass:: erbsland::cterm::Direction
     :members:
 
 .. doxygenclass:: erbsland::cterm::Margins
+    :members:
+
+.. doxygenclass:: erbsland::cterm::Orientation
     :members:
 
 .. doxygenclass:: erbsland::cterm::Position

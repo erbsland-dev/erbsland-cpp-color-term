@@ -3,23 +3,20 @@
 
 #include "StoryDemo.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <string_view>
 
 
 namespace demo::terminalchronicle {
 
 
-void StoryDemo::run() noexcept {
-    auto terminal = Terminal{Size{80, 30}};
-    auto session = ScopedTerminalSession{terminal, Terminal::RefreshMode::Clear, Input::Mode::ReadLine, false};
-    printHeader(terminal);
-    printTimeline(terminal);
-    printStory(terminal);
-    printOutro(terminal);
-    terminal.setDefaultColor();
-    terminal.flush();
+auto StoryDemo::beforeRun() -> int {
+    printHeader(_terminal);
+    printTimeline(_terminal);
+    printStory(_terminal);
+    printOutro(_terminal);
+    _terminal.setDefaultColor();
+    _terminal.flush();
+    return -1;
 }
 
 

@@ -67,7 +67,7 @@ Defaults at a Glance
         - :cpp:any:`SingleLine <erbsland::cterm::ParagraphSpacing::SingleLine>`
         - Render explicit newline-separated paragraphs without an extra blank row.
     *   - Word separators
-        - ``U" \t"``
+        - ``U"\t "``
         - Split words at spaces and tabs.
     *   - Word break mark
         - ``'-'``
@@ -523,10 +523,26 @@ Background Fill Modes
 :cpp:any:`ParagraphBackgroundMode <erbsland::cterm::ParagraphBackgroundMode>` controls whether the background color of
 the last visible character is extended into cells that do not contain visible text.
 
-These modes are easiest to understand when the paragraph uses one background color and the surrounding buffer uses a
-different one. In the following examples the paragraph is blue and the surrounding buffer is dark grey.
+These modes behave slightly differently depending on the rendering path:
+
+* With :cpp:any:`Text <erbsland::cterm::Text>` and
+  :cpp:any:`WritableBuffer::drawText() <erbsland::cterm::WritableBuffer::drawText()>`, untouched cells remain whatever
+  is already stored in the target buffer unless the selected mode fills them from the wrapped text.
+* With :cpp:any:`CursorWriter::printParagraph() <erbsland::cterm::CursorWriter::printParagraph()>`, indentation and
+  trailing padding must be written as space characters. Cells not filled from wrapped-text background therefore use
+  the writer's current background color.
+
+If paragraph padding should blend into a panel when using
+:cpp:any:`CursorWriter::printParagraph() <erbsland::cterm::CursorWriter::printParagraph()>`, set the writer background
+before printing the paragraph.
+
+The following examples use buffer-based text rendering. The paragraph is blue and the surrounding buffer is dark grey.
 
 **ParagraphBackgroundMode::Default**
+
+In buffer-based rendering, the continuation indent and the right side keep the existing buffer background. With
+:cpp:any:`CursorWriter::printParagraph() <erbsland::cterm::CursorWriter::printParagraph()>`, the same cells use the
+current writer background instead.
 
 .. code-block:: cpp
 
@@ -563,6 +579,10 @@ different one. In the following examples the paragraph is blue and the surroundi
     ␛[97;44m          ␛[37mthe dim grey hall beyond it.␛[97;100m                                        ␛[39;49m
 
 **ParagraphBackgroundMode::WrappedRight**
+
+The continuation indent still keeps the existing buffer background in the examples below. When printed through
+:cpp:any:`CursorWriter::printParagraph() <erbsland::cterm::CursorWriter::printParagraph()>`, it uses the current
+writer background instead.
 
 .. code-block:: cpp
 
@@ -634,6 +654,35 @@ different one. In the following examples the paragraph is blue and the surroundi
     ␛[97;44m          ␛[37mpaper lantern glowed at the window while the final line faded into␛[97m  ␛[39;49m
     ␛[97;44m          ␛[37mthe dim grey hall beyond it.␛[97m                                        ␛[39;49m
 
+Reusable Indents and Separator Sets
+-----------------------------------
+
+:cpp:any:`ParagraphIndents <erbsland::cterm::ParagraphIndents>` and
+:cpp:any:`FastCharSet <erbsland::cterm::FastCharSet>` are useful when
+you want to reuse the same low-level paragraph mechanics across several
+rendering presets.
+
+.. code-block:: cpp
+
+    auto indents = ParagraphIndents{2};
+    indents.setFirstLineIndent(0);
+    indents.setWrappedLineIndent(6);
+    indents.setMargins(Margins{1, 1, 0, 1});
+
+    auto options = ParagraphOptions{};
+    options.setIndents(indents);
+    options.setWordSeparatorSet(FastCharSet::create(U" \t/"));
+
+    terminal.printParagraph("path/to/the/current/document section", options);
+
+:cpp:any:`FastCharSet <erbsland::cterm::FastCharSet>` keeps separator
+lookups cheap when the same character set is reused across many
+paragraphs. The shared factories
+:cpp:any:`FastCharSet::onlySpace() <erbsland::cterm::FastCharSet::onlySpace()>`
+and
+:cpp:any:`FastCharSet::spaceAndTab() <erbsland::cterm::FastCharSet::spaceAndTab()>`
+cover the most common cases directly.
+
 Error Handling
 --------------
 
@@ -685,6 +734,9 @@ Interface
 .. doxygenclass:: erbsland::cterm::ParagraphOptions
     :members:
 
+.. doxygenclass:: erbsland::cterm::ParagraphIndents
+    :members:
+
 .. doxygenenum:: erbsland::cterm::ParagraphBackgroundMode
 
 .. doxygenenum:: erbsland::cterm::ParagraphOnError
@@ -692,3 +744,8 @@ Interface
 .. doxygenenum:: erbsland::cterm::ParagraphSpacing
 
 .. doxygenenum:: erbsland::cterm::TabOverflowBehavior
+
+.. doxygentypedef:: erbsland::cterm::FastCharSetPtr
+
+.. doxygenclass:: erbsland::cterm::FastCharSet
+    :members:

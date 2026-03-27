@@ -3,23 +3,21 @@
 
 #include "DisplayAllColorsApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <string_view>
 
 
 namespace demo::display_all_colors {
 
 
-void DisplayAllColorsApp::run() noexcept {
-    auto terminal = Terminal{Size{80, 25}};
-    auto session = ScopedTerminalSession{terminal, Terminal::RefreshMode::Clear, Input::Mode::ReadLine, false};
+auto DisplayAllColorsApp::beforeRun() -> int {
     _buffer = Buffer{Size{80, 9 + 18 + 18}};
     _buffer.fill(Char{" ", bg::Default});
     renderTable();
     renderMatrix();
     renderRainbow();
-    terminal.write(_buffer);
+    _terminal.write(_buffer);
+    _terminal.flush();
+    return -1;
 }
 
 

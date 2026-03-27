@@ -1,0 +1,56 @@
+<h1>HTML Renderer Demo</h1>
+
+<p>
+This demo shows how the HTML renderer can display a structured document inside a
+scrollable terminal viewer. Use the cursor keys to move line by line, page up
+and page down to jump, press <strong>s</strong> to cycle between document
+styles, and press <strong>q</strong> when you want to quit.
+</p>
+
+<h2>What This Demonstrates</h2>
+
+<ul>
+<li>Headings, paragraphs, emphasis, strong text, and links.</li>
+<li>Bullet lists, numbered lists, and nested list indentation.</li>
+<li>Definition lists and code blocks with preserved line breaks.</li>
+<li>A full-screen viewer with a header, footer, scrolling viewport, and switchable styles.</li>
+</ul>
+
+<h2>Nested List Example</h2>
+
+<ol>
+<li>Load an HTML file.</li>
+<li>Render it to a terminal buffer.
+    <ul>
+    <li>Resize the layout when the terminal width changes.</li>
+    <li>Keep the rendered document in a scrollable view.</li>
+    </ul>
+</li>
+<li>Navigate with the keyboard.</li>
+</ol>
+
+<h2>Definition List</h2>
+
+<dl>
+<dt>HtmlRenderer</dt>
+<dd>The public API that turns HTML into terminal text or cursor-writer output.</dd>
+<dt>TextNodeRenderer</dt>
+<dd>The internal renderer that walks the parsed document tree.</dd>
+<dt>CursorBuffer</dt>
+<dd>A buffer that stores the rendered document and can grow vertically.</dd>
+</dl>
+
+<h2>Code Block</h2>
+
+<pre>auto buffer = std::make_shared&lt;CursorBuffer&gt;(Size{80, 1});
+text::HtmlRenderer{html}.renderTo(buffer);
+view.setContent(buffer);
+</pre>
+
+<hr>
+
+<p>
+Links render as link text only, for example <a href="https://erbsland.dev">erbsland.dev</a>.
+The source file for this document lives in the demo directory, and you can pass
+your own HTML file as the first command-line argument.
+</p>

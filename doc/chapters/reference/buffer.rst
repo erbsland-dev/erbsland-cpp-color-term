@@ -65,14 +65,16 @@ terminal applications: creating new frames, cloning the current state, and resiz
     current.fill(Char{" ", Color{fg::Inherited, bg::Black}});
 
     const auto previous = current.clone();
-    current.resize(Size{100, 30}, true, Char::space());
-    current.setFrom(*previous, Char{" ", Color{fg::Inherited, bg::Black}});
+    current.resize(Size{100, 30}, BufferResizeMode::PreserveContent, Char::space());
 
 ``clone()`` returns a writable copy through the abstract interface. This makes it easy to store previous frames for
 diffing, animation steps, or rollback logic.
 
-When resizing a concrete :cpp:any:`Buffer <erbsland::cterm::Buffer>`, use the reorder overload if you want to preserve
-existing content while expanding or cropping the canvas.
+Use :cpp:any:`BufferResizeMode <erbsland::cterm::BufferResizeMode>` to make the resize intent explicit:
+
+* ``BufferResizeMode::Fast`` uses the fastest resize path and leaves existing content undefined.
+* ``BufferResizeMode::PreserveContent`` keeps the visible rectangle stable and fills newly exposed cells with the
+  provided fill character.
 
 Working with Remapped Buffers
 -----------------------------
@@ -91,12 +93,17 @@ become newly visible. This keeps operations like scrolling or line insertion eff
     history.eraseRows(0, Char::space(), 1);      // Scroll everything up by one row.
     history.set(Position{0, 1'999}, String{"new log line"});
 
-    history.resize(Size{100, 2'000}, true, Char::space());
+    history.resize(Size{100, 2'000}, BufferResizeMode::PreserveContent, Char::space());
 
 Use the plain :cpp:any:`RemappedBuffer::resize() <erbsland::cterm::RemappedBuffer::resize>` overload when you want
 maximum performance and plan to redraw the content anyway.
 
-Use the reorder overload when the visible order must remain stable while expanding or cropping the buffer.
+Use ``BufferResizeMode::PreserveContent`` when the visible order must remain stable while expanding or cropping the
+buffer.
+
+For :cpp:any:`RemappedBuffer <erbsland::cterm::RemappedBuffer>`, this preserve-content mode is fast when only the
+primary orientation axis changes. If the secondary axis changes, preserving content requires rebuilding the logical
+view and is therefore significantly more expensive.
 
 Streaming Scrollback with CursorBuffer
 --------------------------------------
@@ -185,6 +192,37 @@ For status panels, generated reports, or static UI elements,
 This is often the fastest way to turn preformatted terminal text into a
 buffer that can later be positioned within a larger layout.
 
+Copying and Aligning Sub-Regions
+--------------------------------
+
+:cpp:any:`BufferDrawOptions <erbsland::cterm::BufferDrawOptions>` makes
+buffer-to-buffer composition explicit. It bundles the target region, the
+optional source crop, and the color-combination strategy for
+:cpp:any:`WritableBuffer::drawBuffer() <erbsland::cterm::WritableBuffer::drawBuffer()>`.
+
+.. code-block:: cpp
+
+    auto frame = Buffer{Size{52, 16}};
+    auto sprite = Buffer{Size{12, 5}};
+    sprite.drawFrame(sprite.rect(), FrameStyle::Double, Color{fg::BrightCyan, bg::Inherited});
+    sprite.drawText("CPU", sprite.rect(), Alignment::Center, Color{fg::BrightWhite, bg::Inherited});
+
+    auto options = BufferDrawOptions{
+        Rectangle{30, 3, 18, 7},
+        Rectangle{0, 0, 12, 5}};
+    options.setOverwriteColors(false);
+
+    frame.drawBuffer(sprite, options);
+
+Use a zero-sized ``targetRect`` when you only need an exact target
+position. Use a zero-sized ``sourceRect`` when the whole source buffer
+should be copied.
+
+If you need to preserve the target glyphs while only adopting parts of
+the source style, attach a
+:cpp:any:`CharCombinationStyle <erbsland::cterm::CharCombinationStyle>`
+through ``setCombinationStyle()``.
+
 Comparing Frames and Deriving Masks
 -----------------------------------
 
@@ -212,6 +250,11 @@ Interface
 .. doxygenclass:: erbsland::cterm::WritableBuffer
     :members:
 
+.. doxygenclass:: erbsland::cterm::BufferDrawOptions
+    :members:
+
+.. doxygenenum:: erbsland::cterm::BufferResizeMode
+
 .. doxygenclass:: erbsland::cterm::Buffer
     :members:
 
@@ -220,4 +263,3 @@ Interface
 
 .. doxygenclass:: erbsland::cterm::CursorBuffer
     :members:
-

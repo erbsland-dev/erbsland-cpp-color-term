@@ -5,336 +5,538 @@
 .. index::
     single: implementation notes; paragraph layout
     single: implementation notes; paragraph painter
+    single: implementation notes; paragraph printer
 
 *****************************
 Paragraph Layout and Painting
 *****************************
 
-This page explains the internal paragraph rendering pipeline used for wrapped text.
-It focuses on :cpp:any:`ParagraphLayout <erbsland::cterm::impl::ParagraphLayout>` and
-:cpp:any:`ParagraphPainter <erbsland::cterm::impl::ParagraphPainter>`.
+This page explains the wrapped-paragraph pipeline in
+``src/erbsland/cterm/impl/paragraph``.
 
-Together, these components transform a logical paragraph into positioned and painted terminal cells.
+The implementation is split into three main parts:
+
+* ``impl::paragraph::Layout`` builds a reusable width-aware layout.
+* ``impl::paragraph::Painter`` paints that layout into a
+  :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>`.
+* ``impl::paragraph::Printer`` streams the same layout through a
+  :cpp:any:`CursorWriter <erbsland::cterm::CursorWriter>`.
+
+``RendererBase`` provides the shared placement and background-fill rules for the
+two renderers.
+
+.. dropdown:: How to read the visuals on this page
+
+    The visuals on this page are intentionally schematic.
+    Plain-text diagrams show control flow and internal data structures.
+    ANSI blocks show the final visible cells, with gray background cells used to
+    expose spacing, indentation, and reserved areas that would otherwise be
+    invisible.
+
+Pipeline at a Glance
+====================
+
+The current rendering path looks like this:
+
+.. mermaid::
+
+    flowchart TD
+        input["text + width + ParagraphOptions"] --> build["Layout::build()"]
+        build --> split["splitIntoSourceLines()<br/>newline interpretation"]
+        build --> prepare["prepareSourceLine()<br/>LayoutLineToken{Word|SeparatorSpace|Tab}"]
+        split --> source["layoutSourceLine()"]
+        prepare --> source
+        source --> builder["LineBuilder"]
+        builder --> line["buildLine()<br/>tryBuildLastLine()<br/>buildWrappedLine()<br/>buildTruncatedLine()"]
+        line --> result["LayoutResult<br/>LayoutLine + LayoutFragment"]
+        result --> painter["Painter::paint()"]
+        result --> printer["Printer::print()"]
+        painter --> buffer["WritableBuffer cells"]
+        printer --> writer["CursorWriter output"]
 
 Relevant Source Files
 =====================
 
 You will find the implementation primarily in:
 
-* :file:`src/erbsland/cterm/impl/ParagraphLayout.hpp`
-* :file:`src/erbsland/cterm/impl/ParagraphLayout.cpp`
-* :file:`src/erbsland/cterm/impl/ParagraphPainter.hpp`
-* :file:`src/erbsland/cterm/impl/ParagraphPainter.cpp`
+* :file:`src/erbsland/cterm/impl/paragraph/Layout.hpp`
+* :file:`src/erbsland/cterm/impl/paragraph/Layout.cpp`
+* :file:`src/erbsland/cterm/impl/paragraph/LineBuilder.hpp`
+* :file:`src/erbsland/cterm/impl/paragraph/LineBuilder.cpp`
+* :file:`src/erbsland/cterm/impl/paragraph/LayoutPreparedSourceLine.hpp`
+* :file:`src/erbsland/cterm/impl/paragraph/LayoutLineToken.hpp`
+* :file:`src/erbsland/cterm/impl/paragraph/RendererBase.hpp`
+* :file:`src/erbsland/cterm/impl/paragraph/Painter.hpp`
+* :file:`src/erbsland/cterm/impl/paragraph/Painter.cpp`
+* :file:`src/erbsland/cterm/impl/paragraph/Printer.hpp`
+* :file:`src/erbsland/cterm/impl/paragraph/Printer.cpp`
 * :file:`src/erbsland/cterm/Terminal.cpp`
+* :file:`src/erbsland/cterm/CursorBuffer.cpp`
 * :file:`src/erbsland/cterm/impl/TextPainter.cpp`
 
-Why the Rendering Is Split into Two Classes
-===========================================
+One Example Through the Pipeline
+================================
 
-The library deliberately separates paragraph rendering into two distinct phases:
+The following simplified example is reused across several visuals below.
+It keeps the moving parts small enough to inspect:
 
-#. ``ParagraphLayout`` converts source text and :cpp:any:`ParagraphOptions <erbsland::cterm::ParagraphOptions>`
-   into a neutral layout result.
-#. ``ParagraphPainter`` renders that result into a concrete
-   :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>`.
+.. code-block:: text
 
-This separation addresses several design goals:
+    source line
+        "Signal lanterns sailors home"
 
-* The same wrapping logic is reused across different front ends.
-  ``Terminal::printParagraph()`` builds a temporary buffer for direct output,
-  while ``TextPainter::drawText()`` renders into an existing screen buffer.
-* Layout can fail early, before any drawing occurs.
-  If indentation, markers, or width constraints make rendering impossible,
-  the caller receives ``Result.valid == false`` and can react accordingly.
-* Painting can apply context-specific coloring without affecting layout logic.
-  ``TextPainter`` uses a color resolver for dynamic effects,
-  while ``Terminal`` follows a simpler default path.
-* The layout result retains semantic information such as ``indentWidth``,
-  ``wrapsToNext``, and the separately aligned ``endMark``.
-  This allows the painter to implement background rules without recomputing layout decisions.
+    width
+        20 columns
+
+    selected options
+        wrappedLineIndent = 3
+        lineBreakStartMark = "» "
+        lineBreakEndMark = " ↩"
+
+At the token and layout level, the data model looks like this:
+
+.. code-block:: text
+
+    prepared tokens
+        [0] Word("Signal")
+        [1] SeparatorSpace(" ")
+        [2] Word("lanterns")
+        [3] SeparatorSpace(" ")
+        [4] Word("sailors")
+        [5] SeparatorSpace(" ")
+        [6] Word("home")
+
+    physical lines
+        line 0:
+            indentWidth = 0
+            wrapsToNext = true
+            fragments = [SourceRange("Signal"), Spaces(1), SourceRange("lanterns")]
+
+        line 1:
+            indentWidth = 3
+            wrapsToNext = false
+            fragments = [LineBreakStartMark("» "), SourceRange("sailors"), Spaces(1), SourceRange("home")]
+
+The wrap-end marker is not stored as a fragment inside ``LayoutLine``.
+Instead, renderers derive it from ``wrapsToNext`` and
+``ParagraphOptions::lineBreakEndMark()`` so it can stay anchored to the right
+edge of the paragraph area.
+
+After rendering, those two lines occupy the 20-cell grid like this:
+
+.. erbsland-ansi::
+    :escape-char: ␛
+    :theme: ela-term
+
+    ␛[90m01234567890123456789␛[39m
+    ␛[97mSignal lanterns␛[100m   ␛[96m ↩␛[39;49m
+    ␛[100m   ␛[96m» ␛[97msailors home␛[39;49m
+
+Why the Pipeline Is Split
+=========================
+
+The library deliberately separates paragraph work into layout plus rendering:
+
+* ``Layout`` turns source text and
+  :cpp:any:`ParagraphOptions <erbsland::cterm::ParagraphOptions>` into a
+  neutral ``LayoutResult``.
+* ``Painter`` renders that result into an existing buffer and can use a color
+  resolver for animated or context-sensitive colors.
+* ``Printer`` renders the same result as streamed cursor-writer output.
+* ``RendererBase`` keeps alignment and background-fill behavior identical
+  between both rendering paths.
+
+This split matters because the entry points have different output models while
+sharing the same wrap rules:
+
+* :cpp:any:`Terminal::printParagraph() <erbsland::cterm::Terminal::printParagraph()>`
+  and :cpp:any:`CursorBuffer::printParagraph() <erbsland::cterm::CursorBuffer::printParagraph()>`
+  use ``Layout`` plus ``Printer``.
+* ``TextPainter::drawText()`` uses ``Layout`` plus ``Painter``.
+* Layout failure is detected before any drawing occurs, so the caller can apply
+  :cpp:any:`ParagraphOnError <erbsland::cterm::ParagraphOnError>` consistently.
 
 Where the Pipeline Is Used
 ==========================
 
-There are currently two primary entry points:
+The layout engine supports two newline modes:
 
-* ``Terminal::printParagraph()`` uses ``ParagraphLayout::NewlineMode::HardLineBreak``.
-  Every newline in the source text becomes a line break within a single paragraph.
-* ``TextPainter::drawText()`` uses ``ParagraphLayout::NewlineMode::ParagraphBreak``.
-  Each newline starts a new paragraph, allowing spacing between paragraphs.
+* ``LayoutNewlineMode::HardLineBreak``:
+  each newline starts a new source line inside one printed paragraph.
+  This is used for terminal and cursor-writer style output.
+* ``LayoutNewlineMode::ParagraphBreak``:
+  each newline starts a new paragraph.
+  This is used when text is rendered inside a rectangle.
 
-This distinction is subtle but important.
-It allows the same layout engine to support both immediate terminal output
-and structured layout inside a defined rectangle—without duplicating logic.
+That means:
+
+* :cpp:any:`Terminal::printParagraph() <erbsland::cterm::Terminal::printParagraph()>`
+  and :cpp:any:`CursorBuffer::printParagraph() <erbsland::cterm::CursorBuffer::printParagraph()>`
+  treat embedded newlines as hard line breaks and append
+  :cpp:any:`ParagraphSpacing <erbsland::cterm::ParagraphSpacing>` only after the
+  whole call finishes.
+* ``TextPainter::drawText()`` treats embedded newlines as paragraph boundaries,
+  so paragraph spacing is inserted between the resulting paragraphs.
 
 The Layout Result Data Model
 ============================
 
-``ParagraphLayout`` produces a ``Result`` consisting of physical ``Line`` objects.
+``Layout::build()`` produces a ``LayoutResult`` with:
 
-Each ``Line`` contains:
+* ``valid`` – ``false`` if the chosen width and paragraph settings cannot
+  produce any visible layout
+* ``sourceText`` – the original string used by source-range fragments
+* ``options`` – the paragraph options used for the build
+* ``lines`` – the rendered physical lines
 
-* ``text`` – the visible content, including indentation and optional start markers
-* ``endMark`` – an optional right-aligned wrap marker, painted separately
-* ``indentWidth`` – the width of the indentation area before visible content
-* ``wrappedFromPrevious`` – whether this line continues a previous one
-* ``wrapsToNext`` – whether this line continues onto the next one
+Each ``LayoutLine`` stores:
 
-Separating ``text`` from ``endMark`` is intentional.
-The end mark must remain visually aligned to the right edge,
-independent of text alignment within the available space.
+* ``indentWidth`` – the width reserved before the first visible fragment
+* ``wrappedFromPrevious`` – whether this line continues a previous physical line
+* ``wrapsToNext`` – whether the renderer must add the configured wrap-end marker
+* ``fragments`` – an ordered sequence of:
 
-How Input Is Split into Paragraphs
-==================================
+  * ``SourceRange`` fragments that point back into the original text
+  * generated ``Spaces``
+  * ``LineBreakStartMark``
+  * ``WordBreakMark``
+  * ``ParagraphEllipsis``
 
-``build()`` begins with validation and then processes the input in two steps:
+This is enough for renderers to position text, keep the wrap-end marker aligned
+to the right edge, and apply background-fill rules without re-running layout.
 
-#. Widths less than or equal to zero immediately result in ``valid = false``.
-#. ``splitInputIntoParagraphs()`` determines how newline characters are interpreted.
+How Input Is Split into Source Lines
+====================================
 
-The splitting rules are:
+``Layout::build()`` starts with two structural steps:
 
-* In ``HardLineBreak`` mode, the entire input is treated as a single paragraph with multiple lines.
-* In ``ParagraphBreak`` mode, each source line becomes its own paragraph.
+#. Widths less than or equal to zero immediately produce ``valid = false``.
+#. ``splitIntoSourceLines()`` splits the input on newline characters.
+
+The resulting source-line ranges are then interpreted differently depending on
+the newline mode:
+
+* In ``HardLineBreak`` mode, all source lines belong to one rendered paragraph.
+* In ``ParagraphBreak`` mode, each source line is laid out as its own paragraph.
+
+Two details are easy to miss:
+
+* Interior empty source lines are preserved, so explicit blank lines stay
+  visible.
+* A trailing newline does not create an extra trailing source line because
+  ``splitIntoSourceLines()`` only appends the final range when it still contains
+  characters.
 
 When paragraph-break mode is active and
-:cpp:any:`ParagraphSpacing::DoubleLine <erbsland::cterm::ParagraphSpacing::DoubleLine>` is enabled,
-``build()`` inserts an empty physical line between paragraphs.
+:cpp:any:`ParagraphSpacing::DoubleLine <erbsland::cterm::ParagraphSpacing::DoubleLine>`
+is enabled, ``build()`` inserts one empty physical line between paragraphs.
 
 Preparing a Source Line
 =======================
 
-Each source line is normalized by ``prepareSourceLine()`` into a sequence of ``WordItem`` objects.
-This step is central to the layout algorithm.
+Each source line is normalized by ``prepareSourceLine()`` into a
+``LayoutPreparedSourceLine``. This step keeps enough structure for the later
+line builder to handle separators, tabs, colors, and indentation correctly.
 
-What ``prepareSourceLine()`` Preserves
---------------------------------------
+The prepared token stream uses three token kinds:
 
-Instead of simply splitting on ASCII spaces,
-the implementation preserves enough structure to accurately reproduce:
+* ``Word`` – a contiguous source word plus its cached display width
+* ``SeparatorSpace`` – one collapsed separator run that later becomes one
+  rendered space
+* ``Tab`` – a left-aligned tab that will be resolved later from the current
+  column and the configured tab stops
 
-* collapsible inter-word spacing
-* tab stops
-* spacing colors
-* the distinction between leading indentation and regular spacing
+Tokenization depends on alignment:
 
-Each ``WordItem`` contains:
+* For left-aligned paragraphs, TAB characters become dedicated ``Tab`` tokens.
+* For centered or right-aligned paragraphs, tabs are only separators if they are
+  contained in ``ParagraphOptions::wordSeparators()``.
 
-* ``word`` – the textual content
-* ``prefixSpacing`` – the spaces and tabs preceding the word
+``LayoutPreparedSourceLine`` also keeps pending spacing tokens until the next
+word is known. That gives the implementation two useful behaviors:
 
-Spacing is stored as ``SpacingElement`` values rather than expanded text.
-This allows tabs to be resolved later based on the current column.
+* leading separator runs are dropped entirely
+* leading tabs are preserved for left-aligned paragraphs and resolved later from
+  tab-stop settings
 
-Word Separators and Tabs
-------------------------
+Visual Example of Token Preparation
+-----------------------------------
 
-Parsing depends on alignment:
+.. code-block:: text
 
-* For left-aligned paragraphs, TAB characters are treated as tab-stop elements.
-* For centered or right-aligned paragraphs, TAB is only treated as a separator
-  if included in ``ParagraphOptions::wordSeparators()``.
+    source line
+        "  title:\talpha,,,beta"
 
-Separators are defined by ``ParagraphOptions::wordSeparators()``.
-Consecutive separators collapse into at most one rendered space.
+    separators include ','
 
-Two subtle but important details:
+    prepared tokens
+        [0] Word("title:")
+        [1] Tab
+        [2] Word("alpha")
+        [3] SeparatorSpace(",,,")
+        [4] Word("beta")
 
-* Leading spaces are removed via ``removeLeadingSpaces()``.
-  A paragraph does not start with arbitrary spacing unless explicitly configured.
-* ``spaceFrom()`` converts separators into colored spaces,
-  preserving their visual appearance without rendering the original characters.
+The important detail is that the three commas do not survive as three rendered
+cells. They collapse into one logical separator token that later becomes one
+generated space with the separator run's color.
 
 Why Empty Source Lines Are Preserved
 ------------------------------------
 
-If ``prepareSourceLine()`` produces no words,
-``layoutSourceLine()`` emits an empty physical ``Line``.
+If ``prepareSourceLine()`` produces no tokens, ``layoutSourceLine()`` appends
+an empty ``LayoutLine`` immediately.
 
-This ensures that explicit blank lines remain visible in ``HardLineBreak`` mode.
+That keeps explicit blank input lines visible in both newline modes. In
+paragraph-break mode, the configured paragraph spacing is then applied around
+those empty paragraphs in exactly the same way as for non-empty ones.
 
 Building Physical Lines
 =======================
 
-``layoutSourceLine()`` transforms prepared input into one or more physical lines.
-Progress is tracked using ``State``:
+``layoutSourceLine()`` turns one prepared source line into one or more physical
+lines by creating a ``LineBuilder``.
 
-* ``wordIndex`` – current word
-* ``wordOffset`` – offset within a split word
-* ``spacingOffset`` – remaining prefix spacing
-* ``tabStopIndex`` – next tab stop to use
+The builder tracks:
 
-The algorithm proceeds as follows:
+* ``tokenIndex`` – the next token in the prepared source line
+* ``wordOffset`` – the current offset inside a split word token
+* ``tabStopIndex`` – the next configured tab stop to consume
 
-#. ``tryBuildLastLine()`` checks whether all remaining content fits.
-#. If not, and the wrap limit is reached, ``buildTruncatedLine()`` produces the final line.
-#. Otherwise, ``buildWrappedLine()`` creates a continuation line and advances the state.
+For one source line, the control flow is:
 
-This structure avoids special handling for the final line—it is simply a normal build with stricter constraints.
+.. mermaid::
+
+    flowchart TD
+        start["layoutSourceLine()"] --> prepare["prepareSourceLine()"]
+        prepare --> empty{"tokens.empty()?"}
+        empty -->|yes| blank["append empty LayoutLine"]
+        empty -->|no| loop["LineBuilder loop"]
+        loop --> last["tryBuildLastLine()"]
+        last --> lastOk{"all remaining content fits?"}
+        lastOk -->|yes| appendLast["append final line"]
+        lastOk -->|no| limit{"wrap limit reached?"}
+        limit -->|yes| truncate["buildTruncatedLine()"]
+        limit -->|no| wrapped["buildWrappedLine()"]
+        truncate --> appendTruncated["append truncated line"]
+        wrapped --> appendWrapped["append wrapped line and continue"]
+
+This keeps the last line, wrapped lines, and truncated lines on the same
+``buildLine()`` foundation instead of maintaining three unrelated code paths.
 
 The ``buildLine()`` Algorithm
 -----------------------------
 
-``buildLine()`` is the core routine used for all line types.
+``buildLine()`` is the core routine behind:
 
-It performs these steps:
+* ``tryBuildLastLine()``
+* ``buildWrappedLine()``
+* ``buildTruncatedLine()``
 
-#. Reserve space for suffix elements such as end marks or ellipsis.
-#. Build the prefix (indentation and optional start mark for wrapped lines).
-#. Process the current word and its prefix spacing.
-#. Expand spacing using ``evaluatePrefixSpacing()``.
-#. If the full word fits, append it and continue.
-#. If it does not fit and the line already has content, stop here.
-#. If it does not fit and the line is still empty, attempt splitting via ``buildSplitWord()``.
-#. If no content can be placed, return ``std::nullopt``.
+Its steps are:
 
-This final case is what results in ``Result.valid == false``.
+#. Reserve suffix width for either the wrap-end marker or the paragraph
+   ellipsis.
+#. Build the prefix from ``indentWidth`` plus an optional start mark on wrapped
+   continuation lines.
+#. Evaluate the next spacing run until the next word token is reached.
+#. If the next whole word fits, append the spacing run and the word.
+#. If the word does not fit but the line already contains visible content, stop
+   and let the caller emit a wrapped or truncated continuation line.
+#. If the word does not fit and the line is still empty, try splitting the word.
+#. If even that cannot place any visible content, return ``std::nullopt`` so the
+   whole layout becomes invalid.
 
-Indentation and Wrapped-Line Start Marks
-----------------------------------------
+Two details matter here:
 
-Indentation is only applied for left-aligned paragraphs.
+* The optional wrap-start mark is only added for wrapped continuation lines in
+  left-aligned paragraphs.
+* The line builder counts automatic wraps per source line. A new source line
+  creates a new ``LineBuilder``, which is why hard line breaks reset the wrap
+  counter.
 
-``calculateIndentWidth()`` returns:
-
-* ``firstLineIndent()`` for the first line
-* ``wrappedLineIndent()`` for continuation lines
-* ``0`` for centered or right-aligned paragraphs
-
-If a continuation line uses a start mark,
-it is appended after the indentation.
-
-Tabs and Prefix Spacing Resolution
+Spacing Runs, Tabs, and Separators
 ----------------------------------
 
-``evaluatePrefixSpacing()`` converts ``SpacingElement`` entries into concrete output.
+Spacing is processed as a run before the next word, not as isolated tokens.
+That is why multiple separators still collapse cleanly and tabs can force a
+line break before the next visible word is emitted.
 
-Rules for spaces:
+Rules for separator tokens:
 
-* Leading spaces at the beginning of a line are ignored.
-* Subsequent spaces are rendered normally.
+* leading separator runs are ignored
+* once visible content exists on the line, a separator run contributes exactly
+  one generated space
 
-Tabs behave differently:
+Rules for tabs in left-aligned paragraphs:
 
-* Each tab consumes one entry from ``ParagraphOptions::tabStops()``.
-* ``resolveTabStop()`` supports ``cTabWrappedLineIndent`` to reuse indentation as a tab stop.
-* If a tab advances the column, it expands into that many spaces.
+* each tab consumes the next entry from ``ParagraphOptions::tabStops()``
+* ``resolveTabStop()`` resolves
+  :cpp:any:`cTabWrappedLineIndent <erbsland::cterm::ParagraphOptions::cTabWrappedLineIndent>`
+  to the configured wrapped-line indent
+* if the resolved tab stop is ahead of the current column, the tab expands into
+  that many spaces
 
-If no advancement occurs or no tab stops remain,
-``tabOverflowBehavior()`` applies:
+If the resolved stop does not advance the current column, or if no further stop
+exists, ``tabOverflowBehavior()`` decides what happens next:
 
-* ``AddSpace`` → replace with a single space
-* ``LineBreak`` → break the line (with safeguards to avoid infinite loops)
+* ``AddSpace`` inserts one space and continues
+* ``LineBreak`` consumes the tab and continues on the next physical line
+
+The implementation also includes one safeguard for ``LineBreak``:
+if the tab appears at the start of a line and would not add any visible content,
+the tab is consumed and dropped instead of producing an endless stream of empty
+wrapped lines.
 
 Word Splitting
 --------------
 
-``buildSplitWord()`` is used only when:
+Splitting is handled by ``LayoutLineToken::split()`` and is only attempted when
+a word does not fit and the current physical line still contains no visible
+text.
 
-* a word does not fit, and
-* the line contains no visible content yet
+The split logic:
 
-This ensures splitting is a fallback, not the default.
-
-The algorithm:
-
-* reserves space for ``wordBreakMark()`` if configured
-* iterates character by character
-* ignores zero-width characters
+* reserves room for ``wordBreakMark()`` when a wrapped line is being built
+* walks the word character by character
+* counts visible width using each ``Char``'s display width
+* skips zero-width characters when calculating the consumed width
 * stops before overflow
-* appends the break mark only if a split occurred
+* adds the break mark only when there is still source text left for later lines
 
-Because it operates on ``Char`` values,
-it respects display width, including wide and combining characters.
+Because the split works on ``Char`` display widths, it stays consistent with the
+library's Unicode width system.
 
 Truncation and Wrap Limits
 --------------------------
 
-``maximumLineWraps()`` limits how often a line may wrap.
+``maximumLineWraps()`` limits the number of automatic wraps produced while
+laying out one source line.
 
-When the limit is reached,
-``buildTruncatedLine()`` rebuilds the line with space reserved for
-``paragraphEllipsisMark()``.
+When the limit is reached, ``buildTruncatedLine()`` rebuilds the current line
+with width reserved for ``paragraphEllipsisMark()``.
 
 Important consequences:
 
-* Hard line breaks reset the wrap counter.
-* The ellipsis consumes real width and can cause layout failure.
-* Truncation remains width-aware.
+* hard line breaks and paragraph breaks reset the wrap counter because they
+  start a new source line
+* the ellipsis consumes real width and can itself make the layout invalid
+* truncation still respects indentation, start marks, tabs, and Unicode width
 
-How Painting Works
-==================
+Rendering the Layout
+====================
 
-Once a ``ParagraphLayout::Result`` is available,
-``ParagraphPainter`` maps it into a ``WritableBuffer``.
+Once a ``LayoutResult`` exists, rendering is handled by ``Painter`` or
+``Printer``. Neither renderer performs line breaking; they only consume the
+precomputed layout.
 
-The painter does not perform layout.
-It only positions lines and applies visual rules.
+Shared Placement Rules
+----------------------
 
-Vertical and Horizontal Placement
----------------------------------
+``RendererBase::linePlacement()`` computes three values for every physical line:
 
-``paint()`` determines how many lines fit into the target rectangle.
-Excess lines are clipped.
+* ``textX`` – where the text and non-end-mark fragments begin
+* ``textWidth`` – the width of ``indentWidth`` plus all fragments
+* ``endMarkX`` – where the wrap-end marker begins if ``wrapsToNext`` is true
 
-Vertical placement:
+The end-mark width is removed from the available alignment width first.
+This keeps the configured wrap-end marker anchored to the right edge of the
+paragraph area even when the text itself is centered or right-aligned.
 
-* top → ``rect.y1()``
-* center → offset by unused height
-* bottom → align last line to ``rect.y2()``
+Schematic placement example:
 
-Horizontal placement:
+.. code-block:: text
 
-The ``endMark`` width is excluded first,
-ensuring it remains anchored at the right edge.
+    paragraph width  = 24
+    endMark width    = 2
+    text width space = 22
 
-The remaining text is aligned within the reduced width.
+    012345678901234567890123
+        Harbor reports     ↩
+        ^                  ^
+        textX              endMarkX
 
-Drawing Characters
-------------------
+Painting into Buffers
+---------------------
 
-``drawSegment()`` renders a string and returns the final color.
+``Painter::paint()`` determines how many layout lines fit into the target
+rectangle, applies vertical alignment, and then draws each line into the buffer.
 
-For each character:
+For each visible line it:
 
-#. Skip zero-width characters
-#. Stop if exceeding the right boundary
-#. Check bounds
-#. Resolve colors
-#. Write the character
-#. Advance by display width
+#. computes the final placement with ``linePlacement()``
+#. draws the line fragments starting at ``textX + indentWidth``
+#. draws the wrap-end marker at ``endMarkX`` when ``wrapsToNext`` is set
+#. applies left and right background fill according to
+   :cpp:any:`ParagraphBackgroundMode <erbsland::cterm::ParagraphBackgroundMode>`
 
-Color handling differs:
+``Painter`` uses an optional color resolver. When present, each character color
+is resolved against the current position before it is merged with the buffer's
+existing base color.
 
-* Without resolver → merge with existing buffer via ``withBaseColor()``
-* With resolver → apply dynamic color before merging
+Printing through CursorWriter
+-----------------------------
 
-The latter is used by ``TextPainter``.
+``Printer::print()`` uses the same placement rules, but because it streams text
+instead of mutating an existing buffer, it must materialize indentation and
+padding as spaces.
+
+That leads to two practical differences from ``Painter``:
+
+* left padding, indentation, gaps before the end mark, and trailing fill are all
+  written explicitly as spaces
+* spaces not covered by wrapped-text background use the writer's current
+  background color
+
+``Printer`` resolves each emitted character against the writer's current base
+style before sending it to ``CursorWriter``.
 
 Background Extension Modes
 ==========================
 
-Background behavior is controlled by
+Background fill is controlled by
 :cpp:any:`ParagraphBackgroundMode <erbsland::cterm::ParagraphBackgroundMode>`.
 
-This logic is separate from layout.
+``RendererBase`` splits the logic into three decisions:
 
-Right-Side Fill
----------------
+* whether continuation indents use left fill
+* whether wrapped lines use right fill
+* whether the final physical line also uses right fill
 
-The background extends using the color of the last visible character.
+Left fill:
 
-* With ``endMark`` → fill up to the mark
-* Without → fill to the right edge depending on mode
+* uses the last visible color from the previous wrapped line
+* applies only to the continuation indent of the next line
+* is enabled by ``WrappedLeft``, ``WrappedBoth``, and ``FullBoth``
 
-Left-Side Fill for Continuation Indents
----------------------------------------
+Right fill:
 
-Left fill uses ``previousWrapColor``.
+* uses the last visible color on the current physical line
+* fills either up to the wrap-end marker or, for ``FullRight`` / ``FullBoth``,
+  to the right edge of the paragraph area
 
-If a line wraps:
+Two rendering paths expose the same modes differently:
 
-* the last visible color is stored
-* the next line uses it to fill indentation
+* ``Painter`` preserves the surrounding buffer content wherever the selected
+  mode does not paint.
+* ``Printer`` must emit spaces, so non-filled padding uses the current
+  cursor-writer background instead.
 
-This relies on ``indentWidth`` and ``wrapsToNext`` from the layout result.
+Visual Example of ``WrappedBoth``
+---------------------------------
+
+The following block shows both fill directions at once:
+
+* right fill continues the wrapped line's background up to the end mark
+* left fill carries that background into the continuation indent
+
+.. erbsland-ansi::
+    :escape-char: ␛
+    :theme: ela-term
+
+    ␛[90m01234567890123456789␛[39m
+    ␛[97;44mSignal lanterns␛[44m   ␛[96;44m ↩␛[39;49m
+    ␛[44m   ␛[96;44m» ␛[97;44msailors home␛[39;49m
+
+``FullRight`` and ``FullBoth`` keep going one step further: their final line
+also fills to the right edge of the paragraph area even when it no longer
+wraps.

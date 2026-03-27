@@ -18,24 +18,8 @@ void FrameDrawOptions::setFrameColor(const Color frameColor) noexcept {
     _frameColor = {frameColor};
 }
 
-void FrameDrawOptions::setFrameColor(const Foreground foreground) noexcept {
-    _frameColor = {Color{foreground, bg::Inherited}};
-}
-
-void FrameDrawOptions::setFrameColor(const Foreground::Hue foreground) noexcept {
-    _frameColor = {Color{foreground, bg::Inherited}};
-}
-
 void FrameDrawOptions::setFrameColor(const Foreground foreground, const Background background) noexcept {
     _frameColor = {Color{foreground, background}};
-}
-
-void FrameDrawOptions::setFrameColor(const Background background) noexcept {
-    _frameColor = {Color{fg::Inherited, background}};
-}
-
-void FrameDrawOptions::setFrameColor(const Background::Hue background) noexcept {
-    _frameColor = {Color{fg::Inherited, background}};
 }
 
 void FrameDrawOptions::setFrameColorSequence(ColorSequence frameColor, const FrameColorMode frameColorMode) noexcept {
@@ -51,24 +35,8 @@ void FrameDrawOptions::setFillColor(const Color fillColor) noexcept {
     _fillColor = {fillColor};
 }
 
-void FrameDrawOptions::setFillColor(const Foreground foreground) noexcept {
-    _fillColor = {Color{foreground, bg::Inherited}};
-}
-
-void FrameDrawOptions::setFillColor(const Foreground::Hue foreground) noexcept {
-    _fillColor = {Color{foreground, bg::Inherited}};
-}
-
 void FrameDrawOptions::setFillColor(const Foreground foreground, const Background background) noexcept {
     _fillColor = {Color{foreground, background}};
-}
-
-void FrameDrawOptions::setFillColor(const Background background) noexcept {
-    _fillColor = {Color{fg::Inherited, background}};
-}
-
-void FrameDrawOptions::setFillColor(const Background::Hue background) noexcept {
-    _fillColor = {Color{fg::Inherited, background}};
 }
 
 void FrameDrawOptions::setFillColorSequence(ColorSequence fillColor, const FrameColorMode fillColorMode) noexcept {

@@ -99,6 +99,8 @@ public: // implement CursorWriter
     void clearScreen() noexcept override;
     void write(const Char &character) noexcept override;
     void write(const String &str) noexcept override;
+    void writeResolved(const Char &character) noexcept override;
+    void writeResolved(const String &str) noexcept override;
     void write(const ReadableBuffer &buffer) noexcept override;
     void writeLineBreak() noexcept override;
 
@@ -108,16 +110,17 @@ protected:
 
 private:
     static void validateFillChar(const Char &fillChar);
+    void writeResolvedCharacter(const Char &character) noexcept;
 
 private:
-    OverflowMode _overflowMode{OverflowMode::Shift}; ///< The overflow mode of the buffer.
-    Size _maximumSize{Size{0, 0}};                   ///< The maximum size of the buffer.
-    Char _fillChar{Char::space()};                   ///< The character used for empty cells.
-    Position _cursorPosition{0, 0};                  ///< The current position of the cursor.
-    Color _currentColor{Color::reset()};             ///< The current color of the cursor.
+    OverflowMode _overflowMode{OverflowMode::Shift};                ///< The overflow mode of the buffer.
+    Size _maximumSize{Size{0, 0}};                                  ///< The maximum size of the buffer.
+    Char _fillChar{Char::space()};                                  ///< The character used for empty cells.
+    Position _cursorPosition{0, 0};                                 ///< The current position of the cursor.
+    Color _currentColor{Color::reset()};                            ///< The current color of the cursor.
     CharAttributes _currentCharAttributes{CharAttributes::reset()}; ///< The current character attributes.
-    bool _autoWrap{true};                            ///< If auto-wrap is enabled.
-    bool _wrapOnNextChar{false};                     ///< If the next character should be wrapped to the next line.
+    bool _autoWrap{true};                                           ///< If auto-wrap is enabled.
+    bool _wrapOnNextChar{false}; ///< If the next character should be wrapped to the next line.
 };
 
 

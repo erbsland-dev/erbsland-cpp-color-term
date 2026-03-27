@@ -20,7 +20,11 @@ Build Requirements
 
 * **CMake**: Version 3.28 or newer.
 
-Test Requirements
-=================
+Regular library use is purely CMake-based. If you consume the library as a submodule or build it together with your
+application, no Python installation is required.
 
-* **Python**: Version 3.11 or newer for the helper scripts and test metadata generation
+Development and Test Tooling
+============================
+
+* **Python**: Version 3.11 or newer for helper scripts, documentation tooling, and test metadata generation used while
+  developing the library itself.

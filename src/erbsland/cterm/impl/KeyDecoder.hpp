@@ -11,6 +11,7 @@
 #include <array>
 #include <cstddef>
 #include <string_view>
+#include <utility>
 
 
 namespace erbsland::cterm::impl {
@@ -20,16 +21,40 @@ namespace erbsland::cterm::impl {
 class KeyDecoder final {
 public:
     /// Result of parsing one key from the beginning of a byte stream.
-    struct ParseResult final {
-        U8ParseStatus status{U8ParseStatus::Invalid}; ///< The parsing status.
-        Key key{};                                    ///< The parsed key for `Parsed`.
-        std::size_t consumedByteCount{0};             ///< Number of bytes consumed.
+    class ParseResult final {
+    public:
+        /// Create one parse result without a decoded key.
+        /// @param status The parsing status.
+        /// @param consumedByteCount The number of bytes consumed.
+        ParseResult(
+            const U8ParseStatus status = U8ParseStatus::Invalid, const std::size_t consumedByteCount = 0) noexcept :
+            _status{status}, _consumedByteCount{consumedByteCount} {}
+
+        /// Create one parse result with a decoded key.
+        /// @param status The parsing status.
+        /// @param key The decoded key.
+        /// @param consumedByteCount The number of bytes consumed.
+        ParseResult(const U8ParseStatus status, Key key, const std::size_t consumedByteCount) noexcept :
+            _status{status}, _key{key}, _consumedByteCount{consumedByteCount} {}
+
+    public:
+        /// Access the parsing status.
+        [[nodiscard]] auto status() const noexcept -> U8ParseStatus { return _status; }
+        /// Access the parsed key for `Parsed`.
+        [[nodiscard]] auto key() const noexcept -> const Key & { return _key; }
+        /// Access the number of bytes consumed.
+        [[nodiscard]] auto consumedByteCount() const noexcept -> std::size_t { return _consumedByteCount; }
+
+    private:
+        U8ParseStatus _status{U8ParseStatus::Invalid}; ///< The parsing status.
+        Key _key;                                      ///< The parsed key for `Parsed`.
+        std::size_t _consumedByteCount{0};             ///< Number of bytes consumed.
     };
 
 public:
     /// Create a decoder for the given input bytes.
     /// @param text The input bytes to decode.
-    explicit KeyDecoder(std::string_view text) noexcept : _text{text} {}
+    explicit KeyDecoder(const std::string_view text) noexcept : _text{text} {}
 
     KeyDecoder(const KeyDecoder &) = delete;
     KeyDecoder(KeyDecoder &&) = delete;

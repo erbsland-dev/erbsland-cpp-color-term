@@ -4,8 +4,7 @@
 
 
 #include "PlasmaRenderer.hpp"
-
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 #include <chrono>
 
@@ -17,28 +16,31 @@ using namespace erbsland::cterm;
 
 
 /// Run the animated plasma buffer demo.
-class RetroPlasmaApp final {
+class RetroPlasmaApp final : public TerminalApplication {
 public:
-    /// Run the demo until the user quits.
-    void run() noexcept;
+    /// Prepare the shared terminal update settings before the terminal is initialized.
+    void beforeInitialize() override;
+    /// Initialize the frame timer after the terminal is ready.
+    auto beforeRun() -> int override;
+    /// Handle animation control keys.
+    void onKey(const Key &key) override;
+    /// Render the plasma effect into the shared demo buffer.
+    void onRenderToBuffer() override;
+    /// Match the original higher refresh cadence of the plasma animation.
+    [[nodiscard]] auto loopInterval() const noexcept -> std::chrono::milliseconds override {
+        return std::chrono::milliseconds{35};
+    }
 
 private:
-    [[nodiscard]] auto canvasSize() const noexcept -> Size;
-    void handleKey(const Key &key) noexcept;
-    void renderFrame() noexcept;
     void drawPrompt() noexcept;
     [[nodiscard]] auto buildPrompt() const -> String;
 
 private:
-    Terminal _terminal{Size{90, 28}};
-    UpdateSettings _updateSettings;
-    Buffer _buffer;
     PlasmaRenderer _renderer;
     double _phase{0.0};
     double _speed{1.0};
     std::size_t _paletteIndex{0};
     bool _paused{false};
-    bool _quitRequested{false};
     std::chrono::steady_clock::time_point _lastFrameTime{std::chrono::steady_clock::now()};
 };
 

@@ -43,6 +43,7 @@ class WorkingSet:
         self.create_global_includes: bool = (
             False  # If includes of submodules shall also copy into global space.
         )
+        self.fold_into_parent: set[str] = set()  # Directory basenames to fold.
         self.create_all_base_dir = (
             ""  # The base dir from where `all.hpp` header shall be created.
         )
@@ -60,6 +61,9 @@ class WorkingSet:
         self.fwd_includes: list[str] = (
             []
         )  # A list if `#include` statements to put in front of each fwd.hpp.
+        self.folded_include_map: dict[str, list[tuple[str, Path]]] = defaultdict(
+            list
+        )  # Parent dir to folded include entries `(relative_include, source_path)`.
 
     def write_all_header(self, header_dir, header_files):
         """
@@ -70,13 +74,14 @@ class WorkingSet:
         """
         header_path = self.src_dir / header_dir / "all.hpp"
         if self.verbose:
-            print(f"- writing: {header_dir}/app.hpp")
+            print(f"- writing: {header_dir}/all.hpp")
         text = self.header.replace("{year}", str(date.today().year))
         text += self.warning
         text += "\n\n"
         for header_file in header_files:
             text += f'#include "{header_file}"\n'
         text += "\n\n"
+        header_path.parent.mkdir(parents=True, exist_ok=True)
         header_path.write_text(text, encoding="utf-8")
 
     def write_include_header(self, target_path: Path, source_path: Path = None):
@@ -155,6 +160,44 @@ class WorkingSet:
                     for entry in entries:
                         print(f'  in dir "{header_dir}" adding entry: {entry}')
 
+    def _create_effective_parent_include_map(self):
+        """
+        Build a map of folded headers that shall be additionally exposed in the parent.
+        """
+        if self.verbose:
+            print("Building folded parent include map")
+        parent_candidates: dict[tuple[str, str], list[Path]] = defaultdict(list)
+        for path in self.file_map.values():
+            if path.name == "fwd.hpp":
+                continue
+            rel_path = path.relative_to(self.src_dir)
+            if rel_path.parent.name not in self.fold_into_parent:
+                continue
+            parent_dir = rel_path.parent.parent.as_posix()
+            parent_candidates[(parent_dir, rel_path.name)].append(rel_path)
+        for (parent_dir, header_name), candidate_paths in sorted(parent_candidates.items()):
+            if header_name in self.dir_map.get(parent_dir, []):
+                if self.verbose:
+                    print(
+                        f'  skipping folded "{header_name}" in "{parent_dir}" due to local conflict'
+                    )
+                continue
+            if len(candidate_paths) > 1:
+                if self.verbose:
+                    print(
+                        f'  skipping folded "{header_name}" in "{parent_dir}" due to multiple folded candidates'
+                    )
+                continue
+            source_rel_path = candidate_paths[0]
+            relative_include = source_rel_path.relative_to(Path(parent_dir)).as_posix()
+            self.folded_include_map[parent_dir].append(
+                (relative_include, self.src_dir / source_rel_path)
+            )
+            if self.verbose:
+                print(
+                    f'  folding "{source_rel_path.as_posix()}" into parent "{parent_dir}"'
+                )
+
     def generate_fwd_files(self):
         """
         Generate all `fwd.hpp` files.
@@ -198,9 +241,15 @@ class WorkingSet:
         """
         if self.verbose:
             print('Writing the "all.hpp" files to the `src` directory.')
-        for header_dir, header_files in self.dir_map.items():
+        all_header_dirs = sorted(set(self.dir_map.keys()) | set(self.folded_include_map.keys()))
+        for header_dir in all_header_dirs:
             if not self._create_all_header_for_dir(header_dir):
                 continue
+            header_files = list(self.dir_map.get(header_dir, []))
+            header_files.extend(
+                relative_include
+                for relative_include, _ in self.folded_include_map.get(header_dir, [])
+            )
             header_files.sort()
             self.write_all_header(header_dir, header_files)
 
@@ -210,7 +259,8 @@ class WorkingSet:
         """
         if self.verbose:
             print("Writing the individual header files in the `include` directory.")
-        for header_dir in sorted(self.dir_map.keys()):
+        include_dirs = sorted(set(self.dir_map.keys()) | set(self.folded_include_map.keys()))
+        for header_dir in include_dirs:
             if not self._create_all_header_for_dir(header_dir):
                 continue
             target_path = self.src_dir / header_dir / "all.hpp"
@@ -222,6 +272,9 @@ class WorkingSet:
             self.write_include_header(path, path.relative_to(self.src_dir))
             if self.create_global_includes:
                 self.write_include_header(path, Path(header_file))
+        for parent_dir, folded_entries in self.folded_include_map.items():
+            for _, source_path in folded_entries:
+                self.write_include_header(source_path, Path(parent_dir) / source_path.name)
 
     def remove_existing_includes(self):
         """
@@ -241,6 +294,7 @@ class WorkingSet:
         self.warning = config["warning"]
         self.exclude_dirs = config["excluded_directories"]
         self.create_global_includes = config["create_global_includes"]
+        self.fold_into_parent = set(config.get("fold_into_parent", []))
         self.create_all_base_dir = config["create_all_base_dir"]
         self.fwd_includes = config["fwd_includes"]
         self.fwd_includes.sort()
@@ -274,6 +328,7 @@ class WorkingSet:
         self.parse_cmd()
         self.read_config()
         self.collect_header_files()
+        self._create_effective_parent_include_map()
         self.generate_all_headers()
         self.remove_existing_includes()
         self.generate_includes()

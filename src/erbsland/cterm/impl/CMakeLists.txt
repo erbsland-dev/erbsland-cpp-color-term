@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 
+add_subdirectory(paragraph)
+
 target_sources(erbsland-color-term PRIVATE
         BitmapPainter.cpp
         BitmapPainter.hpp
@@ -15,14 +17,6 @@ target_sources(erbsland-color-term PRIVATE
         KeyDecoder.cpp
         KeyDecoder.hpp
         LineBuffer.hpp
-        ParagraphLayout.cpp
-        ParagraphLayout.hpp
-        ParagraphPainter.cpp
-        ParagraphPainter.hpp
-        ParagraphPrinter.cpp
-        ParagraphPrinter.hpp
-        ParagraphRendererBase.cpp
-        ParagraphRendererBase.hpp
         StringWrapper.cpp
         StringWrapper.hpp
         TextPainter.cpp

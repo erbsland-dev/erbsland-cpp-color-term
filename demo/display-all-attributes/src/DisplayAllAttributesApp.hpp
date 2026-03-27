@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 #include <array>
 #include <string>
@@ -17,19 +17,19 @@ using namespace erbsland::cterm;
 
 
 /// Display the ANSI character attributes supported by the current terminal setup.
-class DisplayAllAttributesApp final {
+class DisplayAllAttributesApp final : public TerminalApplication {
 public:
-    /// Run the demo.
-    void run() noexcept;
+    /// Render the attribute overview once and exit the demo.
+    auto beforeRun() -> int override;
 
 private:
     /// One attribute row in the demo output.
     struct AttributeSpec {
-        std::string_view name;        ///< The display name for the row.
-        CharAttributes::Flag flag;    ///< The represented attribute.
-        std::string_view sgrCodes;    ///< The related ANSI SGR codes.
-        std::string_view note;        ///< A short note for the row.
-        std::string_view sampleText;  ///< The sample text rendered with the attribute.
+        std::string_view name;       ///< The display name for the row.
+        CharAttributes::Flag flag;   ///< The represented attribute.
+        std::string_view sgrCodes;   ///< The related ANSI SGR codes.
+        std::string_view note;       ///< A short note for the row.
+        std::string_view sampleText; ///< The sample text rendered with the attribute.
     };
 
 private:

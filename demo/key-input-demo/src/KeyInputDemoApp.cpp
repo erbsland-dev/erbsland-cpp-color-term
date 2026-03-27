@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "KeyInputDemoApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <algorithm>
 #include <format>
 
@@ -11,31 +9,27 @@
 namespace demo::keyinputdemo {
 
 
-void KeyInputDemoApp::run() {
+void KeyInputDemoApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{56, 10});
     _updateSettings.setMinimumSizeBackground(backgroundChar());
     _updateSettings.setMinimumSizeMessage(
         String{
             "Resize the terminal to at least 56x10 cells for the key input demo.", Color{fg::BrightWhite, bg::Black}});
+}
+
+
+auto KeyInputDemoApp::beforeRun() -> int {
     initializeScrollBuffer();
-    auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
-    renderFrame();
-    while (!_quitRequested) {
-        _terminal.testScreenSize();
-        if (const auto key = _terminal.input().read(cScrollDelay); key.valid()) {
-            handleKey(key);
-        }
-        if (_quitRequested) {
-            break;
-        }
-        advanceScroll();
-        renderFrame();
-    }
+    _firstFrame = true;
+    return 0;
 }
 
 
 auto KeyInputDemoApp::canvasSize() const noexcept -> Size {
-    return _terminal.size();
+    if (_buffer.size().isZero()) {
+        return _terminal.size().componentMax(_updateSettings.minimumSize());
+    }
+    return _buffer.size();
 }
 
 
@@ -71,8 +65,8 @@ void KeyInputDemoApp::advanceScroll() noexcept {
 }
 
 
-void KeyInputDemoApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Escape}) {
+void KeyInputDemoApp::onKey(const Key &key) {
+    if (key == Key::Escape) {
         _quitRequested = true;
         return;
     }
@@ -95,19 +89,22 @@ void KeyInputDemoApp::stampKeyBlock(const Key &key) noexcept {
 }
 
 
-void KeyInputDemoApp::renderFrame() {
+void KeyInputDemoApp::onRenderToBuffer() {
     const auto visibleCanvas = canvasSize();
-    _buffer.resize(visibleCanvas.componentMax(_updateSettings.minimumSize()));
+    if (_firstFrame) {
+        _firstFrame = false;
+    } else {
+        advanceScroll();
+    }
     _buffer.fill(backgroundChar());
 
-    const auto headerRect = Rectangle{0, 0, _buffer.size().width(), 1};
-    const auto fieldRect = fieldRectForCanvas(visibleCanvas.componentMax(_updateSettings.minimumSize()));
+    const auto headerRect = Rectangle{0, 0, visibleCanvas.width(), 1};
+    const auto fieldRect = fieldRectForCanvas(visibleCanvas);
     const auto footerRect = Rectangle{0, _buffer.size().height() - 1, _buffer.size().width(), 1};
 
     drawHeader(headerRect);
     drawField(fieldRect);
     drawFooter(footerRect);
-    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 

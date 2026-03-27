@@ -205,6 +205,23 @@ directly from UTF-8 or UTF-32 text:
 Control codes are filtered out automatically, except for tab and
 newline, which are preserved for layout and splitting.
 
+Handling Invalid UTF-8 Input
+----------------------------
+
+:cpp:any:`EncodingErrors <erbsland::cterm::EncodingErrors>` controls how
+UTF-8-based constructors react when the input is malformed.
+
+.. code-block:: cpp
+
+    const auto strict = String{"Gr\xC3", EncodingErrors::Throw};     // throws
+    const auto lossy = String{"Gr\xC3", EncodingErrors::Replace};    // inserts U+FFFD
+    const auto compact = String{"Gr\xC3", EncodingErrors::Ignore};   // drops the broken bytes when supported
+
+Use :cpp:any:`EncodingErrors::Throw <erbsland::cterm::EncodingErrors::Throw>`
+at the boundary where invalid data should fail fast. Use
+:cpp:any:`EncodingErrors::Replace <erbsland::cterm::EncodingErrors::Replace>`
+when the application should stay readable even with damaged input.
+
 Searching, Slicing, and Measuring
 ---------------------------------
 
@@ -280,6 +297,8 @@ Interface
 
 .. doxygenclass:: erbsland::cterm::CharStyle
     :members:
+
+.. doxygenenum:: erbsland::cterm::EncodingErrors
 
 .. doxygenclass:: erbsland::cterm::String
     :members:

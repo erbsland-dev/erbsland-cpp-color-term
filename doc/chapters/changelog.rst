@@ -10,6 +10,110 @@
 Changelog
 *********
 
+Version 1.8.0 - 2026-04-17
+==========================
+
+Release 1.8.0 introduces two higher-level layers on top of the existing terminal primitives: a beta
+:cpp:any:`ui::Application <erbsland::cterm::ui::Application>` framework for event-driven terminal interfaces and a
+new rich-text pipeline centered around :cpp:any:`text::HtmlRenderer <erbsland::cterm::text::HtmlRenderer>` for
+rendering structured documents and HTML to terminal output. This release also makes UTF-8 recovery deterministic,
+adds new public support types for paragraph layout and buffer resizing, introduces new demos, and substantially
+expands the reference and implementation documentation.
+
+Highlights
+----------
+
+*   Added the beta :cpp:any:`erbsland::cterm::ui` framework with
+    :cpp:any:`Application <erbsland::cterm::ui::Application>`, pages, surfaces, layouts, key bindings, schedulers,
+    worker threads, and built-in surface types for structured terminal user interfaces.
+*   Added rich-text and HTML rendering through :cpp:any:`text::HtmlRenderer <erbsland::cterm::text::HtmlRenderer>`,
+    :cpp:any:`text::Style <erbsland::cterm::text::Style>`, and
+    :cpp:any:`text::TextNode <erbsland::cterm::text::TextNode>`, making it much easier to render headings, lists,
+    links, blockquotes, and code blocks into terminal-friendly output.
+*   Added :cpp:any:`EncodingErrors <erbsland::cterm::EncodingErrors>`,
+    :cpp:any:`BufferResizeMode <erbsland::cterm::BufferResizeMode>`,
+    :cpp:any:`ParagraphIndents <erbsland::cterm::ParagraphIndents>`,
+    :cpp:any:`FastCharSet <erbsland::cterm::FastCharSet>`, and
+    :cpp:any:`TerminalSession <erbsland::cterm::TerminalSession>` as public support APIs for safer text handling,
+    reusable paragraph configuration, and clearer terminal lifecycle management.
+*   Added the ``html-viewer`` and ``ui-hello-world`` demos and reorganized the demo infrastructure around reusable
+    terminal-application helpers, which makes the examples easier to study and extend.
+*   Expanded the documentation and unit tests significantly, including new reference chapters for rich text, the UI
+    framework, UI events, and detailed implementation notes for scheduling, layout, paragraph rendering, and text
+    node planning.
+
+Added
+-----
+
+*   Added :cpp:any:`erbsland::cterm::ui` as a new public beta module with
+    :cpp:any:`Application <erbsland::cterm::ui::Application>`,
+    :cpp:any:`Display <erbsland::cterm::ui::Display>`, :cpp:any:`Page <erbsland::cterm::ui::Page>`,
+    :cpp:any:`Surface <erbsland::cterm::ui::Surface>`, :cpp:any:`Layout <erbsland::cterm::ui::Layout>`,
+    :cpp:any:`Geometry <erbsland::cterm::ui::Geometry>`,
+    :cpp:any:`KeyBindings <erbsland::cterm::ui::KeyBindings>`, and the built-in
+    :cpp:any:`ui::Stack <erbsland::cterm::ui::layout::Stack>`,
+    :cpp:any:`ui::Panel <erbsland::cterm::ui::surface::Panel>`, and
+    :cpp:any:`ui::TextBox <erbsland::cterm::ui::surface::TextBox>` types.
+*   Added a public event and scheduling layer with :cpp:any:`ui::Event <erbsland::cterm::ui::Event>`,
+    :cpp:any:`ui::EventDriver <erbsland::cterm::ui::EventDriver>`,
+    :cpp:any:`ui::EventScheduler <erbsland::cterm::ui::EventScheduler>`,
+    :cpp:any:`ui::Scheduler <erbsland::cterm::ui::Scheduler>`,
+    :cpp:any:`ui::ScheduledActionRef <erbsland::cterm::ui::ScheduledActionRef>`,
+    :cpp:any:`ui::EventThread <erbsland::cterm::ui::EventThread>`, and
+    :cpp:any:`ui::StopToken <erbsland::cterm::ui::StopToken>` for timers, background work, and cooperative shutdown.
+*   Added the :cpp:any:`erbsland::cterm::text` rich-text module with
+    :cpp:any:`text::HtmlRenderer <erbsland::cterm::text::HtmlRenderer>`,
+    :cpp:any:`text::Style <erbsland::cterm::text::Style>`,
+    :cpp:any:`text::StyleRule <erbsland::cterm::text::StyleRule>`,
+    :cpp:any:`text::StyleSelector <erbsland::cterm::text::StyleSelector>`, and
+    :cpp:any:`text::TextNode <erbsland::cterm::text::TextNode>` for parsing, styling, and rendering structured text
+    and HTML.
+*   Added :cpp:any:`EncodingErrors <erbsland::cterm::EncodingErrors>`,
+    :cpp:any:`BufferResizeMode <erbsland::cterm::BufferResizeMode>`,
+    :cpp:any:`ParagraphIndents <erbsland::cterm::ParagraphIndents>`,
+    :cpp:any:`FastCharSet <erbsland::cterm::FastCharSet>`, and
+    :cpp:any:`TerminalSession <erbsland::cterm::TerminalSession>` to make UTF-8 validation, buffer resizing,
+    paragraph indentation, separator handling, and scoped terminal setup more explicit in user code.
+*   Added umbrella headers for the new text and UI modules, including ``<erbsland/cterm/text/all.hpp>`` and
+    ``<erbsland/cterm/ui/all.hpp>``, together with generated top-level include wrappers.
+*   Added the ``html-viewer`` demo to showcase HTML-to-terminal rendering and the ``ui-hello-world`` demo to show the
+    new UI framework in a minimal end-to-end application.
+
+Improved
+--------
+
+*   :cpp:any:`String <erbsland::cterm::String>` now acts as the explicit public UTF-8 boundary, and text-based
+    :cpp:any:`Char <erbsland::cterm::Char>` and :cpp:any:`CombinedChar <erbsland::cterm::impl::CombinedChar>`
+    construction now recovers deterministically instead of throwing by default.
+*   Malformed UTF-8 replacement is now deterministic, with each erroneous UTF-8 byte becoming one Unicode
+    replacement character. Empty text passed to character constructors also normalizes to the replacement character.
+*   :cpp:any:`Buffer <erbsland::cterm::Buffer>` resize-related APIs now use
+    :cpp:any:`BufferResizeMode <erbsland::cterm::BufferResizeMode>`, which makes content-preservation behavior more
+    explicit when buffers are resized.
+*   Paragraph rendering internals were reorganized into dedicated layout, painter, printer, and renderer components,
+    which simplifies reuse across direct terminal output, cursor-buffer output, and the new rich-text renderer.
+*   Existing demos were modernized around shared terminal-application helpers, and ``update-screen-modes`` gained
+    improved flush-speed tracking for comparing rendering strategies.
+
+Documentation
+-------------
+
+*   Added new reference chapters for :doc:`Rich Text and HTML <reference/rich-text>`,
+    :doc:`UI Framework <reference/ui>`, and :doc:`UI Events and Scheduling <reference/ui-events>`.
+*   Expanded the reference index so the new text, UI, buffer, paragraph, and terminal support types are documented
+    and easier to discover.
+*   Added detailed implementation notes for action scheduling, invocation and event threads, remapped buffers, stack
+    layout, and rich-text rendering, and substantially expanded the paragraph-layout documentation.
+*   Added Mermaid support to the Sphinx documentation build so diagrams can be embedded directly in the docs.
+
+Implementation
+--------------
+
+*   Refactored paragraph rendering into a dedicated ``impl/paragraph`` subsystem and split the rich-text renderer into
+    parser, tokenizer, planning, and rendering components to keep the internal architecture modular.
+*   Expanded the unit test suite across API, implementation, demo, and UI layers, including focused coverage for HTML
+    parsing and rendering, event scheduling, UI layout, text styles, and deterministic UTF-8 recovery.
+
 Version 1.7.0 - 2026-03-27
 ==========================
 
@@ -164,7 +268,7 @@ Added
 
 *   Added :cpp:any:`ReadableBuffer::countDifferencesTo() <erbsland::cterm::ReadableBuffer::countDifferencesTo()>` and :cpp:any:`ReadableBuffer::toMask() <erbsland::cterm::ReadableBuffer::toMask()>` to compare rendered frames and derive bitmap masks from visible buffer content.
 *   Added :cpp:any:`WritableBuffer::setFrom() <erbsland::cterm::WritableBuffer::setFrom()>`, :cpp:any:`WritableBuffer::setAndResizeFrom() <erbsland::cterm::WritableBuffer::setAndResizeFrom()>`, shared drawing helpers, and :cpp:any:`Buffer::clone() <erbsland::cterm::Buffer::clone()>` so frame-generation code can work against abstract writable targets and keep copies of previous frames.
-*   Added a default :cpp:any:`Buffer() <erbsland::cterm::Buffer::Buffer()>` constructor, validating ``Buffer(Size, Char)`` construction, ``Buffer::resize(Size, bool, Char)``, and :cpp:any:`Buffer::fromLinesInString() <erbsland::cterm::Buffer::fromLinesInString()>`/:cpp:any:`Buffer::fromLines() <erbsland::cterm::Buffer::fromLines()>` for more flexible buffer lifecycle management.
+*   Added a default :cpp:any:`Buffer() <erbsland::cterm::Buffer::Buffer()>` constructor, validating ``Buffer(Size, Char)`` construction, ``Buffer::resize(Size, BufferResizeMode, Char)``, and :cpp:any:`Buffer::fromLinesInString() <erbsland::cterm::Buffer::fromLinesInString()>`/:cpp:any:`Buffer::fromLines() <erbsland::cterm::Buffer::fromLines()>` for more flexible buffer lifecycle management.
 *   Added :cpp:any:`Backend <erbsland::cterm::Backend>` as a public extension point for custom platform output and input handling, and changed :cpp:any:`Input <erbsland::cterm::Input>` into a public interface that backends can implement.
 *   Added :cpp:any:`Terminal::OutputMode <erbsland::cterm::Terminal::OutputMode>` with :cpp:any:`FullControl <erbsland::cterm::FullControl>` and :cpp:any:`Text <erbsland::cterm::Text>` modes, plus :cpp:any:`Terminal::setBackend() <erbsland::cterm::Terminal::setBackend()>`, :cpp:any:`setAlternateScreen() <erbsland::cterm::Terminal::setAlternateScreen()>`, :cpp:any:`moveTo() <erbsland::cterm::Terminal::moveTo()>`, :cpp:any:`moveHome() <erbsland::cterm::Terminal::moveHome()>`, :cpp:any:`moveCursor() <erbsland::cterm::Terminal::moveCursor()>`, :cpp:any:`moveRight() <erbsland::cterm::Terminal::moveRight()>`, :cpp:any:`moveUp() <erbsland::cterm::Terminal::moveUp()>`, :cpp:any:`moveDown() <erbsland::cterm::Terminal::moveDown()>`, :cpp:any:`setAutoWrap() <erbsland::cterm::Terminal::setAutoWrap()>`, and :cpp:any:`setCursorVisible() <erbsland::cterm::Terminal::setCursorVisible()>`.
 *   Added :cpp:any:`Bitmap::rect() <erbsland::cterm::Bitmap::rect()>`, :cpp:any:`pixelRing() <erbsland::cterm::Bitmap::pixelRing()>`, :cpp:any:`boundingRect() <erbsland::cterm::Bitmap::boundingRect()>`, :cpp:any:`pixelCount() <erbsland::cterm::Bitmap::pixelCount()>`, :cpp:any:`invert() <erbsland::cterm::Bitmap::invert()>`/:cpp:any:`inverted() <erbsland::cterm::Bitmap::inverted()>`, :cpp:any:`outlined() <erbsland::cterm::Bitmap::outlined()>`, :cpp:any:`fillRect() <erbsland::cterm::Bitmap::fillRect()>`, :cpp:any:`floodFill() <erbsland::cterm::Bitmap::floodFill()>`, :cpp:any:`fromFunction() <erbsland::cterm::Bitmap::fromFunction()>`, and :cpp:any:`toPattern() <erbsland::cterm::Bitmap::toPattern()>`.

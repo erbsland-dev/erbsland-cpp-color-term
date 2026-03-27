@@ -7,10 +7,21 @@
 #include "impl/FramePainter.hpp"
 #include "impl/TextPainter.hpp"
 
-#include <stdexcept>
-
 
 namespace erbsland::cterm {
+
+void WritableBuffer::resize(const Size newSize, const BufferResizeMode mode, const Char fillChar) {
+    if (size() == newSize) {
+        return;
+    }
+    if (mode == BufferResizeMode::Fast) {
+        resize(newSize);
+        return;
+    }
+    const auto previous = clone();
+    resize(newSize);
+    setFrom(*previous, fillChar);
+}
 
 void WritableBuffer::set(
     const Position pos, const Char &block, const CharCombinationStylePtr &combinationStyle) noexcept {
@@ -110,14 +121,14 @@ void WritableBuffer::fillImpl(
 }
 
 void WritableBuffer::drawFrame(
-    Rectangle rect, const Char &frameBlock, const CharCombinationStylePtr &combinationStyle) noexcept {
+    const Rectangle rect, const Char &frameBlock, const CharCombinationStylePtr &combinationStyle) noexcept {
     drawFrameImpl(rect, frameBlock, std::nullopt, combinationStyle);
 }
 
 void WritableBuffer::drawFrameImpl(
     const Rectangle rect,
     const Char &frameBlock,
-    std::optional<Char> fillBlock,
+    const std::optional<Char> fillBlock,
     const CharCombinationStylePtr &combinationStyle) noexcept {
     if (fillBlock.has_value()) {
         impl::FramePainter{*this}.drawFilledFrame(rect, frameBlock, *fillBlock, combinationStyle);
@@ -127,17 +138,17 @@ void WritableBuffer::drawFrameImpl(
 }
 
 void WritableBuffer::drawFrame(
-    Rectangle rect,
+    const Rectangle rect,
     const Char16StylePtr &frameStyle,
     const CharCombinationStylePtr &combinationStyle,
-    Color frameColor) noexcept {
+    const Color frameColor) noexcept {
     drawFrameImpl(rect, frameStyle, std::nullopt, combinationStyle, frameColor);
 }
 
 void WritableBuffer::drawFrameImpl(
     const Rectangle rect,
     const Char16StylePtr &frameStyle,
-    std::optional<Char> fillBlock,
+    const std::optional<Char> fillBlock,
     const CharCombinationStylePtr &combinationStyle,
     const Color frameColor) noexcept {
     if (fillBlock.has_value()) {
@@ -148,9 +159,9 @@ void WritableBuffer::drawFrameImpl(
 }
 
 void WritableBuffer::drawFrame(
-    Rectangle rect,
+    const Rectangle rect,
     const Tile9StylePtr &style,
-    Color frameColor,
+    const Color frameColor,
     const CharCombinationStylePtr &combinationStyle) noexcept {
     drawFrameImpl(rect, style, std::nullopt, combinationStyle, frameColor);
 }
@@ -158,7 +169,7 @@ void WritableBuffer::drawFrame(
 void WritableBuffer::drawFrameImpl(
     const Rectangle rect,
     const Tile9StylePtr &style,
-    std::optional<Char> fillBlock,
+    const std::optional<Char> fillBlock,
     const CharCombinationStylePtr &combinationStyle,
     const Color frameColor) noexcept {
     if (fillBlock.has_value()) {
@@ -168,7 +179,7 @@ void WritableBuffer::drawFrameImpl(
     impl::FramePainter{*this}.drawFrame(rect, style, frameColor, combinationStyle);
 }
 
-void WritableBuffer::drawFrame(Rectangle rect, FrameStyle frameStyle, Color frameColor) noexcept {
+void WritableBuffer::drawFrame(const Rectangle rect, const FrameStyle frameStyle, const Color frameColor) noexcept {
     if (const auto tile9Style = Tile9Style::forStyle(frameStyle); tile9Style != nullptr) {
         drawFrameImpl(rect, tile9Style, std::nullopt, CharCombinationStyle::commonBoxFrame(), frameColor);
         return;
@@ -188,7 +199,7 @@ void WritableBuffer::drawFrameImpl(
 }
 
 void WritableBuffer::drawFilledFrame(
-    Rectangle rect,
+    const Rectangle rect,
     const Char &frameBlock,
     const Char &fillBlock,
     const CharCombinationStylePtr &combinationStyle) noexcept {
@@ -196,25 +207,25 @@ void WritableBuffer::drawFilledFrame(
 }
 
 void WritableBuffer::drawFilledFrame(
-    Rectangle rect,
+    const Rectangle rect,
     const Char16StylePtr &frameStyle,
     const Char &fillBlock,
     const CharCombinationStylePtr &combinationStyle,
-    Color frameColor) noexcept {
+    const Color frameColor) noexcept {
     drawFrameImpl(rect, frameStyle, fillBlock, combinationStyle, frameColor);
 }
 
 void WritableBuffer::drawFilledFrame(
-    Rectangle rect,
+    const Rectangle rect,
     const Tile9StylePtr &style,
     const Char &fillBlock,
     const CharCombinationStylePtr &combinationStyle,
-    Color frameColor) noexcept {
+    const Color frameColor) noexcept {
     drawFrameImpl(rect, style, fillBlock, combinationStyle, frameColor);
 }
 
 void WritableBuffer::drawFilledFrame(
-    Rectangle rect, FrameStyle frameStyle, const Char &fillBlock, Color frameColor) noexcept {
+    const Rectangle rect, const FrameStyle frameStyle, const Char &fillBlock, const Color frameColor) noexcept {
     if (const auto tile9Style = Tile9Style::forStyle(frameStyle); tile9Style != nullptr) {
         drawFrameImpl(rect, tile9Style, fillBlock, CharCombinationStyle::commonBoxFrame(), frameColor);
         return;
@@ -237,22 +248,47 @@ void WritableBuffer::drawTextImpl(const Text &text, const std::size_t animationC
 }
 
 void WritableBuffer::drawText(
-    std::string_view text, Rectangle rect, Alignment alignment, Color color, std::size_t animationCycle) {
-    drawText(String{text}, rect, alignment, color, animationCycle);
+    const std::string_view text,
+    const Rectangle rect,
+    const Alignment alignment,
+    const Color color,
+    const std::size_t animationCycle) {
+    drawText(String{text, EncodingErrors::Replace}, rect, alignment, color, animationCycle);
 }
 
 void WritableBuffer::drawText(
-    String text, Rectangle rect, Alignment alignment, Color color, std::size_t animationCycle) {
-    drawTextImpl(std::move(text), rect, alignment, color, animationCycle);
+    const String &text,
+    const Rectangle rect,
+    const Alignment alignment,
+    const Color color,
+    const std::size_t animationCycle) {
+    drawTextImpl(text, rect, alignment, color, animationCycle);
+}
+
+void WritableBuffer::drawText(
+    const String &text, const Rectangle rect, const TextOptions &options, const std::size_t animationCycle) {
+    drawTextImpl(text, rect, options, animationCycle);
 }
 
 void WritableBuffer::drawTextImpl(
-    String text, Rectangle rect, Alignment alignment, Color color, const std::size_t animationCycle) {
-    impl::TextPainter{*this}.drawText(std::move(text), rect, alignment, color, animationCycle);
+    const String &text,
+    const Rectangle rect,
+    const Alignment alignment,
+    const Color color,
+    const std::size_t animationCycle) {
+    impl::TextPainter{*this}.drawText(text, rect, alignment, color, animationCycle);
+}
+
+void WritableBuffer::drawTextImpl(
+    const String &text, const Rectangle rect, const TextOptions &options, const std::size_t animationCycle) {
+    impl::TextPainter{*this}.drawText(text, rect, options, animationCycle);
 }
 
 void WritableBuffer::drawBitmap(
-    const Bitmap &bitmap, Position pos, const BitmapDrawOptions &options, std::size_t animationCycle) noexcept {
+    const Bitmap &bitmap,
+    const Position pos,
+    const BitmapDrawOptions &options,
+    const std::size_t animationCycle) noexcept {
     drawBitmapImpl(bitmap, pos, options, animationCycle);
 }
 
@@ -266,10 +302,10 @@ void WritableBuffer::drawBitmapImpl(
 
 void WritableBuffer::drawBitmap(
     const Bitmap &bitmap,
-    Rectangle rect,
-    Alignment alignment,
+    const Rectangle rect,
+    const Alignment alignment,
     const BitmapDrawOptions &options,
-    std::size_t animationCycle) noexcept {
+    const std::size_t animationCycle) noexcept {
     drawBitmapImpl(bitmap, rect, alignment, options, animationCycle);
 }
 

@@ -6,8 +6,10 @@
 #include "impl/CombinedChar.hpp"
 #include "impl/HashHelper.hpp"
 
+#include <array>
 #include <cstdint>
 #include <functional>
+#include <optional>
 #include <string>
 #include <string_view>
 
@@ -21,78 +23,47 @@ class Key {
 public:
     /// Supported key kinds.
     enum Type : uint8_t {
-        /// No supported key was decoded.
-        None,
-        /// A single Unicode code point.
-        Character,
-        /// Multiple code points that form one combined text input.
-        Combined,
-        /// The Enter/Return key.
-        Enter,
-        /// The tab key.
-        Tab,
-        /// Reverse tab / Shift+Tab.
-        BackTab,
-        /// The space key.
-        Space,
-        /// The escape key.
-        Escape,
-        /// The backspace key.
-        Backspace,
-        /// The insert key.
-        Insert,
-        /// The delete key.
-        Delete,
-        /// The home key.
-        Home,
-        /// The end key.
-        End,
-        /// The page up key.
-        PageUp,
-        /// The page down key.
-        PageDown,
-        /// The left cursor key.
-        Left,
-        /// The right cursor key.
-        Right,
-        /// The up cursor key.
-        Up,
-        /// The down cursor key.
-        Down,
-        /// The function key F1.
-        F1,
-        /// The function key F2.
-        F2,
-        /// The function key F3.
-        F3,
-        /// The function key F4.
-        F4,
-        /// The function key F5.
-        F5,
-        /// The function key F6.
-        F6,
-        /// The function key F7.
-        F7,
-        /// The function key F8.
-        F8,
-        /// The function key F9.
-        F9,
-        /// The function key F10.
-        F10,
-        /// The function key F11.
-        F11,
-        /// The function key F12.
-        F12,
+        None,      ///< No supported key was decoded.
+        Character, ///< A single Unicode code point.
+        Combined,  ///< Multiple code points that form one combined text input.
+        Enter,     ///< The Enter/Return key.
+        Tab,       ///< The tab key.
+        BackTab,   ///< Reverse tab / Shift+Tab.
+        Space,     ///< The space key.
+        Escape,    ///< The escape key.
+        Backspace, ///< The backspace key.
+        Insert,    ///< The insert key.
+        Delete,    ///< The delete key.
+        Home,      ///< The home key.
+        End,       ///< The end key.
+        PageUp,    ///< The page up key.
+        PageDown,  ///< The page down key.
+        Left,      ///< The left cursor key.
+        Right,     ///< The right cursor key.
+        Up,        ///< The up cursor key.
+        Down,      ///< The down cursor key.
+        F1,        ///< The function key F1.
+        F2,        ///< The function key F2.
+        F3,        ///< The function key F3.
+        F4,        ///< The function key F4.
+        F5,        ///< The function key F5.
+        F6,        ///< The function key F6.
+        F7,        ///< The function key F7.
+        F8,        ///< The function key F8.
+        F9,        ///< The function key F9.
+        F10,       ///< The function key F10.
+        F11,       ///< The function key F11.
+        F12,       ///< The function key F12.
     };
 
 public:
     /// Create an invalid key.
     Key() = default;
-    /// Create a key with explicit type and optional Unicode payload.
+    /// Create a key with an explicit type and optional Unicode payload.
     /// @param type The key type.
     /// @param codePoint The Unicode value for `Type::Character`.
-    Key(Type type, char32_t codePoint = 0) noexcept;
-    /// Create a key with explicit combined Unicode payload.
+    explicit Key(Type type, char32_t codePoint = 0) noexcept;
+    /// Create a key with an explicit combined Unicode payload.
     /// @param type The key type.
     /// @param character The combined Unicode text for `Type::Character` or `Type::Combined`.
     /// @throws std::invalid_argument If `character` is not a supported Unicode character sequence.
@@ -101,6 +72,19 @@ public:
 public: // operators
     /// Compare two key events for equality.
     auto operator==(const Key &other) const noexcept -> bool = default;
+    auto operator!=(const Key &other) const noexcept -> bool = default;
+    /// Compare against a single code point.
+    /// This requires `type()` == `Character` and `unicode()` == `other`.
+    [[nodiscard]] auto operator==(char32_t other) const noexcept -> bool;
+    [[nodiscard]] auto operator!=(char32_t other) const noexcept -> bool;
+    /// Compare against a combined key
+    /// This requires `type()` == `Combined` and `combined()` == `other`.
+    [[nodiscard]] auto operator==(std::u32string_view other) const noexcept -> bool;
+    [[nodiscard]] auto operator!=(std::u32string_view other) const noexcept -> bool;
+    /// Compare against a special key.
+    /// This requires `type()` == `type` and `type` != `Character`|`Combined`.
+    [[nodiscard]] auto operator==(Type type) const noexcept -> bool;
+    [[nodiscard]] auto operator!=(Type type) const noexcept -> bool;
 
 public: // accessors
     /// Get the key type.
@@ -123,7 +107,7 @@ public: // accessors
     }
 
 public: // conversion
-    /// Decode a key from configuration text.
+    /// Decode a key from the configuration text.
     /// @param text The textual key name.
     /// @return The decoded key, or `Type::None` if the text is unsupported.
     [[nodiscard]] static auto fromString(std::string text) noexcept -> Key;
@@ -138,6 +122,33 @@ public: // conversion
     /// @param useBrackets If `true`, wrap the text in `[` and `]`.
     /// @return The display text for prompts and help texts.
     [[nodiscard]] auto toDisplayText(bool useBrackets = true) const -> std::string;
+
+private:
+    struct KeyTextDefinition final {
+        Type type;
+        std::string_view text;
+        std::string_view displayText;
+    };
+
+    struct KeyAliasDefinition final {
+        std::string_view text;
+        Type type;
+    };
+
+    /// Get the canonical text definitions for special keys.
+    [[nodiscard]] static auto keyTextDefinitions() noexcept -> const std::array<KeyTextDefinition, 28> &;
+    /// Get the accepted alias definitions for parsing key names.
+    [[nodiscard]] static auto keyAliasDefinitions() noexcept -> const std::array<KeyAliasDefinition, 39> &;
+    /// Find the display and serialization text for a special key.
+    [[nodiscard]] static auto findKeyTextDefinition(Type type) noexcept -> const KeyTextDefinition *;
+    /// Normalize a key name for case-insensitive alias matching.
+    [[nodiscard]] static auto normalizeKeyText(std::string text) noexcept -> std::string;
+    /// Wrap display text in square brackets when requested.
+    [[nodiscard]] static auto wrapDisplayText(std::string_view text, bool useBrackets) -> std::string;
+    /// Create a character or combined key from normalized Unicode input.
+    [[nodiscard]] static auto createCharacterKey(const impl::CombinedChar &character) noexcept -> Key;
+    /// Parse Unicode text into a character key when possible.
+    [[nodiscard]] static auto parseCharacterKeyText(std::string_view text) -> std::optional<Key>;
 
 private:
     Type _type{None};

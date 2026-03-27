@@ -135,6 +135,7 @@ the cursor through backend callbacks instead of ANSI cursor codes.
         [[nodiscard]] auto inputMode() const noexcept -> Input::Mode override { return _inputMode; }
         void setInputMode(Input::Mode mode) override { _inputMode = mode; }
         [[nodiscard]] auto readKey(std::chrono::milliseconds) -> Key override { return {}; }
+        [[nodiscard]] auto waitForKey() -> Key override { return {}; }
         [[nodiscard]] auto readLine() -> std::string override { return {}; }
 
         [[nodiscard]] auto log() const noexcept -> const std::string & { return _log; }
@@ -164,8 +165,15 @@ Backends are also responsible for the low-level parts of interactivity:
 * :cpp:any:`Backend::inputMode() <erbsland::cterm::Backend::inputMode()>`,
   :cpp:any:`Backend::setInputMode() <erbsland::cterm::Backend::setInputMode()>`,
   :cpp:any:`Backend::readKey() <erbsland::cterm::Backend::readKey()>`,
+  :cpp:any:`Backend::waitForKey() <erbsland::cterm::Backend::waitForKey()>`,
   and :cpp:any:`Backend::readLine() <erbsland::cterm::Backend::readLine()>`
   power the public :cpp:any:`Input <erbsland::cterm::Input>` API.
+
+For backend authors, the important contract is:
+
+* ``readKey(timeout)`` must normalize negative timeouts to zero.
+* In key mode, any timeout less than or equal to zero must be non-blocking.
+* ``waitForKey()`` is the dedicated blocking key-input path.
 
 The terminal applies its own one-column and one-row safe margin on top
 of the detected screen size. Backend implementations should therefore

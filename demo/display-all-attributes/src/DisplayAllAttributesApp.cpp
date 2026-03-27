@@ -3,8 +3,6 @@
 
 #include "DisplayAllAttributesApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 
 namespace demo::display_all_attributes {
 
@@ -28,17 +26,17 @@ auto DisplayAllAttributesApp::attributeSpecs() -> const std::array<AttributeSpec
 }
 
 
-void DisplayAllAttributesApp::run() noexcept {
-    auto terminal = Terminal{Size{116, 28}};
-    auto session = ScopedTerminalSession{terminal, Terminal::RefreshMode::Keep, Input::Mode::ReadLine, false};
-    printHeader(terminal);
-    printAttributeTable(terminal);
-    printCombinations(terminal);
-    printPausePrompt(terminal);
-    terminal.flush();
-    if (terminal.isInteractive()) {
-        static_cast<void>(terminal.input().readLine());
+auto DisplayAllAttributesApp::beforeRun() -> int {
+    _terminal.input().setMode(Input::Mode::ReadLine);
+    printHeader(_terminal);
+    printAttributeTable(_terminal);
+    printCombinations(_terminal);
+    printPausePrompt(_terminal);
+    _terminal.flush();
+    if (_terminal.isInteractive()) {
+        static_cast<void>(_terminal.input().readLine());
     }
+    return -1;
 }
 
 

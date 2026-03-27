@@ -3,8 +3,6 @@
 
 #include "FrameWeaverApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -15,55 +13,44 @@
 namespace demo::frameweaver {
 
 
-void FrameWeaverApp::run() {
+void FrameWeaverApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{32, 10});
     _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
     _updateSettings.setMinimumSizeMessage(
         String{"Resize the terminal to at least 32x10 cells for the frame demo.", Color{fg::BrightWhite, bg::Black}});
-    auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
+}
+
+
+auto FrameWeaverApp::beforeRun() -> int {
     _lastTick = std::chrono::steady_clock::now();
-    while (!_quitRequested) {
-        const auto key = _terminal.input().read(std::chrono::milliseconds{100});
-        if (key.valid()) {
-            handleKey(key);
-        }
-        const auto now = std::chrono::steady_clock::now();
-        updateAnimation(std::chrono::duration_cast<std::chrono::milliseconds>(now - _lastTick));
-        _lastTick = now;
-        renderFrame();
-    }
+    return 0;
 }
 
 
-auto FrameWeaverApp::canvasSize() const noexcept -> Size {
-    return _terminal.size();
-}
-
-
-void FrameWeaverApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, U'q'}) {
-        _quitRequested = true;
-    } else if (key == Key{Key::Character, U'c'}) {
+void FrameWeaverApp::onKey(const Key &key) {
+    if (key == U'c') {
         _frames.clear();
         _accumulator = std::chrono::milliseconds{};
-    } else if (key == Key{Key::Character, U'f'}) {
+    } else if (key == U'f') {
         _frameDelay = std::max(std::chrono::milliseconds{250}, _frameDelay - std::chrono::milliseconds{150});
-    } else if (key == Key{Key::Character, U's'}) {
+    } else if (key == U's') {
         _frameDelay = std::min(std::chrono::milliseconds{2000}, _frameDelay + std::chrono::milliseconds{150});
-    } else if (key == Key{Key::Character, U'1'}) {
+    } else if (key == U'1') {
         _styleMode = StyleMode::Light;
-    } else if (key == Key{Key::Character, U'2'}) {
+    } else if (key == U'2') {
         _styleMode = StyleMode::Double;
-    } else if (key == Key{Key::Character, U'3'}) {
+    } else if (key == U'3') {
         _styleMode = StyleMode::Heavy;
-    } else if (key == Key{Key::Character, U'4'}) {
+    } else if (key == U'4') {
         _styleMode = StyleMode::Mixed;
-    } else if (key == Key{Key::Character, U'5'}) {
+    } else if (key == U'5') {
         _styleMode = StyleMode::Block;
-    } else if (key == Key{Key::Character, U'6'}) {
+    } else if (key == U'6') {
         _styleMode = StyleMode::Custom;
-    } else if (key == Key{Key::Character, U'7'}) {
+    } else if (key == U'7') {
         _styleMode = StyleMode::All;
+    } else {
+        TerminalApplication::onKey(key);
     }
 }
 
@@ -87,9 +74,10 @@ void FrameWeaverApp::addFrame() noexcept {
 }
 
 
-void FrameWeaverApp::renderFrame() {
-    _terminal.testScreenSize();
-    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+void FrameWeaverApp::onRenderToBuffer() {
+    const auto now = std::chrono::steady_clock::now();
+    updateAnimation(std::chrono::duration_cast<std::chrono::milliseconds>(now - _lastTick));
+    _lastTick = now;
     _buffer.fill(Char{" ", bg::Black});
     const auto titleRect = Rectangle{0, 0, _buffer.size().width(), 1};
     const auto contentRect = Rectangle{0, 1, _buffer.size().width(), _buffer.size().height() - 2};
@@ -108,7 +96,6 @@ void FrameWeaverApp::renderFrame() {
     renderFrames(contentRect);
     auto prompt = Text{buildPrompt(), footerRect, Alignment::CenterLeft};
     _buffer.drawText(prompt);
-    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 

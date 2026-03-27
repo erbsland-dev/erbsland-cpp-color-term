@@ -37,24 +37,8 @@ void BitmapDrawOptions::setColor(Color color) noexcept {
     _color = {color};
 }
 
-void BitmapDrawOptions::setColor(Foreground foreground) noexcept {
-    _color = {Color{foreground, bg::Inherited}};
-}
-
-void BitmapDrawOptions::setColor(Foreground::Hue foreground) noexcept {
-    _color = {Color{foreground, bg::Inherited}};
-}
-
 void BitmapDrawOptions::setColor(Foreground foreground, Background background) noexcept {
     _color = {Color{foreground, background}};
-}
-
-void BitmapDrawOptions::setColor(Background background) noexcept {
-    _color = {Color{fg::Inherited, background}};
-}
-
-void BitmapDrawOptions::setColor(Background::Hue background) noexcept {
-    _color = {Color{fg::Inherited, background}};
 }
 
 void BitmapDrawOptions::setColorSequence(ColorSequence colorSequence, BitmapColorMode colorMode) noexcept {

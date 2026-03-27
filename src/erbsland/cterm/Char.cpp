@@ -9,43 +9,9 @@
 
 namespace erbsland::cterm {
 
-
-Char::Char(const std::string_view charStr) : Char{charStr, CharStyle{}} {
-}
-
-Char::Char(const std::u32string_view charStr) : Char{charStr, CharStyle{}} {
-}
-
-auto Char::operator==(const char32_t other) const noexcept -> bool {
-    return _character == other;
-}
-
-auto Char::operator!=(const char32_t other) const noexcept -> bool {
-    return _character != other;
-}
-
-auto Char::charStr() const -> std::string {
-    return _character.utf8();
-}
-
-auto Char::displayWidth() const noexcept -> int {
-    return _character.displayWidth();
-}
-
-
-auto Char::byteCount() const noexcept -> std::size_t {
-    return _character.byteCount();
-}
-
-
-void Char::appendTo(std::string &buffer) const noexcept {
-    _character.appendTo(buffer);
-}
-
-
-auto Char::withCombining(const char32_t codePoint) const -> Char {
+auto Char::withCombining(const char32_t codePoint, const EncodingErrors encodingErrors) const -> Char {
     auto result = *this;
-    result._character = _character.withCombining(codePoint);
+    result._character = _character.withCombining(codePoint, encodingErrors);
     return result;
 }
 
@@ -133,6 +99,10 @@ auto Char::renderedEquals(const Char &other, const bool colorEnabled, const bool
 auto Char::space() noexcept -> const Char & {
     static const Char space{U' '};
     return space;
+}
+
+auto Char::emptyBlock(const CharStyle style) noexcept -> Char {
+    return Char{impl::CombinedChar{}, style};
 }
 
 

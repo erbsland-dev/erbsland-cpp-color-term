@@ -139,11 +139,17 @@ public: // input handling.
     /// Set the current input mode.
     /// @param mode The new input mode.
     virtual void setInputMode(Input::Mode mode) = 0;
-    /// Read one key event.
-    /// In `Input::Mode::ReadLine` mode, the user has to enter a character and press enter.
-    /// @param timeout Maximum wait time in `Mode::Key`; ignored in `Mode::ReadLine`.
-    /// @return The parsed key event, or an invalid key if no supported input was read.
+    /// Read one key event without blocking longer than the given timeout.
+    /// In `Input::Mode::Key`, negative timeouts must be normalized to zero and any timeout less than or equal to
+    /// zero must perform a non-blocking poll.
+    /// In `Input::Mode::ReadLine`, the timeout is ignored and this call may block until a line was entered.
+    /// @param timeout Maximum wait time in `Mode::Key`.
+    /// @return The parsed key event, or an invalid key if no supported input was read before the timeout expired.
     [[nodiscard]] virtual auto readKey(std::chrono::milliseconds timeout) -> Key = 0;
+    /// Wait until one key event is available.
+    /// In `Input::Mode::ReadLine`, this call blocks until a line was entered and returns the converted key.
+    /// @return The parsed key event.
+    [[nodiscard]] virtual auto waitForKey() -> Key = 0;
     /// Read text input in the terminal.
     /// Can be ignored in `Input::Mode::Key` mode.
     /// @return The read text, without line breaks.

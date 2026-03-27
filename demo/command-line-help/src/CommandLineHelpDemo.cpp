@@ -12,17 +12,22 @@
 namespace demo::command_line_help {
 
 
-void CommandLineHelpDemo::run(const int argc, char **argv) {
-    auto parsedArguments = parseArguments(argc, argv);
-    auto terminal = Terminal{Size{80, 25}};
-    terminal.initializeScreen();
-    prepareTerminal(terminal, parsedArguments.errors.empty() ? parsedArguments.config : DemoConfig{});
-    renderErrors(terminal, parsedArguments.errors);
-    const auto renderConfig = parsedArguments.errors.empty() ? parsedArguments.config : DemoConfig{};
-    renderDocument(terminal, buildHelpDocument(renderConfig), renderConfig);
-    terminal.setDefaultColor();
-    terminal.flush();
-    terminal.restoreScreen();
+auto CommandLineHelpDemo::onCommandLine(const std::vector<std::string_view> &args) -> int {
+    const auto parsedArguments = parseArguments(args);
+    _config = parsedArguments.config;
+    _errors = parsedArguments.errors;
+    return 0;
+}
+
+
+auto CommandLineHelpDemo::beforeRun() -> int {
+    const auto renderConfig = _errors.empty() ? _config : DemoConfig{};
+    prepareTerminal(_terminal, renderConfig);
+    renderErrors(_terminal, _errors);
+    renderDocument(_terminal, buildHelpDocument(renderConfig), renderConfig);
+    _terminal.setDefaultColor();
+    _terminal.flush();
+    return -1;
 }
 
 
@@ -171,13 +176,12 @@ auto CommandLineHelpDemo::optionSpecs() -> const std::vector<OptionSpec> & {
 }
 
 
-auto CommandLineHelpDemo::parseArguments(const int argc, char **argv) -> ParsedArguments {
+auto CommandLineHelpDemo::parseArguments(const std::vector<std::string_view> &args) -> ParsedArguments {
     auto result = ParsedArguments{};
-    for (auto index = std::size_t{1}; index < static_cast<std::size_t>(argc); ++index) {
-        const auto argument = std::string_view{argv[index]};
-        const auto nextArgument = (index + 1U < static_cast<std::size_t>(argc))
-            ? std::optional<std::string_view>{argv[index + 1U]}
-            : std::nullopt;
+    for (auto index = std::size_t{1}; index < args.size(); ++index) {
+        const auto argument = args[index];
+        const auto nextArgument =
+            (index + 1U < args.size()) ? std::optional<std::string_view>{args[index + 1U]} : std::nullopt;
         if (argument.starts_with("--")) {
             parseLongOption(argument, nextArgument, index, result.config, result.errors);
             continue;

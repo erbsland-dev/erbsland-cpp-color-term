@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 #include <chrono>
 
@@ -15,15 +15,18 @@ using namespace erbsland::cterm;
 
 
 /// Browse several text rendering demonstrations with left and right cursor keys.
-class TextGalleryApp final {
+class TextGalleryApp final : public TerminalApplication {
 public:
-    /// Run the demo until the user quits.
-    void run();
+    /// Prepare the shared terminal update settings before the terminal is initialized.
+    void beforeInitialize() override;
+    /// Load the shared bitmap font after the terminal is ready.
+    auto beforeRun() -> int override;
+    /// Handle gallery page navigation keys.
+    void onKey(const Key &key) override;
+    /// Render the current gallery page into the shared demo buffer.
+    void onRenderToBuffer() override;
 
 private:
-    [[nodiscard]] auto canvasSize() const noexcept -> Size;
-    void handleKey(const Key &key) noexcept;
-    void renderFrame();
     void drawOverviewPage(Rectangle contentRect);
     void drawMixedWidthPage(Rectangle contentRect);
     void drawBitmapFontPage(Rectangle contentRect);
@@ -41,13 +44,8 @@ private:
     [[nodiscard]] static auto titleForWidth(int width) -> std::string_view;
 
 private:
-    Terminal _terminal{Size{96, 30}};
-    UpdateSettings _updateSettings;
-    Buffer _buffer;
     FontPtr _font;
     std::size_t _pageIndex{0};
-    std::size_t _animationCycle{0};
-    bool _quitRequested{false};
 };
 
 

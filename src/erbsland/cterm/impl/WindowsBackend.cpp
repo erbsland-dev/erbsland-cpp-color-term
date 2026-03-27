@@ -137,9 +137,23 @@ void WindowsBackend::setInputMode(Input::Mode mode) {
 }
 
 auto WindowsBackend::readKey(std::chrono::milliseconds timeout) -> Key {
+    if (timeout < std::chrono::milliseconds::zero()) {
+        timeout = std::chrono::milliseconds::zero();
+    }
     if (_inputMode == Input::Mode::ReadLine) {
         return Key::fromConsoleInput(readLine());
     }
+    return readKeyFromConsole(timeout);
+}
+
+auto WindowsBackend::waitForKey() -> Key {
+    if (_inputMode == Input::Mode::ReadLine) {
+        return Key::fromConsoleInput(readLine());
+    }
+    return readKeyFromConsole(std::nullopt);
+}
+
+auto WindowsBackend::readKeyFromConsole(const OptionalTimeout timeout) -> Key {
     if (!_pendingKeys.empty()) {
         const auto key = _pendingKeys.front();
         _pendingKeys.pop_front();
@@ -147,7 +161,14 @@ auto WindowsBackend::readKey(std::chrono::milliseconds timeout) -> Key {
     }
     using namespace std::chrono;
     const auto inputHandle = GetStdHandle(STD_INPUT_HANDLE);
-    const auto timeoutMilliseconds = (timeout.count() == 0) ? INFINITE : static_cast<DWORD>(timeout.count() / 2);
+    auto timeoutMilliseconds = DWORD{INFINITE};
+    if (timeout.has_value()) {
+        auto normalizedTimeout = *timeout;
+        if (normalizedTimeout < milliseconds::zero()) {
+            normalizedTimeout = milliseconds::zero();
+        }
+        timeoutMilliseconds = static_cast<DWORD>(normalizedTimeout.count());
+    }
     if (WaitForSingleObject(inputHandle, timeoutMilliseconds) != WAIT_OBJECT_0) {
         return {};
     }
@@ -385,11 +406,7 @@ void WindowsBackend::appendTextCodePoint(const char32_t codePoint, const std::si
         }
         if (consoleCharacterWidth(codePoint) == 0) {
             if (_pendingTextInput.has_value()) {
-                try {
-                    _pendingTextInput = _pendingTextInput->withCombining(codePoint);
-                } catch (...) {
-                    flushPendingTextInput();
-                }
+                _pendingTextInput = _pendingTextInput->withCombining(codePoint);
             }
             continue;
         }

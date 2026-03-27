@@ -65,7 +65,8 @@ Reading Keys from the Console
 
 The POSIX backend supports two input paths.
 
-In ``Input::Mode::ReadLine``, ``readKey()`` delegates to ``readLine()``, and ``readLine()`` uses ``std::getline(std::cin, input)``.
+In ``Input::Mode::ReadLine``, both ``readKey()`` and ``waitForKey()`` delegate to ``readLine()``, and ``readLine()``
+uses ``std::getline(std::cin, input)``.
 
 In ``Input::Mode::Key``, the backend switches standard input into a non-canonical, no-echo mode.
 That setup happens in ``initializeKeyInputSession()``:
@@ -81,11 +82,15 @@ That setup happens in ``initializeKeyInputSession()``:
 Once key mode is active, ``readKey()`` works as follows:
 
 #. It prepares a ``select()`` call for ``STDIN_FILENO``.
-#. If the requested timeout is greater than zero, it converts that timeout into ``timeval`` and passes it to ``select()``.
-#. If the timeout is zero, it passes ``nullptr`` as the timeout pointer, which means to wait indefinitely.
-#. When data becomes available, it reads up to 32 bytes from standard input with ``read()``.
+#. If the requested timeout is greater than zero, it converts that timeout into ``timeval`` and passes it to
+   ``select()``.
+#. If the timeout is zero or negative, it normalizes it to zero and performs a non-blocking ``select()`` poll.
+#. When data becomes available, it reads up to 64 bytes from standard input with ``read()``.
 #. If the first byte is ``ESC``, it performs additional 1 ms ``select()`` polls and appends more bytes as long as more data arrives immediately.
 #. It passes the complete byte sequence to :cpp:any:`Key::fromConsoleInput() <erbsland::cterm::Key::fromConsoleInput>`.
+
+``waitForKey()`` uses the same decode path but passes no timeout to ``select()``, so it blocks until input becomes
+available.
 
 This short polling phase after ``ESC`` is important because cursor keys and function keys usually arrive as multi-byte ANSI escape sequences.
 Without it, the parser would often see only the leading ``ESC`` and could not reliably distinguish a plain Escape key from a longer control sequence.

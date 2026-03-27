@@ -5,6 +5,7 @@
 
 #include "Alignment.hpp"
 #include "Anchor.hpp"
+#include "Orientation.hpp"
 #include "Position.hpp"
 
 #include <algorithm>
@@ -63,6 +64,12 @@ public: // attributes
     /// Set the height. Negative values are clamped to 0.
     /// @param height New height (clamped to >= 0).
     void setHeight(Coordinate height) noexcept { _height = std::max(Coordinate{0}, height); }
+    /// Get the size component for the selected orientation.
+    /// @param orientation The orientation that selects width or height.
+    /// @return `width()` for `Orientation::Horizontal`, otherwise `height()`.
+    [[nodiscard]] constexpr auto coordinate(const Orientation orientation) const noexcept -> Coordinate {
+        return orientation == Orientation::Horizontal ? _width : _height;
+    }
     /// Compute a position inside the rectangle defined by this size for a given anchor.
     /// Bottom-right resolves to (width-1, height-1), top-left to (0,0), etc.
     /// @param anchor The anchor describing the target corner/edge/center.
@@ -144,6 +151,10 @@ public: // tools
     /// @param fn The function to invoke for each Position (x from 0..width-1, y from 0..height-1).
     template <typename Fn>
     void forEach(Fn fn) const;
+    /// Get the maximum size that can be represented by this type.
+    [[nodiscard]] static constexpr auto maximum() noexcept -> Size {
+        return Size{std::numeric_limits<Coordinate>::max(), std::numeric_limits<Coordinate>::max()};
+    }
 
 private:
     /// Compute the absolute difference between two integer values.

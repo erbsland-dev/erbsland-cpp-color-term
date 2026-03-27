@@ -6,6 +6,7 @@
 #include <erbsland/cterm/impl/UnicodeWidth.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
+#include <cstdint>
 #include <format>
 #include <initializer_list>
 #include <memory>
@@ -20,7 +21,20 @@ using namespace erbsland::cterm;
 namespace term = erbsland::cterm;
 
 
-class BufferTestHelper : public el::UnitTest {
+class TestHelper : public el::UnitTest {
+public:
+    [[nodiscard]] static auto bytes(const std::initializer_list<uint8_t> values) -> std::string {
+        auto result = std::string{};
+        result.reserve(values.size());
+        for (const auto value : values) {
+            result.push_back(static_cast<char>(value));
+        }
+        return result;
+    }
+};
+
+
+class BufferTestHelper : public TestHelper {
 public:
     auto createBuffer(const std::initializer_list<std::string_view> rows) -> Buffer {
         REQUIRE_FALSE(rows.size() == 0);

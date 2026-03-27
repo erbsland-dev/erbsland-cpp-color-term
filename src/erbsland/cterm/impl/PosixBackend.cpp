@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "PosixBackend.hpp"
 
-
 #include "KeyDecoder.hpp"
 #include "PosixSignalDispatcher.hpp"
 
@@ -56,6 +55,14 @@ void PosixBackend::initializePlatform() {
 
 void PosixBackend::restorePlatform() {
     closeTty();
+    if (_keyInputSessionActive) {
+        tcsetattr(STDIN_FILENO, TCSANOW, &_originalState);
+        _keyInputSessionActive = false;
+    }
+    if (!_isInitialized) {
+        return;
+    }
+    _isInitialized = false;
     if (!_hasNoTerminalAttached) {
         // make the cursor visible and disable the alternative screen buffer.
         if (_isAlternateScreenActive) {
@@ -65,10 +72,6 @@ void PosixBackend::restorePlatform() {
         std::cout << "\x1b[?25h";       // make the cursor visible.
         std::cout << "\n";              // add a newline for compatibility.
         std::cout.flush();
-    }
-    if (_keyInputSessionActive) {
-        tcsetattr(STDIN_FILENO, TCSANOW, &_originalState);
-        _keyInputSessionActive = false;
     }
 }
 
@@ -141,7 +144,7 @@ auto PosixBackend::inputMode() const noexcept -> Input::Mode {
     return _inputMode;
 }
 
-void PosixBackend::setInputMode(Input::Mode mode) {
+void PosixBackend::setInputMode(const Input::Mode mode) {
     if (_inputMode != mode) {
         if (mode == Input::Mode::Key) {
             initializeKeyInputSession();
@@ -152,10 +155,25 @@ void PosixBackend::setInputMode(Input::Mode mode) {
     }
 }
 
-auto PosixBackend::readKey(std::chrono::milliseconds timeout) -> Key {
+auto PosixBackend::readKey(const std::chrono::milliseconds timeout) -> Key {
+    auto normalizedTimeout = timeout;
+    if (normalizedTimeout < std::chrono::milliseconds::zero()) {
+        normalizedTimeout = std::chrono::milliseconds::zero();
+    }
     if (_inputMode == Input::Mode::ReadLine) {
         return Key::fromConsoleInput(readLine());
     }
+    return readDecodedKey(normalizedTimeout);
+}
+
+auto PosixBackend::waitForKey() -> Key {
+    if (_inputMode == Input::Mode::ReadLine) {
+        return Key::fromConsoleInput(readLine());
+    }
+    return readDecodedKey(std::nullopt);
+}
+
+auto PosixBackend::readDecodedKey(const OptionalTimeout timeout) -> Key {
     constexpr auto cFollowUpReadTimeout = std::chrono::milliseconds{1};
 
     while (true) {
@@ -169,28 +187,28 @@ auto PosixBackend::readKey(std::chrono::milliseconds timeout) -> Key {
             appendInputChunks(cFollowUpReadTimeout);
         }
         const auto parseResult = KeyDecoder{_pendingKeyInput}.parseConsoleInputPrefix();
-        if (parseResult.status == U8ParseStatus::Parsed) {
-            _pendingKeyInput.erase(0, parseResult.consumedByteCount);
-            return parseResult.key;
+        if (parseResult.status() == U8ParseStatus::Parsed) {
+            _pendingKeyInput.erase(0, parseResult.consumedByteCount());
+            return parseResult.key();
         }
-        if (parseResult.status == U8ParseStatus::NeedMoreData) {
+        if (parseResult.status() == U8ParseStatus::NeedMoreData) {
             appendInputChunks(timeout);
             const auto retriedResult = KeyDecoder{_pendingKeyInput}.parseConsoleInputPrefix();
-            if (retriedResult.status == U8ParseStatus::Parsed) {
-                _pendingKeyInput.erase(0, retriedResult.consumedByteCount);
-                return retriedResult.key;
+            if (retriedResult.status() == U8ParseStatus::Parsed) {
+                _pendingKeyInput.erase(0, retriedResult.consumedByteCount());
+                return retriedResult.key();
             }
-            if (retriedResult.status == U8ParseStatus::Invalid && retriedResult.consumedByteCount > 0) {
-                _pendingKeyInput.erase(0, retriedResult.consumedByteCount);
+            if (retriedResult.status() == U8ParseStatus::Invalid && retriedResult.consumedByteCount() > 0) {
+                _pendingKeyInput.erase(0, retriedResult.consumedByteCount());
                 continue;
             }
             return {};
         }
-        if (parseResult.consumedByteCount == 0) {
+        if (parseResult.consumedByteCount() == 0) {
             _pendingKeyInput.clear();
             return {};
         }
-        _pendingKeyInput.erase(0, parseResult.consumedByteCount);
+        _pendingKeyInput.erase(0, parseResult.consumedByteCount());
     }
     return {};
 }
@@ -311,15 +329,19 @@ void PosixBackend::restoreKeyInputSession() {
     _pendingKeyInput.clear();
 }
 
-auto PosixBackend::waitForInput(const std::chrono::milliseconds timeout) -> bool {
+auto PosixBackend::waitForInput(const OptionalTimeout timeout) -> bool {
     fd_set set;
     FD_ZERO(&set);
     FD_SET(STDIN_FILENO, &set);
     auto tv = timeval{};
     auto *ptv = static_cast<timeval *>(nullptr);
-    if (timeout.count() > 0) {
-        tv.tv_sec = timeout.count() / 1000;
-        tv.tv_usec = (static_cast<int>(timeout.count()) % 1000) * 1000;
+    if (timeout.has_value()) {
+        auto normalizedTimeout = *timeout;
+        if (normalizedTimeout < std::chrono::milliseconds::zero()) {
+            normalizedTimeout = std::chrono::milliseconds::zero();
+        }
+        tv.tv_sec = normalizedTimeout.count() / 1000;
+        tv.tv_usec = (static_cast<int>(normalizedTimeout.count()) % 1000) * 1000;
         ptv = &tv;
     }
     return select(STDIN_FILENO + 1, &set, nullptr, nullptr, ptv) > 0;
@@ -342,7 +364,7 @@ auto PosixBackend::readInputChunk() -> std::string {
     return {buffer, static_cast<std::size_t>(length)};
 }
 
-void PosixBackend::appendInputChunks(const std::chrono::milliseconds timeout) {
+void PosixBackend::appendInputChunks(const OptionalTimeout timeout) {
     if (!waitForInput(timeout)) {
         return;
     }

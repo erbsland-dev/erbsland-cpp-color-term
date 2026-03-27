@@ -29,8 +29,9 @@ struct CharWidth {
 
 /// Calculate the display width of the given string.
 /// @param charStr The string to calculate the display width for.
+/// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
 /// @return The number of "blocks" on the terminal.
-[[nodiscard]] auto calculateDisplayWidth(std::string_view charStr) -> uint32_t;
+[[nodiscard]] auto calculateDisplayWidth(std::string_view charStr) noexcept -> uint32_t;
 
 
 }

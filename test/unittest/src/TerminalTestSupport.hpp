@@ -91,6 +91,16 @@ public:
         return result;
     }
 
+    [[nodiscard]] auto waitForKey() -> Key override {
+        _waitForKeyCallCount += 1;
+        if (_waitForKeyResults.empty()) {
+            return {};
+        }
+        const auto result = _waitForKeyResults.front();
+        _waitForKeyResults.pop();
+        return result;
+    }
+
     [[nodiscard]] auto readLine() -> std::string override {
         _readLineCallCount += 1;
         if (_readLineResults.empty()) {
@@ -123,6 +133,7 @@ public:
         _setInputModeCallCount = 0;
         _readKeyCallCount = 0;
         _readKeyTimeouts.clear();
+        _waitForKeyCallCount = 0;
         _readLineCallCount = 0;
     }
 
@@ -144,6 +155,7 @@ public:
     int _clearScreenCallCount = 0;
     int _setInputModeCallCount = 0;
     int _readKeyCallCount = 0;
+    int _waitForKeyCallCount = 0;
     int _readLineCallCount = 0;
     std::vector<Color> _emittedColors;
     std::vector<CharAttributes> _emittedCharAttributes;
@@ -152,6 +164,7 @@ public:
     std::vector<bool> _alternateScreenBufferChanges;
     std::vector<std::chrono::milliseconds> _readKeyTimeouts;
     std::queue<Key> _readKeyResults;
+    std::queue<Key> _waitForKeyResults;
     std::queue<std::string> _readLineResults;
     std::vector<std::string> _emittedText;
 };

@@ -24,6 +24,8 @@ class WindowsSignalDispatcher;
 
 class WindowsBackend : public Backend {
 public:
+    using OptionalTimeout = std::optional<std::chrono::milliseconds>;
+
     explicit WindowsBackend(TerminalFlags terminalFlags);
     ~WindowsBackend() override;
 
@@ -45,6 +47,7 @@ public: // input
     [[nodiscard]] auto inputMode() const noexcept -> Input::Mode override;
     void setInputMode(Input::Mode mode) override;
     [[nodiscard]] auto readKey(std::chrono::milliseconds timeout) -> Key override;
+    [[nodiscard]] auto waitForKey() -> Key override;
     [[nodiscard]] auto readLine() -> std::string override;
 
 public:
@@ -74,6 +77,8 @@ private:
     void appendTextCodePoint(char32_t codePoint, std::size_t repeatCount);
     /// Decode one UTF-16 code unit from the console into a Unicode code point.
     [[nodiscard]] auto decodeUtf16CodeUnit(char16_t codeUnit) -> std::optional<char32_t>;
+    /// Read one key using either a timeout-based poll or a blocking wait.
+    [[nodiscard]] auto readKeyFromConsole(OptionalTimeout timeout) -> Key;
     /// Restore the terminal and terminate the process for one handled event.
     void handleProcessSignal(int exitCode) noexcept;
 

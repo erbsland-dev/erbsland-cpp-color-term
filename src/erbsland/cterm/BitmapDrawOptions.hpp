@@ -99,18 +99,8 @@ public:
     /// Set a single color.
     /// Replaces the current color sequence with one entry.
     void setColor(Color color) noexcept;
-    /// @overload
+    /// Set explicit foreground and background colors.
     void setColor(Foreground foreground, Background background) noexcept;
-    /// Set only a foreground color.
-    /// The background remains inherited from the buffer below.
-    void setColor(Foreground foreground) noexcept;
-    /// @overload
-    void setColor(Foreground::Hue foreground) noexcept;
-    /// Set only a background color.
-    /// The foreground remains inherited from the buffer below.
-    void setColor(Background background) noexcept;
-    /// @overload
-    void setColor(Background::Hue background) noexcept;
     /// Set a color sequence.
     /// Pass an empty `ColorSequence{}` to inherit the complete color from the buffer below.
     void setColorSequence(ColorSequence colorSequence, BitmapColorMode colorMode = BitmapColorMode::OneColor) noexcept;

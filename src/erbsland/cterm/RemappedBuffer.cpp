@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "RemappedBuffer.hpp"
 
+
 #include <algorithm>
 #include <cassert>
 #include <format>
@@ -35,9 +36,7 @@ auto RemappedBuffer::get(const Position pos) const noexcept -> const Char & {
     if (!_size.contains(pos)) {
         return Char::space();
     }
-    const auto remappedPos = remapPosition(pos);
-    assert(_size.contains(remappedPos));
-    return _buffer[bufferIndex(remappedPos)];
+    return _buffer[bufferIndex(pos.x(), pos.y())];
 }
 
 auto RemappedBuffer::clone() const -> WritableBufferPtr {
@@ -45,41 +44,41 @@ auto RemappedBuffer::clone() const -> WritableBufferPtr {
 }
 
 void RemappedBuffer::resize(const Size newSize) {
-    resize(newSize, false, Char{});
+    resize(newSize, BufferResizeMode::Fast, Char{});
 }
 
-void RemappedBuffer::resize(const Size newSize, const bool reorder, const Char fillChar) {
+void RemappedBuffer::resize(const Size newSize, const BufferResizeMode mode, const Char fillChar) {
     const auto validatedSize = validatedBufferSize(newSize);
     if (_size == validatedSize) {
         return;
     }
-    if (reorder) {
-        reorderedResize(validatedSize, fillChar);
+    if (mode == BufferResizeMode::PreserveContent) {
+        if (isPrimaryAxisOnlyResize(validatedSize)) {
+            primaryAxisResize(validatedSize, fillChar);
+        } else {
+            reorderedResize(validatedSize, fillChar);
+        }
         return;
     }
     fastResize(validatedSize, fillChar);
 }
 
 void RemappedBuffer::set(const Position pos, const Char &block) noexcept {
-    if (!_size.contains(pos) || block.displayWidth() == 0 || block.displayWidth() > 2) {
+    const auto displayWidth = block.displayWidth();
+    if (!_size.contains(pos) || displayWidth == 0 || displayWidth > 2) {
         return;
     }
-    if (block.displayWidth() == 1) {
-        const auto remappedPos = remapPosition(pos);
-        assert(_size.contains(remappedPos));
-        _buffer[bufferIndex(remappedPos)] = block;
+    if (displayWidth == 1) {
+        _buffer[bufferIndex(pos.x(), pos.y())] = block;
         return;
     }
     const auto secondPosition = pos + Position{1, 0};
     if (!_size.contains(secondPosition)) {
         return;
     }
-    const auto remappedFirstPosition = remapPosition(pos);
-    const auto remappedSecondPosition = remapPosition(secondPosition);
-    assert(_size.contains(remappedFirstPosition));
-    assert(_size.contains(remappedSecondPosition));
-    _buffer[bufferIndex(remappedSecondPosition)] = Char{"", block.style()};
-    _buffer[bufferIndex(remappedFirstPosition)] = block;
+    // The continuation cell for a wide character must stay logically empty while preserving the style.
+    _buffer[bufferIndex(secondPosition.x(), secondPosition.y())] = Char::emptyBlock(block.style());
+    _buffer[bufferIndex(pos.x(), pos.y())] = block;
 }
 
 void RemappedBuffer::reserve(Size size) noexcept {
@@ -275,12 +274,10 @@ void RemappedBuffer::validateDirectionalCount(const Direction direction, const i
 
 auto RemappedBuffer::bufferIndex(const Position pos, const Size size, const Orientation orientation) noexcept
     -> std::size_t {
-    if (orientation == Orientation::Vertical) {
-        return static_cast<std::size_t>(pos.y()) * static_cast<std::size_t>(size.width()) +
-            static_cast<std::size_t>(pos.x());
-    }
-    return static_cast<std::size_t>(pos.x()) * static_cast<std::size_t>(size.height()) +
-        static_cast<std::size_t>(pos.y());
+    const auto crossAxis = orientation.crossed();
+    return static_cast<std::size_t>(pos.coordinate(orientation)) *
+        static_cast<std::size_t>(size.coordinate(crossAxis)) +
+        static_cast<std::size_t>(pos.coordinate(crossAxis));
 }
 
 void RemappedBuffer::rotateMap(CoordinateMap &map, const int count, const bool towardFront) noexcept {
@@ -371,7 +368,7 @@ auto RemappedBuffer::moveInMap(CoordinateMap map, const Coordinate start, const 
 void RemappedBuffer::fillStoredRows(const CoordinateMap &rows, const Char &fillChar) noexcept {
     for (const auto storedRow : rows) {
         for (Coordinate x = 0; x < _size.width(); ++x) {
-            _buffer[bufferIndex(Position{x, storedRow})] = fillChar;
+            _buffer[storedBufferIndex(x, storedRow)] = fillChar;
         }
     }
 }
@@ -379,7 +376,7 @@ void RemappedBuffer::fillStoredRows(const CoordinateMap &rows, const Char &fillC
 void RemappedBuffer::fillStoredColumns(const CoordinateMap &columns, const Char &fillChar) noexcept {
     for (const auto storedColumn : columns) {
         for (Coordinate y = 0; y < _size.height(); ++y) {
-            _buffer[bufferIndex(Position{storedColumn, y})] = fillChar;
+            _buffer[storedBufferIndex(storedColumn, y)] = fillChar;
         }
     }
 }
@@ -397,6 +394,58 @@ void RemappedBuffer::fastResize(const Size newSize, const Char &fillChar) {
     _columnRemap = linearIndex(static_cast<std::size_t>(_size.width()));
 }
 
+void RemappedBuffer::primaryAxisResize(const Size newSize, const Char &fillChar) {
+    const auto oldArea = _buffer.size();
+    const auto oldPrimarySize = _size.coordinate(_orientation);
+    const auto newPrimarySize = newSize.coordinate(_orientation);
+    auto &map = primaryMap();
+
+    if (newPrimarySize > oldPrimarySize) {
+        _size = newSize;
+        _buffer.resize(static_cast<std::size_t>(_size.area()));
+        if (!fillChar.isEmpty() && _buffer.size() > oldArea) {
+            for (auto index = oldArea; index < _buffer.size(); ++index) {
+                _buffer[index] = fillChar;
+            }
+        }
+        map.resize(static_cast<std::size_t>(newPrimarySize));
+        for (auto index = oldPrimarySize; index < newPrimarySize; ++index) {
+            map[static_cast<std::size_t>(index)] = index;
+        }
+        return;
+    }
+
+    auto availableDestinations = CoordinateMap{};
+    availableDestinations.reserve(static_cast<std::size_t>(oldPrimarySize - newPrimarySize));
+    auto destinationUsed = std::vector<bool>(static_cast<std::size_t>(newPrimarySize), false);
+    for (Coordinate index = 0; index < newPrimarySize; ++index) {
+        const auto storedCoordinate = map[static_cast<std::size_t>(index)];
+        if (storedCoordinate < newPrimarySize) {
+            destinationUsed[static_cast<std::size_t>(storedCoordinate)] = true;
+        }
+    }
+    for (Coordinate index = 0; index < newPrimarySize; ++index) {
+        if (!destinationUsed[static_cast<std::size_t>(index)]) {
+            availableDestinations.push_back(index);
+        }
+    }
+
+    auto destinationIndex = std::size_t{0};
+    for (Coordinate index = 0; index < newPrimarySize; ++index) {
+        auto &storedCoordinate = map[static_cast<std::size_t>(index)];
+        if (storedCoordinate < newPrimarySize) {
+            continue;
+        }
+        const auto destination = availableDestinations[destinationIndex++];
+        copyStoredPrimaryLine(storedCoordinate, destination);
+        storedCoordinate = destination;
+    }
+
+    _size = newSize;
+    _buffer.resize(static_cast<std::size_t>(_size.area()));
+    map.resize(static_cast<std::size_t>(newPrimarySize));
+}
+
 void RemappedBuffer::reorderedResize(const Size newSize, const Char &fillChar) {
     auto newBuffer = std::vector<Char>(static_cast<std::size_t>(newSize.area()), fillChar);
     const auto copySize = _size.componentMin(newSize);
@@ -406,6 +455,33 @@ void RemappedBuffer::reorderedResize(const Size newSize, const Char &fillChar) {
     _buffer = std::move(newBuffer);
     _rowRemap = linearIndex(static_cast<std::size_t>(_size.height()));
     _columnRemap = linearIndex(static_cast<std::size_t>(_size.width()));
+}
+
+auto RemappedBuffer::isPrimaryAxisOnlyResize(const Size newSize) const noexcept -> bool {
+    return newSize.coordinate(_orientation.crossed()) == _size.coordinate(_orientation.crossed());
+}
+
+auto RemappedBuffer::primaryMap() noexcept -> CoordinateMap & {
+    return _orientation == Orientation::Vertical ? _rowRemap : _columnRemap;
+}
+
+auto RemappedBuffer::primaryMap() const noexcept -> const CoordinateMap & {
+    return _orientation == Orientation::Vertical ? _rowRemap : _columnRemap;
+}
+
+void RemappedBuffer::copyStoredPrimaryLine(const Coordinate source, const Coordinate destination) noexcept {
+    if (source == destination) {
+        return;
+    }
+    if (_orientation == Orientation::Vertical) {
+        for (Coordinate x = 0; x < _size.width(); ++x) {
+            _buffer[storedBufferIndex(x, destination)] = _buffer[storedBufferIndex(x, source)];
+        }
+        return;
+    }
+    for (Coordinate y = 0; y < _size.height(); ++y) {
+        _buffer[storedBufferIndex(destination, y)] = _buffer[storedBufferIndex(source, y)];
+    }
 }
 
 }

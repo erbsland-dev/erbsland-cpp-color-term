@@ -20,10 +20,12 @@ class String;
 
 /// A value accepted by `Terminal::print()` and `Terminal::printLine()` or `String::append()`.
 template <typename T>
-concept PrintableArg = std::constructible_from<Foreground, T> || std::constructible_from<Background, T> ||
-    std::same_as<Color, T> || std::same_as<CharAttributes, T> || std::same_as<CharStyle, T> || std::same_as<Char, T> ||
-    std::same_as<String, T> || std::same_as<std::decay_t<T>, std::string> ||
-    std::same_as<std::decay_t<T>, std::string_view> || std::same_as<T, const char *>;
+concept PrintableArg =
+    std::constructible_from<Foreground, T> || std::constructible_from<Background, T> || std::same_as<Color, T> ||
+    std::same_as<CharAttributes, T> || std::same_as<CharStyle, T> || std::same_as<Char, T> || std::same_as<String, T> ||
+    std::same_as<std::decay_t<T>, std::string> || std::same_as<std::decay_t<T>, std::string_view> ||
+    std::same_as<std::decay_t<T>, std::u32string> || std::same_as<std::decay_t<T>, std::u32string_view> ||
+    std::same_as<T, const char *> || std::same_as<T, const char32_t *>;
 
 template <typename T>
 concept ColorArg = std::constructible_from<Color, T>;

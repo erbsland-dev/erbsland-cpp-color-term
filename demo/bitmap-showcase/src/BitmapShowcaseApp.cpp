@@ -3,11 +3,8 @@
 
 #include "BitmapShowcaseApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <algorithm>
 #include <array>
-#include <chrono>
 #include <format>
 #include <string>
 #include <vector>
@@ -16,47 +13,31 @@
 namespace demo::bitmapshowcase {
 
 
-void BitmapShowcaseApp::run() {
+void BitmapShowcaseApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{68, 20});
     _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
     _updateSettings.setMinimumSizeMessage(
         String{
             "Resize the terminal to at least 68x20 cells for the bitmap showcase.", Color{fg::BrightWhite, bg::Black}});
-    auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
-    while (!_quitRequested) {
-        const auto key = _terminal.input().read(std::chrono::milliseconds{90});
-        if (key.valid()) {
-            handleKey(key);
-        }
-        renderFrame();
-        ++_animationCycle;
-    }
 }
 
 
-auto BitmapShowcaseApp::canvasSize() const noexcept -> Size {
-    return _terminal.size();
-}
-
-
-void BitmapShowcaseApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, U'q'}) {
-        _quitRequested = true;
-    } else if (key == Key{Key::Left}) {
+void BitmapShowcaseApp::onKey(const Key &key) {
+    if (key == Key::Left) {
         _pageIndex = (_pageIndex + 3) % 4;
-    } else if (key == Key{Key::Right}) {
+    } else if (key == Key::Right) {
         _pageIndex = (_pageIndex + 1) % 4;
-    } else if (key == Key{Key::Up}) {
+    } else if (key == Key::Up) {
         selectVariantDelta(-1);
-    } else if (key == Key{Key::Down}) {
+    } else if (key == Key::Down) {
         selectVariantDelta(1);
+    } else {
+        TerminalApplication::onKey(key);
     }
 }
 
 
-void BitmapShowcaseApp::renderFrame() {
-    _terminal.testScreenSize();
-    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+void BitmapShowcaseApp::onRenderToBuffer() {
     _buffer.fill(Char{" ", bg::Black});
     const auto outerRect = Rectangle{0, 0, _buffer.size().width(), _buffer.size().height()};
     const auto titleRect = Rectangle{2, 1, _buffer.size().width() - 4, 1};
@@ -79,7 +60,6 @@ void BitmapShowcaseApp::renderFrame() {
     drawSelector(selectorRect);
     drawPreview(previewRect);
     drawFooter(footerRect);
-    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 

@@ -82,6 +82,10 @@ public: // wrappers for common paragraph options
     [[nodiscard]] auto wrappedLineIndent() const noexcept -> int { return _textOptions.wrappedLineIndent(); }
     /// @copydoc ParagraphOptions::setWrappedLineIndent
     void setWrappedLineIndent(const int indent) noexcept { _textOptions.setWrappedLineIndent(indent); }
+    /// @copydoc ParagraphOptions::margins
+    [[nodiscard]] auto margins() const noexcept -> const Margins & { return _textOptions.margins(); }
+    /// @copydoc ParagraphOptions::setMargins
+    void setMargins(const Margins margins) noexcept { _textOptions.setMargins(margins); }
     /// @copydoc ParagraphOptions::backgroundMode
     [[nodiscard]] auto backgroundMode() const noexcept -> ParagraphBackgroundMode {
         return _textOptions.backgroundMode();

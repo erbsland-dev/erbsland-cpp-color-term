@@ -15,14 +15,15 @@
 namespace erbsland::cterm {
 
 
-String::String(const std::string_view str, const Color color) : _chars{splitCharacters(str, color)} {
+String::String(const std::string_view str, const EncodingErrors encodingErrors) :
+    String{str, CharStyle{}, encodingErrors} {
 }
 
-String::String(const std::string_view str, const CharStyle style) :
-    _chars{splitCharacters(str, style.color(), style.attributes())} {
+String::String(const std::string_view str, const CharStyle style, const EncodingErrors encodingErrors) :
+    _chars{splitCharacters(str, style.color(), style.attributes(), encodingErrors)} {
 }
 
-String::String(const std::u32string_view str, const Color color) : _chars{splitCharacters(str, color)} {
+String::String(const std::u32string_view str) : String{str, CharStyle{}} {
 }
 
 String::String(const std::u32string_view str, const CharStyle style) :
@@ -48,8 +49,8 @@ auto String::count(const Char character) const noexcept -> std::size_t {
 }
 
 auto String::count(const char32_t character) const noexcept -> std::size_t {
-    return static_cast<std::size_t>(std::ranges::count_if(
-        _chars, [&](const Char &c) -> bool { return c.codePoints() == std::array<char32_t, 3>{character, 0, 0}; }));
+    return static_cast<std::size_t>(
+        std::ranges::count_if(_chars, [&](const Char &c) -> bool { return c.singleCodePoint() == character; }));
 }
 
 auto String::indexOf(const Char character, const std::size_t startIndex) const noexcept -> std::size_t {
@@ -69,7 +70,7 @@ auto String::indexOf(const char32_t character, const std::size_t startIndex) con
         return npos;
     }
     for (auto index = startIndex; index < _chars.size(); ++index) {
-        if (_chars[index].codePoints() == std::array<char32_t, 3>{character, 0, 0}) {
+        if (_chars[index].singleCodePoint() == character) {
             return index;
         }
     }
@@ -91,8 +92,58 @@ auto String::substr(const std::size_t startIndex, std::size_t length) const noex
         _chars.cbegin() + static_cast<difference_type>(startIndex) + static_cast<difference_type>(length)}};
 }
 
+auto String::trimmed(const std::u32string_view characters) const noexcept -> String {
+    auto start = std::size_t{0};
+    auto end = size();
+    while (start < end && _chars[start].isOneOf(characters)) {
+        start += 1;
+    }
+    while (end > start && _chars[end - 1].isOneOf(characters)) {
+        end -= 1;
+    }
+    return substr(start, end - start);
+}
+
 auto String::containsControlCharacters() const noexcept -> bool {
     return std::ranges::any_of(_chars, [](const Char &c) -> bool { return c.isControl(); });
+}
+
+void String::appendStyled(std::string_view text, CharStyle style) noexcept {
+    appendCharacters(_chars, text, style.color(), style.attributes(), EncodingErrors::Replace);
+}
+
+void String::appendStyled(const std::u32string_view text, const CharStyle style) noexcept {
+    _chars.reserve(_chars.size() + text.size());
+    appendCharacters(_chars, text, style.color(), style.attributes());
+}
+
+void String::appendRange(const String &other, const std::size_t startIndex, std::size_t length) noexcept {
+    if (startIndex >= other._chars.size() || length == 0) {
+        return;
+    }
+    if (length == npos || length > other._chars.size() - startIndex) {
+        length = other._chars.size() - startIndex;
+    }
+    _chars.insert(
+        _chars.end(),
+        other._chars.cbegin() + static_cast<difference_type>(startIndex),
+        other._chars.cbegin() + static_cast<difference_type>(startIndex) + static_cast<difference_type>(length));
+}
+
+void String::appendRangeWithBaseStyle(
+    const String &other, const std::size_t startIndex, std::size_t length, const CharStyle style) noexcept {
+    if (startIndex >= other._chars.size() || length == 0) {
+        return;
+    }
+    if (length == npos || length > other._chars.size() - startIndex) {
+        length = other._chars.size() - startIndex;
+    }
+    _chars.reserve(_chars.size() + length);
+    const auto color = style.color();
+    const auto attributes = style.attributes();
+    for (auto index = startIndex; index < startIndex + length; ++index) {
+        _chars.emplace_back(other._chars[index].withBase(color, attributes));
+    }
 }
 
 auto String::splitWords() const noexcept -> std::vector<String> {
@@ -160,7 +211,7 @@ auto String::fromLines(
     }
     std::size_t characterCount = lines.size() - 1; // count newlines
     for (auto &line : lines) {
-        characterCount += countCharacters(line);
+        characterCount += countCharacters(line, EncodingErrors::Replace);
     }
     Storage result;
     result.reserve(characterCount);
@@ -171,7 +222,7 @@ auto String::fromLines(
         } else {
             result.emplace_back(Char{U'\n', color, attributes});
         }
-        impl::U8Buffer{line}.decodeAll(
+        impl::U8Buffer{line}.decodeAllReplacingErrors(
             [&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color, attributes); });
     }
     return String{std::move(result)};
@@ -212,13 +263,15 @@ auto String::fromLines(const std::initializer_list<std::u32string_view> lines, c
     return fromLines(lines, style.color(), style.attributes());
 }
 
-auto String::countCharacters(const std::string_view str) -> std::size_t {
+auto String::countCharacters(const std::string_view str, const EncodingErrors encodingErrors) -> std::size_t {
     std::size_t displayCharCount = 0;
-    impl::U8Buffer{str}.decodeAll([&](const char32_t codePoint) -> void {
-        if (isStringCharacter(codePoint)) {
-            displayCharCount += static_cast<std::size_t>(Char{codePoint}.displayWidth());
-        }
-    });
+    impl::U8Buffer{str}.decodeAll(
+        [&](const char32_t codePoint) -> void {
+            if (isStringCharacter(codePoint)) {
+                displayCharCount += static_cast<std::size_t>(Char{codePoint}.displayWidth());
+            }
+        },
+        encodingErrors);
     return displayCharCount;
 }
 
@@ -232,22 +285,22 @@ auto String::countCharacters(const std::u32string_view str) -> std::size_t {
     return displayCharCount;
 }
 
-auto String::splitCharacters(const std::string_view str, const Color color, const CharAttributes attributes)
+auto String::splitCharacters(
+    const std::string_view str, const Color color, const CharAttributes attributes, const EncodingErrors encodingErrors)
     -> Storage {
     auto result = Storage{};
-    result.reserve(countCharacters(str));
+    result.reserve(countCharacters(str, encodingErrors));
     impl::U8Buffer{str}.decodeAll(
-        [&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color, attributes); });
+        [&](const char32_t codePoint) -> void { appendCodePoint(result, codePoint, color, attributes); },
+        encodingErrors);
     return result;
 }
 
 auto String::splitCharacters(const std::u32string_view str, const Color color, const CharAttributes attributes)
     -> Storage {
     auto result = Storage{};
-    result.reserve(countCharacters(str));
-    for (const auto codePoint : str) {
-        appendCodePoint(result, codePoint, color, attributes);
-    }
+    result.reserve(str.size());
+    appendCharacters(result, str, color, attributes);
     return result;
 }
 
@@ -272,6 +325,25 @@ void String::appendCodePoint(
         return;
     }
     chars.emplace_back(codePoint, color, attributes);
+}
+
+void String::appendCharacters(
+    Storage &chars, const std::u32string_view text, const Color color, const CharAttributes attributes) noexcept {
+    for (const auto codePoint : text) {
+        appendCodePoint(chars, codePoint, color, attributes);
+    }
+}
+
+void String::appendCharacters(
+    Storage &chars,
+    const std::string_view text,
+    const Color color,
+    const CharAttributes attributes,
+    const EncodingErrors encodingErrors) noexcept {
+    chars.reserve(chars.size() + countCharacters(text, encodingErrors));
+    impl::U8Buffer{text}.decodeAll(
+        [&](const char32_t codePoint) -> void { appendCodePoint(chars, codePoint, color, attributes); },
+        encodingErrors);
 }
 
 

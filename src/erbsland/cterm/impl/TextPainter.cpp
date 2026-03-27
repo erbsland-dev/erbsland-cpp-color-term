@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "TextPainter.hpp"
 
-
-#include "ParagraphLayout.hpp"
-#include "ParagraphPainter.hpp"
 #include "StringWrapper.hpp"
+
+#include "paragraph/Layout.hpp"
+#include "paragraph/Painter.hpp"
 
 
 namespace erbsland::cterm::impl {
@@ -32,37 +32,52 @@ void TextPainter::drawText(Position pos, const String &str) {
 }
 
 void TextPainter::drawText(const Text &text, const std::size_t animationCycle) {
-    if (text.font() != nullptr) {
+    drawText(text.text(), text.rectangle(), text.textOptions(), animationCycle);
+}
+
+auto TextPainter::simpleTextOptions(const Alignment alignment, const Color color) noexcept -> TextOptions {
+    auto options = TextOptions{alignment};
+    options.setColor(color);
+    return options;
+}
+
+void TextPainter::drawText(
+    const String &text, const Rectangle rect, const TextOptions &options, std::size_t animationCycle) {
+    const auto textRect = contentRect(rect, options.paragraphOptions());
+    if (textRect.width() <= 0 || textRect.height() <= 0) {
+        return;
+    }
+    if (options.font() != nullptr) {
         auto lines = StringLines{};
-        for (const auto &paragraph : text.text().splitLines()) {
-            const auto fontLines = buildFontTextLines(text, paragraph);
+        for (const auto &paragraph : text.splitLines()) {
+            const auto fontLines = buildFontTextLines(options, paragraph);
             lines.insert(lines.end(), fontLines.begin(), fontLines.end());
         }
-        applyTextLines(text, lines, animationCycle);
+        applyTextLines(textRect, options, lines, animationCycle);
         return;
     }
     const auto layout =
-        ParagraphLayout{
-            text.text(),
-            text.rectangle().width(),
-            text.textOptions().paragraphOptions(),
-            ParagraphLayout::NewlineMode::ParagraphBreak}
+        paragraph::Layout{
+            text, textRect.width(), options.paragraphOptions(), paragraph::LayoutNewlineMode::ParagraphBreak}
             .build();
-    if (!layout.valid) {
-        if (text.onError() == ParagraphOnError::Empty) {
+    if (!layout.valid()) {
+        if (options.onError() == ParagraphOnError::Empty) {
             return;
         }
-        applyTextLines(text, buildSimpleTextLines(text), animationCycle);
+        applyTextLines(
+            textRect, options, buildSimpleTextLines(text, textRect, options.paragraphSpacing()), animationCycle);
         return;
     }
-    ParagraphPainter{
+    paragraph::Painter{
         _buffer,
-        text.rectangle(),
-        text.alignment(),
+        textRect,
+        options.alignment(),
         layout,
-        text.backgroundMode(),
+        text,
+        options.paragraphOptions(),
+        options.backgroundMode(),
         [&](const Char &character, const Position position) -> Color {
-            return colorForTextPosition(text, character, position, animationCycle);
+            return colorForTextPosition(options, character, position, animationCycle);
         }}
         .paint();
 }
@@ -73,29 +88,34 @@ void TextPainter::drawText(
     const Alignment alignment,
     const Color color,
     const std::size_t animationCycle) {
-
-    auto renderedText = Text{String{text}, rect, alignment};
-    renderedText.setColor(color);
-    drawText(renderedText, animationCycle);
+    drawText(String{text, EncodingErrors::Replace}, rect, simpleTextOptions(alignment, color), animationCycle);
 }
 
-void TextPainter::drawText(String text, Rectangle rect, Alignment alignment, Color color, std::size_t animationCycle) {
-    auto renderedText = Text{std::move(text), rect, alignment};
-    renderedText.setColor(color);
-    drawText(renderedText, animationCycle);
+void TextPainter::drawText(
+    const String &text,
+    const Rectangle rect,
+    const Alignment alignment,
+    const Color color,
+    const std::size_t animationCycle) {
+    drawText(text, rect, simpleTextOptions(alignment, color), animationCycle);
 }
 
-auto TextPainter::buildSimpleTextLines(const Text &text) const -> StringLines {
-    return StringWrapper{text.text()}.wrapIntoLines(text.rectangle().width(), text.paragraphSpacing());
+auto TextPainter::contentRect(const Rectangle rect, const ParagraphOptions &options) noexcept -> Rectangle {
+    return rect.insetBy(options.margins());
 }
 
-auto TextPainter::buildFontTextLines(const Text &text, const String &paragraph) const -> StringLines {
+auto TextPainter::buildSimpleTextLines(const String &text, const Rectangle rect, ParagraphSpacing spacing) const
+    -> StringLines {
+    return StringWrapper{text}.wrapIntoLines(rect.width(), spacing);
+}
+
+auto TextPainter::buildFontTextLines(const TextOptions &options, const String &paragraph) const -> StringLines {
     static constexpr auto pixelMap = std::array<std::string_view, 16>{
         " ", "▘", "▝", "▀", "▖", "▌", "▞", "▛", "▗", "▚", "▐", "▜", "▄", "▙", "▟", "█"};
-    if (text.font() == nullptr) {
+    if (options.font() == nullptr) {
         return {};
     }
-    const auto &font = *text.font();
+    const auto &font = *options.font();
     auto bitmapWidth = 0;
     auto renderedGlyphs = 0;
     for (const auto &character : paragraph) {
@@ -144,11 +164,13 @@ auto TextPainter::buildFontTextLines(const Text &text, const String &paragraph) 
 }
 
 void TextPainter::applyTextLines(
-    const Text &text, const StringLines &lines, const std::size_t animationCycle) noexcept {
-    const auto rect = text.rectangle();
+    const Rectangle rect,
+    const TextOptions &options,
+    const StringLines &lines,
+    const std::size_t animationCycle) noexcept {
     const auto maxLines = std::min(static_cast<int>(lines.size()), rect.height());
     auto yStart = rect.topLeft().y();
-    switch (text.alignment() & Alignment::VerticalMask) {
+    switch (options.alignment() & Alignment::VerticalMask) {
     case Alignment::Top:
         break;
     case Alignment::VCenter:
@@ -164,7 +186,7 @@ void TextPainter::applyTextLines(
         const auto &line = lines[static_cast<std::size_t>(lineIndex)];
         const auto lineWidth = std::min(line.displayWidth(), rect.width());
         auto xStart = rect.topLeft().x();
-        switch (text.alignment() & Alignment::HorizontalMask) {
+        switch (options.alignment() & Alignment::HorizontalMask) {
         case Alignment::Left:
             break;
         case Alignment::Right:
@@ -187,7 +209,7 @@ void TextPainter::applyTextLines(
             }
             // only do this calculation if we actually change the buffer.
             if (this->rect().contains(pos)) {
-                auto finalColor = colorForTextPosition(text, character, pos, animationCycle);
+                auto finalColor = colorForTextPosition(options, character, pos, animationCycle);
                 finalColor = get(pos).color().overlayWith(finalColor);
                 set(pos, character.withColorOverlay(finalColor));
             }
@@ -197,16 +219,18 @@ void TextPainter::applyTextLines(
 }
 
 auto TextPainter::colorForTextPosition(
-    const Text &text, const Char &character, const Position position, const std::size_t animationCycle) const noexcept
-    -> Color {
+    const TextOptions &options,
+    const Char &character,
+    const Position position,
+    const std::size_t animationCycle) const noexcept -> Color {
 
     auto color = Color{};
-    if (!text.colorSequence().empty()) {
+    if (!options.colorSequence().empty()) {
         auto sequenceIndex = std::size_t{0};
-        if (text.animation() == TextAnimation::ColorDiagonal) {
+        if (options.animation() == TextAnimation::ColorDiagonal) {
             sequenceIndex = animationCycle + static_cast<std::size_t>(std::max(0, position.x() + position.y()));
         }
-        color = text.colorSequence().color(sequenceIndex);
+        color = options.colorSequence().color(sequenceIndex);
     }
     return color.overlayWith(character.color());
 }

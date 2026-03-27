@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 #include <array>
 #include <chrono>
@@ -17,10 +17,18 @@ using namespace erbsland::cterm;
 
 
 /// Interactive demo that visualizes detected key presses in a horizontally scrolling field.
-class KeyInputDemoApp final {
+class KeyInputDemoApp final : public TerminalApplication {
 public:
-    /// Run the demo until the user presses Escape.
-    void run();
+    /// Prepare the shared terminal update settings before the terminal is initialized.
+    void beforeInitialize() override;
+    /// Initialize the scrolling field once after the terminal is ready.
+    auto beforeRun() -> int override;
+    /// Handle key stamping and the Escape quit key.
+    void onKey(const Key &key) override;
+    /// Render the scrolling field into the shared demo buffer.
+    void onRenderToBuffer() override;
+    /// Match the original scroll cadence for input polling and frame updates.
+    [[nodiscard]] auto loopInterval() const noexcept -> std::chrono::milliseconds override { return cScrollDelay; }
 
 private:
     [[nodiscard]] auto canvasSize() const noexcept -> Size;
@@ -28,9 +36,7 @@ private:
     [[nodiscard]] auto visibleFieldSize() const noexcept -> Size;
     void initializeScrollBuffer() noexcept;
     void advanceScroll() noexcept;
-    void handleKey(const Key &key) noexcept;
     void stampKeyBlock(const Key &key) noexcept;
-    void renderFrame();
     void drawHeader(Rectangle rect);
     void drawField(Rectangle rect);
     void drawFooter(Rectangle rect);
@@ -46,13 +52,10 @@ private:
     constexpr static auto cScrollDelay = std::chrono::milliseconds{200};
 
 private:
-    Terminal _terminal{Size{96, 20}};
-    UpdateSettings _updateSettings;
-    Buffer _buffer;
     RemappedBuffer _scrollBuffer{cScrollBufferSize, Orientation::Horizontal, backgroundChar()};
     std::mt19937 _random{std::random_device{}()};
     std::size_t _insertedColumnCount{0};
-    bool _quitRequested{false};
+    bool _firstFrame{true};
 };
 
 

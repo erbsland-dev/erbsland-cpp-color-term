@@ -177,8 +177,37 @@ public: // write
     /// Overwrites the characters under the cursor.
     /// @param str The string to write.
     virtual void write(const String &str) noexcept = 0;
+    /// Write a string whose characters are already fully resolved against the writer state.
+    /// This bypasses any additional inherited-style resolution in implementations that can optimize for it.
+    /// @param str The already resolved string to write.
+    virtual void writeResolved(const String &str) noexcept { write(str); }
+    /// Write a character that is already fully resolved against the writer state.
+    /// This bypasses any additional inherited-style resolution in implementations that can optimize for it.
+    /// @param character The already resolved character to write.
+    virtual void writeResolved(const Char &character) noexcept { write(character); }
+    /// Write the same character multiple times at the current cursor position.
+    /// Inherited color components resolve against the currently active color for each repetition.
+    /// A non-positive count is ignored.
+    /// @param character The character to repeat.
+    /// @param count The number of repetitions.
+    virtual void writeRepeated(const Char &character, const int count) noexcept {
+        for (auto index = 0; index < count; ++index) {
+            write(character);
+        }
+    }
+    /// Write the same fully resolved character multiple times at the current cursor position.
+    /// This bypasses any additional inherited-style resolution in implementations that can optimize for it.
+    /// A non-positive count is ignored.
+    /// @param character The already resolved character to repeat.
+    /// @param count The number of repetitions.
+    virtual void writeRepeatedResolved(const Char &character, const int count) noexcept {
+        for (auto index = 0; index < count; ++index) {
+            writeResolved(character);
+        }
+    }
     /// @overload
-    void write(std::string_view text) noexcept { write(String(text)); }
+    /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
+    void write(const std::string_view text) noexcept { write(String{text, EncodingErrors::Replace}); }
     /// Write a buffer at the current cursor position.
     /// This will not perform any additional formatting, clipping, or processing.
     /// Each line of the buffer will be written, and a line-break added after each line.
@@ -209,10 +238,11 @@ public: // write
         return printParagraphImpl(paragraph, options);
     }
     /// @overload
+    /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
     auto printParagraph(
         const std::string &paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept
         -> int {
-        return printParagraphImpl(String{paragraph}, options);
+        return printParagraphImpl(String{paragraph, EncodingErrors::Replace}, options);
     }
 
 protected:

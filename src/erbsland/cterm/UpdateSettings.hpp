@@ -34,7 +34,7 @@ public:
     /// @return The minimum supported terminal size.
     [[nodiscard]] auto minimumSize() const noexcept -> Size;
     /// Set the minimum terminal size required for rendering the buffer.
-    /// @param minimumSize The minimum supported terminal size.
+    /// @param minimum The minimum supported terminal size.
     void setMinimumSize(Size minimumSize) noexcept;
     /// Get the background character used if the terminal is too small.
     [[nodiscard]] auto minimumSizeBackground() const noexcept -> const Char &;
@@ -91,7 +91,7 @@ public: // compatibility
         -> const Char &;
     /// Construct update settings using the deprecated aggregate-style compatibility constructor.
     /// @deprecated Construct `UpdateSettings{}` and configure it with setters instead.
-    /// @param minimumSize The minimum terminal size required for normal rendering.
+    /// @param minimum The minimum terminal size required for normal rendering.
     /// @param minimumSizeBackground The fill character for the size-too-small background.
     /// @param showCropMarks `true` to show crop marks for truncated content.
     /// @param cropMarkRight The crop mark to draw at the right edge.

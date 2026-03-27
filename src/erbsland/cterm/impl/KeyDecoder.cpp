@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "KeyDecoder.hpp"
 
-
 #include "UnicodeWidth.hpp"
 
 #include <optional>
@@ -27,9 +26,9 @@ auto KeyDecoder::consoleSequenceDefinitions() noexcept -> const std::array<Conso
 
 auto KeyDecoder::createCharacterKey(const CombinedChar &character) noexcept -> Key {
     if (character.codePointCount() <= 1) {
-        return {Key::Character, character.mainCodePoint()};
+        return Key{Key::Character, character.mainCodePoint()};
     }
-    return {Key::Combined, character.utf32()};
+    return Key{Key::Combined, character.utf32()};
 }
 
 auto KeyDecoder::parseUtf8CodePointPrefix(const std::size_t offset) const noexcept -> U8ParseResult {
@@ -38,7 +37,7 @@ auto KeyDecoder::parseUtf8CodePointPrefix(const std::size_t offset) const noexce
 
 auto KeyDecoder::parseConsoleInputPrefix() const noexcept -> ParseResult {
     if (_text.empty()) {
-        return {.status = U8ParseStatus::Invalid, .consumedByteCount = 0};
+        return ParseResult{U8ParseStatus::Invalid, 0};
     }
     auto matchedSequence = std::optional<ConsoleSequenceDefinition>{};
     auto hasLongerPrefix = false;
@@ -53,62 +52,54 @@ auto KeyDecoder::parseConsoleInputPrefix() const noexcept -> ParseResult {
         }
     }
     if (matchedSequence.has_value()) {
-        return {
-            .status = U8ParseStatus::Parsed,
-            .key = Key{matchedSequence->type},
-            .consumedByteCount = matchedSequence->sequence.size(),
-        };
+        return ParseResult{U8ParseStatus::Parsed, Key{matchedSequence->type}, matchedSequence->sequence.size()};
     }
     if (_text[0] == '\x1b' && hasLongerPrefix) {
-        return {.status = U8ParseStatus::NeedMoreData, .consumedByteCount = 0};
+        return ParseResult{U8ParseStatus::NeedMoreData, 0};
     }
     if (_text[0] == '\x1b' && !hasLongerPrefix) {
-        return {.status = U8ParseStatus::Invalid, .consumedByteCount = _text.size()};
+        return ParseResult{U8ParseStatus::Invalid, _text.size()};
     }
 
     const auto firstCodePoint = parseUtf8CodePointPrefix(0);
-    if (firstCodePoint.status != U8ParseStatus::Parsed) {
-        return {.status = firstCodePoint.status, .consumedByteCount = firstCodePoint.consumedByteCount};
+    if (firstCodePoint.status() != U8ParseStatus::Parsed) {
+        return ParseResult{firstCodePoint.status(), firstCodePoint.consumedByteCount()};
     }
-    const auto baseCodePoint = firstCodePoint.codePoint;
+    const auto baseCodePoint = firstCodePoint.codePoint();
     if (CombinedChar::isControlCode(baseCodePoint)) {
-        return {.status = U8ParseStatus::Invalid, .consumedByteCount = firstCodePoint.consumedByteCount};
+        return ParseResult{U8ParseStatus::Invalid, firstCodePoint.consumedByteCount()};
     }
     if (consoleCharacterWidth(baseCodePoint) == 0) {
-        return {.status = U8ParseStatus::Invalid, .consumedByteCount = firstCodePoint.consumedByteCount};
+        return ParseResult{U8ParseStatus::Invalid, firstCodePoint.consumedByteCount()};
     }
 
     auto character = CombinedChar{baseCodePoint};
-    auto offset = firstCodePoint.consumedByteCount;
+    auto offset = firstCodePoint.consumedByteCount();
     while (offset < _text.size()) {
         const auto nextCodePoint = parseUtf8CodePointPrefix(offset);
-        if (nextCodePoint.status == U8ParseStatus::NeedMoreData) {
-            return {.status = U8ParseStatus::NeedMoreData, .consumedByteCount = 0};
+        if (nextCodePoint.status() == U8ParseStatus::NeedMoreData) {
+            return ParseResult{U8ParseStatus::NeedMoreData, 0};
         }
-        if (nextCodePoint.status != U8ParseStatus::Parsed) {
-            return {.status = U8ParseStatus::Parsed, .key = createCharacterKey(character), .consumedByteCount = offset};
+        if (nextCodePoint.status() != U8ParseStatus::Parsed) {
+            return ParseResult{U8ParseStatus::Parsed, createCharacterKey(character), offset};
         }
-        const auto codePoint = nextCodePoint.codePoint;
+        const auto codePoint = nextCodePoint.codePoint();
         if (CombinedChar::isControlCode(codePoint)) {
-            return {.status = U8ParseStatus::Parsed, .key = createCharacterKey(character), .consumedByteCount = offset};
+            return ParseResult{U8ParseStatus::Parsed, createCharacterKey(character), offset};
         }
         if (consoleCharacterWidth(codePoint) != 0) {
-            return {.status = U8ParseStatus::Parsed, .key = createCharacterKey(character), .consumedByteCount = offset};
+            return ParseResult{U8ParseStatus::Parsed, createCharacterKey(character), offset};
         }
-        try {
-            character = character.withCombining(codePoint);
-        } catch (...) {
-            return {.status = U8ParseStatus::Invalid, .consumedByteCount = nextCodePoint.consumedByteCount};
-        }
-        offset = nextCodePoint.consumedByteCount;
+        character = character.withCombining(codePoint);
+        offset = nextCodePoint.consumedByteCount();
     }
-    return {.status = U8ParseStatus::Parsed, .key = createCharacterKey(character), .consumedByteCount = offset};
+    return ParseResult{U8ParseStatus::Parsed, createCharacterKey(character), offset};
 }
 
 auto KeyDecoder::decodeConsoleInput() const noexcept -> Key {
     const auto result = parseConsoleInputPrefix();
-    if (result.status == U8ParseStatus::Parsed && result.consumedByteCount == _text.size()) {
-        return result.key;
+    if (result.status() == U8ParseStatus::Parsed && result.consumedByteCount() == _text.size()) {
+        return result.key();
     }
     return {};
 }

@@ -19,6 +19,10 @@ Reference
         - Alignment of text or graphics in a box.
     *   - :doc:`Anchor<geometry>`
         - Anchor describes a location inside a rectangular area using a combination of a vertical and a horizontal component.
+    *   - :doc:`BufferDrawOptions<buffer>`
+        - Options for drawing a buffer onto another buffer.
+    *   - :doc:`BufferResizeMode<buffer>`
+        - Describes how a buffer resize should handle existing content.
     *   - :doc:`Backend<backend>`
         - The interface to the underlying platform.
     *   - :doc:`BackendPtr<backend>`
@@ -71,6 +75,8 @@ Reference
         - A configurable sequence of complete Color values with run-length style counts.
     *   - :doc:`CropEdges<buffer-view>`
         - Flags for crop edges and corners.
+    *   - :doc:`Coordinate<geometry>`
+        - Signed integer coordinate value used by the geometry classes.
     *   - :doc:`CursorBuffer<buffer>`
         - A remapped buffer with cursor-style writing, wrapping, and scrollback behavior.
     *   - :doc:`CursorBuffer::OverflowMode<buffer>`
@@ -81,6 +87,14 @@ Reference
         - A direction in a 2D grid.
     *   - :doc:`Direction::Enum<geometry>`
         - The canonical enum values used by Direction.
+    *   - :doc:`EncodingErrors<text>`
+        - How to handle encoding or Unicode normalization errors.
+    *   - :doc:`FastCharSet<paragraph-options>`
+        - Shared immutable character set with optimized lookup for common separator patterns.
+    *   - :doc:`FastCharSet::FastTrack<paragraph-options>`
+        - Fast-track mode for common separator patterns.
+    *   - :doc:`FastCharSetPtr<paragraph-options>`
+        - Shared pointer for FastCharSet.
     *   - :doc:`Font<font>`
         - A bitmap font used to render stylized terminal text.
     *   - :doc:`FontGlyph<font>`
@@ -95,6 +109,8 @@ Reference
         - The options to draw a frame.
     *   - :doc:`FrameStyle<drawing>`
         - Various box styles
+    *   - :doc:`HtmlRenderer<rich-text>`
+        - A renderer for HTML content to strings or cursor writer targets.
     *   - :doc:`Input<input>`
         - Reads key presses from the console depending on the configured mode.
     *   - :doc:`Input::Mode<input>`
@@ -105,6 +121,8 @@ Reference
         - The input modes to which a key definition can apply.
     *   - :doc:`InputDefinitionList<input>`
         - A list of input definitions.
+    *   - :doc:`Orientation<geometry>`
+        - Represents the orientation of a layout or a direction.
     *   - :doc:`Key<input>`
         - A simple representation of a key press.
     *   - :doc:`Key::Type<input>`
@@ -117,6 +135,8 @@ Reference
         - The cursor move mode.
     *   - :doc:`ParagraphBackgroundMode<paragraph-options>`
         - How paragraph rendering extends the background color beyond the visible text.
+    *   - :doc:`ParagraphIndents<paragraph-options>`
+        - Shared indentation and margin settings for paragraph-like text rendering.
     *   - :doc:`ParagraphOnError<paragraph-options>`
         - The fallback to use when paragraph layout becomes impossible.
     *   - :doc:`ParagraphOptions<paragraph-options>`
@@ -159,10 +179,74 @@ Reference
         - Options for text rendering.
     *   - :doc:`TextAnimation<drawing-text>`
         - Supported text animation styles used by Buffer::drawText().
+    *   - :doc:`TerminalSession<terminal>`
+        - A scoped terminal session.
     *   - :doc:`Tile9Style<drawing>`
         - Defines a style for repeating a 3x3 tile pattern across a rectangle.
     *   - :doc:`Tile9StylePtr<drawing>`
         - Shared pointer for Tile9Style
+    *   - :doc:`text::Style<rich-text>`
+        - A style for text formatting.
+    *   - :doc:`text::Style::Selector<rich-text>`
+        - A selector that targets semantic roles, levels, list kinds, and style tokens.
+    *   - :doc:`text::StyleRule<rich-text>`
+        - One resolved or stored rich-text style rule.
+    *   - :doc:`text::StyleRule::Marker<rich-text>`
+        - The visible marker used for bullet and numbered list items.
+    *   - :doc:`text::TextNode<rich-text>`
+        - A node in the text tree.
+    *   - :doc:`text::TextNode::Type<rich-text>`
+        - The node type.
+    *   - :doc:`ui::Application<ui>`
+        - UI Application instance for event-driven UI applications.
+    *   - :doc:`ui::DimensionPolicy<ui>`
+        - The size policy of a single surface dimension.
+    *   - :doc:`ui::Display<ui>`
+        - A display is a way to show pages on a terminal.
+    *   - :doc:`ui::Event<ui-events>`
+        - A single event.
+    *   - :doc:`ui::EventData<ui-events>`
+        - The base class for event data.
+    *   - :doc:`ui::EventDriver<ui-events>`
+        - Event driver for creating event-driven applications.
+    *   - :doc:`ui::EventScheduler<ui-events>`
+        - A scheduler for events.
+    *   - :doc:`ui::EventThread<ui-events>`
+        - A thread that executes queued invocations via the UI event system.
+    *   - :doc:`ui::EventType<ui-events>`
+        - The event type
+    *   - :doc:`ui::Geometry<ui>`
+        - The geometry and size policy of a surface.
+    *   - :doc:`ui::KeyBindings<ui>`
+        - Key-to-action bindings for surfaces and pages.
+    *   - :doc:`ui::KeyPressEvent<ui-events>`
+        - A key press event.
+    *   - :doc:`ui::Layout<ui>`
+        - A layout is a surface that arranges other surfaces in a specific way.
+    *   - :doc:`ui::Page<ui>`
+        - A single page on the screen.
+    *   - :doc:`ui::PaintContext<ui>`
+        - The paint context for the onPaint method.
+    *   - :doc:`ui::Panel<ui>`
+        - A fill surface that paints an optional background behind its child surfaces.
+    *   - :doc:`ui::QuitEvent<ui-events>`
+        - The data for a quit event.
+    *   - :doc:`ui::ScheduledActionRef<ui-events>`
+        - Represents a scheduled action.
+    *   - :doc:`ui::Scheduler<ui-events>`
+        - A scheduler for UI actions.
+    *   - :doc:`ui::SizePolicy<ui>`
+        - The size policy for both width and height of a surface.
+    *   - :doc:`ui::Stack<ui>`
+        - A layout that stacks surfaces vertically or horizontally.
+    *   - :doc:`ui::StopSource<ui-events>`
+        - Stop source used by the event system to request a cooperative shutdown.
+    *   - :doc:`ui::StopToken<ui-events>`
+        - Cooperative stop token passed to stoppable UI callbacks.
+    *   - :doc:`ui::Surface<ui>`
+        - A surface is a rectangular area on a page.
+    *   - :doc:`ui::TextBox<ui>`
+        - A surface that renders one string using TextOptions-derived alignment and wrapping rules.
     *   - :doc:`UpdateSettings<terminal>`
         - Settings controlling how Terminal::updateScreen() renders a buffer.
     *   - :doc:`WritableBuffer<buffer>`
@@ -205,10 +289,16 @@ Reference
         -   The input classes provide access to keyboard input from the terminal. They are designed for interactive applications such as dashboards, tools, and terminal games that need immediate key handling.
     *   -   :doc:`Paragraph Options <paragraph-options>`
         -   ParagraphOptions collects the low-level layout rules for wrapped terminal paragraphs. The same object model is used by Terminal::printParagraph(), TextOptions, and Text, so one paragraph configuration can be reused for direct terminal output and buffer-based text rendering.
+    *   -   :doc:`Rich Text and HTML <rich-text>`
+        -   The rich-text helpers parse a focused HTML subset into TextNode trees and render it either into String values or directly to CursorWriter targets. Style lets you tune headings, lists, code blocks, block margins, and inline emphasis without inventing a separate markup pipeline for terminal output.
     *   -   :doc:`Terminal <terminal>`
         -   The terminal classes provide the runtime connection between your rendered content and the real console. Terminal manages initialization, refresh strategy, full-screen updates, input access, and direct output for interactive applications.
     *   -   :doc:`Text Rendering <drawing-text>`
         -   Text, TextOptions, and TextAnimation render strings into rectangles, wrapped paragraphs, animated labels, and reusable text presets inside writable buffers.
+    *   -   :doc:`UI Events and Scheduling <ui-events>`
+        -   The UI event classes provide the queues, timers, cooperative-stop signals, and worker-thread building blocks behind Application. Most apps use them indirectly, but advanced integrations can drive EventDriver, EventScheduler, Scheduler, or EventThread directly when they need custom orchestration.
+    *   -   :doc:`UI Framework <ui>`
+        -   The UI framework builds terminal applications from a surface tree with pages, layouts, geometry policies, focus routing, and paint invalidation. It provides the high-level structure for interactive full-screen apps that should feel more like a widget system than hand-written buffer math.
 
 .. toctree::
     :hidden:
@@ -226,5 +316,8 @@ Reference
     geometry
     input
     paragraph-options
+    rich-text
     terminal
     text
+    ui
+    ui-events

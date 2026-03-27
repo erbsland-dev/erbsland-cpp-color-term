@@ -3,8 +3,6 @@
 
 #include "LogViewerApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <algorithm>
 #include <array>
 #include <format>
@@ -13,59 +11,50 @@
 namespace demo::logviewer {
 
 
-void LogViewerApp::run() {
-    static constexpr auto cInputDelay = std::chrono::milliseconds{50};
-
+void LogViewerApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{58, 12});
     _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
     _updateSettings.setMinimumSizeMessage(
         String{"Resize the terminal to at least 58x12 cells for the log viewer.", Color{fg::BrightWhite, bg::Black}});
-    auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
+}
+
+
+auto LogViewerApp::beforeRun() -> int {
     scheduleNextMessage();
-    renderFrame();
-    while (!_quitRequested) {
-        const auto key = _terminal.input().read(cInputDelay);
-        if (key.valid()) {
-            handleKey(key);
-        }
-        auto now = std::chrono::steady_clock::now();
-        while (!_quitRequested && now >= _nextMessageAt) {
-            appendGeneratedMessage();
-            scheduleNextMessage();
-            now = std::chrono::steady_clock::now();
-        }
-        renderFrame();
-    }
+    return 0;
 }
 
 
 auto LogViewerApp::canvasSize() const noexcept -> Size {
-    return _terminal.size();
+    if (_buffer.size().isZero()) {
+        return _terminal.size().componentMax(_updateSettings.minimumSize());
+    }
+    return _buffer.size();
 }
 
 
-void LogViewerApp::handleKey(const Key &key) noexcept {
-    const auto viewSize = contentRectForBuffer(_buffer.size()).size();
-    if (key == Key{Key::Character, U'q'} || key == Key{Key::Escape}) {
+void LogViewerApp::onKey(const Key &key) {
+    const auto viewSize = contentRectForBuffer(canvasSize()).size();
+    if (key == U'q' || key == Key::Escape) {
         _quitRequested = true;
-    } else if (key == Key{Key::Character, U'+'} || key == Key{Key::Character, U'='}) {
+    } else if (key == U'+' || key == U'=') {
         adjustDelayPreset(-1);
-    } else if (key == Key{Key::Character, U'-'}) {
+    } else if (key == U'-') {
         adjustDelayPreset(1);
-    } else if (key == Key{Key::Character, U'f'}) {
+    } else if (key == U'f') {
         _followMode = true;
         _viewOffset =
             clampViewOffset(Position{0, _logBuffer->size().height() - viewSize.height()}, viewSize, _logBuffer->size());
-    } else if (key == Key{Key::Left}) {
+    } else if (key == Key::Left) {
         _followMode = false;
         _viewOffset = clampViewOffset(_viewOffset + Position{-1, 0}, viewSize, _logBuffer->size());
-    } else if (key == Key{Key::Right}) {
+    } else if (key == Key::Right) {
         _followMode = false;
         _viewOffset = clampViewOffset(_viewOffset + Position{1, 0}, viewSize, _logBuffer->size());
-    } else if (key == Key{Key::Up}) {
+    } else if (key == Key::Up) {
         _followMode = false;
         _viewOffset = clampViewOffset(_viewOffset + Position{0, -1}, viewSize, _logBuffer->size());
-    } else if (key == Key{Key::Down}) {
+    } else if (key == Key::Down) {
         _followMode = false;
         _viewOffset = clampViewOffset(_viewOffset + Position{0, 1}, viewSize, _logBuffer->size());
     }
@@ -96,9 +85,13 @@ void LogViewerApp::appendGeneratedMessage() {
 }
 
 
-void LogViewerApp::renderFrame() {
-    _terminal.testScreenSize();
-    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+void LogViewerApp::onRenderToBuffer() {
+    auto now = std::chrono::steady_clock::now();
+    while (!_quitRequested && now >= _nextMessageAt) {
+        appendGeneratedMessage();
+        scheduleNextMessage();
+        now = std::chrono::steady_clock::now();
+    }
     _buffer.fill(Char{" ", bg::Black});
     const auto outerRect = Rectangle{0, 0, _buffer.size().width(), _buffer.size().height()};
     const auto titleRect = Rectangle{2, 1, _buffer.size().width() - 4, 1};
@@ -108,7 +101,6 @@ void LogViewerApp::renderFrame() {
     drawHeader(titleRect);
     drawLogView(contentRect);
     drawFooter(footerRect);
-    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 

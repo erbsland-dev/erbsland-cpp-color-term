@@ -1,54 +1,17 @@
+# Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+# SPDX-License-Identifier: Apache-2.0
+
 cmake_minimum_required(VERSION 3.28)
 
 set(_erbsland_color_term_unittest_target erbsland-color-term-unittest)
 
 target_sources(${_erbsland_color_term_unittest_target} PRIVATE
-        ApiWrapperDispatchTest.cpp
-        AlignmentTest.cpp
-        AnchorTest.cpp
-        BackendTest.cpp
-        BitmapTest.cpp
-        BitmapDrawOptionsTest.cpp
-        BlockBufferTest.cpp
-        BufferConvenienceTest.cpp
-        BufferViewTest.cpp
-        Char16StyleTest.cpp
-        CharAttributesTest.cpp
-        CharStyleTest.cpp
-        CombinedCharTest.cpp
-        CharCombinationStyleTest.cpp
-        CharTest.cpp
-        ColorParsingTest.cpp
-        ColorSequenceTest.cpp
-        ColorTest.cpp
-        CropEdgesTest.cpp
-        CursorBufferTest.cpp
-        DirectionTest.cpp
-        FontTest.cpp
-        FontAccessTest.cpp
-        FrameDrawOptionsTest.cpp
-        HashHelperTest.cpp
-        InputDefinitionTest.cpp
-        KeyDecoderTest.cpp
-        KeyPressTest.cpp
         main.cpp
-        MarginsTest.cpp
-        ParagraphOptionsTest.cpp
-        PositionTest.cpp
-        RectangleTest.cpp
-        RemappedBufferTest.cpp
-        SizeTest.cpp
-        StringConversionTest.cpp
-        TerminalTest.cpp
-        TerminalFlagsTest.cpp
         TerminalTestSupport.hpp
-        TermStringTest.cpp
-        TerminalConvenienceTest.cpp
         TestHelper.hpp
-        TextRenderTest.cpp
-        Tile9StyleTest.cpp
-        UnicodeWidthTest.cpp
-        U8BufferTest.cpp
-        UpdateSettingsTest.cpp
-        UpdateScreenModesStateTest.cpp
 )
+
+add_subdirectory(api)
+add_subdirectory(impl)
+add_subdirectory(ui)
+add_subdirectory(demo)

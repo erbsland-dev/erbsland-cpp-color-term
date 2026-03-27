@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 #include <chrono>
 #include <random>
@@ -17,10 +17,20 @@ using namespace erbsland::cterm;
 
 
 /// Continuously add random frames to demonstrate automatic line combinations.
-class FrameWeaverApp final {
+class FrameWeaverApp final : public TerminalApplication {
 public:
-    /// Run the demo until the user quits.
-    void run();
+    /// Prepare the shared terminal update settings before the terminal is initialized.
+    void beforeInitialize() override;
+    /// Initialize the animation clock after the terminal is ready.
+    auto beforeRun() -> int override;
+    /// Handle animation control keys.
+    void onKey(const Key &key) override;
+    /// Render the animated frame composition into the shared demo buffer.
+    void onRenderToBuffer() override;
+    /// Slow the shared render loop slightly to match the original demo pacing.
+    [[nodiscard]] auto loopInterval() const noexcept -> std::chrono::milliseconds override {
+        return std::chrono::milliseconds{100};
+    }
 
 private:
     enum class StyleMode : uint8_t {
@@ -44,11 +54,8 @@ private:
     };
 
 private:
-    [[nodiscard]] auto canvasSize() const noexcept -> Size;
-    void handleKey(const Key &key) noexcept;
     void updateAnimation(std::chrono::milliseconds elapsed) noexcept;
     void addFrame() noexcept;
-    void renderFrame();
     void renderFrames(Rectangle contentRect);
     [[nodiscard]] auto createRandomFrame() -> FrameSpec;
     [[nodiscard]] static auto frameRectangle(FrameSpec frame, Rectangle contentRect) -> Rectangle;
@@ -59,16 +66,12 @@ private:
     [[nodiscard]] auto buildPrompt() const -> String;
 
 private:
-    Terminal _terminal{Size{78, 25}};
-    UpdateSettings _updateSettings;
-    Buffer _buffer;
     std::mt19937 _rng{std::random_device{}()};
     std::vector<FrameSpec> _frames;
     std::chrono::milliseconds _frameDelay{1000};
     std::chrono::milliseconds _accumulator{};
     std::chrono::steady_clock::time_point _lastTick{std::chrono::steady_clock::now()};
     StyleMode _styleMode{StyleMode::Heavy};
-    bool _quitRequested{false};
 };
 
 

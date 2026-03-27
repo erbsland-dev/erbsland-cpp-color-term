@@ -4,6 +4,7 @@
 
 
 #include "Char.hpp"
+#include "EncodingErrors.hpp"
 #include "ParagraphSpacing.hpp"
 
 #include "impl/TypeTraits.hpp"
@@ -40,23 +41,29 @@ public:
     String() = default;
     /// Create a terminal string from UTF-8 text.
     /// @param str The UTF-8 text to split into terminal characters.
-    /// @param color The color to use for the characters.
+    /// @param encodingErrors How UTF-8 encoding errors are handled.
     /// Control codes are ignored except for tab and newline.
-    /// @throws std::invalid_argument If the text is not valid UTF-8 or contains an unsupported character sequence.
-    explicit String(std::string_view str, Color color = {});
-    /// Create a terminal string from UTF-8 text.
+    /// Use `EncodingErrors::Throw` to make malformed UTF-8 explicit at the string-construction boundary.
+    /// `EncodingErrors::Replace` replaces each malformed UTF-8 byte with one Unicode replacement character.
+    /// @throws std::invalid_argument If `encodingErrors` is `EncodingErrors::Throw` and the text is not valid UTF-8,
+    /// or if the text contains an unsupported character sequence.
+    explicit String(std::string_view str, EncodingErrors encodingErrors = EncodingErrors::Replace);
+    /// Create a terminal string from UTF-8 text with a uniform style.
     /// @param str The UTF-8 text to split into terminal characters.
     /// @param style The style to use for the characters.
+    /// @param encodingErrors How UTF-8 encoding errors are handled.
     /// Control codes are ignored except for tab and newline.
-    /// @throws std::invalid_argument If the text is not valid UTF-8 or contains an unsupported character sequence.
-    explicit String(std::string_view str, CharStyle style);
+    /// Use `EncodingErrors::Throw` to make malformed UTF-8 explicit at the string-construction boundary.
+    /// `EncodingErrors::Replace` replaces each malformed UTF-8 byte with one Unicode replacement character.
+    /// @throws std::invalid_argument If `encodingErrors` is `EncodingErrors::Throw` and the text is not valid UTF-8,
+    /// or if the text contains an unsupported character sequence.
+    explicit String(std::string_view str, CharStyle style, EncodingErrors encodingErrors = EncodingErrors::Replace);
     /// Create a terminal string from UTF-32 text.
     /// @param str The UTF-32 text to split into terminal characters.
-    /// @param color The color to use for the characters.
     /// Control codes are ignored except for tab and newline.
     /// @throws std::invalid_argument If the text contains an unsupported character sequence.
-    explicit String(std::u32string_view str, Color color = {});
-    /// Create a terminal string from UTF-32 text.
+    explicit String(std::u32string_view str);
+    /// Create a terminal string from UTF-32 text with a uniform style.
     /// @param str The UTF-32 text to split into terminal characters.
     /// @param style The style to use for the characters.
     /// Control codes are ignored except for tab and newline.
@@ -179,6 +186,11 @@ public: // accessors
     /// @param length The number of characters after the start index.
     /// @return The substring or an empty string if startIndex is out of bounds.
     [[nodiscard]] auto substr(std::size_t startIndex, std::size_t length = npos) const noexcept -> String;
+    /// Trim the given characters from the beginning and end of the string.
+    /// Only single-code-point characters are matched.
+    /// @param characters The characters to remove from both ends.
+    /// @return A copy without matching leading and trailing characters.
+    [[nodiscard]] auto trimmed(std::u32string_view characters) const noexcept -> String;
 
 public: // tests
     /// Test if this string contains control characters.
@@ -191,6 +203,25 @@ public: // modifiers
     void reserve(const std::size_t size) noexcept { _chars.reserve(size); }
     /// Remove all characters from this string.
     void clear() noexcept { _chars.clear(); }
+    /// Append text using one uniform style.
+    /// @param text The text to append.
+    /// @param style The style applied to the appended characters.
+    void appendStyled(std::string_view text, CharStyle style) noexcept;
+    /// @overload
+    void appendStyled(std::u32string_view text, CharStyle style) noexcept;
+    /// Append a range of characters from another terminal string.
+    /// The original character styles are preserved.
+    /// @param other The source string.
+    /// @param startIndex The first character to append.
+    /// @param length The number of characters to append, or `npos` for the remainder of `other`.
+    void appendRange(const String &other, std::size_t startIndex, std::size_t length = npos) noexcept;
+    /// Append a range of characters from another terminal string with one resolved base style.
+    /// @param other The source string.
+    /// @param startIndex The first character to append.
+    /// @param length The number of characters to append, or `npos` for the remainder of `other`.
+    /// @param style The style used as base for inherited components in the appended range.
+    void
+    appendRangeWithBaseStyle(const String &other, std::size_t startIndex, std::size_t length, CharStyle style) noexcept;
     /// Append elements to this string.
     /// This works similar to `Terminal::print()`.
     /// If you add a color, this color is "active" for all following characters *in the same call*.
@@ -236,6 +267,7 @@ public: // conversion
     /// @param lines The lines for the string.
     /// @param color The base color to use for each character.
     /// @param attributes The base attributes to use for each character.
+    /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
     /// @return The new string.
     [[nodiscard]] static auto
     fromLines(std::initializer_list<std::string_view> lines, Color color = {}, CharAttributes attributes = {}) noexcept
@@ -251,12 +283,22 @@ public: // conversion
     [[nodiscard]] static auto fromLines(std::initializer_list<std::u32string_view> lines, CharStyle style) noexcept
         -> String;
 
+public: // legacy
+    [[deprecated("Please use trimmed()"), nodiscard]] auto trim(std::u32string_view characters) const noexcept
+        -> String {
+        return trimmed(characters);
+    }
+
 private:
     explicit String(std::vector<Char> &&chars) noexcept : _chars(std::move(chars)) {}
-    [[nodiscard]] static auto countCharacters(std::string_view str) -> std::size_t;
+    [[nodiscard]] static auto
+    countCharacters(std::string_view str, EncodingErrors encodingErrors = EncodingErrors::Replace) -> std::size_t;
     [[nodiscard]] static auto countCharacters(std::u32string_view str) -> std::size_t;
-    [[nodiscard]] static auto splitCharacters(std::string_view str, Color color = {}, CharAttributes attributes = {})
-        -> Storage;
+    [[nodiscard]] static auto splitCharacters(
+        std::string_view str,
+        Color color = {},
+        CharAttributes attributes = {},
+        EncodingErrors encodingErrors = EncodingErrors::Replace) -> Storage;
     [[nodiscard]] static auto splitCharacters(std::u32string_view str, Color color = {}, CharAttributes attributes = {})
         -> Storage;
     [[nodiscard]] constexpr static auto isControlCode(const char32_t codePoint) noexcept -> bool {
@@ -264,6 +306,14 @@ private:
     }
     [[nodiscard]] static auto isStringCharacter(char32_t codePoint) noexcept -> bool;
     static void appendCodePoint(Storage &chars, char32_t codePoint, Color color, CharAttributes attributes);
+    static void
+    appendCharacters(Storage &chars, std::u32string_view text, Color color, CharAttributes attributes) noexcept;
+    static void appendCharacters(
+        Storage &chars,
+        std::string_view text,
+        Color color,
+        CharAttributes attributes,
+        EncodingErrors encodingErrors) noexcept;
     void appendElement(const Color color, CharStyle &style) noexcept { style.setColor(color); }
     void appendElement(const Foreground::Hue foreground, CharStyle &style) noexcept { style.setFg(foreground); }
     void appendElement(const Foreground foreground, CharStyle &style) noexcept { style.setFg(foreground); }
@@ -279,13 +329,11 @@ private:
         _chars.emplace_back(character.withBase(style.color(), style.attributes()));
     }
     void appendElement(const String &other, CharStyle &style) noexcept {
-        for (const auto &character : other._chars) {
-            _chars.emplace_back(character.withBase(style.color(), style.attributes()));
-        }
+        appendRangeWithBaseStyle(other, 0, other.size(), style);
     }
+    void appendElement(const std::u32string_view str, CharStyle &style) noexcept { appendStyled(str, style); }
     void appendElement(const std::string_view str, CharStyle &style) noexcept {
-        const auto newCharacters = splitCharacters(str, style.color(), style.attributes());
-        _chars.insert(_chars.end(), newCharacters.begin(), newCharacters.end());
+        appendCharacters(_chars, str, style.color(), style.attributes(), EncodingErrors::Replace);
     }
 
 private:

@@ -8,7 +8,7 @@
 
 namespace erbsland::cterm {
 
-Char16Style::Char16Style(const std::string_view tiles) : _tiles(toTiles(String{tiles})) {
+Char16Style::Char16Style(const std::string_view tiles) : _tiles(toTiles(String{tiles, EncodingErrors::Replace})) {
 }
 
 Char16Style::Char16Style(const std::u32string_view tiles) : _tiles(toTiles(String{tiles})) {

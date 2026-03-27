@@ -15,7 +15,8 @@ Tile9Style::Tile9Style(const std::array<Char, 9> tiles) noexcept : Tile9Style(to
 Tile9Style::Tile9Style(const std::array<Char, 16> tiles) noexcept : Tile9Style(toParsedTiles(tiles)) {
 }
 
-Tile9Style::Tile9Style(const std::string_view tiles) : Tile9Style(parseTiles(String{tiles})) {
+Tile9Style::Tile9Style(const std::string_view tiles) :
+    Tile9Style(parseTiles(String{tiles, EncodingErrors::Replace})) {
 }
 
 Tile9Style::Tile9Style(const std::u32string_view tiles) : Tile9Style(parseTiles(String{tiles})) {

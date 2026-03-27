@@ -23,6 +23,7 @@ public:
 public:
     void drawText(Position pos, const String &str);
     void drawText(const Text &text, std::size_t animationCycle = 0);
+    void drawText(const String &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle = 0);
     void drawText(
         std::string_view text,
         Rectangle rect,
@@ -30,7 +31,7 @@ public:
         Color color = {},
         std::size_t animationCycle = 0);
     void drawText(
-        String text,
+        const String &text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
         Color color = {},
@@ -48,11 +49,16 @@ private: // wrapper (to keep code simple)
     }
 
 private: // helper
-    [[nodiscard]] auto buildSimpleTextLines(const Text &text) const -> StringLines;
-    [[nodiscard]] auto buildFontTextLines(const Text &text, const String &paragraph) const -> StringLines;
-    void applyTextLines(const Text &text, const StringLines &lines, std::size_t animationCycle) noexcept;
+    [[nodiscard]] static auto simpleTextOptions(Alignment alignment, Color color) noexcept -> TextOptions;
+    [[nodiscard]] static auto contentRect(Rectangle rect, const ParagraphOptions &options) noexcept -> Rectangle;
+    [[nodiscard]] auto buildSimpleTextLines(const String &text, Rectangle rect, ParagraphSpacing spacing) const
+        -> StringLines;
+    [[nodiscard]] auto buildFontTextLines(const TextOptions &options, const String &paragraph) const -> StringLines;
+    void applyTextLines(
+        Rectangle rect, const TextOptions &options, const StringLines &lines, std::size_t animationCycle) noexcept;
     [[nodiscard]] auto colorForTextPosition(
-        const Text &text, const Char &character, Position position, std::size_t animationCycle) const noexcept -> Color;
+        const TextOptions &options, const Char &character, Position position, std::size_t animationCycle) const noexcept
+        -> Color;
 
 private:
     WritableBuffer &_buffer;

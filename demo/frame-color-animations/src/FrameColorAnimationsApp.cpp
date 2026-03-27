@@ -3,50 +3,24 @@
 
 #include "FrameColorAnimationsApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <array>
-#include <chrono>
 #include <string_view>
 
 
 namespace demo::framecoloranimations {
 
 
-void FrameColorAnimationsApp::run() {
+void FrameColorAnimationsApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{78, 22});
     _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
     _updateSettings.setMinimumSizeMessage(
         String{
             "Resize the terminal to at least 78x22 cells for the frame color animation demo.",
             Color{fg::BrightWhite, bg::Black}});
-    auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
-    while (!_quitRequested) {
-        const auto key = _terminal.input().read(std::chrono::milliseconds{90});
-        if (key.valid()) {
-            handleKey(key);
-        }
-        renderFrame();
-        ++_animationCycle;
-    }
 }
 
 
-auto FrameColorAnimationsApp::canvasSize() const noexcept -> Size {
-    return _terminal.size();
-}
-
-
-void FrameColorAnimationsApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, U'q'}) {
-        _quitRequested = true;
-    }
-}
-
-
-void FrameColorAnimationsApp::renderFrame() {
-    _terminal.testScreenSize();
-    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+void FrameColorAnimationsApp::onRenderToBuffer() {
     _buffer.fill(Char{" ", bg::Black});
 
     const auto outerRect = Rectangle{0, 0, _buffer.size().width(), _buffer.size().height()};
@@ -69,7 +43,6 @@ void FrameColorAnimationsApp::renderFrame() {
         drawPanel(cells[index].insetBy(Margins{1, 0}), panels[index]);
     }
     drawFooter(footerRect);
-    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 

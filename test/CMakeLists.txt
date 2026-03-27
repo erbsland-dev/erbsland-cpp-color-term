@@ -3,7 +3,8 @@
 
 cmake_minimum_required(VERSION 3.28)
 
-if(NOT TARGET erbsland-unittest)
+if (NOT TARGET erbsland-unittest)
     add_subdirectory(erbsland-unittest)
-endif()
+endif ()
+add_subdirectory(profiling)
 add_subdirectory(unittest)

@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include <erbsland/cterm/all.hpp>
+#include "TerminalApplication.hpp"
 
 #include <array>
 
@@ -15,15 +15,16 @@ using namespace erbsland::cterm;
 
 
 /// Interactive demo showing the bitmap rendering modes and options.
-class BitmapShowcaseApp final {
+class BitmapShowcaseApp final : public TerminalApplication {
 public:
-    /// Run the demo until the user quits.
-    void run();
+    /// Prepare the shared terminal update settings before the terminal is initialized.
+    void beforeInitialize() override;
+    /// Handle page navigation and variant selection keys.
+    void onKey(const Key &key) override;
+    /// Render the current showcase page into the shared demo buffer.
+    void onRenderToBuffer() override;
 
 private:
-    [[nodiscard]] auto canvasSize() const noexcept -> Size;
-    void handleKey(const Key &key) noexcept;
-    void renderFrame();
     void drawSelector(Rectangle rect);
     void drawPreview(Rectangle rect);
     void drawScaleModeVariant(Rectangle rect, std::size_t variantIndex);
@@ -47,13 +48,8 @@ private:
     [[nodiscard]] static auto rainbowColors() -> const ColorSequence &;
 
 private:
-    Terminal _terminal{Size{92, 30}};
-    UpdateSettings _updateSettings;
-    Buffer _buffer;
-    std::size_t _animationCycle{0};
     std::size_t _pageIndex{0};
     std::array<std::size_t, 4> _selectedVariantByPage{};
-    bool _quitRequested{false};
 };
 
 

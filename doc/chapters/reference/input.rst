@@ -28,16 +28,19 @@ the screen regularly while still reacting to keyboard events.
     auto quitRequested = false;
 
     while (!quitRequested) {
-        if (const auto key = terminal.input().read(90ms); key.valid()) {
-            if (key == Key{Key::Character, U'q'}) {
+        if (const auto key = terminal.input().readKey(90ms); key.valid()) {
+            if (key == U'q') {
                 quitRequested = true;
-            } else if (key == Key{Key::Left}) {
+            } else if (key == Key::Left) {
                 // Move selection.
             }
         }
     }
 
 Using a timeout keeps the redraw loop responsive without busy waiting.
+In key mode, ``readKey(0ms)`` and any negative timeout perform a non-blocking poll.
+Use ``waitForKey()`` when you intentionally want to block until the next key arrives.
+The older ``read()`` wrapper is deprecated and now forwards to either ``readKey()`` or ``waitForKey()``.
 
 Switching Between Key and Line Input
 ------------------------------------
@@ -55,7 +58,7 @@ configuration tools, and simple command-driven interfaces.
 
     terminal.input().setMode(Input::Mode::Key);
     terminal.printLine("Press any key to continue...");
-    const auto key = terminal.input().read();
+    const auto key = terminal.input().waitForKey();
 
 Switching modes on the same terminal makes it easy to combine
 menu-driven screens with occasional free-form text input.
@@ -86,12 +89,13 @@ When you only care about the general kind of a key event, inspect
 For character comparisons, prefer Unicode code points such as ``U'q'`` and
 use :cpp:any:`Key::unicode() <erbsland::cterm::Key::unicode()>` or
 :cpp:any:`Key::combined() <erbsland::cterm::Key::combined()>` instead of the deprecated ASCII accessor.
+Character comparisons match the exact decoded code point, so compare against the exact character you want to handle.
 
 .. code-block:: cpp
 
     using namespace std::chrono_literals;
 
-    if (const auto key = terminal.input().read(50ms); key.valid()) {
+    if (const auto key = terminal.input().readKey(50ms); key.valid()) {
         if (key.type() == Key::Character || key.type() == Key::Combined) {
             terminal.printLine("Typed: ", String{key.combined()});
         } else if (key.type() == Key::Escape) {

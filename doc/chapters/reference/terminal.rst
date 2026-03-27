@@ -81,7 +81,7 @@ terminal application.
         }
 
         void handleKey(Key key) {
-            if (key == Key{Key::Character, U'q'}) {
+            if (key == U'q') {
                 _quitRequested = true;
             }
         }
@@ -94,7 +94,7 @@ terminal application.
             _updateSettings.setMinimumSizeMessage(String("Too Small!"));
 
             while (!_quitRequested) {
-                const auto key = _terminal.input().read(std::chrono::milliseconds{90});
+                const auto key = _terminal.input().readKey(std::chrono::milliseconds{90});
                 if (key.valid()) {
                     handleKey(key);
                 }
@@ -131,7 +131,7 @@ simpler and safer.
 
 For interactive programs, switch the input mode to
 ``Input::Mode::Key``. This hides the cursor and lets your application
-react to individual key presses via ``input().read()``. The timeout also
+react to individual key presses via ``input().readKey()``. The timeout also
 serves as a natural frame rate control.
 
 Keep a persistent ``Buffer`` instance, resize it to the current terminal
@@ -210,6 +210,26 @@ Output Modes
 The terminal always owns a backend internally, but most applications can
 treat it as an implementation detail and rely on the high-level API.
 
+Scoped Terminal Sessions
+------------------------
+
+:cpp:any:`TerminalSession <erbsland::cterm::TerminalSession>` is the
+small RAII helper for code that should always pair
+``initializeScreen()`` and ``restoreScreen()``.
+
+.. code-block:: cpp
+
+    auto terminal = Terminal{};
+    auto session = TerminalSession{terminal};
+
+    terminal.setRefreshMode(Terminal::RefreshMode::Overwrite);
+    terminal.printLine(fg::BrightGreen, "Interactive section is active");
+    terminal.flush();
+
+This is especially useful in short tools, tests, or setup-heavy code
+paths where multiple return statements would otherwise make screen
+restoration easy to forget.
+
 If you need to inject a custom backend or understand capability fallback
 behavior, continue with :doc:`backend`.
 
@@ -220,6 +240,9 @@ Interface
     :members:
 
 .. doxygenclass:: erbsland::cterm::Terminal
+    :members:
+
+.. doxygenclass:: erbsland::cterm::TerminalSession
     :members:
 
 .. doxygentypedef:: erbsland::cterm::TerminalPtr

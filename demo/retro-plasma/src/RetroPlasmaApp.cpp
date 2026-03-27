@@ -3,65 +3,52 @@
 
 #include "RetroPlasmaApp.hpp"
 
-#include "ScopedTerminalSession.hpp"
-
 #include <algorithm>
 #include <string>
 
 
 namespace demo::retroplasma {
 
-void RetroPlasmaApp::run() noexcept {
+void RetroPlasmaApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{28, 8});
     _updateSettings.setMinimumSizeBackground(Char{" ", bg::Black});
     _updateSettings.setMinimumSizeMessage(
         String{"Resize the terminal to at least 28x8 cells for the plasma demo.", Color{fg::BrightWhite, bg::Black}});
-    auto session = ScopedTerminalSession{_terminal, Terminal::RefreshMode::Overwrite, Input::Mode::Key};
+}
+
+
+auto RetroPlasmaApp::beforeRun() -> int {
     _lastFrameTime = std::chrono::steady_clock::now();
-    while (!_quitRequested) {
-        const auto key = _terminal.input().read(std::chrono::milliseconds{35});
-        if (key.valid()) {
-            handleKey(key);
-        }
-        const auto now = std::chrono::steady_clock::now();
-        const auto elapsedSeconds = std::chrono::duration<double>{now - _lastFrameTime}.count();
-        _lastFrameTime = now;
-        if (!_paused) {
-            _phase += elapsedSeconds * (_speed * 2.7);
-        }
-        renderFrame();
-    }
+    return 0;
 }
 
 
-auto RetroPlasmaApp::canvasSize() const noexcept -> Size {
-    return _terminal.size();
-}
-
-
-void RetroPlasmaApp::handleKey(const Key &key) noexcept {
-    if (key == Key{Key::Character, U'q'}) {
-        _quitRequested = true;
-    } else if (key == Key{Key::Character, U'f'}) {
+void RetroPlasmaApp::onKey(const Key &key) {
+    if (key == U'f') {
         _speed = std::min(_speed + 0.25, 4.0);
-    } else if (key == Key{Key::Character, U's'}) {
+    } else if (key == U's') {
         _speed = std::max(_speed - 0.25, 0.25);
-    } else if (key == Key{Key::Character, U'p'} || key == Key{Key::Space}) {
+    } else if (key == U'p' || key == Key::Space) {
         _paused = !_paused;
-    } else if (key == Key{Key::Character, U'c'}) {
+    } else if (key == U'c') {
         ++_paletteIndex;
+    } else {
+        TerminalApplication::onKey(key);
     }
 }
 
 
-void RetroPlasmaApp::renderFrame() noexcept {
-    _terminal.testScreenSize();
-    _buffer.resize(canvasSize().componentMax(_updateSettings.minimumSize()));
+void RetroPlasmaApp::onRenderToBuffer() {
+    const auto now = std::chrono::steady_clock::now();
+    const auto elapsedSeconds = std::chrono::duration<double>{now - _lastFrameTime}.count();
+    _lastFrameTime = now;
+    if (!_paused) {
+        _phase += elapsedSeconds * (_speed * 2.7);
+    }
     _buffer.fill(Char{U' ', fg::Default, bg::Black});
     const auto contentHeight = std::max(0, _buffer.size().height() - 1);
     _renderer.render(_buffer, Rectangle{0, 0, _buffer.size().width(), contentHeight}, _phase, _paletteIndex);
     drawPrompt();
-    _terminal.updateScreen(_buffer, _updateSettings);
 }
 
 

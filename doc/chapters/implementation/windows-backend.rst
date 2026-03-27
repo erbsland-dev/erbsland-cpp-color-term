@@ -64,25 +64,29 @@ Reading Keys from the Console
 
 The Windows backend supports two input paths.
 
-In ``Input::Mode::ReadLine``, ``readKey()`` delegates to ``readLine()``, and ``readLine()`` uses ``std::getline(std::cin, input)``.
+In ``Input::Mode::ReadLine``, both ``readKey()`` and ``waitForKey()`` delegate to ``readLine()``, and ``readLine()``
+uses ``std::getline(std::cin, input)``.
 
 In ``Input::Mode::Key``, ``readKey()`` works directly with the Windows console input queue:
 
 #. It waits on ``STD_INPUT_HANDLE`` with ``WaitForSingleObject()``.
-#. A timeout of ``0`` means to wait indefinitely.
-#. Any non-zero timeout is currently divided by two before it is passed to ``WaitForSingleObject()``.
+#. A timeout less than or equal to ``0`` performs a non-blocking poll.
+#. Any positive timeout is passed to ``WaitForSingleObject()`` as milliseconds.
 #. After the wait succeeds, the backend repeatedly calls ``GetNumberOfConsoleInputEvents()`` and ``ReadConsoleInputW()`` until the queued events are drained.
 #. It ignores all non-key events.
 #. It ignores key-release events and only reacts to records with ``bKeyDown != 0``.
 #. It maps well-known virtual key codes such as arrows, page navigation keys, insert, delete, enter, escape, tab, backspace, and ``F1`` through ``F12`` to the corresponding :cpp:any:`Key <erbsland::cterm::Key>` values.
-#. For other keys, it decodes ``uChar.UnicodeChar`` as UTF-16, including surrogate pairs, and collects the resulting Unicode text input.
+#. For other keys, it decodes ``uChar.UnicodeChar`` as UTF-16, including surrogate pairs, and collects the resulting
+   Unicode text input.
+
+``waitForKey()`` follows the same path but uses an infinite wait on ``WaitForSingleObject()``.
 
 The return value is the last recognized key seen while draining the queue.
 As a result, one call can consume multiple queued key events but returns only one library key.
 
-Character input therefore no longer depends on the legacy ASCII field of the console record.
-Special keys are still handled through virtual key codes, while textual input is decoded from the UTF-16 payload that
-``ReadConsoleInputW()`` provides.
+Character input is decoded from the UTF-16 payload that ``ReadConsoleInputW()`` provides.
+Special keys are handled through virtual key codes, while textual input comes from the Unicode character field of the
+console record.
 
 Detecting Terminal Size and Interactive Console Availability
 ============================================================

@@ -46,6 +46,8 @@ public:
 
 protected:
     ColorBase() = default;
+    /// Create the base color wrapper from one encoded color value.
+    /// @param value The encoded color value.
     constexpr explicit ColorBase(const Value value) : _value{value} {}
 
     // defaults
@@ -73,13 +75,19 @@ protected:
     [[nodiscard]] static auto brighterEnum(Value value) -> Value;
 
 protected:
+    /// One color table entry with conversion metadata.
     struct TableEntry {
-        Value value;
-        int ansiCode;
-        std::string_view name;
+        Value value;           ///< The encoded color value.
+        int ansiCode;          ///< The role-relative ANSI color code.
+        std::string_view name; ///< The lowercase textual name.
     };
+    /// The lookup table for all supported color values.
     using ColorTable = std::array<TableEntry, static_cast<std::size_t>(Value::_Count)>;
+    /// Access the lookup table entry for this color value.
+    /// @return The matching table entry.
     [[nodiscard]] auto tableEntry() const noexcept -> const TableEntry &;
+    /// Access the static color lookup table.
+    /// @return The shared color lookup table.
     [[nodiscard]] static auto colorTable() noexcept -> const ColorTable &;
 
 protected:

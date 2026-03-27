@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "CursorBuffer.hpp"
 
-
 #include "Buffer.hpp"
 
-#include "impl/ParagraphLayout.hpp"
-#include "impl/ParagraphPrinter.hpp"
+#include "impl/paragraph/Layout.hpp"
+#include "impl/paragraph/Printer.hpp"
 
 
 namespace erbsland::cterm {
@@ -107,9 +106,8 @@ void CursorBuffer::clearScreen() noexcept {
     _wrapOnNextChar = false;
 }
 
-void CursorBuffer::write(const Char &character) noexcept {
-    const auto resolvedCharacter = character.withBase(_currentColor, _currentCharAttributes);
-    const auto displayWidth = resolvedCharacter.displayWidth();
+void CursorBuffer::writeResolvedCharacter(const Char &character) noexcept {
+    const auto displayWidth = character.displayWidth();
     if (displayWidth == 0 || displayWidth > 2) {
         return;
     }
@@ -127,14 +125,14 @@ void CursorBuffer::write(const Char &character) noexcept {
                 return;
             }
             writeLineBreak();
-            set(_cursorPosition, resolvedCharacter);
+            set(_cursorPosition, character);
             _cursorPosition = _cursorPosition + Position{displayWidth, 0};
         } else {
-            set(_cursorPosition, resolvedCharacter);
+            set(_cursorPosition, character);
             _wrapOnNextChar = _autoWrap;
         }
     } else {
-        set(_cursorPosition, resolvedCharacter);
+        set(_cursorPosition, character);
         _cursorPosition = _cursorPosition + Position{displayWidth, 0};
         if (_cursorPosition.x() >= _size.width()) {
             _cursorPosition = Position{_size.width() - 1, _cursorPosition.y()};
@@ -143,9 +141,25 @@ void CursorBuffer::write(const Char &character) noexcept {
     }
 }
 
+void CursorBuffer::write(const Char &character) noexcept {
+    writeResolvedCharacter(character.withBase(_currentColor, _currentCharAttributes));
+}
+
 void CursorBuffer::write(const String &str) noexcept {
+    const auto color = _currentColor;
+    const auto attributes = _currentCharAttributes;
     for (const auto &character : str) {
-        write(character);
+        writeResolvedCharacter(character.withBase(color, attributes));
+    }
+}
+
+void CursorBuffer::writeResolved(const Char &character) noexcept {
+    writeResolvedCharacter(character);
+}
+
+void CursorBuffer::writeResolved(const String &str) noexcept {
+    for (const auto &character : str) {
+        writeResolvedCharacter(character);
     }
 }
 
@@ -173,7 +187,7 @@ void CursorBuffer::writeLineBreak() noexcept {
             break;
         case OverflowMode::ExpandThenShift:
             if (_size.height() < _maximumSize.height()) {
-                resize(_size + Size{0, 1}, true, _fillChar);
+                resize(_size + Size{0, 1}, BufferResizeMode::PreserveContent, _fillChar);
             } else {
                 shift(Direction::North, _fillChar, 1);
             }
@@ -181,7 +195,7 @@ void CursorBuffer::writeLineBreak() noexcept {
             break;
         case OverflowMode::ExpandThenWrap:
             if (_size.height() < _maximumSize.height()) {
-                resize(_size + Size{0, 1}, true, _fillChar);
+                resize(_size + Size{0, 1}, BufferResizeMode::PreserveContent, _fillChar);
                 _cursorPosition = Position{0, _size.height() - 1};
             } else {
                 _cursorPosition = Position{0, 0};
@@ -191,15 +205,17 @@ void CursorBuffer::writeLineBreak() noexcept {
 }
 
 auto CursorBuffer::printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
-    const auto width = size().width();
+    const auto margins = options.margins();
+    const auto x1 = std::max(margins.left(), 0);
+    const auto width = std::max(size().width() - std::max(margins.left(), 0) - std::max(margins.right(), 0), 0);
     const auto layout =
-        impl::ParagraphLayout{paragraph, width, options, impl::ParagraphLayout::NewlineMode::HardLineBreak}.build();
-    if (!layout.valid) {
+        impl::paragraph::Layout{paragraph, width, options, impl::paragraph::LayoutNewlineMode::HardLineBreak}.build();
+    if (!layout.valid()) {
         if (options.onError() == ParagraphOnError::Empty) {
             return 0;
         }
         write(paragraph);
-        auto lineCount = std::max(paragraph.terminalLines(width), 1);
+        auto lineCount = std::max(paragraph.terminalLines(std::max(width, 1)), 1);
         writeLineBreak();
         if (options.paragraphSpacing() == ParagraphSpacing::DoubleLine) {
             writeLineBreak();
@@ -207,7 +223,7 @@ auto CursorBuffer::printParagraphImpl(const String &paragraph, const ParagraphOp
         }
         return lineCount;
     }
-    if (layout.lines.empty()) {
+    if (layout.empty()) {
         writeLineBreak();
         auto lineCount = 1;
         if (options.paragraphSpacing() == ParagraphSpacing::DoubleLine) {
@@ -217,7 +233,9 @@ auto CursorBuffer::printParagraphImpl(const String &paragraph, const ParagraphOp
         return lineCount;
     }
     const auto lineCount =
-        impl::ParagraphPrinter{*this, width, options.alignment(), layout, options.backgroundMode()}.print();
+        impl::paragraph::Printer{
+            *this, x1, width, options.alignment(), layout, paragraph, options, options.backgroundMode()}
+            .print();
     if (options.paragraphSpacing() == ParagraphSpacing::DoubleLine) {
         writeLineBreak();
         return lineCount + 1;

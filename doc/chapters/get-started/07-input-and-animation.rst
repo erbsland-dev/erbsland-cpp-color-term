@@ -62,10 +62,10 @@ Replace the source file with the following final tutorial version:
 
         while (!quitRequested) {
             terminal.testScreenSize();
-            if (const auto key = terminal.input().read(std::chrono::milliseconds{90}); key.valid()) {
-                if (key == Key{Key::Character, U'q'}) {
+            if (const auto key = terminal.input().readKey(std::chrono::milliseconds{90}); key.valid()) {
+                if (key == U'q') {
                     quitRequested = true;
-                } else if (key == Key{Key::Character, U'c'}) {
+                } else if (key == U'c') {
                     paletteIndex = (paletteIndex + 1) % palettes.size();
                 }
             }
@@ -114,7 +114,7 @@ applications:
 
 * ``Input::Mode::Key`` switches from line-based input to immediate
   key handling.
-* ``read(timeout)`` allows the redraw loop to remain responsive
+* ``readKey(timeout)`` allows the redraw loop to remain responsive
   without busy waiting.
 * ``testScreenSize()`` polls for terminal size changes between frames.
 * ``RefreshMode::Overwrite`` redraws the screen cleanly without leaving

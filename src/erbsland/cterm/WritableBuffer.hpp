@@ -5,6 +5,7 @@
 
 #include "BitmapDrawOptions.hpp"
 #include "BufferDrawOptions.hpp"
+#include "BufferResizeMode.hpp"
 #include "Char16Style.hpp"
 #include "CharCombinationStyle.hpp"
 #include "FrameDrawOptions.hpp"
@@ -31,6 +32,15 @@ public: // abstract API
     /// The content of the resized buffer is undefined and must be filled with new content.
     /// @param newSize The new size for the buffer.
     virtual void resize(Size newSize) = 0;
+    /// Resize this buffer and optionally preserve visible content.
+    /// The default implementation calls `resize(Size)` for `BufferResizeMode::Fast`.
+    /// For `BufferResizeMode::PreserveContent`, it clones the current buffer, resizes it using `resize(Size)`, and
+    /// restores the visible content with `setFrom()`.
+    /// Implementations can override this when they provide a faster preserve-content path.
+    /// @param size The new size for the buffer.
+    /// @param mode How existing content should be handled during resizing.
+    /// @param fillChar The character to fill newly visible cells with in preserve-content mode.
+    virtual void resize(Size size, BufferResizeMode mode, Char fillChar);
     /// Write a block at the given position.
     /// @param pos The coordinates within the buffer.
     /// @param block The block value to store.
@@ -186,6 +196,7 @@ public: // drawing methods
     /// @param alignment The alignment inside the rectangle.
     /// @param color The text color.
     /// @param animationCycle Animation cycle for animated text.
+    /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
     void drawText(
         std::string_view text,
         Rectangle rect,
@@ -194,11 +205,13 @@ public: // drawing methods
         std::size_t animationCycle = 0);
     /// @overload
     void drawText(
-        String text,
+        const String &text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
         Color color = {},
         std::size_t animationCycle = 0);
+    /// @overload
+    void drawText(const String &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle = 0);
     /// Draw a bitmap at a given position.
     /// The bitmap is rendered according to `options.scaleMode()`. If `options.char16Style()` is set,
     /// it overrides the scale mode and renders one terminal cell per bitmap pixel.
@@ -318,7 +331,7 @@ protected: // implementation
     /// @param text The text description.
     /// @param animationCycle Animation cycle for animated text.
     virtual void drawTextImpl(const Text &text, std::size_t animationCycle);
-    /// Implement `drawText(String, Rectangle, ...)`.
+    /// Implement `drawText(const String &, Rectangle, ...)`.
     /// The public overload forwards to this method.
     /// @param text The text to render.
     /// @param rect The target rectangle.
@@ -326,7 +339,15 @@ protected: // implementation
     /// @param color The text color.
     /// @param animationCycle Animation cycle for animated text.
     virtual void
-    drawTextImpl(String text, Rectangle rect, Alignment alignment, Color color, std::size_t animationCycle);
+    drawTextImpl(const String &text, Rectangle rect, Alignment alignment, Color color, std::size_t animationCycle);
+    /// Implement `drawText(String, Rectangle, TextOptions, ...)`.
+    /// The public overload forwards to this method.
+    /// @param text The text to render.
+    /// @param rect The target rectangle.
+    /// @param options The text drawing options.
+    /// @param animationCycle Animation cycle for animated text.
+    virtual void
+    drawTextImpl(const String &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle);
     /// Implement `drawBitmap(const Bitmap &, Position, ...)`.
     /// The public overload forwards to this method.
     /// @param bitmap The bitmap to draw.

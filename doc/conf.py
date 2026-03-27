@@ -6,7 +6,9 @@ import shutil
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent))
+_doc_dir = Path(__file__).parent
+sys.path.insert(0, str(_doc_dir))
+sys.path.insert(0, str(_doc_dir / "_ext"))
 
 # -- Project information -----------------------------------------------------
 project = "Erbsland Color Terminal for C++"
@@ -16,6 +18,7 @@ release = "1.0"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
+    "erbsland_mermaid",
     "sphinx_rtd_theme",
     "sphinx_design",
     "sphinx_copybutton",
@@ -32,7 +35,8 @@ html_css_files = [
     "ansi.css",
 ]
 html_js_files = [
-    "https://erbsland.dev/ext/fa7/js/all.min.js"
+    "https://erbsland.dev/ext/fa7/js/all.min.js",
+    "https://erbsland.dev/ext/mermaid/11/mermaid.min.js",
 ]
 
 # -- Options for Breathe -----------------------------------------------------
@@ -49,6 +53,7 @@ breathe_doxygen_config_options = {
     "ALIASES": "\"tested=@par Tested:^^\", \"notest=@par Not Tested:^^\", \"needtest=@par Needs Testing:^^\", \"wip=@par Work in Progress:^^\"",
     "ENABLE_PREPROCESSING": "yes",
     "MACRO_EXPANSION": "no",
+    "RECURSIVE": "yes",
 }
 
 
