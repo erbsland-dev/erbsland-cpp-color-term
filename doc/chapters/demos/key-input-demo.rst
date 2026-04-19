@@ -6,13 +6,16 @@
 Key Input Demo
 **************
 
-``key-input-demo`` visualizes detected key presses inside a horizontally
-scrolling ``RemappedBuffer``. Every key press becomes a colored stamp in the
-field, so the demo doubles as both an input test and a compact illustration
-of retained buffer content that moves independently from new writes.
+``key-input-demo`` combines immediate key handling with a horizontally scrolling retained buffer. Each pressed key is
+stamped into the field as a colored block, so the demo makes keyboard input, buffer updates, and continuous motion
+visible at the same time.
 
-It is a helpful example when you want to combine immediate key handling with
-buffer-based animation.
+Use This Demo When You Need...
+==============================
+
+* A support example for ``Input::Mode::Key`` and immediate key handling.
+* A visual reference for scrolling content inside a retained buffer.
+* A small demo that mixes user input with animation in the same screen.
 
 Run the Demo
 ============
@@ -23,49 +26,31 @@ Start the demo from the build directory:
 
     $ ./cmake-build-debug/demo-apps/key-input-demo
 
-Press any key to stamp it into the scrolling field. Press ``Esc`` to quit.
+Press any key to stamp a block into the field. Press ``Esc`` to quit.
 
-ANSI Output Example
-===================
+Captured Output (80x25)
+=======================
 
-The following capture shows the scrolling field after one ``A`` key press:
+.. include:: _captures/key-input-demo.rstinc
 
-.. erbsland-ansi::
-    :escape-char: ␛
-    :theme: ela-term
+Features Demonstrated
+=====================
 
-    ␛[97;100m  Key Input Demo                                 ␛[96mhorizontal RemappedBuffer 250x30
+* ``Input::Mode::Key`` with immediate, non-line-buffered key handling.
+* ``Key::toDisplayText()`` for user-facing key labels.
+* A horizontally moving retained buffer used as a simple scrolling field.
+* Mixed animation and event-driven drawing on the same screen.
 
-    ␛[39;40m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m            ␛[97;41m[A]␛[39;40m    ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
-    ␛[39m     ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙␛[39m                   ␛[90m∙
+Related Demos
+=============
 
-    ␛[97;100m ␛[93m[esc]␛[97m quit ␛[96mPress any other key to stamp a colored key block into the scrolling␛[0m
-
-Features Shown
-==============
-
-This demo brings several interactive building blocks together:
-
-* ``Input::Mode::Key`` with immediate key handling.
-* ``Key::toDisplayText()`` for user-facing labels.
-* Horizontal ``RemappedBuffer`` scrolling.
-* Mixed animation and event-driven drawing in one retained buffer.
+* :doc:`Update Screen Modes <update-screen-modes>` for another interactive demo focused on refresh behavior.
+* :doc:`Log Viewer <log-viewer>` for viewport-style scrolling over a larger retained history.
+* :doc:`Retro Plasma <retro-plasma>` for another keyboard-controlled full-screen animation.
 
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/key-input-demo/src/KeyInputDemoApp.cpp`.
 
-:file:`demo/key-input-demo/src/KeyInputDemoApp.cpp`
-
-This file contains the scrolling buffer setup, key stamping logic, and the
-footer/help text generation.
+This file contains the scrolling buffer setup, key stamping logic, and footer/help text generation.

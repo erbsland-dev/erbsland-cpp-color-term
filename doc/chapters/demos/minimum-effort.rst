@@ -6,13 +6,15 @@
 Minimum Effort
 **************
 
-``minimum-effort`` is a deliberately tiny full-screen program that still
-shows a framed terminal layout, styled text, and a title. The demo exists to
-demonstrate how little code is needed before the library already feels
-productive.
+``minimum-effort`` is the smallest full-screen demo in the repository. It shows how quickly you can go from a fresh
+terminal session to a framed layout with colored text, direct buffer drawing, and a clear title.
 
-It is a good starting point when you want a minimal example to copy into a
-fresh project.
+Use This Demo When You Need...
+==============================
+
+* A tiny starting point for a new project that still feels like a complete terminal application.
+* The shortest possible example of ``Terminal`` setup, one persistent ``Buffer``, and one ``write()`` call.
+* A support reference for simple ``drawFrame()`` plus ``drawText()`` composition without any application framework.
 
 Run the Demo
 ============
@@ -23,54 +25,32 @@ Start the demo from the build directory:
 
     $ ./cmake-build-debug/demo-apps/minimum-effort
 
-ANSI Output Example
-===================
+The program renders one framed screen and exits immediately. The current title says ``15 Lines of Code``, so the page
+uses that wording consistently.
 
-The following capture shows the rendered frame and the embedded source code:
+Captured Output (80x25)
+=======================
 
-.. erbsland-ansi::
-    :escape-char: ␛
-    :theme: ela-term
+.. include:: _captures/minimum-effort.rstinc
 
-    ␛[94;40m┌─────────────────────────────────────────────────────────────────────────────┐
-    │                                                                             │
-    │                                                                             │
-    │                       ␛[93mDemo with Only 14 Lines of Code␛[94m                       │
-    │                                                                             │
-    │  ␛[96mauto main() -> int {␛[94m                                                       │
-    │  ␛[96m    Terminal term{Size{80, 24}};␛[94m                                           │
-    │  ␛[96m    term.initializeScreen();␛[94m                                               │
-    │  ␛[96m    Buffer buffer{term.size()};␛[94m                                            │
-    │  ␛[96m    buffer.fill(Char{' ', fg::BrightBlue, bg::Black});␛[94m                     │
-    │  ␛[96m    buffer.drawText(Position{3, 5}, cThisCode);␛[94m                            │
-    │  ␛[96m    buffer.drawFrame(buffer.rect(), FrameStyle::Light);␛[94m                    │
-    │  ␛[96m    auto titleRect = buffer.rect().subRectangle(Anchor::Top, {0, 3}, {3, 2}│
-    ␛[94m│  ␛[96m    buffer.drawText("Demo with Only 14 Lines of Code",␛[94m                     │
-    │  ␛[96m        titleRect, Alignment::Center, Color{fg::BrightYellow});␛[94m            │
-    │  ␛[96m    term.write(buffer);␛[94m                                                    │
-    │  ␛[96m    term.restoreScreen();␛[94m                                                  │
-    │  ␛[96m    return 0;␛[94m                                                              │
-    │  ␛[96m}␛[94m                                                                          │
-    │                                                                             │
-    │                                                                             │
-    │                                                                             │
-    └─────────────────────────────────────────────────────────────────────────────┘␛[0m
+Features Demonstrated
+=====================
 
-Features Shown
-==============
+* ``Terminal`` initialization, one-screen rendering, and cleanup.
+* One retained ``Buffer`` with ``fill()``, ``drawFrame()``, and ``drawText()``.
+* A centered title rectangle derived from the full buffer geometry.
+* A self-documenting screen that embeds the demo source directly in the rendered output.
 
-This demo is intentionally compact, but it still touches the core workflow:
+Related Demos
+=============
 
-* ``Terminal`` setup and teardown.
-* One persistent ``Buffer`` with a fill color.
-* ``drawFrame()`` and ``drawText()`` for a simple full-screen composition.
-* A self-documenting code sample rendered inside the frame.
+* :doc:`Terminal Chronicle <terminal-chronicle>` for direct print-style output without a retained buffer.
+* :doc:`Frame Color Animations <frame-color-animations>` for richer frame rendering based on the same drawing ideas.
+* :doc:`UI Hello World <ui-hello-world>` for the smallest comparable example built on the UI framework.
 
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
-
-:file:`demo/minimum-effort/src/main.cpp`
+If you want to explore the implementation, start with :file:`demo/minimum-effort/src/main.cpp`.
 
 The full demo lives in that one file.

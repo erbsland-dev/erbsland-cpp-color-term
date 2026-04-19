@@ -1,0 +1,76 @@
+.. erbsland-ansi::
+    :escape-char: ␛
+    :theme: ela-term
+
+    ␛[92mcommand-line-help␛[37m [␛[35m<options>␛[37m]
+
+    ␛[97mSummary
+    ␛[37mThis demo prints a fictive command-line help page that adapts to the terminal
+    width. On wider terminals it uses ␛[97mTerminal::printParagraph()␛[37m to keep
+    descriptions aligned, wrapped, and easy to scan. Below 40 columns it
+    intentionally falls back to plain line-oriented output so you can compare both
+    styles.
+
+    ␛[97mPreview Paragraph
+    ␛[93;44mPreview ␛[97mThis paragraph keeps a visible background so options like background
+    mode, wrap markers, word breaks, ellipsis handling, and alignment become easier
+    to inspect while you adjust the rendering settings.
+
+    ␛[49mOptions
+    ␛[96m--help␛[37m/␛[93m-h␛[97m                          ␛[37mRender this formatted help output. The flag
+    ␛[97m                                   ␛[37mis mostly here so the demo behaves like a
+    ␛[97m                                   ␛[37mfamiliar command-line tool.
+    ␛[96m--terminal-width␛[37m/␛[93m-t␛[37m=␛[35m<columns>␛[97m      ␛[37mDisable automatic width detection and
+    ␛[97m                                   ␛[37msimulate a terminal width between 20 and 200
+    ␛[97m                                   ␛[37mcells for deterministic wrapping.
+    ␛[96m--description-column␛[37m/␛[93m-c␛[37m=␛[35m<column>␛[97m   ␛[37mOverride the description tab stop for the
+    ␛[97m                                   ␛[37moptions list with a fixed value. Valid values
+    ␛[97m                                   ␛[37mare 12 to 60.
+    ␛[96m--maximum-description-column␛[37m/␛[93m-d␛[37m=␛[35m<column>
+    ␛[97m                                   ␛[37mCap the automatically chosen description tab
+    ␛[97m                                   ␛[37mstop. The default is 35 to force some
+    ␛[97m                                   ␛[37mwrapping in the options list. Valid values
+    ␛[97m                                   ␛[37mare 20 to 60.
+    ␛[96m--alignment␛[37m/␛[93m-a␛[37m=␛[35m<left|center|right>␛[97m ␛[37mChoose the horizontal alignment used for the
+    ␛[97m                                   ␛[37mwrapped preview paragraphs.
+    ␛[96m--line-indent␛[37m/␛[93m-l␛[37m=␛[35m<columns>␛[97m         ␛[37mIndent the preview paragraphs by 0 to 10
+    ␛[97m                                   ␛[37mcolumns before any wrapping takes place.
+    ␛[96m--first-line-indent␛[37m/␛[93m-f␛[37m=␛[35m<columns>␛[97m   ␛[37mOverride the first-line indent for preview
+    ␛[97m                                   ␛[37mparagraphs. Valid values are 0 to 12.
+    ␛[96m--wrapped-line-indent␛[37m/␛[93m-w␛[37m=␛[35m<columns>␛[97m ␛[37mOverride the indentation of wrapped lines.
+    ␛[97m                                   ␛[37mValues between 0 and 30 make the effect easy
+    ␛[97m                                   ␛[37mto inspect.
+    ␛[96m--background-mode␛[37m/␛[93m-b␛[37m=␛[35m<mode>␛[97m        ␛[37mSet the background fill strategy: default,
+    ␛[97m                                   ␛[37mwrapped-left, wrapped-right, wrapped-both,
+    ␛[97m                                   ␛[37mfull-right, or full-both.
+    ␛[96m--line-break-start-mark␛[37m/␛[93m-s␛[37m=␛[35m<text>␛[97m  ␛[37mInsert a one- or two-character marker at the
+    ␛[97m                                   ␛[37mstart of each wrapped continuation line.
+    ␛[96m--line-break-end-mark␛[37m/␛[93m-m␛[37m=␛[35m<text>␛[97m    ␛[37mAppend a one- or two-character marker at the
+    ␛[97m                                   ␛[37mright edge when a line wraps.
+    ␛[96m--paragraph-spacing␛[37m/␛[93m-p␛[37m=␛[35m<single|double>
+    ␛[97m                                   ␛[37mSwitch between compact paragraphs or
+    ␛[97m                                   ␛[37mdouble-spaced output with one empty row in
+    ␛[97m                                   ␛[37mbetween.
+    ␛[96m--word-separators␛[37m/␛[93m-i␛[37m=␛[35m<tokens>␛[97m      ␛[37mUse comma-separated separator tokens such as
+    ␛[97m                                   ␛[37mspace,tab,slash or one-character literals
+    ␛[97m                                   ␛[37mlike ; and |.
+    ␛[96m--word-break-mark␛[37m/␛[93m-k␛[37m=␛[35m<char>␛[97m        ␛[37mSet the single character inserted when a word
+    ␛[97m                                   ␛[37mis split because it does not fit on the
+    ␛[97m                                   ␛[37mcurrent line.
+    ␛[96m--maximum-line-wraps␛[37m/␛[93m-r␛[37m=␛[35m<count>␛[97m    ␛[37mLimit the number of automatic wraps per
+    ␛[97m                                   ␛[37mparagraph. Use 0 for unlimited or values up
+    ␛[97m                                   ␛[37mto 8 to trigger ellipsis behaviour.
+    ␛[96m--paragraph-ellipsis-mark␛[37m/␛[93m-x␛[37m=␛[35m<text>
+    ␛[97m                                   ␛[37mChoose the marker that signals clipped
+    ␛[97m                                   ␛[37mparagraphs after the configured wrap limit
+    ␛[97m                                   ␛[37mhas been reached.
+    ␛[96m--tab-stops␛[37m/␛[93m-u␛[37m=␛[35m<list>␛[97m              ␛[37mProvide comma-separated tab stops like
+    ␛[97m                                   ␛[37m1,24,40 or use wrapped to align a stop with
+    ␛[97m                                   ␛[37mthe wrapped-line indent.
+    ␛[96m--on-error␛[37m/␛[93m-o␛[37m=␛[35m<plain|empty>␛[97m        ␛[37mChoose the fallback when the paragraph cannot
+    ␛[97m                                   ␛[37mbe laid out: plain output or empty output.
+
+    ␛[97mTry It
+    ␛[37mExperiment with ␛[96m--terminal-width␛[37m, wrap markers, custom tab stops, and the
+    preview paragraph settings to see how a real command help screen can stay
+    readable across narrow and wide terminals.␛[0m

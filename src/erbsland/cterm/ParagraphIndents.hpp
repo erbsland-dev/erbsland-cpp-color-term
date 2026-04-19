@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Margins.hpp"
 
 #include <algorithm>
 
-
 namespace erbsland::cterm {
-
 
 /// Shared indentation and margin settings for paragraph-like text rendering.
 class ParagraphIndents final {
@@ -77,6 +74,5 @@ private:
     int _wrappedLineIndent{cUseLineIndent}; ///< Indent for wrapped lines, or `cUseLineIndent`.
     Margins _margins{0};                    ///< Margins around the paragraph area.
 };
-
 
 }

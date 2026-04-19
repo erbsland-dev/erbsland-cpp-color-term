@@ -5,8 +5,10 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
+#include <atomic>
 #include <stdexcept>
 #include <string>
+#include <thread>
 #include <vector>
 
 TESTED_TARGETS(String)
@@ -289,7 +291,125 @@ public:
         REQUIRE_EQUAL(restyled[1].style(), style);
     }
 
+    void testStringViewAppendOperatorsReuseReadOnlyRanges() {
+        const auto source = String{"ABCDE"};
+        const auto middle = StringView{source}.substr(1, 3);
+
+        auto appended = String{"A"};
+        appended += middle.substr(0, 2);
+
+        const auto combined = String{"A"} + middle.substr(2, 1);
+
+        REQUIRE_EQUAL(render(appended), std::string{"ABC"});
+        REQUIRE_EQUAL(render(combined), std::string{"AD"});
+    }
+
+    void testCopyOnWriteKeepsCopiedStringsIndependent() {
+        const auto source = String{"alpha"};
+        auto copy = source;
+
+        copy[0] = Char{U'A'};
+        copy.append(Char{U'!'});
+
+        REQUIRE_EQUAL(render(source), std::string{"alpha"});
+        REQUIRE_EQUAL(render(copy), std::string{"Alpha!"});
+    }
+
+    void testSubstrSharesStorageUntilTheSliceIsModified() {
+        const auto source = String{"ABCDE"};
+        auto slice = source.substr(1, 3);
+
+        slice[0] = Char{U'X'};
+
+        REQUIRE_EQUAL(render(source), std::string{"ABCDE"});
+        REQUIRE_EQUAL(render(slice), std::string{"XCD"});
+    }
+
+    void testMutableIteratorsDetachBeforeWriting() {
+        const auto source = String{"ABCD"};
+        auto copy = source;
+
+        *copy.begin() = Char{U'Z'};
+
+        REQUIRE_EQUAL(render(source), std::string{"ABCD"});
+        REQUIRE_EQUAL(render(copy), std::string{"ZBCD"});
+    }
+
+    void testReserveAndClearDoNotModifySharedCopies() {
+        const auto source = String{"ABCD"};
+        auto copy = source;
+
+        copy.reserve(64);
+        copy.clear();
+
+        REQUIRE_EQUAL(render(source), std::string{"ABCD"});
+        REQUIRE(copy.empty());
+    }
+
+    void testSharedCopiesSupportConcurrentReads() {
+        const auto source = String{"alpha beta gamma"};
+        auto readFailed = std::atomic<bool>{false};
+        auto worker = [&source, &readFailed]() {
+            for (auto iteration = 0; iteration < 2'000; ++iteration) {
+                const auto copy = source;
+                if (copy.displayWidth() != 16 || copy.indexOf(U'b') != 6 || copy.substr(6, 4).displayWidth() != 4) {
+                    readFailed.store(true);
+                }
+            }
+        };
+
+        auto a = std::thread{worker};
+        auto b = std::thread{worker};
+        auto c = std::thread{worker};
+
+        a.join();
+        b.join();
+        c.join();
+
+        REQUIRE_FALSE(readFailed.load());
+        REQUIRE_EQUAL(render(source), std::string{"alpha beta gamma"});
+    }
+
+    void testCopiedStringsCanMutateIndependentlyOnMultipleThreads() {
+        const auto source = String{"Base"};
+        auto left = source;
+        auto right = source;
+
+        auto leftDone = std::atomic<bool>{false};
+        auto rightDone = std::atomic<bool>{false};
+
+        auto leftWorker = std::thread{[&left, &leftDone]() {
+            left.clear();
+            left.append("left");
+            left[0] = Char{U'L'};
+            leftDone.store(true);
+        }};
+        auto rightWorker = std::thread{[&right, &rightDone]() {
+            right.clear();
+            right.append("right");
+            right[0] = Char{U'R'};
+            rightDone.store(true);
+        }};
+
+        leftWorker.join();
+        rightWorker.join();
+
+        REQUIRE(leftDone.load());
+        REQUIRE(rightDone.load());
+        REQUIRE_EQUAL(render(source), std::string{"Base"});
+        REQUIRE_EQUAL(render(left), std::string{"Left"});
+        REQUIRE_EQUAL(render(right), std::string{"Right"});
+    }
+
 private:
+    [[nodiscard]] static auto render(const String &text) -> std::string {
+        auto result = std::string{};
+        for (const auto &character : text) {
+            character.appendTo(result);
+        }
+        return result;
+    }
+
     [[nodiscard]] static auto renderLines(const StringLines &lines) -> std::vector<std::string> {
         auto result = std::vector<std::string>{};
         result.reserve(lines.size());

@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "LayoutConstraints.hpp"
 
-
 namespace erbsland::cterm::ui::layout::impl {
 
 auto LayoutConstraints::fromGeometry(const Geometry &geometry) noexcept -> LayoutConstraints {

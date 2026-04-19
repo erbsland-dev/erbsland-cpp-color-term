@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "StringWrapper.hpp"
 
-
 namespace erbsland::cterm::impl {
-
 
 auto StringWrapper::wrapIntoLines(const int width, const ParagraphSpacing paragraphSpacing) const noexcept
     -> std::vector<String> {
@@ -28,7 +26,6 @@ auto StringWrapper::wrapIntoLines(const int width, const ParagraphSpacing paragr
     return lines;
 }
 
-
 auto StringWrapper::splitLines() const noexcept -> std::vector<String> {
     if (_str.empty()) {
         return {};
@@ -39,21 +36,19 @@ auto StringWrapper::splitLines() const noexcept -> std::vector<String> {
     while (lineStartIndex < _str.size()) {
         const auto lineEndIndex = _str.indexOf(U'\n', lineStartIndex);
         if (lineEndIndex == String::npos) {
-            result.emplace_back(_str.substr(lineStartIndex));
+            result.emplace_back(String{_str.substr(lineStartIndex)});
             break;
         }
-        result.emplace_back(_str.substr(lineStartIndex, lineEndIndex - lineStartIndex));
+        result.emplace_back(String{_str.substr(lineStartIndex, lineEndIndex - lineStartIndex)});
         lineStartIndex = lineEndIndex + 1;
     }
     return result;
 }
 
-
 void StringWrapper::clearPendingSpacing(String &pendingSpacing, int &pendingSpacingWidth) noexcept {
     pendingSpacing.clear();
     pendingSpacingWidth = 0;
 }
-
 
 void StringWrapper::finishWrappedLine(
     String &line,
@@ -68,7 +63,6 @@ void StringWrapper::finishWrappedLine(
     lineWidth = 0;
     clearPendingSpacing(pendingSpacing, pendingSpacingWidth);
 }
-
 
 void StringWrapper::appendSpacingToken(
     String &spacing,
@@ -88,7 +82,6 @@ void StringWrapper::appendSpacingToken(
     pendingSpacingWidth += spacingWidth;
     spacing.clear();
 }
-
 
 void StringWrapper::appendWordToken(
     String &word,
@@ -115,7 +108,6 @@ void StringWrapper::appendWordToken(
     startWrappedLine(word, wordWidth, width, line, lineWidth, lines);
 }
 
-
 void StringWrapper::startWrappedLine(
     String &word,
     const int wordWidth,
@@ -135,7 +127,6 @@ void StringWrapper::startWrappedLine(
     word.clear();
 }
 
-
 void StringWrapper::splitWordIntoWrappedLines(
     const String &word, const int wordWidth, const int width, std::vector<String> &lines) noexcept {
     const auto estimatedLineCount = static_cast<std::size_t>((wordWidth + width - 1) / width);
@@ -148,9 +139,8 @@ void StringWrapper::splitWordIntoWrappedLines(
     }
 }
 
-
 auto StringWrapper::findWrappedWordSplitIndex(
-    const String &word, const std::size_t startIndex, const int width) noexcept -> std::size_t {
+    const StringView &word, const std::size_t startIndex, const int width) noexcept -> std::size_t {
     auto lineWidth = 0;
     auto index = startIndex;
     while (index < word.size()) {
@@ -166,7 +156,6 @@ auto StringWrapper::findWrappedWordSplitIndex(
     }
     return index;
 }
-
 
 auto StringWrapper::wrapParagraphIntoLines(const int width) const noexcept -> std::vector<String> {
     if (width <= 0) {
@@ -211,6 +200,5 @@ auto StringWrapper::wrapParagraphIntoLines(const int width) const noexcept -> st
     finishWrappedLine(line, lineWidth, pendingSpacing, pendingSpacingWidth, lines);
     return lines;
 }
-
 
 }

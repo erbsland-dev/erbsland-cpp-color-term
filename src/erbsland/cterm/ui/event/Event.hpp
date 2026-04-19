@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "EventData.hpp"
 #include "EventType.hpp"
 
 #include <chrono>
 #include <memory>
 
-
 namespace erbsland::cterm::ui {
-
 
 using EventClock = std::chrono::steady_clock;
 using EventTime = EventClock::time_point;

@@ -8,7 +8,6 @@
 
 #include <string_view>
 
-
 TESTED_TARGETS(Terminal)
 class TerminalConvenienceTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {
 public:

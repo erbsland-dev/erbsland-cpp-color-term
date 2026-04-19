@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(TextOptions)
 class TextOptionsTest final : public el::UnitTest {
 public:

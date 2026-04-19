@@ -2,19 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "LayoutLineToken.hpp"
 
-
-#include "../../String.hpp"
-
+#include "../../StringView.hpp"
 
 namespace erbsland::cterm::impl::paragraph {
 
-
-LayoutLineToken::LayoutLineToken(
-    const Type type, const std::size_t startIndex, const std::size_t length, const int displayWidth) noexcept :
-    _type{type}, _startIndex{startIndex}, _length{length}, _displayWidth{displayWidth} {
-}
-
-auto LayoutLineToken::remainingWidth(const String &text, const std::size_t offset) const noexcept -> int {
+auto LayoutLineToken::remainingWidth(const StringView &text, const std::size_t offset) const noexcept -> int {
     assert(isWord());
     if (offset == 0) {
         return _displayWidth;
@@ -26,9 +18,8 @@ auto LayoutLineToken::remainingWidth(const String &text, const std::size_t offse
     return width;
 }
 
-
 auto LayoutLineToken::split(
-    const String &text,
+    const StringView &text,
     const std::size_t offset,
     const int availableWidth,
     const int trailingMarkerWidth) const noexcept -> std::optional<SplitResult> {
@@ -59,6 +50,5 @@ auto LayoutLineToken::split(
     }
     return result;
 }
-
 
 }

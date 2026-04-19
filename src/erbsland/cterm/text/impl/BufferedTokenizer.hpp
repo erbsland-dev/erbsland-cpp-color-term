@@ -2,25 +2,18 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Tokenizer.hpp"
+
+#include "../../IndexRange.hpp"
 
 #include <cstddef>
 #include <string>
 #include <string_view>
 
-
 namespace erbsland::cterm::text::impl {
 
 /// A tokenizer base class with a reusable UTF-32 buffer for decoded content.
 class BufferedTokenizer : public Tokenizer {
-protected:
-    /// A range inside `_buffer`.
-    struct IndexRange final {
-        std::size_t start{0};  ///< The start index in `_buffer`.
-        std::size_t length{0}; ///< The number of code points in the range.
-    };
-
 protected:
     /// Create a buffered tokenizer for the given text.
     /// @param text The UTF-8 encoded source text.

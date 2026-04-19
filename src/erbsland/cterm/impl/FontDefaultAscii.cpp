@@ -1,12 +1,8 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
-
-
 #include "../Font.hpp"
 
-
 namespace erbsland::cterm {
-
 
 auto Font::defaultAscii() -> FontPtr {
     static const auto cFont = [] {
@@ -68,6 +64,5 @@ auto Font::defaultAscii() -> FontPtr {
     }();
     return std::make_shared<Font>(cFont);
 }
-
 
 }

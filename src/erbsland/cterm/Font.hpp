@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "FontGlyph.hpp"
 
 #include <memory>
@@ -11,14 +10,11 @@
 #include <unordered_map>
 #include <utility>
 
-
 namespace erbsland::cterm {
-
 
 class Font;
 /// Shared pointer to a terminal font.
 using FontPtr = std::shared_ptr<Font>;
-
 
 /// A bitmap font used to render stylized terminal text.
 class Font final {
@@ -63,6 +59,5 @@ private:
     int _height{};
     GlyphMap _glyphs;
 };
-
 
 }

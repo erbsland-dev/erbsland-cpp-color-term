@@ -4,26 +4,7 @@
 
 #include <algorithm>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
-
-Printer::Printer(
-    CursorWriter &writer,
-    const int x1,
-    const int width,
-    const Alignment alignment,
-    const LayoutResult &layout,
-    const String &sourceText,
-    const ParagraphOptions &options,
-    const ParagraphBackgroundMode backgroundMode) noexcept :
-    RendererBase{alignment, layout, sourceText, options, backgroundMode},
-    _writer{writer},
-    _x1{x1},
-    _width{width},
-    _baseStyle{writer.style()},
-    _baseColor{writer.color()} {
-}
 
 auto Printer::print() -> int {
     auto previousWrapColor = std::optional<Color>{};
@@ -103,14 +84,12 @@ auto Printer::writeResolved(const LayoutFragment &fragment) -> std::optional<Col
         return lastColor;
     }
     case LayoutFragment::Type::Spaces: {
-        auto lastColor = std::optional<Color>{};
-        for (auto index = 0; index < fragment.width(); ++index) {
-            if (const auto characterColor = writeResolvedCharacter(Char{U' ', fragment.color()});
-                characterColor.has_value()) {
-                lastColor = characterColor;
-            }
+        if (fragment.width() <= 0) {
+            return std::nullopt;
         }
-        return lastColor;
+        const auto resolvedSpace = Char{U' ', fragment.color()}.withBase(_baseStyle.color(), _baseStyle.attributes());
+        _writer.writeRepeatedResolved(resolvedSpace, fragment.width());
+        return resolvedSpace.color();
     }
     case LayoutFragment::Type::LineBreakStartMark: {
         auto lastColor = std::optional<Color>{};
@@ -139,7 +118,7 @@ auto Printer::writeResolved(const LayoutFragment &fragment) -> std::optional<Col
 auto Printer::writeResolvedCharacter(const Char &character) -> std::optional<Color> {
     const auto resolvedCharacter = character.withBase(_baseStyle.color(), _baseStyle.attributes());
     _writer.writeResolved(resolvedCharacter);
-    if (resolvedCharacter.displayWidth() <= 0) {
+    if (resolvedCharacter.isEmpty()) {
         return std::nullopt;
     }
     return resolvedCharacter.color();
@@ -149,8 +128,8 @@ void Printer::writeSpaces(const int count, const Color color) {
     if (count <= 0) {
         return;
     }
-    _writer.writeRepeated(Char{U' ', color}, count);
+    const auto resolvedSpace = Char{U' ', color}.withBase(_baseStyle.color(), _baseStyle.attributes());
+    _writer.writeRepeatedResolved(resolvedSpace, count);
 }
-
 
 }

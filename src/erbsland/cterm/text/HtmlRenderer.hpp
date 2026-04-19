@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Style.hpp"
 #include "TextNode.hpp"
 
@@ -11,9 +10,7 @@
 #include <string_view>
 #include <utility>
 
-
 namespace erbsland::cterm::text {
-
 
 /// A renderer for HTML content to strings or cursor writer targets.
 class HtmlRenderer {
@@ -56,6 +53,5 @@ private:
     std::string_view _html;
     StyleConstPtr _style;
 };
-
 
 }

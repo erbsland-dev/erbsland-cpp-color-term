@@ -4,24 +4,7 @@
 
 #include <optional>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
-
-Painter::Painter(
-    WritableBuffer &buffer,
-    const Rectangle rect,
-    const Alignment alignment,
-    const LayoutResult &layout,
-    const String &sourceText,
-    const ParagraphOptions &options,
-    const ParagraphBackgroundMode backgroundMode,
-    const ColorResolver &colorResolver) noexcept :
-    RendererBase{alignment, layout, sourceText, options, backgroundMode},
-    _buffer{buffer},
-    _rect{rect},
-    _colorResolver{colorResolver} {
-}
 
 void Painter::paint() {
     const auto maxLines = std::min(static_cast<int>(layout().size()), _rect.height());
@@ -168,6 +151,5 @@ void Painter::fillBackgroundRange(const int y, const int x1, const int x2, const
         _buffer.set(pos, Char{U' '}.withColorOverlay(appliedColor));
     }
 }
-
 
 }

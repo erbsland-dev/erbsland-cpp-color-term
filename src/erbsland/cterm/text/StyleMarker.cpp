@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "StyleMarker.hpp"
 
-
 #include <algorithm>
 #include <array>
 #include <charconv>
 #include <string>
 
-
 namespace erbsland::cterm::text {
-
 
 auto StyleMarker::clear() noexcept -> StyleMarker & {
     _kind = Kind::None;
@@ -19,18 +16,15 @@ auto StyleMarker::clear() noexcept -> StyleMarker & {
     return *this;
 }
 
-
 auto StyleMarker::setStyle(const CharStyle &style) noexcept -> StyleMarker & {
     _style = style;
     return *this;
 }
 
-
 auto StyleMarker::setStyle(const Color color, const CharAttributes attributes) noexcept -> StyleMarker & {
     _style = CharStyle{color, attributes};
     return *this;
 }
-
 
 auto StyleMarker::setLiteral(String literal, const CharStyle &style) -> StyleMarker & {
     _kind = Kind::Literal;
@@ -40,11 +34,9 @@ auto StyleMarker::setLiteral(String literal, const CharStyle &style) -> StyleMar
     return *this;
 }
 
-
 auto StyleMarker::setLiteral(const std::u32string_view literal, const CharStyle &style) -> StyleMarker & {
     return setLiteral(String{literal, style}, style);
 }
-
 
 auto StyleMarker::setOrdered(String suffix, const CharStyle &style) -> StyleMarker & {
     _kind = Kind::Ordered;
@@ -54,11 +46,9 @@ auto StyleMarker::setOrdered(String suffix, const CharStyle &style) -> StyleMark
     return *this;
 }
 
-
 auto StyleMarker::setOrdered(const std::u32string_view suffix, const CharStyle &style) -> StyleMarker & {
     return setOrdered(String{suffix, style}, style);
 }
-
 
 auto StyleMarker::render(const std::size_t number, const CharStyle &baseStyle, const int targetColumn) const
     -> Rendered {
@@ -110,6 +100,5 @@ auto StyleMarker::render(const std::size_t number, const CharStyle &baseStyle, c
     }
     return result;
 }
-
 
 }

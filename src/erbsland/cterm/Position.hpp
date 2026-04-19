@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Coordinate.hpp"
 #include "Orientation.hpp"
 
@@ -21,13 +20,10 @@
 #include <utility>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 class Position;
 using PositionList = std::vector<Position>;
-
 
 /// Represents a 2D integer position or vector (x, y).
 /// - Lightweight value type with default construction to (0,0).
@@ -144,7 +140,6 @@ private:
     Coordinate _y{};
 };
 
-
 template <typename Fn>
     requires std::invocable<Fn, Position> && std::convertible_to<std::invoke_result_t<Fn, Position>, bool>
 auto Position::cardinalFourBitmask(Fn fn) const noexcept -> uint32_t {
@@ -155,15 +150,12 @@ auto Position::cardinalFourBitmask(Fn fn) const noexcept -> uint32_t {
         });
 }
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::Position> {
     auto operator()(const erbsland::cterm::Position &pos) const noexcept -> std::size_t { return pos.hash(); }
 };
-
 
 template <>
 struct std::formatter<erbsland::cterm::Position> : std::formatter<std::string> {

@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: CC-BY-4.0
 #include "UnicodeWidth.hpp"
 
-
 #include "U8Buffer.hpp"
 
 #include <algorithm>
 
-
 namespace erbsland::cterm::impl {
-
 
 auto consoleCharacterWidth(const char32_t codePoint) noexcept -> uint8_t {
     // Fast-path frequently used narrow ranges to avoid the table lookup in common terminal text.
@@ -40,7 +37,6 @@ auto consoleCharacterWidth(const char32_t codePoint) noexcept -> uint8_t {
     return 1;
 }
 
-
 auto calculateDisplayWidth(const std::string_view charStr) noexcept -> uint32_t {
     uint32_t result = 0;
     U8Buffer{charStr}.decodeAllReplacingErrors([&](const char32_t codePoint) noexcept -> void {
@@ -48,6 +44,5 @@ auto calculateDisplayWidth(const std::string_view charStr) noexcept -> uint32_t 
     });
     return result;
 }
-
 
 }

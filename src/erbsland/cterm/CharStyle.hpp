@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "CharAttributes.hpp"
 #include "Color.hpp"
 
 #include <functional>
 
-
 namespace erbsland::cterm {
-
 
 /// A combined terminal text style with color and character attributes.
 class CharStyle final {
@@ -86,9 +83,7 @@ private:
     CharAttributes _attributes{}; ///< The character attributes.
 };
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::CharStyle> {

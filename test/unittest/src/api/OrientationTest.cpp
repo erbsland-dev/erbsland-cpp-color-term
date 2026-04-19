@@ -7,12 +7,10 @@
 
 #include <type_traits>
 
-
 static_assert(std::is_same_v<decltype(Orientation{}.value()), Orientation::Value>);
 static_assert(Orientation{}.value() == Orientation::Horizontal);
 static_assert(Orientation{Orientation::Horizontal}.crossed() == Orientation::Vertical);
 static_assert(Orientation{Orientation::Vertical}.crossed() == Orientation::Horizontal);
-
 
 TESTED_TARGETS(Orientation)
 class OrientationTest final : public el::UnitTest {

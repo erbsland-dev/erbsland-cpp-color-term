@@ -2,13 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "LineBuilder.hpp"
 
-
 #include <algorithm>
 #include <utility>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 LineBuilder::LineBuilder(const LayoutContext &context, const LayoutPreparedSourceLine &preparedSourceLine) noexcept :
     _context{context}, _preparedSourceLine{preparedSourceLine} {
@@ -240,6 +237,5 @@ void LineBuilder::appendSpacingRun(
         ignoreSeparatorSpaces = false;
     }
 }
-
 
 }

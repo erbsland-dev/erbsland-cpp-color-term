@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../../../CharStyle.hpp"
 #include "../../../Margins.hpp"
 #include "../../Style.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Rendering context propagated while planning block output.
 class PlanningContext final {
@@ -50,6 +47,5 @@ public:
     /// @return The block rule including inherited margins.
     [[nodiscard]] auto resolvedBlockStyle(const StyleRule &blockStyle) const -> StyleRule;
 };
-
 
 }

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include "TestHelper.hpp"
+#include "BufferTestHelper.hpp"
 
 #include <erbsland/unittest/UnitTest.hpp>
 
@@ -192,7 +192,8 @@ public:
         REQUIRE_EQUAL(fromLines.size(), Size(2, 3));
         requireRowsEqual(fromLines, {"ab", "  ", "c "});
 
-        const auto fromText = Buffer::fromLinesInString(String{"界\nA"});
+        const auto sourceText = String{"x界\nA!"};
+        const auto fromText = Buffer::fromLinesInString(sourceText.substr(1, 3));
 
         REQUIRE_EQUAL(fromText.size(), Size(2, 2));
         REQUIRE_EQUAL(fromText.get(Position{0, 0}), U'界');
@@ -203,7 +204,7 @@ public:
 
     void testFromLinesFactoriesRejectEmptyInput() {
         REQUIRE_THROWS_AS(std::invalid_argument, Buffer::fromLines(StringLines{}));
-        REQUIRE_THROWS_AS(std::invalid_argument, Buffer::fromLinesInString(String{}));
+        REQUIRE_THROWS_AS(std::invalid_argument, Buffer::fromLinesInString(StringView{}));
     }
 
     void testCloneCreatesAnIndependentWritableCopy() {

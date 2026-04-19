@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include "TestHelper.hpp"
+#include "BufferTestHelper.hpp"
 
 #include <erbsland/cterm/RemappedBuffer.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
@@ -12,7 +12,6 @@
 #include <random>
 #include <string>
 #include <vector>
-
 
 TESTED_TARGETS(RemappedBuffer)
 class RemappedBufferTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {

@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 
 target_sources(erbsland-color-term PRIVATE
-        LayoutContext.cpp
         LayoutContext.hpp
         LineBuilder.cpp
         LineBuilder.hpp
@@ -16,7 +15,6 @@ target_sources(erbsland-color-term PRIVATE
         LayoutPreparedSourceLine.hpp
         LayoutResult.cpp
         LayoutResult.hpp
-        LayoutSourceLineRange.hpp
         Painter.cpp
         Painter.hpp
         Printer.cpp

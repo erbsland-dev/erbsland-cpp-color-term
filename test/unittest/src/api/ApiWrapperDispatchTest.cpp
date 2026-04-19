@@ -8,7 +8,6 @@
 #include <chrono>
 #include <optional>
 
-
 class InputDispatchProbe final : public Input {
 public:
     [[nodiscard]] auto mode() const noexcept -> Mode override { return _mode; }
@@ -34,7 +33,6 @@ protected:
     }
 };
 
-
 class ReadableBufferDispatchProbe final : public ReadableBuffer {
 public:
     [[nodiscard]] auto size() const noexcept -> Size override { return _buffer.size(); }
@@ -56,7 +54,6 @@ protected:
 private:
     Buffer _buffer{Size{2, 1}};
 };
-
 
 class WritableBufferDispatchProbe final : public WritableBuffer {
 public:
@@ -201,14 +198,14 @@ protected:
     }
 
     void drawTextImpl(
-        const String &text,
+        const StringView &text,
         const Rectangle rect,
         const Alignment alignment,
         const Color,
         const std::size_t animationCycle) override {
         _lastCall = Call::TextRect;
         _lastRect = rect;
-        _lastText = text;
+        _lastText = String{text};
         _lastAlignment = alignment;
         _lastAnimationCycle = animationCycle;
     }
@@ -240,7 +237,6 @@ protected:
 private:
     Buffer _buffer{Size{4, 4}};
 };
-
 
 TESTED_TARGETS(Input ReadableBuffer WritableBuffer)
 class ApiWrapperDispatchTest final : public el::UnitTest {

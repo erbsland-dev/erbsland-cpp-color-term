@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../Style.hpp"
 #include "../TextNode.hpp"
 
 #include "../../CursorWriter.hpp"
 
-
 namespace erbsland::cterm::text::impl {
-
 
 /// Render a `TextNode` tree to plain text or a cursor writer target.
 class TextNodeRenderer final {
@@ -39,6 +36,5 @@ private:
     TextNodeConstPtr _document;
     StyleConstPtr _style;
 };
-
 
 }

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
+#include "BlockKind.hpp"
 
 #include "../../../String.hpp"
 #include "../../Style.hpp"
@@ -11,17 +12,7 @@
 #include <utility>
 #include <vector>
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
-
-/// The supported physical block kinds emitted by the planner.
-enum class BlockKind : uint8_t {
-    Paragraph,      ///< A regular paragraph-like text block.
-    HorizontalRule, ///< A horizontal separator line.
-    FilledLine,     ///< A line filled with a character and optional overlay text.
-};
-
 
 /// A fully planned render block shared by string and terminal output.
 class RenderBlock final {
@@ -93,41 +84,7 @@ public:
 
     /// Render this block into plain text.
     /// @return The plain-text representation of the block.
-    [[nodiscard]] auto renderString() const -> String {
-        if (_kind == BlockKind::HorizontalRule) {
-            auto result = String{};
-            const auto fill = String{8, _fillCharacter.value_or(Char{U'-'})};
-            auto reservedSize = fill.size();
-            if (_leadingText.has_value()) {
-                reservedSize += _leadingText->size();
-            }
-            if (_trailingText.has_value()) {
-                reservedSize += _trailingText->size();
-            }
-            result.reserve(reservedSize);
-            if (_leadingText.has_value()) {
-                result += *_leadingText;
-            }
-            result += fill;
-            if (_trailingText.has_value()) {
-                result += *_trailingText;
-            }
-            return result;
-        }
-        auto result = String{};
-        const auto lines = _text.splitLines();
-        auto firstLine = true;
-        for (const auto &line : lines) {
-            if (!firstLine) {
-                result.append(Char{U'\n'});
-            }
-            const auto indent = firstLine ? _stringFirstLineIndent : _stringWrappedLineIndent;
-            result.append(String{static_cast<std::size_t>(std::max(indent, 0)), Char{U' '}});
-            result += line;
-            firstLine = false;
-        }
-        return result;
-    }
+    [[nodiscard]] auto renderString() const -> String;
 
 private:
     BlockKind _kind{BlockKind::Paragraph}; ///< The concrete block kind to render.
@@ -141,9 +98,7 @@ private:
     int _stringWrappedLineIndent{0};       ///< Additional plain-text indentation for wrapped lines.
 };
 
-
 /// The planned block list used by all output paths.
 using RenderBlocks = std::vector<RenderBlock>;
-
 
 }

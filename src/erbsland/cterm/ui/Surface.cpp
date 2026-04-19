@@ -2,14 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Surface.hpp"
 
-
 #include "Layout.hpp"
 
 #include "layout/impl/LayoutConstraints.hpp"
 
 #include <algorithm>
 #include <ranges>
-
 
 namespace erbsland::cterm::ui {
 

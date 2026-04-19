@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include "TestHelper.hpp"
+#include "BufferTestHelper.hpp"
 
 #include <erbsland/unittest/UnitTest.hpp>
 
@@ -28,8 +28,9 @@ public:
     void testDrawTextAtPositionUsesTheExistingBufferColorAsBaseColor() {
         auto buffer = Buffer{Size{4, 2}};
         buffer.fill(Char{U' ', fg::White, bg::Blue});
+        auto text = String{"A\nB"};
 
-        buffer.drawText(Position{1, 0}, String{"A\nB"});
+        buffer.drawText(Position{1, 0}, text);
 
         requireRowsEqual(buffer, {" A  ", " B  "});
         REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::White, bg::Blue));
@@ -101,5 +102,15 @@ public:
 
         REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Red, bg::Yellow));
         REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Green, bg::Blue));
+    }
+
+    void testDrawTextUtf32ConvenienceOverloadPreservesWideCharacters() {
+        auto buffer = Buffer{Size{3, 1}};
+
+        buffer.drawText(std::u32string_view{U"界A"}, Rectangle{0, 0, 3, 1});
+
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}), U'界');
+        REQUIRE(buffer.get(Position{1, 0}).isEmpty());
+        REQUIRE_EQUAL(buffer.get(Position{2, 0}), U'A');
     }
 };

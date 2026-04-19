@@ -17,6 +17,10 @@ target_sources(erbsland-color-term PRIVATE
         KeyDecoder.cpp
         KeyDecoder.hpp
         LineBuffer.hpp
+        StringBuilder.cpp
+        StringBuilder.hpp
+        StringData.cpp
+        StringData.hpp
         StringWrapper.cpp
         StringWrapper.hpp
         TextPainter.cpp

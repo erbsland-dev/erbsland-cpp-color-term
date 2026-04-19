@@ -9,14 +9,12 @@
 #include <type_traits>
 #include <vector>
 
-
 static_assert(std::is_same_v<decltype(Size{}.width()), Coordinate>);
 static_assert(std::is_same_v<decltype(Size{}.height()), Coordinate>);
 static_assert(std::is_same_v<decltype(Size{}.coordinate(Orientation::Horizontal)), Coordinate>);
 static_assert(std::is_same_v<decltype(Size{}.alignmentOffset(Size{}, Alignment::TopLeft)), Position>);
 static_assert(Size{3, 7}.coordinate(Orientation::Horizontal) == 3);
 static_assert(Size{3, 7}.coordinate(Orientation::Vertical) == 7);
-
 
 TESTED_TARGETS(Size)
 class SizeTest final : public el::UnitTest {

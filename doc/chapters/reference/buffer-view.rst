@@ -106,6 +106,11 @@ This is especially helpful in scrollable views, where users should
 immediately recognize that additional content exists beyond the visible
 window.
 
+If you are already using the UI framework, see
+:cpp:any:`ui::ScrollingBufferView <erbsland::cterm::ui::surface::ScrollingBufferView>`
+for the same concept packaged as a ready-to-use surface with scroll and
+page navigation helpers.
+
 Interface
 =========
 
@@ -120,4 +125,3 @@ Interface
 
 .. doxygenclass:: erbsland::cterm::CropEdges
     :members:
-

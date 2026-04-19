@@ -1,9 +1,6 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
-
-
 #include "ColorPart.hpp"
-
 
 #include "impl/TextUtil.hpp"
 
@@ -11,14 +8,11 @@
 #include <ranges>
 #include <stdexcept>
 
-
 namespace erbsland::cterm {
-
 
 auto ColorBase::tableEntry() const noexcept -> const TableEntry & {
     return colorTable()[static_cast<std::size_t>(_value)];
 }
-
 
 auto ColorBase::colorTable() noexcept -> const ColorTable & {
     static const auto table = ColorTable{{
@@ -44,11 +38,9 @@ auto ColorBase::colorTable() noexcept -> const ColorTable & {
     return table;
 }
 
-
 auto ColorBase::toString() const -> std::string {
     return std::string{tableEntry().name};
 }
-
 
 auto ColorBase::enumFromString(const std::string_view str) -> Value {
     auto normalizedIdentifier = impl::toNormalizedIdentifier(str);
@@ -59,7 +51,6 @@ auto ColorBase::enumFromString(const std::string_view str) -> Value {
     }
     return it->value;
 }
-
 
 auto ColorBase::brighterEnum(Value value) -> Value {
     switch (value) {
@@ -83,6 +74,5 @@ auto ColorBase::brighterEnum(Value value) -> Value {
         return value;
     }
 }
-
 
 }

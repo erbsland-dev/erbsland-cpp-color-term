@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "InlineTextPlanner.hpp"
 #include "PlanningContext.hpp"
 #include "RenderBlock.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Create fully planned render blocks from semantic inputs.
 class RenderBlockFactory final {
@@ -61,6 +58,5 @@ private:
     const PlanningStyleResolver &_styleResolver; ///< Shared planning style resolver.
     const InlineTextPlanner &_inlineTextPlanner; ///< Inline text planner.
 };
-
 
 }

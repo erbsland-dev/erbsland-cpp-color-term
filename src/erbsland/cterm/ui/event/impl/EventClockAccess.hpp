@@ -2,12 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../Event.hpp"
 
 #include <functional>
 #include <mutex>
-
 
 namespace erbsland::cterm::ui::impl {
 
@@ -34,7 +32,6 @@ private:
     static std::mutex _mutex; ///< Protects the clock override function.
     static NowFn _nowFn;      ///< Optional override clock for tests.
 };
-
 
 /// Scoped override for the internal UI clock.
 class ScopedEventClockOverride final {

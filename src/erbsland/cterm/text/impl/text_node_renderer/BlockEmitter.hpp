@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "RenderBlock.hpp"
 #include "RenderToState.hpp"
 
 #include "../../../CursorWriter.hpp"
 #include "../../../ParagraphOptions.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Emit planned render blocks to a cursor-writer target.
 class BlockEmitter final {
@@ -47,6 +44,5 @@ private:
     CursorWriterPtr _cursorWriter; ///< The output target.
     RenderToState _state;          ///< The current streaming state.
 };
-
 
 }

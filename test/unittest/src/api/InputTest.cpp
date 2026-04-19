@@ -7,7 +7,6 @@
 
 #include <chrono>
 
-
 class InputProbe final : public Input {
 public:
     [[nodiscard]] auto mode() const noexcept -> Mode override { return _mode; }
@@ -35,7 +34,6 @@ public:
     Key _readResult{Key::Escape};
     Key _waitResult{Key::Enter};
 };
-
 
 TESTED_TARGETS(Input)
 class InputTest final : public el::UnitTest {

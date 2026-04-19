@@ -2,15 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
-
 
 namespace demo::terminalchronicle {
 
-
 using namespace erbsland::cterm;
-
 
 /// Tell a short, colorful story using only `Terminal::print()` and `Terminal::printLine()`.
 class StoryDemo final : public TerminalApplication {
@@ -24,6 +20,5 @@ private:
     static void printStory(Terminal &terminal) noexcept;
     static void printOutro(Terminal &terminal) noexcept;
 };
-
 
 }

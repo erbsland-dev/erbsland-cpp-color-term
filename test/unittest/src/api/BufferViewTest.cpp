@@ -1,10 +1,9 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include "TestHelper.hpp"
+#include "BufferTestHelper.hpp"
 
 #include <erbsland/unittest/UnitTest.hpp>
-
 
 TESTED_TARGETS(BufferView)
 class BufferViewTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
@@ -95,5 +94,26 @@ public:
         REQUIRE_EQUAL(refView.get(Position{1, 0}), U']');
         REQUIRE_EQUAL(refView.get(Position{0, 1}), U'_');
         REQUIRE_EQUAL(refView.get(Position{1, 1}), U'+');
+    }
+
+    void testCursorBufferViewsRenderTopCropMarksForScrolledViews() {
+        auto content = std::make_shared<CursorBuffer>(Size{3, 3});
+        fillBufferFromRows(
+            *content,
+            {
+                "ABC",
+                "DEF",
+                "GHI",
+            });
+        auto view = BufferView{content, Rectangle{Position{0, 1}, Size{3, 2}}};
+        view.setShowCropCharacters(true);
+        view.setCropCharacter(Direction::North, Char{U'^'});
+
+        REQUIRE_EQUAL(view.get(Position{0, 0}), U'^');
+        REQUIRE_EQUAL(view.get(Position{1, 0}), U'^');
+        REQUIRE_EQUAL(view.get(Position{2, 0}), U'^');
+        REQUIRE_EQUAL(view.get(Position{0, 1}), U'G');
+        REQUIRE_EQUAL(view.get(Position{1, 1}), U'H');
+        REQUIRE_EQUAL(view.get(Position{2, 1}), U'I');
     }
 };

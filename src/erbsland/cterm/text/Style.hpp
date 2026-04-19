@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "StyleMatchContext.hpp"
 #include "StyleRule.hpp"
 #include "StyleSelector.hpp"
@@ -16,7 +15,6 @@
 #include <span>
 #include <string>
 #include <vector>
-
 
 namespace erbsland::cterm::text {
 
@@ -130,6 +128,5 @@ private:
     ParagraphIndents _baseBlockLayout; ///< Base block layout.
     std::vector<Entry> _definitions;   ///< Explicit selector definitions.
 };
-
 
 }

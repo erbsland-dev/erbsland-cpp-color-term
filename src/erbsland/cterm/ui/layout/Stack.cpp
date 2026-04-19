@@ -1,11 +1,8 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
-
 #include "Stack.hpp"
 
-
 #include "impl/StackLayoutItems.hpp"
-
 
 namespace erbsland::cterm::ui::layout {
 

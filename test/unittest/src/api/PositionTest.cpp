@@ -9,11 +9,9 @@
 #include <limits>
 #include <type_traits>
 
-
 static_assert(std::is_same_v<decltype(Position{}.coordinate(Orientation::Horizontal)), Coordinate>);
 static_assert(Position{3, 7}.coordinate(Orientation::Horizontal) == 3);
 static_assert(Position{3, 7}.coordinate(Orientation::Vertical) == 7);
-
 
 TESTED_TARGETS(Position)
 class PositionTest final : public el::UnitTest {

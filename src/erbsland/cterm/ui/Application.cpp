@@ -17,7 +17,6 @@
 #include <iostream>
 #include <stdexcept>
 
-
 namespace erbsland::cterm::ui {
 
 using namespace std::chrono_literals;

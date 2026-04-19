@@ -29,7 +29,6 @@ static_assert(std::is_same_v<decltype(Rectangle{}.height()), Coordinate>);
 static_assert(std::is_same_v<decltype(Rectangle{}.alignmentOffset(Size{}, Alignment::TopLeft)), Position>);
 static_assert(std::is_same_v<decltype(Rectangle{}.alignedSource(Rectangle{}, Alignment::TopLeft)), AlignedSource>);
 
-
 TESTED_TARGETS(Rectangle)
 class RectangleTest final : public el::UnitTest {
 public:

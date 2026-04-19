@@ -2,17 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <erbsland/cterm/all.hpp>
 
 #include <vector>
 
-
 namespace demo::retroplasma {
 
-
 using namespace erbsland::cterm;
-
 
 /// Render an animated plasma effect into a terminal buffer.
 class PlasmaRenderer final {
@@ -29,6 +25,5 @@ private:
     [[nodiscard]] static auto valueAt(Position position, Rectangle rect, double phase) noexcept -> double;
     [[nodiscard]] static auto cellForValue(double normalizedValue, std::size_t paletteIndex) -> Char;
 };
-
 
 }

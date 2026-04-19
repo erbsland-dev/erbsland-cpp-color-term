@@ -2,18 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "PlasmaRenderer.hpp"
 #include "TerminalApplication.hpp"
 
 #include <chrono>
 
-
 namespace demo::retroplasma {
 
-
 using namespace erbsland::cterm;
-
 
 /// Run the animated plasma buffer demo.
 class RetroPlasmaApp final : public TerminalApplication {
@@ -43,6 +39,5 @@ private:
     bool _paused{false};
     std::chrono::steady_clock::time_point _lastFrameTime{std::chrono::steady_clock::now()};
 };
-
 
 }

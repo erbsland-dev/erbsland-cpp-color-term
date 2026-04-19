@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "StyleMarker.hpp"
 
 #include "../CharStyle.hpp"
@@ -13,9 +12,7 @@
 #include <optional>
 #include <string_view>
 
-
 namespace erbsland::cterm::text {
-
 
 /// One configurable rich-text style rule with convenient fluent setters.
 class StyleRule final {
@@ -54,7 +51,7 @@ public:
     /// Replace the margins around the block.
     /// @param margins The new margins.
     /// @return Reference to this rule.
-    auto setMargins(const Margins margins) noexcept -> StyleRule &;
+    auto setMargins(Margins margins) noexcept -> StyleRule &;
     /// Replace the margins around the block.
     /// @param allSides Uniform margin for all sides.
     /// @return Reference to this rule.
@@ -157,7 +154,7 @@ public:
     /// @param suffix The text appended after the item number.
     /// @param style Optional marker overlay style.
     /// @return Reference to this rule.
-    auto setOrderedMarker(String suffix = String{U".\t"}, const CharStyle &style = {}) -> StyleRule &;
+    auto setOrderedMarker(String suffix = String{".\t"}, const CharStyle &style = {}) -> StyleRule &;
     /// Configure an ordered marker.
     /// @param suffix The text appended after the item number.
     /// @param style Optional marker overlay style.
@@ -175,6 +172,5 @@ private:
     std::optional<Char> _lineFill; ///< Optional fill character for filled headings or separators.
     StyleMarker _marker;           ///< Optional list marker.
 };
-
 
 }

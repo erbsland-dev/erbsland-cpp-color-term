@@ -2,23 +2,19 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "InlineTextPlanner.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 InlineTextPlanner::InlineTextPlanner(const PlanningStyleResolver &styleResolver) : _styleResolver{styleResolver} {
 }
 
-
 auto InlineTextPlanner::render(const TextNode &node, const CharStyle &style) const -> String {
-    auto text = String{};
+    auto text = cterm::impl::StringBuilder{};
     text.reserve(node.estimatedInlineTextCapacity());
     appendTo(node, style, text);
-    return text;
+    return text.takeString();
 }
 
-
-void InlineTextPlanner::appendTo(const TextNode &node, const CharStyle &style, String &text) const {
+void InlineTextPlanner::appendTo(const TextNode &node, const CharStyle &style, cterm::impl::StringBuilder &text) const {
     switch (node.type()) {
     case TextNode::Type::Text:
     case TextNode::Type::Unsupported:
@@ -39,14 +35,13 @@ void InlineTextPlanner::appendTo(const TextNode &node, const CharStyle &style, S
     }
 }
 
-
-void InlineTextPlanner::appendChildren(const TextNode &node, const CharStyle &style, String &text) const {
+void InlineTextPlanner::appendChildren(
+    const TextNode &node, const CharStyle &style, cterm::impl::StringBuilder &text) const {
     for (const auto &child : node.children()) {
         if (child) {
             appendTo(*child, style, text);
         }
     }
 }
-
 
 }

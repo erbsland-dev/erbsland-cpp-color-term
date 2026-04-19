@@ -14,9 +14,7 @@
 #include <random>
 #include <stdexcept>
 
-
 namespace demo::htmlviewer {
-
 
 void HtmlViewerApp::beforeInitialize() {
     _documentBuffer = std::make_shared<CursorBuffer>(
@@ -81,7 +79,6 @@ auto HtmlViewerApp::onCommandLine(const std::vector<std::string_view> &args) -> 
     return 0;
 }
 
-
 auto HtmlViewerApp::beforeRun() -> int {
     _html = loadHtmlFile(_htmlFilePath);
     if (_printMode) {
@@ -94,14 +91,12 @@ auto HtmlViewerApp::beforeRun() -> int {
     return 0;
 }
 
-
 auto HtmlViewerApp::printRenderedDocument() -> int {
     renderDocumentIfRequired(std::max(_terminal.size().width(), 1));
     _terminal.write(*_documentBuffer);
     _terminal.flush();
     return -1;
 }
-
 
 void HtmlViewerApp::onKey(const Key &key) {
     const auto contentRect = contentRectForBuffer(_buffer.size());
@@ -126,7 +121,6 @@ void HtmlViewerApp::onKey(const Key &key) {
     }
 }
 
-
 void HtmlViewerApp::onRenderToBuffer() {
     _buffer.fill(Char{U' ', bg::Black});
     const auto headerRect = Rectangle{0, 0, _buffer.size().width(), 1};
@@ -137,7 +131,6 @@ void HtmlViewerApp::onRenderToBuffer() {
     drawDocument(contentRect);
     drawFooter(footerRect);
 }
-
 
 void HtmlViewerApp::renderDocumentIfRequired(const int contentWidth) {
     const auto normalizedWidth = std::max(contentWidth, 1);
@@ -159,7 +152,6 @@ void HtmlViewerApp::renderDocumentIfRequired(const int contentWidth) {
         clampViewOffset(_viewOffsetY, contentRectForBuffer(_buffer.size()).height(), _documentBuffer->size().height());
 }
 
-
 void HtmlViewerApp::drawHeader(const Rectangle rect) {
     _buffer.fill(rect, Char{U' ', bg::Blue});
     _buffer.drawText(
@@ -177,7 +169,6 @@ void HtmlViewerApp::drawHeader(const Rectangle rect) {
         Alignment::CenterRight,
         Color{fg::BrightCyan, bg::Blue});
 }
-
 
 void HtmlViewerApp::drawFooter(const Rectangle rect) {
     _buffer.fill(rect, Char{U' ', bg::BrightBlack});
@@ -208,20 +199,17 @@ void HtmlViewerApp::drawFooter(const Rectangle rect) {
     _buffer.drawText(Text{help, rect.insetBy(Margins{1, 0}), Alignment::CenterRight});
 }
 
-
 void HtmlViewerApp::drawDocument(const Rectangle rect) {
     _buffer.fill(rect, Char{U' ', documentBaseColor()});
     updateView(rect);
     _buffer.drawBuffer(_documentView, rect);
 }
 
-
 void HtmlViewerApp::updateView(const Rectangle contentRect) noexcept {
     _viewOffsetY = clampViewOffset(
         _viewOffsetY, contentRect.height(), _documentBuffer == nullptr ? 0 : _documentBuffer->size().height());
     _documentView.setViewRect(Rectangle{0, _viewOffsetY, contentRect.width(), contentRect.height()});
 }
-
 
 void HtmlViewerApp::advanceDocumentStylePreset() noexcept {
     switch (_documentStylePreset) {
@@ -238,7 +226,6 @@ void HtmlViewerApp::advanceDocumentStylePreset() noexcept {
     _documentDirty = true;
 }
 
-
 auto HtmlViewerApp::locationText() const -> std::string {
     const auto totalLines = std::max(_documentBuffer->size().height(), 1);
     const auto topLine = std::min(_viewOffsetY + 1, totalLines);
@@ -247,12 +234,10 @@ auto HtmlViewerApp::locationText() const -> std::string {
     return std::format("lines {}-{} / {}  ({}%)", topLine, bottomLine, totalLines, percent);
 }
 
-
 auto HtmlViewerApp::displayName() const -> std::string {
     const auto filename = _htmlFilePath.filename().string();
     return filename.empty() ? _htmlFilePath.string() : filename;
 }
-
 
 auto HtmlViewerApp::documentStylePresetName() const noexcept -> std::string_view {
     switch (_documentStylePreset) {
@@ -266,16 +251,13 @@ auto HtmlViewerApp::documentStylePresetName() const noexcept -> std::string_view
     return "styled";
 }
 
-
 auto HtmlViewerApp::documentBaseColor() const -> Color {
     return documentStyle()->baseTextStyle().color();
 }
 
-
 auto HtmlViewerApp::defaultHtmlFilePath() -> std::filesystem::path {
     return std::filesystem::path{ERBSLAND_COLOR_TERM_HTML_VIEWER_DEFAULT_FILE};
 }
-
 
 auto HtmlViewerApp::loadHtmlFile(const std::filesystem::path &htmlFilePath) -> std::string {
     auto file = std::ifstream{htmlFilePath, std::ios::binary};
@@ -285,16 +267,13 @@ auto HtmlViewerApp::loadHtmlFile(const std::filesystem::path &htmlFilePath) -> s
     return std::string{std::istreambuf_iterator<char>{file}, std::istreambuf_iterator<char>{}};
 }
 
-
 auto HtmlViewerApp::documentStyle() const -> const text::StyleConstPtr & {
     return documentStyleForPreset(_documentStylePreset);
 }
 
-
 auto HtmlViewerApp::documentStyleForPreset(const DocumentStylePreset preset) -> const text::StyleConstPtr & {
     return text::Style::defaultStyle(preset);
 }
-
 
 auto HtmlViewerApp::parseDocumentStylePreset(const std::string_view value, DocumentStylePreset &preset) noexcept
     -> bool {
@@ -313,16 +292,13 @@ auto HtmlViewerApp::parseDocumentStylePreset(const std::string_view value, Docum
     return false;
 }
 
-
 auto HtmlViewerApp::contentRectForBuffer(const Size bufferSize) noexcept -> Rectangle {
     return Rectangle{0, 1, bufferSize.width(), std::max(bufferSize.height() - 2, 1)};
 }
-
 
 auto HtmlViewerApp::clampViewOffset(const int viewOffset, const int viewHeight, const int contentHeight) noexcept
     -> int {
     return std::clamp(viewOffset, 0, std::max(contentHeight - std::max(viewHeight, 1), 0));
 }
-
 
 }

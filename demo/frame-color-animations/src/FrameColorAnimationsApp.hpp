@@ -2,18 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
 
 #include <array>
 #include <string_view>
 
-
 namespace demo::framecoloranimations {
 
-
 using namespace erbsland::cterm;
-
 
 /// Interactive demo showing the animated frame color modes.
 class FrameColorAnimationsApp final : public TerminalApplication {
@@ -42,6 +38,5 @@ private:
     [[nodiscard]] static auto outerFrameColors() -> const ColorSequence &;
     [[nodiscard]] static auto fillColors() -> const ColorSequence &;
 };
-
 
 }

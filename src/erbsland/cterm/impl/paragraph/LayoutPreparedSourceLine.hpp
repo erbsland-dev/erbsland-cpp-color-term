@@ -2,13 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "LayoutLine.hpp"
 #include "LayoutLineToken.hpp"
-#include "LayoutSourceLineRange.hpp"
+
+#include "../../IndexRange.hpp"
 
 #include <vector>
-
 
 namespace erbsland::cterm::impl::paragraph {
 
@@ -18,8 +17,8 @@ public:
     /// Create a prepared source line for the given source range.
     /// Storage is reserved from the source range length to reduce allocation churn while tokenizing.
     /// @param sourceRange The original source-line range in the input text.
-    explicit LayoutPreparedSourceLine(LayoutSourceLineRange sourceRange) : sourceLine{sourceRange} {
-        tokens.reserve(sourceRange.length);
+    explicit LayoutPreparedSourceLine(IndexRange sourceRange) : sourceLine{sourceRange} {
+        tokens.reserve(sourceRange.length());
         _pendingTokens.reserve(4);
     }
 
@@ -69,7 +68,7 @@ public:
     }
 
 public:
-    LayoutSourceLineRange sourceLine;    ///< The original source line range.
+    IndexRange sourceLine;               ///< The original source line range.
     std::vector<LayoutLineToken> tokens; ///< The extracted tokens of the source line.
 
 private:
@@ -94,6 +93,5 @@ private:
     std::vector<LayoutLineToken> _pendingTokens; ///< Spacing tokens waiting for the next emitted word.
     bool _hasWordToken{false};                   ///< Tracks whether a word token was already emitted.
 };
-
 
 }

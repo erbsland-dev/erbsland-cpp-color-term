@@ -2,11 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "WritableBuffer.hpp"
 
-
 #include "impl/BitmapPainter.hpp"
 #include "impl/FramePainter.hpp"
 #include "impl/TextPainter.hpp"
-
 
 namespace erbsland::cterm {
 
@@ -47,7 +45,7 @@ void WritableBuffer::set(
     }
 }
 
-void WritableBuffer::set(Position pos, const String &str) noexcept {
+void WritableBuffer::set(Position pos, const StringView &str) noexcept {
     if (str.empty() || !size().contains(pos)) {
         return;
     }
@@ -235,7 +233,7 @@ void WritableBuffer::drawFilledFrame(
     }
 }
 
-void WritableBuffer::drawText(Position pos, const String &str) {
+void WritableBuffer::drawText(Position pos, const StringView &str) {
     impl::TextPainter{*this}.drawText(pos, str);
 }
 
@@ -257,7 +255,16 @@ void WritableBuffer::drawText(
 }
 
 void WritableBuffer::drawText(
-    const String &text,
+    const std::u32string_view text,
+    const Rectangle rect,
+    const Alignment alignment,
+    const Color color,
+    const std::size_t animationCycle) {
+    drawText(String{text}, rect, alignment, color, animationCycle);
+}
+
+void WritableBuffer::drawText(
+    const StringView &text,
     const Rectangle rect,
     const Alignment alignment,
     const Color color,
@@ -266,12 +273,12 @@ void WritableBuffer::drawText(
 }
 
 void WritableBuffer::drawText(
-    const String &text, const Rectangle rect, const TextOptions &options, const std::size_t animationCycle) {
+    const StringView &text, const Rectangle rect, const TextOptions &options, const std::size_t animationCycle) {
     drawTextImpl(text, rect, options, animationCycle);
 }
 
 void WritableBuffer::drawTextImpl(
-    const String &text,
+    const StringView &text,
     const Rectangle rect,
     const Alignment alignment,
     const Color color,
@@ -280,7 +287,7 @@ void WritableBuffer::drawTextImpl(
 }
 
 void WritableBuffer::drawTextImpl(
-    const String &text, const Rectangle rect, const TextOptions &options, const std::size_t animationCycle) {
+    const StringView &text, const Rectangle rect, const TextOptions &options, const std::size_t animationCycle) {
     impl::TextPainter{*this}.drawText(text, rect, options, animationCycle);
 }
 

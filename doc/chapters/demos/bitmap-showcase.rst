@@ -6,11 +6,16 @@
 Bitmap Showcase
 ****************
 
-``bitmap-showcase`` demonstrates how bitmap rendering behaves once a ``Bitmap`` is passed to ``Buffer::drawBitmap()``.
-The demo uses a selector on the left and one large preview panel on the right, so the active variant stays readable
-even on regular terminal sizes.
+``bitmap-showcase`` demonstrates how bitmap rendering behaves when a ``Bitmap`` is passed to ``Buffer::drawBitmap()``.
+It uses a selector panel on the left and a large preview area on the right so different scale modes, color modes,
+layout options, and style replacements stay easy to compare.
 
-It is the quickest way to see how low-level bitmap data turns into terminal cells in practice.
+Use This Demo When You Need...
+==============================
+
+* A support reference for ``drawBitmap()`` and its rendering options.
+* A practical way to compare scale modes, color modes, alignment, cropping, and style replacements.
+* A place to study how bitmap rendering interacts with existing frame grids and ``Char16Style`` output.
 
 Run the Demo
 ============
@@ -22,24 +27,32 @@ Start the demo from the build directory:
     $ ./cmake-build-debug/demo-apps/bitmap-showcase
 
 Use the left and right arrow keys to switch pages. Use the up and down arrow keys to move through the variants on the
-current page.
+current page. Press ``Q`` to quit.
 
-Features Shown
-==============
+Captured Output (80x25)
+=======================
 
-This demo highlights the complete bitmap rendering pipeline:
+.. include:: _captures/bitmap-showcase.rstinc
 
-* ``HalfBlock``, ``FullBlock``, ``DoubleBlock``, and ``Char16Style`` rendering.
+Features Demonstrated
+=====================
+
+* ``Buffer::drawBitmap()`` across ``HalfBlock``, ``FullBlock``, ``DoubleBlock``, and ``Char16Style`` output modes.
 * Animated ``BitmapColorMode`` variants with ``ColorSequence``.
 * Drawing a bitmap into a rectangle with alignment-dependent cropping.
 * Custom ``fullBlock()``, ``doubleBlocks()``, and ``halfBlocks()`` replacements.
 * ``CharCombinationStyle`` when a line-based bitmap is drawn over an existing frame grid.
 
+Related Demos
+=============
+
+* :doc:`Text Gallery <text-gallery>` for the font and text-oriented side of terminal rendering.
+* :doc:`Frame Weaver <frame-weaver>` for more ``Char16Style`` and combination-style behavior.
+* :doc:`Frame Color Animations <frame-color-animations>` for another showcase built around visual comparisons in one screen.
+
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/bitmap-showcase/src/BitmapShowcaseApp.cpp`.
 
-:file:`demo/bitmap-showcase/src/BitmapShowcaseApp.cpp`
-
-This file contains the page layout, the sample bitmaps, and the option combinations used to render the demo.
+This file contains the page layout, sample bitmaps, and the rendering option combinations used by the demo.

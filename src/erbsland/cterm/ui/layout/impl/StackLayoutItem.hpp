@@ -2,11 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "DimensionConstraints.hpp"
 
 #include "../../Surface.hpp"
-
 
 namespace erbsland::cterm::ui::layout::impl {
 

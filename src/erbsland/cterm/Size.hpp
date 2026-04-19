@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Alignment.hpp"
 #include "Anchor.hpp"
 #include "Orientation.hpp"
@@ -11,9 +10,7 @@
 #include <algorithm>
 #include <format>
 
-
 namespace erbsland::cterm {
-
 
 /// A non-negative 2D size (width × height).
 /// - Width and height are clamped to be >= 0.
@@ -184,7 +181,6 @@ private:
     Coordinate _height{};
 };
 
-
 template <typename Fn>
 void Size::forEach(Fn fn) const {
     for (Coordinate y = 0; y < height(); ++y) {
@@ -194,9 +190,7 @@ void Size::forEach(Fn fn) const {
     }
 }
 
-
 }
-
 
 template <>
 struct std::formatter<erbsland::cterm::Size> : std::formatter<std::string> {

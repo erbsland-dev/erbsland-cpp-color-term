@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "StyleListKind.hpp"
 #include "StyleRole.hpp"
 
@@ -10,9 +9,7 @@
 #include <span>
 #include <string>
 
-
 namespace erbsland::cterm::text {
-
 
 /// Additional node metadata used while resolving selectors.
 class StyleMatchContext final {
@@ -22,7 +19,7 @@ public:
     /// @param level The optional heading or list nesting level of the current node.
     /// @param listKind The list kind of the current node.
     /// @param styleTokens Parsed style tokens from `TextNode::style()`.
-    StyleMatchContext(
+    explicit StyleMatchContext(
         const StyleRole role = StyleRole::Paragraph,
         const std::optional<int> level = std::nullopt,
         const StyleListKind listKind = StyleListKind::Any,
@@ -55,6 +52,5 @@ private:
     StyleListKind _listKind{StyleListKind::Any}; ///< The list kind of the current node.
     std::span<const std::string> _styleTokens;   ///< Parsed style tokens from `TextNode::style()`.
 };
-
 
 }

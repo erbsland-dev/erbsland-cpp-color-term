@@ -7,9 +7,7 @@
 #include <array>
 #include <cmath>
 
-
 namespace demo::retroplasma {
-
 
 void PlasmaRenderer::render(
     Buffer &buffer, const Rectangle rect, const double phase, const std::size_t paletteIndex) const noexcept {
@@ -18,7 +16,6 @@ void PlasmaRenderer::render(
         buffer.set(position, cellForValue(valueAt(position, rect, phase), paletteIndex));
     });
 }
-
 
 auto PlasmaRenderer::palettes() -> const std::vector<ColorSequence> & {
     static const auto cPalettes = std::vector<ColorSequence>{
@@ -47,7 +44,6 @@ auto PlasmaRenderer::palettes() -> const std::vector<ColorSequence> & {
     return cPalettes;
 }
 
-
 auto PlasmaRenderer::valueAt(const Position position, const Rectangle rect, const double phase) noexcept -> double {
 
     const auto width = std::max(1, rect.width());
@@ -61,7 +57,6 @@ auto PlasmaRenderer::valueAt(const Position position, const Rectangle rect, cons
         std::sin((centeredX + centeredY) * 4.5 + phase * 0.8) + std::sin(radial * 9.0 - phase * 2.1);
     return std::clamp((value + 4.0) / 8.0, 0.0, 1.0);
 }
-
 
 auto PlasmaRenderer::cellForValue(const double normalizedValue, const std::size_t paletteIndex) -> Char {
     static constexpr auto cShades = std::array<std::string_view, 5>{" ", "░", "▒", "▓", "█"};
@@ -78,6 +73,5 @@ auto PlasmaRenderer::cellForValue(const double normalizedValue, const std::size_
     const auto foreground = palette.color(nextIndex);
     return Char{cShades[shadeIndex], Color{foreground.fg(), background.bg()}};
 }
-
 
 }

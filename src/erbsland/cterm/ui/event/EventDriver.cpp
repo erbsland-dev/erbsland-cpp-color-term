@@ -8,7 +8,6 @@
 #include <stdexcept>
 #include <thread>
 
-
 namespace erbsland::cterm::ui {
 
 using namespace std::chrono_literals;

@@ -1,5 +1,5 @@
-# Copyright (c) 2024-2025 Tobias Erbsland - https://erbsland.dev
-# SPDX-License-Identifier: Apache-2.0
+#  Copyright (c) 2024-2026 Tobias Erbsland - https://erbsland.dev
+#  SPDX-License-Identifier: Apache-2.0
 
 
 import argparse
@@ -8,7 +8,7 @@ from operator import attrgetter
 from pathlib import Path
 
 
-class ScriptError (Exception):
+class ScriptError(Exception):
     """
     Script error used for error reporting.
     """
@@ -68,11 +68,35 @@ class WorkingSet:
         'all.hpp'
     ]
 
+    RE_LEADING_BLOCK_H = re.compile(r"""
+        ^
+        # Capture a BOM if present.
+        (?P<bom>\ufeff?)
+        # Capture the copyright block.
+        (?P<copyright>(?://.*?\n)+)
+        # Ignore any empty lines between the copyright block and #pragma once.
+        (?:[ \t]*\n)*
+        # Capture the pragma line.
+        (?P<directive>\#pragma[ \t]+once[ \t]*\n)
+    """, re.VERBOSE)
+
+    RE_LEADING_BLOCK_CPP = re.compile(r"""
+        ^
+        # Capture a BOM if present.
+        (?P<bom>\ufeff?)
+        # Capture the copyright block.
+        (?P<copyright>(?://.*?\n)+)
+        # Ignore any empty lines between the copyright block and the first include.
+        (?:[ \t]*\n)*
+        # Capture the first include line.
+        (?P<directive>\#include.+\n)
+    """, re.VERBOSE)
+
     RE_INCLUDE_BLOCK_H = re.compile(r"""
         # Skip a BOM
         \ufeff?
         # Skip copyright block
-        (?://.*\n)+(?:[ \t]*\n)*
+        (?://.*?\n)+(?:[ \t]*\n)*
         # Skip pragma
         \#pragma[ \t]+once[ \t]*\n
         # Skip initial empty lines
@@ -85,7 +109,7 @@ class WorkingSet:
         # Skip a BOM
         \ufeff?
         # Skip copyright block
-        (?://.*\n)+(?:[ \t]*\n)*
+        (?://.*?\n)+(?:[ \t]*\n)*
         # Skip initial include statement
         \#include.+\n
         # Skip initial empty lines
@@ -102,14 +126,38 @@ class WorkingSet:
         """
         Create a new empty working set.
         """
-        self.verbose = False                       # If verbose messages shall be shown
-        self.project_dir = Path()                  # The project directory
-        self.src_dir = Path()                      # The directory with the sources.
+        self.verbose = False  # If verbose messages shall be shown
+        self.project_dir = Path()  # The project directory
+        self.src_dir = Path()  # The directory with the sources.
+
+    @classmethod
+    def normalize_leading_spacing(cls, text: str, is_header: bool) -> str:
+        """
+        Normalize the spacing between the copyright block and the first directive.
+
+        Header files keep `#pragma once` directly below the copyright block. Source files keep the
+        self-include directly below the copyright block.
+
+        @param text The file content to normalize.
+        @param is_header If the file is a header or template implementation file.
+        @return The normalized file content.
+        """
+        pattern = cls.RE_LEADING_BLOCK_H if is_header else cls.RE_LEADING_BLOCK_CPP
+        match = pattern.match(text)
+        if not match:
+            return text
+        return (
+            f'{match.group("bom")}'
+            f'{match.group("copyright")}'
+            f'{match.group("directive")}'
+            f'{text[match.end():]}'
+        )
 
     def process_file(self, path: Path, is_header: bool):
         if self.verbose:
             print(f'Processing file: {path.relative_to(self.src_dir)}')
-        text = path.read_text(encoding='utf-8')
+        original_text = path.read_text(encoding='utf-8')
+        text = self.normalize_leading_spacing(original_text, is_header)
         if is_header:
             if '#pragma once' not in text:
                 raise ScriptError('Missing "#pragma once" in header file!')
@@ -117,6 +165,11 @@ class WorkingSet:
         else:
             match = self.RE_INCLUDE_BLOCK_CPP.match(text)
         if not match or not match.group(1).strip():
+            if original_text != text:
+                if self.verbose:
+                    print('  overwriting changed file')
+                path.write_text(text, encoding='utf-8')
+                return
             if self.verbose:
                 print('  no include block found.')
             return
@@ -151,7 +204,7 @@ class WorkingSet:
             return
         include_list.sort(key=attrgetter('group_id', 'sort_path'))
         last_group_id = 0
-        new_block = '\n\n'
+        new_block = '\n'
         if include_list:
             for entry in include_list:
                 if last_group_id > 0 and last_group_id != entry.group_id:
@@ -164,13 +217,13 @@ class WorkingSet:
                     end_quote = '"'
                 new_block += f'#include {start_quote}{entry.path}{end_quote}\n'
                 last_group_id = entry.group_id
-            new_block += '\n\n'
+            new_block += '\n'
         else:
             new_block = ''
         new_text = text[0:match.start(1)]
         new_text += new_block
         new_text += text[match.end(1):]
-        if text != new_text:
+        if original_text != new_text:
             if self.verbose:
                 print('  overwriting changed file')
             path.write_text(new_text, encoding='utf-8')

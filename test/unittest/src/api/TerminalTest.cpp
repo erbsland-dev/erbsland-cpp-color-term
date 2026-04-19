@@ -8,7 +8,6 @@
 
 #include <string_view>
 
-
 TESTED_TARGETS(Terminal)
 class TerminalTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {
 public:
@@ -179,6 +178,18 @@ public:
 
         REQUIRE_EQUAL(writtenLines, 2);
         REQUIRE_EQUAL(backend->output(), std::string{"\x1b[44mAB  \x1b[49m\n\x1b[44mCD  \x1b[49m\n"});
+    }
+
+    void testPrintParagraphAcceptsStringViewSlices() {
+        const auto backend = std::make_shared<TerminalTestBackend>();
+        auto terminal = createTerminal(backend, Size{4, 4});
+        const auto source = String{"xAB CD!"};
+
+        const auto writtenLines = terminal->printParagraph(StringView{source}.substr(1, 5));
+        terminal->flush();
+
+        REQUIRE_EQUAL(writtenLines, 2);
+        REQUIRE_EQUAL(backend->output(), std::string{"AB\nCD\n"});
     }
 
     void testLineBufferCanBeDisabledForImmediateEmission() {

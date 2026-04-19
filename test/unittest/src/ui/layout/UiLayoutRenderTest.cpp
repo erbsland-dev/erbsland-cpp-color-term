@@ -10,7 +10,6 @@
 
 namespace ui = erbsland::cterm::ui;
 
-
 TESTED_TARGETS(UiLayout)
 class UiLayoutRenderTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {
 public:

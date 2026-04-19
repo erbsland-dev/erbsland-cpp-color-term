@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Alignment.hpp"
 #include "Char.hpp"
 #include "FastCharSet.hpp"
@@ -13,7 +12,6 @@
 #include "TabOverflowBehavior.hpp"
 
 #include <stdexcept>
-
 
 namespace erbsland::cterm {
 
@@ -223,6 +221,5 @@ private:
     TabOverflowBehavior _tabOverflowBehavior{TabOverflowBehavior::AddSpace}; ///< Fallback for non-advancing tabs.
     ParagraphOnError _onError{ParagraphOnError::PlainOutput};                ///< Error handling mode for paragraphs.
 };
-
 
 }

@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "PlanningContext.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 auto PlanningContext::withContainer(const StyleRule &containerRule) const -> PlanningContext {
     return PlanningContext{
@@ -16,7 +14,6 @@ auto PlanningContext::withContainer(const StyleRule &containerRule) const -> Pla
             margins.left() + containerRule.margins().left()}};
 }
 
-
 auto PlanningContext::withHorizontalMargins(const Margins &edgeMargins) const -> PlanningContext {
     return PlanningContext{
         .textStyle = textStyle,
@@ -26,7 +23,6 @@ auto PlanningContext::withHorizontalMargins(const Margins &edgeMargins) const ->
             margins.bottom(),
             margins.left() + edgeMargins.left()}};
 }
-
 
 auto PlanningContext::withEdgeMargins(const Margins &edgeMargins, const bool isFirstChild, const bool isLastChild) const
     -> PlanningContext {
@@ -39,7 +35,6 @@ auto PlanningContext::withEdgeMargins(const Margins &edgeMargins, const bool isF
             margins.left()}};
 }
 
-
 auto PlanningContext::withListItem(const StyleRule &listItemRule) const -> PlanningContext {
     return PlanningContext{
         .textStyle = textStyle.withOverlay(listItemRule.textStyle()),
@@ -47,12 +42,10 @@ auto PlanningContext::withListItem(const StyleRule &listItemRule) const -> Plann
             0, margins.right() + listItemRule.margins().right(), 0, margins.left() + listItemRule.margins().left()}};
 }
 
-
 auto PlanningContext::resolvedTextStyle(const CharStyle &baseTextStyle, const StyleRule &blockStyle) const
     -> CharStyle {
     return baseTextStyle.withOverlay(textStyle).withOverlay(blockStyle.textStyle());
 }
-
 
 auto PlanningContext::resolvedBlockStyle(const StyleRule &blockStyle) const -> StyleRule {
     auto result = blockStyle;
@@ -64,6 +57,5 @@ auto PlanningContext::resolvedBlockStyle(const StyleRule &blockStyle) const -> S
             blockStyle.margins().left() + margins.left()});
     return result;
 }
-
 
 }

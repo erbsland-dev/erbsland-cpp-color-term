@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "BufferedTokenizer.hpp"
 
-
 #include "../../impl/TextUtil.hpp"
-
 
 namespace erbsland::cterm::text::impl {
 
@@ -37,16 +35,15 @@ void BufferedTokenizer::appendCurrentAndAdvance() {
 }
 
 auto BufferedTokenizer::makeRange(const std::size_t start) const noexcept -> IndexRange {
-    return IndexRange{.start = start, .length = _buffer.size() - start};
+    return IndexRange{start, _buffer.size() - start};
 }
 
 auto BufferedTokenizer::trimRange(IndexRange range) const noexcept -> IndexRange {
-    while (range.length > 0 && cterm::impl::isAsciiWhitespace(_buffer[range.start])) {
-        range.start += 1;
-        range.length -= 1;
+    while (range.length() > 0 && cterm::impl::isAsciiWhitespace(_buffer[range.startIndex()])) {
+        range = IndexRange{range.startIndex() + 1, range.length() - 1};
     }
-    while (range.length > 0 && cterm::impl::isAsciiWhitespace(_buffer[(range.start + range.length) - 1])) {
-        range.length -= 1;
+    while (range.length() > 0 && cterm::impl::isAsciiWhitespace(_buffer[(range.startIndex() + range.length()) - 1])) {
+        range = IndexRange{range.startIndex(), range.length() - 1};
     }
     return range;
 }

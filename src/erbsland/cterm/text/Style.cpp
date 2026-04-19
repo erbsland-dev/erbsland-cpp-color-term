@@ -6,9 +6,7 @@
 #include <limits>
 #include <ranges>
 
-
 namespace erbsland::cterm::text {
-
 
 Style::Style() :
     _baseTextStyle{Color{fg::White, bg::Black}},
@@ -26,31 +24,25 @@ Style::Style() :
     edit(StyleSelector{StyleRole::ListItem, std::nullopt, StyleListKind::Numbered}).setOrderedMarker(U".\t");
 }
 
-
 auto Style::clone() const -> StylePtr {
     return std::make_shared<Style>(*this);
 }
-
 
 auto Style::baseTextStyle() const noexcept -> const CharStyle & {
     return _baseTextStyle;
 }
 
-
 void Style::setBaseTextStyle(const CharStyle &style) noexcept {
     _baseTextStyle = style;
 }
-
 
 auto Style::baseBlockLayout() const noexcept -> const ParagraphIndents & {
     return _baseBlockLayout;
 }
 
-
 void Style::setBaseBlockLayout(const ParagraphIndents &layout) noexcept {
     _baseBlockLayout = layout;
 }
-
 
 auto Style::definition(const StyleSelector &selector) const noexcept
     -> std::optional<std::reference_wrapper<const StyleRule>> {
@@ -60,7 +52,6 @@ auto Style::definition(const StyleSelector &selector) const noexcept
     }
     return iterator->rule;
 }
-
 
 auto Style::edit(const StyleSelector &selector) -> StyleRule & {
     const auto normalized = normalizedSelector(selector);
@@ -75,13 +66,11 @@ auto Style::edit(const StyleSelector &selector) -> StyleRule & {
     return _definitions.back().rule;
 }
 
-
 void Style::erase(const StyleSelector &selector) noexcept {
     if (auto iterator = findEntry(selector); iterator != _definitions.end()) {
         _definitions.erase(iterator);
     }
 }
-
 
 auto Style::resolve(const StyleSelector &selector, const StyleMatchContext &context) const -> StyleRule {
     const auto effectiveContext = mergeSelectorIntoContext(selector, context);
@@ -152,7 +141,6 @@ auto Style::resolve(const StyleSelector &selector, const StyleMatchContext &cont
     return resolved;
 }
 
-
 auto Style::defaultStyle(const Predefined predefined) noexcept -> const StyleConstPtr & {
     switch (predefined) {
     case Predefined::Plain:
@@ -165,24 +153,20 @@ auto Style::defaultStyle(const Predefined predefined) noexcept -> const StyleCon
     return defaultPlain();
 }
 
-
 auto Style::defaultPlain() noexcept -> const StyleConstPtr & {
     static const StyleConstPtr cPlainStyle = std::make_shared<Style>();
     return cPlainStyle;
 }
-
 
 auto Style::defaultSimple() noexcept -> const StyleConstPtr & {
     static const auto cSimpleStyle = createSimpleDefaultStyle();
     return cSimpleStyle;
 }
 
-
 auto Style::defaultStyled() noexcept -> const StyleConstPtr & {
     static const auto cStyledStyle = createStyledDefaultStyle();
     return cStyledStyle;
 }
-
 
 auto Style::createSimpleDefaultStyle() -> StyleConstPtr {
     using Selector = StyleSelector;
@@ -205,7 +189,6 @@ auto Style::createSimpleDefaultStyle() -> StyleConstPtr {
     value->edit(Selector::horizontalRule()).setMargins(0, 1);
     return value;
 }
-
 
 auto Style::createStyledDefaultStyle() -> StyleConstPtr {
     using Selector = StyleSelector;
@@ -244,14 +227,12 @@ auto Style::createStyledDefaultStyle() -> StyleConstPtr {
     return value;
 }
 
-
 auto Style::normalizedSelector(StyleSelector selector) -> StyleSelector {
     std::ranges::sort(selector.requiredStyleTokens());
     selector.requiredStyleTokens().erase(
         std::ranges::unique(selector.requiredStyleTokens()).begin(), selector.requiredStyleTokens().end());
     return selector;
 }
-
 
 auto Style::defaultRuleFor(const Role role, const ListKind listKind, const std::optional<int> level) const noexcept
     -> StyleRule {
@@ -263,7 +244,6 @@ auto Style::defaultRuleFor(const Role role, const ListKind listKind, const std::
     }
     return rule;
 }
-
 
 auto Style::mergeSelectorIntoContext(const StyleSelector &selector, const StyleMatchContext &context)
     -> StyleMatchContext {
@@ -277,7 +257,6 @@ auto Style::mergeSelectorIntoContext(const StyleSelector &selector, const StyleM
     }
     return result;
 }
-
 
 auto Style::combineSelectorAndContextTokens(
     const StyleSelector &selector, const std::span<const std::string> contextTokens) -> std::vector<std::string> {
@@ -294,7 +273,6 @@ auto Style::combineSelectorAndContextTokens(
     return tokens;
 }
 
-
 auto Style::tokensMatch(
     const std::span<const std::string> requiredTokens, const std::span<const std::string> contextTokens) noexcept
     -> bool {
@@ -309,17 +287,14 @@ auto Style::tokensMatch(
     return true;
 }
 
-
 auto Style::findEntry(const StyleSelector &selector) noexcept -> std::vector<Entry>::iterator {
     const auto normalized = normalizedSelector(selector);
     return std::ranges::find(_definitions, normalized, &Entry::selector);
 }
 
-
 auto Style::findEntry(const StyleSelector &selector) const noexcept -> std::vector<Entry>::const_iterator {
     const auto normalized = normalizedSelector(selector);
     return std::ranges::find(_definitions, normalized, &Entry::selector);
 }
-
 
 }

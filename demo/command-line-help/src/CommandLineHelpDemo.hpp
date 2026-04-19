@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "CommandLineHelpModel.hpp"
 #include "TerminalApplication.hpp"
 
 #include <optional>
 
-
 namespace demo::command_line_help {
-
 
 /// Demonstrate colorful command help output together with `Terminal::printParagraph()`.
 class CommandLineHelpDemo final : public TerminalApplication {
@@ -102,6 +99,5 @@ private:
     DemoConfig _config;
     std::vector<std::string> _errors;
 };
-
 
 }

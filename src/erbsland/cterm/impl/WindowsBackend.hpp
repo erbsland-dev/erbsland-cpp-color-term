@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "CombinedChar.hpp"
 
 #include "../Backend.hpp"
@@ -15,12 +14,9 @@
 #include <mutex>
 #include <optional>
 
-
 namespace erbsland::cterm::impl {
 
-
 class WindowsSignalDispatcher;
-
 
 class WindowsBackend : public Backend {
 public:

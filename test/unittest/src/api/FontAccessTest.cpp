@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(Font)
 class FontAccessTest final : public el::UnitTest {
 public:

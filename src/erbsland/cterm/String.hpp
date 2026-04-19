@@ -2,22 +2,31 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Char.hpp"
 #include "EncodingErrors.hpp"
+#include "IndexRange.hpp"
 #include "ParagraphSpacing.hpp"
 
 #include "impl/TypeTraits.hpp"
 
+#include <memory>
 #include <string>
 #include <string_view>
 #include <vector>
 
-
 namespace erbsland::cterm {
 
+class StringView;
+
+namespace impl {
+class StringBuilder;
+class StringData;
+}
 
 /// A terminal string represented as a sequence of `Char` values.
+///
+/// `String` is implicitly shared. Copying a string shares its backing data, and a deep copy is only made when one
+/// instance is modified through a mutating API.
 class String {
 public:
     using Storage = std::vector<Char>;                              ///< Storage container for the characters.
@@ -33,12 +42,12 @@ public:
     using pointer = Storage::pointer;                               ///< Mutable element pointer.
     using const_pointer = Storage::const_pointer;                   ///< Immutable element pointer.
 
-    /// No valid position
-    static constexpr std::size_t npos = std::numeric_limits<std::size_t>::max();
+    /// No valid position.
+    static constexpr std::size_t npos = IndexRange::npos;
 
 public:
     /// Create an empty terminal string.
-    String() = default;
+    String() noexcept;
     /// Create a terminal string from UTF-8 text.
     /// @param str The UTF-8 text to split into terminal characters.
     /// @param encodingErrors How UTF-8 encoding errors are handled.
@@ -73,6 +82,9 @@ public:
     /// @param count The repetition count. Limited to 10'000'000.
     /// @param character The character to repeat.
     explicit String(std::size_t count, Char character) noexcept;
+    /// Create a terminal string by materializing one read-only view.
+    /// @param view The string view to copy into an owned string.
+    explicit String(const StringView &view);
 
     // defaults
     ~String() = default;
@@ -85,11 +97,11 @@ public: // operators
     /// Access one character without bounds checking.
     /// @param index The character index.
     /// @return A copy of the character at `index`.
-    [[nodiscard]] auto operator[](const std::size_t index) const noexcept -> Char { return _chars[index]; }
+    [[nodiscard]] auto operator[](std::size_t index) const noexcept -> Char;
     /// Access one character without bounds checking.
     /// @param index The character index.
     /// @return A mutable reference to the character at `index`.
-    [[nodiscard]] auto operator[](const std::size_t index) noexcept -> Char & { return _chars[index]; }
+    [[nodiscard]] auto operator[](std::size_t index) noexcept -> Char &;
     /// Append one character to this string.
     /// @param character The character to append.
     /// @return Reference to this string.
@@ -100,10 +112,11 @@ public: // operators
     /// Append another terminal string to this string.
     /// @param other The string to append.
     /// @return Reference to this string.
-    auto operator+=(const String &other) noexcept -> String & {
-        _chars.insert(_chars.end(), other._chars.begin(), other._chars.end());
-        return *this;
-    }
+    auto operator+=(const String &other) noexcept -> String &;
+    /// Append a read-only string view to this string.
+    /// @param other The string view to append.
+    /// @return Reference to this string.
+    auto operator+=(const StringView &other) noexcept -> String &;
     /// Create a new string with one appended character.
     /// @param character The character to append.
     /// @return The concatenated string.
@@ -115,52 +128,52 @@ public: // operators
     /// Create a new string with another appended string.
     /// @param other The string to append.
     /// @return The concatenated string.
-    auto operator+(const String &other) const noexcept -> String {
-        auto copy = *this;
-        copy += other;
-        return copy;
-    }
+    auto operator+(const String &other) const noexcept -> String;
+    /// Create a new string with an appended read-only view.
+    /// @param other The string view to append.
+    /// @return The concatenated string.
+    auto operator+(const StringView &other) const noexcept -> String;
 
 public: // accessors
     /// Get the number of stored characters.
-    [[nodiscard]] auto size() const noexcept -> std::size_t { return _chars.size(); }
+    [[nodiscard]] auto size() const noexcept -> std::size_t { return _range.length(); }
     /// Get the width of the string in terminal cells.
     /// @return The sum of all character display widths.
     [[nodiscard]] auto displayWidth() const noexcept -> int;
+    /// Test if this string is empty.
+    [[nodiscard]] auto empty() const noexcept -> bool { return _range.empty(); }
     /// Access one character with bounds checking.
     /// @param index The character index.
     /// @return A copy of the character at `index`.
-    [[nodiscard]] auto at(const std::size_t index) const -> Char { return _chars.at(index); }
-    /// Test if this string is empty.
-    [[nodiscard]] auto empty() const noexcept -> bool { return _chars.empty(); }
+    [[nodiscard]] auto at(std::size_t index) const -> Char;
     /// Get an iterator to the first character.
-    [[nodiscard]] auto begin() noexcept { return _chars.begin(); }
+    [[nodiscard]] auto begin() noexcept -> iterator;
     /// Get an iterator past the last character.
-    [[nodiscard]] auto end() noexcept { return _chars.end(); }
+    [[nodiscard]] auto end() noexcept -> iterator;
     /// Get a const iterator to the first character.
-    [[nodiscard]] auto begin() const noexcept { return _chars.begin(); }
+    [[nodiscard]] auto begin() const noexcept -> const_iterator;
     /// Get a const iterator past the last character.
-    [[nodiscard]] auto end() const noexcept { return _chars.end(); }
+    [[nodiscard]] auto end() const noexcept -> const_iterator;
     /// Get a const iterator to the first character.
-    [[nodiscard]] auto cbegin() const noexcept { return _chars.cbegin(); }
+    [[nodiscard]] auto cbegin() const noexcept -> const_iterator;
     /// Get a const iterator past the last character.
-    [[nodiscard]] auto cend() const noexcept { return _chars.cend(); }
+    [[nodiscard]] auto cend() const noexcept -> const_iterator;
     /// Get a reverse iterator to the last character.
-    [[nodiscard]] auto rbegin() noexcept { return _chars.rbegin(); }
+    [[nodiscard]] auto rbegin() noexcept -> reverse_iterator;
     /// Get a reverse iterator past the first character.
-    [[nodiscard]] auto rend() noexcept { return _chars.rend(); }
+    [[nodiscard]] auto rend() noexcept -> reverse_iterator;
     /// Get a const reverse iterator to the last character.
-    [[nodiscard]] auto rbegin() const noexcept { return _chars.rbegin(); }
+    [[nodiscard]] auto rbegin() const noexcept -> const_reverse_iterator;
     /// Get a const reverse iterator past the first character.
-    [[nodiscard]] auto rend() const noexcept { return _chars.rend(); }
+    [[nodiscard]] auto rend() const noexcept -> const_reverse_iterator;
     /// Get a const reverse iterator to the last character.
-    [[nodiscard]] auto crbegin() const noexcept { return _chars.crbegin(); }
+    [[nodiscard]] auto crbegin() const noexcept -> const_reverse_iterator;
     /// Get a const reverse iterator past the first character.
-    [[nodiscard]] auto crend() const noexcept { return _chars.crend(); }
+    [[nodiscard]] auto crend() const noexcept -> const_reverse_iterator;
     /// Count the number of characters with a given color.
     /// @param character The character to count.
     /// @return The number of characters in this string.
-    [[nodiscard]] auto count(Char character) const noexcept -> std::size_t;
+    [[nodiscard]] auto count(const Char &character) const noexcept -> std::size_t;
     /// Count the number of characters matching any color.
     /// @param character The character to count (1 code-point).
     /// @return The number of characters in this string.
@@ -171,7 +184,7 @@ public: // accessors
     /// @param character The character to search for. Compares both, character and color!
     /// @param startIndex The start index to search from. Defaults to 0.
     /// @return The index of the next character or npos if not found.
-    [[nodiscard]] auto indexOf(Char character, std::size_t startIndex = 0) const noexcept -> std::size_t;
+    [[nodiscard]] auto indexOf(const Char &character, std::size_t startIndex = 0) const noexcept -> std::size_t;
     /// Get the index of the next character matching any color.
     /// If startIndex is out of bounds, returns npos.
     /// If no character is found, returns npos.
@@ -200,9 +213,9 @@ public: // tests
 public: // modifiers
     /// Reserve storage for at least the given number of characters.
     /// @param size The requested capacity.
-    void reserve(const std::size_t size) noexcept { _chars.reserve(size); }
+    void reserve(std::size_t size) noexcept;
     /// Remove all characters from this string.
-    void clear() noexcept { _chars.clear(); }
+    void clear() noexcept;
     /// Append text using one uniform style.
     /// @param text The text to append.
     /// @param style The style applied to the appended characters.
@@ -211,23 +224,23 @@ public: // modifiers
     void appendStyled(std::u32string_view text, CharStyle style) noexcept;
     /// Append a range of characters from another terminal string.
     /// The original character styles are preserved.
-    /// @param other The source string.
+    /// @param other The source text view.
     /// @param startIndex The first character to append.
     /// @param length The number of characters to append, or `npos` for the remainder of `other`.
-    void appendRange(const String &other, std::size_t startIndex, std::size_t length = npos) noexcept;
+    void appendRange(const StringView &other, std::size_t startIndex, std::size_t length = npos) noexcept;
     /// Append a range of characters from another terminal string with one resolved base style.
-    /// @param other The source string.
+    /// @param other The source text view.
     /// @param startIndex The first character to append.
     /// @param length The number of characters to append, or `npos` for the remainder of `other`.
     /// @param style The style used as base for inherited components in the appended range.
-    void
-    appendRangeWithBaseStyle(const String &other, std::size_t startIndex, std::size_t length, CharStyle style) noexcept;
+    void appendRangeWithBaseStyle(
+        const StringView &other, std::size_t startIndex, std::size_t length, CharStyle style) noexcept;
     /// Append elements to this string.
     /// This works similar to `Terminal::print()`.
     /// If you add a color, this color is "active" for all following characters *in the same call*.
     /// If you add character attributes, these attributes are active for all following characters *in the same call*.
-    /// Appended `Char` and `String` values with inherited color components or inherited attributes resolve against the
-    /// currently active state.
+    /// Appended `Char`, `String`, and `StringView` values with inherited color components or inherited attributes
+    /// resolve against the currently active state.
     /// Just adding a color does not change the string.
     /// @param args The arguments to append.
     template <PrintableArg... Args>
@@ -290,10 +303,13 @@ public: // legacy
     }
 
 private:
-    explicit String(std::vector<Char> &&chars) noexcept : _chars(std::move(chars)) {}
-    [[nodiscard]] static auto
-    countCharacters(std::string_view str, EncodingErrors encodingErrors = EncodingErrors::Replace) -> std::size_t;
-    [[nodiscard]] static auto countCharacters(std::u32string_view str) -> std::size_t;
+    friend class StringView;
+    friend class impl::StringBuilder;
+
+    explicit String(std::shared_ptr<impl::StringData> data, IndexRange range) noexcept;
+    explicit String(Storage chars) noexcept;
+    [[nodiscard]] static auto fromStorageWithDisplayWidth(Storage chars, int displayWidth) noexcept -> String;
+
     [[nodiscard]] static auto splitCharacters(
         std::string_view str,
         Color color = {},
@@ -301,48 +317,30 @@ private:
         EncodingErrors encodingErrors = EncodingErrors::Replace) -> Storage;
     [[nodiscard]] static auto splitCharacters(std::u32string_view str, Color color = {}, CharAttributes attributes = {})
         -> Storage;
-    [[nodiscard]] constexpr static auto isControlCode(const char32_t codePoint) noexcept -> bool {
-        return codePoint < 0x20 || (codePoint >= 0x7FU && codePoint <= 0x9FU);
-    }
-    [[nodiscard]] static auto isStringCharacter(char32_t codePoint) noexcept -> bool;
-    static void appendCodePoint(Storage &chars, char32_t codePoint, Color color, CharAttributes attributes);
-    static void
-    appendCharacters(Storage &chars, std::u32string_view text, Color color, CharAttributes attributes) noexcept;
-    static void appendCharacters(
-        Storage &chars,
-        std::string_view text,
-        Color color,
-        CharAttributes attributes,
-        EncodingErrors encodingErrors) noexcept;
-    void appendElement(const Color color, CharStyle &style) noexcept { style.setColor(color); }
-    void appendElement(const Foreground::Hue foreground, CharStyle &style) noexcept { style.setFg(foreground); }
-    void appendElement(const Foreground foreground, CharStyle &style) noexcept { style.setFg(foreground); }
-    void appendElement(const Background::Hue background, CharStyle &style) noexcept { style.setBg(background); }
-    void appendElement(const Background background, CharStyle &style) noexcept { style.setBg(background); }
-    void appendElement(const CharStyle overlayStyle, CharStyle &style) noexcept {
-        style = style.withOverlay(overlayStyle);
-    }
-    void appendElement(const CharAttributes attributes, CharStyle &style) noexcept {
-        style.setAttributes(attributes.resolvedWith(style.attributes()));
-    }
-    void appendElement(const Char &character, CharStyle &style) noexcept {
-        _chars.emplace_back(character.withBase(style.color(), style.attributes()));
-    }
-    void appendElement(const String &other, CharStyle &style) noexcept {
-        appendRangeWithBaseStyle(other, 0, other.size(), style);
-    }
-    void appendElement(const std::u32string_view str, CharStyle &style) noexcept { appendStyled(str, style); }
-    void appendElement(const std::string_view str, CharStyle &style) noexcept {
-        appendCharacters(_chars, str, style.color(), style.attributes(), EncodingErrors::Replace);
-    }
+    void appendElement(Color color, CharStyle &style) noexcept;
+    void appendElement(Foreground::Hue foreground, CharStyle &style) noexcept;
+    void appendElement(Foreground foreground, CharStyle &style) noexcept;
+    void appendElement(Background::Hue background, CharStyle &style) noexcept;
+    void appendElement(Background background, CharStyle &style) noexcept;
+    void appendElement(CharStyle overlayStyle, CharStyle &style) noexcept;
+    void appendElement(CharAttributes attributes, CharStyle &style) noexcept;
+    void appendElement(const Char &character, CharStyle &style) noexcept;
+    void appendElement(const String &other, CharStyle &style) noexcept;
+    void appendElement(const StringView &other, CharStyle &style) noexcept;
+    void appendElement(std::u32string_view str, CharStyle &style) noexcept;
+    void appendElement(std::string_view str, CharStyle &style) noexcept;
+    void appendView(const StringView &view, CharStyle style) noexcept;
+    void appendViewWithBaseStyle(const StringView &view, CharStyle style) noexcept;
+    void detach();
+    void syncRangeWithStorage() noexcept;
+    [[nodiscard]] auto characterAt(std::size_t index) const noexcept -> const Char &;
 
 private:
-    std::vector<Char> _chars;
+    std::shared_ptr<impl::StringData> _data; ///< Shared backing storage.
+    IndexRange _range;                       ///< Visible sub-range inside `_data`.
 };
-
 
 /// A sequence of wrapped terminal text lines.
 using StringLines = std::vector<String>;
-
 
 }

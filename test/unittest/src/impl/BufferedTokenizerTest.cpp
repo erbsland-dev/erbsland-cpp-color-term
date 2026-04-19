@@ -88,8 +88,8 @@ public:
 
         const auto range = tokenizer.rangeFrom(1);
 
-        REQUIRE_EQUAL(range.start, 1U);
-        REQUIRE_EQUAL(range.length, 2U);
+        REQUIRE_EQUAL(range.startIndex(), 1U);
+        REQUIRE_EQUAL(range.length(), 2U);
     }
 
     void testTrimRangeRemovesOnlyLeadingAndTrailingAsciiWhitespace() {
@@ -104,8 +104,8 @@ public:
 
         const auto range = tokenizer.trim(tokenizer.rangeFrom(0));
 
-        REQUIRE_EQUAL(range.start, 2U);
-        REQUIRE_EQUAL(range.length, 3U);
-        REQUIRE_EQUAL(tokenizer.bufferText().substr(range.start, range.length), U"A B");
+        REQUIRE_EQUAL(range.startIndex(), 2U);
+        REQUIRE_EQUAL(range.length(), 3U);
+        REQUIRE_EQUAL(tokenizer.bufferText().substr(range.startIndex(), range.length()), U"A B");
     }
 };

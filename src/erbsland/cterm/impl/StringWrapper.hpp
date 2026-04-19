@@ -2,21 +2,21 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
+#include "../StringView.hpp"
 
-#include "../String.hpp"
-
+#include <utility>
 #include <vector>
 
-
 namespace erbsland::cterm::impl {
-
 
 /// Helper that keeps string wrapping and line splitting logic out of the `String` API type.
 class StringWrapper final {
 public:
     /// Create a wrapper tool for one terminal string.
-    /// @param str The string to process.
-    explicit StringWrapper(const String &str) noexcept : _str{str} {}
+    /// @param str The string view to process.
+    explicit StringWrapper(const StringView &str) noexcept : _str{str} {}
+
+    // default/delete
     ~StringWrapper() = default;
     StringWrapper(const StringWrapper &) = delete;
     StringWrapper(StringWrapper &&) = delete;
@@ -69,12 +69,11 @@ private:
     static void
     splitWordIntoWrappedLines(const String &word, int wordWidth, int width, std::vector<String> &lines) noexcept;
     /// Find the exclusive end index for the next part of an oversized word.
-    [[nodiscard]] static auto findWrappedWordSplitIndex(const String &word, std::size_t startIndex, int width) noexcept
-        -> std::size_t;
+    [[nodiscard]] static auto
+    findWrappedWordSplitIndex(const StringView &word, std::size_t startIndex, int width) noexcept -> std::size_t;
 
 private:
-    const String &_str;
+    const StringView &_str;
 };
-
 
 }

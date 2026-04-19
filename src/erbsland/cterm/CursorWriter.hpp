@@ -2,12 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "MoveMode.hpp"
 #include "ParagraphOptions.hpp"
 #include "Position.hpp"
 #include "Size.hpp"
-#include "String.hpp"
+#include "StringView.hpp"
 
 #include "impl/TypeTraits.hpp"
 
@@ -19,14 +18,11 @@
 #include <type_traits>
 #include <utility>
 
-
 namespace erbsland::cterm {
-
 
 class CursorWriter;
 using CursorWriterPtr = std::shared_ptr<CursorWriter>;
 class ReadableBuffer;
-
 
 /// The shared interface for buffers/terminals that support cursor-based output.
 class CursorWriter {
@@ -176,11 +172,11 @@ public: // write
     /// Inherited color components in each character resolve against the currently active color.
     /// Overwrites the characters under the cursor.
     /// @param str The string to write.
-    virtual void write(const String &str) noexcept = 0;
+    virtual void write(const StringView &str) noexcept = 0;
     /// Write a string whose characters are already fully resolved against the writer state.
     /// This bypasses any additional inherited-style resolution in implementations that can optimize for it.
     /// @param str The already resolved string to write.
-    virtual void writeResolved(const String &str) noexcept { write(str); }
+    virtual void writeResolved(const StringView &str) noexcept { write(str); }
     /// Write a character that is already fully resolved against the writer state.
     /// This bypasses any additional inherited-style resolution in implementations that can optimize for it.
     /// @param character The already resolved character to write.
@@ -208,6 +204,8 @@ public: // write
     /// @overload
     /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
     void write(const std::string_view text) noexcept { write(String{text, EncodingErrors::Replace}); }
+    /// @overload
+    void write(const std::u32string_view text) noexcept { write(String{text}); }
     /// Write a buffer at the current cursor position.
     /// This will not perform any additional formatting, clipping, or processing.
     /// Each line of the buffer will be written, and a line-break added after each line.
@@ -234,15 +232,22 @@ public: // write
     /// @param options The paragraph options to use.
     /// @return The number of lines written (including empty lines).
     auto printParagraph(
-        const String &paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept -> int {
+        const StringView &paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept
+        -> int {
         return printParagraphImpl(paragraph, options);
     }
     /// @overload
     /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
     auto printParagraph(
-        const std::string &paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept
+        const std::string_view paragraph, const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept
         -> int {
         return printParagraphImpl(String{paragraph, EncodingErrors::Replace}, options);
+    }
+    /// @overload
+    auto printParagraph(
+        const std::u32string_view paragraph,
+        const ParagraphOptions &options = ParagraphOptions::defaultOptions()) noexcept -> int {
+        return printParagraphImpl(String{paragraph}, options);
     }
 
 protected:
@@ -251,7 +256,7 @@ protected:
     /// @param paragraph The paragraph text to print.
     /// @param options The paragraph layout settings to apply.
     /// @return The number of rendered lines.
-    virtual auto printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int = 0;
+    virtual auto printParagraphImpl(const StringView &paragraph, const ParagraphOptions &options) noexcept -> int = 0;
 
     /// Handle one argument passed to `print()` or `printLine()`.
     virtual void printLinePart(const Color color) noexcept { setColor(color); }
@@ -274,12 +279,19 @@ protected:
     /// Handle one argument passed to `print()` or `printLine()`.
     virtual void printLinePart(const String &str) noexcept { write(str); }
     /// Handle one argument passed to `print()` or `printLine()`.
+    virtual void printLinePart(const StringView &str) noexcept { write(str); }
+    /// Handle one argument passed to `print()` or `printLine()`.
     virtual void printLinePart(const std::string &text) noexcept { write(text); }
     /// Handle one argument passed to `print()` or `printLine()`.
     virtual void printLinePart(const std::string_view text) noexcept { write(text); }
     /// Handle one argument passed to `print()` or `printLine()`.
+    virtual void printLinePart(const std::u32string &text) noexcept { write(std::u32string_view{text}); }
+    /// Handle one argument passed to `print()` or `printLine()`.
+    virtual void printLinePart(const std::u32string_view text) noexcept { write(text); }
+    /// Handle one argument passed to `print()` or `printLine()`.
     virtual void printLinePart(const char text[]) noexcept { write(text); }
+    /// Handle one argument passed to `print()` or `printLine()`.
+    virtual void printLinePart(const char32_t text[]) noexcept { write(std::u32string_view{text}); }
 };
-
 
 }

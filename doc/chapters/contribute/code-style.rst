@@ -23,7 +23,7 @@ File Organization
 
 - **Header Guards**: Use ``#pragma once``
 - **Include Order** (separate blocks with empty lines):
-  1. Corresponding header (if in ``.cpp``) — *followed by two empty lines*
+  1. Corresponding header (if in ``.cpp``)
   2. Local includes: ``#include "Example.hpp"``
   3. Local subdirectory includes: ``#include "sub/sub/Example.hpp"``
   4. Local relative includes: ``#include "../../Example.hpp"``

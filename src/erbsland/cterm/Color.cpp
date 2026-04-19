@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Color.hpp"
 
-
 namespace erbsland::cterm {
-
 
 auto Color::overlayWith(const Color &overlay) const -> Color {
     auto result = *this;
@@ -17,7 +15,6 @@ auto Color::overlayWith(const Color &overlay) const -> Color {
     return result;
 }
 
-
 auto Color::fromString(const std::string_view str) -> Color {
     if (const auto splitPos = str.find(':'); splitPos != std::string_view::npos) {
         const auto fgStr = str.substr(0, splitPos);
@@ -26,6 +23,5 @@ auto Color::fromString(const std::string_view str) -> Color {
     }
     return {Foreground::fromString(str)};
 }
-
 
 }

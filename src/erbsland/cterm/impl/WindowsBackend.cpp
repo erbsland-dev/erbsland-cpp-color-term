@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "WindowsBackend.hpp"
 
-
 #include "UnicodeWidth.hpp"
 #include "WindowsSignalDispatcher.hpp"
 
@@ -13,7 +12,6 @@
 #include <chrono>
 #include <iostream>
 
-
 namespace erbsland::cterm {
 
 auto Backend::createPlatformDefault(const TerminalFlags terminalFlags) -> BackendPtr {
@@ -23,7 +21,6 @@ auto Backend::createPlatformDefault(const TerminalFlags terminalFlags) -> Backen
 }
 
 namespace erbsland::cterm::impl {
-
 
 std::mutex WindowsBackend::_instanceMutex;
 WindowsBackend *WindowsBackend::_instance = nullptr;
@@ -442,6 +439,5 @@ void WindowsBackend::handleProcessSignal(const int exitCode) noexcept {
     restoreGlobalPlatform();
     std::_Exit(exitCode);
 }
-
 
 }

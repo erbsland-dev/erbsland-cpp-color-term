@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "LayoutFragments.hpp"
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// One rendered physical line in the final paragraph layout.
 class LayoutLine final {
@@ -30,6 +27,5 @@ public:
     bool wrappedFromPrevious = false; ///< `true` if this line is a wrapped continuation.
     bool wrapsToNext = false;         ///< `true` if this line wraps to the next physical line.
 };
-
 
 }

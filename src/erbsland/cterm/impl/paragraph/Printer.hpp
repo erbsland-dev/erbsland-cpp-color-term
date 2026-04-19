@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "RendererBase.hpp"
 
 #include "../../CursorWriter.hpp"
@@ -10,22 +9,26 @@
 #include <cstddef>
 #include <optional>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// Print a shared paragraph layout sequentially to a cursor writer.
 class Printer final : public RendererBase {
 public:
     Printer(
         CursorWriter &writer,
-        int x1,
-        int width,
-        Alignment alignment,
+        const int x1,
+        const int width,
+        const Alignment alignment,
         const LayoutResult &layout,
-        const String &sourceText,
+        const StringView &sourceText,
         const ParagraphOptions &options,
-        ParagraphBackgroundMode backgroundMode) noexcept;
+        const ParagraphBackgroundMode backgroundMode) noexcept :
+        RendererBase{alignment, layout, sourceText, options, backgroundMode},
+        _writer{writer},
+        _x1{x1},
+        _width{width},
+        _baseStyle{writer.style()},
+        _baseColor{writer.color()} {}
 
     // defaults/deletions
     ~Printer() = default;
@@ -53,6 +56,5 @@ private:
     CharStyle _baseStyle;
     Color _baseColor;
 };
-
 
 }

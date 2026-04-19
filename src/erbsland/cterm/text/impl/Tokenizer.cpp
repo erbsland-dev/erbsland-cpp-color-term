@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Tokenizer.hpp"
 
-
 #include "../../impl/U8Buffer.hpp"
-
 
 namespace erbsland::cterm::text::impl {
 

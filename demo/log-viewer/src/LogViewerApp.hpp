@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
 
 #include <chrono>
@@ -11,12 +10,9 @@
 #include <span>
 #include <string>
 
-
 namespace demo::logviewer {
 
-
 using namespace erbsland::cterm;
-
 
 /// Demonstrate a live log viewport backed by a growing cursor buffer.
 class LogViewerApp final : public TerminalApplication {
@@ -108,6 +104,5 @@ private:
     std::size_t _delayPresetIndex{2};
     bool _followMode{true};
 };
-
 
 }

@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Char.hpp"
 #include "CropEdges.hpp"
 #include "Direction.hpp"
 #include "ReadableBuffer.hpp"
 
-
 namespace erbsland::cterm {
-
 
 /// The base class for all buffer views.
 class BufferViewBase : public ReadableBuffer {
@@ -106,7 +103,7 @@ public: // implement ReadableBuffer
         if (_content->size().contains(translatedPos)) {
             if (_showCropCharacters) {
                 const auto cropEdges = CropEdges::fromView(_viewRect, _content->rect());
-                const auto cropDirection = cropEdges.edgeForView(pos, _viewRect);
+                const auto cropDirection = cropEdges.edgeForView(translatedPos, _viewRect);
                 if (cropDirection != Direction::None) {
                     return _cropCharacters[cropDirection];
                 }
@@ -160,7 +157,7 @@ public: // implement ReadableBuffer
         if (_buffer.size().contains(translatedPos)) {
             if (_showCropCharacters) {
                 const auto cropEdges = CropEdges::fromView(_viewRect, _buffer.rect());
-                const auto cropDirection = cropEdges.edgeForView(pos, _viewRect);
+                const auto cropDirection = cropEdges.edgeForView(translatedPos, _viewRect);
                 if (cropDirection != Direction::None) {
                     return _cropCharacters[cropDirection];
                 }
@@ -173,6 +170,5 @@ public: // implement ReadableBuffer
 private:
     const ReadableBuffer &_buffer; ///< The reference to the buffer.
 };
-
 
 }

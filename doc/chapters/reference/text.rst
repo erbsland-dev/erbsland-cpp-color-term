@@ -154,10 +154,8 @@ style against an underlying base theme.
 Building Strings
 ----------------
 
-:cpp:any:`String <erbsland::cterm::String>` stores a sequence of
-:cpp:any:`Char <erbsland::cterm::Char>` values. It is the right type for
-status bars, prompts, labels, and any text where characters may use
-different colors.
+:cpp:any:`String <erbsland::cterm::String>` stores a sequence of :cpp:any:`Char <erbsland::cterm::Char>` values.
+It is the right type for status bars, prompts, labels, and any text where characters may use different colors.
 
 Building Colored Text Fragments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -204,6 +202,37 @@ directly from UTF-8 or UTF-32 text:
 
 Control codes are filtered out automatically, except for tab and
 newline, which are preserved for layout and splitting.
+
+Implicit Sharing, Views, and Ranges
+-----------------------------------
+
+``String`` is implicitly shared. Copying a string is cheap because the character storage is shared until one copy
+is modified through a mutable API. Once that happens, the modified instance detaches and continues with its own
+private copy of the visible character range.
+
+This keeps normal value semantics:
+
+.. code-block:: cpp
+
+    auto original = String{"alpha"};
+    auto copy = original;   // shared storage
+
+    copy[0] = Char{U'A'};   // detaches here
+
+    // original is still "alpha"
+    // copy is now "Alpha"
+
+Use :cpp:any:`StringView <erbsland::cterm::StringView>` when an API only needs read-only access.
+It references the same shared data as :cpp:any:`String <erbsland::cterm::String>` but exposes only non-mutating
+operations. A ``String`` converts implicitly to ``StringView`` so APIs can use ``StringView``` to accepts both,
+``String`` and ``StringView``.
+
+.. code-block:: cpp
+
+    void drawLabel(StringView text);
+
+    auto title = String{"Status: ready"};
+    drawLabel(title);  // implicit String -> StringView
 
 Handling Invalid UTF-8 Input
 ----------------------------
@@ -300,7 +329,13 @@ Interface
 
 .. doxygenenum:: erbsland::cterm::EncodingErrors
 
+.. doxygenclass:: erbsland::cterm::IndexRange
+    :members:
+
 .. doxygenclass:: erbsland::cterm::String
+    :members:
+
+.. doxygenclass:: erbsland::cterm::StringView
     :members:
 
 .. doxygentypedef:: erbsland::cterm::StringLines

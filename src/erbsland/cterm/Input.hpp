@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Key.hpp"
 
 #include <chrono>
@@ -10,13 +9,10 @@
 #include <memory>
 #include <string>
 
-
 namespace erbsland::cterm {
-
 
 class Input;
 using InputPtr = std::shared_ptr<Input>;
-
 
 /// The input interface.
 class Input {
@@ -77,6 +73,5 @@ protected:
     /// @return The parsed key event.
     [[nodiscard]] virtual auto waitForKeyImpl() const -> Key = 0;
 };
-
 
 }

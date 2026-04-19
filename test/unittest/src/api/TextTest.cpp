@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(Text)
 class TextTest final : public el::UnitTest {
 public:
@@ -19,6 +18,12 @@ public:
         REQUIRE(text.font() == nullptr);
         REQUIRE_EQUAL(text.animation(), TextAnimation::None);
         REQUIRE_EQUAL(text.alignment(), Alignment::TopLeft);
+        REQUIRE_EQUAL(text.paragraphSpacing(), ParagraphSpacing::SingleLine);
+    }
+
+    void testTextUsesSingleParagraphSpacingByDefault() {
+        const auto text = Text{};
+
         REQUIRE_EQUAL(text.paragraphSpacing(), ParagraphSpacing::SingleLine);
     }
 
@@ -84,6 +89,17 @@ public:
         REQUIRE_EQUAL(text.wordBreakMark(), U'=');
         REQUIRE_EQUAL(text.maximumLineWraps(), 0);
         REQUIRE_EQUAL(text.onError(), ParagraphOnError::Empty);
+    }
+
+    void testSetColorCreatesSingleEntryColorSequence() {
+        auto text = Text{String{"A"}, Rectangle{0, 0, 1, 1}, Alignment::TopLeft};
+
+        REQUIRE_EQUAL(text.color(), Color{});
+
+        text.setColor(Color{fg::Cyan, bg::Black});
+
+        REQUIRE_EQUAL(text.color(), Color(fg::Cyan, bg::Black));
+        REQUIRE_EQUAL(text.colorSequence().sequenceLength(), std::size_t{1});
     }
 
 private:

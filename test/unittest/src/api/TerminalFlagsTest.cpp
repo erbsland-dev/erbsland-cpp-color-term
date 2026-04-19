@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(TerminalFlags)
 class TerminalFlagsTest final : public el::UnitTest {
 public:

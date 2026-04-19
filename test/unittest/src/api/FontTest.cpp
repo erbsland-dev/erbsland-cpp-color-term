@@ -11,7 +11,6 @@
 #include <string_view>
 #include <vector>
 
-
 TESTED_TARGETS(Font)
 class FontTest final : public el::UnitTest {
 public:

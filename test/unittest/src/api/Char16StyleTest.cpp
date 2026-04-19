@@ -10,7 +10,6 @@
 #include <array>
 #include <stdexcept>
 
-
 TESTED_TARGETS(Char16Style)
 class Char16StyleTest final : public el::UnitTest {
 public:

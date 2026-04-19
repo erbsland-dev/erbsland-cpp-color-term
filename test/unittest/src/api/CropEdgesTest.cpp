@@ -6,7 +6,6 @@
 #include <erbsland/cterm/CropEdges.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(CropEdges)
 class CropEdgesTest final : public el::UnitTest {
 public:

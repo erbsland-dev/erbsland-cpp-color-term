@@ -27,7 +27,6 @@ private:
 
 }
 
-
 TESTED_TARGETS(UiEventThread UiEventDriver UiEventScheduler)
 class EventThreadTest final : public el::UnitTest {
 public:

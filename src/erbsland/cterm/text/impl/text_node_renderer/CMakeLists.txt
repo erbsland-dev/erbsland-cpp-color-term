@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.28)
 target_sources(erbsland-color-term PRIVATE
         BlockEmitter.cpp
         BlockEmitter.hpp
+        BlockKind.hpp
         InlineTextPlanner.cpp
         InlineTextPlanner.hpp
         ListBlockPlanner.cpp
@@ -17,6 +18,7 @@ target_sources(erbsland-color-term PRIVATE
         PlanningContext.hpp
         PlanningStyleResolver.cpp
         PlanningStyleResolver.hpp
+        RenderBlock.cpp
         RenderBlock.hpp
         RenderBlockFactory.cpp
         RenderBlockFactory.hpp

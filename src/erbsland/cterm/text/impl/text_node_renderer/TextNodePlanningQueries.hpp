@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../../TextNode.hpp"
 
 #include <optional>
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Planning-specific queries on `TextNode` trees.
 class TextNodePlanningQueries final {
@@ -43,6 +40,5 @@ public:
     [[nodiscard]] auto findChildRange(const TextNode &node, ChildSelection selection) const
         -> std::optional<ChildRange>;
 };
-
 
 }

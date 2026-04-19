@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
 
 #include <erbsland/cterm/text/HtmlRenderer.hpp>
@@ -13,9 +12,7 @@
 #include <string_view>
 #include <vector>
 
-
 namespace demo::htmlviewer {
-
 
 /// A small full-screen HTML viewer demo with scrolling and pagination.
 class HtmlViewerApp final : public TerminalApplication {
@@ -76,6 +73,5 @@ private:
     int _renderedContentWidth{0};
     bool _documentDirty{true};
 };
-
 
 }

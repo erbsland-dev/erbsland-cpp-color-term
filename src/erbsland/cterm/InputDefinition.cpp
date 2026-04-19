@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "InputDefinition.hpp"
 
-
 namespace erbsland::cterm {
 
 static auto unescapeKeyText(std::string text) -> std::string {
@@ -18,7 +17,6 @@ static auto escapeKeyText(std::string text) -> std::string {
     }
     return text;
 }
-
 
 InputDefinition::InputDefinition(const Key keyPress, const ForMode forMode) noexcept :
     _keyPress{keyPress}, _forMode{forMode} {
@@ -55,6 +53,5 @@ auto InputDefinition::toString() const -> std::string {
 auto InputDefinition::toDisplayText(const bool useBrackets) const -> std::string {
     return _keyPress.toDisplayText(useBrackets);
 }
-
 
 }

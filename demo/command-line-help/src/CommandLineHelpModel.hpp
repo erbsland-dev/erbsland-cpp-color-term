@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <erbsland/cterm/all.hpp>
 
 #include <optional>
@@ -10,12 +9,9 @@
 #include <string_view>
 #include <vector>
 
-
 namespace demo::command_line_help {
 
-
 using namespace erbsland::cterm;
-
 
 /// Complete rendering configuration for the command-line help demo.
 struct DemoConfig final {
@@ -45,7 +41,6 @@ struct DemoConfig final {
     [[nodiscard]] auto effectiveDescriptionColumn(int widestSignatureWidth) const noexcept -> int;
 };
 
-
 /// One command-line option together with its help output and parsing callback.
 struct OptionSpec final {
     using ApplyValueFn = void (*)(DemoConfig &, std::string_view);
@@ -70,13 +65,11 @@ struct OptionSpec final {
     [[nodiscard]] auto signatureWidth() const -> int;
 };
 
-
 /// The rendering mode for one help section.
 enum class HelpSectionKind : uint8_t {
     Paragraphs, ///< Render regular explanatory paragraphs.
     Options,    ///< Render option paragraphs built from tab-aligned signatures and descriptions.
 };
-
 
 /// One titled section in the rendered help document.
 struct HelpSection final {
@@ -85,12 +78,10 @@ struct HelpSection final {
     std::vector<String> paragraphs; ///< Paragraphs or option lines for the section.
 };
 
-
 /// Full help document assembled for the demo output.
 struct HelpDocument final {
     String usageLine;                  ///< Colored usage line.
     std::vector<HelpSection> sections; ///< Ordered document sections.
 };
-
 
 }

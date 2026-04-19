@@ -2,42 +2,34 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "CharCombinationStyle.hpp"
 
-
 #include <algorithm>
 #include <limits>
 #include <stdexcept>
 #include <utility>
 
-
 namespace erbsland::cterm {
-
 
 auto CharCombinationStyle::combine([[maybe_unused]] const Char &current, const Char &overlay) const noexcept -> Char {
     return overlay;
 }
-
 
 auto CharCombinationStyle::combine(
     [[maybe_unused]] const std::array<const Char *, 9> &current, const Char &overlay) const noexcept -> Char {
     return overlay;
 }
 
-
 auto CharCombinationStyle::overwrite() noexcept -> const CharCombinationStylePtr & {
     static const auto style = std::make_shared<CharCombinationStyle>();
     return style;
 }
-
 
 auto CharCombinationStyle::colorOverlay() noexcept -> const CharCombinationStylePtr & {
     static const CharCombinationStylePtr style = std::make_shared<SimpleCharCombinationStyle>();
     return style;
 }
 
-
 SimpleCharCombinationStyle::SimpleCharCombinationStyle(Map map) noexcept : _map{std::move(map)} {
 }
-
 
 auto SimpleCharCombinationStyle::combine(const Char &current, const Char &overlay) const noexcept -> Char {
     auto result = Char{};
@@ -51,22 +43,18 @@ auto SimpleCharCombinationStyle::combine(const Char &current, const Char &overla
     return result;
 }
 
-
 auto SimpleCharCombinationStyle::map() const noexcept -> const Map & {
     return _map;
 }
-
 
 void SimpleCharCombinationStyle::setMap(Map map) noexcept {
     _map = std::move(map);
 }
 
-
 void SimpleCharCombinationStyle::add(
     const std::string &current, const std::string &overlay, const std::string &combined) noexcept {
     _map.emplace(current + overlay, combined);
 }
-
 
 MatrixCombinationStyle::MatrixCombinationStyle(std::u32string characters, const std::string_view resultMatrix) :
     _characters{std::move(characters)}, _resultMatrix{resultMatrix} {
@@ -90,7 +78,6 @@ MatrixCombinationStyle::MatrixCombinationStyle(std::u32string characters, const 
     }
 }
 
-
 auto MatrixCombinationStyle::combine(const Char &current, const Char &overlay) const noexcept -> Char {
     auto result = overlay;
     const auto currentIndex = lookupIndex(static_cast<char32_t>(current.mainCodePoint()));
@@ -110,7 +97,6 @@ auto MatrixCombinationStyle::combine(const Char &current, const Char &overlay) c
     return result;
 }
 
-
 auto MatrixCombinationStyle::lookupIndex(const char32_t codePoint) const noexcept -> uint8_t {
     if (_characterIndexByCodePoint.empty() || codePoint < _lookupBase) {
         return cUnsupportedIndex;
@@ -121,6 +107,5 @@ auto MatrixCombinationStyle::lookupIndex(const char32_t codePoint) const noexcep
     }
     return _characterIndexByCodePoint[offset];
 }
-
 
 }

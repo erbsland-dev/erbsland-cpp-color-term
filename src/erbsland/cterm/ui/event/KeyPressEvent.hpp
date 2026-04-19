@@ -2,13 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "EventData.hpp"
 
 #include "../../Key.hpp"
 
 #include <memory>
-
 
 namespace erbsland::cterm::ui {
 

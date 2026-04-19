@@ -9,7 +9,6 @@
 #include <chrono>
 #include <utility>
 
-
 namespace erbsland::cterm::ui {
 
 auto EventThread::create() -> EventThreadPtr {

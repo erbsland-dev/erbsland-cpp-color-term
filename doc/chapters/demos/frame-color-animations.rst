@@ -6,13 +6,16 @@
 Frame Color Animations
 **********************
 
-``frame-color-animations`` demonstrates the animated color modes of
-``FrameDrawOptions``. The demo renders several frame styles side by side,
-each with a different ``FrameColorMode`` so you can compare one-color,
-striped, diagonal, and chasing-border animations in one screen.
+``frame-color-animations`` demonstrates the animated color modes of ``FrameDrawOptions``. Several frame styles are
+rendered side by side so you can compare one-color, striped, diagonal, and chasing-border animation modes in one
+screen.
 
-It is a good showcase for decorative terminal panels, status frames, and
-animated dashboards that should stay readable while still feeling alive.
+Use This Demo When You Need...
+==============================
+
+* A support example for animated frame borders or panel fills.
+* A quick comparison of the available ``FrameColorMode`` behaviors.
+* A reference for combining one retained ``Buffer`` with color sequences and a lightweight render loop.
 
 Run the Demo
 ============
@@ -25,55 +28,29 @@ Start the demo from the build directory:
 
 Press ``Q`` to quit.
 
-ANSI Output Example
-===================
+Captured Output (80x25)
+=======================
 
-The following capture shows one frame of the animation gallery:
+.. include:: _captures/frame-color-animations.rstinc
 
-.. erbsland-ansi::
-    :escape-char: ␛
-    :theme: ela-term
-
-    ␛[97;40m╭␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m─╮
-    ␛[32m│       ␛[100m ␛[40m               ␛[100m ␛[40m        ␛[97mFrame Color Animations␛[32m ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[92m│
-    ␛[32m│      ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m│
-    ␛[92m│␛[32m     ␛[100m ␛[40m             ␛[93mThis is a demo of various frame animation modes.␛[32m  ␛[100m ␛[40m               ␛[100m ␛[40m │
-    ␛[97m│␛[32m    ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m  │
-    ␛[97m│␛[32m  ␛[35m╭──────────────────╮␛[32m  ␛[36m┌─␛[96m─␛[97m──␛[96m─␛[36m────␛[96m─␛[97m──␛[96m─␛[36m────␛[96m┐␛[32m  ␛[92m┏━━━━━━━━━━━━━━━━━┓␛[32m  ␛[94m╔═════════════════╗␛[32m  │
-    ␛[92m│␛[32m  ␛[35m│     ␛[97mOneColor␛[35m     │␛[32m  ␛[36m│ ␛[96m ␛[97m  Vertical␛[96m ␛[36m    ␛[96m│␛[32m  ␛[92m┃   ␛[97mHorizontal␛[92m    ┃␛[32m  ␛[94m║     ␛[97mForward␛[94m     ║␛[32m  ␛[92m│
-    ␛[32m│ ␛[100m ␛[35;40m│                  │␛[32m  ␛[36m│ ␛[96m ␛[97m  ␛[96m ␛[36m    ␛[96m ␛[97m  ␛[96m ␛[36m    ␛[96m│␛[32m  ␛[92m┃                 ┃␛[32m ␛[100m ␛[94;40m║                 ║␛[32m  ␛[97m│
-    ␛[32m│␛[100m ␛[40m ␛[35m│  ␛[90manimated frame␛[35m  │␛[32m  ␛[36m│ ␛[90manimated frame␛[36m  ␛[96m│␛[32m  ␛[92m┃ ␛[90manimated frame␛[92m  ┃␛[32;100m ␛[40m ␛[94m║ ␛[90manimated frame␛[94m  ║␛[32m  ␛[97m│
-    ␛[32m│  ␛[35m│                  │␛[32m  ␛[36m│ ␛[96m ␛[97m  ␛[96m ␛[36m    ␛[96m ␛[97m  ␛[96m ␛[36m    ␛[96m│␛[32m  ␛[92m┃                 ┃␛[32m  ␛[94m║                 ║␛[32m  ␛[92m│
-    ␛[32m│  ␛[35m│                  │␛[32m  ␛[36m│ ␛[96m ␛[97m  ␛[96m ␛[36m    ␛[96m ␛[97m  ␛[96m ␛[36m    ␛[96m│␛[32m  ␛[92m┃                 ┃␛[32m  ␛[94m║                 ║␛[32m  │
-    ␛[92m│␛[32m  ␛[35m╰──────────────────╯␛[32m  ␛[36m└─␛[96m─␛[97m──␛[96m─␛[36m────␛[96m─␛[97m──␛[96m─␛[36m────␛[96m┘␛[32m  ␛[92m┗━━━━━━━━━━━━━━━━━┛␛[32m  ␛[94m╚═════════════════╝␛[32m  │
-    ␛[97m│␛[32m  ␛[31m▛▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▜␛[32m  ␛[93m┏━━━━━␛[97m━━␛[93m━━━━␛[33m━━━━━━┓␛[32m ␛[100m ␛[40m╭─␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m╮␛[32m            ␛[100m ␛[40m          │
-    ␛[97m│␛[32m  ␛[31m▌     ␛[97mBackward␛[31m     ▐␛[32m  ␛[93m┃␛[33m ␛[97mChasing Border␛[33m  ┃␛[32;100m ␛[40m │ ␛[97mChasing Border␛[32m  ␛[97m│␛[32m           ␛[100m ␛[40m           │
-    ␛[92m│␛[32m  ␛[31m▌                  ▐␛[32m  ␛[93m┃␛[33m                 ┃␛[32m  │                 ␛[97m│␛[32m          ␛[100m ␛[40m            ␛[92m│
-    ␛[32m│  ␛[31m▌  ␛[90manimated frame␛[31m  ▐␛[32m  ␛[93m┃␛[33m ␛[90manimated frame␛[33m  ┃␛[32m  ␛[92m│␛[32m ␛[90manimated frame␛[32m  ␛[92m│␛[32m         ␛[100m ␛[40m             ␛[97m│
-    ␛[32m│  ␛[31m▌                  ▐␛[32m  ␛[93m┃␛[33m                 ␛[93m┃␛[32m  ␛[97m│␛[32m                 │        ␛[100m ␛[40m              ␛[97m│
-    ␛[32m│  ␛[31m▌                  ▐␛[32m ␛[100m ␛[93;40m┃␛[33m                 ␛[93m┃␛[32m  ␛[97m│␛[32m                 │       ␛[100m ␛[40m               ␛[92m│
-    ␛[32m│  ␛[31m▙▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▟␛[32;100m ␛[40m ␛[93m┗━━━━━━━━━━━━━━━━━┛␛[32m  ␛[92m╰␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m─╯      ␛[100m ␛[40m               ␛[100m ␛[40m│
-    ␛[92m│␛[32m     ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m │
-    ␛[97m│␛[32m    ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m ␛[90mPress q to qui␛[100mt␛[40m.␛[32m │
-    ␛[97m│␛[32m   ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m               ␛[100m ␛[40m   │
-    ␛[92m╰␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m─␛[32m────␛[92m─␛[97m──␛[92m╯␛[0m
-
-Features Shown
-==============
-
-This demo highlights the frame-animation pipeline:
+Features Demonstrated
+=====================
 
 * ``FrameDrawOptions::setFrameColorSequence()`` with several ``FrameColorMode`` values.
-* Animated outer frames plus animated fill colors.
-* A side-by-side comparison of different ``FrameStyle`` values.
+* Animated outer frames combined with animated fill colors.
+* A side-by-side comparison of multiple ``FrameStyle`` values.
 * Simple full-screen rendering with one persistent ``Buffer``.
+
+Related Demos
+=============
+
+* :doc:`Frame Weaver <frame-weaver>` for frame intersections, mixed line styles, and custom tiles.
+* :doc:`Display All Colors <display-all-colors>` for the underlying palette combinations.
+* :doc:`Update Screen Modes <update-screen-modes>` for another view of repeated full-screen redraw behavior.
 
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/frame-color-animations/src/FrameColorAnimationsApp.cpp`.
 
-:file:`demo/frame-color-animations/src/FrameColorAnimationsApp.cpp`
-
-This file contains the animation loop, the panel layout, and the color
-sequences for each frame mode.
+This file contains the animation loop, panel layout, and color sequences for each frame mode.

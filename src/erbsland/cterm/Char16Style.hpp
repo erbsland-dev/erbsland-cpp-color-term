@@ -1,25 +1,20 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
-
 #pragma once
-
 
 #include "Char.hpp"
 #include "FrameStyle.hpp"
-#include "String.hpp"
+#include "StringView.hpp"
 
 #include <array>
 #include <memory>
 #include <string_view>
 
-
 namespace erbsland::cterm {
-
 
 class Char16Style;
 /// Shared pointer for Char16Style
 using Char16StylePtr = std::shared_ptr<Char16Style>;
-
 
 /// Defines a style for drawing tiles.
 class Char16Style {
@@ -85,11 +80,10 @@ public:
     [[nodiscard]] static auto forStyle(FrameStyle frameStyle) -> Char16StylePtr;
 
 private:
-    [[nodiscard]] static auto toTiles(const String &tiles) -> std::array<Char, 16>;
+    [[nodiscard]] static auto toTiles(const StringView &tiles) -> std::array<Char, 16>;
 
 private:
     std::array<Char, 16> _tiles;
 };
-
 
 }

@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../../Color.hpp"
 
 #include <cstddef>
 #include <cstdint>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// One logical piece of a rendered paragraph line.
 class LayoutFragment final {
@@ -71,6 +68,5 @@ private:
     int _width = 0;                    ///< The rendered display width of the fragment.
     Color _color{Background::Default}; ///< The fragment color for generated spaces.
 };
-
 
 }

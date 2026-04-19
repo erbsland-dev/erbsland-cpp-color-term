@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Char.hpp"
 #include "Rectangle.hpp"
 #include "Size.hpp"
@@ -10,16 +9,13 @@
 #include <memory>
 #include <string>
 
-
 namespace erbsland::cterm {
-
 
 class ReadableBuffer;
 using ReadableBufferPtr = std::shared_ptr<ReadableBuffer>;
 class Bitmap;
 class WritableBuffer;
 using WritableBufferPtr = std::shared_ptr<WritableBuffer>;
-
 
 /// A readable buffer.
 class ReadableBuffer {
@@ -64,6 +60,5 @@ protected: // implementation
     /// @return A bitmap mask with the same size as this buffer.
     [[nodiscard]] virtual auto toMaskImpl(const std::u32string &characters, bool invert) -> Bitmap;
 };
-
 
 }

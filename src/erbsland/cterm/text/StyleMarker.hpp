@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../CharStyle.hpp"
 #include "../String.hpp"
 
@@ -10,9 +9,7 @@
 #include <cstdint>
 #include <string_view>
 
-
 namespace erbsland::cterm::text {
-
 
 /// A visible marker used for bullet and numbered list items.
 class StyleMarker final {
@@ -81,7 +78,7 @@ public:
     /// @param suffix The text appended after the number.
     /// @param style Optional marker overlay style.
     /// @return Reference to this marker.
-    auto setOrdered(String suffix = String{U".\t"}, const CharStyle &style = {}) -> StyleMarker &;
+    auto setOrdered(String suffix = String{".\t"}, const CharStyle &style = {}) -> StyleMarker &;
     /// Use an ordered marker with the given suffix.
     /// @param suffix The text appended after the number.
     /// @param style Optional marker overlay style.
@@ -101,6 +98,5 @@ private:
     String _literal;        ///< Marker text for literal markers.
     String _suffix;         ///< Suffix appended after ordered numbers.
 };
-
 
 }

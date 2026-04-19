@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Char16Style.hpp"
 #include "CharCombinationStyle.hpp"
 #include "Color.hpp"
@@ -10,9 +9,7 @@
 #include "ColorSequence.hpp"
 #include "String.hpp"
 
-
 namespace erbsland::cterm {
-
 
 /// The mode how color is applied to the bitmap.
 enum class BitmapColorMode : uint8_t {
@@ -54,7 +51,6 @@ enum class BitmapScaleMode : uint8_t {
     /// To color the unset pixels, you must fill the bitmap area first.
     DoubleBlock,
 };
-
 
 /// The options to draw a bitmap.
 /// These options define how `Buffer::drawBitmap()` converts bitmap pixels into terminal cells.
@@ -175,6 +171,5 @@ private:
     String _halfBlocks{" ▘▝▀▖▌▞▛▗▚▐▜▄▙▟█"};
     BitmapScaleMode _scaleMode = BitmapScaleMode::HalfBlock;
 };
-
 
 }

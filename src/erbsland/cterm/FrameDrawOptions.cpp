@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "FrameDrawOptions.hpp"
 
-
 namespace erbsland::cterm {
-
 
 FrameDrawOptions::FrameDrawOptions(ColorSequence frameColor, const FrameColorMode frameColorMode) :
     _frameColor{std::move(frameColor)}, _frameColorMode{frameColorMode} {
@@ -112,6 +110,5 @@ auto FrameDrawOptions::defaultOptions() noexcept -> const FrameDrawOptions & {
     static const FrameDrawOptions options;
     return options;
 }
-
 
 }

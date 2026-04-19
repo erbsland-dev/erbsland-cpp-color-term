@@ -7,7 +7,6 @@
 
 #include <functional>
 
-
 TESTED_TARGETS(CharAttributes)
 class CharAttributesTest final : public el::UnitTest {
 public:

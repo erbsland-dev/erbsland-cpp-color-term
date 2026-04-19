@@ -8,7 +8,6 @@
 
 #include <string_view>
 
-
 TESTED_TARGETS(Backend)
 class BackendTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {
 public:

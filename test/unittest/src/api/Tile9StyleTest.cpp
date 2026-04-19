@@ -10,7 +10,6 @@
 #include <array>
 #include <stdexcept>
 
-
 TESTED_TARGETS(Tile9Style)
 class Tile9StyleTest final : public el::UnitTest {
 public:

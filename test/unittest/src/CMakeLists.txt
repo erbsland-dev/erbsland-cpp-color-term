@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.28)
 set(_erbsland_color_term_unittest_target erbsland-color-term-unittest)
 
 target_sources(${_erbsland_color_term_unittest_target} PRIVATE
+        BufferTestHelper.hpp
         main.cpp
         TerminalTestSupport.hpp
         TestHelper.hpp

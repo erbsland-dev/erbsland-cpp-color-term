@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Event.hpp"
 
 #include <atomic>
@@ -10,7 +9,6 @@
 #include <deque>
 #include <functional>
 #include <mutex>
-
 
 namespace erbsland::cterm::ui {
 

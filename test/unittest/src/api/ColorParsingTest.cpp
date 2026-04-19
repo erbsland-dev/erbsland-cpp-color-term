@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(Color)
 class ColorParsingTest final : public el::UnitTest {
 public:

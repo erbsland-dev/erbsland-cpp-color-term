@@ -2,17 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
 
 #include <array>
 
-
 namespace demo::bitmapshowcase {
 
-
 using namespace erbsland::cterm;
-
 
 /// Interactive demo showing the bitmap rendering modes and options.
 class BitmapShowcaseApp final : public TerminalApplication {
@@ -51,6 +47,5 @@ private:
     std::size_t _pageIndex{0};
     std::array<std::size_t, 4> _selectedVariantByPage{};
 };
-
 
 }

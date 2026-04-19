@@ -5,9 +5,7 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-#include <format>
 #include <vector>
-
 
 class BitmapAccessor final : public Bitmap {
 public:
@@ -18,41 +16,25 @@ public:
     void writePixelRef(const Position pos, const bool value) { pixelRef(pos) = value; }
 };
 
-
 TESTED_TARGETS(Bitmap)
 class BitmapTest final : public el::UnitTest {
 public:
-    void requireRowsEqual(const Bitmap &bitmap, const std::vector<std::string> &expectedRows) {
-        REQUIRE_EQUAL(bitmap.size().height(), static_cast<Coordinate>(expectedRows.size()));
-        for (std::size_t y = 0; y < expectedRows.size(); ++y) {
-            runWithContext(
-                SOURCE_LOCATION(),
-                [&]() { REQUIRE_EQUAL(bitmap.size().width(), static_cast<Coordinate>(expectedRows[y].size())); },
-                [&]() -> std::string {
-                    return std::format(
-                        "row = {} / bitmapWidth = {} / expectedWidth = {}",
-                        y,
-                        bitmap.size().width(),
-                        expectedRows[y].size());
-                });
-            for (std::size_t x = 0; x < expectedRows[y].size(); ++x) {
-                runWithContext(
-                    SOURCE_LOCATION(),
-                    [&]() {
-                        REQUIRE_EQUAL(
-                            bitmap.pixel(Position{static_cast<Coordinate>(x), static_cast<Coordinate>(y)}),
-                            expectedRows[y][x] == '#');
-                    },
-                    [&]() -> std::string {
-                        return std::format(
-                            "x = {} / y = {} / expectedPixel = {} / expectedRow = \"{}\"",
-                            x,
-                            y,
-                            expectedRows[y][x] == '#',
-                            expectedRows[y]);
-                    });
+    [[nodiscard]] static auto renderRows(const Bitmap &bitmap) -> std::vector<std::string> {
+        auto rows = std::vector<std::string>{};
+        rows.reserve(static_cast<std::size_t>(bitmap.size().height()));
+        for (Coordinate y = 0; y < bitmap.size().height(); ++y) {
+            auto row = std::string{};
+            row.reserve(static_cast<std::size_t>(bitmap.size().width()));
+            for (Coordinate x = 0; x < bitmap.size().width(); ++x) {
+                row += bitmap.pixel(Position{x, y}) ? '#' : '.';
             }
+            rows.push_back(std::move(row));
         }
+        return rows;
+    }
+
+    void requireRowsEqual(const Bitmap &bitmap, const std::vector<std::string> &expectedRows) {
+        REQUIRE_EQUAL_LINES(renderRows(bitmap), expectedRows);
     }
 
     void requireRectangleEqual(const Rectangle &actual, const Rectangle &expected) {

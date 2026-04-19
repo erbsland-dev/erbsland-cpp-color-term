@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "InputBackend.hpp"
 
-
 namespace erbsland::cterm::impl {
-
 
 auto InputBackend::mode() const noexcept -> Mode {
     return _backend->inputMode();

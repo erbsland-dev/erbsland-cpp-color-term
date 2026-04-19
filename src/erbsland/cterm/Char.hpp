@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "CharStyle.hpp"
 #include "EncodingErrors.hpp"
 
@@ -14,9 +13,7 @@
 #include <string>
 #include <string_view>
 
-
 namespace erbsland::cterm {
-
 
 /// Represents a character string with combined terminal style information.
 /// Used by the UI code to render colored text blocks on the console.
@@ -264,9 +261,7 @@ private:
     CharStyle _style;              ///< The style for this character.
 };
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::Char> {

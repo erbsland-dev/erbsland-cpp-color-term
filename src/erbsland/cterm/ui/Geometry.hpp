@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "SizePolicy.hpp"
 
 #include "../Rectangle.hpp"
 #include "../Size.hpp"
 
-
 namespace erbsland::cterm::ui {
-
 
 /// The geometry and size policy of a surface.
 class Geometry {
@@ -120,6 +117,5 @@ private:
     Size _preferred{cDefaultSize};  ///< The preferred size.
     SizePolicy _policy;             ///< The size policy.
 };
-
 
 }

@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "ColorPart.hpp"
 
 #include <functional>
 #include <string_view>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 /// A foreground/background color pair for terminal rendering.
 class Color final {
@@ -101,13 +98,10 @@ public: // data
     Background _background;
 };
 
-
 /// A list of terminal colors.
 using ColorList = std::vector<Color>;
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::Color> {

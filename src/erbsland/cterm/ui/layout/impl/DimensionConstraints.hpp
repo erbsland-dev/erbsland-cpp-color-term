@@ -2,10 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../../../Orientation.hpp"
 #include "../../Geometry.hpp"
-
 
 namespace erbsland::cterm::ui::layout::impl {
 

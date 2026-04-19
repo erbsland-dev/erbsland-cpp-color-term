@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(BitmapDrawOptions)
 class BitmapDrawOptionsTest final : public el::UnitTest {
 public:

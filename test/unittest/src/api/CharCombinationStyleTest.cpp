@@ -9,7 +9,6 @@
 
 #include <stdexcept>
 
-
 TESTED_TARGETS(CharCombinationStyle)
 class CharCombinationStyleTest final : public el::UnitTest {
 public:

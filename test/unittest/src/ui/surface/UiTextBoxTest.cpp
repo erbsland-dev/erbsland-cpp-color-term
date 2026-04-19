@@ -8,7 +8,6 @@
 
 namespace ui = erbsland::cterm::ui;
 
-
 TESTED_TARGETS(UiTextBox)
 class UiTextBoxTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {
 public:

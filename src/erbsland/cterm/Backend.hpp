@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "CharAttributes.hpp"
 #include "Color.hpp"
 #include "Input.hpp"
@@ -14,13 +13,10 @@
 #include <optional>
 #include <string_view>
 
-
 namespace erbsland::cterm {
-
 
 class Backend;
 using BackendPtr = std::shared_ptr<Backend>;
-
 
 /// The interface to the underlying platform.
 /// This library expects that the platform implementation correctly handles UTF-8 encoding and
@@ -159,6 +155,5 @@ public:
     /// Create the default backend for this platform.
     [[nodiscard]] static auto createPlatformDefault(TerminalFlags terminalFlags) -> BackendPtr;
 };
-
 
 }

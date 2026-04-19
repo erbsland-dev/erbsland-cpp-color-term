@@ -2,11 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <atomic>
 #include <memory>
 #include <utility>
-
 
 namespace erbsland::cterm::ui::impl {
 
@@ -17,7 +15,6 @@ public:
 };
 
 }
-
 
 namespace erbsland::cterm::ui {
 
@@ -59,7 +56,6 @@ private:
 private:
     std::shared_ptr<impl::StopState> _state; ///< The shared stop state.
 };
-
 
 /// Stop source used by the event system to request a cooperative shutdown.
 class StopSource final {

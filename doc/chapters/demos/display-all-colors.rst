@@ -6,14 +6,16 @@
 Display All Colors
 ******************
 
-``display-all-colors`` is the quickest overview of the built-in 16 terminal
-colors and the combinations that can be formed from them. The demo prints
-three sections: a named foreground/background table, a full 16x16 index
-matrix, and a rainbow-style block pattern that makes contrast differences
-easy to compare.
+``display-all-colors`` is the quickest overview of the built-in 16 terminal colors and the combinations they can
+form. It prints a named foreground/background table, a full 16x16 matrix, and a rainbow block pattern that makes
+contrast differences easy to compare.
 
-Because it writes directly to the terminal instead of using a redraw loop,
-it also serves as a compact example of color-focused command-line output.
+Use This Demo When You Need...
+==============================
+
+* A support reference for the built-in ANSI 16-color palette.
+* A visual way to compare foreground/background combinations before choosing terminal colors for an application.
+* A compact example of palette-oriented output without a redraw loop.
 
 Run the Demo
 ============
@@ -24,78 +26,31 @@ Start the demo from the build directory:
 
     $ ./cmake-build-debug/demo-apps/display-all-colors
 
-ANSI Output Example
-===================
+The program writes the full palette reference into terminal history and exits on its own.
 
-The following capture shows the generated palette tables and the combined
-foreground/background matrix:
+Captured Output (80x25)
+=======================
 
-.. erbsland-ansi::
-    :escape-char: ␛
-    :theme: ela-term
+.. include:: _captures/display-all-colors.rstinc
 
-                  ␛[97mForegrounds␛[39m                             ␛[97mBackgrounds
-    ␛[30;100m black              ␛[90;40m bright_black       ␛[97m black              ␛[100m bright_black
-    ␛[31;40m red                ␛[91m bright_red         ␛[97;41m red                ␛[101m bright_red
-    ␛[32;40m green              ␛[92m bright_green       ␛[97;42m green              ␛[102m bright_green
-    ␛[33;40m yellow             ␛[93m bright_yellow      ␛[97;43m yellow             ␛[103m bright_yellow
-    ␛[34;40m blue               ␛[94m bright_blue        ␛[97;44m blue               ␛[104m bright_blue
-    ␛[35;40m magenta            ␛[95m bright_magenta     ␛[97;45m magenta            ␛[105m bright_magenta
-    ␛[36;40m cyan               ␛[96m bright_cyan        ␛[97;46m cyan               ␛[106m bright_cyan
-    ␛[37;40m white              ␛[97m bright_white       ␛[47m white              ␛[90;107m bright_white
-
-
-    ␛[30;40m  0  ␛[31m  1  ␛[32m  2  ␛[33m  3  ␛[34m  4  ␛[35m  5  ␛[36m  6  ␛[37m  7  ␛[90m  8  ␛[91m  9  ␛[92m 10  ␛[93m 11  ␛[94m 12  ␛[95m 13  ␛[96m 14  ␛[97m 15
-    ␛[30;41m 16  ␛[31m 17  ␛[32m 18  ␛[33m 19  ␛[34m 20  ␛[35m 21  ␛[36m 22  ␛[37m 23  ␛[90m 24  ␛[91m 25  ␛[92m 26  ␛[93m 27  ␛[94m 28  ␛[95m 29  ␛[96m 30  ␛[97m 31
-    ␛[30;42m 32  ␛[31m 33  ␛[32m 34  ␛[33m 35  ␛[34m 36  ␛[35m 37  ␛[36m 38  ␛[37m 39  ␛[90m 40  ␛[91m 41  ␛[92m 42  ␛[93m 43  ␛[94m 44  ␛[95m 45  ␛[96m 46  ␛[97m 47
-    ␛[30;43m 48  ␛[31m 49  ␛[32m 50  ␛[33m 51  ␛[34m 52  ␛[35m 53  ␛[36m 54  ␛[37m 55  ␛[90m 56  ␛[91m 57  ␛[92m 58  ␛[93m 59  ␛[94m 60  ␛[95m 61  ␛[96m 62  ␛[97m 63
-    ␛[30;44m 64  ␛[31m 65  ␛[32m 66  ␛[33m 67  ␛[34m 68  ␛[35m 69  ␛[36m 70  ␛[37m 71  ␛[90m 72  ␛[91m 73  ␛[92m 74  ␛[93m 75  ␛[94m 76  ␛[95m 77  ␛[96m 78  ␛[97m 79
-    ␛[30;45m 80  ␛[31m 81  ␛[32m 82  ␛[33m 83  ␛[34m 84  ␛[35m 85  ␛[36m 86  ␛[37m 87  ␛[90m 88  ␛[91m 89  ␛[92m 90  ␛[93m 91  ␛[94m 92  ␛[95m 93  ␛[96m 94  ␛[97m 95
-    ␛[30;46m 96  ␛[31m 97  ␛[32m 98  ␛[33m 99  ␛[34m 100 ␛[35m 101 ␛[36m 102 ␛[37m 103 ␛[90m 104 ␛[91m 105 ␛[92m 106 ␛[93m 107 ␛[94m 108 ␛[95m 109 ␛[96m 110 ␛[97m 111
-    ␛[30;47m 112 ␛[31m 113 ␛[32m 114 ␛[33m 115 ␛[34m 116 ␛[35m 117 ␛[36m 118 ␛[37m 119 ␛[90m 120 ␛[91m 121 ␛[92m 122 ␛[93m 123 ␛[94m 124 ␛[95m 125 ␛[96m 126 ␛[97m 127
-    ␛[30;100m 128 ␛[31m 129 ␛[32m 130 ␛[33m 131 ␛[34m 132 ␛[35m 133 ␛[36m 134 ␛[37m 135 ␛[90m 136 ␛[91m 137 ␛[92m 138 ␛[93m 139 ␛[94m 140 ␛[95m 141 ␛[96m 142 ␛[97m 143
-    ␛[30;101m 144 ␛[31m 145 ␛[32m 146 ␛[33m 147 ␛[34m 148 ␛[35m 149 ␛[36m 150 ␛[37m 151 ␛[90m 152 ␛[91m 153 ␛[92m 154 ␛[93m 155 ␛[94m 156 ␛[95m 157 ␛[96m 158 ␛[97m 159
-    ␛[30;102m 160 ␛[31m 161 ␛[32m 162 ␛[33m 163 ␛[34m 164 ␛[35m 165 ␛[36m 166 ␛[37m 167 ␛[90m 168 ␛[91m 169 ␛[92m 170 ␛[93m 171 ␛[94m 172 ␛[95m 173 ␛[96m 174 ␛[97m 175
-    ␛[30;103m 176 ␛[31m 177 ␛[32m 178 ␛[33m 179 ␛[34m 180 ␛[35m 181 ␛[36m 182 ␛[37m 183 ␛[90m 184 ␛[91m 185 ␛[92m 186 ␛[93m 187 ␛[94m 188 ␛[95m 189 ␛[96m 190 ␛[97m 191
-    ␛[30;104m 192 ␛[31m 193 ␛[32m 194 ␛[33m 195 ␛[34m 196 ␛[35m 197 ␛[36m 198 ␛[37m 199 ␛[90m 200 ␛[91m 201 ␛[92m 202 ␛[93m 203 ␛[94m 204 ␛[95m 205 ␛[96m 206 ␛[97m 207
-    ␛[30;105m 208 ␛[31m 209 ␛[32m 210 ␛[33m 211 ␛[34m 212 ␛[35m 213 ␛[36m 214 ␛[37m 215 ␛[90m 216 ␛[91m 217 ␛[92m 218 ␛[93m 219 ␛[94m 220 ␛[95m 221 ␛[96m 222 ␛[97m 223
-    ␛[30;106m 224 ␛[31m 225 ␛[32m 226 ␛[33m 227 ␛[34m 228 ␛[35m 229 ␛[36m 230 ␛[37m 231 ␛[90m 232 ␛[91m 233 ␛[92m 234 ␛[93m 235 ␛[94m 236 ␛[95m 237 ␛[96m 238 ␛[97m 239
-    ␛[30;107m 240 ␛[31m 241 ␛[32m 242 ␛[33m 243 ␛[34m 244 ␛[35m 245 ␛[36m 246 ␛[37m 247 ␛[90m 248 ␛[91m 249 ␛[92m 250 ␛[93m 251 ␛[94m 252 ␛[95m 253 ␛[96m 254 ␛[97m 255
-
-    ␛[31;43m ░▒▓█␛[91;41m ░▒▓█␛[95;101m ░▒▓█␛[35;105m ░▒▓█␛[34;45m ░▒▓█␛[94;44m ░▒▓█␛[96;104m ░▒▓█␛[36;106m ░▒▓█␛[32;46m ░▒▓█␛[92;42m ░▒▓█␛[93;102m ░▒▓█␛[97;103m ░▒▓█␛[37;107m ░▒▓█␛[90;47m ░▒▓█␛[30;100m ░▒▓█␛[40m ░▒▓█
-    ␛[33;43m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;41m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;101m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;105m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;45m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;44m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;104m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;106m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;46m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;42m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;102m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;103m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;107m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;47m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;100m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█
-    ␛[33;40m ░▒▓█␛[31m ░▒▓█␛[91m ░▒▓█␛[95m ░▒▓█␛[35m ░▒▓█␛[34m ░▒▓█␛[94m ░▒▓█␛[96m ░▒▓█␛[36m ░▒▓█␛[32m ░▒▓█␛[92m ░▒▓█␛[93m ░▒▓█␛[97m ░▒▓█␛[37m ░▒▓█␛[90m ░▒▓█␛[30m ░▒▓█␛[0m
-
-Features Shown
-==============
-
-This demo is a focused reference for palette-oriented output:
+Features Demonstrated
+=====================
 
 * ``Foreground::fromIndex16()`` and ``Background::fromIndex16()`` across the full ANSI palette.
 * Named color output via ``toString()``.
 * Dense matrix rendering with ``Buffer::fill()`` and ``Buffer::drawText()``.
 * Practical contrast checks using the rainbow block pattern.
 
+Related Demos
+=============
+
+* :doc:`Display All Attributes <display-all-attributes>` for the matching attribute-focused reference.
+* :doc:`Frame Color Animations <frame-color-animations>` for color sequences applied to animated frames.
+* :doc:`Retro Plasma <retro-plasma>` for palette-driven animation in a full-screen demo.
+
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/display-all-colors/src/DisplayAllColorsApp.cpp`.
 
-:file:`demo/display-all-colors/src/DisplayAllColorsApp.cpp`
-
-This file contains the named palette table, the 16x16 index matrix, and the
-rainbow preview generation.
+This file contains the palette table, matrix, and rainbow pattern rendering logic.

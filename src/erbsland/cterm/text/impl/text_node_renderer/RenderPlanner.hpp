@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "InlineTextPlanner.hpp"
 #include "ListBlockPlanner.hpp"
 #include "PlanningContext.hpp"
@@ -14,19 +13,17 @@
 #include "../../Style.hpp"
 #include "../../TextNode.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Plan `TextNode` trees into a linear block representation.
 class RenderPlanner final : private PlannedNodeAppender {
 public:
     /// Create a planner for the given style.
     /// @param style The style to use when resolving block and inline rendering.
-    explicit RenderPlanner(StyleConstPtr style);
+    explicit RenderPlanner(const StyleConstPtr &style);
 
     // defaults
-    ~RenderPlanner() = default;
+    ~RenderPlanner() override = default;
     RenderPlanner(const RenderPlanner &) = delete;
     RenderPlanner(RenderPlanner &&) = delete;
     auto operator=(const RenderPlanner &) -> RenderPlanner & = delete;
@@ -54,6 +51,5 @@ private:
     RenderBlockFactory _blockFactory;     ///< Factory for planned render blocks.
     ListBlockPlanner _listBlockPlanner;   ///< Planner for list containers and list items.
 };
-
 
 }

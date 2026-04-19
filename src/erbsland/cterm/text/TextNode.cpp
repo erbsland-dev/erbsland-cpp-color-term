@@ -2,12 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "TextNode.hpp"
 
-
 #include "../impl/U8Buffer.hpp"
 
 #include <format>
 #include <string_view>
-
 
 namespace erbsland::cterm::text {
 

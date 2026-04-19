@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "ListBlockPlanner.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 ListBlockPlanner::ListBlockPlanner(
     const PlanningStyleResolver &styleResolver,
@@ -12,7 +10,6 @@ ListBlockPlanner::ListBlockPlanner(
     const TextNodePlanningQueries &queries) :
     _styleResolver{styleResolver}, _blockFactory{blockFactory}, _queries{queries} {
 }
-
 
 void ListBlockPlanner::appendList(
     const TextNode &node,
@@ -45,13 +42,11 @@ void ListBlockPlanner::appendList(
     }
 }
 
-
 auto ListBlockPlanner::listItemParagraphRule() -> StyleRule {
     auto rule = StyleRule{};
     rule.setIndents(ParagraphIndents{0, 0, 0, Margins{0}});
     return rule;
 }
-
 
 void ListBlockPlanner::appendListItem(
     const TextNode &node,
@@ -64,7 +59,6 @@ void ListBlockPlanner::appendListItem(
     applyListItemMargins(itemBlocks, listItemRule, context);
     appendListItemBlocks(itemBlocks, listItemLayout, blocks);
 }
-
 
 auto ListBlockPlanner::collectListItemBlocks(
     const TextNode &node, const PlanningContext &context, const PlannedNodeAppender &appender) const -> RenderBlocks {
@@ -80,7 +74,6 @@ auto ListBlockPlanner::collectListItemBlocks(
     }
     return itemBlocks;
 }
-
 
 void ListBlockPlanner::appendListItemChild(
     const TextNode &node,
@@ -102,7 +95,6 @@ void ListBlockPlanner::appendListItemChild(
     appender.appendPlannedNode(node, context, blocks);
 }
 
-
 void ListBlockPlanner::applyListItemMargins(
     RenderBlocks &itemBlocks, const StyleRule &listItemRule, const PlanningContext &context) const {
     auto firstMargins = itemBlocks.front().style().margins();
@@ -122,7 +114,6 @@ void ListBlockPlanner::applyListItemMargins(
     itemBlocks.back().style().setMargins(lastMargins);
 }
 
-
 void ListBlockPlanner::appendListItemBlocks(
     RenderBlocks &itemBlocks, const ListItemLayout &listItemLayout, RenderBlocks &blocks) const {
     auto firstBlock = true;
@@ -137,18 +128,15 @@ void ListBlockPlanner::appendListItemBlocks(
     }
 }
 
-
 auto ListBlockPlanner::emptyListItemRule() -> StyleRule {
     auto rule = StyleRule{};
     rule.setIndents(ParagraphIndents{0, 0, 0, Margins{0}});
     return rule;
 }
 
-
 auto ListBlockPlanner::emptyListItemBlock(const PlanningContext &context) const -> RenderBlock {
     return _blockFactory.paragraph(String{}, emptyListItemRule(), context);
 }
-
 
 auto ListBlockPlanner::makeListItemLayout(
     const StyleRule &listItemRule, const PlanningContext &context, const std::size_t number) const -> ListItemLayout {
@@ -163,6 +151,5 @@ auto ListBlockPlanner::makeListItemLayout(
         listItemRule.indents().firstLineIndent(),
         listItemRule.indents().wrappedLineIndent()};
 }
-
 
 }

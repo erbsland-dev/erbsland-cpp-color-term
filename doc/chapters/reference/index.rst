@@ -187,21 +187,25 @@ Reference
         - Shared pointer for Tile9Style
     *   - :doc:`text::Style<rich-text>`
         - A style for text formatting.
-    *   - :doc:`text::Style::Selector<rich-text>`
+    *   - :doc:`text::StyleListKind<rich-text>`
+        - Qualifies list-specific style selectors for bullet and numbered lists.
+    *   - :doc:`text::StyleRole<rich-text>`
+        - Semantic roles used by rich-text selectors such as paragraph, heading, span, or link.
+    *   - :doc:`text::StyleMarker<rich-text>`
+        - The visible marker configuration used for bullet and numbered list items.
+    *   - :doc:`text::StyleSelector<rich-text>`
         - A selector that targets semantic roles, levels, list kinds, and style tokens.
     *   - :doc:`text::StyleRule<rich-text>`
         - One resolved or stored rich-text style rule.
-    *   - :doc:`text::StyleRule::Marker<rich-text>`
-        - The visible marker used for bullet and numbered list items.
     *   - :doc:`text::TextNode<rich-text>`
         - A node in the text tree.
     *   - :doc:`text::TextNode::Type<rich-text>`
         - The node type.
-    *   - :doc:`ui::Application<ui>`
+    *   - :doc:`ui::Application<ui-core>`
         - UI Application instance for event-driven UI applications.
-    *   - :doc:`ui::DimensionPolicy<ui>`
+    *   - :doc:`ui::DimensionPolicy<ui-core>`
         - The size policy of a single surface dimension.
-    *   - :doc:`ui::Display<ui>`
+    *   - :doc:`ui::Display<ui-core>`
         - A display is a way to show pages on a terminal.
     *   - :doc:`ui::Event<ui-events>`
         - A single event.
@@ -215,19 +219,19 @@ Reference
         - A thread that executes queued invocations via the UI event system.
     *   - :doc:`ui::EventType<ui-events>`
         - The event type
-    *   - :doc:`ui::Geometry<ui>`
+    *   - :doc:`ui::Geometry<ui-core>`
         - The geometry and size policy of a surface.
-    *   - :doc:`ui::KeyBindings<ui>`
+    *   - :doc:`ui::KeyBindings<ui-input>`
         - Key-to-action bindings for surfaces and pages.
     *   - :doc:`ui::KeyPressEvent<ui-events>`
         - A key press event.
-    *   - :doc:`ui::Layout<ui>`
+    *   - :doc:`ui::Layout<ui-core>`
         - A layout is a surface that arranges other surfaces in a specific way.
-    *   - :doc:`ui::Page<ui>`
+    *   - :doc:`ui::Page<ui-core>`
         - A single page on the screen.
-    *   - :doc:`ui::PaintContext<ui>`
+    *   - :doc:`ui::PaintContext<ui-core>`
         - The paint context for the onPaint method.
-    *   - :doc:`ui::Panel<ui>`
+    *   - :doc:`ui::Panel<ui-surfaces>`
         - A fill surface that paints an optional background behind its child surfaces.
     *   - :doc:`ui::QuitEvent<ui-events>`
         - The data for a quit event.
@@ -235,17 +239,33 @@ Reference
         - Represents a scheduled action.
     *   - :doc:`ui::Scheduler<ui-events>`
         - A scheduler for UI actions.
-    *   - :doc:`ui::SizePolicy<ui>`
+    *   - :doc:`ui::ScrollingBufferView<ui-surfaces>`
+        - A surface that shows and scrolls a viewport onto a readable buffer.
+    *   - :doc:`ui::SizePolicy<ui-core>`
         - The size policy for both width and height of a surface.
-    *   - :doc:`ui::Stack<ui>`
+    *   - :doc:`ui::Stack<ui-layouts>`
         - A layout that stacks surfaces vertically or horizontally.
+    *   - :doc:`ui::AbstractStatusLine<ui-surfaces>`
+        - The subclassing-oriented base for one-line status bars.
+    *   - :doc:`ui::AbstractStatusLine::CollapseBehavior<ui-surfaces>`
+        - Overflow handling used when a status-line section does not fit.
+    *   - :doc:`ui::AbstractStatusLine::Section<ui-surfaces>`
+        - The three logical sections of a status line.
+    *   - :doc:`ui::StatusLine<ui-surfaces>`
+        - A configurable one-line status bar with owned fields and update callbacks.
+    *   - :doc:`ui::StatusLine::Field<ui-surfaces>`
+        - The owned configuration and content for one status-line section.
+    *   - :doc:`ui::StatusLine::UpdateFn<ui-surfaces>`
+        - The callback type used to refresh a status-line field.
+    *   - :doc:`ui::StatusLine::UpdateMode<ui-surfaces>`
+        - Controls when one status-line field refreshes automatically.
     *   - :doc:`ui::StopSource<ui-events>`
         - Stop source used by the event system to request a cooperative shutdown.
     *   - :doc:`ui::StopToken<ui-events>`
         - Cooperative stop token passed to stoppable UI callbacks.
-    *   - :doc:`ui::Surface<ui>`
+    *   - :doc:`ui::Surface<ui-core>`
         - A surface is a rectangular area on a page.
-    *   - :doc:`ui::TextBox<ui>`
+    *   - :doc:`ui::TextBox<ui-surfaces>`
         - A surface that renders one string using TextOptions-derived alignment and wrapping rules.
     *   - :doc:`UpdateSettings<terminal>`
         - Settings controlling how Terminal::updateScreen() renders a buffer.
@@ -320,4 +340,8 @@ Reference
     terminal
     text
     ui
+    ui-core
+    ui-layouts
+    ui-input
+    ui-surfaces
     ui-events

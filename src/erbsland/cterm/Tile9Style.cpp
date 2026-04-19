@@ -2,10 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Tile9Style.hpp"
 
-
 #include <algorithm>
 #include <stdexcept>
-
 
 namespace erbsland::cterm {
 
@@ -15,13 +13,11 @@ Tile9Style::Tile9Style(const std::array<Char, 9> tiles) noexcept : Tile9Style(to
 Tile9Style::Tile9Style(const std::array<Char, 16> tiles) noexcept : Tile9Style(toParsedTiles(tiles)) {
 }
 
-Tile9Style::Tile9Style(const std::string_view tiles) :
-    Tile9Style(parseTiles(String{tiles, EncodingErrors::Replace})) {
+Tile9Style::Tile9Style(const std::string_view tiles) : Tile9Style(parseTiles(String{tiles, EncodingErrors::Replace})) {
 }
 
 Tile9Style::Tile9Style(const std::u32string_view tiles) : Tile9Style(parseTiles(String{tiles})) {
 }
-
 
 auto Tile9Style::block(const Rectangle rect, const Position pos) const noexcept -> Char {
     if (!rect.contains(pos)) {
@@ -104,7 +100,7 @@ Tile9Style::Tile9Style(const ParsedTiles &parsed) noexcept :
     _tiles{parsed.tiles}, _hasExtendedTiles{parsed.hasExtendedTiles} {
 }
 
-auto Tile9Style::parseTiles(const String &tiles) -> ParsedTiles {
+auto Tile9Style::parseTiles(const StringView &tiles) -> ParsedTiles {
     if (tiles.size() != 9 && tiles.size() != 16) {
         throw std::invalid_argument{"Tile9Style requires exactly 9 or 16 terminal characters."};
     }

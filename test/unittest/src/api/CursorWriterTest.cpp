@@ -7,7 +7,6 @@
 
 #include <optional>
 
-
 class CursorWriterProbe final : public CursorWriter {
 public:
     [[nodiscard]] auto color() const noexcept -> Color override { return _color; }
@@ -27,13 +26,13 @@ public:
     [[nodiscard]] auto size() const noexcept -> Size override { return Size{80, 25}; }
     void clearScreen() noexcept override { _clearScreenCallCount += 1; }
     void write(const Char &character) noexcept override { _writtenChars.push_back(character); }
-    void write(const String &str) noexcept override { _writtenStrings.push_back(str); }
+    void write(const StringView &str) noexcept override { _writtenStrings.push_back(String{str}); }
     void write(const ReadableBuffer &) noexcept override { _writeBufferCallCount += 1; }
     void writeLineBreak() noexcept override { _lineBreakCount += 1; }
 
 protected:
-    auto printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int override {
-        _lastParagraph = paragraph;
+    auto printParagraphImpl(const StringView &paragraph, const ParagraphOptions &options) noexcept -> int override {
+        _lastParagraph = String{paragraph};
         _lastParagraphAlignment = options.alignment();
         return 7;
     }
@@ -52,7 +51,6 @@ public:
     String _lastParagraph{};
     Alignment _lastParagraphAlignment{Alignment::TopLeft};
 };
-
 
 TESTED_TARGETS(CursorWriter)
 class CursorWriterTest final : public el::UnitTest {
@@ -127,10 +125,14 @@ public:
             CharAttributes{}.withFlag(CharAttributes::Underline, true),
             Char{U'X'},
             String{"Y"},
+            StringView{String{"QR"}}.substr(0, 1),
             std::string{"Z"},
+            std::u32string_view{U"Ω"},
             std::string_view{"!"},
             "?");
-        const auto lineCount = writer.printParagraph(String{"AA"}, ParagraphOptions{Alignment::Right});
+        const auto paragraphSource = String{"xAA!"};
+        const auto lineCount =
+            writer.printParagraph(StringView{paragraphSource}.substr(1, 2), ParagraphOptions{Alignment::Right});
         writer.printLine("tail");
 
         REQUIRE_EQUAL(writer.color(), Color(fg::Yellow, bg::Magenta));
@@ -138,12 +140,14 @@ public:
         REQUIRE(writer.charAttributes().isUnderline());
         REQUIRE_EQUAL(writer._writtenChars.size(), std::size_t{1});
         REQUIRE_EQUAL(writer._writtenChars[0], U'X');
-        REQUIRE_EQUAL(writer._writtenStrings.size(), std::size_t{5});
+        REQUIRE_EQUAL(writer._writtenStrings.size(), std::size_t{7});
         requireStringEqual(writer._writtenStrings[0], U"Y");
-        requireStringEqual(writer._writtenStrings[1], U"Z");
-        requireStringEqual(writer._writtenStrings[2], U"!");
-        requireStringEqual(writer._writtenStrings[3], U"?");
-        requireStringEqual(writer._writtenStrings[4], U"tail");
+        requireStringEqual(writer._writtenStrings[1], U"Q");
+        requireStringEqual(writer._writtenStrings[2], U"Z");
+        requireStringEqual(writer._writtenStrings[3], U"Ω");
+        requireStringEqual(writer._writtenStrings[4], U"!");
+        requireStringEqual(writer._writtenStrings[5], U"?");
+        requireStringEqual(writer._writtenStrings[6], U"tail");
         REQUIRE_EQUAL(writer._lineBreakCount, 1);
         REQUIRE_EQUAL(lineCount, 7);
         requireStringEqual(writer._lastParagraph, U"AA");

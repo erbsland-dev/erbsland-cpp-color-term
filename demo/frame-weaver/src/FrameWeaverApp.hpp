@@ -2,19 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
 
 #include <chrono>
 #include <random>
 #include <vector>
 
-
 namespace demo::frameweaver {
 
-
 using namespace erbsland::cterm;
-
 
 /// Continuously add random frames to demonstrate automatic line combinations.
 class FrameWeaverApp final : public TerminalApplication {
@@ -73,6 +69,5 @@ private:
     std::chrono::steady_clock::time_point _lastTick{std::chrono::steady_clock::now()};
     StyleMode _styleMode{StyleMode::Heavy};
 };
-
 
 }

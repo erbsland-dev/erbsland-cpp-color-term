@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "BufferedTokenizer.hpp"
 #include "Generator.hpp"
 #include "HtmlToken.hpp"
@@ -11,7 +10,6 @@
 #include <optional>
 #include <string>
 #include <vector>
-
 
 namespace erbsland::cterm::text::impl {
 

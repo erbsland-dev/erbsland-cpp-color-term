@@ -6,9 +6,7 @@
 #include <array>
 #include <string_view>
 
-
 namespace demo::framecoloranimations {
-
 
 void FrameColorAnimationsApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{78, 22});
@@ -18,7 +16,6 @@ void FrameColorAnimationsApp::beforeInitialize() {
             "Resize the terminal to at least 78x22 cells for the frame color animation demo.",
             Color{fg::BrightWhite, bg::Black}});
 }
-
 
 void FrameColorAnimationsApp::onRenderToBuffer() {
     _buffer.fill(Char{" ", bg::Black});
@@ -45,7 +42,6 @@ void FrameColorAnimationsApp::onRenderToBuffer() {
     drawFooter(footerRect);
 }
 
-
 void FrameColorAnimationsApp::drawPanel(const Rectangle rect, const PanelSpec &panel) {
     auto options = FrameDrawOptions{};
     options.setStyle(panel.style);
@@ -70,7 +66,6 @@ void FrameColorAnimationsApp::drawPanel(const Rectangle rect, const PanelSpec &p
         Color{fg::BrightBlack, bg::Inherited});
 }
 
-
 void FrameColorAnimationsApp::drawHeader(const Rectangle rect) {
     _buffer.drawText(
         "Frame Color Animations",
@@ -84,11 +79,9 @@ void FrameColorAnimationsApp::drawHeader(const Rectangle rect) {
         Color{fg::BrightYellow, bg::Black});
 }
 
-
 void FrameColorAnimationsApp::drawFooter(const Rectangle rect) {
     _buffer.drawText("Press q to quit.", rect, Alignment::CenterRight, Color{fg::BrightBlack, bg::Inherited});
 }
-
 
 auto FrameColorAnimationsApp::panelSpecs() -> const std::array<PanelSpec, 7> & {
     static const auto cPanels = std::array<PanelSpec, 7>{
@@ -102,7 +95,6 @@ auto FrameColorAnimationsApp::panelSpecs() -> const std::array<PanelSpec, 7> & {
     };
     return cPanels;
 }
-
 
 auto FrameColorAnimationsApp::colorSequence(const std::size_t index) -> const ColorSequence & {
     static const auto cSequences = std::array<ColorSequence, 7>{
@@ -152,11 +144,9 @@ auto FrameColorAnimationsApp::colorSequence(const std::size_t index) -> const Co
     return cSequences[index % cSequences.size()];
 }
 
-
 auto FrameColorAnimationsApp::outerFrameColors() -> const ColorSequence & {
     return colorSequence(2);
 }
-
 
 auto FrameColorAnimationsApp::fillColors() -> const ColorSequence & {
     static const auto cFillColors = ColorSequence{
@@ -165,6 +155,5 @@ auto FrameColorAnimationsApp::fillColors() -> const ColorSequence & {
     };
     return cFillColors;
 }
-
 
 }

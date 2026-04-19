@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
+#include "UnicodeWidth.hpp"
 
 #include <cctype>
 #include <cstdint>
 #include <string>
 #include <string_view>
-
 
 namespace erbsland::cterm::impl {
 
@@ -35,6 +35,21 @@ namespace erbsland::cterm::impl {
 
 [[nodiscard]] constexpr auto isValidUnicode(const char32_t unicode) noexcept -> bool {
     return unicode <= 0x10FFFFU && (unicode < 0xD800U || unicode > 0xDFFFU);
+}
+
+/// Test if one code point is an ISO control code.
+/// @param codePoint The code point to test.
+/// @return `true` if the code point is a control code.
+[[nodiscard]] constexpr auto isControlCode(const char32_t codePoint) noexcept -> bool {
+    return codePoint < 0x20 || (codePoint >= 0x7FU && codePoint <= 0x9FU);
+}
+
+/// Test whether one code point is accepted as a visible string character.
+/// @param codePoint The code point to test.
+/// @return `true` if the code point is preserved in a terminal string.
+[[nodiscard]] inline auto isStringCharacter(const char32_t codePoint) noexcept -> bool {
+    return codePoint == U'\t' || codePoint == U'\n' ||
+        (!isControlCode(codePoint) && codePoint >= 0x20 && consoleCharacterWidth(codePoint) > 0);
 }
 
 [[nodiscard]] constexpr auto isAsciiWhitespace(const char32_t character) noexcept -> bool {
@@ -141,6 +156,5 @@ namespace erbsland::cterm::impl {
     }
     return result;
 }
-
 
 }

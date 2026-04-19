@@ -20,6 +20,7 @@ Implementation Notes
     paragraph-layout-and-painting
     remapped-buffer
     stack-layout
+    string-sharing
     text-node-renderer
     unicode-width-system
 
@@ -87,6 +88,13 @@ code structure, and platform-specific behavior that are intentionally not part o
 
         Understand how remap tables, storage layout, and resize paths work
         together to keep row- and column-oriented edits efficient.
+
+    .. grid-item-card:: :fas:`clone;sd-text-success` String Sharing
+        :link: string-sharing
+        :link-type: doc
+
+        Follow how `String`, `StringView`, shared backing storage, and
+        copy-on-write detaches fit together.
 
     .. grid-item-card:: :fas:`table-columns;sd-text-success` Stack Layout
         :link: stack-layout

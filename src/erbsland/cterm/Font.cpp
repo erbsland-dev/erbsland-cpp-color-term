@@ -1,14 +1,10 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
-
 #include "Font.hpp"
-
 
 #include <algorithm>
 
-
 namespace erbsland::cterm {
-
 
 Font::Font(const int height) noexcept : _height{height} {
 }
@@ -38,6 +34,5 @@ auto Font::glyph(const std::string_view name) const -> const FontGlyph * {
     }
     return nullptr;
 }
-
 
 }

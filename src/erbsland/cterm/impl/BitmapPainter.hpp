@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "WritableBuffer.hpp"
 
-
 namespace erbsland::cterm::impl {
-
 
 class BitmapPainter final {
 public:
@@ -52,6 +49,5 @@ private: // helper
 private:
     WritableBuffer &_buffer;
 };
-
 
 }

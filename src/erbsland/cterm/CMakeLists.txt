@@ -14,6 +14,7 @@ target_sources(erbsland-color-term PRIVATE
         Bitmap.hpp
         BitmapDrawOptions.cpp
         BitmapDrawOptions.hpp
+        BufferResizeMode.hpp
         Buffer.cpp
         Buffer.hpp
         BufferDrawOptions.hpp
@@ -53,6 +54,7 @@ target_sources(erbsland-color-term PRIVATE
         Input.hpp
         InputDefinition.cpp
         InputDefinition.hpp
+        IndexRange.hpp
         Key.cpp
         Key.hpp
         Margins.hpp
@@ -76,6 +78,8 @@ target_sources(erbsland-color-term PRIVATE
         Size.hpp
         String.cpp
         String.hpp
+        StringView.cpp
+        StringView.hpp
         Terminal.cpp
         Terminal.hpp
         TerminalFlags.hpp

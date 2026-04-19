@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "HtmlTokenizer.hpp"
 
-
 #include "../../impl/TextUtil.hpp"
 
 #include <array>
@@ -10,7 +9,6 @@
 #include <string_view>
 #include <utility>
 #include <vector>
-
 
 namespace erbsland::cterm::text::impl {
 
@@ -181,9 +179,7 @@ auto HtmlTokenizer::tokenizeDocType(std::vector<HtmlTokenRef> &tokens) -> bool {
         return false;
     }
     tokens.emplace_back(
-        HtmlTokenRef{
-            .type = HtmlTokenType::DocType,
-            .range = trimRange(IndexRange{.start = textStart, .length = textEnd - textStart})});
+        HtmlTokenRef{.type = HtmlTokenType::DocType, .range = trimRange(IndexRange{textStart, textEnd - textStart})});
     return true;
 }
 
@@ -310,7 +306,7 @@ auto HtmlTokenizer::parseAttributeValue(IndexRange &value) -> bool {
         if (!consumeBufferedIf(quoteCharacter)) {
             return false;
         }
-        value = IndexRange{.start = start, .length = end - start};
+        value = IndexRange{start, end - start};
         return true;
     }
 
@@ -327,7 +323,7 @@ auto HtmlTokenizer::parseAttributeValue(IndexRange &value) -> bool {
         appendCurrentAndAdvance();
     }
     value = makeRange(start);
-    return value.length > 0;
+    return value.length() > 0;
 }
 
 auto HtmlTokenizer::parseName() -> std::optional<IndexRange> {
@@ -336,7 +332,7 @@ auto HtmlTokenizer::parseName() -> std::optional<IndexRange> {
         appendCurrentAndAdvance();
     }
     const auto range = makeRange(start);
-    if (range.length == 0) {
+    if (range.length() == 0) {
         return std::nullopt;
     }
     return range;
@@ -349,7 +345,7 @@ void HtmlTokenizer::skipWhitespace() {
 }
 
 auto HtmlTokenizer::materializeToken(const HtmlTokenRef &token) const -> HtmlToken {
-    return HtmlToken{token.type, _buffer.substr(token.range.start, token.range.length)};
+    return HtmlToken{token.type, _buffer.substr(token.range.startIndex(), token.range.length())};
 }
 
 auto HtmlTokenizer::bufferTextToken() const -> HtmlToken {

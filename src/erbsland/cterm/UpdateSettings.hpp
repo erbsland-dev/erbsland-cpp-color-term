@@ -2,19 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Char.hpp"
 #include "Size.hpp"
 #include "String.hpp"
 
 #include <utility>
 
-
 namespace erbsland::cterm {
 
-
 class BufferViewBase;
-
 
 /// Settings controlling how `Terminal::updateScreen()` renders a buffer.
 class UpdateSettings final {
@@ -107,13 +103,12 @@ public: // compatibility
 private:
     Size _minimumSize{};                        ///< The minimum required terminal size.
     Char _minimumSizeBackground{Char::space()}; ///< Background character if the terminal size is too small.
-    String _minimumSizeMessage;      ///< A message that is displayed centered if the terminal size is too small.
-    bool _showCropMarks{false};      ///< If crop marks are enabled.
-    Char _cropMarkRight{U'▶'};       ///< Crop mark at the right edge.
-    Char _cropMarkBottomRight{U'◢'}; ///< Crop mark in the bottom-right corner.
-    Char _cropMarkBottom{U'▼'};      ///< Crop mark at the bottom edge.
+    String _minimumSizeMessage;          ///< A message that is displayed centered if the terminal size is too small.
+    bool _showCropMarks{false};          ///< If crop marks are enabled.
+    Char _cropMarkRight{U'▶'};           ///< Crop mark at the right edge.
+    Char _cropMarkBottomRight{U'◢'};     ///< Crop mark in the bottom-right corner.
+    Char _cropMarkBottom{U'▼'};          ///< Crop mark at the bottom edge.
     bool _switchToAlternateBuffer{true}; ///< Switches to the alternate screen buffer if supported.
 };
-
 
 }

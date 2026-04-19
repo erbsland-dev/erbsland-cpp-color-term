@@ -2,10 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Char.hpp"
 
-
 #include <algorithm>
 #include <ranges>
-
 
 namespace erbsland::cterm {
 
@@ -14,7 +12,6 @@ auto Char::withCombining(const char32_t codePoint, const EncodingErrors encoding
     result._character = _character.withCombining(codePoint, encodingErrors);
     return result;
 }
-
 
 auto Char::withColorOverlay(const Color color) const -> Char {
     auto result = *this;
@@ -28,7 +25,6 @@ auto Char::withOverlay(const Color color, const CharAttributes attributes) const
     return result;
 }
 
-
 auto Char::withColorReplaced(const Color color) const noexcept -> Char {
     auto result = *this;
     result._style.setColor(color);
@@ -40,7 +36,6 @@ auto Char::withAttributes(const CharAttributes attributes) const noexcept -> Cha
     result._style.setAttributes(attributes);
     return result;
 }
-
 
 auto Char::withBaseColor(const Color color) const noexcept -> Char {
     return withBase(color, CharAttributes{});
@@ -57,7 +52,6 @@ auto Char::withBase(const Char &base) const noexcept -> Char {
     result._style = _style.withBase(base.style());
     return result;
 }
-
 
 auto Char::isSpacing() const noexcept -> bool {
     return _character.isSpacing();
@@ -104,6 +98,5 @@ auto Char::space() noexcept -> const Char & {
 auto Char::emptyBlock(const CharStyle style) noexcept -> Char {
     return Char{impl::CombinedChar{}, style};
 }
-
 
 }

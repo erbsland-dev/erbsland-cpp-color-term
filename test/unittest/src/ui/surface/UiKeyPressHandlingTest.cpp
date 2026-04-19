@@ -43,7 +43,6 @@ private:
 
 }
 
-
 TESTED_TARGETS(UiKeyBindings UiKeyPress UiApplication)
 class UiKeyPressHandlingTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {
 public:
@@ -61,6 +60,70 @@ public:
         panel->onKeyPress(matchedEvent);
         REQUIRE_EQUAL(bindingCalls, std::size_t{1});
         REQUIRE(matchedEvent.isHandled());
+    }
+
+    void testSurfaceKeyBindingsSupportConvenienceOverloadsAndMultiBinding() {
+        auto panel = ui::Panel::create();
+        auto bindingCalls = std::size_t{0};
+        const auto action = [&bindingCalls]() -> void { bindingCalls += 1; };
+
+        panel->keyBindings().bind(Key::Enter, action);
+        panel->keyBindings().bind(U'ü', action);
+        panel->keyBindings().bind(U"ab", action);
+        panel->keyBindings().bind({Key{Key::Escape}, Key{Key::Tab}}, action);
+        panel->keyBindings().bind({Key::Left, Key::Right}, action);
+        panel->keyBindings().bind({U'λ', U'ß'}, action);
+
+        for (const auto &key :
+             {Key{Key::Enter},
+              Key{Key::Character, U'ü'},
+              Key{Key::Combined, U"ab"},
+              Key{Key::Escape},
+              Key{Key::Tab},
+              Key{Key::Left},
+              Key{Key::Right},
+              Key{Key::Character, U'λ'},
+              Key{Key::Character, U'ß'}}) {
+            auto keyPressEvent = ui::KeyPressEvent{key};
+            panel->onKeyPress(keyPressEvent);
+            REQUIRE(keyPressEvent.isHandled());
+        }
+        REQUIRE_EQUAL(bindingCalls, std::size_t{9});
+    }
+
+    void testConvenienceBindOverloadsSupportReplacingAndRemovingBindings() {
+        auto panel = ui::Panel::create();
+        auto callsA = std::size_t{0};
+        auto callsB = std::size_t{0};
+
+        panel->keyBindings().bind({Key::Escape, Key::Enter}, [&callsA]() -> void { callsA += 1; });
+        panel->keyBindings().bind(Key::Enter, [&callsB]() -> void { callsB += 1; });
+
+        auto enterEvent = ui::KeyPressEvent{Key{Key::Enter}};
+        panel->onKeyPress(enterEvent);
+        REQUIRE(enterEvent.isHandled());
+        REQUIRE_EQUAL(callsA, std::size_t{0});
+        REQUIRE_EQUAL(callsB, std::size_t{1});
+
+        panel->keyBindings().bind({Key::Escape, Key::Enter}, {});
+
+        auto removedEscapeEvent = ui::KeyPressEvent{Key{Key::Escape}};
+        panel->onKeyPress(removedEscapeEvent);
+        REQUIRE_FALSE(removedEscapeEvent.isHandled());
+
+        auto removedEnterEvent = ui::KeyPressEvent{Key{Key::Enter}};
+        panel->onKeyPress(removedEnterEvent);
+        REQUIRE_FALSE(removedEnterEvent.isHandled());
+        REQUIRE_EQUAL(callsA, std::size_t{0});
+        REQUIRE_EQUAL(callsB, std::size_t{1});
+    }
+
+    void testSpecialKeyTypeOverloadRejectsUnsupportedKeyKinds() {
+        auto keyBindings = ui::KeyBindings{};
+
+        REQUIRE_THROWS(keyBindings.bind(Key::None, []() -> void {}));
+        REQUIRE_THROWS(keyBindings.bind(Key::Character, []() -> void {}));
+        REQUIRE_THROWS(keyBindings.bind(Key::Combined, []() -> void {}));
     }
 
     void testFocusToRejectsForeignSurfaces() {

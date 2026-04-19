@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "impl/CombinedChar.hpp"
 #include "impl/HashHelper.hpp"
 
@@ -13,9 +12,7 @@
 #include <string>
 #include <string_view>
 
-
 namespace erbsland::cterm {
-
 
 /// A simple representation of a key press.
 /// Supports Unicode text input and common special keys.
@@ -155,9 +152,7 @@ private:
     impl::CombinedChar _character;
 };
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::Key> {

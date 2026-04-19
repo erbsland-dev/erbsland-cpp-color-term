@@ -2,13 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Surface.hpp"
 
 #include "../Char.hpp"
 
 #include <memory>
-
 
 namespace erbsland::cterm::ui {
 

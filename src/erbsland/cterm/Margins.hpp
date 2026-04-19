@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 namespace erbsland::cterm {
-
 
 /// Represents margins (top, right, bottom, left) around a rectangle.
 /// - Immutable-like value type for representing padding or insets.
@@ -56,6 +54,5 @@ private:
     int _bottom;
     int _left;
 };
-
 
 }

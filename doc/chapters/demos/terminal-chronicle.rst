@@ -6,14 +6,16 @@
 Terminal Chronicle
 ******************
 
-``terminal-chronicle`` is the most straightforward demo in the repository. It tells a short story using only
-``Terminal::print()`` and ``Terminal::printLine()`` without relying on a back buffer or complex rendering logic.
+``terminal-chronicle`` tells a short story using only ``Terminal::print()`` and ``Terminal::printLine()``. It is the
+most direct example in the repository of colorful, structured terminal output without a back buffer or full-screen
+render loop.
 
-This makes the example particularly useful if you want to generate structured and colorful terminal output for
-command-line tools, status messages, or splash screens while keeping the implementation compact and easy to read.
+Use This Demo When You Need...
+==============================
 
-.. figure:: /images/terminal-chronicle.jpg
-    :width: 100%
+* A readable example of mixed text, colors, and formatting in ordinary command-line output.
+* A support reference for status messages, splash screens, or narrated console output.
+* A compact alternative to the fullscreen demos when you want simple print calls only.
 
 Run the Demo
 ============
@@ -24,26 +26,31 @@ Start the demo from the build directory:
 
     $ ./cmake-build-debug/demo-apps/terminal-chronicle
 
-The program prints a short animated story directly to the terminal using simple formatted output calls.
+The program prints the full story directly into the terminal history and exits on its own.
 
-Features Shown
-==============
+Captured Output (80x25)
+=======================
 
-This demo highlights how to produce expressive terminal output with minimal infrastructure:
+.. include:: _captures/terminal-chronicle.rstinc
 
-* Direct terminal output using ``Terminal::print()`` and ``Terminal::printLine()``.
-* Readable mixed argument lists that combine text, colors, and formatting.
-* Foreground and background color changes within a single output line.
-* Structured console output without building or managing a ``Buffer``.
-* Explicit terminal setup and restore operations.
+Features Demonstrated
+=====================
+
+* Direct output via ``Terminal::print()`` and ``Terminal::printLine()``.
+* Readable mixed argument lists combining plain text, colors, and formatting state.
+* Inline foreground and background changes inside one output flow.
+* Structured command-line output without building or managing a ``Buffer`` first.
+
+Related Demos
+=============
+
+* :doc:`Command Line Help <command-line-help>` for more advanced paragraph layout and tab-stop based help text.
+* :doc:`Display All Colors <display-all-colors>` for a palette-focused reference of the built-in ANSI colors.
+* :doc:`Minimum Effort <minimum-effort>` for the next step up into full-screen retained-buffer rendering.
 
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/terminal-chronicle/src/StoryDemo.cpp`.
 
-:file:`demo/terminal-chronicle/src/StoryDemo.cpp`
-
-This file contains the entire story sequence and demonstrates how formatted terminal
-output can remain readable even when mixing text and styling instructions.
-
+This file contains the complete sequence and shows how expressive terminal output can stay compact and readable.

@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstdint>
 
-
 namespace erbsland::cterm {
-
 
 /// Alignment of text or graphics in a box.
 enum class Alignment : uint8_t {
@@ -30,7 +27,6 @@ enum class Alignment : uint8_t {
     VerticalMask = Top | VCenter | Bottom,   ///< Mask for extracting the vertical component.
 };
 
-
 /// Bitwise OR for combining alignments.
 /// Example: Alignment::Top | Alignment::HCenter -> TopCenter
 [[nodiscard]] constexpr auto operator|(const Alignment lhs, const Alignment rhs) noexcept -> Alignment {
@@ -42,6 +38,5 @@ enum class Alignment : uint8_t {
 [[nodiscard]] constexpr auto operator&(const Alignment lhs, const Alignment rhs) noexcept -> Alignment {
     return static_cast<Alignment>(static_cast<int>(lhs) & static_cast<int>(rhs));
 }
-
 
 }

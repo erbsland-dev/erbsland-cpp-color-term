@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "FramePainter.hpp"
 
-
 namespace erbsland::cterm::impl {
 
 void FramePainter::drawFrame(
@@ -213,6 +212,5 @@ auto FramePainter::colorForFramePosition(
     const auto wrappedSequenceIndex = ((sequenceIndex % sequenceLength) + sequenceLength) % sequenceLength;
     return colorSequence.color(static_cast<std::size_t>(wrappedSequenceIndex));
 }
-
 
 }

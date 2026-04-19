@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Char16Style.hpp"
 #include "CharCombinationStyle.hpp"
 #include "Color.hpp"
@@ -11,9 +10,7 @@
 #include "FrameStyle.hpp"
 #include "Tile9Style.hpp"
 
-
 namespace erbsland::cterm {
-
 
 /// The mode how animated colors are applied to frames.
 enum class FrameColorMode : uint8_t {
@@ -39,7 +36,6 @@ enum class FrameColorMode : uint8_t {
     /// Increasing `animationCycle` makes the colors travel counter-clockwise.
     ChasingBorderCCW,
 };
-
 
 /// The options to draw a frame.
 /// These options define the frame style, optional fill, combination style, and animated color behavior for
@@ -147,6 +143,5 @@ private:
     FrameColorMode _frameColorMode = FrameColorMode::OneColor;
     FrameColorMode _fillColorMode = FrameColorMode::OneColor;
 };
-
 
 }

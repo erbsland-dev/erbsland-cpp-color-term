@@ -9,9 +9,7 @@
 #include <format>
 #include <string>
 
-
 namespace demo::frameweaver {
-
 
 void FrameWeaverApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{32, 10});
@@ -20,12 +18,10 @@ void FrameWeaverApp::beforeInitialize() {
         String{"Resize the terminal to at least 32x10 cells for the frame demo.", Color{fg::BrightWhite, bg::Black}});
 }
 
-
 auto FrameWeaverApp::beforeRun() -> int {
     _lastTick = std::chrono::steady_clock::now();
     return 0;
 }
-
 
 void FrameWeaverApp::onKey(const Key &key) {
     if (key == U'c') {
@@ -54,7 +50,6 @@ void FrameWeaverApp::onKey(const Key &key) {
     }
 }
 
-
 void FrameWeaverApp::updateAnimation(const std::chrono::milliseconds elapsed) noexcept {
     _accumulator += elapsed;
     while (_accumulator >= _frameDelay) {
@@ -62,7 +57,6 @@ void FrameWeaverApp::updateAnimation(const std::chrono::milliseconds elapsed) no
         addFrame();
     }
 }
-
 
 void FrameWeaverApp::addFrame() noexcept {
     static constexpr auto cMaxFrames = std::size_t{20};
@@ -72,7 +66,6 @@ void FrameWeaverApp::addFrame() noexcept {
     }
     _frames.push_back(createRandomFrame());
 }
-
 
 void FrameWeaverApp::onRenderToBuffer() {
     const auto now = std::chrono::steady_clock::now();
@@ -98,7 +91,6 @@ void FrameWeaverApp::onRenderToBuffer() {
     _buffer.drawText(prompt);
 }
 
-
 void FrameWeaverApp::renderFrames(const Rectangle contentRect) {
     for (const auto &frame : _frames) {
         if (frame.customStyle != nullptr) {
@@ -112,7 +104,6 @@ void FrameWeaverApp::renderFrames(const Rectangle contentRect) {
         }
     }
 }
-
 
 auto FrameWeaverApp::createRandomFrame() -> FrameSpec {
     auto factorDistribution = std::uniform_real_distribution<double>{0.0, 1.0};
@@ -135,7 +126,6 @@ auto FrameWeaverApp::createRandomFrame() -> FrameSpec {
     return frame;
 }
 
-
 auto FrameWeaverApp::frameRectangle(const FrameSpec frame, const Rectangle contentRect) -> Rectangle {
     const auto width = std::clamp(
         static_cast<int>(std::lround(frame.width * static_cast<double>(contentRect.width()))),
@@ -151,7 +141,6 @@ auto FrameWeaverApp::frameRectangle(const FrameSpec frame, const Rectangle conte
     const auto y = contentRect.y1() + static_cast<int>(std::lround(frame.y * static_cast<double>(maxY)));
     return {x, y, width, height};
 }
-
 
 auto FrameWeaverApp::prismFrameStyle() -> const Char16StylePtr & {
     static const auto style = std::make_shared<Char16Style>(std::array<Char, 16>{
@@ -175,7 +164,6 @@ auto FrameWeaverApp::prismFrameStyle() -> const Char16StylePtr & {
     return style;
 }
 
-
 auto FrameWeaverApp::colors() -> const ColorSequence & {
     static const auto cColors = ColorSequence{
         {fg::BrightCyan, bg::Black},
@@ -186,7 +174,6 @@ auto FrameWeaverApp::colors() -> const ColorSequence & {
     };
     return cColors;
 }
-
 
 auto FrameWeaverApp::availableStyles() const -> std::vector<FrameSpec> {
     switch (_styleMode) {
@@ -233,7 +220,6 @@ auto FrameWeaverApp::availableStyles() const -> std::vector<FrameSpec> {
     }
 }
 
-
 auto FrameWeaverApp::modeName() const -> std::string_view {
     switch (_styleMode) {
     case StyleMode::Light:
@@ -253,7 +239,6 @@ auto FrameWeaverApp::modeName() const -> std::string_view {
         return "all";
     }
 }
-
 
 auto FrameWeaverApp::buildPrompt() const -> String {
     auto result = String{};
@@ -301,6 +286,5 @@ auto FrameWeaverApp::buildPrompt() const -> String {
         " all");
     return result;
 }
-
 
 }

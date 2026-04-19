@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "TextNodePlanningQueries.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 auto TextNodePlanningQueries::emitsBlocks(const TextNode &node) const -> bool {
     switch (node.type()) {
@@ -41,7 +39,6 @@ auto TextNodePlanningQueries::emitsBlocks(const TextNode &node) const -> bool {
     }
 }
 
-
 auto TextNodePlanningQueries::childMatchesSelection(const TextNode &node, const ChildSelection selection) const
     -> bool {
     switch (selection) {
@@ -52,7 +49,6 @@ auto TextNodePlanningQueries::childMatchesSelection(const TextNode &node, const 
     }
     return false;
 }
-
 
 auto TextNodePlanningQueries::findChildRange(const TextNode &node, const ChildSelection selection) const
     -> std::optional<ChildRange> {
@@ -73,6 +69,5 @@ auto TextNodePlanningQueries::findChildRange(const TextNode &node, const ChildSe
     }
     return ChildRange{.first = *first, .last = *last};
 }
-
 
 }

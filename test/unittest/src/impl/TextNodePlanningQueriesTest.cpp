@@ -7,10 +7,8 @@
 #include <erbsland/cterm/text/TextNode.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 namespace text = erbsland::cterm::text;
 namespace tnr = erbsland::cterm::text::impl::text_node_renderer;
-
 
 TESTED_TARGETS(TextNodePlanningQueries)
 class TextNodePlanningQueriesTest final : public UNITTEST_SUBCLASS(TestHelper) {

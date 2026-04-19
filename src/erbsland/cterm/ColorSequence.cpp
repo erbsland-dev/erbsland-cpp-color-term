@@ -2,17 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "ColorSequence.hpp"
 
-
 #include <algorithm>
 
-
 namespace erbsland::cterm {
-
 
 ColorSequence::ColorSequence(const Color color, const std::size_t count) noexcept {
     add(color, count);
 }
-
 
 ColorSequence::ColorSequence(const std::initializer_list<Color> colors) noexcept {
     for (const auto color : colors) {
@@ -20,13 +16,11 @@ ColorSequence::ColorSequence(const std::initializer_list<Color> colors) noexcept
     }
 }
 
-
 ColorSequence::ColorSequence(const std::initializer_list<Entry> entries) noexcept {
     for (const auto &entry : entries) {
         add(entry.color, entry.count);
     }
 }
-
 
 void ColorSequence::add(const Color color, const std::size_t count) noexcept {
     if (count == 0) {
@@ -36,14 +30,12 @@ void ColorSequence::add(const Color color, const std::size_t count) noexcept {
     _sequenceLength += count;
 }
 
-
 auto ColorSequence::color(const std::size_t index) const noexcept -> Color {
     if (_sequenceLength == 0) {
         return {};
     }
     return colorAtEffectiveIndex(index % _sequenceLength);
 }
-
 
 auto ColorSequence::colorNormalized(const double normalized) const noexcept -> Color {
     if (_sequenceLength == 0) {
@@ -55,7 +47,6 @@ auto ColorSequence::colorNormalized(const double normalized) const noexcept -> C
     return color(scaledIndex);
 }
 
-
 auto ColorSequence::colorAtEffectiveIndex(std::size_t index) const noexcept -> Color {
     for (const auto &entry : _entries) {
         if (index < entry.count) {
@@ -65,6 +56,5 @@ auto ColorSequence::colorAtEffectiveIndex(std::size_t index) const noexcept -> C
     }
     return {};
 }
-
 
 }

@@ -15,10 +15,8 @@
 
 #include <string>
 
-
 namespace text = erbsland::cterm::text;
 namespace tnr = erbsland::cterm::text::impl::text_node_renderer;
-
 
 namespace {
 
@@ -91,7 +89,6 @@ private:
 
 } // namespace
 
-
 TESTED_TARGETS(ListBlockPlanner ListItemLayout)
 class ListBlockPlannerTest final : public UNITTEST_SUBCLASS(TestHelper) {
 public:
@@ -118,6 +115,8 @@ public:
 
         REQUIRE_EQUAL(blocks.size(), std::size_t{2});
         REQUIRE_EQUAL(toPlainText(blocks[0].renderString()), std::string{"•   One"});
+        REQUIRE(blocks[0].terminalText().has_value());
+        REQUIRE_EQUAL(toPlainText(*blocks[0].terminalText()), std::string{"•\tOne"});
         REQUIRE_EQUAL(toPlainText(blocks[1].renderString()), std::string{"    Two"});
     }
 

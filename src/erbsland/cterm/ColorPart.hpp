@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "ColorRole.hpp"
 
 #include "impl/HashHelper.hpp"
@@ -13,9 +12,7 @@
 #include <string>
 #include <string_view>
 
-
 namespace erbsland::cterm {
-
 
 /// Shared implementation for foreground and background color values.
 class ColorBase {
@@ -93,7 +90,6 @@ protected:
 protected:
     Value _value{Value::Inherited};
 };
-
 
 /// A foreground or background color.
 template <ColorRole tColorType>
@@ -207,7 +203,6 @@ public: // tools
     }
 };
 
-
 /// The background color.
 using Background = ColorPart<ColorRole::Background>;
 /// Short alias for `Background`.
@@ -218,15 +213,12 @@ using Foreground = ColorPart<ColorRole::Foreground>;
 /// Short alias for `Foreground`.
 using fg = Foreground;
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::Foreground> {
     auto operator()(const erbsland::cterm::Foreground &color) const noexcept -> std::size_t { return color.hash(); }
 };
-
 
 template <>
 struct std::hash<erbsland::cterm::Background> {

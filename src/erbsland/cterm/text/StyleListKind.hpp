@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstdint>
 
-
 namespace erbsland::cterm::text {
-
 
 /// The list kind for list-specific selectors.
 enum class StyleListKind : uint8_t {
@@ -15,6 +12,5 @@ enum class StyleListKind : uint8_t {
     Bullet,   ///< Match bullet lists and bullet list items.
     Numbered, ///< Match numbered lists and numbered list items.
 };
-
 
 }

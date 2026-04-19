@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <string>
 
-
 namespace demo::retroplasma {
 
 void RetroPlasmaApp::beforeInitialize() {
@@ -16,12 +15,10 @@ void RetroPlasmaApp::beforeInitialize() {
         String{"Resize the terminal to at least 28x8 cells for the plasma demo.", Color{fg::BrightWhite, bg::Black}});
 }
 
-
 auto RetroPlasmaApp::beforeRun() -> int {
     _lastFrameTime = std::chrono::steady_clock::now();
     return 0;
 }
-
 
 void RetroPlasmaApp::onKey(const Key &key) {
     if (key == U'f') {
@@ -37,7 +34,6 @@ void RetroPlasmaApp::onKey(const Key &key) {
     }
 }
 
-
 void RetroPlasmaApp::onRenderToBuffer() {
     const auto now = std::chrono::steady_clock::now();
     const auto elapsedSeconds = std::chrono::duration<double>{now - _lastFrameTime}.count();
@@ -51,7 +47,6 @@ void RetroPlasmaApp::onRenderToBuffer() {
     drawPrompt();
 }
 
-
 void RetroPlasmaApp::drawPrompt() noexcept {
     if (_buffer.size().height() <= 0) {
         return;
@@ -61,7 +56,6 @@ void RetroPlasmaApp::drawPrompt() noexcept {
     auto text = Text{buildPrompt(), Rectangle{0, promptRow, _buffer.size().width(), 1}, Alignment::CenterLeft};
     _buffer.drawText(text);
 }
-
 
 auto RetroPlasmaApp::buildPrompt() const -> String {
     auto result = String{};
@@ -91,6 +85,5 @@ auto RetroPlasmaApp::buildPrompt() const -> String {
         std::format(" palette  speed {}%", (_speed * 100.0)));
     return result;
 }
-
 
 }

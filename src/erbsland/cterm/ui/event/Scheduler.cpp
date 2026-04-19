@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Scheduler.hpp"
 
-
 #include "impl/EventClockAccess.hpp"
 #include "impl/ScheduledActionEvent.hpp"
 
@@ -12,7 +11,6 @@
 #include <tuple>
 #include <utility>
 #include <vector>
-
 
 namespace erbsland::cterm::ui {
 

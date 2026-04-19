@@ -7,10 +7,9 @@
 #include "paragraph/Layout.hpp"
 #include "paragraph/Painter.hpp"
 
-
 namespace erbsland::cterm::impl {
 
-void TextPainter::drawText(Position pos, const String &str) {
+void TextPainter::drawText(Position pos, const StringView &str) {
     if (str.empty() || !size().contains(pos)) {
         return;
     }
@@ -42,7 +41,7 @@ auto TextPainter::simpleTextOptions(const Alignment alignment, const Color color
 }
 
 void TextPainter::drawText(
-    const String &text, const Rectangle rect, const TextOptions &options, std::size_t animationCycle) {
+    const StringView &text, const Rectangle rect, const TextOptions &options, std::size_t animationCycle) {
     const auto textRect = contentRect(rect, options.paragraphOptions());
     if (textRect.width() <= 0 || textRect.height() <= 0) {
         return;
@@ -92,7 +91,16 @@ void TextPainter::drawText(
 }
 
 void TextPainter::drawText(
-    const String &text,
+    const std::u32string_view text,
+    const Rectangle rect,
+    const Alignment alignment,
+    const Color color,
+    const std::size_t animationCycle) {
+    drawText(String{text}, rect, simpleTextOptions(alignment, color), animationCycle);
+}
+
+void TextPainter::drawText(
+    const StringView &text,
     const Rectangle rect,
     const Alignment alignment,
     const Color color,
@@ -104,12 +112,12 @@ auto TextPainter::contentRect(const Rectangle rect, const ParagraphOptions &opti
     return rect.insetBy(options.margins());
 }
 
-auto TextPainter::buildSimpleTextLines(const String &text, const Rectangle rect, ParagraphSpacing spacing) const
+auto TextPainter::buildSimpleTextLines(const StringView &text, const Rectangle rect, ParagraphSpacing spacing) const
     -> StringLines {
     return StringWrapper{text}.wrapIntoLines(rect.width(), spacing);
 }
 
-auto TextPainter::buildFontTextLines(const TextOptions &options, const String &paragraph) const -> StringLines {
+auto TextPainter::buildFontTextLines(const TextOptions &options, const StringView &paragraph) const -> StringLines {
     static constexpr auto pixelMap = std::array<std::string_view, 16>{
         " ", "▘", "▝", "▀", "▖", "▌", "▞", "▛", "▗", "▚", "▐", "▜", "▄", "▙", "▟", "█"};
     if (options.font() == nullptr) {

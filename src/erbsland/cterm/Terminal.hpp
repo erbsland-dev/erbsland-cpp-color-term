@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Backend.hpp"
 #include "Char.hpp"
 #include "Color.hpp"
@@ -22,14 +21,11 @@
 #include <functional>
 #include <memory>
 
-
 namespace erbsland::cterm {
-
 
 class Terminal;
 /// Shared pointer to a terminal instance.
 using TerminalPtr = std::shared_ptr<Terminal>;
-
 
 /// High-level terminal interface for screen control, color output, and key input.
 class Terminal final : public CursorWriter {
@@ -99,9 +95,9 @@ public: // implement CursorWriter
     void setAutoWrap(bool enabled) noexcept override;
     void setCursorVisible(bool visible) noexcept override;
     void write(const Char &character) noexcept override;
-    void write(const String &str) noexcept override;
+    void write(const StringView &str) noexcept override;
     void writeResolved(const Char &character) noexcept override;
-    void writeResolved(const String &str) noexcept override;
+    void writeResolved(const StringView &str) noexcept override;
     void write(const ReadableBuffer &buffer) noexcept override;
     void writeLineBreak() noexcept override;
 
@@ -222,7 +218,7 @@ public: // backward compatibility.
     void setColorEnabled(bool enabled) noexcept;
 
 protected: // implement CursorWriter
-    auto printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int override;
+    auto printParagraphImpl(const StringView &paragraph, const ParagraphOptions &options) noexcept -> int override;
 
 private:
     /// Test whether the current backend combination supports full ANSI buffering.
@@ -257,7 +253,7 @@ private:
     /// @param paragraph The paragraph to write.
     /// @param options The paragraph options for error handling and spacing.
     /// @return The number of terminal lines written.
-    [[nodiscard]] auto printParagraphPlainOutput(const String &paragraph, const ParagraphOptions &options) noexcept
+    [[nodiscard]] auto printParagraphPlainOutput(const StringView &paragraph, const ParagraphOptions &options) noexcept
         -> int;
     /// Finish a paragraph by writing one or two explicit line breaks.
     /// @param renderedLines The number of already rendered paragraph lines.
@@ -287,6 +283,5 @@ private:
     impl::InputBackend _input;                               ///< The input backend.
     impl::LineBuffer _lineBuffer;                            ///< The line buffer.
 };
-
 
 }

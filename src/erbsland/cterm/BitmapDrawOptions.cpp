@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "BitmapDrawOptions.hpp"
 
-
 #include <stdexcept>
 
-
 namespace erbsland::cterm {
-
 
 BitmapDrawOptions::BitmapDrawOptions(ColorSequence colorSequence, BitmapColorMode colorMode) :
     _color{colorSequence}, _colorMode{colorMode} {
@@ -117,6 +114,5 @@ auto BitmapDrawOptions::defaultOptions() noexcept -> const BitmapDrawOptions & {
     static const BitmapDrawOptions options;
     return options;
 }
-
 
 }

@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Size.hpp"
 
-
 namespace erbsland::cterm {
 
 auto Size::anchor(const Anchor anchor) const noexcept -> Position {
@@ -59,6 +58,5 @@ auto Size::alignmentOffset(const Size contentSize, const Alignment alignment) co
         axisOffset(_width, contentSize.width(), alignment & Alignment::HorizontalMask),
         axisOffset(_height, contentSize.height(), alignment & Alignment::VerticalMask)};
 }
-
 
 }

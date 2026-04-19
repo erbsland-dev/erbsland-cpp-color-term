@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(UnicodeWidth)
 class UnicodeWidthTest final : public UNITTEST_SUBCLASS(TestHelper) {
 public:

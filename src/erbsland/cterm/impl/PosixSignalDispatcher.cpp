@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "PosixSignalDispatcher.hpp"
 
-
 #include <fcntl.h>
 #include <unistd.h>
 
 #include <cerrno>
 #include <utility>
 
-
 namespace erbsland::cterm::impl {
-
 
 std::array<struct sigaction, PosixSignalDispatcher::cSignals.size()> PosixSignalDispatcher::_previousSignalActions{};
 volatile sig_atomic_t PosixSignalDispatcher::_signalWriteFd{-1};
@@ -122,6 +119,5 @@ void PosixSignalDispatcher::onSignal(const int signalNumber) noexcept {
     // If the pipe is already full, we may lose the signal. That's fine.
     [[maybe_unused]] const auto rc = ::write(fd, &forwardedSignal, sizeof(forwardedSignal));
 }
-
 
 }

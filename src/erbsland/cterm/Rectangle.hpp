@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Alignment.hpp"
 #include "Direction.hpp"
 #include "Margins.hpp"
@@ -14,14 +13,11 @@
 #include <type_traits>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 class Rectangle;
 struct AlignedSource;
 using RectangleList = std::vector<Rectangle>;
-
 
 /// Axis-aligned rectangle represented by a top-left position and size.
 /// Provides geometry utilities such as containment tests, expansion and iteration.
@@ -36,8 +32,7 @@ public:
     /// @param width Rectangle width.
     /// @param height Rectangle height.
     constexpr Rectangle(Coordinate x, Coordinate y, Coordinate width, Coordinate height) noexcept :
-        _pos{x, y},
-        _size{width, height} {}
+        _pos{x, y}, _size{width, height} {}
     /// Construct from position and size objects.
     /// @param pos Top-left corner position.
     /// @param size Rectangle size.
@@ -183,11 +178,9 @@ public: // tools
     /// @param verticalSpacing The spacing between cells vertically.
     /// @return A vector of rectangles representing the grid cells from left to right, top to bottom.
     /// @throws std::invalid_argument if rows or columns are less than 1 or the chosen division is impossible.
-    [[nodiscard]] auto gridCells(
-        int rows,
-        int columns,
-        Coordinate horizontalSpacing = 0,
-        Coordinate verticalSpacing = 0) const -> std::vector<Rectangle>;
+    [[nodiscard]] auto
+    gridCells(int rows, int columns, Coordinate horizontalSpacing = 0, Coordinate verticalSpacing = 0) const
+        -> std::vector<Rectangle>;
     /// Call a function for each position contained in the rectangle.
     /// @tparam Fn A callable with signature `void(Position)`.
     /// The function definition must be `void fn(Position pos)`.
@@ -209,7 +202,6 @@ private:
     Size _size;
 };
 
-
 /// Effective source and target rectangles after alignment.
 struct AlignedSource final {
     Rectangle targetRect; ///< The target rectangle inside the alignment box.
@@ -217,7 +209,6 @@ struct AlignedSource final {
 
     auto operator==(const AlignedSource &other) const noexcept -> bool = default;
 };
-
 
 template <typename Fn>
 void Rectangle::forEach(Fn fn) const {
@@ -227,7 +218,6 @@ void Rectangle::forEach(Fn fn) const {
         }
     }
 }
-
 
 template <typename Fn>
     requires(std::is_invocable_r_v<void, Fn, Position, int> || std::is_invocable_r_v<void, Fn, Position>)
@@ -273,15 +263,12 @@ void Rectangle::forEachInFrame(Fn fn) const {
     }
 }
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::Rectangle> {
     auto operator()(const erbsland::cterm::Rectangle &rect) const noexcept -> std::size_t { return rect.hash(); }
 };
-
 
 template <>
 struct std::formatter<erbsland::cterm::Rectangle> : std::formatter<std::string> {

@@ -14,7 +14,7 @@
 namespace text = erbsland::cterm::text;
 namespace textimpl = erbsland::cterm::text::impl;
 
-TESTED_TARGETS(HtmlParser TextNode)
+TESTED_TARGETS(HtmlParser)
 class HtmlParserTest final : public UNITTEST_SUBCLASS(TestHelper) {
 public:
     void testParseBuildsInlineStructureForFragments() {
@@ -174,31 +174,6 @@ public:
             });
     }
 
-    void testCreateUnsupportedBuildsTheExpectedPlaceholderNode() {
-        const auto node = text::TextNode::createUnsupported(U"image");
-
-        REQUIRE_EQUAL(node->type(), text::TextNode::Type::Unsupported);
-        REQUIRE_EQUAL(node->toDiagnosticTree().size(), std::size_t{1});
-        REQUIRE_EQUAL(node->toDiagnosticTree().front(), "Unsupported text=\"image\"");
-    }
-
-    void testCreateGenericFactoryBuildsTypedNodesWithDefaultPayload() {
-        const auto paragraph = text::TextNode::create(text::TextNode::Type::Paragraph);
-        const auto link = text::TextNode::create(text::TextNode::Type::Link);
-
-        REQUIRE_EQUAL(paragraph->type(), text::TextNode::Type::Paragraph);
-        REQUIRE_EQUAL(link->type(), text::TextNode::Type::Link);
-        REQUIRE(link->data().has_value());
-        REQUIRE_EQUAL(link->data().value(), "");
-    }
-
-    void testTextNodeTypeHelpersClassifyKnownNodeKinds() {
-        REQUIRE(text::TextNode::isInlineNodeType(text::TextNode::Type::Strong));
-        REQUIRE(text::TextNode::isTextContainerType(text::TextNode::Type::CodeBlock));
-        REQUIRE(text::TextNode::isListNodeType(text::TextNode::Type::BulletList));
-        REQUIRE_FALSE(text::TextNode::isInlineNodeType(text::TextNode::Type::Paragraph));
-    }
-
 private:
     [[nodiscard]] static auto parse(const std::string_view html) -> text::TextNodePtr {
         auto parser = textimpl::HtmlParser{html};
@@ -206,18 +181,11 @@ private:
     }
 
     void requireTreeEqual(const text::TextNodePtr &root, const std::initializer_list<std::string_view> expectedLines) {
-        const auto actualLines = root->toDiagnosticTree(2);
-        REQUIRE_EQUAL(actualLines.size(), expectedLines.size());
-        auto index = std::size_t{0};
-        for (const auto expectedLine : expectedLines) {
-            runWithContext(
-                SOURCE_LOCATION(),
-                [&]() { REQUIRE_EQUAL(actualLines[index], std::string{expectedLine}); },
-                [&]() -> std::string {
-                    return std::format(
-                        "index = {} / actual = \"{}\" / expected = \"{}\"", index, actualLines[index], expectedLine);
-                });
-            index += 1;
+        auto expected = std::vector<std::string>{};
+        expected.reserve(expectedLines.size());
+        for (const auto line : expectedLines) {
+            expected.emplace_back(line);
         }
+        REQUIRE_EQUAL_LINES(root->toDiagnosticTree(2), expected);
     }
 };

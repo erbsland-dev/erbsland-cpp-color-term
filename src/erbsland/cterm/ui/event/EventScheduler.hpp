@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "EventDriver.hpp"
 
 #include <cstdint>
@@ -11,7 +10,6 @@
 #include <mutex>
 #include <optional>
 #include <utility>
-
 
 namespace erbsland::cterm::ui {
 
@@ -64,6 +62,5 @@ private:
     mutable std::mutex _mutex; ///< The mutex to protect the scheduler.
     SchedulingMap _events;     ///< The map with all scheduled events.
 };
-
 
 }

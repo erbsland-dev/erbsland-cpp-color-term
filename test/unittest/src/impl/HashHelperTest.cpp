@@ -47,7 +47,6 @@ public:
 
 static_assert(std::same_as<decltype(term::impl::hashCreate(1, 2, 3)), std::size_t>);
 
-
 TESTED_TARGETS(HashHelper)
 class HashHelperTest final : public el::UnitTest {
 public:

@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstdint>
 
-
 namespace erbsland::cterm {
-
 
 /// The handling for tabs whose configured tab stop does not advance the current line.
 ///
@@ -19,6 +16,5 @@ enum class TabOverflowBehavior : uint8_t {
     /// End the current physical line and continue after the tab on the next wrapped line.
     LineBreak,
 };
-
 
 }

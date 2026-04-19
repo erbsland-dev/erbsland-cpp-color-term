@@ -8,9 +8,7 @@
 
 #include <chrono>
 
-
 using namespace std::chrono_literals;
-
 
 TESTED_TARGETS(UpdateScreenModesState)
 class UpdateScreenModesStateTest final : public el::UnitTest {

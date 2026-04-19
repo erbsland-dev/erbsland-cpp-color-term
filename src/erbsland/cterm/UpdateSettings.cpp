@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "UpdateSettings.hpp"
 
-
 #include "BufferView.hpp"
 
-
 namespace erbsland::cterm {
-
 
 UpdateSettings::UpdateSettings(
     const Size minimumSize,
@@ -105,6 +102,5 @@ auto UpdateSettings::defaultSettings() noexcept -> const UpdateSettings & {
     static UpdateSettings settings;
     return settings;
 }
-
 
 }

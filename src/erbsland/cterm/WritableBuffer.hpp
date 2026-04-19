@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "BitmapDrawOptions.hpp"
 #include "BufferDrawOptions.hpp"
 #include "BufferResizeMode.hpp"
@@ -10,12 +9,11 @@
 #include "CharCombinationStyle.hpp"
 #include "FrameDrawOptions.hpp"
 #include "ReadableBuffer.hpp"
-#include "String.hpp"
+#include "StringView.hpp"
 #include "Text.hpp"
 #include "Tile9Style.hpp"
 
 #include <optional>
-
 
 namespace erbsland::cterm {
 
@@ -63,7 +61,7 @@ public: // convenience methods
     /// Color (even inherited) overwrites the existing characters. Use `drawText(pos, text)` for a color overlay.
     /// @param pos The coordinates within the buffer.
     /// @param str The string to write.
-    virtual void set(Position pos, const String &str) noexcept;
+    virtual void set(Position pos, const StringView &str) noexcept;
     /// Copy the content from another buffer into this one.
     /// This buffer is completely overwritten but not resized.
     /// If there is a size mismatch, the contents are either cut off or filled using `fillChar`.
@@ -182,7 +180,7 @@ public: // drawing methods
     /// Characters outside this buffer are cut off.
     /// @param pos The start position (top-left corner).
     /// @param str The text to draw on this buffer.
-    virtual void drawText(Position pos, const String &str);
+    virtual void drawText(Position pos, const StringView &str);
     /// If fg or bg is set to `Inherited`, the current color from the buffer is used.
     /// Draw simple text into a rectangle.
     /// If fg or bg is set to `Inherited`, the current color from the buffer is used.
@@ -205,13 +203,20 @@ public: // drawing methods
         std::size_t animationCycle = 0);
     /// @overload
     void drawText(
-        const String &text,
+        std::u32string_view text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
         Color color = {},
         std::size_t animationCycle = 0);
     /// @overload
-    void drawText(const String &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle = 0);
+    void drawText(
+        const StringView &text,
+        Rectangle rect,
+        Alignment alignment = Alignment::TopLeft,
+        Color color = {},
+        std::size_t animationCycle = 0);
+    /// @overload
+    void drawText(const StringView &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle = 0);
     /// Draw a bitmap at a given position.
     /// The bitmap is rendered according to `options.scaleMode()`. If `options.char16Style()` is set,
     /// it overrides the scale mode and renders one terminal cell per bitmap pixel.
@@ -331,7 +336,7 @@ protected: // implementation
     /// @param text The text description.
     /// @param animationCycle Animation cycle for animated text.
     virtual void drawTextImpl(const Text &text, std::size_t animationCycle);
-    /// Implement `drawText(const String &, Rectangle, ...)`.
+    /// Implement `drawText(StringView, Rectangle, ...)`.
     /// The public overload forwards to this method.
     /// @param text The text to render.
     /// @param rect The target rectangle.
@@ -339,15 +344,15 @@ protected: // implementation
     /// @param color The text color.
     /// @param animationCycle Animation cycle for animated text.
     virtual void
-    drawTextImpl(const String &text, Rectangle rect, Alignment alignment, Color color, std::size_t animationCycle);
-    /// Implement `drawText(String, Rectangle, TextOptions, ...)`.
+    drawTextImpl(const StringView &text, Rectangle rect, Alignment alignment, Color color, std::size_t animationCycle);
+    /// Implement `drawText(StringView, Rectangle, TextOptions, ...)`.
     /// The public overload forwards to this method.
     /// @param text The text to render.
     /// @param rect The target rectangle.
     /// @param options The text drawing options.
     /// @param animationCycle Animation cycle for animated text.
     virtual void
-    drawTextImpl(const String &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle);
+    drawTextImpl(const StringView &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle);
     /// Implement `drawBitmap(const Bitmap &, Position, ...)`.
     /// The public overload forwards to this method.
     /// @param bitmap The bitmap to draw.
@@ -370,6 +375,5 @@ protected: // implementation
         const BitmapDrawOptions &options,
         std::size_t animationCycle) noexcept;
 };
-
 
 }

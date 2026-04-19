@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "RemappedBuffer.hpp"
 
-
 #include <algorithm>
 #include <cassert>
 #include <format>
 #include <ranges>
 
-
 namespace erbsland::cterm {
-
 
 RemappedBuffer::RemappedBuffer() : RemappedBuffer{Size{1, 1}, Orientation::Vertical, Char{U' '}} {
 }

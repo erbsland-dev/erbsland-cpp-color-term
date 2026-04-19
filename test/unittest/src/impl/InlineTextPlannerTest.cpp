@@ -11,10 +11,8 @@
 
 #include <string>
 
-
 namespace text = erbsland::cterm::text;
 namespace tnr = erbsland::cterm::text::impl::text_node_renderer;
-
 
 namespace {
 
@@ -27,7 +25,6 @@ auto toPlainText(const String &textValue) -> std::string {
 }
 
 } // namespace
-
 
 TESTED_TARGETS(InlineTextPlanner)
 class InlineTextPlannerTest final : public UNITTEST_SUBCLASS(TestHelper) {

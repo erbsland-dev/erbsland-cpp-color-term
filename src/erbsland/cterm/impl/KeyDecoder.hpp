@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "CombinedChar.hpp"
 #include "U8Buffer.hpp"
 
@@ -13,9 +12,7 @@
 #include <string_view>
 #include <utility>
 
-
 namespace erbsland::cterm::impl {
-
 
 /// Decode one key from a UTF-8 console input buffer.
 class KeyDecoder final {
@@ -84,6 +81,5 @@ private:
 private:
     std::string_view _text;
 };
-
 
 }

@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstddef>
 #include <cstdint>
 #include <memory>
@@ -11,9 +10,7 @@
 #include <string_view>
 #include <vector>
 
-
 namespace erbsland::cterm::text {
-
 
 class TextNode;
 using TextNodePtr = std::shared_ptr<TextNode>;
@@ -265,6 +262,5 @@ private:
     std::optional<std::string> _data;                  ///< Target URL for links/code language/etc.
     Level _level{0};                                   ///< Level of a heading/list
 };
-
 
 }

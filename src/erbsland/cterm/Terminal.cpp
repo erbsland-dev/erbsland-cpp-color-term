@@ -13,9 +13,7 @@
 #include <format>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 Terminal::Terminal() : Terminal(Size{80, 25}, TerminalFlags{}) {
 }
@@ -440,7 +438,7 @@ void Terminal::write(const Char &character) noexcept {
     _lineBuffer.handleEmit();
 }
 
-void Terminal::write(const String &str) noexcept {
+void Terminal::write(const StringView &str) noexcept {
     for (const auto &character : str) {
         const auto resolvedCharacter = character.withBase(_color, _charAttributes);
         setStyle(resolvedCharacter.style());
@@ -455,7 +453,7 @@ void Terminal::writeResolved(const Char &character) noexcept {
     _lineBuffer.handleEmit();
 }
 
-void Terminal::writeResolved(const String &str) noexcept {
+void Terminal::writeResolved(const StringView &str) noexcept {
     for (const auto &character : str) {
         setStyle(character.style());
         _lineBuffer.write(character);
@@ -476,7 +474,7 @@ void Terminal::writeLineBreak() noexcept {
     _lineBuffer.handleEmit();
 }
 
-auto Terminal::printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
+auto Terminal::printParagraphImpl(const StringView &paragraph, const ParagraphOptions &options) noexcept -> int {
     const auto margins = options.margins();
     const auto x1 = std::max(margins.left(), 0);
     const auto width = std::max(size().width() - std::max(margins.left(), 0) - std::max(margins.right(), 0), 0);
@@ -502,7 +500,7 @@ auto Terminal::printParagraphImpl(const String &paragraph, const ParagraphOption
     return lineCount;
 }
 
-auto Terminal::printParagraphPlainOutput(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
+auto Terminal::printParagraphPlainOutput(const StringView &paragraph, const ParagraphOptions &options) noexcept -> int {
     if (options.onError() == ParagraphOnError::Empty) {
         return 0;
     }

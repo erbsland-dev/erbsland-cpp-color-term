@@ -2,12 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Orientation.hpp"
 #include "WritableBuffer.hpp"
 
 #include <string_view>
-
 
 namespace erbsland::cterm {
 

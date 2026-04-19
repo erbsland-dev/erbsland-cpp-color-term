@@ -2,24 +2,18 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cassert>
 #include <cstddef>
 #include <cstdint>
 #include <optional>
 
-
 namespace erbsland::cterm {
 
-
-class String;
-
+class StringView;
 
 }
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// One prepared source-line token used during physical line layout.
 class LayoutLineToken final {
@@ -44,7 +38,9 @@ public:
     /// @param startIndex The first source character index covered by the token.
     /// @param length The number of source characters covered by the token.
     /// @param displayWidth The cached display width of the token.
-    LayoutLineToken(Type type, std::size_t startIndex, std::size_t length, int displayWidth) noexcept;
+    constexpr LayoutLineToken(
+        const Type type, const std::size_t startIndex, const std::size_t length, const int displayWidth) noexcept :
+        _type{type}, _startIndex{startIndex}, _length{length}, _displayWidth{displayWidth} {}
 
     // defaults
     LayoutLineToken(const LayoutLineToken &) = default;
@@ -67,7 +63,7 @@ public:
         return _startIndex + offset;
     }
     /// Get the remaining display width from the given character offset onward.
-    [[nodiscard]] auto remainingWidth(const String &text, std::size_t offset) const noexcept -> int;
+    [[nodiscard]] auto remainingWidth(const StringView &text, std::size_t offset) const noexcept -> int;
     /// Split the word to fit into the available width.
     /// @param text The source text that contains the word characters.
     /// @param offset The first source character offset to place on the current line.
@@ -75,7 +71,7 @@ public:
     /// @param trailingMarkerWidth The width of an optional trailing split marker.
     /// @return The split result, or `std::nullopt` if nothing can be rendered.
     [[nodiscard]] auto
-    split(const String &text, std::size_t offset, int availableWidth, int trailingMarkerWidth) const noexcept
+    split(const StringView &text, std::size_t offset, int availableWidth, int trailingMarkerWidth) const noexcept
         -> std::optional<SplitResult>;
 
 private:
@@ -87,6 +83,5 @@ private:
     std::size_t _length = 0;
     int _displayWidth = 0;
 };
-
 
 }

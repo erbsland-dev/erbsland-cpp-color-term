@@ -2,17 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <erbsland/cterm/all.hpp>
 
 #include <chrono>
 
-
 namespace demo {
 
-
 using namespace erbsland::cterm;
-
 
 /// The base class for all demo applications
 class TerminalApplication {
@@ -73,6 +69,5 @@ protected:
     std::size_t _animationCycle{0};
     bool _screenInitialized{false};
 };
-
 
 }

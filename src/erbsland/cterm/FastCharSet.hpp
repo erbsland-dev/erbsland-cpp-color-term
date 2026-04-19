@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Char.hpp"
 
 #include <array>
@@ -11,14 +10,11 @@
 #include <variant>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 class FastCharSet;
 /// Shared pointer for FastCharSet.
 using FastCharSetPtr = std::shared_ptr<FastCharSet>;
-
 
 /// Shared immutable character set with optimized lookup for common separator patterns.
 ///
@@ -85,6 +81,5 @@ private:
     std::variant<FastTrack, Tables> _lookup;
     std::u32string _characters;
 };
-
 
 }

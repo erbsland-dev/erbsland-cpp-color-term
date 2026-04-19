@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstdint>
-
 
 namespace erbsland::cterm {
 
@@ -45,6 +43,5 @@ public: // tools
 private:
     Value _value{Horizontal};
 };
-
 
 }

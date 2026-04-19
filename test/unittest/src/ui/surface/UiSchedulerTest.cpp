@@ -32,7 +32,6 @@ private:
     ui::EventTime _now{};
 };
 
-
 class ControlledTimeBackend final : public Backend {
 public:
     explicit ControlledTimeBackend(std::shared_ptr<ManualClock> clock) : _clock{std::move(clock)} {}
@@ -147,7 +146,6 @@ public:
 };
 
 }
-
 
 TESTED_TARGETS(UiScheduler UiApplication UiDisplay)
 class UiSchedulerTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {

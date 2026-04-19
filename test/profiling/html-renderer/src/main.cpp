@@ -14,9 +14,7 @@
 #include <memory>
 #include <random>
 
-
 namespace profiling::htmlrenderer {
-
 
 using namespace erbsland::cterm;
 
@@ -25,16 +23,13 @@ constexpr auto cMinimumWidth = 40;
 constexpr auto cMaximumWidth = 200;
 constexpr auto cWidthSeed = std::uint32_t{0x5EED1234U};
 
-
 [[nodiscard]] auto documentStyle() -> const text::StyleConstPtr & {
     return text::Style::defaultStyled();
 }
 
-
 [[nodiscard]] auto documentBaseColor() -> Color {
     return documentStyle()->baseTextStyle().color();
 }
-
 
 [[nodiscard]] auto createWidthSequence() -> std::array<int, cIterationCount> {
     auto widths = std::array<int, cIterationCount>{};
@@ -46,7 +41,6 @@ constexpr auto cWidthSeed = std::uint32_t{0x5EED1234U};
     return widths;
 }
 
-
 [[nodiscard]] auto hashBuffer(const CursorBuffer &buffer) -> std::uint64_t {
     auto hash = std::uint64_t{1469598103934665603ULL};
     for (auto y = 0; y < buffer.size().height(); ++y) {
@@ -57,7 +51,6 @@ constexpr auto cWidthSeed = std::uint32_t{0x5EED1234U};
     }
     return hash;
 }
-
 
 auto main() -> int {
     const auto widths = createWidthSequence();
@@ -92,9 +85,7 @@ auto main() -> int {
     return 0;
 }
 
-
 }
-
 
 auto main() -> int {
     return profiling::htmlrenderer::main();

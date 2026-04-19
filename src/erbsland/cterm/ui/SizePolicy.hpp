@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "DimensionPolicy.hpp"
-
 
 namespace erbsland::cterm::ui {
 
@@ -57,6 +55,5 @@ private:
     DimensionPolicy _width;
     DimensionPolicy _height;
 };
-
 
 }

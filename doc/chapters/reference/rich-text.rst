@@ -20,6 +20,9 @@ The system is structured into three layers:
 * :cpp:any:`Style <erbsland::cterm::text::Style>` defines the visual
   appearance of headings, paragraphs, lists, blockquotes, code blocks,
   and inline elements such as emphasis or links.
+  :cpp:any:`StyleSelector <erbsland::cterm::text::StyleSelector>` and
+  :cpp:any:`StyleRole <erbsland::cterm::text::StyleRole>` let you target
+  those rules precisely.
 * :cpp:any:`TextNode <erbsland::cterm::text::TextNode>` represents the
   intermediate document tree. You can inspect or construct this tree
   when you need more control than direct rendering provides.
@@ -103,6 +106,31 @@ renderer automatically collapses adjacent vertical margins where it
 makes sense, so headings and paragraphs behave like cohesive document
 blocks rather than isolated ``printParagraph()`` calls.
 
+Styling Inline Span Tokens
+--------------------------
+
+Generic inline spans can be styled explicitly with
+:cpp:any:`StyleSelector::span() <erbsland::cterm::text::StyleSelector::span()>`
+and optional style tokens parsed from HTML ``class`` attributes.
+
+.. code-block:: cpp
+
+    namespace rich = erbsland::cterm::text;
+
+    auto style = std::make_shared<rich::Style>();
+    style->edit(rich::StyleSelector::span()).setTextStyle(Color{fg::White, bg::Inherited});
+    style->edit(rich::StyleSelector{rich::StyleRole::Span, {"tag"}})
+        .setTextStyle(Color{fg::BrightBlack, bg::BrightYellow});
+    style->edit(rich::StyleSelector{rich::StyleRole::Span, {"warning"}})
+        .setTextStyle(Color{fg::BrightYellow, bg::Inherited}, CharAttributes::Bold);
+
+    rich::HtmlRenderer{
+        "<p><span class=\"tag\">beta</span> <span class=\"warning\">Read carefully.</span></p>",
+        style}.renderTo(buffer);
+
+This works well for terminal badges, inline tags, severity labels, and
+other compact document cues that should stay part of the text flow.
+
 Inspecting and Building TextNode Trees
 --------------------------------------
 
@@ -148,6 +176,19 @@ Interface
 .. doxygentypedef:: erbsland::cterm::text::StyleConstPtr
 
 .. doxygenclass:: erbsland::cterm::text::Style
+    :members:
+
+.. doxygenenum:: erbsland::cterm::text::StyleRole
+
+.. doxygenenum:: erbsland::cterm::text::StyleListKind
+
+.. doxygenclass:: erbsland::cterm::text::StyleSelector
+    :members:
+
+.. doxygenclass:: erbsland::cterm::text::StyleMarker
+    :members:
+
+.. doxygenclass:: erbsland::cterm::text::StyleRule
     :members:
 
 .. doxygentypedef:: erbsland::cterm::text::TextNodePtr

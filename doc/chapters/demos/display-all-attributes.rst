@@ -6,15 +6,16 @@
 Display All Attributes
 **********************
 
-``display-all-attributes`` gives you a compact visual overview of the
-ANSI character attributes supported by the library. It prints one row
-for each standard text attribute and a few common combinations so you
-can quickly compare what your terminal actually renders.
+``display-all-attributes`` gives you a compact visual overview of the ANSI character attributes supported by the
+library. It prints one row per attribute together with backend support information, sample text, and a few practical
+combinations.
 
-Unlike backend capability flags, the rendered rows reflect the behavior
-of your real terminal emulator and theme. If a sample looks unchanged,
-the attribute is probably ignored or deliberately suppressed by the
-terminal.
+Use This Demo When You Need...
+==============================
+
+* A fast support checklist for attributes like italic, blink, hidden text, or strikethrough.
+* A real-terminal comparison between what the backend can emit and what the emulator actually renders.
+* A small reference for applying ``CharAttributes`` directly in line-oriented output.
 
 Run the Demo
 ============
@@ -25,28 +26,31 @@ Start the demo from the build directory:
 
     $ ./cmake-build-debug/demo-apps/display-all-attributes
 
-What It Shows
+The demo prints the table and waits for Enter in an interactive terminal.
+
+Captured Output (80x25)
+=======================
+
+.. include:: _captures/display-all-attributes.rstinc
+
+Features Demonstrated
+=====================
+
+* Individual ``CharAttributes`` flags such as bold, dim, italic, underline, blink, reverse, hidden, and strikethrough.
+* Backend-reported support checks via ``Terminal::supportedCharAttributes()``.
+* Side-by-side display of ANSI SGR enable and disable codes.
+* Practical combination rows that make reset behavior easier to inspect.
+
+Related Demos
 =============
 
-The demo is meant as a fast support checklist:
-
-* ``Bold``, ``Dim``, ``Italic``, ``Underline``, ``Blink``, ``Reverse``,
-  ``Hidden``, and ``Strikethrough`` on separate rows.
-* The backend-reported support status for each attribute.
-* The primary ANSI SGR enable and disable codes for each row.
-* A small combination section to verify that resets and reapplication
-  work correctly when multiple attributes are active together.
-
-This is especially useful when you want to confirm that your terminal
-supports italic, blink, or hidden text before relying on them in an
-application.
+* :doc:`Display All Colors <display-all-colors>` for the complementary palette reference.
+* :doc:`Command Line Help <command-line-help>` for line-oriented output with heavier paragraph layout.
+* :doc:`Frame Color Animations <frame-color-animations>` for a color-sequence based animation example.
 
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/display-all-attributes/src/DisplayAllAttributesApp.cpp`.
 
-:file:`demo/display-all-attributes/src/DisplayAllAttributesApp.cpp`
-
-This file contains the row generation and shows how to use
-``CharAttributes`` directly with ``Terminal::printLine()``.
+This file contains the attribute table generation and the direct use of ``CharAttributes`` with terminal print calls.

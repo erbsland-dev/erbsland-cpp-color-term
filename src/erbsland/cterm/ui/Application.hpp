@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Display.hpp"
 
 #include "event/Event.hpp"
@@ -18,7 +17,6 @@
 #include <memory>
 #include <mutex>
 #include <vector>
-
 
 namespace erbsland::cterm::ui {
 
@@ -187,7 +185,6 @@ private:
     std::vector<std::weak_ptr<EventThread>> _managedEventThreads;                    ///< The managed event threads.
     std::shared_ptr<int> _managedEventThreadsCleanupToken{std::make_shared<int>(0)}; ///< Safe cleanup token.
 };
-
 
 /// Access the global application instance.
 /// Calling this method is thread-safe and can be used to post events from other threads.

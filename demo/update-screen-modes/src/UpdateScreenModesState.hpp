@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <chrono>
 #include <cstddef>
 #include <cstdint>
 #include <string_view>
 
-
 namespace demo::updatescreenmodes {
-
 
 /// Stores the interactive state for the `update-screen-modes` demo.
 class UpdateScreenModesState final {
@@ -53,6 +50,5 @@ private:
     bool _backBufferEnabled{true};
     bool _safeMarginEnabled{false};
 };
-
 
 }

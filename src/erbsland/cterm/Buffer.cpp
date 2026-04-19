@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Buffer.hpp"
 
-
 #include "Char16Style.hpp"
 #include "Tile9Style.hpp"
 
@@ -12,9 +11,7 @@
 #include <string_view>
 #include <utility>
 
-
 namespace erbsland::cterm {
-
 
 Buffer::Buffer() : _size{1, 1}, _data(1U, Char{U' '}) {
 }
@@ -132,11 +129,15 @@ void Buffer::setAndResizeFrom(const ReadableBuffer &other) {
     WritableBuffer::setAndResizeFrom(other);
 }
 
-auto Buffer::fromLinesInString(const String &text) -> Buffer {
+auto Buffer::fromLinesInString(const StringView &text) -> Buffer {
     if (text.empty()) {
         throw std::invalid_argument{"text is empty"};
     }
-    return fromLines(text.splitLines());
+    auto lines = StringLines{};
+    for (const auto &line : text.splitLines()) {
+        lines.emplace_back(line);
+    }
+    return fromLines(lines);
 }
 
 auto Buffer::fromLines(const StringLines &lines) -> Buffer {
@@ -179,6 +180,5 @@ void Buffer::drawText(
     renderedText.setColor(color);
     drawText(renderedText, animationCycle);
 }
-
 
 }

@@ -2,13 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../Layout.hpp"
 
 #include "../../Orientation.hpp"
 
 #include <memory>
-
 
 namespace erbsland::cterm::ui::layout {
 
@@ -36,6 +34,5 @@ public:
 private:
     Orientation _orientation{Orientation::Vertical};
 };
-
 
 }

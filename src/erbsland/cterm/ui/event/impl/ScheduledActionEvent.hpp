@@ -2,14 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../EventData.hpp"
 #include "../ScheduledActionRef.hpp"
 
 #include "../../Surface.hpp"
 
 #include <cstdint>
-
 
 namespace erbsland::cterm::ui::impl {
 
@@ -21,8 +19,7 @@ public:
     /// @param actionRef The action reference.
     /// @param generation The generation of the scheduled action.
     ScheduledActionEvent(SurfaceWeakPtr surface, ScheduledActionRef actionRef, uint64_t generation) :
-        _surface{std::move(surface)}, _actionRef{actionRef}, _generation{generation} {
-    }
+        _surface{std::move(surface)}, _actionRef{actionRef}, _generation{generation} {}
 
 public:
     /// Get the target surface.
@@ -36,9 +33,9 @@ public:
     [[nodiscard]] auto generation() const noexcept -> uint64_t { return _generation; }
 
 private:
-    SurfaceWeakPtr _surface;             ///< The target surface.
-    ScheduledActionRef _actionRef;       ///< The action reference.
-    uint64_t _generation = 0;            ///< The generation of the scheduled action.
+    SurfaceWeakPtr _surface;       ///< The target surface.
+    ScheduledActionRef _actionRef; ///< The action reference.
+    uint64_t _generation = 0;      ///< The generation of the scheduled action.
 };
 
 }

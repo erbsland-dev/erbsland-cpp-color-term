@@ -1,29 +1,25 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include "TestHelper.hpp"
+#include "BufferTestHelper.hpp"
 
 #include <erbsland/cterm/text/HtmlRenderer.hpp>
-#include <erbsland/cterm/text/impl/HtmlParser.hpp>
-#include <erbsland/cterm/text/impl/TextNodeRenderer.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
 #include <format>
 #include <string>
 #include <vector>
 
-
 namespace text = erbsland::cterm::text;
-namespace textimpl = erbsland::cterm::text::impl;
 
-
-TESTED_TARGETS(HtmlRenderer TextNodeRenderer)
+TESTED_TARGETS(HtmlRenderer)
 class HtmlRendererTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
 public:
     void testRenderStringPreservesInlineStylesAndHeadingParagraphStructure() {
         const auto rendered = text::HtmlRenderer{"<h1>Title</h1><p>Hello <strong>world</strong>.</p>"}.renderString();
+        const auto expected = std::vector<std::string>{"Title", "Hello world."};
 
-        REQUIRE_EQUAL(toPlainText(rendered), std::string{"Title\nHello world."});
+        REQUIRE_EQUAL_LINES(erbsland::unittest::th::splitLines(toPlainText(rendered)), expected);
         REQUIRE(rendered[12].attributes().isBold());
     }
 
@@ -35,19 +31,10 @@ public:
                                                  "<p><a href=\"/target\">Go</a></p>"
                                                  "<hr>"}
                                   .renderString();
+        const auto expected = std::vector<std::string>{
+            "•   One", "•   Two", "1.  First", "2.  Second", "Term", "Meaning", "  a", "  b", "Go", "--------"};
 
-        REQUIRE_EQUAL(
-            toPlainText(rendered),
-            std::string{"•   One\n"
-                        "•   Two\n"
-                        "1.  First\n"
-                        "2.  Second\n"
-                        "Term\n"
-                        "Meaning\n"
-                        "  a\n"
-                        "  b\n"
-                        "Go\n"
-                        "--------"});
+        REQUIRE_EQUAL_LINES(erbsland::unittest::th::splitLines(toPlainText(rendered)), expected);
     }
 
     void testRenderStringUsesStyleTokensFromNodeClassAttributes() {
@@ -59,6 +46,44 @@ public:
         REQUIRE_EQUAL(toPlainText(rendered), std::string{"[warning] Careful"});
     }
 
+    void testRenderStringAppliesConfiguredBlockPrefixesAndSuffixes() {
+        auto style = std::make_shared<text::Style>();
+        style->edit(text::StyleSelector::paragraph()).setPrefix(U"(").setSuffix(U")");
+
+        const auto rendered = text::HtmlRenderer{"<p>Careful</p>", style}.renderString();
+
+        REQUIRE_EQUAL(toPlainText(rendered), std::string{"(Careful)"});
+    }
+
+    void testRenderStringUsesDedicatedSpanSelectorsForClassedInlineSpans() {
+        auto style = std::make_shared<text::Style>();
+        style->edit(text::StyleSelector{text::StyleRole::Span, {"warning"}}).setTextStyle(CharStyle{fg::Yellow});
+
+        const auto rendered =
+            text::HtmlRenderer{"<p>Hello <span class=\"warning\">there</span>.</p>", style}.renderString();
+
+        REQUIRE_EQUAL(toPlainText(rendered), std::string{"Hello there."});
+        REQUIRE_EQUAL(rendered[6].color().fg(), fg::Yellow);
+        REQUIRE_EQUAL(rendered[10].color().fg(), fg::Yellow);
+        REQUIRE_NOT_EQUAL(rendered[0].color().fg(), fg::Yellow);
+        REQUIRE_NOT_EQUAL(rendered[11].color().fg(), fg::Yellow);
+    }
+
+    void testRenderStringComposesSpanSelectorsWithExistingInlineRoles() {
+        auto style = std::make_shared<text::Style>();
+        style->edit(text::StyleSelector::strong()).setTextStyle(CharStyle{CharAttributes::Bold});
+        style->edit(text::StyleSelector{text::StyleRole::Span, {"warning"}}).setTextStyle(CharStyle{fg::BrightRed});
+
+        const auto rendered =
+            text::HtmlRenderer{"<p><strong><span class=\"warning\">Alert</span></strong></p>", style}.renderString();
+
+        REQUIRE_EQUAL(toPlainText(rendered), std::string{"Alert"});
+        for (const auto &character : rendered) {
+            REQUIRE(character.attributes().isBold());
+            REQUIRE_EQUAL(character.color().fg(), fg::BrightRed);
+        }
+    }
+
     void testRenderStringUsesConfiguredListItemIndentAndMarker() {
         auto style = std::make_shared<text::Style>();
         style->edit(text::StyleSelector::listItem(text::StyleListKind::Bullet, 0))
@@ -66,8 +91,9 @@ public:
             .setLiteralMarker(U"◆ ");
 
         const auto rendered = text::HtmlRenderer{"<ul><li><p>One</p><p>Two</p></li></ul>", style}.renderString();
+        const auto expected = std::vector<std::string>{"  ◆ One", "  Two"};
 
-        REQUIRE_EQUAL(toPlainText(rendered), std::string{"  ◆ One\n  Two"});
+        REQUIRE_EQUAL_LINES(erbsland::unittest::th::splitLines(toPlainText(rendered)), expected);
     }
 
     void testRenderStringUsesTabAlignedNumberedPrefixesAndOverflowFallback() {
@@ -76,7 +102,7 @@ public:
             .setIndents(ParagraphIndents{0, 0, 4, Margins{0}});
 
         const auto rendered = text::HtmlRenderer{makeOrderedListHtml(10'000), style}.renderString();
-        const auto lines = splitLines(toPlainText(rendered));
+        const auto lines = erbsland::unittest::th::splitLines(toPlainText(rendered));
 
         REQUIRE(lines.size() >= std::size_t{9'999});
         REQUIRE_EQUAL(lines[0], std::string{"1.  Item 1"});
@@ -153,15 +179,6 @@ public:
         requireRowsEqual(*buffer, {"        ", "  Quote ", "        ", "After   ", "        ", "        "});
     }
 
-    void testTextNodeRendererRendersHorizontalRulesAcrossTheAvailableWidth() {
-        const auto document = textimpl::HtmlParser{"<hr>"}.parse();
-        auto buffer = std::make_shared<CursorBuffer>(Size{16, 2});
-
-        textimpl::TextNodeRenderer{document}.renderTo(buffer);
-
-        requireRowsEqual(*buffer, {"----------------", "                "});
-    }
-
     void testConfiguredHorizontalRulesApplyDecorationAndFill() {
         auto style = std::make_shared<text::Style>();
         style->edit(text::StyleSelector::horizontalRule())
@@ -186,24 +203,6 @@ private:
         }
         return result;
     }
-
-    [[nodiscard]] static auto splitLines(const std::string &textValue) -> std::vector<std::string> {
-        auto lines = std::vector<std::string>{};
-        auto current = std::string{};
-        for (const auto character : textValue) {
-            if (character == '\n') {
-                lines.push_back(current);
-                current.clear();
-                continue;
-            }
-            current += character;
-        }
-        if (!current.empty()) {
-            lines.push_back(current);
-        }
-        return lines;
-    }
-
     [[nodiscard]] static auto makeOrderedListHtml(const std::size_t itemCount) -> std::string {
         auto html = std::string{"<ol>"};
         html.reserve(itemCount * 20 + 16);

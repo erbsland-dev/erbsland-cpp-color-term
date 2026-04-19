@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Event.hpp"
 #include "ScheduledActionRef.hpp"
 
@@ -11,7 +10,6 @@
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-
 
 namespace erbsland::cterm::ui {
 

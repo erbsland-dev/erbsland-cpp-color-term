@@ -2,12 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "HtmlTokenType.hpp"
 
 #include <string>
 #include <utility>
-
 
 namespace erbsland::cterm::text::impl {
 

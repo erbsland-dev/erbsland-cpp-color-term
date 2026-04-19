@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-
 TESTED_TARGETS(String)
 class StringConversionTest final : public el::UnitTest {
 public:

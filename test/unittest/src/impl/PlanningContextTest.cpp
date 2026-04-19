@@ -6,10 +6,8 @@
 #include <erbsland/cterm/text/impl/text_node_renderer/PlanningContext.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 namespace text = erbsland::cterm::text;
 namespace tnr = erbsland::cterm::text::impl::text_node_renderer;
-
 
 TESTED_TARGETS(PlanningContext)
 class PlanningContextTest final : public UNITTEST_SUBCLASS(TestHelper) {

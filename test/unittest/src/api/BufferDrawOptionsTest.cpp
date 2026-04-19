@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(BufferDrawOptions)
 class BufferDrawOptionsTest final : public el::UnitTest {
 public:

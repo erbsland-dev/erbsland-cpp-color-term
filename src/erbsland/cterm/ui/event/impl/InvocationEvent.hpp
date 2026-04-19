@@ -2,13 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../EventData.hpp"
 #include "../StopToken.hpp"
 
 #include <functional>
 #include <utility>
-
 
 namespace erbsland::cterm::ui::impl {
 

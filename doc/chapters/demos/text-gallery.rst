@@ -6,18 +6,16 @@
 Text Gallery
 ************
 
-``text-gallery`` demonstrates the text rendering capabilities of the library. The demo combines framed panels,
-wrapped paragraphs, mixed-width Unicode text, animated bitmap-font titles, and small colored footer prompts
-in one interactive terminal application.
+``text-gallery`` demonstrates the text rendering side of the library in one interactive full-screen page set. It
+combines framed panels, wrapped paragraphs, mixed-width Unicode text, animated bitmap-font titles, and compact footer
+prompts.
 
-It provides a compact overview of how structured text layouts, decorative titles, and styled UI elements can
-be composed inside a terminal interface.
+Use This Demo When You Need...
+==============================
 
-.. figure:: /images/text-gallery3.jpg
-    :width: 100%
-
-.. figure:: /images/text-gallery2.jpg
-    :width: 100%
+* A support example for alignment, wrapping, and mixed-width Unicode text inside framed panels.
+* A practical reference for bitmap-font text via ``Font::defaultAscii()``.
+* A single demo that shows several text-rendering techniques working together in one retained buffer.
 
 Run the Demo
 ============
@@ -28,26 +26,37 @@ Start the demo from the build directory:
 
     $ ./cmake-build-debug/demo-apps/text-gallery
 
-The application renders several panels and decorative elements while demonstrating how different text layout
-features interact on the screen.
+Use the left and right arrow keys to switch pages. Press ``Q`` to quit.
 
-Features Shown
-==============
+Captured Output (80x25)
+=======================
 
-This demo highlights several aspects of advanced text rendering:
+.. include:: _captures/text-gallery.rstinc
 
-* Text layout using ``Text`` together with ``Alignment`` options.
+The capture may not show the terminal output correctly. Here a screenshot:
+
+.. figure:: /images/text-gallery3.jpg
+    :width: 100%
+
+Features Demonstrated
+=====================
+
+* Text layout using ``Text`` together with multiple ``Alignment`` modes.
 * Unicode-aware wrapping and centering of mixed-width characters.
 * Bitmap-font rendering using ``Font::defaultAscii()``.
 * Animated title coloring with ``ColorSequence`` and ``TextAnimation``.
 * Colored footer prompts assembled from ``String`` and ``Char`` elements.
 
+Related Demos
+=============
+
+* :doc:`Command Line Help <command-line-help>` for paragraph layout in a line-oriented command help format.
+* :doc:`UI Hello World <ui-hello-world>` for a UI framework example with centered content.
+* :doc:`Bitmap Showcase <bitmap-showcase>` for a companion demo centered on bitmap-based rendering instead of text.
+
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/text-gallery/src/TextGalleryApp.cpp`.
 
-:file:`demo/text-gallery/src/TextGalleryApp.cpp`
-
-This file contains the complete layout logic for the panels, titles, and
-footer prompts shown in the demo.
+This file contains the complete layout logic for the panels, titles, and footer prompts shown in the demo.

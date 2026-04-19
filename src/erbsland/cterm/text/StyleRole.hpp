@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstdint>
 
-
 namespace erbsland::cterm::text {
-
 
 /// Semantic roles that can be styled.
 enum class StyleRole : uint8_t {
@@ -26,9 +23,9 @@ enum class StyleRole : uint8_t {
     Emphasis,              ///< Emphasized or italic inline content.
     Strong,                ///< Strong or bold inline content.
     Underline,             ///< Underlined inline content.
+    Span,                  ///< Generic inline span containers.
     Link,                  ///< Links or active references.
     Code,                  ///< Inline code.
 };
-
 
 }

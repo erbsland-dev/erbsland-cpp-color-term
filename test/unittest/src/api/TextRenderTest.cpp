@@ -1,18 +1,13 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include "TestHelper.hpp"
+#include "BufferTestHelper.hpp"
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-TESTED_TARGETS(Text Buffer)
+TESTED_TARGETS(Buffer)
 class TextRenderTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
 public:
-    void testTextUsesSingleParagraphSpacingByDefault() {
-        auto text = Text{};
-        REQUIRE_EQUAL(text.paragraphSpacing(), ParagraphSpacing::SingleLine);
-    }
-
     void testBufferRendersAlignedText() {
         auto buffer = Buffer{Size{8, 3}};
         buffer.drawText("Hi", Rectangle{0, 0, 8, 3}, Alignment::Center, Color{fg::Yellow, bg::Black});
@@ -117,14 +112,6 @@ public:
         buffer.drawText(text);
         REQUIRE_EQUAL(buffer.get(Position{0, 0}), U'█');
         REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::BrightWhite, bg::Black));
-    }
-
-    void testTextSetColorCreatesSingleEntryColorSequence() {
-        auto text = Text{String{"A"}, Rectangle{0, 0, 1, 1}, Alignment::TopLeft};
-        REQUIRE_EQUAL(text.color(), Color{});
-        text.setColor(Color{fg::Cyan, bg::Black});
-        REQUIRE_EQUAL(text.color(), Color(fg::Cyan, bg::Black));
-        REQUIRE_EQUAL(text.colorSequence().sequenceLength(), std::size_t{1});
     }
 
     void testBufferRendersParagraphIndentAndWrapMarks() {

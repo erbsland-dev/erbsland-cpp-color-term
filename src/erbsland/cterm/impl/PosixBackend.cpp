@@ -13,7 +13,6 @@
 #include <iostream>
 #include <thread>
 
-
 namespace erbsland::cterm {
 
 auto Backend::createPlatformDefault(const TerminalFlags terminalFlags) -> BackendPtr {

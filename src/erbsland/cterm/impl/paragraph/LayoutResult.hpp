@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "LayoutLine.hpp"
 
 #include <cstddef>
 #include <vector>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// The complete wrapped paragraph layout result.
 class LayoutResult final {
@@ -63,6 +60,5 @@ private:
     bool _valid = false;
     std::vector<LayoutLine> _lines;
 };
-
 
 }

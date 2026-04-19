@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstdint>
 
-
 namespace erbsland::cterm {
-
 
 /// Various box styles
 enum class FrameStyle : uint8_t {
@@ -28,6 +25,5 @@ enum class FrameStyle : uint8_t {
     // combined styles
     LightWithRoundedCorners, ///< Light box with rounded corners `╭─╮`
 };
-
 
 }

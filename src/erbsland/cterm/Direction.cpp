@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Direction.hpp"
 
-
 #include "impl/TextUtil.hpp"
 
 #include <algorithm>
@@ -10,9 +9,7 @@
 #include <stdexcept>
 #include <tuple>
 
-
 namespace erbsland::cterm {
-
 
 auto Direction::contains(Direction direction) const noexcept -> bool {
     switch (_value) {
@@ -150,6 +147,5 @@ auto Direction::stringToDirectionMap() noexcept -> const StringToDirectionMap & 
     };
     return map;
 }
-
 
 }

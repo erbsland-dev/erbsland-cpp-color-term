@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(Margins)
 class MarginsTest final : public el::UnitTest {
 public:

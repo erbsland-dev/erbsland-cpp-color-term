@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(Anchor)
 class AnchorTest final : public el::UnitTest {
 public:

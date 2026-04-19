@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Color.hpp"
 
 #include <cstddef>
 #include <initializer_list>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 /// A configurable sequence of complete `Color` values with run-length style counts.
 ///
@@ -84,6 +81,5 @@ private:
     std::vector<Entry> _entries;
     std::size_t _sequenceLength{0};
 };
-
 
 }

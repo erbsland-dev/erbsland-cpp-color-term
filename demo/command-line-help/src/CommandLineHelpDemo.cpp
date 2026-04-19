@@ -8,9 +8,7 @@
 #include <format>
 #include <stdexcept>
 
-
 namespace demo::command_line_help {
-
 
 auto CommandLineHelpDemo::onCommandLine(const std::vector<std::string_view> &args) -> int {
     const auto parsedArguments = parseArguments(args);
@@ -18,7 +16,6 @@ auto CommandLineHelpDemo::onCommandLine(const std::vector<std::string_view> &arg
     _errors = parsedArguments.errors;
     return 0;
 }
-
 
 auto CommandLineHelpDemo::beforeRun() -> int {
     const auto renderConfig = _errors.empty() ? _config : DemoConfig{};
@@ -29,7 +26,6 @@ auto CommandLineHelpDemo::beforeRun() -> int {
     _terminal.flush();
     return -1;
 }
-
 
 auto CommandLineHelpDemo::optionSpecs() -> const std::vector<OptionSpec> & {
     static const auto cOptionSpecs = std::vector<OptionSpec>{
@@ -175,7 +171,6 @@ auto CommandLineHelpDemo::optionSpecs() -> const std::vector<OptionSpec> & {
     return cOptionSpecs;
 }
 
-
 auto CommandLineHelpDemo::parseArguments(const std::vector<std::string_view> &args) -> ParsedArguments {
     auto result = ParsedArguments{};
     for (auto index = std::size_t{1}; index < args.size(); ++index) {
@@ -194,7 +189,6 @@ auto CommandLineHelpDemo::parseArguments(const std::vector<std::string_view> &ar
     }
     return result;
 }
-
 
 void CommandLineHelpDemo::parseLongOption(
     const std::string_view argument,
@@ -215,7 +209,6 @@ void CommandLineHelpDemo::parseLongOption(
         separator == std::string_view::npos ? std::optional<std::string_view>{} : optionText.substr(separator + 1);
     applyOptionValue(*option, std::format("--{}", name), inlineValue, nextArgument, index, config, errors);
 }
-
 
 void CommandLineHelpDemo::parseShortOption(
     const std::string_view argument,
@@ -242,7 +235,6 @@ void CommandLineHelpDemo::parseShortOption(
     applyOptionValue(*option, std::format("-{}", shortName), inlineValue, nextArgument, index, config, errors);
 }
 
-
 auto CommandLineHelpDemo::findOptionByLongName(const std::string_view name) -> const OptionSpec * {
     for (const auto &spec : optionSpecs()) {
         if (spec.matchesLongName(name)) {
@@ -252,7 +244,6 @@ auto CommandLineHelpDemo::findOptionByLongName(const std::string_view name) -> c
     return nullptr;
 }
 
-
 auto CommandLineHelpDemo::findOptionByShortName(const char name) -> const OptionSpec * {
     for (const auto &spec : optionSpecs()) {
         if (spec.matchesShortName(name)) {
@@ -261,7 +252,6 @@ auto CommandLineHelpDemo::findOptionByShortName(const char name) -> const Option
     }
     return nullptr;
 }
-
 
 void CommandLineHelpDemo::applyOptionValue(
     const OptionSpec &spec,
@@ -294,25 +284,20 @@ void CommandLineHelpDemo::applyOptionValue(
     }
 }
 
-
 void CommandLineHelpDemo::applyHelpFlag(DemoConfig &, const std::string_view) {
 }
-
 
 void CommandLineHelpDemo::applyTerminalWidth(DemoConfig &config, const std::string_view value) {
     config.terminalWidthOverride = parseIntInRange(value, "terminal width", 20, 200);
 }
 
-
 void CommandLineHelpDemo::applyDescriptionColumn(DemoConfig &config, const std::string_view value) {
     config.descriptionColumn = parseIntInRange(value, "description column", 12, 60);
 }
 
-
 void CommandLineHelpDemo::applyMaximumDescriptionColumn(DemoConfig &config, const std::string_view value) {
     config.maximumDescriptionColumn = parseIntInRange(value, "maximum description column", 20, 60);
 }
-
 
 void CommandLineHelpDemo::applyAlignment(DemoConfig &config, const std::string_view value) {
     if (value == "left") {
@@ -330,21 +315,17 @@ void CommandLineHelpDemo::applyAlignment(DemoConfig &config, const std::string_v
     throw std::invalid_argument{"alignment must be left, center, or right."};
 }
 
-
 void CommandLineHelpDemo::applyLineIndent(DemoConfig &config, const std::string_view value) {
     config.lineIndent = parseIntInRange(value, "line indent", 0, 10);
 }
-
 
 void CommandLineHelpDemo::applyFirstLineIndent(DemoConfig &config, const std::string_view value) {
     config.firstLineIndent = parseIntInRange(value, "first-line indent", 0, 12);
 }
 
-
 void CommandLineHelpDemo::applyWrappedLineIndent(DemoConfig &config, const std::string_view value) {
     config.wrappedLineIndent = parseIntInRange(value, "wrapped-line indent", 0, 30);
 }
-
 
 void CommandLineHelpDemo::applyBackgroundMode(DemoConfig &config, const std::string_view value) {
     if (value == "default") {
@@ -375,20 +356,17 @@ void CommandLineHelpDemo::applyBackgroundMode(DemoConfig &config, const std::str
         "background mode must be default, wrapped-left, wrapped-right, wrapped-both, full-right, or full-both."};
 }
 
-
 void CommandLineHelpDemo::applyLineBreakStartMark(DemoConfig &config, const std::string_view value) {
     config.lineBreakStartMark = parseParagraphString(value, "line-break-start-mark");
     auto options = ParagraphOptions{};
     options.setLineBreakStartMark(config.lineBreakStartMark);
 }
 
-
 void CommandLineHelpDemo::applyLineBreakEndMark(DemoConfig &config, const std::string_view value) {
     config.lineBreakEndMark = parseParagraphString(value, "line-break-end-mark");
     auto options = ParagraphOptions{};
     options.setLineBreakEndMark(config.lineBreakEndMark);
 }
-
 
 void CommandLineHelpDemo::applyParagraphSpacing(DemoConfig &config, const std::string_view value) {
     if (value == "single") {
@@ -402,31 +380,25 @@ void CommandLineHelpDemo::applyParagraphSpacing(DemoConfig &config, const std::s
     throw std::invalid_argument{"paragraph spacing must be single or double."};
 }
 
-
 void CommandLineHelpDemo::applyWordSeparators(DemoConfig &config, const std::string_view value) {
     config.wordSeparators = parseWordSeparators(value);
 }
-
 
 void CommandLineHelpDemo::applyWordBreakMark(DemoConfig &config, const std::string_view value) {
     config.wordBreakMark = parseSingleCharacter(value, "word-break-mark");
 }
 
-
 void CommandLineHelpDemo::applyMaximumLineWraps(DemoConfig &config, const std::string_view value) {
     config.maximumLineWraps = parseIntInRange(value, "maximum-line-wraps", 0, 8);
 }
-
 
 void CommandLineHelpDemo::applyParagraphEllipsisMark(DemoConfig &config, const std::string_view value) {
     config.paragraphEllipsisMark = parseParagraphString(value, "paragraph-ellipsis-mark");
 }
 
-
 void CommandLineHelpDemo::applyTabStops(DemoConfig &config, const std::string_view value) {
     config.tabStops = parseTabStopList(value);
 }
-
 
 void CommandLineHelpDemo::applyOnError(DemoConfig &config, const std::string_view value) {
     if (value == "plain") {
@@ -439,7 +411,6 @@ void CommandLineHelpDemo::applyOnError(DemoConfig &config, const std::string_vie
     }
     throw std::invalid_argument{"on-error must be plain or empty."};
 }
-
 
 auto CommandLineHelpDemo::parseIntInRange(
     const std::string_view value, const std::string_view optionName, const int min, const int max) -> int {
@@ -457,7 +428,6 @@ auto CommandLineHelpDemo::parseIntInRange(
     return parsedValue;
 }
 
-
 auto CommandLineHelpDemo::parseParagraphString(const std::string_view value, const std::string_view optionName)
     -> String {
     try {
@@ -467,7 +437,6 @@ auto CommandLineHelpDemo::parseParagraphString(const std::string_view value, con
     }
 }
 
-
 auto CommandLineHelpDemo::parseSingleCharacter(const std::string_view value, const std::string_view optionName)
     -> Char {
     const auto stringValue = parseParagraphString(value, optionName);
@@ -476,7 +445,6 @@ auto CommandLineHelpDemo::parseSingleCharacter(const std::string_view value, con
     }
     return stringValue[0];
 }
-
 
 auto CommandLineHelpDemo::parseWordSeparators(const std::string_view value) -> std::u32string {
     auto result = std::u32string{};
@@ -513,7 +481,6 @@ auto CommandLineHelpDemo::parseWordSeparators(const std::string_view value) -> s
     return result;
 }
 
-
 auto CommandLineHelpDemo::parseTabStopList(const std::string_view value) -> std::vector<int> {
     auto result = std::vector<int>{};
     for (const auto token : splitCommaSeparated(value)) {
@@ -532,7 +499,6 @@ auto CommandLineHelpDemo::parseTabStopList(const std::string_view value) -> std:
     return result;
 }
 
-
 auto CommandLineHelpDemo::trim(const std::string_view text) noexcept -> std::string_view {
     auto begin = text.find_first_not_of(" \t");
     if (begin == std::string_view::npos) {
@@ -541,7 +507,6 @@ auto CommandLineHelpDemo::trim(const std::string_view text) noexcept -> std::str
     const auto end = text.find_last_not_of(" \t");
     return text.substr(begin, end - begin + 1);
 }
-
 
 auto CommandLineHelpDemo::splitCommaSeparated(const std::string_view text) -> std::vector<std::string_view> {
     auto result = std::vector<std::string_view>{};
@@ -557,7 +522,6 @@ auto CommandLineHelpDemo::splitCommaSeparated(const std::string_view text) -> st
     }
     return result;
 }
-
 
 auto CommandLineHelpDemo::buildHelpDocument(const DemoConfig &) -> HelpDocument {
     auto document = HelpDocument{};
@@ -597,7 +561,6 @@ auto CommandLineHelpDemo::buildHelpDocument(const DemoConfig &) -> HelpDocument 
     return document;
 }
 
-
 auto CommandLineHelpDemo::buildIntroParagraph() -> String {
     auto result = String{};
     result.append(
@@ -612,7 +575,6 @@ auto CommandLineHelpDemo::buildIntroParagraph() -> String {
     return result;
 }
 
-
 auto CommandLineHelpDemo::buildPreviewParagraph() -> String {
     auto result = String{};
     result.append(
@@ -624,7 +586,6 @@ auto CommandLineHelpDemo::buildPreviewParagraph() -> String {
         "ellipsis handling, and alignment become easier to inspect while you adjust the rendering settings.");
     return result;
 }
-
 
 auto CommandLineHelpDemo::buildClosingParagraph() -> String {
     auto result = String{};
@@ -639,14 +600,12 @@ auto CommandLineHelpDemo::buildClosingParagraph() -> String {
     return result;
 }
 
-
 auto CommandLineHelpDemo::buildOptionParagraph(const OptionSpec &spec) -> String {
     auto result = spec.coloredSignature();
     result.append("\t");
     result.append(fg::White, spec.description);
     return result;
 }
-
 
 auto CommandLineHelpDemo::widestSignatureWidth() -> int {
     auto result = 0;
@@ -655,7 +614,6 @@ auto CommandLineHelpDemo::widestSignatureWidth() -> int {
     }
     return result;
 }
-
 
 void CommandLineHelpDemo::renderErrors(Terminal &terminal, const std::vector<std::string> &errors) noexcept {
     if (errors.empty()) {
@@ -667,7 +625,6 @@ void CommandLineHelpDemo::renderErrors(Terminal &terminal, const std::vector<std
     terminal.writeLineBreak();
 }
 
-
 void CommandLineHelpDemo::renderDocument(
     Terminal &terminal, const HelpDocument &document, const DemoConfig &config) noexcept {
 
@@ -677,7 +634,6 @@ void CommandLineHelpDemo::renderDocument(
         renderWideDocument(terminal, document, config);
     }
 }
-
 
 void CommandLineHelpDemo::renderWideDocument(
     Terminal &terminal, const HelpDocument &document, const DemoConfig &config) noexcept {
@@ -697,7 +653,6 @@ void CommandLineHelpDemo::renderWideDocument(
         terminal.writeLineBreak();
     }
 }
-
 
 void CommandLineHelpDemo::renderNarrowDocument(
     Terminal &terminal, const HelpDocument &document, const DemoConfig &) noexcept {
@@ -719,28 +674,23 @@ void CommandLineHelpDemo::renderNarrowDocument(
     }
 }
 
-
 void CommandLineHelpDemo::printUsageLine(Terminal &terminal, const String &usageLine) noexcept {
     terminal.printLine(usageLine);
 }
 
-
 void CommandLineHelpDemo::printSectionTitle(Terminal &terminal, const String &title) noexcept {
     terminal.printLine(fg::BrightWhite, title);
 }
-
 
 void CommandLineHelpDemo::printNarrowParagraph(Terminal &terminal, const String &paragraph) noexcept {
     terminal.printLine(paragraph);
     terminal.writeLineBreak();
 }
 
-
 void CommandLineHelpDemo::printNarrowOption(Terminal &terminal, const OptionSpec &spec) noexcept {
     terminal.printLine(spec.coloredSignature());
     terminal.printLine(fg::White, "    ", spec.description);
 }
-
 
 void CommandLineHelpDemo::prepareTerminal(Terminal &terminal, const DemoConfig &config) noexcept {
     terminal.testScreenSize();
@@ -748,6 +698,5 @@ void CommandLineHelpDemo::prepareTerminal(Terminal &terminal, const DemoConfig &
         terminal.setSize(Size{*config.terminalWidthOverride, terminal.size().height()});
     }
 }
-
 
 }

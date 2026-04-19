@@ -1,0 +1,27 @@
+.. erbsland-ansi::
+    :escape-char: ␛
+    :theme: ela-term
+
+    ␛[94;40m┌─────────────────────────────────────────────────────────────────────────────┐
+    │                                                                             │
+    │                                                                             │
+    │                       ␛[93mDemo with Only 10 Lines of Code␛[94m                       │
+    │                                                                             │
+    │  ␛[96mauto main() -> int {␛[94m                                                       │
+    │  ␛[96m    Terminal term{Size{80, 24}};␛[94m                                           │
+    │  ␛[96m    TerminalSession session{term};␛[94m                                         │
+    │  ␛[96m    Buffer buffer{term.size().componentMin({200, 24})};␛[94m                    │
+    │  ␛[96m    buffer.fill(Char{' ', fg::BrightBlue, bg::Black});␛[94m                     │
+    │  ␛[96m    buffer.drawText(Position{3, 5}, cThisCode);␛[94m                            │
+    │  ␛[96m    buffer.drawFrame(buffer.rect(), FrameStyle::Light);␛[94m                    │
+    │  ␛[96m    auto titleRect = buffer.rect().subRectangle(Anchor::Top, {0, 3}, {3, 2}│
+    ␛[94m│  ␛[96m    buffer.drawText("Demo with Only 10 Lines of Code",␛[94m                     │
+    │  ␛[96m        titleRect, Alignment::Center, Color{fg::BrightYellow});␛[94m            │
+    │  ␛[96m    term.write(buffer);␛[94m                                                    │
+    │  ␛[96m    return 0;␛[94m                                                              │
+    │  ␛[96m}␛[94m                                                                          │
+    │                                                                             │
+    │                                                                             │
+    │                                                                             │
+    │                                                                             │
+    └─────────────────────────────────────────────────────────────────────────────┘␛[0m

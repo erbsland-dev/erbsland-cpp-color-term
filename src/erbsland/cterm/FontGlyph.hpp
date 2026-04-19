@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Bitmap.hpp"
 
 #include <algorithm>
@@ -10,9 +9,7 @@
 #include <cstdint>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 /// A bitmap glyph that can be used by a terminal text font.
 class FontGlyph final : public Bitmap {
@@ -47,6 +44,5 @@ private:
         return width;
     }
 };
-
 
 }

@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Terminal.hpp"
-
 
 namespace erbsland::cterm {
 

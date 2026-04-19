@@ -27,7 +27,10 @@
 #include "event/Scheduler.hpp"
 #include "event/StopToken.hpp"
 #include "layout/Stack.hpp"
+#include "surface/AbstractStatusLine.hpp"
 #include "surface/Panel.hpp"
+#include "surface/ScrollingBufferView.hpp"
+#include "surface/StatusLine.hpp"
 #include "surface/TextBox.hpp"
 #include "ui_namespace.hpp"
 

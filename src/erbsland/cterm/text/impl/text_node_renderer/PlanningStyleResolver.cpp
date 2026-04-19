@@ -2,22 +2,17 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "PlanningStyleResolver.hpp"
 
-
 #include <algorithm>
-
 
 namespace erbsland::cterm::text::impl::text_node_renderer {
 
-
-PlanningStyleResolver::PlanningStyleResolver(StyleConstPtr style) :
-    _style{style != nullptr ? std::move(style) : Style::defaultStyle()} {
+PlanningStyleResolver::PlanningStyleResolver(const StyleConstPtr &style) :
+    _style{style != nullptr ? style : Style::defaultStyle()} {
 }
-
 
 auto PlanningStyleResolver::baseTextStyle() const noexcept -> const CharStyle & {
     return _style->baseTextStyle();
 }
-
 
 auto PlanningStyleResolver::blockRule(
     const TextNode &node,
@@ -37,11 +32,9 @@ auto PlanningStyleResolver::blockRule(
         StyleMatchContext{role, level, listKind, std::span<const std::string>{styleTokens}});
 }
 
-
 auto PlanningStyleResolver::horizontalRuleRule() const -> StyleRule {
     return _style->resolve(StyleSelector::horizontalRule(), StyleMatchContext{StyleRole::HorizontalRule});
 }
-
 
 auto PlanningStyleResolver::inlineRole(const TextNode::Type type) -> std::optional<StyleRole> {
     switch (type) {
@@ -51,6 +44,8 @@ auto PlanningStyleResolver::inlineRole(const TextNode::Type type) -> std::option
         return StyleRole::Strong;
     case TextNode::Type::Underline:
         return StyleRole::Underline;
+    case TextNode::Type::Span:
+        return StyleRole::Span;
     case TextNode::Type::Link:
         return StyleRole::Link;
     case TextNode::Type::Code:
@@ -59,7 +54,6 @@ auto PlanningStyleResolver::inlineRole(const TextNode::Type type) -> std::option
         return std::nullopt;
     }
 }
-
 
 auto PlanningStyleResolver::splitStyleTokens(const std::string_view value) -> std::vector<std::string> {
     auto tokens = std::vector<std::string>{};
@@ -82,6 +76,5 @@ auto PlanningStyleResolver::splitStyleTokens(const std::string_view value) -> st
     tokens.erase(std::ranges::unique(tokens).begin(), tokens.end());
     return tokens;
 }
-
 
 }

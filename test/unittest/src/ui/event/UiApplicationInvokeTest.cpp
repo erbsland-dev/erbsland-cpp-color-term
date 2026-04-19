@@ -38,7 +38,6 @@ private:
     milliseconds _managedThreadShutdownTimeout{std::chrono::milliseconds{1500}};
 };
 
-
 class StderrCapture final {
 public:
     StderrCapture() : _previousBuffer{std::cerr.rdbuf(_buffer.rdbuf())} {}
@@ -53,7 +52,6 @@ private:
 };
 
 }
-
 
 TESTED_TARGETS(UiApplication UiEventThread UiInvocation)
 class UiApplicationInvokeTest final : public UNITTEST_SUBCLASS(TerminalTestHelper) {

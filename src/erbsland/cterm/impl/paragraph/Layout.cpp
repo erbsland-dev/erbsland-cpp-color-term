@@ -6,13 +6,13 @@
 
 #include <utility>
 
-
 namespace erbsland::cterm::impl::paragraph {
 
-
 Layout::Layout(
-    const String &text, const int width, const ParagraphOptions &options, const LayoutNewlineMode newlineMode) noexcept
-    :
+    const StringView &text,
+    const int width,
+    const ParagraphOptions &options,
+    const LayoutNewlineMode newlineMode) noexcept :
     _context{text, width, options, (options.alignment() & Alignment::HorizontalMask) == Alignment::Left},
     _newlineMode{newlineMode},
     _wordSeparators{_context.options().wordSeparatorSet()} {
@@ -43,27 +43,26 @@ auto Layout::build() -> LayoutResult {
     return result;
 }
 
-auto Layout::splitIntoSourceLines() const -> std::vector<LayoutSourceLineRange> {
-    if (_context.text().empty()) {
+auto Layout::splitIntoSourceLines() const -> std::vector<IndexRange> {
+    const auto &text = _context.text();
+    if (text.empty()) {
         return {};
     }
-    auto result = std::vector<LayoutSourceLineRange>{};
+    auto result = std::vector<IndexRange>{};
     auto lineStartIndex = std::size_t{0};
-    for (auto index = std::size_t{0}; index < _context.text().size(); ++index) {
-        if (_context.text()[index] == U'\n') {
-            result.push_back(LayoutSourceLineRange{.startIndex = lineStartIndex, .length = index - lineStartIndex});
+    for (auto index = std::size_t{0}; index < text.size(); ++index) {
+        if (text[index] == U'\n') {
+            result.push_back(IndexRange{lineStartIndex, index - lineStartIndex});
             lineStartIndex = index + 1;
         }
     }
-    if (lineStartIndex < _context.text().size()) {
-        result.push_back(
-            LayoutSourceLineRange{.startIndex = lineStartIndex, .length = _context.text().size() - lineStartIndex});
+    if (lineStartIndex < text.size()) {
+        result.push_back(IndexRange{lineStartIndex, text.size() - lineStartIndex});
     }
     return result;
 }
 
-auto Layout::layoutParagraph(const std::vector<LayoutSourceLineRange> &sourceLines, std::vector<LayoutLine> &lines)
-    -> bool {
+auto Layout::layoutParagraph(const std::vector<IndexRange> &sourceLines, std::vector<LayoutLine> &lines) -> bool {
     if (sourceLines.empty()) {
         return true;
     }
@@ -75,7 +74,7 @@ auto Layout::layoutParagraph(const std::vector<LayoutSourceLineRange> &sourceLin
     return true;
 }
 
-auto Layout::layoutSourceLine(const LayoutSourceLineRange sourceLine, std::vector<LayoutLine> &lines) -> bool {
+auto Layout::layoutSourceLine(const IndexRange sourceLine, std::vector<LayoutLine> &lines) -> bool {
     const auto preparedLine = prepareSourceLine(sourceLine);
     if (preparedLine.empty()) {
         lines.emplace_back();
@@ -85,9 +84,10 @@ auto Layout::layoutSourceLine(const LayoutSourceLineRange sourceLine, std::vecto
     return lineBuilder.appendLinesTo(lines);
 }
 
-auto Layout::prepareSourceLine(const LayoutSourceLineRange sourceLine) const -> LayoutPreparedSourceLine {
+auto Layout::prepareSourceLine(const IndexRange sourceLine) const -> LayoutPreparedSourceLine {
     auto result = LayoutPreparedSourceLine{sourceLine};
     const auto leftAligned = _context.leftAligned();
+    const auto &text = _context.text();
     auto currentWordStartIndex = std::size_t{0};
     auto currentWordLength = std::size_t{0};
     auto currentWordWidth = 0;
@@ -97,8 +97,8 @@ auto Layout::prepareSourceLine(const LayoutSourceLineRange sourceLine) const -> 
         currentWordLength = 0;
         currentWordWidth = 0;
     };
-    for (auto index = sourceLine.startIndex; index < sourceLine.startIndex + sourceLine.length; ++index) {
-        const auto &character = _context.text()[index];
+    for (auto index = sourceLine.startIndex(); index < sourceLine.startIndex() + sourceLine.length(); ++index) {
+        const auto &character = text[index];
         const auto codePoint = character.singleCodePoint();
         if (leftAligned && codePoint == U'\t') {
             finishCurrentWord();
@@ -120,6 +120,5 @@ auto Layout::prepareSourceLine(const LayoutSourceLineRange sourceLine) const -> 
     result.finish();
     return result;
 }
-
 
 }

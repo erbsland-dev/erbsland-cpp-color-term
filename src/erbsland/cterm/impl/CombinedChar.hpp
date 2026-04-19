@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "HashHelper.hpp"
 #include "UnicodeWidth.hpp"
 
@@ -16,9 +15,7 @@
 #include <string>
 #include <string_view>
 
-
 namespace erbsland::cterm::impl {
-
 
 /// Internal representation of one terminal character with optional combining marks.
 class CombinedChar final {
@@ -79,18 +76,10 @@ public: // accessors
     [[nodiscard]] constexpr auto codePointCount() const noexcept -> std::size_t { return countCodePoints(_codePoints); }
     /// Get the terminal display width in cells.
     [[nodiscard]] auto displayWidth() const noexcept -> int {
-        if (_displayWidthCache != cNoDisplayWidth) {
-            return static_cast<int>(_displayWidthCache);
+        if (_codePoints[0] == 0) {
+            return 0;
         }
-        auto result = 0;
-        for (const auto codePoint : _codePoints) {
-            if (codePoint == 0) {
-                break;
-            }
-            result += static_cast<int>(consoleCharacterWidth(codePoint));
-        }
-        _displayWidthCache = static_cast<uint8_t>(result);
-        return result;
+        return static_cast<int>(consoleCharacterWidth(_codePoints[0]));
     }
     /// Get the UTF-8 byte count for this sequence.
     [[nodiscard]] auto byteCount() const noexcept -> std::size_t;
@@ -159,13 +148,8 @@ private:
     [[nodiscard]] constexpr static auto countCodePoints(const Storage &codePoints) noexcept -> std::size_t;
 
 private:
-    constexpr static auto cNoDisplayWidth = std::numeric_limits<uint8_t>::max();
-
-private:
-    Storage _codePoints{};                                ///< The stored base and combining code points.
-    mutable uint8_t _displayWidthCache = cNoDisplayWidth; ///< Cached terminal width.
+    Storage _codePoints{}; ///< The stored base and combining code points.
 };
-
 
 constexpr auto CombinedChar::isControlCode(const char32_t codePoint) noexcept -> bool {
     return codePoint < 0x20 || (codePoint >= 0x7FU && codePoint <= 0x9FU);
@@ -181,7 +165,6 @@ constexpr auto CombinedChar::countCodePoints(const Storage &codePoints) noexcept
 }
 
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::impl::CombinedChar> {

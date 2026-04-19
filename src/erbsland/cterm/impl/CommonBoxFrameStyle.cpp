@@ -7,12 +7,9 @@
 // overwrites.
 #include "../CharCombinationStyle.hpp"
 
-
 #include <memory>
 
-
 namespace erbsland::cterm {
-
 
 auto CharCombinationStyle::commonBoxFrame() noexcept -> const CharCombinationStylePtr & {
     static const CharCombinationStylePtr style = std::make_shared<MatrixCombinationStyle>(
@@ -814,6 +811,5 @@ auto CharCombinationStyle::commonBoxFrame() noexcept -> const CharCombinationSty
             17424});
     return style;
 }
-
 
 }

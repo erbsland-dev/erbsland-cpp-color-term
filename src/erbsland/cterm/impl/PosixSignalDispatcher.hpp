@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <signal.h>
 
 #include <array>
 #include <functional>
 #include <thread>
 
-
 namespace erbsland::cterm::impl {
-
 
 /// Forward POSIX termination signals to a regular worker thread.
 ///
@@ -69,6 +66,5 @@ private:
     std::array<int, 2> _signalPipe{-1, -1};      ///< Pipe to forward signals into the watcher thread.
     std::thread _watcher;                        ///< Dedicated watcher thread for forwarded signals.
 };
-
 
 }

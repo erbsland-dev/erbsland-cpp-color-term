@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "EventClockAccess.hpp"
 
-
 namespace erbsland::cterm::ui::impl {
 
 std::mutex EventClockAccess::_mutex{};

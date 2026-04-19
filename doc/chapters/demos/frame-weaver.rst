@@ -6,18 +6,16 @@
 Frame Weaver
 ************
 
-``frame-weaver`` demonstrates the frame drawing system of the library. The application continuously places
-randomly sized frames on the terminal so you can observe how the rendering engine resolves intersections and
-combines different frame styles.
+``frame-weaver`` demonstrates how the frame drawing system resolves intersections while multiple frames with varying
+sizes, colors, and styles are added over time. It is the best showcase for mixed line styles, custom frame tiles, and
+automatic frame combination behavior.
 
-While the demo is running, frames with varying sizes, colors, and line styles are added dynamically. This makes
-it easy to see how mixed line styles, custom frame tiles, and automatic intersection handling behave in practice.
+Use This Demo When You Need...
+==============================
 
-.. figure:: /images/frame-weaver3.jpg
-    :width: 100%
-
-.. figure:: /images/frame-weaver1.jpg
-    :width: 100%
+* A support example for frame intersections and overlapping panels.
+* A place to compare predefined ``FrameStyle`` values with custom ``Char16Style`` tiles.
+* A full-screen animation that makes frame composition behavior easy to inspect over time.
 
 Run the Demo
 ============
@@ -28,26 +26,37 @@ Start the demo from the build directory:
 
     $ ./cmake-build-debug/demo-apps/frame-weaver
 
-The application continuously updates the screen and allows you to interact with the animation using the keyboard.
+Use ``F`` and ``S`` to change the pacing, ``C`` to clear the scene, the number keys to switch style groups, and ``Q``
+to quit.
 
-Features Shown
-==============
+Captured Output (80x25)
+=======================
 
-This demo highlights several important features of the frame rendering system:
+.. include:: _captures/frame-weaver.rstinc
 
-* Use of predefined ``FrameStyle`` values as well as custom ``Char16Style`` tiles.
-* Automatic resolution of frame intersections using
-  ``CharCombinationStyle::commonBoxFrame()``.
-* Animated screen updates with a continuously redrawn terminal buffer.
-* Palette-driven color variations using ``ColorSequence``.
+The capture may not show the terminal output correctly. Here a screenshot:
+
+.. figure:: /images/frame-weaver3.jpg
+    :width: 100%
+
+Features Demonstrated
+=====================
+
+* Predefined ``FrameStyle`` values and a custom ``Char16Style`` frame tile set.
+* Automatic frame intersection handling via ``CharCombinationStyle::commonBoxFrame()``.
+* Repeated full-screen redraws with palette-driven color variations.
+* Randomized frame placement that stresses mixed styles and crossing borders.
+
+Related Demos
+=============
+
+* :doc:`Frame Color Animations <frame-color-animations>` for animated color sequences on cleaner, fixed panels.
+* :doc:`Minimum Effort <minimum-effort>` for the smallest possible frame-drawing example.
+* :doc:`Bitmap Showcase <bitmap-showcase>` for another example of ``Char16Style``-based rendering behavior.
 
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/frame-weaver/src/FrameWeaverApp.cpp`.
 
-:file:`demo/frame-weaver/src/FrameWeaverApp.cpp`
-
-This file contains the rendering loop, the frame placement logic, and the definition
-of the custom frame style used by the demo.
-
+This file contains the render loop, random frame placement, and the custom style definition used by the demo.

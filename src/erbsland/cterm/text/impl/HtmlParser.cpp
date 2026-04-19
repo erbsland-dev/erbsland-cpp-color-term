@@ -8,7 +8,6 @@
 #include <cstddef>
 #include <utility>
 
-
 namespace erbsland::cterm::text::impl {
 
 using namespace cterm::impl;

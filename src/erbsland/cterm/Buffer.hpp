@@ -2,19 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "WritableBuffer.hpp"
 
 #include <string_view>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 class Buffer;
 using BufferPtr = std::shared_ptr<Buffer>;
-
 
 /// A mutable 2D buffer storing characters and colors for rendering.
 ///
@@ -79,7 +75,7 @@ public: // builders
     /// This function splits the given string into lines and creates a buffer with a matching size.
     /// @param text The string to split into lines and create a buffer from. Must not be empty.
     /// @return A buffer containing the lines from the input string.
-    [[nodiscard]] static auto fromLinesInString(const String &text) -> Buffer;
+    [[nodiscard]] static auto fromLinesInString(const StringView &text) -> Buffer;
 
     /// Creates a buffer from the lines in a string.
     /// @param lines The lines to create the buffer from. Must not be empty.
@@ -106,6 +102,5 @@ private:
     Size _size{cMinimumSize};
     std::vector<Char> _data{Char::space()};
 };
-
 
 }

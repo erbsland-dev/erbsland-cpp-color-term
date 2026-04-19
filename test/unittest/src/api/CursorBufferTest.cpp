@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include "TestHelper.hpp"
+#include "BufferTestHelper.hpp"
 
 #include <erbsland/cterm/CursorBuffer.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
@@ -82,6 +82,17 @@ public:
         REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Red, bg::Blue));
         REQUIRE_FALSE(buffer.get(Position{1, 0}).attributes().isBold());
         REQUIRE(buffer.get(Position{1, 0}).attributes().isUnderline());
+    }
+
+    void testWritingAStringViewUsesTheSameInheritedStyleResolution() {
+        auto buffer = CursorBuffer{Size{2, 1}};
+        buffer.setColor(Color{fg::Green, bg::Blue});
+        const auto source = String{"AB"};
+
+        buffer.write(StringView{source}.substr(0, 2));
+
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}).color(), Color(fg::Green, bg::Blue));
+        REQUIRE_EQUAL(buffer.get(Position{1, 0}).color(), Color(fg::Green, bg::Blue));
     }
 
     void testPrintAcceptsCharacterAttributesAndAppliesThemToFollowingCharacters() {

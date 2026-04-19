@@ -6,7 +6,6 @@
 #include <exception>
 #include <iostream>
 
-
 auto main() -> int {
     try {
         demo::ui_hello_world::UiHelloWorldApp{}.run();

@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Position.hpp"
 
-
 namespace erbsland::cterm {
 
 auto Position::operator+(const Position &other) const noexcept -> Position {

@@ -5,9 +5,7 @@
 #include <algorithm>
 #include <format>
 
-
 namespace demo::keyinputdemo {
-
 
 void KeyInputDemoApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{56, 10});
@@ -17,13 +15,11 @@ void KeyInputDemoApp::beforeInitialize() {
             "Resize the terminal to at least 56x10 cells for the key input demo.", Color{fg::BrightWhite, bg::Black}});
 }
 
-
 auto KeyInputDemoApp::beforeRun() -> int {
     initializeScrollBuffer();
     _firstFrame = true;
     return 0;
 }
-
 
 auto KeyInputDemoApp::canvasSize() const noexcept -> Size {
     if (_buffer.size().isZero()) {
@@ -31,7 +27,6 @@ auto KeyInputDemoApp::canvasSize() const noexcept -> Size {
     }
     return _buffer.size();
 }
-
 
 auto KeyInputDemoApp::fieldRectForCanvas(const Size canvasSize) const noexcept -> Rectangle {
     const auto availableHeight = std::max(1, canvasSize.height() - 4);
@@ -43,11 +38,9 @@ auto KeyInputDemoApp::fieldRectForCanvas(const Size canvasSize) const noexcept -
     return {x, 2, fieldSize.width(), fieldSize.height()};
 }
 
-
 auto KeyInputDemoApp::visibleFieldSize() const noexcept -> Size {
     return fieldRectForCanvas(canvasSize()).size();
 }
-
 
 void KeyInputDemoApp::initializeScrollBuffer() noexcept {
     _scrollBuffer.fill(backgroundChar());
@@ -57,13 +50,11 @@ void KeyInputDemoApp::initializeScrollBuffer() noexcept {
     _insertedColumnCount = cScrollBufferSize.width();
 }
 
-
 void KeyInputDemoApp::advanceScroll() noexcept {
     const auto fillChar = (_insertedColumnCount % 20 == 0) ? guideColumnChar() : backgroundChar();
     _scrollBuffer.shift(Direction::East, fillChar, 1);
     _insertedColumnCount += 1;
 }
-
 
 void KeyInputDemoApp::onKey(const Key &key) {
     if (key == Key::Escape) {
@@ -72,7 +63,6 @@ void KeyInputDemoApp::onKey(const Key &key) {
     }
     stampKeyBlock(key);
 }
-
 
 void KeyInputDemoApp::stampKeyBlock(const Key &key) noexcept {
     const auto fieldSize = visibleFieldSize();
@@ -87,7 +77,6 @@ void KeyInputDemoApp::stampKeyBlock(const Key &key) noexcept {
     const auto y = std::uniform_int_distribution<int>{0, fieldSize.height() - 1}(_random);
     _scrollBuffer.drawText(Position{x, y}, block);
 }
-
 
 void KeyInputDemoApp::onRenderToBuffer() {
     const auto visibleCanvas = canvasSize();
@@ -107,7 +96,6 @@ void KeyInputDemoApp::onRenderToBuffer() {
     drawFooter(footerRect);
 }
 
-
 void KeyInputDemoApp::drawHeader(const Rectangle rect) {
     _buffer.fill(rect, Char{" ", Color{fg::BrightWhite, bg::BrightBlack}});
     _buffer.drawText(
@@ -119,19 +107,16 @@ void KeyInputDemoApp::drawHeader(const Rectangle rect) {
         Color{fg::BrightCyan, bg::BrightBlack});
 }
 
-
 void KeyInputDemoApp::drawField(const Rectangle rect) {
     _buffer.fill(rect, backgroundChar());
     auto view = BufferConstRefView{_scrollBuffer, rect.size()};
     _buffer.drawBuffer(view, rect);
 }
 
-
 void KeyInputDemoApp::drawFooter(const Rectangle rect) {
     _buffer.fill(rect, Char{" ", Color{fg::BrightWhite, bg::BrightBlack}});
     _buffer.drawText(Text{footerText(), rect.insetBy(Margins{1, 0}), Alignment::CenterLeft});
 }
-
 
 auto KeyInputDemoApp::footerText() const -> String {
     auto result = String{};
@@ -145,16 +130,13 @@ auto KeyInputDemoApp::footerText() const -> String {
     return result;
 }
 
-
 auto KeyInputDemoApp::backgroundChar() noexcept -> Char {
     return Char{" ", Color{fg::Default, bg::Black}};
 }
 
-
 auto KeyInputDemoApp::guideColumnChar() noexcept -> Char {
     return Char{U'∙', Color{fg::BrightBlack, bg::Black}};
 }
-
 
 auto KeyInputDemoApp::stampColors() noexcept -> const std::array<Color, 10> & {
     static const auto cStampColors = std::array<Color, 10>{
@@ -171,6 +153,5 @@ auto KeyInputDemoApp::stampColors() noexcept -> const std::array<Color, 10> & {
     };
     return cStampColors;
 }
-
 
 }

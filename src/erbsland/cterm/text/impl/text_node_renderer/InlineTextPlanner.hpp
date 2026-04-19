@@ -2,14 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "PlanningStyleResolver.hpp"
 
+#include "../../../impl/StringBuilder.hpp"
 #include "../../../String.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Render one node subtree into styled inline text.
 class InlineTextPlanner final {
@@ -35,14 +33,13 @@ public:
     /// @param node The node subtree to render.
     /// @param style The active inline text style.
     /// @param text The destination text buffer.
-    void appendTo(const TextNode &node, const CharStyle &style, String &text) const;
+    void appendTo(const TextNode &node, const CharStyle &style, cterm::impl::StringBuilder &text) const;
 
 private:
-    void appendChildren(const TextNode &node, const CharStyle &style, String &text) const;
+    void appendChildren(const TextNode &node, const CharStyle &style, cterm::impl::StringBuilder &text) const;
 
 private:
     const PlanningStyleResolver &_styleResolver; ///< Shared style-resolution helper.
 };
-
 
 }

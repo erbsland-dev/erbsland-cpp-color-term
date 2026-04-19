@@ -9,7 +9,6 @@
 #include <format>
 #include <functional>
 
-
 TESTED_TARGETS(Color)
 class ColorTest final : public el::UnitTest {
 public:

@@ -6,7 +6,6 @@
 #include <erbsland/cterm/ParagraphIndents.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(ParagraphIndents)
 class ParagraphIndentsTest final : public el::UnitTest {
 public:

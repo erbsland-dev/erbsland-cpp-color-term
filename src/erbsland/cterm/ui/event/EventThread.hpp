@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "EventDriver.hpp"
 #include "EventScheduler.hpp"
 #include "StopToken.hpp"
@@ -14,7 +13,6 @@
 #include <mutex>
 #include <optional>
 #include <thread>
-
 
 namespace erbsland::cterm::ui {
 

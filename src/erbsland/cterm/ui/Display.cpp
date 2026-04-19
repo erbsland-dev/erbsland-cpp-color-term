@@ -2,13 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Display.hpp"
 
-
 #include "event/impl/EventClockAccess.hpp"
 
 #include <algorithm>
 #include <ranges>
 #include <stdexcept>
-
 
 namespace erbsland::cterm::ui {
 

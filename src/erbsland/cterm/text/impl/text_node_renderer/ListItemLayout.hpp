@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "ListPrefix.hpp"
 #include "RenderBlock.hpp"
 
 #include <utility>
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Layout data used while applying a list-item prefix to planned blocks.
 class ListItemLayout final {
@@ -59,6 +56,5 @@ private:
     int _plainFirstLineOffset{0};    ///< Additional plain-text indent for the prefixed line.
     int _plainContinuationIndent{0}; ///< Additional plain-text indent for continuation lines and blocks.
 };
-
 
 }

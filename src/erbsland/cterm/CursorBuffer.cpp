@@ -7,7 +7,6 @@
 #include "impl/paragraph/Layout.hpp"
 #include "impl/paragraph/Printer.hpp"
 
-
 namespace erbsland::cterm {
 
 void CursorBuffer::validateFillChar(const Char &fillChar) {
@@ -111,33 +110,43 @@ void CursorBuffer::writeResolvedCharacter(const Char &character) noexcept {
     if (displayWidth == 0 || displayWidth > 2) {
         return;
     }
-    if (_wrapOnNextChar || _cursorPosition.x() >= _size.width()) {
+    auto x = _cursorPosition.x();
+    auto y = _cursorPosition.y();
+    auto width = _size.width();
+    if (_wrapOnNextChar || x >= width) {
         if (_autoWrap) {
             writeLineBreak();
         } else {
-            _cursorPosition = Position{_size.width() - 1, _cursorPosition.y()};
+            _cursorPosition = Position{width - 1, y};
         }
         _wrapOnNextChar = false;
+        x = _cursorPosition.x();
+        y = _cursorPosition.y();
+        width = _size.width();
     }
-    if (_cursorPosition.x() == _size.width() - 1) {
+    const auto lastColumn = width - 1;
+    if (x == lastColumn) {
         if (displayWidth == 2) {
             if (!_autoWrap) {
                 return;
             }
             writeLineBreak();
-            set(_cursorPosition, character);
-            _cursorPosition = _cursorPosition + Position{displayWidth, 0};
+            x = _cursorPosition.x();
+            y = _cursorPosition.y();
+            set(Position{x, y}, character);
+            _cursorPosition = Position{x + displayWidth, y};
         } else {
-            set(_cursorPosition, character);
+            set(Position{x, y}, character);
             _wrapOnNextChar = _autoWrap;
         }
     } else {
-        set(_cursorPosition, character);
-        _cursorPosition = _cursorPosition + Position{displayWidth, 0};
-        if (_cursorPosition.x() >= _size.width()) {
-            _cursorPosition = Position{_size.width() - 1, _cursorPosition.y()};
+        set(Position{x, y}, character);
+        x += displayWidth;
+        if (x >= width) {
+            x = width - 1;
             _wrapOnNextChar = _autoWrap;
         }
+        _cursorPosition = Position{x, y};
     }
 }
 
@@ -145,7 +154,7 @@ void CursorBuffer::write(const Char &character) noexcept {
     writeResolvedCharacter(character.withBase(_currentColor, _currentCharAttributes));
 }
 
-void CursorBuffer::write(const String &str) noexcept {
+void CursorBuffer::write(const StringView &str) noexcept {
     const auto color = _currentColor;
     const auto attributes = _currentCharAttributes;
     for (const auto &character : str) {
@@ -157,7 +166,7 @@ void CursorBuffer::writeResolved(const Char &character) noexcept {
     writeResolvedCharacter(character);
 }
 
-void CursorBuffer::writeResolved(const String &str) noexcept {
+void CursorBuffer::writeResolved(const StringView &str) noexcept {
     for (const auto &character : str) {
         writeResolvedCharacter(character);
     }
@@ -204,7 +213,7 @@ void CursorBuffer::writeLineBreak() noexcept {
     }
 }
 
-auto CursorBuffer::printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int {
+auto CursorBuffer::printParagraphImpl(const StringView &paragraph, const ParagraphOptions &options) noexcept -> int {
     const auto margins = options.margins();
     const auto x1 = std::max(margins.left(), 0);
     const auto width = std::max(size().width() - std::max(margins.left(), 0) - std::max(margins.right(), 0), 0);

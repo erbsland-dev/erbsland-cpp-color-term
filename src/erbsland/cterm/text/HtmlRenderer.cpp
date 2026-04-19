@@ -2,10 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "HtmlRenderer.hpp"
 
-
 #include "impl/HtmlParser.hpp"
 #include "impl/TextNodeRenderer.hpp"
-
 
 namespace erbsland::cterm::text {
 

@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(UpdateSettings)
 class UpdateSettingsTest final : public el::UnitTest {
 public:

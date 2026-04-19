@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "RendererBase.hpp"
 
 #include "../../ParagraphBackgroundMode.hpp"
@@ -11,9 +10,7 @@
 #include <functional>
 #include <optional>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// Paint a shared paragraph layout into a writable buffer.
 class Painter final : public RendererBase {
@@ -23,13 +20,17 @@ public:
 public:
     Painter(
         WritableBuffer &buffer,
-        Rectangle rect,
-        Alignment alignment,
+        const Rectangle rect,
+        const Alignment alignment,
         const LayoutResult &layout,
-        const String &sourceText,
+        const StringView &sourceText,
         const ParagraphOptions &options,
-        ParagraphBackgroundMode backgroundMode,
-        const ColorResolver &colorResolver = {}) noexcept;
+        const ParagraphBackgroundMode backgroundMode,
+        const ColorResolver &colorResolver = {}) noexcept :
+        RendererBase{alignment, layout, sourceText, options, backgroundMode},
+        _buffer{buffer},
+        _rect{rect},
+        _colorResolver{colorResolver} {}
 
     // defaults/deletions
     ~Painter() = default;
@@ -53,6 +54,5 @@ private:
     Rectangle _rect;
     const ColorResolver &_colorResolver;
 };
-
 
 }

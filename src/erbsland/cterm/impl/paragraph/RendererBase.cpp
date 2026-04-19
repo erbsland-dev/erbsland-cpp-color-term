@@ -2,22 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "RendererBase.hpp"
 
-
 namespace erbsland::cterm::impl::paragraph {
-
-
-RendererBase::RendererBase(
-    const Alignment alignment,
-    const LayoutResult &layout,
-    const String &sourceText,
-    const ParagraphOptions &options,
-    const ParagraphBackgroundMode backgroundMode) noexcept :
-    _alignment{alignment},
-    _layout{layout},
-    _sourceText{sourceText},
-    _options{options},
-    _backgroundMode{backgroundMode} {
-}
 
 auto RendererBase::linePlacement(const LayoutLine &line, const int x1, const int width) const noexcept
     -> LinePlacement {
@@ -38,6 +23,5 @@ auto RendererBase::linePlacement(const LayoutLine &line, const int x1, const int
     return LinePlacement{
         .textX = textX, .textWidth = textWidth, .endMarkX = x1 + width - endMarkWidth, .endMarkWidth = endMarkWidth};
 }
-
 
 }

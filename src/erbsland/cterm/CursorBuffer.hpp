@@ -2,10 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "CursorWriter.hpp"
 #include "RemappedBuffer.hpp"
-
 
 namespace erbsland::cterm {
 
@@ -98,15 +96,15 @@ public: // implement CursorWriter
     void setAutoWrap(bool enabled) noexcept override;
     void clearScreen() noexcept override;
     void write(const Char &character) noexcept override;
-    void write(const String &str) noexcept override;
+    void write(const StringView &str) noexcept override;
     void writeResolved(const Char &character) noexcept override;
-    void writeResolved(const String &str) noexcept override;
+    void writeResolved(const StringView &str) noexcept override;
     void write(const ReadableBuffer &buffer) noexcept override;
     void writeLineBreak() noexcept override;
 
 protected:
     /// Print a paragraph using the cursor-aware buffer output.
-    auto printParagraphImpl(const String &paragraph, const ParagraphOptions &options) noexcept -> int override;
+    auto printParagraphImpl(const StringView &paragraph, const ParagraphOptions &options) noexcept -> int override;
 
 private:
     static void validateFillChar(const Char &fillChar);
@@ -122,6 +120,5 @@ private:
     bool _autoWrap{true};                                           ///< If auto-wrap is enabled.
     bool _wrapOnNextChar{false}; ///< If the next character should be wrapped to the next line.
 };
-
 
 }

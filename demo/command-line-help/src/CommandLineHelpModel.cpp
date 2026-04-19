@@ -5,9 +5,7 @@
 
 #include <algorithm>
 
-
 namespace demo::command_line_help {
-
 
 auto DemoConfig::bodyParagraphOptions() const -> ParagraphOptions {
     auto options = ParagraphOptions{};
@@ -34,7 +32,6 @@ auto DemoConfig::bodyParagraphOptions() const -> ParagraphOptions {
     return options;
 }
 
-
 auto DemoConfig::optionParagraphOptions(const int descriptionColumnValue) const -> ParagraphOptions {
     auto options = bodyParagraphOptions();
     options.setLineIndent(0);
@@ -49,7 +46,6 @@ auto DemoConfig::optionParagraphOptions(const int descriptionColumnValue) const 
     return options;
 }
 
-
 auto DemoConfig::effectiveDescriptionColumn(const int widestSignatureWidth) const noexcept -> int {
     if (descriptionColumn.has_value()) {
         return *descriptionColumn;
@@ -57,21 +53,17 @@ auto DemoConfig::effectiveDescriptionColumn(const int widestSignatureWidth) cons
     return std::min(std::max(widestSignatureWidth + 2, 30), maximumDescriptionColumn);
 }
 
-
 auto OptionSpec::requiresValue() const noexcept -> bool {
     return !valueName.empty();
 }
-
 
 auto OptionSpec::matchesLongName(const std::string_view name) const noexcept -> bool {
     return longName == name;
 }
 
-
 auto OptionSpec::matchesShortName(const char name) const noexcept -> bool {
     return shortName != '\0' && shortName == name;
 }
-
 
 auto OptionSpec::plainSignature() const -> std::string {
     auto result = std::string{"--"};
@@ -88,7 +80,6 @@ auto OptionSpec::plainSignature() const -> std::string {
     return result;
 }
 
-
 auto OptionSpec::coloredSignature() const -> String {
     auto result = String{};
     result.append(fg::BrightCyan, "--", longName);
@@ -102,10 +93,8 @@ auto OptionSpec::coloredSignature() const -> String {
     return result;
 }
 
-
 auto OptionSpec::signatureWidth() const -> int {
     return coloredSignature().displayWidth();
 }
-
 
 }

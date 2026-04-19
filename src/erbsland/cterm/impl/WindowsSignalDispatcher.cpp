@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "WindowsSignalDispatcher.hpp"
 
-
 #include <utility>
 
-
 namespace erbsland::cterm::impl {
-
 
 std::atomic<WindowsSignalDispatcher *> WindowsSignalDispatcher::_instance{};
 
@@ -95,6 +92,5 @@ auto WindowsSignalDispatcher::onConsoleControl(const DWORD controlType) noexcept
     }
     return FALSE;
 }
-
 
 }

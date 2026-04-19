@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstdint>
-
 
 namespace erbsland::cterm {
 
@@ -55,6 +53,5 @@ enum class Anchor : uint8_t {
 [[nodiscard]] constexpr auto operator&(const Anchor lhs, const Anchor rhs) noexcept -> Anchor {
     return static_cast<Anchor>(static_cast<int>(lhs) & static_cast<int>(rhs));
 }
-
 
 }

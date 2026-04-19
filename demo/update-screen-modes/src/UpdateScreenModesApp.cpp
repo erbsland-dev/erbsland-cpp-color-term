@@ -8,9 +8,7 @@
 #include <format>
 #include <string>
 
-
 namespace demo::updatescreenmodes {
-
 
 void UpdateScreenModesApp::onKey(const Key &key) {
     if (key == U'q') {
@@ -26,7 +24,6 @@ void UpdateScreenModesApp::onKey(const Key &key) {
     }
 }
 
-
 void UpdateScreenModesApp::applyTerminalSettings() noexcept {
     if (_state.overwriteModeEnabled()) {
         _terminal.setRefreshMode(Terminal::RefreshMode::Overwrite);
@@ -37,7 +34,6 @@ void UpdateScreenModesApp::applyTerminalSettings() noexcept {
     _terminal.setBackBufferEnabled(_state.backBufferActive());
     _terminal.setSafeMarginEnabled(_state.safeMarginEnabled());
 }
-
 
 void UpdateScreenModesApp::onRenderToBuffer() {
     applyTerminalSettings();
@@ -56,11 +52,9 @@ void UpdateScreenModesApp::onRenderToBuffer() {
     drawFooter(footerRect);
 }
 
-
 void UpdateScreenModesApp::onAfterUpdateScreen(const std::chrono::nanoseconds duration) {
     _flushSpeedTracker.addSample(duration);
 }
-
 
 void UpdateScreenModesApp::drawScene(const Rectangle contentRect) noexcept {
     const auto infoWidth = std::clamp(contentRect.width() / 3, 24, 30);
@@ -134,7 +128,6 @@ void UpdateScreenModesApp::drawScene(const Rectangle contentRect) noexcept {
     }
 }
 
-
 void UpdateScreenModesApp::drawFooter(const Rectangle footerRect) {
     _buffer.fill(footerRect, Char{" ", bg::BrightBlack});
 
@@ -165,7 +158,6 @@ void UpdateScreenModesApp::drawFooter(const Rectangle footerRect) {
         Text{line, Rectangle{footerRect.x1(), footerRect.y1(), footerRect.width(), 1}, Alignment::CenterLeft});
 }
 
-
 void UpdateScreenModesApp::appendStateLine(String &text, const std::string_view label, const bool enabled) noexcept {
     constexpr auto cLabelWidth = std::size_t{18};
 
@@ -182,7 +174,6 @@ void UpdateScreenModesApp::appendStateLine(String &text, const std::string_view 
     text.append(bg::BrightBlack, fg::White, "]\n");
 }
 
-
 void UpdateScreenModesApp::appendTimingLine(
     String &text, const std::string_view label, const double milliseconds) noexcept {
 
@@ -194,6 +185,5 @@ void UpdateScreenModesApp::appendTimingLine(
     }
     text.append(bg::BrightBlack, fg::BrightWhite, std::format("{:>6.3f} ms\n", milliseconds));
 }
-
 
 }

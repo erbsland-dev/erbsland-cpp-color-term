@@ -2,19 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
 
 #include <array>
 #include <string>
 #include <string_view>
 
-
 namespace demo::display_all_attributes {
 
-
 using namespace erbsland::cterm;
-
 
 /// Display the ANSI character attributes supported by the current terminal setup.
 class DisplayAllAttributesApp final : public TerminalApplication {
@@ -43,6 +39,5 @@ private:
     [[nodiscard]] static auto supportLabel(bool supported) -> std::string_view;
     [[nodiscard]] static auto sampleAttributes(CharAttributes::Flag flag) -> CharAttributes;
 };
-
 
 }

@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <coroutine>
 #include <exception>
 #include <memory>
@@ -10,9 +9,7 @@
 #include <stdexcept>
 #include <utility>
 
-
 namespace erbsland::cterm::text::impl {
-
 
 /// A custom generator for coroutines in C++20.
 /// Can be replaced by `std::generator<T>` in C++23.
@@ -26,12 +23,10 @@ public:
         T current_value;
         std::exception_ptr _exception{};
 
-        auto get_return_object() {
-            return Generator{std::coroutine_handle<promise_type>::from_promise(*this)};
-        }
+        auto get_return_object() { return Generator{std::coroutine_handle<promise_type>::from_promise(*this)}; }
         auto initial_suspend() noexcept -> std::suspend_always { return {}; }
         auto final_suspend() noexcept -> std::suspend_always { return {}; }
-        template<std::convertible_to<T> Fwd>
+        template <std::convertible_to<T> Fwd>
         auto yield_value(Fwd &&value) -> std::suspend_always {
             current_value = std::forward<Fwd>(value);
             return {};
@@ -55,7 +50,7 @@ public:
             return _handle.promise().current_value;
         }
 
-        auto operator++() -> iterator& {
+        auto operator++() -> iterator & {
             if (_handle) {
                 _handle.resume();
                 if (_handle.done() && !_handle.promise()._exception) {
@@ -65,13 +60,9 @@ public:
             return *this;
         }
 
-        auto operator==(const iterator& other) const -> bool {
-            return _handle == other._handle;
-        }
+        auto operator==(const iterator &other) const -> bool { return _handle == other._handle; }
 
-        auto operator!=(const iterator& other) const -> bool {
-            return !(*this == other);
-        }
+        auto operator!=(const iterator &other) const -> bool { return !(*this == other); }
 
     private:
         handle_type _handle{};
@@ -79,19 +70,17 @@ public:
 
 public:
     Generator() = default;
-    explicit Generator(handle_type handle) : _handle(handle) {
-    }
+    explicit Generator(handle_type handle) : _handle(handle) {}
     ~Generator() {
         if (_handle) {
             _handle.destroy();
         }
     }
 
-    Generator(const Generator&) = delete;
-    auto operator=(const Generator&) -> Generator& = delete;
-    Generator(Generator&& other) noexcept : _handle(std::exchange(other._handle, {})) {
-    }
-    auto operator=(Generator&& other) noexcept -> Generator& {
+    Generator(const Generator &) = delete;
+    auto operator=(const Generator &) -> Generator & = delete;
+    Generator(Generator &&other) noexcept : _handle(std::exchange(other._handle, {})) {}
+    auto operator=(Generator &&other) noexcept -> Generator & {
         if (this != &other) {
             if (_handle) {
                 _handle.destroy();
@@ -116,9 +105,7 @@ public:
         return iterator{_handle};
     }
 
-    auto end() -> iterator {
-        return iterator{};
-    }
+    auto end() -> iterator { return iterator{}; }
 
 private:
     /// Prepare the next element.
@@ -138,6 +125,4 @@ private:
     handle_type _handle{};
 };
 
-
 }
-

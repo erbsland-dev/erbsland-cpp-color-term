@@ -19,7 +19,10 @@ target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         LayoutTest.cpp
         PlanningContextTest.cpp
         PlanningStyleResolverTest.cpp
-        StructuredTextParserTest.cpp
+        StringBuilderTest.cpp
+        TextNodeRendererTest.cpp
+        TextNodeTest.cpp
+        TokenizerTest.cpp
         TextNodePlanningQueriesTest.cpp
         U8BufferTest.cpp
         UnicodeWidthTest.cpp

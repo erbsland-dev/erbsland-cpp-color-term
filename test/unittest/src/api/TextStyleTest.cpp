@@ -6,9 +6,7 @@
 #include <erbsland/cterm/text/Style.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 namespace text = erbsland::cterm::text;
-
 
 TESTED_TARGETS(Style)
 class TextStyleTest final : public el::UnitTest {

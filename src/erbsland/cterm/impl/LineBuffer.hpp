@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../Backend.hpp"
 
 #include <atomic>
 #include <cassert>
 #include <string>
 
-
 namespace erbsland::cterm::impl {
-
 
 /// A smart line buffer.
 class LineBuffer {
@@ -126,7 +123,6 @@ private:
     bool _hasNewLine{false};      ///< A flag if there is a NL in the line buffer.
     EmitLock _emitLock;           ///< The emit lock.
 };
-
 
 class LineBuffer::EmitLockGuard {
 public:

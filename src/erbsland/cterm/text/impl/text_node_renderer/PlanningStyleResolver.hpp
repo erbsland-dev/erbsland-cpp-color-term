@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../../Style.hpp"
 #include "../../TextNode.hpp"
 
@@ -10,16 +9,14 @@
 #include <string_view>
 #include <vector>
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Resolve planner-facing style information for text nodes.
 class PlanningStyleResolver final {
 public:
     /// Create a resolver for the given style.
     /// @param style The style used during planning. `nullptr` falls back to the default style.
-    explicit PlanningStyleResolver(StyleConstPtr style);
+    explicit PlanningStyleResolver(const StyleConstPtr &style);
 
     // defaults
     ~PlanningStyleResolver() = default;
@@ -58,6 +55,5 @@ public:
 private:
     StyleConstPtr _style; ///< The style used for all selector resolution.
 };
-
 
 }

@@ -5,9 +5,7 @@
 
 #include <string_view>
 
-
 namespace demo::terminalchronicle {
-
 
 auto StoryDemo::beforeRun() -> int {
     printHeader(_terminal);
@@ -18,7 +16,6 @@ auto StoryDemo::beforeRun() -> int {
     _terminal.flush();
     return -1;
 }
-
 
 void StoryDemo::printHeader(Terminal &terminal) noexcept {
     terminal.writeLineBreak();
@@ -32,7 +29,6 @@ void StoryDemo::printHeader(Terminal &terminal) noexcept {
         "Low-level output with readable print calls.");
     terminal.writeLineBreak();
 }
-
 
 void StoryDemo::printTimeline(Terminal &terminal) noexcept {
     terminal.print(fg::BrightBlack, "Timeline: ");
@@ -54,7 +50,6 @@ void StoryDemo::printTimeline(Terminal &terminal) noexcept {
     terminal.writeLineBreak();
     terminal.writeLineBreak();
 }
-
 
 void StoryDemo::printStory(Terminal &terminal) noexcept {
     terminal.printLine(
@@ -127,7 +122,6 @@ void StoryDemo::printStory(Terminal &terminal) noexcept {
     terminal.writeLineBreak();
 }
 
-
 void StoryDemo::printOutro(Terminal &terminal) noexcept {
     terminal.printLine(
         bg::BrightBlack,
@@ -149,6 +143,5 @@ void StoryDemo::printOutro(Terminal &terminal) noexcept {
         ".");
     terminal.writeLineBreak();
 }
-
 
 }

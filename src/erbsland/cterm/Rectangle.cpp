@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Rectangle.hpp"
 
-
 #include <stdexcept>
-
 
 namespace erbsland::cterm {
 

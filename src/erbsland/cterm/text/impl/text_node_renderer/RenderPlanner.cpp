@@ -2,19 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "RenderPlanner.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
 
-
-RenderPlanner::RenderPlanner(StyleConstPtr style) :
-    _style{style != nullptr ? std::move(style) : Style::defaultStyle()},
+RenderPlanner::RenderPlanner(const StyleConstPtr &style) :
+    _style{style != nullptr ? style : Style::defaultStyle()},
     _styleResolver{_style},
-    _queries{},
     _inlineTextPlanner{_styleResolver},
     _blockFactory{_styleResolver, _inlineTextPlanner},
     _listBlockPlanner{_styleResolver, _blockFactory, _queries} {
 }
-
 
 auto RenderPlanner::build(const TextNodeConstPtr &document) const -> RenderBlocks {
     auto blocks = RenderBlocks{};
@@ -23,7 +19,6 @@ auto RenderPlanner::build(const TextNodeConstPtr &document) const -> RenderBlock
     }
     return blocks;
 }
-
 
 void RenderPlanner::appendNode(const TextNode &node, const PlanningContext &context, RenderBlocks &blocks) const {
     switch (node.type()) {
@@ -85,13 +80,11 @@ void RenderPlanner::appendNode(const TextNode &node, const PlanningContext &cont
     }
 }
 
-
 void RenderPlanner::appendParagraphLikeNode(
     const TextNode &node, const StyleRole role, const PlanningContext &context, RenderBlocks &blocks) const {
     const auto rule = _styleResolver.blockRule(node, role);
     blocks.push_back(_blockFactory.paragraph(node, rule, context));
 }
-
 
 void RenderPlanner::appendContainer(
     const TextNode &node, const StyleRole role, const PlanningContext &context, RenderBlocks &blocks) const {
@@ -115,11 +108,9 @@ void RenderPlanner::appendContainer(
     }
 }
 
-
 void RenderPlanner::appendPlannedNode(
     const TextNode &node, const PlanningContext &context, RenderBlocks &blocks) const {
     appendNode(node, context, blocks);
 }
-
 
 }

@@ -2,15 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
-
 
 namespace demo::display_all_colors {
 
-
 using namespace erbsland::cterm;
-
 
 /// Display and label all available colors.
 class DisplayAllColorsApp final : public TerminalApplication {
@@ -23,6 +19,5 @@ private:
     void renderMatrix();
     void renderRainbow();
 };
-
 
 }

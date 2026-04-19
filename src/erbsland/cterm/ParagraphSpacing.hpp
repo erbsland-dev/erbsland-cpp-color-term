@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstdint>
 
-
 namespace erbsland::cterm {
-
 
 /// The spacing between explicit newline-separated paragraphs.
 enum class ParagraphSpacing : uint8_t {
@@ -16,6 +13,5 @@ enum class ParagraphSpacing : uint8_t {
     /// Insert one empty row between paragraphs.
     DoubleLine,
 };
-
 
 }

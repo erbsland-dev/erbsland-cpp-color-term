@@ -4,9 +4,7 @@
 #include <erbsland/cterm/ui/all.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 namespace ui = erbsland::cterm::ui;
-
 
 TESTED_TARGETS(UiStopToken UiEventThread UiInvocation)
 class StopTokenTest final : public el::UnitTest {

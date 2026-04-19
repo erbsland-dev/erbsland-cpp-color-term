@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../../../String.hpp"
 
 #include <utility>
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// The rendered prefix for one list item.
 class ListPrefix final {
@@ -34,6 +31,5 @@ private:
     String _terminalText; ///< The paragraph prefix used for terminal output.
     int _width{0};        ///< The visible prefix width in terminal cells.
 };
-
 
 }

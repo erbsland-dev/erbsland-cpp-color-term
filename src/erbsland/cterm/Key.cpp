@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Key.hpp"
 
-
 #include "impl/CombinedChar.hpp"
 #include "impl/KeyDecoder.hpp"
 
@@ -10,7 +9,6 @@
 #include <cctype>
 #include <optional>
 #include <string_view>
-
 
 namespace erbsland::cterm {
 
@@ -120,7 +118,6 @@ auto Key::parseCharacterKeyText(const std::string_view text) -> std::optional<Ke
     return std::nullopt;
 }
 
-
 Key::Key(const Type type, const char32_t codePoint) noexcept : _type{type} {
     if (type == Character || type == Combined) {
         _character = impl::CombinedChar{codePoint};
@@ -219,6 +216,5 @@ auto Key::toDisplayText(const bool useBrackets) const -> std::string {
     }
     return {};
 }
-
 
 }

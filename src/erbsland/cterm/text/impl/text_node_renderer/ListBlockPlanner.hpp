@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "ListItemLayout.hpp"
 #include "PlanningContext.hpp"
 #include "PlanningStyleResolver.hpp"
@@ -10,9 +9,7 @@
 #include "RenderBlockFactory.hpp"
 #include "TextNodePlanningQueries.hpp"
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// Interface used by the list planner to recurse into non-list nodes.
 class PlannedNodeAppender {
@@ -27,7 +24,6 @@ public:
     virtual void
     appendPlannedNode(const TextNode &node, const PlanningContext &context, RenderBlocks &blocks) const = 0;
 };
-
 
 /// Plan list containers and list-item block rewrites.
 class ListBlockPlanner final {
@@ -96,6 +92,5 @@ private:
     const RenderBlockFactory &_blockFactory;     ///< Shared render-block factory.
     const TextNodePlanningQueries &_queries;     ///< Shared planning queries.
 };
-
 
 }

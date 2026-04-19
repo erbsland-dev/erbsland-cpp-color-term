@@ -6,13 +6,10 @@
 
 #include <algorithm>
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 BlockEmitter::BlockEmitter(CursorWriterPtr cursorWriter) : _cursorWriter{std::move(cursorWriter)} {
 }
-
 
 void BlockEmitter::render(const RenderBlocks &blocks) {
     if (!_cursorWriter) {
@@ -24,7 +21,6 @@ void BlockEmitter::render(const RenderBlocks &blocks) {
     }
     writeBlankLines(_state.previousBottomMargin);
 }
-
 
 void BlockEmitter::renderBlock(const RenderBlock &block, ParagraphOptions &paragraphOptions) {
     writeBlockTopMargin(block.style());
@@ -43,7 +39,6 @@ void BlockEmitter::renderBlock(const RenderBlock &block, ParagraphOptions &parag
     finishRenderedBlock(block.style());
 }
 
-
 void BlockEmitter::renderFilledLine(const RenderBlock &block) {
     const auto margins = block.style().margins();
     const auto leftMargin = std::max(margins.left(), 0);
@@ -60,7 +55,6 @@ void BlockEmitter::renderFilledLine(const RenderBlock &block) {
     line.drawText(Position{std::min(block.style().indents().firstLineIndent(), contentWidth - 1), 0}, block.text());
     _cursorWriter->write(line);
 }
-
 
 void BlockEmitter::renderHorizontalRule(const RenderBlock &block) {
     const auto margins = block.style().margins();
@@ -87,18 +81,15 @@ void BlockEmitter::renderHorizontalRule(const RenderBlock &block) {
     _cursorWriter->write(line);
 }
 
-
 void BlockEmitter::writeBlockTopMargin(const StyleRule &blockStyle) {
     const auto currentTopMargin = std::max(blockStyle.margins().top(), 0);
     writeBlankLines(_state.firstBlock ? currentTopMargin : std::max(_state.previousBottomMargin, currentTopMargin));
 }
 
-
 void BlockEmitter::finishRenderedBlock(const StyleRule &blockStyle) noexcept {
     _state.previousBottomMargin = std::max(blockStyle.margins().bottom(), 0);
     _state.firstBlock = false;
 }
-
 
 auto BlockEmitter::paragraphText(const RenderBlock &block) noexcept -> const String & {
     if (block.terminalText().has_value()) {
@@ -107,12 +98,10 @@ auto BlockEmitter::paragraphText(const RenderBlock &block) noexcept -> const Str
     return block.text();
 }
 
-
 void BlockEmitter::updateParagraphOptions(ParagraphOptions &options, const StyleRule &blockStyle) noexcept {
     options.setIndents(blockStyle.indents());
     options.setParagraphSpacing(ParagraphSpacing::SingleLine);
 }
-
 
 void BlockEmitter::writeSpaces(const int count) noexcept {
     if (count <= 0) {
@@ -121,12 +110,10 @@ void BlockEmitter::writeSpaces(const int count) noexcept {
     _cursorWriter->writeRepeated(Char{U' '}, count);
 }
 
-
 void BlockEmitter::writeBlankLines(const int lineCount) noexcept {
     for (auto index = 0; index < lineCount; ++index) {
         _cursorWriter->writeLineBreak();
     }
 }
-
 
 }

@@ -2,11 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Alignment.hpp"
 #include "CharCombinationStyle.hpp"
 #include "Rectangle.hpp"
-
 
 namespace erbsland::cterm {
 
@@ -71,6 +69,5 @@ private:
     CharCombinationStylePtr _combinationStyle; ///< An optional combination style.
     bool _overwrite{false};                    ///< Flag if `Inherit` colors should be interpreted as `Default`.
 };
-
 
 }

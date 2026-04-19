@@ -2,9 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "ListItemLayout.hpp"
 
+#include "../../../impl/StringBuilder.hpp"
+#include "../../../StringView.hpp"
 
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 void ListItemLayout::applyPrefixTo(RenderBlock &block) const {
     auto indents = block.style().indents();
@@ -15,18 +16,17 @@ void ListItemLayout::applyPrefixTo(RenderBlock &block) const {
     block.addStringFirstLineIndent(plainFirstLineOffset());
     block.addStringWrappedLineIndent(plainContinuationIndent());
 
-    auto prefixedText = String{};
+    auto prefixedText = cterm::impl::StringBuilder{};
     prefixedText.reserve(prefix().text().size() + block.text().size());
-    prefixedText += prefix().text();
-    prefixedText += block.text();
-    auto terminalText = String{};
+    prefixedText.append(prefix().text());
+    prefixedText.append(block.text());
+    auto terminalText = cterm::impl::StringBuilder{};
     terminalText.reserve(prefix().terminalText().size() + block.text().size());
-    terminalText += prefix().terminalText();
-    terminalText += block.text();
-    block.setTerminalText(std::move(terminalText));
-    block.setText(std::move(prefixedText));
+    terminalText.append(prefix().terminalText());
+    terminalText.append(block.text());
+    block.setTerminalText(terminalText.takeString());
+    block.setText(prefixedText.takeString());
 }
-
 
 void ListItemLayout::applyContinuationTo(RenderBlock &block) const {
     auto indents = block.style().indents();
@@ -37,6 +37,5 @@ void ListItemLayout::applyContinuationTo(RenderBlock &block) const {
     block.addStringFirstLineIndent(plainContinuationIndent());
     block.addStringWrappedLineIndent(plainContinuationIndent());
 }
-
 
 }

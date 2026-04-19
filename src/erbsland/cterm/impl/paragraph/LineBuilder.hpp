@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "LayoutContext.hpp"
 #include "LayoutPreparedSourceLine.hpp"
 
 #include <optional>
 #include <utility>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// Builds one physical line from a prepared source line and the current layout state.
 class LineBuilder final {
@@ -123,6 +120,5 @@ private:
     int _wrappedLineCount = 0;
     bool _isFirstPhysicalLine = true;
 };
-
 
 }

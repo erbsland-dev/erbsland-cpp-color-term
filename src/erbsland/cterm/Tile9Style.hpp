@@ -1,26 +1,21 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
-
 #pragma once
-
 
 #include "Char.hpp"
 #include "FrameStyle.hpp"
 #include "Rectangle.hpp"
-#include "String.hpp"
+#include "StringView.hpp"
 
 #include <array>
 #include <memory>
 #include <string_view>
 
-
 namespace erbsland::cterm {
-
 
 class Tile9Style;
 /// Shared pointer for Tile9Style
 using Tile9StylePtr = std::shared_ptr<Tile9Style>;
-
 
 /// Defines a style for repeating a 3x3 tile pattern across a rectangle.
 ///
@@ -86,7 +81,7 @@ private:
 
 private:
     explicit Tile9Style(const ParsedTiles &parsed) noexcept;
-    [[nodiscard]] static auto parseTiles(const String &tiles) -> ParsedTiles;
+    [[nodiscard]] static auto parseTiles(const StringView &tiles) -> ParsedTiles;
     [[nodiscard]] static auto toParsedTiles(const std::array<Char, 9> &tiles) noexcept -> ParsedTiles;
     [[nodiscard]] static auto toParsedTiles(const std::array<Char, 16> &tiles) noexcept -> ParsedTiles;
 
@@ -94,6 +89,5 @@ private:
     std::array<Char, 16> _tiles{};
     bool _hasExtendedTiles = false;
 };
-
 
 }

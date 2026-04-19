@@ -4,9 +4,7 @@
 
 #include <utility>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 void LayoutResult::appendEmptyLine() {
     _lines.emplace_back();
@@ -15,6 +13,5 @@ void LayoutResult::appendEmptyLine() {
 void LayoutResult::appendLine(LayoutLine line) {
     _lines.emplace_back(std::move(line));
 }
-
 
 }

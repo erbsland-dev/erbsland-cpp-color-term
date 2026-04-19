@@ -9,9 +9,7 @@
 #include <string>
 #include <vector>
 
-
 namespace demo::bitmapshowcase {
-
 
 void BitmapShowcaseApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{68, 20});
@@ -20,7 +18,6 @@ void BitmapShowcaseApp::beforeInitialize() {
         String{
             "Resize the terminal to at least 68x20 cells for the bitmap showcase.", Color{fg::BrightWhite, bg::Black}});
 }
-
 
 void BitmapShowcaseApp::onKey(const Key &key) {
     if (key == Key::Left) {
@@ -35,7 +32,6 @@ void BitmapShowcaseApp::onKey(const Key &key) {
         TerminalApplication::onKey(key);
     }
 }
-
 
 void BitmapShowcaseApp::onRenderToBuffer() {
     _buffer.fill(Char{" ", bg::Black});
@@ -61,7 +57,6 @@ void BitmapShowcaseApp::onRenderToBuffer() {
     drawPreview(previewRect);
     drawFooter(footerRect);
 }
-
 
 void BitmapShowcaseApp::drawSelector(const Rectangle rect) {
     const auto count = static_cast<int>(variantCount(_pageIndex));
@@ -96,7 +91,6 @@ void BitmapShowcaseApp::drawSelector(const Rectangle rect) {
     }
 }
 
-
 void BitmapShowcaseApp::drawPreview(const Rectangle rect) {
     switch (_pageIndex) {
     case 0:
@@ -114,7 +108,6 @@ void BitmapShowcaseApp::drawPreview(const Rectangle rect) {
         break;
     }
 }
-
 
 void BitmapShowcaseApp::drawScaleModeVariant(const Rectangle rect, const std::size_t variantIndex) {
 
@@ -169,7 +162,6 @@ void BitmapShowcaseApp::drawScaleModeVariant(const Rectangle rect, const std::si
         cDescriptions[std::min(variantIndex, cDescriptions.size() - 1)], descriptionRect, Alignment::Center);
 }
 
-
 void BitmapShowcaseApp::drawColorModeVariant(const Rectangle rect, const std::size_t variantIndex) {
 
     static constexpr auto cModes = std::array<BitmapColorMode, 5>{
@@ -199,7 +191,6 @@ void BitmapShowcaseApp::drawColorModeVariant(const Rectangle rect, const std::si
     _buffer.drawText(
         cDescriptions[std::min(variantIndex, cDescriptions.size() - 1)], descriptionRect, Alignment::Center);
 }
-
 
 void BitmapShowcaseApp::drawLayoutVariant(const Rectangle rect, const std::size_t variantIndex) {
 
@@ -246,7 +237,6 @@ void BitmapShowcaseApp::drawLayoutVariant(const Rectangle rect, const std::size_
     _buffer.drawText(
         cDescriptions[std::min(variantIndex, cDescriptions.size() - 1)], descriptionRect, Alignment::Center);
 }
-
 
 void BitmapShowcaseApp::drawStyleVariant(const Rectangle rect, const std::size_t variantIndex) {
 
@@ -319,7 +309,6 @@ void BitmapShowcaseApp::drawStyleVariant(const Rectangle rect, const std::size_t
         cDescriptions[std::min(variantIndex, cDescriptions.size() - 1)], descriptionRect, Alignment::Center);
 }
 
-
 void BitmapShowcaseApp::drawPreviewPanel(const Rectangle rect, const std::string_view title, const Color fillColor) {
 
     if (rect.width() <= 4 || rect.height() <= 4) {
@@ -333,13 +322,11 @@ void BitmapShowcaseApp::drawPreviewPanel(const Rectangle rect, const std::string
         Color{fg::BrightWhite, fillColor.bg()});
 }
 
-
 void BitmapShowcaseApp::drawFooter(const Rectangle rect) {
     _buffer.fill(rect, Char{" ", bg::BrightBlack});
     auto footer = Text{footerText(), rect, Alignment::CenterLeft};
     _buffer.drawText(footer);
 }
-
 
 auto BitmapShowcaseApp::footerText() const -> String {
     auto result = String{};
@@ -361,7 +348,6 @@ auto BitmapShowcaseApp::footerText() const -> String {
     return result;
 }
 
-
 auto BitmapShowcaseApp::pageTitle() const -> std::string_view {
     switch (_pageIndex) {
     case 0:
@@ -376,7 +362,6 @@ auto BitmapShowcaseApp::pageTitle() const -> std::string_view {
     }
 }
 
-
 auto BitmapShowcaseApp::variantCount(const std::size_t pageIndex) const noexcept -> std::size_t {
     switch (pageIndex) {
     case 0:
@@ -390,7 +375,6 @@ auto BitmapShowcaseApp::variantCount(const std::size_t pageIndex) const noexcept
         return 5;
     }
 }
-
 
 auto BitmapShowcaseApp::variantTitle(const std::size_t pageIndex, const std::size_t variantIndex) const
     -> std::string_view {
@@ -454,11 +438,9 @@ auto BitmapShowcaseApp::variantTitle(const std::size_t pageIndex, const std::siz
     }
 }
 
-
 auto BitmapShowcaseApp::selectedVariantIndex() const noexcept -> std::size_t {
     return _selectedVariantByPage[_pageIndex];
 }
-
 
 void BitmapShowcaseApp::selectVariantDelta(const int delta) noexcept {
     const auto count = static_cast<int>(variantCount(_pageIndex));
@@ -469,7 +451,6 @@ void BitmapShowcaseApp::selectVariantDelta(const int delta) noexcept {
     const auto next = (current + delta % count + count) % count;
     _selectedVariantByPage[_pageIndex] = static_cast<std::size_t>(next);
 }
-
 
 auto BitmapShowcaseApp::ringBitmap() -> const Bitmap & {
     static const auto bitmap = Bitmap::fromPattern({
@@ -484,7 +465,6 @@ auto BitmapShowcaseApp::ringBitmap() -> const Bitmap & {
     });
     return bitmap;
 }
-
 
 auto BitmapShowcaseApp::rocketBitmap() -> const Bitmap & {
     static const auto bitmap = Bitmap::fromPattern({
@@ -503,7 +483,6 @@ auto BitmapShowcaseApp::rocketBitmap() -> const Bitmap & {
     return bitmap;
 }
 
-
 auto BitmapShowcaseApp::waveBitmap() -> const Bitmap & {
     static const auto bitmap = Bitmap::fromPattern({
         "......####.....",
@@ -516,7 +495,6 @@ auto BitmapShowcaseApp::waveBitmap() -> const Bitmap & {
     });
     return bitmap;
 }
-
 
 auto BitmapShowcaseApp::circuitBitmap() -> const Bitmap & {
     static const auto bitmap = Bitmap::fromPattern({
@@ -531,7 +509,6 @@ auto BitmapShowcaseApp::circuitBitmap() -> const Bitmap & {
     return bitmap;
 }
 
-
 auto BitmapShowcaseApp::rainbowColors() -> const ColorSequence & {
     static const auto colors = ColorSequence{
         {Color{fg::BrightBlue, bg::Black}, 3},
@@ -543,6 +520,5 @@ auto BitmapShowcaseApp::rainbowColors() -> const ColorSequence & {
     };
     return colors;
 }
-
 
 }

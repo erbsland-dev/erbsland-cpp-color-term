@@ -15,11 +15,9 @@ public:
 
 private:
     void setupUi();
-    [[nodiscard]] static auto currentDateTimeText() -> String;
 
 private:
     ui::Application _app;
 };
-
 
 }

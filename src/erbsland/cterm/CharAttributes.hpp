@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "impl/HashHelper.hpp"
 
 #include <cstddef>
 #include <cstdint>
 #include <functional>
 
-
 namespace erbsland::cterm {
-
 
 /// A set of optional ANSI character attributes.
 /// Each attribute stores two states: whether it is explicitly specified and whether it is enabled.
@@ -227,9 +224,7 @@ private:
     uint8_t _specifiedMask{0}; ///< The explicitly specified attributes.
 };
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::CharAttributes> {

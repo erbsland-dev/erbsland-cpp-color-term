@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Position.hpp"
 
 #include <cstdint>
 #include <functional>
 #include <string_view>
 
-
 namespace erbsland::cterm {
-
 
 /// A direction in a 2D grid.
 class Direction final {
@@ -116,9 +113,7 @@ private:
     Enum _value{None}; ///< The internal enum value.
 };
 
-
 }
-
 
 template <>
 struct std::hash<erbsland::cterm::Direction> {

@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "ReadableBuffer.hpp"
 
-
 #include "Bitmap.hpp"
-
 
 namespace erbsland::cterm {
 

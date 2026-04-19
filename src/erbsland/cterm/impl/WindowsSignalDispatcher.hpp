@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <windows.h>
 
 #include <atomic>
@@ -12,9 +11,7 @@
 #include <optional>
 #include <thread>
 
-
 namespace erbsland::cterm::impl {
-
 
 /// Forward Windows termination events to a regular worker thread.
 ///
@@ -69,6 +66,5 @@ private:
     bool _stopped{false};                                    ///< Stops the watcher thread.
     bool _consoleHandlerActive{false}; ///< If the console control handler was successfully registered.
 };
-
 
 }

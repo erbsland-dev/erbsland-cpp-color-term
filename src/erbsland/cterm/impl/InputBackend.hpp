@@ -2,13 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../Backend.hpp"
 #include "../Input.hpp"
 
-
 namespace erbsland::cterm::impl {
-
 
 /// The input implementation, using the platform backend.
 class InputBackend : public Input {
@@ -30,6 +27,5 @@ public:
 private:
     BackendPtr _backend;
 };
-
 
 }

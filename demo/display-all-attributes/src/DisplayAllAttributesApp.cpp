@@ -3,9 +3,7 @@
 
 #include "DisplayAllAttributesApp.hpp"
 
-
 namespace demo::display_all_attributes {
-
 
 auto DisplayAllAttributesApp::attributeSpecs() -> const std::array<AttributeSpec, 8> & {
     static const auto cAttributeSpecs = std::array<AttributeSpec, 8>{{
@@ -25,7 +23,6 @@ auto DisplayAllAttributesApp::attributeSpecs() -> const std::array<AttributeSpec
     return cAttributeSpecs;
 }
 
-
 auto DisplayAllAttributesApp::beforeRun() -> int {
     _terminal.input().setMode(Input::Mode::ReadLine);
     printHeader(_terminal);
@@ -38,7 +35,6 @@ auto DisplayAllAttributesApp::beforeRun() -> int {
     }
     return -1;
 }
-
 
 void DisplayAllAttributesApp::printHeader(Terminal &terminal) noexcept {
     terminal.printLine(fg::BrightWhite, CharAttributes{CharAttributes::Bold}, "Display All Attributes");
@@ -58,7 +54,6 @@ void DisplayAllAttributesApp::printHeader(Terminal &terminal) noexcept {
         "---------------------------------------------------------------------------------------------------");
 }
 
-
 void DisplayAllAttributesApp::printAttributeTable(Terminal &terminal) noexcept {
     const auto supported = terminal.supportedCharAttributes();
     for (const auto &spec : attributeSpecs()) {
@@ -66,7 +61,6 @@ void DisplayAllAttributesApp::printAttributeTable(Terminal &terminal) noexcept {
     }
     terminal.writeLineBreak();
 }
-
 
 void DisplayAllAttributesApp::printAttributeRow(
     Terminal &terminal, const AttributeSpec &spec, const bool supported) noexcept {
@@ -105,7 +99,6 @@ void DisplayAllAttributesApp::printAttributeRow(
     }
     terminal.writeLineBreak();
 }
-
 
 void DisplayAllAttributesApp::printCombinations(Terminal &terminal) noexcept {
     auto emphatic = CharAttributes{};
@@ -149,14 +142,12 @@ void DisplayAllAttributesApp::printCombinations(Terminal &terminal) noexcept {
     terminal.writeLineBreak();
 }
 
-
 void DisplayAllAttributesApp::printPausePrompt(Terminal &terminal) noexcept {
     if (!terminal.isInteractive()) {
         return;
     }
     terminal.printLine(fg::BrightBlack, "Press Enter to close the demo.");
 }
-
 
 auto DisplayAllAttributesApp::padded(const std::string_view text, const std::size_t width) -> std::string {
     auto result = std::string{text};
@@ -166,14 +157,12 @@ auto DisplayAllAttributesApp::padded(const std::string_view text, const std::siz
     return result;
 }
 
-
 auto DisplayAllAttributesApp::supportLabel(const bool supported) -> std::string_view {
     if (supported) {
         return "yes";
     }
     return "no";
 }
-
 
 auto DisplayAllAttributesApp::sampleAttributes(const CharAttributes::Flag flag) -> CharAttributes {
     auto attributes = CharAttributes{};
@@ -196,6 +185,5 @@ auto DisplayAllAttributesApp::sampleAttributes(const CharAttributes::Flag flag) 
     }
     return attributes;
 }
-
 
 }

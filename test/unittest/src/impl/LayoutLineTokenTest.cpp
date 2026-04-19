@@ -5,7 +5,6 @@
 
 #include <erbsland/cterm/impl/paragraph/LayoutLineToken.hpp>
 
-
 TESTED_TARGETS(LayoutLineToken)
 class LayoutLineTokenTest final : public el::UnitTest {
 public:

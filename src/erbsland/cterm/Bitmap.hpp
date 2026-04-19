@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Position.hpp"
 #include "Rectangle.hpp"
 #include "Size.hpp"
@@ -17,9 +16,7 @@
 #include <string_view>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 /// A mutable bitmap storing boolean pixels in row-major order.
 class Bitmap {
@@ -164,7 +161,6 @@ protected:
     Data _data;
 };
 
-
 template <typename T>
     requires std::is_integral_v<T> && std::is_unsigned_v<T>
 void Bitmap::draw(const Position position, const std::vector<T> &data) noexcept {
@@ -175,6 +171,5 @@ void Bitmap::draw(const Position position, const std::vector<T> &data) noexcept 
         }
     }
 }
-
 
 }

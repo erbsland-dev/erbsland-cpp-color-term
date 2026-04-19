@@ -7,7 +7,6 @@
 
 #include <stdexcept>
 
-
 TESTED_TARGETS(ParagraphOptions)
 class ParagraphOptionsTest final : public el::UnitTest {
 public:

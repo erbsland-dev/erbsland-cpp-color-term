@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "HtmlTokenizer.hpp"
 
 #include "../TextNode.hpp"
@@ -11,7 +10,6 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
 
 namespace erbsland::cterm::text::impl {
 

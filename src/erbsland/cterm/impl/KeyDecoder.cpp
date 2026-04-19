@@ -6,9 +6,7 @@
 
 #include <optional>
 
-
 namespace erbsland::cterm::impl {
-
 
 auto KeyDecoder::consoleSequenceDefinitions() noexcept -> const std::array<ConsoleSequenceDefinition, 32> & {
     static constexpr auto cConsoleSequenceDefinitions = std::array<ConsoleSequenceDefinition, 32>{{
@@ -103,6 +101,5 @@ auto KeyDecoder::decodeConsoleInput() const noexcept -> Key {
     }
     return {};
 }
-
 
 }

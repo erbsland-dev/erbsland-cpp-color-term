@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Key.hpp"
 
 #include <cstdint>
 #include <string>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 /// Definition of a single key mapping for a specific input mode.
 class InputDefinition {
@@ -68,9 +65,7 @@ private:
     ForMode _forMode{ForMode::Both};
 };
 
-
 /// A list of input definitions.
 using InputDefinitionList = std::vector<InputDefinition>;
-
 
 }

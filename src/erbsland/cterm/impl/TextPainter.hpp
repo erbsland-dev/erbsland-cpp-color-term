@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../WritableBuffer.hpp"
 
-
 namespace erbsland::cterm::impl {
-
 
 class TextPainter final {
 public:
@@ -21,9 +18,9 @@ public:
     auto operator=(TextPainter &&) -> TextPainter & = delete;
 
 public:
-    void drawText(Position pos, const String &str);
+    void drawText(Position pos, const StringView &str);
     void drawText(const Text &text, std::size_t animationCycle = 0);
-    void drawText(const String &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle = 0);
+    void drawText(const StringView &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle = 0);
     void drawText(
         std::string_view text,
         Rectangle rect,
@@ -31,7 +28,13 @@ public:
         Color color = {},
         std::size_t animationCycle = 0);
     void drawText(
-        const String &text,
+        std::u32string_view text,
+        Rectangle rect,
+        Alignment alignment = Alignment::TopLeft,
+        Color color = {},
+        std::size_t animationCycle = 0);
+    void drawText(
+        const StringView &text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
         Color color = {},
@@ -51,9 +54,9 @@ private: // wrapper (to keep code simple)
 private: // helper
     [[nodiscard]] static auto simpleTextOptions(Alignment alignment, Color color) noexcept -> TextOptions;
     [[nodiscard]] static auto contentRect(Rectangle rect, const ParagraphOptions &options) noexcept -> Rectangle;
-    [[nodiscard]] auto buildSimpleTextLines(const String &text, Rectangle rect, ParagraphSpacing spacing) const
+    [[nodiscard]] auto buildSimpleTextLines(const StringView &text, Rectangle rect, ParagraphSpacing spacing) const
         -> StringLines;
-    [[nodiscard]] auto buildFontTextLines(const TextOptions &options, const String &paragraph) const -> StringLines;
+    [[nodiscard]] auto buildFontTextLines(const TextOptions &options, const StringView &paragraph) const -> StringLines;
     void applyTextLines(
         Rectangle rect, const TextOptions &options, const StringLines &lines, std::size_t animationCycle) noexcept;
     [[nodiscard]] auto colorForTextPosition(
@@ -63,6 +66,5 @@ private: // helper
 private:
     WritableBuffer &_buffer;
 };
-
 
 }

@@ -5,9 +5,7 @@
 
 #include <string_view>
 
-
 namespace demo::display_all_colors {
-
 
 auto DisplayAllColorsApp::beforeRun() -> int {
     _buffer = Buffer{Size{80, 9 + 18 + 18}};
@@ -19,7 +17,6 @@ auto DisplayAllColorsApp::beforeRun() -> int {
     _terminal.flush();
     return -1;
 }
-
 
 void DisplayAllColorsApp::renderTable() {
     auto headerCells = _buffer.rect().subRectangle(Anchor::Top, Size{0, 1}, {}).gridCells(1, 2);
@@ -123,6 +120,5 @@ void DisplayAllColorsApp::renderRainbow() {
         }
     }
 }
-
 
 }

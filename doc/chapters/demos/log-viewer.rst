@@ -6,13 +6,16 @@
 Log Viewer
 **********
 
-``log-viewer`` demonstrates how :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>` and
-:cpp:any:`BufferView <erbsland::cterm::BufferView>` work together in a live scrollback-style application. The demo
-generates fictive web-server log messages, appends them to a growing cursor buffer, and shows only the currently
-visible window in the center area of the terminal UI.
+``log-viewer`` demonstrates how ``CursorBuffer`` and ``BufferView`` work together in a live scrollback-style
+application. It generates fictive web-server log messages, appends them to a growing history, and lets the user pan
+through that history or jump back into follow mode.
 
-The viewport follows the newest lines by default, so the demo starts like a live log tail. You can then pan through
-older lines with the cursor keys and jump back to the live bottom-left view with ``F``.
+Use This Demo When You Need...
+==============================
+
+* A support example for ``CursorBuffer`` growth plus viewport-style navigation.
+* A realistic reference for tail-like log UIs with follow mode and manual panning.
+* A place to study paragraph formatting inside one scrolling text surface.
 
 Run the Demo
 ============
@@ -23,25 +26,33 @@ Start the demo from the build directory:
 
     $ ./cmake-build-debug/demo-apps/log-viewer
 
-The demo keeps generating new entries until you quit it.
+Use the arrow keys to pan, ``F`` to jump back to the newest entries, ``+`` or ``-`` to change the message pace, and
+``Q`` or ``Esc`` to quit.
 
-Features Shown
-==============
+Captured Output (80x25)
+=======================
 
-This demo highlights several practical buffer and layout features:
+.. include:: _captures/log-viewer.rstinc
 
-* ``CursorBuffer`` configured with ``ExpandThenShift`` and a black-background ``fillChar`` for stable log history
-  cells while the buffer grows and scrolls.
+Features Demonstrated
+=====================
+
+* ``CursorBuffer`` with ``ExpandThenShift`` and a stable black-background fill character.
 * ``BufferView`` used as a live viewport onto the bottom-left or a manually panned area of that history.
 * ``printParagraph()`` with custom indent, wrap markers, and ellipsis handling for terminal-friendly log formatting.
 * Independent coloring for timestamps, log levels, and continuation lines inside one scrolling text surface.
-* Interactive panning with follow mode for a realistic log-tail experience.
+* Follow mode versus manual mode in a realistic log-tail workflow.
+
+Related Demos
+=============
+
+* :doc:`HTML Viewer <html-viewer>` for another ``CursorBuffer`` plus ``BufferView`` driven viewport.
+* :doc:`Key Input Demo <key-input-demo>` for another example of interactive input combined with a retained buffer.
+* :doc:`UI HTML Viewer <ui-html-viewer>` for the UI framework equivalent of a scrollable document surface.
 
 Relevant Source Files
 =====================
 
-If you want to explore the implementation, start with:
+If you want to explore the implementation, start with :file:`demo/log-viewer/src/LogViewerApp.cpp`.
 
-:file:`demo/log-viewer/src/LogViewerApp.cpp`
-
-This file contains the log generator, the cursor-buffer rendering logic, and the follow/pan viewport handling.
+This file contains the log generator, the cursor-buffer rendering logic, and the follow versus pan viewport handling.

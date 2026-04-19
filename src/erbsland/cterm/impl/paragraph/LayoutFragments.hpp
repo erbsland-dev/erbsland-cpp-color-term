@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "LayoutFragment.hpp"
 
 #include <cstddef>
 #include <vector>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// Owns the rendered fragments for one physical paragraph line.
 class LayoutFragments final {
@@ -97,6 +94,5 @@ private:
     Container _fragments;
     int _width = 0;
 };
-
 
 }

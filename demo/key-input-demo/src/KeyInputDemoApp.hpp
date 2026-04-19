@@ -2,19 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TerminalApplication.hpp"
 
 #include <array>
 #include <chrono>
 #include <random>
 
-
 namespace demo::keyinputdemo {
 
-
 using namespace erbsland::cterm;
-
 
 /// Interactive demo that visualizes detected key presses in a horizontally scrolling field.
 class KeyInputDemoApp final : public TerminalApplication {
@@ -57,6 +53,5 @@ private:
     std::size_t _insertedColumnCount{0};
     bool _firstFrame{true};
 };
-
 
 }

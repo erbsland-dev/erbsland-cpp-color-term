@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(FastCharSet)
 class FastCharSetTest final : public el::UnitTest {
 public:

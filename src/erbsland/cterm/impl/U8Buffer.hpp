@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "TextUtil.hpp"
 
 #include "../EncodingErrors.hpp"
@@ -15,9 +14,7 @@
 #include <type_traits>
 #include <utility>
 
-
 namespace erbsland::cterm::impl {
-
 
 /// Status for parsing one UTF-8 code point from the front of a byte buffer.
 enum class U8ParseStatus : uint8_t {
@@ -28,7 +25,6 @@ enum class U8ParseStatus : uint8_t {
     /// The leading bytes are invalid or unsupported.
     Invalid,
 };
-
 
 /// Result of parsing one UTF-8 code point from a byte buffer.
 class U8ParseResult final {
@@ -60,7 +56,6 @@ private:
     char32_t _codePoint{0};                        ///< The parsed code point for `Parsed`.
     std::size_t _consumedByteCount{0};             ///< Number of bytes consumed or rejected.
 };
-
 
 /// A safe and reliable UTF-8 decoder/encoder.
 template <typename T>
@@ -483,11 +478,9 @@ private:
     std::span<T> _buffer;
 };
 
-
 U8Buffer(const std::u8string &) -> U8Buffer<const char8_t>;
 U8Buffer(std::u8string_view) -> U8Buffer<const char8_t>;
 U8Buffer(const std::string &) -> U8Buffer<const char>;
 U8Buffer(std::string_view) -> U8Buffer<const char>;
-
 
 }

@@ -8,9 +8,7 @@
 #include <utility>
 #include <vector>
 
-
 namespace paragraph = erbsland::cterm::impl::paragraph;
-
 
 TESTED_TARGETS(Layout)
 class LayoutTest final : public UNITTEST_SUBCLASS(TestHelper) {
@@ -20,19 +18,12 @@ public:
         const ParagraphOptions &options,
         const paragraph::LayoutResult &layout,
         const std::initializer_list<std::string_view> expectedLines) {
-        const auto actualLines = renderLines(sourceText, options, layout);
-        REQUIRE_EQUAL(actualLines.size(), expectedLines.size());
-        auto index = std::size_t{0};
-        for (const auto expectedLine : expectedLines) {
-            runWithContext(
-                SOURCE_LOCATION(),
-                [&]() { REQUIRE_EQUAL(actualLines[index], std::string{expectedLine}); },
-                [&]() -> std::string {
-                    return std::format(
-                        "line = {} / actual = \"{}\" / expected = \"{}\"", index, actualLines[index], expectedLine);
-                });
-            index += 1;
+        auto expected = std::vector<std::string>{};
+        expected.reserve(expectedLines.size());
+        for (const auto line : expectedLines) {
+            expected.emplace_back(line);
         }
+        REQUIRE_EQUAL_LINES(renderLines(sourceText, options, layout), expected);
     }
 
     [[nodiscard]] static auto renderLine(

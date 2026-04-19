@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Page.hpp"
 
 #include "event/Event.hpp"
@@ -12,7 +11,6 @@
 
 #include <memory>
 #include <vector>
-
 
 namespace erbsland::cterm::ui {
 

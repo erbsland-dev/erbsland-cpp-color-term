@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: CC-BY-4.0
 #pragma once
 
-
 #include <cstdint>
 #include <span>
 #include <string_view>
 
-
 namespace erbsland::cterm::impl {
-
 
 /// Width information for a contiguous Unicode range.
 struct CharWidth {
@@ -32,6 +29,5 @@ struct CharWidth {
 /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
 /// @return The number of "blocks" on the terminal.
 [[nodiscard]] auto calculateDisplayWidth(std::string_view charStr) noexcept -> uint32_t;
-
 
 }

@@ -1,0 +1,130 @@
+// Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+// SPDX-License-Identifier: Apache-2.0
+
+#include "CursorBufferTestBase.hpp"
+#include "TestHelper.hpp"
+
+#include <erbsland/unittest/TextHelper.hpp>
+#include <erbsland/unittest/UnitTest.hpp>
+
+TESTED_TARGETS(ParagraphOptions CursorBuffer)
+class ParagraphRenderTest final : public UNITTEST_SUBCLASS(CursorBufferTestBase) {
+public:
+    static constexpr auto cOneLine = "one two three four five six seven eight nine ten";
+    static constexpr auto cTwoLines = "one two three four five six\nseven eight nine ten eleven twelve";
+
+    ParagraphOptions options;
+
+    void testNoIndent() {
+        options = {};
+        options.setLineIndent(0);
+        options.setFirstLineIndent(0);
+        options.setWrappedLineIndent(0);
+
+        buffer.clearScreen();
+        buffer.printParagraph(cOneLine, options);
+        auto actual = rawLinesFromBuffer();
+        auto expected = std::vector<std::string>{
+            //  01234567890123456789
+            "one two three four  ",
+            "five six seven eight",
+            "nine ten            ",
+            "                    ",
+            "                    ",
+        };
+        REQUIRE_EQUAL_LINES(actual, expected);
+
+        buffer.clearScreen();
+        buffer.printParagraph(cTwoLines, options);
+        actual = rawLinesFromBuffer();
+        expected = std::vector<std::string>{
+            //  01234567890123456789
+            "one two three four  ",
+            "five six            ",
+            "seven eight nine ten",
+            "eleven twelve       ",
+            "                    ",
+        };
+        REQUIRE_EQUAL_LINES(actual, expected);
+    }
+
+    void testLineIndent() {
+        options = {};
+        options.setLineIndent(4);
+        options.setFirstLineIndent(ParagraphOptions::cUseLineIndent);
+        options.setWrappedLineIndent(ParagraphOptions::cUseLineIndent);
+
+        buffer.clearScreen();
+        buffer.printParagraph(cOneLine, options);
+        auto actual = rawLinesFromBuffer();
+        auto expected = std::vector<std::string>{
+            //  01234567890123456789
+            "    one two three   ",
+            "    four five six   ",
+            "    seven eight nine",
+            "    ten             ",
+            "                    ",
+        };
+        REQUIRE_EQUAL_LINES(actual, expected);
+
+        buffer.clearScreen();
+        buffer.printParagraph(cTwoLines, options);
+        actual = rawLinesFromBuffer();
+        expected = std::vector<std::string>{
+            //  01234567890123456789
+            "    one two three   ",
+            "    four five six   ",
+            "    seven eight nine",
+            "    ten eleven      ",
+            "    twelve          ",
+        };
+        REQUIRE_EQUAL_LINES(actual, expected);
+    }
+
+    void testFirstLineIndent() {
+        options = {};
+        options.setLineIndent(4);
+        options.setFirstLineIndent(0);
+        options.setWrappedLineIndent(ParagraphOptions::cUseLineIndent);
+
+        buffer.clearScreen();
+        buffer.printParagraph(cOneLine, options);
+        auto actual = rawLinesFromBuffer();
+        auto expected = std::vector<std::string>{
+            //  01234567890123456789
+            "one two three four  ",
+            "    five six seven  ",
+            "    eight nine ten  ",
+            "                    ",
+            "                    ",
+        };
+        REQUIRE_EQUAL_LINES(actual, expected);
+
+        buffer.clearScreen();
+        buffer.printParagraph(cTwoLines, options);
+        actual = rawLinesFromBuffer();
+        expected = std::vector<std::string>{
+            //  01234567890123456789
+            "one two three four  ",
+            "    five six        ",
+            "seven eight nine ten",
+            "    eleven twelve   ",
+            "                    ",
+        };
+        REQUIRE_EQUAL_LINES(actual, expected);
+
+        options.setFirstLineIndent(8);
+        buffer.clearScreen();
+        buffer.printParagraph(cOneLine, options);
+        actual = rawLinesFromBuffer();
+        expected = std::vector<std::string>{
+            //  01234567890123456789
+            "        one two     ",
+            "    three four five ",
+            "    six seven eight ",
+            "    nine ten        ",
+            "                    ",
+        };
+        REQUIRE_EQUAL_LINES(actual, expected);
+    }
+};

@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Layout.hpp"
 
 #include "../../ParagraphBackgroundMode.hpp"
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// Shared paragraph placement and background-fill rules for painters and printers.
 class RendererBase {
@@ -24,11 +21,16 @@ protected:
 
 protected:
     RendererBase(
-        Alignment alignment,
+        const Alignment alignment,
         const LayoutResult &layout,
-        const String &sourceText,
+        const StringView &sourceText,
         const ParagraphOptions &options,
-        ParagraphBackgroundMode backgroundMode) noexcept;
+        ParagraphBackgroundMode backgroundMode) noexcept :
+        _alignment{alignment},
+        _layout{layout},
+        _sourceText{sourceText},
+        _options{options},
+        _backgroundMode{backgroundMode} {}
 
 public: // defaults/deletions
     ~RendererBase() = default;
@@ -40,7 +42,7 @@ public: // defaults/deletions
 protected:
     [[nodiscard]] auto alignment() const noexcept -> Alignment { return _alignment; }
     [[nodiscard]] auto layout() const noexcept -> const LayoutResult & { return _layout; }
-    [[nodiscard]] auto sourceText() const noexcept -> const String & { return _sourceText; }
+    [[nodiscard]] auto sourceText() const noexcept -> const StringView & { return _sourceText; }
     [[nodiscard]] auto options() const noexcept -> const ParagraphOptions & { return _options; }
     [[nodiscard]] auto usesLeftFill() const noexcept -> bool {
         return _backgroundMode == ParagraphBackgroundMode::WrappedLeft ||
@@ -67,10 +69,9 @@ protected:
 private:
     Alignment _alignment;
     const LayoutResult &_layout;
-    const String &_sourceText;
+    const StringView &_sourceText;
     const ParagraphOptions &_options;
     ParagraphBackgroundMode _backgroundMode;
 };
-
 
 }

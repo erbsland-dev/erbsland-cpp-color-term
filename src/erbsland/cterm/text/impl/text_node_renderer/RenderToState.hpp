@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 namespace erbsland::cterm::text::impl::text_node_renderer {
-
 
 /// State used while streaming planned blocks to a cursor writer.
 struct RenderToState final {
@@ -13,6 +11,5 @@ struct RenderToState final {
     /// The bottom margin of the previously emitted block.
     int previousBottomMargin{0};
 };
-
 
 }

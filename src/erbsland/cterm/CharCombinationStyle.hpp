@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Char.hpp"
 
 #include <array>
@@ -12,14 +11,11 @@
 #include <string_view>
 #include <vector>
 
-
 namespace erbsland::cterm {
-
 
 class CharCombinationStyle;
 /// Shared pointer for CharCombinationStyle
 using CharCombinationStylePtr = std::shared_ptr<CharCombinationStyle>;
-
 
 /// A style how two characters are visually combined to a new one.
 class CharCombinationStyle {
@@ -59,7 +55,6 @@ public: // predefined styles
     [[nodiscard]] static auto commonBoxFrame() noexcept -> const CharCombinationStylePtr &;
 };
 
-
 /// A class to use a simple map to combine styles.
 /// It uses a map of [current, overlay] -> combined and uses `Color::overlayWith` to combine the colors.
 /// If a character is missing in the map, the overlay overwrites the current one.
@@ -88,7 +83,6 @@ public:
 private:
     Map _map;
 };
-
 
 /// A class that combines characters through an indexed result matrix.
 /// It uses supported Unicode code points and a compact byte matrix of result indexes.
@@ -120,6 +114,5 @@ private:
     char32_t _lookupBase{0};
     std::vector<uint8_t> _characterIndexByCodePoint;
 };
-
 
 }

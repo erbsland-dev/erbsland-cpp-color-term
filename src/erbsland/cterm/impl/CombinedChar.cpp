@@ -2,15 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "CombinedChar.hpp"
 
-
 #include "U8Buffer.hpp"
 #include "UnicodeWidth.hpp"
 
 #include <stdexcept>
 
-
 namespace erbsland::cterm::impl {
-
 
 CombinedChar::CombinedChar(const std::string_view text) noexcept : _codePoints{decodeUtf8(text)} {
 }
@@ -98,7 +95,6 @@ auto CombinedChar::withCombining(const char32_t codePoint, const EncodingErrors 
         return *this;
     }
     result._codePoints[index] = codePoint;
-    result._displayWidthCache = cNoDisplayWidth;
     return result;
 }
 
@@ -195,6 +191,5 @@ void CombinedChar::normalizeDecodedTextCodePoint(
     result[1 + combiningCount] = codePoint;
     ++combiningCount;
 }
-
 
 }

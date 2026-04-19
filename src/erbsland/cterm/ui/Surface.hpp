@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "Geometry.hpp"
 #include "KeyBindings.hpp"
 #include "PaintContext.hpp"
@@ -15,7 +14,6 @@
 #include "../WritableBuffer.hpp"
 
 #include <memory>
-
 
 namespace erbsland::cterm::ui {
 

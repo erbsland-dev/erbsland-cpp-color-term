@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../Backend.hpp"
 
 #include <termios.h>
@@ -14,12 +13,9 @@
 #include <mutex>
 #include <string>
 
-
 namespace erbsland::cterm::impl {
 
-
 class PosixSignalDispatcher;
-
 
 class PosixBackend final : public Backend {
     using clock = std::chrono::steady_clock;
@@ -103,6 +99,5 @@ private:
     std::string _pendingKeyInput;                          ///< Buffered raw input that was not yet decoded.
     std::unique_ptr<PosixSignalDispatcher> _signalHandler; ///< Helper that forwards termination signals safely.
 };
-
 
 }

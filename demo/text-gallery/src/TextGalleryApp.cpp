@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <format>
 
-
 namespace demo::textgallery {
-
 
 void TextGalleryApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{38, 14});
@@ -17,12 +15,10 @@ void TextGalleryApp::beforeInitialize() {
         String{"Resize the terminal to at least 38x14 cells for the text gallery.", Color{fg::BrightWhite, bg::Black}});
 }
 
-
 auto TextGalleryApp::beforeRun() -> int {
     _font = Font::defaultAscii();
     return 0;
 }
-
 
 void TextGalleryApp::onKey(const Key &key) {
     if (key == Key::Left) {
@@ -33,7 +29,6 @@ void TextGalleryApp::onKey(const Key &key) {
         TerminalApplication::onKey(key);
     }
 }
-
 
 void TextGalleryApp::onRenderToBuffer() {
     _buffer.fill(Char{" ", bg::Black});
@@ -61,7 +56,6 @@ void TextGalleryApp::onRenderToBuffer() {
     }
     drawFooter(footerRect);
 }
-
 
 void TextGalleryApp::drawOverviewPage(const Rectangle contentRect) {
     const auto gap = 1;
@@ -101,7 +95,6 @@ void TextGalleryApp::drawOverviewPage(const Rectangle contentRect) {
         Color{fg::BrightCyan, bg::Cyan});
 }
 
-
 void TextGalleryApp::drawMixedWidthPage(const Rectangle contentRect) {
     const auto topHeight = std::max(5, contentRect.height() / 2 - 1);
     drawPanel(
@@ -135,7 +128,6 @@ void TextGalleryApp::drawMixedWidthPage(const Rectangle contentRect) {
         Color{fg::BrightWhite, bg::Magenta});
 }
 
-
 void TextGalleryApp::drawBitmapFontPage(const Rectangle contentRect) {
     const auto titleHeight = std::min(6, contentRect.height());
     auto title = Text{
@@ -159,7 +151,6 @@ void TextGalleryApp::drawBitmapFontPage(const Rectangle contentRect) {
         Color{fg::BrightWhite, bg::BrightBlack});
 }
 
-
 void TextGalleryApp::drawPanel(
     const Rectangle rect,
     const std::string_view title,
@@ -178,13 +169,11 @@ void TextGalleryApp::drawPanel(
         text, Rectangle{rect.x1() + 1, rect.y1() + 1, rect.width() - 2, rect.height() - 2}, alignment, textColor);
 }
 
-
 void TextGalleryApp::drawFooter(const Rectangle rect) {
     _buffer.fill(rect, Char{" ", bg::BrightBlack});
     auto footer = Text{buildFooterText(), rect, Alignment::CenterLeft};
     _buffer.drawText(footer);
 }
-
 
 auto TextGalleryApp::buildFooterText() const -> String {
     auto result = String{};
@@ -202,7 +191,6 @@ auto TextGalleryApp::buildFooterText() const -> String {
     return result;
 }
 
-
 auto TextGalleryApp::titleColors() -> ColorSequence {
     return ColorSequence{
         {Color{fg::BrightBlue, bg::Black}, 10},
@@ -212,7 +200,6 @@ auto TextGalleryApp::titleColors() -> ColorSequence {
         {Color{fg::BrightGreen, bg::Black}, 5},
     };
 }
-
 
 auto TextGalleryApp::titleForWidth(const int width) -> std::string_view {
     if (width >= 60) {
@@ -226,6 +213,5 @@ auto TextGalleryApp::titleForWidth(const int width) -> std::string_view {
     }
     return "TERM";
 }
-
 
 }

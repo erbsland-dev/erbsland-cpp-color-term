@@ -2,17 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "FlushSpeedTracker.hpp"
 #include "TerminalApplication.hpp"
 #include "UpdateScreenModesState.hpp"
 
-
 namespace demo::updatescreenmodes {
 
-
 using namespace erbsland::cterm;
-
 
 /// Demonstrate `Terminal::updateScreen()` with clear, overwrite, and smart back-buffer updates.
 class UpdateScreenModesApp final : public TerminalApplication {
@@ -39,6 +35,5 @@ private:
     UpdateScreenModesState _state;
     FlushSpeedTracker _flushSpeedTracker;
 };
-
 
 }

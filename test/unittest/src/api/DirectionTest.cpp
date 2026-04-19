@@ -10,7 +10,6 @@
 #include <functional>
 #include <stdexcept>
 
-
 TESTED_TARGETS(Direction)
 class DirectionTest final : public el::UnitTest {
 public:

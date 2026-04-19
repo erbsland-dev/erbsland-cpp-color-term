@@ -2,11 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include <cstddef>
 #include <cstdint>
 #include <type_traits>
-
 
 namespace erbsland::cterm::impl {
 
@@ -43,7 +41,6 @@ template <typename InputValue>
 [[nodiscard]] constexpr auto hashCombineInput64(const uint64_t hash, const InputValue inputValue) noexcept -> uint64_t {
     return static_cast<uint64_t>(inputValue) + 0x9e3779b97f4a7c15ULL + (hash << 6) + (hash >> 2);
 }
-
 
 /// Create a 64bit hash for one or more integral values.
 /// @param inputValues The input values.

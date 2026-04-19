@@ -7,9 +7,7 @@
 #include <array>
 #include <format>
 
-
 namespace demo::logviewer {
-
 
 void LogViewerApp::beforeInitialize() {
     _updateSettings.setMinimumSize(Size{58, 12});
@@ -18,12 +16,10 @@ void LogViewerApp::beforeInitialize() {
         String{"Resize the terminal to at least 58x12 cells for the log viewer.", Color{fg::BrightWhite, bg::Black}});
 }
 
-
 auto LogViewerApp::beforeRun() -> int {
     scheduleNextMessage();
     return 0;
 }
-
 
 auto LogViewerApp::canvasSize() const noexcept -> Size {
     if (_buffer.size().isZero()) {
@@ -31,7 +27,6 @@ auto LogViewerApp::canvasSize() const noexcept -> Size {
     }
     return _buffer.size();
 }
-
 
 void LogViewerApp::onKey(const Key &key) {
     const auto viewSize = contentRectForBuffer(canvasSize()).size();
@@ -60,7 +55,6 @@ void LogViewerApp::onKey(const Key &key) {
     }
 }
 
-
 void LogViewerApp::adjustDelayPreset(const int delta) noexcept {
     const auto presets = delayPresets();
     const auto maximumIndex = static_cast<int>(presets.size()) - 1;
@@ -68,7 +62,6 @@ void LogViewerApp::adjustDelayPreset(const int delta) noexcept {
         static_cast<std::size_t>(std::clamp(static_cast<int>(_delayPresetIndex) + delta, 0, maximumIndex));
     _nextMessageAt = std::chrono::steady_clock::now() + randomDelay();
 }
-
 
 void LogViewerApp::scheduleNextMessage() noexcept {
     if (_nextMessageAt == std::chrono::steady_clock::time_point{}) {
@@ -78,12 +71,10 @@ void LogViewerApp::scheduleNextMessage() noexcept {
     }
 }
 
-
 void LogViewerApp::appendGeneratedMessage() {
     renderLogMessage(generateLogMessage());
     _messageCount += 1;
 }
-
 
 void LogViewerApp::onRenderToBuffer() {
     auto now = std::chrono::steady_clock::now();
@@ -103,7 +94,6 @@ void LogViewerApp::onRenderToBuffer() {
     drawFooter(footerRect);
 }
 
-
 void LogViewerApp::drawHeader(const Rectangle rect) {
     _buffer.drawText(
         std::format(
@@ -121,7 +111,6 @@ void LogViewerApp::drawHeader(const Rectangle rect) {
         Alignment::CenterRight,
         Color{fg::BrightCyan, bg::Black});
 }
-
 
 void LogViewerApp::drawFooter(const Rectangle rect) {
     _buffer.fill(rect, Char{" ", bg::BrightBlack});
@@ -156,13 +145,11 @@ void LogViewerApp::drawFooter(const Rectangle rect) {
     _buffer.drawText(Text{footer, rect, Alignment::CenterLeft});
 }
 
-
 void LogViewerApp::drawLogView(const Rectangle rect) {
     _buffer.fill(rect, Char{" ", Color{fg::Default, bg::Black}});
     updateView(rect.size());
     _buffer.drawBuffer(_logView, rect);
 }
-
 
 void LogViewerApp::updateView(const Size viewSize) noexcept {
     if (_followMode) {
@@ -173,7 +160,6 @@ void LogViewerApp::updateView(const Size viewSize) noexcept {
     }
     _logView.setViewRect(Rectangle{_viewOffset, viewSize});
 }
-
 
 void LogViewerApp::renderLogMessage(const LogMessage &message) {
     const auto lineBreak = message.text.find('\n');
@@ -198,7 +184,6 @@ void LogViewerApp::renderLogMessage(const LogMessage &message) {
     }
 }
 
-
 auto LogViewerApp::shouldCopyCell(const Char &cell) noexcept -> bool {
     const auto color = cell.color();
     const auto hasDefaultColors = color.fg() == fg::Default && color.bg() == bg::Default;
@@ -207,7 +192,6 @@ auto LogViewerApp::shouldCopyCell(const Char &cell) noexcept -> bool {
     }
     return !(cell.isEmpty() || cell == U' ');
 }
-
 
 void LogViewerApp::renderInitialLine(
     const std::string_view timestamp, const LogLevel level, const std::string_view text) {
@@ -220,12 +204,10 @@ void LogViewerApp::renderInitialLine(
     _logBuffer->printParagraph(line, initialLineOptions());
 }
 
-
 void LogViewerApp::renderContinuationLine(const std::string_view text) {
     _logBuffer->setColor(Color{fg::White, bg::Black});
     _logBuffer->printParagraph(String{text, Color{fg::Inherited, bg::Inherited}}, continuationLineOptions());
 }
-
 
 auto LogViewerApp::generateLogMessage() -> LogMessage {
     const auto level = randomLogLevel();
@@ -238,7 +220,6 @@ auto LogViewerApp::generateLogMessage() -> LogMessage {
     }
     return LogMessage{level, generateMultilineMessage(level)};
 }
-
 
 auto LogViewerApp::generateShortMessage(const LogLevel level) -> std::string {
     const auto method = sample(methodChoices());
@@ -277,7 +258,6 @@ auto LogViewerApp::generateShortMessage(const LogLevel level) -> std::string {
     return message;
 }
 
-
 auto LogViewerApp::generateLongMessage(const LogLevel level) -> std::string {
     auto message = generateShortMessage(level);
     const auto targetLength = randomInt(300, 600);
@@ -307,7 +287,6 @@ auto LogViewerApp::generateLongMessage(const LogLevel level) -> std::string {
     return message;
 }
 
-
 auto LogViewerApp::generateMultilineMessage(const LogLevel level) -> std::string {
     return std::format(
         "{}\nroute: {}\nrequest-id: {}\nclient: {} via {}\nuser-agent: {}\nextra: retry={}, cache={}, worker={}",
@@ -322,13 +301,11 @@ auto LogViewerApp::generateMultilineMessage(const LogLevel level) -> std::string
         randomInt(1, 24));
 }
 
-
 auto LogViewerApp::nextTimestamp() -> std::string {
     const auto result = std::format("{:%F %T}", _logTimestamp);
     _logTimestamp += randomTimestampStep();
     return result;
 }
-
 
 auto LogViewerApp::randomLogLevel() -> LogLevel {
     const auto roll = randomInt(1, 100);
@@ -344,38 +321,31 @@ auto LogViewerApp::randomLogLevel() -> LogLevel {
     return LogLevel::Error;
 }
 
-
 auto LogViewerApp::randomInt(const int minimum, const int maximum) -> int {
     return std::uniform_int_distribution<int>{minimum, maximum}(_rng);
 }
-
 
 auto LogViewerApp::randomDelay() -> std::chrono::milliseconds {
     const auto preset = delayPresets()[_delayPresetIndex];
     return std::chrono::milliseconds{randomInt(preset.minimumMs, preset.maximumMs)};
 }
 
-
 auto LogViewerApp::randomTimestampStep() -> std::chrono::seconds {
     return std::chrono::seconds{randomInt(3, 95)};
 }
-
 
 auto LogViewerApp::randomRequestId() -> std::string {
     const auto value = std::uniform_int_distribution<uint32_t>{0U, 0xffff'ffffU}(_rng);
     return std::format("req-{:08x}", value);
 }
 
-
 auto LogViewerApp::randomIpAddress() -> std::string {
     return std::format("203.0.113.{}", randomInt(2, 254));
 }
 
-
 auto LogViewerApp::sample(const std::span<const std::string_view> values) -> std::string_view {
     return values[static_cast<std::size_t>(randomInt(0, static_cast<int>(values.size()) - 1))];
 }
-
 
 auto LogViewerApp::initialLineOptions() -> const ParagraphOptions & {
     static const auto cOptions = [] {
@@ -389,7 +359,6 @@ auto LogViewerApp::initialLineOptions() -> const ParagraphOptions & {
     }();
     return cOptions;
 }
-
 
 auto LogViewerApp::continuationLineOptions() -> const ParagraphOptions & {
     static const auto cOptions = [] {
@@ -405,11 +374,9 @@ auto LogViewerApp::continuationLineOptions() -> const ParagraphOptions & {
     return cOptions;
 }
 
-
 auto LogViewerApp::contentRectForBuffer(const Size bufferSize) noexcept -> Rectangle {
     return Rectangle{2, 3, std::max(1, bufferSize.width() - 4), std::max(1, bufferSize.height() - 6)};
 }
-
 
 auto LogViewerApp::clampViewOffset(const Position offset, const Size viewSize, const Size contentSize) noexcept
     -> Position {
@@ -417,7 +384,6 @@ auto LogViewerApp::clampViewOffset(const Position offset, const Size viewSize, c
     const auto maxY = std::max(0, contentSize.height() - viewSize.height());
     return {std::clamp(offset.x(), 0, maxX), std::clamp(offset.y(), 0, maxY)};
 }
-
 
 auto LogViewerApp::logLevelColor(const LogLevel level) noexcept -> Color {
     switch (level) {
@@ -433,7 +399,6 @@ auto LogViewerApp::logLevelColor(const LogLevel level) noexcept -> Color {
     return Color::reset();
 }
 
-
 auto LogViewerApp::logTypeCode(const LogLevel level) noexcept -> std::string_view {
     switch (level) {
     case LogLevel::Trace:
@@ -448,7 +413,6 @@ auto LogViewerApp::logTypeCode(const LogLevel level) noexcept -> std::string_vie
     return "UNK";
 }
 
-
 auto LogViewerApp::delayPresets() noexcept -> std::span<const DelayPreset> {
     static constexpr auto cValues = std::array{
         DelayPreset{10, 100, "10-100 ms"},
@@ -459,7 +423,6 @@ auto LogViewerApp::delayPresets() noexcept -> std::span<const DelayPreset> {
     return cValues;
 }
 
-
 auto LogViewerApp::methodChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
         std::string_view{"GET"},
@@ -469,7 +432,6 @@ auto LogViewerApp::methodChoices() noexcept -> std::span<const std::string_view>
     };
     return cValues;
 }
-
 
 auto LogViewerApp::routeChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
@@ -485,7 +447,6 @@ auto LogViewerApp::routeChoices() noexcept -> std::span<const std::string_view> 
     return cValues;
 }
 
-
 auto LogViewerApp::staticRouteChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
         std::string_view{"/assets/site.css"},
@@ -495,7 +456,6 @@ auto LogViewerApp::staticRouteChoices() noexcept -> std::span<const std::string_
     };
     return cValues;
 }
-
 
 auto LogViewerApp::backendChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
@@ -509,7 +469,6 @@ auto LogViewerApp::backendChoices() noexcept -> std::span<const std::string_view
     return cValues;
 }
 
-
 auto LogViewerApp::cacheChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
         std::string_view{"warm cache"},
@@ -519,7 +478,6 @@ auto LogViewerApp::cacheChoices() noexcept -> std::span<const std::string_view> 
     };
     return cValues;
 }
-
 
 auto LogViewerApp::userAgentChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
@@ -531,7 +489,6 @@ auto LogViewerApp::userAgentChoices() noexcept -> std::span<const std::string_vi
     return cValues;
 }
 
-
 auto LogViewerApp::warningChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
         std::string_view{"needed a retry"},
@@ -541,7 +498,6 @@ auto LogViewerApp::warningChoices() noexcept -> std::span<const std::string_view
     };
     return cValues;
 }
-
 
 auto LogViewerApp::errorChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
@@ -553,7 +509,6 @@ auto LogViewerApp::errorChoices() noexcept -> std::span<const std::string_view> 
     return cValues;
 }
 
-
 auto LogViewerApp::traceChoices() noexcept -> std::span<const std::string_view> {
     static constexpr auto cValues = std::array{
         std::string_view{"header normalization complete"},
@@ -563,6 +518,5 @@ auto LogViewerApp::traceChoices() noexcept -> std::span<const std::string_view> 
     };
     return cValues;
 }
-
 
 }

@@ -7,6 +7,8 @@ set(_erbsland_color_term_unittest_target erbsland-color-term-unittest)
 
 target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         UiKeyPressHandlingTest.cpp
+        UiScrollingBufferViewTest.cpp
         UiSchedulerTest.cpp
+        UiStatusLineTest.cpp
         UiTextBoxTest.cpp
 )

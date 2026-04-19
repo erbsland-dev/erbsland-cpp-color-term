@@ -2,16 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-
 #include "../../ParagraphOptions.hpp"
-#include "../../String.hpp"
+#include "../../StringView.hpp"
 
 #include <algorithm>
 #include <cstddef>
 
-
 namespace erbsland::cterm::impl::paragraph {
-
 
 /// Shared immutable settings for building physical lines of one paragraph layout.
 class LayoutContext final {
@@ -21,7 +18,16 @@ public:
     /// @param width The available paragraph width.
     /// @param options The paragraph options used for layout.
     /// @param leftAligned `true` if left-aligned paragraph behavior is active.
-    LayoutContext(const String &text, int width, const ParagraphOptions &options, bool leftAligned) noexcept;
+    LayoutContext(
+        const StringView &text, const int width, const ParagraphOptions &options, const bool leftAligned) noexcept :
+        _text{text},
+        _width{width},
+        _options{options},
+        _leftAligned{leftAligned},
+        _lineBreakStartMarkWidth{options.lineBreakStartMark().displayWidth()},
+        _lineBreakEndMarkWidth{options.lineBreakEndMark().displayWidth()},
+        _paragraphEllipsisWidth{options.paragraphEllipsisMark().displayWidth()},
+        _wordBreakMarkWidth{options.wordBreakMark().displayWidth()} {}
 
     // defaults/deletions
     ~LayoutContext() = default;
@@ -33,7 +39,7 @@ public:
 public:
     /// Access the source text.
     /// @return The source text referenced by source-range fragments.
-    [[nodiscard]] auto text() const noexcept -> const String & { return _text; }
+    [[nodiscard]] auto text() const noexcept -> const StringView & { return _text; }
     /// Access the paragraph width.
     /// @return The available paragraph width.
     [[nodiscard]] auto width() const noexcept -> int { return _width; }
@@ -79,7 +85,7 @@ public:
     }
 
 private:
-    const String &_text;
+    const StringView &_text;
     int _width;
     const ParagraphOptions &_options;
     bool _leftAligned;
@@ -88,6 +94,5 @@ private:
     int _paragraphEllipsisWidth;
     int _wordBreakMarkWidth;
 };
-
 
 }

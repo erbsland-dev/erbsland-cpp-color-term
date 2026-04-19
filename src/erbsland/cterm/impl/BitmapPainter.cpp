@@ -2,9 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "BitmapPainter.hpp"
 
-
 namespace erbsland::cterm::impl {
-
 
 void BitmapPainter::drawBitmap(
     const Bitmap &bitmap,

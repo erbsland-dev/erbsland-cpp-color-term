@@ -5,7 +5,6 @@
 
 #include <erbsland/unittest/UnitTest.hpp>
 
-
 TESTED_TARGETS(FrameDrawOptions)
 class FrameDrawOptionsTest final : public el::UnitTest {
 public:

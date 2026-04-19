@@ -34,17 +34,20 @@ target_sources(${_erbsland_color_term_unittest_target} PRIVATE
         FrameDrawOptionsTest.cpp
         InputTest.cpp
         InputDefinitionTest.cpp
+        IndexRangeTest.cpp
         KeyTest.cpp
         MarginsTest.cpp
         OrientationTest.cpp
         ParagraphIndentsTest.cpp
         ParagraphOptionsTest.cpp
+        ParagraphRenderTest.cpp
         PositionTest.cpp
         RectangleTest.cpp
         RemappedBufferTest.cpp
         SizeTest.cpp
         StringConversionTest.cpp
         StringTest.cpp
+        StringViewTest.cpp
         TerminalConvenienceTest.cpp
         TerminalFlagsTest.cpp
         TerminalTest.cpp

@@ -2,12 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Bitmap.hpp"
 
-
 #include <algorithm>
 
-
 namespace erbsland::cterm {
-
 
 auto Bitmap::fromPattern(const std::initializer_list<std::string_view> rows) -> Bitmap {
     auto width = Coordinate{0};
@@ -27,7 +24,6 @@ auto Bitmap::fromPattern(const std::initializer_list<std::string_view> rows) -> 
     return bitmap;
 }
 
-
 auto Bitmap::toPattern() const -> std::string {
     std::string result;
     result.reserve(static_cast<std::size_t>(_size.area() + _size.height()));
@@ -39,7 +35,6 @@ auto Bitmap::toPattern() const -> std::string {
     }
     return result;
 }
-
 
 auto Bitmap::pixel(const Position pos) const noexcept -> bool {
     if (!_size.contains(pos)) {
