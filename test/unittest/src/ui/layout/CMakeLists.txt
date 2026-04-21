@@ -3,10 +3,11 @@
 
 cmake_minimum_required(VERSION 3.28)
 
-set(_erbsland_color_term_unittest_target erbsland-color-term-unittest)
-
-add_subdirectory(impl)
-
-target_sources(${_erbsland_color_term_unittest_target} PRIVATE
+target_sources(erbsland-color-term-unittest PRIVATE
+        UiButtonsTest.cpp
+        UiCenteredFrameTest.cpp
         UiLayoutRenderTest.cpp
+        UiPagesTest.cpp
+        UiScrollAreaTest.cpp
+        UiSectionsTest.cpp
 )

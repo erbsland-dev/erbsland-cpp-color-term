@@ -15,7 +15,7 @@ public:
     /// Create a renderer for a parsed text tree.
     /// @param document The document node to render. `nullptr` produces empty output.
     /// @param style The style to apply. `nullptr` uses `Style::defaultStyle()`.
-    explicit TextNodeRenderer(TextNodeConstPtr document, StyleConstPtr style = Style::defaultStyle());
+    explicit TextNodeRenderer(TextNodeConstPtr document, const StyleConstPtr &style = Style::defaultStyle());
 
     // defaults
     ~TextNodeRenderer() = default;

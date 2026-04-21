@@ -94,16 +94,18 @@ void HtmlParser::handleText(std::u32string text) {
         return;
     }
     if (!preserveWhitespace && whitespaceOnly) {
-        if (!currentNodeHasChildren()) {
-            return;
-        }
-        if (_nextToken.type == HtmlTokenType::TagClose) {
-            return;
-        }
-        const auto *nextTagInfo =
-            _nextToken.type == HtmlTokenType::TagOpen ? findTagInfo(toLowerAscii(_nextToken.value)) : nullptr;
-        if (nextTagInfo != nullptr && nextTagInfo->isBlock()) {
-            return;
+        if (!TextNode::isInlineNodeType(currentNodeType())) {
+            if (!currentNodeHasChildren()) {
+                return;
+            }
+            if (_nextToken.type == HtmlTokenType::TagClose) {
+                return;
+            }
+            const auto *nextTagInfo =
+                _nextToken.type == HtmlTokenType::TagOpen ? findTagInfo(toLowerAscii(_nextToken.value)) : nullptr;
+            if (nextTagInfo != nullptr && nextTagInfo->isBlock()) {
+                return;
+            }
         }
     }
 

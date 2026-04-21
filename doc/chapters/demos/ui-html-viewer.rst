@@ -7,13 +7,14 @@ UI HTML Viewer
 **************
 
 ``ui-html-viewer`` shows how to build a structured document viewer on top of the UI framework. It reuses the HTML
-rendering pipeline but delegates layout, status lines, and scroll behavior to reusable UI surfaces.
+rendering pipeline but delegates layout, header/footer lines, and scroll behavior to reusable UI surfaces.
 
 Use This Demo When You Need...
 ==============================
 
 * A support example for the UI framework version of a scrollable document viewer.
-* A reference for combining ``StatusLine`` with a reusable scrollable center surface.
+* A reference for combining ``HeaderLine`` and ``FooterLine`` with a reusable scrollable center surface.
+* An example of parsing command line options in ``ui::Application`` and applying them to an existing surface tree.
 * A practical example of reusing ``HtmlRenderer`` output inside a higher-level UI application.
 
 Run the Demo
@@ -38,8 +39,9 @@ Features Demonstrated
 =====================
 
 * ``ScrollingBufferView`` as the document viewport.
-* ``StatusLine`` used for both header and footer without demo-specific subclasses.
-* ``KeyBindings`` overloads for special keys, characters, and combined input sequences.
+* ``HeaderLine`` and ``FooterLine`` used without demo-specific subclasses.
+* ``setupUi()`` builds the UI shell before ``processCommandLineArguments()`` loads the selected document and style.
+* Shared ``Action`` objects for scrolling, style changes, quit handling, and automatic footer keyboard help.
 * ``HtmlRenderer`` and the rich-text style system reused unchanged from the non-UI viewer.
 * UI-driven paint invalidation for live status updates.
 

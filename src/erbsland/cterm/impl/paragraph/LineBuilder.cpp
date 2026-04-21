@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "LineBuilder.hpp"
 
-#include <algorithm>
 #include <utility>
 
 namespace erbsland::cterm::impl::paragraph {
@@ -62,7 +61,6 @@ auto LineBuilder::buildLine(const int reservedSuffixWidth, const bool addEndMark
     auto line = LayoutLine{};
     line.wrappedFromPrevious = !_isFirstPhysicalLine;
     line.indentWidth = _context.calculateIndentWidth(_isFirstPhysicalLine);
-    line.fragments.reserve(static_cast<std::size_t>(std::max(maximumTextWidth / 6, 1)));
     auto prefixWidth = line.indentWidth;
     if (!_isFirstPhysicalLine && _context.leftAligned() && !_context.options().lineBreakStartMark().empty()) {
         line.fragments.appendLiteral(LayoutFragment::Type::LineBreakStartMark, _context.lineBreakStartMarkWidth());

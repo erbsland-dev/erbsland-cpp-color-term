@@ -1,6 +1,8 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
+#include "ManualClock.hpp"
+
 #include <erbsland/cterm/ui/all.hpp>
 #include <erbsland/cterm/ui/event/impl/EventClockAccess.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
@@ -8,24 +10,8 @@
 #include <atomic>
 #include <chrono>
 #include <future>
-#include <memory>
 #include <stdexcept>
 #include <thread>
-
-namespace ui = erbsland::cterm::ui;
-
-namespace ui_event_thread_test {
-
-class ManualClock final {
-public:
-    [[nodiscard]] auto now() const noexcept -> ui::EventTime { return _now; }
-    void advance(const ui::EventClock::duration duration) noexcept { _now += duration; }
-
-private:
-    ui::EventTime _now{};
-};
-
-}
 
 TESTED_TARGETS(UiEventThread UiEventDriver UiEventScheduler)
 class EventThreadTest final : public el::UnitTest {
@@ -35,8 +21,8 @@ public:
         auto callbackThreadId = std::thread::id{};
         const auto callerThreadId = std::this_thread::get_id();
 
-        eventThread->invoke([&callbackThreadId]() { callbackThreadId = std::this_thread::get_id(); });
-        eventThread->invoke([eventThread]() { eventThread->quit(); });
+        eventThread->invoke([&callbackThreadId]() -> void { callbackThreadId = std::this_thread::get_id(); });
+        eventThread->invoke([eventThread]() -> void { eventThread->quit(); });
 
         REQUIRE(eventThread->waitForQuit(std::chrono::milliseconds{500}));
         REQUIRE_NOT_EQUAL(callbackThreadId, std::thread::id{});
@@ -44,13 +30,13 @@ public:
     }
 
     void testInvokeDelayedRunsAfterTheConfiguredDelay() {
-        auto clock = std::make_shared<ui_event_thread_test::ManualClock>();
+        auto clock = std::make_shared<ManualClock>();
         auto clockOverride = ui::impl::ScopedEventClockOverride{[clock]() -> ui::EventTime { return clock->now(); }};
         auto eventThread = ui::EventThread::create();
         auto fireCount = std::size_t{0};
 
         eventThread->invokeDelayed(
-            [&fireCount, eventThread]() {
+            [&fireCount, eventThread]() -> void {
                 fireCount += 1;
                 eventThread->quit();
             },
@@ -69,8 +55,8 @@ public:
         auto eventThread = ui::EventThread::create();
         auto fireCount = std::size_t{0};
 
-        eventThread->invoke([&fireCount]() { fireCount += 1; });
-        eventThread->invokeDelayed([&fireCount]() { fireCount += 100; }, std::chrono::milliseconds{100});
+        eventThread->invoke([&fireCount]() -> void { fireCount += 1; });
+        eventThread->invokeDelayed([&fireCount]() -> void { fireCount += 100; }, std::chrono::milliseconds{100});
         eventThread->quit();
 
         REQUIRE(eventThread->waitForQuit(std::chrono::milliseconds{500}));
@@ -82,7 +68,7 @@ public:
         auto started = std::promise<void>{};
         auto stopObserved = std::atomic<bool>{false};
 
-        eventThread->invoke([&started, &stopObserved](const ui::StopToken stopToken) {
+        eventThread->invoke([&started, &stopObserved](const ui::StopToken stopToken) -> void {
             started.set_value();
             while (!stopToken.stopRequested()) {
                 std::this_thread::sleep_for(std::chrono::milliseconds{1});
@@ -104,14 +90,15 @@ public:
         auto stopObserved = std::atomic<bool>{false};
         auto queuedWorkExecuted = std::atomic<bool>{false};
 
-        eventThread->invoke([&started, &stopObserved](const ui::StopToken stopToken) {
+        eventThread->invoke([&started, &stopObserved](const ui::StopToken stopToken) -> void {
             started.set_value();
             while (!stopToken.stopRequested()) {
                 std::this_thread::sleep_for(std::chrono::milliseconds{1});
             }
             stopObserved.store(true, std::memory_order_release);
         });
-        eventThread->invoke([&queuedWorkExecuted]() { queuedWorkExecuted.store(true, std::memory_order_release); });
+        eventThread->invoke(
+            [&queuedWorkExecuted]() -> void { queuedWorkExecuted.store(true, std::memory_order_release); });
 
         REQUIRE_EQUAL(started.get_future().wait_for(std::chrono::milliseconds{500}), std::future_status::ready);
 
@@ -125,7 +112,7 @@ public:
     void testWaitForQuitTimesOutWhileTheThreadIsStillRunning() {
         auto eventThread = ui::EventThread::create();
 
-        eventThread->invoke([](const ui::StopToken stopToken) {
+        eventThread->invoke([](const ui::StopToken stopToken) -> void {
             while (!stopToken.stopRequested()) {
                 std::this_thread::sleep_for(std::chrono::milliseconds{1});
             }
@@ -140,7 +127,7 @@ public:
     void testWaitForQuitRethrowsCallbackFailures() {
         auto eventThread = ui::EventThread::create();
 
-        eventThread->invoke([]() { throw std::runtime_error{"boom"}; });
+        eventThread->invoke([]() -> void { throw std::runtime_error{"boom"}; });
 
         REQUIRE_THROWS_AS(std::runtime_error, eventThread->waitForQuit(std::chrono::milliseconds{500}));
         REQUIRE(eventThread->hasFailed());

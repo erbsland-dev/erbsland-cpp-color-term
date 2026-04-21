@@ -147,8 +147,10 @@ The optional UI layer helps you build structured event-driven terminal applicati
 *   Built-in :cpp:any:`ui::Stack <erbsland::cterm::ui::layout::Stack>`,
     :cpp:any:`ui::Panel <erbsland::cterm::ui::surface::Panel>`, and
     :cpp:any:`ui::TextBox <erbsland::cterm::ui::surface::TextBox>` cover common surface and layout needs
-*   :cpp:any:`ui::KeyBindings <erbsland::cterm::ui::KeyBindings>`, schedulers, and event threads support focus-aware
+*   :cpp:any:`ui::Action <erbsland::cterm::ui::Action>` objects, schedulers, and event threads support focus-aware
     input handling, timed actions, and background work
+*   :doc:`Themes <chapters/reference/theme>` centralize UI colors, terminal-cell block shapes, and content margins so
+    applications can switch visual styles without per-widget styling code
 
 .. important::
 

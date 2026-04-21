@@ -79,6 +79,11 @@ auto Char16Style::fullBlockWithChamferFrame() -> Char16StylePtr {
     return style;
 }
 
+auto Char16Style::noneFrame() -> Char16StylePtr {
+    static auto style = create("                ");
+    return style;
+}
+
 auto Char16Style::create(const std::string_view tiles) -> Char16StylePtr {
     return std::make_shared<Char16Style>(tiles);
 }
@@ -113,6 +118,8 @@ auto Char16Style::forStyle(const FrameStyle frameStyle) -> Char16StylePtr {
         return fullBlockFrame();
     case FrameStyle::FullBlockWithChamfer:
         return fullBlockWithChamferFrame();
+    case FrameStyle::None:
+        return noneFrame();
     case FrameStyle::OuterHalfBlock:
     case FrameStyle::InnerHalfBlock:
         return {};

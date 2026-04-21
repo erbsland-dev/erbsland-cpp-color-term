@@ -2,6 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "StringView.hpp"
 
+#include "TextOptions.hpp"
+
+#include "impl/paragraph/Layout.hpp"
+#include "impl/paragraph/LayoutNewlineMode.hpp"
 #include "impl/StringData.hpp"
 #include "impl/StringWrapper.hpp"
 
@@ -186,6 +190,56 @@ auto StringView::terminalLines(const int width) const noexcept -> int {
         renderedLines += 1;
     }
     return renderedLines;
+}
+
+auto StringView::naturalTextSize() const noexcept -> Size {
+    auto preferredWidth = Coordinate{1};
+    auto preferredHeight = Coordinate{1};
+    auto currentLineWidth = Coordinate{0};
+    for (auto index = std::size_t{0}; index < size(); ++index) {
+        const auto character = characterAt(index);
+        if (character == U'\n') {
+            preferredWidth = std::max(preferredWidth, currentLineWidth);
+            currentLineWidth = 0;
+            if (index + 1 < size()) {
+                preferredHeight += 1;
+            }
+            continue;
+        }
+        currentLineWidth += character.displayWidth();
+    }
+    preferredWidth = std::max(preferredWidth, currentLineWidth);
+    return {preferredWidth, preferredHeight};
+}
+
+auto StringView::wrappedTextHeight(const Coordinate width, const TextOptions &options) const noexcept -> Coordinate {
+    const auto margins = options.margins();
+    const auto verticalMargins = margins.verticalExtent();
+    if (options.font() != nullptr) {
+        auto lineCount = Coordinate{0};
+        const auto lineHeight = std::max(Coordinate{1}, (options.font()->height() + 1) / 2);
+        for (const auto &line : splitLines()) {
+            if (std::ranges::any_of(line, [&](const Char &character) -> bool {
+                    return options.font()->glyph(character.charStr()) != nullptr;
+                })) {
+                lineCount += lineHeight;
+            }
+        }
+        return std::max(lineCount, Coordinate{1}) + verticalMargins;
+    }
+    const auto contentWidth = std::max(width - margins.horizontalExtent(), Coordinate{1});
+    const auto layout =
+        impl::paragraph::Layout{
+            *this, contentWidth, options.paragraphOptions(), impl::paragraph::LayoutNewlineMode::ParagraphBreak}
+            .build();
+    if (layout.valid()) {
+        return std::max(static_cast<Coordinate>(layout.size()), Coordinate{1}) + verticalMargins;
+    }
+    if (options.onError() == ParagraphOnError::Empty) {
+        return verticalMargins;
+    }
+    const auto fallbackLines = impl::StringWrapper{*this}.wrapIntoLines(contentWidth, options.paragraphSpacing());
+    return std::max(static_cast<Coordinate>(fallbackLines.size()), Coordinate{1}) + verticalMargins;
 }
 
 auto StringView::splitLines() const noexcept -> std::vector<StringView> {

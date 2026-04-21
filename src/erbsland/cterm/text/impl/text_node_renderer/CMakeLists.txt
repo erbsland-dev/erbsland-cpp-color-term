@@ -4,27 +4,27 @@
 cmake_minimum_required(VERSION 3.28)
 
 target_sources(erbsland-color-term PRIVATE
-        BlockEmitter.cpp
-        BlockEmitter.hpp
+        BlockStream.hpp
+        BlockTarget.hpp
         BlockKind.hpp
-        InlineTextPlanner.cpp
-        InlineTextPlanner.hpp
-        ListBlockPlanner.cpp
-        ListBlockPlanner.hpp
+        CursorBlockTarget.cpp
+        CursorBlockTarget.hpp
+        InlineTextRenderer.cpp
+        InlineTextRenderer.hpp
         ListItemLayout.cpp
         ListItemLayout.hpp
         ListPrefix.hpp
-        PlanningContext.cpp
-        PlanningContext.hpp
-        PlanningStyleResolver.cpp
-        PlanningStyleResolver.hpp
+        RenderContext.cpp
+        RenderContext.hpp
         RenderBlock.cpp
         RenderBlock.hpp
-        RenderBlockFactory.cpp
-        RenderBlockFactory.hpp
-        RenderPlanner.cpp
-        RenderPlanner.hpp
         RenderToState.hpp
-        TextNodePlanningQueries.cpp
-        TextNodePlanningQueries.hpp
+        StringBuilderWithWhitespaceState.cpp
+        StringBuilderWithWhitespaceState.hpp
+        StringBlockTarget.hpp
+        StyleResolver.cpp
+        StyleResolver.hpp
+        TreeRenderer.cpp
+        TreeRenderer.hpp
+        WhitespaceMode.hpp
 )

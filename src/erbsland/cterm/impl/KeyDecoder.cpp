@@ -5,21 +5,20 @@
 #include "UnicodeWidth.hpp"
 
 #include <optional>
+#include <vector>
 
 namespace erbsland::cterm::impl {
 
-auto KeyDecoder::consoleSequenceDefinitions() noexcept -> const std::array<ConsoleSequenceDefinition, 32> & {
-    static constexpr auto cConsoleSequenceDefinitions = std::array<ConsoleSequenceDefinition, 32>{{
-        {"\n", Key::Enter},       {"\r", Key::Enter},       {"\t", Key::Tab},         {" ", Key::Space},
-        {"\x1b", Key::Escape},    {"\x08", Key::Backspace}, {"\x7f", Key::Backspace}, {"\x1b[Z", Key::BackTab},
-        {"\x1b[A", Key::Up},      {"\x1b[B", Key::Down},    {"\x1b[C", Key::Right},   {"\x1b[D", Key::Left},
-        {"\x1b[H", Key::Home},    {"\x1b[F", Key::End},     {"\x1bOH", Key::Home},    {"\x1bOF", Key::End},
-        {"\x1b[2~", Key::Insert}, {"\x1b[3~", Key::Delete}, {"\x1b[5~", Key::PageUp}, {"\x1b[6~", Key::PageDown},
-        {"\x1bOP", Key::F1},      {"\x1bOQ", Key::F2},      {"\x1bOR", Key::F3},      {"\x1bOS", Key::F4},
-        {"\x1b[15~", Key::F5},    {"\x1b[17~", Key::F6},    {"\x1b[18~", Key::F7},    {"\x1b[19~", Key::F8},
-        {"\x1b[20~", Key::F9},    {"\x1b[21~", Key::F10},   {"\x1b[23~", Key::F11},   {"\x1b[24~", Key::F12},
+auto KeyDecoder::simpleSequenceDefinitions() noexcept -> const std::array<SimpleSequenceDefinition, 6> & {
+    static constexpr auto cSimpleSequenceDefinitions = std::array<SimpleSequenceDefinition, 6>{{
+        {"\n", Key::Enter},
+        {"\r", Key::Enter},
+        {"\t", Key::Tab},
+        {" ", Key::Space},
+        {"\x08", Key::Backspace},
+        {"\x7f", Key::Backspace},
     }};
-    return cConsoleSequenceDefinitions;
+    return cSimpleSequenceDefinitions;
 }
 
 auto KeyDecoder::createCharacterKey(const CombinedChar &character) noexcept -> Key {
@@ -33,30 +32,245 @@ auto KeyDecoder::parseUtf8CodePointPrefix(const std::size_t offset) const noexce
     return U8Buffer{_text}.parseCodePointPrefix(offset);
 }
 
+auto KeyDecoder::parseModifierParameter(const int value) noexcept -> std::optional<KeyModifiers> {
+    auto modifiers = KeyModifiers{};
+    switch (value) {
+    case 1:
+        return modifiers;
+    case 2:
+        modifiers.set(KeyModifier::Shift);
+        return modifiers;
+    case 3:
+        modifiers.set(KeyModifier::Alt);
+        return modifiers;
+    case 4:
+        modifiers.set(KeyModifier::Shift);
+        modifiers.set(KeyModifier::Alt);
+        return modifiers;
+    case 5:
+        modifiers.set(KeyModifier::Control);
+        return modifiers;
+    case 6:
+        modifiers.set(KeyModifier::Shift);
+        modifiers.set(KeyModifier::Control);
+        return modifiers;
+    case 7:
+        modifiers.set(KeyModifier::Alt);
+        modifiers.set(KeyModifier::Control);
+        return modifiers;
+    case 8:
+        modifiers.set(KeyModifier::Shift);
+        modifiers.set(KeyModifier::Alt);
+        modifiers.set(KeyModifier::Control);
+        return modifiers;
+    default:
+        return std::nullopt;
+    }
+}
+
+auto KeyDecoder::parseCsiParameters(const std::string_view text) noexcept -> std::optional<std::vector<int>> {
+    auto result = std::vector<int>{};
+    if (text.empty()) {
+        return result;
+    }
+    auto value = 0;
+    auto hasDigit = false;
+    for (const auto character : text) {
+        if (character >= '0' && character <= '9') {
+            hasDigit = true;
+            value = value * 10 + (character - '0');
+            continue;
+        }
+        if (character == ';') {
+            if (!hasDigit) {
+                result.emplace_back(1);
+            } else {
+                result.emplace_back(value);
+            }
+            value = 0;
+            hasDigit = false;
+            continue;
+        }
+        return std::nullopt;
+    }
+    result.emplace_back(hasDigit ? value : 1);
+    return result;
+}
+
+auto KeyDecoder::findCsiFinalByte(const std::string_view text) noexcept -> std::optional<std::size_t> {
+    for (auto index = std::size_t{2}; index < text.size(); ++index) {
+        const auto byte = static_cast<unsigned char>(text[index]);
+        if (byte >= 0x40U && byte <= 0x7eU) {
+            return index;
+        }
+    }
+    return std::nullopt;
+}
+
+auto KeyDecoder::keyFromCsiFinal(const char finalByte) noexcept -> Key::Type {
+    switch (finalByte) {
+    case 'A':
+        return Key::Up;
+    case 'B':
+        return Key::Down;
+    case 'C':
+        return Key::Right;
+    case 'D':
+        return Key::Left;
+    case 'H':
+        return Key::Home;
+    case 'F':
+        return Key::End;
+    case 'P':
+        return Key::F1;
+    case 'Q':
+        return Key::F2;
+    case 'R':
+        return Key::F3;
+    case 'S':
+        return Key::F4;
+    default:
+        return Key::None;
+    }
+}
+
+auto KeyDecoder::keyFromCsiTildeParameter(const int parameter) noexcept -> Key::Type {
+    switch (parameter) {
+    case 1:
+    case 7:
+        return Key::Home;
+    case 2:
+        return Key::Insert;
+    case 3:
+        return Key::Delete;
+    case 4:
+    case 8:
+        return Key::End;
+    case 5:
+        return Key::PageUp;
+    case 6:
+        return Key::PageDown;
+    case 15:
+        return Key::F5;
+    case 17:
+        return Key::F6;
+    case 18:
+        return Key::F7;
+    case 19:
+        return Key::F8;
+    case 20:
+        return Key::F9;
+    case 21:
+        return Key::F10;
+    case 23:
+        return Key::F11;
+    case 24:
+        return Key::F12;
+    default:
+        return Key::None;
+    }
+}
+
+auto KeyDecoder::decodeCsi(const std::string_view text) noexcept -> ParseResult {
+    const auto finalIndex = findCsiFinalByte(text);
+    if (!finalIndex.has_value()) {
+        return ParseResult{U8ParseStatus::NeedMoreData, 0};
+    }
+    const auto sequenceSize = *finalIndex + 1;
+    const auto finalByte = text[*finalIndex];
+    if (finalByte == 'Z') {
+        if (*finalIndex == 2) {
+            return ParseResult{U8ParseStatus::Parsed, Key{Key::BackTab}, sequenceSize};
+        }
+        return ParseResult{U8ParseStatus::Invalid, sequenceSize};
+    }
+
+    const auto parameters = parseCsiParameters(text.substr(2, *finalIndex - 2));
+    if (!parameters.has_value()) {
+        return ParseResult{U8ParseStatus::Invalid, sequenceSize};
+    }
+
+    auto type = Key::None;
+    auto modifiers = KeyModifiers{};
+    if (finalByte == '~') {
+        if (parameters->empty()) {
+            return ParseResult{U8ParseStatus::Invalid, sequenceSize};
+        }
+        type = keyFromCsiTildeParameter((*parameters)[0]);
+        if (parameters->size() >= 2) {
+            const auto parsedModifiers = parseModifierParameter((*parameters)[1]);
+            if (!parsedModifiers.has_value()) {
+                return ParseResult{U8ParseStatus::Invalid, sequenceSize};
+            }
+            modifiers = *parsedModifiers;
+        }
+    } else {
+        type = keyFromCsiFinal(finalByte);
+        if (parameters->size() >= 2) {
+            const auto parsedModifiers = parseModifierParameter((*parameters)[1]);
+            if (!parsedModifiers.has_value()) {
+                return ParseResult{U8ParseStatus::Invalid, sequenceSize};
+            }
+            modifiers = *parsedModifiers;
+        } else if (parameters->size() == 1 && (*parameters)[0] != 1) {
+            const auto parsedModifiers = parseModifierParameter((*parameters)[0]);
+            if (!parsedModifiers.has_value()) {
+                return ParseResult{U8ParseStatus::Invalid, sequenceSize};
+            }
+            modifiers = *parsedModifiers;
+        }
+    }
+
+    if (type == Key::None || parameters->size() > 2) {
+        return ParseResult{U8ParseStatus::Invalid, sequenceSize};
+    }
+    return ParseResult{U8ParseStatus::Parsed, Key{type, modifiers}, sequenceSize};
+}
+
+auto KeyDecoder::decodeSs3(const std::string_view text) noexcept -> ParseResult {
+    if (text.size() < 3) {
+        return ParseResult{U8ParseStatus::NeedMoreData, 0};
+    }
+    switch (text[2]) {
+    case 'H':
+        return ParseResult{U8ParseStatus::Parsed, Key{Key::Home}, 3};
+    case 'F':
+        return ParseResult{U8ParseStatus::Parsed, Key{Key::End}, 3};
+    case 'P':
+        return ParseResult{U8ParseStatus::Parsed, Key{Key::F1}, 3};
+    case 'Q':
+        return ParseResult{U8ParseStatus::Parsed, Key{Key::F2}, 3};
+    case 'R':
+        return ParseResult{U8ParseStatus::Parsed, Key{Key::F3}, 3};
+    case 'S':
+        return ParseResult{U8ParseStatus::Parsed, Key{Key::F4}, 3};
+    default:
+        return ParseResult{U8ParseStatus::Invalid, 3};
+    }
+}
+
 auto KeyDecoder::parseConsoleInputPrefix() const noexcept -> ParseResult {
     if (_text.empty()) {
         return ParseResult{U8ParseStatus::Invalid, 0};
     }
-    auto matchedSequence = std::optional<ConsoleSequenceDefinition>{};
-    auto hasLongerPrefix = false;
-    for (const auto &definition : consoleSequenceDefinitions()) {
+
+    for (const auto &definition : simpleSequenceDefinitions()) {
         if (_text.starts_with(definition.sequence)) {
-            if (!matchedSequence.has_value() || definition.sequence.size() > matchedSequence->sequence.size()) {
-                matchedSequence = definition;
-            }
-        }
-        if (definition.sequence.starts_with(_text) && definition.sequence.size() > _text.size()) {
-            hasLongerPrefix = true;
+            return ParseResult{U8ParseStatus::Parsed, Key{definition.type}, definition.sequence.size()};
         }
     }
-    if (matchedSequence.has_value()) {
-        return ParseResult{U8ParseStatus::Parsed, Key{matchedSequence->type}, matchedSequence->sequence.size()};
-    }
-    if (_text[0] == '\x1b' && hasLongerPrefix) {
-        return ParseResult{U8ParseStatus::NeedMoreData, 0};
-    }
-    if (_text[0] == '\x1b' && !hasLongerPrefix) {
-        return ParseResult{U8ParseStatus::Invalid, _text.size()};
+
+    if (_text[0] == '\x1b') {
+        if (_text.size() == 1) {
+            return ParseResult{U8ParseStatus::NeedMoreData, 0};
+        }
+        if (_text[1] == '[') {
+            return decodeCsi(_text);
+        }
+        if (_text[1] == 'O') {
+            return decodeSs3(_text);
+        }
+        return ParseResult{U8ParseStatus::Invalid, 2};
     }
 
     const auto firstCodePoint = parseUtf8CodePointPrefix(0);
@@ -95,6 +309,9 @@ auto KeyDecoder::parseConsoleInputPrefix() const noexcept -> ParseResult {
 }
 
 auto KeyDecoder::decodeConsoleInput() const noexcept -> Key {
+    if (_text == "\x1b") {
+        return Key{Key::Escape};
+    }
     const auto result = parseConsoleInputPrefix();
     if (result.status() == U8ParseStatus::Parsed && result.consumedByteCount() == _text.size()) {
         return result.key();

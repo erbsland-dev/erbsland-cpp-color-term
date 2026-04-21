@@ -4,3 +4,4 @@
 cmake_minimum_required(VERSION 3.28)
 
 add_subdirectory(update-screen-modes)
+add_subdirectory(ui-world-view)

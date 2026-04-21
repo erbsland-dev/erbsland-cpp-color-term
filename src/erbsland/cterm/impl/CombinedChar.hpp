@@ -42,6 +42,7 @@ public:
     explicit CombinedChar(std::u32string_view text) noexcept;
 
     // defaults
+    ~CombinedChar() = default;
     CombinedChar(const CombinedChar &) = default;
     CombinedChar(CombinedChar &&) = default;
     auto operator=(const CombinedChar &) -> CombinedChar & = default;

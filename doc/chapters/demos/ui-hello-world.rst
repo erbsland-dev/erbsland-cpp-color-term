@@ -14,7 +14,8 @@ Use This Demo When You Need...
 ==============================
 
 * The smallest possible starting point for the ``ui`` framework.
-* A support reference for ``Page``, ``Stack``, ``TextBox``, and ``StatusLine`` working together.
+* A support reference for ``Page``, ``Stack``, ``TextBox``, ``HeaderLine``, and ``FooterLine`` working together.
+* A compact example of subclassing ``ui::Application`` and overriding ``setupUi()``.
 * An example of live status updates without writing a custom application render loop.
 
 Run the Demo
@@ -36,10 +37,11 @@ Captured Output (80x25)
 Features Demonstrated
 =====================
 
-* ``StatusLine`` used directly for both the header and footer.
+* ``HeaderLine`` and ``FooterLine`` used directly for the top and bottom rows.
 * A centered, growing ``TextBox`` as the main content surface.
-* ``KeyBindings`` convenience overloads for characters and special keys.
-* ``StatusLine::UpdateMode::OnRefresh`` for live clock text.
+* ``ui::Application::setupUi()`` used as the single place where the page and surface tree are assembled.
+* Shared ``Action`` objects for quit handling and automatic footer keyboard help.
+* ``TextLine::UpdateMode::OnRefresh`` for live clock text.
 * A surface-local scheduler that marks the header dirty once per second.
 
 Related Demos

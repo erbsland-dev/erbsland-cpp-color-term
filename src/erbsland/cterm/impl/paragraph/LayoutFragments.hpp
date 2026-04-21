@@ -24,9 +24,6 @@ public: // defaults/deletions
     auto operator=(LayoutFragments &&) noexcept -> LayoutFragments & = default;
 
 public:
-    /// Reserve storage for the expected number of fragments.
-    /// @param count The expected fragment count.
-    void reserve(const std::size_t count) { _fragments.reserve(count); }
     /// Test whether no fragments have been appended yet.
     /// @return `true` if no fragments have been appended yet.
     [[nodiscard]] auto empty() const noexcept -> bool { return _fragments.empty(); }

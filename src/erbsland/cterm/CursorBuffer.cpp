@@ -16,25 +16,19 @@ void CursorBuffer::validateFillChar(const Char &fillChar) {
 }
 
 auto CursorBuffer::color() const noexcept -> Color {
-    return _currentColor;
+    return _currentStyle.color();
 }
 
 auto CursorBuffer::charAttributes() const noexcept -> CharAttributes {
-    return _currentCharAttributes;
+    return _currentStyle.attributes();
 }
 
 void CursorBuffer::setColor(Color color) noexcept {
-    if (color.fg() == Foreground::Inherited) {
-        color.setFg(Foreground::Default);
-    }
-    if (color.bg() == Background::Inherited) {
-        color.setBg(Background::Default);
-    }
-    _currentColor = color;
+    _currentStyle.setColor(Color::reset().overlayWith(color));
 }
 
 void CursorBuffer::setCharAttributes(const CharAttributes attributes) noexcept {
-    _currentCharAttributes = attributes.resolvedWith(CharAttributes::reset());
+    _currentStyle.setAttributes(attributes.withBase(CharAttributes::reset()));
 }
 
 auto CursorBuffer::maximumSize() const noexcept -> Size {
@@ -66,14 +60,14 @@ void CursorBuffer::setForeground(Foreground color) noexcept {
     if (color == Foreground::Inherited) {
         color = Foreground::Default;
     }
-    _currentColor.setFg(color);
+    _currentStyle.setFg(color);
 }
 
 void CursorBuffer::setBackground(Background color) noexcept {
     if (color == Background::Inherited) {
         color = Background::Default;
     }
-    _currentColor.setBg(color);
+    _currentStyle.setBg(color);
 }
 
 auto CursorBuffer::supportedCharAttributes() const noexcept -> CharAttributes {
@@ -151,14 +145,12 @@ void CursorBuffer::writeResolvedCharacter(const Char &character) noexcept {
 }
 
 void CursorBuffer::write(const Char &character) noexcept {
-    writeResolvedCharacter(character.withBase(_currentColor, _currentCharAttributes));
+    writeResolvedCharacter(character.withBase(_currentStyle));
 }
 
 void CursorBuffer::write(const StringView &str) noexcept {
-    const auto color = _currentColor;
-    const auto attributes = _currentCharAttributes;
     for (const auto &character : str) {
-        writeResolvedCharacter(character.withBase(color, attributes));
+        writeResolvedCharacter(character.withBase(_currentStyle));
     }
 }
 

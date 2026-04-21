@@ -4,9 +4,23 @@
 
 #include "WritableBuffer.hpp"
 
+#include <functional>
+#include <optional>
+#include <vector>
+
 namespace erbsland::cterm::impl {
 
 class FramePainter final {
+    using FrameBorderReference = std::reference_wrapper<const FrameBorder::Border>;
+    using OptionalFrameBorderReference = std::optional<FrameBorderReference>;
+
+    struct FrameLine final {
+        Coordinate coordinate;
+        FrameBorderReference border;
+    };
+
+    using FrameLineList = std::vector<FrameLine>;
+
 public:
     explicit FramePainter(WritableBuffer &buffer) : _buffer(buffer) {}
 
@@ -35,6 +49,7 @@ public:
         Rectangle rect,
         const FrameDrawOptions &options = FrameDrawOptions::defaultOptions(),
         std::size_t animationCycle = 0) noexcept;
+    void drawGridLayout(Position pos, const GridLayout &layout, const FrameBorder &border) noexcept;
     void drawFilledFrame(
         Rectangle rect,
         const Char &frameBlock,
@@ -66,6 +81,26 @@ private: // wrapper (to keep code simple)
 
 private: // helper
     [[nodiscard]] static auto blockForFrame(Rectangle rect, Position pos, const Char16StylePtr &frameStyle) -> Char;
+    [[nodiscard]] static auto blockForGridLine(const FrameBorder::Border &border, uint32_t bitMask) noexcept -> Char;
+    [[nodiscard]] static auto lineSize(const FrameBorder::Border &border) noexcept -> Coordinate;
+    [[nodiscard]] static auto lineAt(const FrameLineList &lines, Coordinate coordinate, std::size_t &index) noexcept
+        -> OptionalFrameBorderReference;
+    void addGridLine(FrameLineList &lines, Coordinate coordinate, const FrameBorder::Border &border) noexcept;
+    void drawHorizontalGridLine(
+        const FrameLine &horizontalLine,
+        const FrameLineList &verticalLines,
+        Coordinate x1,
+        Coordinate x2,
+        Coordinate y1,
+        Coordinate y2) noexcept;
+    void drawVerticalGridLine(
+        const FrameLine &verticalLine, const FrameLineList &horizontalLines, Coordinate y1, Coordinate y2) noexcept;
+    void drawGridBlock(
+        Position pos,
+        OptionalFrameBorderReference east,
+        OptionalFrameBorderReference south,
+        OptionalFrameBorderReference west,
+        OptionalFrameBorderReference north) noexcept;
     void drawFrameBlock(
         Position pos, const Char &block, Color baseColor, const CharCombinationStylePtr &combinationStyle) noexcept;
     [[nodiscard]] static auto colorForFramePosition(

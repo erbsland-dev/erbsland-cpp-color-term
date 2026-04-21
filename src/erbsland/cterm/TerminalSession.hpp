@@ -18,8 +18,8 @@ public:
     // defaults
     TerminalSession(const TerminalSession &) = delete;
     TerminalSession(TerminalSession &&) = delete;
-    TerminalSession &operator=(const TerminalSession &) = delete;
-    TerminalSession &operator=(TerminalSession &&) = delete;
+    auto operator=(const TerminalSession &) -> TerminalSession & = delete;
+    auto operator=(TerminalSession &&) -> TerminalSession & = delete;
 
 public:
     /// Access the terminal instance.

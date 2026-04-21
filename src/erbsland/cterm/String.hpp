@@ -7,6 +7,7 @@
 #include "IndexRange.hpp"
 #include "ParagraphSpacing.hpp"
 
+#include "geometry/Size.hpp"
 #include "impl/TypeTraits.hpp"
 
 #include <memory>
@@ -17,6 +18,7 @@
 namespace erbsland::cterm {
 
 class StringView;
+class TextOptions;
 
 namespace impl {
 class StringBuilder;
@@ -216,12 +218,32 @@ public: // modifiers
     void reserve(std::size_t size) noexcept;
     /// Remove all characters from this string.
     void clear() noexcept;
+    /// Append another terminal string with a base style.
+    /// If `pos` is out of range, appends the string at the end.
+    /// @param pos The position to insert the string at.
+    /// @param other The source text view.
+    /// @param style The style used as base for inherited components in the appended range.
+    void insertWithBaseStyle(std::size_t pos, const StringView &other, CharStyle style) noexcept;
     /// Append text using one uniform style.
     /// @param text The text to append.
     /// @param style The style applied to the appended characters.
     void appendStyled(std::string_view text, CharStyle style) noexcept;
     /// @overload
     void appendStyled(std::u32string_view text, CharStyle style) noexcept;
+    /// Append another terminal string with a base style.
+    /// @param other The source text view.
+    /// @param style The style used as base for inherited components in the appended range.
+    void appendWithBaseStyle(const StringView &other, CharStyle style) noexcept;
+    /// Append a repeated character.
+    /// @param count The repetition count. Limited to 10'000'000.
+    /// @param character The character to repeat.
+    void append(std::size_t count, Char character) noexcept;
+    /// Append a repeated Unicode code point with a uniform style.
+    /// @param count The repetition count. Limited to 10'000'000.
+    /// @param character The character to repeat.
+    /// @param style The style for every appended character.
+    void append(std::size_t count, char32_t character, CharStyle style) noexcept;
+    /// Append elements to this string.
     /// Append a range of characters from another terminal string.
     /// The original character styles are preserved.
     /// @param other The source text view.
@@ -267,6 +289,17 @@ public: // tools
     /// @param width The available terminal width in cells. Must be greater than zero.
     /// @return The number of occupied terminal lines.
     [[nodiscard]] auto terminalLines(int width) const noexcept -> int;
+    /// Get the natural rectangular size for this text without wrapping.
+    /// The returned size is at least 1x1, preserves explicit non-trailing newline characters as separate lines,
+    /// and uses terminal cell width for wide and combining characters.
+    /// @return The natural text size in terminal cells.
+    [[nodiscard]] auto naturalTextSize() const noexcept -> Size;
+    /// Calculate the height required to render this text with `WritableBuffer::drawText()`.
+    /// The given width is the full target rectangle width, including margins configured in `options`.
+    /// @param width The available rectangle width in terminal cells.
+    /// @param options The text options used for paragraph layout.
+    /// @return The required rectangle height in terminal cells.
+    [[nodiscard]] auto wrappedTextHeight(Coordinate width, const TextOptions &options) const noexcept -> Coordinate;
     /// Splits this string into individual lines.
     /// The string is split at the NL character that is not included in the result.
     /// Empty lines are preserved.

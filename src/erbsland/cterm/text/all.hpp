@@ -14,5 +14,6 @@
 #include "StyleRule.hpp"
 #include "StyleSelector.hpp"
 #include "TextNode.hpp"
+#include "TextNodeType.hpp"
 
 

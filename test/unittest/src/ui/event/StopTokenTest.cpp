@@ -1,10 +1,9 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include <erbsland/cterm/ui/all.hpp>
-#include <erbsland/unittest/UnitTest.hpp>
+#include "support/ColorTermIncludes.hpp"
 
-namespace ui = erbsland::cterm::ui;
+#include <erbsland/unittest/UnitTest.hpp>
 
 TESTED_TARGETS(UiStopToken UiEventThread UiInvocation)
 class StopTokenTest final : public el::UnitTest {

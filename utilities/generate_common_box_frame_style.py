@@ -1,284 +1,91 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 # SPDX-License-Identifier: Apache-2.0
-"""Generate the common box-frame character combination matrix."""
+"""Generate the common box-frame character combination data."""
 
 from __future__ import annotations
 
 import argparse
-import unicodedata
 from collections import Counter
-from dataclasses import asdict, dataclass
-from enum import IntEnum
 from pathlib import Path
+
+from lib.box_drawing import (
+    Attributes,
+    POSITION_NAMES,
+    POSITION_WEIGHTS,
+    all_characters,
+    build_attributes_to_character,
+    build_character_attributes,
+    combine_attributes,
+    choose_combination_result,
+    has_lines,
+    is_center_only,
+    score_candidate,
+)
+from lib.cpp_render import generated_cpp_source
 
 
 LIBRARY_ROOT = Path(__file__).resolve().parent.parent
-OUTPUT_PATH = LIBRARY_ROOT / "src" / "erbsland" / "cterm" / "impl" / "CommonBoxFrameStyle.cpp"
-BOX_FRAME_CHARACTER_DATA = """\
-┌┬┐├┼┤└┴┘
-┏┳┓┣╋┫┗┻┛
-┍┯┑┝┿┥┕┷┙
-┎┰┒┠╂┨┖┸┚
-╒╤╕╞╪╡╘╧╛
-╔╦╗╠╬╣╚╩╝
-╓╥╖╟╫╢╙╨╜
-╼╾╽╿╱╲╳
- ┮┱┲┭
-┡┽╀╁┾┩
-┟╆╈╇╅┧
-┞╄╉╊╃┦
-┢┶┹┺┵┪
-╴╵╶╷╭╮
-╸╹╺╻╰╯
-│┃┊┋┆┇
-─━┈┉┄┅
-╎╌╏╍║═︎
-∙▪▫
-"""
-POSITION_NAMES = ("right", "down", "left", "up", "slash", "backslash", "center")
-POSITION_WEIGHTS = {
-    "right": 4,
-    "down": 4,
-    "left": 4,
-    "up": 4,
-    "slash": 5,
-    "backslash": 5,
-    "center": 6,
-}
+GENERATOR_PATH = "erbsland-cpp-color-term/utilities/generate_common_box_frame_style.py"
+OUTPUT_PATH = LIBRARY_ROOT / "src" / "erbsland" / "cterm" / "impl" / "CommonBoxFrameCombinationStyle_data.cpp"
+ATTRIBUTE_SHIFT = 4
+BOX_DRAWING_START = 0x2500
+BOX_DRAWING_END = 0x257F
+UNSUPPORTED_INDEX = 0xFF
 MINIMUM_IMPROVEMENT = 100
 
 
-class StrokeType(IntEnum):
-    NONE = 0
-    LIGHT_QUADRUPLE_DASH = 1
-    HEAVY_QUADRUPLE_DASH = 2
-    LIGHT_TRIPLE_DASH = 3
-    HEAVY_TRIPLE_DASH = 4
-    LIGHT_DOUBLE_DASH = 5
-    HEAVY_DOUBLE_DASH = 6
-    LIGHT = 7
-    DOUBLE = 8
-    HEAVY = 9
+def is_box_drawing(character: str) -> bool:
+    """Test if a character is in the Unicode box-drawing block."""
+    return BOX_DRAWING_START <= ord(character) <= BOX_DRAWING_END
 
 
-STYLE_TOKENS = {
-    "LIGHT": StrokeType.LIGHT,
-    "HEAVY": StrokeType.HEAVY,
-    "DOUBLE": StrokeType.DOUBLE,
-    "SINGLE": StrokeType.LIGHT,
-}
-GROUPS = {
-    "UP": ("up",),
-    "DOWN": ("down",),
-    "LEFT": ("left",),
-    "RIGHT": ("right",),
-    "VERTICAL": ("up", "down"),
-    "HORIZONTAL": ("left", "right"),
-    "LEFT DOWN": ("left", "down"),
-    "RIGHT DOWN": ("right", "down"),
-    "LEFT UP": ("left", "up"),
-    "RIGHT UP": ("right", "up"),
-    "DOWN HORIZONTAL": ("down", "left", "right"),
-    "UP HORIZONTAL": ("up", "left", "right"),
-    "RIGHT VERTICAL": ("right", "up", "down"),
-    "LEFT VERTICAL": ("left", "up", "down"),
-}
+def pack_attributes(attributes: Attributes) -> int:
+    """Pack attributes into a compact 4-bit-per-position integer."""
+    value = 0
+    for index, position in enumerate(POSITION_NAMES):
+        value |= int(getattr(attributes, position)) << (index * ATTRIBUTE_SHIFT)
+    return value
 
 
-@dataclass(frozen=True)
-class Attributes:
-    right: StrokeType = StrokeType.NONE
-    down: StrokeType = StrokeType.NONE
-    left: StrokeType = StrokeType.NONE
-    up: StrokeType = StrokeType.NONE
-    slash: StrokeType = StrokeType.NONE
-    backslash: StrokeType = StrokeType.NONE
-    center: StrokeType = StrokeType.NONE
-
-
-def all_characters() -> list[str]:
-    result: list[str] = []
-    for character in BOX_FRAME_CHARACTER_DATA:
-        if character == "\n":
-            continue
-        if 0xFE00 <= ord(character) <= 0xFE0F:
-            continue
-        if character not in result:
-            result.append(character)
-    return result
-
-
-def apply_positions(
-    attributes: Attributes,
-    positions: tuple[str, ...],
-    stroke_type: StrokeType,
-    *,
-    include_center: bool = True,
-) -> Attributes:
-    values = asdict(attributes)
-    for position in positions:
-        values[position] = stroke_type
-    if include_center and stroke_type > values["center"]:
-        values["center"] = stroke_type
-    return Attributes(**values)
-
-
-def parse_group(text: str) -> tuple[str, ...]:
-    if text not in GROUPS:
-        raise ValueError(f"Unsupported box-drawing group: {text!r}")
-    return GROUPS[text]
-
-
-def extract_style(segment: str, inherited_style: StrokeType | None) -> tuple[StrokeType, str]:
-    segment = segment.replace(" SINGLE", " LIGHT")
-    dash_variant: str | None = None
-    for marker, variant in (
-        (" QUADRUPLE DASH", "quadruple"),
-        (" TRIPLE DASH", "triple"),
-        (" DOUBLE DASH", "double"),
-    ):
-        if marker in segment:
-            segment = segment.replace(marker, "")
-            dash_variant = variant
-            break
-    words = segment.split()
-    if words and words[0] in STYLE_TOKENS:
-        stroke_type = STYLE_TOKENS[words[0]]
-        group_text = " ".join(words[1:])
-    elif words and words[-1] in STYLE_TOKENS:
-        stroke_type = STYLE_TOKENS[words[-1]]
-        group_text = " ".join(words[:-1])
-    else:
-        if inherited_style is None:
-            raise ValueError(f"Cannot infer style for segment: {segment!r}")
-        stroke_type = inherited_style
-        group_text = segment
-    if dash_variant == "quadruple":
-        stroke_type = (
-            StrokeType.HEAVY_QUADRUPLE_DASH if stroke_type == StrokeType.HEAVY else StrokeType.LIGHT_QUADRUPLE_DASH
-        )
-    elif dash_variant == "triple":
-        stroke_type = StrokeType.HEAVY_TRIPLE_DASH if stroke_type == StrokeType.HEAVY else StrokeType.LIGHT_TRIPLE_DASH
-    elif dash_variant == "double":
-        stroke_type = StrokeType.HEAVY_DOUBLE_DASH if stroke_type == StrokeType.HEAVY else StrokeType.LIGHT_DOUBLE_DASH
-    return stroke_type, group_text
-
-
-def attributes_from_name(character: str) -> Attributes:
-    if character == " ":
-        return Attributes()
-    if character == "∙":
-        return Attributes(center=StrokeType.LIGHT)
-    if character == "▪":
-        return Attributes(center=StrokeType.HEAVY)
-    if character == "▫":
-        return Attributes(center=StrokeType.DOUBLE)
-
-    unicode_name = unicodedata.name(character)
-    if not unicode_name.startswith("BOX DRAWINGS "):
-        raise ValueError(f"Unsupported character: {character!r}")
-    box_name = unicode_name.removeprefix("BOX DRAWINGS ")
-
-    if box_name.startswith("LIGHT ARC "):
-        attributes = Attributes()
-        for segment in box_name.removeprefix("LIGHT ARC ").split(" AND "):
-            attributes = apply_positions(attributes, parse_group(segment), StrokeType.LIGHT, include_center=False)
-        return attributes
-    if box_name == "LIGHT DIAGONAL UPPER RIGHT TO LOWER LEFT":
-        return Attributes(slash=StrokeType.LIGHT, center=StrokeType.LIGHT)
-    if box_name == "LIGHT DIAGONAL UPPER LEFT TO LOWER RIGHT":
-        return Attributes(backslash=StrokeType.LIGHT, center=StrokeType.LIGHT)
-    if box_name == "LIGHT DIAGONAL CROSS":
-        return Attributes(slash=StrokeType.LIGHT, backslash=StrokeType.LIGHT, center=StrokeType.LIGHT)
-
-    attributes = Attributes()
-    inherited_style: StrokeType | None = None
-    for segment in box_name.split(" AND "):
-        stroke_type, group_text = extract_style(segment, inherited_style)
-        attributes = apply_positions(attributes, parse_group(group_text), stroke_type)
-        inherited_style = stroke_type
-    return attributes
-
-
-def build_character_attributes(characters: list[str]) -> dict[str, Attributes]:
-    return {character: attributes_from_name(character) for character in characters}
-
-
-def combine_attributes(current: Attributes, overlay: Attributes) -> Attributes:
-    return Attributes(
-        **{
-            position: max(getattr(current, position), getattr(overlay, position))
-            for position in POSITION_NAMES
-        }
-    )
-
-
-def has_lines(attributes: Attributes) -> bool:
-    return any(getattr(attributes, position) != StrokeType.NONE for position in POSITION_NAMES[:-1])
-
-
-def is_center_only(attributes: Attributes) -> bool:
-    return attributes.center != StrokeType.NONE and not has_lines(attributes)
-
-
-def score_candidate(ideal: Attributes, candidate: Attributes) -> int:
-    missing_score = 0
-    distance_score = 0
-    extra_score = 0
-    for position in POSITION_NAMES:
-        ideal_stroke = getattr(ideal, position)
-        candidate_stroke = getattr(candidate, position)
-        weight = POSITION_WEIGHTS[position]
-        if ideal_stroke != StrokeType.NONE and candidate_stroke == StrokeType.NONE:
-            missing_score += weight
-        elif ideal_stroke == StrokeType.NONE and candidate_stroke != StrokeType.NONE:
-            extra_score += weight * (2 + int(candidate_stroke))
-        elif ideal_stroke != StrokeType.NONE and candidate_stroke != StrokeType.NONE:
-            distance_score += weight * abs(int(ideal_stroke) - int(candidate_stroke))
-    return missing_score * 10_000 + distance_score * 100 + extra_score
-
-
-def choose_result(
+def compact_result(
     current: str,
     overlay: str,
     character_attributes: dict[str, Attributes],
     attributes_to_character: dict[Attributes, str],
     characters: list[str],
-) -> tuple[str, str]:
+) -> str:
+    """Return the result produced by the compact runtime algorithm."""
     current_attributes = character_attributes[current]
     overlay_attributes = character_attributes[overlay]
     if is_center_only(current_attributes) and has_lines(overlay_attributes):
-        return overlay, "center-overwrite"
+        return overlay
     if has_lines(current_attributes) and is_center_only(overlay_attributes):
-        return current, "center-overwrite"
+        return current
 
     ideal = combine_attributes(current_attributes, overlay_attributes)
     exact_match = attributes_to_character.get(ideal)
     if exact_match is not None:
-        return exact_match, "exact"
+        return exact_match
 
     best_character = min(characters, key=lambda character: score_candidate(ideal, character_attributes[character]))
     best_score = score_candidate(ideal, character_attributes[best_character])
     overlay_score = score_candidate(ideal, overlay_attributes)
     if best_score + MINIMUM_IMPROVEMENT < overlay_score:
-        return best_character, "best"
-    return overlay, "overlay"
-
-
-def cpp_u32_string_literal(text: str) -> str:
-    return 'U"' + text.replace("\\", "\\\\").replace('"', '\\"') + '"'
+        return best_character
+    return overlay
 
 
 def generate_matrix(characters: list[str]) -> tuple[list[str], Counter[str]]:
+    """Generate the reference result matrix rows and a summary of selection modes."""
     character_attributes = build_character_attributes(characters)
-    attributes_to_character = {attributes: character for character, attributes in character_attributes.items()}
+    attributes_to_character = build_attributes_to_character(character_attributes)
     result_rows: list[str] = []
     selection_counts: Counter[str] = Counter()
     for current in characters:
         row: list[str] = []
         for overlay in characters:
-            result, selection = choose_result(
+            result, selection = choose_combination_result(
                 current=current,
                 overlay=overlay,
                 character_attributes=character_attributes,
@@ -291,76 +98,185 @@ def generate_matrix(characters: list[str]) -> tuple[list[str], Counter[str]]:
     return result_rows, selection_counts
 
 
-def generate_result_index_rows(characters: list[str], result_rows: list[str]) -> list[str]:
-    character_index = {character: index for index, character in enumerate(characters)}
-    index_rows: list[str] = []
-    for row in result_rows:
-        encoded_row = "".join(f"\\x{character_index[character]:02X}" for character in row)
-        index_rows.append('"' + encoded_row + '"')
-    return index_rows
+def verify_compact_algorithm(characters: list[str]) -> None:
+    """Verify the compact runtime algorithm against the reference generator rules."""
+    character_attributes = build_character_attributes(characters)
+    attributes_to_character = build_attributes_to_character(character_attributes)
+    for current in characters:
+        for overlay in characters:
+            reference_result, _ = choose_combination_result(
+                current=current,
+                overlay=overlay,
+                character_attributes=character_attributes,
+                attributes_to_character=attributes_to_character,
+                characters=characters,
+            )
+            compact = compact_result(current, overlay, character_attributes, attributes_to_character, characters)
+            if compact != reference_result:
+                raise AssertionError(
+                    f"Compact algorithm mismatch for {current!r} + {overlay!r}: "
+                    f"{compact!r} != {reference_result!r}"
+                )
 
 
-def render_output(characters: list[str], result_rows: list[str], selection_counts: Counter[str]) -> str:
-    result_index_rows = generate_result_index_rows(characters, result_rows)
-    matrix_size = len(characters) * len(characters)
+def render_integer_array(
+    values: list[int],
+    *,
+    indent: str = "        ",
+    entries_per_line: int = 12,
+    suffix: str = "U",
+    width: int = 2,
+) -> list[str]:
+    """Render an integer list for a C++ array initializer."""
+    result: list[str] = []
+    for start in range(0, len(values), entries_per_line):
+        chunk = values[start:start + entries_per_line]
+        result.append(indent + ", ".join(f"0x{value:0{width}X}{suffix}" for value in chunk) + ",")
+    return result
+
+
+def render_attribute_array(values: list[int]) -> list[str]:
+    """Render packed attributes as C++ array entries."""
+    return render_integer_array(values, entries_per_line=8, suffix="U", width=7)
+
+
+def special_index_entries(characters: list[str]) -> list[tuple[str, int]]:
+    """Build the special non-box code point lookup entries."""
+    return [(character, index) for index, character in enumerate(characters) if not is_box_drawing(character)]
+
+
+def render_data_function(
+    name: str,
+    result_type: str,
+    values: list[int],
+    *,
+    entries_per_line: int = 12,
+    width: int = 2,
+) -> list[str]:
+    """Render one generated data accessor function."""
+    storage_type = result_type.split("::")[-1]
     lines = [
-        "// Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev",
-        "// SPDX-License-Identifier: Apache-2.0",
-        "//",
-        "// This file is generated by erbsland-cpp-color-term/utilities/generate_common_box_frame_style.py",
-        "//",
+        f"auto CommonBoxFrameCombinationStyle::{name}() noexcept -> std::span<const {result_type}> {{",
+        f"    static constexpr std::array<{storage_type}, {len(values)}U> data{{{{",
+    ]
+    lines.extend(
+        render_integer_array(values, indent="        ", entries_per_line=entries_per_line, suffix="U", width=width)
+    )
+    lines.extend(
+        [
+            "    }};",
+            "    return data;",
+            "}",
+            "",
+        ]
+    )
+    return lines
+
+
+def render_output(characters: list[str], selection_counts: Counter[str]) -> str:
+    """Render the generated C++ source file."""
+    character_attributes = build_character_attributes(characters)
+    attributes_to_character = build_attributes_to_character(character_attributes)
+    packed_attributes = [pack_attributes(character_attributes[character]) for character in characters]
+    exact_entries = sorted(
+        (pack_attributes(attributes), ord(character)) for attributes, character in attributes_to_character.items()
+    )
+    box_offset_to_character_index = [UNSUPPORTED_INDEX] * (BOX_DRAWING_END - BOX_DRAWING_START + 1)
+    for index, character in enumerate(characters):
+        if is_box_drawing(character):
+            box_offset_to_character_index[ord(character) - BOX_DRAWING_START] = index
+
+    special_entries = special_index_entries(characters)
+    summary_lines = [
         (
-            "// Generated from "
-            f"{sum(selection_counts.values())} directed combinations: "
+            f"Generated from {sum(selection_counts.values())} directed combinations: "
             f"{selection_counts['exact']} exact, "
             f"{selection_counts['best']} weighted matches, "
             f"{selection_counts['overlay']} overlay fallbacks, "
             f"{selection_counts['center-overwrite']} center overwrites."
         ),
-        "#include \"../CharCombinationStyle.hpp\"",
+        (
+            f"Compact runtime data: {len(characters)} characters, {len(exact_entries)} exact attribute entries, "
+            f"{len(box_offset_to_character_index)} box lookup entries."
+        ),
+    ]
+    body_lines = [
+        '#include "CommonBoxFrameCombinationStyle.hpp"',
         "",
-        "#include <memory>",
-        "",
+        "#include <array>",
         "",
         "namespace erbsland::cterm {",
         "",
-        "",
-        "auto CharCombinationStyle::commonBoxFrame() noexcept -> const CharCombinationStylePtr & {",
-        "    static const CharCombinationStylePtr style =",
-        "        std::make_shared<MatrixCombinationStyle>(",
-        f"            {cpp_u32_string_literal(''.join(characters))},",
-        f"            std::string_view{{",
     ]
-    for row in result_index_rows:
-        lines.append(f"                {row}")
-    lines.extend(
-        [
-            f"                , {matrix_size}}}",
-            "            );",
-            "    return style;",
-            "}",
-            "",
-            "",
-            "}",
-            "",
-        ]
+    body_lines.extend(
+        render_data_function(
+            "boxOffsetToCharacterIndex", "uint8_t", box_offset_to_character_index, entries_per_line=12, width=2
+        )
     )
-    return "\n".join(lines)
+    body_lines.extend(
+        render_data_function(
+            "characters", "CommonBoxFrameCombinationStyle::CodePointData",
+            [ord(character) for character in characters], entries_per_line=8, width=4
+        )
+    )
+    body_lines.extend(
+        render_data_function(
+            "attributes", "CommonBoxFrameCombinationStyle::AttributeData", packed_attributes,
+            entries_per_line=8, width=7
+        )
+    )
+    body_lines.extend(
+        render_data_function(
+            "exactAttributes", "CommonBoxFrameCombinationStyle::AttributeData", [entry[0] for entry in exact_entries],
+            entries_per_line=8, width=7
+        )
+    )
+    body_lines.extend(
+        render_data_function(
+            "exactCharacters", "CommonBoxFrameCombinationStyle::CodePointData", [entry[1] for entry in exact_entries],
+            entries_per_line=8, width=4
+        )
+    )
+    body_lines.extend(
+        render_data_function(
+            "positionWeights", "uint8_t", [POSITION_WEIGHTS[position] for position in POSITION_NAMES],
+            entries_per_line=len(POSITION_NAMES), width=2
+        )
+    )
+    body_lines.extend(
+        render_data_function(
+            "specialCodePoints", "CommonBoxFrameCombinationStyle::CodePointData",
+            [ord(character) for character, _ in special_entries], entries_per_line=8, width=4
+        )
+    )
+    body_lines.extend(
+        render_data_function(
+            "specialCharacterIndexes", "uint8_t", [index for _, index in special_entries], entries_per_line=8, width=2
+        )
+    )
+    body_lines.extend(["}", ""])
+    return generated_cpp_source(GENERATOR_PATH, summary_lines, body_lines)
+
+
+def parse_arguments() -> argparse.Namespace:
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="Verify that the generated file is up to date.")
+    return parser.parse_args()
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="Verify that the generated file is up to date.")
-    args = parser.parse_args()
-
+    """Run the generator."""
+    args = parse_arguments()
     characters = all_characters()
-    result_rows, selection_counts = generate_matrix(characters)
-    output = render_output(characters, result_rows, selection_counts)
+    verify_compact_algorithm(characters)
+    _, selection_counts = generate_matrix(characters)
+    output = render_output(characters, selection_counts)
 
     if args.check:
         existing_output = OUTPUT_PATH.read_text(encoding="utf-8")
         if existing_output != output:
-            raise SystemExit("The generated common box frame style file is out of date.")
+            raise SystemExit("The generated common box frame style data file is out of date.")
         return
 
     OUTPUT_PATH.write_text(output, encoding="utf-8")

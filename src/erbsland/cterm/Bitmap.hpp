@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "Position.hpp"
-#include "Rectangle.hpp"
-#include "Size.hpp"
+#include "geometry/Position.hpp"
+#include "geometry/Rectangle.hpp"
+#include "geometry/Size.hpp"
 
 #include <array>
 #include <bit>

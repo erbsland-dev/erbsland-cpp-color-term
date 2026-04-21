@@ -5,6 +5,8 @@
 #include "Event.hpp"
 #include "ScheduledActionRef.hpp"
 
+#include "../SurfacePtr.hpp"
+
 #include <chrono>
 #include <functional>
 #include <memory>
@@ -15,9 +17,6 @@ namespace erbsland::cterm::ui {
 
 class Scheduler;
 using SchedulerPtr = std::unique_ptr<Scheduler>;
-class Surface;
-using SurfaceWeakPtr = std::weak_ptr<Surface>;
-
 /// A scheduler for UI actions.
 /// Scheduler management methods are thread-safe.
 /// Scheduled callbacks are always executed on the application UI thread.

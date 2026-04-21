@@ -53,6 +53,29 @@ count differences, or derive masks.
 Use :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` when your function should modify the target buffer
 without caring whether it operates on a standalone :cpp:any:`Buffer <erbsland::cterm::Buffer>` or another writable implementation.
 
+Write-Clipped Paint Operations
+------------------------------
+
+:cpp:any:`WriteClippedBufferRef <erbsland::cterm::WriteClippedBufferRef>` is a thin writable wrapper for
+temporary subsurface painting. It exposes source coordinates to the drawing code and clips write operations to a target
+rectangle in the wrapped buffer. Read operations are translated into the wrapped buffer without applying the write clip,
+which lets drawing helpers sample existing cells around the clipped area.
+
+.. code-block:: cpp
+
+    auto screen = Buffer{Size{80, 24}};
+    auto panel = WriteClippedBufferRef{
+        screen,
+        Position{0, 0},
+        Rectangle{10, 4, 32, 8}};
+
+    panel.fill(panel.sourceRect(), Char{" ", Color{fg::Inherited, bg::Blue}});
+    panel.drawText("Panel title", Rectangle{0, 0, 32, 1}, Alignment::Center);
+
+Use :cpp:any:`WriteClippedBuffer <erbsland::cterm::WriteClippedBuffer>` when the wrapper must store a shared
+pointer to the wrapped buffer. Use :cpp:any:`WriteClippedBufferRef <erbsland::cterm::WriteClippedBufferRef>`
+for short-lived paint passes where the wrapped buffer already outlives the wrapper.
+
 Cloning, Copying, and Resizing
 ------------------------------
 
@@ -254,6 +277,15 @@ Interface
     :members:
 
 .. doxygenenum:: erbsland::cterm::BufferResizeMode
+
+.. doxygenclass:: erbsland::cterm::WriteClippedBufferBase
+    :members:
+
+.. doxygenclass:: erbsland::cterm::WriteClippedBuffer
+    :members:
+
+.. doxygenclass:: erbsland::cterm::WriteClippedBufferRef
+    :members:
 
 .. doxygenclass:: erbsland::cterm::Buffer
     :members:

@@ -2,9 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "Orientation.hpp"
 #include "WritableBuffer.hpp"
 
+#include "geometry/Orientation.hpp"
+
+#include <span>
 #include <string_view>
 
 namespace erbsland::cterm {
@@ -201,11 +203,6 @@ public:
     void fill(const Char &fillBlock) noexcept override;
 
 private:
-    struct MoveMapResult {
-        CoordinateMap reorderedMap; ///< The reordered visible-to-stored mapping.
-        CoordinateMap recycled;     ///< Stored coordinates that must be refilled after the operation.
-    };
-
     /// Validate the buffer size.
     /// @throws std::invalid_argument if size is invalid
     [[nodiscard]] static auto validatedBufferSize(Size size) -> Size;
@@ -291,29 +288,31 @@ private:
     /// @param start The first element to erase.
     /// @param count The number of elements to erase.
     /// @return The recycled coordinates that must be refilled.
-    [[nodiscard]] static auto eraseFromMap(CoordinateMap &map, Coordinate start, int count) -> CoordinateMap;
+    [[nodiscard]] static auto eraseFromMap(CoordinateMap &map, Coordinate start, int count)
+        -> std::span<const Coordinate>;
     /// Insert a span into a coordinate map using recycled coordinates from the end.
     /// @param map The map to modify.
     /// @param start The insertion coordinate.
     /// @param count The number of elements to insert.
     /// @return The recycled coordinates that must be refilled.
-    [[nodiscard]] static auto insertIntoMap(CoordinateMap &map, Coordinate start, int count) -> CoordinateMap;
+    [[nodiscard]] static auto insertIntoMap(CoordinateMap &map, Coordinate start, int count)
+        -> std::span<const Coordinate>;
     /// Move a span inside a coordinate map.
-    /// @param map The map to transform.
+    /// @param map The map to transform in place.
     /// @param start The first element to move.
     /// @param count The number of elements to move.
     /// @param delta The movement delta.
-    /// @return The reordered map together with the recycled coordinates that must be refilled.
-    [[nodiscard]] static auto moveInMap(CoordinateMap map, Coordinate start, int count, Coordinate delta)
-        -> MoveMapResult;
+    /// @return The recycled coordinates that must be refilled.
+    [[nodiscard]] static auto moveInMap(CoordinateMap &map, Coordinate start, int count, Coordinate delta)
+        -> std::span<const Coordinate>;
     /// Fill the given stored rows.
     /// @param rows The stored row coordinates to fill.
     /// @param fillChar The fill character.
-    void fillStoredRows(const CoordinateMap &rows, const Char &fillChar) noexcept;
+    void fillStoredRows(std::span<const Coordinate> rows, const Char &fillChar) noexcept;
     /// Fill the given stored columns.
     /// @param columns The stored column coordinates to fill.
     /// @param fillChar The fill character.
-    void fillStoredColumns(const CoordinateMap &columns, const Char &fillChar) noexcept;
+    void fillStoredColumns(std::span<const Coordinate> columns, const Char &fillChar) noexcept;
     /// Execute the fast resize path.
     /// @param newSize The validated new size.
     /// @param fillChar The fill character for newly appended storage cells.

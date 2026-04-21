@@ -159,9 +159,7 @@ void RemappedBuffer::moveRows(const Coordinate startRow, const int count, const 
     if (count == 0 || delta == 0) {
         return;
     }
-    const auto result = moveInMap(_rowRemap, startRow, count, delta);
-    _rowRemap = result.reorderedMap;
-    fillStoredRows(result.recycled, fillChar);
+    fillStoredRows(moveInMap(_rowRemap, startRow, count, delta), fillChar);
 }
 
 void RemappedBuffer::moveColumns(
@@ -170,9 +168,7 @@ void RemappedBuffer::moveColumns(
     if (count == 0 || delta == 0) {
         return;
     }
-    const auto result = moveInMap(_columnRemap, startColumn, count, delta);
-    _columnRemap = result.reorderedMap;
-    fillStoredColumns(result.recycled, fillChar);
+    fillStoredColumns(moveInMap(_columnRemap, startColumn, count, delta), fillChar);
 }
 
 void RemappedBuffer::fill(const Char &fillBlock) noexcept {
@@ -292,77 +288,57 @@ void RemappedBuffer::rotateMap(CoordinateMap &map, const int count, const bool t
     std::ranges::rotate(map, map.end() - static_cast<std::ptrdiff_t>(normalizedCount));
 }
 
-auto RemappedBuffer::eraseFromMap(CoordinateMap &map, const Coordinate start, const int count) -> CoordinateMap {
-    auto recycled = CoordinateMap{};
-    recycled.reserve(static_cast<std::size_t>(count));
+auto RemappedBuffer::eraseFromMap(CoordinateMap &map, const Coordinate start, const int count)
+    -> std::span<const Coordinate> {
+    const auto recycledSize = static_cast<std::size_t>(count);
     const auto first = map.begin() + start;
     const auto last = first + count;
-    recycled.insert(recycled.end(), first, last);
-    std::move(last, map.end(), first);
-    std::ranges::move(recycled, map.end() - count);
-    return recycled;
+    std::ranges::rotate(first, last, map.end());
+    return {map.data() + (map.size() - recycledSize), recycledSize};
 }
 
-auto RemappedBuffer::insertIntoMap(CoordinateMap &map, const Coordinate start, const int count) -> CoordinateMap {
-    auto recycled = CoordinateMap{};
-    recycled.reserve(static_cast<std::size_t>(count));
-    recycled.insert(recycled.end(), map.end() - count, map.end());
-    if (count == static_cast<int>(map.size())) {
-        return recycled;
-    }
-    std::move_backward(map.begin() + start, map.end() - count, map.end());
-    std::ranges::move(recycled, map.begin() + start);
-    return recycled;
+auto RemappedBuffer::insertIntoMap(CoordinateMap &map, const Coordinate start, const int count)
+    -> std::span<const Coordinate> {
+    const auto recycledSize = static_cast<std::size_t>(count);
+    std::ranges::rotate(map.begin() + start, map.end() - count, map.end());
+    return {map.data() + static_cast<std::size_t>(start), recycledSize};
 }
 
-auto RemappedBuffer::moveInMap(CoordinateMap map, const Coordinate start, const int count, const Coordinate delta)
-    -> MoveMapResult {
-    auto moved = CoordinateMap{};
-    moved.reserve(static_cast<std::size_t>(count));
-    moved.insert(moved.end(), map.begin() + start, map.begin() + start + count);
-
-    auto remaining = CoordinateMap{};
-    remaining.reserve(map.size() - static_cast<std::size_t>(count));
-    remaining.insert(remaining.end(), map.begin(), map.begin() + start);
-    remaining.insert(remaining.end(), map.begin() + start + count, map.end());
-
+auto RemappedBuffer::moveInMap(CoordinateMap &map, const Coordinate start, const int count, const Coordinate delta)
+    -> std::span<const Coordinate> {
     const auto targetStart = start + delta;
     const auto droppedBefore = std::clamp(-targetStart, 0, count);
     const auto droppedAfter = std::clamp(targetStart + count - static_cast<Coordinate>(map.size()), 0, count);
-    const auto keptBegin = static_cast<std::size_t>(droppedBefore);
-    const auto keptEnd = static_cast<std::size_t>(count - droppedAfter);
 
-    auto kept = CoordinateMap{};
-    kept.reserve(keptEnd - keptBegin);
-    kept.insert(
-        kept.end(),
-        moved.begin() + static_cast<std::ptrdiff_t>(keptBegin),
-        moved.begin() + static_cast<std::ptrdiff_t>(keptEnd));
-
-    auto recycled = CoordinateMap{};
-    recycled.reserve(static_cast<std::size_t>(droppedBefore + droppedAfter));
-    recycled.insert(recycled.end(), moved.begin(), moved.begin() + static_cast<std::ptrdiff_t>(keptBegin));
-    recycled.insert(recycled.end(), moved.begin() + static_cast<std::ptrdiff_t>(keptEnd), moved.end());
-
-    auto reorderedMap = CoordinateMap{};
-    reorderedMap.reserve(map.size());
-    if (droppedAfter > 0) {
-        reorderedMap.insert(reorderedMap.end(), recycled.begin(), recycled.end());
-    }
-    const auto insertIndex =
-        static_cast<std::size_t>(std::clamp(targetStart, 0, static_cast<Coordinate>(remaining.size())));
-    reorderedMap.insert(
-        reorderedMap.end(), remaining.begin(), remaining.begin() + static_cast<std::ptrdiff_t>(insertIndex));
-    reorderedMap.insert(reorderedMap.end(), kept.begin(), kept.end());
-    reorderedMap.insert(
-        reorderedMap.end(), remaining.begin() + static_cast<std::ptrdiff_t>(insertIndex), remaining.end());
     if (droppedBefore > 0) {
-        reorderedMap.insert(reorderedMap.end(), recycled.begin(), recycled.end());
+        const auto recycledSize = static_cast<std::size_t>(droppedBefore);
+        const auto keptSize = static_cast<std::ptrdiff_t>(count - droppedBefore);
+        std::ranges::rotate(map.begin() + start, map.begin() + start + droppedBefore, map.end());
+        std::ranges::rotate(map.begin(), map.begin() + start, map.begin() + start + keptSize);
+        return {map.data() + (map.size() - recycledSize), recycledSize};
     }
-    return {.reorderedMap = std::move(reorderedMap), .recycled = std::move(recycled)};
+
+    if (droppedAfter > 0) {
+        const auto recycledSize = static_cast<std::size_t>(droppedAfter);
+        const auto keptSize = static_cast<std::ptrdiff_t>(count - droppedAfter);
+        std::ranges::rotate(map.begin(), map.begin() + start + keptSize, map.begin() + start + count);
+        std::ranges::rotate(
+            map.begin() + static_cast<std::ptrdiff_t>(recycledSize) + start,
+            map.begin() + static_cast<std::ptrdiff_t>(recycledSize) + start + keptSize,
+            map.end());
+        return {map.data(), recycledSize};
+    }
+
+    if (delta > 0) {
+        std::ranges::rotate(map.begin() + start, map.begin() + start + count, map.begin() + start + count + delta);
+        return {};
+    }
+
+    std::ranges::rotate(map.begin() + targetStart, map.begin() + start, map.begin() + start + count);
+    return {};
 }
 
-void RemappedBuffer::fillStoredRows(const CoordinateMap &rows, const Char &fillChar) noexcept {
+void RemappedBuffer::fillStoredRows(const std::span<const Coordinate> rows, const Char &fillChar) noexcept {
     for (const auto storedRow : rows) {
         for (Coordinate x = 0; x < _size.width(); ++x) {
             _buffer[storedBufferIndex(x, storedRow)] = fillChar;
@@ -370,7 +346,7 @@ void RemappedBuffer::fillStoredRows(const CoordinateMap &rows, const Char &fillC
     }
 }
 
-void RemappedBuffer::fillStoredColumns(const CoordinateMap &columns, const Char &fillChar) noexcept {
+void RemappedBuffer::fillStoredColumns(const std::span<const Coordinate> columns, const Char &fillChar) noexcept {
     for (const auto storedColumn : columns) {
         for (Coordinate y = 0; y < _size.height(); ++y) {
             _buffer[storedBufferIndex(storedColumn, y)] = fillChar;

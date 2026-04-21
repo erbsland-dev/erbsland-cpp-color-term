@@ -4,6 +4,7 @@
 
 #include "../impl/U8Buffer.hpp"
 
+#include <cassert>
 #include <format>
 #include <string_view>
 
@@ -25,7 +26,7 @@ TextNode::TextNode(
 }
 
 auto TextNode::create(const Type type) noexcept -> TextNodePtr {
-    switch (type) {
+    switch (type.raw()) {
     case Type::Heading:
     case Type::BulletList:
     case Type::NumberedList:
@@ -105,26 +106,6 @@ auto TextNode::isListNodeType(const Type type) noexcept -> bool {
 auto TextNode::toDiagnosticTree(const std::size_t indent) const noexcept -> std::vector<std::string> {
     auto result = std::vector<std::string>{};
     appendDiagnosticTree(result, *this, 0, indent);
-    return result;
-}
-
-auto TextNode::estimatedInlineTextCapacity() const noexcept -> std::size_t {
-    switch (type()) {
-    case Type::Text:
-    case Type::Unsupported:
-    case Type::Error:
-        return text().size();
-    case Type::LineBreak:
-        return 1;
-    default:
-        break;
-    }
-    auto result = std::size_t{0};
-    for (const auto &child : children()) {
-        if (child) {
-            result += child->estimatedInlineTextCapacity();
-        }
-    }
     return result;
 }
 
@@ -237,6 +218,7 @@ void TextNode::setParent(const TextNodePtr &parent) noexcept {
 }
 
 void TextNode::addChild(TextNodePtr child) noexcept {
+    assert(child != nullptr);
     if (!_children.has_value()) {
         _children = std::vector<TextNodePtr>{};
     }
@@ -257,7 +239,7 @@ void TextNode::appendDiagnosticTree(
 auto TextNode::renderDiagnosticLine(const TextNode &node, const std::size_t depth, const std::size_t indent) noexcept
     -> std::string {
     auto line = std::string(depth * indent, ' ');
-    line += typeName(node.type());
+    line += node.type().toString();
     if (node.level() != 0) {
         line += std::format(" level={}", node.level());
     }
@@ -274,58 +256,6 @@ auto TextNode::renderDiagnosticLine(const TextNode &node, const std::size_t dept
         line += std::format(" text=\"{}\"", escapeText(renderTextValue(node.text())));
     }
     return line;
-}
-
-auto TextNode::typeName(const Type type) noexcept -> std::string_view {
-    switch (type) {
-    case Type::Document:
-        return "Document";
-    case Type::Paragraph:
-        return "Paragraph";
-    case Type::Section:
-        return "Section";
-    case Type::Blockquote:
-        return "Blockquote";
-    case Type::LineBreak:
-        return "LineBreak";
-    case Type::Heading:
-        return "Heading";
-    case Type::BulletList:
-        return "BulletList";
-    case Type::NumberedList:
-        return "NumberedList";
-    case Type::ListItem:
-        return "ListItem";
-    case Type::DefinitionList:
-        return "DefinitionList";
-    case Type::DefinitionTerm:
-        return "DefinitionTerm";
-    case Type::DefinitionDescription:
-        return "DefinitionDescription";
-    case Type::CodeBlock:
-        return "CodeBlock";
-    case Type::HorizontalLine:
-        return "HorizontalLine";
-    case Type::Text:
-        return "Text";
-    case Type::Emphasis:
-        return "Emphasis";
-    case Type::Strong:
-        return "Strong";
-    case Type::Underline:
-        return "Underline";
-    case Type::Span:
-        return "Span";
-    case Type::Link:
-        return "Link";
-    case Type::Code:
-        return "Code";
-    case Type::Unsupported:
-        return "Unsupported";
-    case Type::Error:
-        return "Error";
-    }
-    return "Unknown";
 }
 
 auto TextNode::renderTextValue(const std::u32string_view text) noexcept -> std::string {

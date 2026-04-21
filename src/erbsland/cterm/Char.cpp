@@ -13,15 +13,9 @@ auto Char::withCombining(const char32_t codePoint, const EncodingErrors encoding
     return result;
 }
 
-auto Char::withColorOverlay(const Color color) const -> Char {
+auto Char::withOverlay(const CharStyle style) const noexcept -> Char {
     auto result = *this;
-    result._style.setColor(_style.color().overlayWith(color));
-    return result;
-}
-
-auto Char::withOverlay(const Color color, const CharAttributes attributes) const noexcept -> Char {
-    auto result = *this;
-    result._style = _style.withOverlay(CharStyle{color, attributes});
+    result._style = _style.withOverlay(style);
     return result;
 }
 
@@ -31,19 +25,21 @@ auto Char::withColorReplaced(const Color color) const noexcept -> Char {
     return result;
 }
 
+auto Char::withStyleReplaced(const CharStyle style) const noexcept -> Char {
+    auto result = *this;
+    result._style = style;
+    return result;
+}
+
 auto Char::withAttributes(const CharAttributes attributes) const noexcept -> Char {
     auto result = *this;
     result._style.setAttributes(attributes);
     return result;
 }
 
-auto Char::withBaseColor(const Color color) const noexcept -> Char {
-    return withBase(color, CharAttributes{});
-}
-
-auto Char::withBase(const Color color, const CharAttributes attributes) const noexcept -> Char {
+auto Char::withBase(const CharStyle style) const noexcept -> Char {
     auto result = *this;
-    result._style = _style.withBase(CharStyle{color, attributes});
+    result._style = _style.withBase(style);
     return result;
 }
 
@@ -81,8 +77,8 @@ auto Char::renderedEquals(const Char &other, const bool colorEnabled, const bool
         }
     }
     if (attributeEnabled) {
-        const auto resolvedAttributes = attributes().resolvedWith(CharAttributes::reset());
-        const auto otherResolvedAttributes = other.attributes().resolvedWith(CharAttributes::reset());
+        const auto resolvedAttributes = attributes().withBase(CharAttributes::reset());
+        const auto otherResolvedAttributes = other.attributes().withBase(CharAttributes::reset());
         if (resolvedAttributes != otherResolvedAttributes) {
             return false;
         }

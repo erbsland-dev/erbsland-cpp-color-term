@@ -63,7 +63,6 @@ void StringData::appendCodePoint(const char32_t codePoint, const Color color, co
 
 void StringData::appendCharacters(
     const std::u32string_view text, const Color color, const CharAttributes attributes) noexcept {
-    _chars.reserve(_chars.size() + text.size());
     for (const auto codePoint : text) {
         appendCodePoint(codePoint, color, attributes);
     }
@@ -75,7 +74,6 @@ void StringData::appendCharacters(
     const CharAttributes attributes,
     const EncodingErrors encodingErrors) noexcept {
 
-    _chars.reserve(_chars.size() + static_cast<std::size_t>(measureDisplayWidth(text, encodingErrors)));
     U8Buffer{text}.decodeAll(
         [&](const char32_t codePoint) -> void { appendCodePoint(codePoint, color, attributes); }, encodingErrors);
 }

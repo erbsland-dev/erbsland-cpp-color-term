@@ -99,6 +99,38 @@ correct combined glyph for each intersection.
 This ensures that intersecting lines produce consistent box-drawing
 characters instead of visual artifacts.
 
+Drawing Grid Layouts
+--------------------
+
+Use :cpp:any:`GridLayout <erbsland::cterm::GridLayout>` when you want a stable table-like layout where content cells
+keep their own rectangles and the frame lines are drawn around them.
+
+The :cpp:any:`FrameBorder <erbsland::cterm::FrameBorder>` object describes which outer and inner line groups are
+visible. A ``None`` element consumes no terminal cells, while supported line styles consume one cell and are resolved
+with their neighbors automatically. Block frame styles are not grid line styles and are treated like ``None`` here.
+
+.. code-block:: cpp
+
+    auto border = FrameBorder{FrameStyle::Light, Color{fg::BrightWhite, bg::Black}};
+    border.set(FrameBorderElement::HLine, FrameStyle::Heavy, Color{fg::BrightWhite, bg::Black});
+
+    auto layout = GridLayout{{16, 16, 16}, {3, 3}};
+    auto origin = Position{2, 2};
+
+    for (std::size_t row = 0; row < layout.rowCount(); ++row) {
+        for (std::size_t column = 0; column < layout.columnCount(); ++column) {
+            buffer.drawText(
+                "cell",
+                layout.cellRect(row, column, origin, border),
+                Alignment::Center,
+                Color{fg::BrightCyan, bg::Black});
+        }
+    }
+    buffer.drawGridLayout(origin, layout, border);
+
+This keeps content placement independent from the selected border style. If you later hide separator lines or switch
+from light to double borders, the same ``cellRect()`` calls still describe the usable content area.
+
 The difference is easiest to see when the same pair of frames is rendered
 once with plain overwrite behavior and once with a box-aware combiner:
 
@@ -166,6 +198,11 @@ center while still scaling cleanly to any size.
     buffer.drawFrame(panel, style, Color{fg::BrightCyan, bg::Black});
 
 The 9-tile layout covers the standard case: corners, edges, and center.
+You can also read a configured tile directly by name, for example
+``style->block(Tile9Style::Element::West)`` or
+``style->block(Tile9Style::Element::Center)``. This is useful for small
+theme-controlled text fragments that reuse the same tile table without
+drawing a rectangle.
 
 If you also need specialized tiles for degenerate cases such as a single
 row, a single column, or a single cell, construct the style with 16
@@ -326,6 +363,14 @@ Interface
 .. doxygentypedef:: erbsland::cterm::Tile9StylePtr
 
 .. doxygenenum:: erbsland::cterm::FrameStyle
+
+.. doxygenenum:: erbsland::cterm::FrameBorderElement
+
+.. doxygenclass:: erbsland::cterm::FrameBorder
+    :members:
+
+.. doxygenclass:: erbsland::cterm::GridLayout
+    :members:
 
 .. doxygenenum:: erbsland::cterm::FrameColorMode
 

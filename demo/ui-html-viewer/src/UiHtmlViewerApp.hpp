@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
+#include "UiDemoApplication.hpp"
+
 #include <erbsland/cterm/all.hpp>
 #include <erbsland/cterm/text/Style.hpp>
 #include <erbsland/cterm/ui/all.hpp>
@@ -18,20 +20,19 @@ using namespace erbsland::cterm;
 
 class HtmlDocumentPanel;
 
-class UiHtmlViewerApp {
+class UiHtmlViewerApp : public demo::UiDemoApplication {
 public:
-    UiHtmlViewerApp() = default;
-    ~UiHtmlViewerApp() = default;
+    UiHtmlViewerApp(const int argc, char *argv[]) : UiDemoApplication(argc, argv) {}
+    ~UiHtmlViewerApp() override = default;
 
-public:
-    auto run(int argc, char **argv) -> int;
+protected: // implement ui::Application
+    void setupUi() override;
+    auto processCommandLineArguments(const CommandLineArgs &args) -> ExitCode override;
 
 private:
     using DocumentStylePreset = text::Style::Predefined;
 
 private:
-    auto onCommandLine(const std::vector<std::string_view> &args) -> int;
-    void setupUi();
     void updateDynamicUi() noexcept;
     void advanceDocumentStylePreset() noexcept;
     [[nodiscard]] auto locationText() const -> std::string;
@@ -43,15 +44,16 @@ private:
         -> bool;
     [[nodiscard]] static auto defaultHtmlFilePath() -> std::filesystem::path;
     [[nodiscard]] static auto loadHtmlFile(const std::filesystem::path &htmlFilePath) -> std::string;
+    void parseStyleValue(std::string_view styleText);
+    void printUsage() const;
 
 private:
-    ui::Application _app;
     std::filesystem::path _htmlFilePath;
     std::string _html;
     DocumentStylePreset _documentStylePreset{DocumentStylePreset::Styled};
     std::shared_ptr<HtmlDocumentPanel> _documentPanel;
-    ui::StatusLinePtr _headerStatus;
-    ui::StatusLinePtr _footerStatus;
+    ui::HeaderLinePtr _headerStatus;
+    ui::FooterLinePtr _footerStatus;
 };
 
 }

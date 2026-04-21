@@ -6,10 +6,9 @@
 #include <exception>
 #include <iostream>
 
-auto main() -> int {
+auto main(const int argc, char *argv[]) -> int {
     try {
-        demo::ui_hello_world::UiHelloWorldApp{}.run();
-        return 0;
+        return demo::ui_hello_world::UiHelloWorldApp{argc, argv}.run();
     } catch (const std::exception &exception) {
         std::cerr << "ui-hello-world failed: " << exception.what() << '\n';
     }

@@ -13,6 +13,13 @@ Tile9Style::Tile9Style(const std::array<Char, 9> tiles) noexcept : Tile9Style(to
 Tile9Style::Tile9Style(const std::array<Char, 16> tiles) noexcept : Tile9Style(toParsedTiles(tiles)) {
 }
 
+Tile9Style::Tile9Style(const std::array<char32_t, 16> tiles, const CharStyle style) noexcept {
+    for (auto index = std::size_t{0}; index < tiles.size(); ++index) {
+        _tiles[index] = Char{tiles[index], style};
+    }
+    _hasExtendedTiles = true;
+}
+
 Tile9Style::Tile9Style(const std::string_view tiles) : Tile9Style(parseTiles(String{tiles, EncodingErrors::Replace})) {
 }
 
@@ -65,6 +72,29 @@ auto Tile9Style::block(const Rectangle rect, const Position pos) const noexcept 
     const auto row = pos.y() == rect.y1() ? 0 : pos.y() == rect.y2() - 1 ? 2 : 1;
     const auto column = pos.x() == rect.x1() ? 0 : pos.x() == rect.x2() - 1 ? 2 : 1;
     return _tiles[static_cast<std::size_t>(row * 3 + column)];
+}
+
+auto Tile9Style::block(const Element element) const noexcept -> Char {
+    const auto index = static_cast<std::size_t>(element);
+    if (_hasExtendedTiles || index < 9) {
+        return _tiles[index];
+    }
+    switch (element) {
+    case Element::HorizontalWest:
+    case Element::VerticalNorth:
+    case Element::Single:
+        return _tiles[0];
+    case Element::HorizontalCenter:
+        return _tiles[1];
+    case Element::HorizontalEast:
+        return _tiles[2];
+    case Element::VerticalCenter:
+        return _tiles[3];
+    case Element::VerticalSouth:
+        return _tiles[6];
+    default:
+        return {};
+    }
 }
 
 auto Tile9Style::create(const std::string_view tiles) -> Tile9StylePtr {

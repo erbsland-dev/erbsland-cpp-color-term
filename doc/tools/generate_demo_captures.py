@@ -71,6 +71,12 @@ CAPTURES = [
         timeout_seconds=4.0,
     ),
     DemoCapture(
+        "grid-layout",
+        ["./cmake-build-debug/demo-apps/grid-layout"],
+        inputs=[TimedInput(0.7, b"q")],
+        timeout_seconds=3.0,
+    ),
+    DemoCapture(
         "html-viewer",
         [
             "./cmake-build-debug/demo-apps/html-viewer",
@@ -119,6 +125,12 @@ CAPTURES = [
         ],
         inputs=[TimedInput(0.8, b"q")],
         timeout_seconds=3.0,
+    ),
+    DemoCapture(
+        "ui-world-view",
+        ["./cmake-build-debug/demo-apps/ui-world-view"],
+        inputs=[TimedInput(0.5, b"]"), TimedInput(1.0, b"q")],
+        timeout_seconds=4.0,
     ),
     DemoCapture(
         "update-screen-modes",

@@ -38,13 +38,25 @@ auto Application::instanceIfAvailable() noexcept -> Application * {
 Application::Application() : Application(std::make_shared<Terminal>()) {
 }
 
-Application::Application(TerminalPtr terminal) : _terminal(std::move(terminal)) {
+Application::Application(int argc, char *argv[]) : Application(argc, argv, std::make_shared<Terminal>()) {
+}
+
+Application::Application(TerminalPtr terminal) : Application(0, nullptr, std::move(terminal)) {
+}
+
+Application::Application(int argc, char *argv[], TerminalPtr terminal) : _terminal{std::move(terminal)} {
     Application *expected = nullptr;
     if (!_instance.compare_exchange_strong(expected, this)) {
         throw std::runtime_error("Only one Application instance is allowed.");
     }
     if (_terminal == nullptr) {
         throw std::invalid_argument{"terminal must not be null"};
+    }
+    if (argc > 0 && argv != nullptr) {
+        _commandLineArgs.reserve(static_cast<std::size_t>(argc));
+        for (int i = 0; i < argc; i++) {
+            _commandLineArgs.emplace_back(argv[i]);
+        }
     }
 }
 
@@ -60,6 +72,24 @@ void Application::setMainPage(PagePtr page) {
     _mainPage = std::move(page);
 }
 
+void Application::setTheme(const theme::ThemeConstPtr &theme) {
+    _theme = theme == nullptr ? theme::Theme::dark() : theme;
+    if (_display != nullptr) {
+        _display->setTheme(_theme);
+    }
+    if (_mainPage != nullptr) {
+        _mainPage->flags().setThemeOutdated();
+    }
+}
+
+auto Application::theme() const noexcept -> const theme::ThemeConstPtr & {
+    return _theme;
+}
+
+auto Application::commandLineArgs() const -> const CommandLineArgs & {
+    return _commandLineArgs;
+}
+
 auto Application::terminal() const -> Terminal & {
     return *_terminal;
 }
@@ -71,31 +101,22 @@ auto Application::display() const -> Display & {
     return *_display;
 }
 
-auto Application::run() -> int {
+auto Application::run() -> ExitCode {
     if (_state.load(std::memory_order_acquire) != State::Constructing) {
         throw std::logic_error{"Application::run() can only be called once."};
     }
     try {
-        _appMethodWasCalled = false;
-        initialize();
-        if (!_appMethodWasCalled) {
-            throw std::logic_error{"You must call Application::initialize() when subclassing Application."};
+        if (const auto exitCode = initializeImpl(); exitCode != cExitCodeContinue) {
+            restoreTerminal();
+            setState(State::Destroyed);
+            return exitCode;
         }
-        initializeTerminal();
-        setState(State::Running);
         _appMethodWasCalled = false;
         const auto exitCode = runEventLoop();
         if (!_appMethodWasCalled) {
             throw std::logic_error{"You must call Application::runEventLoop() when subclassing Application."};
         }
-        setState(State::Stopping);
-        restoreTerminal();
-        _appMethodWasCalled = false;
-        shutdown();
-        if (!_appMethodWasCalled) {
-            throw std::logic_error{"You must call Application::shutdown() when subclassing Application."};
-        }
-        setState(State::Destroyed);
+        shutdownImpl();
         return exitCode;
     } catch (...) {
         restoreTerminal();
@@ -115,13 +136,14 @@ void Application::addEvent(const EventType eventType, EventDataUniquePtr &&event
     _eventDriver->addEvent(eventType, std::move(eventData));
 }
 
-void Application::invoke(std::function<void()> fn) {
+void Application::invoke(std::function<void()> invokedFn) {
     verifyEventSystemIsActive();
     pruneManagedEventThreads();
     _eventDriver->addEvent(
-        EventType::Invocation, std::make_unique<impl::InvocationEvent>([fn = std::move(fn)](const StopToken) {
-            if (fn) {
-                fn();
+        EventType::Invocation,
+        std::make_unique<impl::InvocationEvent>([invokedFn = std::move(invokedFn)](const StopToken) -> void {
+            if (invokedFn) {
+                invokedFn();
             }
         }));
 }
@@ -129,18 +151,19 @@ void Application::invoke(std::function<void()> fn) {
 auto Application::createEventThread() -> EventThreadPtr {
     verifyEventSystemIsActive();
     auto eventThread = EventThread::create();
-    eventThread->setFinishedCallback([cleanupToken = std::weak_ptr<int>{_managedEventThreadsCleanupToken}, this]() {
-        if (!cleanupToken.expired()) {
-            pruneManagedEventThreads();
-        }
-    });
+    eventThread->setFinishedCallback(
+        [cleanupToken = std::weak_ptr<int>{_managedEventThreadsCleanupToken}, this]() -> void {
+            if (!cleanupToken.expired()) {
+                pruneManagedEventThreads();
+            }
+        });
     const auto lock = std::scoped_lock{_managedEventThreadsMutex};
     pruneManagedEventThreadsLocked();
     _managedEventThreads.emplace_back(eventThread);
     return eventThread;
 }
 
-void Application::quit(const int exitCode) {
+void Application::quit(const ExitCode exitCode) {
     _quitRequested.store(true, std::memory_order_release);
     if (isShuttingDown()) {
         return;
@@ -153,6 +176,25 @@ void Application::abort() {
     _abortRequested.store(true, std::memory_order_release);
 }
 
+auto Application::manualInitialize() -> ExitCode {
+    if (_state.load(std::memory_order_acquire) != State::Constructing) {
+        throw std::logic_error{"Application::manualInitialize() can only be called once."};
+    }
+    return initializeImpl();
+}
+
+auto Application::manualProcessEvents() -> ExitCode {
+    return processEventsImpl();
+}
+
+void Application::manualShutdown() {
+    shutdownImpl();
+}
+
+void Application::setupUi() {
+    // do nothing.
+}
+
 void Application::initialize() {
     if (_mainPage == nullptr) {
         throw std::logic_error{"Application::initialize() must be called after setting the main page."};
@@ -162,29 +204,26 @@ void Application::initialize() {
     _eventDriver = std::make_unique<EventDriver>();
     _eventDriver->setEventHandler([this](const Event &event) -> void { handleEvent(event); });
     _eventScheduler = std::make_unique<EventScheduler>(*_eventDriver.get());
-    _display = std::make_unique<Display>(_terminal, _mainPage);
+    _display = std::make_unique<Display>(_terminal, _mainPage, _theme);
     armSurfaceSchedulers(_mainPage);
     _appMethodWasCalled = true;
 }
 
 void Application::initializeTerminal() {
+    _terminal->setSafeMarginEnabled(false);
     _terminal->initializeScreen();
     _terminal->input().setMode(Input::Mode::Key);
+}
+
+auto Application::processCommandLineArguments([[maybe_unused]] const std::vector<std::string> &args) -> int {
+    return cExitCodeContinue;
 }
 
 auto Application::runEventLoop() -> int {
     _appMethodWasCalled = true;
     while (!_abortRequested.load(std::memory_order_acquire)) {
-        _display->pollTerminalResize();
-        _eventScheduler->poll();
-        const auto result = _eventDriver->processEvents(0ms);
-        if (result.status() == EventDriver::ProcessResult::Quit) {
-            return result.exitCode();
-        }
-        _display->pollRender();
-        const auto inputTimeout = calculateInputTimeout();
-        if (const auto key = _terminal->input().readKey(inputTimeout); key.valid()) {
-            addEvent(EventType::KeyPress, std::make_unique<KeyPressEvent>(key));
+        if (const auto exitCode = processEventsImpl(); exitCode != cExitCodeContinue) {
+            return exitCode;
         }
     }
     return 1;
@@ -217,6 +256,50 @@ auto Application::managedEventThreadCount() const -> std::size_t {
     return count;
 }
 
+auto Application::initializeImpl() -> ExitCode {
+    setupUi();
+    initializeTerminal();
+    setState(State::Running);
+    if (const auto exitCode = processCommandLineArguments(_commandLineArgs); exitCode != cExitCodeContinue) {
+        return exitCode;
+    }
+    _appMethodWasCalled = false;
+    initialize();
+    if (!_appMethodWasCalled) {
+        throw std::logic_error{"You must call Application::initialize() when subclassing Application."};
+    }
+    return cExitCodeContinue;
+}
+
+auto Application::processEventsImpl() -> ExitCode {
+    _display->pollTerminalResize();
+    _eventScheduler->poll();
+    const auto result = _eventDriver->processEvents(0ms);
+    if (result.status() == EventDriver::ProcessResult::Quit) {
+        if (result.exitCode() == cExitCodeContinue) {
+            return 1; // prevent unexpected behavior if the wrong exit code is used
+        }
+        return result.exitCode();
+    }
+    _display->pollRender();
+    const auto inputTimeout = calculateInputTimeout();
+    if (const auto key = _terminal->input().readKey(inputTimeout); key.valid()) {
+        addEvent(EventType::KeyPress, std::make_unique<KeyPressEvent>(key));
+    }
+    return cExitCodeContinue;
+}
+
+void Application::shutdownImpl() {
+    setState(State::Stopping);
+    restoreTerminal();
+    _appMethodWasCalled = false;
+    shutdown();
+    if (!_appMethodWasCalled) {
+        throw std::logic_error{"You must call Application::shutdown() when subclassing Application."};
+    }
+    setState(State::Destroyed);
+}
+
 void Application::scheduleAction(
     const SurfaceWeakPtr &surface,
     const ScheduledActionRef actionRef,
@@ -236,10 +319,10 @@ void Application::armSurfaceSchedulers(const SurfacePtr &surface) {
     if (surface == nullptr) {
         return;
     }
-    if (auto *scheduler = surface->schedulerIfExists(); scheduler != nullptr) {
+    if (auto &scheduler = surface->schedulerPtr(); scheduler != nullptr) {
         scheduler->armAllActions();
     }
-    for (const auto &child : surface->children()) {
+    for (const auto &child : surface->surfaces()) {
         armSurfaceSchedulers(child);
     }
 }
@@ -270,7 +353,7 @@ void Application::handleEvent(const Event &event) {
         if (auto *scheduledActionEvent = dynamic_cast<impl::ScheduledActionEvent *>(event.data().get());
             scheduledActionEvent != nullptr) {
             if (const auto surface = scheduledActionEvent->surface().lock(); surface != nullptr) {
-                if (auto *scheduler = surface->schedulerIfExists(); scheduler != nullptr) {
+                if (auto &scheduler = surface->schedulerPtr(); scheduler != nullptr) {
                     scheduler->executeAction(scheduledActionEvent->actionRef(), scheduledActionEvent->generation());
                 }
             }
@@ -354,7 +437,7 @@ void Application::pruneManagedEventThreads() noexcept {
 }
 
 void Application::pruneManagedEventThreadsLocked() noexcept {
-    std::erase_if(_managedEventThreads, [](const auto &managedEventThread) {
+    std::erase_if(_managedEventThreads, [](const auto &managedEventThread) -> bool {
         if (const auto eventThread = managedEventThread.lock(); eventThread != nullptr) {
             return eventThread->isFinished();
         }

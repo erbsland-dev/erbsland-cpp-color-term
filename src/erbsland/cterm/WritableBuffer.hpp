@@ -7,7 +7,9 @@
 #include "BufferResizeMode.hpp"
 #include "Char16Style.hpp"
 #include "CharCombinationStyle.hpp"
+#include "FrameBorder.hpp"
 #include "FrameDrawOptions.hpp"
+#include "GridLayout.hpp"
 #include "ReadableBuffer.hpp"
 #include "StringView.hpp"
 #include "Text.hpp"
@@ -83,12 +85,23 @@ public: // drawing methods
     /// Positions outside the buffer are ignored.
     /// @param rect The rectangle to be filled.
     /// @param style The tile style to repeat across the rectangle.
-    /// @param baseColor The base color underneath the style colors.
+    /// @param baseColor The base color underneath the tile style.
     /// @param combinationStyle The combination style for overwriting existing characters.
     void fill(
         Rectangle rect,
         const Tile9StylePtr &style,
         Color baseColor = {},
+        const CharCombinationStylePtr &combinationStyle = {}) noexcept;
+    /// Fill the given rectangle using a repeating 9-tile style.
+    /// Positions outside the buffer are ignored.
+    /// @param rect The rectangle to be filled.
+    /// @param style The tile style to repeat across the rectangle.
+    /// @param baseStyle The base style underneath the tile style.
+    /// @param combinationStyle The combination style for overwriting existing characters.
+    void fill(
+        Rectangle rect,
+        const Tile9StylePtr &style,
+        CharStyle baseStyle,
         const CharCombinationStylePtr &combinationStyle = {}) noexcept;
     /// Draw a frame inside a given rectangle
     /// This will set all blocks at the edge, *inside* the given rectangle
@@ -135,6 +148,12 @@ public: // drawing methods
         Rectangle rect,
         const FrameDrawOptions &options = FrameDrawOptions::defaultOptions(),
         std::size_t animationCycle = 0) noexcept;
+    /// Draw a grid layout using reusable border styles.
+    /// The layout defines only cell geometry; `border` defines which lines are visible and how they are styled.
+    /// @param pos The top-left position of the full grid.
+    /// @param layout The grid cell layout.
+    /// @param border The frame border styling for the grid lines.
+    void drawGridLayout(Position pos, const GridLayout &layout, const FrameBorder &border) noexcept;
     /// Draw a box and fill it.
     /// @param rect The rectangle for the frame.
     /// @param frameBlock The block for the frame.
@@ -217,6 +236,14 @@ public: // drawing methods
         std::size_t animationCycle = 0);
     /// @overload
     void drawText(const StringView &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle = 0);
+    /// Calculate the height required to render wrapped text for a given rectangle width.
+    /// The given width is the full target rectangle width, including margins configured in `options`.
+    /// @param text The text to measure.
+    /// @param width The available rectangle width in terminal cells.
+    /// @param options The text options used for paragraph layout.
+    /// @return The required rectangle height in terminal cells.
+    [[nodiscard]] static auto
+    textHeightForWidth(const StringView &text, Coordinate width, const TextOptions &options) noexcept -> Coordinate;
     /// Draw a bitmap at a given position.
     /// The bitmap is rendered according to `options.scaleMode()`. If `options.char16Style()` is set,
     /// it overrides the scale mode and renders one terminal cell per bitmap pixel.
@@ -281,12 +308,12 @@ protected: // implementation
     /// The public overload forwards to this method.
     /// @param rect The rectangle to be filled.
     /// @param style The tile style to repeat across the rectangle.
-    /// @param baseColor The base color underneath the style colors.
+    /// @param baseStyle The base style underneath the tile style.
     /// @param combinationStyle The combination style for overwriting existing characters.
     virtual void fillImpl(
         Rectangle rect,
         const Tile9StylePtr &style,
-        Color baseColor,
+        CharStyle baseStyle,
         const CharCombinationStylePtr &combinationStyle) noexcept;
     /// Implement the public frame drawing overloads using explicit frame blocks.
     /// The public block-based overloads forward to this method.
@@ -331,6 +358,12 @@ protected: // implementation
     /// @param options Frame drawing options.
     /// @param animationCycle Animation cycle for frame and fill color animations.
     virtual void drawFrameImpl(Rectangle rect, const FrameDrawOptions &options, std::size_t animationCycle) noexcept;
+    /// Implement `drawGridLayout(Position, const GridLayout &, const FrameBorder &)`.
+    /// The public overload forwards to this method.
+    /// @param pos The top-left position of the full grid.
+    /// @param layout The grid cell layout.
+    /// @param border The frame border styling for the grid lines.
+    virtual void drawGridLayoutImpl(Position pos, const GridLayout &layout, const FrameBorder &border) noexcept;
     /// Implement `drawText(const Text &, ...)`.
     /// The public overload forwards to this method.
     /// @param text The text description.

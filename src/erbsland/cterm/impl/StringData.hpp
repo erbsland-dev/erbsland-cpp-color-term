@@ -33,8 +33,8 @@ public:
     ~StringData() = default;
     StringData(const StringData &) = default;
     StringData(StringData &&) = default;
-    StringData &operator=(const StringData &) = default;
-    StringData &operator=(StringData &&) = default;
+    auto operator=(const StringData &) -> StringData & = default;
+    auto operator=(StringData &&) -> StringData & = default;
 
 public:
     /// Access the stored characters.

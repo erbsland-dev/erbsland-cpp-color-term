@@ -23,12 +23,16 @@ reference implementations when you want to study real code.
     frame-color-animations
     retro-plasma
     frame-weaver
+    grid-layout
     key-input-demo
     html-viewer
     log-viewer
     text-gallery
+    ui-choice
     ui-hello-world
     ui-html-viewer
+    ui-sections
+    ui-world-view
     bitmap-showcase
     update-screen-modes
 
@@ -55,16 +59,18 @@ Find a Demo by Feature
         :doc:`Frame Color Animations <frame-color-animations>`, :doc:`Retro Plasma <retro-plasma>`
     * - Frames / Intersections / Custom Frame Tiles
       - :doc:`Minimum Effort <minimum-effort>`, :doc:`Frame Color Animations <frame-color-animations>`,
-        :doc:`Frame Weaver <frame-weaver>`
+        :doc:`Frame Weaver <frame-weaver>`, :doc:`Grid Layout <grid-layout>`
     * - Buffers / Cursor Buffers / Buffer Views / Scrolling
       - :doc:`HTML Viewer <html-viewer>`, :doc:`Log Viewer <log-viewer>`, :doc:`Key Input Demo <key-input-demo>`,
         :doc:`UI HTML Viewer <ui-html-viewer>`
     * - Bitmap Rendering
-      - :doc:`Bitmap Showcase <bitmap-showcase>`
+      - :doc:`Bitmap Showcase <bitmap-showcase>`, :doc:`UI World View <ui-world-view>`
     * - HTML Rendering
       - :doc:`HTML Viewer <html-viewer>`, :doc:`UI HTML Viewer <ui-html-viewer>`
     * - UI Framework Surfaces
-      - :doc:`UI Hello World <ui-hello-world>`, :doc:`UI HTML Viewer <ui-html-viewer>`
+      - :doc:`UI Hello World <ui-hello-world>`, :doc:`UI Choice <ui-choice>`,
+        :doc:`UI Sections <ui-sections>`, :doc:`UI HTML Viewer <ui-html-viewer>`,
+        :doc:`UI World View <ui-world-view>`
     * - Input Handling / Refresh Behavior / Screen Update Modes
       - :doc:`Key Input Demo <key-input-demo>`, :doc:`Retro Plasma <retro-plasma>`,
         :doc:`Update Screen Modes <update-screen-modes>`
@@ -95,11 +101,15 @@ Browse All Demo Pages
 *   :doc:`frame-color-animations`
 *   :doc:`retro-plasma`
 *   :doc:`frame-weaver`
+*   :doc:`grid-layout`
 *   :doc:`key-input-demo`
 *   :doc:`html-viewer`
 *   :doc:`log-viewer`
 *   :doc:`text-gallery`
+*   :doc:`ui-choice`
 *   :doc:`ui-hello-world`
 *   :doc:`ui-html-viewer`
+*   :doc:`ui-sections`
+*   :doc:`ui-world-view`
 *   :doc:`bitmap-showcase`
 *   :doc:`update-screen-modes`

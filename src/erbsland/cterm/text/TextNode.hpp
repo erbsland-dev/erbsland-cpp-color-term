@@ -2,12 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
+#include "TextNodeType.hpp"
+
+#include <concepts>
 #include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <optional>
 #include <string>
 #include <string_view>
+#include <type_traits>
 #include <vector>
 
 namespace erbsland::cterm::text {
@@ -21,36 +25,7 @@ using TextNodeWeakPtr = std::weak_ptr<TextNode>;
 class TextNode : public std::enable_shared_from_this<TextNode> {
 public:
     /// The node type.
-    enum class Type : uint8_t {
-        // structural nodes
-        Document,              ///< The root node of the text tree (children).
-        Paragraph,             ///< A paragraph of text (children).
-        Section,               ///< A section of text (children).
-        Blockquote,            ///< A blockquote (children).
-        LineBreak,             ///< A line break (no content).
-        Heading,               ///< A heading/title (inline nodes, level).
-        BulletList,            ///< A bullet list (list items, level).
-        NumberedList,          ///< A list with numbers (list items, level).
-        ListItem,              ///< A single list item (children).
-        DefinitionList,        ///< A list of definitions (definition terms, definition descriptions).
-        DefinitionTerm,        ///< A definition term.
-        DefinitionDescription, ///< A definition description.
-        CodeBlock,             ///< A block of code (children, data=language).
-        HorizontalLine,        ///< A horizontal line (no content).
-
-        // inline nodes
-        Text,      ///< Inline text (no children, text)
-        Emphasis,  ///< Emphasized/Italic text (inline nodes).
-        Strong,    ///< Strongly emphasized/Bold text (inline nodes).
-        Underline, ///< Underlined text (inline nodes).
-        Span,      ///< User defines inline text (inline nodes).
-        Link,      ///< A link (inline nodes, data).
-        Code,      ///< Inline code (inline nodes).
-
-        // special
-        Unsupported, ///< Node to indicate unsupported content (no children, text)
-        Error,       ///< Error node (no children, text)
-    };
+    using Type = TextNodeType;
 
     /// The nesting or heading level used by structural nodes.
     using Level = int;
@@ -188,10 +163,6 @@ public:
     /// @param indent The number of spaces for each nesting level.
     /// @return The rendered diagnostic lines.
     [[nodiscard]] auto toDiagnosticTree(std::size_t indent = 4) const noexcept -> std::vector<std::string>;
-    /// Estimate the number of inline terminal characters produced by this node subtree.
-    /// This is useful for reserving output storage before rendering inline content.
-    /// @return The estimated inline character count.
-    [[nodiscard]] auto estimatedInlineTextCapacity() const noexcept -> std::size_t;
 
 public:
     /// Get the node type.
@@ -243,12 +214,54 @@ public:
     /// @param level The new level.
     void setLevel(Level level) noexcept;
 
+public:
+    /// The result for the walk function call.
+    enum class WalkResult : uint8_t {
+        Continue, ///< Continue.
+        Stop,     ///< Stop and return.
+    };
+    /// Recursively walk the node tree.
+    /// If the called function returns `WalkResult::Stop`, the walk will stop and return immediately.
+    /// @return `Continue` if the walk completed, `Stop` if the walk was stopped by the function.
+    template <typename Fn>
+        requires(
+            std::invocable<Fn, const TextNode &> &&
+            std::same_as<std::invoke_result_t<Fn, const TextNode &>, WalkResult>)
+    auto walk(Fn nodeFn) const -> WalkResult {
+        std::vector<TextNodeConstPtr> stack;
+        stack.push_back(shared_from_this());
+        while (!stack.empty()) {
+            const auto current = stack.back();
+            stack.pop_back();
+            if (nodeFn(*current) == WalkResult::Stop) {
+                return WalkResult::Stop;
+            }
+            if (current->hasChildren()) {
+                stack.insert(stack.end(), current->children().begin(), current->children().end());
+            }
+        }
+        return WalkResult::Continue;
+    }
+
+    /// Recursively walk the node tree and return true if *one* `fn(node)` call returns true.
+    /// @param nodeFn A function with the signature `fn(const TextNode &node) -> bool`.
+    /// @return True if any node matches the predicate, false otherwise.
+    template <typename Fn>
+        requires(
+            std::invocable<Fn, const TextNode &> &&
+            std::convertible_to<std::invoke_result_t<Fn, const TextNode &>, bool>)
+    [[nodiscard]] auto anyOf(Fn nodeFn) const -> bool {
+        auto result = walk([&nodeFn](const TextNode &node) -> WalkResult {
+            return nodeFn(node) ? WalkResult::Stop : WalkResult::Continue;
+        });
+        return result == WalkResult::Stop;
+    }
+
 private:
     static void appendDiagnosticTree(
         std::vector<std::string> &lines, const TextNode &node, std::size_t depth, std::size_t indent) noexcept;
     [[nodiscard]] static auto renderDiagnosticLine(const TextNode &node, std::size_t depth, std::size_t indent) noexcept
         -> std::string;
-    [[nodiscard]] static auto typeName(Type type) noexcept -> std::string_view;
     [[nodiscard]] static auto renderTextValue(std::u32string_view text) noexcept -> std::string;
     [[nodiscard]] static auto escapeText(std::string_view text) noexcept -> std::string;
 

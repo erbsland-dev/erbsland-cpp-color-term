@@ -15,12 +15,8 @@ namespace erbsland::cterm::impl::paragraph {
 class LayoutPreparedSourceLine final {
 public:
     /// Create a prepared source line for the given source range.
-    /// Storage is reserved from the source range length to reduce allocation churn while tokenizing.
     /// @param sourceRange The original source-line range in the input text.
-    explicit LayoutPreparedSourceLine(IndexRange sourceRange) : sourceLine{sourceRange} {
-        tokens.reserve(sourceRange.length());
-        _pendingTokens.reserve(4);
-    }
+    explicit LayoutPreparedSourceLine(IndexRange sourceRange) : sourceLine{sourceRange} {}
 
     // defaults
     ~LayoutPreparedSourceLine() = default;
@@ -82,7 +78,6 @@ private:
             _pendingTokens.clear();
             return;
         }
-        tokens.reserve(tokens.size() + _pendingTokens.size());
         for (const auto &token : _pendingTokens) {
             tokens.push_back(token);
         }

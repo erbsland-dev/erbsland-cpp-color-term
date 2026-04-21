@@ -106,7 +106,7 @@ public: // tools
     /// Only explicitly specified attributes overwrite the base state.
     /// @param base The base attributes.
     /// @return The resolved attribute set.
-    [[nodiscard]] constexpr auto resolvedWith(const CharAttributes base) const noexcept -> CharAttributes {
+    [[nodiscard]] constexpr auto withBase(const CharAttributes base) const noexcept -> CharAttributes {
         return fromMasks(
             static_cast<uint8_t>((base._enabledMask & ~_specifiedMask) | (_enabledMask & _specifiedMask)),
             static_cast<uint8_t>(base._specifiedMask | _specifiedMask));
@@ -202,6 +202,12 @@ public: // per-attribute modifiers
     constexpr void setStrikethrough(const bool enabled) noexcept { setFlag(Strikethrough, enabled); }
     /// Make the strikethrough attribute inherit from the base state.
     constexpr void setStrikethroughInherited() noexcept { setInheritedFlag(Strikethrough); }
+
+public: // deprecated methods
+    [[deprecated("Please use withBase(base)"), nodiscard]]
+    constexpr auto resolvedWith(const CharAttributes base) const noexcept -> CharAttributes {
+        return withBase(base);
+    }
 
 private:
     constexpr CharAttributes(const uint8_t enabledMask, const uint8_t specifiedMask) noexcept :

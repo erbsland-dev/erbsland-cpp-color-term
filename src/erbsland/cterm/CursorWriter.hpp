@@ -4,10 +4,10 @@
 
 #include "MoveMode.hpp"
 #include "ParagraphOptions.hpp"
-#include "Position.hpp"
-#include "Size.hpp"
 #include "StringView.hpp"
 
+#include "geometry/Position.hpp"
+#include "geometry/Size.hpp"
 #include "impl/TypeTraits.hpp"
 
 #include <cstdint>
@@ -272,7 +272,7 @@ protected:
     virtual void printLinePart(const CharStyle style) noexcept { setStyle(this->style().withOverlay(style)); }
     /// Handle one argument passed to `print()` or `printLine()`.
     virtual void printLinePart(const CharAttributes attributes) noexcept {
-        setCharAttributes(attributes.resolvedWith(charAttributes()));
+        setCharAttributes(attributes.withBase(charAttributes()));
     }
     /// Handle one argument passed to `print()` or `printLine()`.
     virtual void printLinePart(const Char &charStr) noexcept { write(charStr); }

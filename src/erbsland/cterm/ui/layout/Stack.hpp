@@ -4,7 +4,7 @@
 
 #include "../Layout.hpp"
 
-#include "../../Orientation.hpp"
+#include "../../geometry/Orientation.hpp"
 
 #include <memory>
 
@@ -27,9 +27,17 @@ public:
     [[nodiscard]] static auto create(Orientation orientation) -> StackPtr;
 
 public:
+    /// Measure this stack from its visible children.
+    /// @param scope Measurement access.
+    /// @param proposal The proposed stack size.
+    [[nodiscard]] auto onMeasure(MeasureScope &scope, const LayoutProposal &proposal) noexcept
+        -> LayoutMetrics override;
     /// Recalculate all child rectangles inside this stack.
-    /// @param newSize The available stack size.
-    void onLayout(Size newSize) noexcept override;
+    /// @param scope The layout scope.
+    void onLayout(LayoutScope &scope) noexcept override;
+
+private:
+    [[nodiscard]] static auto saturatedAdd(Coordinate left, Coordinate right) noexcept -> Coordinate;
 
 private:
     Orientation _orientation{Orientation::Vertical};

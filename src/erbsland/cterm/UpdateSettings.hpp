@@ -3,8 +3,9 @@
 #pragma once
 
 #include "Char.hpp"
-#include "Size.hpp"
 #include "String.hpp"
+
+#include "geometry/Size.hpp"
 
 #include <utility>
 

@@ -43,13 +43,17 @@ def main():
     project_root = Path(__file__).parent.parent
     os.chdir(project_root)
 
-    # Step 1: Run clang-format
+    # Step 1: Regenerate static frame lookup tables
+    run_script("generate_common_box_frame_style.py")
+    run_script("generate_frame_border_joint_chars.py")
+
+    # Step 2: Run clang-format
     run_clang_format(directories)
 
-    # Step 2: Run generate_header_files.py
+    # Step 3: Run generate_header_files.py
     run_script("generate_header_files.py")
 
-    # Step 3: Run cleanup_includes.py
+    # Step 4: Run cleanup_includes.py
     run_script("cleanup_includes.py")
 
     print("All pre-commit tasks completed successfully.")

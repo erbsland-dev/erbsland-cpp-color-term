@@ -37,6 +37,12 @@ public:
     auto operator=(DimensionPolicy &&) -> DimensionPolicy & = default;
 
 public:
+    /// Compare two dimension policies.
+    auto operator==(const DimensionPolicy &other) const noexcept -> bool = default;
+    /// Compare two dimension policies.
+    auto operator!=(const DimensionPolicy &other) const noexcept -> bool = default;
+
+public:
     /// Get the policy type.
     /// @return The configured policy type.
     [[nodiscard]] auto type() const noexcept -> Type { return _type; }

@@ -6,8 +6,9 @@
 #include "Color.hpp"
 #include "Input.hpp"
 #include "MoveMode.hpp"
-#include "Size.hpp"
 #include "TerminalFlags.hpp"
+
+#include "geometry/Size.hpp"
 
 #include <memory>
 #include <optional>

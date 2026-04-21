@@ -4,10 +4,10 @@
 
 namespace erbsland::cterm::ui::layout::impl {
 
-auto LayoutConstraints::fromGeometry(const Geometry &geometry) noexcept -> LayoutConstraints {
+auto LayoutConstraints::fromMetrics(const LayoutMetrics &metrics) noexcept -> LayoutConstraints {
     return {
-        DimensionConstraints::fromGeometry(geometry, Orientation::Horizontal),
-        DimensionConstraints::fromGeometry(geometry, Orientation::Vertical)};
+        DimensionConstraints::fromMetrics(metrics, Orientation::Horizontal),
+        DimensionConstraints::fromMetrics(metrics, Orientation::Vertical)};
 }
 
 auto LayoutConstraints::resolve(const Size availableSize) const noexcept -> Size {

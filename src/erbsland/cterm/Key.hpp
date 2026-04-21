@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
+#include "KeyModifiers.hpp"
+
 #include "impl/CombinedChar.hpp"
 #include "impl/HashHelper.hpp"
 
@@ -59,12 +61,29 @@ public:
     /// Create a key with an explicit type and optional Unicode payload.
     /// @param type The key type.
     /// @param codePoint The Unicode value for `Type::Character`.
-    explicit Key(Type type, char32_t codePoint = 0) noexcept;
+    /// @param modifiers The modifiers pressed together with this key.
+    Key(Type type, char32_t codePoint = 0, KeyModifiers modifiers = {}) noexcept; // NOLINT(*-explicit-constructor)
+    /// Create a special key with modifiers.
+    /// @param type The key type.
+    /// @param modifiers The modifiers pressed together with this key.
+    Key(Type type, KeyModifiers modifiers) noexcept; // NOLINT(*-explicit-constructor)
+    /// Create a single-code-point character key.
+    /// @param codePoint The Unicode code point.
+    /// @param modifiers The modifiers pressed together with this key.
+    Key(char32_t codePoint, KeyModifiers modifiers = {}) noexcept; // NOLINT(*-explicit-constructor)
     /// Create a key with an explicit combined Unicode payload.
     /// @param type The key type.
     /// @param character The combined Unicode text for `Type::Character` or `Type::Combined`.
+    /// @param modifiers The modifiers pressed together with this key.
     /// @throws std::invalid_argument If `character` is not a supported Unicode character sequence.
-    Key(Type type, std::u32string_view character);
+    Key(Type type, std::u32string_view character, KeyModifiers modifiers = {});
+
+    // defaults
+    ~Key() = default;
+    Key(const Key &) = default;
+    Key(Key &&) = default;
+    auto operator=(const Key &) -> Key & = default;
+    auto operator=(Key &&) -> Key & = default;
 
 public: // operators
     /// Compare two key events for equality.
@@ -86,6 +105,12 @@ public: // operators
 public: // accessors
     /// Get the key type.
     [[nodiscard]] auto type() const noexcept -> Type { return _type; }
+    /// Get the modifiers pressed together with this key.
+    [[nodiscard]] auto modifiers() const noexcept -> const KeyModifiers & { return _modifiers; }
+    /// Test if a modifier is set.
+    [[nodiscard]] auto hasModifier(KeyModifier modifier) const noexcept -> bool { return _modifiers.has(modifier); }
+    /// Create a copy of this key without modifiers.
+    [[nodiscard]] auto withoutModifiers() const noexcept -> Key;
     /// Legacy ASCII accessor for `Type::Character`.
     /// @deprecated Use `unicode()` or `combined()` to support full Unicode input.
     /// @return The ASCII character for single-code-point character input, otherwise `0`.
@@ -100,7 +125,7 @@ public: // accessors
     [[nodiscard]] auto valid() const noexcept -> bool { return _type != None; }
     /// Get a hash for this key.
     [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
-        return impl::hashCreate(static_cast<uint8_t>(_type), _character.hash());
+        return impl::hashCreate(static_cast<uint8_t>(_type), _character.hash(), _modifiers.mask());
     }
 
 public: // conversion
@@ -140,6 +165,14 @@ private:
     [[nodiscard]] static auto findKeyTextDefinition(Type type) noexcept -> const KeyTextDefinition *;
     /// Normalize a key name for case-insensitive alias matching.
     [[nodiscard]] static auto normalizeKeyText(std::string text) noexcept -> std::string;
+    /// Remove parsed modifiers from the beginning of a key string.
+    [[nodiscard]] static auto parseModifiers(std::string &text) noexcept -> KeyModifiers;
+    /// Parse one modifier name.
+    [[nodiscard]] static auto parseModifierText(std::string_view text) noexcept -> std::optional<KeyModifier>;
+    /// Append modifier configuration text to a string.
+    static void appendModifierString(std::string &text, KeyModifiers modifiers);
+    /// Append modifier display text to a string.
+    static void appendModifierDisplayText(std::string &text, KeyModifiers modifiers);
     /// Wrap display text in square brackets when requested.
     [[nodiscard]] static auto wrapDisplayText(std::string_view text, bool useBrackets) -> std::string;
     /// Create a character or combined key from normalized Unicode input.
@@ -150,6 +183,7 @@ private:
 private:
     Type _type{None};
     impl::CombinedChar _character;
+    KeyModifiers _modifiers;
 };
 
 }

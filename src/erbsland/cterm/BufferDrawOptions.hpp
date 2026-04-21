@@ -2,9 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "Alignment.hpp"
 #include "CharCombinationStyle.hpp"
-#include "Rectangle.hpp"
+
+#include "geometry/Alignment.hpp"
+#include "geometry/Rectangle.hpp"
 
 namespace erbsland::cterm {
 

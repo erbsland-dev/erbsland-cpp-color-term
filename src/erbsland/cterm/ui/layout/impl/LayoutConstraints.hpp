@@ -26,10 +26,10 @@ public:
     auto operator=(LayoutConstraints &&) -> LayoutConstraints & = default;
 
 public:
-    /// Create layout constraints from a geometry description.
-    /// @param geometry The source geometry.
+    /// Create layout constraints from layout metrics.
+    /// @param metrics The source metrics.
     /// @return The extracted layout constraints.
-    [[nodiscard]] static auto fromGeometry(const Geometry &geometry) noexcept -> LayoutConstraints;
+    [[nodiscard]] static auto fromMetrics(const LayoutMetrics &metrics) noexcept -> LayoutConstraints;
 
     /// Resolve the final size for the available parent size.
     /// @param availableSize The available size inside the parent.

@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "Rectangle.hpp"
 #include "TextOptions.hpp"
+
+#include "geometry/Rectangle.hpp"
 
 #include <utility>
 

@@ -7,6 +7,7 @@
 
 #include "impl/paragraph/Layout.hpp"
 #include "impl/paragraph/Printer.hpp"
+#include "text/Style.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -400,8 +401,7 @@ auto Terminal::applySafeMargin(const Size terminalSize) const noexcept -> Size {
 
 void Terminal::initializeScreen() noexcept {
     _backend->initializePlatform();
-    _color = Color::reset();
-    _charAttributes = CharAttributes::reset();
+    _style = CharStyle::reset();
     testScreenSize();
     setCursorVisible(false);
     flush();
@@ -425,6 +425,9 @@ void Terminal::restoreScreen() noexcept {
     setDefaultColor();
     setCharAttributes(CharAttributes::reset());
     setCursorVisible(true);
+    if (isAlternateScreenActive()) {
+        setAlternateScreen(false);
+    }
     flush();
     _lineBuffer.shutdown();
     _backBuffer = {}; // free the back buffer resources
@@ -432,7 +435,7 @@ void Terminal::restoreScreen() noexcept {
 }
 
 void Terminal::write(const Char &character) noexcept {
-    const auto resolvedCharacter = character.withBase(_color, _charAttributes);
+    const auto resolvedCharacter = character.withBase(_style);
     setStyle(resolvedCharacter.style());
     _lineBuffer.write(resolvedCharacter);
     _lineBuffer.handleEmit();
@@ -440,7 +443,7 @@ void Terminal::write(const Char &character) noexcept {
 
 void Terminal::write(const StringView &str) noexcept {
     for (const auto &character : str) {
-        const auto resolvedCharacter = character.withBase(_color, _charAttributes);
+        const auto resolvedCharacter = character.withBase(_style);
         setStyle(resolvedCharacter.style());
         _lineBuffer.write(resolvedCharacter);
     }
@@ -522,11 +525,11 @@ auto Terminal::finishParagraphWithExplicitLineBreaks(
 }
 
 auto Terminal::color() const noexcept -> Color {
-    return _color;
+    return _style.color();
 }
 
 auto Terminal::charAttributes() const noexcept -> CharAttributes {
-    return _charAttributes;
+    return _style.attributes();
 }
 
 auto Terminal::supportedCharAttributes() const noexcept -> CharAttributes {
@@ -540,13 +543,13 @@ void Terminal::setForeground(Foreground color) noexcept {
     if (color == Foreground::Inherited) {
         color = Foreground::Default;
     }
-    if (color != _color.fg()) {
-        _color.setFg(color);
+    if (color != _style.fg()) {
+        _style.setFg(color);
         if (_backend->supportsColorCodes()) {
             _lineBuffer.write(std::format("\x1b[{}m", color.ansiCode()));
             _lineBuffer.handleEmit();
         } else {
-            _backend->emitColor(_color);
+            _backend->emitColor(_style.color());
         }
     }
 }
@@ -556,24 +559,24 @@ void Terminal::setCharAttributes(CharAttributes attributes) noexcept {
         return;
     }
     attributes = normalizedSupportedAttributes(attributes);
-    if (attributes == _charAttributes) {
+    if (attributes == _style.attributes()) {
         return;
     }
     const auto supportedCodeMask = static_cast<uint8_t>(
         _backend->supportedCharAttributes().mask() & _backend->supportedCharAttributeCodes().mask());
     const auto previousCodeAttributes =
-        CharAttributes::fromMasks(_charAttributes.enabledMask() & supportedCodeMask, supportedCodeMask);
+        CharAttributes::fromMasks(_style.attributes().enabledMask() & supportedCodeMask, supportedCodeMask);
     const auto newCodeAttributes =
         CharAttributes::fromMasks(attributes.enabledMask() & supportedCodeMask, supportedCodeMask);
     if (previousCodeAttributes != newCodeAttributes) {
         emitCharAttributeCodes(previousCodeAttributes, newCodeAttributes);
     }
     const auto callbackMask = static_cast<uint8_t>(_backend->supportedCharAttributes().mask() & ~supportedCodeMask);
-    if (((_charAttributes.enabledMask() ^ attributes.enabledMask()) & callbackMask) != 0) {
+    if (((_style.attributes().enabledMask() ^ attributes.enabledMask()) & callbackMask) != 0) {
         flush();
         _backend->emitCharAttributes(CharAttributes::fromMasks(attributes.enabledMask() & callbackMask, callbackMask));
     }
-    _charAttributes = attributes;
+    _style.setAttributes(attributes);
 }
 
 void Terminal::setBackground(Background color) noexcept {
@@ -583,13 +586,13 @@ void Terminal::setBackground(Background color) noexcept {
     if (color == Background::Inherited) {
         color = Background::Default;
     }
-    if (color != _color.bg()) {
-        _color.setBg(color);
+    if (color != _style.bg()) {
+        _style.setBg(color);
         if (_backend->supportsColorCodes()) {
             _lineBuffer.write(std::format("\x1b[{}m", color.ansiCode()));
             _lineBuffer.handleEmit();
         } else {
-            _backend->emitColor(_color);
+            _backend->emitColor(_style.color());
         }
     }
 }
@@ -604,22 +607,22 @@ void Terminal::setColor(Color color) noexcept {
     if (color.bg() == Background::Inherited) {
         color.setBg(Background::Default);
     }
-    if (color == _color) {
+    if (color == _style.color()) {
         return;
     }
     if (_backend->supportsColorCodes()) {
-        if (color.fg() != _color.fg() && color.bg() != _color.bg()) {
+        if (color.fg() != _style.fg() && color.bg() != _style.bg()) {
             _lineBuffer.write(std::format("\x1b[{};{}m", color.fg().ansiCode(), color.bg().ansiCode()));
-        } else if (color.fg() != _color.fg()) {
+        } else if (color.fg() != _style.fg()) {
             _lineBuffer.write(std::format("\x1b[{}m", color.fg().ansiCode()));
-        } else if (color.bg() != _color.bg()) {
+        } else if (color.bg() != _style.bg()) {
             _lineBuffer.write(std::format("\x1b[{}m", color.bg().ansiCode()));
         }
         _lineBuffer.handleEmit();
     } else {
         _backend->emitColor(color);
     }
-    _color = color;
+    _style.setColor(color);
 }
 
 auto Terminal::canUseLineBuffer() const noexcept -> bool {
@@ -629,9 +632,9 @@ auto Terminal::canUseLineBuffer() const noexcept -> bool {
 
 auto Terminal::normalizedSupportedAttributes(CharAttributes attributes) const noexcept -> CharAttributes {
     const auto supportedMask = _backend->supportedCharAttributes().mask();
-    attributes = attributes.resolvedWith(CharAttributes::reset());
+    attributes = attributes.withBase(CharAttributes::reset());
     return CharAttributes::fromMasks(attributes.enabledMask() & supportedMask, supportedMask)
-        .resolvedWith(CharAttributes::reset());
+        .withBase(CharAttributes::reset());
 }
 
 void Terminal::emitCharAttributeCodes(

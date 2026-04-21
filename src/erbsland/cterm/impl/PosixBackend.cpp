@@ -10,6 +10,7 @@
 #include <sys/select.h>
 #include <unistd.h>
 
+#include <algorithm>
 #include <iostream>
 #include <thread>
 
@@ -173,43 +174,96 @@ auto PosixBackend::waitForKey() -> Key {
 }
 
 auto PosixBackend::readDecodedKey(const OptionalTimeout timeout) -> Key {
-    constexpr auto cFollowUpReadTimeout = std::chrono::milliseconds{1};
-
     while (true) {
         if (_pendingKeyInput.empty()) {
+            _pendingEscapeStarted.reset();
             appendInputChunks(timeout);
             if (_pendingKeyInput.empty()) {
                 return {};
             }
         }
         if (_pendingKeyInput[0] == '\x1b') {
-            appendInputChunks(cFollowUpReadTimeout);
+            markPendingEscapeSequence();
+            appendInputChunks(escapeSequenceWaitTimeout(timeout));
         }
         const auto parseResult = KeyDecoder{_pendingKeyInput}.parseConsoleInputPrefix();
         if (parseResult.status() == U8ParseStatus::Parsed) {
-            _pendingKeyInput.erase(0, parseResult.consumedByteCount());
+            erasePendingKeyInput(parseResult.consumedByteCount());
             return parseResult.key();
         }
         if (parseResult.status() == U8ParseStatus::NeedMoreData) {
-            appendInputChunks(timeout);
+            if (escapeSequenceExpired()) {
+                if (_pendingKeyInput == "\x1b") {
+                    erasePendingKeyInput(1);
+                    return Key{Key::Escape};
+                }
+                _pendingKeyInput.clear();
+                _pendingEscapeStarted.reset();
+                return {};
+            }
+            appendInputChunks(escapeSequenceWaitTimeout(timeout));
             const auto retriedResult = KeyDecoder{_pendingKeyInput}.parseConsoleInputPrefix();
             if (retriedResult.status() == U8ParseStatus::Parsed) {
-                _pendingKeyInput.erase(0, retriedResult.consumedByteCount());
+                erasePendingKeyInput(retriedResult.consumedByteCount());
                 return retriedResult.key();
             }
             if (retriedResult.status() == U8ParseStatus::Invalid && retriedResult.consumedByteCount() > 0) {
-                _pendingKeyInput.erase(0, retriedResult.consumedByteCount());
+                erasePendingKeyInput(retriedResult.consumedByteCount());
                 continue;
+            }
+            if (escapeSequenceExpired()) {
+                if (_pendingKeyInput == "\x1b") {
+                    erasePendingKeyInput(1);
+                    return Key{Key::Escape};
+                }
+                _pendingKeyInput.clear();
+                _pendingEscapeStarted.reset();
             }
             return {};
         }
         if (parseResult.consumedByteCount() == 0) {
             _pendingKeyInput.clear();
+            _pendingEscapeStarted.reset();
             return {};
         }
-        _pendingKeyInput.erase(0, parseResult.consumedByteCount());
+        erasePendingKeyInput(parseResult.consumedByteCount());
     }
     return {};
+}
+
+void PosixBackend::markPendingEscapeSequence() noexcept {
+    if (!_pendingEscapeStarted.has_value()) {
+        _pendingEscapeStarted = clock::now();
+    }
+}
+
+auto PosixBackend::escapeSequenceExpired() const noexcept -> bool {
+    return _pendingEscapeStarted.has_value() && clock::now() - *_pendingEscapeStarted >= cEscapeSequenceTimeout;
+}
+
+auto PosixBackend::escapeSequenceWaitTimeout(const OptionalTimeout timeout) const noexcept
+    -> std::chrono::milliseconds {
+    auto remaining = cEscapeSequenceTimeout;
+    if (_pendingEscapeStarted.has_value()) {
+        remaining = std::chrono::duration_cast<std::chrono::milliseconds>(
+            cEscapeSequenceTimeout - (clock::now() - *_pendingEscapeStarted));
+        if (remaining < std::chrono::milliseconds::zero()) {
+            remaining = std::chrono::milliseconds::zero();
+        }
+    }
+    if (!timeout.has_value()) {
+        return remaining;
+    }
+    return std::min(*timeout, remaining);
+}
+
+void PosixBackend::erasePendingKeyInput(const std::size_t byteCount) {
+    _pendingKeyInput.erase(0, byteCount);
+    if (_pendingKeyInput.empty() || _pendingKeyInput[0] != '\x1b') {
+        _pendingEscapeStarted.reset();
+    } else {
+        _pendingEscapeStarted = clock::now();
+    }
 }
 
 auto PosixBackend::readLine() -> std::string {

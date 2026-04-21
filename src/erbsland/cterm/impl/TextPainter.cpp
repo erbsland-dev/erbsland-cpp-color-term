@@ -10,7 +10,7 @@
 namespace erbsland::cterm::impl {
 
 void TextPainter::drawText(Position pos, const StringView &str) {
-    if (str.empty() || !size().contains(pos)) {
+    if (str.empty()) {
         return;
     }
     const auto x = pos.x();
@@ -24,7 +24,7 @@ void TextPainter::drawText(Position pos, const StringView &str) {
             continue;
         }
         if (rect().contains(pos)) {
-            set(pos, character.withBaseColor(get(pos).color()));
+            set(pos, character.withBase(get(pos).color()));
         }
         pos += Position{character.displayWidth(), 0};
     }
@@ -219,7 +219,7 @@ void TextPainter::applyTextLines(
             if (this->rect().contains(pos)) {
                 auto finalColor = colorForTextPosition(options, character, pos, animationCycle);
                 finalColor = get(pos).color().overlayWith(finalColor);
-                set(pos, character.withColorOverlay(finalColor));
+                set(pos, character.withOverlay(finalColor));
             }
             pos = pos + Position{characterWidth, 0};
         }

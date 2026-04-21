@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BlockKind.hpp"
+#include "ListPrefix.hpp"
 
 #include "../../../String.hpp"
 #include "../../Style.hpp"
@@ -10,7 +11,6 @@
 #include <algorithm>
 #include <optional>
 #include <utility>
-#include <vector>
 
 namespace erbsland::cterm::text::impl::text_node_renderer {
 
@@ -56,8 +56,8 @@ public:
     [[nodiscard]] auto leadingText() const noexcept -> const std::optional<String> & { return _leadingText; }
     /// Access optional text anchored at the end of a horizontal rule.
     [[nodiscard]] auto trailingText() const noexcept -> const std::optional<String> & { return _trailingText; }
-    /// Access the optional paragraph text override used only by `renderTo()`.
-    [[nodiscard]] auto terminalText() const noexcept -> const std::optional<String> & { return _terminalText; }
+    /// Access the optional list prefix attached to the first block of a list item.
+    [[nodiscard]] auto listPrefix() const noexcept -> const std::optional<ListPrefix> & { return _listPrefix; }
     /// Access the resolved block rule, including inherited margins.
     [[nodiscard]] auto style() const noexcept -> const StyleRule & { return _style; }
     /// Access the resolved block rule, including inherited margins.
@@ -72,9 +72,9 @@ public:
     /// Replace the styled text payload for paragraph and filled-line blocks.
     /// @param text The new styled text payload.
     void setText(String text) { _text = std::move(text); }
-    /// Replace the paragraph text override used only by `renderTo()`.
-    /// @param terminalText The new terminal text override.
-    void setTerminalText(String terminalText) { _terminalText = std::move(terminalText); }
+    /// Attach a list prefix to this block.
+    /// @param listPrefix The list prefix to attach.
+    void setListPrefix(ListPrefix listPrefix) { _listPrefix = std::move(listPrefix); }
     /// Increase the plain-text first-line indentation.
     /// @param indent The additional indentation to add.
     void addStringFirstLineIndent(const int indent) noexcept { _stringFirstLineIndent += indent; }
@@ -91,14 +91,11 @@ private:
     String _text;                          ///< The styled text payload for paragraph and filled-line blocks.
     std::optional<String> _leadingText;    ///< Optional text anchored at the start of a horizontal rule.
     std::optional<String> _trailingText;   ///< Optional text anchored at the end of a horizontal rule.
-    std::optional<String> _terminalText;   ///< Optional paragraph text override used only by `renderTo()`.
+    std::optional<ListPrefix> _listPrefix; ///< Optional prefix for the first block of a list item.
     StyleRule _style;                      ///< The resolved block rule, including inherited margins.
     std::optional<Char> _fillCharacter;    ///< Optional fill character for horizontal rules and headings.
     int _stringFirstLineIndent{0};         ///< Additional plain-text indentation used only by `renderString()`.
     int _stringWrappedLineIndent{0};       ///< Additional plain-text indentation for wrapped lines.
 };
-
-/// The planned block list used by all output paths.
-using RenderBlocks = std::vector<RenderBlock>;
 
 }

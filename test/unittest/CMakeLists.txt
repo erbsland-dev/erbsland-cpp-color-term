@@ -3,12 +3,10 @@
 
 cmake_minimum_required(VERSION 3.28)
 
-set(_erbsland_color_term_unittest_target erbsland-color-term-unittest)
-
-add_executable(${_erbsland_color_term_unittest_target})
-erbsland_set_required_compiler_options(${_erbsland_color_term_unittest_target})
-target_link_libraries(${_erbsland_color_term_unittest_target} PRIVATE erbsland-color-term)
-target_include_directories(${_erbsland_color_term_unittest_target} PRIVATE
+add_executable(erbsland-color-term-unittest)
+erbsland_set_required_compiler_options(erbsland-color-term-unittest)
+target_link_libraries(erbsland-color-term-unittest PRIVATE erbsland-color-term)
+target_include_directories(erbsland-color-term-unittest PRIVATE
         ${PROJECT_SOURCE_DIR}/demo
         ${PROJECT_SOURCE_DIR}/src
         src
@@ -17,5 +15,5 @@ target_include_directories(${_erbsland_color_term_unittest_target} PRIVATE
 add_subdirectory(src)
 
 erbsland_unittest(
-        TARGET ${_erbsland_color_term_unittest_target}
+        TARGET erbsland-color-term-unittest
 )

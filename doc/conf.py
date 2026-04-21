@@ -58,13 +58,17 @@ breathe_doxygen_config_options = {
 
 
 def _swap_tr(match):
-    return match.group(2) + " " + match.group(1) + " " + match.group(3)
+    return match.group("return_type") + " " + match.group("declarator") + " " + match.group("suffix")
 
 
 def preprocess_sources():
     print("Preprocessing sources...")
 
-    re_swap_tr = re.compile(r"auto\s+(.*?)\s+->\s*(.*?)\s*(override\s*[;{]|=\s*(?:0|default)\s*;|[;{])")
+    re_swap_tr = re.compile(
+        r"auto\s+(?P<declarator>.*?)\s+->\s*"
+        r"(?P<return_type>.*?)\s*"
+        r"(?P<suffix>(?:(?:override|final)\s+)*(?:override|final)?\s*[;{]|=\s*(?:0|default|delete)\s*;)"
+    )
     re_std_helpers = re.compile(r"(?s)template\s*<>\s*\nstruct.*\{\n.*\n\};\n")
     re_macros = re.compile(r"""(?x)
         ERBSLAND_COLOR_TERM_[A-Z_]+ .*\n

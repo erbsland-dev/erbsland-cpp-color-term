@@ -4,6 +4,8 @@
 
 #include "../Surface.hpp"
 
+#include <optional>
+
 namespace erbsland::cterm::ui::surface {
 
 class TextBox;
@@ -47,8 +49,17 @@ public:
     /// Replace the current text rendering options.
     /// @param textOptions The new text options.
     void setTextOptions(const TextOptions &textOptions);
+    /// Access the preferred content line width.
+    /// @return The preferred line width, or an empty value for natural unwrapped width.
+    [[nodiscard]] auto preferredLineWidth() const noexcept -> std::optional<Coordinate>;
+    /// Replace the preferred content line width.
+    /// @param width The preferred line width, or an empty value for natural unwrapped width.
+    void setPreferredLineWidth(std::optional<Coordinate> width);
 
 public:
+    /// Measure this text box for a proposed width.
+    [[nodiscard]] auto onMeasure(MeasureScope &scope, const LayoutProposal &proposal) noexcept
+        -> LayoutMetrics override;
     /// Render the text into the target rectangle.
     /// @param buffer The destination buffer.
     /// @param context The paint context.
@@ -56,10 +67,15 @@ public:
 
 private:
     void updatePreferredSize();
+    [[nodiscard]] auto measuredTextSize(const LayoutProposal &proposal, const ThemeContext &themeContext) const noexcept
+        -> Size;
+    [[nodiscard]] auto preferredContentSize() const noexcept -> Size;
+    [[nodiscard]] auto contentSizeForWidth(Coordinate width) const noexcept -> Size;
 
 private:
-    String _text;             ///< The text to be displayed in the text box.
-    TextOptions _textOptions; ///< The text options for rendering the text.
+    String _text;                                  ///< The text to be displayed in the text box.
+    TextOptions _textOptions;                      ///< The text options for rendering the text.
+    std::optional<Coordinate> _preferredLineWidth; ///< Preferred readable content width.
 };
 
 }

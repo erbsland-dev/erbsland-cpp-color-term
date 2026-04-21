@@ -171,11 +171,13 @@ cell in the visible rectangle.
 
 Instead they:
 
-#. update the relevant remap vector
-#. collect the stored rows or columns that became free
+#. update the relevant remap vector in place
+#. expose the stored rows or columns that became free as a contiguous span
 #. refill only those recycled stored rows or columns
 
 This keeps the work proportional to the number of affected lines instead of the full visible area.
+The remap helpers use rotations inside the existing map storage, so repeated scrolling-style operations do not allocate
+temporary coordinate vectors.
 
 The helper functions are:
 
@@ -220,9 +222,9 @@ Rotate and Move
 
 ``moveRows()`` and ``moveColumns()`` are a little more involved:
 
-* ``moveInMap()`` extracts the moved span
+* ``moveInMap()`` rotates the existing map into its new order
 * it computes which lines remain visible and which drop out of range
-* dropped stored lines are returned as ``recycled``
+* dropped stored lines are returned as a recycled coordinate span
 * the caller then refills only those recycled lines
 
 This design keeps the policy separate from the storage update.

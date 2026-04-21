@@ -4,11 +4,11 @@
 cmake_minimum_required(VERSION 3.28)
 
 add_subdirectory(impl)
+add_subdirectory(geometry)
 add_subdirectory(text)
+add_subdirectory(theme)
 add_subdirectory(ui)
 target_sources(erbsland-color-term PRIVATE
-        Alignment.hpp
-        Anchor.hpp
         Backend.hpp
         Bitmap.cpp
         Bitmap.hpp
@@ -22,6 +22,7 @@ target_sources(erbsland-color-term PRIVATE
         BufferView.hpp
         Char.cpp
         Char.hpp
+        WriteClippedBuffer.hpp
         CharAttributes.hpp
         CharStyle.hpp
         Char16Style.cpp
@@ -38,44 +39,41 @@ target_sources(erbsland-color-term PRIVATE
         ColorRole.hpp
         ColorSequence.cpp
         ColorSequence.hpp
-        Coordinate.hpp
         CropEdges.hpp
-        Direction.cpp
-        Direction.hpp
         EncodingErrors.hpp
         FastCharSet.cpp
         FastCharSet.hpp
         Font.cpp
         Font.hpp
         FontGlyph.hpp
+        FrameBorder.cpp
+        FrameBorder.hpp
+        FrameBorderElement.hpp
         FrameDrawOptions.cpp
         FrameDrawOptions.hpp
         FrameStyle.hpp
+        GridLayout.cpp
+        GridLayout.hpp
         Input.hpp
         InputDefinition.cpp
         InputDefinition.hpp
         IndexRange.hpp
         Key.cpp
         Key.hpp
-        Margins.hpp
+        KeyModifiers.hpp
+        Keys.cpp
+        Keys.hpp
         MoveMode.hpp
-        Orientation.hpp
         ParagraphBackgroundMode.hpp
         ParagraphIndents.hpp
         ParagraphOnError.hpp
         ParagraphOptions.cpp
         ParagraphOptions.hpp
         ParagraphSpacing.hpp
-        Position.cpp
-        Position.hpp
         ReadableBuffer.cpp
         ReadableBuffer.hpp
-        Rectangle.cpp
-        Rectangle.hpp
         RemappedBuffer.cpp
         RemappedBuffer.hpp
-        Size.cpp
-        Size.hpp
         String.cpp
         String.hpp
         StringView.cpp

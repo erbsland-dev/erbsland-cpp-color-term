@@ -9,8 +9,10 @@
 
 #include <array>
 #include <cstddef>
+#include <optional>
 #include <string_view>
 #include <utility>
+#include <vector>
 
 namespace erbsland::cterm::impl {
 
@@ -67,15 +69,21 @@ public:
     [[nodiscard]] auto decodeConsoleInput() const noexcept -> Key;
 
 private:
-    struct ConsoleSequenceDefinition final {
+    struct SimpleSequenceDefinition final {
         std::string_view sequence;
         Key::Type type;
     };
 
 private:
     [[nodiscard]] static auto createCharacterKey(const CombinedChar &character) noexcept -> Key;
-    [[nodiscard]] static auto consoleSequenceDefinitions() noexcept
-        -> const std::array<ConsoleSequenceDefinition, 32> &;
+    [[nodiscard]] static auto simpleSequenceDefinitions() noexcept -> const std::array<SimpleSequenceDefinition, 6> &;
+    [[nodiscard]] static auto parseModifierParameter(int value) noexcept -> std::optional<KeyModifiers>;
+    [[nodiscard]] static auto parseCsiParameters(std::string_view text) noexcept -> std::optional<std::vector<int>>;
+    [[nodiscard]] static auto findCsiFinalByte(std::string_view text) noexcept -> std::optional<std::size_t>;
+    [[nodiscard]] static auto keyFromCsiFinal(char finalByte) noexcept -> Key::Type;
+    [[nodiscard]] static auto keyFromCsiTildeParameter(int parameter) noexcept -> Key::Type;
+    [[nodiscard]] static auto decodeCsi(std::string_view text) noexcept -> ParseResult;
+    [[nodiscard]] static auto decodeSs3(std::string_view text) noexcept -> ParseResult;
     [[nodiscard]] auto parseUtf8CodePointPrefix(std::size_t offset) const noexcept -> U8ParseResult;
 
 private:

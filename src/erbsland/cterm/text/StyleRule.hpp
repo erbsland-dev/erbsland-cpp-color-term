@@ -5,7 +5,7 @@
 #include "StyleMarker.hpp"
 
 #include "../CharStyle.hpp"
-#include "../Coordinate.hpp"
+#include "../geometry/Coordinate.hpp"
 #include "../ParagraphIndents.hpp"
 #include "../String.hpp"
 
@@ -81,33 +81,33 @@ public:
     /// @return Reference to this rule.
     auto setWrappedLineIndent(int indent) noexcept -> StyleRule &;
 
-    /// Get the optional prefix inserted before the block content.
+    /// Get the optional prefix inserted before the rendered content.
     [[nodiscard]] auto prefix() const noexcept -> const std::optional<String> & { return _prefix; }
-    /// Set the optional prefix inserted before the block content.
+    /// Set the optional prefix inserted before the rendered content.
     /// @param prefix The prefix string.
     /// @return Reference to this rule.
     auto setPrefix(String prefix) -> StyleRule &;
-    /// Set the optional prefix inserted before the block content.
+    /// Set the optional prefix inserted before the rendered content.
     /// @param prefix The prefix text.
     /// @param style Optional style for the prefix text.
     /// @return Reference to this rule.
     auto setPrefix(std::u32string_view prefix, const CharStyle &style = {}) -> StyleRule &;
-    /// Remove any configured block prefix.
+    /// Remove any configured prefix.
     /// @return Reference to this rule.
     auto clearPrefix() noexcept -> StyleRule &;
 
-    /// Get the optional suffix appended after the block content.
+    /// Get the optional suffix appended after the rendered content.
     [[nodiscard]] auto suffix() const noexcept -> const std::optional<String> & { return _suffix; }
-    /// Set the optional suffix appended after the block content.
+    /// Set the optional suffix appended after the rendered content.
     /// @param suffix The suffix string.
     /// @return Reference to this rule.
     auto setSuffix(String suffix) -> StyleRule &;
-    /// Set the optional suffix appended after the block content.
+    /// Set the optional suffix appended after the rendered content.
     /// @param suffix The suffix text.
     /// @param style Optional style for the suffix text.
     /// @return Reference to this rule.
     auto setSuffix(std::u32string_view suffix, const CharStyle &style = {}) -> StyleRule &;
-    /// Remove any configured block suffix.
+    /// Remove any configured suffix.
     /// @return Reference to this rule.
     auto clearSuffix() noexcept -> StyleRule &;
 
@@ -122,12 +122,6 @@ public:
     /// @param style Optional style for the fill character.
     /// @return Reference to this rule.
     auto setLineFill(char32_t codePoint, const CharStyle &style = {}) noexcept -> StyleRule &;
-    /// Set the fill character for filled headings or custom separators.
-    /// @param codePoint The fill character code point.
-    /// @param color The fill character color.
-    /// @param attributes The fill character attributes.
-    /// @return Reference to this rule.
-    auto setLineFill(char32_t codePoint, Color color, CharAttributes attributes = {}) noexcept -> StyleRule &;
     /// Remove any configured fill character.
     /// @return Reference to this rule.
     auto clearLineFill() noexcept -> StyleRule &;
@@ -167,8 +161,8 @@ public:
 private:
     CharStyle _textStyle;          ///< Text overlay applied to inline or block content.
     ParagraphIndents _indents;     ///< Block indentation and margins.
-    std::optional<String> _prefix; ///< Optional prefix inserted before the block content.
-    std::optional<String> _suffix; ///< Optional suffix appended after the block content.
+    std::optional<String> _prefix; ///< Optional prefix inserted before the rendered content.
+    std::optional<String> _suffix; ///< Optional suffix appended after the rendered content.
     std::optional<Char> _lineFill; ///< Optional fill character for filled headings or separators.
     StyleMarker _marker;           ///< Optional list marker.
 };

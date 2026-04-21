@@ -25,7 +25,13 @@ namespace erbsland::cterm::impl {
 std::mutex WindowsBackend::_instanceMutex;
 WindowsBackend *WindowsBackend::_instance = nullptr;
 
-WindowsBackend::WindowsBackend(TerminalFlags terminalFlags) : _terminalFlags{terminalFlags} {
+struct WindowsBackend::WindowsPrivate {
+    HANDLE outputHandle{INVALID_HANDLE_VALUE};
+};
+
+WindowsBackend::WindowsBackend(const TerminalFlags terminalFlags) :
+    _terminalFlags{terminalFlags}, _windows{std::make_unique<WindowsPrivate>()} {
+
     // called once per application.
     _instance = this;
     if (!_terminalFlags.has(TerminalFlag::NoSignalHandling)) {
@@ -44,10 +50,15 @@ WindowsBackend::~WindowsBackend() {
 }
 
 void WindowsBackend::initializePlatform() {
-    enableUtf8Mode();
-    enableAnsiMode();
-    _cursorVisible = changeCursorVisibility(false);
-    _cursorStateSaved = true;
+    _windows->outputHandle = ::GetStdHandle(STD_OUTPUT_HANDLE);
+    const auto screenSize = detectScreenSize();
+    (void)screenSize;
+    if (_isInteractive) {
+        enableUtf8Mode();
+        enableAnsiMode();
+        _cursorVisible = changeCursorVisibility(false);
+        _cursorStateSaved = true;
+    }
     _initialized = true;
 }
 
@@ -60,12 +71,16 @@ void WindowsBackend::restorePlatform() {
         changeCursorVisibility(_cursorVisible);
     }
     if (_isAlternateScreenActive) {
-        std::cout << "\x1b[?1049l"; // disable alternative screen buffer
+        emitText("\x1b[?1049l"); // disable alternative screen buffer
     }
-    std::cout << "\x1b[0m";         // restore to default color
-    std::cout << "\x1b[?25h";       // make the cursor visible.
-    std::cout << "\n";
-    std::cout.flush();
+    if (_isInteractive) {
+        emitText(
+            "\x1b[0m"   // restore to default color
+            "\x1b[?25h" // make the cursor visible.
+            "\n");
+    }
+    emitFlush();
+    _initialized = false;
 }
 
 auto WindowsBackend::supportsColorCodes() const noexcept -> bool {
@@ -85,40 +100,85 @@ bool WindowsBackend::supportsAlternateScreenBufferCodes() const noexcept {
 }
 
 auto WindowsBackend::isInteractive() const noexcept -> bool {
-    return detectVisibleConsoleSize().has_value();
+    return _isInteractive;
 }
 
 auto WindowsBackend::detectScreenSize() -> std::optional<Size> {
-    return detectVisibleConsoleSize();
-}
-
-auto WindowsBackend::detectVisibleConsoleSize() noexcept -> std::optional<Size> {
-    const auto outputHandle = ::GetStdHandle(STD_OUTPUT_HANDLE);
-    if (outputHandle == nullptr || outputHandle == INVALID_HANDLE_VALUE) {
+    if (_windows->outputHandle == nullptr || _windows->outputHandle == INVALID_HANDLE_VALUE) {
+        _isInteractive = false;
         return std::nullopt;
     }
     CONSOLE_SCREEN_BUFFER_INFO info{};
-    if (::GetConsoleScreenBufferInfo(outputHandle, &info) == 0) {
+    if (::GetConsoleScreenBufferInfo(_windows->outputHandle, &info) == 0) {
+        _isInteractive = false;
         return std::nullopt;
     }
     const auto width = static_cast<int>(info.srWindow.Right - info.srWindow.Left + 1);
     const auto height = static_cast<int>(info.srWindow.Bottom - info.srWindow.Top + 1);
     if (width <= 0 || height <= 0) {
+        _isInteractive = false;
         return std::nullopt;
     }
+    _isInteractive = true;
     return Size{width, height};
 }
 
-void WindowsBackend::setCursorVisible(bool visible) {
+void WindowsBackend::setCursorVisible(const bool visible) {
     changeCursorVisibility(visible);
 }
 
-void WindowsBackend::emitText(std::string_view text) {
-    std::cout.write(text.data(), static_cast<std::streamsize>(text.size()));
+void WindowsBackend::emitText(const std::string_view text) {
+    if (text.empty()) {
+        return;
+    }
+    if (_windows->outputHandle == nullptr || _windows->outputHandle == INVALID_HANDLE_VALUE) {
+        std::cout.write(text.data(), static_cast<std::streamsize>(text.size()));
+        return;
+    }
+    DWORD written{};
+    std::size_t index = 0;
+    if (_isInteractive) {
+        const auto wideLength =
+            ::MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), nullptr, 0);
+        if (wideLength <= 0) {
+            return;
+        }
+        std::wstring wide(static_cast<size_t>(wideLength), L'\0');
+        ::MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), wide.data(), wideLength);
+        while (index < wide.size()) {
+            ::WriteConsoleW(
+                _windows->outputHandle,
+                wide.data() + index,
+                static_cast<DWORD>(wide.size() - index),
+                &written,
+                nullptr);
+            index += written;
+            if (index < wide.size()) {
+                std::this_thread::yield();
+            }
+        }
+    } else {
+        while (index < text.size()) {
+            ::WriteFile(
+                _windows->outputHandle,
+                text.data() + index,
+                static_cast<DWORD>(text.size() - index),
+                &written,
+                nullptr);
+            index += written;
+            if (index < text.size()) {
+                std::this_thread::yield();
+            }
+        }
+    }
 }
 
 void WindowsBackend::emitFlush() {
-    std::cout.flush();
+    if (_windows->outputHandle == nullptr || _windows->outputHandle == INVALID_HANDLE_VALUE) {
+        std::cout.flush();
+        return;
+    }
+    ::FlushFileBuffers(_windows->outputHandle);
 }
 
 void WindowsBackend::setAlternateScreenBuffer(const bool enabled) {
@@ -189,119 +249,120 @@ auto WindowsBackend::readKeyFromConsole(const OptionalTimeout timeout) -> Key {
         if (keyEvent.bKeyDown == 0) {
             continue; // consume, ignore
         }
+        const auto keyModifiers = keyModifiersFromControlState(keyEvent.dwControlKeyState);
 
         switch (keyEvent.wVirtualKeyCode) {
         case VK_UP:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Up}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Up, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_DOWN:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Down}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Down, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_LEFT:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Left}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Left, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_RIGHT:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Right}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Right, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_RETURN:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Enter}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Enter, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_TAB:
             flushPendingTextInput();
             if ((keyEvent.dwControlKeyState & SHIFT_PRESSED) != 0) {
                 enqueueKey(Key{Key::BackTab}, keyEvent.wRepeatCount);
             } else {
-                enqueueKey(Key{Key::Tab}, keyEvent.wRepeatCount);
+                enqueueKey(Key{Key::Tab, keyModifiers}, keyEvent.wRepeatCount);
             }
             break;
         case VK_SPACE:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Space}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Space, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_ESCAPE:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Escape}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Escape, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_BACK:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Backspace}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Backspace, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_INSERT:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Insert}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Insert, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_DELETE:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Delete}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Delete, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_HOME:
             flushPendingTextInput();
-            enqueueKey(Key{Key::Home}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::Home, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_END:
             flushPendingTextInput();
-            enqueueKey(Key{Key::End}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::End, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_PRIOR:
             flushPendingTextInput();
-            enqueueKey(Key{Key::PageUp}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::PageUp, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_NEXT:
             flushPendingTextInput();
-            enqueueKey(Key{Key::PageDown}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::PageDown, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F1:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F1}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F1, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F2:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F2}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F2, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F3:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F3}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F3, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F4:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F4}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F4, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F5:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F5}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F5, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F6:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F6}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F6, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F7:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F7}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F7, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F8:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F8}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F8, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F9:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F9}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F9, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F10:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F10}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F10, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F11:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F11}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F11, keyModifiers}, keyEvent.wRepeatCount);
             break;
         case VK_F12:
             flushPendingTextInput();
-            enqueueKey(Key{Key::F12}, keyEvent.wRepeatCount);
+            enqueueKey(Key{Key::F12, keyModifiers}, keyEvent.wRepeatCount);
             break;
         default:
             if (const auto codePoint = decodeUtf16CodeUnit(static_cast<char16_t>(keyEvent.uChar.UnicodeChar));
@@ -318,6 +379,20 @@ auto WindowsBackend::readKeyFromConsole(const OptionalTimeout timeout) -> Key {
     const auto key = _pendingKeys.front();
     _pendingKeys.pop_front();
     return key;
+}
+
+auto WindowsBackend::keyModifiersFromControlState(const uint32_t controlKeyState) noexcept -> KeyModifiers {
+    auto modifiers = KeyModifiers{};
+    if ((controlKeyState & SHIFT_PRESSED) != 0) {
+        modifiers.set(KeyModifier::Shift);
+    }
+    if ((controlKeyState & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED)) != 0) {
+        modifiers.set(KeyModifier::Control);
+    }
+    if ((controlKeyState & (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED)) != 0) {
+        modifiers.set(KeyModifier::Alt);
+    }
+    return modifiers;
 }
 
 auto WindowsBackend::readLine() -> std::string {
@@ -356,25 +431,26 @@ void WindowsBackend::enableUtf8Mode() {
 }
 
 void WindowsBackend::enableAnsiMode() {
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (_windows->outputHandle == nullptr || _windows->outputHandle == INVALID_HANDLE_VALUE) {
+        return;
+    }
     DWORD mode = 0;
-    GetConsoleMode(hOut, &mode);
+    GetConsoleMode(_windows->outputHandle, &mode);
     mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-    SetConsoleMode(hOut, mode);
+    SetConsoleMode(_windows->outputHandle, mode);
 }
 
 auto WindowsBackend::changeCursorVisibility(bool visible) -> bool {
-    const auto outputHandle = ::GetStdHandle(STD_OUTPUT_HANDLE);
-    if (outputHandle == nullptr || outputHandle == INVALID_HANDLE_VALUE) {
-        return true;
+    if (_windows->outputHandle == nullptr || _windows->outputHandle == INVALID_HANDLE_VALUE) {
+        return false;
     }
     CONSOLE_CURSOR_INFO cursorInfo{};
-    if (::GetConsoleCursorInfo(outputHandle, &cursorInfo) == 0) {
+    if (::GetConsoleCursorInfo(_windows->outputHandle, &cursorInfo) == 0) {
         return true;
     }
-    bool previousState = cursorInfo.bVisible != FALSE;
+    const bool previousState = cursorInfo.bVisible != FALSE;
     cursorInfo.bVisible = visible ? TRUE : FALSE;
-    ::SetConsoleCursorInfo(outputHandle, &cursorInfo);
+    ::SetConsoleCursorInfo(_windows->outputHandle, &cursorInfo);
     return previousState;
 }
 

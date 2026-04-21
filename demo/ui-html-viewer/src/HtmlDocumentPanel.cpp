@@ -7,11 +7,10 @@
 namespace demo::ui_html_viewer {
 
 HtmlDocumentPanel::HtmlDocumentPanel(ProtectedTag protectedTag) noexcept : Panel{protectedTag} {
-    setBackground(Char{U' ', bg::Black});
 }
 
 void HtmlDocumentPanel::initializeUi() {
-    addChild(_view);
+    addSurface(_view);
 }
 
 void HtmlDocumentPanel::setHtml(std::string html) {
@@ -34,9 +33,9 @@ auto HtmlDocumentPanel::view() const noexcept -> const ui::ScrollingBufferViewPt
     return _view;
 }
 
-void HtmlDocumentPanel::onLayout(const Size newParentSize) noexcept {
-    Panel::onLayout(newParentSize);
-    renderDocumentIfRequired(_view->rectangle().width());
+void HtmlDocumentPanel::onLayout(ui::LayoutScope &scope) noexcept {
+    scope.place(_view, Rectangle{Position{}, scope.size()});
+    renderDocumentIfRequired(scope.size().width());
 }
 
 void HtmlDocumentPanel::renderDocumentIfRequired(const Coordinate contentWidth) {
@@ -57,7 +56,7 @@ void HtmlDocumentPanel::renderDocumentIfRequired(const Coordinate contentWidth) 
     _view->setSource(_documentBuffer);
     _renderedContentWidth = normalizedWidth;
     _documentDirty = false;
-    setPaintOutdated();
+    flags().setPaintOutdated();
 }
 
 }

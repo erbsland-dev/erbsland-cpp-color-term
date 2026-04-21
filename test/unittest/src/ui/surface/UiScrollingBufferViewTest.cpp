@@ -1,12 +1,10 @@
 // Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
 // SPDX-License-Identifier: Apache-2.0
 
-#include "BufferTestHelper.hpp"
+#include "support/BufferTestHelper.hpp"
 
 #include <erbsland/cterm/ui/surface/ScrollingBufferView.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
-
-namespace ui = erbsland::cterm::ui;
 
 TESTED_TARGETS(UiScrollingBufferView)
 class UiScrollingBufferViewTest final : public UNITTEST_SUBCLASS(BufferTestHelper) {
@@ -22,8 +20,8 @@ public:
         auto buffer = Buffer{Size{3, 2}, Char{U'.'}};
 
         view->setRectangle(Rectangle{0, 0, 3, 2});
-        view->onLayout(Size{3, 2});
-        view->onPaint(buffer, ui::PaintContext{buffer.rect()});
+        view->layout(Size{3, 2}, ui::LayoutContext{});
+        view->onPaint(buffer, ui::PaintContext{buffer.rect(), buffer.rect(), buffer.rect(), ui::ThemeContext{}});
 
         requireRowsEqual(
             buffer,
@@ -31,12 +29,12 @@ public:
                 "123",
                 "ABC",
             });
-        REQUIRE_EQUAL(view->viewRect(), Rectangle(0, 0, 3, 2));
+        REQUIRE_EQUAL(view->visibleContentRect(), Rectangle(0, 0, 3, 2));
 
         buffer.fill(Char{U'.'});
         view->scrollDown();
         view->scrollRight(2);
-        view->onPaint(buffer, ui::PaintContext{buffer.rect()});
+        view->onPaint(buffer, ui::PaintContext{buffer.rect(), buffer.rect(), buffer.rect(), ui::ThemeContext{}});
 
         requireRowsEqual(
             buffer,
@@ -44,8 +42,8 @@ public:
                 "CDE",
                 "wxy",
             });
-        REQUIRE_EQUAL(view->viewOffset(), Position(2, 1));
-        REQUIRE_EQUAL(view->viewRect(), Rectangle(2, 1, 3, 2));
+        REQUIRE_EQUAL(view->scrollOffset(), Position(2, 1));
+        REQUIRE_EQUAL(view->visibleContentRect(), Rectangle(2, 1, 3, 2));
     }
 
     void testScrollingBufferViewClampsPageScrollingAndEdgeJumps() {
@@ -59,27 +57,27 @@ public:
         auto view = ui::ScrollingBufferView::create(source);
 
         view->setRectangle(Rectangle{0, 0, 4, 2});
-        view->onLayout(Size{4, 2});
+        view->layout(Size{4, 2}, ui::LayoutContext{});
 
         view->pageRight();
-        REQUIRE_EQUAL(view->viewOffset(), Position(2, 0));
+        REQUIRE_EQUAL(view->scrollOffset(), Position(2, 0));
 
         view->pageDown();
-        REQUIRE_EQUAL(view->viewOffset(), Position(2, 2));
+        REQUIRE_EQUAL(view->scrollOffset(), Position(2, 2));
 
         view->pageDown();
-        REQUIRE_EQUAL(view->viewOffset(), Position(2, 3));
+        REQUIRE_EQUAL(view->scrollOffset(), Position(2, 3));
 
         view->scrollToTop();
-        REQUIRE_EQUAL(view->viewOffset(), Position(2, 0));
+        REQUIRE_EQUAL(view->scrollOffset(), Position(2, 0));
 
         view->scrollToLeftEdge();
-        REQUIRE_EQUAL(view->viewOffset(), Position(0, 0));
+        REQUIRE_EQUAL(view->scrollOffset(), Position(0, 0));
 
         view->scrollToBottom();
-        REQUIRE_EQUAL(view->viewOffset(), Position(0, 3));
+        REQUIRE_EQUAL(view->scrollOffset(), Position(0, 3));
 
         view->scrollToRightEdge();
-        REQUIRE_EQUAL(view->viewOffset(), Position(2, 3));
+        REQUIRE_EQUAL(view->scrollOffset(), Position(2, 3));
     }
 };

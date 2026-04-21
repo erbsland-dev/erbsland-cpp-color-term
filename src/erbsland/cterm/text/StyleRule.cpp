@@ -91,12 +91,6 @@ auto StyleRule::setLineFill(const char32_t codePoint, const CharStyle &style) no
     return *this;
 }
 
-auto StyleRule::setLineFill(const char32_t codePoint, const Color color, const CharAttributes attributes) noexcept
-    -> StyleRule & {
-    _lineFill = Char{codePoint, color, attributes};
-    return *this;
-}
-
 auto StyleRule::clearLineFill() noexcept -> StyleRule & {
     _lineFill.reset();
     return *this;

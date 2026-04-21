@@ -87,7 +87,7 @@ auto Printer::writeResolved(const LayoutFragment &fragment) -> std::optional<Col
         if (fragment.width() <= 0) {
             return std::nullopt;
         }
-        const auto resolvedSpace = Char{U' ', fragment.color()}.withBase(_baseStyle.color(), _baseStyle.attributes());
+        const auto resolvedSpace = Char{U' ', fragment.color()}.withBase(_baseStyle);
         _writer.writeRepeatedResolved(resolvedSpace, fragment.width());
         return resolvedSpace.color();
     }
@@ -116,7 +116,7 @@ auto Printer::writeResolved(const LayoutFragment &fragment) -> std::optional<Col
 }
 
 auto Printer::writeResolvedCharacter(const Char &character) -> std::optional<Color> {
-    const auto resolvedCharacter = character.withBase(_baseStyle.color(), _baseStyle.attributes());
+    const auto resolvedCharacter = character.withBase(_baseStyle);
     _writer.writeResolved(resolvedCharacter);
     if (resolvedCharacter.isEmpty()) {
         return std::nullopt;
@@ -128,8 +128,7 @@ void Printer::writeSpaces(const int count, const Color color) {
     if (count <= 0) {
         return;
     }
-    const auto resolvedSpace = Char{U' ', color}.withBase(_baseStyle.color(), _baseStyle.attributes());
-    _writer.writeRepeatedResolved(resolvedSpace, count);
+    _writer.writeRepeatedResolved(Char{U' ', color}.withBase(_baseStyle), count);
 }
 
 }

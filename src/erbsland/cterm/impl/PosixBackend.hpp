@@ -20,6 +20,7 @@ class PosixSignalDispatcher;
 class PosixBackend final : public Backend {
     using clock = std::chrono::steady_clock;
     constexpr static auto cMinimumDelayBetweenScreenSizeDetection = std::chrono::milliseconds{100};
+    constexpr static auto cEscapeSequenceTimeout = std::chrono::milliseconds{25};
 
 public:
     enum class SizeDetectionResult : uint8_t { NoTerminalAttached, NoTerminalSize, Success };
@@ -75,6 +76,14 @@ private:
     [[nodiscard]] static auto readInputChunk() -> std::string;
     /// Read one or more available chunks and append them to the pending key buffer.
     void appendInputChunks(OptionalTimeout timeout);
+    /// Mark the start time for one pending escape sequence.
+    void markPendingEscapeSequence() noexcept;
+    /// Test if the pending escape sequence waited long enough for follow-up bytes.
+    [[nodiscard]] auto escapeSequenceExpired() const noexcept -> bool;
+    /// Calculate the timeout used to collect follow-up escape-sequence bytes.
+    [[nodiscard]] auto escapeSequenceWaitTimeout(OptionalTimeout timeout) const noexcept -> std::chrono::milliseconds;
+    /// Remove decoded bytes and clear escape sequence state when appropriate.
+    void erasePendingKeyInput(std::size_t byteCount);
     /// Decode one pending key using either a timeout-based poll or a blocking wait.
     [[nodiscard]] auto readDecodedKey(OptionalTimeout timeout) -> Key;
     /// Restore the terminal and terminate the process for one handled signal.
@@ -93,11 +102,12 @@ private:
     bool _hasNoTerminalAttached = false;             ///< If we definitely know that screen detection will never work.
     int _ttyFdForDetection = -1;                     ///< The open /dev/tty we use for screen size detection
     std::size_t _noSizeFailureCount = 0; ///< A failure count to escalate if we repeatedly cannot detect screen size.
-    Input::Mode _inputMode{Input::Mode::ReadLine};         ///< The current input mode.
-    bool _isAlternateScreenActive = false;                 ///< remember if we are in alternate screen mode.
-    termios _originalState{};                              ///< state backup.
-    std::string _pendingKeyInput;                          ///< Buffered raw input that was not yet decoded.
-    std::unique_ptr<PosixSignalDispatcher> _signalHandler; ///< Helper that forwards termination signals safely.
+    Input::Mode _inputMode{Input::Mode::ReadLine};          ///< The current input mode.
+    bool _isAlternateScreenActive = false;                  ///< remember if we are in alternate screen mode.
+    termios _originalState{};                               ///< state backup.
+    std::string _pendingKeyInput;                           ///< Buffered raw input that was not yet decoded.
+    std::optional<clock::time_point> _pendingEscapeStarted; ///< Start time for resolving a pending escape sequence.
+    std::unique_ptr<PosixSignalDispatcher> _signalHandler;  ///< Helper that forwards termination signals safely.
 };
 
 }

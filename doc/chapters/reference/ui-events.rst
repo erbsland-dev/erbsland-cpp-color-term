@@ -75,7 +75,7 @@ modifying surface state.
     auto action = notice->scheduler().addSingleShot(
         [weakNotice = SurfaceWeakPtr{notice}]() {
             if (const auto locked = weakNotice.lock()) {
-                locked->setPaintOutdated();
+                locked->flags().setPaintOutdated();
             }
         },
         std::chrono::milliseconds{750});

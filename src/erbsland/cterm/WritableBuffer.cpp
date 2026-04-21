@@ -23,7 +23,7 @@ void WritableBuffer::resize(const Size newSize, const BufferResizeMode mode, con
 
 void WritableBuffer::set(
     const Position pos, const Char &block, const CharCombinationStylePtr &combinationStyle) noexcept {
-    if (!size().contains(pos)) {
+    if (!rect().contains(pos)) {
         return;
     }
     if (combinationStyle == nullptr) {
@@ -35,7 +35,7 @@ void WritableBuffer::set(
         for (std::size_t i = 0; i < 9; ++i) {
             const auto surroundPosition =
                 pos + Position{static_cast<Coordinate>(i) % 3 - 1, static_cast<Coordinate>(i) / 3 - 1};
-            if (size().contains(surroundPosition)) {
+            if (rect().contains(surroundPosition)) {
                 surroundingBlocks[i] = &get(surroundPosition);
             }
         }
@@ -46,7 +46,7 @@ void WritableBuffer::set(
 }
 
 void WritableBuffer::set(Position pos, const StringView &str) noexcept {
-    if (str.empty() || !size().contains(pos)) {
+    if (str.empty()) {
         return;
     }
     const auto x = pos.x();
@@ -69,8 +69,8 @@ void WritableBuffer::setFrom(const ReadableBuffer &other, const Char fillChar) {
 }
 
 void WritableBuffer::setFromImpl(const ReadableBuffer &other, const Char fillChar) {
-    size().forEach([&](const Position pos) -> void {
-        if (other.size().contains(pos)) {
+    rect().forEach([&](const Position pos) -> void {
+        if (other.rect().contains(pos)) {
             set(pos, other.get(pos));
         } else {
             set(pos, fillChar);
@@ -102,19 +102,27 @@ void WritableBuffer::fill(
     const Tile9StylePtr &style,
     const Color baseColor,
     const CharCombinationStylePtr &combinationStyle) noexcept {
-    fillImpl(rect, style, baseColor, combinationStyle);
+    fillImpl(rect, style, CharStyle{baseColor}, combinationStyle);
+}
+
+void WritableBuffer::fill(
+    const Rectangle rect,
+    const Tile9StylePtr &style,
+    const CharStyle baseStyle,
+    const CharCombinationStylePtr &combinationStyle) noexcept {
+    fillImpl(rect, style, baseStyle, combinationStyle);
 }
 
 void WritableBuffer::fillImpl(
     const Rectangle rect,
     const Tile9StylePtr &style,
-    const Color baseColor,
+    const CharStyle baseStyle,
     const CharCombinationStylePtr &combinationStyle) noexcept {
     if (style == nullptr) {
         return;
     }
     rect.forEach([&, this](const Position pos) -> void {
-        set(pos, style->block(rect, pos).withBaseColor(baseColor), combinationStyle);
+        set(pos, style->block(rect, pos).withBase(baseStyle), combinationStyle);
     });
 }
 
@@ -194,6 +202,15 @@ void WritableBuffer::drawFrame(Rectangle rect, const FrameDrawOptions &options, 
 void WritableBuffer::drawFrameImpl(
     const Rectangle rect, const FrameDrawOptions &options, const std::size_t animationCycle) noexcept {
     impl::FramePainter{*this}.drawFrame(rect, options, animationCycle);
+}
+
+void WritableBuffer::drawGridLayout(const Position pos, const GridLayout &layout, const FrameBorder &border) noexcept {
+    drawGridLayoutImpl(pos, layout, border);
+}
+
+void WritableBuffer::drawGridLayoutImpl(
+    const Position pos, const GridLayout &layout, const FrameBorder &border) noexcept {
+    impl::FramePainter{*this}.drawGridLayout(pos, layout, border);
 }
 
 void WritableBuffer::drawFilledFrame(
@@ -277,6 +294,11 @@ void WritableBuffer::drawText(
     drawTextImpl(text, rect, options, animationCycle);
 }
 
+auto WritableBuffer::textHeightForWidth(
+    const StringView &text, const Coordinate width, const TextOptions &options) noexcept -> Coordinate {
+    return text.wrappedTextHeight(width, options);
+}
+
 void WritableBuffer::drawTextImpl(
     const StringView &text,
     const Rectangle rect,
@@ -358,7 +380,7 @@ void WritableBuffer::drawBuffer(const ReadableBuffer &buffer, const BufferDrawOp
             return;
         }
         if (!options.overwriteColors()) {
-            sourceBlock = sourceBlock.withBaseColor(get(targetPos).color());
+            sourceBlock = sourceBlock.withBase(get(targetPos).color());
         }
         set(targetPos, sourceBlock);
     });

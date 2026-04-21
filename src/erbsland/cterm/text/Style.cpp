@@ -194,6 +194,7 @@ auto Style::createStyledDefaultStyle() -> StyleConstPtr {
     using Selector = StyleSelector;
 
     auto value = std::make_shared<Style>();
+    value->edit(Selector::document()).setMargins(0, 2);
     value->edit(Selector::paragraph()).setMargins(0, 2, 1, 6);
     value->edit(Selector::heading(1))
         .setMargins(3, 1, 1, 2)
@@ -224,6 +225,10 @@ auto Style::createStyledDefaultStyle() -> StyleConstPtr {
         .setMargins(2)
         .setPrefix(U"◆◂", {fg::Magenta})
         .setSuffix(U"▸◆", {fg::Magenta});
+    value->edit(Selector::span({"key"}))
+        .setPrefix(String{U"[", fg::BrightBlack})
+        .setSuffix(String{U"]", fg::BrightBlack})
+        .setTextStyle(CharStyle{fg::BrightWhite});
     return value;
 }
 

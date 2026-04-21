@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "Alignment.hpp"
 #include "Char.hpp"
 #include "FastCharSet.hpp"
 #include "ParagraphBackgroundMode.hpp"
@@ -10,6 +9,8 @@
 #include "ParagraphOnError.hpp"
 #include "String.hpp"
 #include "TabOverflowBehavior.hpp"
+
+#include "geometry/Alignment.hpp"
 
 #include <stdexcept>
 

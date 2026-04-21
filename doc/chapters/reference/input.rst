@@ -81,6 +81,17 @@ or when displaying the currently active bindings.
 The helper functions ``toDisplayText()`` and ``toString()`` make it easy
 to present key bindings in help screens or configuration output.
 
+For interactive tools with one command bound to several keys, use
+:cpp:any:`Keys <erbsland::cterm::Keys>`. It stores unique key presses in
+priority order, can test whether a decoded key is part of the set, and
+can separate main keys from alternatives for compact and detailed help.
+
+Special keys may carry modifiers such as ``shift+up``, ``ctrl+pageup``,
+or ``alt+f4``. Modified keys are distinct from their unmodified base key,
+so a binding for ``up`` does not also match ``shift+up``. Printable text
+input remains text input: pressing Shift with a letter produces the
+resulting character, for example ``Q``.
+
 Matching Decoded Key Types
 --------------------------
 
@@ -125,4 +136,10 @@ Interface
 .. doxygentypedef:: erbsland::cterm::InputDefinitionList
 
 .. doxygenclass:: erbsland::cterm::Key
+    :members:
+
+.. doxygenclass:: erbsland::cterm::KeyModifiers
+    :members:
+
+.. doxygenclass:: erbsland::cterm::Keys
     :members:

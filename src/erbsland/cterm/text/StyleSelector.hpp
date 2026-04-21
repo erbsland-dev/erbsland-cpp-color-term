@@ -148,9 +148,12 @@ public: // factory methods
     /// Create an underline selector.
     /// @return The underline selector.
     [[nodiscard]] static constexpr auto underline() noexcept -> StyleSelector { return role(StyleRole::Underline); }
-    /// Create a span selector.
-    /// @return The generic inline span selector.
-    [[nodiscard]] static constexpr auto span() noexcept -> StyleSelector { return role(StyleRole::Span); }
+    /// Create a span selector with required style tokens.
+    /// @param requiredStyleTokens Required style tokens typically coming from the `class` attribute.
+    /// @return The span selector for these required style tokens.
+    [[nodiscard]] static auto span(const std::initializer_list<std::string> requiredStyleTokens) -> StyleSelector {
+        return StyleSelector{StyleRole::Span, requiredStyleTokens};
+    }
     /// Create a link selector.
     /// @return The link selector.
     [[nodiscard]] static constexpr auto link() noexcept -> StyleSelector { return role(StyleRole::Link); }

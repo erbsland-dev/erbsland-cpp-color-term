@@ -6,18 +6,18 @@
 
 namespace erbsland::cterm::ui::layout::impl {
 
-auto DimensionConstraints::fromGeometry(const Geometry &geometry, const Orientation orientation) noexcept
+auto DimensionConstraints::fromMetrics(const LayoutMetrics &metrics, const Orientation orientation) noexcept
     -> DimensionConstraints {
     return {
-        geometry.minimum().coordinate(orientation),
-        geometry.maximum().coordinate(orientation),
-        geometry.preferred().coordinate(orientation),
-        orientation == Orientation::Horizontal ? geometry.sizePolicy().width() : geometry.sizePolicy().height()};
+        metrics.minimum().coordinate(orientation),
+        metrics.maximum().coordinate(orientation),
+        metrics.preferred().coordinate(orientation),
+        orientation == Orientation::Horizontal ? metrics.sizePolicy().width() : metrics.sizePolicy().height()};
 }
 
 auto DimensionConstraints::resolve(const Coordinate availableSize) const noexcept -> Coordinate {
     const auto boundedAvailableSize = std::max(Coordinate{0}, availableSize);
-    if (policyType() == DimensionPolicy::Type::Grow) {
+    if (policyType() == DimensionPolicy::Grow) {
         return std::min(
             std::clamp(boundedAvailableSize, boundedMinimumSize(), boundedMaximumSize()), boundedAvailableSize);
     }

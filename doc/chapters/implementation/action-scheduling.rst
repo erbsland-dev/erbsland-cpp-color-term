@@ -266,7 +266,7 @@ Example public call:
 .. code-block:: cpp
 
     auto ref = surface->scheduler().addRepeated(
-        [surface]() { surface->setPaintOutdated(); },
+        [surface]() { surface->flags().setPaintOutdated(); },
         std::chrono::seconds{1});
 
 Inside ``Scheduler``:
@@ -568,8 +568,8 @@ Scheduled callbacks do **not** automatically invalidate surfaces.
 That choice is deliberate.
 The callback must explicitly call:
 
-* ``setPaintOutdated()``
-* ``setLayoutOutdated()``
+* ``surface->flags().setPaintOutdated()``
+* ``surface->flags().setLayoutOutdated()``
 
 when it changes visible state.
 
@@ -711,7 +711,7 @@ When a scheduled action does not run:
 
 When a scheduled action runs but nothing repaints:
 
-* Did the callback call ``setPaintOutdated()`` or ``setLayoutOutdated()``?
+* Did the callback call ``surface->flags().setPaintOutdated()`` or ``surface->flags().setLayoutOutdated()``?
 * Is the surface currently hidden behind an opaque page?
 * Is the display still inside the minimum render interval?
 

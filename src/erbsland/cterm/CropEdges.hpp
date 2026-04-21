@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "Direction.hpp"
-#include "Rectangle.hpp"
+#include "geometry/Direction.hpp"
+#include "geometry/Rectangle.hpp"
 
 #include <bitset>
 #include <cstdint>

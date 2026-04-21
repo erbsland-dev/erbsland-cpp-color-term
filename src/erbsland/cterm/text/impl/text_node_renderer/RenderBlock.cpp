@@ -39,6 +39,9 @@ auto RenderBlock::renderString() const -> String {
         for (auto index = 0; index < std::max(indent, 0); ++index) {
             result.append(Char{U' '});
         }
+        if (firstLine && _listPrefix.has_value()) {
+            result.append(_listPrefix->text());
+        }
         result.append(line);
         firstLine = false;
     }

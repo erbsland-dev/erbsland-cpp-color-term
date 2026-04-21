@@ -1,0 +1,18 @@
+// Copyright (c) 2026 Tobias Erbsland - https://erbsland.dev
+// SPDX-License-Identifier: Apache-2.0
+#include "Properties.hpp"
+
+namespace erbsland::cterm::theme {
+
+void Properties::setBlock(const BlockRole role, const char32_t codePoint) noexcept {
+    if (!_blocks.has_value()) {
+        _blocks = Blocks{};
+    }
+    if (role == BlockRole::Background) {
+        _blocks->fill(codePoint);
+        return;
+    }
+    (*_blocks)[static_cast<std::size_t>(role)] = codePoint;
+}
+
+}

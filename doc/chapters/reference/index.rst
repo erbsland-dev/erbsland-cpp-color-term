@@ -59,6 +59,12 @@ Reference
         - A style how two characters are visually combined to a new one.
     *   - :doc:`CharCombinationStylePtr<drawing>`
         - Shared pointer for CharCombinationStyle
+    *   - :doc:`WriteClippedBuffer<buffer>`
+        - A write-clipped buffer that owns a shared pointer to the wrapped buffer.
+    *   - :doc:`WriteClippedBufferBase<buffer>`
+        - The shared base for writable buffer clipping wrappers.
+    *   - :doc:`WriteClippedBufferRef<buffer>`
+        - A write-clipped buffer that stores a reference to the wrapped buffer.
     *   - :doc:`Color<color>`
         - A foreground/background color pair for terminal rendering.
     *   - :doc:`ColorBase<color>`
@@ -127,6 +133,8 @@ Reference
         - A simple representation of a key press.
     *   - :doc:`Key::Type<input>`
         - Supported key kinds.
+    *   - :doc:`Keys<input>`
+        - An ordered set of unique key presses for key bindings.
     *   - :doc:`Margins<geometry>`
         - Represents margins (top, right, bottom, left) around a rectangle.
     *   - :doc:`MatrixCombinationStyle<drawing>`
@@ -197,16 +205,54 @@ Reference
         - A selector that targets semantic roles, levels, list kinds, and style tokens.
     *   - :doc:`text::StyleRule<rich-text>`
         - One resolved or stored rich-text style rule.
+    *   - :doc:`theme::BlockRole<theme>`
+        - Named roles for the sixteen themed block code points.
+    *   - :doc:`theme::Element<theme>`
+        - A fast theme element identifier.
+    *   - :doc:`theme::Identifier<theme>`
+        - A strongly typed numeric theme identifier.
+    *   - :doc:`theme::IdentifierType<theme>`
+        - The logical kind of a theme identifier.
+    *   - :doc:`theme::Part<theme>`
+        - A fast theme part identifier.
+    *   - :doc:`theme::Properties<theme>`
+        - Authoring values for one theme property sheet.
+    *   - :doc:`theme::PropertyEditor<theme>`
+        - Mutable editor for one property sheet while a theme is being built.
+    *   - :doc:`theme::PropertySheet<theme>`
+        - Effective values for one resolved theme selector.
+    *   - :doc:`theme::Selector<theme>`
+        - A compiled selector for one themed element part with required states and tags.
+    *   - :doc:`theme::State<theme>`
+        - A single UI state flag used in theme selectors.
+    *   - :doc:`theme::States<theme>`
+        - A compact set of UI state flags used in theme selector matching.
+    *   - :doc:`theme::Tag<theme>`
+        - A theme tag bit assigned by a theme builder.
+    *   - :doc:`theme::Tags<theme>`
+        - A compact set of theme tags.
+    *   - :doc:`theme::Theme<theme>`
+        - Immutable theme built from hierarchical property sheets.
+    *   - :doc:`theme::ThemeAccessor<theme>`
+        - Read-only theme accessor for the current selector.
+    *   - :doc:`theme::ThemeBuilder<theme>`
+        - Builder for immutable themes.
+    *   - :doc:`theme::ThemePainter<theme>`
+        - Thin convenience painter for rendering themed blocks into a writable buffer.
     *   - :doc:`text::TextNode<rich-text>`
         - A node in the text tree.
     *   - :doc:`text::TextNode::Type<rich-text>`
         - The node type.
     *   - :doc:`ui::Application<ui-core>`
         - UI Application instance for event-driven UI applications.
+    *   - :doc:`ui::AbstractSurfaceContainer<ui-core>`
+        - Abstract interface for surface child containers.
     *   - :doc:`ui::DimensionPolicy<ui-core>`
         - The size policy of a single surface dimension.
     *   - :doc:`ui::Display<ui-core>`
         - A display is a way to show pages on a terminal.
+    *   - :doc:`ui::Centered<ui-layouts>`
+        - A one-child layout that centers its content inside padded available space.
     *   - :doc:`ui::Event<ui-events>`
         - A single event.
     *   - :doc:`ui::EventData<ui-events>`
@@ -219,10 +265,20 @@ Reference
         - A thread that executes queued invocations via the UI event system.
     *   - :doc:`ui::EventType<ui-events>`
         - The event type
-    *   - :doc:`ui::Geometry<ui-core>`
-        - The geometry and size policy of a surface.
-    *   - :doc:`ui::KeyBindings<ui-input>`
-        - Key-to-action bindings for surfaces and pages.
+    *   - :doc:`ui::Frame<ui-layouts>`
+        - A one-child layout that surrounds its content with a themed frame and optional title.
+    *   - :doc:`ui::LayoutMetrics<ui-core>`
+        - The measured and configured layout metrics of a surface.
+    *   - :doc:`ui::LayoutMetricsEditor<ui-core>`
+        - An editor for changing surface layout metrics with layout invalidation.
+    *   - :doc:`ui::Action<ui-input>`
+        - A shared UI action with keys, help metadata, enablement, and a trigger callback.
+    *   - :doc:`ui::Actions<ui-input>`
+        - Ordered action container attached to a surface or page.
+    *   - :doc:`ui::ActionTriggerContext<ui-input>`
+        - Context passed to an action callback when it is triggered.
+    *   - :doc:`ui::HelpData<ui-input>`
+        - Display metadata for a user-interface action.
     *   - :doc:`ui::KeyPressEvent<ui-events>`
         - A key press event.
     *   - :doc:`ui::Layout<ui-core>`
@@ -231,6 +287,8 @@ Reference
         - A single page on the screen.
     *   - :doc:`ui::PaintContext<ui-core>`
         - The paint context for the onPaint method.
+    *   - :doc:`ui::ThemeContext<ui-core>`
+        - The resolved theme scope used during layout and painting.
     *   - :doc:`ui::Panel<ui-surfaces>`
         - A fill surface that paints an optional background behind its child surfaces.
     *   - :doc:`ui::QuitEvent<ui-events>`
@@ -239,26 +297,48 @@ Reference
         - Represents a scheduled action.
     *   - :doc:`ui::Scheduler<ui-events>`
         - A scheduler for UI actions.
+    *   - :doc:`ui::ScrollArea<ui-layouts>`
+        - A scroll area layout that displays one content surface with optional scroll bars.
+    *   - :doc:`ui::ScrollBarMode<ui-core>`
+        - Visibility mode for scroll bars in scrollable surfaces.
+    *   - :doc:`ui::ScrollCorner<ui-surfaces>`
+        - The one-cell fill surface where horizontal and vertical scroll bars meet.
     *   - :doc:`ui::ScrollingBufferView<ui-surfaces>`
         - A surface that shows and scrolls a viewport onto a readable buffer.
     *   - :doc:`ui::SizePolicy<ui-core>`
         - The size policy for both width and height of a surface.
     *   - :doc:`ui::Stack<ui-layouts>`
         - A layout that stacks surfaces vertically or horizontally.
-    *   - :doc:`ui::AbstractStatusLine<ui-surfaces>`
-        - The subclassing-oriented base for one-line status bars.
-    *   - :doc:`ui::AbstractStatusLine::CollapseBehavior<ui-surfaces>`
-        - Overflow handling used when a status-line section does not fit.
-    *   - :doc:`ui::AbstractStatusLine::Section<ui-surfaces>`
-        - The three logical sections of a status line.
-    *   - :doc:`ui::StatusLine<ui-surfaces>`
-        - A configurable one-line status bar with owned fields and update callbacks.
-    *   - :doc:`ui::StatusLine::Field<ui-surfaces>`
-        - The owned configuration and content for one status-line section.
-    *   - :doc:`ui::StatusLine::UpdateFn<ui-surfaces>`
-        - The callback type used to refresh a status-line field.
-    *   - :doc:`ui::StatusLine::UpdateMode<ui-surfaces>`
-        - Controls when one status-line field refreshes automatically.
+    *   - :doc:`ui::SurfaceContainer<ui-core>`
+        - Ordered child surface collection for one surface.
+    *   - :doc:`ui::AbstractLine<ui-surfaces>`
+        - The subclassing-oriented base for one-line header, footer, and status surfaces.
+    *   - :doc:`ui::AbstractLine::CollapseBehavior<ui-surfaces>`
+        - Overflow handling used when a line section does not fit.
+    *   - :doc:`ui::AbstractLine::Section<ui-surfaces>`
+        - The three logical sections of a line.
+    *   - :doc:`ui::AbstractScrollBar<ui-surfaces>`
+        - The shared base for visual scroll bar surfaces.
+    *   - :doc:`ui::AbstractScrollArea<ui-surfaces>`
+        - Shared base for scrollable surfaces that paint custom content into a viewport.
+    *   - :doc:`ui::HorizontalScrollBar<ui-surfaces>`
+        - A one-row horizontal scroll bar that grows in width.
+    *   - :doc:`ui::ActionHelp<ui-surfaces>`
+        - A compact keyboard-help surface generated from currently available actions.
+    *   - :doc:`ui::DynamicText<ui-surfaces>`
+        - A one-line text surface with static, resize, and repaint update modes.
+    *   - :doc:`ui::FooterLine<ui-surfaces>`
+        - A footer with dynamic text, automatic action help, and queued message overlays.
+    *   - :doc:`ui::HeaderLine<ui-surfaces>`
+        - A field-based one-line header with its own theme element.
+    *   - :doc:`ui::TextLine<ui-surfaces>`
+        - A configurable one-line surface with owned fields and update callbacks.
+    *   - :doc:`ui::TextLine::Field<ui-surfaces>`
+        - The owned configuration and content for one line section.
+    *   - :doc:`ui::TextLine::UpdateFn<ui-surfaces>`
+        - The callback type used to refresh a line field.
+    *   - :doc:`ui::TextLine::UpdateMode<ui-surfaces>`
+        - Controls when one line field refreshes automatically.
     *   - :doc:`ui::StopSource<ui-events>`
         - Stop source used by the event system to request a cooperative shutdown.
     *   - :doc:`ui::StopToken<ui-events>`
@@ -267,6 +347,10 @@ Reference
         - A surface is a rectangular area on a page.
     *   - :doc:`ui::TextBox<ui-surfaces>`
         - A surface that renders one string using TextOptions-derived alignment and wrapping rules.
+    *   - :doc:`ui::VerticalScrollBar<ui-surfaces>`
+        - A one-column vertical scroll bar that grows in height.
+    *   - :doc:`ui::Viewport<ui-layouts>`
+        - A layout surface that clips, positions, and scrolls one content surface.
     *   - :doc:`UpdateSettings<terminal>`
         - Settings controlling how Terminal::updateScreen() renders a buffer.
     *   - :doc:`WritableBuffer<buffer>`
@@ -315,6 +399,8 @@ Reference
         -   The terminal classes provide the runtime connection between your rendered content and the real console. Terminal manages initialization, refresh strategy, full-screen updates, input access, and direct output for interactive applications.
     *   -   :doc:`Text Rendering <drawing-text>`
         -   Text, TextOptions, and TextAnimation render strings into rectangles, wrapped paragraphs, animated labels, and reusable text presets inside writable buffers.
+    *   -   :doc:`Themes <theme>`
+        -   Themes centralize the colors, text attributes, block shapes, and content margins used by the UI framework. They let applications switch visual styles at runtime while keeping paint loops fast and control APIs small.
     *   -   :doc:`UI Events and Scheduling <ui-events>`
         -   The UI event classes provide the queues, timers, cooperative-stop signals, and worker-thread building blocks behind Application. Most apps use them indirectly, but advanced integrations can drive EventDriver, EventScheduler, Scheduler, or EventThread directly when they need custom orchestration.
     *   -   :doc:`UI Framework <ui>`
@@ -339,6 +425,7 @@ Reference
     rich-text
     terminal
     text
+    theme
     ui
     ui-core
     ui-layouts

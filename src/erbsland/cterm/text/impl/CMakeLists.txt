@@ -9,8 +9,11 @@ target_sources(erbsland-color-term PRIVATE
         BufferedTokenizer.cpp
         BufferedTokenizer.hpp
         Generator.hpp
+        HtmlAttribute.hpp
         HtmlParser.cpp
+        HtmlParserFrame.hpp
         HtmlParser.hpp
+        HtmlTagInfo.hpp
         HtmlToken.hpp
         HtmlTokenizer.cpp
         HtmlTokenizer.hpp

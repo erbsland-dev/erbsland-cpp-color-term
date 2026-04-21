@@ -10,6 +10,70 @@
 Changelog
 *********
 
+Version 1.10.0 - 2026-04-30
+===========================
+
+Version 1.10.0 continues the beta UI framework work with a much more complete application layer: shared actions,
+theme-driven painting, reusable scrollable areas, modal pages, and a broader set of layout and surface primitives.
+It also adds table-style grid drawing helpers, clipped writable buffers, and new demos that show the UI framework in
+larger, more realistic examples.
+
+The beta UI API changed substantially in this release. Existing demo code was updated to use the new action,
+theme, surface-container, and layout concepts.
+
+Highlights
+----------
+
+*   Added the :cpp:any:`erbsland::cterm::theme` subsystem with :cpp:any:`Theme <erbsland::cterm::theme::Theme>`, :cpp:any:`ThemeBuilder <erbsland::cterm::theme::ThemeBuilder>`, selectors, states, tags, reusable property sheets, and built-in dark, light, and monochrome themes for UI applications.
+*   Replaced the beta ``ui::KeyBindings`` API with shared :cpp:any:`ui::Action <erbsland::cterm::ui::Action>` objects, :cpp:any:`ui::Actions <erbsland::cterm::ui::Actions>`, :cpp:any:`ui::ButtonAction <erbsland::cterm::ui::ButtonAction>`, focus-chain dispatch, enablement callbacks, multi-key help data, and automatic footer keyboard help.
+*   Expanded the beta UI layout and surface toolkit with :cpp:any:`ui::Viewport <erbsland::cterm::ui::layout::Viewport>`, :cpp:any:`ui::ScrollArea <erbsland::cterm::ui::layout::ScrollArea>`, :cpp:any:`ui::Centered <erbsland::cterm::ui::layout::Centered>`, :cpp:any:`ui::Frame <erbsland::cterm::ui::layout::Frame>`, :cpp:any:`ui::Sections <erbsland::cterm::ui::layout::Sections>`, :cpp:any:`ui::Buttons <erbsland::cterm::ui::layout::Buttons>`, :cpp:any:`ui::Button <erbsland::cterm::ui::surface::Button>`, and modal :cpp:any:`ui::Choice <erbsland::cterm::ui::page::Choice>` and :cpp:any:`ui::HelpViewer <erbsland::cterm::ui::page::HelpViewer>` pages.
+*   Added :cpp:any:`FrameBorder <erbsland::cterm::FrameBorder>`, :cpp:any:`GridLayout <erbsland::cterm::GridLayout>`, and :cpp:any:`WriteClippedBuffer <erbsland::cterm::WriteClippedBuffer>` so applications can draw table-like grids, combine mixed frame styles, and render safely into clipped writable regions.
+*   Added the ``ui-world-view``, ``grid-layout``, ``ui-choice``, and ``ui-sections`` demos and expanded the documentation with new theme, UI layout, UI surface, UI input, UI paint-system, and scrollable-area material.
+
+Added
+-----
+
+*   Added the :cpp:any:`erbsland::cterm::theme` namespace, including selector-based theme lookup, inherited property sheets, editable builders, predefined themes, theme painters, and custom element/tag support for application-specific UI styling.
+*   Added the ``ui-world-view`` demo to showcase bitmap rendering, custom viewport math, generated data files, and the new scroll bar surfaces in one interactive world-map viewer.
+*   Added the ``grid-layout`` demo to demonstrate :cpp:any:`FrameBorder <erbsland::cterm::FrameBorder>` and :cpp:any:`GridLayout <erbsland::cterm::GridLayout>` with mixed border elements, dynamic row and column counts, and generated documentation captures.
+*   Added the ``ui-choice`` and ``ui-sections`` demos to show composed modal pages, button rows, titled sections, and higher-level UI layout patterns.
+*   Added :cpp:any:`FrameBorder <erbsland::cterm::FrameBorder>`, :cpp:any:`FrameBorderElement <erbsland::cterm::FrameBorderElement>`, and :cpp:any:`GridLayout <erbsland::cterm::GridLayout>`, plus :cpp:any:`WritableBuffer::drawGridLayout() <erbsland::cterm::WritableBuffer::drawGridLayout()>`, for table-like frame drawing with independently styled outer and inner line groups.
+*   Added :cpp:any:`WriteClippedBuffer <erbsland::cterm::WriteClippedBuffer>` and :cpp:any:`WriteClippedBufferRef <erbsland::cterm::WriteClippedBufferRef>` for drawing into translated, clipped regions of another writable buffer.
+*   Added :cpp:any:`KeyModifiers <erbsland::cterm::KeyModifiers>` and :cpp:any:`Keys <erbsland::cterm::Keys>` as public helpers for modified keys, ordered multi-key bindings, compact help display, and alternative key handling.
+*   Added :cpp:any:`ui::AbstractLine <erbsland::cterm::ui::surface::AbstractLine>`, :cpp:any:`ui::TextLine <erbsland::cterm::ui::surface::TextLine>`, :cpp:any:`ui::HeaderLine <erbsland::cterm::ui::surface::HeaderLine>`, :cpp:any:`ui::FooterLine <erbsland::cterm::ui::surface::FooterLine>`, :cpp:any:`ui::DynamicText <erbsland::cterm::ui::surface::DynamicText>`, and :cpp:any:`ui::ActionHelp <erbsland::cterm::ui::surface::ActionHelp>` as the new one-line UI building blocks.
+*   Added :cpp:any:`ui::AbstractScrollArea <erbsland::cterm::ui::surface::AbstractScrollArea>`, :cpp:any:`ui::HorizontalScrollBar <erbsland::cterm::ui::surface::HorizontalScrollBar>`, :cpp:any:`ui::VerticalScrollBar <erbsland::cterm::ui::surface::VerticalScrollBar>`, :cpp:any:`ui::ScrollCorner <erbsland::cterm::ui::surface::ScrollCorner>`, and :cpp:any:`ui::ScrollBarMode <erbsland::cterm::ui::ScrollBarMode>` for custom-painted scrollable surfaces and reusable scroll indicators.
+*   Added :cpp:any:`ui::Viewport <erbsland::cterm::ui::layout::Viewport>` and :cpp:any:`ui::ScrollArea <erbsland::cterm::ui::layout::ScrollArea>` for clipped one-child content and classic overflow scrolling with optional scroll bars.
+*   Added :cpp:any:`ui::Centered <erbsland::cterm::ui::layout::Centered>`, :cpp:any:`ui::Frame <erbsland::cterm::ui::layout::Frame>`, :cpp:any:`ui::Sections <erbsland::cterm::ui::layout::Sections>`, and :cpp:any:`ui::Buttons <erbsland::cterm::ui::layout::Buttons>` as higher-level layout primitives for dialogs, framed regions, titled sections, and button rows.
+*   Added :cpp:any:`ui::Button <erbsland::cterm::ui::surface::Button>`, :cpp:any:`ui::Choice <erbsland::cterm::ui::page::Choice>`, and :cpp:any:`ui::HelpViewer <erbsland::cterm::ui::page::HelpViewer>` for common interactive UI flows.
+*   Refactored beta UI child-surface management around :cpp:any:`ui::SurfaceManager <erbsland::cterm::ui::SurfaceManager>`, :cpp:any:`ui::LayoutData <erbsland::cterm::ui::LayoutData>`, and :cpp:any:`ui::layout::SingleContentLayout <erbsland::cterm::ui::layout::SingleContentLayout>` so layouts can keep generic child mutation useful while enforcing their real invariants.
+
+Improved
+--------
+
+*   Reworked beta UI key input around action dispatch. Key presses now travel from the focused surface through its parent chain to the active page, disabled actions can let outer actions handle the same key, and actions can refresh enablement before repaint or before triggering.
+*   Updated UI painting to resolve colors, blocks, margins, padding, focus state, selected state, disabled state, checked state, and custom tags through the active theme instead of hard-coded surface styling.
+*   Improved scrollable UI behavior with shared scroll metrics, clamped offsets, stable automatic scroll-bar visibility, ``scrollIntoView()`` support, and visibility-aware traversal for layout, paint, dirty collection, and focus handling.
+*   Reorganized the public geometry headers into a dedicated ``geometry`` source module while keeping generated top-level include wrappers available for existing users.
+*   Refined the rich-text renderer internals around :cpp:any:`text::TextNodeType <erbsland::cterm::text::TextNodeType>`, parser frames, tag metadata, streaming block targets, ``TreeRenderer``, ``StyleResolver``, ``InlineTextRenderer``, and render contexts, making the implementation easier to reason about and test.
+*   Updated the UI demos to use the new shared ``UiDemoApplication`` helper, actions, footer help, themed surfaces, and layout primitives.
+
+Documentation
+-------------
+
+*   Added the :doc:`Themes <reference/theme>` reference chapter and expanded the UI reference pages for core concepts, input, layouts, surfaces, and the overall beta UI framework.
+*   Added implementation notes for :doc:`UI Paint System <implementation/ui-paint-system>` and :doc:`UI Scrollable Areas <implementation/ui-scrollable-areas>`, and refreshed the text-node renderer notes to match the new renderer structure.
+*   Added or expanded demo documentation and captures for :doc:`Grid Layout <demos/grid-layout>`, :doc:`UI Choice <demos/ui-choice>`, :doc:`UI Sections <demos/ui-sections>`, :doc:`UI World View <demos/ui-world-view>`, :doc:`UI Hello World <demos/ui-hello-world>`, and :doc:`UI HTML Viewer <demos/ui-html-viewer>`.
+*   Expanded the buffer, drawing, input, and reference-index documentation for clipped buffers, grid drawing, key modifiers, multi-key bindings, theme APIs, and the new UI components.
+
+Implementation
+--------------
+
+*   Split and reorganized many unit tests by API area, implementation area, and UI subsystem so coverage follows the source structure more closely.
+*   Added focused tests for grid layout drawing, frame-border combinations, clipped writable buffers, key modifiers, multi-key action helpers, themes, scroll bars, scroll areas, viewports, button rows, choices, help viewers, surface containers, and UI paint behavior.
+*   Replaced the large generated common box-frame implementation with smaller frame-border combination data and reusable generation helpers.
+*   Added generated, world-map demo data and tooling for the ``ui-world-view`` demo.
+
+
 Version 1.9.0 - 2026-04-20
 ==========================
 
@@ -21,17 +85,17 @@ Highlights
 ----------
 
 *   Introduced :cpp:any:`StringView <erbsland::cterm::StringView>` and :cpp:any:`IndexRange <erbsland::cterm::IndexRange>` as public APIs for efficient read-only access, cheap slicing, and range-based operations on terminal strings.
-*   Added :cpp:any:`ui::ScrollingBufferView <erbsland::cterm::ui::surface::ScrollingBufferView>`, :cpp:any:`ui::AbstractStatusLine <erbsland::cterm::ui::surface::AbstractStatusLine>`, and :cpp:any:`ui::StatusLine <erbsland::cterm::ui::surface::StatusLine>` to simplify building scrollable views and single-line headers or footers with minimal custom surface code.
+*   Added :cpp:any:`ui::ScrollingBufferView <erbsland::cterm::ui::surface::ScrollingBufferView>`, :cpp:any:`ui::AbstractScrollBar <erbsland::cterm::ui::surface::AbstractScrollBar>`, :cpp:any:`ui::HorizontalScrollBar <erbsland::cterm::ui::surface::HorizontalScrollBar>`, :cpp:any:`ui::VerticalScrollBar <erbsland::cterm::ui::surface::VerticalScrollBar>`, and the beta one-line UI surfaces that are now represented by :cpp:any:`ui::AbstractLine <erbsland::cterm::ui::surface::AbstractLine>` and :cpp:any:`ui::TextLine <erbsland::cterm::ui::surface::TextLine>` to simplify building scrollable views, visual range indicators, and single-line headers or footers with minimal custom surface code.
 *   Added the ``ui-html-viewer`` demo and extended demo documentation for ``html-viewer``, ``ui-hello-world``, and ``ui-html-viewer`` to demonstrate how the HTML renderer and the beta UI framework work together in realistic applications.
 *   Expanded the reference documentation with dedicated chapters for UI core, input, layouts, and surfaces, and added an implementation note describing the new string-sharing design.
-*   Increased unit test coverage for :cpp:any:`StringView <erbsland::cterm::StringView>`, :cpp:any:`IndexRange <erbsland::cterm::IndexRange>`, paragraph rendering, key bindings, and the new UI surfaces.
+*   Increased unit test coverage for :cpp:any:`StringView <erbsland::cterm::StringView>`, :cpp:any:`IndexRange <erbsland::cterm::IndexRange>`, paragraph rendering, action dispatch, and the new UI surfaces.
 
 Added
 -----
 
 *   Added :cpp:any:`StringView <erbsland::cterm::StringView>` as the read-only companion to :cpp:any:`String <erbsland::cterm::String>`, together with :cpp:any:`IndexRange <erbsland::cterm::IndexRange>` for explicit range handling within shared string storage.
-*   Added :cpp:any:`ui::ScrollingBufferView <erbsland::cterm::ui::surface::ScrollingBufferView>` for scrollable buffer-backed content, and :cpp:any:`ui::AbstractStatusLine <erbsland::cterm::ui::surface::AbstractStatusLine>` plus :cpp:any:`ui::StatusLine <erbsland::cterm::ui::surface::StatusLine>` for reusable single-line status bars with section layout, margins, collapse behavior, and refresh callbacks.
-*   Added the ``ui-html-viewer`` demo as a UI-framework-based version of the HTML viewer, showcasing :cpp:any:`ui::ScrollingBufferView <erbsland::cterm::ui::surface::ScrollingBufferView>`, :cpp:any:`ui::StatusLine <erbsland::cterm::ui::surface::StatusLine>`, and the rich-text pipeline in a complete end-to-end example.
+*   Added :cpp:any:`ui::ScrollingBufferView <erbsland::cterm::ui::surface::ScrollingBufferView>` for scrollable buffer-backed content, :cpp:any:`ui::AbstractScrollBar <erbsland::cterm::ui::surface::AbstractScrollBar>` together with :cpp:any:`ui::HorizontalScrollBar <erbsland::cterm::ui::surface::HorizontalScrollBar>` and :cpp:any:`ui::VerticalScrollBar <erbsland::cterm::ui::surface::VerticalScrollBar>` for visual scroll-range indicators, and the beta single-line UI surfaces that are now :cpp:any:`ui::AbstractLine <erbsland::cterm::ui::surface::AbstractLine>` plus :cpp:any:`ui::TextLine <erbsland::cterm::ui::surface::TextLine>` for section layout, margins, collapse behavior, and refresh callbacks.
+*   Added the ``ui-html-viewer`` demo as a UI-framework-based version of the HTML viewer, showcasing :cpp:any:`ui::ScrollingBufferView <erbsland::cterm::ui::surface::ScrollingBufferView>`, one-line UI surfaces, and the rich-text pipeline in a complete end-to-end example.
 *   Added dedicated reference chapters for :doc:`UI Core <reference/ui-core>`, :doc:`UI Input <reference/ui-input>`, :doc:`UI Layouts <reference/ui-layouts>`, and :doc:`UI Surfaces <reference/ui-surfaces>`.
 *   Added the :doc:`String Sharing <implementation/string-sharing>` implementation note and new demo chapters for :doc:`HTML Viewer <demos/html-viewer>`, :doc:`UI Hello World <demos/ui-hello-world>`, and :doc:`UI HTML Viewer <demos/ui-html-viewer>`.
 
@@ -39,7 +103,7 @@ Improved
 --------
 
 *   Updated read-only text APIs across :cpp:any:`Terminal <erbsland::cterm::Terminal>`, :cpp:any:`CursorWriter <erbsland::cterm::CursorWriter>`, :cpp:any:`CursorBuffer <erbsland::cterm::CursorBuffer>`, :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>`, :cpp:any:`Buffer <erbsland::cterm::Buffer>`, :cpp:any:`String <erbsland::cterm::String>`, and related helpers to accept :cpp:any:`StringView <erbsland::cterm::StringView>` where mutation is not required. This reduces copying and clarifies ownership semantics.
-*   Extended :cpp:any:`ui::KeyBindings <erbsland::cterm::ui::KeyBindings>` with convenience overloads for special keys, Unicode characters, combined text input, and initializer-list bindings, making interactions easier to express.
+*   Improved the beta key input API. The old key-binding API has since been replaced by shared :cpp:any:`ui::Action <erbsland::cterm::ui::Action>` objects.
 *   Refined paragraph and rich-text rendering with improved token and render-block handling, keeping the HTML renderer and paragraph pipeline more modular and easier to extend.
 
 Documentation
@@ -54,7 +118,7 @@ Implementation
 --------------
 
 *   Refactored terminal string storage around dedicated shared data and builder components, making :cpp:any:`String <erbsland::cterm::String>` slicing and detaching behavior more explicit.
-*   Expanded the unit test suite with focused coverage for string-view behavior, string building, paragraph rendering, HTML rendering, key bindings, scrolling views, and status lines.
+*   Expanded the unit test suite with focused coverage for string-view behavior, string building, paragraph rendering, HTML rendering, key input, scroll bars, scrolling views, and line surfaces.
 *   Added the repository-local ``utilities/pre_commit.py`` helper to run standard pre-commit checks consistently.
 
 Code Format
@@ -75,7 +139,7 @@ Release 1.8.0 introduces two higher-level layers on top of the existing terminal
 Highlights
 ----------
 
-*   Added the beta :cpp:any:`erbsland::cterm::ui` framework with :cpp:any:`Application <erbsland::cterm::ui::Application>`, pages, surfaces, layouts, key bindings, schedulers, worker threads, and built-in surface types for structured terminal user interfaces.
+*   Added the beta :cpp:any:`erbsland::cterm::ui` framework with :cpp:any:`Application <erbsland::cterm::ui::Application>`, pages, surfaces, layouts, key input, schedulers, worker threads, and built-in surface types for structured terminal user interfaces.
 *   Added rich-text and HTML rendering through :cpp:any:`text::HtmlRenderer <erbsland::cterm::text::HtmlRenderer>`, :cpp:any:`text::Style <erbsland::cterm::text::Style>`, and :cpp:any:`text::TextNode <erbsland::cterm::text::TextNode>`, making it much easier to render headings, lists, links, blockquotes, and code blocks into terminal-friendly output.
 *   Added :cpp:any:`EncodingErrors <erbsland::cterm::EncodingErrors>`, :cpp:any:`BufferResizeMode <erbsland::cterm::BufferResizeMode>`, :cpp:any:`ParagraphIndents <erbsland::cterm::ParagraphIndents>`, :cpp:any:`FastCharSet <erbsland::cterm::FastCharSet>`, and :cpp:any:`TerminalSession <erbsland::cterm::TerminalSession>` as public support APIs for safer text handling, reusable paragraph configuration, and clearer terminal lifecycle management.
 *   Added the ``html-viewer`` and ``ui-hello-world`` demos and reorganized the demo infrastructure around reusable terminal-application helpers, which makes the examples easier to study and extend.
@@ -84,7 +148,7 @@ Highlights
 Added
 -----
 
-*   Added :cpp:any:`erbsland::cterm::ui` as a new public beta module with :cpp:any:`Application <erbsland::cterm::ui::Application>`, :cpp:any:`Display <erbsland::cterm::ui::Display>`, :cpp:any:`Page <erbsland::cterm::ui::Page>`, :cpp:any:`Surface <erbsland::cterm::ui::Surface>`, :cpp:any:`Layout <erbsland::cterm::ui::Layout>`, :cpp:any:`Geometry <erbsland::cterm::ui::Geometry>`, :cpp:any:`KeyBindings <erbsland::cterm::ui::KeyBindings>`, and the built-in :cpp:any:`ui::Stack <erbsland::cterm::ui::layout::Stack>`, :cpp:any:`ui::Panel <erbsland::cterm::ui::surface::Panel>`, and :cpp:any:`ui::TextBox <erbsland::cterm::ui::surface::TextBox>` types.
+*   Added :cpp:any:`erbsland::cterm::ui` as a new public beta module with :cpp:any:`Application <erbsland::cterm::ui::Application>`, :cpp:any:`Display <erbsland::cterm::ui::Display>`, :cpp:any:`Page <erbsland::cterm::ui::Page>`, :cpp:any:`Surface <erbsland::cterm::ui::Surface>`, :cpp:any:`Layout <erbsland::cterm::ui::Layout>`, :cpp:any:`Geometry <erbsland::cterm::ui::Geometry>`, key input support, and the built-in :cpp:any:`ui::Stack <erbsland::cterm::ui::layout::Stack>`, :cpp:any:`ui::Panel <erbsland::cterm::ui::surface::Panel>`, and :cpp:any:`ui::TextBox <erbsland::cterm::ui::surface::TextBox>` types.
 *   Added a public event and scheduling layer with :cpp:any:`ui::Event <erbsland::cterm::ui::Event>`, :cpp:any:`ui::EventDriver <erbsland::cterm::ui::EventDriver>`, :cpp:any:`ui::EventScheduler <erbsland::cterm::ui::EventScheduler>`, :cpp:any:`ui::Scheduler <erbsland::cterm::ui::Scheduler>`, :cpp:any:`ui::ScheduledActionRef <erbsland::cterm::ui::ScheduledActionRef>`, :cpp:any:`ui::EventThread <erbsland::cterm::ui::EventThread>`, and :cpp:any:`ui::StopToken <erbsland::cterm::ui::StopToken>` for timers, background work, and cooperative shutdown.
 *   Added the :cpp:any:`erbsland::cterm::text` rich-text module with :cpp:any:`text::HtmlRenderer <erbsland::cterm::text::HtmlRenderer>`, :cpp:any:`text::Style <erbsland::cterm::text::Style>`, :cpp:any:`text::StyleRule <erbsland::cterm::text::StyleRule>`, :cpp:any:`text::StyleSelector <erbsland::cterm::text::StyleSelector>`, and :cpp:any:`text::TextNode <erbsland::cterm::text::TextNode>` for parsing, styling, and rendering structured text and HTML.
 *   Added :cpp:any:`EncodingErrors <erbsland::cterm::EncodingErrors>`, :cpp:any:`BufferResizeMode <erbsland::cterm::BufferResizeMode>`, :cpp:any:`ParagraphIndents <erbsland::cterm::ParagraphIndents>`, :cpp:any:`FastCharSet <erbsland::cterm::FastCharSet>`, and :cpp:any:`TerminalSession <erbsland::cterm::TerminalSession>` to make UTF-8 validation, buffer resizing, paragraph indentation, separator handling, and scoped terminal setup more explicit in user code.

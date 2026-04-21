@@ -12,40 +12,35 @@ auto currentDateTimeText() -> String {
     return String{std::format("{:%F %T}", now)};
 }
 
-void UiHelloWorldApp::run() {
-    _app.terminal().setSafeMarginEnabled(false);
-    setupUi();
-    _app.run();
-}
-
 void UiHelloWorldApp::setupUi() {
     auto mainPage = ui::Page::create();
-    mainPage->setBackground(Char{U'╱', fg::BrightBlack, bg::Black});
-    mainPage->keyBindings().bind({U'q', U'Q'}, []() -> void { ui::getApplication().quit(); });
-    mainPage->keyBindings().bind(Key::Escape, []() -> void { ui::getApplication().quit(); });
-    _app.setMainPage(mainPage);
+    auto quitAction = ui::Action::create("Quit");
+    quitAction->setKeys(Keys{U'q', Key::Escape}.setMainKeyCount(1));
+    quitAction->setTriggerFn([]() -> void { ui::getApplication().quit(); });
+    quitAction->help().setPriority(-100);
+    mainPage->actions().add(quitAction);
 
     auto mainLayout = ui::Stack::create(Orientation::Vertical);
-    mainPage->addChild(mainLayout);
+    mainPage->addSurface(mainLayout);
 
-    using Section = ui::StatusLine::Section;
-    using CollapseBehavior = ui::StatusLine::CollapseBehavior;
-    using UpdateMode = ui::StatusLine::UpdateMode;
-    auto header = ui::StatusLine::create();
-    header->setBackground(Char{U' ', bg::Blue});
-    header->setText(Section::Left, String{"Hello World!", Color{fg::BrightWhite, bg::Blue}});
-    header->setMargins(Section::Left, Margins{0, 1, 0, 1});
+    using Section = ui::TextLine::Section;
+    using CollapseBehavior = ui::TextLine::CollapseBehavior;
+    using UpdateMode = ui::TextLine::UpdateMode;
+    auto header = ui::HeaderLine::create();
+    header->setText(Section::Left, String{"Hello World!", fg::BrightWhite});
+    header->setMargins(Section::Left, Margins{1, 0});
     header->setUpdateMode(Section::Middle, UpdateMode::OnRefresh);
     header->setUpdateFn(Section::Middle, [](String &text, const Coordinate) -> void {
         text.clear();
-        text.append(Color{fg::BrightCyan, bg::Blue}, currentDateTimeText());
+        text.append(fg::BrightCyan, currentDateTimeText());
     });
     header->setCollapseBehavior(Section::Middle, CollapseBehavior::Hide);
-    header->setMargins(Section::Middle, Margins{0, 1, 0, 1});
-    header->setText(Section::Right, String{"Minimal UI Demo", Color{fg::BrightYellow, bg::Blue}});
-    header->setMargins(Section::Right, Margins{0, 1, 0, 1});
-    header->scheduler().addRepeated([header]() -> void { header->setPaintOutdated(); }, std::chrono::seconds{1});
-    mainLayout->addChild(header);
+    header->setMargins(Section::Middle, Margins{1, 0});
+    header->setText(Section::Right, String{"Minimal UI Demo", fg::BrightYellow});
+    header->setMargins(Section::Right, Margins{1, 0});
+    header->scheduler().addRepeated(
+        [header]() -> void { header->flags().setPaintOutdated(); }, std::chrono::seconds{1});
+    mainLayout->addSurface(header);
 
     auto center = ui::TextBox::create(
         String{
@@ -53,20 +48,15 @@ void UiHelloWorldApp::setupUi() {
             "\n"
             "A complete full-screen terminal UI with centered content,\n"
             "live status lines, and key handling in just a few surfaces.",
-            Color{fg::BrightWhite, bg::Inherited}},
+            fg::BrightWhite},
         Alignment::Center);
-    center->geometry().setSizePolicy(ui::SizePolicy{ui::SizePolicy::Grow});
-    mainLayout->addChild(center);
+    center->editLayoutMetrics().setSizePolicy(ui::SizePolicy::Grow);
+    mainLayout->addSurface(center);
 
-    auto footer = ui::StatusLine::create();
-    footer->setBackground(Char{U' ', bg::BrightBlack});
-    footer->setText(
-        Section::Left, String{"Built from Page + Stack + TextBox + StatusLine", Color{fg::White, bg::BrightBlack}});
-    footer->setCollapseBehavior(Section::Left, CollapseBehavior::Hide);
-    footer->setMargins(Section::Left, Margins{0, 1, 0, 1});
-    footer->setText(Section::Right, String{"[Q] or [Esc] quit", Color{fg::BrightYellow, bg::BrightBlack}});
-    footer->setMargins(Section::Right, Margins{0, 1, 0, 1});
-    mainLayout->addChild(footer);
+    auto footer = ui::FooterLine::create();
+    footer->setText(String{"Built via Stack[Header, TextBox, Footer]", fg::White});
+    mainLayout->addSurface(footer);
+    setMainPage(mainPage);
 }
 
 }

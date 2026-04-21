@@ -74,6 +74,8 @@ public:
     [[nodiscard]] static auto fullBlockFrame() -> Char16StylePtr;
     /// For drawing solid block frames with chamfered corners.
     [[nodiscard]] static auto fullBlockWithChamferFrame() -> Char16StylePtr;
+    /// For drawing empty frames with colored spaces.
+    [[nodiscard]] static auto noneFrame() -> Char16StylePtr;
     /// Get the style for the given frame style.
     /// @param frameStyle The frame style to resolve.
     /// @return The shared style instance, or `nullptr` if `frameStyle` requires `Tile9Style`.

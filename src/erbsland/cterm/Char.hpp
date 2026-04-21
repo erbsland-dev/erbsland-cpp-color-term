@@ -173,36 +173,29 @@ public: // modifiers
     /// @throws std::invalid_argument If `encodingErrors` is `Throw` and the code point is unsupported.
     [[nodiscard]] auto withCombining(char32_t codePoint, EncodingErrors encodingErrors = EncodingErrors::Replace) const
         -> Char;
-    /// Create a character with the given colors applied as an overlay.
-    /// @param color The color override to apply.
-    /// @return A copy of this character with the adjusted colors.
-    /// If the applied colors contain `Inherited`, the existing component from this character is kept unchanged.
-    [[nodiscard]] auto withColorOverlay(Color color) const -> Char;
     /// Create a character with style applied on top of the stored style.
     /// `Inherited` color components keep the current color component, and unspecified attributes keep the current
     /// attribute state.
-    /// @param color The color override to apply.
-    /// @param attributes The attribute override to apply.
+    /// @param style The style override to apply.
     /// @return A copy of this character with the overlaid style.
-    [[nodiscard]] auto withOverlay(Color color, CharAttributes attributes) const noexcept -> Char;
+    [[nodiscard]] auto withOverlay(CharStyle style) const noexcept -> Char;
     /// Create a character with the given color replacing the stored color.
     /// @param color The replacement color.
     /// @return A copy of this character with exactly `color`.
     [[nodiscard]] auto withColorReplaced(Color color) const noexcept -> Char;
+    /// Create a character with the given character style replaced.
+    /// @param style The replacement style.
+    /// @return A copy of this character with exactly `style`.
+    [[nodiscard]] auto withStyleReplaced(CharStyle style) const noexcept -> Char;
     /// Create a character with the given attributes replacing the stored attributes.
     /// @param attributes The replacement attributes.
     /// @return A copy of this character with exactly `attributes`.
     [[nodiscard]] auto withAttributes(CharAttributes attributes) const noexcept -> Char;
-    /// Create a character with a base color underneath the stored color.
-    /// @param color The base color.
-    /// @return A copy of this character where this character color overlays `color`.
-    [[nodiscard]] auto withBaseColor(Color color) const noexcept -> Char;
     /// Create a character with style used as the base underneath the stored style.
     /// The stored color and stored attributes overwrite the base style.
-    /// @param color The base color.
-    /// @param attributes The base attributes.
+    /// @param style The base style.
     /// @return A copy of this character resolved against the base style.
-    [[nodiscard]] auto withBase(Color color, CharAttributes attributes) const noexcept -> Char;
+    [[nodiscard]] auto withBase(CharStyle style) const noexcept -> Char;
     /// Create a character with another character used as the style base.
     /// Only the style is used from `base`; the stored Unicode character is preserved.
     /// @param base The character providing the base color and attributes.
@@ -252,6 +245,24 @@ public: // predefined characters.
     /// @param style The style to store on the empty block.
     /// @return An empty block with `style`.
     [[nodiscard]] static auto emptyBlock(CharStyle style) noexcept -> Char;
+
+public: // deprecated methods.
+    [[deprecated("Please use withOverlay(color)"), nodiscard]]
+    auto withColorOverlay(const Color color) const -> Char {
+        return withOverlay(color);
+    }
+    [[deprecated("Please use withOverlay(CharStyle{color, attributes})"), nodiscard]]
+    auto withOverlay(const Color color, const CharAttributes attributes) const noexcept -> Char {
+        return withOverlay(CharStyle{color, attributes});
+    }
+    [[deprecated("Please use withBase(color)"), nodiscard]]
+    auto withBaseColor(const Color color) const noexcept -> Char {
+        return withBase(color);
+    }
+    [[deprecated("Please use withBase(CharStyle{color, attributes})"), nodiscard]]
+    auto withBase(const Color color, const CharAttributes attributes) const noexcept -> Char {
+        return withBase(CharStyle{color, attributes});
+    }
 
 private:
     Char(const impl::CombinedChar character, const CharStyle style) noexcept : _character{character}, _style{style} {}

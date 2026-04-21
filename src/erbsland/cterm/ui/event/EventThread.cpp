@@ -22,7 +22,7 @@ EventThread::EventThread(ProtectedTag protectedTag) noexcept : _eventDriver{}, _
 }
 
 void EventThread::invoke(InvocationFn fn) {
-    invokeImpl([fn = std::move(fn)](const StopToken) {
+    invokeImpl([fn = std::move(fn)](const StopToken) -> void {
         if (fn) {
             fn();
         }
@@ -35,7 +35,7 @@ void EventThread::invoke(StoppableInvocationFn fn) {
 
 void EventThread::invokeDelayed(InvocationFn fn, const milliseconds delay) {
     invokeDelayedImpl(
-        [fn = std::move(fn)](const StopToken) {
+        [fn = std::move(fn)](const StopToken) -> void {
             if (fn) {
                 fn();
             }
@@ -84,7 +84,7 @@ auto EventThread::waitForQuit(milliseconds timeout) -> bool {
     if (!_finished && std::this_thread::get_id() == _workerThreadId) {
         throw std::logic_error{"EventThread::waitForQuit() must not be called from the event thread itself."};
     }
-    if (!_finished && !_finishedCv.wait_for(lock, timeout, [this]() { return _finished; })) {
+    if (!_finished && !_finishedCv.wait_for(lock, timeout, [this]() -> bool { return _finished; })) {
         return false;
     }
     lock.unlock();
@@ -124,7 +124,7 @@ auto EventThread::hasFailed() const -> bool {
 
 void EventThread::start() {
     auto self = shared_from_this();
-    std::thread([self = std::move(self)]() mutable { self->runWorker(); }).detach();
+    std::thread([self = std::move(self)]() mutable -> void { self->runWorker(); }).detach();
 }
 
 void EventThread::runWorker() {
@@ -132,7 +132,7 @@ void EventThread::runWorker() {
         std::scoped_lock lock{_mutex};
         _workerThreadId = std::this_thread::get_id();
     }
-    _eventDriver.setEventHandler([this](const Event &event) { handleEvent(event); });
+    _eventDriver.setEventHandler([this](const Event &event) -> void { handleEvent(event); });
     try {
         while (processLoopIteration()) {}
     } catch (...) {
@@ -178,9 +178,9 @@ auto EventThread::processLoopIteration() -> bool {
     }
     if (!waitDuration.has_value()) {
         _wakeupCv.wait(
-            lock, [this]() { return _abortRequested || _wakeupRequested || _eventDriver.hasPendingEvents(); });
+            lock, [this]() -> bool { return _abortRequested || _wakeupRequested || _eventDriver.hasPendingEvents(); });
     } else if (*waitDuration > milliseconds::zero()) {
-        _wakeupCv.wait_for(lock, *waitDuration, [this]() {
+        _wakeupCv.wait_for(lock, *waitDuration, [this]() -> bool {
             return _abortRequested || _wakeupRequested || _eventDriver.hasPendingEvents();
         });
     }

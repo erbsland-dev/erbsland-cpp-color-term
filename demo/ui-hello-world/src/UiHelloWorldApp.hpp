@@ -9,15 +9,17 @@ namespace demo::ui_hello_world {
 
 using namespace erbsland::cterm;
 
-class UiHelloWorldApp {
+/// Minimal UI application that shows the basic framework building blocks.
+class UiHelloWorldApp final : public ui::Application {
 public:
-    void run();
+    /// Create the application and store command line arguments.
+    /// @param argc The number of command line arguments.
+    /// @param argv The command line arguments.
+    UiHelloWorldApp(const int argc, char *argv[]) : Application(argc, argv) {}
+    ~UiHelloWorldApp() override = default;
 
-private:
-    void setupUi();
-
-private:
-    ui::Application _app;
+protected: // implement ui::Application
+    void setupUi() override;
 };
 
 }

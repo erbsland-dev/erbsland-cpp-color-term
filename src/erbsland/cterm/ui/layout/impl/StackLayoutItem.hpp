@@ -15,9 +15,11 @@ public:
     /// @param surface The child surface.
     /// @param orientation The stack orientation.
     /// @param availableSize The available stack size.
+    /// @param scope The parent layout scope.
     /// @return The initialized layout item.
     [[nodiscard]] static auto
-    fromSurface(const SurfacePtr &surface, Orientation orientation, Size availableSize) noexcept -> StackLayoutItem;
+    fromSurface(const SurfacePtr &surface, Orientation orientation, Size availableSize, LayoutScope &scope) noexcept
+        -> StackLayoutItem;
 
 public:
     /// Get the assigned size on the main axis.
@@ -25,6 +27,9 @@ public:
 
     /// Get the size on the cross axis.
     [[nodiscard]] auto assignedCrossSize() const noexcept -> Coordinate;
+
+    /// Access the surface for this item.
+    [[nodiscard]] auto surface() const noexcept -> const SurfacePtr &;
 
     /// Get the main-axis policy type.
     [[nodiscard]] auto policyType() const noexcept -> DimensionPolicy::Type;
@@ -51,10 +56,11 @@ public:
     /// @return The applied shrink.
     [[nodiscard]] auto shrink(Coordinate requestedShrink, bool shrinkBelowMinimum) noexcept -> Coordinate;
 
-    /// Apply the resolved rectangle to the surface and layout its subtree.
+    /// Apply the resolved rectangle to the surface.
     /// @param orientation The stack orientation.
     /// @param mainOffset The position on the main axis.
-    void applyLayout(Orientation orientation, Coordinate mainOffset) const noexcept;
+    /// @param scope The parent layout scope.
+    void applyLayout(Orientation orientation, Coordinate mainOffset, LayoutScope &scope) const noexcept;
 
 private:
     /// Create an item with fully resolved constraints.

@@ -17,7 +17,7 @@ void FramePainter::drawFrame(
     const Color frameColor) noexcept {
 
     rect.forEachInFrame([&, this](const Position pos) -> void {
-        set(pos, blockForFrame(rect, pos, frameStyle).withBaseColor(frameColor), combinationStyle);
+        set(pos, blockForFrame(rect, pos, frameStyle).withBase(frameColor), combinationStyle);
     });
 }
 
@@ -31,7 +31,7 @@ void FramePainter::drawFrame(
         return;
     }
     rect.forEachInFrame([&, this](const Position pos) -> void {
-        set(pos, style->block(rect, pos).withBaseColor(frameColor), combinationStyle);
+        set(pos, style->block(rect, pos).withBase(frameColor), combinationStyle);
     });
 }
 
@@ -50,12 +50,16 @@ void FramePainter::drawFrame(
     if (rect.width() <= 0 || rect.height() <= 0) {
         return;
     }
-    const auto tile9Style =
-        options.tile9Style() != nullptr ? options.tile9Style() : Tile9Style::forStyle(options.style());
-    const auto char16Style = tile9Style == nullptr
-        ? (options.char16Style() != nullptr ? options.char16Style() : Char16Style::forStyle(options.style()))
-        : Char16StylePtr{};
-    if (tile9Style == nullptr && char16Style == nullptr) {
+    Tile9StylePtr tile9Style;
+    Char16StylePtr char16Style;
+    if (options.tile9Style() != nullptr) {
+        tile9Style = options.tile9Style();
+    } else if (options.char16Style() != nullptr) {
+        char16Style = options.char16Style();
+    } else if (tile9Style = Tile9Style::forStyle(options.style()); tile9Style == nullptr) {
+        char16Style = Char16Style::forStyle(options.style());
+    }
+    if (char16Style == nullptr && tile9Style == nullptr) {
         return;
     }
     rect.forEach([&, this](const Position pos) -> void {
@@ -84,6 +88,53 @@ void FramePainter::drawFrame(
     });
 }
 
+void FramePainter::drawGridLayout(const Position pos, const GridLayout &layout, const FrameBorder &border) noexcept {
+
+    const auto layoutSize = layout.size(border);
+    const auto &topBorder = border.border(FrameBorder::Element::Top);
+    const auto &bottomBorder = border.border(FrameBorder::Element::Bottom);
+    const auto &leftBorder = border.border(FrameBorder::Element::Left);
+    const auto &rightBorder = border.border(FrameBorder::Element::Right);
+    const auto &hLineBorder = border.border(FrameBorder::Element::HLine);
+    const auto &vLineBorder = border.border(FrameBorder::Element::VLine);
+
+    auto horizontalLines = FrameLineList{};
+    auto verticalLines = FrameLineList{};
+    horizontalLines.reserve(layout.rowCount() + 1);
+    verticalLines.reserve(layout.columnCount() + 1);
+    addGridLine(horizontalLines, pos.y(), topBorder);
+    addGridLine(verticalLines, pos.x(), leftBorder);
+
+    auto lineY = pos.y() + lineSize(topBorder);
+    const auto &rowHeights = layout.rowHeights();
+    for (std::size_t row = 0; row + 1 < rowHeights.size(); ++row) {
+        lineY += rowHeights[row];
+        addGridLine(horizontalLines, lineY, hLineBorder);
+        lineY += lineSize(hLineBorder);
+    }
+    addGridLine(horizontalLines, pos.y() + layoutSize.height() - 1, bottomBorder);
+
+    auto lineX = pos.x() + lineSize(leftBorder);
+    const auto &columnWidths = layout.columnWidths();
+    for (std::size_t column = 0; column + 1 < columnWidths.size(); ++column) {
+        lineX += columnWidths[column];
+        addGridLine(verticalLines, lineX, vLineBorder);
+        lineX += lineSize(vLineBorder);
+    }
+    addGridLine(verticalLines, pos.x() + layoutSize.width() - 1, rightBorder);
+
+    const auto x1 = pos.x();
+    const auto x2 = pos.x() + layoutSize.width() - 1;
+    const auto y1 = pos.y();
+    const auto y2 = pos.y() + layoutSize.height() - 1;
+    for (const auto &horizontalLine : horizontalLines) {
+        drawHorizontalGridLine(horizontalLine, verticalLines, x1, x2, y1, y2);
+    }
+    for (const auto &verticalLine : verticalLines) {
+        drawVerticalGridLine(verticalLine, horizontalLines, y1, y2);
+    }
+}
+
 void FramePainter::drawFilledFrame(
     Rectangle rect,
     const Char &frameBlock,
@@ -108,7 +159,7 @@ void FramePainter::drawFilledFrame(
 
     rect.forEach([&, this](const Position pos) -> void {
         if (rect.isFrame(pos)) {
-            set(pos, blockForFrame(rect, pos, frameStyle).withBaseColor(frameColor), combinationStyle);
+            set(pos, blockForFrame(rect, pos, frameStyle).withBase(frameColor), combinationStyle);
         } else {
             set(pos, fillBlock, combinationStyle);
         }
@@ -128,7 +179,7 @@ void FramePainter::drawFilledFrame(
     }
     rect.forEach([&, this](const Position pos) -> void {
         if (rect.isFrame(pos)) {
-            set(pos, style->block(rect, pos).withBaseColor(frameColor), combinationStyle);
+            set(pos, style->block(rect, pos).withBase(frameColor), combinationStyle);
         } else {
             set(pos, fillBlock, combinationStyle);
         }
@@ -151,6 +202,111 @@ auto FramePainter::blockForFrame(const Rectangle rect, const Position pos, const
     const auto bitMask =
         pos.cardinalFourBitmask([&](const Position deltaPos) -> bool { return rect.isFrame(deltaPos); });
     return frameStyle->block(bitMask);
+}
+
+auto FramePainter::blockForGridLine(const FrameBorder::Border &border, const uint32_t bitMask) noexcept -> Char {
+    if (const auto style = Char16Style::forStyle(border.style); style != nullptr) {
+        return style->block(bitMask);
+    }
+    return {};
+}
+
+auto FramePainter::lineSize(const FrameBorder::Border &border) noexcept -> Coordinate {
+    return border.style != FrameStyle::None && FrameBorder::isLineStyle(border.style) ? 1 : 0;
+}
+
+auto FramePainter::lineAt(const FrameLineList &lines, const Coordinate coordinate, std::size_t &index) noexcept
+    -> OptionalFrameBorderReference {
+
+    while (index < lines.size() && lines[index].coordinate < coordinate) {
+        ++index;
+    }
+    if (index < lines.size() && lines[index].coordinate == coordinate) {
+        return lines[index].border;
+    }
+    return std::nullopt;
+}
+
+void FramePainter::addGridLine(
+    FrameLineList &lines, const Coordinate coordinate, const FrameBorder::Border &border) noexcept {
+
+    if (lineSize(border) == 0) {
+        return;
+    }
+    lines.push_back(FrameLine{.coordinate = coordinate, .border = std::cref(border)});
+}
+
+void FramePainter::drawHorizontalGridLine(
+    const FrameLine &horizontalLine,
+    const FrameLineList &verticalLines,
+    const Coordinate x1,
+    const Coordinate x2,
+    const Coordinate y1,
+    const Coordinate y2) noexcept {
+
+    const auto &horizontalBorder = horizontalLine.border.get();
+    const auto block = blockForGridLine(horizontalBorder, 0b0101);
+    auto verticalLineIndex = std::size_t{0};
+    for (auto x = x1; x <= x2; ++x) {
+        const auto verticalBorder = lineAt(verticalLines, x, verticalLineIndex);
+        if (!verticalBorder.has_value()) {
+            drawFrameBlock(Position{x, horizontalLine.coordinate}, block, horizontalBorder.color, {});
+            continue;
+        }
+        auto eastBorder = OptionalFrameBorderReference{};
+        auto southBorder = OptionalFrameBorderReference{};
+        auto westBorder = OptionalFrameBorderReference{};
+        auto northBorder = OptionalFrameBorderReference{};
+        if (x < x2) {
+            eastBorder = horizontalLine.border;
+        }
+        if (horizontalLine.coordinate < y2) {
+            southBorder = verticalBorder;
+        }
+        if (x > x1) {
+            westBorder = horizontalLine.border;
+        }
+        if (horizontalLine.coordinate > y1) {
+            northBorder = verticalBorder;
+        }
+        drawGridBlock(Position{x, horizontalLine.coordinate}, eastBorder, southBorder, westBorder, northBorder);
+    }
+}
+
+void FramePainter::drawVerticalGridLine(
+    const FrameLine &verticalLine,
+    const FrameLineList &horizontalLines,
+    const Coordinate y1,
+    const Coordinate y2) noexcept {
+
+    const auto &verticalBorder = verticalLine.border.get();
+    const auto block = blockForGridLine(verticalBorder, 0b1010);
+    auto horizontalLineIndex = std::size_t{0};
+    for (auto y = y1; y <= y2; ++y) {
+        if (lineAt(horizontalLines, y, horizontalLineIndex).has_value()) {
+            continue;
+        }
+        drawFrameBlock(Position{verticalLine.coordinate, y}, block, verticalBorder.color, {});
+    }
+}
+
+void FramePainter::drawGridBlock(
+    const Position pos,
+    const OptionalFrameBorderReference east,
+    const OptionalFrameBorderReference south,
+    const OptionalFrameBorderReference west,
+    const OptionalFrameBorderReference north) noexcept {
+
+    static const auto cNone = FrameBorder::Border{};
+    drawFrameBlock(
+        pos,
+        FrameBorder::cornerChar(
+            east.has_value() ? east.value().get() : cNone,
+            south.has_value() ? south.value().get() : cNone,
+            west.has_value() ? west.value().get() : cNone,
+            north.has_value() ? north.value().get() : cNone),
+        {},
+        {});
 }
 
 void FramePainter::drawFrameBlock(

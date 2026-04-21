@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "CharCombinationStyle.hpp"
 
+#include "impl/CommonBoxFrameCombinationStyle.hpp"
+
 #include <algorithm>
 #include <limits>
 #include <stdexcept>
@@ -25,6 +27,11 @@ auto CharCombinationStyle::overwrite() noexcept -> const CharCombinationStylePtr
 
 auto CharCombinationStyle::colorOverlay() noexcept -> const CharCombinationStylePtr & {
     static const CharCombinationStylePtr style = std::make_shared<SimpleCharCombinationStyle>();
+    return style;
+}
+
+auto CharCombinationStyle::commonBoxFrame() noexcept -> const CharCombinationStylePtr & {
+    static const CharCombinationStylePtr style = std::make_shared<CommonBoxFrameCombinationStyle>();
     return style;
 }
 
@@ -80,8 +87,8 @@ MatrixCombinationStyle::MatrixCombinationStyle(std::u32string characters, const 
 
 auto MatrixCombinationStyle::combine(const Char &current, const Char &overlay) const noexcept -> Char {
     auto result = overlay;
-    const auto currentIndex = lookupIndex(static_cast<char32_t>(current.mainCodePoint()));
-    const auto overlayIndex = lookupIndex(static_cast<char32_t>(overlay.mainCodePoint()));
+    const auto currentIndex = lookupIndex(current.mainCodePoint());
+    const auto overlayIndex = lookupIndex(overlay.mainCodePoint());
     if (currentIndex != cUnsupportedIndex && overlayIndex != cUnsupportedIndex) {
         const auto matrixSize = _characters.size();
         const auto matrixIndex =

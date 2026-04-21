@@ -2,21 +2,34 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "StackLayoutItem.hpp"
 
+#include "../../../geometry/AxisMapper.hpp"
+
 namespace erbsland::cterm::ui::layout::impl {
 
 auto StackLayoutItem::fromSurface(
-    const SurfacePtr &surface, const Orientation orientation, const Size availableSize) noexcept -> StackLayoutItem {
-    const auto mainConstraints = DimensionConstraints::fromGeometry(surface->geometry(), orientation);
+    const SurfacePtr &surface, const Orientation orientation, const Size availableSize, LayoutScope &scope) noexcept
+    -> StackLayoutItem {
+    const auto axis = AxisMapper{orientation};
     const auto crossAxis = orientation.crossed();
-    const auto crossConstraints = DimensionConstraints::fromGeometry(surface->geometry(), crossAxis);
-    const auto availableMainSize = availableSize.coordinate(orientation);
+    const auto availableMainDimension = LayoutDimension::atMost(availableSize.coordinate(orientation));
+    const auto availableCrossDimension = LayoutDimension::exact(availableSize.coordinate(crossAxis));
+    const auto initialProposal = LayoutProposal{
+        axis.horizontalValue(availableMainDimension, availableCrossDimension),
+        axis.verticalValue(availableMainDimension, availableCrossDimension)};
+    auto metrics = scope.measure(surface, initialProposal);
+    auto crossConstraints = DimensionConstraints::fromMetrics(metrics, crossAxis);
     const auto availableCrossSize = availableSize.coordinate(crossAxis);
+    const auto assignedCrossSize = crossConstraints.resolve(availableCrossSize);
+    const auto assignedCrossDimension = LayoutDimension::exact(assignedCrossSize);
+    const auto finalProposal = LayoutProposal{
+        axis.horizontalValue(availableMainDimension, assignedCrossDimension),
+        axis.verticalValue(availableMainDimension, assignedCrossDimension)};
+    metrics = scope.measure(surface, finalProposal);
+    const auto mainConstraints = DimensionConstraints::fromMetrics(metrics, orientation);
+    crossConstraints = DimensionConstraints::fromMetrics(metrics, crossAxis);
+    const auto availableMainSize = availableSize.coordinate(orientation);
     return {
-        surface,
-        mainConstraints,
-        crossConstraints,
-        mainConstraints.initialSize(availableMainSize),
-        crossConstraints.resolve(availableCrossSize)};
+        surface, mainConstraints, crossConstraints, mainConstraints.initialSize(availableMainSize), assignedCrossSize};
 }
 
 StackLayoutItem::StackLayoutItem(
@@ -38,6 +51,10 @@ auto StackLayoutItem::assignedMainSize() const noexcept -> Coordinate {
 
 auto StackLayoutItem::assignedCrossSize() const noexcept -> Coordinate {
     return _assignedCrossSize;
+}
+
+auto StackLayoutItem::surface() const noexcept -> const SurfacePtr & {
+    return _surface;
 }
 
 auto StackLayoutItem::policyType() const noexcept -> DimensionPolicy::Type {
@@ -70,12 +87,10 @@ auto StackLayoutItem::shrink(const Coordinate requestedShrink, const bool shrink
     return appliedShrink;
 }
 
-void StackLayoutItem::applyLayout(const Orientation orientation, const Coordinate mainOffset) const noexcept {
-    const auto childSize = orientation == Orientation::Horizontal ? Size{_assignedMainSize, _assignedCrossSize}
-                                                                  : Size{_assignedCrossSize, _assignedMainSize};
-    const auto childPos = orientation == Orientation::Horizontal ? Position{mainOffset, 0} : Position{0, mainOffset};
-    _surface->setRectangle(Rectangle{childPos, childSize});
-    _surface->onLayout(childSize);
+void StackLayoutItem::applyLayout(
+    const Orientation orientation, const Coordinate mainOffset, LayoutScope &scope) const noexcept {
+    const auto axis = AxisMapper{orientation};
+    scope.place(_surface, Rectangle{axis.position(mainOffset), axis.size(_assignedMainSize, _assignedCrossSize)});
 }
 
 }

@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "../../../Orientation.hpp"
-#include "../../Geometry.hpp"
+#include "../../../geometry/Orientation.hpp"
+#include "../../LayoutMetrics.hpp"
 
 namespace erbsland::cterm::ui::layout::impl {
 
@@ -32,11 +32,11 @@ public:
     auto operator=(DimensionConstraints &&) -> DimensionConstraints & = default;
 
 public:
-    /// Create dimension constraints from one axis of a geometry description.
-    /// @param geometry The source geometry.
+    /// Create dimension constraints from one axis of layout metrics.
+    /// @param metrics The source metrics.
     /// @param orientation The selected axis.
     /// @return The extracted constraints.
-    [[nodiscard]] static auto fromGeometry(const Geometry &geometry, Orientation orientation) noexcept
+    [[nodiscard]] static auto fromMetrics(const LayoutMetrics &metrics, Orientation orientation) noexcept
         -> DimensionConstraints;
 
     /// Resolve a dimension against an available size.

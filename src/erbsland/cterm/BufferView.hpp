@@ -4,8 +4,9 @@
 
 #include "Char.hpp"
 #include "CropEdges.hpp"
-#include "Direction.hpp"
 #include "ReadableBuffer.hpp"
+
+#include "geometry/Direction.hpp"
 
 namespace erbsland::cterm {
 

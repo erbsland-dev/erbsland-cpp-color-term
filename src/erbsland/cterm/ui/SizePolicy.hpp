@@ -38,6 +38,12 @@ public:
     auto operator=(SizePolicy &&) -> SizePolicy & = default;
 
 public:
+    /// Compare two size policies.
+    auto operator==(const SizePolicy &other) const noexcept -> bool = default;
+    /// Compare two size policies.
+    auto operator!=(const SizePolicy &other) const noexcept -> bool = default;
+
+public:
     /// Get the width policy.
     /// @return The width policy.
     [[nodiscard]] auto width() const noexcept -> DimensionPolicy { return _width; }

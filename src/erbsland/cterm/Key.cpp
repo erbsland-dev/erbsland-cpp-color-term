@@ -8,6 +8,7 @@
 #include <array>
 #include <cctype>
 #include <optional>
+#include <string>
 #include <string_view>
 
 namespace erbsland::cterm {
@@ -89,6 +90,60 @@ auto Key::normalizeKeyText(std::string text) noexcept -> std::string {
     return text;
 }
 
+auto Key::parseModifierText(const std::string_view text) noexcept -> std::optional<KeyModifier> {
+    if (text == "shift") {
+        return KeyModifier::Shift;
+    }
+    if (text == "ctrl" || text == "control") {
+        return KeyModifier::Control;
+    }
+    if (text == "alt") {
+        return KeyModifier::Alt;
+    }
+    return std::nullopt;
+}
+
+auto Key::parseModifiers(std::string &text) noexcept -> KeyModifiers {
+    auto modifiers = KeyModifiers{};
+    while (true) {
+        const auto separator = text.find('+');
+        if (separator == std::string::npos) {
+            return modifiers;
+        }
+        const auto modifierText = normalizeKeyText(text.substr(0, separator));
+        const auto modifier = parseModifierText(modifierText);
+        if (!modifier.has_value()) {
+            return modifiers;
+        }
+        modifiers.set(*modifier);
+        text.erase(0, separator + 1);
+    }
+}
+
+void Key::appendModifierString(std::string &text, const KeyModifiers modifiers) {
+    if (modifiers.has(KeyModifier::Shift)) {
+        text += "shift+";
+    }
+    if (modifiers.has(KeyModifier::Control)) {
+        text += "ctrl+";
+    }
+    if (modifiers.has(KeyModifier::Alt)) {
+        text += "alt+";
+    }
+}
+
+void Key::appendModifierDisplayText(std::string &text, const KeyModifiers modifiers) {
+    if (modifiers.has(KeyModifier::Shift)) {
+        text += "Shift+";
+    }
+    if (modifiers.has(KeyModifier::Control)) {
+        text += "Ctrl+";
+    }
+    if (modifiers.has(KeyModifier::Alt)) {
+        text += "Alt+";
+    }
+}
+
 auto Key::wrapDisplayText(const std::string_view text, const bool useBrackets) -> std::string {
     if (!useBrackets) {
         return std::string{text};
@@ -118,20 +173,28 @@ auto Key::parseCharacterKeyText(const std::string_view text) -> std::optional<Ke
     return std::nullopt;
 }
 
-Key::Key(const Type type, const char32_t codePoint) noexcept : _type{type} {
+Key::Key(const Type type, const char32_t codePoint, const KeyModifiers modifiers) noexcept :
+    _type{type}, _modifiers{modifiers} {
     if (type == Character || type == Combined) {
         _character = impl::CombinedChar{codePoint};
     }
 }
 
-Key::Key(const Type type, const std::u32string_view character) : _type{type} {
+Key::Key(const Type type, const KeyModifiers modifiers) noexcept : Key{type, char32_t{0}, modifiers} {
+}
+
+Key::Key(const char32_t codePoint, const KeyModifiers modifiers) noexcept : Key{Character, codePoint, modifiers} {
+}
+
+Key::Key(const Type type, const std::u32string_view character, const KeyModifiers modifiers) :
+    _type{type}, _modifiers{modifiers} {
     if (type == Character || type == Combined) {
         _character = impl::CombinedChar{character};
     }
 }
 
 auto Key::operator==(const char32_t other) const noexcept -> bool {
-    return _type == Character && _character.mainCodePoint() == other;
+    return _type == Character && _modifiers.empty() && _character.mainCodePoint() == other;
 }
 
 auto Key::operator!=(const char32_t other) const noexcept -> bool {
@@ -139,7 +202,7 @@ auto Key::operator!=(const char32_t other) const noexcept -> bool {
 }
 
 auto Key::operator==(const std::u32string_view other) const noexcept -> bool {
-    return _type == Combined && combined() == other;
+    return _type == Combined && _modifiers.empty() && combined() == other;
 }
 
 auto Key::operator!=(const std::u32string_view other) const noexcept -> bool {
@@ -150,7 +213,7 @@ auto Key::operator==(const Type type) const noexcept -> bool {
     if (type == Character || type == Combined) {
         return false;
     }
-    return _type == type;
+    return _type == type && _modifiers.empty();
 }
 
 auto Key::operator!=(const Type type) const noexcept -> bool {
@@ -179,13 +242,24 @@ auto Key::combined() const -> std::u32string {
     return _character.utf32();
 }
 
+auto Key::withoutModifiers() const noexcept -> Key {
+    auto result = *this;
+    result._modifiers = {};
+    return result;
+}
+
 auto Key::fromString(std::string text) noexcept -> Key {
-    const auto originalText = text;
+    auto originalText = text;
+    const auto modifiers = parseModifiers(text);
+    originalText = text;
     text = normalizeKeyText(std::move(text));
     for (const auto &definition : keyAliasDefinitions()) {
         if (definition.text == text) {
-            return Key{definition.type};
+            return Key{definition.type, modifiers};
         }
+    }
+    if (!modifiers.empty()) {
+        return Key{None};
     }
     if (const auto key = parseCharacterKeyText(originalText); key.has_value()) {
         return *key;
@@ -198,21 +272,29 @@ auto Key::fromConsoleInput(const std::string &text) noexcept -> Key {
 }
 
 auto Key::toString() const -> std::string {
+    auto result = std::string{};
+    appendModifierString(result, _modifiers);
     if (_type == Character || _type == Combined) {
-        return _character.utf8();
+        result += _character.utf8();
+        return result;
     }
     if (const auto *definition = findKeyTextDefinition(_type)) {
-        return std::string{definition->text};
+        result += definition->text;
+        return result;
     }
     return {};
 }
 
 auto Key::toDisplayText(const bool useBrackets) const -> std::string {
+    auto result = std::string{};
+    appendModifierDisplayText(result, _modifiers);
     if (_type == Character || _type == Combined) {
-        return wrapDisplayText(_character.utf8(), useBrackets);
+        result += _character.utf8();
+        return wrapDisplayText(result, useBrackets);
     }
     if (const auto *definition = findKeyTextDefinition(_type)) {
-        return wrapDisplayText(definition->displayText, useBrackets);
+        result += definition->displayText;
+        return wrapDisplayText(result, useBrackets);
     }
     return {};
 }

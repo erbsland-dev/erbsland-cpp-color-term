@@ -6,7 +6,6 @@
 
 #include "impl/StringData.hpp"
 #include "impl/StringWrapper.hpp"
-#include "impl/TextUtil.hpp"
 
 #include <algorithm>
 #include <ranges>
@@ -221,6 +220,19 @@ void String::clear() noexcept {
     _range = {};
 }
 
+void String::insertWithBaseStyle(std::size_t pos, const StringView &other, const CharStyle style) noexcept {
+    if (other.empty()) {
+        return;
+    }
+    detach();
+    pos = std::min(pos, size());
+    _data->chars().insert(_data->chars().begin() + static_cast<std::ptrdiff_t>(pos), other.size(), Char{});
+    for (std::size_t i = 0; i < other.size(); ++i) {
+        _data->chars()[pos + i] = other[i].withBase(style);
+    }
+    syncRangeWithStorage();
+}
+
 void String::appendStyled(std::string_view text, const CharStyle style) noexcept {
     detach();
     _data->appendCharacters(text, style.color(), style.attributes(), EncodingErrors::Replace);
@@ -231,6 +243,25 @@ void String::appendStyled(const std::u32string_view text, const CharStyle style)
     detach();
     _data->appendCharacters(text, style.color(), style.attributes());
     syncRangeWithStorage();
+}
+
+void String::appendWithBaseStyle(const StringView &other, CharStyle style) noexcept {
+    appendViewWithBaseStyle(other, style);
+}
+
+void String::append(const std::size_t count, const Char character) noexcept {
+    const auto limitedCount = std::min(count, static_cast<std::size_t>(10'000'000U));
+    if (limitedCount == 0) {
+        return;
+    }
+    detach();
+    _data->chars().insert(_data->chars().end(), limitedCount, character);
+    _data->invalidateDisplayWidth();
+    syncRangeWithStorage();
+}
+
+void String::append(const std::size_t count, const char32_t character, const CharStyle style) noexcept {
+    append(count, Char{character, style});
 }
 
 void String::appendRange(const StringView &other, const std::size_t startIndex, const std::size_t length) noexcept {
@@ -257,6 +288,14 @@ auto String::wrapIntoLines(const int width, const ParagraphSpacing paragraphSpac
 
 auto String::terminalLines(const int width) const noexcept -> int {
     return StringView{*this}.terminalLines(width);
+}
+
+auto String::naturalTextSize() const noexcept -> Size {
+    return StringView{*this}.naturalTextSize();
+}
+
+auto String::wrappedTextHeight(const Coordinate width, const TextOptions &options) const noexcept -> Coordinate {
+    return StringView{*this}.wrappedTextHeight(width, options);
 }
 
 auto String::splitLines() const noexcept -> std::vector<String> {
@@ -367,13 +406,12 @@ void String::appendElement(const CharStyle overlayStyle, CharStyle &style) noexc
 }
 
 void String::appendElement(const CharAttributes attributes, CharStyle &style) noexcept {
-    style.setAttributes(attributes.resolvedWith(style.attributes()));
+    style.setAttributes(attributes.withBase(style.attributes()));
 }
 
 void String::appendElement(const Char &character, CharStyle &style) noexcept {
     detach();
-    const auto resolved = character.withBase(style.color(), style.attributes());
-    _data->append(resolved);
+    _data->append(character.withBase(style));
     syncRangeWithStorage();
 }
 
@@ -410,12 +448,8 @@ void String::appendViewWithBaseStyle(const StringView &view, const CharStyle sty
         return;
     }
     detach();
-    auto &chars = _data->chars();
-    chars.reserve(chars.size() + view.size());
-    const auto color = style.color();
-    const auto attributes = style.attributes();
     for (const auto &character : view) {
-        const auto resolved = character.withBase(color, attributes);
+        const auto resolved = character.withBase(style);
         _data->append(resolved);
     }
     syncRangeWithStorage();

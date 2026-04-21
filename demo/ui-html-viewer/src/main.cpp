@@ -6,9 +6,9 @@
 #include <exception>
 #include <iostream>
 
-auto main(const int argc, char **argv) -> int {
+auto main(const int argc, char *argv[]) -> int {
     try {
-        return demo::ui_html_viewer::UiHtmlViewerApp{}.run(argc, argv);
+        return demo::ui_html_viewer::UiHtmlViewerApp{argc, argv}.run();
     } catch (const std::exception &exception) {
         std::cerr << "ui-html-viewer failed: " << exception.what() << '\n';
     }

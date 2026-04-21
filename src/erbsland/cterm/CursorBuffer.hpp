@@ -111,14 +111,13 @@ private:
     void writeResolvedCharacter(const Char &character) noexcept;
 
 private:
-    OverflowMode _overflowMode{OverflowMode::Shift};                ///< The overflow mode of the buffer.
-    Size _maximumSize{Size{0, 0}};                                  ///< The maximum size of the buffer.
-    Char _fillChar{Char::space()};                                  ///< The character used for empty cells.
-    Position _cursorPosition{0, 0};                                 ///< The current position of the cursor.
-    Color _currentColor{Color::reset()};                            ///< The current color of the cursor.
-    CharAttributes _currentCharAttributes{CharAttributes::reset()}; ///< The current character attributes.
-    bool _autoWrap{true};                                           ///< If auto-wrap is enabled.
-    bool _wrapOnNextChar{false}; ///< If the next character should be wrapped to the next line.
+    OverflowMode _overflowMode{OverflowMode::Shift}; ///< The overflow mode of the buffer.
+    Size _maximumSize{Size{0, 0}};                   ///< The maximum size of the buffer.
+    Char _fillChar{Char::space()};                   ///< The character used for empty cells.
+    Position _cursorPosition{0, 0};                  ///< The current position of the cursor.
+    CharStyle _currentStyle{CharStyle::reset()};     ///< The current character style.
+    bool _autoWrap{true};                            ///< If auto-wrap is enabled.
+    bool _wrapOnNextChar{false};                     ///< If the next character should be wrapped to the next line.
 };
 
 }

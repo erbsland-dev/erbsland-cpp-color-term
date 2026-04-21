@@ -6,13 +6,18 @@
 
 namespace erbsland::cterm::ui::layout::impl {
 
-auto StackLayoutItems::fromChildren(
-    const std::vector<SurfacePtr> &children, const Orientation orientation, const Size availableSize) noexcept
-    -> StackLayoutItems {
+auto StackLayoutItems::fromSurfaces(
+    const AbstractSurfaceContainer &surfaces,
+    const Orientation orientation,
+    const Size availableSize,
+    LayoutScope &scope) noexcept -> StackLayoutItems {
     auto items = std::vector<StackLayoutItem>{};
-    items.reserve(children.size());
-    for (const auto &child : children) {
-        items.push_back(StackLayoutItem::fromSurface(child, orientation, availableSize));
+    items.reserve(surfaces.size());
+    for (const auto &surface : surfaces) {
+        if (!surface->flags().isVisible()) {
+            continue;
+        }
+        items.push_back(StackLayoutItem::fromSurface(surface, orientation, availableSize, scope));
     }
     return StackLayoutItems{std::move(items)};
 }
@@ -31,10 +36,10 @@ void StackLayoutItems::resolveMainSizes(const Coordinate availableMainSize) noex
     }
 }
 
-void StackLayoutItems::applyLayout(const Orientation orientation) const noexcept {
+void StackLayoutItems::applyLayout(const Orientation orientation, LayoutScope &scope) const noexcept {
     auto mainOffset = Coordinate{0};
     for (const auto &item : _items) {
-        item.applyLayout(orientation, mainOffset);
+        item.applyLayout(orientation, mainOffset, scope);
         mainOffset += item.assignedMainSize();
     }
 }
@@ -51,7 +56,7 @@ void StackLayoutItems::distributeExtraSpace(Coordinate remainingSpace) noexcept 
     while (remainingSpace > 0) {
         auto growFactorSum = 0;
         for (const auto &item : _items) {
-            if (item.policyType() == DimensionPolicy::Type::Grow && item.canGrow()) {
+            if (item.policyType() == DimensionPolicy::Grow && item.canGrow()) {
                 growFactorSum += item.factor();
             }
         }
@@ -60,7 +65,7 @@ void StackLayoutItems::distributeExtraSpace(Coordinate remainingSpace) noexcept 
         }
         auto usedSpace = Coordinate{0};
         for (auto &item : _items) {
-            if (item.policyType() != DimensionPolicy::Type::Grow || !item.canGrow()) {
+            if (item.policyType() != DimensionPolicy::Grow || !item.canGrow()) {
                 continue;
             }
             const auto desiredGrowth = std::max<Coordinate>(1, remainingSpace * item.factor() / growFactorSum);
@@ -78,12 +83,12 @@ void StackLayoutItems::distributeExtraSpace(Coordinate remainingSpace) noexcept 
 
 void StackLayoutItems::shrinkOverflow(const Coordinate availableMainSize) noexcept {
     auto overflow = totalMainSize() - availableMainSize;
-    shrinkPolicyGroup(overflow, DimensionPolicy::Type::Shrink, false);
-    shrinkPolicyGroup(overflow, DimensionPolicy::Type::Preferred, false);
-    shrinkPolicyGroup(overflow, DimensionPolicy::Type::Grow, false);
-    shrinkPolicyGroup(overflow, DimensionPolicy::Type::Grow, true);
-    shrinkPolicyGroup(overflow, DimensionPolicy::Type::Preferred, true);
-    shrinkPolicyGroup(overflow, DimensionPolicy::Type::Shrink, true);
+    shrinkPolicyGroup(overflow, DimensionPolicy::Shrink, false);
+    shrinkPolicyGroup(overflow, DimensionPolicy::Preferred, false);
+    shrinkPolicyGroup(overflow, DimensionPolicy::Grow, false);
+    shrinkPolicyGroup(overflow, DimensionPolicy::Grow, true);
+    shrinkPolicyGroup(overflow, DimensionPolicy::Preferred, true);
+    shrinkPolicyGroup(overflow, DimensionPolicy::Shrink, true);
 }
 
 void StackLayoutItems::shrinkPolicyGroup(

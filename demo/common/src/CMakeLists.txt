@@ -6,6 +6,8 @@ cmake_minimum_required(VERSION 3.28)
 target_sources(erbsland-color-term-demo-common PRIVATE
         TerminalApplication.cpp
         TerminalApplication.hpp
+        UiDemoApplication.cpp
+        UiDemoApplication.hpp
         DemoError.hpp
         Main.hpp
 )

@@ -32,7 +32,7 @@ public:
     [[nodiscard]] auto view() const noexcept -> const ui::ScrollingBufferViewPtr &;
 
 public: // implement Surface
-    void onLayout(Size newParentSize) noexcept override;
+    void onLayout(ui::LayoutScope &scope) noexcept override;
 
 private:
     void initializeUi();

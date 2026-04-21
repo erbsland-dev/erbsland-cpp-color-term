@@ -8,12 +8,12 @@
 #include "CursorWriter.hpp"
 #include "MoveMode.hpp"
 #include "ParagraphOptions.hpp"
-#include "Size.hpp"
 #include "String.hpp"
 #include "TerminalFlags.hpp"
 #include "UpdateSettings.hpp"
 #include "WritableBuffer.hpp"
 
+#include "geometry/Size.hpp"
 #include "impl/InputBackend.hpp"
 #include "impl/LineBuffer.hpp"
 #include "impl/TypeTraits.hpp"
@@ -273,15 +273,14 @@ private:
     bool _afterResize{false};                         ///< If the screen should be cleared after a resize.
     RefreshMode _refreshMode{RefreshMode::Overwrite}; ///< The refresh mode to use.
     Size _size;                                       ///< The configured size of the terminal that is safe to use.
-    Size _terminalSize; ///< The actual, reported size of the terminal. Zero if we have no detected size.
-    Color _color{Foreground::Default, Background::Default};  ///< The current terminal colors.
-    CharAttributes _charAttributes{CharAttributes::reset()}; ///< The current terminal character attributes.
-    bool _backBufferEnabled{false};                          ///< If the back buffer feature is enabled.
-    bool _isAlternateScreenActive{false};                    ///< If the alternate screen is active or not.
-    WritableBufferPtr _sizeTooSmallBuffer;                   ///< Buffer for size too small message.
-    WritableBufferPtr _backBuffer;                           ///< The back buffer.
-    impl::InputBackend _input;                               ///< The input backend.
-    impl::LineBuffer _lineBuffer;                            ///< The line buffer.
+    Size _terminalSize;                               ///< Size of the terminal. Zero if we have no detected size.
+    CharStyle _style{CharStyle::reset()};             ///< The current 'cursor' style.
+    bool _backBufferEnabled{false};                   ///< If the back buffer feature is enabled.
+    bool _isAlternateScreenActive{false};             ///< If the alternate screen is active or not.
+    WritableBufferPtr _sizeTooSmallBuffer;            ///< Buffer for size too small message.
+    WritableBufferPtr _backBuffer;                    ///< The back buffer.
+    impl::InputBackend _input;                        ///< The input backend.
+    impl::LineBuffer _lineBuffer;                     ///< The line buffer.
 };
 
 }

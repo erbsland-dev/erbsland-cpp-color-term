@@ -4,6 +4,8 @@
 
 #include "StackLayoutItem.hpp"
 
+#include "../../AbstractSurfaceContainer.hpp"
+
 #include <vector>
 
 namespace erbsland::cterm::ui::layout::impl {
@@ -11,23 +13,31 @@ namespace erbsland::cterm::ui::layout::impl {
 /// Ordered list of stack layout items with main-axis sizing logic.
 class StackLayoutItems final {
 public:
-    /// Create layout items for the given stack children.
-    /// @param children The stack children.
+    /// Create layout items for the given stack surfaces.
+    /// @param surfaces The stack child surfaces.
     /// @param orientation The stack orientation.
     /// @param availableSize The available stack size.
+    /// @param scope The parent layout scope.
     /// @return The initialized item collection.
-    [[nodiscard]] static auto
-    fromChildren(const std::vector<SurfacePtr> &children, Orientation orientation, Size availableSize) noexcept
-        -> StackLayoutItems;
+    [[nodiscard]] static auto fromSurfaces(
+        const AbstractSurfaceContainer &surfaces,
+        Orientation orientation,
+        Size availableSize,
+        LayoutScope &scope) noexcept -> StackLayoutItems;
 
 public:
     /// Adjust all main-axis sizes to fit the available size.
     /// @param availableMainSize The available size on the main axis.
     void resolveMainSizes(Coordinate availableMainSize) noexcept;
 
+    /// Access the resolved items.
+    /// @return The resolved layout items.
+    [[nodiscard]] auto items() const noexcept -> const std::vector<StackLayoutItem> & { return _items; }
+
     /// Apply the resolved rectangles to all items.
     /// @param orientation The stack orientation.
-    void applyLayout(Orientation orientation) const noexcept;
+    /// @param scope The parent layout scope.
+    void applyLayout(Orientation orientation, LayoutScope &scope) const noexcept;
 
 private:
     /// Create a new item collection.

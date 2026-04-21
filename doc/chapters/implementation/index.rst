@@ -17,6 +17,8 @@ Implementation Notes
     posix-backend
     action-scheduling
     invocation-and-event-threads
+    ui-paint-system
+    ui-scrollable-areas
     paragraph-layout-and-painting
     remapped-buffer
     stack-layout
@@ -67,6 +69,21 @@ code structure, and platform-specific behavior that are intentionally not part o
 
         Understand how generic invocation events move work onto the UI thread
         or a managed worker thread, and how cooperative shutdown is coordinated.
+
+    .. grid-item-card:: :fas:`paint-roller;sd-text-success` UI Paint System
+        :link: ui-paint-system
+        :link-type: doc
+
+        Follow how dirty surfaces become clipped paint calls, how opacity chooses the repaint base,
+        and how overlapping siblings are composed in order.
+
+    .. grid-item-card:: :fas:`arrows-up-down-left-right;sd-text-success` UI Scrollable Areas
+        :link: ui-scrollable-areas
+        :link-type: doc
+
+        Understand the scroll metric helpers, managed child containers,
+        visibility filtering, viewports, scroll areas, and custom-painted
+        scroll surfaces.
 
     .. grid-item-card:: :fas:`align-left;sd-text-success` Paragraph Layout and Painting
         :link: paragraph-layout-and-painting

@@ -55,14 +55,14 @@ auto StyleMarker::render(const std::size_t number, const CharStyle &baseStyle, c
     const auto markerStyle = baseStyle.withOverlay(_style);
     auto result = Rendered{};
 
-    const auto appendTab = [&](const CharStyle &tabStyle) {
+    const auto appendTab = [&](const CharStyle &tabStyle) -> void {
         const auto spaceCount = std::max(targetColumn - result.width, 1);
         result.text += String{static_cast<std::size_t>(spaceCount), Char{U' ', tabStyle}};
         result.width += spaceCount;
     };
-    const auto appendCharacters = [&](const String &value) {
+    const auto appendCharacters = [&](const String &value) -> void {
         for (const auto &character : value) {
-            const auto resolved = character.withBase(markerStyle.color(), markerStyle.attributes());
+            const auto resolved = character.withBase(markerStyle);
             if (resolved == U'\t') {
                 appendTab(resolved.style());
                 result.terminalText += resolved;

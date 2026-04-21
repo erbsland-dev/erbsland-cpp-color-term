@@ -131,6 +131,17 @@ public: // tools
     /// @param width The available terminal width in cells. Must be greater than zero.
     /// @return The number of occupied terminal lines.
     [[nodiscard]] auto terminalLines(int width) const noexcept -> int;
+    /// Get the natural rectangular size for this text view without wrapping.
+    /// The returned size is at least 1x1, preserves explicit non-trailing newline characters as separate lines,
+    /// and uses terminal cell width for wide and combining characters.
+    /// @return The natural text size in terminal cells.
+    [[nodiscard]] auto naturalTextSize() const noexcept -> Size;
+    /// Calculate the height required to render this text view with `WritableBuffer::drawText()`.
+    /// The given width is the full target rectangle width, including margins configured in `options`.
+    /// @param width The available rectangle width in terminal cells.
+    /// @param options The text options used for paragraph layout.
+    /// @return The required rectangle height in terminal cells.
+    [[nodiscard]] auto wrappedTextHeight(Coordinate width, const TextOptions &options) const noexcept -> Coordinate;
     /// Split this view into individual lines.
     /// The string is split at the NL character that is not included in the result.
     /// Empty lines are preserved.

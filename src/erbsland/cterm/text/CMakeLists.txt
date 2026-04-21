@@ -20,4 +20,6 @@ target_sources(erbsland-color-term PRIVATE
         StyleRule.hpp
         TextNode.cpp
         TextNode.hpp
+        TextNodeType.cpp
+        TextNodeType.hpp
 )

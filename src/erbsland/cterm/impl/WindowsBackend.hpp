@@ -9,6 +9,7 @@
 #include <signal.h>
 
 #include <csignal>
+#include <cstdint>
 #include <deque>
 #include <memory>
 #include <mutex>
@@ -55,8 +56,6 @@ public:
     static void restoreGlobalPlatform() noexcept;
 
 private:
-    /// Detect the size of the visible interactive console window.
-    [[nodiscard]] static auto detectVisibleConsoleSize() noexcept -> std::optional<Size>;
     /// Enabled UTF-8 in the Windows terminal.
     void enableUtf8Mode();
     /// Enables ANSI mode in the Windows terminal.
@@ -73,6 +72,8 @@ private:
     void appendTextCodePoint(char32_t codePoint, std::size_t repeatCount);
     /// Decode one UTF-16 code unit from the console into a Unicode code point.
     [[nodiscard]] auto decodeUtf16CodeUnit(char16_t codeUnit) -> std::optional<char32_t>;
+    /// Translate Windows control-key flags into key modifiers.
+    [[nodiscard]] static auto keyModifiersFromControlState(uint32_t controlKeyState) noexcept -> KeyModifiers;
     /// Read one key using either a timeout-based poll or a blocking wait.
     [[nodiscard]] auto readKeyFromConsole(OptionalTimeout timeout) -> Key;
     /// Restore the terminal and terminate the process for one handled event.
@@ -84,6 +85,7 @@ private:
 
     TerminalFlags _terminalFlags;                            ///< The terminal flags.
     bool _initialized{false};                                ///< If the platform was initialized.
+    bool _isInteractive{true};                               ///< If the backend is interactive.
     bool _cursorStateSaved{false};                           ///< If the backend saved the cursor state.
     bool _cursorVisible{true};                               ///< The current cursor visibility state.
     Input::Mode _inputMode{Input::Mode::ReadLine};           ///< The current input mode.
@@ -92,6 +94,8 @@ private:
     std::optional<CombinedChar> _pendingTextInput;           ///< Buffered translated Unicode text input.
     std::optional<char16_t> _pendingHighSurrogate;           ///< Stored first UTF-16 surrogate for the next event.
     std::unique_ptr<WindowsSignalDispatcher> _signalHandler; ///< Helper that forwards termination events safely.
+    struct WindowsPrivate;
+    std::unique_ptr<WindowsPrivate> _windows;                ///< Windows specific variables.
 };
 
 }

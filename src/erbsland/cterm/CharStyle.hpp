@@ -17,7 +17,9 @@ public:
     /// Create a style from color and attributes.
     /// @param color The color for the style.
     /// @param attributes The character attributes for the style.
-    constexpr CharStyle(const Color color, const CharAttributes attributes = {}) noexcept :
+    template <typename tColor>
+        requires std::is_constructible_v<Color, tColor>
+    constexpr CharStyle(const tColor color, const CharAttributes attributes = {}) noexcept :
         _color{color}, _attributes{attributes} {}
     /// Create a style from character attributes and inherited color.
     /// @param attributes The character attributes for the style.
@@ -64,18 +66,24 @@ public: // tools
     /// @param overlay The overlay style.
     /// @return The combined style.
     [[nodiscard]] auto withOverlay(const CharStyle overlay) const noexcept -> CharStyle {
-        return CharStyle{_color.overlayWith(overlay._color), overlay._attributes.resolvedWith(_attributes)};
+        return CharStyle{_color.overlayWith(overlay._color), overlay._attributes.withBase(_attributes)};
     }
     /// Create a new style by placing a base style underneath this one.
     /// The current style overwrites inherited or unspecified parts from the base style.
     /// @param base The base style.
     /// @return The resolved style.
     [[nodiscard]] auto withBase(const CharStyle base) const noexcept -> CharStyle {
-        return CharStyle{base._color.overlayWith(_color), _attributes.resolvedWith(base._attributes)};
+        return CharStyle{base._color.overlayWith(_color), _attributes.withBase(base._attributes)};
     }
     /// Get a stable hash for the character style.
     [[nodiscard]] constexpr auto hash() const noexcept -> std::size_t {
         return impl::hashCreate(_color.hash(), _attributes.hash());
+    }
+
+public:
+    /// Get a character style with default colors and default attributes set.
+    [[nodiscard]] constexpr static auto reset() noexcept -> CharStyle {
+        return CharStyle{Color::reset(), CharAttributes::reset()};
     }
 
 private:

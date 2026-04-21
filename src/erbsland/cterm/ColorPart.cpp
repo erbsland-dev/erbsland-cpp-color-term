@@ -45,7 +45,8 @@ auto ColorBase::toString() const -> std::string {
 auto ColorBase::enumFromString(const std::string_view str) -> Value {
     auto normalizedIdentifier = impl::toNormalizedIdentifier(str);
     const auto &table = colorTable();
-    auto it = std::ranges::find_if(table, [&](const auto &entry) { return entry.name == normalizedIdentifier; });
+    auto it =
+        std::ranges::find_if(table, [&](const auto &entry) -> bool { return entry.name == normalizedIdentifier; });
     if (it == table.end()) {
         throw std::invalid_argument("Unknown color '" + std::string(str) + "'.");
     }

@@ -130,9 +130,9 @@ auto Painter::drawCharacter(const Char &character, Position &pos) -> std::option
         auto renderedCharacter = character;
         if (_colorResolver) {
             const auto appliedColor = _buffer.get(pos).color().overlayWith(_colorResolver(character, pos));
-            renderedCharacter = character.withColorOverlay(appliedColor);
+            renderedCharacter = character.withOverlay(appliedColor);
         } else {
-            renderedCharacter = character.withBaseColor(_buffer.get(pos).color());
+            renderedCharacter = character.withBase(_buffer.get(pos).color());
         }
         _buffer.set(pos, renderedCharacter);
         lastColor = renderedCharacter.color();
@@ -148,7 +148,7 @@ void Painter::fillBackgroundRange(const int y, const int x1, const int x2, const
             continue;
         }
         const auto appliedColor = _buffer.get(pos).color().overlayWith(Color{Foreground::Inherited, color.bg()});
-        _buffer.set(pos, Char{U' '}.withColorOverlay(appliedColor));
+        _buffer.set(pos, Char{U' '}.withOverlay(appliedColor));
     }
 }
 

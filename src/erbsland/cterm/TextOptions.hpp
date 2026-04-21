@@ -2,11 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "Alignment.hpp"
 #include "ColorSequence.hpp"
 #include "Font.hpp"
 #include "ParagraphOptions.hpp"
 #include "TextAnimation.hpp"
+
+#include "geometry/Alignment.hpp"
 
 namespace erbsland::cterm {
 
