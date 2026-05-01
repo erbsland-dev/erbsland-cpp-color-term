@@ -43,6 +43,11 @@ public:
         high->help().setPriority(100);
         child->actions().add(high);
 
+        auto htmlAction = ui::Action::create("HTML");
+        htmlAction->setKeys(U'<');
+        htmlAction->help().setDescription("Use <strong>rich</strong> help.", ui::HelpFormat::Html);
+        child->actions().add(htmlAction);
+
         auto hidden = ui::Action::create("Hidden");
         hidden->setKeys(U'x');
         hidden->help().setVisibility(ui::HelpVisibility::Footer);
@@ -68,7 +73,11 @@ public:
         REQUIRE(html.find("Disabled") == std::string::npos);
         REQUIRE(html.find("<span class=\"key\">↵</span>") != std::string::npos);
         REQUIRE(html.find("<span class=\"key\">h</span>/<span class=\"key\">H</span>") != std::string::npos);
+        REQUIRE(html.find("<span class=\"key\">&lt;</span>") != std::string::npos);
         REQUIRE(html.find("Use &amp; enjoy") != std::string::npos);
+        REQUIRE(html.find("Use <strong>rich</strong> help.") != std::string::npos);
+        REQUIRE_EQUAL(high->help().descriptionFormat(), ui::HelpFormat::Text);
+        REQUIRE_EQUAL(htmlAction->help().descriptionFormat(), ui::HelpFormat::Html);
         REQUIRE_EQUAL(html.find("Shared"), html.rfind("Shared"));
     }
 };

@@ -2,35 +2,39 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "ActionHelp.hpp"
 
+#include "../Page.hpp"
+
+#include "../../theme/LayoutHelper.hpp"
+
 #include <algorithm>
 #include <chrono>
 #include <ranges>
-#include <string_view>
-#include <utility>
 
 namespace erbsland::cterm::ui::surface {
 
 using namespace std::chrono_literals;
 
-constexpr auto cActionItemSeparator = std::string_view{"  "};
-constexpr auto cActionNameSeparator = std::string_view{" "};
-constexpr auto cOmittedMarker = std::string_view{"…"};
-
-ActionHelp::ActionHelp([[maybe_unused]] ProtectedTag protectedTag) noexcept : Surface{theme::Element::ActionHelp} {
+ActionHelp::ActionHelp([[maybe_unused]] ProtectedTag protectedTag) noexcept {
     editLayoutMetrics().setFixedHeight(1);
 }
 
 auto ActionHelp::create() -> ActionHelpPtr {
     auto result = std::make_shared<ActionHelp>(ProtectedTag{});
-    const auto weakResult = std::weak_ptr<ActionHelp>{result};
-    result->scheduler().addRepeated(
-        [weakResult]() -> void {
-            if (const auto surface = weakResult.lock(); surface != nullptr) {
+    result->initializeUi();
+    return result;
+}
+
+void ActionHelp::initializeUi() {
+    Surface::initializeUi();
+    themeAttributes().setElement(theme::Element::ActionHelp);
+    const auto weakThis = std::weak_ptr<ActionHelp>{std::static_pointer_cast<ActionHelp>(shared_from_this())};
+    scheduler().addRepeated(
+        [weakThis]() -> void {
+            if (const auto surface = weakThis.lock(); surface != nullptr) {
                 surface->flags().setPaintOutdated();
             }
         },
         100ms);
-    return result;
 }
 
 auto ActionHelp::collectActions() -> std::vector<ActionPtr> {
@@ -62,64 +66,34 @@ auto ActionHelp::collectActions() -> std::vector<ActionPtr> {
 }
 
 auto ActionHelp::renderHelpText(const PaintContext &context, const Coordinate width) -> String {
-    const auto normalizedWidth = std::max(width, 0);
-    auto result = String{};
-    if (normalizedWidth == 0) {
-        return result;
+    if (width <= 0) {
+        return {};
     }
+    auto createEllipsisText = [&]() -> theme::StringWithMargins {
+        const auto ellipsisTheme = context.theme().forPart(theme::Part::Ellipsis);
+        const auto ellipsisBlock = ellipsisTheme.block();
+        return theme::layout::stylePaddingAndMargins(String{1U, ellipsisBlock}, ellipsisTheme);
+    };
     const auto actions = collectActions();
-    const auto separator = [&]() -> String {
-        auto text = String{};
-        text.appendStyled(cActionItemSeparator, context.theme().forPart(theme::Part::Text).style());
-        return text;
-    }();
-    const auto omitted = [&]() -> String {
-        auto text = String{};
-        text.appendStyled(cOmittedMarker, context.theme().forPart(theme::Part::Text).style());
-        return text;
-    }();
-    auto renderedActionCount = std::size_t{0};
+    auto result = theme::StringWithMargins{};
     for (const auto &action : actions) {
-        auto item = renderActionItem(action, context);
-        auto proposedWidth = result.displayWidth() + item.displayWidth();
-        if (!result.empty()) {
-            proposedWidth += separator.displayWidth();
-        }
-        if (proposedWidth > normalizedWidth) {
-            if (result.empty()) {
-                if (omitted.displayWidth() <= normalizedWidth) {
-                    result += omitted;
-                }
+        auto actionText = renderActionText(action, context);
+        if (result.joinedDisplayWidth(actionText) > width) {
+            auto ellipsis = createEllipsisText();
+            if (result.joinedDisplayWidth(ellipsis) > width) {
                 break;
             }
-            const auto omittedWidth = result.displayWidth() + separator.displayWidth() + omitted.displayWidth();
-            if (renderedActionCount > 0 && omittedWidth <= normalizedWidth) {
-                result += separator;
-                result += omitted;
-            }
+            result.join(ellipsis);
             break;
         }
-        if (!result.empty()) {
-            result += separator;
-        }
-        result += item;
-        renderedActionCount += 1;
+        result.join(actionText);
     }
-    return result;
+    return result.text();
 }
 
 void ActionHelp::onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept {
     const auto helpText = renderHelpText(context, context.surfaceRect().width());
     buffer.drawText(helpText, context.surfaceRect(), TextOptions{Alignment::TopRight});
-}
-
-auto ActionHelp::nearestPage() noexcept -> PagePtr {
-    for (auto surface = weak_from_this().lock(); surface != nullptr; surface = surface->parent().lock()) {
-        if (surface->isPage()) {
-            return std::dynamic_pointer_cast<Page>(surface);
-        }
-    }
-    return {};
 }
 
 auto ActionHelp::focusedSurfaceChain(const PagePtr &page) const -> std::vector<SurfacePtr> {
@@ -165,32 +139,22 @@ void ActionHelp::addCandidates(
             ActionCandidate{
                 .action = action,
                 .chainIndex = chainIndex,
-                .actionIndex = actionIndex++,
+                .actionIndex = actionIndex,
             });
+        actionIndex += 1;
     }
 }
 
-auto ActionHelp::renderActionItem(const ActionPtr &action, const PaintContext &context) -> String {
-    auto result = String{};
-    if (action == nullptr) {
-        return result;
+auto ActionHelp::renderActionText(const ActionPtr &action, const PaintContext &context) -> theme::StringWithMargins {
+    const auto keyLabels = action->keys().mainKeyLabels();
+    auto keysWithBrackets =
+        theme::layout::encloseInBrackets(keyLabels, context.theme(), theme::Part::KeyBracket, theme::Part::Key);
+    if (action->help().name().empty()) {
+        return keysWithBrackets;
     }
-    const auto themeAccessor = context.theme();
-    const auto keyStyle = themeAccessor.forPart(theme::Part::Key).style();
-    const auto nameStyle = themeAccessor.forPart(theme::Part::Text).style();
-    const auto keys = action->keys().mainKeys();
-    for (auto index = std::size_t{0}; index < keys.size(); ++index) {
-        if (index > 0) {
-            result.append(themeAccessor.forPart(theme::Part::KeyBracket).block(theme::BlockRole::Center));
-        } else {
-            result.append(themeAccessor.forPart(theme::Part::KeyBracket).block(theme::BlockRole::West));
-        }
-        result.appendWithBaseStyle(String{keys[index].toDisplayText(false)}, keyStyle);
-    }
-    result.append(themeAccessor.forPart(theme::Part::KeyBracket).block(theme::BlockRole::East));
-    result.appendStyled(cActionNameSeparator, nameStyle);
-    result.appendWithBaseStyle(String{action->help().name()}, nameStyle);
-    return result;
+    auto actionName =
+        theme::layout::stylePaddingAndMargins(action->help().name(), context.theme(), theme::Part::ActionName);
+    return keysWithBrackets.joined(actionName);
 }
 
 }

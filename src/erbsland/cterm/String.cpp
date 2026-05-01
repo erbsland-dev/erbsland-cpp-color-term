@@ -5,16 +5,16 @@
 #include "StringView.hpp"
 
 #include "impl/StringData.hpp"
+#include "impl/StringRangeView.hpp"
 #include "impl/StringWrapper.hpp"
 
 #include <algorithm>
-#include <ranges>
-#include <stdexcept>
+#include <span>
 #include <utility>
 
 namespace erbsland::cterm {
 
-String::String() noexcept : _data{impl::StringData::sharedEmpty()}, _range{} {
+String::String() noexcept : _data{impl::StringData::sharedEmpty()} {
 }
 
 String::String(const std::string_view str, const EncodingErrors encodingErrors) :
@@ -48,54 +48,61 @@ String::String(Storage chars) noexcept :
     _range{0, _data->size()} {
 }
 
+auto String::operator==(const String &other) const noexcept -> bool {
+    const auto view = impl::StringRangeView{*_data, _range};
+    const auto otherView = impl::StringRangeView{*other._data, other._range};
+    if (view.size() != otherView.size()) {
+        return false;
+    }
+    for (std::size_t i = 0; i < view.size(); ++i) {
+        if (view.characterAt(i) != otherView.characterAt(i)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 auto String::operator[](const std::size_t index) const noexcept -> Char {
-    return characterAt(index);
+    return impl::StringRangeView{*_data, _range}[index];
 }
 
 auto String::operator[](const std::size_t index) noexcept -> Char & {
+    if (index >= size()) {
+        return ignoredMutableCharacter();
+    }
     detach();
     _data->invalidateDisplayWidth();
     return _data->chars()[index];
 }
 
 auto String::operator+=(const String &other) noexcept -> String & {
-    appendRange(other, 0, other.size());
+    append(other);
     return *this;
 }
 
 auto String::operator+=(const StringView &other) noexcept -> String & {
-    appendRange(other, 0, other.size());
+    append(other);
     return *this;
 }
 
 auto String::operator+(const String &other) const noexcept -> String {
     auto copy = *this;
-    copy += other;
+    copy.append(other);
     return copy;
 }
 
 auto String::operator+(const StringView &other) const noexcept -> String {
     auto copy = *this;
-    copy += other;
+    copy.append(other);
     return copy;
 }
 
 auto String::displayWidth() const noexcept -> int {
-    if (_range.startIndex() == 0 && _range.length() == _data->size() && _data->hasDisplayWidthCache()) {
-        return _data->displayWidth();
-    }
-    auto result = 0;
-    for (auto it = begin(); it != end(); ++it) {
-        result += it->displayWidth();
-    }
-    return result;
+    return impl::StringRangeView{*_data, _range}.displayWidth();
 }
 
 auto String::at(const std::size_t index) const -> Char {
-    if (index >= size()) {
-        throw std::out_of_range{"String index out of range."};
-    }
-    return characterAt(index);
+    return impl::StringRangeView{*_data, _range}.at(index, "String");
 }
 
 auto String::begin() noexcept -> iterator {
@@ -111,19 +118,19 @@ auto String::end() noexcept -> iterator {
 }
 
 auto String::begin() const noexcept -> const_iterator {
-    return _data->chars().cbegin() + static_cast<difference_type>(_range.startIndex());
+    return impl::StringRangeView{*_data, _range}.begin();
 }
 
 auto String::end() const noexcept -> const_iterator {
-    return begin() + static_cast<difference_type>(_range.length());
+    return impl::StringRangeView{*_data, _range}.end();
 }
 
 auto String::cbegin() const noexcept -> const_iterator {
-    return begin();
+    return impl::StringRangeView{*_data, _range}.cbegin();
 }
 
 auto String::cend() const noexcept -> const_iterator {
-    return end();
+    return impl::StringRangeView{*_data, _range}.cend();
 }
 
 auto String::rbegin() noexcept -> reverse_iterator {
@@ -135,79 +142,81 @@ auto String::rend() noexcept -> reverse_iterator {
 }
 
 auto String::rbegin() const noexcept -> const_reverse_iterator {
-    return const_reverse_iterator{end()};
+    return impl::StringRangeView{*_data, _range}.rbegin();
 }
 
 auto String::rend() const noexcept -> const_reverse_iterator {
-    return const_reverse_iterator{begin()};
+    return impl::StringRangeView{*_data, _range}.rend();
 }
 
 auto String::crbegin() const noexcept -> const_reverse_iterator {
-    return rbegin();
+    return impl::StringRangeView{*_data, _range}.crbegin();
 }
 
 auto String::crend() const noexcept -> const_reverse_iterator {
-    return rend();
+    return impl::StringRangeView{*_data, _range}.crend();
 }
 
 auto String::count(const Char &character) const noexcept -> std::size_t {
-    return static_cast<std::size_t>(
-        std::ranges::count_if(*this, [&](const Char &candidate) -> bool { return candidate == character; }));
+    return impl::StringRangeView{*_data, _range}.count(character);
 }
 
 auto String::count(const char32_t character) const noexcept -> std::size_t {
-    return static_cast<std::size_t>(std::ranges::count_if(
-        *this, [&](const Char &candidate) -> bool { return candidate.singleCodePoint() == character; }));
+    return impl::StringRangeView{*_data, _range}.count(character);
 }
 
 auto String::indexOf(const Char &character, const std::size_t startIndex) const noexcept -> std::size_t {
-    if (startIndex >= size()) {
-        return npos;
-    }
-    for (auto index = startIndex; index < size(); ++index) {
-        if (characterAt(index) == character) {
-            return index;
-        }
-    }
-    return npos;
+    return impl::StringRangeView{*_data, _range}.indexOf(character, startIndex);
 }
 
 auto String::indexOf(const char32_t character, const std::size_t startIndex) const noexcept -> std::size_t {
-    if (startIndex >= size()) {
-        return npos;
-    }
-    for (auto index = startIndex; index < size(); ++index) {
-        if (characterAt(index).singleCodePoint() == character) {
-            return index;
-        }
-    }
-    return npos;
+    return impl::StringRangeView{*_data, _range}.indexOf(character, startIndex);
+}
+
+auto String::indexOf(const std::u32string_view characterSet, std::size_t startIndex) const noexcept -> std::size_t {
+    return impl::StringRangeView{*_data, _range}.indexOf(characterSet, startIndex);
+}
+
+auto String::indexNotOf(const std::u32string_view characterSet, std::size_t startIndex) const noexcept -> std::size_t {
+    return impl::StringRangeView{*_data, _range}.indexNotOf(characterSet, startIndex);
 }
 
 auto String::substr(const std::size_t startIndex, std::size_t length) const noexcept -> String {
-    if (startIndex >= size() || length == 0) {
+    const auto range = impl::StringRangeView{*_data, _range}.subRange(startIndex, length);
+    if (range.empty()) {
         return {};
     }
-    if (length == npos || length > size() - startIndex) {
-        length = size() - startIndex;
-    }
-    return String{_data, IndexRange{_range.startIndex() + startIndex, length}};
+    return String{_data, range};
 }
 
-auto String::trimmed(const std::u32string_view characters) const noexcept -> String {
-    auto start = std::size_t{0};
-    auto endIndex = size();
-    while (start < endIndex && characterAt(start).isOneOf(characters)) {
-        start += 1;
+auto String::croppedToDisplayWidth(const Coordinate displayWidth, const Alignment alignment) const noexcept -> String {
+    const auto range = impl::StringRangeView{*_data, _range}.croppedRange(displayWidth, alignment);
+    if (range.empty()) {
+        return {};
     }
-    while (endIndex > start && characterAt(endIndex - 1).isOneOf(characters)) {
-        endIndex -= 1;
+    return String{_data, range};
+}
+
+auto String::trimmed(std::u32string_view characters) const noexcept -> String {
+    if (empty()) {
+        return {};
     }
-    return substr(start, endIndex - start);
+    auto copy = *this;
+    copy.trim(characters);
+    return copy;
+}
+
+auto String::normalized(const std::u32string_view characters, const Char separator) const noexcept -> String {
+    if (empty()) {
+        return {};
+    }
+    auto copy = *this;
+    copy.normalize(characters, separator);
+    return copy;
 }
 
 auto String::containsControlCharacters() const noexcept -> bool {
-    return std::ranges::any_of(*this, [](const Char &character) -> bool { return character.isControl(); });
+    return impl::StringRangeView{*_data, _range}.containsControlCharacters();
 }
 
 void String::reserve(const std::size_t size) noexcept {
@@ -218,6 +227,162 @@ void String::reserve(const std::size_t size) noexcept {
 void String::clear() noexcept {
     _data = impl::StringData::sharedEmpty();
     _range = {};
+}
+
+void String::trim(std::u32string_view characters) noexcept {
+    if (empty()) {
+        return;
+    }
+    const auto range = impl::StringRangeView{*_data, _range}.trimmedRange(characters);
+    if (range == _range) {
+        return;
+    }
+    if (range.empty()) {
+        clear();
+        return;
+    }
+    _range = range;
+}
+
+void String::normalize(std::u32string_view characters, const Char separator) noexcept {
+    if (empty()) {
+        return;
+    }
+    if (characters.empty()) {
+        characters = U" \n\t";
+    }
+    trim(characters);
+    auto startPos = indexOf(characters);
+    while (startPos != npos) {
+        auto endPos = indexNotOf(characters, startPos + 1);
+        if (endPos == npos) {
+            endPos = size();
+        }
+        auto newSeparator = separator.withBase(at(startPos).style());
+        if (endPos - startPos != 1 || at(startPos) != newSeparator) {
+            replace(IndexRange{startPos, endPos - startPos}, newSeparator);
+        }
+        // Replacing the characters shortened the string.
+        // Start the next search after the "not of" character previously found.
+        startPos = indexOf(characters, startPos + 2);
+    }
+}
+
+void String::replace(IndexRange range, const Char replacement) noexcept {
+    if (empty() || range.empty() || range.startIndex() >= size()) {
+        return;
+    }
+    if (range.endIndex() >= size()) {
+        range = IndexRange{range.startIndex(), size() - range.startIndex()};
+    }
+    if (range.empty()) {
+        return;
+    }
+    if (range.length() == 1 && !replacement.isEmpty()) { // fast path.
+        if (this->at(range.startIndex()) != replacement) {
+            detach();
+            (*this)[range.startIndex()] = replacement;
+        }
+        return;
+    }
+    if (replacement.isEmpty()) { // empty char is like a remove operation.
+        remove(range);
+        return;
+    }
+    remove(IndexRange{range.startIndex() + 1, range.length() - 1});
+    if (at(range.startIndex()) != replacement) {
+        detach();
+        _data->invalidateDisplayWidth();
+        _data->chars()[range.startIndex()] = replacement;
+    }
+}
+
+void String::replace(IndexRange range, const StringView &replacement) noexcept {
+    if (empty() || range.empty() || range.startIndex() >= size()) {
+        return;
+    }
+    if (range.endIndex() >= size()) {
+        range = IndexRange{range.startIndex(), size() - range.startIndex()};
+    }
+    if (range.empty()) {
+        return;
+    }
+    if (replacement.empty()) {
+        remove(range);
+        return;
+    }
+    auto replacementChars = std::span(replacement.cbegin(), replacement.cend());
+    if (range.length() == replacementChars.size()) { // fast path.
+        auto firstMismatch = range.length();
+        for (std::size_t i = 0; i < range.length(); ++i) {
+            if (at(range.startIndex() + i) != replacementChars[i]) {
+                firstMismatch = i;
+                break;
+            }
+        }
+        if (firstMismatch == range.length()) {
+            return;
+        }
+        detach();
+        auto &chars = _data->chars();
+        for (std::size_t i = firstMismatch; i < replacementChars.size(); ++i) {
+            chars[range.startIndex() + i] = replacementChars[i];
+        }
+        _data->invalidateDisplayWidth();
+        return;
+    }
+    detach();
+    using Diff = impl::StringData::Storage::difference_type;
+    auto &chars = _data->chars();
+    if (range.length() > replacementChars.size()) {
+        chars.erase(
+            chars.begin() + static_cast<Diff>(range.startIndex() + replacementChars.size()),
+            chars.begin() + static_cast<Diff>(range.endIndex()));
+        for (std::size_t i = 0; i < replacementChars.size(); ++i) {
+            chars[range.startIndex() + i] = replacementChars[i];
+        }
+    } else {
+        const auto missingCharCount = replacementChars.size() - range.length();
+        chars.insert(
+            chars.begin() + static_cast<Diff>(range.startIndex()),
+            replacementChars.begin(),
+            replacementChars.begin() + static_cast<Diff>(missingCharCount));
+        for (std::size_t i = missingCharCount; i < replacementChars.size(); ++i) {
+            chars[range.startIndex() + i] = replacementChars[i];
+        }
+    }
+    _data->invalidateDisplayWidth();
+    syncRangeWithStorage();
+}
+
+void String::remove(IndexRange range) noexcept {
+    if (empty() || range.empty() || range.startIndex() >= size()) {
+        return;
+    }
+    if (range.endIndex() >= size()) { // fast path, string only needs trimming at the end.
+        _range.setLength(range.startIndex());
+        return;
+    }
+    detach();
+    using Diff = impl::StringData::Storage::difference_type;
+    _data->chars().erase(
+        _data->chars().begin() + static_cast<Diff>(range.startIndex()),
+        _data->chars().begin() + static_cast<Diff>(range.endIndex()));
+    _data->invalidateDisplayWidth();
+    syncRangeWithStorage();
+}
+
+void String::set(const std::size_t index, const Char character) noexcept {
+    if (index >= size()) {
+        return;
+    }
+    if (const auto oldChar = at(index); oldChar != character) {
+        detach();
+        _data->chars()[index] = character;
+        if (oldChar.displayWidth() != character.displayWidth()) {
+            _data->invalidateDisplayWidth();
+        }
+    }
 }
 
 void String::insertWithBaseStyle(std::size_t pos, const StringView &other, const CharStyle style) noexcept {
@@ -245,15 +410,15 @@ void String::appendStyled(const std::u32string_view text, const CharStyle style)
     syncRangeWithStorage();
 }
 
-void String::appendWithBaseStyle(const StringView &other, CharStyle style) noexcept {
+void String::appendStyled(const StringView &other, CharStyle style) noexcept {
     appendViewWithBaseStyle(other, style);
 }
 
 void String::append(const std::size_t count, const Char character) noexcept {
-    const auto limitedCount = std::min(count, static_cast<std::size_t>(10'000'000U));
-    if (limitedCount == 0) {
+    if (count == 0) {
         return;
     }
+    const auto limitedCount = std::min(count, static_cast<std::size_t>(10'000'000U));
     detach();
     _data->chars().insert(_data->chars().end(), limitedCount, character);
     _data->invalidateDisplayWidth();
@@ -302,6 +467,23 @@ auto String::splitLines() const noexcept -> std::vector<String> {
     auto result = std::vector<String>{};
     for (const auto &line : StringView{*this}.splitLines()) {
         result.push_back(String{line._data, line._range});
+    }
+    return result;
+}
+
+auto String::withBase(const CharStyle style) const noexcept -> String {
+    // This method does not detach, if the base style keeps the original string intact.
+    if (style == CharStyle{}) { // fast-path
+        return *this;
+    }
+    auto result = *this;
+    // here we first compare and only assign actual changed characters.
+    for (std::size_t i = 0; i < result.size(); ++i) {
+        const auto character = result.at(i);
+        const auto styledCharacter = character.withBase(style);
+        if (character != styledCharacter) {
+            result[i] = styledCharacter;
+        }
     }
     return result;
 }
@@ -477,7 +659,13 @@ void String::syncRangeWithStorage() noexcept {
 }
 
 auto String::characterAt(const std::size_t index) const noexcept -> const Char & {
-    return _data->chars()[_range.startIndex() + index];
+    return impl::StringRangeView{*_data, _range}.characterAt(index);
+}
+
+auto String::ignoredMutableCharacter() noexcept -> Char & {
+    static thread_local auto ignored = Char{};
+    ignored = Char{};
+    return ignored;
 }
 
 }

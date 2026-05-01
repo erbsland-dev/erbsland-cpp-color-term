@@ -4,8 +4,7 @@
 
 namespace erbsland::cterm::ui::layout {
 
-ScrollArea::ScrollArea(ProtectedTag protectedTag) noexcept :
-    surface::AbstractScrollArea{protectedTag}, _viewport{Viewport::create()} {
+ScrollArea::ScrollArea(ProtectedTag protectedTag) noexcept : surface::AbstractScrollArea{protectedTag} {
     setScrollBarMode(Orientation::Horizontal, ScrollBarMode::Automatic);
     setScrollBarMode(Orientation::Vertical, ScrollBarMode::Automatic);
 }
@@ -44,8 +43,8 @@ void ScrollArea::onLayout(LayoutScope &scope) noexcept {
     _viewport->setScrollOffset(scrollOffset());
 }
 
-auto ScrollArea::isManagedScrollAreaChild(const SurfacePtr &surface) const noexcept -> bool {
-    return surface == _viewport || surface::AbstractScrollArea::isManagedScrollAreaChild(surface);
+auto ScrollArea::isManagedChild(const SurfacePtr &surface) const noexcept -> bool {
+    return surface == _viewport || surface::AbstractScrollArea::isManagedChild(surface);
 }
 
 auto ScrollArea::contentSizeForViewport(const Size viewportSize) const noexcept -> Size {
@@ -69,8 +68,9 @@ void ScrollArea::onScrollOffsetChanged(const Position scrollOffset) noexcept {
 }
 
 void ScrollArea::initializeUi() {
+    _viewport = Viewport::create();
     childStorage().add(_viewport);
-    initializeScrollAreaChildren();
+    surface::AbstractScrollArea::initializeUi();
 }
 
 }

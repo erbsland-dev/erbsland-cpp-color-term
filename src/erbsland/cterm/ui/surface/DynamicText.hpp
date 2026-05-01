@@ -2,12 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include "../Surface.hpp"
+#include "StaticText.hpp"
 
-#include <cstdint>
+#include <chrono>
 #include <functional>
 #include <memory>
-#include <optional>
 #include <string_view>
 
 namespace erbsland::cterm::ui::surface {
@@ -15,16 +14,11 @@ namespace erbsland::cterm::ui::surface {
 class DynamicText;
 using DynamicTextPtr = std::shared_ptr<DynamicText>;
 
-/// A one-line text surface with optional dynamic update callback.
-class DynamicText final : public Surface {
+/// A one-line text surface with optional manual or scheduled updates.
+class DynamicText final : public StaticText {
 public:
-    /// Automatic update handling.
-    enum class UpdateMode : uint8_t {
-        Static,    ///< Never call the update function; text changes happen only through `setText()`.
-        OnResize,  ///< Call the update function when the available width changes.
-        OnRefresh, ///< Call the update function before every paint pass.
-    };
-
+    /// Duration type used for the automatic update interval.
+    using milliseconds = std::chrono::milliseconds;
     /// Callback type used to update the text.
     using UpdateFn = std::function<void(String &text, Coordinate availableWidth)>;
 
@@ -48,45 +42,25 @@ public:
     [[nodiscard]] static auto create(std::string_view text, Alignment alignment = Alignment::TopLeft) -> DynamicTextPtr;
 
 public:
-    /// Get the current text.
-    [[nodiscard]] auto text() const noexcept -> const String & { return _text; }
-    /// Replace the current text.
-    /// @param text The new text.
-    void setText(String text);
-    /// Replace the current text from UTF-8 text.
-    /// @param text The new text.
-    void setText(std::string_view text);
-    /// Get the current update mode.
-    [[nodiscard]] auto updateMode() const noexcept -> UpdateMode { return _updateMode; }
-    /// Replace the update mode.
-    /// @param updateMode The new update mode.
-    void setUpdateMode(UpdateMode updateMode) noexcept;
     /// Replace the update function.
     /// @param updateFn The new update function.
     void setUpdateFn(UpdateFn updateFn);
     /// Remove the update function.
     void clearUpdateFn() noexcept;
-    /// Get the current text display width.
-    [[nodiscard]] auto textDisplayWidth() const noexcept -> Coordinate { return _text.displayWidth(); }
-    /// Update the text for a known width when the update mode requires it.
-    /// @param availableWidth The available width.
-    void updateForWidth(Coordinate availableWidth) noexcept;
-
-public: // implement Surface
-    [[nodiscard]] auto onMeasure(MeasureScope &scope, const LayoutProposal &proposal) noexcept
-        -> LayoutMetrics override;
-    void onLayout(LayoutScope &scope) noexcept override;
-    void onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept override;
+    /// Update the text once by calling the update function.
+    void updateText();
+    /// Get the automatic update interval.
+    /// @return A non-positive duration for manual updates.
+    [[nodiscard]] auto updateInterval() const noexcept -> milliseconds { return _updateInterval; }
+    /// Replace the automatic update interval.
+    /// A value less than or equal to zero disables automatic updates.
+    /// @param interval The new interval.
+    void setUpdateInterval(milliseconds interval);
 
 private:
-    void updatePreferredSize();
-
-private:
-    String _text;                               ///< The text to display.
-    TextOptions _textOptions;                   ///< Paint options.
-    UpdateMode _updateMode{UpdateMode::Static}; ///< The update mode.
-    UpdateFn _updateFn;                         ///< Optional update function.
-    std::optional<Coordinate> _lastWidth;       ///< Last width used for OnResize.
+    UpdateFn _updateFn;                       ///< Optional update function.
+    milliseconds _updateInterval{};           ///< Automatic update interval, or zero for manual updates.
+    ScheduledActionRef _scheduledUpdateRef{}; ///< Scheduled automatic update action.
 };
 
 }

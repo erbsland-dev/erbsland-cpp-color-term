@@ -90,6 +90,12 @@ public:
     static const Element Choice;
     /// The help viewer page.
     static const Element HelpViewer;
+    /// A one-line static text surface.
+    static const Element StaticText;
+    /// A label text surface.
+    static const Element Label;
+    /// A dynamic text surface.
+    static const Element DynamicText;
 
 private:
     static constexpr auto cCustomOffset = uint16_t{1000};
@@ -118,6 +124,9 @@ inline constexpr Element Element::Button{Id{16}};
 inline constexpr Element Element::Frame{Id{17}};
 inline constexpr Element Element::Choice{Id{18}};
 inline constexpr Element Element::HelpViewer{Id{19}};
+inline constexpr Element Element::StaticText{Id{20}};
+inline constexpr Element Element::Label{Id{21}};
+inline constexpr Element Element::DynamicText{Id{22}};
 
 }
 

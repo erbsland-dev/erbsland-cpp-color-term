@@ -76,6 +76,9 @@ public: // child surface management
     /// @param surface The child surface to add.
     /// @throws std::invalid_argument If the child is invalid or would create a cycle in the surface tree.
     void addSurface(SurfacePtr surface);
+    /// Find the nearest page that contains this surface.
+    /// @return The page, or null when this surface is detached.
+    [[nodiscard]] auto nearestPage() noexcept -> PagePtr;
 
 public:
     /// Get the full local rectangle of this surface.
@@ -159,6 +162,8 @@ public:
 
 public: // events
     /// Measure this surface for a proposed size.
+    /// The returned layout sizes describe the margin-free content rectangle. The optional margins in the returned
+    /// metrics are recommendations for the parent layout and are not included in these sizes.
     /// @param scope Measurement access for child surfaces.
     /// @param proposal The proposed size.
     /// @return The measured layout metrics.
@@ -182,6 +187,8 @@ public: // events
 protected:
     /// Protected tag for safe construction of all surface classes.
     struct ProtectedTag {};
+    /// Initialize theme attributes, child surfaces and other UI state after construction.
+    virtual void initializeUi();
     /// Get mutable access to the real child surface storage.
     /// @return The unfiltered child surface storage.
     [[nodiscard]] auto childStorage() noexcept -> SurfaceContainer &;
@@ -209,9 +216,6 @@ private:
     void clearDirectFocusIfNeeded() noexcept;
     /// Clear page focus if the current focused surface is in this subtree.
     void clearSubtreeFocusIfNeeded() noexcept;
-    /// Find the nearest page that contains this surface.
-    /// @return The page, or null when this surface is detached.
-    [[nodiscard]] auto nearestPage() noexcept -> PagePtr;
 
 protected:
     SurfaceContainer _surfaces{*this};       ///< All child surfaces.

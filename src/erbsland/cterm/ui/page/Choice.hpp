@@ -106,6 +106,8 @@ private:
     };
 
 private:
+    /// Set up the UI
+    void initializeUi() override;
     /// Select the choice with the given insertion index.
     void selectChoice(std::size_t insertionIndex);
     /// Focus the first enabled choice button.

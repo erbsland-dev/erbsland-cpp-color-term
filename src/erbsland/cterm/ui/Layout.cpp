@@ -4,8 +4,13 @@
 
 namespace erbsland::cterm::ui {
 
-Layout::Layout() noexcept : Surface{theme::Element::Layout, cDefaultLayoutSize} {
+Layout::Layout() noexcept : Surface{cDefaultLayoutSize} {
     childStorage().setManager(*this);
+}
+
+void Layout::initializeUi() {
+    Surface::initializeUi();
+    themeAttributes().setElement(theme::Element::Layout);
 }
 
 auto Layout::isOpaque() const noexcept -> bool {

@@ -4,7 +4,7 @@
 
 namespace erbsland::cterm::theme {
 
-PropertySheet::PropertySheet() noexcept : _color{Color::reset()}, _attributes{CharAttributes::reset()} {
+PropertySheet::PropertySheet() noexcept {
     _blocks.fill(U' ');
 }
 
@@ -26,9 +26,10 @@ PropertySheet::PropertySheet(const PropertySheet &base, const Properties &proper
         _attributes = *properties.attributes();
     }
     if (properties.blocks().has_value()) {
+        const auto &blocks = *properties.blocks();
         for (auto index = std::size_t{0}; index < _blocks.size(); ++index) {
-            if ((*properties.blocks())[index] != U'\0') {
-                _blocks[index] = (*properties.blocks())[index];
+            if (blocks[index] != Properties::cInheritedBlock) {
+                _blocks[index] = blocks[index];
             }
         }
     }

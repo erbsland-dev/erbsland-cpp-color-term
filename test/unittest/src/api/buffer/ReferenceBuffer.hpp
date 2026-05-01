@@ -52,7 +52,7 @@ public:
         }
         if (mode == BufferResizeMode::PreserveContent) {
             auto newData = std::vector<Char>(static_cast<std::size_t>(validatedSize.area()), fillChar);
-            _size.componentMin(validatedSize).forEach([&](const Position pos) -> void {
+            _size.limitedWith(validatedSize).forEach([&](const Position pos) -> void {
                 newData[validatedSize.index(pos)] = get(pos);
             });
             _size = validatedSize;

@@ -4,6 +4,7 @@
 cmake_minimum_required(VERSION 3.28)
 
 add_subdirectory(event)
+add_subdirectory(impl)
 add_subdirectory(layout)
 add_subdirectory(page)
 add_subdirectory(surface)
@@ -12,29 +13,31 @@ target_sources(erbsland-color-term PRIVATE
         AbstractSurfaceContainer.hpp
         Action.cpp
         Action.hpp
-        Actions.cpp
-        Actions.hpp
         ActionTriggerContext.cpp
         ActionTriggerContext.hpp
+        Actions.cpp
+        Actions.hpp
         Application.cpp
         Application.hpp
         ButtonAction.cpp
         ButtonAction.hpp
+        DimensionPolicy.hpp
         Display.cpp
         Display.hpp
-        DimensionPolicy.hpp
+        ExclusiveSurfaceManager.cpp
+        ExclusiveSurfaceManager.hpp
         FocusChange.hpp
         HelpData.cpp
         HelpData.hpp
-        impl/ScrollMetrics.cpp
-        impl/ScrollMetrics.hpp
-        LayoutDimension.cpp
-        LayoutDimension.hpp
-        LayoutContext.cpp
-        LayoutContext.hpp
+        HelpFormat.hpp
+        HelpVisibility.hpp
         Layout.cpp
         Layout.hpp
+        LayoutContext.cpp
+        LayoutContext.hpp
         LayoutData.hpp
+        LayoutDimension.cpp
+        LayoutDimension.hpp
         LayoutMetrics.cpp
         LayoutMetrics.hpp
         LayoutMetricsEditor.cpp
@@ -50,11 +53,11 @@ target_sources(erbsland-color-term PRIVATE
         ScrollBarMode.hpp
         SizePolicy.hpp
         Surface.cpp
+        Surface.hpp
         SurfaceContainer.cpp
         SurfaceContainer.hpp
         SurfaceFlags.cpp
         SurfaceFlags.hpp
-        Surface.hpp
         SurfaceManager.cpp
         SurfaceManager.hpp
         SurfacePtr.hpp

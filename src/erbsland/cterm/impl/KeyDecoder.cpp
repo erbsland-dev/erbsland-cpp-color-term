@@ -74,14 +74,24 @@ auto KeyDecoder::parseCsiParameters(const std::string_view text) noexcept -> std
         return result;
     }
     auto value = 0;
+    auto digitCount = 0;
     auto hasDigit = false;
+    constexpr static auto cMaximumDigitCount = 8;
+    constexpr static auto cMaximumParameterCount = 16;
     for (const auto character : text) {
         if (character >= '0' && character <= '9') {
+            if (digitCount >= cMaximumDigitCount) {
+                return std::nullopt;
+            }
             hasDigit = true;
             value = value * 10 + (character - '0');
+            digitCount++;
             continue;
         }
         if (character == ';') {
+            if (result.size() >= cMaximumParameterCount) {
+                return std::nullopt;
+            }
             if (!hasDigit) {
                 result.emplace_back(1);
             } else {
@@ -89,6 +99,7 @@ auto KeyDecoder::parseCsiParameters(const std::string_view text) noexcept -> std
             }
             value = 0;
             hasDigit = false;
+            digitCount = 0;
             continue;
         }
         return std::nullopt;

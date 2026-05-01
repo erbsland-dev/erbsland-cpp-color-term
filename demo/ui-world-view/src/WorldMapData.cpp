@@ -111,11 +111,10 @@ auto WorldMapData::parse(const std::string_view text) -> WorldMapData {
             }
             auto labelText = std::string{};
             std::getline(labelStream, labelText);
-            const auto trimmedLabel = trimmed(labelText);
-            if (trimmedLabel.empty()) {
+            auto textValue = String{labelText, CharStyle{fg::BrightWhite}}.trimmed(U" \t\r\n");
+            if (textValue.empty()) {
                 fail(lineNumber, "label text must not be empty.");
             }
-            auto textValue = styledLabelText(trimmedLabel);
             currentZoom.labels.push_back(
                 Label{
                     .anchor = Position{static_cast<Coordinate>(x), static_cast<Coordinate>(y)},
@@ -211,10 +210,6 @@ auto WorldMapData::trimmed(const std::string_view text) noexcept -> std::string_
     }
     const auto last = text.find_last_not_of(" \t\r\n");
     return text.substr(first, last - first + 1);
-}
-
-auto WorldMapData::styledLabelText(const std::string_view text) -> String {
-    return String{text, CharStyle{Color{fg::BrightWhite, bg::Inherited}}};
 }
 
 }

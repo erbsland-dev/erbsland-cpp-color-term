@@ -11,8 +11,10 @@ namespace erbsland::cterm::ui::layout {
 Viewport::Viewport(ProtectedTag) noexcept {
 }
 
-auto Viewport::create() noexcept -> ViewportPtr {
-    return std::make_shared<Viewport>(ProtectedTag{});
+auto Viewport::create() -> ViewportPtr {
+    auto result = std::make_shared<Viewport>(ProtectedTag{});
+    result->initializeUi();
+    return result;
 }
 
 auto Viewport::alignment() const noexcept -> Alignment {
@@ -33,7 +35,7 @@ auto Viewport::scrollOffset() const noexcept -> Position {
 
 void Viewport::setScrollOffset(const Position scrollOffset) noexcept {
     const auto contentSize = contentSizeForViewport(rectangle().size());
-    const auto clampedOffset = impl::clampedScrollOffset(scrollOffset, contentSize, rectangle().size());
+    const auto clampedOffset = ui::impl::clampedScrollOffset(scrollOffset, contentSize, rectangle().size());
     if (_scrollOffset == clampedOffset) {
         return;
     }
@@ -95,7 +97,7 @@ void Viewport::scrollToRightEdge() noexcept {
 
 void Viewport::scrollIntoView(const Rectangle contentRect) noexcept {
     const auto contentSize = contentSizeForViewport(rectangle().size());
-    setScrollOffset(impl::scrollOffsetForVisibleRect(_scrollOffset, contentRect, contentSize, rectangle().size()));
+    setScrollOffset(ui::impl::scrollOffsetForVisibleRect(_scrollOffset, contentRect, contentSize, rectangle().size()));
 }
 
 auto Viewport::contentSizeForViewport(const Size viewportSize) const noexcept -> Size {
@@ -103,7 +105,7 @@ auto Viewport::contentSizeForViewport(const Size viewportSize) const noexcept ->
     if (content == nullptr || !content->flags().isVisible()) {
         return {};
     }
-    return impl::resolveScrollContentSize(content->layoutMetrics(), viewportSize);
+    return ui::impl::resolveScrollContentSize(content->layoutMetrics(), viewportSize);
 }
 
 auto Viewport::contentSizeForViewport(const Size viewportSize, LayoutScope &scope) noexcept -> Size {
@@ -111,8 +113,8 @@ auto Viewport::contentSizeForViewport(const Size viewportSize, LayoutScope &scop
     if (content == nullptr || !content->flags().isVisible()) {
         return {};
     }
-    const auto metrics = scope.measure(content, LayoutProposal::atMost(viewportSize));
-    return impl::resolveScrollContentSize(metrics, viewportSize);
+    const auto metrics = measureContentForViewport(content, viewportSize, scope);
+    return ui::impl::resolveScrollContentSize(metrics, viewportSize);
 }
 
 auto Viewport::contentSize() const noexcept -> Size {
@@ -128,14 +130,24 @@ void Viewport::onLayout(LayoutScope &scope) noexcept {
         return;
     }
     const auto viewportRect = Rectangle{Position{}, newParentSize};
-    _contentSize = contentSizeForViewport(newParentSize, scope);
+    const auto metrics = measureContentForViewport(content, newParentSize, scope);
+    const auto margins = metrics.margins();
+    _contentSize = ui::impl::resolveScrollContentSize(metrics, newParentSize);
     clampScrollOffset();
-    const auto contentOrigin = impl::alignedContentOrigin(viewportRect, _contentSize, _scrollOffset, _alignment);
-    scope.place(content, Rectangle{contentOrigin, _contentSize});
+    const auto contentOrigin = ui::impl::alignedContentOrigin(viewportRect, _contentSize, _scrollOffset, _alignment);
+    const auto childSize = _contentSize - margins.extent();
+    scope.place(content, Rectangle{contentOrigin + Position{margins.left(), margins.top()}, childSize});
+}
+
+auto Viewport::measureContentForViewport(
+    const SurfacePtr &content, const Size viewportSize, LayoutScope &scope) noexcept -> LayoutMetrics {
+    auto metrics = scope.measure(content, LayoutProposal::atMost(viewportSize));
+    metrics = scope.measure(content, LayoutProposal::atMost(viewportSize - metrics.margins().extent()));
+    return metrics;
 }
 
 void Viewport::clampScrollOffset() noexcept {
-    _scrollOffset = impl::clampedScrollOffset(_scrollOffset, _contentSize, rectangle().size());
+    _scrollOffset = ui::impl::clampedScrollOffset(_scrollOffset, _contentSize, rectangle().size());
 }
 
 }

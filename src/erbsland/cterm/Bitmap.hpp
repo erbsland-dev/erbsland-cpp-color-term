@@ -24,11 +24,16 @@ protected:
     using Data = std::vector<bool>;
 
 public:
+    /// The maximum bitmap size is 4096x4096 pixels.
+    static constexpr auto cMaximumBitmapSize = Size{4096, 4096};
+
+public:
     /// Create an empty bitmap with the size `(0,0)`.
     Bitmap() = default;
     /// Create a bitmap with the given size and all pixels cleared.
-    /// @param size The bitmap dimensions.
-    explicit Bitmap(const Size size) : _size{size}, _data(static_cast<Data::size_type>(size.area()), false) {}
+    /// @param size The bitmap dimensions. The size is limited to 4096x4096 (cMaximumBitmapSize).
+    explicit Bitmap(const Size size) :
+        _size{size.limitedWith(cMaximumBitmapSize)}, _data(static_cast<Data::size_type>(_size.area()), false) {}
 
     // defaults
     ~Bitmap() = default;

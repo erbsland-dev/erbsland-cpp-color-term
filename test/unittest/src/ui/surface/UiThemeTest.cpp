@@ -163,7 +163,10 @@ public:
     void testLayoutContextCarriesTheThemeContext() {
         auto contentRect = Rectangle{};
         auto probe = ThemeLayoutProbeSurface::create(contentRect);
-        const auto context = ui::LayoutContext{theme::Theme::dark(), theme::Element::HorizontalScrollBar};
+        auto builder = theme::ThemeBuilder::zero();
+        builder.edit(theme::Selector{theme::Element::HorizontalScrollBar, theme::Part::Track})
+            .setMargins(Margins{1, 0});
+        const auto context = ui::LayoutContext{builder.build(), theme::Element::HorizontalScrollBar};
 
         probe->layout(Size{10, 1}, context);
 
@@ -215,7 +218,7 @@ private:
     }
 
     static auto applicationTheme(Color textBoxBackground) -> theme::ThemeConstPtr {
-        auto builder = theme::ThemeBuilder::from(theme::Theme::dark());
+        auto builder = theme::ThemeBuilder::zero();
         builder.edit(theme::Selector{theme::Element::TextBox, theme::Part::Background}).setColor(textBoxBackground);
         return builder.build();
     }

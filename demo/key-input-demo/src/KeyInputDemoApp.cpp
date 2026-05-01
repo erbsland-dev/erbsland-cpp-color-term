@@ -23,7 +23,7 @@ auto KeyInputDemoApp::beforeRun() -> int {
 
 auto KeyInputDemoApp::canvasSize() const noexcept -> Size {
     if (_buffer.size().isZero()) {
-        return _terminal.size().componentMax(_updateSettings.minimumSize());
+        return _terminal.size().expandedWith(_updateSettings.minimumSize());
     }
     return _buffer.size();
 }

@@ -27,7 +27,7 @@ void BitmapPainter::drawBitmap(
     if (renderedSize.area() == 0) {
         return;
     }
-    auto visibleSize = renderedSize.componentMin(rect.size());
+    auto visibleSize = renderedSize.limitedWith(rect.size());
     auto sourceOffset = Position{};
     auto targetPos = rect.alignmentOffset(renderedSize, alignment);
     const auto alignmentOffset = rect.size().alignmentOffset(renderedSize, alignment);

@@ -9,7 +9,7 @@ namespace erbsland::cterm::text::impl::text_node_renderer {
 
 auto RenderBlock::renderString() const -> String {
     if (_kind == BlockKind::HorizontalRule) {
-        auto result = ::erbsland::cterm::impl::StringBuilder{};
+        auto result = cterm::impl::StringBuilder{};
         const auto fill = String{8, _fillCharacter.value_or(Char{U'-'})};
         auto reservedSize = fill.size();
         if (_leadingText.has_value()) {

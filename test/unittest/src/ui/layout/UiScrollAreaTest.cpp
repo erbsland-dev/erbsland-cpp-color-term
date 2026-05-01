@@ -90,6 +90,19 @@ public:
         REQUIRE_EQUAL(content->rectangle(), Rectangle(2, 1, 2, 1));
     }
 
+    void testViewportIncludesContentMarginsInScrollableSize() {
+        auto viewport = ui::Viewport::create();
+        auto content = ui::Panel::create();
+        content->editLayoutMetrics().setFixedSize(Size{4, 2}).setMargins(Margins{1});
+        viewport->setContentSurface(content);
+
+        viewport->setRectangle(Rectangle{0, 0, 4, 2});
+        viewport->layout(Size{4, 2}, ui::LayoutContext{});
+
+        REQUIRE_EQUAL(viewport->contentSize(), Size(6, 4));
+        REQUIRE_EQUAL(content->rectangle(), Rectangle(1, 1, 4, 2));
+    }
+
     void testScrollAreaIgnoresHiddenContentForAutomaticScrollBars() {
         auto scrollArea = ui::ScrollArea::create();
         auto content = ui::Panel::create();

@@ -42,6 +42,16 @@ auto Keys::alternativeKeys() const -> std::vector<Key> {
     return {_keys.begin() + static_cast<Container::difference_type>(count), _keys.end()};
 }
 
+auto Keys::mainKeyLabels() const -> std::vector<std::string> {
+    std::vector<std::string> keyLabels;
+    const auto keys = mainKeys();
+    keyLabels.reserve(keys.size());
+    for (const auto &key : keys) {
+        keyLabels.emplace_back(key.toDisplayText(false));
+    }
+    return keyLabels;
+}
+
 auto Keys::setKeys(std::vector<Key> keys) -> Keys & {
     clear();
     for (auto &key : keys) {

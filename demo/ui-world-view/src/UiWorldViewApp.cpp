@@ -75,16 +75,14 @@ void UiWorldViewApp::setupUi() {
     auto root = ui::Stack::create(Orientation::Vertical);
     page->addSurface(root);
 
-    using Section = ui::TextLine::Section;
-    using CollapseBehavior = ui::TextLine::CollapseBehavior;
-    using UpdateMode = ui::TextLine::UpdateMode;
+    using Section = ui::DynamicTextLine::Section;
+    using SpacePriority = ui::DynamicTextLine::SpacePriority;
 
     auto header = ui::HeaderLine::create();
     header->setText(Section::Left, String{"UI World View", fg::BrightWhite});
     header->setMargins(Section::Left, Margins{1, 0});
-    header->setCollapseBehavior(Section::Middle, CollapseBehavior::Hide);
-    header->setUpdateMode(Section::Middle, UpdateMode::OnRefresh);
-    header->setUpdateFn(Section::Middle, [this](String &text, const Coordinate) -> void {
+    header->setSpacePriority(Section::Middle, SpacePriority::Hide);
+    header->dynamicText(Section::Middle)->setUpdateFn([this](String &text, const Coordinate) -> void {
         const auto zoom = _mapView != nullptr ? _mapView->zoomIndex() + 1 : std::size_t{0};
         const auto zoomCount = _mapView != nullptr ? _mapView->zoomLevelCount() : std::size_t{0};
         const auto labelsShown = _mapView != nullptr && _mapView->labelsShown();
@@ -98,12 +96,13 @@ void UiWorldViewApp::setupUi() {
                 gridShown ? "on" : "off"),
             fg::BrightYellow};
     });
+    header->dynamicText(Section::Middle)->updateText();
     header->setMargins(Section::Middle, Margins{1, 0});
-    header->setUpdateMode(Section::Right, UpdateMode::OnRefresh);
-    header->setUpdateFn(Section::Right, [this](String &text, const Coordinate) -> void {
+    header->dynamicText(Section::Right)->setUpdateFn([this](String &text, const Coordinate) -> void {
         const auto mapSize = _mapView != nullptr ? _mapView->mapSize() : Size{};
         text = String{std::format("{} x {}", mapSize.width(), mapSize.height()), fg::BrightCyan};
     });
+    header->dynamicText(Section::Right)->updateText();
     header->setMargins(Section::Right, Margins{1, 0});
     root->addSurface(header);
     _headerStatus = header;
@@ -112,7 +111,6 @@ void UiWorldViewApp::setupUi() {
     root->addSurface(_mapHost);
 
     auto footer = ui::FooterLine::create();
-    footer->leftText()->setUpdateMode(ui::DynamicText::UpdateMode::OnRefresh);
     footer->leftText()->setUpdateFn([this](String &text, const Coordinate) -> void {
         const auto visibleRect = _mapView != nullptr && _mapArea != nullptr
             ? _mapView->visibleSourceRect(_mapArea->visibleContentRect())
@@ -156,6 +154,7 @@ auto UiWorldViewApp::processCommandLineArguments(const CommandLineArgs &args) ->
         _mapArea = ui::ScrollArea::create();
         _mapArea->setContentSurface(_mapView);
         _mapHost->addSurface(_mapArea);
+        updateDynamicUi();
     } catch (const std::exception &exception) {
         terminal().printLine(fg::BrightRed, exception.what());
         printUsage();
@@ -172,9 +171,14 @@ void UiWorldViewApp::updateDynamicUi() noexcept {
     _mapArea->flags().setPaintOutdated();
     _mapView->flags().setPaintOutdated();
     if (_headerStatus != nullptr) {
+        using Section = ui::DynamicTextLine::Section;
+        _headerStatus->dynamicText(Section::Middle)->updateText();
+        _headerStatus->dynamicText(Section::Right)->updateText();
+        _headerStatus->flags().setLayoutOutdated();
         _headerStatus->flags().setPaintOutdated();
     }
     if (_footerStatus != nullptr) {
+        _footerStatus->leftText()->updateText();
         _footerStatus->flags().setPaintOutdated();
     }
 }

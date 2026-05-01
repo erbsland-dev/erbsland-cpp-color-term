@@ -47,7 +47,7 @@ public:
         viewer->addSection(first);
         viewer->addSection(second);
 
-        REQUIRE_EQUAL(render(viewer->header()->text(ui::TextLine::Section::Left)), "First");
+        REQUIRE_EQUAL(render(viewer->header()->text(ui::DynamicTextLine::Section::Left)), "First");
         REQUIRE_EQUAL(render(viewer->footer()->leftText()->text()), "1 / 2");
 
         auto nextEvent = ui::KeyPressEvent{Key{Key::Right}};
@@ -55,7 +55,7 @@ public:
 
         REQUIRE(nextEvent.isHandled());
         REQUIRE_EQUAL(viewer->pages()->currentPage(), 1);
-        REQUIRE_EQUAL(render(viewer->header()->text(ui::TextLine::Section::Left)), "Second");
+        REQUIRE_EQUAL(render(viewer->header()->text(ui::DynamicTextLine::Section::Left)), "Second");
         REQUIRE_EQUAL(render(viewer->footer()->leftText()->text()), "2 / 2");
         REQUIRE_EQUAL(second->scrollToTopCount(), 1);
     }

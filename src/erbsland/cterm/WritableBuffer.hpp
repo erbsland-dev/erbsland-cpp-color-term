@@ -211,28 +211,28 @@ public: // drawing methods
     /// @param text The text to render.
     /// @param rect The target rectangle.
     /// @param alignment The alignment inside the rectangle.
-    /// @param color The text color.
+    /// @param style The base text style.
     /// @param animationCycle Animation cycle for animated text.
     /// Invalid UTF-8 bytes are replaced with the Unicode replacement character.
     void drawText(
         std::string_view text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
-        Color color = {},
+        CharStyle style = {},
         std::size_t animationCycle = 0);
     /// @overload
     void drawText(
         std::u32string_view text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
-        Color color = {},
+        CharStyle style = {},
         std::size_t animationCycle = 0);
     /// @overload
     void drawText(
         const StringView &text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
-        Color color = {},
+        CharStyle style = {},
         std::size_t animationCycle = 0);
     /// @overload
     void drawText(const StringView &text, Rectangle rect, const TextOptions &options, std::size_t animationCycle = 0);
@@ -374,10 +374,10 @@ protected: // implementation
     /// @param text The text to render.
     /// @param rect The target rectangle.
     /// @param alignment The alignment inside the rectangle.
-    /// @param color The text color.
+    /// @param style The text color.
     /// @param animationCycle Animation cycle for animated text.
-    virtual void
-    drawTextImpl(const StringView &text, Rectangle rect, Alignment alignment, Color color, std::size_t animationCycle);
+    virtual void drawTextImpl(
+        const StringView &text, Rectangle rect, Alignment alignment, CharStyle style, std::size_t animationCycle);
     /// Implement `drawText(StringView, Rectangle, TextOptions, ...)`.
     /// The public overload forwards to this method.
     /// @param text The text to render.

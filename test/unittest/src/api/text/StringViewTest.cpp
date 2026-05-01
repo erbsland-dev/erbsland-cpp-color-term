@@ -44,6 +44,50 @@ public:
         REQUIRE_EQUAL(render(middle), std::string{"pha b"});
     }
 
+    void testIndexedAccessAndAtRespectCroppedBounds() {
+        const auto source = String{"012345"};
+        const auto view = StringView{source}.substr(2, 3);
+
+        REQUIRE_EQUAL(view[0], U'2');
+        REQUIRE_EQUAL(view[2], U'4');
+        REQUIRE(view[3].isEmpty());
+        REQUIRE_THROWS_AS(std::out_of_range, view.at(3));
+    }
+
+    void testTrimmedUsesDefaultWhitespaceCharacters() {
+        const auto source = String{"xx \talpha\n yy"};
+        const auto view = StringView{source}.substr(2, 9);
+
+        REQUIRE_EQUAL(render(view), std::string{" \talpha\n "});
+        REQUIRE_EQUAL(render(view.trimmed()), std::string{"alpha"});
+    }
+
+    void testTrimmedRemovesNonWhitespaceCharactersFromCroppedView() {
+        const auto source = String{"00xyalpha yx11"};
+        const auto view = StringView{source}.substr(2, 10);
+
+        REQUIRE_EQUAL(render(view.trimmed(U"xy")), std::string{"alpha "});
+    }
+
+    void testIndexOfCharacterSetCoversBoundsAndCroppedViews() {
+        const auto source = String{"xxabc-yy"};
+        const auto view = StringView{source}.substr(2, 4);
+
+        REQUIRE_EQUAL(view.indexOf(U"-x"), std::size_t{3});
+        REQUIRE_EQUAL(view.indexOf(U"-x", 4), StringView::npos);
+        REQUIRE_EQUAL(view.indexOf(U"x"), StringView::npos);
+        REQUIRE_EQUAL(view.indexOf(U"-", 99), StringView::npos);
+    }
+
+    void testIndexNotOfCharacterSetCoversBoundsAndCroppedViews() {
+        const auto source = String{"xxabc-yy"};
+        const auto view = StringView{source}.substr(2, 4);
+
+        REQUIRE_EQUAL(view.indexNotOf(U"abc"), std::size_t{3});
+        REQUIRE_EQUAL(view.indexNotOf(U"abc-"), StringView::npos);
+        REQUIRE_EQUAL(view.indexNotOf(U"a", 99), StringView::npos);
+    }
+
     void testSplitWordsReturnsOnlyWordViews() {
         const auto words = StringView{String{"  alpha\tbeta\n\ngamma  "}}.splitWords();
 
@@ -69,6 +113,37 @@ public:
 
         REQUIRE_EQUAL(view.naturalTextSize(), (Size{3, 2}));
         REQUIRE_EQUAL(view.wrappedTextHeight(3, options), 2);
+    }
+
+    void testCroppedViewsUseTheSameRangeAlgorithmsAsStrings() {
+        const auto source = String{U"xxA界 e\u0301\nB yy"};
+        const auto stringRange = source.substr(2, 6);
+        const auto view = StringView{source}.substr(2, 6);
+
+        REQUIRE_EQUAL(render(view), render(stringRange));
+        REQUIRE_EQUAL(view.displayWidth(), stringRange.displayWidth());
+        REQUIRE_EQUAL(view.count(U'e'), stringRange.count(U'e'));
+        REQUIRE_EQUAL(view.indexOf(U'\n'), stringRange.indexOf(U'\n'));
+        REQUIRE_EQUAL(view.indexNotOf(U"A界 e"), stringRange.indexNotOf(U"A界 e"));
+        REQUIRE_EQUAL(
+            render(view.croppedToDisplayWidth(4, Alignment::Left)),
+            render(stringRange.croppedToDisplayWidth(4, Alignment::Left)));
+        REQUIRE_EQUAL(
+            render(view.croppedToDisplayWidth(4, Alignment::Right)),
+            render(stringRange.croppedToDisplayWidth(4, Alignment::Right)));
+        REQUIRE_EQUAL(renderWords(view.splitWords()), std::vector<std::string>({"A界", "é", "B"}));
+        REQUIRE_EQUAL(renderWords(view.splitLines()), std::vector<std::string>({"A界 é", "B"}));
+        REQUIRE_EQUAL(view.naturalTextSize(), stringRange.naturalTextSize());
+    }
+
+    void testEmptyViewRangesStayEmpty() {
+        const auto view = StringView{String{"xxx"}}.trimmed(U"x");
+
+        REQUIRE(view.empty());
+        REQUIRE(view.substr(0).empty());
+        REQUIRE(view.croppedToDisplayWidth(3, Alignment::Left).empty());
+        REQUIRE(view.splitWords().empty());
+        REQUIRE(view.splitLines().empty());
     }
 
 private:

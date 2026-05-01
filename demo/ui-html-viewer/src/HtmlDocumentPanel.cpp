@@ -10,6 +10,7 @@ HtmlDocumentPanel::HtmlDocumentPanel(ProtectedTag protectedTag) noexcept : Panel
 }
 
 void HtmlDocumentPanel::initializeUi() {
+    Panel::initializeUi();
     addSurface(_view);
 }
 

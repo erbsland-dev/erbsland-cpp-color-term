@@ -23,23 +23,21 @@ void UiHelloWorldApp::setupUi() {
     auto mainLayout = ui::Stack::create(Orientation::Vertical);
     mainPage->addSurface(mainLayout);
 
-    using Section = ui::TextLine::Section;
-    using CollapseBehavior = ui::TextLine::CollapseBehavior;
-    using UpdateMode = ui::TextLine::UpdateMode;
+    using Section = ui::DynamicTextLine::Section;
+    using SpacePriority = ui::DynamicTextLine::SpacePriority;
     auto header = ui::HeaderLine::create();
     header->setText(Section::Left, String{"Hello World!", fg::BrightWhite});
     header->setMargins(Section::Left, Margins{1, 0});
-    header->setUpdateMode(Section::Middle, UpdateMode::OnRefresh);
-    header->setUpdateFn(Section::Middle, [](String &text, const Coordinate) -> void {
+    header->dynamicText(Section::Middle)->setUpdateFn([](String &text, const Coordinate) -> void {
         text.clear();
         text.append(fg::BrightCyan, currentDateTimeText());
     });
-    header->setCollapseBehavior(Section::Middle, CollapseBehavior::Hide);
+    header->dynamicText(Section::Middle)->updateText();
+    header->dynamicText(Section::Middle)->setUpdateInterval(std::chrono::seconds{1});
+    header->setSpacePriority(Section::Middle, SpacePriority::Hide);
     header->setMargins(Section::Middle, Margins{1, 0});
     header->setText(Section::Right, String{"Minimal UI Demo", fg::BrightYellow});
     header->setMargins(Section::Right, Margins{1, 0});
-    header->scheduler().addRepeated(
-        [header]() -> void { header->flags().setPaintOutdated(); }, std::chrono::seconds{1});
     mainLayout->addSurface(header);
 
     auto center = ui::TextBox::create(

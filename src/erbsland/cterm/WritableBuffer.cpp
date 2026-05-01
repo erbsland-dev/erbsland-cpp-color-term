@@ -266,27 +266,27 @@ void WritableBuffer::drawText(
     const std::string_view text,
     const Rectangle rect,
     const Alignment alignment,
-    const Color color,
+    const CharStyle style,
     const std::size_t animationCycle) {
-    drawText(String{text, EncodingErrors::Replace}, rect, alignment, color, animationCycle);
+    drawText(String{text, EncodingErrors::Replace}, rect, alignment, style, animationCycle);
 }
 
 void WritableBuffer::drawText(
     const std::u32string_view text,
     const Rectangle rect,
     const Alignment alignment,
-    const Color color,
+    const CharStyle style,
     const std::size_t animationCycle) {
-    drawText(String{text}, rect, alignment, color, animationCycle);
+    drawText(String{text}, rect, alignment, style, animationCycle);
 }
 
 void WritableBuffer::drawText(
     const StringView &text,
     const Rectangle rect,
     const Alignment alignment,
-    const Color color,
+    const CharStyle style,
     const std::size_t animationCycle) {
-    drawTextImpl(text, rect, alignment, color, animationCycle);
+    drawTextImpl(text, rect, alignment, style, animationCycle);
 }
 
 void WritableBuffer::drawText(
@@ -303,9 +303,9 @@ void WritableBuffer::drawTextImpl(
     const StringView &text,
     const Rectangle rect,
     const Alignment alignment,
-    const Color color,
+    const CharStyle style,
     const std::size_t animationCycle) {
-    impl::TextPainter{*this}.drawText(text, rect, alignment, color, animationCycle);
+    impl::TextPainter{*this}.drawText(text, rect, alignment, style, animationCycle);
 }
 
 void WritableBuffer::drawTextImpl(
@@ -362,7 +362,7 @@ void WritableBuffer::drawBuffer(const ReadableBuffer &buffer, const BufferDrawOp
     }
     auto targetRect = options.isTargetPosition() ? Rectangle{options.targetRect().topLeft(), sourceRect.size()}
                                                  : options.targetRect();
-    targetRect.setSize(targetRect.size().componentMin(sourceRect.size()));
+    targetRect.setSize(targetRect.size().limitedWith(sourceRect.size()));
     if (targetRect.width() <= 0 || targetRect.height() <= 0) {
         return;
     }

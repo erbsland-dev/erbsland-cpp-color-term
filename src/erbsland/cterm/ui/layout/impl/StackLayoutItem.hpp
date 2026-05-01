@@ -25,8 +25,14 @@ public:
     /// Get the assigned size on the main axis.
     [[nodiscard]] auto assignedMainSize() const noexcept -> Coordinate;
 
+    /// Get the resolved spacing before this item.
+    [[nodiscard]] auto spacingBefore() const noexcept -> Coordinate;
+
     /// Get the size on the cross axis.
     [[nodiscard]] auto assignedCrossSize() const noexcept -> Coordinate;
+
+    /// Access the child margins.
+    [[nodiscard]] auto margins() const noexcept -> Margins;
 
     /// Access the surface for this item.
     [[nodiscard]] auto surface() const noexcept -> const SurfacePtr &;
@@ -56,6 +62,15 @@ public:
     /// @return The applied shrink.
     [[nodiscard]] auto shrink(Coordinate requestedShrink, bool shrinkBelowMinimum) noexcept -> Coordinate;
 
+    /// Shrink the spacing before this item.
+    /// @param requestedShrink The requested shrink amount.
+    /// @return The applied shrink.
+    [[nodiscard]] auto shrinkSpacingBefore(Coordinate requestedShrink) noexcept -> Coordinate;
+
+    /// Set the preferred spacing before this item.
+    /// @param spacingBefore The collapsed margin spacing before this item.
+    void setSpacingBefore(Coordinate spacingBefore) noexcept;
+
     /// Apply the resolved rectangle to the surface.
     /// @param orientation The stack orientation.
     /// @param mainOffset The position on the main axis.
@@ -66,6 +81,7 @@ private:
     /// Create an item with fully resolved constraints.
     StackLayoutItem(
         SurfacePtr surface,
+        Margins margins,
         DimensionConstraints mainConstraints,
         DimensionConstraints crossConstraints,
         Coordinate assignedMainSize,
@@ -73,8 +89,10 @@ private:
 
 private:
     SurfacePtr _surface;
+    Margins _margins;
     DimensionConstraints _mainConstraints;
     DimensionConstraints _crossConstraints;
+    Coordinate _spacingBefore{0};
     Coordinate _assignedMainSize{0};
     Coordinate _assignedCrossSize{0};
 };

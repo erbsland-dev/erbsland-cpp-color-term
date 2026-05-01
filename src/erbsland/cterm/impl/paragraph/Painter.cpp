@@ -10,16 +10,12 @@ void Painter::paint() {
     const auto maxLines = std::min(static_cast<int>(layout().size()), _rect.height());
     const auto leftFillEnabled = usesLeftFill();
     const auto rightFillEnabled = usesRightFill();
+    const auto textAlignment = alignment();
     auto yStart = _rect.y1();
-    switch (alignment() & Alignment::VerticalMask) {
-    case Alignment::VCenter:
+    if (textAlignment.isVerticalCenter()) {
         yStart += (_rect.height() - maxLines) / 2;
-        break;
-    case Alignment::Bottom:
+    } else if (textAlignment.isBottom()) {
         yStart = _rect.y2() - maxLines;
-        break;
-    default:
-        break;
     }
     auto previousWrapColor = std::optional<Color>{};
     for (auto lineIndex = 0; lineIndex < maxLines; ++lineIndex) {

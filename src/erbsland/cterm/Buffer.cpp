@@ -17,8 +17,7 @@ Buffer::Buffer() : _size{1, 1}, _data(1U, Char{U' '}) {
 }
 
 Buffer::Buffer(const Size size, const Char fillChar) :
-    _size{size.componentMin(cMaximumSize)}, _data(static_cast<std::size_t>(std::max(1, _size.area())), fillChar) {
-    validateBufferSize(size);
+    _size{validatedBufferSize(size)}, _data(static_cast<std::size_t>(_size.area()), fillChar) {
 }
 
 auto Buffer::size() const noexcept -> Size {
@@ -45,47 +44,47 @@ void Buffer::resize(const Size size, const BufferResizeMode mode, const Char fil
     if (_size == size) {
         return;
     }
-    validateBufferSize(size);
+    const auto validatedSize = validatedBufferSize(size);
     if (mode != BufferResizeMode::Fast) {
-        if (size.area() > _size.area()) {
+        if (validatedSize.area() > _size.area()) {
             // if the data expands, do resize before reordering.
-            _data.resize(static_cast<std::size_t>(size.area()));
+            _data.resize(static_cast<std::size_t>(validatedSize.area()));
         }
-        if (size.width() < _size.width()) {
+        if (validatedSize.width() < _size.width()) {
             // shrinking horizontally: forward copy should be safe.
-            size.forEach([&](const Position pos) -> void {
+            validatedSize.forEach([&](const Position pos) -> void {
                 if (_size.contains(pos)) {
-                    _data[size.index(pos)] = _data[_size.index(pos)];
+                    _data[validatedSize.index(pos)] = _data[_size.index(pos)];
                 } else {
-                    _data[size.index(pos)] = fillChar;
+                    _data[validatedSize.index(pos)] = fillChar;
                 }
             });
         } else {
             // expanding: reverse copy should be safe.
-            for (auto y = size.height(); y > 0; --y) {
-                for (auto x = size.width(); x > 0; --x) {
+            for (auto y = validatedSize.height(); y > 0; --y) {
+                for (auto x = validatedSize.width(); x > 0; --x) {
                     const auto pos = Position{x - 1, y - 1};
                     if (_size.contains(pos)) {
-                        _data[size.index(pos)] = _data[_size.index(pos)];
+                        _data[validatedSize.index(pos)] = _data[_size.index(pos)];
                     } else {
-                        _data[size.index(pos)] = fillChar;
+                        _data[validatedSize.index(pos)] = fillChar;
                     }
                 }
             }
         }
-        if (size.area() < _size.area()) {
+        if (validatedSize.area() < _size.area()) {
             // if the data shrinks, do resize after reordering.
-            _data.resize(static_cast<std::size_t>(size.area()));
+            _data.resize(static_cast<std::size_t>(validatedSize.area()));
         }
     } else {
-        _data.resize(static_cast<std::size_t>(size.area()));
-        if (!fillChar.isEmpty() && size.area() > _size.area()) {
+        _data.resize(static_cast<std::size_t>(validatedSize.area()));
+        if (!fillChar.isEmpty() && validatedSize.area() > _size.area()) {
             for (auto i = static_cast<std::size_t>(_size.area()); i < _data.size(); ++i) {
                 _data[i] = fillChar;
             }
         }
     }
-    _size = size;
+    _size = validatedSize;
 }
 
 void Buffer::set(const Position pos, const Char &block) noexcept {
@@ -120,7 +119,7 @@ auto Buffer::clone() const -> WritableBufferPtr {
 void Buffer::setAndResizeFrom(const ReadableBuffer &other) {
     // if we do a copy `Buffer -> Buffer`, use a fast path.
     if (const auto bufferImpl = dynamic_cast<Buffer const *>(&other); bufferImpl != nullptr) {
-        _size = bufferImpl->_size;
+        _size = validatedBufferSize(bufferImpl->_size);
         _data.resize(bufferImpl->_data.size());
         std::ranges::copy(bufferImpl->_data, _data.begin());
         return;
@@ -159,13 +158,14 @@ auto Buffer::fromLines(const StringLines &lines) -> Buffer {
     return buffer;
 }
 
-void Buffer::validateBufferSize(const Size size) {
+auto Buffer::validatedBufferSize(const Size size) -> Size {
     if (size.width() < 1 || size.height() < 1) {
         throw std::invalid_argument("Buffer size must be at least 1x1");
     }
     if (!size.fitsInto(cMaximumSize)) {
         throw std::invalid_argument("Buffer size must not exceed 10'000x10'000");
     }
+    return size;
 }
 
 void Buffer::drawText(

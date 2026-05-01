@@ -21,9 +21,13 @@ auto resolvedScrollDimension(
 }
 
 auto resolveScrollContentSize(const LayoutMetrics &metrics, const Size viewportSize) noexcept -> Size {
+    const auto margins = metrics.margins();
+    const auto contentViewportSize = (viewportSize - margins.extent()).expandedWith(Size{});
     return Size{
-        resolvedScrollDimension(metrics, Orientation::Horizontal, viewportSize.width()),
-        resolvedScrollDimension(metrics, Orientation::Vertical, viewportSize.height())};
+        resolvedScrollDimension(metrics, Orientation::Horizontal, contentViewportSize.width()) +
+            margins.horizontalExtent(),
+        resolvedScrollDimension(metrics, Orientation::Vertical, contentViewportSize.height()) +
+            margins.verticalExtent()};
 }
 
 auto maximumScrollOffset(const Size contentSize, const Size viewportSize) noexcept -> Position {

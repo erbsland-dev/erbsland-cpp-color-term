@@ -38,7 +38,7 @@ public:
         auto builder = theme::ThemeBuilder{};
         builder.edit(theme::Selector{theme::Element::Panel, theme::Part::Border})
             .setColor(Color{fg::Green})
-            .setBlock(theme::BlockRole::Background, U'P');
+            .setBlocks(U'P');
         const auto activeTheme = builder.build();
 
         const auto accessor = theme::ThemeAccessor{activeTheme, theme::Selector{customPanel, theme::Part::Border}};
@@ -83,7 +83,7 @@ public:
         builder.edit(theme::Selector{theme::Element::Base}).setStyle(CharStyle::reset());
         builder.edit(theme::Selector{theme::Element::Surface, theme::Part::Border})
             .setColor(Color{fg::Green, bg::Blue})
-            .setBlock(theme::BlockRole::Background, U'#');
+            .setBlocks(U'#');
         const auto activeTheme = builder.build();
 
         REQUIRE(activeTheme != nullptr);
@@ -92,6 +92,17 @@ public:
 
         REQUIRE_EQUAL(border.color(), Color(fg::Green, bg::Blue));
         REQUIRE_EQUAL(border.block().singleCodePoint(), U'#');
+    }
+
+    void testMissingThemePropertiesStayTransparent() {
+        const auto activeTheme = theme::ThemeBuilder{}.build();
+        const auto accessor =
+            theme::ThemeAccessor{activeTheme, theme::Selector{theme::Element::Button, theme::Part::Text}};
+
+        REQUIRE_EQUAL(accessor.color(), Color{});
+        REQUIRE_EQUAL(accessor.attributes(), CharAttributes{});
+        REQUIRE_EQUAL(accessor.block().color(), Color{});
+        REQUIRE_EQUAL(accessor.block().attributes(), CharAttributes{});
     }
 
     void testStateSpecificityUsesBestPartialStateBase() {
@@ -130,7 +141,7 @@ public:
             .setColor(Color{fg::Red, bg::Blue})
             .setColorSequence(ColorSequence{Color{fg::Yellow, bg::Blue}, Color{fg::Blue, bg::Blue}})
             .setAttributes(CharAttributes::Bold)
-            .setBlock(theme::BlockRole::Background, U'X')
+            .setBlocks(U'X')
             .setMargins(Margins{1})
             .setPadding(Margins{2});
         builder.edit(theme::Selector{theme::Element::Panel, theme::Part::Background})
@@ -148,6 +159,44 @@ public:
         REQUIRE_EQUAL(accessor.block().singleCodePoint(), U'X');
         REQUIRE_EQUAL(accessor.margins(), Margins{1});
         REQUIRE_EQUAL(accessor.padding(), Margins{2});
+    }
+
+    void testPartialBlockDefinitionsKeepInheritedRoles() {
+        auto builder = theme::ThemeBuilder{};
+        builder.edit(theme::Selector{theme::Element::Surface, theme::Part::Border}).setBlocks(U'.');
+        builder.edit(theme::Selector{theme::Element::Panel, theme::Part::Border})
+            .setBlock(theme::BlockRole::LeftBracket, U'[');
+        const auto activeTheme = builder.build();
+
+        const auto accessor =
+            theme::ThemeAccessor{activeTheme, theme::Selector{theme::Element::Panel, theme::Part::Border}};
+
+        REQUIRE_EQUAL(accessor.block(theme::BlockRole::LeftBracket).singleCodePoint(), U'[');
+        REQUIRE_EQUAL(accessor.block(theme::BlockRole::RightBracket).singleCodePoint(), U'.');
+        REQUIRE_EQUAL(accessor.block(theme::BlockRole::LeftOuterPadding).singleCodePoint(), U'.');
+    }
+
+    void testThemeAccessorReturnsHorizontalSpacing() {
+        auto builder = theme::ThemeBuilder{};
+        builder.edit(theme::Selector{theme::Element::Surface, theme::Part::Text})
+            .setMargins(Margins{1, 2, 3, 4})
+            .setPadding(Margins{5, 6, 7, 8});
+        const auto activeTheme = builder.build();
+        const auto accessor =
+            theme::ThemeAccessor{activeTheme, theme::Selector{theme::Element::Surface, theme::Part::Text}};
+
+        REQUIRE_EQUAL(accessor.horizontalMargins(), (Margins{0, 2, 0, 4}));
+        REQUIRE_EQUAL(accessor.horizontalPadding(), (Margins{0, 6, 0, 8}));
+        REQUIRE_EQUAL(accessor.extent(), (Size{20, 16}));
+        REQUIRE_EQUAL(accessor.horizontalExtent(), (Size{20, 0}));
+        const auto layout = accessor.layout(Rectangle{0, 0, 30, 20});
+        REQUIRE_EQUAL(layout.outerRect, (Rectangle{0, 0, 30, 20}));
+        REQUIRE_EQUAL(layout.partRect, (Rectangle{4, 1, 24, 16}));
+        REQUIRE_EQUAL(layout.contentRect, (Rectangle{12, 6, 10, 4}));
+        const auto horizontalLayout = accessor.horizontalLayout(Rectangle{0, 0, 30, 20});
+        REQUIRE_EQUAL(horizontalLayout.outerRect, (Rectangle{0, 0, 30, 20}));
+        REQUIRE_EQUAL(horizontalLayout.partRect, (Rectangle{4, 0, 24, 20}));
+        REQUIRE_EQUAL(horizontalLayout.contentRect, (Rectangle{12, 0, 10, 20}));
     }
 
     void testColorSequenceOverridesStaticColorForAnimation() {
@@ -175,8 +224,8 @@ public:
 
         theme::ThemePainter{buffer, accessor}.fill(buffer.rect());
 
-        REQUIRE_EQUAL(buffer.get(Position{0, 0}), (Char{U'a', Color{fg::Red, bg::Blue}, CharAttributes::reset()}));
-        REQUIRE_EQUAL(buffer.get(Position{1, 1}), (Char{U'e', Color{fg::Red, bg::Blue}, CharAttributes::reset()}));
-        REQUIRE_EQUAL(buffer.get(Position{2, 2}), (Char{U'i', Color{fg::Red, bg::Blue}, CharAttributes::reset()}));
+        REQUIRE_EQUAL(buffer.get(Position{0, 0}), (Char{U'a', Color{fg::Red, bg::Blue}, CharAttributes{}}));
+        REQUIRE_EQUAL(buffer.get(Position{1, 1}), (Char{U'e', Color{fg::Red, bg::Blue}, CharAttributes{}}));
+        REQUIRE_EQUAL(buffer.get(Position{2, 2}), (Char{U'i', Color{fg::Red, bg::Blue}, CharAttributes{}}));
     }
 };

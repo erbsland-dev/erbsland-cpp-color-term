@@ -267,6 +267,81 @@ public:
         REQUIRE_EQUAL(footer->rectangle(), Rectangle(0, 4, 10, 1));
     }
 
+    void testStackCollapsesInternalMarginsAndPropagatesOuterMargins() {
+        auto stack = ui::Stack::create(Orientation::Vertical);
+        auto first = ui::Panel::create();
+        auto second = ui::Panel::create();
+        first->editLayoutMetrics().setFixedSize(Size{3, 1}).setMargins(Margins{4, 2, 2, 1});
+        second->editLayoutMetrics().setFixedSize(Size{4, 1}).setMargins(Margins{5, 3, 6, 2});
+        stack->addSurface(first);
+        stack->addSurface(second);
+        auto scope = measureScope();
+
+        const auto metrics = stack->onMeasure(scope, ui::LayoutProposal::unconstrained());
+        stack->layout(Size{10, 10}, ui::LayoutContext{});
+
+        REQUIRE_EQUAL(metrics.preferred(), (Size{4, 7}));
+        REQUIRE_EQUAL(metrics.margins(), (Margins{4, 3, 6, 2}));
+        REQUIRE_EQUAL(first->rectangle(), Rectangle(0, 0, 3, 1));
+        REQUIRE_EQUAL(second->rectangle(), Rectangle(0, 6, 4, 1));
+    }
+
+    void testStackShrinksInternalMarginsBeforeChildContent() {
+        auto stack = ui::Stack::create(Orientation::Vertical);
+        auto first = ui::Panel::create();
+        auto second = ui::Panel::create();
+        first->editLayoutMetrics().setFixedSize(Size{3, 1}).setMargins(Margins{0, 0, 3, 0});
+        second->editLayoutMetrics().setFixedSize(Size{3, 1}).setMargins(Margins{3, 0, 0, 0});
+        stack->addSurface(first);
+        stack->addSurface(second);
+
+        stack->layout(Size{10, 2}, ui::LayoutContext{});
+
+        REQUIRE_EQUAL(first->rectangle(), Rectangle(0, 0, 3, 1));
+        REQUIRE_EQUAL(second->rectangle(), Rectangle(0, 1, 3, 1));
+    }
+
+    void testStackIgnoresHiddenChildMargins() {
+        auto stack = ui::Stack::create(Orientation::Vertical);
+        auto visible = ui::Panel::create();
+        auto hidden = ui::Panel::create();
+        visible->editLayoutMetrics().setFixedSize(Size{3, 1}).setMargins(Margins{1});
+        hidden->editLayoutMetrics().setFixedSize(Size{3, 1}).setMargins(Margins{9});
+        hidden->flags().setVisible(false);
+        stack->addSurface(visible);
+        stack->addSurface(hidden);
+        auto scope = measureScope();
+
+        const auto metrics = stack->onMeasure(scope, ui::LayoutProposal::unconstrained());
+        stack->layout(Size{10, 10}, ui::LayoutContext{});
+
+        REQUIRE_EQUAL(metrics.preferred(), (Size{3, 1}));
+        REQUIRE_EQUAL(metrics.margins(), (Margins{1}));
+        REQUIRE_EQUAL(visible->rectangle(), Rectangle(0, 0, 3, 1));
+        REQUIRE_EQUAL(hidden->rectangle(), Rectangle{});
+    }
+
+    void testNestedStacksCollapsePropagatedCrossAxisMargins() {
+        auto row = ui::Stack::create(Orientation::Horizontal);
+        auto leftColumn = ui::Stack::create(Orientation::Vertical);
+        auto rightColumn = ui::Stack::create(Orientation::Vertical);
+        auto left = ui::Panel::create();
+        auto right = ui::Panel::create();
+        leftColumn->editLayoutMetrics().setSizePolicy(ui::SizePolicy::Preferred);
+        rightColumn->editLayoutMetrics().setSizePolicy(ui::SizePolicy::Preferred);
+        left->editLayoutMetrics().setFixedSize(Size{2, 1}).setMargins(Margins{0, 4, 0, 0});
+        right->editLayoutMetrics().setFixedSize(Size{2, 1}).setMargins(Margins{0, 0, 0, 6});
+        leftColumn->addSurface(left);
+        rightColumn->addSurface(right);
+        row->addSurface(leftColumn);
+        row->addSurface(rightColumn);
+
+        row->layout(Size{20, 2}, ui::LayoutContext{});
+
+        REQUIRE_EQUAL(leftColumn->rectangle(), Rectangle(0, 0, 2, 1));
+        REQUIRE_EQUAL(rightColumn->rectangle(), Rectangle(8, 0, 2, 1));
+    }
+
     void testDisplayRendersTheInitialPageContent() {
         const auto backend = std::make_shared<TerminalTestBackend>();
         auto terminal = std::make_shared<Terminal>(backend, Size{12, 3});
@@ -321,10 +396,16 @@ private:
         renderInitialFrame(setup);
     }
 
-    [[nodiscard]] static auto pageTheme(const char32_t block) -> theme::ThemeConstPtr {
-        auto builder = theme::ThemeBuilder::from(theme::Theme::dark());
-        builder.edit(theme::Selector{theme::Element::Page, theme::Part::Background})
-            .setBlock(theme::BlockRole::Background, block);
+    [[nodiscard]] static auto measureScope() -> ui::MeasureScope {
+        return ui::MeasureScope{[](const ui::SurfacePtr &surface, const ui::LayoutProposal &proposal) {
+            auto childScope = ui::MeasureScope{};
+            return surface->onMeasure(childScope, proposal);
+        }};
+    }
+
+    [[nodiscard]] static auto pageTheme(const char32_t backgroundBlock) -> theme::ThemeConstPtr {
+        auto builder = theme::ThemeBuilder::zero();
+        builder.edit(theme::Selector{theme::Element::Page, theme::Part::Background}).setBlocks(backgroundBlock);
         return builder.build();
     }
 };

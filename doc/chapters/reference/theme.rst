@@ -246,9 +246,18 @@ is the closing bracket.
 Block tables contain sixteen code points named by
 :cpp:any:`BlockRole <erbsland::cterm::theme::BlockRole>`. Use
 ``setBlock()`` for one role, or ``setBlocks()`` with a 9-character or
-16-character UTF-32 string. Content margins describe the usable inner
-area for layout and overlays. Scroll bars use the track margins to decide
-where the thumb may appear:
+16-character UTF-32 string.
+
+Margins and padding have different owners. Margins are outside a themed
+part; the parent surface keeps that space and the part does not paint it.
+Padding is inside the themed part; text-focused UI elements paint padding
+with the part's ``BlockRole::Background`` block and style before drawing
+the text. Strict one-line text ignores top and bottom margins and padding
+but still uses left and right values. When adjacent one-line text parts
+meet, their horizontal margins collapse to the larger value instead of
+being added together.
+
+Scroll bars use the track margins to decide where the thumb may appear:
 
 .. code-block:: cpp
 

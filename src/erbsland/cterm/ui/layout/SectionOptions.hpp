@@ -20,7 +20,13 @@ public:
     /// @param rightText The optional right-side text.
     SectionOptions(String title, String rightText = {}) noexcept :
         _title{std::move(title)}, _rightText{std::move(rightText)} {}
-    ~SectionOptions() = default;
+
+    // defaults
+    ~SectionOptions() override = default;
+    SectionOptions(const SectionOptions &) = default;
+    SectionOptions(SectionOptions &&) noexcept = default;
+    auto operator=(const SectionOptions &) -> SectionOptions & = default;
+    auto operator=(SectionOptions &&) noexcept -> SectionOptions & = default;
 
 public: // accessors
     /// Access the section title.

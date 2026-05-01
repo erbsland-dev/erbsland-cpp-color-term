@@ -7,10 +7,7 @@ namespace erbsland::cterm::theme {
 void Properties::setBlock(const BlockRole role, const char32_t codePoint) noexcept {
     if (!_blocks.has_value()) {
         _blocks = Blocks{};
-    }
-    if (role == BlockRole::Background) {
-        _blocks->fill(codePoint);
-        return;
+        _blocks->fill(cInheritedBlock);
     }
     (*_blocks)[static_cast<std::size_t>(role)] = codePoint;
 }

@@ -311,12 +311,12 @@ Reference
         - A layout that stacks surfaces vertically or horizontally.
     *   - :doc:`ui::SurfaceContainer<ui-core>`
         - Ordered child surface collection for one surface.
-    *   - :doc:`ui::AbstractLine<ui-surfaces>`
-        - The subclassing-oriented base for one-line header, footer, and status surfaces.
-    *   - :doc:`ui::AbstractLine::CollapseBehavior<ui-surfaces>`
-        - Overflow handling used when a line section does not fit.
-    *   - :doc:`ui::AbstractLine::Section<ui-surfaces>`
+    *   - :doc:`ui::DynamicTextLine<ui-surfaces>`
+        - A composed one-line surface with managed dynamic text sections.
+    *   - :doc:`ui::DynamicTextLine::Section<ui-surfaces>`
         - The three logical sections of a line.
+    *   - :doc:`ui::DynamicTextLine::SpacePriority<ui-surfaces>`
+        - Layout priority used when a line section does not fit.
     *   - :doc:`ui::AbstractScrollBar<ui-surfaces>`
         - The shared base for visual scroll bar surfaces.
     *   - :doc:`ui::AbstractScrollArea<ui-surfaces>`
@@ -331,14 +331,6 @@ Reference
         - A footer with dynamic text, automatic action help, and queued message overlays.
     *   - :doc:`ui::HeaderLine<ui-surfaces>`
         - A field-based one-line header with its own theme element.
-    *   - :doc:`ui::TextLine<ui-surfaces>`
-        - A configurable one-line surface with owned fields and update callbacks.
-    *   - :doc:`ui::TextLine::Field<ui-surfaces>`
-        - The owned configuration and content for one line section.
-    *   - :doc:`ui::TextLine::UpdateFn<ui-surfaces>`
-        - The callback type used to refresh a line field.
-    *   - :doc:`ui::TextLine::UpdateMode<ui-surfaces>`
-        - Controls when one line field refreshes automatically.
     *   - :doc:`ui::StopSource<ui-events>`
         - Stop source used by the event system to request a cooperative shutdown.
     *   - :doc:`ui::StopToken<ui-events>`

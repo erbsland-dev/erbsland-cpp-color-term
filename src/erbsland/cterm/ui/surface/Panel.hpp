@@ -20,11 +20,14 @@ public:
 
     /// Create a panel that grows to fill free space in layouts.
     /// @return The new panel instance.
-    [[nodiscard]] static auto create() noexcept -> PanelPtr;
+    [[nodiscard]] static auto create() -> PanelPtr;
 
 public: // implement Surface
     [[nodiscard]] auto isOpaque() const noexcept -> bool override;
     void onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept override;
+
+protected: // implement Surface
+    void initializeUi() override;
 };
 
 }

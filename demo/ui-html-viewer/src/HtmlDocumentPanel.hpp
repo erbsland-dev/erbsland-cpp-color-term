@@ -35,7 +35,7 @@ public: // implement Surface
     void onLayout(ui::LayoutScope &scope) noexcept override;
 
 private:
-    void initializeUi();
+    void initializeUi() override;
     void renderDocumentIfRequired(Coordinate contentWidth);
 
 private:

@@ -19,7 +19,7 @@ public:
 public:
     /// Create a viewport.
     /// @return The new viewport.
-    [[nodiscard]] static auto create() noexcept -> ViewportPtr;
+    [[nodiscard]] static auto create() -> ViewportPtr;
 
 public:
     /// Get the content alignment for undersized content.
@@ -85,6 +85,10 @@ public: // implement Surface
     void onLayout(LayoutScope &scope) noexcept override;
 
 private:
+    /// Measure the content using the viewport size and the child's reported margins.
+    [[nodiscard]] static auto
+    measureContentForViewport(const SurfacePtr &content, Size viewportSize, LayoutScope &scope) noexcept
+        -> LayoutMetrics;
     /// Clamp the current scroll offset to the current content and viewport size.
     void clampScrollOffset() noexcept;
 

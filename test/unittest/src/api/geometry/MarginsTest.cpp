@@ -68,6 +68,30 @@ public:
         REQUIRE_EQUAL(margins, Margins(5, 6, 7, 8));
     }
 
+    void testOrientationAccess() {
+        using Side = Margins::Side;
+
+        margins = Margins(1, 2, 3, 4);
+
+        REQUIRE_EQUAL(Margins::leadingSide(Orientation::Horizontal), Side::Left);
+        REQUIRE_EQUAL(Margins::trailingSide(Orientation::Horizontal), Side::Right);
+        REQUIRE_EQUAL(Margins::crossLeadingSide(Orientation::Horizontal), Side::Top);
+        REQUIRE_EQUAL(Margins::crossTrailingSide(Orientation::Horizontal), Side::Bottom);
+        REQUIRE_EQUAL(margins.leading(Orientation::Horizontal), 4);
+        REQUIRE_EQUAL(margins.trailing(Orientation::Horizontal), 2);
+        REQUIRE_EQUAL(margins.crossLeading(Orientation::Horizontal), 1);
+        REQUIRE_EQUAL(margins.crossTrailing(Orientation::Horizontal), 3);
+
+        REQUIRE_EQUAL(Margins::leadingSide(Orientation::Vertical), Side::Top);
+        REQUIRE_EQUAL(Margins::trailingSide(Orientation::Vertical), Side::Bottom);
+        REQUIRE_EQUAL(Margins::crossLeadingSide(Orientation::Vertical), Side::Left);
+        REQUIRE_EQUAL(Margins::crossTrailingSide(Orientation::Vertical), Side::Right);
+        REQUIRE_EQUAL(margins.leading(Orientation::Vertical), 1);
+        REQUIRE_EQUAL(margins.trailing(Orientation::Vertical), 3);
+        REQUIRE_EQUAL(margins.crossLeading(Orientation::Vertical), 4);
+        REQUIRE_EQUAL(margins.crossTrailing(Orientation::Vertical), 2);
+    }
+
     void testEqualityAndInequality() {
         margins = Margins(1, 2, 3, 4);
         REQUIRE_EQUAL(margins, Margins(1, 2, 3, 4));
@@ -109,11 +133,37 @@ public:
         margins = Margins(1, 6, -3, 4);
         const auto other = Margins(5, 2, -7, 8);
 
-        REQUIRE_EQUAL(margins.componentMax(other), Margins(5, 6, -3, 8));
-        REQUIRE_EQUAL(margins.componentMax(other, Side::Top), Margins(5, 6, -3, 4));
-        REQUIRE_EQUAL(margins.componentMax(other, Side::Right), Margins(1, 6, -3, 4));
-        REQUIRE_EQUAL(margins.componentMax(other, Side::Bottom), Margins(1, 6, -3, 4));
-        REQUIRE_EQUAL(margins.componentMax(other, Side::Left), Margins(1, 6, -3, 8));
+        REQUIRE_EQUAL(margins.expandedWith(other), Margins(5, 6, -3, 8));
+        REQUIRE_EQUAL(margins.expandedWith(other, Side::Top), Margins(5, 6, -3, 4));
+        REQUIRE_EQUAL(margins.expandedWith(other, Side::Right), Margins(1, 6, -3, 4));
+        REQUIRE_EQUAL(margins.expandedWith(other, Side::Bottom), Margins(1, 6, -3, 4));
+        REQUIRE_EQUAL(margins.expandedWith(other, Side::Left), Margins(1, 6, -3, 8));
+    }
+
+    void testExpandTo() {
+        using Side = Margins::Side;
+
+        margins = Margins(1, 6, -3, 4);
+        const auto other = Margins(5, 2, -7, 8);
+
+        REQUIRE_EQUAL(margins.expandTo(other), Margins(5, 6, -3, 8));
+        REQUIRE_EQUAL(margins, Margins(5, 6, -3, 8));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).expandedWith(other), Margins(5, 6, -3, 8));
+
+        margins = Margins(1, 6, -3, 4);
+        REQUIRE_EQUAL(margins.expandTo(other, Orientation::Horizontal), Margins(1, 6, -3, 8));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).expandedWith(other, Orientation::Horizontal), Margins(1, 6, -3, 8));
+
+        margins = Margins(1, 6, -3, 4);
+        REQUIRE_EQUAL(margins.expandTo(other, Orientation::Vertical), Margins(5, 6, -3, 4));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).expandedWith(other, Orientation::Vertical), Margins(5, 6, -3, 4));
+
+        margins = Margins(1, 6, -3, 4);
+        REQUIRE_EQUAL(margins.expandTo(other, Side::Left), Margins(1, 6, -3, 8));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).expandedWith(other, Side::Top), Margins(5, 6, -3, 4));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).expandedWith(other), Margins(1, 6, -3, 4).expandedWith(other));
+        REQUIRE_EQUAL(
+            Margins(1, 6, -3, 4).expandedWith(other, Side::Left), Margins(1, 6, -3, 4).expandedWith(other, Side::Left));
     }
 
     void testComponentMin() {
@@ -127,5 +177,45 @@ public:
         REQUIRE_EQUAL(margins.componentMin(other, Side::Right), Margins(1, 2, -3, 4));
         REQUIRE_EQUAL(margins.componentMin(other, Side::Bottom), Margins(1, 6, -7, 4));
         REQUIRE_EQUAL(margins.componentMin(other, Side::Left), Margins(1, 6, -3, 4));
+    }
+
+    void testLimitedWith() {
+        using Side = Margins::Side;
+
+        margins = Margins(1, 6, -3, 4);
+        const auto other = Margins(5, 2, -7, 8);
+
+        REQUIRE_EQUAL(margins.limitedWith(other), Margins(1, 2, -7, 4));
+        REQUIRE_EQUAL(margins.limitedWith(other, Side::Top), Margins(1, 6, -3, 4));
+        REQUIRE_EQUAL(margins.limitedWith(other, Side::Right), Margins(1, 2, -3, 4));
+        REQUIRE_EQUAL(margins.limitedWith(other, Side::Bottom), Margins(1, 6, -7, 4));
+        REQUIRE_EQUAL(margins.limitedWith(other, Side::Left), Margins(1, 6, -3, 4));
+    }
+
+    void testLimitTo() {
+        using Side = Margins::Side;
+
+        margins = Margins(1, 6, -3, 4);
+        const auto other = Margins(5, 2, -7, 8);
+
+        REQUIRE_EQUAL(margins.limitTo(other), Margins(1, 2, -7, 4));
+        REQUIRE_EQUAL(margins, Margins(1, 2, -7, 4));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).limitedWith(other), Margins(1, 2, -7, 4));
+
+        margins = Margins(1, 6, -3, 4);
+        REQUIRE_EQUAL(margins.limitTo(other, Orientation::Horizontal), Margins(1, 2, -3, 4));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).limitedWith(other, Orientation::Horizontal), Margins(1, 2, -3, 4));
+
+        margins = Margins(1, 6, -3, 4);
+        REQUIRE_EQUAL(margins.limitTo(other, Orientation::Vertical), Margins(1, 6, -7, 4));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).limitedWith(other, Orientation::Vertical), Margins(1, 6, -7, 4));
+
+        margins = Margins(1, 6, -3, 4);
+        REQUIRE_EQUAL(margins.limitTo(other, Side::Bottom), Margins(1, 6, -7, 4));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).limitedWith(other, Side::Right), Margins(1, 2, -3, 4));
+        REQUIRE_EQUAL(Margins(1, 6, -3, 4).componentMin(other), Margins(1, 6, -3, 4).limitedWith(other));
+        REQUIRE_EQUAL(
+            Margins(1, 6, -3, 4).componentMin(other, Side::Bottom),
+            Margins(1, 6, -3, 4).limitedWith(other, Side::Bottom));
     }
 };

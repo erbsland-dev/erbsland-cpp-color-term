@@ -52,8 +52,11 @@ Working with Layout Metrics and Invalidation
 
 Each surface owns a
 :cpp:any:`LayoutMetrics <erbsland::cterm::ui::LayoutMetrics>` object with minimum,
-preferred, and maximum size hints plus a size policy for both axes. You
-read it with :cpp:any:`Surface::layoutMetrics()
+preferred, and maximum size hints plus a size policy for both axes. These
+sizes always describe the margin-free content rectangle. The same metrics
+object can also recommend outer margins; these margins are not part of the
+sizes and are always clamped to zero or positive values when stored in
+``LayoutMetrics``. You read it with :cpp:any:`Surface::layoutMetrics()
 <erbsland::cterm::ui::Surface::layoutMetrics>` and change it through
 :cpp:any:`Surface::editLayoutMetrics()
 <erbsland::cterm::ui::Surface::editLayoutMetrics>`. The editor keeps the
@@ -67,6 +70,7 @@ recompute layout after a real metrics change.
 
     header->editLayoutMetrics().setFixedHeight(1);
     body->editLayoutMetrics().setSizePolicy(SizePolicy{SizePolicy::Grow});
+    body->editLayoutMetrics().setMargins(Margins{1, 2});
 
     body->flags().setPaintOutdated();
 

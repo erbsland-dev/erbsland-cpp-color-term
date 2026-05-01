@@ -48,6 +48,10 @@ public:
     /// Set a single text color.
     /// @param color The single base color to use for the rendered text.
     void setColor(const Color color) noexcept { _colorSequence = ColorSequence{color}; }
+    /// Get the character attributes
+    [[nodiscard]] auto charAttributes() const noexcept -> CharAttributes { return _charAttributes; }
+    /// Set the char attributes
+    void setCharAttributes(const CharAttributes attributes) noexcept { _charAttributes = attributes; }
     /// Get the optional font. If this is empty, regular text rendering is used.
     [[nodiscard]] auto font() const noexcept -> const FontPtr & { return _font; }
     /// Set the font.
@@ -159,6 +163,7 @@ private:
 
 private:
     ColorSequence _colorSequence;
+    CharAttributes _charAttributes;
     FontPtr _font;
     TextAnimation _animation{TextAnimation::None};
     ParagraphOptions _paragraphOptions;

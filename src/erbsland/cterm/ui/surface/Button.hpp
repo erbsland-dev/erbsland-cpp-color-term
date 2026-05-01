@@ -5,6 +5,8 @@
 #include "../ButtonAction.hpp"
 #include "../Surface.hpp"
 
+#include "../../theme/StringWithMargins.hpp"
+
 namespace erbsland::cterm::ui::surface {
 
 class Button;
@@ -29,27 +31,22 @@ public:
     [[nodiscard]] auto action() const noexcept -> const ButtonActionPtr &;
     /// Test if the represented action is enabled.
     [[nodiscard]] auto isEnabled() const noexcept -> bool;
-    /// Calculate the button's current preferred size from its action metadata.
-    [[nodiscard]] auto preferredSize() const -> Size;
-    /// Refresh the preferred layout size from the current action metadata.
-    void refreshLayoutSize();
 
 public: // implement Surface
+    [[nodiscard]] auto onMeasure(MeasureScope &scope, const LayoutProposal &proposal) noexcept
+        -> LayoutMetrics override;
     void onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept override;
     void onKeyPress(KeyPressEvent &keyPressEvent) noexcept override;
 
 private:
+    /// Initialize theme, focus state and action dispatch after construction.
+    void initializeUi() override;
     /// Render the button label with themed parts.
-    [[nodiscard]] auto renderButton(const ThemeContext &themeContext) const -> String;
-    /// Get the main display key, or an empty string if no key exists.
-    [[nodiscard]] auto keyText() const -> String;
+    [[nodiscard]] auto renderButtonText(const theme::ThemeAccessor &themeAccessor) const -> theme::StringWithMargins;
     /// Trigger the action from a keyboard event.
     auto triggerFromKey(const Key &key) -> bool;
 
 private:
-    static constexpr auto cHorizontalPadding = Coordinate{2};
-    static constexpr auto cGapBeforeKey = Coordinate{2};
-
     ButtonActionPtr _action; ///< The action represented by this button.
 };
 

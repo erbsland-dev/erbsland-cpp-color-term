@@ -153,6 +153,11 @@ auto Theme::monochrome() noexcept -> const ThemeConstPtr & {
     return theme;
 }
 
+auto Theme::zero() noexcept -> const ThemeConstPtr & {
+    static const auto theme = ThemeBuilder::zero().build();
+    return theme;
+}
+
 void Theme::registerElement(const Element element, const Element base) {
     elementBaseManager().registerElement(element, base);
 }

@@ -6,7 +6,7 @@
 #include "support/TerminalTestHelper.hpp"
 
 #include <erbsland/cterm/ui/event/impl/EventClockAccess.hpp>
-#include <erbsland/cterm/ui/surface/TextLine.hpp>
+#include <erbsland/cterm/ui/surface/DynamicTextLine.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
 #include <memory>
@@ -213,19 +213,15 @@ public:
         REQUIRE_FALSE(child->flags().isPaintOutdated());
     }
 
-    void testDirtyTextLineRefreshesDynamicText() {
+    void testDirtyDynamicTextLineRepaintsUpdatedChildText() {
         auto setup = createSetup(Size{12, 2});
-        auto currentLine = 1;
-        auto textLine = ui::TextLine::create();
-        textLine->setUpdateMode(ui::TextLine::Section::Left, ui::TextLine::UpdateMode::OnRefresh);
-        textLine->setUpdateFn(ui::TextLine::Section::Left, [&currentLine](String &text, const Coordinate) -> void {
-            text = String{std::string{"line "} + std::to_string(currentLine)};
-        });
+        auto textLine = ui::DynamicTextLine::create();
+        textLine->setText(ui::DynamicTextLine::Section::Left, "line 1");
         setup.root->addSurface(textLine);
         textLine->setRectangle(Rectangle{0, 1, 12, 1});
         renderInitialFrame(setup);
 
-        currentLine = 2;
+        textLine->setText(ui::DynamicTextLine::Section::Left, "line 2");
         textLine->flags().setPaintOutdated();
         renderNextFrame(setup);
 

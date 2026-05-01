@@ -3,8 +3,9 @@
 #pragma once
 
 #include "../Action.hpp"
-#include "../Page.hpp"
 #include "../Surface.hpp"
+
+#include "../../theme/StringWithMargins.hpp"
 
 #include <memory>
 #include <vector>
@@ -40,6 +41,9 @@ public: // implement Surface
     void onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept override;
 
 private:
+    /// Initialize theme and scheduled repaint refresh after construction.
+    void initializeUi() override;
+
     struct ActionCandidate final {
         ActionPtr action;          ///< The action.
         int chainIndex{};          ///< The surface-chain index, focused surface first.
@@ -47,8 +51,6 @@ private:
     };
 
 private:
-    /// Find the nearest owning page.
-    [[nodiscard]] auto nearestPage() noexcept -> PagePtr;
     /// Build the focused surface chain for the nearest page.
     /// @param page The page.
     /// @return The focused chain ending with the page.
@@ -67,7 +69,8 @@ private:
     /// @param action The action to render.
     /// @param context The current paint context.
     /// @return The rendered item.
-    [[nodiscard]] static auto renderActionItem(const ActionPtr &action, const PaintContext &context) -> String;
+    [[nodiscard]] static auto renderActionText(const ActionPtr &action, const PaintContext &context)
+        -> theme::StringWithMargins;
 };
 
 }

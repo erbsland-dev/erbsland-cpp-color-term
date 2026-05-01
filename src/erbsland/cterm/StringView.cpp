@@ -7,15 +7,15 @@
 #include "impl/paragraph/Layout.hpp"
 #include "impl/paragraph/LayoutNewlineMode.hpp"
 #include "impl/StringData.hpp"
+#include "impl/StringRangeView.hpp"
 #include "impl/StringWrapper.hpp"
 
 #include <algorithm>
 #include <ranges>
-#include <stdexcept>
 
 namespace erbsland::cterm {
 
-StringView::StringView() noexcept : _data{impl::StringData::sharedEmpty()}, _range{} {
+StringView::StringView() noexcept : _data{impl::StringData::sharedEmpty()} {
 }
 
 StringView::StringView(const String &string) noexcept : _data{string._data}, _range{string._range} {
@@ -26,136 +26,106 @@ StringView::StringView(std::shared_ptr<impl::StringData> data, const IndexRange 
 }
 
 auto StringView::operator[](const std::size_t index) const noexcept -> Char {
-    return characterAt(index);
+    return impl::StringRangeView{*_data, _range}[index];
 }
 
 auto StringView::displayWidth() const noexcept -> int {
-    if (_range.startIndex() == 0 && _range.length() == _data->size() && _data->hasDisplayWidthCache()) {
-        return _data->displayWidth();
-    }
-    auto result = 0;
-    for (auto it = begin(); it != end(); ++it) {
-        result += it->displayWidth();
-    }
-    return result;
+    return impl::StringRangeView{*_data, _range}.displayWidth();
 }
 
 auto StringView::at(const std::size_t index) const -> Char {
-    if (index >= size()) {
-        throw std::out_of_range{"StringView index out of range."};
-    }
-    return characterAt(index);
+    return impl::StringRangeView{*_data, _range}.at(index, "StringView");
 }
 
 auto StringView::begin() const noexcept -> const_iterator {
-    return _data->chars().cbegin() + static_cast<difference_type>(_range.startIndex());
+    return impl::StringRangeView{*_data, _range}.begin();
 }
 
 auto StringView::end() const noexcept -> const_iterator {
-    return begin() + static_cast<difference_type>(_range.length());
+    return impl::StringRangeView{*_data, _range}.end();
 }
 
 auto StringView::cbegin() const noexcept -> const_iterator {
-    return begin();
+    return impl::StringRangeView{*_data, _range}.cbegin();
 }
 
 auto StringView::cend() const noexcept -> const_iterator {
-    return end();
+    return impl::StringRangeView{*_data, _range}.cend();
 }
 
 auto StringView::rbegin() const noexcept -> const_reverse_iterator {
-    return const_reverse_iterator{end()};
+    return impl::StringRangeView{*_data, _range}.rbegin();
 }
 
 auto StringView::rend() const noexcept -> const_reverse_iterator {
-    return const_reverse_iterator{begin()};
+    return impl::StringRangeView{*_data, _range}.rend();
 }
 
 auto StringView::crbegin() const noexcept -> const_reverse_iterator {
-    return rbegin();
+    return impl::StringRangeView{*_data, _range}.crbegin();
 }
 
 auto StringView::crend() const noexcept -> const_reverse_iterator {
-    return rend();
+    return impl::StringRangeView{*_data, _range}.crend();
 }
 
 auto StringView::count(const Char &character) const noexcept -> std::size_t {
-    return static_cast<std::size_t>(
-        std::ranges::count_if(*this, [&](const Char &candidate) -> bool { return candidate == character; }));
+    return impl::StringRangeView{*_data, _range}.count(character);
 }
 
 auto StringView::count(const char32_t character) const noexcept -> std::size_t {
-    return static_cast<std::size_t>(std::ranges::count_if(
-        *this, [&](const Char &candidate) -> bool { return candidate.singleCodePoint() == character; }));
+    return impl::StringRangeView{*_data, _range}.count(character);
 }
 
 auto StringView::indexOf(const Char &character, const std::size_t startIndex) const noexcept -> std::size_t {
-    if (startIndex >= size()) {
-        return npos;
-    }
-    for (auto index = startIndex; index < size(); ++index) {
-        if (characterAt(index) == character) {
-            return index;
-        }
-    }
-    return npos;
+    return impl::StringRangeView{*_data, _range}.indexOf(character, startIndex);
 }
 
 auto StringView::indexOf(const char32_t character, const std::size_t startIndex) const noexcept -> std::size_t {
-    if (startIndex >= size()) {
-        return npos;
-    }
-    for (auto index = startIndex; index < size(); ++index) {
-        if (characterAt(index).singleCodePoint() == character) {
-            return index;
-        }
-    }
-    return npos;
+    return impl::StringRangeView{*_data, _range}.indexOf(character, startIndex);
+}
+
+auto StringView::indexOf(std::u32string_view characterSet, std::size_t startIndex) const noexcept -> std::size_t {
+    return impl::StringRangeView{*_data, _range}.indexOf(characterSet, startIndex);
+}
+
+auto StringView::indexNotOf(std::u32string_view characterSet, std::size_t startIndex) const noexcept -> std::size_t {
+    return impl::StringRangeView{*_data, _range}.indexNotOf(characterSet, startIndex);
 }
 
 auto StringView::substr(const std::size_t startIndex, std::size_t length) const noexcept -> StringView {
-    if (startIndex >= size() || length == 0) {
+    const auto range = impl::StringRangeView{*_data, _range}.subRange(startIndex, length);
+    if (range.empty()) {
         return {};
     }
-    if (length == npos || length > size() - startIndex) {
-        length = size() - startIndex;
-    }
-    return StringView{_data, IndexRange{storageIndex(startIndex), length}};
+    return StringView{_data, range};
 }
 
-auto StringView::trimmed(const std::u32string_view characters) const noexcept -> StringView {
-    auto start = std::size_t{0};
-    auto endIndex = size();
-    while (start < endIndex && characterAt(start).isOneOf(characters)) {
-        start += 1;
+auto StringView::croppedToDisplayWidth(const Coordinate displayWidth, const Alignment alignment) const noexcept
+    -> StringView {
+    const auto range = impl::StringRangeView{*_data, _range}.croppedRange(displayWidth, alignment);
+    if (range.empty()) {
+        return {};
     }
-    while (endIndex > start && characterAt(endIndex - 1).isOneOf(characters)) {
-        endIndex -= 1;
+    return StringView{_data, range};
+}
+
+auto StringView::trimmed(std::u32string_view characters) const noexcept -> StringView {
+    const auto range = impl::StringRangeView{*_data, _range}.trimmedRange(characters);
+    if (range.empty()) {
+        return {};
     }
-    return substr(start, endIndex - start);
+    return StringView{_data, range};
 }
 
 auto StringView::containsControlCharacters() const noexcept -> bool {
-    return std::ranges::any_of(*this, [](const Char &character) -> bool { return character.isControl(); });
+    return impl::StringRangeView{*_data, _range}.containsControlCharacters();
 }
 
 auto StringView::splitWords() const noexcept -> std::vector<StringView> {
     auto words = std::vector<StringView>{};
-    auto wordStart = npos;
-    for (auto index = std::size_t{0}; index < size(); ++index) {
-        if (characterAt(index).isSpacing()) {
-            if (wordStart != npos) {
-                words.emplace_back(substr(wordStart, index - wordStart));
-                wordStart = npos;
-            }
-            continue;
-        }
-        if (wordStart == npos) {
-            wordStart = index;
-        }
-    }
-    if (wordStart != npos) {
-        words.emplace_back(substr(wordStart));
+    for (const auto &range : impl::StringRangeView{*_data, _range}.splitWordRanges()) {
+        words.emplace_back(StringView{_data, range});
     }
     return words;
 }
@@ -165,51 +135,11 @@ auto StringView::wrapIntoLines(const int width, const ParagraphSpacing paragraph
 }
 
 auto StringView::terminalLines(const int width) const noexcept -> int {
-    if (width <= 0) {
-        return 0;
-    }
-    if (width == 1) {
-        return static_cast<int>(size());
-    }
-    auto renderedLines = 0;
-    auto currentWidth = 0;
-    for (const auto &character : *this) {
-        if (character == U'\n') {
-            renderedLines += 1;
-            currentWidth = 0;
-            continue;
-        }
-        const auto characterWidth = character.displayWidth();
-        currentWidth += characterWidth;
-        if (currentWidth >= width) {
-            renderedLines += 1;
-            currentWidth = currentWidth > width ? characterWidth : 0;
-        }
-    }
-    if (currentWidth > 0) {
-        renderedLines += 1;
-    }
-    return renderedLines;
+    return impl::StringRangeView{*_data, _range}.terminalLines(width);
 }
 
 auto StringView::naturalTextSize() const noexcept -> Size {
-    auto preferredWidth = Coordinate{1};
-    auto preferredHeight = Coordinate{1};
-    auto currentLineWidth = Coordinate{0};
-    for (auto index = std::size_t{0}; index < size(); ++index) {
-        const auto character = characterAt(index);
-        if (character == U'\n') {
-            preferredWidth = std::max(preferredWidth, currentLineWidth);
-            currentLineWidth = 0;
-            if (index + 1 < size()) {
-                preferredHeight += 1;
-            }
-            continue;
-        }
-        currentLineWidth += character.displayWidth();
-    }
-    preferredWidth = std::max(preferredWidth, currentLineWidth);
-    return {preferredWidth, preferredHeight};
+    return impl::StringRangeView{*_data, _range}.naturalTextSize();
 }
 
 auto StringView::wrappedTextHeight(const Coordinate width, const TextOptions &options) const noexcept -> Coordinate {
@@ -243,26 +173,23 @@ auto StringView::wrappedTextHeight(const Coordinate width, const TextOptions &op
 }
 
 auto StringView::splitLines() const noexcept -> std::vector<StringView> {
-    if (empty()) {
-        return {};
-    }
     auto result = std::vector<StringView>{};
-    result.reserve(count(U'\n') + 1);
-    auto lineStartIndex = std::size_t{0};
-    while (lineStartIndex < size()) {
-        const auto lineEndIndex = indexOf(U'\n', lineStartIndex);
-        if (lineEndIndex == npos) {
-            result.emplace_back(substr(lineStartIndex));
-            break;
+    for (const auto &range : impl::StringRangeView{*_data, _range}.splitLineRanges()) {
+        if (range.empty()) {
+            result.emplace_back();
+        } else {
+            result.emplace_back(StringView{_data, range});
         }
-        result.emplace_back(substr(lineStartIndex, lineEndIndex - lineStartIndex));
-        lineStartIndex = lineEndIndex + 1;
     }
     return result;
 }
 
+auto StringView::withBase(const CharStyle style) const noexcept -> String {
+    return String{*this}.withBase(style);
+}
+
 auto StringView::characterAt(const std::size_t localIndex) const noexcept -> const Char & {
-    return _data->chars()[storageIndex(localIndex)];
+    return impl::StringRangeView{*_data, _range}.characterAt(localIndex);
 }
 
 }

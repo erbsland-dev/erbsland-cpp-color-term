@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Frame.hpp"
 
+#include "../../theme/LayoutHelper.hpp"
 #include "../../theme/ThemePainter.hpp"
 
 #include <algorithm>
@@ -10,12 +11,18 @@
 namespace erbsland::cterm::ui::layout {
 
 Frame::Frame(ProtectedTag) noexcept {
-    themeAttributes().setElement(theme::Element::Frame);
     editLayoutMetrics().setSizePolicy(SizePolicy::Preferred);
 }
 
 auto Frame::create() -> FramePtr {
-    return std::make_shared<Frame>(ProtectedTag{});
+    auto result = std::make_shared<Frame>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void Frame::initializeUi() {
+    SingleContentLayout::initializeUi();
+    themeAttributes().setElement(theme::Element::Frame);
 }
 
 auto Frame::title() const noexcept -> const String & {
@@ -46,9 +53,20 @@ auto Frame::onMeasure(MeasureScope &scope, const LayoutProposal &proposal) noexc
     contentMetrics.setFixedSize({});
     const auto &content = contentSurface();
     if (content != nullptr && content->flags().isVisible()) {
-        contentMetrics = scope.measure(content, contentProposal(proposal, _padding));
+        auto contentInset = _padding;
+        contentMetrics = measureContent(content, scope, proposal, contentInset);
+        auto result = framedMetrics(contentMetrics, scope.themeContext(), contentInset);
+        const auto decoration = decorationSize(contentInset);
+        const auto resolvedContentWidth = result.preferred().width() - decoration.width();
+        if (resolvedContentWidth < contentMetrics.preferred().width()) {
+            const auto resolvedFrameWidth = result.preferred().width();
+            contentMetrics = measureContent(
+                content, scope, proposal.withWidth(LayoutDimension::atMost(resolvedFrameWidth)), contentInset);
+            result = framedMetrics(contentMetrics, scope.themeContext(), contentInset);
+        }
+        return result;
     }
-    return framedMetrics(contentMetrics, scope.themeContext());
+    return framedMetrics(contentMetrics, scope.themeContext(), _padding);
 }
 
 void Frame::onLayout(LayoutScope &scope) noexcept {
@@ -56,7 +74,8 @@ void Frame::onLayout(LayoutScope &scope) noexcept {
     if (content == nullptr || !content->flags().isVisible()) {
         return;
     }
-    scope.place(content, contentRect(scope.size()));
+    const auto initialMetrics = scope.measure(content, LayoutProposal::atMost(scope.size()));
+    scope.place(content, contentRect(scope.size(), initialMetrics.margins()));
 }
 
 auto Frame::isOpaque() const noexcept -> bool {
@@ -77,8 +96,8 @@ auto Frame::decorationSize(const Margins padding) noexcept -> Size {
     return Size{2, 2} + padding.extent();
 }
 
-auto Frame::contentRect(const Size size) const noexcept -> Rectangle {
-    return Rectangle{Position{}, size}.insetBy(Margins{1}).insetBy(_padding);
+auto Frame::contentRect(const Size size, const Margins childMargins) const noexcept -> Rectangle {
+    return Rectangle{Position{}, size}.insetBy(Margins{1}).insetBy(_padding.expandedWith(childMargins));
 }
 
 auto Frame::contentProposal(const LayoutProposal proposal, const Margins padding) noexcept -> LayoutProposal {
@@ -95,47 +114,44 @@ auto Frame::contentProposal(const LayoutProposal proposal, const Margins padding
     return result;
 }
 
-auto Frame::framedMetrics(const LayoutMetrics &contentMetrics, const ThemeContext &themeContext) const
+auto Frame::measureContent(
+    const SurfacePtr &content, MeasureScope &scope, const LayoutProposal proposal, Margins &contentInset) const noexcept
     -> LayoutMetrics {
-    const auto decoration = decorationSize(_padding);
-    const auto titleWidth = _title.empty() ? Coordinate{0} : titleBlock(themeContext).displayWidth();
+    auto contentMetrics = scope.measure(content, contentProposal(proposal, contentInset));
+    contentInset = _padding.expandedWith(contentMetrics.margins());
+    return scope.measure(content, contentProposal(proposal, contentInset));
+}
+
+auto Frame::framedMetrics(
+    const LayoutMetrics &contentMetrics, const ThemeContext &themeContext, const Margins contentInset) const
+    -> LayoutMetrics {
+    const auto decoration = decorationSize(contentInset);
+    const auto titleWidth = titleBlock(themeContext).displayWidth();
     auto minimum = contentMetrics.minimum() + decoration;
     auto preferred = contentMetrics.preferred() + decoration;
     minimum.setWidth(std::max(minimum.width(), titleWidth + Coordinate{2}));
     preferred.setWidth(std::max(preferred.width(), titleWidth + Coordinate{4}));
 
     auto result = layoutMetrics();
-    result.setMinimum(minimum.componentMin(result.maximum()));
-    result.setPreferred(preferred.componentMax(result.minimum()).componentMin(result.maximum()));
+    result.setMinimum(minimum.limitedWith(result.maximum()));
+    result.setPreferred(preferred.expandedWith(result.minimum()).limitedWith(result.maximum()));
     return result;
 }
 
-auto Frame::titleBlock(const ThemeContext &themeContext) const -> String {
+auto Frame::titleBlock(const ThemeContext &themeContext) const -> theme::StringWithMargins {
     const auto themeAccessor = themeContext.theme();
-    const auto textStyle = themeAccessor.forPart(theme::Part::Text).style();
-    const auto indicatorTheme = themeAccessor.forPart(theme::Part::Indicator);
-    const auto indicatorMargins = indicatorTheme.margins();
-    auto result = String{};
-    result.append(indicatorTheme.block(theme::BlockRole::HorizontalWest));
-    result.append(static_cast<std::size_t>(std::max(indicatorMargins.left(), 0)), U' ', textStyle);
-    result.appendWithBaseStyle(_title, textStyle);
-    result.append(static_cast<std::size_t>(std::max(indicatorMargins.right(), 0)), U' ', textStyle);
-    result.append(indicatorTheme.block(theme::BlockRole::HorizontalEast));
-    return result;
+    return theme::layout::encloseInBrackets(_title, themeAccessor, theme::Part::TitleBracket, theme::Part::Title);
 }
 
 void Frame::drawTitle(WritableBuffer &buffer, const PaintContext &context, const Rectangle frameRect) const {
-    if (_title.empty() || frameRect.width() <= 4) {
+    if (_title.empty() || frameRect.width() <= 8) {
         return;
     }
     const auto title = titleBlock(context.themeContext());
-    const auto leftInset =
-        std::max(static_cast<Coordinate>(context.theme().forPart(theme::Part::Border).margins().left()), Coordinate{0});
-    const auto x = frameRect.x1() + leftInset;
-    if (x >= frameRect.x2()) {
-        return;
-    }
-    buffer.drawText(title, Rectangle{{x, frameRect.y1()}, Size{frameRect.x2() - x, 1}});
+    const auto rect = Rectangle{
+        context.surfaceRect().topLeft() + Position{title.margins().left(), 0},
+        Size{context.surfaceRect().width() - title.margins().horizontalExtent(), 1}};
+    buffer.drawText(title.text(), rect);
 }
 
 }

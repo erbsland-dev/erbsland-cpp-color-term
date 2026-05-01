@@ -72,13 +72,199 @@ public:
         REQUIRE(text.substr(99).empty());
     }
 
-    void testTrimRemovesMatchingCharactersFromBothEndsOnly() {
-        const auto text = String{"\n\t alpha \r\n"};
-        const auto trimmed = text.trimmed(U"\n\r\t ");
+    void testIndexedAccessAndAtRespectCroppedBounds() {
+        const auto text = String{"012345"};
+        const auto cropped = text.substr(2, 3);
+
+        REQUIRE_EQUAL(cropped[0], U'2');
+        REQUIRE_EQUAL(cropped[2], U'4');
+        REQUIRE(cropped[3].isEmpty());
+        REQUIRE_THROWS_AS(std::out_of_range, cropped.at(3));
+    }
+
+    void testMutableIndexedAccessIgnoresOutOfBounds() {
+        auto text = String{"ABC"}.substr(1, 2);
+
+        text[99] = Char{U'X'};
+
+        REQUIRE_EQUAL(render(text), std::string{"BC"});
+        REQUIRE(text[99].isEmpty());
+    }
+
+    void testTrimmedUsesDefaultWhitespaceCharacters() {
+        const auto text = String{"\n\t alpha \n"};
+        const auto trimmed = text.trimmed();
 
         REQUIRE_EQUAL(trimmed.size(), std::size_t{5});
         REQUIRE_EQUAL(trimmed[0], U'a');
         REQUIRE_EQUAL(trimmed[4], U'a');
+    }
+
+    void testTrimRemovesNonWhitespaceCharactersFromBothEndsOnly() {
+        auto text = String{"xyalpha yx"};
+
+        text.trim(U"xy");
+
+        REQUIRE_EQUAL(render(text), std::string{"alpha "});
+    }
+
+    void testTrimWorksOnCroppedStringsAndKeepsSharedCopiesIndependent() {
+        const auto source = String{"xx  alpha  yy"};
+        auto cropped = source.substr(2, 9);
+        const auto sharedCropped = cropped;
+
+        const auto trimmed = cropped.trimmed();
+        cropped.trim();
+
+        REQUIRE_EQUAL(render(source), std::string{"xx  alpha  yy"});
+        REQUIRE_EQUAL(render(sharedCropped), std::string{"  alpha  "});
+        REQUIRE_EQUAL(render(trimmed), std::string{"alpha"});
+        REQUIRE_EQUAL(render(cropped), std::string{"alpha"});
+    }
+
+    void testNormalizedUsesDefaultWhitespaceCharacters() {
+        const auto text = String{" \t alpha\n\nbeta  "};
+
+        REQUIRE_EQUAL(render(text.normalized()), std::string{"alpha beta"});
+    }
+
+    void testNormalizeReplacesNonWhitespaceRuns() {
+        auto text = String{"--alpha..beta--"};
+
+        text.normalize(U"-.", Char{U'|'});
+
+        REQUIRE_EQUAL(render(text), std::string{"alpha|beta"});
+    }
+
+    void testNormalizeWorksOnCroppedStringsAndKeepsSharedCopiesIndependent() {
+        const auto source = String{"xx  alpha\t beta  yy"};
+        auto cropped = source.substr(2, 15);
+        const auto sharedCropped = cropped;
+
+        const auto normalized = cropped.normalized();
+        cropped.normalize();
+
+        REQUIRE_EQUAL(render(source), std::string{"xx  alpha\t beta  yy"});
+        REQUIRE_EQUAL(render(sharedCropped), std::string{"  alpha\t beta  "});
+        REQUIRE_EQUAL(render(normalized), std::string{"alpha beta"});
+        REQUIRE_EQUAL(render(cropped), std::string{"alpha beta"});
+    }
+
+    void testNormalizeAppliesFirstMatchedCharacterStyleToSeparator() {
+        auto text = String{};
+        text.append(Char{U'A', fg::White, bg::Black});
+        text.append(Char{U' ', fg::Red, bg::Blue});
+        text.append(Char{U'\t', fg::Green, bg::Cyan});
+        text.append(Char{U'B', fg::White, bg::Black});
+
+        const auto normalized = text.normalized(U" \t", Char{U'_', fg::Inherited, bg::Yellow});
+
+        REQUIRE_EQUAL(render(normalized), std::string{"A_B"});
+        REQUIRE_EQUAL(normalized[1], U'_');
+        REQUIRE_EQUAL(normalized[1].color(), Color(fg::Red, bg::Yellow));
+    }
+
+    void testReplaceCharacterCoversSingleMultiAndEmptyReplacement() {
+        auto text = String{"ABCDE"};
+
+        text.replace(IndexRange{1, 1}, Char{U'X'});
+        REQUIRE_EQUAL(render(text), std::string{"AXCDE"});
+
+        text.replace(IndexRange{2, 2}, Char{U'Y'});
+        REQUIRE_EQUAL(render(text), std::string{"AXYE"});
+
+        text.replace(IndexRange{1, 1}, Char{});
+        REQUIRE_EQUAL(render(text), std::string{"AYE"});
+    }
+
+    void testReplaceStringViewCoversShorterLongerAndSameSizeReplacement() {
+        auto text = String{"ABCDE"};
+
+        text.replace(IndexRange{1, 2}, StringView{String{"x"}});
+        REQUIRE_EQUAL(render(text), std::string{"AxDE"});
+
+        text.replace(IndexRange{2, 1}, StringView{String{"YZ"}});
+        REQUIRE_EQUAL(render(text), std::string{"AxYZE"});
+
+        text.replace(IndexRange{1, 2}, StringView{String{"12"}});
+        REQUIRE_EQUAL(render(text), std::string{"A12ZE"});
+    }
+
+    void testReplaceStringViewSameSizeCopiesEveryChangedCharacter() {
+        auto text = String{"ABCDE"};
+
+        text.replace(IndexRange{1, 3}, StringView{String{"xyz"}});
+
+        REQUIRE_EQUAL(render(text), std::string{"AxyzE"});
+    }
+
+    void testReplaceHandlesOutOfBoundsAndCroppedStrings() {
+        const auto source = String{"0123456789"};
+        auto cropped = source.substr(2, 5);
+        const auto sharedCropped = cropped;
+
+        cropped.replace(IndexRange{9, 1}, Char{U'X'});
+        REQUIRE_EQUAL(render(cropped), std::string{"23456"});
+
+        cropped.replace(IndexRange{1, 3}, StringView{String{"XY"}});
+        REQUIRE_EQUAL(render(cropped), std::string{"2XY6"});
+
+        cropped.replace(IndexRange{2, 99}, Char{U'Z'});
+        REQUIRE_EQUAL(render(cropped), std::string{"2XZ"});
+        REQUIRE_EQUAL(render(source), std::string{"0123456789"});
+        REQUIRE_EQUAL(render(sharedCropped), std::string{"23456"});
+    }
+
+    void testRemoveHandlesMiddleTailOutOfBoundsAndCroppedStrings() {
+        auto text = String{"ABCDE"};
+
+        text.remove(IndexRange{1, 2});
+        REQUIRE_EQUAL(render(text), std::string{"ADE"});
+
+        text.remove(IndexRange{1, 99});
+        REQUIRE_EQUAL(render(text), std::string{"A"});
+
+        text.remove(IndexRange{9, 1});
+        REQUIRE_EQUAL(render(text), std::string{"A"});
+
+        const auto source = String{"0123456789"};
+        auto cropped = source.substr(2, 5);
+        const auto sharedCropped = cropped;
+
+        cropped.remove(IndexRange{1, 2});
+        REQUIRE_EQUAL(render(cropped), std::string{"256"});
+
+        cropped.remove(IndexRange{2, 99});
+        REQUIRE_EQUAL(render(cropped), std::string{"25"});
+        REQUIRE_EQUAL(render(source), std::string{"0123456789"});
+        REQUIRE_EQUAL(render(sharedCropped), std::string{"23456"});
+    }
+
+    void testIndexOfCharacterSetCoversBoundsAndCroppedStrings() {
+        const auto text = String{"abc-def"};
+
+        REQUIRE_EQUAL(text.indexOf(U"-x"), std::size_t{3});
+        REQUIRE_EQUAL(text.indexOf(U"-x", 4), String::npos);
+        REQUIRE_EQUAL(text.indexOf(U"z"), String::npos);
+        REQUIRE_EQUAL(text.indexOf(U"-", 99), String::npos);
+
+        const auto cropped = String{"xxabc-yy"}.substr(2, 4);
+
+        REQUIRE_EQUAL(cropped.indexOf(U"-x"), std::size_t{3});
+        REQUIRE_EQUAL(cropped.indexOf(U"x"), String::npos);
+    }
+
+    void testIndexNotOfCharacterSetCoversBoundsAndCroppedStrings() {
+        const auto text = String{"aaabbb"};
+
+        REQUIRE_EQUAL(text.indexNotOf(U"a"), std::size_t{3});
+        REQUIRE_EQUAL(text.indexNotOf(U"ab"), String::npos);
+        REQUIRE_EQUAL(text.indexNotOf(U"a", 99), String::npos);
+
+        const auto cropped = String{"xxabc-yy"}.substr(2, 4);
+
+        REQUIRE_EQUAL(cropped.indexNotOf(U"abc"), std::size_t{3});
+        REQUIRE_EQUAL(cropped.indexNotOf(U"abc-"), String::npos);
     }
 
     void testWrapIntoLinesUsesTerminalWidth() {
@@ -283,38 +469,6 @@ public:
         REQUIRE_EQUAL(text[2].style(), style);
     }
 
-    void testAppendRangeAndAppendStyledRangeCopyOnlyTheRequestedCharacters() {
-        auto source = String{};
-        source.append(Char{U'A', fg::Red, bg::Black});
-        source.append(Char{U'B', fg::Green, bg::Black});
-        source.append(Char{U'C', fg::Blue, bg::Black});
-        source.append(Char{U'D', fg::Yellow, bg::Black});
-
-        auto copied = String{};
-        copied.appendRange(source, 1, 2);
-        const auto expectedB = Char{U'B', fg::Green, bg::Black};
-        const auto expectedC = Char{U'C', fg::Blue, bg::Black};
-
-        REQUIRE_EQUAL(copied.size(), std::size_t{2});
-        REQUIRE_EQUAL(copied[0], expectedB);
-        REQUIRE_EQUAL(copied[1], expectedC);
-
-        auto attributes = CharAttributes{};
-        attributes.setUnderline(true);
-        const auto style = CharStyle{Color{fg::BrightWhite, bg::BrightBlack}, attributes};
-        auto sourceWithInherited = String{};
-        sourceWithInherited.append(Char{U'B', fg::Inherited, bg::Inherited});
-        sourceWithInherited.append(Char{U'C', fg::Inherited, bg::Inherited});
-        auto restyled = String{};
-        restyled.appendRangeWithBaseStyle(sourceWithInherited, 0, 2, style);
-
-        REQUIRE_EQUAL(restyled.size(), std::size_t{2});
-        REQUIRE_EQUAL(restyled[0], U'B');
-        REQUIRE_EQUAL(restyled[1], U'C');
-        REQUIRE_EQUAL(restyled[0].style(), style);
-        REQUIRE_EQUAL(restyled[1].style(), style);
-    }
-
     void testStringViewAppendOperatorsReuseReadOnlyRanges() {
         const auto source = String{"ABCDE"};
         const auto middle = StringView{source}.substr(1, 3);
@@ -347,6 +501,25 @@ public:
 
         REQUIRE_EQUAL(render(source), std::string{"ABCDE"});
         REQUIRE_EQUAL(render(slice), std::string{"XCD"});
+    }
+
+    void testCroppedStringDetachesAfterReadOnlyRangeOperations() {
+        const auto source = String{"xxABC\nyy"};
+        auto cropped = source.substr(2, 4);
+        const auto sharedCropped = cropped;
+
+        REQUIRE_EQUAL(cropped.displayWidth(), 3);
+        REQUIRE_EQUAL(cropped.count(U'B'), std::size_t{1});
+        REQUIRE_EQUAL(cropped.indexOf(U'\n'), std::size_t{3});
+        REQUIRE_EQUAL(render(cropped.substr(1, 2)), std::string{"BC"});
+        REQUIRE_EQUAL(render(cropped.croppedToDisplayWidth(2, Alignment::Left)), std::string{"AB"});
+        REQUIRE_EQUAL(renderLines(cropped.splitLines()), std::vector<std::string>({"ABC"}));
+
+        cropped[1] = Char{U'Z'};
+
+        REQUIRE_EQUAL(render(source), std::string{"xxABC\nyy"});
+        REQUIRE_EQUAL(render(sharedCropped), std::string{"ABC\n"});
+        REQUIRE_EQUAL(render(cropped), std::string{"AZC\n"});
     }
 
     void testMutableIteratorsDetachBeforeWriting() {
@@ -423,6 +596,20 @@ public:
         REQUIRE_EQUAL(render(source), std::string{"Base"});
         REQUIRE_EQUAL(render(left), std::string{"Left"});
         REQUIRE_EQUAL(render(right), std::string{"Right"});
+    }
+
+    void testTrimmedSubstr() {
+        const auto source = String{"XXX  ABC  XXX"};
+        auto substr = source.substr(3, 7);
+        REQUIRE_EQUAL(substr, String{"  ABC  "});
+        auto trimmed = substr.trimmed();
+        REQUIRE_EQUAL(trimmed, String{"ABC"});
+    }
+
+    void testNormalizeSpecial() {
+        auto source = String{"\nXXX\n\tABC\n\tXXX\t"};
+        source.normalize();
+        REQUIRE_EQUAL(source, String{"XXX ABC XXX"});
     }
 
 private:

@@ -65,21 +65,25 @@ public:
         REQUIRE_EQUAL(metrics.preferred(), (Size{20, 1}));
     }
 
-    void testTextPartMarginsInsetMeasurementAndPainting() {
-        auto builder = theme::ThemeBuilder::from(theme::Theme::dark());
-        builder.edit(theme::Selector{theme::Element::TextBox, theme::Part::Text}).setMargins(Margins{1});
+    void testTextPartMarginsRemainParentOwnedAndPaddingIsPainted() {
+        auto builder = theme::ThemeBuilder::zero();
+        builder.edit(theme::Selector{theme::Element::TextBox, theme::Part::Text})
+            .setMargins(Margins{1})
+            .setPadding(Margins{2, 2});
+        builder.edit(theme::Selector{theme::Element::TextBox, theme::Part::Background}).setBlocks(U"123456789");
         const auto activeTheme = builder.build();
         auto textBox = ui::TextBox::create("X");
         const auto themeContext = textBox->themeContextFrom(ui::ThemeContext{activeTheme});
         auto scope = ui::MeasureScope{{}, themeContext};
 
         const auto metrics = textBox->onMeasure(scope, ui::LayoutProposal::unconstrained());
-        REQUIRE_EQUAL(metrics.preferred(), (Size{3, 3}));
+        REQUIRE_EQUAL(metrics.preferred(), (Size{5, 5}));
+        REQUIRE_EQUAL(metrics.margins(), (Margins{1}));
 
-        auto buffer = Buffer{Size{3, 3}, Char{U'.'}};
+        auto buffer = Buffer{Size{5, 5}, Char{U'.'}};
         textBox->onPaint(buffer, ui::PaintContext{buffer.rect(), buffer.rect(), buffer.rect(), themeContext});
 
-        requireRowsEqual(buffer, {"   ", " X ", "   "});
+        requireRowsEqual(buffer, {"12223", "45556", "45X56", "45556", "78889"});
     }
 
 private:

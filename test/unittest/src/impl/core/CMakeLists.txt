@@ -8,6 +8,7 @@ target_sources(erbsland-color-term-unittest PRIVATE
         HashHelperTest.cpp
         HashHelperTestSupport.hpp
         KeyDecoderTest.cpp
+        SaturatingMathTest.cpp
         StringBuilderTest.cpp
         U8BufferTest.cpp
         U8BufferTestSupport.hpp

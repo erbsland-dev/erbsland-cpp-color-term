@@ -2,18 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
-#include <cstdint>
+#include "HelpFormat.hpp"
+#include "HelpVisibility.hpp"
+
 #include <string>
 
 namespace erbsland::cterm::ui {
-
-/// Visibility of action help metadata.
-enum class HelpVisibility : uint8_t {
-    Hidden,   ///< Hide this action from generated help.
-    Footer,   ///< Show this action only in compact footer help.
-    HelpPage, ///< Show this action only in detailed help.
-    All,      ///< Show this action in compact footer help and detailed help.
-};
 
 /// Display metadata for a user-interface action.
 class HelpData {
@@ -33,10 +27,13 @@ public: // accessors
     auto setName(std::string name) -> HelpData &;
     /// Get the detailed help description.
     [[nodiscard]] auto description() const noexcept -> const std::string & { return _description; }
+    /// Get the format of the detailed help description.
+    [[nodiscard]] auto descriptionFormat() const noexcept -> HelpFormat { return _descriptionFormat; }
     /// Set the detailed help description.
     /// @param description The detailed help description.
+    /// @param format The format of the detailed help description.
     /// @return This object.
-    auto setDescription(std::string description) -> HelpData &;
+    auto setDescription(std::string description, HelpFormat format = HelpFormat::Text) -> HelpData &;
     /// Get the display priority.
     [[nodiscard]] auto priority() const noexcept -> int { return _priority; }
     /// Set the display priority.
@@ -59,6 +56,7 @@ public: // tests
 private:
     std::string _name;                               ///< Short display name for compact help.
     std::string _description;                        ///< Detailed help text.
+    HelpFormat _descriptionFormat{HelpFormat::Text}; ///< Format of the detailed help text.
     int _priority{0};                                ///< Display priority.
     HelpVisibility _visibility{HelpVisibility::All}; ///< Where this metadata is shown.
 };

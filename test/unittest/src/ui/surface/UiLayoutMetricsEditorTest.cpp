@@ -16,26 +16,31 @@ public:
             .setMinimumSize(Size{2, 1})
             .setMaximumSize(Size{10, 4})
             .setPreferredSize(Size{5, 3})
-            .setSizePolicy(ui::SizePolicy{ui::DimensionPolicy::Grow});
+            .setSizePolicy(ui::SizePolicy{ui::DimensionPolicy::Grow})
+            .setMargins(Margins{-1, 2, 3, -4});
 
         REQUIRE_EQUAL(surface->layoutMetrics().minimum(), Size(2, 1));
         REQUIRE_EQUAL(surface->layoutMetrics().maximum(), Size(10, 4));
         REQUIRE_EQUAL(surface->layoutMetrics().preferred(), Size(5, 3));
         REQUIRE_EQUAL(surface->layoutMetrics().sizePolicy().width().type(), ui::DimensionPolicy::Grow);
         REQUIRE_EQUAL(surface->layoutMetrics().sizePolicy().height().type(), ui::DimensionPolicy::Grow);
+        REQUIRE_EQUAL(surface->layoutMetrics().margins(), (Margins{0, 2, 3, 0}));
         REQUIRE(surface->flags().isLayoutOutdated());
     }
 
     void testEditorDoesNotInvalidateForUnchangedMetrics() {
         auto surface = ui::Panel::create();
         surface->editLayoutMetrics().setFixedSize(Size{6, 2});
+        surface->editLayoutMetrics().setMargins(Margins{1});
         surface->layout(Size{10, 5}, ui::LayoutContext{});
 
         surface->editLayoutMetrics().setFixedSize(Size{6, 2});
+        surface->editLayoutMetrics().setMargins(Margins{1});
 
         REQUIRE_FALSE(surface->flags().isLayoutOutdated());
         REQUIRE_EQUAL(surface->layoutMetrics().minimum(), Size(6, 2));
         REQUIRE_EQUAL(surface->layoutMetrics().maximum(), Size(6, 2));
         REQUIRE_EQUAL(surface->layoutMetrics().preferred(), Size(6, 2));
+        REQUIRE_EQUAL(surface->layoutMetrics().margins(), (Margins{1}));
     }
 };

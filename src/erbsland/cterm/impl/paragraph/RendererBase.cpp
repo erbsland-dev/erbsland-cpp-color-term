@@ -10,15 +10,10 @@ auto RendererBase::linePlacement(const LayoutLine &line, const int x1, const int
     const auto availableWidth = width - endMarkWidth;
     const auto textWidth = line.textWidth();
     auto textX = x1;
-    switch (_alignment & Alignment::HorizontalMask) {
-    case Alignment::Right:
+    if (_alignment.isRight()) {
         textX = x1 + availableWidth - textWidth;
-        break;
-    case Alignment::HCenter:
+    } else if (_alignment.isHorizontalCenter()) {
         textX = x1 + (availableWidth - textWidth) / 2;
-        break;
-    default:
-        break;
     }
     return LinePlacement{
         .textX = textX, .textWidth = textWidth, .endMarkX = x1 + width - endMarkWidth, .endMarkWidth = endMarkWidth};

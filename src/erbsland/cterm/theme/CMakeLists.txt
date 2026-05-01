@@ -3,10 +3,14 @@
 
 cmake_minimum_required(VERSION 3.28)
 
+add_subdirectory(impl)
 target_sources(erbsland-color-term PRIVATE
         BlockRole.hpp
         Element.hpp
         Identifier.hpp
+        LayoutHelper.cpp
+        LayoutHelper.hpp
+        LayoutRectangle.hpp
         Part.hpp
         Properties.cpp
         Properties.hpp
@@ -19,6 +23,8 @@ target_sources(erbsland-color-term PRIVATE
         State.hpp
         States.cpp
         States.hpp
+        StringWithMargins.cpp
+        StringWithMargins.hpp
         Tag.hpp
         Tags.hpp
         Theme.cpp
@@ -29,6 +35,4 @@ target_sources(erbsland-color-term PRIVATE
         ThemeBuilder.hpp
         ThemePainter.cpp
         ThemePainter.hpp
-        impl/ElementBaseManager.cpp
-        impl/ElementBaseManager.hpp
 )

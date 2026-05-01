@@ -4,6 +4,7 @@
 #include "support/BufferTestHelper.hpp"
 
 #include <erbsland/cterm/theme/State.hpp>
+#include <erbsland/cterm/theme/ThemeBuilder.hpp>
 #include <erbsland/cterm/ui/all.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
@@ -16,15 +17,18 @@ public:
         auto action = ui::ButtonAction::create("Yes");
         action->setKeys(U'y');
         auto button = ui::Button::create(action);
-        auto buffer = Buffer{button->preferredSize(), Char{U'.'}};
-        button->setRectangle(buffer.rect());
-        const auto context = button->themeContextFrom(ui::ThemeContext{});
+        const auto context = button->themeContextFrom(zeroThemeContext());
+        auto scope = ui::MeasureScope{{}, context};
 
+        const auto metrics = button->onMeasure(scope, ui::LayoutProposal::unconstrained());
+        auto buffer = Buffer{metrics.preferred(), Char{U'.'}};
+        button->setRectangle(buffer.rect());
         button->onPaint(buffer, ui::PaintContext{buffer.rect(), buffer.rect(), buffer.rect(), context});
 
-        REQUIRE_EQUAL(button->preferredSize(), Size(14, 1));
+        REQUIRE_EQUAL(metrics.preferred(), Size(8, 1));
+        REQUIRE_EQUAL(metrics.margins(), Margins{});
         REQUIRE(button->flags().isFocusable());
-        requireRowsEqual(buffer, {"▌  Yes  [y]  ▐"});
+        requireRowsEqual(buffer, {" Yes y  "});
     }
 
     void testButtonTriggersActionWithEnterSpaceAndActionKey() {
@@ -45,6 +49,30 @@ public:
         REQUIRE(spaceEvent.isHandled());
         REQUIRE(keyEvent.isHandled());
         REQUIRE_EQUAL(calls, (std::vector<Key>{Key{Key::Enter}, Key{Key::Space}, Key{Key::Character, U'r'}}));
+    }
+
+    void testButtonUsesThemeTextPaddingForMeasurementAndRendering() {
+        auto builder = theme::ThemeBuilder::zero();
+        builder.edit(theme::Selector{theme::Element::Button, theme::Part::Border})
+            .setBlock(theme::BlockRole::LeftBracket, U'▌')
+            .setBlock(theme::BlockRole::RightBracket, U'▐')
+            .setMargins(Margins{1})
+            .setPadding(Margins{2, 0});
+        builder.edit(theme::Selector{theme::Element::Button, theme::Part::Text}).setPadding(Margins{1, 0});
+        const auto activeTheme = builder.build();
+        auto action = ui::ButtonAction::create("Go");
+        auto button = ui::Button::create(action);
+        const auto context = button->themeContextFrom(ui::ThemeContext{activeTheme});
+        auto scope = ui::MeasureScope{{}, context};
+
+        const auto metrics = button->onMeasure(scope, ui::LayoutProposal::unconstrained());
+        REQUIRE_EQUAL(metrics.preferred(), (Size{10, 1}));
+
+        auto buffer = Buffer{metrics.preferred(), Char{U'.'}};
+        button->setRectangle(buffer.rect());
+        button->onPaint(buffer, ui::PaintContext{buffer.rect(), buffer.rect(), buffer.rect(), context});
+
+        requireRowsEqual(buffer, {"▌   Go   ▐"});
     }
 
     void testDisabledButtonUsesDisabledStateAndDoesNotTrigger() {

@@ -19,7 +19,11 @@ public:
 public:
     /// Create a horizontal scroll bar.
     /// @return The new horizontal scroll bar.
-    [[nodiscard]] static auto create() noexcept -> HorizontalScrollBarPtr;
+    [[nodiscard]] static auto create() -> HorizontalScrollBarPtr;
+
+private:
+    /// Initialize theme attributes after construction.
+    void initializeUi() override;
 };
 
 }

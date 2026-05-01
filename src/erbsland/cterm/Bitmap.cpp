@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Bitmap.hpp"
 
+#include "impl/SaturatingMath.hpp"
+
 #include <algorithm>
 
 namespace erbsland::cterm {
@@ -191,8 +193,9 @@ auto Bitmap::outlined() const noexcept -> Bitmap {
 }
 
 auto Bitmap::expanded(const Margins margins, const bool value) const noexcept -> Bitmap {
-    const auto newSize =
-        Size{_size.width() + margins.left() + margins.right(), _size.height() + margins.top() + margins.bottom()};
+    const auto newSize = Size{
+        impl::saturatingAdd(_size.width(), margins.horizontalDelta()),
+        impl::saturatingAdd(_size.height(), margins.verticalDelta())};
     if (newSize.width() <= 0 || newSize.height() <= 0) {
         return {};
     }

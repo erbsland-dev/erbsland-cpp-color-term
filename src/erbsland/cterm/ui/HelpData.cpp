@@ -14,8 +14,9 @@ auto HelpData::setName(std::string name) -> HelpData & {
     return *this;
 }
 
-auto HelpData::setDescription(std::string description) -> HelpData & {
+auto HelpData::setDescription(std::string description, const HelpFormat format) -> HelpData & {
     _description = std::move(description);
+    _descriptionFormat = format;
     return *this;
 }
 

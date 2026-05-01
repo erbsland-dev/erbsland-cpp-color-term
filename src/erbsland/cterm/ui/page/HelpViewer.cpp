@@ -10,18 +10,12 @@
 
 namespace erbsland::cterm::ui::page {
 
-HelpViewer::HelpViewer(ProtectedTag protectedTag) :
-    Page{protectedTag},
-    _root{layout::Stack::create(Orientation::Vertical)},
-    _header{surface::HeaderLine::create()},
-    _pages{layout::Pages::create()},
-    _footer{surface::FooterLine::create()} {
+HelpViewer::HelpViewer(ProtectedTag protectedTag) : Page{protectedTag} {
 }
 
 auto HelpViewer::create() -> HelpViewerPtr {
     auto result = std::make_shared<HelpViewer>(ProtectedTag{});
     result->initializeUi();
-    result->initializeActions();
     return result;
 }
 
@@ -79,15 +73,22 @@ void HelpViewer::onLayout(LayoutScope &scope) noexcept {
 }
 
 void HelpViewer::initializeUi() {
+    Page::initializeUi();
+    _root = layout::Stack::create(Orientation::Vertical);
+    _header = surface::HeaderLine::create();
+    _pages = layout::Pages::create();
+    _footer = surface::FooterLine::create();
     addSurface(_root);
-    _header->setMargins(surface::TextLine::Section::Left, Margins{1, 0});
-    _header->setMargins(surface::TextLine::Section::Right, Margins{1, 0});
+    using S = DynamicTextLine::Section;
+    _header->setMargins(S::Left, Margins{1, 0});
+    _header->setMargins(S::Right, Margins{1, 0});
     _header->themeAttributes().setElement(theme::Element::HelpViewer);
     _root->addSurface(_header);
     _root->addSurface(_pages);
     _footer->setText(String{});
     _root->addSurface(_footer);
     updateStatus();
+    initializeActions();
 }
 
 void HelpViewer::initializeActions() {
@@ -176,8 +177,9 @@ void HelpViewer::scrollCurrentSection(const Key &key) noexcept {
 }
 
 void HelpViewer::updateStatus() noexcept {
-    _header->setText(surface::TextLine::Section::Left, currentTitle());
-    _header->setText(surface::TextLine::Section::Right, String{"Help", fg::BrightYellow});
+    using S = DynamicTextLine::Section;
+    _header->setText(S::Left, currentTitle());
+    _header->setText(S::Right, String{"Help", fg::BrightYellow});
     _footer->setText(pageCounterText());
 }
 

@@ -4,6 +4,8 @@
 
 #include "impl/StackLayoutItems.hpp"
 
+#include "../../theme/ThemePainter.hpp"
+
 #include <algorithm>
 #include <stdexcept>
 #include <utility>
@@ -11,11 +13,17 @@
 namespace erbsland::cterm::ui::layout {
 
 Sections::Sections(ProtectedTag) noexcept {
-    themeAttributes().setElement(theme::Element::Sections);
 }
 
 auto Sections::create() -> SectionsPtr {
-    return std::make_shared<Sections>(ProtectedTag{});
+    auto result = std::make_shared<Sections>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void Sections::initializeUi() {
+    Layout::initializeUi();
+    themeAttributes().setElement(theme::Element::Sections);
 }
 
 void Sections::addSection(SurfacePtr surface) {
@@ -131,41 +139,22 @@ void Sections::drawSeparatorLine(
     if (focusWithin) {
         state |= theme::States{theme::State::FocusWithin};
     }
-    const auto themeContext = context.themeContext().withState(state);
-    const auto themeAccessor = themeContext.theme();
-    const auto rect = Rectangle{{surfaceRect.x1(), y}, Size{surfaceRect.width(), 1}};
-    buffer.fill(rect, themeAccessor.forPart(theme::Part::Border).block(theme::BlockRole::Background));
+    const auto themeAccessor = context.theme(); //.withState(state).theme();
+    const auto lineRect = Rectangle{{surfaceRect.x1(), y}, Size{surfaceRect.width(), 1}};
+    theme::ThemePainter{buffer, themeAccessor.forPart(theme::Part::Border)}.drawFrame(lineRect);
 
     if (!options.title().empty()) {
-        const auto leftInset = std::max(
-            static_cast<Coordinate>(themeAccessor.forPart(theme::Part::Border).margins().left()), Coordinate{0});
-        const auto x = rect.x1() + leftInset;
-        if (x < rect.x2()) {
-            buffer.drawText(titleBlock(options, themeContext), Rectangle{{x, y}, Size{rect.x2() - x, 1}});
-        }
+        const auto title = theme::layout::encloseInBrackets(
+            options.title(), themeAccessor, theme::Part::TitleBracket, theme::Part::Title);
+        const auto rect = lineRect.insetBy(title.margins());
+        buffer.drawText(title.text(), rect);
     }
     if (!options.rightText().empty()) {
-        const auto rightInset = std::max(
-            static_cast<Coordinate>(themeAccessor.forPart(theme::Part::Border).margins().right()), Coordinate{0});
-        auto rightText = String{};
-        rightText.appendWithBaseStyle(options.rightText(), themeAccessor.forPart(theme::Part::Text).style());
-        buffer.drawText(
-            rightText,
-            Rectangle{{rect.x2() - rightInset - rightText.displayWidth(), y}, Size{rightText.displayWidth(), 1}});
+        const auto textRight =
+            theme::layout::stylePaddingAndMargins(options.rightText(), themeAccessor, theme::Part::Text);
+        const auto rect = lineRect.insetBy(textRight.margins());
+        buffer.drawText(textRight.text(), rect, Alignment::Right);
     }
-}
-
-auto Sections::titleBlock(const SectionOptions &options, const ThemeContext &themeContext) noexcept -> String {
-    const auto themeAccessor = themeContext.theme();
-    const auto titleStyle = themeAccessor.forPart(theme::Part::Title).style();
-    const auto titleMargins = themeAccessor.forPart(theme::Part::Title).margins();
-    auto result = String{};
-    result.append(themeAccessor.forPart(theme::Part::TitleBracket).block(theme::BlockRole::HorizontalWest));
-    result.append(static_cast<std::size_t>(std::max(titleMargins.left(), 0)), U' ', titleStyle);
-    result.appendWithBaseStyle(options.title(), titleStyle);
-    result.append(static_cast<std::size_t>(std::max(titleMargins.right(), 0)), U' ', titleStyle);
-    result.append(themeAccessor.forPart(theme::Part::TitleBracket).block(theme::BlockRole::HorizontalEast));
-    return result;
 }
 
 }

@@ -25,7 +25,7 @@ public:
     /// Create a scrolling buffer view for one source buffer.
     /// @param source The optional source buffer.
     /// @return The new scrolling buffer view.
-    [[nodiscard]] static auto create(ReadableBufferPtr source = {}) noexcept -> ScrollingBufferViewPtr;
+    [[nodiscard]] static auto create(ReadableBufferPtr source = {}) -> ScrollingBufferViewPtr;
 
 public:
     /// Access the source buffer.

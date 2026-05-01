@@ -10,12 +10,18 @@ HorizontalScrollBar::HorizontalScrollBar(ProtectedTag protectedTag) noexcept :
         LayoutMetrics{Size{1, 1}, Size::maximum(), Size{20, 1}, SizePolicy{SizePolicy::Grow}},
         ProtectedTag{}} {
     static_cast<void>(protectedTag);
-    themeAttributes().setElement(theme::Element::HorizontalScrollBar);
     editLayoutMetrics().setFixedHeight(1);
 }
 
-auto HorizontalScrollBar::create() noexcept -> HorizontalScrollBarPtr {
-    return std::make_shared<HorizontalScrollBar>(ProtectedTag{});
+auto HorizontalScrollBar::create() -> HorizontalScrollBarPtr {
+    auto result = std::make_shared<HorizontalScrollBar>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void HorizontalScrollBar::initializeUi() {
+    AbstractScrollBar::initializeUi();
+    themeAttributes().setElement(theme::Element::HorizontalScrollBar);
 }
 
 }

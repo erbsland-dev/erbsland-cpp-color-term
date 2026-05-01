@@ -60,6 +60,11 @@ auto ElementBaseManager::builtInBaseElementFor(const Element element) noexcept -
     case 18:
     case 19:
         return Element::Page;
+    case 20:
+        return Element::Surface;
+    case 21:
+    case 22:
+        return Element::StaticText;
     default:
         return Element::None;
     }

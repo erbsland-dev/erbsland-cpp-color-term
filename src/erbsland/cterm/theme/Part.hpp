@@ -74,16 +74,20 @@ public:
     static const Part Increase;
     /// Generic indicator part.
     static const Part Indicator;
-    /// Key label in shortcut help.
+    /// Key label in the shortcut help.
     static const Part Key;
     /// Bracket text around a key label in shortcut help.
     static const Part KeyBracket;
+    /// The action name after a keyboard shortcut.
+    static const Part ActionName;
     /// Title text in a decorated element.
     static const Part Title;
-    /// Bracket text around title text.
+    /// Brackets around the title text.
     static const Part TitleBracket;
     /// Spacing configuration between repeated elements.
     static const Part Spacing;
+    /// Ellipsis marker for cropped text.
+    static const Part Ellipsis;
 
 private:
     static constexpr auto cCustomOffset = uint16_t{1000};
@@ -103,9 +107,11 @@ inline constexpr Part Part::Increase{Id{7}};
 inline constexpr Part Part::Indicator{Id{8}};
 inline constexpr Part Part::Key{Id{9}};
 inline constexpr Part Part::KeyBracket{Id{10}};
-inline constexpr Part Part::Title{Id{11}};
-inline constexpr Part Part::TitleBracket{Id{12}};
-inline constexpr Part Part::Spacing{Id{13}};
+inline constexpr Part Part::ActionName{Id{11}};
+inline constexpr Part Part::Title{Id{12}};
+inline constexpr Part Part::TitleBracket{Id{13}};
+inline constexpr Part Part::Spacing{Id{14}};
+inline constexpr Part Part::Ellipsis{Id{15}};
 
 }
 

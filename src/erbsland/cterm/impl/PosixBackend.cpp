@@ -421,7 +421,7 @@ void PosixBackend::appendInputChunks(const OptionalTimeout timeout) {
     if (!waitForInput(timeout)) {
         return;
     }
-    while (true) {
+    while (_pendingKeyInput.size() < cMaximumPendingKeyInputSize) {
         const auto chunk = readInputChunk();
         if (chunk.empty()) {
             return;

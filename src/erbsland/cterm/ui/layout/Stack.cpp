@@ -12,36 +12,47 @@ Stack::Stack(const Orientation orientation, ProtectedTag) noexcept : _orientatio
 }
 
 auto Stack::create(Orientation orientation) -> StackPtr {
-    return std::make_shared<Stack>(orientation, ProtectedTag{});
+    auto result = std::make_shared<Stack>(orientation, ProtectedTag{});
+    result->initializeUi();
+    return result;
 }
 
 auto Stack::onMeasure(MeasureScope &scope, const LayoutProposal &proposal) noexcept -> LayoutMetrics {
     auto contentMinimum = Size{};
     auto contentPreferred = Size{};
+    auto propagatedMargins = Margins{};
+    auto previousMargins = Margins{};
+    auto hasVisibleChild = false;
     const auto childProposal = LayoutProposal{proposal.width(), proposal.height()};
     for (const auto &child : surfaces()) {
         if (child == nullptr || !child->flags().isVisible()) {
             continue;
         }
         const auto childMetrics = scope.measure(child, childProposal);
-        if (_orientation == Orientation::Horizontal) {
-            contentMinimum.setWidth(saturatedAdd(contentMinimum.width(), childMetrics.minimum().width()));
-            contentPreferred.setWidth(saturatedAdd(contentPreferred.width(), childMetrics.preferred().width()));
-            contentMinimum.setHeight(std::max(contentMinimum.height(), childMetrics.minimum().height()));
-            contentPreferred.setHeight(std::max(contentPreferred.height(), childMetrics.preferred().height()));
+        const auto childMargins = childMetrics.margins();
+        if (!hasVisibleChild) {
+            propagatedMargins.set(Margins::leadingSide(_orientation), childMargins.leading(_orientation));
         } else {
-            contentMinimum.setHeight(saturatedAdd(contentMinimum.height(), childMetrics.minimum().height()));
-            contentPreferred.setHeight(saturatedAdd(contentPreferred.height(), childMetrics.preferred().height()));
-            contentMinimum.setWidth(std::max(contentMinimum.width(), childMetrics.minimum().width()));
-            contentPreferred.setWidth(std::max(contentPreferred.width(), childMetrics.preferred().width()));
+            const auto spacing = std::max(previousMargins.trailing(_orientation), childMargins.leading(_orientation));
+            const auto spacingSize = Size{spacing, spacing};
+            contentMinimum.add(spacingSize, _orientation);
+            contentPreferred.add(spacingSize, _orientation);
         }
+        propagatedMargins.set(Margins::trailingSide(_orientation), childMargins.trailing(_orientation));
+        propagatedMargins.expandTo(childMargins, Margins::crossLeadingSide(_orientation));
+        propagatedMargins.expandTo(childMargins, Margins::crossTrailingSide(_orientation));
+        contentMinimum.add(childMetrics.minimum(), _orientation);
+        contentPreferred.add(childMetrics.preferred(), _orientation);
+        contentMinimum.expandTo(childMetrics.minimum(), _orientation.crossed());
+        contentPreferred.expandTo(childMetrics.preferred(), _orientation.crossed());
+        previousMargins = childMargins;
+        hasVisibleChild = true;
     }
     auto result = layoutMetrics();
-    result.setMinimum(result.minimum().componentMax(contentMinimum).componentMin(result.maximum()));
-    result.setPreferred(result.preferred()
-                            .componentMax(result.minimum())
-                            .componentMax(contentPreferred)
-                            .componentMin(result.maximum()));
+    result.setMinimum(result.minimum().expandedWith(contentMinimum).limitedWith(result.maximum()));
+    result.setPreferred(
+        result.preferred().expandedWith(result.minimum()).expandedWith(contentPreferred).limitedWith(result.maximum()));
+    result.setMargins(result.margins().expandedWith(propagatedMargins));
     return result;
 }
 
@@ -49,14 +60,6 @@ void Stack::onLayout(LayoutScope &scope) noexcept {
     auto items = impl::StackLayoutItems::fromSurfaces(surfaces(), _orientation, scope.size(), scope);
     items.resolveMainSizes(scope.size().coordinate(_orientation));
     items.applyLayout(_orientation, scope);
-}
-
-auto Stack::saturatedAdd(const Coordinate left, const Coordinate right) noexcept -> Coordinate {
-    const auto maximum = Size::maximum().width();
-    if (left > maximum - right) {
-        return maximum;
-    }
-    return left + right;
 }
 
 }

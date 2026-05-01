@@ -7,13 +7,18 @@
 namespace erbsland::cterm::ui::surface {
 
 ScrollCorner::ScrollCorner(ProtectedTag) noexcept :
-    Surface{
-        theme::Element::ScrollCorner,
-        LayoutMetrics{Size{1, 1}, Size{1, 1}, Size{1, 1}, SizePolicy{SizePolicy::Preferred}}} {
+    Surface{LayoutMetrics{Size{1, 1}, Size{1, 1}, Size{1, 1}, SizePolicy{SizePolicy::Preferred}}} {
 }
 
-auto ScrollCorner::create() noexcept -> ScrollCornerPtr {
-    return std::make_shared<ScrollCorner>(ProtectedTag{});
+auto ScrollCorner::create() -> ScrollCornerPtr {
+    auto result = std::make_shared<ScrollCorner>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void ScrollCorner::initializeUi() {
+    Surface::initializeUi();
+    themeAttributes().setElement(theme::Element::ScrollCorner);
 }
 
 auto ScrollCorner::fill() const noexcept -> const Char & {

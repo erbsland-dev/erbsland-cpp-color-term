@@ -41,7 +41,7 @@ public:
 
 private:
     /// Create a new item collection.
-    explicit StackLayoutItems(std::vector<StackLayoutItem> items) noexcept;
+    StackLayoutItems(Orientation orientation, std::vector<StackLayoutItem> items) noexcept;
 
     /// Get the currently assigned total size on the main axis.
     [[nodiscard]] auto totalMainSize() const noexcept -> Coordinate;
@@ -54,6 +54,10 @@ private:
     /// @param availableMainSize The available main size.
     void shrinkOverflow(Coordinate availableMainSize) noexcept;
 
+    /// Shrink internal margin spacing before reducing child sizes.
+    /// @param overflow The remaining overflow.
+    void shrinkSpacing(Coordinate &overflow) noexcept;
+
     /// Shrink one policy group.
     /// @param overflow The remaining overflow.
     /// @param policyType The selected policy group.
@@ -61,6 +65,7 @@ private:
     void shrinkPolicyGroup(Coordinate &overflow, DimensionPolicy::Type policyType, bool shrinkBelowMinimum) noexcept;
 
 private:
+    Orientation _orientation{Orientation::Vertical};
     std::vector<StackLayoutItem> _items;
 };
 

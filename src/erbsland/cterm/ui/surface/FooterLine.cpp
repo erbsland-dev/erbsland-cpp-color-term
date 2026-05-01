@@ -8,13 +8,13 @@
 namespace erbsland::cterm::ui::surface {
 
 FooterLine::FooterLine(ProtectedTag protectedTag) noexcept : Panel{protectedTag} {
-    themeAttributes().setElement(theme::Element::FooterLine);
     editLayoutMetrics().setFixedHeight(1);
+    childStorage().setManager(*this);
 }
 
 auto FooterLine::create() -> FooterLinePtr {
     auto result = std::make_shared<FooterLine>(ProtectedTag{});
-    result->initializeChildren();
+    result->initializeUi();
     return result;
 }
 
@@ -50,8 +50,8 @@ void FooterLine::hideMessage() {
 void FooterLine::onLayout(LayoutScope &scope) noexcept {
     const auto newParentSize = scope.size();
     const auto width = std::max(newParentSize.width(), 0);
-    _leftText->updateForWidth(width);
-    const auto leftWidth = std::min(_leftText->textDisplayWidth(), width);
+    const auto leftMetrics = scope.measure(_leftText, LayoutProposal::atMost(Size{width, 1}));
+    const auto leftWidth = std::clamp(leftMetrics.preferred().width(), 0, width);
     const auto actionHelpWidth = std::max(width - leftWidth, 0);
     scope.place(_leftText, Rectangle{{0, 0}, Size{leftWidth, 1}});
     scope.place(_actionHelp, Rectangle{{leftWidth, 0}, Size{actionHelpWidth, 1}});
@@ -60,14 +60,21 @@ void FooterLine::onLayout(LayoutScope &scope) noexcept {
     }
 }
 
-void FooterLine::initializeChildren() {
+void FooterLine::initializeUi() {
+    Panel::initializeUi();
+    themeAttributes().setElement(theme::Element::FooterLine);
     _leftText = DynamicText::create();
+    _leftText->themeAttributes().setElement(theme::Element::FooterLine);
     _actionHelp = ActionHelp::create();
-    _messageText = DynamicText::create(String{}, Alignment::TopCenter);
+    _messageText = Label::create(String{}, Alignment::TopCenter);
     _messageText->flags().setVisible(false);
     addSurface(_leftText);
     addSurface(_actionHelp);
     addSurface(_messageText);
+}
+
+auto FooterLine::isManagedChild(const SurfacePtr &surface) const noexcept -> bool {
+    return surface == _leftText || surface == _actionHelp || surface == _messageText;
 }
 
 void FooterLine::showNextMessage() {
@@ -79,7 +86,7 @@ void FooterLine::showNextMessage() {
     _hasMessage = true;
     _messageGeneration += 1;
     const auto generation = _messageGeneration;
-    _messageText->setText(styledMessage(message));
+    _messageText->setText(message.text.withBase(message.style));
     _messageText->flags().setVisible(true);
     flags().setPaintOutdated();
     if (message.timeout <= milliseconds{0}) {
@@ -93,12 +100,6 @@ void FooterLine::showNextMessage() {
             }
         },
         message.timeout);
-}
-
-auto FooterLine::styledMessage(const Message &message) noexcept -> String {
-    auto result = String{};
-    result.append(message.style, message.text);
-    return result;
 }
 
 }

@@ -104,6 +104,19 @@ public:
         REQUIRE_EQUAL(child->rectangle(), Rectangle(2, 2, 8, 2));
     }
 
+    void testFrameCollapsesPaddingWithChildMargins() {
+        auto frame = ui::Frame::create();
+        auto child = ui::Panel::create();
+        child->editLayoutMetrics().setMargins(Margins{3});
+        frame->setPadding(Margins{1});
+        frame->setContentSurface(child);
+
+        frame->setRectangle(Rectangle{0, 0, 14, 10});
+        frame->layout(Size{14, 10}, ui::LayoutContext{});
+
+        REQUIRE_EQUAL(child->rectangle(), Rectangle(4, 4, 6, 2));
+    }
+
     void testFrameMeasuresContentWithBorderAndPadding() {
         auto frame = ui::Frame::create();
         auto child = ui::Panel::create();
@@ -118,6 +131,23 @@ public:
         const auto metrics = frame->onMeasure(scope, ui::LayoutProposal::unconstrained());
 
         REQUIRE_EQUAL(metrics.preferred(), (Size{10, 8}));
+    }
+
+    void testFrameMeasuresCollapsedChildMarginsAsInset() {
+        auto frame = ui::Frame::create();
+        auto child = ui::Panel::create();
+        child->editLayoutMetrics().setFixedSize(Size{4, 2}).setMargins(Margins{3});
+        frame->setPadding(Margins{1});
+        frame->setContentSurface(child);
+        auto childScope = ui::MeasureScope{};
+        auto scope = ui::MeasureScope{[&](const ui::SurfacePtr &surface, const ui::LayoutProposal &proposal) {
+            return surface->onMeasure(childScope, proposal);
+        }};
+
+        const auto metrics = frame->onMeasure(scope, ui::LayoutProposal::unconstrained());
+
+        REQUIRE_EQUAL(metrics.preferred(), (Size{12, 10}));
+        REQUIRE_EQUAL(metrics.margins(), Margins{});
     }
 
     void testFramePaintsThemedBorderAndTitle() {

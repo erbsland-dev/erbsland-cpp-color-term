@@ -52,7 +52,7 @@ public: // implement Surface
 
 private:
     /// Create the static child tree and page actions.
-    void initializeUi();
+    void initializeUi() override;
     /// Create actions for the help viewer page.
     void initializeActions();
     /// Move to the previous section.

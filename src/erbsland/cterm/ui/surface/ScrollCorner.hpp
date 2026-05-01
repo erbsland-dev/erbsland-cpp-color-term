@@ -19,7 +19,7 @@ public:
 public:
     /// Create a scroll corner.
     /// @return The new scroll corner.
-    [[nodiscard]] static auto create() noexcept -> ScrollCornerPtr;
+    [[nodiscard]] static auto create() -> ScrollCornerPtr;
 
 public:
     /// Get the fill character.
@@ -34,6 +34,9 @@ public: // implement Surface
     void onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept override;
 
 private:
+    /// Initialize theme attributes after construction.
+    void initializeUi() override;
+
     Char _fill{U' ', Color{fg::Black, bg::BrightBlack}}; ///< The corner fill character.
     bool _fillOverride{false};                           ///< The fill character was explicitly configured.
 };

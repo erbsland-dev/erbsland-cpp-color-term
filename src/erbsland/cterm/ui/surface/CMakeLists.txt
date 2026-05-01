@@ -4,8 +4,6 @@
 cmake_minimum_required(VERSION 3.28)
 
 target_sources(erbsland-color-term PRIVATE
-        AbstractLine.cpp
-        AbstractLine.hpp
         AbstractHelpSection.cpp
         AbstractHelpSection.hpp
         AbstractScrollBar.cpp
@@ -20,6 +18,8 @@ target_sources(erbsland-color-term PRIVATE
         Button.hpp
         DynamicText.cpp
         DynamicText.hpp
+        DynamicTextLine.cpp
+        DynamicTextLine.hpp
         FooterLine.cpp
         FooterLine.hpp
         HeaderLine.cpp
@@ -28,14 +28,15 @@ target_sources(erbsland-color-term PRIVATE
         HtmlHelpSection.hpp
         HorizontalScrollBar.cpp
         HorizontalScrollBar.hpp
+        Label.hpp
         Panel.cpp
         Panel.hpp
         ScrollCorner.cpp
         ScrollCorner.hpp
         ScrollingBufferView.cpp
         ScrollingBufferView.hpp
-        TextLine.cpp
-        TextLine.hpp
+        StaticText.cpp
+        StaticText.hpp
         TextBox.cpp
         TextBox.hpp
         VerticalScrollBar.cpp

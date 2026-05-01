@@ -71,21 +71,19 @@ void UiHtmlViewerApp::setupUi() {
     auto root = ui::Stack::create(Orientation::Vertical);
     page->addSurface(root);
 
-    using Section = ui::TextLine::Section;
-    using CollapseBehavior = ui::TextLine::CollapseBehavior;
-    using UpdateMode = ui::TextLine::UpdateMode;
+    using Section = ui::DynamicTextLine::Section;
+    using SpacePriority = ui::DynamicTextLine::SpacePriority;
 
     auto header = ui::HeaderLine::create();
     header->setText(Section::Left, String{std::format("UI HTML Viewer  |  {}", displayName()), fg::BrightWhite});
     header->setMargins(Section::Left, Margins{1, 0});
-    header->setCollapseBehavior(Section::Middle, CollapseBehavior::Hide);
-    header->setUpdateMode(Section::Middle, UpdateMode::OnRefresh);
-    header->setUpdateFn(Section::Middle, [this](String &text, const Coordinate) -> void {
+    header->setSpacePriority(Section::Middle, SpacePriority::Hide);
+    header->dynamicText(Section::Middle)->setUpdateFn([this](String &text, const Coordinate) -> void {
         text = String{std::format("Style {}", documentStylePresetName()), fg::BrightYellow};
     });
+    header->dynamicText(Section::Middle)->updateText();
     header->setMargins(Section::Middle, Margins{1, 0});
-    header->setUpdateMode(Section::Right, UpdateMode::OnRefresh);
-    header->setUpdateFn(Section::Right, [this](String &text, const Coordinate) -> void {
+    header->dynamicText(Section::Right)->setUpdateFn([this](String &text, const Coordinate) -> void {
         if (_documentPanel == nullptr) {
             text.clear();
             return;
@@ -94,6 +92,7 @@ void UiHtmlViewerApp::setupUi() {
             std::format("{} x {}", _documentPanel->contentSize().width(), _documentPanel->contentSize().height()),
             fg::BrightCyan};
     });
+    header->dynamicText(Section::Right)->updateText();
     header->setMargins(Section::Right, Margins{1, 0});
     root->addSurface(header);
     _headerStatus = header;
@@ -102,7 +101,6 @@ void UiHtmlViewerApp::setupUi() {
     root->addSurface(_documentPanel);
 
     auto footer = ui::FooterLine::create();
-    footer->leftText()->setUpdateMode(ui::DynamicText::UpdateMode::OnRefresh);
     footer->leftText()->setUpdateFn([this](String &text, const Coordinate) -> void {
         if (_documentPanel == nullptr) {
             text.clear();
@@ -147,6 +145,7 @@ auto UiHtmlViewerApp::processCommandLineArguments(const std::vector<std::string>
         _html = loadHtmlFile(_htmlFilePath);
         _documentPanel->setHtml(_html);
         _documentPanel->setStyle(documentStyle());
+        updateDynamicUi();
     } catch (const std::exception &e) {
         terminal().printLine(fg::BrightRed, e.what());
         printUsage();
@@ -157,9 +156,13 @@ auto UiHtmlViewerApp::processCommandLineArguments(const std::vector<std::string>
 
 void UiHtmlViewerApp::updateDynamicUi() noexcept {
     if (_headerStatus != nullptr) {
+        _headerStatus->dynamicText(ui::DynamicTextLine::Section::Middle)->updateText();
+        _headerStatus->dynamicText(ui::DynamicTextLine::Section::Right)->updateText();
+        _headerStatus->flags().setLayoutOutdated();
         _headerStatus->flags().setPaintOutdated();
     }
     if (_footerStatus != nullptr) {
+        _footerStatus->leftText()->updateText();
         _footerStatus->flags().setPaintOutdated();
     }
 }

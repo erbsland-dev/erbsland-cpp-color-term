@@ -73,6 +73,9 @@ public:
     /// Fix both dimensions to a single size.
     /// @param size The fixed size.
     auto setFixedSize(Size size) -> LayoutMetricsEditor &;
+    /// Replace the recommended outer margins.
+    /// @param margins The new margins. Negative sides are clamped to zero.
+    auto setMargins(Margins margins) -> LayoutMetricsEditor &;
 
 private:
     [[nodiscard]] auto apply(LayoutMetrics layoutMetrics) -> LayoutMetricsEditor &;

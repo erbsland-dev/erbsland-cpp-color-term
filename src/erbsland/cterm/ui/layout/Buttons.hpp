@@ -6,6 +6,9 @@
 #include "../Layout.hpp"
 #include "../surface/Button.hpp"
 
+#include <functional>
+#include <vector>
+
 namespace erbsland::cterm::ui::layout {
 
 class Buttons;
@@ -65,15 +68,22 @@ protected: // implement SurfaceManager
         const LayoutDataPtr &newData) noexcept override;
 
 private:
+    /// Initialize theme attributes after construction.
+    void initializeUi() override;
+
     struct LayoutButton final {
         surface::ButtonPtr button;
+        Margins margins;
         Coordinate width{0};
     };
 
     struct LayoutRow final {
         std::vector<LayoutButton> buttons;
+        Margins margins;
         Coordinate width{0};
     };
+
+    using MeasureButtonFunction = std::function<LayoutMetrics(const surface::ButtonPtr &, const LayoutProposal &)>;
 
 private:
     /// Return all visible buttons in insertion order.
@@ -81,9 +91,16 @@ private:
     /// Return all visible and enabled buttons in insertion order.
     [[nodiscard]] auto focusableButtons() const -> std::vector<surface::ButtonPtr>;
     /// Build centered layout rows for a size.
-    [[nodiscard]] auto buildRows(Size size, Size spacing) const -> std::vector<LayoutRow>;
-    /// Calculate the height required to show every visible button for the given width.
-    [[nodiscard]] auto requiredHeight(Coordinate width, Size spacing) const -> Coordinate;
+    [[nodiscard]] auto buildRows(Size size, Size spacing, const MeasureButtonFunction &measureButton) const
+        -> std::vector<LayoutRow>;
+    /// Collapse two adjacent margins with a minimum spacing.
+    [[nodiscard]] static auto collapsedSpacing(Coordinate minimum, Coordinate trailing, Coordinate leading) noexcept
+        -> Coordinate;
+    /// Calculate the height required to show the prepared rows.
+    [[nodiscard]] static auto requiredHeight(const std::vector<LayoutRow> &rows, Size spacing) noexcept -> Coordinate;
+    /// Calculate the minimum height required to show the prepared rows.
+    [[nodiscard]] static auto requiredMinimumHeight(const std::vector<LayoutRow> &rows, Size spacing) noexcept
+        -> Coordinate;
     /// Test if a button is fully inside the current local surface rectangle.
     [[nodiscard]] auto isButtonFullyVisible(const surface::ButtonPtr &button) const noexcept -> bool;
     /// Move focus in a direction.

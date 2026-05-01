@@ -6,6 +6,7 @@
 
 #include "support/TerminalTestHelper.hpp"
 
+#include <erbsland/cterm/theme/ThemeBuilder.hpp>
 #include <erbsland/cterm/ui/event/impl/EventClockAccess.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
@@ -546,6 +547,31 @@ public:
         REQUIRE_EQUAL(render(text), "[o/O/↵] open");
     }
 
+    void testActionHelpUsesCollapsedThemeMarginsBetweenParts() {
+        auto builder = theme::ThemeBuilder::zero();
+        builder.edit(theme::Selector{theme::Element::ActionHelp, theme::Part::ActionName})
+            .setMargins(Margins{0, 3, 0, 2});
+        builder.edit(theme::Selector{theme::Element::ActionHelp, theme::Part::KeyBracket})
+            .setBlocks(U"    /    [ ]    ")
+            .setPadding(Margins{0, 1, 0, 1});
+        const auto activeTheme = builder.build();
+        auto page = ui::Page::create();
+        auto help = ui::ActionHelp::create();
+        auto openAction = ui::Action::create("open");
+        auto saveAction = ui::Action::create("save");
+        openAction->setKeys(U'o');
+        saveAction->setKeys(U's');
+        page->actions().add(openAction);
+        page->actions().add(saveAction);
+        page->addSurface(help);
+        const auto context = help->themeContextFrom(ui::ThemeContext{activeTheme});
+
+        const auto text = help->renderHelpText(
+            ui::PaintContext{Rectangle{0, 0, 40, 1}, Rectangle{0, 0, 40, 1}, Rectangle{0, 0, 40, 1}, context}, 40);
+
+        REQUIRE_EQUAL(render(text), "[ o ]  open   [ s ]  save");
+    }
+
     void testActionHelpRendersOnlyMainKeysInFooter() {
         auto page = ui::Page::create();
         auto help = ui::ActionHelp::create();
@@ -616,7 +642,6 @@ public:
         REQUIRE_EQUAL(footer->actionHelp()->themeAttributes().element(), theme::Element::ActionHelp);
 
         auto updateCount = 0;
-        dynamicText->setUpdateMode(ui::DynamicText::UpdateMode::OnRefresh);
         dynamicText->setUpdateFn([&](String &text, const Coordinate width) -> void {
             updateCount += 1;
             text = String{std::format("D{}-{}", updateCount, width)};
@@ -625,10 +650,12 @@ public:
         auto firstBuffer = Buffer{Size{8, 1}, Char{U' '}};
         auto secondBuffer = Buffer{Size{8, 1}, Char{U' '}};
         dynamicText->layout(Size{8, 1}, ui::LayoutContext{});
+        dynamicText->updateText();
         dynamicText->onPaint(
             firstBuffer,
             ui::PaintContext{firstBuffer.rect(), firstBuffer.rect(), firstBuffer.rect(), ui::ThemeContext{}});
         dynamicText->layout(Size{8, 1}, ui::LayoutContext{});
+        dynamicText->updateText();
         dynamicText->onPaint(
             secondBuffer,
             ui::PaintContext{secondBuffer.rect(), secondBuffer.rect(), secondBuffer.rect(), ui::ThemeContext{}});
@@ -646,11 +673,17 @@ public:
         footer->displayMessage("Second", {}, ui::FooterLine::milliseconds{0});
 
         auto firstBuffer = renderFooter(*footer, 20);
-        REQUIRE_EQUAL(renderRows(firstBuffer), (std::vector<std::string>{"left   First        "}));
+        requireRowsEqual(firstBuffer, {"left   First        "});
 
         footer->hideMessage();
         auto secondBuffer = renderFooter(*footer, 20);
-        REQUIRE_EQUAL(renderRows(secondBuffer), (std::vector<std::string>{"left   Second       "}));
+        requireRowsEqual(secondBuffer, {"left   Second       "});
+    }
+
+    void testFooterLineRejectsExternalChildren() {
+        auto footer = ui::FooterLine::create();
+
+        REQUIRE_THROWS_AS(std::logic_error, footer->surfaces().add(ui::Panel::create()));
     }
 
     void testApplicationQueuesTerminalKeyPressesAndRoutesThemToTheUi() {

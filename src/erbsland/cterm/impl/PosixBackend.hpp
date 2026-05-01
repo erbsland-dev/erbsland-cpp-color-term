@@ -21,6 +21,7 @@ class PosixBackend final : public Backend {
     using clock = std::chrono::steady_clock;
     constexpr static auto cMinimumDelayBetweenScreenSizeDetection = std::chrono::milliseconds{100};
     constexpr static auto cEscapeSequenceTimeout = std::chrono::milliseconds{25};
+    constexpr static auto cMaximumPendingKeyInputSize = 1024;
 
 public:
     enum class SizeDetectionResult : uint8_t { NoTerminalAttached, NoTerminalSize, Success };

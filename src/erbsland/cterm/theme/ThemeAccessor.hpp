@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #pragma once
 
+#include "LayoutRectangle.hpp"
 #include "Theme.hpp"
 
 #include "../geometry/Rectangle.hpp"
@@ -48,18 +49,68 @@ public:
     }
     /// Resolve a block character for a role.
     [[nodiscard]] auto
-    block(const BlockRole role = BlockRole::Background, const std::size_t animationCycle = 0) const noexcept -> Char {
+    block(const BlockRole role = BlockRole::Main, const std::size_t animationCycle = 0) const noexcept -> Char {
         return sheet()->block(role, animationCycle);
     }
     /// Resolve the tile-9 style for an animation cycle.
     [[nodiscard]] auto tile9Style(const std::size_t animationCycle = 0) const noexcept -> Tile9Style {
         return sheet()->tile9Style(animationCycle);
     }
-    /// Access the effective margins.
+    /// Access the effective parent-owned margins outside the current part.
+    /// Margins are always zero or positive.
     [[nodiscard]] auto margins() const noexcept -> Margins { return sheet()->margins(); }
-    /// Access the effective padding.
+    /// Access the effective horizontal margins with top and bottom set to zero.
+    /// Use this for strict one-line text where vertical margins are intentionally ignored.
+    /// Margins are always zero or positive.
+    [[nodiscard]] auto horizontalMargins() const noexcept -> Margins {
+        const auto currentMargins = margins();
+        return Margins{0, currentMargins.right(), 0, currentMargins.left()};
+    }
+    /// Access the effective part-owned padding inside the current part.
+    /// Padding is always zero or positive.
     [[nodiscard]] auto padding() const noexcept -> Margins { return sheet()->padding(); }
+    /// Access the effective horizontal padding with top and bottom set to zero.
+    /// Use this for strict one-line text where vertical padding is intentionally ignored.
+    /// Padding is always zero or positive.
+    [[nodiscard]] auto horizontalPadding() const noexcept -> Margins {
+        const auto currentPadding = padding();
+        return Margins{0, currentPadding.right(), 0, currentPadding.left()};
+    }
+    /// Calculate the size consumed by margins and padding.
+    /// Extent is always zero or positive.
+    [[nodiscard]] auto extent() const noexcept -> Size { return margins().extent() + padding().extent(); }
+    /// Calculate the horizontal size consumed by margins and padding.
+    /// Use this for strict one-line text where vertical margins and padding are intentionally ignored.
+    /// Extent is always zero or positive.
+    [[nodiscard]] auto horizontalExtent() const noexcept -> Size {
+        return horizontalMargins().extent() + horizontalPadding().extent();
+    }
+    /// Resolve the themed layout rectangles for an assigned rectangle.
+    /// @param outerRect The assigned rectangle, including margins.
+    /// @return The resolved rectangles.
+    [[nodiscard]] auto layout(const Rectangle outerRect) const noexcept -> LayoutRectangles {
+        const auto currentPartRect = outerRect.insetBy(margins());
+        return LayoutRectangles{
+            .outerRect = outerRect,
+            .partRect = currentPartRect,
+            .contentRect = currentPartRect.insetBy(padding()),
+        };
+    }
+    /// Resolve horizontal-only themed layout rectangles for an assigned rectangle.
+    /// Use this for strict one-line text where vertical margins and padding are intentionally ignored.
+    /// @param outerRect The assigned rectangle, including horizontal margins.
+    /// @return The resolved rectangles.
+    [[nodiscard]] auto horizontalLayout(const Rectangle outerRect) const noexcept -> LayoutRectangles {
+        const auto currentPartRect = outerRect.insetBy(horizontalMargins());
+        return LayoutRectangles{
+            .outerRect = outerRect,
+            .partRect = currentPartRect,
+            .contentRect = currentPartRect.insetBy(horizontalPadding()),
+        };
+    }
     /// Resolve the content rectangle by applying margins.
+    /// This only removes the parent-owned margin area. Apply `padding()` separately when resolving the inner content of
+    /// a part.
     [[nodiscard]] auto contentRect(const Rectangle rect) const noexcept -> Rectangle { return rect.insetBy(margins()); }
 
 private:

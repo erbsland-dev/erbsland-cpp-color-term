@@ -54,6 +54,8 @@ public: // accessors
     [[nodiscard]] auto mainKeys() const -> std::vector<Key>;
     /// Get alternative keys shown only in detailed help.
     [[nodiscard]] auto alternativeKeys() const -> std::vector<Key>;
+    /// Get all key labels for the main keys.
+    [[nodiscard]] auto mainKeyLabels() const -> std::vector<std::string>;
 
 public: // modifiers
     /// Replace all keys.
@@ -93,10 +95,6 @@ public: // tests
     /// @param key The key event to test.
     /// @return `true` if the key is part of the set.
     [[nodiscard]] auto matches(const Key &key) const noexcept { return contains(key); }
-
-public: // iterators
-    [[nodiscard]] auto begin() const noexcept -> const_iterator { return _keys.begin(); }
-    [[nodiscard]] auto end() const noexcept -> const_iterator { return _keys.end(); }
 
 private:
     /// The sentinel value for "all keys are main keys".

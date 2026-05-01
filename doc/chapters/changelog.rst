@@ -10,6 +10,78 @@
 Changelog
 *********
 
+Version 1.10.2 - 2026-05-04
+===========================
+
+Version 1.10.2 is a focused follow-up to the 1.10 beta UI overhaul. It keeps the new theme and action model, but
+polishes the practical details that matter when building real terminal interfaces: predictable themed margins and
+padding, reusable one-line text surfaces, safer geometry arithmetic, and a richer :cpp:any:`String
+<erbsland::cterm::String>` / :cpp:any:`StringView <erbsland::cterm::StringView>` API for terminal text manipulation.
+
+The beta UI API changed again in this release. The old one-line ``AbstractLine`` and ``TextLine`` surfaces were
+replaced by composition-based line surfaces centered around :cpp:any:`ui::DynamicTextLine
+<erbsland::cterm::ui::surface::DynamicTextLine>` and :cpp:any:`ui::DynamicText
+<erbsland::cterm::ui::surface::DynamicText>`. Existing demos were updated to the new API.
+
+Highlights
+----------
+
+*   Reworked beta one-line UI surfaces around :cpp:any:`ui::DynamicTextLine <erbsland::cterm::ui::surface::DynamicTextLine>`, :cpp:any:`ui::StaticText <erbsland::cterm::ui::surface::StaticText>`, and :cpp:any:`ui::Label <erbsland::cterm::ui::surface::Label>`, replacing the previous subclassing-oriented ``AbstractLine`` / ``TextLine`` design with composed, theme-aware surfaces.
+*   Added theme layout helpers such as :cpp:any:`theme::StringWithMargins <erbsland::cterm::theme::StringWithMargins>`, themed layout rectangles, and padding/margin helpers in :cpp:any:`ThemeAccessor <erbsland::cterm::theme::ThemeAccessor>`, making built-in controls handle themed spacing consistently.
+*   Expanded :cpp:any:`String <erbsland::cterm::String>` and :cpp:any:`StringView <erbsland::cterm::StringView>` with display-width cropping, character-set searches, default trimming, normalization, range replacement/removal, efficient base-style application, and shared range algorithms.
+*   Improved geometry helpers with a richer :cpp:any:`Alignment <erbsland::cterm::Alignment>` value type, saturated :cpp:any:`Size <erbsland::cterm::Size>` arithmetic, clearer ``expandTo`` / ``limitTo`` style APIs, and margin helpers for layout axes and margin collapsing.
+*   Updated the UI demos, reference documentation, and unit tests to cover the revised layout, theme, string, and surface behavior.
+
+Added
+-----
+
+*   Added :cpp:any:`ui::StaticText <erbsland::cterm::ui::surface::StaticText>` for fixed one-line text, :cpp:any:`ui::Label <erbsland::cterm::ui::surface::Label>` as its label-themed specialization, and :cpp:any:`ui::DynamicTextLine <erbsland::cterm::ui::surface::DynamicTextLine>` as the new composed left/middle/right line surface for headers and compact status rows.
+*   Added :cpp:any:`ui::ExclusiveSurfaceManager <erbsland::cterm::ui::ExclusiveSurfaceManager>` for surfaces that own a fixed internal child set while still using the regular surface-container machinery.
+*   Added :cpp:any:`ui::HelpFormat <erbsland::cterm::ui::HelpFormat>` and moved :cpp:any:`ui::HelpVisibility <erbsland::cterm::ui::HelpVisibility>` to its own public header. :cpp:any:`HelpData <erbsland::cterm::ui::HelpData>` can now record whether detailed help descriptions are plain text or HTML.
+*   Added :cpp:any:`theme::StringWithMargins <erbsland::cterm::theme::StringWithMargins>`, themed layout-rectangle helpers, and ``theme::layout`` functions for styling text with padding, cropping, bracket decoration, and collapsed horizontal margins.
+*   Added :cpp:any:`String::croppedToDisplayWidth() <erbsland::cterm::String::croppedToDisplayWidth>`, :cpp:any:`String::indexNotOf() <erbsland::cterm::String::indexNotOf>`, :cpp:any:`String::normalized() <erbsland::cterm::String::normalized>`, :cpp:any:`String::replace() <erbsland::cterm::String::replace>`, :cpp:any:`String::remove() <erbsland::cterm::String::remove>`, :cpp:any:`String::set() <erbsland::cterm::String::set>`, and :cpp:any:`String::withBase() <erbsland::cterm::String::withBase>` for common terminal-text editing tasks.
+*   Added matching :cpp:any:`StringView <erbsland::cterm::StringView>` helpers for display-width cropping, character-set searches, default trimming, and base-style materialization.
+*   Added :cpp:any:`HtmlRenderer::escapeHtml() <erbsland::cterm::text::HtmlRenderer::escapeHtml>` for safely embedding plain text into HTML fragments used by the rich-text renderer.
+*   Added :cpp:any:`Keys::mainKeyLabels() <erbsland::cterm::Keys::mainKeyLabels>` and :cpp:any:`Char::empty() <erbsland::cterm::Char::empty>` as small convenience APIs used by the refreshed UI rendering code.
+
+Improved
+--------
+
+*   Replaced the beta ``ui::AbstractLine`` and ``ui::TextLine`` implementation with composed surfaces. :cpp:any:`HeaderLine <erbsland::cterm::ui::surface::HeaderLine>` now builds on :cpp:any:`DynamicTextLine <erbsland::cterm::ui::surface::DynamicTextLine>`, while :cpp:any:`FooterLine <erbsland::cterm::ui::surface::FooterLine>` continues to combine status text, action help, and queued messages using the newer text surfaces.
+*   Made :cpp:any:`Button <erbsland::cterm::ui::surface::Button>`, :cpp:any:`ActionHelp <erbsland::cterm::ui::surface::ActionHelp>`, :cpp:any:`Frame <erbsland::cterm::ui::layout::Frame>`, :cpp:any:`Buttons <erbsland::cterm::ui::layout::Buttons>`, :cpp:any:`Sections <erbsland::cterm::ui::layout::Sections>`, and text surfaces resolve themed margins and padding consistently instead of hard-coding local spacing.
+*   Clarified UI layout metrics: sizes describe the margin-free content rectangle, while margins remain parent-owned spacing. ``Stack`` and ``Buttons`` collapse adjacent child margins, pure layouts propagate outer margins, and enclosing layouts such as ``Frame`` collapse child margins with their own insets.
+*   Reworked :cpp:any:`Alignment <erbsland::cterm::Alignment>` from a plain enum into a lightweight value type with named constants, horizontal/vertical component helpers, offset calculations, bitwise combination, equality, and hashing support.
+*   Updated :cpp:any:`Size <erbsland::cterm::Size>` and :cpp:any:`Margins <erbsland::cterm::Margins>` with clearer mutating and copy-returning helpers such as ``add()``, ``subtract()``, ``expandTo()``, ``limitTo()``, ``expandedWith()``, and ``limitedWith()``. The old component-style helpers remain available for compatibility.
+*   Centralized terminal string range logic in an internal ``StringRangeView`` helper so :cpp:any:`String <erbsland::cterm::String>` and :cpp:any:`StringView <erbsland::cterm::StringView>` share the same behavior for iteration, display width, splitting, trimming, searching, and line metrics.
+*   Improved character and bitmap safety: invalid Unicode scalar values passed to :cpp:any:`Char <erbsland::cterm::Char>` are normalized, :cpp:any:`Bitmap <erbsland::cterm::Bitmap>` dimensions are capped at ``4096 x 4096``, and geometry calculations use saturated arithmetic where overflow would otherwise be surprising.
+*   Refined :cpp:any:`WritableBuffer <erbsland::cterm::WritableBuffer>` text drawing internals to work with full :cpp:any:`CharStyle <erbsland::cterm::CharStyle>` values instead of only colors.
+*   Updated the UI demos to the new line-surface, margin, and help-description APIs, including ``ui-hello-world``, ``ui-html-viewer``, ``ui-choice``, ``ui-sections``, and ``ui-world-view``.
+
+Fixed
+-----
+
+*   Fixed several range-related edge cases in :cpp:any:`String <erbsland::cterm::String>` and :cpp:any:`StringView <erbsland::cterm::StringView>` where operations on substrings or views could accidentally ignore the visible range.
+*   Fixed out-of-range unchecked string access to return an empty/discarded character instead of reading outside the visible range.
+*   Fixed UI spacing inconsistencies where padding, margins, frame titles, button rows, action-help fragments, and line sections could add too much spacing or fail to collapse adjacent themed margins.
+*   Fixed line and button measurement paths so theme changes that affect padding or margins are reflected in layout instead of only in paint output.
+*   Fixed several overflow-prone geometry and layout calculations by introducing saturated integer helpers for internal arithmetic.
+
+Documentation
+-------------
+
+*   Updated the UI surface reference to describe :cpp:any:`DynamicTextLine <erbsland::cterm::ui::surface::DynamicTextLine>`, :cpp:any:`StaticText <erbsland::cterm::ui::surface::StaticText>`, labels, dynamic text, action help, and footer behavior after the line-surface redesign.
+*   Expanded the UI layout and theme reference pages with the new margin and padding model, including how pure layouts propagate outer margins and how enclosing layouts collapse child margins with their own inset.
+*   Updated the stack-layout implementation note so it explains margin collapsing, hidden-child handling, and propagation of cross-axis margins.
+*   Refreshed the reference index and the ``ui-hello-world`` demo documentation to match the renamed and newly added UI surface APIs.
+
+Implementation
+--------------
+
+*   Added the internal ``SaturatingMath`` helpers and dedicated tests for integer casting, arithmetic, and overflow detection used by geometry and layout code.
+*   Added and updated unit tests for :cpp:any:`String <erbsland::cterm::String>`, :cpp:any:`StringView <erbsland::cterm::StringView>`, :cpp:any:`Alignment <erbsland::cterm::Alignment>`, :cpp:any:`Margins <erbsland::cterm::Margins>`, :cpp:any:`Size <erbsland::cterm::Size>`, themes, button rows, frames, pages, choices, scroll areas, text boxes, :cpp:any:`StaticText <erbsland::cterm::ui::surface::StaticText>`, and :cpp:any:`DynamicTextLine <erbsland::cterm::ui::surface::DynamicTextLine>`.
+*   Adjusted CI and documentation workflows for the refreshed documentation and generated headers.
+
+
 Version 1.10.0 - 2026-04-30
 ===========================
 

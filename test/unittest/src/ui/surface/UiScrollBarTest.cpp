@@ -95,7 +95,7 @@ public:
         scrollBar->setScrollRegion(IndexRange{0, 10});
         scrollBar->setVisibleRegion(IndexRange{0, 1});
 
-        auto builder = theme::ThemeBuilder::from(theme::Theme::dark());
+        auto builder = theme::ThemeBuilder::zero();
         builder.edit(theme::Selector{theme::Element::HorizontalScrollBar, theme::Part::Track})
             .setColor(Color{fg::Green, bg::Blue})
             .setBlocks(U".........<.>....")
@@ -114,10 +114,12 @@ public:
     }
 
 private:
-    auto renderHorizontal(
-        ui::HorizontalScrollBar &scrollBar,
-        const Coordinate width,
-        theme::ThemeConstPtr activeTheme = theme::Theme::dark()) -> Buffer {
+    auto
+    renderHorizontal(ui::HorizontalScrollBar &scrollBar, const Coordinate width, theme::ThemeConstPtr activeTheme = {})
+        -> Buffer {
+        if (activeTheme == nullptr) {
+            activeTheme = scrollBarTheme();
+        }
         auto buffer = Buffer{Size{width, 1}, Char{U'?'}};
         scrollBar.setRectangle(Rectangle{0, 0, width, 1});
         scrollBar.layout(Size{width, 1}, ui::LayoutContext{});
@@ -131,10 +133,12 @@ private:
         return buffer;
     }
 
-    auto renderVertical(
-        ui::VerticalScrollBar &scrollBar,
-        const Coordinate height,
-        theme::ThemeConstPtr activeTheme = theme::Theme::dark()) -> Buffer {
+    auto
+    renderVertical(ui::VerticalScrollBar &scrollBar, const Coordinate height, theme::ThemeConstPtr activeTheme = {})
+        -> Buffer {
+        if (activeTheme == nullptr) {
+            activeTheme = scrollBarTheme();
+        }
         auto buffer = Buffer{Size{1, height}, Char{U'?'}};
         scrollBar.setRectangle(Rectangle{0, 0, 1, height});
         scrollBar.layout(Size{1, height}, ui::LayoutContext{});
@@ -146,5 +150,28 @@ private:
                 buffer.rect(),
                 ui::ThemeContext{std::move(activeTheme), theme::Element::VerticalScrollBar}});
         return buffer;
+    }
+
+    [[nodiscard]] static auto scrollBarTheme() -> theme::ThemeConstPtr {
+        auto builder = theme::ThemeBuilder::zero();
+        builder.edit(theme::Selector{theme::Element::HorizontalScrollBar, theme::Part::Track})
+            .setBlocks(U"░░░░░░░░░←░→░░░←")
+            .setMargins(Margins{1, 0});
+        builder.edit(theme::Selector{theme::Element::HorizontalScrollBar, theme::Part::Thumb})
+            .setBlocks(U"         ▏ ▕    ");
+        builder.edit(theme::Selector{theme::Element::HorizontalScrollBar, theme::Part::Decrease})
+            .setBlock(theme::BlockRole::Main, U'←');
+        builder.edit(theme::Selector{theme::Element::HorizontalScrollBar, theme::Part::Increase})
+            .setBlock(theme::BlockRole::Main, U'→');
+        builder.edit(theme::Selector{theme::Element::VerticalScrollBar, theme::Part::Track})
+            .setBlocks(U"░░░░░░░░░░░░↑░↓↑")
+            .setMargins(Margins{0, 1});
+        builder.edit(theme::Selector{theme::Element::VerticalScrollBar, theme::Part::Thumb})
+            .setBlocks(U"            ▔ ▁ ");
+        builder.edit(theme::Selector{theme::Element::VerticalScrollBar, theme::Part::Decrease})
+            .setBlock(theme::BlockRole::Main, U'↑');
+        builder.edit(theme::Selector{theme::Element::VerticalScrollBar, theme::Part::Increase})
+            .setBlock(theme::BlockRole::Main, U'↓');
+        return builder.build();
     }
 };

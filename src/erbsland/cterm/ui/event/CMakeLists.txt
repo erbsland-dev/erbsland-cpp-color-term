@@ -3,6 +3,7 @@
 
 cmake_minimum_required(VERSION 3.28)
 
+add_subdirectory(impl)
 target_sources(erbsland-color-term PRIVATE
         Event.hpp
         EventData.hpp
@@ -19,8 +20,4 @@ target_sources(erbsland-color-term PRIVATE
         ScheduledActionRef.hpp
         Scheduler.cpp
         Scheduler.hpp
-        impl/EventClockAccess.cpp
-        impl/EventClockAccess.hpp
-        impl/InvocationEvent.hpp
-        impl/ScheduledActionEvent.hpp
 )

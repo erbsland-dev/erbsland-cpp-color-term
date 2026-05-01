@@ -13,7 +13,7 @@ Layout::Layout(
     const int width,
     const ParagraphOptions &options,
     const LayoutNewlineMode newlineMode) noexcept :
-    _context{text, width, options, (options.alignment() & Alignment::HorizontalMask) == Alignment::Left},
+    _context{text, width, options, options.alignment().isLeft()},
     _newlineMode{newlineMode},
     _wordSeparators{_context.options().wordSeparatorSet()} {
 }

@@ -91,6 +91,11 @@ auto Char::space() noexcept -> const Char & {
     return space;
 }
 
+auto Char::empty() noexcept -> const Char & {
+    static const Char empty{impl::CombinedChar{}, {}};
+    return empty;
+}
+
 auto Char::emptyBlock(const CharStyle style) noexcept -> Char {
     return Char{impl::CombinedChar{}, style};
 }

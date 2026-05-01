@@ -11,7 +11,14 @@
 namespace erbsland::cterm::ui {
 
 auto Page::create() -> PagePtr {
-    return std::make_shared<Page>(ProtectedTag{});
+    auto result = std::make_shared<Page>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void Page::initializeUi() {
+    Surface::initializeUi();
+    themeAttributes().setElement(theme::Element::Page);
 }
 
 void Page::setTheme(theme::ThemeConstPtr theme) noexcept {

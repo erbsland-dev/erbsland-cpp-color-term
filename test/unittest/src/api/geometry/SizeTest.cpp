@@ -132,6 +132,76 @@ public:
         REQUIRE_EQUAL(size.componentMax(size2), Size(3, 4));
     }
 
+    void testExpandedWith() {
+        size = Size(1, 2);
+        Size size2{3, 4};
+        REQUIRE_EQUAL(size.expandedWith(size2), Size(3, 4));
+    }
+
+    void testAdd() {
+        size = Size{1, 2};
+        REQUIRE_EQUAL(size.add(Size{3, 4}), (Size{4, 6}));
+        REQUIRE_EQUAL(size, (Size{4, 6}));
+
+        size = Size::maximum();
+        REQUIRE_EQUAL(size.add(Size{1, 1}), Size::maximum());
+        REQUIRE_EQUAL((Size::maximum() + Size{1, 1}), Size::maximum());
+
+        size = Size{3, 4};
+        REQUIRE_EQUAL((size += Size{5, 6}), (Size{8, 10}));
+    }
+
+    void testAddOrientation() {
+        size = Size{1, 2};
+        REQUIRE_EQUAL(size.add(Size{3, 4}, Orientation::Horizontal), (Size{4, 2}));
+        REQUIRE_EQUAL(size.add(Size{3, 4}, Orientation::Vertical), (Size{4, 6}));
+    }
+
+    void testSubtract() {
+        size = Size{7, 9};
+        REQUIRE_EQUAL(size.subtract(Size{3, 4}), (Size{4, 5}));
+        REQUIRE_EQUAL(size, (Size{4, 5}));
+
+        size = Size{3, 4};
+        REQUIRE_EQUAL(size.subtract(Size{9, 1}), (Size{0, 3}));
+        REQUIRE_EQUAL((Size{3, 4} - Size{9, 1}), (Size{0, 3}));
+
+        size = Size{8, 10};
+        REQUIRE_EQUAL((size -= Size{5, 6}), (Size{3, 4}));
+    }
+
+    void testSubtractOrientation() {
+        size = Size{7, 9};
+        REQUIRE_EQUAL(size.subtract(Size{3, 4}, Orientation::Horizontal), (Size{4, 9}));
+        REQUIRE_EQUAL(size.subtract(Size{3, 4}, Orientation::Vertical), (Size{4, 5}));
+    }
+
+    void testExpandTo() {
+        size = Size{3, 7};
+        REQUIRE_EQUAL(size.expandTo(Size{5, 2}), (Size{5, 7}));
+        REQUIRE_EQUAL(size, (Size{5, 7}));
+        REQUIRE_EQUAL((Size{3, 7}.expandedWith(Size{5, 2})), (Size{5, 7}));
+
+        size = Size{3, 7};
+        REQUIRE_EQUAL(size.expandTo(Size{5, 9}, Orientation::Horizontal), (Size{5, 7}));
+        REQUIRE_EQUAL(size.expandTo(Size{8, 9}, Orientation::Vertical), (Size{5, 9}));
+        REQUIRE_EQUAL((Size{3, 7}.expandedWith(Size{5, 9}, Orientation::Horizontal)), (Size{5, 7}));
+        REQUIRE_EQUAL((Size{3, 7}.componentMax(Size{5, 2})), (Size{3, 7}.expandedWith(Size{5, 2})));
+    }
+
+    void testLimitTo() {
+        size = Size{7, 3};
+        REQUIRE_EQUAL(size.limitTo(Size{5, 8}), (Size{5, 3}));
+        REQUIRE_EQUAL(size, (Size{5, 3}));
+        REQUIRE_EQUAL((Size{7, 3}.limitedWith(Size{5, 8})), (Size{5, 3}));
+
+        size = Size{7, 9};
+        REQUIRE_EQUAL(size.limitTo(Size{5, 4}, Orientation::Horizontal), (Size{5, 9}));
+        REQUIRE_EQUAL(size.limitTo(Size{3, 4}, Orientation::Vertical), (Size{5, 4}));
+        REQUIRE_EQUAL((Size{7, 9}.limitedWith(Size{5, 4}, Orientation::Horizontal)), (Size{5, 9}));
+        REQUIRE_EQUAL((Size{7, 3}.limitedWith(Size{5, 8})), (Size{7, 3}.limitedWith(Size{5, 8})));
+    }
+
     void testContains() {
         size = Size(8, 4);
         REQUIRE(size.contains(Position(0, 0)));

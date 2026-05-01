@@ -10,9 +10,9 @@ ScrollingBufferView::ScrollingBufferView(ReadableBufferPtr source, ProtectedTag)
     _view{_source, Rectangle{Position{0, 0}, Size{1, 1}}} {
 }
 
-auto ScrollingBufferView::create(ReadableBufferPtr source) noexcept -> ScrollingBufferViewPtr {
+auto ScrollingBufferView::create(ReadableBufferPtr source) -> ScrollingBufferViewPtr {
     auto view = std::make_shared<ScrollingBufferView>(std::move(source), ProtectedTag{});
-    view->initializeScrollAreaChildren();
+    view->initializeUi();
     return view;
 }
 

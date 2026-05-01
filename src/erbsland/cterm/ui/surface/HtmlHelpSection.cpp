@@ -74,6 +74,7 @@ void HtmlHelpSection::onLayout(LayoutScope &scope) noexcept {
 }
 
 void HtmlHelpSection::initializeUi() {
+    AbstractHelpSection::initializeUi();
     _style = text::Style::defaultStyled();
     _documentBuffer = createCursorBuffer();
     _view = ScrollingBufferView::create(_documentBuffer);

@@ -37,11 +37,11 @@ public:
         const auto yes = buttons->addAction(action("Yes", U'y'));
         const auto no = buttons->addAction(action("No", U'n'));
 
-        buttons->setRectangle(Rectangle{0, 0, 30, 1});
-        buttons->layout(Size{30, 1}, ui::LayoutContext{buttons->themeContextFrom(ui::ThemeContext{})});
+        buttons->setRectangle(Rectangle{0, 0, 40, 1});
+        buttons->layout(Size{40, 1}, ui::LayoutContext{buttons->themeContextFrom(zeroThemeContext())});
 
-        REQUIRE_EQUAL(yes->rectangle(), Rectangle(1, 0, 14, 1));
-        REQUIRE_EQUAL(no->rectangle(), Rectangle(16, 0, 13, 1));
+        REQUIRE_EQUAL(yes->rectangle(), Rectangle(12, 0, 8, 1));
+        REQUIRE_EQUAL(no->rectangle(), Rectangle(20, 0, 7, 1));
     }
 
     void testButtonsWrapToMultipleCenteredRows() {
@@ -49,39 +49,45 @@ public:
         const auto yes = buttons->addAction(action("Yes", U'y'));
         const auto no = buttons->addAction(action("No", U'n'));
 
-        buttons->setRectangle(Rectangle{0, 0, 15, 2});
-        buttons->layout(Size{15, 2}, ui::LayoutContext{buttons->themeContextFrom(ui::ThemeContext{})});
+        buttons->setRectangle(Rectangle{0, 0, 8, 2});
+        buttons->layout(Size{8, 2}, ui::LayoutContext{buttons->themeContextFrom(zeroThemeContext())});
 
-        REQUIRE_EQUAL(yes->rectangle(), Rectangle(0, 0, 14, 1));
-        REQUIRE_EQUAL(no->rectangle(), Rectangle(1, 1, 13, 1));
+        REQUIRE_EQUAL(yes->rectangle(), Rectangle(0, 0, 8, 1));
+        REQUIRE_EQUAL(no->rectangle(), Rectangle(0, 1, 7, 1));
     }
 
     void testButtonsUseThemeSpacing() {
-        auto builder = theme::ThemeBuilder::from(theme::Theme::dark());
-        builder.edit(theme::Selector{theme::Element::Buttons, theme::Part::Spacing}).setMargins(Margins{3, 1});
-        const auto activeTheme = builder.build();
+        const auto activeTheme = buttonLayoutTheme();
         auto buttons = ui::Buttons::create();
         auto context = buttons->themeContextFrom(ui::ThemeContext{activeTheme});
         const auto yes = buttons->addAction(action("Yes", U'y'));
         const auto no = buttons->addAction(action("No", U'n'));
 
-        buttons->setRectangle(Rectangle{0, 0, 20, 3});
-        buttons->layout(Size{20, 3}, ui::LayoutContext{context});
+        buttons->setRectangle(Rectangle{0, 0, 24, 3});
+        buttons->layout(Size{24, 3}, ui::LayoutContext{context});
 
-        REQUIRE_EQUAL(yes->rectangle(), Rectangle(3, 0, 14, 1));
-        REQUIRE_EQUAL(no->rectangle(), Rectangle(3, 2, 13, 1));
+        REQUIRE_EQUAL(yes->rectangle(), Rectangle(4, 0, 16, 1));
+        REQUIRE_EQUAL(no->rectangle(), Rectangle(4, 2, 15, 1));
     }
 
     void testButtonsMinimumHeightIncludesAllWrappedRows() {
         auto buttons = ui::Buttons::create();
         buttons->addAction(action("Yes", U'y'));
         buttons->addAction(action("No", U'n'));
-        auto scope = ui::MeasureScope{};
+        const auto context = buttons->themeContextFrom(zeroThemeContext());
+        auto scope = ui::MeasureScope{
+            [context](const ui::SurfacePtr &surface, const ui::LayoutProposal &proposal) -> ui::LayoutMetrics {
+                const auto childContext = surface->themeContextFrom(context);
+                auto childScope = ui::MeasureScope{{}, childContext};
+                return surface->onMeasure(childScope, proposal);
+            },
+            context};
 
-        const auto metrics = buttons->onMeasure(scope, ui::LayoutProposal::atMost(Size{15, 10}));
+        const auto metrics = buttons->onMeasure(scope, ui::LayoutProposal::atMost(Size{7, 10}));
 
         REQUIRE_EQUAL(metrics.minimum().height(), Coordinate{2});
         REQUIRE_EQUAL(metrics.preferred().height(), Coordinate{2});
+        REQUIRE_EQUAL(metrics.margins(), Margins{});
     }
 
     void testButtonsMoveFocusAndSkipDisabledButtons() {
@@ -143,6 +149,19 @@ public:
     }
 
 private:
+    [[nodiscard]] static auto buttonLayoutTheme() -> theme::ThemeConstPtr {
+        auto builder = theme::ThemeBuilder::zero();
+        builder.edit(theme::Selector{theme::Element::Buttons, theme::Part::Spacing}).setMargins(Margins{3, 1});
+        builder.edit(theme::Selector{theme::Element::Button, theme::Part::Border})
+            .setBlock(theme::BlockRole::LeftBracket, U'▌')
+            .setBlock(theme::BlockRole::RightBracket, U'▐')
+            .setMargins(Margins{1})
+            .setPadding(Margins{2, 0});
+        builder.edit(theme::Selector{theme::Element::Button, theme::Part::Text}).setPadding(Margins{2, 0});
+        builder.edit(theme::Selector{theme::Element::Button, theme::Part::KeyBracket}).setBlocks(U"    /    [ ]    ");
+        return builder.build();
+    }
+
     [[nodiscard]] static auto action(const std::string &name, const char32_t key) -> ui::ButtonActionPtr {
         auto result = ui::ButtonAction::create(name);
         result->setKeys(key);

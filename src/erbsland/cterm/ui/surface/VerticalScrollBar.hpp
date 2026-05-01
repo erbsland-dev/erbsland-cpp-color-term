@@ -19,7 +19,11 @@ public:
 public:
     /// Create a vertical scroll bar.
     /// @return The new vertical scroll bar.
-    [[nodiscard]] static auto create() noexcept -> VerticalScrollBarPtr;
+    [[nodiscard]] static auto create() -> VerticalScrollBarPtr;
+
+private:
+    /// Initialize theme attributes after construction.
+    void initializeUi() override;
 };
 
 }

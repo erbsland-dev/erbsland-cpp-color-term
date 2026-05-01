@@ -36,10 +36,11 @@ void UiSectionsApp::setupUi() {
     page->addSurface(root);
 
     auto header = ui::HeaderLine::create();
-    header->setText(ui::TextLine::Section::Left, String{"Sections Layout", fg::BrightWhite});
-    header->setMargins(ui::TextLine::Section::Left, Margins{1, 0});
-    header->setText(ui::TextLine::Section::Right, String{"interactive demo", fg::BrightYellow});
-    header->setMargins(ui::TextLine::Section::Right, Margins{1, 0});
+    using S = ui::DynamicTextLine::Section;
+    header->setText(S::Left, String{"Sections Layout", fg::BrightWhite});
+    header->setMargins(S::Left, Margins{1, 0});
+    header->setText(S::Right, String{"interactive demo", fg::BrightYellow});
+    header->setMargins(S::Right, Margins{1, 0});
     root->addSurface(header);
 
     _sections = ui::Sections::create();

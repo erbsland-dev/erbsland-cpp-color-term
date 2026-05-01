@@ -41,8 +41,8 @@ Features Demonstrated
 * A centered, growing ``TextBox`` as the main content surface.
 * ``ui::Application::setupUi()`` used as the single place where the page and surface tree are assembled.
 * Shared ``Action`` objects for quit handling and automatic footer keyboard help.
-* ``TextLine::UpdateMode::OnRefresh`` for live clock text.
-* A surface-local scheduler that marks the header dirty once per second.
+* ``DynamicText`` callbacks for live clock text in the middle header section.
+* A surface-local update interval that refreshes the clock once per second.
 
 Related Demos
 =============

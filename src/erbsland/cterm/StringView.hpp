@@ -48,7 +48,7 @@ public:
 public: // operators
     /// Access one character without bounds checking.
     /// @param index The character index.
-    /// @return A copy of the character at `index`.
+    /// @return A copy of the character at `index`, or `Char{}` if `index` is out of bounds.
     [[nodiscard]] auto operator[](std::size_t index) const noexcept -> Char;
 
 public: // accessors
@@ -97,6 +97,26 @@ public: // accessors
     /// @param startIndex The first local index to inspect.
     /// @return The local index of the next match, or `npos`.
     [[nodiscard]] auto indexOf(char32_t character, std::size_t startIndex = 0) const noexcept -> std::size_t;
+    /// Get the index of the next matching character.
+    /// Ignores the character style.
+    /// If startIndex is out of bounds, returns npos.
+    /// If no character is found, returns npos.
+    /// This function matches **any** character in the character set.
+    /// @param characterSet The character-set to search for. Only compares single-code-point characters.
+    /// @param startIndex The start index to search from. Defaults to 0.
+    /// @return The index of the next character or npos if not found.
+    [[nodiscard]] auto indexOf(std::u32string_view characterSet, std::size_t startIndex = 0) const noexcept
+        -> std::size_t;
+    /// Get the index of the next **not** matching character.
+    /// Ignores the character style.
+    /// If startIndex is out of bounds, returns npos.
+    /// If no character is found, returns npos.
+    /// This function matches if **no** character in the character set matches the text.
+    /// @param characterSet The character-set to search for. Only compares single-code-point characters.
+    /// @param startIndex The start index to search from. Defaults to 0.
+    /// @return The index of the next character or npos if not found.
+    [[nodiscard]] auto indexNotOf(std::u32string_view characterSet, std::size_t startIndex = 0) const noexcept
+        -> std::size_t;
     /// Get a sub-view.
     /// If startIndex is out of bounds, returns an empty view.
     /// If length exceeds the view length, returns the remaining characters.
@@ -104,11 +124,18 @@ public: // accessors
     /// @param length The number of characters after the start index.
     /// @return The substring view or an empty view if startIndex is out of bounds.
     [[nodiscard]] auto substr(std::size_t startIndex, std::size_t length = npos) const noexcept -> StringView;
+    /// Get a substring that fits into the given display width.
+    /// If a double-sized character is at the edge, it isn't included in the result.
+    /// Therefore, the resulting string may be shorter than the display width.
+    /// @param displayWidth The maximum width of the substring in display units.
+    /// @param alignment The alignment of the cropped text. Only `Alignment::Left` and `Alignment::Right` are supported.
+    /// @return The cropped substring or an empty string if displayWidth is <=0.
+    [[nodiscard]] auto croppedToDisplayWidth(Coordinate displayWidth, Alignment alignment) const noexcept -> StringView;
     /// Trim the given characters from the beginning and end of the view.
     /// Only single-code-point characters are matched.
-    /// @param characters The characters to remove from both ends.
+    /// @param characters The characters to remove from both ends. If empty, removes space, tab, and newline characters.
     /// @return A trimmed string view.
-    [[nodiscard]] auto trimmed(std::u32string_view characters) const noexcept -> StringView;
+    [[nodiscard]] auto trimmed(std::u32string_view characters = {}) const noexcept -> StringView;
 
 public: // tests
     /// Test if this string view contains control characters.
@@ -148,15 +175,16 @@ public: // tools
     /// A NL at the end of the view does not generate an additional empty line.
     /// @return A sequence of line views.
     [[nodiscard]] auto splitLines() const noexcept -> std::vector<StringView>;
+    /// Create a new string with the given style applied as a base.
+    /// @param style The style used as base for the resulting string.
+    /// @return A new string with the base style applied.
+    [[nodiscard]] auto withBase(CharStyle style) const noexcept -> String;
 
 private:
     friend class String;
 
     StringView(std::shared_ptr<impl::StringData> data, IndexRange range) noexcept;
 
-    [[nodiscard]] auto storageIndex(std::size_t localIndex) const noexcept -> std::size_t {
-        return _range.startIndex() + localIndex;
-    }
     [[nodiscard]] auto characterAt(std::size_t localIndex) const noexcept -> const Char &;
 
 private:

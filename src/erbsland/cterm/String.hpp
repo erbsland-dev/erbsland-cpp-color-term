@@ -96,13 +96,17 @@ public:
     auto operator=(String &&) -> String & = default;
 
 public: // operators
+    /// Compare two strings.
+    /// Two strings are only equal, if all characters and styles are equal.
+    auto operator==(const String &other) const noexcept -> bool;
+    auto operator!=(const String &other) const noexcept -> bool { return !operator==(other); }
     /// Access one character without bounds checking.
     /// @param index The character index.
-    /// @return A copy of the character at `index`.
+    /// @return A copy of the character at `index`, or `Char{}` if `index` is out of bounds.
     [[nodiscard]] auto operator[](std::size_t index) const noexcept -> Char;
     /// Access one character without bounds checking.
     /// @param index The character index.
-    /// @return A mutable reference to the character at `index`.
+    /// @return A mutable reference to the character at `index`, or a discarded `Char{}` if `index` is out of bounds.
     [[nodiscard]] auto operator[](std::size_t index) noexcept -> Char &;
     /// Append one character to this string.
     /// @param character The character to append.
@@ -187,13 +191,34 @@ public: // accessors
     /// @param startIndex The start index to search from. Defaults to 0.
     /// @return The index of the next character or npos if not found.
     [[nodiscard]] auto indexOf(const Char &character, std::size_t startIndex = 0) const noexcept -> std::size_t;
-    /// Get the index of the next character matching any color.
+    /// Get the index of the next matching character.
+    /// Ignores the character style.
     /// If startIndex is out of bounds, returns npos.
     /// If no character is found, returns npos.
-    /// @param character The character to search for. Only compares the character (1 code-point).
+    /// @param character The character to search for. Only compares single-code-point characters.
     /// @param startIndex The start index to search from. Defaults to 0.
     /// @return The index of the next character or npos if not found.
     [[nodiscard]] auto indexOf(char32_t character, std::size_t startIndex = 0) const noexcept -> std::size_t;
+    /// Get the index of the next matching character.
+    /// Ignores the character style.
+    /// If startIndex is out of bounds, returns npos.
+    /// If no character is found, returns npos.
+    /// This function matches **any** character in the character set.
+    /// @param characterSet The character-set to search for. Only compares single-code-point characters.
+    /// @param startIndex The start index to search from. Defaults to 0.
+    /// @return The index of the next character or npos if not found.
+    [[nodiscard]] auto indexOf(std::u32string_view characterSet, std::size_t startIndex = 0) const noexcept
+        -> std::size_t;
+    /// Get the index of the next **not** matching character.
+    /// Ignores the character style.
+    /// If startIndex is out of bounds, returns npos.
+    /// If no character is found, returns npos.
+    /// This function matches if **no** character in the character set matches the text.
+    /// @param characterSet The character-set to search for. Only compares single-code-point characters.
+    /// @param startIndex The start index to search from. Defaults to 0.
+    /// @return The index of the next character or npos if not found.
+    [[nodiscard]] auto indexNotOf(std::u32string_view characterSet, std::size_t startIndex = 0) const noexcept
+        -> std::size_t;
     /// Get a substring.
     /// If startIndex is out of bounds, returns an empty string.
     /// If length exceeds the string length, returns the remaining characters.
@@ -201,15 +226,32 @@ public: // accessors
     /// @param length The number of characters after the start index.
     /// @return The substring or an empty string if startIndex is out of bounds.
     [[nodiscard]] auto substr(std::size_t startIndex, std::size_t length = npos) const noexcept -> String;
-    /// Trim the given characters from the beginning and end of the string.
+    /// Get a substring that fits into the given display width.
+    /// If a double-sized character is at the edge, it isn't included in the result.
+    /// Therefore, the resulting string may be shorter than the display width.
+    /// @param displayWidth The maximum width of the substring in display units.
+    /// @param alignment The alignment of the cropped text. Only `Alignment::Left` and `Alignment::Right` are supported.
+    /// @return The cropped substring or an empty string if displayWidth is <=0.
+    [[nodiscard]] auto croppedToDisplayWidth(Coordinate displayWidth, Alignment alignment) const noexcept -> String;
+    /// Return a string with the given characters trimmed from the beginning and end.
     /// Only single-code-point characters are matched.
-    /// @param characters The characters to remove from both ends.
+    /// @param characters The characters to remove from both ends. If empty, removes space, tab, and newline characters.
     /// @return A copy without matching leading and trailing characters.
-    [[nodiscard]] auto trimmed(std::u32string_view characters) const noexcept -> String;
+    [[nodiscard]] auto trimmed(std::u32string_view characters = {}) const noexcept -> String;
+    /// Return a normalized string.
+    /// Trim the given characters from start/end, and eplace any number of the given characters inside the
+    /// string with a single separator.
+    /// Only single-code-point characters are matched.
+    /// The style of replaced characters is determined by using the first matches character style
+    /// as a base for `separator`.
+    /// @param characters The characters to match. If empty: space, tab, and newline characters.
+    /// @param separator The separator to use.
+    [[nodiscard]] auto normalized(std::u32string_view characters = {}, Char separator = Char::space()) const noexcept
+        -> String;
 
 public: // tests
     /// Test if this string contains control characters.
-    /// As most control codes are filtered on construction, this mainly tests for NL and TAB.
+    /// Most control codes are filtered on construction, therefore, this test searched for NL and TAB.
     [[nodiscard]] auto containsControlCharacters() const noexcept -> bool;
 
 public: // modifiers
@@ -218,6 +260,35 @@ public: // modifiers
     void reserve(std::size_t size) noexcept;
     /// Remove all characters from this string.
     void clear() noexcept;
+    /// Trim the given characters from the beginning and end of the string.
+    /// Only single-code-point characters are matched.
+    /// @param characters The characters to remove from both ends. If empty, removes space, tab, and newline characters.
+    void trim(std::u32string_view characters = {}) noexcept;
+    /// Normalize this string.
+    /// Trim the given characters from start/end, and eplace any number of the given characters inside the
+    /// string with a single separator.
+    /// Only single-code-point characters are matched.
+    /// The style of replaced characters is determined by using the first matches character style
+    /// as a base for `separator`.
+    /// @param characters The characters to match. If empty: space, tab, and newline characters.
+    /// @param separator The separator to use.
+    void normalize(std::u32string_view characters = {}, Char separator = Char::space()) noexcept;
+    /// Replace characters in this string.
+    /// If the range is out of bounds, it is clamped to the string's length.
+    /// If the range is outside the string or empty, no replacement is performed.
+    /// If the operation does not change the string, no replacement is performed.
+    /// @param range The range of characters to replace.
+    /// @param replacement The replacement for this range.
+    void replace(IndexRange range, Char replacement) noexcept;
+    /// @overload
+    void replace(IndexRange range, const StringView &replacement) noexcept;
+    /// Remove a part of the string.
+    /// If the range is out of bounds, it is clamped to the string's length.
+    /// If the range is outside the string or empty, no replacement is performed.
+    void remove(IndexRange range) noexcept;
+    /// Set a character in this string.
+    /// This call is more efficient than using the index operator.
+    void set(std::size_t index, Char character) noexcept;
     /// Append another terminal string with a base style.
     /// If `pos` is out of range, appends the string at the end.
     /// @param pos The position to insert the string at.
@@ -233,7 +304,7 @@ public: // modifiers
     /// Append another terminal string with a base style.
     /// @param other The source text view.
     /// @param style The style used as base for inherited components in the appended range.
-    void appendWithBaseStyle(const StringView &other, CharStyle style) noexcept;
+    void appendStyled(const StringView &other, CharStyle style) noexcept;
     /// Append a repeated character.
     /// @param count The repetition count. Limited to 10'000'000.
     /// @param character The character to repeat.
@@ -243,20 +314,6 @@ public: // modifiers
     /// @param character The character to repeat.
     /// @param style The style for every appended character.
     void append(std::size_t count, char32_t character, CharStyle style) noexcept;
-    /// Append elements to this string.
-    /// Append a range of characters from another terminal string.
-    /// The original character styles are preserved.
-    /// @param other The source text view.
-    /// @param startIndex The first character to append.
-    /// @param length The number of characters to append, or `npos` for the remainder of `other`.
-    void appendRange(const StringView &other, std::size_t startIndex, std::size_t length = npos) noexcept;
-    /// Append a range of characters from another terminal string with one resolved base style.
-    /// @param other The source text view.
-    /// @param startIndex The first character to append.
-    /// @param length The number of characters to append, or `npos` for the remainder of `other`.
-    /// @param style The style used as base for inherited components in the appended range.
-    void appendRangeWithBaseStyle(
-        const StringView &other, std::size_t startIndex, std::size_t length, CharStyle style) noexcept;
     /// Append elements to this string.
     /// This works similar to `Terminal::print()`.
     /// If you add a color, this color is "active" for all following characters *in the same call*.
@@ -306,6 +363,10 @@ public: // tools
     /// A NL at the end of the string does not generate an additional empty line.
     /// @return A sequence of lines.
     [[nodiscard]] auto splitLines() const noexcept -> std::vector<String>;
+    /// Create a new string with the given style applied as a base.
+    /// @param style The style used as base for the resulting string.
+    /// @return A new string with the base style applied.
+    [[nodiscard]] auto withBase(CharStyle style) const noexcept -> String;
 
 public: // conversion
     /// Create a new string from a list of lines.
@@ -330,10 +391,15 @@ public: // conversion
         -> String;
 
 public: // legacy
-    [[deprecated("Please use trimmed()"), nodiscard]] auto trim(std::u32string_view characters) const noexcept
-        -> String {
-        return trimmed(characters);
+    [[deprecated("Please use appendStyled()")]]
+    void appendWithBaseStyle(const StringView &other, CharStyle style) noexcept {
+        appendStyled(other, style);
     }
+    [[deprecated("Please use append(other.substr(startIndex, length)). Its COW and fast.")]]
+    void appendRange(const StringView &other, std::size_t startIndex, std::size_t length = npos) noexcept;
+    [[deprecated("Please use appendStyles(other.substr(startIndex, length)). Its COW and fast.")]]
+    void appendRangeWithBaseStyle(
+        const StringView &other, std::size_t startIndex, std::size_t length, CharStyle style) noexcept;
 
 private:
     friend class StringView;
@@ -367,6 +433,7 @@ private:
     void detach();
     void syncRangeWithStorage() noexcept;
     [[nodiscard]] auto characterAt(std::size_t index) const noexcept -> const Char &;
+    [[nodiscard]] static auto ignoredMutableCharacter() noexcept -> Char &;
 
 private:
     std::shared_ptr<impl::StringData> _data; ///< Shared backing storage.

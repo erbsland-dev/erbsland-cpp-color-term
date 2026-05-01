@@ -37,9 +37,9 @@ public:
     [[nodiscard]] auto block(BlockRole role, std::size_t animationCycle = 0) const noexcept -> Char;
     /// Resolve a tile-9 style for an animation cycle.
     [[nodiscard]] auto tile9Style(std::size_t animationCycle = 0) const noexcept -> Tile9Style;
-    /// Access the effective margins.
+    /// Access the effective parent-owned margins outside the part.
     [[nodiscard]] auto margins() const noexcept -> Margins { return _margins; }
-    /// Access the effective padding.
+    /// Access the effective part-owned padding inside the part.
     [[nodiscard]] auto padding() const noexcept -> Margins { return _padding; }
 
 private:
@@ -47,8 +47,8 @@ private:
     ColorSequence _colorSequence; ///< The effective color sequence.
     CharAttributes _attributes;   ///< The effective attributes.
     Properties::Blocks _blocks{}; ///< The effective block code points.
-    Margins _margins;             ///< The effective margins.
-    Margins _padding;             ///< The effective padding.
+    Margins _margins;             ///< The effective parent-owned margins.
+    Margins _padding;             ///< The effective part-owned padding.
 };
 
 }

@@ -57,7 +57,7 @@ public: // implement Surface
 
 protected:
     /// Attach the owned child surfaces.
-    void initializeUi();
+    void initializeUi() override;
     /// Render the HTML document if the source or available width changed.
     /// @param contentWidth The available content width.
     void renderDocumentIfRequired(Coordinate contentWidth);

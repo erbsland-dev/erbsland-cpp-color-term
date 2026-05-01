@@ -2,24 +2,28 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "TextBox.hpp"
 
+#include "../../theme/LayoutHelper.hpp"
+#include "../../theme/ThemePainter.hpp"
+
+#include <algorithm>
 #include <utility>
 
 namespace erbsland::cterm::ui::surface {
 
 TextBox::TextBox(String text, const Alignment alignment, ProtectedTag) :
-    Surface{
-        theme::Element::TextBox,
-        LayoutMetrics{Size{1, 1}, Size::maximum(), Size{1, 1}, SizePolicy{DimensionPolicy::Preferred}}},
+    Surface{LayoutMetrics{Size{1, 1}, Size::maximum(), Size{1, 1}, SizePolicy{DimensionPolicy::Preferred}}},
     _text(std::move(text)),
-    _textOptions(alignment) {
+    _alignment(alignment) {
     updatePreferredSize();
 }
 
-auto TextBox::create(String text, Alignment alignment) noexcept -> TextBoxPtr {
-    return std::make_shared<TextBox>(std::move(text), alignment, ProtectedTag{});
+auto TextBox::create(String text, Alignment alignment) -> TextBoxPtr {
+    auto result = std::make_shared<TextBox>(std::move(text), alignment, ProtectedTag{});
+    result->initializeUi();
+    return result;
 }
 
-auto TextBox::create(std::string_view text, Alignment alignment) noexcept -> TextBoxPtr {
+auto TextBox::create(const std::string_view text, const Alignment alignment) -> TextBoxPtr {
     return create(String{text, EncodingErrors::Replace}, alignment);
 }
 
@@ -33,12 +37,12 @@ void TextBox::setText(String text) {
     flags().setPaintOutdated();
 }
 
-auto TextBox::textOptions() const noexcept -> const TextOptions & {
-    return _textOptions;
+auto TextBox::alignment() const noexcept -> Alignment {
+    return _alignment;
 }
 
-void TextBox::setTextOptions(const TextOptions &textOptions) {
-    _textOptions = textOptions;
+void TextBox::setAlignment(const Alignment alignment) {
+    _alignment = alignment;
     updatePreferredSize();
     flags().setPaintOutdated();
 }
@@ -61,51 +65,55 @@ void TextBox::setPreferredLineWidth(std::optional<Coordinate> width) {
 
 auto TextBox::onMeasure([[maybe_unused]] MeasureScope &scope, const LayoutProposal &proposal) noexcept
     -> LayoutMetrics {
+    const auto textTheme = scope.theme().forPart(theme::Part::Text);
+    const auto textPadding = textTheme.padding();
+    auto textSize = preferredTextSize();
+    if (proposal.width().hasBound()) {
+        const auto proposedWidth = std::max(proposal.width().value(), Coordinate{1});
+        const auto availableTextWidth = std::max(proposedWidth - textPadding.horizontalExtent(), Coordinate{1});
+        if (proposal.width().isExact() || !_preferredLineWidth.has_value()) {
+            textSize = textSizeForWidth(availableTextWidth);
+        } else {
+            textSize = textSizeForWidth(std::min(textSize.width(), availableTextWidth));
+        }
+    }
+
     auto result = layoutMetrics();
-    result.setPreferred(measuredTextSize(proposal, scope.themeContext()));
+    result.setPreferred(textSize + textPadding.extent());
+    result.setMargins(textTheme.margins());
     return result;
 }
 
 void TextBox::onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept {
     const auto textTheme = context.theme().forPart(theme::Part::Text);
-    buffer.fill(Char::space().withStyleReplaced(textTheme.style()));
-    buffer.drawText(_text, textTheme.contentRect(context.surfaceRect()), _textOptions);
+    const auto contentRect = context.surfaceRect().insetBy(textTheme.padding());
+    theme::ThemePainter{buffer, context.theme()}.fillBackground(context.surfaceRect());
+    buffer.drawText(_text, contentRect, _alignment, textTheme.style());
+}
+
+void TextBox::initializeUi() {
+    Surface::initializeUi();
+    themeAttributes().setElement(theme::Element::TextBox);
 }
 
 void TextBox::updatePreferredSize() {
-    const auto preferredSize = preferredContentSize();
+    const auto preferredSize = preferredTextSize();
     if (layoutMetrics().preferred() != preferredSize) {
         editLayoutMetrics().setPreferredSize(preferredSize);
     }
 }
 
-auto TextBox::measuredTextSize(const LayoutProposal &proposal, const ThemeContext &themeContext) const noexcept
-    -> Size {
-    const auto textMargins = themeContext.theme().forPart(theme::Part::Text).margins();
-    const auto marginExtent = textMargins.extent();
-    if (proposal.width().isUnspecified()) {
-        return preferredContentSize() + marginExtent;
-    }
-    const auto proposedWidth = std::max(proposal.width().value(), Coordinate{1});
-    const auto contentWidthLimit = std::max(proposedWidth - marginExtent.width(), Coordinate{1});
-    auto contentWidth = contentWidthLimit;
-    if (proposal.width().isAtMost() && _preferredLineWidth.has_value()) {
-        contentWidth = std::min(preferredContentSize().width(), contentWidthLimit);
-    }
-    return contentSizeForWidth(contentWidth) + marginExtent;
-}
-
-auto TextBox::preferredContentSize() const noexcept -> Size {
+auto TextBox::preferredTextSize() const noexcept -> Size {
     const auto naturalSize = _text.naturalTextSize();
-    if (!_preferredLineWidth.has_value()) {
+    if (!_preferredLineWidth.has_value() || naturalSize.width() <= *_preferredLineWidth) {
         return naturalSize;
     }
-    return contentSizeForWidth(std::min(naturalSize.width(), *_preferredLineWidth));
+    return textSizeForWidth(*_preferredLineWidth);
 }
 
-auto TextBox::contentSizeForWidth(const Coordinate width) const noexcept -> Size {
-    const auto contentWidth = std::max(width, Coordinate{1});
-    return Size{contentWidth, WritableBuffer::textHeightForWidth(_text, contentWidth, _textOptions)};
+auto TextBox::textSizeForWidth(const Coordinate width) const noexcept -> Size {
+    const auto textWidth = std::max(width, Coordinate{1});
+    return Size{textWidth, WritableBuffer::textHeightForWidth(_text, textWidth, TextOptions{_alignment})};
 }
 
 }

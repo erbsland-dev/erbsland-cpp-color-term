@@ -23,14 +23,14 @@ Terminal::Terminal(const TerminalFlags flags) : Terminal(Size{80, 25}, flags) {
 }
 
 Terminal::Terminal(const Size size, const TerminalFlags flags) :
-    _flags{flags}, _size{size.componentMin(cMaximumSize).componentMax(cMinimumSize)} {
+    _flags{flags}, _size{size.limitedWith(cMaximumSize).expandedWith(cMinimumSize)} {
     _backend = Backend::createPlatformDefault(flags);
     _input.setBackend(_backend);
     _lineBuffer.setBackend(_backend);
 }
 
 Terminal::Terminal(BackendPtr backend, const Size size) :
-    _backend{std::move(backend)}, _size{size.componentMin(cMaximumSize).componentMax(cMinimumSize)} {
+    _backend{std::move(backend)}, _size{size.limitedWith(cMaximumSize).expandedWith(cMinimumSize)} {
     if (_backend == nullptr) {
         _backend = Backend::createPlatformDefault(TerminalFlags{});
     }
@@ -40,7 +40,7 @@ Terminal::Terminal(BackendPtr backend, const Size size) :
 
 void Terminal::setSize(const Size size) noexcept {
     if (_size != size) {
-        _size = size.componentMin(cMaximumSize).componentMax(cMinimumSize);
+        _size = size.limitedWith(cMaximumSize).expandedWith(cMinimumSize);
         _afterResize = true;
     }
 }

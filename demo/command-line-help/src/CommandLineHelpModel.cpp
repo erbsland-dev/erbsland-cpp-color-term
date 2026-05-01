@@ -50,7 +50,7 @@ auto DemoConfig::effectiveDescriptionColumn(const int widestSignatureWidth) cons
     if (descriptionColumn.has_value()) {
         return *descriptionColumn;
     }
-    return std::min(std::max(widestSignatureWidth + 2, 30), maximumDescriptionColumn);
+    return std::clamp(widestSignatureWidth + 2, 30, maximumDescriptionColumn);
 }
 
 auto OptionSpec::requiresValue() const noexcept -> bool {

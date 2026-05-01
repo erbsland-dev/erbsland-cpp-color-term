@@ -44,7 +44,7 @@ public: // implement Surface
     void onLayout(LayoutScope &scope) noexcept override;
 
 protected: // implement AbstractScrollArea
-    [[nodiscard]] auto isManagedScrollAreaChild(const SurfacePtr &surface) const noexcept -> bool override;
+    [[nodiscard]] auto isManagedChild(const SurfacePtr &surface) const noexcept -> bool override;
     [[nodiscard]] auto contentSizeForViewport(Size viewportSize) const noexcept -> Size override;
     [[nodiscard]] auto measureContentSizeForViewport(Size viewportSize, LayoutScope &scope) noexcept -> Size override;
     void onPaintArea(
@@ -54,9 +54,9 @@ protected: // implement AbstractScrollArea
         const PaintContext &context) noexcept override;
     void onScrollOffsetChanged(Position scrollOffset) noexcept override;
 
-private:
+private: // implement Surface
     /// Add the internal child surfaces.
-    void initializeUi();
+    void initializeUi() override;
 
 private:
     ViewportPtr _viewport; ///< The viewport child surface.

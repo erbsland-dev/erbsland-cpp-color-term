@@ -39,15 +39,47 @@ The stack arranges children in source order on one axis:
 * a horizontal stack places children from left to right
 * a vertical stack places children from top to bottom
 
-There is no wrapping, no overlaying, and no spacing object yet.
-The whole algorithm is therefore about one question:
+There is no wrapping and no overlaying. The stack does, however, own
+the spacing between children by collapsing their adjacent layout
+margins. The whole algorithm is therefore about two questions:
 
-How much size should each child receive on the main axis?
+How much size should each child receive on the main axis, and how much
+collapsed spacing belongs between neighboring children?
 
 The cross axis is simpler:
 
 * each child resolves itself independently against the full available cross size
 * the stack does not distribute cross-axis free space between siblings
+* cross-axis child margins are propagated as the stack's own outer margins
+
+Layout Margins
+==============
+
+``LayoutMetrics`` sizes exclude margins. A child reports margins as
+parent-owned outer spacing, and the stack decides which parts it can
+resolve.
+
+On the main axis, the stack consumes only margins between adjacent
+children. The spacing between two children is:
+
+.. code-block:: text
+
+    max(previous.trailing_margin, next.leading_margin)
+
+For a vertical stack this means ``max(previous.bottom, next.top)``. For a
+horizontal stack it means ``max(previous.right, next.left)``.
+
+The first leading margin and last trailing margin are not consumed by
+the stack. They are reported as the stack's own margins, so an outer
+layout can collapse them with neighboring surfaces. Cross-axis margins
+are also propagated using the largest child margin on each side. This is
+important for nested layouts. In a horizontal stack of vertical stacks,
+only the horizontal parent knows which column margins touch each other,
+so the vertical stacks must report their side margins instead of
+consuming them internally.
+
+Hidden children are ignored completely. They contribute neither size nor
+margins.
 
 Main Axis and Cross Axis
 ========================
@@ -88,7 +120,7 @@ The full pipeline is:
 
 #. Convert each child surface into one ``StackLayoutItem``.
 #. Resolve an initial main-axis size and a final cross-axis size for every child.
-#. Sum the initial main-axis sizes.
+#. Sum the initial main-axis sizes plus internal collapsed margins.
 #. If space is left over, distribute it to ``Grow`` items.
 #. If there is overflow, shrink items in a fixed priority order.
 #. Apply the final rectangles in child order.
@@ -97,8 +129,9 @@ In pseudo code:
 
 .. code-block:: text
 
-    items = build items from children
+    items = build items from visible children
     resolve initial sizes
+    add collapsed margins between adjacent items
 
     if total_main_size < available_main_size:
         distribute extra space

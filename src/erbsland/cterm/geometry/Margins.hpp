@@ -11,7 +11,8 @@
 namespace erbsland::cterm {
 
 /// Represents margins (top, right, bottom, left) around a rectangle.
-/// - Immutable-like value type for representing padding or insets.
+/// - Immutable-like value type for representing margins, padding, or insets.
+/// - In UI themes, margins are parent-owned outside space, while padding is part-owned inside space.
 /// - Provides convenience constructors for uniform or symmetric margins.
 class Margins final {
 public:
@@ -100,6 +101,42 @@ public: // accessors
             break;
         }
     }
+    /// Get the leading side for an orientation.
+    [[nodiscard]] static constexpr auto leadingSide(const Orientation orientation) noexcept -> Side {
+        return orientation == Orientation::Horizontal ? Side::Left : Side::Top;
+    }
+    /// Get the trailing side for an orientation.
+    [[nodiscard]] static constexpr auto trailingSide(const Orientation orientation) noexcept -> Side {
+        return orientation == Orientation::Horizontal ? Side::Right : Side::Bottom;
+    }
+    /// Get the leading cross-axis side for an orientation.
+    [[nodiscard]] static constexpr auto crossLeadingSide(const Orientation orientation) noexcept -> Side {
+        return leadingSide(orientation.crossed());
+    }
+    /// Get the trailing cross-axis side for an orientation.
+    [[nodiscard]] static constexpr auto crossTrailingSide(const Orientation orientation) noexcept -> Side {
+        return trailingSide(orientation.crossed());
+    }
+    /// Get the leading margin for an orientation.
+    [[nodiscard]] constexpr auto leading(const Orientation orientation) const noexcept -> Coordinate {
+        return at(leadingSide(orientation));
+    }
+    /// Get the trailing margin for an orientation.
+    [[nodiscard]] constexpr auto trailing(const Orientation orientation) const noexcept -> Coordinate {
+        return at(trailingSide(orientation));
+    }
+    /// Get the leading cross-axis margin for an orientation.
+    [[nodiscard]] constexpr auto crossLeading(const Orientation orientation) const noexcept -> Coordinate {
+        return at(crossLeadingSide(orientation));
+    }
+    /// Get the trailing cross-axis margin for an orientation.
+    [[nodiscard]] constexpr auto crossTrailing(const Orientation orientation) const noexcept -> Coordinate {
+        return at(crossTrailingSide(orientation));
+    }
+    /// Get a new object with only the horizontal margins preserved.
+    [[nodiscard]] constexpr auto horizontal() const noexcept -> Margins { return {0, _right, 0, _left}; }
+    /// Get a new object with only the vertical margins preserved.
+    [[nodiscard]] constexpr auto vertical() const noexcept -> Margins { return {_top, 0, _bottom, 0}; }
     /// Get the positive horizontal extent consumed by the margins.
     /// @return `left() + right()` with negative sides treated as zero.
     [[nodiscard]] constexpr auto horizontalExtent() const noexcept -> Coordinate {
@@ -136,43 +173,149 @@ public: // accessors
     [[nodiscard]] constexpr auto spacing(const Orientation orientation) const noexcept -> Coordinate {
         return orientation == Orientation::Horizontal ? horizontalSpacing() : verticalSpacing();
     }
-    /// Component-wise maximum with another margin set.
-    /// @param other The other margins.
-    /// @return Margins containing the max of each side.
+    /// Get the horizontal delta caused by positive or negative margins.
+    /// Saturation addition limits the value to the `Coordinate` range.
+    [[nodiscard]] auto horizontalDelta() const noexcept -> Coordinate { return impl::saturatingAdd(_left, _right); }
+    /// Get the vertical delta caused by positive or negative margins.
+    /// Saturation addition limits the value to the `Coordinate` range.
+    [[nodiscard]] auto verticalDelta() const noexcept -> Coordinate { return impl::saturatingAdd(_top, _bottom); }
+    /// Get the delta for the given axis.
+    [[nodiscard]] auto delta(const Orientation orientation) const noexcept {
+        return orientation == Orientation::Horizontal ? horizontalDelta() : verticalDelta();
+    }
+    /// Expand all sides so they are at least the matching sides in another margin set.
+    /// @param other The minimum margins to cover.
+    /// @return This margin set.
+    constexpr auto expandTo(const Margins other) noexcept -> Margins & {
+        _top = std::max(_top, other._top);
+        _right = std::max(_right, other._right);
+        _bottom = std::max(_bottom, other._bottom);
+        _left = std::max(_left, other._left);
+        return *this;
+    }
+    /// Expand the margins along one axis so they are at least the matching sides in another margin set.
+    /// @param other The minimum margins to cover.
+    /// @param orientation The axis to modify.
+    /// @return This margin set.
+    constexpr auto expandTo(const Margins other, const Orientation orientation) noexcept -> Margins & {
+        expandTo(other, leadingSide(orientation));
+        expandTo(other, trailingSide(orientation));
+        return *this;
+    }
+    /// Expand one side so it is at least the matching side in another margin set.
+    /// @param other The minimum margins to cover.
+    /// @param side The side to modify.
+    /// @return This margin set.
+    constexpr auto expandTo(const Margins other, const Side side) noexcept -> Margins & {
+        set(side, std::max(at(side), other.at(side)));
+        return *this;
+    }
+    /// Limit all sides to zero or positive values.
+    /// @return This margin set.
+    constexpr auto expandPositive() -> Margins & {
+        expandTo(Margins{});
+        return *this;
+    }
+    /// Limit all sides so they are at most the matching sides in another margin set.
+    /// @param other The maximum margins to respect.
+    /// @return This margin set.
+    constexpr auto limitTo(const Margins other) noexcept -> Margins & {
+        _top = std::min(_top, other._top);
+        _right = std::min(_right, other._right);
+        _bottom = std::min(_bottom, other._bottom);
+        _left = std::min(_left, other._left);
+        return *this;
+    }
+    /// Limit the margins along one axis so they are at most the matching sides in another margin set.
+    /// @param other The maximum margins to respect.
+    /// @param orientation The axis to modify.
+    /// @return This margin set.
+    constexpr auto limitTo(const Margins other, const Orientation orientation) noexcept -> Margins & {
+        limitTo(other, leadingSide(orientation));
+        limitTo(other, trailingSide(orientation));
+        return *this;
+    }
+    /// Limit one side so it is at most the matching side in another margin set.
+    /// @param other The maximum margins to respect.
+    /// @param side The side to modify.
+    /// @return This margin set.
+    constexpr auto limitTo(const Margins other, const Side side) noexcept -> Margins & {
+        set(side, std::min(at(side), other.at(side)));
+        return *this;
+    }
+    /// Create a copy expanded so all sides are at least the matching sides in another margin set.
+    /// @param other The minimum margins to cover.
+    /// @return The expanded margins.
+    [[nodiscard]] constexpr auto expandedWith(const Margins other) const noexcept -> Margins {
+        auto result = *this;
+        result.expandTo(other);
+        return result;
+    }
+    /// Create a copy expanded on one axis so both sides are at least the matching sides in another margin set.
+    /// @param other The minimum margins to cover.
+    /// @param orientation The axis to modify.
+    /// @return The expanded margins.
+    [[nodiscard]] constexpr auto expandedWith(const Margins other, const Orientation orientation) const noexcept
+        -> Margins {
+        auto result = *this;
+        result.expandTo(other, orientation);
+        return result;
+    }
+    /// Create a copy expanded on one side so it is at least the matching side in another margin set.
+    /// @param other The minimum margins to cover.
+    /// @param side The side to modify.
+    /// @return The expanded margins.
+    [[nodiscard]] constexpr auto expandedWith(const Margins other, const Side side) const noexcept -> Margins {
+        auto result = *this;
+        result.expandTo(other, side);
+        return result;
+    }
+    /// Create a copy expanding with all sides to zero or positive values.
+    [[nodiscard]] constexpr auto expandedPositive() const noexcept -> Margins {
+        auto result = *this;
+        result.expandPositive();
+        return result;
+    }
+    /// Create a copy limited so all sides are at most the matching sides in another margin set.
+    /// @param other The maximum margins to respect.
+    /// @return The limited margins.
+    [[nodiscard]] constexpr auto limitedWith(const Margins other) const noexcept -> Margins {
+        auto result = *this;
+        result.limitTo(other);
+        return result;
+    }
+    /// Create a copy limited on one axis so both sides are at most the matching sides in another margin set.
+    /// @param other The maximum margins to respect.
+    /// @param orientation The axis to modify.
+    /// @return The limited margins.
+    [[nodiscard]] constexpr auto limitedWith(const Margins other, const Orientation orientation) const noexcept
+        -> Margins {
+        auto result = *this;
+        result.limitTo(other, orientation);
+        return result;
+    }
+    /// Create a copy limited on one side so it is at most the matching side in another margin set.
+    /// @param other The maximum margins to respect.
+    /// @param side The side to modify.
+    /// @return The limited margins.
+    [[nodiscard]] constexpr auto limitedWith(const Margins other, const Side side) const noexcept -> Margins {
+        auto result = *this;
+        result.limitTo(other, side);
+        return result;
+    }
+
+public: // compatibility/deprecated
     [[nodiscard]] constexpr auto componentMax(const Margins other) const noexcept -> Margins {
-        return {
-            std::max(_top, other._top),
-            std::max(_right, other._right),
-            std::max(_bottom, other._bottom),
-            std::max(_left, other._left)};
+        return expandedWith(other);
     }
-    /// Component-wise maximum with another margin set, limited to one side.
-    /// @param other The other margins.
-    /// @param side The side to compare.
-    /// @return Margins with only the selected side replaced by the maximum value.
     [[nodiscard]] constexpr auto componentMax(const Margins other, const Side side) const noexcept -> Margins {
-        auto result = *this;
-        result.set(side, std::max(at(side), other.at(side)));
-        return result;
+        return expandedWith(other, side);
     }
-    /// Component-wise minimum with another margin set.
-    /// @param other The other margins.
-    /// @return Margins containing the min of each side.
     [[nodiscard]] constexpr auto componentMin(const Margins other) const noexcept -> Margins {
-        return {
-            std::min(_top, other._top),
-            std::min(_right, other._right),
-            std::min(_bottom, other._bottom),
-            std::min(_left, other._left)};
+        return limitedWith(other);
     }
-    /// Component-wise minimum with another margin set, limited to one side.
-    /// @param other The other margins.
-    /// @param side The side to compare.
-    /// @return Margins with only the selected side replaced by the minimum value.
     [[nodiscard]] constexpr auto componentMin(const Margins other, const Side side) const noexcept -> Margins {
-        auto result = *this;
-        result.set(side, std::min(at(side), other.at(side)));
-        return result;
+        return limitedWith(other, side);
     }
 
 private:

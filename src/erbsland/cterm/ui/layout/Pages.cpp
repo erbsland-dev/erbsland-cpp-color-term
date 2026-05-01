@@ -10,11 +10,16 @@
 namespace erbsland::cterm::ui::layout {
 
 Pages::Pages(ProtectedTag) noexcept {
-    themeAttributes().setElement(theme::Element::Layout);
 }
 
 auto Pages::create() -> PagesPtr {
-    return std::make_shared<Pages>(ProtectedTag{});
+    auto result = std::make_shared<Pages>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void Pages::initializeUi() {
+    Layout::initializeUi();
 }
 
 void Pages::nextPage() {
@@ -134,10 +139,13 @@ auto Pages::clampedCurrentPage(const std::vector<SurfacePtr> &pages) const noexc
 
 void Pages::placeCentered(const SurfacePtr &surface, const LayoutMetrics &metrics, LayoutScope &scope) noexcept {
     const auto availableSize = scope.size();
-    auto childSize = metrics.resolvedSize(LayoutProposal::atMost(availableSize)).componentMin(availableSize);
-    childSize = childSize.componentMax(Size{});
-    const auto offset = availableSize.alignmentOffset(childSize, Alignment::Center);
-    scope.place(surface, Rectangle{offset, childSize});
+    const auto margins = metrics.margins();
+    const auto contentAvailableSize = availableSize - margins.extent();
+    const auto childSize =
+        metrics.resolvedSize(LayoutProposal::atMost(contentAvailableSize)).limitedWith(contentAvailableSize);
+    const auto outerSize = (childSize + margins.extent()).limitedWith(availableSize);
+    const auto offset = availableSize.alignmentOffset(outerSize, Alignment::Center);
+    scope.place(surface, Rectangle{offset + Position{margins.left(), margins.top()}, childSize});
 }
 
 }

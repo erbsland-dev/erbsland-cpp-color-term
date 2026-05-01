@@ -15,6 +15,14 @@
 
 class TestHelper : public el::UnitTest {
 public:
+    [[nodiscard]] static auto zeroThemeContext() noexcept -> ui::ThemeContext {
+        return ui::ThemeContext{theme::Theme::zero()};
+    }
+
+    [[nodiscard]] static auto zeroLayoutContext() noexcept -> ui::LayoutContext {
+        return ui::LayoutContext{zeroThemeContext()};
+    }
+
     [[nodiscard]] static auto bytes(const std::initializer_list<uint8_t> values) -> std::string {
         auto result = std::string{};
         result.reserve(values.size());

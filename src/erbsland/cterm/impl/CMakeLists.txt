@@ -5,11 +5,11 @@ add_subdirectory(paragraph)
 target_sources(erbsland-color-term PRIVATE
         BitmapPainter.cpp
         BitmapPainter.hpp
+        CombinedChar.cpp
+        CombinedChar.hpp
         CommonBoxFrameCombinationStyle.cpp
         CommonBoxFrameCombinationStyle.hpp
         CommonBoxFrameCombinationStyle_data.cpp
-        CombinedChar.cpp
-        CombinedChar.hpp
         FontDefaultAscii.cpp
         FrameBorder_data.hpp
         FramePainter.cpp
@@ -20,9 +20,12 @@ target_sources(erbsland-color-term PRIVATE
         KeyDecoder.cpp
         KeyDecoder.hpp
         LineBuffer.hpp
+        SaturatingMath.hpp
         StringBuilder.hpp
         StringData.cpp
         StringData.hpp
+        StringRangeView.cpp
+        StringRangeView.hpp
         StringWrapper.cpp
         StringWrapper.hpp
         TextPainter.cpp

@@ -24,13 +24,15 @@ jobs:
       BUILD_DIR: cmake-build
 
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      # actions/checkout@v6.0.2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           persist-credentials: false
           submodules: recursive
 
       - name: Cache CMake build
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        # actions/cache@v5.0.5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: ${{ env.BUILD_DIR }}
           key: ${{ runner.os }}-cmake-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake', '**/ci.yml') }}
@@ -45,7 +47,10 @@ jobs:
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
-        run: brew install ninja
+        run: |
+          if ! command -v ninja >/dev/null; then
+            brew install ninja
+          fi
 
       - name: Setup MSVC (Windows)
         if: runner.os == 'Windows'

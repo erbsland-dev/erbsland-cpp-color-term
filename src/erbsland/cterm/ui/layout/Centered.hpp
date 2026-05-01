@@ -37,10 +37,11 @@ public: // implement Surface
 private:
     /// Subtract padding from a size.
     [[nodiscard]] static auto contentSize(Size size, Margins padding) noexcept -> Size;
-    /// Create a child proposal by removing padding from this layout's proposal.
-    [[nodiscard]] static auto contentProposal(LayoutProposal proposal, Margins padding) noexcept -> LayoutProposal;
-    /// Add padding to content metrics.
-    [[nodiscard]] auto paddedMetrics(const LayoutMetrics &contentMetrics) const noexcept -> LayoutMetrics;
+    /// Create a child proposal by removing the collapsed content inset from this layout's proposal.
+    [[nodiscard]] static auto contentProposal(LayoutProposal proposal, Margins contentInset) noexcept -> LayoutProposal;
+    /// Add the collapsed content inset to content metrics.
+    [[nodiscard]] auto paddedMetrics(const LayoutMetrics &contentMetrics, Margins contentInset) const noexcept
+        -> LayoutMetrics;
 
 private:
     Margins _padding; ///< Padding around the centered content.

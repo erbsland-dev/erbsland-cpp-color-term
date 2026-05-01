@@ -6,9 +6,9 @@
 #include "ScrollCorner.hpp"
 #include "VerticalScrollBar.hpp"
 
+#include "../ExclusiveSurfaceManager.hpp"
 #include "../ScrollBarMode.hpp"
 #include "../Surface.hpp"
-#include "../SurfaceManager.hpp"
 
 namespace erbsland::cterm::ui::surface {
 
@@ -16,7 +16,7 @@ class AbstractScrollArea;
 using AbstractScrollAreaPtr = std::shared_ptr<AbstractScrollArea>;
 
 /// Shared base for scrollable surfaces that paint custom content into a viewport.
-class AbstractScrollArea : public Surface, protected SurfaceManager {
+class AbstractScrollArea : public Surface, protected ExclusiveSurfaceManager {
 public:
     /// Create a scroll area base with grow/fill geometry.
     explicit AbstractScrollArea(ProtectedTag) noexcept;
@@ -97,10 +97,13 @@ public: // implement Surface
     void onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept override;
 
 protected:
-    /// Add the scroll bar surfaces to the child storage.
-    void initializeScrollAreaChildren();
-    /// Test if a surface belongs to this scroll area implementation.
-    [[nodiscard]] virtual auto isManagedScrollAreaChild(const SurfacePtr &surface) const noexcept -> bool;
+    /// Create and add the scroll bar surfaces to the child storage.
+    void initializeUi() override;
+
+protected: // implement ExclusiveSurfaceManager
+    [[nodiscard]] auto isManagedChild(const SurfacePtr &surface) const noexcept -> bool override;
+
+protected:
     /// Calculate the content size for one viewport size.
     /// @param viewportSize The candidate viewport size.
     /// @return The resulting content size.
@@ -121,18 +124,6 @@ protected:
     /// React to a scroll offset change.
     /// @param scrollOffset The new scroll offset.
     virtual void onScrollOffsetChanged(Position scrollOffset) noexcept;
-
-protected: // implement SurfaceManager
-    void willAdd(const SurfacePtr &surface, std::size_t index, const LayoutDataPtr &data) override;
-    void willRemove(const SurfacePtr &surface, std::size_t index, const LayoutDataPtr &data) override;
-    void willRemoveAll(std::size_t count) override;
-    void willReplace(
-        const SurfacePtr &oldSurface,
-        const SurfacePtr &newSurface,
-        std::size_t index,
-        const LayoutDataPtr &oldData,
-        const LayoutDataPtr &newData) override;
-    void willMove(const SurfacePtr &surface, std::size_t fromIndex, std::size_t toIndex) override;
 
 private:
     struct ScrollBarVisibility final {
@@ -160,7 +151,6 @@ private:
     Position _scrollOffset;                                        ///< The current scroll offset.
     Rectangle _viewportRect;                                       ///< The current viewport rectangle.
     Size _contentSize;                                             ///< The current content size.
-    bool _scrollAreaChildrenInitialized{false};                    ///< Set after adding internal children.
 };
 
 }

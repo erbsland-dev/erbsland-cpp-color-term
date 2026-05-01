@@ -34,14 +34,15 @@ void TextPainter::drawText(const Text &text, const std::size_t animationCycle) {
     drawText(text.text(), text.rectangle(), text.textOptions(), animationCycle);
 }
 
-auto TextPainter::simpleTextOptions(const Alignment alignment, const Color color) noexcept -> TextOptions {
+auto TextPainter::simpleTextOptions(const Alignment alignment, CharStyle style) noexcept -> TextOptions {
     auto options = TextOptions{alignment};
-    options.setColor(color);
+    options.setColor(style.color());
+    options.setCharAttributes(style.attributes());
     return options;
 }
 
 void TextPainter::drawText(
-    const StringView &text, const Rectangle rect, const TextOptions &options, std::size_t animationCycle) {
+    const StringView &text, const Rectangle rect, const TextOptions &options, const std::size_t animationCycle) {
     const auto textRect = contentRect(rect, options.paragraphOptions());
     if (textRect.width() <= 0 || textRect.height() <= 0) {
         return;
@@ -85,27 +86,27 @@ void TextPainter::drawText(
     const std::string_view text,
     const Rectangle rect,
     const Alignment alignment,
-    const Color color,
+    const CharStyle style,
     const std::size_t animationCycle) {
-    drawText(String{text, EncodingErrors::Replace}, rect, simpleTextOptions(alignment, color), animationCycle);
+    drawText(String{text, EncodingErrors::Replace}, rect, simpleTextOptions(alignment, style), animationCycle);
 }
 
 void TextPainter::drawText(
     const std::u32string_view text,
     const Rectangle rect,
     const Alignment alignment,
-    const Color color,
+    const CharStyle style,
     const std::size_t animationCycle) {
-    drawText(String{text}, rect, simpleTextOptions(alignment, color), animationCycle);
+    drawText(String{text}, rect, simpleTextOptions(alignment, style), animationCycle);
 }
 
 void TextPainter::drawText(
     const StringView &text,
     const Rectangle rect,
     const Alignment alignment,
-    const Color color,
+    const CharStyle style,
     const std::size_t animationCycle) {
-    drawText(text, rect, simpleTextOptions(alignment, color), animationCycle);
+    drawText(text, rect, simpleTextOptions(alignment, style), animationCycle);
 }
 
 auto TextPainter::contentRect(const Rectangle rect, const ParagraphOptions &options) noexcept -> Rectangle {
@@ -177,34 +178,21 @@ void TextPainter::applyTextLines(
     const StringLines &lines,
     const std::size_t animationCycle) noexcept {
     const auto maxLines = std::min(static_cast<int>(lines.size()), rect.height());
+    const auto alignment = options.alignment();
     auto yStart = rect.topLeft().y();
-    switch (options.alignment() & Alignment::VerticalMask) {
-    case Alignment::Top:
-        break;
-    case Alignment::VCenter:
+    if (alignment.isVerticalCenter()) {
         yStart += (rect.height() - maxLines) / 2;
-        break;
-    case Alignment::Bottom:
+    } else if (alignment.isBottom()) {
         yStart = rect.y2() - maxLines;
-        break;
-    default:
-        break;
     }
     for (auto lineIndex = 0; lineIndex < maxLines; ++lineIndex) {
         const auto &line = lines[static_cast<std::size_t>(lineIndex)];
         const auto lineWidth = std::min(line.displayWidth(), rect.width());
         auto xStart = rect.topLeft().x();
-        switch (options.alignment() & Alignment::HorizontalMask) {
-        case Alignment::Left:
-            break;
-        case Alignment::Right:
+        if (alignment.isRight()) {
             xStart = rect.x2() - lineWidth;
-            break;
-        case Alignment::HCenter:
+        } else if (alignment.isHorizontalCenter()) {
             xStart += (rect.width() - lineWidth) / 2;
-            break;
-        default:
-            break;
         }
         auto pos = Position{xStart, yStart + lineIndex};
         for (const auto &character : line) {

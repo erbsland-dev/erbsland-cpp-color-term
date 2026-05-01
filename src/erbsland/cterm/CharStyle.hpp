@@ -24,6 +24,16 @@ public:
     /// Create a style from character attributes and inherited color.
     /// @param attributes The character attributes for the style.
     constexpr CharStyle(const CharAttributes attributes) noexcept : _attributes{attributes} {}
+    /// Create a style with the given foreground color.
+    /// @param fg The foreground color for the style.
+    constexpr CharStyle(const Foreground fg) noexcept : _color{fg} {}
+    /// Create a style with the given background color.
+    /// @param bg The background color for the style.
+    constexpr CharStyle(const Background bg) noexcept : _color{bg} {}
+    /// Create a style with the given foreground and background color.
+    /// @param fg The foreground color for the style.
+    /// @param bg The background color for the style.
+    constexpr CharStyle(const Foreground fg, const Background bg) noexcept : _color{fg, bg} {}
 
     // defaults
     ~CharStyle() = default;

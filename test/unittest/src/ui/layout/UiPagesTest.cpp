@@ -65,6 +65,18 @@ public:
         REQUIRE_EQUAL(second->rectangle(), Rectangle());
     }
 
+    void testPagesCentersOuterMarginBox() {
+        auto pages = ui::Pages::create();
+        auto child = ui::Panel::create();
+        child->editLayoutMetrics().setFixedSize(Size{2, 1}).setMargins(Margins{1});
+        pages->addSurface(child);
+
+        pages->setRectangle(Rectangle{0, 0, 10, 5});
+        pages->layout(Size{10, 5}, ui::LayoutContext{});
+
+        REQUIRE_EQUAL(child->rectangle(), Rectangle(4, 2, 2, 1));
+    }
+
     void testPagesPaintsOpaqueBackground() {
         auto pages = ui::Pages::create();
         pages->setRectangle(Rectangle{0, 0, 4, 2});

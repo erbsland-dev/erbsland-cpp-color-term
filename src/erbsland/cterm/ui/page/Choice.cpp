@@ -11,34 +11,12 @@
 namespace erbsland::cterm::ui::page {
 
 Choice::Choice(String title, String description, ProtectedTag protectedTag) :
-    Page{protectedTag},
-    _title{std::move(title)},
-    _description{std::move(description)},
-    _centered{layout::Centered::create()},
-    _frame{layout::Frame::create()},
-    _stack{layout::Stack::create(Orientation::Vertical)},
-    _descriptionText{surface::TextBox::create(String{})},
-    _buttons{layout::Buttons::create()} {
-    themeAttributes().setElement(theme::Element::Choice);
+    Page{protectedTag}, _title{std::move(title)}, _description{std::move(description)} {
 }
 
 auto Choice::create(String title, String description) -> ChoicePtr {
     auto result = std::make_shared<Choice>(std::move(title), std::move(description), ProtectedTag{});
-    result->_descriptionText->themeAttributes().setElement(theme::Element::Choice);
-    result->_frame->themeAttributes().setElement(theme::Element::Choice);
-    auto frameMetrics = result->_frame->editLayoutMetrics();
-    frameMetrics.setMinimumWidth(cMinimumDialogWidth)
-        .setPreferredWidth(cPreferredDialogWidth)
-        .setMaximumWidth(cMaximumDialogWidth)
-        .setSizePolicyForWidth(DimensionPolicy::Preferred);
-    result->_frame->setPadding(cDefaultPadding);
-    result->_buttons->editLayoutMetrics().setSizePolicyForHeight(DimensionPolicy::Preferred);
-    result->_stack->addSurface(result->_descriptionText);
-    result->_stack->addSurface(result->_buttons);
-    result->_frame->setContentSurface(result->_stack);
-    result->_centered->setContentSurface(result->_frame);
-    result->addSurface(result->_centered);
-    result->updatePromptLayoutState();
+    result->initializeUi();
     return result;
 }
 
@@ -162,6 +140,31 @@ void Choice::onLayout(LayoutScope &scope) noexcept {
 void Choice::onPaint([[maybe_unused]] WritableBuffer &buffer, [[maybe_unused]] const PaintContext &context) noexcept {
     const auto style = context.theme().forPart(theme::Part::Background).style();
     buffer.rect().forEach([&](const auto &pos) -> void { buffer.set(pos, buffer.get(pos).withStyleReplaced(style)); });
+}
+
+void Choice::initializeUi() {
+    Page::initializeUi();
+    themeAttributes().setElement(theme::Element::Choice);
+    _descriptionText = surface::TextBox::create(_description);
+    _descriptionText->themeAttributes().setElement(theme::Element::Choice);
+    _frame = layout::Frame::create();
+    _frame->themeAttributes().setElement(theme::Element::Choice);
+    auto frameMetrics = _frame->editLayoutMetrics();
+    frameMetrics.setMinimumWidth(cMinimumDialogWidth)
+        .setPreferredWidth(cPreferredDialogWidth)
+        .setMaximumWidth(cMaximumDialogWidth)
+        .setSizePolicyForWidth(DimensionPolicy::Preferred);
+    _frame->setPadding(cDefaultPadding);
+    _buttons = layout::Buttons::create();
+    _buttons->editLayoutMetrics().setSizePolicyForHeight(DimensionPolicy::Preferred);
+    _stack = layout::Stack::create(Orientation::Vertical);
+    _stack->addSurface(_descriptionText);
+    _stack->addSurface(_buttons);
+    _frame->setContentSurface(_stack);
+    _centered = layout::Centered::create();
+    _centered->setContentSurface(_frame);
+    addSurface(_centered);
+    updatePromptLayoutState();
 }
 
 void Choice::selectChoice(const std::size_t insertionIndex) {

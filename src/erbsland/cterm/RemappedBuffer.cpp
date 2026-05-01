@@ -421,7 +421,7 @@ void RemappedBuffer::primaryAxisResize(const Size newSize, const Char &fillChar)
 
 void RemappedBuffer::reorderedResize(const Size newSize, const Char &fillChar) {
     auto newBuffer = std::vector<Char>(static_cast<std::size_t>(newSize.area()), fillChar);
-    const auto copySize = _size.componentMin(newSize);
+    const auto copySize = _size.limitedWith(newSize);
     copySize.forEach(
         [&](const Position pos) -> void { newBuffer[bufferIndex(pos, newSize, _orientation)] = get(pos); });
     _size = newSize;

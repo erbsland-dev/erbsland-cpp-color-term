@@ -4,7 +4,10 @@
 
 #include "ActionHelp.hpp"
 #include "DynamicText.hpp"
+#include "Label.hpp"
 #include "Panel.hpp"
+
+#include "../ExclusiveSurfaceManager.hpp"
 
 #include <chrono>
 #include <cstdint>
@@ -18,7 +21,7 @@ class FooterLine;
 using FooterLinePtr = std::shared_ptr<FooterLine>;
 
 /// A themed footer line with dynamic text, action help, and queued overlay messages.
-class FooterLine final : public Panel {
+class FooterLine final : public Panel, protected ExclusiveSurfaceManager {
 public:
     using milliseconds = std::chrono::milliseconds;
 
@@ -67,20 +70,19 @@ public:
 public: // implement Surface
     void onLayout(LayoutScope &scope) noexcept override;
 
+protected: // implement ExclusiveSurfaceManager
+    [[nodiscard]] auto isManagedChild(const SurfacePtr &surface) const noexcept -> bool override;
+
 private:
     /// Create and attach the owned child surfaces.
-    void initializeChildren();
+    void initializeUi() override;
     /// Show the next queued message.
     void showNextMessage();
-    /// Build styled message text.
-    /// @param message The message to style.
-    /// @return The styled message string.
-    [[nodiscard]] static auto styledMessage(const Message &message) noexcept -> String;
 
 private:
     DynamicTextPtr _leftText;          ///< The left-side dynamic text.
     ActionHelpPtr _actionHelp;         ///< The right-side action help.
-    DynamicTextPtr _messageText;       ///< The centered message overlay.
+    LabelPtr _messageText;             ///< The centered message overlay.
     std::deque<Message> _messageQueue; ///< Queued overlay messages.
     bool _hasMessage{false};           ///< Whether a message is currently visible.
     uint64_t _messageGeneration{0};    ///< Increments whenever the visible message changes.

@@ -9,10 +9,7 @@
 namespace erbsland::cterm::ui::surface {
 
 AbstractScrollArea::AbstractScrollArea(ProtectedTag) noexcept :
-    Surface{LayoutMetrics{Size{}, Size::maximum(), Size{}, SizePolicy{SizePolicy::Grow}}},
-    _horizontalScrollBar{HorizontalScrollBar::create()},
-    _verticalScrollBar{VerticalScrollBar::create()},
-    _scrollCorner{ScrollCorner::create()} {
+    Surface{LayoutMetrics{Size{}, Size::maximum(), Size{}, SizePolicy{SizePolicy::Grow}}} {
     childStorage().setManager(*this);
 }
 
@@ -141,56 +138,25 @@ void AbstractScrollArea::onPaint(WritableBuffer &buffer, [[maybe_unused]] const 
     }
 }
 
-void AbstractScrollArea::initializeScrollAreaChildren() {
-    if (_scrollAreaChildrenInitialized) {
+void AbstractScrollArea::initializeUi() {
+    Surface::initializeUi();
+    if (_horizontalScrollBar != nullptr) {
         return;
     }
+    _horizontalScrollBar = HorizontalScrollBar::create();
+    _verticalScrollBar = VerticalScrollBar::create();
+    _scrollCorner = ScrollCorner::create();
     childStorage().add(_horizontalScrollBar);
     childStorage().add(_verticalScrollBar);
     childStorage().add(_scrollCorner);
-    _scrollAreaChildrenInitialized = true;
 }
 
-auto AbstractScrollArea::isManagedScrollAreaChild(const SurfacePtr &surface) const noexcept -> bool {
+auto AbstractScrollArea::isManagedChild(const SurfacePtr &surface) const noexcept -> bool {
     return surface == _horizontalScrollBar || surface == _verticalScrollBar || surface == _scrollCorner;
 }
 
 void AbstractScrollArea::onScrollOffsetChanged([[maybe_unused]] Position scrollOffset) noexcept {
     flags().setPaintOutdated(_viewportRect);
-}
-
-void AbstractScrollArea::willAdd(
-    const SurfacePtr &surface, [[maybe_unused]] const std::size_t index, [[maybe_unused]] const LayoutDataPtr &data) {
-    if (!isManagedScrollAreaChild(surface)) {
-        throw std::logic_error{"Scroll areas manage their child surfaces internally."};
-    }
-}
-
-void AbstractScrollArea::willRemove(
-    [[maybe_unused]] const SurfacePtr &surface,
-    [[maybe_unused]] const std::size_t index,
-    [[maybe_unused]] const LayoutDataPtr &data) {
-    throw std::logic_error{"Scroll areas manage their child surfaces internally."};
-}
-
-void AbstractScrollArea::willRemoveAll([[maybe_unused]] const std::size_t count) {
-    throw std::logic_error{"Scroll areas manage their child surfaces internally."};
-}
-
-void AbstractScrollArea::willReplace(
-    [[maybe_unused]] const SurfacePtr &oldSurface,
-    [[maybe_unused]] const SurfacePtr &newSurface,
-    [[maybe_unused]] const std::size_t index,
-    [[maybe_unused]] const LayoutDataPtr &oldData,
-    [[maybe_unused]] const LayoutDataPtr &newData) {
-    throw std::logic_error{"Scroll areas manage their child surfaces internally."};
-}
-
-void AbstractScrollArea::willMove(
-    [[maybe_unused]] const SurfacePtr &surface,
-    [[maybe_unused]] const std::size_t fromIndex,
-    [[maybe_unused]] const std::size_t toIndex) {
-    throw std::logic_error{"Scroll areas manage their child surfaces internally."};
 }
 
 auto AbstractScrollArea::resolveScrollBarVisibility(const Size availableSize, LayoutScope &scope) noexcept

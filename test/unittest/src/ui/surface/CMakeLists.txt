@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.28)
 target_sources(erbsland-color-term-unittest PRIVATE
         ControlledTimeBackend.hpp
         RecordingSurface.hpp
-        TestTextLine.hpp
+        UiDynamicTextLineTest.cpp
         UiHelpSectionTest.cpp
         UiButtonTest.cpp
         UiKeyPressHandlingTest.cpp
@@ -16,7 +16,7 @@ target_sources(erbsland-color-term-unittest PRIVATE
         UiScrollingBufferViewTest.cpp
         UiSchedulerManualClock.hpp
         UiSchedulerTest.cpp
-        UiTextLineTest.cpp
+        UiStaticTextTest.cpp
         UiSurfaceContainerTest.cpp
         UiThemeTest.cpp
         UiTextBoxTest.cpp

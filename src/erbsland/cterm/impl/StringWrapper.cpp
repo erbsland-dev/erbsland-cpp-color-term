@@ -144,7 +144,7 @@ auto StringWrapper::findWrappedWordSplitIndex(
     auto lineWidth = 0;
     auto index = startIndex;
     while (index < word.size()) {
-        const auto characterWidth = word[index].displayWidth();
+        const auto characterWidth = word.at(index).displayWidth();
         if (lineWidth > 0 && lineWidth + characterWidth > width) {
             break;
         }

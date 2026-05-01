@@ -4,22 +4,59 @@
 import os
 import subprocess
 import sys
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
+CLANG_FORMAT_MARKER_FILE = ".clang-format-last-run"
+CLANG_FORMAT_FULL_RUN_INTERVAL = 24 * 60 * 60
+CLANG_FORMAT_EXTENSIONS = (".cpp", ".hpp")
 
-def run_clang_format(directories):
-    """Run clang-format on specified directories."""
-    print("Running clang-format...")
+
+def find_cpp_files(directories):
+    """Find C++ source files in the specified directories."""
+    cpp_files = []
     for directory in directories:
         dir_path = Path(directory)
         if not dir_path.exists():
             print(f"Warning: Directory '{directory}' does not exist, skipping...")
             continue
+        cpp_files.extend(file for file in dir_path.rglob("*") if file.suffix in CLANG_FORMAT_EXTENSIONS)
+    return sorted(cpp_files)
 
-        cpp_files = list(dir_path.rglob("*.cpp")) + list(dir_path.rglob("*.hpp"))
-        for file in cpp_files:
-            print(f"  Formatting {file}")
-            subprocess.run(["clang-format", "-i", str(file)], check=True)
+
+def should_run_full_clang_format(marker_path):
+    """Test if clang-format should run over all source files."""
+    if not marker_path.exists():
+        return True
+    return (time.time() - marker_path.stat().st_mtime) > CLANG_FORMAT_FULL_RUN_INTERVAL
+
+
+def touch_clang_format_marker(marker_path):
+    """Update the clang-format run marker file."""
+    timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    marker_path.write_text(f"{timestamp}\n", encoding="utf-8")
+
+
+def run_clang_format(directories, project_root):
+    """Run clang-format on specified directories."""
+    marker_path = project_root / CLANG_FORMAT_MARKER_FILE
+    full_run = should_run_full_clang_format(marker_path)
+    marker_mtime = marker_path.stat().st_mtime if marker_path.exists() else 0
+    cpp_files = find_cpp_files(directories)
+    files_to_format = cpp_files if full_run else [file for file in cpp_files if file.stat().st_mtime > marker_mtime]
+
+    if full_run:
+        print("Running clang-format for all source files...")
+    else:
+        print("Running clang-format for source files changed since the last run...")
+
+    for file in files_to_format:
+        print(f"  Formatting {file}")
+        subprocess.run(["clang-format", "-i", str(file)], check=True)
+
+    touch_clang_format_marker(marker_path)
+    print(f"Formatted {len(files_to_format)} of {len(cpp_files)} source files.")
     print("clang-format completed.")
 
 
@@ -48,7 +85,7 @@ def main():
     run_script("generate_frame_border_joint_chars.py")
 
     # Step 2: Run clang-format
-    run_clang_format(directories)
+    run_clang_format(directories, project_root)
 
     # Step 3: Run generate_header_files.py
     run_script("generate_header_files.py")

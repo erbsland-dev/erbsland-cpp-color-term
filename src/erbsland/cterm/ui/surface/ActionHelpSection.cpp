@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "ActionHelpSection.hpp"
 
+#include "../../text/HtmlRenderer.hpp"
+
 #include <algorithm>
 #include <format>
 #include <ranges>
@@ -9,14 +11,18 @@
 namespace erbsland::cterm::ui::surface {
 
 ActionHelpSection::ActionHelpSection(ProtectedTag protectedTag) noexcept : HtmlHelpSection{protectedTag} {
-    setTitle("Keyboard Shortcuts");
 }
 
 auto ActionHelpSection::create() -> ActionHelpSectionPtr {
     auto result = std::make_shared<ActionHelpSection>(ProtectedTag{});
     result->initializeUi();
-    result->rebuildHtml();
     return result;
+}
+
+void ActionHelpSection::initializeUi() {
+    HtmlHelpSection::initializeUi();
+    setTitle("Keyboard Shortcuts");
+    rebuildHtml();
 }
 
 void ActionHelpSection::setIntro(const std::string_view introHtml) {
@@ -29,7 +35,7 @@ void ActionHelpSection::setOutro(const std::string_view outroHtml) {
     rebuildHtml();
 }
 
-void ActionHelpSection::setActionSource(SurfacePtr surface) {
+void ActionHelpSection::setActionSource(const SurfacePtr &surface) {
     _actionSource = surface;
     rebuildHtml();
 }
@@ -119,11 +125,21 @@ auto ActionHelpSection::renderActionTable(const std::vector<ActionPtr> &actions)
         html += std::format(
             "<dt>{} <strong>{}</strong></dt><dd>{}</dd>",
             renderKeys(action->keys().keys()),
-            escapeHtml(action->help().name()),
-            escapeHtml(action->help().description()));
+            text::HtmlRenderer::escapeHtml(action->help().name()),
+            renderDescription(action->help()));
     }
     html += "</dl>";
     return html;
+}
+
+auto ActionHelpSection::renderDescription(const HelpData &helpData) -> std::string {
+    switch (helpData.descriptionFormat()) {
+    case HelpFormat::Html:
+        return helpData.description();
+    case HelpFormat::Text:
+        return text::HtmlRenderer::escapeHtml(helpData.description());
+    }
+    return text::HtmlRenderer::escapeHtml(helpData.description());
 }
 
 auto ActionHelpSection::renderKeys(const std::vector<Key> &keys) -> std::string {
@@ -133,36 +149,8 @@ auto ActionHelpSection::renderKeys(const std::vector<Key> &keys) -> std::string 
             result += "/";
         }
         result += "<span class=\"key\">";
-        result += keys[index].toDisplayText(false);
+        result += text::HtmlRenderer::escapeHtml(keys[index].toDisplayText(false));
         result += "</span>";
-    }
-    return result;
-}
-
-auto ActionHelpSection::escapeHtml(const std::string_view text) -> std::string {
-    auto result = std::string{};
-    result.reserve(text.size());
-    for (const auto character : text) {
-        switch (character) {
-        case '&':
-            result += "&amp;";
-            break;
-        case '<':
-            result += "&lt;";
-            break;
-        case '>':
-            result += "&gt;";
-            break;
-        case '"':
-            result += "&quot;";
-            break;
-        case '\'':
-            result += "&#39;";
-            break;
-        default:
-            result += character;
-            break;
-        }
     }
     return result;
 }

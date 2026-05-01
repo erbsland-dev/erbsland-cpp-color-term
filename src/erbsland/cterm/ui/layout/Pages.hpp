@@ -55,6 +55,8 @@ public: // implement Surface
     void onPaint(WritableBuffer &buffer, const PaintContext &context) noexcept override;
 
 private:
+    /// Initialize theme attributes after construction.
+    void initializeUi() override;
     /// Get all visible child pages in child-storage order.
     [[nodiscard]] auto visiblePages() const -> std::vector<SurfacePtr>;
     /// Clamp the current page to the visible page range.

@@ -94,6 +94,42 @@ removing and re-adding them.
 
     details->flags().setVisible(false); // body now receives the space details would have used
 
+How Layout Margins Work
+-----------------------
+
+Margins in ``LayoutMetrics`` are recommendations to the parent layout.
+They are different from padding: a surface owns its content and its own
+padding, while the parent that arranges child surfaces owns the spacing
+between those children. Metric sizes always describe the child content
+rectangle without margins.
+
+When a layout places adjacent child surfaces, it collapses the two
+touching margins. The larger value wins and becomes spacing owned by the
+layouting parent. In a vertical stack, the previous child's bottom
+margin collapses with the next child's top margin. In a horizontal stack,
+the previous child's right margin collapses with the next child's left
+margin.
+
+Margins around the outside of a layout depend on the role of that
+layout:
+
+* Pure layouts arrange peer surfaces. ``Stack`` and ``Buttons`` are pure
+  layouts. They consume only the margins between children and propagate
+  surrounding child margins through their own ``LayoutMetrics``. This is
+  what lets nested layouts collapse margins at the level where siblings
+  actually meet.
+* Enclosing layouts place one selected or contained surface inside an
+  area they own. ``Frame``, ``Pages``, and ``Viewport`` are enclosing
+  layouts. They collapse their own padding or inset with the enclosed
+  child's margins and place the child inside the reduced rectangle. The
+  enclosed child's margins are not propagated further.
+
+For example, in a horizontal stack of vertical stacks, the vertical
+stacks propagate their left and right child margins. The horizontal
+stack then collapses the margins between columns. If the vertical stacks
+consumed those margins themselves, the column spacing would be added
+instead of collapsed.
+
 Clipping One Content Surface with Viewport
 ------------------------------------------
 
@@ -235,8 +271,9 @@ The default theme draws ``─⟨ title ⟩────``. Customize the separato
 through the ``Sections`` theme element: ``Border`` defines the separator
 line and title/right insets, ``Title`` defines the title style and
 padding, and ``TitleBracket`` defines the bracket style and bracket
-glyphs. Use theme tags when only selected section groups should use a
-different decoration.
+glyphs. Title padding is painted as part of the title, while title
+margins collapse with adjacent one-line text parts. Use theme tags when
+only selected section groups should use a different decoration.
 
 Laying Out Buttons
 ------------------

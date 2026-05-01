@@ -25,19 +25,19 @@ public:
         std::string_view text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
-        Color color = {},
+        CharStyle style = {},
         std::size_t animationCycle = 0);
     void drawText(
         std::u32string_view text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
-        Color color = {},
+        CharStyle style = {},
         std::size_t animationCycle = 0);
     void drawText(
         const StringView &text,
         Rectangle rect,
         Alignment alignment = Alignment::TopLeft,
-        Color color = {},
+        CharStyle style = {},
         std::size_t animationCycle = 0);
 
 private: // wrapper (to keep code simple)
@@ -52,7 +52,7 @@ private: // wrapper (to keep code simple)
     }
 
 private: // helper
-    [[nodiscard]] static auto simpleTextOptions(Alignment alignment, Color color) noexcept -> TextOptions;
+    [[nodiscard]] static auto simpleTextOptions(Alignment alignment, CharStyle style) noexcept -> TextOptions;
     [[nodiscard]] static auto contentRect(Rectangle rect, const ParagraphOptions &options) noexcept -> Rectangle;
     [[nodiscard]] auto buildSimpleTextLines(const StringView &text, Rectangle rect, ParagraphSpacing spacing) const
         -> StringLines;

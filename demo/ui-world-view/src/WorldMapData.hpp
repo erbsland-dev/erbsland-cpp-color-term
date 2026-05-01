@@ -90,10 +90,6 @@ private:
     /// @param text The text to trim.
     /// @return The trimmed view.
     [[nodiscard]] static auto trimmed(std::string_view text) noexcept -> std::string_view;
-    /// Build the styled runtime label text.
-    /// @param text The label text in UTF-8.
-    /// @return The styled label string.
-    [[nodiscard]] static auto styledLabelText(std::string_view text) -> String;
 
 private:
     std::vector<ZoomLevel> _zoomLevels; ///< The loaded zoom levels.

@@ -60,6 +60,10 @@ public:
     [[nodiscard]] static auto light() noexcept -> const ThemeConstPtr &;
     /// Access the predefined monochrome theme.
     [[nodiscard]] static auto monochrome() noexcept -> const ThemeConstPtr &;
+    /// Access the predefined zero theme.
+    /// The zero theme does not define any elements or styles.
+    /// Use this theme for your unit tests or when you want to start from a clean slate.
+    [[nodiscard]] static auto zero() noexcept -> const ThemeConstPtr &;
 
 private:
     /// Normalize empty selectors to the root selector.

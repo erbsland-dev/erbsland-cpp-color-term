@@ -47,14 +47,14 @@ auto Rectangle::insetBy(const Margins margins) const noexcept -> Rectangle {
 
 auto Rectangle::subRectangle(const Anchor anchor, Size size, const Margins margins) const noexcept -> Rectangle {
     const auto innerRect = insetBy(margins);
-    size = size.componentMin(innerRect.size());
+    size = size.limitedWith(innerRect.size());
     if (size.width() == 0) {
         size.setWidth(innerRect.width());
     }
     if (size.height() == 0) {
         size.setHeight(innerRect.height());
     }
-    auto topLeftRect = Rectangle(innerRect.topLeft(), size.componentMin(innerRect.size()));
+    auto topLeftRect = Rectangle(innerRect.topLeft(), size.limitedWith(innerRect.size()));
     const auto offset = innerRect.anchor(anchor) - topLeftRect.anchor(anchor);
     return Rectangle{innerRect.topLeft() + offset, size};
 }
@@ -69,7 +69,7 @@ auto Rectangle::alignedSource(Rectangle sourceRect, const Alignment alignment) c
     const auto originalTargetSize = targetRect.size();
     const auto localOffset = size().alignmentOffset(originalSourceSize, alignment);
     const auto targetOffset = topLeft() + localOffset;
-    const auto visibleSize = originalSourceSize.componentMin(originalTargetSize);
+    const auto visibleSize = originalSourceSize.limitedWith(originalTargetSize);
     sourceRect.setSize(visibleSize);
     targetRect.setSize(visibleSize);
     if (originalSourceSize.width() <= originalTargetSize.width()) {

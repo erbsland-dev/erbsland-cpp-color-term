@@ -17,9 +17,11 @@ public:
     ThemePainter(WritableBuffer &buffer, ThemeAccessor theme) noexcept;
 
 public:
-    /// Fill a rectangle using all block roles from the accessor.
+    /// Fill a rectangle using a tile-9 pattern from the accessor.
     /// @param rect The rectangle to fill.
     void fill(Rectangle rect) const noexcept;
+    /// Fill the background using `Part::Background`, and a tile-9 pattern from accessor.
+    void fillBackground(Rectangle rect) const noexcept;
     /// Draw only the edge blocks for a rectangle.
     /// @param rect The rectangle to draw.
     void drawFrame(Rectangle rect) const noexcept;

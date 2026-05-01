@@ -67,6 +67,9 @@ void Surface::onKeyPress(KeyPressEvent &keyPressEvent) noexcept {
 void Surface::onFocus([[maybe_unused]] const FocusChange focusChange) noexcept {
 }
 
+void Surface::initializeUi() {
+}
+
 auto Surface::localToScreen(Rectangle localRect) const noexcept -> Rectangle {
     auto screenPosition = localRect.pos() + _rectangle.pos();
     for (auto parentSurface = parent().lock(); parentSurface != nullptr;

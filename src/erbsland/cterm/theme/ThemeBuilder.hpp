@@ -32,6 +32,8 @@ public:
     [[nodiscard]] static auto light() -> ThemeBuilder;
     /// Create the monochrome default theme builder.
     [[nodiscard]] static auto monochrome() -> ThemeBuilder;
+    /// Create the zero theme builder.
+    [[nodiscard]] static auto zero() -> ThemeBuilder;
 
 private:
     /// Edit a definition and preserve insertion order.

@@ -262,17 +262,16 @@ void WorldMapView::drawLabels(WritableBuffer &buffer, const Rectangle targetRect
 
 auto WorldMapView::formatLongitude(const Coordinate longitude) -> String {
     if (longitude == 0) {
-        return String{"0", Color{fg::BrightWhite, bg::Black}};
+        return String{"0", fg::BrightWhite};
     }
-    return String{
-        std::format("{}{}", std::abs(longitude), longitude < 0 ? "W" : "E"), Color{fg::BrightWhite, bg::Black}};
+    return String{std::format("{}{}", std::abs(longitude), longitude < 0 ? "W" : "E"), fg::BrightWhite};
 }
 
 auto WorldMapView::formatLatitude(const Coordinate latitude) -> String {
     if (latitude == 0) {
-        return String{"0", Color{fg::BrightWhite, bg::Black}};
+        return String{"0", fg::BrightWhite};
     }
-    return String{std::format("{}{}", std::abs(latitude), latitude < 0 ? "S" : "N"), Color{fg::BrightWhite, bg::Black}};
+    return String{std::format("{}{}", std::abs(latitude), latitude < 0 ? "S" : "N"), fg::BrightWhite};
 }
 
 auto WorldMapView::intersectsPinnedCoordinateArea(

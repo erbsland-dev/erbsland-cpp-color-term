@@ -6,6 +6,8 @@
 
 #include "../Layout.hpp"
 
+#include "../../theme/LayoutHelper.hpp"
+
 namespace erbsland::cterm::ui::layout {
 
 class Sections;
@@ -59,6 +61,8 @@ protected: // implement SurfaceManager
     [[nodiscard]] auto defaultLayoutData(const SurfacePtr &surface) const -> LayoutDataPtr override;
 
 private:
+    /// Initialize theme attributes after construction.
+    void initializeUi() override;
     /// Count visible child sections.
     [[nodiscard]] auto visibleSectionCount() const noexcept -> std::size_t;
     /// Calculate the number of separator rows for the current visible sections.
@@ -70,9 +74,6 @@ private:
         Coordinate y,
         const SectionOptions &options,
         bool focusWithin) const noexcept;
-    /// Build the title block for one separator.
-    [[nodiscard]] static auto titleBlock(const SectionOptions &options, const ThemeContext &themeContext) noexcept
-        -> String;
 
 private:
     bool _trailingSeparatorVisible{true}; ///< Whether to draw the final separator.

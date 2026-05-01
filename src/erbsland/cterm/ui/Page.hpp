@@ -17,7 +17,7 @@ using PagePtr = std::shared_ptr<Page>;
 class Page : public Surface {
 public:
     /// Create a page instance through the protected construction path.
-    explicit Page(ProtectedTag) : Surface{theme::Element::Page} {}
+    explicit Page(ProtectedTag) {}
     ~Page() override = default;
 
 public:
@@ -55,6 +55,9 @@ public: // implement Surface
     void onKeyPress(KeyPressEvent &keyPressEvent) noexcept override;
     [[nodiscard]] auto isOpaque() const noexcept -> bool override;
     [[nodiscard]] auto isPage() const noexcept -> bool override;
+
+protected: // implement Surface
+    void initializeUi() override;
 
 private:
     enum class FocusRelation : uint8_t {

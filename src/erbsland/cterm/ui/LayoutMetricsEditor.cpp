@@ -109,4 +109,10 @@ auto LayoutMetricsEditor::setFixedSize(const Size size) -> LayoutMetricsEditor &
     return apply(std::move(layoutMetrics));
 }
 
+auto LayoutMetricsEditor::setMargins(const Margins margins) -> LayoutMetricsEditor & {
+    auto layoutMetrics = _surface._layoutMetrics;
+    layoutMetrics.setMargins(margins);
+    return apply(std::move(layoutMetrics));
+}
+
 }

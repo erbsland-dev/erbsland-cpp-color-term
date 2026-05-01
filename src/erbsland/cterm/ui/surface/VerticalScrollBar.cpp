@@ -12,14 +12,19 @@ VerticalScrollBar::VerticalScrollBar(ProtectedTag protectedTag) noexcept :
             Size::maximum(),
             Size{1, 20},
             SizePolicy{DimensionPolicy{DimensionPolicy::Preferred}, DimensionPolicy{DimensionPolicy::Grow}}},
-        ProtectedTag{}} {
-    static_cast<void>(protectedTag);
-    themeAttributes().setElement(theme::Element::VerticalScrollBar);
+        protectedTag} {
     editLayoutMetrics().setFixedWidth(1);
 }
 
-auto VerticalScrollBar::create() noexcept -> VerticalScrollBarPtr {
-    return std::make_shared<VerticalScrollBar>(ProtectedTag{});
+auto VerticalScrollBar::create() -> VerticalScrollBarPtr {
+    auto result = std::make_shared<VerticalScrollBar>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void VerticalScrollBar::initializeUi() {
+    AbstractScrollBar::initializeUi();
+    themeAttributes().setElement(theme::Element::VerticalScrollBar);
 }
 
 }

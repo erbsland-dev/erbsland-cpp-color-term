@@ -7,6 +7,7 @@
 
 #include "../CursorWriter.hpp"
 
+#include <string>
 #include <string_view>
 #include <utility>
 
@@ -48,6 +49,10 @@ public:
     /// @param html The HTML code to parse.
     /// @return A text node representing the parsed HTML.
     [[nodiscard]] static auto parse(std::string_view html) -> TextNodePtr;
+    /// Escape text for safe use inside an HTML fragment.
+    /// @param text The plain text to escape.
+    /// @return The escaped HTML text.
+    [[nodiscard]] static auto escapeHtml(std::string_view text) -> std::string;
 
 private:
     std::string_view _html;

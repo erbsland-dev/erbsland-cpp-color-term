@@ -35,11 +35,14 @@ public:
     void setOutro(std::string_view outroHtml);
     /// Set the surface whose action chain is scanned for shortcuts.
     /// @param surface The source surface.
-    void setActionSource(SurfacePtr surface);
+    void setActionSource(const SurfacePtr &surface);
     /// Access the current action source.
     [[nodiscard]] auto actionSource() const noexcept -> SurfacePtr;
 
 private:
+    /// Initialize inherited HTML view state and generated content after construction.
+    void initializeUi() override;
+
     struct ActionCandidate final {
         ActionPtr action;          ///< The action.
         int chainIndex{};          ///< The source-chain index.
@@ -61,10 +64,10 @@ private:
         std::vector<ActionPtr> &seen);
     /// Render all candidates into a preformatted shortcuts table.
     [[nodiscard]] static auto renderActionTable(const std::vector<ActionPtr> &actions) -> std::string;
+    /// Render one action description according to its configured help format.
+    [[nodiscard]] static auto renderDescription(const HelpData &helpData) -> std::string;
     /// Render one key collection.
     [[nodiscard]] static auto renderKeys(const std::vector<Key> &keys) -> std::string;
-    /// Escape text for HTML.
-    [[nodiscard]] static auto escapeHtml(std::string_view text) -> std::string;
 
 private:
     std::string _introHtml;       ///< HTML before the shortcut table.

@@ -21,4 +21,32 @@ auto HtmlRenderer::parse(const std::string_view html) -> TextNodePtr {
     return impl::HtmlParser{html}.parse();
 }
 
+auto HtmlRenderer::escapeHtml(const std::string_view text) -> std::string {
+    auto result = std::string{};
+    result.reserve(text.size());
+    for (const auto character : text) {
+        switch (character) {
+        case '&':
+            result += "&amp;";
+            break;
+        case '<':
+            result += "&lt;";
+            break;
+        case '>':
+            result += "&gt;";
+            break;
+        case '"':
+            result += "&quot;";
+            break;
+        case '\'':
+            result += "&#39;";
+            break;
+        default:
+            result += character;
+            break;
+        }
+    }
+    return result;
+}
+
 }

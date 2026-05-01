@@ -146,12 +146,15 @@ void WindowsBackend::emitText(const std::string_view text) {
         std::wstring wide(static_cast<size_t>(wideLength), L'\0');
         ::MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), wide.data(), wideLength);
         while (index < wide.size()) {
-            ::WriteConsoleW(
-                _windows->outputHandle,
-                wide.data() + index,
-                static_cast<DWORD>(wide.size() - index),
-                &written,
-                nullptr);
+            if (::WriteConsoleW(
+                    _windows->outputHandle,
+                    wide.data() + index,
+                    static_cast<DWORD>(wide.size() - index),
+                    &written,
+                    nullptr) == 0 ||
+                written == 0) {
+                break; // prevent write lock if we lose the output handle.
+            }
             index += written;
             if (index < wide.size()) {
                 std::this_thread::yield();
@@ -159,12 +162,15 @@ void WindowsBackend::emitText(const std::string_view text) {
         }
     } else {
         while (index < text.size()) {
-            ::WriteFile(
-                _windows->outputHandle,
-                text.data() + index,
-                static_cast<DWORD>(text.size() - index),
-                &written,
-                nullptr);
+            if (::WriteFile(
+                    _windows->outputHandle,
+                    text.data() + index,
+                    static_cast<DWORD>(text.size() - index),
+                    &written,
+                    nullptr) == 0 ||
+                written == 0) {
+                break; // prevent write lock if we lose the output handle.
+            }
             index += written;
             if (index < text.size()) {
                 std::this_thread::yield();

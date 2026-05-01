@@ -6,22 +6,23 @@
 
 
 #include "AbstractHelpSection.hpp"
-#include "AbstractLine.hpp"
 #include "AbstractScrollArea.hpp"
 #include "AbstractScrollBar.hpp"
 #include "ActionHelp.hpp"
 #include "ActionHelpSection.hpp"
 #include "Button.hpp"
 #include "DynamicText.hpp"
+#include "DynamicTextLine.hpp"
 #include "FooterLine.hpp"
 #include "HeaderLine.hpp"
 #include "HorizontalScrollBar.hpp"
 #include "HtmlHelpSection.hpp"
+#include "Label.hpp"
 #include "Panel.hpp"
 #include "ScrollCorner.hpp"
 #include "ScrollingBufferView.hpp"
+#include "StaticText.hpp"
 #include "TextBox.hpp"
-#include "TextLine.hpp"
 #include "VerticalScrollBar.hpp"
 
 

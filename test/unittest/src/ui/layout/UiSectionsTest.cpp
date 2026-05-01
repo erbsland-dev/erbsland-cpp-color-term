@@ -91,19 +91,21 @@ public:
         auto buffer = Buffer{Size{24, 2}, Char{U'.'}};
         sections->onPaint(buffer, ui::PaintContext{buffer.rect(), buffer.rect(), buffer.rect(), context});
 
-        requireRowsEqual(buffer, {"──⟨ Info ⟩──────────[h]─", "........................"});
+        requireRowsEqual(buffer, {"──⟨ Info ⟩─────────[h]──", "........................"});
     }
 
     void testSectionsUseThemeDecoration() {
-        auto builder = theme::ThemeBuilder::from(theme::Theme::dark());
+        auto builder = theme::ThemeBuilder::zero();
         builder.edit(theme::Selector{theme::Element::Sections, theme::Part::Border})
-            .setBlock(theme::BlockRole::Background, U'=')
+            .setBlocks(U'=')
             .setMargins(Margins{0, 2, 0, 1});
         builder.edit(theme::Selector{theme::Element::Sections, theme::Part::Title})
-            .setBlock(theme::BlockRole::Background, U' ')
-            .setMargins(Margins{0});
+            .setBlocks(U' ')
+            .setMargins(Margins{0, 0, 0, 1})
+            .setPadding(Margins{0});
         builder.edit(theme::Selector{theme::Element::Sections, theme::Part::TitleBracket})
             .setBlocks(U"         [ ]    ");
+        builder.edit(theme::Selector{theme::Element::Sections, theme::Part::Text}).setMargins(Margins{0, 2, 0, 0});
         const auto activeTheme = builder.build();
         auto sections = ui::Sections::create();
         const auto context = sections->themeContextFrom(ui::ThemeContext{activeTheme});
@@ -131,7 +133,7 @@ public:
         page->addSurface(sections);
         page->focusTo(body);
 
-        auto builder = theme::ThemeBuilder::from(theme::Theme::dark());
+        auto builder = theme::ThemeBuilder::zero();
         builder.edit(theme::Selector{theme::Element::Sections, theme::Part::Border}).setColor(Color{fg::White});
         auto selector = theme::Selector{theme::Element::Sections, theme::Part::Border};
         selector.requireState(theme::State::FocusWithin);

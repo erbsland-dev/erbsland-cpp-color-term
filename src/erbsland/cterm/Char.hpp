@@ -6,6 +6,7 @@
 #include "EncodingErrors.hpp"
 
 #include "impl/CombinedChar.hpp"
+#include "impl/TextUtil.hpp"
 #include "impl/TypeTraits.hpp"
 
 #include <cstddef>
@@ -22,25 +23,28 @@ public:
     /// Construct an empty block character using inherited colors.
     constexpr Char() noexcept = default;
     /// Construct a block character from a single Unicode code point using inherited colors.
+    /// Control codes (except new-line and tab) are replaced with a space - to represent an
+    /// "invisible" character. Invalid Unicode code points are replaced with the Unicode replacement character.
     /// @param codePoint The base Unicode code point.
-    constexpr explicit Char(const char32_t codePoint) noexcept : _character{codePoint} {}
+    constexpr explicit Char(const char32_t codePoint) noexcept : _character{impl::safeCodePoint(codePoint)} {}
     /// Construct a block character with inherited colors.
     /// @param charStr The UTF-8 encoded text to display.
     /// Invalid or unsupported text normalizes deterministically to a single renderable character.
     /// Empty input, control codes, and leading zero-width code points normalize to `U+FFFD`.
     /// Later visible code points also collapse the result to `U+FFFD`, while a third combining mark is ignored.
-    explicit Char(std::string_view charStr) noexcept : Char{charStr, CharStyle{}} {}
+    explicit Char(const std::string_view charStr) noexcept : Char{charStr, CharStyle{}} {}
     /// Construct a block character with inherited colors.
     /// @param charStr The UTF-32 encoded text to display.
     /// Invalid or unsupported text normalizes deterministically to a single renderable character.
     /// Empty input, control codes, invalid Unicode scalar values, and leading zero-width code points normalize to
     /// `U+FFFD`. Later visible code points also collapse the result to `U+FFFD`, while a third combining mark is
     /// ignored.
-    explicit Char(std::u32string_view charStr) noexcept : Char{charStr, CharStyle{}} {}
+    explicit Char(const std::u32string_view charStr) noexcept : Char{charStr, CharStyle{}} {}
     /// Construct a block character from a single Unicode code point with explicit style.
     /// @param codePoint The base Unicode code point.
     /// @param style The style for the character.
-    constexpr Char(const char32_t codePoint, const CharStyle style) noexcept : _character{codePoint}, _style{style} {}
+    constexpr Char(const char32_t codePoint, const CharStyle style) noexcept :
+        _character{impl::safeCodePoint(codePoint)}, _style{style} {}
     /// Construct a block character from a single Unicode code point with explicit color and attributes.
     /// @param codePoint The base Unicode code point.
     /// @param color The color for the character.
@@ -87,7 +91,7 @@ public:
     template <typename... tColorArgs>
         requires CharColorConstructorArgs<tColorArgs...>
     constexpr Char(const char32_t codePoint, tColorArgs... color) noexcept :
-        _character{codePoint}, _style{Color{color...}} {}
+        _character{impl::safeCodePoint(codePoint)}, _style{Color{color...}} {}
     /// Construct a block character with explicit text and colors.
     /// @param charStr The UTF-8 encoded text to display.
     /// @param color The color for the character.
@@ -239,6 +243,8 @@ public: // tests
 public: // predefined characters.
     /// A space with inherited colors.
     [[nodiscard]] static auto space() noexcept -> const Char &;
+    /// A shared empty character with inherited colors.
+    [[nodiscard]] static auto empty() noexcept -> const Char &;
     /// Create an empty render cell that carries only the given style.
     /// This is mainly used for wide-character continuation cells, which must stay logically empty while preserving
     /// the visible style of the leading cell.

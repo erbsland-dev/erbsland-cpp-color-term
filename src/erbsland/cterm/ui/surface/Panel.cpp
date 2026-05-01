@@ -7,11 +7,18 @@
 namespace erbsland::cterm::ui::surface {
 
 Panel::Panel(ProtectedTag) noexcept :
-    Surface{theme::Element::Panel, LayoutMetrics{Size{}, Size::maximum(), Size{}, SizePolicy{SizePolicy::Grow}}} {
+    Surface{LayoutMetrics{Size{}, Size::maximum(), Size{}, SizePolicy{SizePolicy::Grow}}} {
 }
 
-auto Panel::create() noexcept -> PanelPtr {
-    return std::make_shared<Panel>(ProtectedTag{});
+auto Panel::create() -> PanelPtr {
+    auto result = std::make_shared<Panel>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void Panel::initializeUi() {
+    Surface::initializeUi();
+    themeAttributes().setElement(theme::Element::Panel);
 }
 
 auto Panel::isOpaque() const noexcept -> bool {

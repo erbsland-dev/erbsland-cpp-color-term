@@ -33,6 +33,7 @@ namespace erbsland::cterm::impl {
     return result;
 }
 
+/// Test if one code point is in the valid Unicode range.
 [[nodiscard]] constexpr auto isValidUnicode(const char32_t unicode) noexcept -> bool {
     return unicode <= 0x10FFFFU && (unicode < 0xD800U || unicode > 0xDFFFU);
 }
@@ -42,6 +43,29 @@ namespace erbsland::cterm::impl {
 /// @return `true` if the code point is a control code.
 [[nodiscard]] constexpr auto isControlCode(const char32_t codePoint) noexcept -> bool {
     return codePoint < 0x20 || (codePoint >= 0x7FU && codePoint <= 0x9FU);
+}
+
+/// Test if one code point is safe for `Char` construction.
+/// This accepts any valid Unicode code point except control characters.
+/// New-line and tabs are allowed control-characters.
+[[nodiscard]] constexpr auto isSafeCodePoint(const char32_t codePoint) noexcept -> bool {
+    return isValidUnicode(codePoint) &&
+        (codePoint == U'\t' || codePoint == U'\n' || (codePoint >= 0x20 && codePoint <= 0x7E) || codePoint >= 0xA0);
+}
+
+/// Return a safe replacement for invalid code-points.
+/// @return Space for all valid Unicode code points, otherwise the Unicode replacement character.
+[[nodiscard]] constexpr auto safeCodePointReplacement(const char32_t codePoint) noexcept -> char32_t {
+    return isValidUnicode(codePoint) ? U' ' : 0xFFFDU;
+}
+
+/// Return a safe code point for `Char`.
+/// Valid Unicode code points are preserved, control codes are replaced with a space - to represent an
+/// "invisible" character. Invalid Unicode code points are replaced with the Unicode replacement character.
+/// New-line and tabs are allowed control-characters.
+/// @return The safe code point for use in terminal strings.
+[[nodiscard]] constexpr auto safeCodePoint(const char32_t codePoint) noexcept -> char32_t {
+    return isSafeCodePoint(codePoint) ? codePoint : safeCodePointReplacement(codePoint);
 }
 
 /// Test whether one code point is accepted as a visible string character.

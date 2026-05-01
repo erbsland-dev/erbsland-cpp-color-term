@@ -173,7 +173,7 @@ protected:
         const StringView &text,
         const Rectangle rect,
         const Alignment alignment,
-        const Color,
+        CharStyle style,
         const std::size_t animationCycle) override {
         _lastCall = Call::TextRect;
         _lastRect = rect;

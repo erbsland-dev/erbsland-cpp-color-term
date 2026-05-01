@@ -15,6 +15,12 @@
 TESTED_TARGETS(HtmlRenderer)
 class HtmlRendererTest final : public UNITTEST_SUBCLASS(HtmlRendererTestSupport) {
 public:
+    void testEscapeHtmlEscapesSpecialCharacters() {
+        const auto escaped = text::HtmlRenderer::escapeHtml("Use <tag attr=\"value\">Tom & Jerry's</tag>");
+
+        REQUIRE_EQUAL(escaped, std::string{"Use &lt;tag attr=&quot;value&quot;&gt;Tom &amp; Jerry&#39;s&lt;/tag&gt;"});
+    }
+
     void testRenderStringPreservesInlineStylesAndHeadingParagraphStructure() {
         const auto rendered = text::HtmlRenderer{"<h1>Title</h1><p>Hello <strong>world</strong>.</p>"}.renderString();
         const auto expected = std::vector<std::string>{"Title", "Hello world."};

@@ -7,8 +7,11 @@
 #include "Orientation.hpp"
 #include "Position.hpp"
 
+#include "../impl/SaturatingMath.hpp"
+
 #include <algorithm>
 #include <format>
+#include <limits>
 
 namespace erbsland::cterm {
 
@@ -37,18 +40,30 @@ public: // operators
     auto operator==(const Size &other) const noexcept -> bool = default;
     /// Inequality comparison on width and height.
     auto operator!=(const Size &other) const noexcept -> bool = default;
-    /// Add two sizes.
+    /// Add two sizes using saturated arithmetic.
     /// @param other The size to add.
-    /// @return The component-wise sum.
+    /// @return The component-wise sum, capped at the maximum coordinate value.
     auto operator+(const Size &other) const noexcept -> Size {
-        return {_width + other._width, _height + other._height};
+        auto result = *this;
+        result.add(other);
+        return result;
     }
-    /// Subtract two sizes.
+    /// Subtract two sizes using saturated arithmetic.
     /// @param other The size to subtract.
-    /// @return The component-wise difference, clamped to non-negative values by the constructor.
+    /// @return The component-wise difference, clamped to non-negative values.
     auto operator-(const Size &other) const noexcept -> Size {
-        return {_width - other._width, _height - other._height};
+        auto result = *this;
+        result.subtract(other);
+        return result;
     }
+    /// Add a size using saturated arithmetic.
+    /// @param other The size to add.
+    /// @return This size.
+    auto operator+=(const Size &other) noexcept -> Size & { return add(other); }
+    /// Subtract a size using saturated arithmetic.
+    /// @param other The size to subtract.
+    /// @return This size.
+    auto operator-=(const Size &other) noexcept -> Size & { return subtract(other); }
 
 public: // attributes
     /// Get the width (>= 0).
@@ -104,24 +119,126 @@ public: // tests
     }
 
 public: // constraints
-    /// Component-wise maximum with another size.
-    /// @param other Other size.
-    /// @return A size whose width is max(this.width, other.width) and height is max(this.height, other.height).
-    [[nodiscard]] auto componentMax(const Size other) const noexcept -> Size {
-        return {std::max(_width, other._width), std::max(_height, other._height)};
+    /// Add another size using saturated arithmetic.
+    /// @param other The size to add.
+    /// @return This size.
+    auto add(const Size other) noexcept -> Size & {
+        _width = impl::saturatingAdd(_width, other._width);
+        _height = impl::saturatingAdd(_height, other._height);
+        return *this;
     }
-    /// Component-wise minimum with another size.
-    /// @param other Other size.
-    /// @return A size whose width is min(this.width, other.width) and height is min(this.height, other.height).
-    [[nodiscard]] auto componentMin(const Size other) const noexcept -> Size {
-        return {std::min(_width, other._width), std::min(_height, other._height)};
+    /// Add another size only on the selected axis using saturated arithmetic.
+    /// @param other The size to add.
+    /// @param orientation The axis to modify.
+    /// @return This size.
+    auto add(const Size other, const Orientation orientation) noexcept -> Size & {
+        if (orientation == Orientation::Horizontal) {
+            _width = impl::saturatingAdd(_width, other._width);
+        } else {
+            _height = impl::saturatingAdd(_height, other._height);
+        }
+        return *this;
+    }
+    /// Subtract another size using saturated arithmetic and clamp the result to zero.
+    /// @param other The size to subtract.
+    /// @return This size.
+    auto subtract(const Size other) noexcept -> Size & {
+        setWidth(impl::saturatingSubtract(_width, other._width));
+        setHeight(impl::saturatingSubtract(_height, other._height));
+        return *this;
+    }
+    /// Subtract another size only on the selected axis using saturated arithmetic and clamp the result to zero.
+    /// @param other The size to subtract.
+    /// @param orientation The axis to modify.
+    /// @return This size.
+    auto subtract(const Size other, const Orientation orientation) noexcept -> Size & {
+        if (orientation == Orientation::Horizontal) {
+            setWidth(impl::saturatingSubtract(_width, other._width));
+        } else {
+            setHeight(impl::saturatingSubtract(_height, other._height));
+        }
+        return *this;
+    }
+    /// Expand this size so it is at least the given size.
+    /// @param other The minimum size to cover.
+    /// @return This size.
+    auto expandTo(const Size other) noexcept -> Size & {
+        _width = std::max(_width, other._width);
+        _height = std::max(_height, other._height);
+        return *this;
+    }
+    /// Expand this size so it is at least the given size on the selected axis.
+    /// @param other The minimum size to cover.
+    /// @param orientation The axis to modify.
+    /// @return This size.
+    auto expandTo(const Size other, const Orientation orientation) noexcept -> Size & {
+        if (orientation == Orientation::Horizontal) {
+            _width = std::max(_width, other._width);
+        } else {
+            _height = std::max(_height, other._height);
+        }
+        return *this;
+    }
+    /// Limit this size so it is at most the given size.
+    /// @param other The maximum size to respect.
+    /// @return This size.
+    auto limitTo(const Size other) noexcept -> Size & {
+        _width = std::min(_width, other._width);
+        _height = std::min(_height, other._height);
+        return *this;
+    }
+    /// Limit this size so it is at most the given size on the selected axis.
+    /// @param other The maximum size to respect.
+    /// @param orientation The axis to modify.
+    /// @return This size.
+    auto limitTo(const Size other, const Orientation orientation) noexcept -> Size & {
+        if (orientation == Orientation::Horizontal) {
+            _width = std::min(_width, other._width);
+        } else {
+            _height = std::min(_height, other._height);
+        }
+        return *this;
+    }
+    /// Create a copy expanded so it is at least the given size.
+    /// @param other The minimum size to cover.
+    /// @return The expanded size.
+    [[nodiscard]] auto expandedWith(const Size other) const noexcept -> Size {
+        auto result = *this;
+        result.expandTo(other);
+        return result;
+    }
+    /// Create a copy expanded so it is at least the given size on the selected axis.
+    /// @param other The minimum size to cover.
+    /// @param orientation The axis to modify.
+    /// @return The expanded size.
+    [[nodiscard]] auto expandedWith(const Size other, const Orientation orientation) const noexcept -> Size {
+        auto result = *this;
+        result.expandTo(other, orientation);
+        return result;
+    }
+    /// Create a copy limited so it is at most the given size.
+    /// @param other The maximum size to respect.
+    /// @return The limited size.
+    [[nodiscard]] auto limitedWith(const Size other) const noexcept -> Size {
+        auto result = *this;
+        result.limitTo(other);
+        return result;
+    }
+    /// Create a copy limited so it is at most the given size on the selected axis.
+    /// @param other The maximum size to respect.
+    /// @param orientation The axis to modify.
+    /// @return The limited size.
+    [[nodiscard]] auto limitedWith(const Size other, const Orientation orientation) const noexcept -> Size {
+        auto result = *this;
+        result.limitTo(other, orientation);
+        return result;
     }
     /// Component-wise clamp with a minimum and maximum size.
     /// @warning If minimum.width > maximum.width or minimum.height > maximum.height, the behavior is *undefined*.
     /// @param minimum The minimum size.
     /// @param maximum The maximum size.
     /// @return a size (min.width <= width <= max.width, min.height <= height <= max.height)
-    [[nodiscard]] auto componentClamp(const Size minimum, const Size maximum) const noexcept -> Size {
+    [[nodiscard]] auto clampTo(const Size minimum, const Size maximum) const noexcept -> Size {
         return {
             std::clamp(_width, minimum._width, maximum._width), std::clamp(_height, minimum._height, maximum._height)};
     }
@@ -151,6 +268,17 @@ public: // tools
     /// Get the maximum size that can be represented by this type.
     [[nodiscard]] static constexpr auto maximum() noexcept -> Size {
         return Size{std::numeric_limits<Coordinate>::max(), std::numeric_limits<Coordinate>::max()};
+    }
+    /// Get the minimum size that can be represented by this type.
+    [[nodiscard]] static constexpr auto minimum() noexcept -> Size { return Size{Coordinate{0}, Coordinate{0}}; }
+    /// Get a size.
+    [[nodiscard]] static constexpr auto zero() noexcept -> Size { return Size{Coordinate{0}, Coordinate{0}}; }
+
+public: // compatibility/deprecated
+    [[nodiscard]] auto componentMax(const Size other) const noexcept -> Size { return expandedWith(other); }
+    [[nodiscard]] auto componentMin(const Size other) const noexcept -> Size { return limitedWith(other); }
+    [[nodiscard]] auto componentClamp(const Size minimum, const Size maximum) const noexcept -> Size {
+        return clampTo(minimum, maximum);
     }
 
 private:

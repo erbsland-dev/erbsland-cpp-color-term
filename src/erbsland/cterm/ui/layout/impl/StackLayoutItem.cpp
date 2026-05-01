@@ -4,6 +4,8 @@
 
 #include "../../../geometry/AxisMapper.hpp"
 
+#include <algorithm>
+
 namespace erbsland::cterm::ui::layout::impl {
 
 auto StackLayoutItem::fromSurface(
@@ -29,16 +31,23 @@ auto StackLayoutItem::fromSurface(
     crossConstraints = DimensionConstraints::fromMetrics(metrics, crossAxis);
     const auto availableMainSize = availableSize.coordinate(orientation);
     return {
-        surface, mainConstraints, crossConstraints, mainConstraints.initialSize(availableMainSize), assignedCrossSize};
+        surface,
+        metrics.margins(),
+        mainConstraints,
+        crossConstraints,
+        mainConstraints.initialSize(availableMainSize),
+        assignedCrossSize};
 }
 
 StackLayoutItem::StackLayoutItem(
     SurfacePtr surface,
+    Margins margins,
     DimensionConstraints mainConstraints,
     DimensionConstraints crossConstraints,
     const Coordinate assignedMainSize,
     const Coordinate assignedCrossSize) noexcept :
     _surface(std::move(surface)),
+    _margins(margins),
     _mainConstraints(std::move(mainConstraints)),
     _crossConstraints(std::move(crossConstraints)),
     _assignedMainSize(assignedMainSize),
@@ -49,8 +58,16 @@ auto StackLayoutItem::assignedMainSize() const noexcept -> Coordinate {
     return _assignedMainSize;
 }
 
+auto StackLayoutItem::spacingBefore() const noexcept -> Coordinate {
+    return _spacingBefore;
+}
+
 auto StackLayoutItem::assignedCrossSize() const noexcept -> Coordinate {
     return _assignedCrossSize;
+}
+
+auto StackLayoutItem::margins() const noexcept -> Margins {
+    return _margins;
 }
 
 auto StackLayoutItem::surface() const noexcept -> const SurfacePtr & {
@@ -85,6 +102,16 @@ auto StackLayoutItem::shrink(const Coordinate requestedShrink, const bool shrink
         std::min(requestedShrink, _mainConstraints.shrinkLimit(_assignedMainSize, shrinkBelowMinimum));
     _assignedMainSize -= appliedShrink;
     return appliedShrink;
+}
+
+auto StackLayoutItem::shrinkSpacingBefore(const Coordinate requestedShrink) noexcept -> Coordinate {
+    const auto appliedShrink = std::min(requestedShrink, _spacingBefore);
+    _spacingBefore -= appliedShrink;
+    return appliedShrink;
+}
+
+void StackLayoutItem::setSpacingBefore(const Coordinate spacingBefore) noexcept {
+    _spacingBefore = std::max(spacingBefore, Coordinate{0});
 }
 
 void StackLayoutItem::applyLayout(

@@ -9,11 +9,17 @@
 namespace erbsland::cterm::ui::layout {
 
 Buttons::Buttons(ProtectedTag) noexcept {
-    themeAttributes().setElement(theme::Element::Buttons);
 }
 
 auto Buttons::create() -> ButtonsPtr {
-    return std::make_shared<Buttons>(ProtectedTag{});
+    auto result = std::make_shared<Buttons>(ProtectedTag{});
+    result->initializeUi();
+    return result;
+}
+
+void Buttons::initializeUi() {
+    Layout::initializeUi();
+    themeAttributes().setElement(theme::Element::Buttons);
 }
 
 auto Buttons::addAction(ButtonActionPtr action) -> surface::ButtonPtr {
@@ -43,10 +49,26 @@ auto Buttons::onMeasure(MeasureScope &scope, const LayoutProposal &proposal) noe
     const auto spacing = scope.theme().forPart(theme::Part::Spacing).margins().spacing();
     const auto width = proposal.width().valueOr(layoutMetrics().preferred().width());
     const auto normalizedWidth = std::max(width, Coordinate{1});
-    const auto height = requiredHeight(normalizedWidth, spacing);
+    const auto rows = buildRows(
+        Size{normalizedWidth, Size::maximum().height()},
+        spacing,
+        [&scope](const surface::ButtonPtr &button, const LayoutProposal &buttonProposal) -> LayoutMetrics {
+            return scope.measure(button, buttonProposal);
+        });
+    const auto minimumHeight = requiredMinimumHeight(rows, spacing);
+    const auto height = requiredHeight(rows, spacing);
+    auto propagatedMargins = Margins{};
+    if (!rows.empty()) {
+        propagatedMargins.setTop(rows.front().margins.top());
+        propagatedMargins.setBottom(rows.back().margins.bottom());
+        for (const auto &row : rows) {
+            propagatedMargins.expandTo(row.margins, Orientation::Horizontal);
+        }
+    }
     auto result = layoutMetrics();
-    result.setMinimumHeight(height);
+    result.setMinimumHeight(minimumHeight);
     result.setPreferred(Size{normalizedWidth, height});
+    result.setMargins(result.margins().expandedWith(propagatedMargins));
     return result;
 }
 
@@ -54,14 +76,39 @@ void Buttons::onLayout(LayoutScope &scope) noexcept {
     auto y = Coordinate{0};
     const auto newSize = scope.size();
     const auto spacing = scope.theme().forPart(theme::Part::Spacing).margins().spacing();
-    for (const auto &row : buildRows(newSize, spacing)) {
+    const auto rows = buildRows(
+        newSize,
+        spacing,
+        [&scope](const surface::ButtonPtr &button, const LayoutProposal &buttonProposal) -> LayoutMetrics {
+            return scope.measure(button, buttonProposal);
+        });
+    auto rowSpacingOverflow = std::max(requiredHeight(rows, spacing) - newSize.height(), Coordinate{0});
+    auto previousRowMargins = Margins{};
+    auto firstRow = true;
+    for (const auto &row : rows) {
+        if (!firstRow) {
+            const auto preferredSpacing =
+                collapsedSpacing(spacing.height(), previousRowMargins.bottom(), row.margins.top());
+            const auto spacingReduction = std::min(rowSpacingOverflow, preferredSpacing - spacing.height());
+            y += preferredSpacing - spacingReduction;
+            rowSpacingOverflow -= spacingReduction;
+        }
         auto x = std::max((newSize.width() - row.width) / 2, Coordinate{0});
+        auto previousButtonMargins = Margins{};
+        auto firstButton = true;
         for (const auto &layoutButton : row.buttons) {
+            if (!firstButton) {
+                x += collapsedSpacing(spacing.width(), previousButtonMargins.right(), layoutButton.margins.left());
+            }
             const auto buttonSize = Size{layoutButton.width, 1};
             scope.place(layoutButton.button, Rectangle{{x, y}, buttonSize});
-            x += layoutButton.width + spacing.width();
+            x += layoutButton.width;
+            previousButtonMargins = layoutButton.margins;
+            firstButton = false;
         }
-        y += 1 + spacing.height();
+        y += 1;
+        previousRowMargins = row.margins;
+        firstRow = false;
     }
 }
 
@@ -163,23 +210,34 @@ auto Buttons::focusableButtons() const -> std::vector<surface::ButtonPtr> {
     return result;
 }
 
-auto Buttons::buildRows(const Size size, const Size spacing) const -> std::vector<LayoutRow> {
+auto Buttons::buildRows(const Size size, const Size spacing, const MeasureButtonFunction &measureButton) const
+    -> std::vector<LayoutRow> {
     const auto availableWidth = std::max(size.width(), Coordinate{1});
     auto rows = std::vector<LayoutRow>{};
     auto currentRow = LayoutRow{};
     for (const auto &button : visibleButtons()) {
-        button->refreshLayoutSize();
-        const auto preferredWidth = button->layoutMetrics().preferred().width();
+        const auto metrics = measureButton(button, LayoutProposal::atMost(Size{availableWidth, 1}));
+        const auto preferredWidth = metrics.preferred().width();
         const auto width = std::max(std::min(preferredWidth, availableWidth), Coordinate{1});
-        const auto addedWidth = currentRow.buttons.empty() ? width : width + spacing.width();
+        const auto margins = metrics.margins();
+        const auto addedSpacing = currentRow.buttons.empty()
+            ? Coordinate{0}
+            : collapsedSpacing(spacing.width(), currentRow.buttons.back().margins.right(), margins.left());
+        const auto addedWidth = width + addedSpacing;
         if (!currentRow.buttons.empty() && currentRow.width + addedWidth > availableWidth) {
             rows.emplace_back(std::move(currentRow));
             currentRow = LayoutRow{};
         }
         if (!currentRow.buttons.empty()) {
-            currentRow.width += spacing.width();
+            currentRow.width +=
+                collapsedSpacing(spacing.width(), currentRow.buttons.back().margins.right(), margins.left());
         }
-        currentRow.buttons.push_back(LayoutButton{button, width});
+        currentRow.margins.expandTo(margins, Orientation::Vertical);
+        if (currentRow.buttons.empty()) {
+            currentRow.margins.setLeft(margins.left());
+        }
+        currentRow.margins.setRight(margins.right());
+        currentRow.buttons.push_back(LayoutButton{button, margins, width});
         currentRow.width += width;
     }
     if (!currentRow.buttons.empty()) {
@@ -188,12 +246,27 @@ auto Buttons::buildRows(const Size size, const Size spacing) const -> std::vecto
     return rows;
 }
 
-auto Buttons::requiredHeight(const Coordinate width, const Size spacing) const -> Coordinate {
-    const auto rows = buildRows(Size{std::max(width, Coordinate{1}), Size::maximum().height()}, spacing);
+auto Buttons::collapsedSpacing(const Coordinate minimum, const Coordinate trailing, const Coordinate leading) noexcept
+    -> Coordinate {
+    return std::max(minimum, std::max(trailing, leading));
+}
+
+auto Buttons::requiredHeight(const std::vector<LayoutRow> &rows, const Size spacing) noexcept -> Coordinate {
     if (rows.empty()) {
         return 0;
     }
-    return static_cast<Coordinate>(rows.size()) + static_cast<Coordinate>(rows.size() - 1) * spacing.height();
+    auto result = static_cast<Coordinate>(rows.size());
+    for (auto index = std::size_t{1}; index < rows.size(); ++index) {
+        result += collapsedSpacing(spacing.height(), rows[index - 1].margins.bottom(), rows[index].margins.top());
+    }
+    return result;
+}
+
+auto Buttons::requiredMinimumHeight(const std::vector<LayoutRow> &rows, const Size spacing) noexcept -> Coordinate {
+    if (rows.empty()) {
+        return 0;
+    }
+    return static_cast<Coordinate>(rows.size()) + (static_cast<Coordinate>(rows.size()) - 1) * spacing.height();
 }
 
 auto Buttons::isButtonFullyVisible(const surface::ButtonPtr &button) const noexcept -> bool {

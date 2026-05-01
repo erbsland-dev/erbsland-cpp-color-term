@@ -7,9 +7,11 @@
 #include <erbsland/cterm/theme/Theme.hpp>
 #include <erbsland/cterm/theme/ThemeBuilder.hpp>
 #include <erbsland/cterm/ui/event/impl/EventClockAccess.hpp>
+#include <erbsland/cterm/ui/surface/DynamicText.hpp>
 #include <erbsland/cterm/ui/surface/Panel.hpp>
 #include <erbsland/unittest/UnitTest.hpp>
 
+#include <format>
 #include <ranges>
 #include <thread>
 #include <vector>
@@ -122,6 +124,35 @@ public:
         REQUIRE_EQUAL(fireTimes[0], std::chrono::milliseconds{35});
         REQUIRE_EQUAL(fireTimes[1], std::chrono::milliseconds{35});
         REQUIRE_EQUAL(fireTimes[2], std::chrono::milliseconds{35});
+    }
+
+    void testDynamicTextRepeatedUpdateUsesSurfaceScheduler() {
+        auto clock = std::make_shared<UiSchedulerManualClock>();
+        auto clockOverride = ui::impl::ScopedEventClockOverride{[clock]() -> ui::EventTime { return clock->now(); }};
+        const auto backend = std::make_shared<ControlledTimeBackend>(clock);
+        auto terminal = std::make_shared<Terminal>(backend, Size{8, 1});
+        terminal->setOutputMode(Terminal::OutputMode::Text);
+        auto application = ExactSizeApplication{terminal};
+        auto page = ui::Page::create();
+        auto dynamicText = ui::DynamicText::create();
+        auto updateCount = 0;
+
+        dynamicText->editLayoutMetrics().setFixedWidth(8);
+        dynamicText->setUpdateFn([&updateCount](String &text, const Coordinate width) -> void {
+            updateCount += 1;
+            text = String{std::format("T{}-{}", updateCount, width)};
+            if (updateCount == 2) {
+                ui::getApplication().quit();
+            }
+        });
+        dynamicText->setUpdateInterval(std::chrono::milliseconds{10});
+        page->addSurface(dynamicText);
+        application.setMainPage(page);
+
+        application.run();
+
+        REQUIRE_EQUAL(updateCount, 2);
+        REQUIRE_EQUAL(render(dynamicText->text()), "T2-8");
     }
 
     void testSubMillisecondScheduledActionWakeUsesZeroTimeoutInputPolling() {
@@ -287,10 +318,9 @@ private:
         }
     };
 
-    [[nodiscard]] static auto pageTheme(const char32_t block) -> theme::ThemeConstPtr {
-        auto builder = theme::ThemeBuilder::from(theme::Theme::dark());
-        builder.edit(theme::Selector{theme::Element::Page, theme::Part::Background})
-            .setBlock(theme::BlockRole::Background, block);
+    [[nodiscard]] static auto pageTheme(const char32_t backgroundBlock) -> theme::ThemeConstPtr {
+        auto builder = theme::ThemeBuilder::zero();
+        builder.edit(theme::Selector{theme::Element::Page, theme::Part::Background}).setBlocks(backgroundBlock);
         return builder.build();
     }
 };

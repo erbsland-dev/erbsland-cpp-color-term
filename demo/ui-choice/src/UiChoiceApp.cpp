@@ -21,10 +21,11 @@ void UiChoiceApp::setupUi() {
     page->addSurface(root);
 
     auto header = ui::HeaderLine::create();
-    header->setText(ui::TextLine::Section::Left, String{"Choice Dialog", fg::BrightWhite});
-    header->setMargins(ui::TextLine::Section::Left, Margins{1, 0});
-    header->setText(ui::TextLine::Section::Right, String{"composition demo", fg::BrightYellow});
-    header->setMargins(ui::TextLine::Section::Right, Margins{1, 0});
+    using S = ui::DynamicTextLine::Section;
+    header->setText(S::Left, String{"Choice Dialog", fg::BrightWhite});
+    header->setMargins(S::Left, Margins{1, 0});
+    header->setText(S::Right, String{"composition demo", fg::BrightYellow});
+    header->setMargins(S::Right, Margins{1, 0});
     root->addSurface(header);
 
     auto frame = ui::Frame::create();
@@ -37,7 +38,7 @@ void UiChoiceApp::setupUi() {
     frame->setContentSurface(body);
 
     auto intro = ui::TextBox::create(String{"This demo app opens a modal choice overlay.", fg::BrightWhite});
-    intro->setTextOptions(TextOptions{Alignment::Center});
+    intro->setAlignment(Alignment::Center);
     intro->editLayoutMetrics().setSizePolicy(ui::SizePolicy::Grow);
     body->addSurface(intro);
 

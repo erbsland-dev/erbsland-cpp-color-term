@@ -96,7 +96,8 @@ public: // compatibility
         std::string_view text, Alignment alignment, Rectangle rect, Color color = {}, std::size_t animationCycle = 0);
 
 private:
-    static void validateBufferSize(Size size);
+    /// Validate the buffer size and return it if it is valid, otherwise throw an exception.
+    static auto validatedBufferSize(Size size) -> Size;
 
 private:
     Size _size{cMinimumSize};

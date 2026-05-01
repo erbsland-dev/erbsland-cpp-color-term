@@ -27,7 +27,7 @@ Display::Display(TerminalPtr terminal, PagePtr mainPage, SizeLimits sizeLimits) 
 
 Display::Display(TerminalPtr terminal, PagePtr mainPage, theme::ThemeConstPtr theme, SizeLimits sizeLimits) :
     _terminal(std::move(terminal)),
-    _minimumDisplaySize{sizeLimits.minimumDisplaySize.componentMax(sizeLimits.hardMinimumDisplaySize)},
+    _minimumDisplaySize{sizeLimits.minimumDisplaySize.expandedWith(sizeLimits.hardMinimumDisplaySize)},
     _hardMinimumDisplaySize(sizeLimits.hardMinimumDisplaySize),
     _nextTerminalSizePollTime(impl::EventClockAccess::now()),
     _pageStack({std::move(mainPage)}),
@@ -125,7 +125,7 @@ void Display::setTheme(const theme::ThemeConstPtr &theme) {
 }
 
 void Display::setMinimumDisplaySize(const Size minimumDisplaySize) {
-    const auto effectiveMinimumDisplaySize = minimumDisplaySize.componentMax(_hardMinimumDisplaySize);
+    const auto effectiveMinimumDisplaySize = minimumDisplaySize.expandedWith(_hardMinimumDisplaySize);
     if (effectiveMinimumDisplaySize == _minimumDisplaySize) {
         return;
     }
@@ -139,7 +139,7 @@ void Display::setHardMinimumDisplaySize(const Size hardMinimumDisplaySize) {
     }
     _hardMinimumDisplaySize = hardMinimumDisplaySize;
     _updateSettings.setMinimumSize(_hardMinimumDisplaySize);
-    _minimumDisplaySize = _minimumDisplaySize.componentMax(hardMinimumDisplaySize);
+    _minimumDisplaySize = _minimumDisplaySize.expandedWith(hardMinimumDisplaySize);
     refreshTerminalSize();
 }
 
@@ -406,7 +406,7 @@ auto Display::themeContextForSurface(const SurfacePtr &surface) const -> ThemeCo
 }
 
 void Display::refreshTerminalSize() {
-    const auto newTerminalSize = _terminal->size().componentMax(_minimumDisplaySize);
+    const auto newTerminalSize = _terminal->size().expandedWith(_minimumDisplaySize);
     if (newTerminalSize != _terminalSize) {
         _terminalSize = newTerminalSize;
         _hasPendingResize = true;

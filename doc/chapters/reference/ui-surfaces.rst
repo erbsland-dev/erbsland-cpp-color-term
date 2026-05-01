@@ -43,6 +43,9 @@ Centering Labels with TextBox
 :cpp:any:`TextBox <erbsland::cterm::ui::surface::TextBox>` renders one
 terminal string using the same alignment and wrapping rules as
 :cpp:any:`Text <erbsland::cterm::Text>`.
+The ``Text`` theme part may add margins and padding around this content:
+margins stay outside the text box's painted area, while padding is filled
+with the text part's background block and style.
 
 .. code-block:: cpp
 
@@ -185,61 +188,33 @@ small is expanded to stay readable:
 Building Reusable Lines
 -----------------------
 
-:cpp:any:`AbstractLine <erbsland::cterm::ui::surface::AbstractLine>`
-owns the one-line layout algorithm shared by headers, footers, and
-compact status rows. Subclasses provide the section text, optional
-margins, and collapse behavior.
-
-.. code-block:: cpp
-
-    class DemoLine final : public ui::AbstractLine {
-    public:
-        explicit DemoLine(ProtectedTag protectedTag) noexcept : AbstractLine{protectedTag} {}
-
-        [[nodiscard]] static auto create() -> std::shared_ptr<DemoLine> {
-            return std::make_shared<DemoLine>(ProtectedTag{});
-        }
-
-        [[nodiscard]] auto text(Section section) const -> const String & override {
-            switch (section) {
-            case Section::Left:
-                return _left;
-            case Section::Middle:
-                return _middle;
-            case Section::Right:
-                return _right;
-            }
-            return _middle;
-        }
-
-    private:
-        String _left{"Demo", Color{fg::BrightWhite, bg::Inherited}};
-        String _middle{};
-        String _right{"Ready", Color{fg::BrightYellow, bg::Inherited}};
-    };
-
-:cpp:any:`TextLine <erbsland::cterm::ui::surface::TextLine>` builds on
-that base and owns three optional fields, so many apps do not need to
-subclass at all. :cpp:any:`HeaderLine <erbsland::cterm::ui::surface::HeaderLine>`
-is the same field-based surface with a separate theme element for header
-styling.
+:cpp:any:`DynamicTextLine <erbsland::cterm::ui::surface::DynamicTextLine>`
+is a composed one-line surface for headers and compact status rows. It
+owns three managed :cpp:any:`DynamicText <erbsland::cterm::ui::surface::DynamicText>`
+children for the left, middle, and right sections. The line calculates
+where those children belong; the children paint and crop their own text.
 
 .. code-block:: cpp
 
     auto header = ui::HeaderLine::create();
-    using Section = ui::TextLine::Section;
-    using UpdateMode = ui::TextLine::UpdateMode;
+    using Section = ui::DynamicTextLine::Section;
+    using SpacePriority = ui::DynamicTextLine::SpacePriority;
+
     header->setText(
         Section::Left,
         String{"Viewer", Color{fg::BrightWhite, bg::Inherited}});
     header->setMargins(Section::Left, Margins{1, 0});
-    header->setUpdateMode(Section::Right, UpdateMode::OnRefresh);
-    header->setUpdateFn(Section::Right, [](String &text, Coordinate width) {
+
+    header->dynamicText(Section::Right)->setUpdateFn([](String &text, Coordinate width) {
         text = String{std::format("{} cells", width), Color{fg::BrightYellow, bg::Inherited}};
     });
+    header->dynamicText(Section::Right)->updateText();
+    header->setSpacePriority(Section::Right, SpacePriority::Shrink);
 
 The line background itself comes from the active theme. This lets you
-change the full application color scheme without rewriting each field.
+change the full application color scheme without rewriting each section.
+:cpp:any:`HeaderLine <erbsland::cterm::ui::surface::HeaderLine>` is a
+thin specialization with its own theme element for header styling.
 
 Line Layout Rules
 -----------------
@@ -251,13 +226,11 @@ in this order:
 * right second
 * middle last inside the remaining gap
 
-The :cpp:any:`sectionWidth() <erbsland::cterm::ui::surface::AbstractLine::sectionWidth>`
-value is the current pre-collapse width budget for that section. It
+The :cpp:any:`sectionWidth() <erbsland::cterm::ui::surface::DynamicTextLine::sectionWidth>`
+value is the current width assigned to the child text surface. It
 excludes the section's own left and right margins.
 
-Section presence is determined by
-:cpp:any:`hasText() <erbsland::cterm::ui::surface::AbstractLine::hasText>`.
-Sections that are absent reserve no width and their margins are ignored.
+Sections with empty text reserve no width and their margins are ignored.
 This means a header with only a left section can naturally use the whole
 line, while a middle section shrinks only when visible left or right
 sections actually consume space.
@@ -271,38 +244,22 @@ Margins only affect the horizontal layout:
 * the right section uses its right margin as an inset from the line edge
   and its left margin as spacing towards the center
 
-Collapse behavior is evaluated after the width budget is known:
+The managed ``DynamicText`` children also honor horizontal margins and
+padding from the line's ``Text`` theme part. Top and bottom values are
+ignored because these are strict one-line surfaces.
 
-* ``Ellipsis`` trims the visible text to fit and appends or prepends one
-  ellipsis marker depending on the anchor
+Space priority is evaluated after the width budget is known:
+
+* ``Keep`` preserves the section's preferred width even if sections
+  overlap.
+* ``Shrink`` assigns no more than the available width and lets
+  ``DynamicText`` crop the visible text.
 * ``Hide`` omits the section entirely when it does not fit, releasing
-  both text width and margins
-* ``Never`` paints the full text and does not reserve width for sibling
-  sections, so overlap is possible and the final drawing is clipped to
-  the line rectangle
+  both text width and margins.
 
-Owned Field Updates
--------------------
-
-The concrete :cpp:any:`TextLine <erbsland::cterm::ui::surface::TextLine>`
-stores one optional
-:cpp:any:`Field <erbsland::cterm::ui::surface::TextLine::Field>` for
-each section. A field can contain static text, margins, collapse
-behavior, and an optional updater callback.
-
-Automatic updates are controlled per field:
-
-* ``Static`` never calls the updater, even if one is assigned. Update
-  the text explicitly with ``setText()``.
-* ``OnRefresh`` calls the updater before every paint pass when an
-  updater exists.
-* ``OnResize`` calls the updater when that section's current
-  ``sectionWidth()`` changes. Width changes can come from terminal
-  resizing, margin changes, sibling text appearing or disappearing, or
-  sibling collapse behavior changing.
-
-If no updater is set, the field behaves as static content even when the
-stored update mode is ``OnRefresh`` or ``OnResize``.
+Use :cpp:any:`dynamicText() <erbsland::cterm::ui::surface::DynamicTextLine::dynamicText>`
+when you need the full text-surface API, for example to install an
+update callback, schedule periodic updates, or adjust alignment.
 
 Dynamic Text, Action Help, and Footers
 --------------------------------------
@@ -315,17 +272,20 @@ three sections.
 :cpp:any:`ActionHelp <erbsland::cterm::ui::surface::ActionHelp>` finds
 the nearest page, collects enabled actions from the focused surface
 chain, deduplicates shared ``ActionPtr`` instances, and renders the
-available keyboard help. :cpp:any:`FooterLine <erbsland::cterm::ui::surface::FooterLine>`
+available keyboard help. The spaces between key brackets, key labels,
+and action names come from collapsed horizontal margins on the ``Key``,
+``KeyBracket``, and ``Text`` theme parts.
+:cpp:any:`FooterLine <erbsland::cterm::ui::surface::FooterLine>`
 combines a left-side ``DynamicText`` with right-side action help and can
 temporarily overlay centered status messages.
 
 .. code-block:: cpp
 
     auto footer = ui::FooterLine::create();
-    footer->leftText()->setUpdateMode(ui::DynamicText::UpdateMode::OnRefresh);
     footer->leftText()->setUpdateFn([](String &text, Coordinate width) {
         text = String{std::format("width {}", width)};
     });
+    footer->leftText()->updateText();
     footer->displayMessage(
         "Saved",
         CharStyle{Color{fg::BrightWhite, bg::Blue}},
@@ -371,10 +331,7 @@ Reference
 .. doxygenclass:: erbsland::cterm::ui::surface::ScrollCorner
     :members:
 
-.. doxygenclass:: erbsland::cterm::ui::surface::AbstractLine
-    :members:
-
-.. doxygenclass:: erbsland::cterm::ui::surface::TextLine
+.. doxygenclass:: erbsland::cterm::ui::surface::DynamicTextLine
     :members:
 
 .. doxygenclass:: erbsland::cterm::ui::surface::HeaderLine
