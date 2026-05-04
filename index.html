@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erbsland Color Terminal Library Documentation &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="_static/ansi.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="chapters/get-started/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="chapters/get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Erbsland Color Terminal Library Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="erbsland-color-terminal-library-documentation">
+<h1>Erbsland Color Terminal Library Documentation<a class="headerlink" href="#erbsland-color-terminal-library-documentation" title="Link to this heading"></a></h1>
+<p>The <strong>Erbsland Color Terminal</strong> library is a small and focused C++20 static library designed for building rich terminal applications.</p>
+<p>It provides reliable building blocks for colorful terminal output, Unicode-aware text handling, key-based input,
+buffer-based rendering, wrapped paragraph layout, rich-text and HTML rendering, and a beta UI framework for
+structured terminal applications. These layers let you build command-line tools, dashboards, document-like terminal
+output, and full-screen terminal interfaces without reinventing low-level terminal plumbing.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/retro-plasma.jpg"><img alt="_images/retro-plasma.jpg" src="_images/retro-plasma.jpg" style="width: 100%;" />
+</a>
+</figure>
+<p class="sd-text-center"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-success sd-fs-2 sd-font-weight-bold sd-p-3 reference internal" href="chapters/get-started/index.html"><span class="doc">Get Started with the Tutorial →</span></a></span></p>
+<section id="topics">
+<h2>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mt-4 sd-mb-4 sd-ml-0 sd-mr-0 docutils">
+<div class="sd-row sd-row-cols-3 sd-row-cols-xs-3 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-g-1 sd-g-xs-1 sd-g-sm-1 sd-g-md-1 sd-g-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<span class="fas fa-user sd-text-success"></span> Usage Guides</div>
+<p class="sd-card-text">Learn how to install the library, integrate it into your application, and run its unit tests.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="chapters/usage/index.html"><span class="doc">Usage</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<span class="fas fa-user-graduate sd-text-success"></span> Step-by-Step Tutorial</div>
+<p class="sd-card-text">Start with a compact introduction to the library and build your first terminal program step by step.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="chapters/get-started/index.html"><span class="doc">Getting Started</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<span class="fas fa-code sd-text-success"></span> API Reference</div>
+<p class="sd-card-text">Explore the public modules for terminal I/O, buffers, paragraph layout, rich text, and the beta UI framework.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="chapters/reference/index.html"><span class="doc">Reference</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<span class="fas fa-microchip sd-text-success"></span> Implementation Notes</div>
+<p class="sd-card-text">Read contributor-focused notes about backends, scheduling, paragraph layout, remapped buffers, stack layout,
+and rich-text rendering internals.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="chapters/implementation/index.html"><span class="doc">Implementation Notes</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<span class="fas fa-images sd-text-success"></span> Demo Gallery</div>
+<p class="sd-card-text">Browse the included demo applications with screenshots and notes about the showcased features.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="chapters/demos/index.html"><span class="doc">Demos</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<span class="fas fa-layer-group sd-text-success"></span> Requirements</div>
+<p class="sd-card-text">Review the compiler and CMake requirements for using the library, plus the extra tooling requirements for
+development work.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="chapters/requirements.html"><span class="doc">Requirements</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<span class="fas fa-timeline sd-text-success"></span> Change Log</div>
+<p class="sd-card-text">Track new features, improvements, and breaking changes between releases.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="chapters/changelog.html"><span class="doc">Changelog</span></a></div>
+</div>
+</div>
+</div>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<section id="terminal-foundations">
+<h3>Terminal Foundations<a class="headerlink" href="#terminal-foundations" title="Link to this heading"></a></h3>
+<p>The foundational layer provides portable building blocks for terminal interaction and text handling.</p>
+<ul class="simple">
+<li><p>Cross-platform terminal backend for <strong>Linux, macOS, and Windows</strong> — write once and compile everywhere</p></li>
+<li><p>Direct control over <strong>colors, cursor positioning, and screen management</strong></p></li>
+<li><p>Automatic terminal detection and initialization</p></li>
+<li><p>Convenient colored text output using <strong>ANSI escape sequences</strong></p></li>
+<li><p>Optional <strong>text-only mode</strong> for non-interactive applications</p></li>
+<li><p><strong>Unicode-aware terminal strings</strong> with accurate display-width calculation</p></li>
+<li><p>Automatic handling of <strong>wide and combined Unicode code points</strong></p></li>
+<li><p>Configurable handling of <strong>invalid UTF-8</strong>, including strict rejection and deterministic replacement</p></li>
+<li><p><strong>Interactive key input</strong> and traditional <strong>line-based input</strong></p></li>
+<li><p>Geometry utilities for positions, sizes, rectangles, anchors, alignment, margins, and bitmaps</p></li>
+<li><p>Automatic <strong>terminal state restoration on exit</strong>, including unexpected exits caused by signals</p></li>
+</ul>
+</section>
+<section id="rendering-buffers-and-layout">
+<h3>Rendering, Buffers, and Layout<a class="headerlink" href="#rendering-buffers-and-layout" title="Link to this heading"></a></h3>
+<p>The rendering layer builds on the terminal primitives to simplify complex screen output and reusable text layout.</p>
+<ul class="simple">
+<li><p>Efficient <strong>cell buffer classes</strong> for preparing terminal output</p></li>
+<li><p>Automatic <strong>back-buffering and delta screen updates</strong></p></li>
+<li><p>Automatic switching to the <strong>alternate screen</strong> and restoration on exit</p></li>
+<li><p><a class="reference internal" href="chapters/reference/cursor-output.html#_CPPv4N8erbsland5cterm12CursorWriterE" title="erbsland::cterm::CursorWriter"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter</span></code></a> and
+<a class="reference internal" href="chapters/reference/buffer.html#_CPPv4N8erbsland5cterm12CursorBufferE" title="erbsland::cterm::CursorBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorBuffer</span></code></a> for shared streaming output to terminals and
+scrollback-style buffers</p></li>
+<li><p><a class="reference internal" href="chapters/reference/buffer.html#_CPPv4N8erbsland5cterm14RemappedBufferE" title="erbsland::cterm::RemappedBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">RemappedBuffer</span></code></a> for efficient row- and column-oriented editing
+workloads</p></li>
+<li><p><strong>View system</strong> to render sections of buffers on screen</p></li>
+<li><p>Reusable paragraph layout with wrapping, indentation, tab stops, spacing, wrap markers, and ellipsis handling</p></li>
+<li><p>Text rendering helpers for alignment, animation, and reusable <strong>TextOptions</strong></p></li>
+<li><p>Frame and rectangle drawing utilities</p></li>
+<li><p>Character-combination framework for building block-based terminal graphics</p></li>
+<li><p><strong>Tile-9 fill</strong> and <strong>tile-16 frame</strong> drawing helpers</p></li>
+<li><p><strong>Custom font support</strong></p></li>
+<li><p><strong>Bitmap font rendering</strong> for large terminal text</p></li>
+<li><p>Color sequences and <strong>animated color effects</strong></p></li>
+<li><p>Bitmap utilities for generating masks and rendering bitmaps to the screen</p></li>
+</ul>
+</section>
+<section id="rich-text-and-html">
+<h3>Rich Text and HTML<a class="headerlink" href="#rich-text-and-html" title="Link to this heading"></a></h3>
+<p>The text layer can render structured terminal documents instead of only plain strings.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="chapters/reference/rich-text.html#_CPPv4N8erbsland5cterm4text12HtmlRendererE" title="erbsland::cterm::text::HtmlRenderer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">HtmlRenderer</span></code></a> converts a focused HTML subset into
+terminal-friendly output</p></li>
+<li><p><a class="reference internal" href="chapters/reference/rich-text.html#_CPPv4N8erbsland5cterm4text5StyleE" title="erbsland::cterm::text::Style"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Style</span></code></a>,
+<a class="reference internal" href="chapters/reference/rich-text.html#_CPPv4N8erbsland5cterm4text9StyleRuleE" title="erbsland::cterm::text::StyleRule"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">StyleRule</span></code></a>,
+<a class="reference internal" href="chapters/reference/rich-text.html#_CPPv4N8erbsland5cterm4text13StyleSelectorE" title="erbsland::cterm::text::StyleSelector"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">StyleSelector</span></code></a>, and
+<a class="reference internal" href="chapters/reference/rich-text.html#_CPPv4N8erbsland5cterm4text8TextNodeE" title="erbsland::cterm::text::TextNode"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">TextNode</span></code></a> support document-style rendering and customization</p></li>
+<li><p>Headings, lists, links, blockquotes, code blocks, and inline formatting can be rendered either into
+<a class="reference internal" href="chapters/reference/text.html#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">String</span></code></a> values or directly to any
+<a class="reference internal" href="chapters/reference/cursor-output.html#_CPPv4N8erbsland5cterm12CursorWriterE" title="erbsland::cterm::CursorWriter"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter</span></code></a></p></li>
+</ul>
+</section>
+<section id="beta-ui-framework">
+<h3>Beta UI Framework<a class="headerlink" href="#beta-ui-framework" title="Link to this heading"></a></h3>
+<p>The optional UI layer helps you build structured event-driven terminal applications.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="chapters/reference/ui-core.html#_CPPv4N8erbsland5cterm2ui11ApplicationE" title="erbsland::cterm::ui::Application"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::Application</span></code></a>,
+<a class="reference internal" href="chapters/reference/ui-core.html#_CPPv4N8erbsland5cterm2ui4PageE" title="erbsland::cterm::ui::Page"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::Page</span></code></a>,
+<a class="reference internal" href="chapters/reference/ui-core.html#_CPPv4N8erbsland5cterm2ui7SurfaceE" title="erbsland::cterm::ui::Surface"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::Surface</span></code></a>, and
+<a class="reference internal" href="chapters/reference/ui-core.html#_CPPv4N8erbsland5cterm2ui6LayoutE" title="erbsland::cterm::ui::Layout"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::Layout</span></code></a> provide the core abstractions for full-screen terminal apps</p></li>
+<li><p>Built-in <a class="reference internal" href="chapters/reference/ui-layouts.html#_CPPv4N8erbsland5cterm2ui6layout5StackE" title="erbsland::cterm::ui::layout::Stack"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::Stack</span></code></a>,
+<a class="reference internal" href="chapters/reference/ui-surfaces.html#_CPPv4N8erbsland5cterm2ui7surface5PanelE" title="erbsland::cterm::ui::surface::Panel"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::Panel</span></code></a>, and
+<a class="reference internal" href="chapters/reference/ui-surfaces.html#_CPPv4N8erbsland5cterm2ui7surface7TextBoxE" title="erbsland::cterm::ui::surface::TextBox"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::TextBox</span></code></a> cover common surface and layout needs</p></li>
+<li><p><a class="reference internal" href="chapters/reference/ui-input.html#_CPPv4N8erbsland5cterm2ui6ActionE" title="erbsland::cterm::ui::Action"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::Action</span></code></a> objects, schedulers, and event threads support focus-aware
+input handling, timed actions, and background work</p></li>
+<li><p><a class="reference internal" href="chapters/reference/theme.html"><span class="doc">Themes</span></a> centralize UI colors, terminal-cell block shapes, and content margins so
+applications can switch visual styles without per-widget styling code</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">erbsland::cterm::ui</span></code> framework is currently in beta and parts of the API may change in future
+releases.</p>
+</div>
+</section>
+<section id="ansi-foreground-background-colors">
+<h3>ANSI Foreground/Background Colors<a class="headerlink" href="#ansi-foreground-background-colors" title="Link to this heading"></a></h3>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/terminal-chronicle.jpg"><img alt="_images/terminal-chronicle.jpg" src="_images/terminal-chronicle.jpg" style="width: 100%;" />
+</a>
+</figure>
+<p>The library provides easy-to-use low-level functionality for colorful, Unicode-aware terminal output.</p>
+<p>Convenient print helpers allow you to combine text and colors while keeping your code readable and expressive.</p>
+<p>A dedicated <code class="docutils literal notranslate"><span class="pre">String</span></code> class makes it possible to work with colored text safely. Combined Unicode characters are grouped correctly, and each visible character can have its own foreground and background color.</p>
+</section>
+<section id="handling-of-zero-width-and-full-width-characters">
+<h3>Handling of Zero-Width and Full-Width Characters<a class="headerlink" href="#handling-of-zero-width-and-full-width-characters" title="Link to this heading"></a></h3>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/text-gallery2.jpg"><img alt="_images/text-gallery2.jpg" src="_images/text-gallery2.jpg" style="width: 100%;" />
+</a>
+</figure>
+<p>Mixing East Asian full-width characters or combined Unicode characters often breaks terminal layouts.</p>
+<p>The <strong>Erbsland Color Terminal</strong> library correctly calculates the display width of commonly used Unicode character sequences and automatically handles them during text output.</p>
+<p>This allows you to mix different scripts and Unicode symbols without breaking the layout of your terminal interface.</p>
+</section>
+<section id="frame-and-rectangle-drawing">
+<h3>Frame and Rectangle Drawing<a class="headerlink" href="#frame-and-rectangle-drawing" title="Link to this heading"></a></h3>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/frame-weaver3.jpg"><img alt="_images/frame-weaver3.jpg" src="_images/frame-weaver3.jpg" style="width: 100%;" />
+</a>
+</figure>
+<p>The library includes utilities for drawing frames, rectangles, and lines in various styles.</p>
+<p>When lines intersect, the library automatically selects the best matching line characters to produce visually consistent borders.</p>
+</section>
+<section id="text-wrapping-and-alignment">
+<h3>Text Wrapping and Alignment<a class="headerlink" href="#text-wrapping-and-alignment" title="Link to this heading"></a></h3>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/text-gallery3.jpg"><img alt="_images/text-gallery3.jpg" src="_images/text-gallery3.jpg" style="width: 100%;" />
+</a>
+</figure>
+<p>Text wrapping and alignment are integrated directly into the library.</p>
+<p>You can easily format text blocks within a defined area, apply alignment rules, and keep layouts stable even when working with Unicode text.</p>
+</section>
+<section id="bitmap-fonts">
+<h3>Bitmap Fonts<a class="headerlink" href="#bitmap-fonts" title="Link to this heading"></a></h3>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/text-gallery1.jpg"><img alt="_images/text-gallery1.jpg" src="_images/text-gallery1.jpg" style="width: 100%;" />
+</a>
+</figure>
+<p>The library can render large bitmap fonts directly in the terminal.</p>
+<p>You can use the built-in character set or provide your own custom bitmap font to create banners, headings, or decorative output.</p>
+</section>
+</section>
+<section id="contents-at-a-glance">
+<h2>Contents at a Glance<a class="headerlink" href="#contents-at-a-glance" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chapters/get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/demos/index.html">Demos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapters/demos/index.html#find-a-demo-by-feature">Find a Demo by Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/demos/index.html#building-the-demo-applications">Building the Demo Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/demos/index.html#browse-all-demo-pages">Browse All Demo Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/contribute/index.html">Contributing Guidelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapters/contribute/index.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/contribute/index.html#how-you-can-contribute">How You Can Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/contribute/index.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/contribute/index.html#about-the-use-of-artificial-intelligence">About the Use of Artificial Intelligence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/requirements.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapters/requirements.html#code-level-requirements">Code-Level Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/requirements.html#build-requirements">Build Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/requirements.html#development-and-test-tooling">Development and Test Tooling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-10-2-2026-05-04">Version 1.10.2 - 2026-05-04</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#highlights">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#added">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#improved">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#fixed">Fixed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#implementation">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-10-0-2026-04-30">Version 1.10.0 - 2026-04-30</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id1">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id2">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id3">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id4">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id5">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-9-0-2026-04-20">Version 1.9.0 - 2026-04-20</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id6">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id7">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id8">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id9">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id10">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#code-format">Code Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-8-0-2026-04-17">Version 1.8.0 - 2026-04-17</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id11">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id12">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id13">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id14">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id15">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-7-0-2026-03-27">Version 1.7.0 - 2026-03-27</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id16">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id17">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id18">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id19">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-6-0-2026-03-25">Version 1.6.0 - 2026-03-25</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id20">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id21">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id22">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id23">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id24">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-5-0-2026-03-21">Version 1.5.0 - 2026-03-21</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id25">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id26">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id27">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id28">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-4-0-2026-03-15">Version 1.4.0 - 2026-03-15</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id29">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id30">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id31">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id32">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-3-0-2026-03-10">Version 1.3.0 - 2026-03-10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id33">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id34">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id35">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id36">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-2-0-2026-03-10">Version 1.2.0 - 2026-03-10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id37">Highlights</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id38">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id39">Improved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapters/changelog.html#id40">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapters/changelog.html#version-1-0-0-2026-03-08">Version 1.0.0 — 2026-03-08</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapters/license.html">License</a></li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and Tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="chapters/get-started/index.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

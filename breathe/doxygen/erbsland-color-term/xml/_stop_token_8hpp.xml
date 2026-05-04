@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_stop_token_8hpp" kind="file" language="C++">
+    <compoundname>StopToken.hpp</compoundname>
+    <includes local="no">atomic</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includedby refid="ui_2all_8hpp" local="yes">erbsland/cterm/ui/all.hpp</includedby>
+    <includedby refid="_event_thread_8hpp" local="yes">erbsland/cterm/ui/event/EventThread.hpp</includedby>
+    <includedby refid="ui_2event_2all_8hpp" local="yes">erbsland/cterm/ui/event/all.hpp</includedby>
+    <includedby refid="_invocation_event_8hpp" local="yes">erbsland/cterm/ui/event/impl/InvocationEvent.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>erbsland/cterm/ui/event/StopToken.hpp</label>
+        <link refid="_stop_token_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>atomic</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="4">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>erbsland/cterm/ui/all.hpp</label>
+        <link refid="ui_2all_8hpp_source"/>
+      </node>
+      <node id="3">
+        <label>erbsland/cterm/ui/event/EventThread.hpp</label>
+        <link refid="_event_thread_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/ui/event/StopToken.hpp</label>
+        <link refid="_stop_token_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland/cterm/ui/event/all.hpp</label>
+        <link refid="ui_2event_2all_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>erbsland/cterm/ui/event/impl/InvocationEvent.hpp</label>
+        <link refid="_invocation_event_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_stop_state" prot="public">erbsland::cterm::ui::impl::StopState</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" prot="public">erbsland::cterm::ui::StopToken</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" prot="public">erbsland::cterm::ui::StopSource</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1ui">erbsland::cterm::ui</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1ui_1_1impl">erbsland::cterm::ui::impl</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;atomic&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm::ui::impl<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_stop_state" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_stop_state" kindref="compound">StopState</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="14" refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_stop_state_1ac50cdab73377090506fe5584e18df15e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::atomic&lt;bool&gt;<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_stop_state_1ac50cdab73377090506fe5584e18df15e" kindref="member">stopRequested</ref>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm::ui<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">StopSource;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref>;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1a700fe98aba375c734079f1ffc10a49dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1a700fe98aba375c734079f1ffc10a49dd" kindref="member">StopToken</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>~<ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref>()<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref><sp/>&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref><sp/>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref><sp/>&amp;<sp/>operator=(const<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref><sp/>&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref><sp/>&amp;<sp/>operator=(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref><sp/>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">public:</highlight></codeline>
+<codeline lineno="41" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1a1e6e9bd0f14e0852c3f2d44c5e565fba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1a1e6e9bd0f14e0852c3f2d44c5e565fba" kindref="member">stopPossible</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_state<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="44" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1aedaa8674c80c4c219b4a4ad437d5f76b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1aedaa8674c80c4c219b4a4ad437d5f76b" kindref="member">stopRequested</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_state<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_state-&gt;stopRequested.load(std::memory_order_acquire);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1a700fe98aba375c734079f1ffc10a49dd" kindref="member">StopToken</ref>(std::shared_ptr&lt;impl::StopState&gt;<sp/>state)<sp/>noexcept<sp/>:<sp/>_state{std::move(state)}<sp/>{}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>std::shared_ptr&lt;impl::StopState&gt;<sp/>_state;<sp/></highlight></codeline>
+<codeline lineno="58"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="64" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a0ea4372020cf1686fe363636fa1a79ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a0ea4372020cf1686fe363636fa1a79ac" kindref="member">StopSource</ref>()<sp/>:<sp/>_state{std::make_shared&lt;impl::StopState&gt;()}<sp/>{}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">~StopSource</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a0ea4372020cf1686fe363636fa1a79ac" kindref="member">StopSource</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref><sp/>&amp;)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a0ea4372020cf1686fe363636fa1a79ac" kindref="member">StopSource</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref><sp/>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref><sp/>&amp;<sp/>operator=(const<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref><sp/>&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref><sp/>&amp;<sp/>operator=(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref><sp/>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal">public:</highlight></codeline>
+<codeline lineno="76" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1ab17ddcfdbf3005b83c89531f9f832441" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1ab17ddcfdbf3005b83c89531f9f832441" kindref="member">getToken</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref>{_state};<sp/>}</highlight></codeline>
+<codeline lineno="79" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a79f770a952578e34593b989390ae9672" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a79f770a952578e34593b989390ae9672" kindref="member">stopPossible</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_state<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="82" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a87093e64b9f21a54b4bdea81db527f3a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a87093e64b9f21a54b4bdea81db527f3a" kindref="member">stopRequested</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_state<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_state-&gt;stopRequested.load(std::memory_order_acquire);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90" refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a89bbc1bca5884ae993c4a890673b5e44" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a89bbc1bca5884ae993c4a890673b5e44" kindref="member">requestStop</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_state<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!_state-&gt;stopRequested.exchange(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>std::memory_order_acq_rel);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>std::shared_ptr&lt;impl::StopState&gt;<sp/>_state;<sp/></highlight></codeline>
+<codeline lineno="99"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/ui/event/StopToken.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,366 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::KeyDecoder</compoundname>
+    <includes refid="_key_decoder_8hpp" local="no">erbsland/cterm/impl/KeyDecoder.hpp</includes>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1_1_parse_result" prot="public">erbsland::cterm::impl::KeyDecoder::ParseResult</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1_key_decoder_1_1_simple_sequence_definition" prot="private">erbsland::cterm::impl::KeyDecoder::SimpleSequenceDefinition</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ac79574eb8aefc3df45bbd6e7febd6a97" prot="private" static="no" mutable="no">
+        <type>std::string_view</type>
+        <definition>std::string_view erbsland::cterm::impl::KeyDecoder::_text</definition>
+        <argsstring></argsstring>
+        <name>_text</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::_text</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="90" column="22" bodyfile="erbsland/cterm/impl/KeyDecoder.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ad9fd76ab9bd342c90a97527061918e45" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::KeyDecoder::KeyDecoder</definition>
+        <argsstring>(const std::string_view text) noexcept</argsstring>
+        <name>KeyDecoder</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::KeyDecoder</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Create a decoder for the given input bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input bytes to decode. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="56" column="14" bodyfile="erbsland/cterm/impl/KeyDecoder.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1aabef9c22473f9a3b4e92a2e117b59683" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::KeyDecoder::KeyDecoder</definition>
+        <argsstring>(const KeyDecoder &amp;)=delete</argsstring>
+        <name>KeyDecoder</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::KeyDecoder</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder" kindref="compound">KeyDecoder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="58" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a186253d38a8b127dafe5fa90a29abca2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::KeyDecoder::KeyDecoder</definition>
+        <argsstring>(KeyDecoder &amp;&amp;)=delete</argsstring>
+        <name>KeyDecoder</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::KeyDecoder</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder" kindref="compound">KeyDecoder</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="59" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a2cf6a766eb0a8d07d74fb92f8c39abcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder" kindref="compound">KeyDecoder</ref> &amp;</type>
+        <definition>KeyDecoder &amp; erbsland::cterm::impl::KeyDecoder::operator=</definition>
+        <argsstring>(const KeyDecoder &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder" kindref="compound">KeyDecoder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="60" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ad80d6725b4294230fddb55d8a5a3e353" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder" kindref="compound">KeyDecoder</ref> &amp;</type>
+        <definition>KeyDecoder &amp; erbsland::cterm::impl::KeyDecoder::operator=</definition>
+        <argsstring>(KeyDecoder &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder" kindref="compound">KeyDecoder</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="61" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1afe1229acee121fc8f75bee08795f2da5" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1_1_parse_result" kindref="compound">ParseResult</ref></type>
+        <definition>ParseResult erbsland::cterm::impl::KeyDecoder::parseConsoleInputPrefix</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>parseConsoleInputPrefix</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::parseConsoleInputPrefix</qualifiedname>
+        <briefdescription>
+<para>Parse one key from the beginning of the configured input bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The parsing result for the leading bytes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="66" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ab06763be7e77e07aad505025972c81fe" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref></type>
+        <definition>Key erbsland::cterm::impl::KeyDecoder::decodeConsoleInput</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>decodeConsoleInput</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::decodeConsoleInput</qualifiedname>
+        <briefdescription>
+<para>Decode exactly one full console input item. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The decoded key, or an invalid key if the text is unsupported or incomplete. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="69" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1aa4c275da8d071446b8bf31df61494723" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref></type>
+        <definition>static Key erbsland::cterm::impl::KeyDecoder::createCharacterKey</definition>
+        <argsstring>(const CombinedChar &amp;character) noexcept</argsstring>
+        <name>createCharacterKey</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::createCharacterKey</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="78" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1adb88b8e344f672b1edb86d266a1887aa" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::array&lt; SimpleSequenceDefinition, 6 &gt; &amp;</type>
+        <definition>static const std::array&lt; SimpleSequenceDefinition, 6 &gt; &amp; erbsland::cterm::impl::KeyDecoder::simpleSequenceDefinitions</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>simpleSequenceDefinitions</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::simpleSequenceDefinitions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="79" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ae0b7273f9e1e956c8c9eda450b4282f6" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_key_modifiers" kindref="compound">KeyModifiers</ref> &gt;</type>
+        <definition>static std::optional&lt; KeyModifiers &gt; erbsland::cterm::impl::KeyDecoder::parseModifierParameter</definition>
+        <argsstring>(int value) noexcept</argsstring>
+        <name>parseModifierParameter</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::parseModifierParameter</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="80" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1af2e12e071b835f9ce257b43201258f5e" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; std::vector&lt; int &gt; &gt;</type>
+        <definition>static std::optional&lt; std::vector&lt; int &gt; &gt; erbsland::cterm::impl::KeyDecoder::parseCsiParameters</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>parseCsiParameters</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::parseCsiParameters</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="81" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1aced4f45c80b01c5c27fa7973d6bbb318" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; std::size_t &gt;</type>
+        <definition>static std::optional&lt; std::size_t &gt; erbsland::cterm::impl::KeyDecoder::findCsiFinalByte</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>findCsiFinalByte</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::findCsiFinalByte</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="82" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ac224ec776613ba05245a05f0bc125410" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1" kindref="member">Key::Type</ref></type>
+        <definition>static Key::Type erbsland::cterm::impl::KeyDecoder::keyFromCsiFinal</definition>
+        <argsstring>(char finalByte) noexcept</argsstring>
+        <name>keyFromCsiFinal</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::keyFromCsiFinal</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>finalByte</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="83" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1af6bc1b3aa2f21ca90a95a4e5671e6403" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_key_1a4fd228cb2159e2d0afb6a1069decc5e1" kindref="member">Key::Type</ref></type>
+        <definition>static Key::Type erbsland::cterm::impl::KeyDecoder::keyFromCsiTildeParameter</definition>
+        <argsstring>(int parameter) noexcept</argsstring>
+        <name>keyFromCsiTildeParameter</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::keyFromCsiTildeParameter</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>parameter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="84" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a34f945f6046dff16f0f8fd30f988f7d3" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1_1_parse_result" kindref="compound">ParseResult</ref></type>
+        <definition>static ParseResult erbsland::cterm::impl::KeyDecoder::decodeCsi</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>decodeCsi</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::decodeCsi</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="85" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a101bac66a6bf8e652384252d790a83b5" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1_1_parse_result" kindref="compound">ParseResult</ref></type>
+        <definition>static ParseResult erbsland::cterm::impl::KeyDecoder::decodeSs3</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>decodeSs3</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::decodeSs3</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="86" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a04e78de9d47d28e358f08fcf6fc99ed3" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result" kindref="compound">U8ParseResult</ref></type>
+        <definition>U8ParseResult erbsland::cterm::impl::KeyDecoder::parseUtf8CodePointPrefix</definition>
+        <argsstring>(std::size_t offset) const noexcept</argsstring>
+        <name>parseUtf8CodePointPrefix</name>
+        <qualifiedname>erbsland::cterm::impl::KeyDecoder::parseUtf8CodePointPrefix</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="87" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Decode one key from a UTF-8 console input buffer. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/KeyDecoder.hpp" line="20" column="1" bodyfile="erbsland/cterm/impl/KeyDecoder.hpp" bodystart="20" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ac79574eb8aefc3df45bbd6e7febd6a97" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>_text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1aa4c275da8d071446b8bf31df61494723" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>createCharacterKey</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ab06763be7e77e07aad505025972c81fe" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>decodeConsoleInput</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a34f945f6046dff16f0f8fd30f988f7d3" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>decodeCsi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a101bac66a6bf8e652384252d790a83b5" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>decodeSs3</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1aced4f45c80b01c5c27fa7973d6bbb318" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>findCsiFinalByte</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ad9fd76ab9bd342c90a97527061918e45" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>KeyDecoder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1aabef9c22473f9a3b4e92a2e117b59683" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>KeyDecoder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a186253d38a8b127dafe5fa90a29abca2" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>KeyDecoder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ac224ec776613ba05245a05f0bc125410" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>keyFromCsiFinal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1af6bc1b3aa2f21ca90a95a4e5671e6403" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>keyFromCsiTildeParameter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a2cf6a766eb0a8d07d74fb92f8c39abcf" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ad80d6725b4294230fddb55d8a5a3e353" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1afe1229acee121fc8f75bee08795f2da5" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>parseConsoleInputPrefix</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1af2e12e071b835f9ce257b43201258f5e" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>parseCsiParameters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1ae0b7273f9e1e956c8c9eda450b4282f6" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>parseModifierParameter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1a04e78de9d47d28e358f08fcf6fc99ed3" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>parseUtf8CodePointPrefix</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder_1adb88b8e344f672b1edb86d266a1887aa" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::KeyDecoder</scope><name>simpleSequenceDefinitions</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

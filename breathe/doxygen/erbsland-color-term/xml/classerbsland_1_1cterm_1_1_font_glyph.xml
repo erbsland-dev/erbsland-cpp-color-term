@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_font_glyph" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::FontGlyph</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1_bitmap" prot="public" virt="non-virtual">erbsland::cterm::Bitmap</basecompoundref>
+    <includes refid="_font_glyph_8hpp" local="no">erbsland/cterm/FontGlyph.hpp</includes>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_font_glyph_1a082626697b2fffdd8497e00841ca906e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::FontGlyph::cMaxGlyphWidth</definition>
+        <argsstring></argsstring>
+        <name>cMaxGlyphWidth</name>
+        <qualifiedname>erbsland::cterm::FontGlyph::cMaxGlyphWidth</qualifiedname>
+        <initializer>= 64</initializer>
+        <briefdescription>
+<para>Maximum supported glyph width when importing numeric row masks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FontGlyph.hpp" line="18" column="27" bodyfile="erbsland/cterm/FontGlyph.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_glyph_1a7cbf7d8db034b15ba1b03878e7aca409" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::FontGlyph::FontGlyph</definition>
+        <argsstring>()=default</argsstring>
+        <name>FontGlyph</name>
+        <qualifiedname>erbsland::cterm::FontGlyph::FontGlyph</qualifiedname>
+        <briefdescription>
+<para>Create an empty glyph. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FontGlyph.hpp" line="22" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_glyph_1a740119d4e76e2caca57186d1e3205a77" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::FontGlyph::FontGlyph</definition>
+        <argsstring>(const Size size) noexcept</argsstring>
+        <name>FontGlyph</name>
+        <qualifiedname>erbsland::cterm::FontGlyph::FontGlyph</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Create an empty glyph with the given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The glyph dimensions. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FontGlyph.hpp" line="25" column="14" bodyfile="erbsland/cterm/FontGlyph.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_glyph_1a7f471112dc5e55d8a200899a62295ff0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>erbsland::cterm::FontGlyph::FontGlyph</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;data)</argsstring>
+        <name>FontGlyph</name>
+        <qualifiedname>erbsland::cterm::FontGlyph::FontGlyph</qualifiedname>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+    <requiresclause>std::is_integral_v&lt;T&gt; &amp;&amp; std::is_unsigned_v&lt;T&gt;    </requiresclause>
+        <briefdescription>
+<para>Create a glyph from numeric row masks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>One 64-bit mask per bitmap row. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FontGlyph.hpp" line="30" column="14" bodyfile="erbsland/cterm/FontGlyph.hpp" bodystart="30" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_font_glyph_1a1b66ee17993e5f9d905c651fc687d3da" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr Coordinate</type>
+        <definition>static constexpr Coordinate erbsland::cterm::FontGlyph::calculateGlyphWidth</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;data) noexcept</argsstring>
+        <name>calculateGlyphWidth</name>
+        <qualifiedname>erbsland::cterm::FontGlyph::calculateGlyphWidth</qualifiedname>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+    <requiresclause>std::is_integral_v&lt;T&gt; &amp;&amp; std::is_unsigned_v&lt;T&gt;    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FontGlyph.hpp" line="39" column="34" bodyfile="erbsland/cterm/FontGlyph.hpp" bodystart="39" bodyend="45"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A bitmap glyph that can be used by a terminal text font. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::Bitmap</label>
+        <link refid="classerbsland_1_1cterm_1_1_bitmap"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::FontGlyph</label>
+        <link refid="classerbsland_1_1cterm_1_1_font_glyph"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>erbsland::cterm::Bitmap</label>
+        <link refid="classerbsland_1_1cterm_1_1_bitmap"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_size</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::FontGlyph</label>
+        <link refid="classerbsland_1_1cterm_1_1_font_glyph"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::Size</label>
+        <link refid="classerbsland_1_1cterm_1_1_size"/>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/FontGlyph.hpp" line="15" column="1" bodyfile="erbsland/cterm/FontGlyph.hpp" bodystart="15" bodyend="46"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ab6e6c8bb4a09190488f7416a5737de33" prot="protected" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>_data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a6d63dff2771b83e9e0bf02ec2664ddc4" prot="protected" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>_size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a7ecf67ceb9c5455e65120c82e08ef1d4" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>Bitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a665244b95823d49ae0e4ccad1fdbc028" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>Bitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a06d61aaec1009e332a72da1cd1bc777a" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>Bitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ad9e6ff3aa3e82610077b77a37d2db16e" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>Bitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1afe4da2cba34afc56a84e4bcbacb73090" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>boundingRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_glyph_1a1b66ee17993e5f9d905c651fc687d3da" prot="private" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>calculateGlyphWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_glyph_1a082626697b2fffdd8497e00841ca906e" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>cMaxGlyphWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a9fdada9eb67862fa8b01545a0adeeb7c" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>cMaximumBitmapSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a5b18d24a380eea19613d95efb830abaa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>Data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ae4a0983b91510e9ee12796b13dded22c" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1aea308a7e1835c5e2685ca20d71fbde62" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a306505b478b3b93744b02a91f43de53b" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>draw</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a6d5ab0810bab3e533d3e7e462b6d955e" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>draw</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ac3c007a45c53caba9d8d9ebce265d067" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>expanded</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a2d3577f6d58e7b4c979c20a3df4b0fed" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>fillRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a0405205a1bb3dd6535d3ed665a242359" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>flipHorizontal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a507ff7ce8ea782795b24f21b5e7de475" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>floodFill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_glyph_1a7cbf7d8db034b15ba1b03878e7aca409" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>FontGlyph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_glyph_1a740119d4e76e2caca57186d1e3205a77" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>FontGlyph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_font_glyph_1a7f471112dc5e55d8a200899a62295ff0" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>FontGlyph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a76fd6cd65a1198ea68fac80c38cacf87" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>fromFunction</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1aa71af37f75c2002606e5e8a3eee0ba09" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>fromPattern</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1aac0549d5785942bf291373f1007100ca" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>invert</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a1f068e0ab351750341247515a217eb0d" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>inverted</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a242e79ce343316ea263e7597d9f0ad81" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ac08fb226260eaba88b2ae77136840e0e" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a8f1ed8f319559027f8d35ce359143bf8" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>outlined</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1aeb9bd69611cf8d8af7c01f4d061f00a9" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>pixel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a8afab82d13d90b13ffdc04caac9bbf6a" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>pixelCardinal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a7c3e6989a15ffc47b4577242cecb30a9" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>pixelCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ad7c9fca179c403837c717049d79db983" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>pixelQuad</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a4be79dc2a7086be44f25e2ac5b0cf7f0" prot="protected" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>pixelRef</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a1e479ba26170926e420051d4d34c2ccf" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>pixelRing</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1aa26e949bee1e508dfb9ed2d281c15e63" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>rect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1abe4c9bc98cbf2a49594e72aba840e1c2" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>setPixel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ae1f3d14030b5aa43548c39a30778ea11" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1a23f2b7d9a1041f7605a652540322b81f" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>toPattern</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_bitmap_1ab6d102b22dd25496a34badc0d3546124" prot="public" virt="non-virtual"><scope>erbsland::cterm::FontGlyph</scope><name>~Bitmap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,614 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_scheduler_8hpp" kind="file" language="C++">
+    <compoundname>Scheduler.hpp</compoundname>
+    <includes refid="_event_8hpp" local="yes">Event.hpp</includes>
+    <includes refid="_scheduled_action_ref_8hpp" local="yes">ScheduledActionRef.hpp</includes>
+    <includes refid="_surface_ptr_8hpp" local="yes">../SurfacePtr.hpp</includes>
+    <includes local="no">chrono</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">mutex</includes>
+    <includes local="no">unordered_map</includes>
+    <includedby refid="_surface_8hpp" local="yes">erbsland/cterm/ui/Surface.hpp</includedby>
+    <includedby refid="ui_2all_8hpp" local="yes">erbsland/cterm/ui/all.hpp</includedby>
+    <includedby refid="ui_2event_2all_8hpp" local="yes">erbsland/cterm/ui/event/all.hpp</includedby>
+    <incdepgraph>
+      <node id="11">
+        <label>../SurfacePtr.hpp</label>
+        <link refid="_surface_ptr_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Event.hpp</label>
+        <link refid="_event_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>EventData.hpp</label>
+        <link refid="_event_data_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>EventType.hpp</label>
+        <link refid="_event_type_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ScheduledActionRef.hpp</label>
+        <link refid="_scheduled_action_ref_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/ui/event/Scheduler.hpp</label>
+        <link refid="_scheduler_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>chrono</label>
+      </node>
+      <node id="9">
+        <label>cstddef</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="12">
+        <label>functional</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+      <node id="13">
+        <label>mutex</label>
+      </node>
+      <node id="10">
+        <label>unordered_map</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="20">
+        <label>erbsland/cterm/ui/Application.hpp</label>
+        <link refid="_application_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>erbsland/cterm/ui/Display.hpp</label>
+        <link refid="_display_8hpp_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland/cterm/ui/Layout.hpp</label>
+        <link refid="ui_2_layout_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>erbsland/cterm/ui/Page.hpp</label>
+        <link refid="_page_8hpp_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland/cterm/ui/Surface.hpp</label>
+        <link refid="_surface_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland/cterm/ui/all.hpp</label>
+        <link refid="ui_2all_8hpp_source"/>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/ui/event/Scheduler.hpp</label>
+        <link refid="_scheduler_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>erbsland/cterm/ui/event/all.hpp</label>
+        <link refid="ui_2event_2all_8hpp_source"/>
+      </node>
+      <node id="23">
+        <label>erbsland/cterm/ui/event/impl/ScheduledActionEvent.hpp</label>
+        <link refid="_scheduled_action_event_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>erbsland/cterm/ui/layout/Buttons.hpp</label>
+        <link refid="_buttons_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>erbsland/cterm/ui/layout/Centered.hpp</label>
+        <link refid="_centered_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>erbsland/cterm/ui/layout/Frame.hpp</label>
+        <link refid="_frame_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>erbsland/cterm/ui/layout/Pages.hpp</label>
+        <link refid="_pages_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>erbsland/cterm/ui/layout/ScrollArea.hpp</label>
+        <link refid="_scroll_area_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>erbsland/cterm/ui/layout/Sections.hpp</label>
+        <link refid="_sections_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>erbsland/cterm/ui/layout/SingleContentLayout.hpp</label>
+        <link refid="_single_content_layout_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>erbsland/cterm/ui/layout/Stack.hpp</label>
+        <link refid="_stack_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>erbsland/cterm/ui/layout/Viewport.hpp</label>
+        <link refid="_viewport_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>erbsland/cterm/ui/layout/all.hpp</label>
+        <link refid="ui_2layout_2all_8hpp_source"/>
+      </node>
+      <node id="24">
+        <label>erbsland/cterm/ui/layout/impl/StackLayoutItem.hpp</label>
+        <link refid="_stack_layout_item_8hpp_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp</label>
+        <link refid="_stack_layout_items_8hpp_source"/>
+      </node>
+      <node id="7">
+        <label>erbsland/cterm/ui/page/Choice.hpp</label>
+        <link refid="_choice_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>erbsland/cterm/ui/page/HelpViewer.hpp</label>
+        <link refid="_help_viewer_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>erbsland/cterm/ui/page/all.hpp</label>
+        <link refid="ui_2page_2all_8hpp_source"/>
+      </node>
+      <node id="26">
+        <label>erbsland/cterm/ui/surface/AbstractHelpSection.hpp</label>
+        <link refid="_abstract_help_section_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>erbsland/cterm/ui/surface/AbstractScrollArea.hpp</label>
+        <link refid="_abstract_scroll_area_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>erbsland/cterm/ui/surface/AbstractScrollBar.hpp</label>
+        <link refid="_abstract_scroll_bar_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>erbsland/cterm/ui/surface/ActionHelp.hpp</label>
+        <link refid="_action_help_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>erbsland/cterm/ui/surface/ActionHelpSection.hpp</label>
+        <link refid="_action_help_section_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>erbsland/cterm/ui/surface/Button.hpp</label>
+        <link refid="_button_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>erbsland/cterm/ui/surface/DynamicText.hpp</label>
+        <link refid="_dynamic_text_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>erbsland/cterm/ui/surface/DynamicTextLine.hpp</label>
+        <link refid="_dynamic_text_line_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>erbsland/cterm/ui/surface/FooterLine.hpp</label>
+        <link refid="_footer_line_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>erbsland/cterm/ui/surface/HeaderLine.hpp</label>
+        <link refid="_header_line_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>erbsland/cterm/ui/surface/HorizontalScrollBar.hpp</label>
+        <link refid="_horizontal_scroll_bar_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>erbsland/cterm/ui/surface/HtmlHelpSection.hpp</label>
+        <link refid="_html_help_section_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>erbsland/cterm/ui/surface/Label.hpp</label>
+        <link refid="_label_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>erbsland/cterm/ui/surface/Panel.hpp</label>
+        <link refid="_panel_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>erbsland/cterm/ui/surface/ScrollCorner.hpp</label>
+        <link refid="_scroll_corner_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>erbsland/cterm/ui/surface/ScrollingBufferView.hpp</label>
+        <link refid="_scrolling_buffer_view_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>erbsland/cterm/ui/surface/StaticText.hpp</label>
+        <link refid="_static_text_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>erbsland/cterm/ui/surface/TextBox.hpp</label>
+        <link refid="_text_box_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>erbsland/cterm/ui/surface/VerticalScrollBar.hpp</label>
+        <link refid="_vertical_scroll_bar_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>erbsland/cterm/ui/surface/all.hpp</label>
+        <link refid="ui_2surface_2all_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler" prot="public">erbsland::cterm::ui::Scheduler</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1_scheduler_1_1_action_entry" prot="private">erbsland::cterm::ui::Scheduler::ActionEntry</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1ui">erbsland::cterm::ui</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Event.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ScheduledActionRef.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../SurfacePtr.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;chrono&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm::ui<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Scheduler;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SchedulerPtr<sp/>=<sp/>std::unique_ptr&lt;Scheduler&gt;;</highlight></codeline>
+<codeline lineno="23" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler" kindref="compound">Scheduler</ref><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="26" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>=<sp/>std::chrono::milliseconds;</highlight></codeline>
+<codeline lineno="28" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref><sp/>=<sp/>std::function&lt;void()&gt;;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>Mode<sp/>:<sp/>uint8_t<sp/>{<sp/>SingleShot,<sp/>Repeating<sp/>};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ActionEntry<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref><sp/>action;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mode<sp/>mode<sp/>=<sp/>Mode::SingleShot;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>delayOrInterval{};<sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EventTime<sp/>nextExecutionTime{};<sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>generation<sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="47" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ac4b4f4b6e70845a69e1a519c39903fe4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ac4b4f4b6e70845a69e1a519c39903fe4" kindref="member">cMaximumScheduledActions</ref><sp/>=<sp/>std::size_t{1000};</highlight></codeline>
+<codeline lineno="49" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9b2d999cea3fb047c2cb91e65f6b14d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9b2d999cea3fb047c2cb91e65f6b14d6" kindref="member">cMinimumInterval</ref><sp/>=<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref>{10};</highlight></codeline>
+<codeline lineno="51" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a330a27cf36bad8cab42618fd6058dc2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a330a27cf36bad8cab42618fd6058dc2a" kindref="member">cMaximumInterval</ref><sp/>=<sp/>std::chrono::duration_cast&lt;milliseconds&gt;(std::chrono::hours{12});</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="56" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ab411655e3066cc403415573763c90bf5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ab411655e3066cc403415573763c90bf5" kindref="member">Scheduler</ref>(SurfaceWeakPtr<sp/>surface);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler" kindref="compound">~Scheduler</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="64" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a588da59b185c2542621d2e085a4a0587" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a588da59b185c2542621d2e085a4a0587" kindref="member">addSingleShot</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref><sp/>&amp;&amp;action,<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>delay)<sp/>;</highlight></codeline>
+<codeline lineno="71" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1abad1906460c9052254a1e9aadac7d453" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1abad1906460c9052254a1e9aadac7d453" kindref="member">addSingleShot</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref><sp/>&amp;&amp;action,<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>actionRef,<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>delay)<sp/>;</highlight></codeline>
+<codeline lineno="76" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a2f7a27109e9f01028b437c6b3148a530" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a2f7a27109e9f01028b437c6b3148a530" kindref="member">addRepeated</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref><sp/>&amp;&amp;action,<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>interval)<sp/>;</highlight></codeline>
+<codeline lineno="81" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a86141eaf2e6f6c53437458bd7bfde534" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a86141eaf2e6f6c53437458bd7bfde534" kindref="member">setDelayOrInterval</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>actionRef,<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>delayOrInterval);</highlight></codeline>
+<codeline lineno="85" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a12ea7423d711970cb6b53c07a363539a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a12ea7423d711970cb6b53c07a363539a" kindref="member">remove</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>actionRef);</highlight></codeline>
+<codeline lineno="87" refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a7f4040e9e758429b9e97d9a8cd37699a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a7f4040e9e758429b9e97d9a8cd37699a" kindref="member">removeAll</ref>();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>executeAction(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>actionRef,<sp/>uint64_t<sp/>generation);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>armAllActions();</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>hasGeneration(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>actionRef,<sp/>uint64_t<sp/>generation)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>scheduleAction(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref><sp/>&amp;&amp;action,<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>actionRef,<sp/>Mode<sp/>mode,<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>delayOrInterval)<sp/>;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>armAction(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>actionRef,<sp/>uint64_t<sp/>generation,<sp/>EventTime<sp/>eventTime);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>clampDelayOrInterval(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref><sp/>delayOrInterval)<sp/>;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint64_t<sp/>nextGeneration(uint64_t<sp/>generation)<sp/>;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref><sp/>allocateActionRef()<sp/>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>std::mutex<sp/>_mutex;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>SurfaceWeakPtr<sp/>_surface;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unordered_map&lt;ScheduledActionRef,<sp/>ActionEntry&gt;<sp/>_actions;<sp/></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>_nextActionId<sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="130"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/ui/event/Scheduler.hpp"/>
+  </compounddef>
+</doxygen>

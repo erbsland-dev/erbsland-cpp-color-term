@@ -1,0 +1,486 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_posix_backend_8hpp" kind="file" language="C++">
+    <compoundname>PosixBackend.hpp</compoundname>
+    <includes refid="_backend_8hpp" local="yes">../Backend.hpp</includes>
+    <includes local="no">termios.h</includes>
+    <includes local="no">unistd.h</includes>
+    <includes local="no">chrono</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">mutex</includes>
+    <includes local="no">string</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>../Backend.hpp</label>
+        <link refid="_backend_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>CharAttributes.hpp</label>
+        <link refid="_char_attributes_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Color.hpp</label>
+        <link refid="_color_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ColorPart.hpp</label>
+        <link refid="_color_part_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>ColorRole.hpp</label>
+        <link refid="_color_role_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>../EncodingErrors.hpp</label>
+        <link refid="_encoding_errors_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Input.hpp</label>
+        <link refid="_input_8hpp_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Key.hpp</label>
+        <link refid="_key_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>KeyModifiers.hpp</label>
+        <link refid="_key_modifiers_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>MoveMode.hpp</label>
+        <link refid="_move_mode_8hpp_source"/>
+      </node>
+      <node id="28">
+        <label>TerminalFlags.hpp</label>
+        <link refid="_terminal_flags_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Alignment.hpp</label>
+        <link refid="_alignment_8hpp_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>Anchor.hpp</label>
+        <link refid="_anchor_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>Coordinate.hpp</label>
+        <link refid="_coordinate_8hpp_source"/>
+      </node>
+      <node id="33">
+        <label>Orientation.hpp</label>
+        <link refid="_orientation_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>Position.hpp</label>
+        <link refid="_position_8hpp_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>geometry/Size.hpp</label>
+        <link refid="_size_8hpp_source"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>impl/CombinedChar.hpp</label>
+        <link refid="_combined_char_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>impl/HashHelper.hpp</label>
+        <link refid="_hash_helper_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/impl/PosixBackend.hpp</label>
+        <link refid="_posix_backend_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>../impl/SaturatingMath.hpp</label>
+        <link refid="_saturating_math_8hpp_source"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>UnicodeWidth.hpp</label>
+        <link refid="_unicode_width_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>algorithm</label>
+      </node>
+      <node id="12">
+        <label>array</label>
+      </node>
+      <node id="25">
+        <label>chrono</label>
+      </node>
+      <node id="41">
+        <label>concepts</label>
+      </node>
+      <node id="5">
+        <label>cstddef</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="36">
+        <label>cstdlib</label>
+      </node>
+      <node id="42">
+        <label>exception</label>
+      </node>
+      <node id="37">
+        <label>format</label>
+      </node>
+      <node id="8">
+        <label>functional</label>
+      </node>
+      <node id="23">
+        <label>limits</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="45">
+        <label>mutex</label>
+      </node>
+      <node id="38">
+        <label>numeric</label>
+      </node>
+      <node id="24">
+        <label>optional</label>
+      </node>
+      <node id="21">
+        <label>span</label>
+      </node>
+      <node id="13">
+        <label>string</label>
+      </node>
+      <node id="14">
+        <label>string_view</label>
+      </node>
+      <node id="43">
+        <label>termios.h</label>
+      </node>
+      <node id="7">
+        <label>type_traits</label>
+      </node>
+      <node id="44">
+        <label>unistd.h</label>
+      </node>
+      <node id="39">
+        <label>utility</label>
+      </node>
+      <node id="15">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" prot="public">erbsland::cterm::impl::PosixBackend</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1impl">erbsland::cterm::impl</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../Backend.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;termios.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unistd.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;chrono&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm::impl<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">PosixSignalDispatcher;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" kindref="compound">PosixBackend</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_backend" kindref="compound">Backend</ref><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">clock<sp/>=<sp/>std::chrono::steady_clock;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cMinimumDelayBetweenScreenSizeDetection<sp/>=<sp/>std::chrono::milliseconds{100};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cEscapeSequenceTimeout<sp/>=<sp/>std::chrono::milliseconds{25};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cMaximumPendingKeyInputSize<sp/>=<sp/>1024;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>SizeDetectionResult<sp/>:<sp/>uint8_t<sp/>{<sp/>NoTerminalAttached,<sp/>NoTerminalSize,<sp/>Success<sp/>};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">OptionalTimeout<sp/>=<sp/>std::optional&lt;std::chrono::milliseconds&gt;;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" kindref="compound">PosixBackend</ref>(<ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>terminalFlags);<sp/></highlight><highlight class="comment">//<sp/>must<sp/>never<sp/>be<sp/>called<sp/>directly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" kindref="compound">~PosixBackend</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="35" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8a0ca1efddd54d31e1d95fcd80085611" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8a0ca1efddd54d31e1d95fcd80085611" kindref="member">initializePlatform</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a73baf1856a6b69b1a1978cb18f8dfc74" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a73baf1856a6b69b1a1978cb18f8dfc74" kindref="member">restorePlatform</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a1537b671c97e60b665c4fce97453038e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a1537b671c97e60b665c4fce97453038e" kindref="member">supportsColorCodes</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="38" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1aff36f86190df079d1826ba6e41fb0057" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1aff36f86190df079d1826ba6e41fb0057" kindref="member">supportsCursorCodes</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="39" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1af5b590c1495dd57493b1735770402185" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1af5b590c1495dd57493b1735770402185" kindref="member">isInteractive</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="40" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8b4380dc037fd276a11a891888d03461" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::optional&lt;<ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>&gt;<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8b4380dc037fd276a11a891888d03461" kindref="member">detectScreenSize</ref>()<sp/>override;</highlight></codeline>
+<codeline lineno="41" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1aaa86cd4a85808d34833c99a950b6d094" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1aaa86cd4a85808d34833c99a950b6d094" kindref="member">emitText</ref>(std::string_view<sp/>text)<sp/>override;</highlight></codeline>
+<codeline lineno="42" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1ae3c66671d59416f4fc7cf7b9cbb59493" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1ae3c66671d59416f4fc7cf7b9cbb59493" kindref="member">emitFlush</ref>()<sp/>override;</highlight></codeline>
+<codeline lineno="43" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a52ef1df2414d67c9e8b736d47e4279be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a52ef1df2414d67c9e8b736d47e4279be" kindref="member">setAlternateScreenBuffer</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>override;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>input</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a5be61296c5a218d5e488e23242099ecd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_input" kindref="compound">Input</ref>::Mode<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a5be61296c5a218d5e488e23242099ecd" kindref="member">inputMode</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="47" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a1b1a72da971ca33e8e964eaccd1d769e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a1b1a72da971ca33e8e964eaccd1d769e" kindref="member">setInputMode</ref>(<ref refid="classerbsland_1_1cterm_1_1_input" kindref="compound">Input</ref>::Mode<sp/>mode)<sp/>override;</highlight></codeline>
+<codeline lineno="48" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a6af035e8b17fb83b0e303baea5cf7942" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a6af035e8b17fb83b0e303baea5cf7942" kindref="member">readKey</ref>(std::chrono::milliseconds<sp/>timeout)<sp/>override;</highlight></codeline>
+<codeline lineno="49" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a018b376cfaea0ed500e1a0ca7ef4d6d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a018b376cfaea0ed500e1a0ca7ef4d6d1" kindref="member">waitForKey</ref>()<sp/>override;</highlight></codeline>
+<codeline lineno="50" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8565f0c6f3048e005b8e8bd09adbd6bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8565f0c6f3048e005b8e8bd09adbd6bf" kindref="member">readLine</ref>()<sp/>override;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal">public:</highlight></codeline>
+<codeline lineno="54" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1ab3f306913a9c817372df93aff59bb332" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/>BackendPtr<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1ab3f306913a9c817372df93aff59bb332" kindref="member">getOrCreate</ref>(<ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>terminalFlags)<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="56" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a2342a4dce81a08f72e3baf1922bc04ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" kindref="compound">PosixBackend</ref><sp/>*<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a2342a4dce81a08f72e3baf1922bc04ea" kindref="member">instance</ref>()<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="58" refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a0da2410a4d821d66c52aa83cccc66597" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a0da2410a4d821d66c52aa83cccc66597" kindref="member">restoreGlobalPlatform</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal">private:</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::pair&lt;SizeDetectionResult,<sp/><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>&gt;<sp/>getScreenSize()<sp/>;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>static<sp/>std::pair&lt;SizeDetectionResult,<sp/><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>&gt;<sp/>getScreenSizeForFd(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>fd)<sp/>;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>closeTty();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initializeKeyInputSession();</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>restoreKeyInputSession();</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>static<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>waitForInput(OptionalTimeout<sp/>timeout)<sp/>;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>static<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>pollForInput()<sp/>;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>static<sp/>std::</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>readInputChunk()<sp/>;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>appendInputChunks(OptionalTimeout<sp/>timeout);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>markPendingEscapeSequence()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>escapeSequenceExpired()<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::chrono::milliseconds<sp/>escapeSequenceWaitTimeout(OptionalTimeout<sp/>timeout)<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>erasePendingKeyInput(std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>byteCount);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref><sp/>readDecodedKey(OptionalTimeout<sp/>timeout)<sp/>;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>handleProcessSignal(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>signalNumber)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal">private:</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/>std::mutex<sp/>_instanceMutex;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" kindref="compound">PosixBackend</ref><sp/>*_instance;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>_terminalFlags;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_isInitialized<sp/>=<sp/>false;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_keyInputSessionActive<sp/>=<sp/>false;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>clock::time_point<sp/>_lastScreenSizeDetection<sp/>=<sp/>{};<sp/></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>std::optional&lt;Size&gt;<sp/>_lastScreenSize;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_firstScreenSizeDetection<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_hasNoTerminalAttached<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_ttyFdForDetection<sp/>=<sp/>-1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>_noSizeFailureCount<sp/>=<sp/>0;<sp/></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816" kindref="member">Input::Mode</ref><sp/>_inputMode{<ref refid="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a299040a8206f805f0a777fc25b6df6a9" kindref="member">Input::Mode::ReadLine</ref>};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_isAlternateScreenActive<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>termios<sp/>_originalState{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>_pendingKeyInput;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>std::optional&lt;clock::time_point&gt;<sp/>_pendingEscapeStarted;<sp/></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;PosixSignalDispatcher&gt;<sp/>_signalHandler;<sp/><sp/></highlight></codeline>
+<codeline lineno="112"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/impl/PosixBackend.hpp"/>
+  </compounddef>
+</doxygen>

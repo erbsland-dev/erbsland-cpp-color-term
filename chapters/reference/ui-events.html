@@ -1,0 +1,1203 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Events and Scheduling &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Demos" href="../demos/index.html" />
+    <link rel="prev" title="UI Surfaces" href="ui-surfaces.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer.html">Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer-view.html">Buffer Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cursor-output.html">Cursor Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing.html">Frames, Borders, Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing-text.html">Text Rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-options.html">Paragraph Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rich-text.html">Rich Text and HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal.html">Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Strings and Chars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theme.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">UI Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-core.html">UI Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-layouts.html">UI Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-input.html">UI Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-surfaces.html">UI Surfaces</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">UI Events and Scheduling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#driving-an-event-queue-manually">Driving an Event Queue Manually</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scheduling-surface-local-ui-actions">Scheduling Surface-Local UI Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-background-work-with-cooperative-stop">Running Background Work with Cooperative Stop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-and-quit-events">Key and Quit Events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventTypeE"><code class="docutils literal notranslate"><span class="pre">EventType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventDataE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::EventData</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui5EventE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::Event</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriverE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::EventDriver</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui14EventSchedulerE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::EventScheduler</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9SchedulerE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::Scheduler</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::ScheduledActionRef</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9StopTokenE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::StopToken</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui10StopSourceE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::StopSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThreadE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::EventThread</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui13KeyPressEventE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::KeyPressEvent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9QuitEventE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::QuitEvent</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">UI Events and Scheduling</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/ui-events.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ui-events-and-scheduling">
+<h1>UI Events and Scheduling<a class="headerlink" href="#ui-events-and-scheduling" title="Link to this heading"></a></h1>
+<p>The UI runtime is built on a small, flexible event system that is also
+available as a public API. Most applications interact with it indirectly
+through <a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11ApplicationE" title="erbsland::cterm::ui::Application"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Application</span></code></a>, but
+you can use it directly when you need fine-grained control over event
+flow, timers, or background work.</p>
+<p>This layer becomes especially useful when you:</p>
+<ul class="simple">
+<li><p>integrate the UI into an existing event loop</p></li>
+<li><p>schedule delayed or repeated actions</p></li>
+<li><p>run background tasks without blocking the UI thread</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The UI Framework is currently in beta, and parts of the API may
+change in future releases.</p>
+</div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="driving-an-event-queue-manually">
+<h3>Driving an Event Queue Manually<a class="headerlink" href="#driving-an-event-queue-manually" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriverE" title="erbsland::cterm::ui::EventDriver"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">EventDriver</span></code></a> manages the
+event queue and dispatches events to a single handler. Combine it with
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui14EventSchedulerE" title="erbsland::cterm::ui::EventScheduler"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">EventScheduler</span></code></a> if you
+need time-based events.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">erbsland</span><span class="o">::</span><span class="nn">cterm</span><span class="o">::</span><span class="nn">ui</span><span class="p">;</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EventDriver</span><span class="p">{};</span>
+<span class="n">driver</span><span class="p">.</span><span class="n">setEventHandler</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">Event</span><span class="w"> </span><span class="o">&amp;</span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EventType</span><span class="o">::</span><span class="n">Resize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Recalculate layout here.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">scheduler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EventScheduler</span><span class="p">{</span><span class="n">driver</span><span class="p">};</span>
+<span class="n">scheduler</span><span class="p">.</span><span class="n">schedule</span><span class="p">(</span>
+<span class="w">    </span><span class="n">EventType</span><span class="o">::</span><span class="n">Resize</span><span class="p">,</span>
+<span class="w">    </span><span class="p">{},</span>
+<span class="w">    </span><span class="n">EventClock</span><span class="o">::</span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">{</span><span class="mi">50</span><span class="p">});</span>
+
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">processEvents</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">{</span><span class="mi">10</span><span class="p">}).</span><span class="n">status</span>
+<span class="w">       </span><span class="o">!=</span><span class="w"> </span><span class="n">EventDriver</span><span class="o">::</span><span class="n">ProcessResult</span><span class="o">::</span><span class="n">Quit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">scheduler</span><span class="p">.</span><span class="n">poll</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This level of control is mainly useful for testing, embedding, or custom
+runtime integration. In typical applications,
+<a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11ApplicationE" title="erbsland::cterm::ui::Application"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Application</span></code></a> manages both
+the driver and the scheduler for you.</p>
+</section>
+<section id="scheduling-surface-local-ui-actions">
+<h3>Scheduling Surface-Local UI Actions<a class="headerlink" href="#scheduling-surface-local-ui-actions" title="Link to this heading"></a></h3>
+<p>Each <a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui7SurfaceE" title="erbsland::cterm::ui::Surface"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Surface</span></code></a> can lazily create
+its own <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9SchedulerE" title="erbsland::cterm::ui::Scheduler"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Scheduler</span></code></a>. All
+scheduled callbacks run on the UI thread, which makes them safe for
+modifying surface state.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">notice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TextBox</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Saving...&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">Center</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notice</span><span class="o">-&gt;</span><span class="n">scheduler</span><span class="p">().</span><span class="n">addSingleShot</span><span class="p">(</span>
+<span class="w">    </span><span class="p">[</span><span class="n">weakNotice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SurfaceWeakPtr</span><span class="p">{</span><span class="n">notice</span><span class="p">}]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">weakNotice</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">locked</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">().</span><span class="n">setPaintOutdated</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">{</span><span class="mi">750</span><span class="p">});</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">action</span><span class="p">.</span><span class="n">isValid</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// The UI thread will execute the callback once the delay expires.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Use this mechanism for UI-related delays such as animations, status
+updates, or deferred rendering changes.</p>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE" title="erbsland::cterm::ui::ScheduledActionRef"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ScheduledActionRef</span></code></a>
+acts as a handle for the scheduled task. You can use it to reschedule or
+cancel the action later without introducing your own identifier system.</p>
+</section>
+<section id="running-background-work-with-cooperative-stop">
+<h3>Running Background Work with Cooperative Stop<a class="headerlink" href="#running-background-work-with-cooperative-stop" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThreadE" title="erbsland::cterm::ui::EventThread"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">EventThread</span></code></a> runs callbacks
+on a dedicated worker thread. This allows you to perform longer-running
+tasks without blocking the UI.</p>
+<p>Stoppable callbacks receive a
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9StopTokenE" title="erbsland::cterm::ui::StopToken"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">StopToken</span></code></a>, which lets them
+exit cooperatively when the application shuts down.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">worker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getApplication</span><span class="p">().</span><span class="n">createEventThread</span><span class="p">();</span>
+<span class="n">worker</span><span class="o">-&gt;</span><span class="n">invoke</span><span class="p">([](</span><span class="n">StopToken</span><span class="w"> </span><span class="n">stopToken</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">stopToken</span><span class="p">.</span><span class="n">stopRequested</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Perform one unit of work here.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="n">worker</span><span class="o">-&gt;</span><span class="n">quitAndWait</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="p">{</span><span class="mi">1</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>Important: do not update UI surfaces directly from a worker thread.
+Instead, post results back to the UI thread using:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11Application6invokeENSt8functionIFvvEEE" title="erbsland::cterm::ui::Application::invoke"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Application::invoke()</span></code></a></p></li>
+<li><p>or a surface-local <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9SchedulerE" title="erbsland::cterm::ui::Scheduler"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Scheduler</span></code></a></p></li>
+</ul>
+<p>This keeps your UI consistent and avoids subtle race conditions.</p>
+</section>
+<section id="key-and-quit-events">
+<h3>Key and Quit Events<a class="headerlink" href="#key-and-quit-events" title="Link to this heading"></a></h3>
+<p>The framework currently exposes two primary event payload types:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui13KeyPressEventE" title="erbsland::cterm::ui::KeyPressEvent"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">KeyPressEvent</span></code></a> for user
+input</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9QuitEventE" title="erbsland::cterm::ui::QuitEvent"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">QuitEvent</span></code></a> for terminating
+the application</p></li>
+</ul>
+<p>Key events are routed through the focused surface chain, allowing each
+surface to handle or forward input.</p>
+<p>Quit events stop the event loop gracefully and can carry the final exit
+code of your application.</p>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventTypeE">
+<span id="_CPPv3N8erbsland5cterm2ui9EventTypeE"></span><span id="_CPPv2N8erbsland5cterm2ui9EventTypeE"></span><span class="target" id="_event_type_8hpp_1a31f96fadd2fe853adf5b7a7815e77bcc"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">EventType</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventTypeE" title="Link to this definition"></a><br /></dt>
+<dd><p>The event type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventType7NoEventE">
+<span id="_CPPv3N8erbsland5cterm2ui9EventType7NoEventE"></span><span id="_CPPv2N8erbsland5cterm2ui9EventType7NoEventE"></span><span class="target" id="_event_type_8hpp_1a31f96fadd2fe853adf5b7a7815e77bcca9b8e7e8d81a268a2240a96b7962a0183"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NoEvent</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventType7NoEventE" title="Link to this definition"></a><br /></dt>
+<dd><p>Special flag for error handling. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventType4QuitE">
+<span id="_CPPv3N8erbsland5cterm2ui9EventType4QuitE"></span><span id="_CPPv2N8erbsland5cterm2ui9EventType4QuitE"></span><span class="target" id="_event_type_8hpp_1a31f96fadd2fe853adf5b7a7815e77bcca0d82790b0612935992bd564a17ce37d6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Quit</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventType4QuitE" title="Link to this definition"></a><br /></dt>
+<dd><p>A quit event. Stops a running event loop. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventType8KeyPressE">
+<span id="_CPPv3N8erbsland5cterm2ui9EventType8KeyPressE"></span><span id="_CPPv2N8erbsland5cterm2ui9EventType8KeyPressE"></span><span class="target" id="_event_type_8hpp_1a31f96fadd2fe853adf5b7a7815e77bcca65a1aa093fcf3acd50b318f1942c02f5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyPress</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventType8KeyPressE" title="Link to this definition"></a><br /></dt>
+<dd><p>A key was pressed. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventType6ResizeE">
+<span id="_CPPv3N8erbsland5cterm2ui9EventType6ResizeE"></span><span id="_CPPv2N8erbsland5cterm2ui9EventType6ResizeE"></span><span class="target" id="_event_type_8hpp_1a31f96fadd2fe853adf5b7a7815e77bcca9d723d04c40bfd81835c0766a698cf63"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Resize</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventType6ResizeE" title="Link to this definition"></a><br /></dt>
+<dd><p>The terminal was resized. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventType15ScheduledActionE">
+<span id="_CPPv3N8erbsland5cterm2ui9EventType15ScheduledActionE"></span><span id="_CPPv2N8erbsland5cterm2ui9EventType15ScheduledActionE"></span><span class="target" id="_event_type_8hpp_1a31f96fadd2fe853adf5b7a7815e77bcca5a6746c3608ca93769cc223357ef0fea"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ScheduledAction</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventType15ScheduledActionE" title="Link to this definition"></a><br /></dt>
+<dd><p>A scheduled action event. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventType10InvocationE">
+<span id="_CPPv3N8erbsland5cterm2ui9EventType10InvocationE"></span><span id="_CPPv2N8erbsland5cterm2ui9EventType10InvocationE"></span><span class="target" id="_event_type_8hpp_1a31f96fadd2fe853adf5b7a7815e77bccada495869897c5c6c4ad8b3348989762f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Invocation</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventType10InvocationE" title="Link to this definition"></a><br /></dt>
+<dd><p>A function was invoked. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventDataE">
+<span id="_CPPv3N8erbsland5cterm2ui9EventDataE"></span><span id="_CPPv2N8erbsland5cterm2ui9EventDataE"></span><span id="erbsland::cterm::ui::EventData"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_data"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EventData</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventDataE" title="Link to this definition"></a><br /></dt>
+<dd><p>The base class for event data. </p>
+<p>If an event has additional data, it is stored as a subclass of this class. </p>
+<p>Subclassed by <a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_key_press_event"><span class="std std-ref">erbsland::cterm::ui::KeyPressEvent</span></a>, <a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_quit_event"><span class="std std-ref">erbsland::cterm::ui::QuitEvent</span></a>, erbsland::cterm::ui::impl::InvocationEvent, erbsland::cterm::ui::impl::ScheduledActionEvent</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui9EventData9isHandledEv">
+<span id="_CPPv3NK8erbsland5cterm2ui9EventData9isHandledEv"></span><span id="_CPPv2NK8erbsland5cterm2ui9EventData9isHandledEv"></span><span id="erbsland::cterm::ui::EventData::isHandledC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_data_1af3213c238e1bd6ea9f5f6f2da1a80036"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isHandled</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui9EventData9isHandledEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this event was handled and should not be propagated further. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9EventData10setHandledEv">
+<span id="_CPPv3N8erbsland5cterm2ui9EventData10setHandledEv"></span><span id="_CPPv2N8erbsland5cterm2ui9EventData10setHandledEv"></span><span id="erbsland::cterm::ui::EventData::setHandled"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_data_1a9cb7da4b9454468729344895a4f47364"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setHandled</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9EventData10setHandledEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Mark this event as handled and should not be propagated further. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui5EventE">
+<span id="_CPPv3N8erbsland5cterm2ui5EventE"></span><span id="_CPPv2N8erbsland5cterm2ui5EventE"></span><span id="erbsland::cterm::ui::Event"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Event</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui5EventE" title="Link to this definition"></a><br /></dt>
+<dd><p>A single event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui5Event5EventEK9EventType">
+<span id="_CPPv3N8erbsland5cterm2ui5Event5EventEK9EventType"></span><span id="_CPPv2N8erbsland5cterm2ui5Event5EventEK9EventType"></span><span id="erbsland::cterm::ui::Event::Event__EventTypeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_1a4f315552d0b558edcc1d59a4bc2c7f81"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Event</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventTypeE" title="erbsland::cterm::ui::EventType"><span class="n"><span class="pre">EventType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui5Event5EventEK9EventType" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an event of a given type. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui5Event5EventEK9EventType18EventDataUniquePtr">
+<span id="_CPPv3N8erbsland5cterm2ui5Event5EventEK9EventType18EventDataUniquePtr"></span><span id="_CPPv2N8erbsland5cterm2ui5Event5EventEK9EventType18EventDataUniquePtr"></span><span id="erbsland::cterm::ui::Event::Event__EventTypeC.EventDataUniquePtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_1afafb5f739c38e34cf30791ccca3d7b8f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Event</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventTypeE" title="erbsland::cterm::ui::EventType"><span class="n"><span class="pre">EventType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="n"><span class="pre">EventDataUniquePtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui5Event5EventEK9EventType18EventDataUniquePtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an event of a given type with optional data. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui5Event5EventERR5Event">
+<span id="_CPPv3N8erbsland5cterm2ui5Event5EventERR5Event"></span><span id="_CPPv2N8erbsland5cterm2ui5Event5EventERR5Event"></span><span id="erbsland::cterm::ui::Event::Event__EventRR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_1a368f6657043d3a12eb54cf15e3e4dc91"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Event</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui5Event5EventERR5Event" title="erbsland::cterm::ui::Event::Event"><span class="n"><span class="pre">Event</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui5Event5EventERR5Event" title="Link to this definition"></a><br /></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui5EventaSERR5Event">
+<span id="_CPPv3N8erbsland5cterm2ui5EventaSERR5Event"></span><span id="_CPPv2N8erbsland5cterm2ui5EventaSERR5Event"></span><span id="erbsland::cterm::ui::Event::assign-operator__EventRR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_1a62ba3737a5389cb9619ca8c11c40c480"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui5EventE" title="erbsland::cterm::ui::Event"><span class="n"><span class="pre">Event</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui5EventE" title="erbsland::cterm::ui::Event"><span class="n"><span class="pre">Event</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui5EventaSERR5Event" title="Link to this definition"></a><br /></dt>
+<dd><p>Move assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui5Event4timeEv">
+<span id="_CPPv3NK8erbsland5cterm2ui5Event4timeEv"></span><span id="_CPPv2NK8erbsland5cterm2ui5Event4timeEv"></span><span id="erbsland::cterm::ui::Event::timeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_1adfd764935d1e29af4eb0f3cee2f8452e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">EventTime</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">time</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui5Event4timeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The event creation time. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui5Event4typeEv">
+<span id="_CPPv3NK8erbsland5cterm2ui5Event4typeEv"></span><span id="_CPPv2NK8erbsland5cterm2ui5Event4typeEv"></span><span id="erbsland::cterm::ui::Event::typeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_1a1c0fc06d6c6112a0aa77ff462d18e893"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventTypeE" title="erbsland::cterm::ui::EventType"><span class="n"><span class="pre">EventType</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui5Event4typeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>The event type. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui5Event4dataEv">
+<span id="_CPPv3NK8erbsland5cterm2ui5Event4dataEv"></span><span id="_CPPv2NK8erbsland5cterm2ui5Event4dataEv"></span><span id="erbsland::cterm::ui::Event::dataC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_1a3d6b008a5c936a196f1a1860856c8d18"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">EventDataUniquePtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui5Event4dataEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Optional event data. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriverE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriverE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriverE"></span><span id="erbsland::cterm::ui::EventDriver"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EventDriver</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriverE" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_event"><span class="std std-ref">Event</span></a> driver for creating event-driven applications. </p>
+<p>All methods in the event driver are thread-safe. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver5StateE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver5StateE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver5StateE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dc"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">State</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver5StateE" title="Link to this definition"></a><br /></dt>
+<dd><p>The state of the event driver. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver5State7RunningE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver5State7RunningE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver5State7RunningE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dca5bda814c4aedb126839228f1a3d92f09"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Running</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver5State7RunningE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver5State4QuitE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver5State4QuitE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver5State4QuitE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dca0d82790b0612935992bd564a17ce37d6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Quit</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver5State4QuitE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver8addEventE9EventTypeRR18EventDataUniquePtr">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver8addEventE9EventTypeRR18EventDataUniquePtr"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver8addEventE9EventTypeRR18EventDataUniquePtr"></span><span id="erbsland::cterm::ui::EventDriver::addEvent__EventType.EventDataUniquePtrRR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a0f50f3fb45500aa017c12555800c3f62"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addEvent</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventTypeE" title="erbsland::cterm::ui::EventType"><span class="n"><span class="pre">EventType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eventType</span></span>, <span class="n"><span class="pre">EventDataUniquePtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">eventData</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver8addEventE9EventTypeRR18EventDataUniquePtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Add an event to the event loop. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver8addEventERR5Event">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver8addEventERR5Event"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver8addEventERR5Event"></span><span id="erbsland::cterm::ui::EventDriver::addEvent__EventRR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a4648141208a516c07a35581e5e18190d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addEvent</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui5EventE" title="erbsland::cterm::ui::Event"><span class="n"><span class="pre">Event</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver8addEventERR5Event" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver15setEventHandlerENSt8functionIFvRK5EventEEE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver15setEventHandlerENSt8functionIFvRK5EventEEE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver15setEventHandlerENSt8functionIFvRK5EventEEE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a7bdc21c3cfd62207af3f5172f285c20e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setEventHandler</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui5EventE" title="erbsland::cterm::ui::Event"><span class="n"><span class="pre">Event</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eventHandler</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver15setEventHandlerENSt8functionIFvRK5EventEEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the callback for queued non-control events. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>eventHandler</strong> – The handler that receives all non-quit events. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui11EventDriver16hasPendingEventsEv">
+<span id="_CPPv3NK8erbsland5cterm2ui11EventDriver16hasPendingEventsEv"></span><span id="_CPPv2NK8erbsland5cterm2ui11EventDriver16hasPendingEventsEv"></span><span id="erbsland::cterm::ui::EventDriver::hasPendingEventsC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ae044b07d4a1396d6618f4750f57af8f1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasPendingEvents</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui11EventDriver16hasPendingEventsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if events are pending in the queue. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if at least one event is queued. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver3runEv">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver3runEv"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver3runEv"></span><span id="erbsland::cterm::ui::EventDriver::run"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad3c1ff7aac54c370d2e86ce83c036497"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResultE" title="erbsland::cterm::ui::EventDriver::ProcessResult"><span class="n"><span class="pre">ProcessResult</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">run</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver3runEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Run this event loop continuously. </p>
+<p>This runs the event loop continuously until a quit event is received. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver13processEventsENSt6chrono12millisecondsE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver13processEventsENSt6chrono12millisecondsE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver13processEventsENSt6chrono12millisecondsE"></span><span id="erbsland::cterm::ui::EventDriver::processEvents__std::chrono::milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a82e1bc5512a262e064bd53a83265c3de"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResultE" title="erbsland::cterm::ui::EventDriver::ProcessResult"><span class="n"><span class="pre">ProcessResult</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEvents</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">milliseconds</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13processEventsENSt6chrono12millisecondsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Manually process events with a timeout. </p>
+<p>A call of this method will process events in the event queue until the queue is empty or <code class="docutils literal notranslate"><span class="pre">timeout</span></code> is reached; whatever happens first. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> – The timeout for polling events. Zero = no timeout (not recommended). </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">excepton</span></span></span> – If an event throws an exception, the exception is rethrown. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver15processOneEventEv">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver15processOneEventEv"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver15processOneEventEv"></span><span id="erbsland::cterm::ui::EventDriver::processOneEvent"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1af427922b0138a44b65d18ac9ff8c40cb"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResultE" title="erbsland::cterm::ui::EventDriver::ProcessResult"><span class="n"><span class="pre">ProcessResult</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processOneEvent</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver15processOneEventEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Process at most one queued event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Processed</span></code> if one regular event was handled, <code class="docutils literal notranslate"><span class="pre">Idle</span></code> if no event was queued, or <code class="docutils literal notranslate"><span class="pre">Quit</span></code> if the driver stopped. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver12processEventERK5Event">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver12processEventERK5Event"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver12processEventERK5Event"></span><span id="erbsland::cterm::ui::EventDriver::processEvent__EventCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a1b540317e6a9bb8a874a1becbe78cf65"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEvent</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui5EventE" title="erbsland::cterm::ui::Event"><span class="n"><span class="pre">Event</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver12processEventERK5Event" title="Link to this definition"></a><br /></dt>
+<dd><p>Process a single event. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver4quitEi">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver4quitEi"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver4quitEi"></span><span id="erbsland::cterm::ui::EventDriver::quit__i"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a879d19a9b0fd281490ba625bd83f8226"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">quit</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">exitCode</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver4quitEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Quit this event loop with the given exit code. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResultE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver13ProcessResultE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver13ProcessResultE"></span><span id="erbsland::cterm::ui::EventDriver::ProcessResult"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ProcessResult</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResultE" title="Link to this definition"></a><br /></dt>
+<dd><p>The result of processing events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6StatusE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver13ProcessResult6StatusE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver13ProcessResult6StatusE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Status</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6StatusE" title="Link to this definition"></a><br /></dt>
+<dd><p>Processing status for one event loop step. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4IdleE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4IdleE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4IdleE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7a1d1cda64e817b1e83f4f8ac0e6321508"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Idle</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4IdleE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status9ProcessedE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver13ProcessResult6Status9ProcessedE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver13ProcessResult6Status9ProcessedE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7a198755e8e1dbd07097f4b760924801b0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Processed</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status9ProcessedE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status7TimeoutE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver13ProcessResult6Status7TimeoutE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver13ProcessResult6Status7TimeoutE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7a1d577ec971d697782a291d4c9f649cbf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Timeout</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status7TimeoutE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4QuitE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4QuitE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4QuitE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7a4f9a55bcfe312973876b2d46e7607fe6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Quit</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4QuitE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult13ProcessResultEK6StatusKi">
+<span id="_CPPv3N8erbsland5cterm2ui11EventDriver13ProcessResult13ProcessResultEK6StatusKi"></span><span id="_CPPv2N8erbsland5cterm2ui11EventDriver13ProcessResult13ProcessResultEK6StatusKi"></span><span id="erbsland::cterm::ui::EventDriver::ProcessResult::ProcessResult__StatusC.iC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ae736043ce84f557782f76846947bddfc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ProcessResult</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6StatusE" title="erbsland::cterm::ui::EventDriver::ProcessResult::Status"><span class="n"><span class="pre">Status</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">status</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6Status4IdleE" title="erbsland::cterm::ui::EventDriver::ProcessResult::Idle"><span class="n"><span class="pre">Idle</span></span></a>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">exitCode</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult13ProcessResultEK6StatusKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Create one event-loop processing result. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>status</strong> – The processing status. </p></li>
+<li><p><strong>exitCode</strong> – The quit exit code if processing stopped. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui11EventDriver13ProcessResult6statusEv">
+<span id="_CPPv3NK8erbsland5cterm2ui11EventDriver13ProcessResult6statusEv"></span><span id="_CPPv2NK8erbsland5cterm2ui11EventDriver13ProcessResult6statusEv"></span><span id="erbsland::cterm::ui::EventDriver::ProcessResult::statusC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ac41857a914e2b7f680c5a20ba91f0aa9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriver13ProcessResult6StatusE" title="erbsland::cterm::ui::EventDriver::ProcessResult::Status"><span class="n"><span class="pre">Status</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">status</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui11EventDriver13ProcessResult6statusEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the processing status. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui11EventDriver13ProcessResult8exitCodeEv">
+<span id="_CPPv3NK8erbsland5cterm2ui11EventDriver13ProcessResult8exitCodeEv"></span><span id="_CPPv2NK8erbsland5cterm2ui11EventDriver13ProcessResult8exitCodeEv"></span><span id="erbsland::cterm::ui::EventDriver::ProcessResult::exitCodeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a23e045669a42214b0d49cc74681bf938"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">exitCode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui11EventDriver13ProcessResult8exitCodeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the quit exit code, meaningful when <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ac41857a914e2b7f680c5a20ba91f0aa9"><span class="std std-ref"><span class="pre">status()</span></span></a> <span class="pre">==</span> <span class="pre">Quit</span></code>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14EventSchedulerE">
+<span id="_CPPv3N8erbsland5cterm2ui14EventSchedulerE"></span><span id="_CPPv2N8erbsland5cterm2ui14EventSchedulerE"></span><span id="erbsland::cterm::ui::EventScheduler"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EventScheduler</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14EventSchedulerE" title="Link to this definition"></a><br /></dt>
+<dd><p>A scheduler for events. </p>
+<p>Stores events until a given time and add them to the event driver.<ul class="simple">
+<li><p>thread-safe.</p></li>
+<li><p>limited to a maximum of 10’000 scheduled events. If more events are added, they are discarded.</p></li>
+<li><p>limited to a scheduling time of 0-12h. </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14EventScheduler14EventSchedulerER11EventDriver">
+<span id="_CPPv3N8erbsland5cterm2ui14EventScheduler14EventSchedulerER11EventDriver"></span><span id="_CPPv2N8erbsland5cterm2ui14EventScheduler14EventSchedulerER11EventDriver"></span><span id="erbsland::cterm::ui::EventScheduler::EventScheduler__EventDriverR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1aebf447c24ffa73e154d773a038f82f8c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EventScheduler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventDriverE" title="erbsland::cterm::ui::EventDriver"><span class="n"><span class="pre">EventDriver</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">driver</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14EventScheduler14EventSchedulerER11EventDriver" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a new scheduler using the given driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>driver</strong> – The event driver to add events to. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14EventScheduler8scheduleE9EventTypeRR18EventDataUniquePtr9EventTime">
+<span id="_CPPv3N8erbsland5cterm2ui14EventScheduler8scheduleE9EventTypeRR18EventDataUniquePtr9EventTime"></span><span id="_CPPv2N8erbsland5cterm2ui14EventScheduler8scheduleE9EventTypeRR18EventDataUniquePtr9EventTime"></span><span id="erbsland::cterm::ui::EventScheduler::schedule__EventType.EventDataUniquePtrRR.EventTime"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1ab884398766071cb3fa835992a8fde814"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">schedule</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventTypeE" title="erbsland::cterm::ui::EventType"><span class="n"><span class="pre">EventType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eventType</span></span>, <span class="n"><span class="pre">EventDataUniquePtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">data</span></span>, <span class="n"><span class="pre">EventTime</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eventTime</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14EventScheduler8scheduleE9EventTypeRR18EventDataUniquePtr9EventTime" title="Link to this definition"></a><br /></dt>
+<dd><p>Schedule an event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eventType</strong> – The event type. </p></li>
+<li><p><strong>data</strong> – The event data. </p></li>
+<li><p><strong>eventTime</strong> – The time when the event should be scheduled. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14EventScheduler4pollEv">
+<span id="_CPPv3N8erbsland5cterm2ui14EventScheduler4pollEv"></span><span id="_CPPv2N8erbsland5cterm2ui14EventScheduler4pollEv"></span><span id="erbsland::cterm::ui::EventScheduler::poll"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a422c99d8b1cf51770264e8402ac5d719"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">poll</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14EventScheduler4pollEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Poll the scheduler. </p>
+<p>If an event is ready, it is removed from the scheduler and passed to the event driver. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14EventScheduler5clearEv">
+<span id="_CPPv3N8erbsland5cterm2ui14EventScheduler5clearEv"></span><span id="_CPPv2N8erbsland5cterm2ui14EventScheduler5clearEv"></span><span id="erbsland::cterm::ui::EventScheduler::clear"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a675edb99545dc80b7eaa22a451ef079d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14EventScheduler5clearEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Remove all scheduled events. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui14EventScheduler13nextEventTimeEv">
+<span id="_CPPv3NK8erbsland5cterm2ui14EventScheduler13nextEventTimeEv"></span><span id="_CPPv2NK8erbsland5cterm2ui14EventScheduler13nextEventTimeEv"></span><span id="erbsland::cterm::ui::EventScheduler::nextEventTimeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1abe4b67443e2e84b325ffbf55ec488187"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">EventTime</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nextEventTime</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui14EventScheduler13nextEventTimeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the time of the next scheduled event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The next scheduled event time, or an empty optional if no events are pending. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9SchedulerE">
+<span id="_CPPv3N8erbsland5cterm2ui9SchedulerE"></span><span id="_CPPv2N8erbsland5cterm2ui9SchedulerE"></span><span id="erbsland::cterm::ui::Scheduler"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Scheduler</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9SchedulerE" title="Link to this definition"></a><br /></dt>
+<dd><p>A scheduler for UI actions. </p>
+<p><a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_scheduler"><span class="std std-ref">Scheduler</span></a> management methods are thread-safe. Scheduled callbacks are always executed on the application UI thread. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler12millisecondsE">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler12millisecondsE"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler12millisecondsE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">milliseconds</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">milliseconds</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler12millisecondsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Duration type used for delays and repeat intervals. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler8ActionFnE">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler8ActionFnE"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler8ActionFnE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ActionFn</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler8ActionFnE" title="Link to this definition"></a><br /></dt>
+<dd><p>Callback type executed on the application UI thread. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler9SchedulerE14SurfaceWeakPtr">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler9SchedulerE14SurfaceWeakPtr"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler9SchedulerE14SurfaceWeakPtr"></span><span id="erbsland::cterm::ui::Scheduler::Scheduler__SurfaceWeakPtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ab411655e3066cc403415573763c90bf5"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Scheduler</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SurfaceWeakPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">surface</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler9SchedulerE14SurfaceWeakPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a scheduler for one surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>surface</strong> – The owning surface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler13addSingleShotERR8ActionFn12milliseconds">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler13addSingleShotERR8ActionFn12milliseconds"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler13addSingleShotERR8ActionFn12milliseconds"></span><span id="erbsland::cterm::ui::Scheduler::addSingleShot__ActionFnRR.milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a588da59b185c2542621d2e085a4a0587"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE" title="erbsland::cterm::ui::ScheduledActionRef"><span class="n"><span class="pre">ScheduledActionRef</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addSingleShot</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler8ActionFnE" title="erbsland::cterm::ui::Scheduler::ActionFn"><span class="n"><span class="pre">ActionFn</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">action</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler12millisecondsE" title="erbsland::cterm::ui::Scheduler::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">delay</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler13addSingleShotERR8ActionFn12milliseconds" title="Link to this definition"></a><br /></dt>
+<dd><p>Schedules a single action with a delay. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>action</strong> – The action to schedule. </p></li>
+<li><p><strong>delay</strong> – The delay before the action is executed. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reference of the scheduled action. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler13addSingleShotERR8ActionFn18ScheduledActionRef12milliseconds">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler13addSingleShotERR8ActionFn18ScheduledActionRef12milliseconds"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler13addSingleShotERR8ActionFn18ScheduledActionRef12milliseconds"></span><span id="erbsland::cterm::ui::Scheduler::addSingleShot__ActionFnRR.ScheduledActionRef.milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1abad1906460c9052254a1e9aadac7d453"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE" title="erbsland::cterm::ui::ScheduledActionRef"><span class="n"><span class="pre">ScheduledActionRef</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addSingleShot</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler8ActionFnE" title="erbsland::cterm::ui::Scheduler::ActionFn"><span class="n"><span class="pre">ActionFn</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">action</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE" title="erbsland::cterm::ui::ScheduledActionRef"><span class="n"><span class="pre">ScheduledActionRef</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">actionRef</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler12millisecondsE" title="erbsland::cterm::ui::Scheduler::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">delay</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler13addSingleShotERR8ActionFn18ScheduledActionRef12milliseconds" title="Link to this definition"></a><br /></dt>
+<dd><p>Schedules a single action with a delay. </p>
+<p>This is either schedule a new action or move the execution time of an existing action. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>action</strong> – The action to schedule. </p></li>
+<li><p><strong>actionRef</strong> – The reference of the action to reschedule if it exists. </p></li>
+<li><p><strong>delay</strong> – The delay before the action is executed. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reference of the scheduled action. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler11addRepeatedERR8ActionFn12milliseconds">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler11addRepeatedERR8ActionFn12milliseconds"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler11addRepeatedERR8ActionFn12milliseconds"></span><span id="erbsland::cterm::ui::Scheduler::addRepeated__ActionFnRR.milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a2f7a27109e9f01028b437c6b3148a530"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE" title="erbsland::cterm::ui::ScheduledActionRef"><span class="n"><span class="pre">ScheduledActionRef</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addRepeated</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler8ActionFnE" title="erbsland::cterm::ui::Scheduler::ActionFn"><span class="n"><span class="pre">ActionFn</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">action</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler12millisecondsE" title="erbsland::cterm::ui::Scheduler::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">interval</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler11addRepeatedERR8ActionFn12milliseconds" title="Link to this definition"></a><br /></dt>
+<dd><p>Add a repeating action to the scheduler. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>action</strong> – The action to schedule. </p></li>
+<li><p><strong>interval</strong> – The interval between executions. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reference of the scheduled action. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler18setDelayOrIntervalE18ScheduledActionRef12milliseconds">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler18setDelayOrIntervalE18ScheduledActionRef12milliseconds"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler18setDelayOrIntervalE18ScheduledActionRef12milliseconds"></span><span id="erbsland::cterm::ui::Scheduler::setDelayOrInterval__ScheduledActionRef.milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a86141eaf2e6f6c53437458bd7bfde534"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setDelayOrInterval</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE" title="erbsland::cterm::ui::ScheduledActionRef"><span class="n"><span class="pre">ScheduledActionRef</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">actionRef</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler12millisecondsE" title="erbsland::cterm::ui::Scheduler::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">delayOrInterval</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler18setDelayOrIntervalE18ScheduledActionRef12milliseconds" title="Link to this definition"></a><br /></dt>
+<dd><p>Change the interval or delay of a scheduled action. </p>
+<p>This resets the due time relative to the current time. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>actionRef</strong> – The reference to the action. If the action does not exist, this call is ignored. </p></li>
+<li><p><strong>delayOrInterval</strong> – The new delay or interval for the action. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler6removeE18ScheduledActionRef">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler6removeE18ScheduledActionRef"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler6removeE18ScheduledActionRef"></span><span id="erbsland::cterm::ui::Scheduler::remove__ScheduledActionRef"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a12ea7423d711970cb6b53c07a363539a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remove</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE" title="erbsland::cterm::ui::ScheduledActionRef"><span class="n"><span class="pre">ScheduledActionRef</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">actionRef</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler6removeE18ScheduledActionRef" title="Link to this definition"></a><br /></dt>
+<dd><p>Stop/Remove a scheduled action. </p>
+<p>If the given reference does not exist, this call is ignored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>actionRef</strong> – The reference of the action to remove. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler9removeAllEv">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler9removeAllEv"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler9removeAllEv"></span><span id="erbsland::cterm::ui::Scheduler::removeAll"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a7f4040e9e758429b9e97d9a8cd37699a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">removeAll</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler9removeAllEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Remove all scheduled actions. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler24cMaximumScheduledActionsE">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler24cMaximumScheduledActionsE"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler24cMaximumScheduledActionsE"></span><span id="erbsland::cterm::ui::Scheduler::cMaximumScheduledActions__auto"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ac4b4f4b6e70845a69e1a519c39903fe4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cMaximumScheduledActions</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">1000</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler24cMaximumScheduledActionsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Maximum number of scheduled actions tracked at once. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler16cMinimumIntervalE">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler16cMinimumIntervalE"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler16cMinimumIntervalE"></span><span id="erbsland::cterm::ui::Scheduler::cMinimumInterval__auto"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9b2d999cea3fb047c2cb91e65f6b14d6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cMinimumInterval</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler12millisecondsE" title="erbsland::cterm::ui::Scheduler::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler16cMinimumIntervalE" title="Link to this definition"></a><br /></dt>
+<dd><p>Minimum supported delay or repeat interval. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9Scheduler16cMaximumIntervalE">
+<span id="_CPPv3N8erbsland5cterm2ui9Scheduler16cMaximumIntervalE"></span><span id="_CPPv2N8erbsland5cterm2ui9Scheduler16cMaximumIntervalE"></span><span id="erbsland::cterm::ui::Scheduler::cMaximumInterval__auto"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a330a27cf36bad8cab42618fd6058dc2a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cMaximumInterval</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">duration_cast</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9Scheduler12millisecondsE" title="erbsland::cterm::ui::Scheduler::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">hours</span></span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9Scheduler16cMaximumIntervalE" title="Link to this definition"></a><br /></dt>
+<dd><p>Maximum supported delay or repeat interval. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE">
+<span id="_CPPv3N8erbsland5cterm2ui18ScheduledActionRefE"></span><span id="_CPPv2N8erbsland5cterm2ui18ScheduledActionRefE"></span><span id="erbsland::cterm::ui::ScheduledActionRef"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ScheduledActionRef</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRefE" title="Link to this definition"></a><br /></dt>
+<dd><p>Represents a scheduled action. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui18ScheduledActionRef18ScheduledActionRefEv">
+<span id="_CPPv3N8erbsland5cterm2ui18ScheduledActionRef18ScheduledActionRefEv"></span><span id="_CPPv2N8erbsland5cterm2ui18ScheduledActionRef18ScheduledActionRefEv"></span><span id="erbsland::cterm::ui::ScheduledActionRef::ScheduledActionRef"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref_1a8a2ba502ee4323b076b74a74c70df7fa"></span><span class="sig-name descname"><span class="n"><span class="pre">ScheduledActionRef</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui18ScheduledActionRef18ScheduledActionRefEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a “no scheduled action” reference. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui18ScheduledActionRef7isValidEv">
+<span id="_CPPv3NK8erbsland5cterm2ui18ScheduledActionRef7isValidEv"></span><span id="_CPPv2NK8erbsland5cterm2ui18ScheduledActionRef7isValidEv"></span><span id="erbsland::cterm::ui::ScheduledActionRef::isValidC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref_1aafe6dfafb236d200805ef6b1cc078bc4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isValid</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui18ScheduledActionRef7isValidEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this scheduled action reference is valid. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui18ScheduledActionRef4hashEv">
+<span id="_CPPv3NK8erbsland5cterm2ui18ScheduledActionRef4hashEv"></span><span id="_CPPv2NK8erbsland5cterm2ui18ScheduledActionRef4hashEv"></span><span id="erbsland::cterm::ui::ScheduledActionRef::hashC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref_1a3db40f265b4522946496f07387839ea3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui18ScheduledActionRef4hashEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a hash for this reference. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9StopTokenE">
+<span id="_CPPv3N8erbsland5cterm2ui9StopTokenE"></span><span id="_CPPv2N8erbsland5cterm2ui9StopTokenE"></span><span id="erbsland::cterm::ui::StopToken"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_token"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StopToken</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9StopTokenE" title="Link to this definition"></a><br /></dt>
+<dd><p>Cooperative stop token passed to stoppable UI callbacks. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9StopToken9StopTokenEv">
+<span id="_CPPv3N8erbsland5cterm2ui9StopToken9StopTokenEv"></span><span id="_CPPv2N8erbsland5cterm2ui9StopToken9StopTokenEv"></span><span id="erbsland::cterm::ui::StopToken::StopToken"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1a700fe98aba375c734079f1ffc10a49dd"></span><span class="sig-name descname"><span class="n"><span class="pre">StopToken</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9StopToken9StopTokenEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty stop token that can never observe stop requests. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui9StopToken12stopPossibleEv">
+<span id="_CPPv3NK8erbsland5cterm2ui9StopToken12stopPossibleEv"></span><span id="_CPPv2NK8erbsland5cterm2ui9StopToken12stopPossibleEv"></span><span id="erbsland::cterm::ui::StopToken::stopPossibleC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1a1e6e9bd0f14e0852c3f2d44c5e565fba"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stopPossible</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui9StopToken12stopPossibleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this token is connected to a stop source. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if stop requests can be observed. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui9StopToken13stopRequestedEv">
+<span id="_CPPv3NK8erbsland5cterm2ui9StopToken13stopRequestedEv"></span><span id="_CPPv2NK8erbsland5cterm2ui9StopToken13stopRequestedEv"></span><span id="erbsland::cterm::ui::StopToken::stopRequestedC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_token_1aedaa8674c80c4c219b4a4ad437d5f76b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stopRequested</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui9StopToken13stopRequestedEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if a cooperative stop was requested. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the associated stop source requested a stop. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui10StopSourceE">
+<span id="_CPPv3N8erbsland5cterm2ui10StopSourceE"></span><span id="_CPPv2N8erbsland5cterm2ui10StopSourceE"></span><span id="erbsland::cterm::ui::StopSource"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StopSource</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui10StopSourceE" title="Link to this definition"></a><br /></dt>
+<dd><p>Stop source used by the event system to request a cooperative shutdown. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui10StopSource10StopSourceEv">
+<span id="_CPPv3N8erbsland5cterm2ui10StopSource10StopSourceEv"></span><span id="_CPPv2N8erbsland5cterm2ui10StopSource10StopSourceEv"></span><span id="erbsland::cterm::ui::StopSource::StopSource"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a0ea4372020cf1686fe363636fa1a79ac"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StopSource</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui10StopSource10StopSourceEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a new stop source with its own shared stop state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui10StopSource8getTokenEv">
+<span id="_CPPv3NK8erbsland5cterm2ui10StopSource8getTokenEv"></span><span id="_CPPv2NK8erbsland5cterm2ui10StopSource8getTokenEv"></span><span id="erbsland::cterm::ui::StopSource::getTokenC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1ab17ddcfdbf3005b83c89531f9f832441"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9StopTokenE" title="erbsland::cterm::ui::StopToken"><span class="n"><span class="pre">StopToken</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getToken</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui10StopSource8getTokenEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a token that observes this source. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A stop token connected to this source. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui10StopSource12stopPossibleEv">
+<span id="_CPPv3NK8erbsland5cterm2ui10StopSource12stopPossibleEv"></span><span id="_CPPv2NK8erbsland5cterm2ui10StopSource12stopPossibleEv"></span><span id="erbsland::cterm::ui::StopSource::stopPossibleC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a79f770a952578e34593b989390ae9672"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stopPossible</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui10StopSource12stopPossibleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this source is connected to a shared stop state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if stop requests are supported. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui10StopSource13stopRequestedEv">
+<span id="_CPPv3NK8erbsland5cterm2ui10StopSource13stopRequestedEv"></span><span id="_CPPv2NK8erbsland5cterm2ui10StopSource13stopRequestedEv"></span><span id="erbsland::cterm::ui::StopSource::stopRequestedC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a87093e64b9f21a54b4bdea81db527f3a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stopRequested</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui10StopSource13stopRequestedEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if a cooperative stop was already requested. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a89bbc1bca5884ae993c4a890673b5e44"><span class="std std-ref"><span class="pre">requestStop()</span></span></a></code> was called before. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui10StopSource11requestStopEv">
+<span id="_CPPv3N8erbsland5cterm2ui10StopSource11requestStopEv"></span><span id="_CPPv2N8erbsland5cterm2ui10StopSource11requestStopEv"></span><span id="erbsland::cterm::ui::StopSource::requestStop"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_stop_source_1a89bbc1bca5884ae993c4a890673b5e44"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">requestStop</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui10StopSource11requestStopEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Request a cooperative stop. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if this call changed the stop state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThreadE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThreadE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThreadE"></span><span id="erbsland::cterm::ui::EventThread"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EventThread</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_shared_from_this</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThreadE" title="erbsland::cterm::ui::EventThread"><span class="n"><span class="pre">EventThread</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThreadE" title="Link to this definition"></a><br /></dt>
+<dd><p>A thread that executes queued invocations via the UI event system. </p>
+<p>All public methods are thread-safe. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread12millisecondsE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread12millisecondsE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread12millisecondsE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">milliseconds</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">milliseconds</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread12millisecondsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Duration type used by the event thread API. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread12InvocationFnE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread12InvocationFnE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread12InvocationFnE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ae1ddcc0645f1eb82cafa1b4337c4f33c"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InvocationFn</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread12InvocationFnE" title="Link to this definition"></a><br /></dt>
+<dd><p>Callback type for invocations without stop support. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread21StoppableInvocationFnE">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread21StoppableInvocationFnE"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread21StoppableInvocationFnE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad994d18c09cbfdbb50644a02fa8d1ce4"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StoppableInvocationFn</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9StopTokenE" title="erbsland::cterm::ui::StopToken"><span class="n"><span class="pre">StopToken</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread21StoppableInvocationFnE" title="Link to this definition"></a><br /></dt>
+<dd><p>Callback type for invocations that can observe cooperative stop requests. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread11EventThreadE12ProtectedTag">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread11EventThreadE12ProtectedTag"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread11EventThreadE12ProtectedTag"></span><span id="erbsland::cterm::ui::EventThread::EventThread__ProtectedTag"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a929b66515856c05fe0b19f217697df3a"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EventThread</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ProtectedTag</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">protectedTag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread11EventThreadE12ProtectedTag" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an event thread instance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>protectedTag</strong> – Internal construction tag. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread6invokeE12InvocationFn">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread6invokeE12InvocationFn"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread6invokeE12InvocationFn"></span><span id="erbsland::cterm::ui::EventThread::invoke__InvocationFn"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a1d11c70fa4189345a53be64aca4c883e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">invoke</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThread12InvocationFnE" title="erbsland::cterm::ui::EventThread::InvocationFn"><span class="n"><span class="pre">InvocationFn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread6invokeE12InvocationFn" title="Link to this definition"></a><br /></dt>
+<dd><p>Queue one invocation on the event thread. </p>
+<p>If the thread is already stopping or finished, this call is ignored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fn</strong> – The callback to execute. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread6invokeE21StoppableInvocationFn">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread6invokeE21StoppableInvocationFn"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread6invokeE21StoppableInvocationFn"></span><span id="erbsland::cterm::ui::EventThread::invoke__StoppableInvocationFn"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a7a6446270901ad9c943c6c8c089575a6"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">invoke</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThread21StoppableInvocationFnE" title="erbsland::cterm::ui::EventThread::StoppableInvocationFn"><span class="n"><span class="pre">StoppableInvocationFn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread6invokeE21StoppableInvocationFn" title="Link to this definition"></a><br /></dt>
+<dd><p>Queue one stoppable invocation on the event thread. </p>
+<p>If the thread is already stopping or finished, this call is ignored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fn</strong> – The callback to execute. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread13invokeDelayedE12InvocationFn12milliseconds">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread13invokeDelayedE12InvocationFn12milliseconds"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread13invokeDelayedE12InvocationFn12milliseconds"></span><span id="erbsland::cterm::ui::EventThread::invokeDelayed__InvocationFn.milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a06bc05a34b9f468fc46eaa9568914d13"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">invokeDelayed</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThread12InvocationFnE" title="erbsland::cterm::ui::EventThread::InvocationFn"><span class="n"><span class="pre">InvocationFn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fn</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThread12millisecondsE" title="erbsland::cterm::ui::EventThread::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">delay</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread13invokeDelayedE12InvocationFn12milliseconds" title="Link to this definition"></a><br /></dt>
+<dd><p>Queue one invocation on the event thread after a delay. </p>
+<p>If the thread is already stopping or finished, this call is ignored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fn</strong> – The callback to execute. </p></li>
+<li><p><strong>delay</strong> – The delay before execution. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread13invokeDelayedE21StoppableInvocationFn12milliseconds">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread13invokeDelayedE21StoppableInvocationFn12milliseconds"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread13invokeDelayedE21StoppableInvocationFn12milliseconds"></span><span id="erbsland::cterm::ui::EventThread::invokeDelayed__StoppableInvocationFn.milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aafc5043bffc60451f2b6902250937c62"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">invokeDelayed</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThread21StoppableInvocationFnE" title="erbsland::cterm::ui::EventThread::StoppableInvocationFn"><span class="n"><span class="pre">StoppableInvocationFn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fn</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThread12millisecondsE" title="erbsland::cterm::ui::EventThread::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">delay</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread13invokeDelayedE21StoppableInvocationFn12milliseconds" title="Link to this definition"></a><br /></dt>
+<dd><p>Queue one stoppable invocation on the event thread after a delay. </p>
+<p>If the thread is already stopping or finished, this call is ignored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fn</strong> – The callback to execute. </p></li>
+<li><p><strong>delay</strong> – The delay before execution. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread4quitEv">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread4quitEv"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread4quitEv"></span><span id="erbsland::cterm::ui::EventThread::quit"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6f2b58dc113dafbc2b6f980a00a81df8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">quit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread4quitEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Request a graceful shutdown. </p>
+<p>Delayed work that is not yet due is cancelled immediately. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread5abortEv">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread5abortEv"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread5abortEv"></span><span id="erbsland::cterm::ui::EventThread::abort"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a753fc2415d63976d12fd1618f9669481"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">abort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread5abortEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Request an immediate shutdown. </p>
+<p>Queued work that has not started yet is discarded. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread11waitForQuitE12milliseconds">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread11waitForQuitE12milliseconds"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread11waitForQuitE12milliseconds"></span><span id="erbsland::cterm::ui::EventThread::waitForQuit__milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1af83680c5e495bdc91cb9d3791c2277fc"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForQuit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThread12millisecondsE" title="erbsland::cterm::ui::EventThread::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread11waitForQuitE12milliseconds" title="Link to this definition"></a><br /></dt>
+<dd><p>Wait for the thread to finish. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> – The maximum wait time. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">logic_error</span></span></span> – If called from the event thread itself before it finished. </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">exception</span></span></span> – Any stored callback exception after the thread finished. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the thread finished before the timeout expired. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread11quitAndWaitE12milliseconds">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread11quitAndWaitE12milliseconds"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread11quitAndWaitE12milliseconds"></span><span id="erbsland::cterm::ui::EventThread::quitAndWait__milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a7f0a464198da3a1f2faebff03f176b8f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">quitAndWait</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui11EventThread12millisecondsE" title="erbsland::cterm::ui::EventThread::milliseconds"><span class="n"><span class="pre">milliseconds</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread11quitAndWaitE12milliseconds" title="Link to this definition"></a><br /></dt>
+<dd><p>Request graceful shutdown and wait for completion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> – The maximum wait time. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">logic_error</span></span></span> – If called from the event thread itself before it finished. </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">exception</span></span></span> – Any stored callback exception after the thread finished. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the thread finished before the timeout expired. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui11EventThread9isRunningEv">
+<span id="_CPPv3NK8erbsland5cterm2ui11EventThread9isRunningEv"></span><span id="_CPPv2NK8erbsland5cterm2ui11EventThread9isRunningEv"></span><span id="erbsland::cterm::ui::EventThread::isRunningC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a25fc06c224a5ad18e2b465d5be2b2dfe"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isRunning</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui11EventThread9isRunningEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the worker thread is still running. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> while the event loop is active. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui11EventThread15isQuitRequestedEv">
+<span id="_CPPv3NK8erbsland5cterm2ui11EventThread15isQuitRequestedEv"></span><span id="_CPPv2NK8erbsland5cterm2ui11EventThread15isQuitRequestedEv"></span><span id="erbsland::cterm::ui::EventThread::isQuitRequestedC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aeddfbb945fe51f642818a081d35c8538"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isQuitRequested</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui11EventThread15isQuitRequestedEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if graceful shutdown was requested. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6f2b58dc113dafbc2b6f980a00a81df8"><span class="std std-ref"><span class="pre">quit()</span></span></a></code> was called. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui11EventThread16isAbortRequestedEv">
+<span id="_CPPv3NK8erbsland5cterm2ui11EventThread16isAbortRequestedEv"></span><span id="_CPPv2NK8erbsland5cterm2ui11EventThread16isAbortRequestedEv"></span><span id="erbsland::cterm::ui::EventThread::isAbortRequestedC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6cf935a1771b53f884261c232a0cc380"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isAbortRequested</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui11EventThread16isAbortRequestedEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if immediate shutdown was requested. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a753fc2415d63976d12fd1618f9669481"><span class="std std-ref"><span class="pre">abort()</span></span></a></code> was called. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui11EventThread10isFinishedEv">
+<span id="_CPPv3NK8erbsland5cterm2ui11EventThread10isFinishedEv"></span><span id="_CPPv2NK8erbsland5cterm2ui11EventThread10isFinishedEv"></span><span id="erbsland::cterm::ui::EventThread::isFinishedC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a692f2bc920d5fb7786ab1e18bbe857ad"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isFinished</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui11EventThread10isFinishedEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the worker thread finished. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the worker thread ended. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui11EventThread9hasFailedEv">
+<span id="_CPPv3NK8erbsland5cterm2ui11EventThread9hasFailedEv"></span><span id="_CPPv2NK8erbsland5cterm2ui11EventThread9hasFailedEv"></span><span id="erbsland::cterm::ui::EventThread::hasFailedC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6b30329820c3688357c4247751a3ee61"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasFailed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui11EventThread9hasFailedEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the worker thread stored a failure. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if one callback threw an exception. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui11EventThread6createEv">
+<span id="_CPPv3N8erbsland5cterm2ui11EventThread6createEv"></span><span id="_CPPv2N8erbsland5cterm2ui11EventThread6createEv"></span><span id="erbsland::cterm::ui::EventThread::create"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a211bee10dd1ed3118845a769290cf89e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">EventThreadPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui11EventThread6createEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create and start a new event thread. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The started event thread. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui13KeyPressEventE">
+<span id="_CPPv3N8erbsland5cterm2ui13KeyPressEventE"></span><span id="_CPPv2N8erbsland5cterm2ui13KeyPressEventE"></span><span id="erbsland::cterm::ui::KeyPressEvent"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_key_press_event"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyPressEvent</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventDataE" title="erbsland::cterm::ui::EventData"><span class="n"><span class="pre">EventData</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui13KeyPressEventE" title="Link to this definition"></a><br /></dt>
+<dd><p>A key press event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui13KeyPressEvent13KeyPressEventERK3Key">
+<span id="_CPPv3N8erbsland5cterm2ui13KeyPressEvent13KeyPressEventERK3Key"></span><span id="_CPPv2N8erbsland5cterm2ui13KeyPressEvent13KeyPressEventERK3Key"></span><span id="erbsland::cterm::ui::KeyPressEvent::KeyPressEvent__KeyCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_key_press_event_1a11ce78aaf64085dd4f804878cd984f52"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyPressEvent</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui13KeyPressEvent13KeyPressEventERK3Key" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a key press event for the given key. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> – The pressed key. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui13KeyPressEvent3keyEv">
+<span id="_CPPv3NK8erbsland5cterm2ui13KeyPressEvent3keyEv"></span><span id="_CPPv2NK8erbsland5cterm2ui13KeyPressEvent3keyEv"></span><span id="erbsland::cterm::ui::KeyPressEvent::keyC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_key_press_event_1ad40b86b64819da8ceaf430fb6d89873d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">key</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui13KeyPressEvent3keyEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the pressed key. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9QuitEventE">
+<span id="_CPPv3N8erbsland5cterm2ui9QuitEventE"></span><span id="_CPPv2N8erbsland5cterm2ui9QuitEventE"></span><span id="erbsland::cterm::ui::QuitEvent"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_quit_event"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">QuitEvent</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui9EventDataE" title="erbsland::cterm::ui::EventData"><span class="n"><span class="pre">EventData</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9QuitEventE" title="Link to this definition"></a><br /></dt>
+<dd><p>The data for a quit event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9QuitEvent9QuitEventEv">
+<span id="_CPPv3N8erbsland5cterm2ui9QuitEvent9QuitEventEv"></span><span id="_CPPv2N8erbsland5cterm2ui9QuitEvent9QuitEventEv"></span><span id="erbsland::cterm::ui::QuitEvent::QuitEvent"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_quit_event_1a0fafd510d48d99603b44fd31a969b5a8"></span><span class="sig-name descname"><span class="n"><span class="pre">QuitEvent</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9QuitEvent9QuitEventEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a quit event with exit code <code class="docutils literal notranslate"><span class="pre">0</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui9QuitEvent9QuitEventEKi">
+<span id="_CPPv3N8erbsland5cterm2ui9QuitEvent9QuitEventEKi"></span><span id="_CPPv2N8erbsland5cterm2ui9QuitEvent9QuitEventEKi"></span><span id="erbsland::cterm::ui::QuitEvent::QuitEvent__iC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_quit_event_1af5fe881b20ab046d3e88967c193f3354"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">QuitEvent</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">exitCode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui9QuitEvent9QuitEventEKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a quit event with an explicit exit code. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exitCode</strong> – The requested application exit code. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui9QuitEvent8exitCodeEv">
+<span id="_CPPv3NK8erbsland5cterm2ui9QuitEvent8exitCodeEv"></span><span id="_CPPv2NK8erbsland5cterm2ui9QuitEvent8exitCodeEv"></span><span id="erbsland::cterm::ui::QuitEvent::exitCodeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_quit_event_1a3f517c3b272a6bdbc019e56c9c02249c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">exitCode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui9QuitEvent8exitCodeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the requested application exit code. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The exit code. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ui-surfaces.html" class="btn btn-neutral float-left" title="UI Surfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../demos/index.html" class="btn btn-neutral float-right" title="Demos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

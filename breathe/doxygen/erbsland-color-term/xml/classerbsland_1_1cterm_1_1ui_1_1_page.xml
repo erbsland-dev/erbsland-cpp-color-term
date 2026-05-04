@@ -1,0 +1,802 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_page" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::Page</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_surface" prot="public" virt="non-virtual">erbsland::cterm::ui::Surface</basecompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice" prot="public" virt="non-virtual">erbsland::cterm::ui::page::Choice</derivedcompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer" prot="public" virt="non-virtual">erbsland::cterm::ui::page::HelpViewer</derivedcompoundref>
+    <includes refid="_page_8hpp" local="no">erbsland/cterm/ui/Page.hpp</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a8551ad5ab08204b27a6a5330bbfe4a10" prot="private" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>FocusRelation</name>
+        <qualifiedname>erbsland::cterm::ui::Page::FocusRelation</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_page_1a8551ad5ab08204b27a6a5330bbfe4a10a6adf97f83acf6453d4a6a4b1070f3754" prot="private">
+          <name>None</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_page_1a8551ad5ab08204b27a6a5330bbfe4a10a37bac6dce4f46277d89bfa3003e2e39b" prot="private">
+          <name>Within</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_page_1a8551ad5ab08204b27a6a5330bbfe4a10afd1dd0c603be8170f9eae0be9f2f6afb" prot="private">
+          <name>Direct</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="63" column="5" bodyfile="erbsland/cterm/ui/Page.hpp" bodystart="63" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_page_1adde9ff8b60a61e0a23e323be7d70b66b" prot="private" static="no">
+        <type>std::vector&lt; SurfacePtr &gt;</type>
+        <definition>using erbsland::cterm::ui::Page::FocusPath =  std::vector&lt;SurfacePtr&gt;</definition>
+        <argsstring></argsstring>
+        <name>FocusPath</name>
+        <qualifiedname>erbsland::cterm::ui::Page::FocusPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="68" column="5" bodyfile="erbsland/cterm/ui/Page.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a609ab524109c7c43fd1a72d559c5e87b" prot="private" static="no" mutable="no">
+        <type>SurfaceWeakPtr</type>
+        <definition>SurfaceWeakPtr erbsland::cterm::ui::Page::_focusSurface</definition>
+        <argsstring></argsstring>
+        <name>_focusSurface</name>
+        <qualifiedname>erbsland::cterm::ui::Page::_focusSurface</qualifiedname>
+        <briefdescription>
+<para>The surface that currently has the main focus. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="96" column="20" bodyfile="erbsland/cterm/ui/Page.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a90a268f3e616f56176ad5dd949c07615" prot="private" static="no" mutable="no">
+        <type>theme::ThemeConstPtr</type>
+        <definition>theme::ThemeConstPtr erbsland::cterm::ui::Page::_theme</definition>
+        <argsstring></argsstring>
+        <name>_theme</name>
+        <qualifiedname>erbsland::cterm::ui::Page::_theme</qualifiedname>
+        <briefdescription>
+<para>Optional page theme override. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="97" column="26" bodyfile="erbsland/cterm/ui/Page.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a03b392013b20696c2af18ffa1a791902" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Page::Page</definition>
+        <argsstring>(ProtectedTag)</argsstring>
+        <name>Page</name>
+        <qualifiedname>erbsland::cterm::ui::Page::Page</qualifiedname>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_surface_1_1_protected_tag" kindref="compound">ProtectedTag</ref></type>
+        </param>
+        <briefdescription>
+<para>Create a page instance through the protected construction path. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="20" column="14" bodyfile="erbsland/cterm/ui/Page.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1aef96abb0e968f08238b2de773c0044d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Page::~Page</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Page</name>
+        <qualifiedname>erbsland::cterm::ui::Page::~Page</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="21" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a9bb714de24d436f24edb1b8c93902889" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Page::setTheme</definition>
+        <argsstring>(theme::ThemeConstPtr theme) noexcept</argsstring>
+        <name>setTheme</name>
+        <qualifiedname>erbsland::cterm::ui::Page::setTheme</qualifiedname>
+        <param>
+          <type>theme::ThemeConstPtr</type>
+          <declname>theme</declname>
+        </param>
+        <briefdescription>
+<para>Replace the theme for this page and its descendants. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>theme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The page theme. A null pointer clears the override. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="30" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a7647a0a4b8c354a9d16b991ac69c5e2a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Page::clearTheme</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clearTheme</name>
+        <qualifiedname>erbsland::cterm::ui::Page::clearTheme</qualifiedname>
+        <briefdescription>
+<para>Clear the page theme override. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="32" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a385e3fc91364c8c7cbae6fbeb61bba1d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const theme::ThemeConstPtr &amp;</type>
+        <definition>const theme::ThemeConstPtr &amp; erbsland::cterm::ui::Page::themeOverride</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>themeOverride</name>
+        <qualifiedname>erbsland::cterm::ui::Page::themeOverride</qualifiedname>
+        <briefdescription>
+<para>Access the page theme override. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The page theme override, or null if the application theme is used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="35" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1aad434f9aac7b4da5dc28a644f14ac887" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Page::hasFocusSurface</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hasFocusSurface</name>
+        <qualifiedname>erbsland::cterm::ui::Page::hasFocusSurface</qualifiedname>
+        <briefdescription>
+<para>Test if the page has a focus surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="37" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a1eb1c0c96ac28d970d692e20906b1d1c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const SurfaceWeakPtr &amp;</type>
+        <definition>const SurfaceWeakPtr &amp; erbsland::cterm::ui::Page::focusSurface</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>focusSurface</name>
+        <qualifiedname>erbsland::cterm::ui::Page::focusSurface</qualifiedname>
+        <briefdescription>
+<para>Get the current focus surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="39" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a250d857dc1df98dee9d276602f4e95d6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Page::focusTo</definition>
+        <argsstring>(const SurfaceWeakPtr &amp;surface) noexcept</argsstring>
+        <name>focusTo</name>
+        <qualifiedname>erbsland::cterm::ui::Page::focusTo</qualifiedname>
+        <param>
+          <type>const SurfaceWeakPtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Move the focus to another surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Passing an expired, foreign, hidden, or non-focusable surface clears the current focus. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new focus surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the surface received focus. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="44" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1aeb2a9a20d1f4660f51d8319e10785e84" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Page::clearFocus</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clearFocus</name>
+        <qualifiedname>erbsland::cterm::ui::Page::clearFocus</qualifiedname>
+        <briefdescription>
+<para>Clear keyboard focus from this page. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="46" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1ac8a9515ec39797de05d4173d7fe94cad" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Page::onLayout</definition>
+        <argsstring>(LayoutScope &amp;scope) noexcept override</argsstring>
+        <name>onLayout</name>
+        <qualifiedname>erbsland::cterm::ui::Page::onLayout</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a931eb7df2cba0068a95ef28af0cdc2b4">onLayout</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_scope" kindref="compound">LayoutScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> top-level page children inside the page. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout scope for this page. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="51" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1acdae32d8805c0c03d8a05c911afadcca" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Page::onPaint</definition>
+        <argsstring>(WritableBuffer &amp;buffer, const PaintContext &amp;context) noexcept override</argsstring>
+        <name>onPaint</name>
+        <qualifiedname>erbsland::cterm::ui::Page::onPaint</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ebde9b30a900ad9dcfb69d451826d13">onPaint</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_writable_buffer" kindref="compound">WritableBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_paint_context" kindref="compound">PaintContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Paint this surface into the target buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The paint context for the current paint pass. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="52" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1aa2c3501327d704abfec1a54441efc805" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Page::onKeyPress</definition>
+        <argsstring>(KeyPressEvent &amp;keyPressEvent) noexcept override</argsstring>
+        <name>onKeyPress</name>
+        <qualifiedname>erbsland::cterm::ui::Page::onKeyPress</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac5de18b08b9c414b0bcfe38fa801d367">onKeyPress</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_key_press_event" kindref="compound">KeyPressEvent</ref> &amp;</type>
+          <declname>keyPressEvent</declname>
+        </param>
+        <briefdescription>
+<para>Route the key press to the focused surface chain and finally to the page itself. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>keyPressEvent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key press event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a6034171b4786f2360937a40530e8c1f1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Page::isOpaque</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>isOpaque</name>
+        <qualifiedname>erbsland::cterm::ui::Page::isOpaque</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a95e5424ead0b6cc74db8b7130d1633a3">isOpaque</reimplements>
+        <briefdescription>
+<para>Test if this surface paints every cell in its rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if the surface is opaque. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="56" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1ab15f5aa4e53b8f3687eddff4f100fe86" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Page::isPage</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>isPage</name>
+        <qualifiedname>erbsland::cterm::ui::Page::isPage</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a967203e56c68deb9f759c9a6f4f8d8d4">isPage</reimplements>
+        <briefdescription>
+<para>Test if this surface is a page. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> for <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_page" kindref="compound">Page</ref></computeroutput>, otherwise <computeroutput>false</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="57" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a71fb3a4d5b561302586d5fd617e24e98" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>PagePtr</type>
+        <definition>static PagePtr erbsland::cterm::ui::Page::create</definition>
+        <argsstring>()</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::Page::create</qualifiedname>
+        <briefdescription>
+<para>Create a new page. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="25" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1acf80b42cdac8cf4c28f808909a1568f1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Page::initializeUi</definition>
+        <argsstring>() override</argsstring>
+        <name>initializeUi</name>
+        <qualifiedname>erbsland::cterm::ui::Page::initializeUi</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad58106a9586de9d0ad45c4da90bdb528">initializeUi</reimplements>
+        <briefdescription>
+<para>Initialize theme attributes, child surfaces and other UI state after construction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="60" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a8ca012a61dbe747e8014f188e6b8e4d6" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Page::isFocusSurfaceValid</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const noexcept</argsstring>
+        <name>isFocusSurfaceValid</name>
+        <qualifiedname>erbsland::cterm::ui::Page::isFocusSurfaceValid</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Test if the given surface belongs to this page. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the surface is a descendant of this page. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="74" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1abe9b50178e763c1dddbbf05cfbd76b8b" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SurfacePtr</type>
+        <definition>SurfacePtr erbsland::cterm::ui::Page::validFocusSurface</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>validFocusSurface</name>
+        <qualifiedname>erbsland::cterm::ui::Page::validFocusSurface</qualifiedname>
+        <briefdescription>
+<para>Clear the stored focus if it is no longer valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The valid focus surface, or null if no focus remains. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="77" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a85e65752edd0f1e09e29cd51bfb307e8" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>FocusPath</type>
+        <definition>FocusPath erbsland::cterm::ui::Page::focusPathFor</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const</argsstring>
+        <name>focusPathFor</name>
+        <qualifiedname>erbsland::cterm::ui::Page::focusPathFor</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Build a page-relative path from a focus surface to this page. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The focus surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The path from page child to focus surface. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="81" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a29616708b8d6ba2ca6d48dc20b0f6c1f" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Page::updateFocusPath</definition>
+        <argsstring>(const FocusPath &amp;oldPath, const FocusPath &amp;newPath) noexcept</argsstring>
+        <name>updateFocusPath</name>
+        <qualifiedname>erbsland::cterm::ui::Page::updateFocusPath</qualifiedname>
+        <param>
+          <type>const FocusPath &amp;</type>
+          <declname>oldPath</declname>
+        </param>
+        <param>
+          <type>const FocusPath &amp;</type>
+          <declname>newPath</declname>
+        </param>
+        <briefdescription>
+<para>Apply all relation changes between two paths. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>oldPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The previous focus path. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>newPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new focus path. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="90" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a6a91ac9d95e603cb02e1a0aaa6900a1f" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>FocusRelation</type>
+        <definition>static FocusRelation erbsland::cterm::ui::Page::relationFor</definition>
+        <argsstring>(const FocusPath &amp;path, const SurfacePtr &amp;surface) noexcept</argsstring>
+        <name>relationFor</name>
+        <qualifiedname>erbsland::cterm::ui::Page::relationFor</qualifiedname>
+        <param>
+          <type>const FocusPath &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Get one surface relation for a path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The focus path. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to query. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The focus relation for the surface. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="86" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_page_1a0d9a21988001056a5b527eaa5bac7b9e" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>FocusChange</type>
+        <definition>static FocusChange erbsland::cterm::ui::Page::focusChangeFor</definition>
+        <argsstring>(FocusRelation relation) noexcept</argsstring>
+        <name>focusChangeFor</name>
+        <qualifiedname>erbsland::cterm::ui::Page::focusChangeFor</qualifiedname>
+        <param>
+          <type>FocusRelation</type>
+          <declname>relation</declname>
+        </param>
+        <briefdescription>
+<para>Convert one relation into a focus callback change. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>relation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new relation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding focus change. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Page.hpp" line="94" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A single page on the screen. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::ui::Page</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_page"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::ui::page::Choice</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::page::HelpViewer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="7">
+        <label>erbsland::cterm::Rectangle</label>
+        <link refid="classerbsland_1_1cterm_1_1_rectangle"/>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="8">
+        <label>erbsland::cterm::ui::LayoutMetrics</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::Page</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_page"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>_surfaces</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>_flags</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_rectangle</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_layoutMetrics</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>_themeAttributes</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::SurfaceFlags</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_flags"/>
+      </node>
+      <node id="9">
+        <label>erbsland::cterm::ui::SurfaceThemeAttributes</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_theme_attributes"/>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/Page.hpp" line="17" column="1" bodyfile="erbsland/cterm/ui/Page.hpp" bodystart="17" bodyend="98"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a67caf5a45f3afcf394d04b6a811fb019" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>_flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a609ab524109c7c43fd1a72d559c5e87b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>_focusSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5e98ac945443673593de934b8e5a6c82" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>_layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9ded519b8019bf6a0379b4807842db02" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>_rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adebfc77d073fdbec83278119180d2641" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>_surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a90a268f3e616f56176ad5dd949c07615" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>_theme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a3495ef389b8d8ba1623a671bdbe0a96f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>_themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d68b998618a891511dee33516b51268" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac3b1bb4dd817e95e8a35841cf96b48a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>actionsPtr</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9822c7ffb68730aea7ba35147f48f418" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>addSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0abe7d82b04e8ab6336b069f5cc8582" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>childLayoutContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1abaddf3eeea6f7644b5c60ff68d2de36b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0523529e715f39f711cc5d96ac3c44d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aeb2a9a20d1f4660f51d8319e10785e84" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>clearFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a7647a0a4b8c354a9d16b991ac69c5e2a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>clearTheme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a71fb3a4d5b561302586d5fd617e24e98" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ed84aa3c6e6d970d42b64c83b46573d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>editLayoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaf52c2f637ff1260e089e66443b07531" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a89aeb65892433da9fcac35928db00810" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a0d9a21988001056a5b527eaa5bac7b9e" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>focusChangeFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1adde9ff8b60a61e0a23e323be7d70b66b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>FocusPath</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a85e65752edd0f1e09e29cd51bfb307e8" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>focusPathFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a8551ad5ab08204b27a6a5330bbfe4a10" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>FocusRelation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a1eb1c0c96ac28d970d692e20906b1d1c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>focusSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a250d857dc1df98dee9d276602f4e95d6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>focusTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aad434f9aac7b4da5dc28a644f14ac887" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>hasFocusSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1acf80b42cdac8cf4c28f808909a1568f1" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>initializeUi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1acc65b744f0701f00597e4c89d6241239" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>isAncestorOrSame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a8ca012a61dbe747e8014f188e6b8e4d6" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>isFocusSurfaceValid</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a6034171b4786f2360937a40530e8c1f1" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>isOpaque</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1ab15f5aa4e53b8f3687eddff4f100fe86" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>isPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1afb8f08ad9f89178255cdda7cf8ac450f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad34c082f4cb962dabd803d02895a9902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaa6aedebddacbcb54d637ab7dc763317" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>localSurfaceRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a73838b048c6c2e0a456eb2776a11c459" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>localToScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a827a5338cd11a1ac0f82d8beae54c1f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>nearestOpaqueSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a50e8ebc2c27eaa297c1b6df62176a9de" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>nearestPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1908b92a2163d514b9dec6b29e18c13b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>onFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aa2c3501327d704abfec1a54441efc805" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1ac8a9515ec39797de05d4173d7fe94cad" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>onLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a970401f71d513138ee3de0e51004f759" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>onMeasure</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1acdae32d8805c0c03d8a05c911afadcca" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>onPaint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1af4b08bc02b3b7e8e6cf6cf5822645470" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1db7d7cb9f30ee4c5b4242473de6fe33" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a03b392013b20696c2af18ffa1a791902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>Page</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a57ed2140168f6fad97796cbc98b876f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1a2f2168434fcf663bccb768dfa8cba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a6a91ac9d95e603cb02e1a0aaa6900a1f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>relationFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6691b41ed4a62a31aff2393c131ab2f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>requestFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a484e22bcc258d2b36992ff91e6cc4c0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c4a3823f5477de8879ebd80c043abe6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>screenToLocal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad190a0f521f4abb34c9a5fe9e8cdba40" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>setRectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a9bb714de24d436f24edb1b8c93902889" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>setTheme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae70aa6dae2d6df94fbb2f6f6b5226daa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5cb74a7a34e1b983c592e6f7f6aeca96" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d00cfd2476c5d44de898c00f29fc90a" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a4623853a42b6ae3683027cb10e3fef65" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aea9e1412522664de3fbfa01435f9bacf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae95b294bf3fad17469266a725bb69ff7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c6f25c89ecf460580ae03db5573b9ba" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ade89cf3d7830659bfa54ed703bdc3d14" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1add04ac6c18ebbcb1dc835a4da635d58d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adb6bc351b2e411bfdc50f26867d31df9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a02f5c3f2df31839ad57c7dd3e442bdc6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>themeContextFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a385e3fc91364c8c7cbae6fbeb61bba1d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>themeOverride</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a29616708b8d6ba2ca6d48dc20b0f6c1f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>updateFocusPath</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1abe9b50178e763c1dddbbf05cfbd76b8b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>validFocusSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a0cff8325b685e12268b2a8136d6c47f2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>visibleScreenRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aef96abb0e968f08238b2de773c0044d0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Page</scope><name>~Page</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d29bb69da75140fb230c6edd80bd9e7" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Page</scope><name>~Surface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

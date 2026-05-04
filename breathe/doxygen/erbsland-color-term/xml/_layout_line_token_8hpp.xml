@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_layout_line_token_8hpp" kind="file" language="C++">
+    <compoundname>LayoutLineToken.hpp</compoundname>
+    <includes local="no">cassert</includes>
+    <includes local="no">cstddef</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">optional</includes>
+    <includedby refid="_layout_prepared_source_line_8hpp" local="yes">erbsland/cterm/impl/paragraph/LayoutPreparedSourceLine.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>erbsland/cterm/impl/paragraph/LayoutLineToken.hpp</label>
+        <link refid="_layout_line_token_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cassert</label>
+      </node>
+      <node id="3">
+        <label>cstddef</label>
+      </node>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="5">
+        <label>optional</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>erbsland/cterm/impl/paragraph/Layout.hpp</label>
+        <link refid="impl_2paragraph_2_layout_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/impl/paragraph/LayoutLineToken.hpp</label>
+        <link refid="_layout_line_token_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland/cterm/impl/paragraph/LayoutPreparedSourceLine.hpp</label>
+        <link refid="_layout_prepared_source_line_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland/cterm/impl/paragraph/LineBuilder.hpp</label>
+        <link refid="_line_builder_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>erbsland/cterm/impl/paragraph/Painter.hpp</label>
+        <link refid="_painter_8hpp_source"/>
+      </node>
+      <node id="6">
+        <label>erbsland/cterm/impl/paragraph/Printer.hpp</label>
+        <link refid="_printer_8hpp_source"/>
+      </node>
+      <node id="4">
+        <label>erbsland/cterm/impl/paragraph/RendererBase.hpp</label>
+        <link refid="_renderer_base_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" prot="public">erbsland::cterm::impl::paragraph::LayoutLineToken</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result" prot="public">erbsland::cterm::impl::paragraph::LayoutLineToken::SplitResult</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1impl">erbsland::cterm::impl</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1impl_1_1paragraph">erbsland::cterm::impl::paragraph</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstddef&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;optional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">StringView;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm::impl::paragraph<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" kindref="compound">LayoutLineToken</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="22" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" kindref="member">Type</ref><sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a07a094a210794e74a0e5e1a1457a92ee" kindref="member">Word</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a64c4d6fefe9d6d019613aa13fb0b32b6" kindref="member">SeparatorSpace</ref>,<sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a5c6ba25104401c9ee0650230fc6ba413" kindref="member">Tab</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result" kindref="compound">SplitResult</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="30" refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result_1a919bad6ff698b17d1c57f029c7cbbe45" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/><ref refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result_1a919bad6ff698b17d1c57f029c7cbbe45" kindref="member">sourceCharacterCount</ref><sp/>=<sp/>0;<sp/></highlight></codeline>
+<codeline lineno="31" refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result_1a98f6735201b09a3199772b782aa86b8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result_1a98f6735201b09a3199772b782aa86b8b" kindref="member">sourceWidth</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32" refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result_1aa3233e1d6b39fce7a4b8890d59f3b56e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result_1aa3233e1d6b39fce7a4b8890d59f3b56e" kindref="member">width</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="41" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a70ba33f16b622352ebe5bdeb26040782" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a70ba33f16b622352ebe5bdeb26040782" kindref="member">LayoutLineToken</ref>(</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" kindref="member">Type</ref><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5bd09c90399a4e7a3391c9b260e061e9" kindref="member">type</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1abe83c9080c30f7128e82e4865d7c3d9c" kindref="member">startIndex</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5e333c82560f44ee560585e34ef9077a" kindref="member">length</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a6736570df577c3da5ae9b4254a476277" kindref="member">displayWidth</ref>)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_type{<ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5bd09c90399a4e7a3391c9b260e061e9" kindref="member">type</ref>},<sp/>_startIndex{<ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1abe83c9080c30f7128e82e4865d7c3d9c" kindref="member">startIndex</ref>},<sp/>_length{<ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5e333c82560f44ee560585e34ef9077a" kindref="member">length</ref>},<sp/>_displayWidth{<ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a6736570df577c3da5ae9b4254a476277" kindref="member">displayWidth</ref>}<sp/>{}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>LayoutLineToken(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>LayoutLineToken<sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>LayoutLineToken(LayoutLineToken<sp/>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>LayoutLineToken<sp/>&amp;<sp/>operator=(const<sp/>LayoutLineToken<sp/>&amp;)<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>LayoutLineToken<sp/>&amp;<sp/>operator=(LayoutLineToken<sp/>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal">public:</highlight></codeline>
+<codeline lineno="53" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5bd09c90399a4e7a3391c9b260e061e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" kindref="member">Type</ref><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5bd09c90399a4e7a3391c9b260e061e9" kindref="member">type</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_type;<sp/>}</highlight></codeline>
+<codeline lineno="55" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1abe83c9080c30f7128e82e4865d7c3d9c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::size_t<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1abe83c9080c30f7128e82e4865d7c3d9c" kindref="member">startIndex</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_startIndex;<sp/>}</highlight></codeline>
+<codeline lineno="57" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5e333c82560f44ee560585e34ef9077a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::size_t<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5e333c82560f44ee560585e34ef9077a" kindref="member">length</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_length;<sp/>}</highlight></codeline>
+<codeline lineno="59" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a6736570df577c3da5ae9b4254a476277" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a6736570df577c3da5ae9b4254a476277" kindref="member">displayWidth</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_displayWidth;<sp/>}</highlight></codeline>
+<codeline lineno="61" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a1fc6b8dc2ef8e9b2704a465bdf6921eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::size_t<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a1fc6b8dc2ef8e9b2704a465bdf6921eb" kindref="member">sourceIndex</ref>(std::size_t<sp/>offset)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(isWord());</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_startIndex<sp/>+<sp/>offset;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="66" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ad589b1da149a0321df3e17028593a37e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ad589b1da149a0321df3e17028593a37e" kindref="member">remainingWidth</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;text,<sp/>std::size_t<sp/>offset)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="73" refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab09e7bd65b4392aee51260208361f265" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::optional&lt;SplitResult&gt;<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab09e7bd65b4392aee51260208361f265" kindref="member">split</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;text,<sp/>std::size_t<sp/>offset,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>availableWidth,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>trailingMarkerWidth)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isWord()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_type<sp/>==<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a07a094a210794e74a0e5e1a1457a92ee" kindref="member">Type::Word</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" kindref="member">Type</ref><sp/>_type<sp/>=<sp/><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a07a094a210794e74a0e5e1a1457a92ee" kindref="member">Type::Word</ref>;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>_startIndex<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>_length<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_displayWidth<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::paragraph::LayoutLineToken</compoundname>
+    <includes refid="_layout_line_token_8hpp" local="no">erbsland/cterm/impl/paragraph/LayoutLineToken.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result" prot="public">erbsland::cterm::impl::paragraph::LayoutLineToken::SplitResult</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>Type</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::Type</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a07a094a210794e74a0e5e1a1457a92ee" prot="public">
+          <name>Word</name>
+          <briefdescription>
+<para>A contiguous source word. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a64c4d6fefe9d6d019613aa13fb0b32b6" prot="public">
+          <name>SeparatorSpace</name>
+          <briefdescription>
+<para>A collapsed separator run rendered as one space. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a5c6ba25104401c9ee0650230fc6ba413" prot="public">
+          <name>Tab</name>
+          <briefdescription>
+<para>A left-aligned tab resolved later from the current column. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The kind of token. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="22" column="5" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="22" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1aa6e1542e8f04273927fdfc432710e808" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" kindref="member">Type</ref></type>
+        <definition>Type erbsland::cterm::impl::paragraph::LayoutLineToken::_type</definition>
+        <argsstring></argsstring>
+        <name>_type</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::_type</qualifiedname>
+        <initializer>= <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912a07a094a210794e74a0e5e1a1457a92ee" kindref="member">Type::Word</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="79" column="10" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a01ac99f2493609e814bb37b5da18a3b4" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::paragraph::LayoutLineToken::_startIndex</definition>
+        <argsstring></argsstring>
+        <name>_startIndex</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::_startIndex</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="80" column="17" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ad0caf221f6a4400b721e7e6cc9ef20ee" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::paragraph::LayoutLineToken::_length</definition>
+        <argsstring></argsstring>
+        <name>_length</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::_length</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="81" column="17" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a7c6f846ca069417806f6801a1de4e620" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::impl::paragraph::LayoutLineToken::_displayWidth</definition>
+        <argsstring></argsstring>
+        <name>_displayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::_displayWidth</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="82" column="9" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a70ba33f16b622352ebe5bdeb26040782" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::impl::paragraph::LayoutLineToken::LayoutLineToken</definition>
+        <argsstring>(const Type type, const std::size_t startIndex, const std::size_t length, const int displayWidth) noexcept</argsstring>
+        <name>LayoutLineToken</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::LayoutLineToken</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>startIndex</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>displayWidth</declname>
+        </param>
+        <briefdescription>
+<para>Create one prepared source-line token. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The token type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>startIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first source character index covered by the token. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of source characters covered by the token. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>displayWidth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The cached display width of the token. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="41" column="15" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="41" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5569e82bf898536cfd5c795fa413448c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::LayoutLineToken::LayoutLineToken</definition>
+        <argsstring>(const LayoutLineToken &amp;)=default</argsstring>
+        <name>LayoutLineToken</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::LayoutLineToken</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" kindref="compound">LayoutLineToken</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a55d22e54415b11c641e14516a0038715" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::LayoutLineToken::LayoutLineToken</definition>
+        <argsstring>(LayoutLineToken &amp;&amp;) noexcept=default</argsstring>
+        <name>LayoutLineToken</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::LayoutLineToken</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" kindref="compound">LayoutLineToken</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a7ec1cf795d61c1d818bb37d1f89f7ada" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" kindref="compound">LayoutLineToken</ref> &amp;</type>
+        <definition>LayoutLineToken &amp; erbsland::cterm::impl::paragraph::LayoutLineToken::operator=</definition>
+        <argsstring>(const LayoutLineToken &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" kindref="compound">LayoutLineToken</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="48" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1aec0a6f8b029fe6c1f0c23b37fa6d2afc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" kindref="compound">LayoutLineToken</ref> &amp;</type>
+        <definition>LayoutLineToken &amp; erbsland::cterm::impl::paragraph::LayoutLineToken::operator=</definition>
+        <argsstring>(LayoutLineToken &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token" kindref="compound">LayoutLineToken</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="49" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5bd09c90399a4e7a3391c9b260e061e9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" kindref="member">Type</ref></type>
+        <definition>Type erbsland::cterm::impl::paragraph::LayoutLineToken::type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>type</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::type</qualifiedname>
+        <briefdescription>
+<para>Get the token type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="53" column="11" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1abe83c9080c30f7128e82e4865d7c3d9c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::paragraph::LayoutLineToken::startIndex</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>startIndex</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::startIndex</qualifiedname>
+        <briefdescription>
+<para>Get the first source character index of the token. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="55" column="18" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5e333c82560f44ee560585e34ef9077a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::paragraph::LayoutLineToken::length</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>length</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::length</qualifiedname>
+        <briefdescription>
+<para>Get the source character count of the token. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="57" column="18" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a6736570df577c3da5ae9b4254a476277" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::impl::paragraph::LayoutLineToken::displayWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>displayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::displayWidth</qualifiedname>
+        <briefdescription>
+<para>Get the cached display width of the token. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="59" column="10" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a1fc6b8dc2ef8e9b2704a465bdf6921eb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::paragraph::LayoutLineToken::sourceIndex</definition>
+        <argsstring>(std::size_t offset) const noexcept</argsstring>
+        <name>sourceIndex</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::sourceIndex</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>Get the source character index for the given offset inside the word. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="61" column="18" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ad589b1da149a0321df3e17028593a37e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::impl::paragraph::LayoutLineToken::remainingWidth</definition>
+        <argsstring>(const StringView &amp;text, std::size_t offset) const noexcept</argsstring>
+        <name>remainingWidth</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::remainingWidth</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>Get the remaining display width from the given character offset onward. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab09e7bd65b4392aee51260208361f265" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1_1_split_result" kindref="compound">SplitResult</ref> &gt;</type>
+        <definition>std::optional&lt; SplitResult &gt; erbsland::cterm::impl::paragraph::LayoutLineToken::split</definition>
+        <argsstring>(const StringView &amp;text, std::size_t offset, int availableWidth, int trailingMarkerWidth) const noexcept</argsstring>
+        <name>split</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::split</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>availableWidth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>trailingMarkerWidth</declname>
+        </param>
+        <briefdescription>
+<para>Split the word to fit into the available width. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source text that contains the word characters. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first source character offset to place on the current line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>availableWidth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The available display width for the word content and optional trailing marker. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>trailingMarkerWidth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The width of an optional trailing split marker. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The split result, or <computeroutput>std::nullopt</computeroutput> if nothing can be rendered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="73" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a4813a4f4d06c2a1f6b0e6f7b0e616849" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::paragraph::LayoutLineToken::isWord</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isWord</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LayoutLineToken::isWord</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="76" column="11" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="76" bodyend="76"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>One prepared source-line token used during physical line layout. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" line="19" column="1" bodyfile="erbsland/cterm/impl/paragraph/LayoutLineToken.hpp" bodystart="19" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a7c6f846ca069417806f6801a1de4e620" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>_displayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ad0caf221f6a4400b721e7e6cc9ef20ee" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>_length</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a01ac99f2493609e814bb37b5da18a3b4" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>_startIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1aa6e1542e8f04273927fdfc432710e808" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>_type</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a6736570df577c3da5ae9b4254a476277" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>displayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a4813a4f4d06c2a1f6b0e6f7b0e616849" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>isWord</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a70ba33f16b622352ebe5bdeb26040782" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>LayoutLineToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5569e82bf898536cfd5c795fa413448c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>LayoutLineToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a55d22e54415b11c641e14516a0038715" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>LayoutLineToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5e333c82560f44ee560585e34ef9077a" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>length</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a7ec1cf795d61c1d818bb37d1f89f7ada" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1aec0a6f8b029fe6c1f0c23b37fa6d2afc" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ad589b1da149a0321df3e17028593a37e" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>remainingWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a1fc6b8dc2ef8e9b2704a465bdf6921eb" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>sourceIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab09e7bd65b4392aee51260208361f265" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>split</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1abe83c9080c30f7128e82e4865d7c3d9c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>startIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1ab5cf2d664152103f6dad71677c740912" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>Type</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line_token_1a5bd09c90399a4e7a3391c9b260e061e9" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LayoutLineToken</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

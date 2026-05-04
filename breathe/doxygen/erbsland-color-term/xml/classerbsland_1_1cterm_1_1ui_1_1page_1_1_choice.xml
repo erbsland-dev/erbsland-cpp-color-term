@@ -1,0 +1,1144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::page::Choice</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_page" prot="public" virt="non-virtual">erbsland::cterm::ui::Page</basecompoundref>
+    <includes refid="_choice_8hpp" local="no">erbsland/cterm/ui/page/Choice.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1_1_choice_data" prot="private">erbsland::cterm::ui::page::Choice::ChoiceData</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1_1_selection" prot="public">erbsland::cterm::ui::page::Choice::Selection</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a0d857bce3996b33a5c22baedb5e957ce" prot="public" static="no">
+        <type>std::function&lt; void(const <ref refid="structerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1_1_selection" kindref="compound">Selection</ref> &amp;)&gt;</type>
+        <definition>using erbsland::cterm::ui::page::Choice::Callback =  std::function&lt;void(const Selection &amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>Callback</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::Callback</qualifiedname>
+        <briefdescription>
+<para>Callback executed after the page has been popped. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="33" column="5" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a35484881cb5057597d60f65276732e21" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::page::Choice::cMinimumDialogWidth</definition>
+        <argsstring></argsstring>
+        <name>cMinimumDialogWidth</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::cMinimumDialogWidth</qualifiedname>
+        <initializer>= Coordinate{25}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="121" column="27" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a6e0d6ae0f510a5507b4bbb084a3240f7" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::page::Choice::cPreferredDialogWidth</definition>
+        <argsstring></argsstring>
+        <name>cPreferredDialogWidth</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::cPreferredDialogWidth</qualifiedname>
+        <initializer>= Coordinate{60}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="122" column="27" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="122" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a59f2b9196202654b193fb948e61aeff7" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::page::Choice::cMaximumDialogWidth</definition>
+        <argsstring></argsstring>
+        <name>cMaximumDialogWidth</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::cMaximumDialogWidth</qualifiedname>
+        <initializer>= Coordinate{80}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="123" column="27" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a7029194ad0401ea4aabbb3dc2b937927" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::page::Choice::cDefaultPadding</definition>
+        <argsstring></argsstring>
+        <name>cDefaultPadding</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::cDefaultPadding</qualifiedname>
+        <initializer>= <ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref>{1, 2, 0, 2}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="124" column="27" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="124" bodyend="124"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a6b54c5983e36772236e5c02f0206d909" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+        <definition>String erbsland::cterm::ui::page::Choice::_title</definition>
+        <argsstring></argsstring>
+        <name>_title</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_title</qualifiedname>
+        <briefdescription>
+<para>Prompt title. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="126" column="12" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a0151d3aef0ac7627207186fd45201597" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+        <definition>String erbsland::cterm::ui::page::Choice::_description</definition>
+        <argsstring></argsstring>
+        <name>_description</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_description</qualifiedname>
+        <briefdescription>
+<para>Prompt description. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="127" column="12" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a31e3013fa03c2c3b9a456f981c6412a0" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a0d857bce3996b33a5c22baedb5e957ce" kindref="member">Callback</ref></type>
+        <definition>Callback erbsland::cterm::ui::page::Choice::_callback</definition>
+        <argsstring></argsstring>
+        <name>_callback</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_callback</qualifiedname>
+        <briefdescription>
+<para><ref refid="structerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1_1_selection" kindref="compound">Selection</ref> callback. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="128" column="14" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ad60d4c12c0c55640d3be5a26d7db9303" prot="private" static="no" mutable="no">
+        <type>layout::CenteredPtr</type>
+        <definition>layout::CenteredPtr erbsland::cterm::ui::page::Choice::_centered</definition>
+        <argsstring></argsstring>
+        <name>_centered</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_centered</qualifiedname>
+        <briefdescription>
+<para>Full-page centering layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="129" column="25" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a468c3c647f4c00fbafdf5681083f4be4" prot="private" static="no" mutable="no">
+        <type>layout::FramePtr</type>
+        <definition>layout::FramePtr erbsland::cterm::ui::page::Choice::_frame</definition>
+        <argsstring></argsstring>
+        <name>_frame</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_frame</qualifiedname>
+        <briefdescription>
+<para>The modal frame layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="130" column="22" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af0a8cdf0282440727ae302fa1f463334" prot="private" static="no" mutable="no">
+        <type>layout::StackPtr</type>
+        <definition>layout::StackPtr erbsland::cterm::ui::page::Choice::_stack</definition>
+        <argsstring></argsstring>
+        <name>_stack</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_stack</qualifiedname>
+        <briefdescription>
+<para>Vertical prompt body layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="131" column="22" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a429e527ca232cc2ac09ace4eef15ff1b" prot="private" static="no" mutable="no">
+        <type>surface::TextBoxPtr</type>
+        <definition>surface::TextBoxPtr erbsland::cterm::ui::page::Choice::_descriptionText</definition>
+        <argsstring></argsstring>
+        <name>_descriptionText</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_descriptionText</qualifiedname>
+        <briefdescription>
+<para>Description text surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="132" column="25" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a0c5270d10dbb4af180e10149a87e9223" prot="private" static="no" mutable="no">
+        <type>layout::ButtonsPtr</type>
+        <definition>layout::ButtonsPtr erbsland::cterm::ui::page::Choice::_buttons</definition>
+        <argsstring></argsstring>
+        <name>_buttons</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_buttons</qualifiedname>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice" kindref="compound">Choice</ref> button layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="133" column="24" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1aed29d428790e52572ba4a4727b18458c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; ChoiceData &gt;</type>
+        <definition>std::vector&lt;ChoiceData&gt; erbsland::cterm::ui::page::Choice::_choices</definition>
+        <argsstring></argsstring>
+        <name>_choices</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_choices</qualifiedname>
+        <briefdescription>
+<para>Choices in display order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="134" column="17" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a149175f6990f7727f8034cb2c7e8d4fc" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ui::page::Choice::_nextInsertionIndex</definition>
+        <argsstring></argsstring>
+        <name>_nextInsertionIndex</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_nextInsertionIndex</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Stable insertion index source. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="135" column="17" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ac41f3de6b385678745e17be53f74fec6" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref></type>
+        <definition>Margins erbsland::cterm::ui::page::Choice::_margins</definition>
+        <argsstring></argsstring>
+        <name>_margins</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_margins</qualifiedname>
+        <initializer>{4, 2}</initializer>
+        <briefdescription>
+<para>Outer margins around the modal. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="136" column="13" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="136" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af267532dcb3032d015c34ce908565bc1" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref></type>
+        <definition>Margins erbsland::cterm::ui::page::Choice::_padding</definition>
+        <argsstring></argsstring>
+        <name>_padding</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_padding</qualifiedname>
+        <initializer>{cDefaultPadding}</initializer>
+        <briefdescription>
+<para>Prompt padding inside the frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="137" column="13" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="137" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af25cee496f061285f79b6d96ff3b7ce9" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; Coordinate &gt;</type>
+        <definition>std::optional&lt;Coordinate&gt; erbsland::cterm::ui::page::Choice::_preferredLineWidth</definition>
+        <argsstring></argsstring>
+        <name>_preferredLineWidth</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::_preferredLineWidth</qualifiedname>
+        <initializer>{78}</initializer>
+        <briefdescription>
+<para>Preferred readable description width. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="138" column="19" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="138" bodyend="138"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ade874ce07bf8c47ba904bc1b75883542" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::page::Choice::Choice</definition>
+        <argsstring>(String title, String description, ProtectedTag)</argsstring>
+        <name>Choice</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::Choice</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>description</declname>
+        </param>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_surface_1_1_protected_tag" kindref="compound">ProtectedTag</ref></type>
+        </param>
+        <briefdescription>
+<para>Create a choice page. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="37" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ae634f8992e2f91cfa298120e1c8b2bb7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::page::Choice::~Choice</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Choice</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::~Choice</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a44b364ef8e0825cf2f6f8b4fc6034ae8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+        <definition>const String &amp; erbsland::cterm::ui::page::Choice::title</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>title</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::title</qualifiedname>
+        <briefdescription>
+<para>Access the title. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="54" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a64d0ad92966b02f2691eef5794b54e03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::setTitle</definition>
+        <argsstring>(String title)</argsstring>
+        <name>setTitle</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::setTitle</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>title</declname>
+        </param>
+        <briefdescription>
+<para>Replace the title. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="56" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a7c6b65efe546e5ae458d05fada0c7c75" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+        <definition>const String &amp; erbsland::cterm::ui::page::Choice::description</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>description</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::description</qualifiedname>
+        <briefdescription>
+<para>Access the description. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="58" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a595c99fad0eb47aaf4bb3e798549e684" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::setDescription</definition>
+        <argsstring>(String description)</argsstring>
+        <name>setDescription</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::setDescription</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>description</declname>
+        </param>
+        <briefdescription>
+<para>Replace the description. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="60" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a27283fd633ca17c298da0c10687f2485" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::setCallback</definition>
+        <argsstring>(Callback callback)</argsstring>
+        <name>setCallback</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::setCallback</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a0d857bce3996b33a5c22baedb5e957ce" kindref="member">Callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>Set the selection callback. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ae91297a359e37a871e4db6535eceddd2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref></type>
+        <definition>Margins erbsland::cterm::ui::page::Choice::margins</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>margins</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::margins</qualifiedname>
+        <briefdescription>
+<para>Access the outer margins that keep the lower page visible. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1aec38d669adba1d1700483eb22c5ede61" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::setMargins</definition>
+        <argsstring>(Margins margins) noexcept</argsstring>
+        <name>setMargins</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::setMargins</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref></type>
+          <declname>margins</declname>
+        </param>
+        <briefdescription>
+<para>Replace the outer margins. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1abe13106cf4b6aa3990d76ba289284a63" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref></type>
+        <definition>Margins erbsland::cterm::ui::page::Choice::padding</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>padding</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::padding</qualifiedname>
+        <briefdescription>
+<para>Access the prompt content padding. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="68" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a1173c64a91d36f28544aa5a966fde009" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::setPadding</definition>
+        <argsstring>(Margins padding) noexcept</argsstring>
+        <name>setPadding</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::setPadding</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref></type>
+          <declname>padding</declname>
+        </param>
+        <briefdescription>
+<para>Replace the prompt content padding. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="70" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a4edb5893ad90afdbccb972c9c8a35a32" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; Coordinate &gt;</type>
+        <definition>std::optional&lt; Coordinate &gt; erbsland::cterm::ui::page::Choice::preferredLineWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>preferredLineWidth</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::preferredLineWidth</qualifiedname>
+        <briefdescription>
+<para>Access the preferred line width for the description text. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="72" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af3ececf8930e4791b4e7dedb1c79fd4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::setPreferredLineWidth</definition>
+        <argsstring>(std::optional&lt; Coordinate &gt; width)</argsstring>
+        <name>setPreferredLineWidth</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::setPreferredLineWidth</qualifiedname>
+        <param>
+          <type>std::optional&lt; Coordinate &gt;</type>
+          <declname>width</declname>
+        </param>
+        <briefdescription>
+<para>Replace the preferred line width for the description text. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="74" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ad4afc87791fb00c538cadec52d54af2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ActionPtr</type>
+        <definition>ActionPtr erbsland::cterm::ui::page::Choice::addChoice</definition>
+        <argsstring>(std::string id, std::string title, Keys keys={}, int priority=0)</argsstring>
+        <name>addChoice</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::addChoice</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_keys" kindref="compound">Keys</ref></type>
+          <declname>keys</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>priority</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Add one choice. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stable application identifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> title. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>keys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Keyboard shortcuts for the choice. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>priority</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> priority; larger values are shown first. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The action backing the choice button. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="81" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af4883a72432c7531a1a1bf34252446d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ActionPtr</type>
+        <definition>ActionPtr erbsland::cterm::ui::page::Choice::addChoice</definition>
+        <argsstring>(std::string title, Keys keys={}, int priority=0)</argsstring>
+        <name>addChoice</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::addChoice</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_keys" kindref="compound">Keys</ref></type>
+          <declname>keys</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>priority</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Add one choice using the title as stable identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> title and identifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>keys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Keyboard shortcuts for the choice. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>priority</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> priority; larger values are shown first. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The action backing the choice button. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="87" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ae18d7191ffe976d60c9a6786e656b73a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::show</definition>
+        <argsstring>()</argsstring>
+        <name>show</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::show</qualifiedname>
+        <briefdescription>
+<para>Show this page on the application display and focus the first enabled choice. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="89" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a48e618983db219fbbddfcb6c309eaf02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::dismiss</definition>
+        <argsstring>()</argsstring>
+        <name>dismiss</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::dismiss</qualifiedname>
+        <briefdescription>
+<para>Pop this page from the application display. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="91" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a22638e489d9e9053cc7c8df162c87103" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::page::Choice::isOpaque</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>isOpaque</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::isOpaque</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a95e5424ead0b6cc74db8b7130d1633a3">isOpaque</reimplements>
+        <briefdescription>
+<para>Test if this surface paints every cell in its rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if the surface is opaque. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="94" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a570b36bdf561b138ed9255744eb6200d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::onLayout</definition>
+        <argsstring>(LayoutScope &amp;scope) noexcept override</argsstring>
+        <name>onLayout</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::onLayout</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a931eb7df2cba0068a95ef28af0cdc2b4">onLayout</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_scope" kindref="compound">LayoutScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> direct children within this surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> access for measuring and placing child surfaces. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="95" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ab76be77a6eabf35f1d7724a09bb371c4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::onPaint</definition>
+        <argsstring>(WritableBuffer &amp;buffer, const PaintContext &amp;context) noexcept override</argsstring>
+        <name>onPaint</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::onPaint</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ebde9b30a900ad9dcfb69d451826d13">onPaint</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_writable_buffer" kindref="compound">WritableBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_paint_context" kindref="compound">PaintContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Paint this surface into the target buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The paint context for the current paint pass. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="96" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a8c84c8c9b53a01947becb553ffd24ce8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ChoicePtr</type>
+        <definition>static ChoicePtr erbsland::cterm::ui::page::Choice::create</definition>
+        <argsstring>(String title, String description={})</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::create</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>description</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Create a choice page. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The prompt title. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The prompt description. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new choice page. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="45" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a2590de2ccea62949186532323d80ed7c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ChoicePtr</type>
+        <definition>static ChoicePtr erbsland::cterm::ui::page::Choice::create</definition>
+        <argsstring>(std::string_view title, std::string_view description={})</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::create</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>description</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Create a choice page from UTF-8 text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The prompt title. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The prompt description. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new choice page. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="50" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a6e480d3673156a2d78a18c2c49e218ff" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::initializeUi</definition>
+        <argsstring>() override</argsstring>
+        <name>initializeUi</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::initializeUi</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad58106a9586de9d0ad45c4da90bdb528">initializeUi</reimplements>
+        <briefdescription>
+<para>Set up the UI. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="110" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a7a496c1c14ba44fbdfa93aadbe1f2c22" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::selectChoice</definition>
+        <argsstring>(std::size_t insertionIndex)</argsstring>
+        <name>selectChoice</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::selectChoice</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>insertionIndex</declname>
+        </param>
+        <briefdescription>
+<para>Select the choice with the given insertion index. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="112" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ac9f89ee3183491bc2f42717c2944e71e" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::focusDefaultChoice</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>focusDefaultChoice</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::focusDefaultChoice</qualifiedname>
+        <briefdescription>
+<para>Focus the first enabled choice button. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="114" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a7ecf9a8951799220d2f8be04ca2cddc1" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ui::page::Choice::insertionPositionFor</definition>
+        <argsstring>(int priority, std::size_t insertionIndex) const noexcept</argsstring>
+        <name>insertionPositionFor</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::insertionPositionFor</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>priority</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>insertionIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the display order index for a new choice. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="116" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a1094fbf87ce1d7a1b5888e7d56b6b21d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::Choice::updatePromptLayoutState</definition>
+        <argsstring>()</argsstring>
+        <name>updatePromptLayoutState</name>
+        <qualifiedname>erbsland::cterm::ui::page::Choice::updatePromptLayoutState</qualifiedname>
+        <briefdescription>
+<para>Update child layout state from the current title, description and spacing settings. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/Choice.hpp" line="118" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A non-opaque modal page that asks the user to choose one action. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::ui::Page</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_page"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::page::Choice</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="8">
+        <label>erbsland::cterm::Rectangle</label>
+        <link refid="classerbsland_1_1cterm_1_1_rectangle"/>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="9">
+        <label>erbsland::cterm::ui::LayoutMetrics</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::Page</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_page"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_surfaces</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_flags</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_rectangle</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>_layoutMetrics</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>_themeAttributes</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland::cterm::ui::SurfaceFlags</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_flags"/>
+      </node>
+      <node id="10">
+        <label>erbsland::cterm::ui::SurfaceThemeAttributes</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_theme_attributes"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::page::Choice</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/page/Choice.hpp" line="23" column="1" bodyfile="erbsland/cterm/ui/page/Choice.hpp" bodystart="23" bodyend="139"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a0c5270d10dbb4af180e10149a87e9223" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_buttons</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a31e3013fa03c2c3b9a456f981c6412a0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_callback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ad60d4c12c0c55640d3be5a26d7db9303" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_centered</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1aed29d428790e52572ba4a4727b18458c" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_choices</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a0151d3aef0ac7627207186fd45201597" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_description</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a429e527ca232cc2ac09ace4eef15ff1b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_descriptionText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a67caf5a45f3afcf394d04b6a811fb019" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a468c3c647f4c00fbafdf5681083f4be4" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_frame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5e98ac945443673593de934b8e5a6c82" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ac41f3de6b385678745e17be53f74fec6" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_margins</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a149175f6990f7727f8034cb2c7e8d4fc" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_nextInsertionIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af267532dcb3032d015c34ce908565bc1" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_padding</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af25cee496f061285f79b6d96ff3b7ce9" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_preferredLineWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9ded519b8019bf6a0379b4807842db02" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af0a8cdf0282440727ae302fa1f463334" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_stack</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adebfc77d073fdbec83278119180d2641" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a3495ef389b8d8ba1623a671bdbe0a96f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a6b54c5983e36772236e5c02f0206d909" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>_title</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d68b998618a891511dee33516b51268" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac3b1bb4dd817e95e8a35841cf96b48a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>actionsPtr</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ad4afc87791fb00c538cadec52d54af2e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>addChoice</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af4883a72432c7531a1a1bf34252446d2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>addChoice</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9822c7ffb68730aea7ba35147f48f418" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>addSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a0d857bce3996b33a5c22baedb5e957ce" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Callback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a7029194ad0401ea4aabbb3dc2b937927" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>cDefaultPadding</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0abe7d82b04e8ab6336b069f5cc8582" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>childLayoutContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1abaddf3eeea6f7644b5c60ff68d2de36b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0523529e715f39f711cc5d96ac3c44d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ade874ce07bf8c47ba904bc1b75883542" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Choice</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aeb2a9a20d1f4660f51d8319e10785e84" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>clearFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a7647a0a4b8c354a9d16b991ac69c5e2a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>clearTheme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a59f2b9196202654b193fb948e61aeff7" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>cMaximumDialogWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a35484881cb5057597d60f65276732e21" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>cMinimumDialogWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a6e0d6ae0f510a5507b4bbb084a3240f7" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>cPreferredDialogWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a8c84c8c9b53a01947becb553ffd24ce8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a2590de2ccea62949186532323d80ed7c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a71fb3a4d5b561302586d5fd617e24e98" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::ui::Page::"><scope>erbsland::cterm::ui::page::Choice</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a7c6b65efe546e5ae458d05fada0c7c75" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>description</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a48e618983db219fbbddfcb6c309eaf02" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>dismiss</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ed84aa3c6e6d970d42b64c83b46573d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>editLayoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaf52c2f637ff1260e089e66443b07531" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a89aeb65892433da9fcac35928db00810" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ac9f89ee3183491bc2f42717c2944e71e" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>focusDefaultChoice</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a1eb1c0c96ac28d970d692e20906b1d1c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>focusSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a250d857dc1df98dee9d276602f4e95d6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>focusTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aad434f9aac7b4da5dc28a644f14ac887" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>hasFocusSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a6e480d3673156a2d78a18c2c49e218ff" prot="private" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>initializeUi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a7ecf9a8951799220d2f8be04ca2cddc1" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>insertionPositionFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1acc65b744f0701f00597e4c89d6241239" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>isAncestorOrSame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a22638e489d9e9053cc7c8df162c87103" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>isOpaque</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1ab15f5aa4e53b8f3687eddff4f100fe86" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>isPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1afb8f08ad9f89178255cdda7cf8ac450f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad34c082f4cb962dabd803d02895a9902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaa6aedebddacbcb54d637ab7dc763317" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>localSurfaceRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a73838b048c6c2e0a456eb2776a11c459" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>localToScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ae91297a359e37a871e4db6535eceddd2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>margins</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a827a5338cd11a1ac0f82d8beae54c1f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>nearestOpaqueSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a50e8ebc2c27eaa297c1b6df62176a9de" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>nearestPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1908b92a2163d514b9dec6b29e18c13b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>onFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aa2c3501327d704abfec1a54441efc805" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a570b36bdf561b138ed9255744eb6200d" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>onLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a970401f71d513138ee3de0e51004f759" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>onMeasure</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ab76be77a6eabf35f1d7724a09bb371c4" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>onPaint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1af4b08bc02b3b7e8e6cf6cf5822645470" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1db7d7cb9f30ee4c5b4242473de6fe33" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1abe13106cf4b6aa3990d76ba289284a63" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>padding</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a03b392013b20696c2af18ffa1a791902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Page</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a57ed2140168f6fad97796cbc98b876f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a4edb5893ad90afdbccb972c9c8a35a32" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>preferredLineWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1a2f2168434fcf663bccb768dfa8cba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6691b41ed4a62a31aff2393c131ab2f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>requestFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a484e22bcc258d2b36992ff91e6cc4c0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c4a3823f5477de8879ebd80c043abe6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>screenToLocal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a7a496c1c14ba44fbdfa93aadbe1f2c22" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>selectChoice</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a27283fd633ca17c298da0c10687f2485" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>setCallback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a595c99fad0eb47aaf4bb3e798549e684" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>setDescription</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1aec38d669adba1d1700483eb22c5ede61" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>setMargins</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a1173c64a91d36f28544aa5a966fde009" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>setPadding</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1af3ececf8930e4791b4e7dedb1c79fd4f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>setPreferredLineWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad190a0f521f4abb34c9a5fe9e8cdba40" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>setRectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a9bb714de24d436f24edb1b8c93902889" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>setTheme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a64d0ad92966b02f2691eef5794b54e03" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>setTitle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ae18d7191ffe976d60c9a6786e656b73a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>show</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae70aa6dae2d6df94fbb2f6f6b5226daa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5cb74a7a34e1b983c592e6f7f6aeca96" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d00cfd2476c5d44de898c00f29fc90a" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a4623853a42b6ae3683027cb10e3fef65" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aea9e1412522664de3fbfa01435f9bacf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae95b294bf3fad17469266a725bb69ff7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c6f25c89ecf460580ae03db5573b9ba" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ade89cf3d7830659bfa54ed703bdc3d14" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1add04ac6c18ebbcb1dc835a4da635d58d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adb6bc351b2e411bfdc50f26867d31df9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a02f5c3f2df31839ad57c7dd3e442bdc6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>themeContextFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a385e3fc91364c8c7cbae6fbeb61bba1d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>themeOverride</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a44b364ef8e0825cf2f6f8b4fc6034ae8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>title</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1a1094fbf87ce1d7a1b5888e7d56b6b21d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>updatePromptLayoutState</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a0cff8325b685e12268b2a8136d6c47f2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>visibleScreenRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_choice_1ae634f8992e2f91cfa298120e1c8b2bb7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>~Choice</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aef96abb0e968f08238b2de773c0044d0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>~Page</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d29bb69da75140fb230c6edd80bd9e7" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::Choice</scope><name>~Surface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TextNodeRenderer &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unicode Width System" href="unicode-width-system.html" />
+    <link rel="prev" title="String Sharing" href="string-sharing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Implementation Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="windows-backend.html">Windows Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="posix-backend.html">POSIX Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action-scheduling.html">Action Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation-and-event-threads.html">Invocation and Event Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-paint-system.html">UI Paint System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-scrollable-areas.html">UI Scrollable Areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-layout-and-painting.html">Paragraph Layout and Painting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remapped-buffer.html">RemappedBuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack-layout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string-sharing.html">String Sharing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">TextNodeRenderer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#relevant-source-files">Relevant Source Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-architecture">High-Level Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-pipeline">Streaming Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#render-context">Render Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#style-resolution">Style Resolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inline-rendering">Inline Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#render-blocks">Render Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#block-scopes">Block Scopes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-rendering">List Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-targets">Output Targets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#renderstring"><code class="docutils literal notranslate"><span class="pre">renderString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#renderto-cursorwriter"><code class="docutils literal notranslate"><span class="pre">renderTo(CursorWriter)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#allocation-notes">Allocation Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#where-to-change-what">Where to Change What</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-new-block-emitting-textnode-type">Adding a new block-emitting <code class="docutils literal notranslate"><span class="pre">TextNode::Type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-inherited-text-style-or-horizontal-margins">Changing inherited text style or horizontal margins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-vertical-edge-margin-behavior">Changing vertical edge-margin behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-selector-matching-or-node-token-handling">Changing selector matching or node token handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-inline-rendering-behavior">Changing inline rendering behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-list-prefix-placement-or-continuation-layout">Changing list prefix placement or continuation layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-block-string-projection">Changing block string projection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-plain-string-collection">Changing plain-string collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-terminal-only-emission-behavior">Changing terminal-only emission behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-strategy">Testing Strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unicode-width-system.html">Unicode Width System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementation Notes</a></li>
+      <li class="breadcrumb-item active">TextNodeRenderer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/implementation/text-node-renderer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="textnoderenderer">
+<span id="index-0"></span><h1>TextNodeRenderer<a class="headerlink" href="#textnoderenderer" title="Link to this heading"></a></h1>
+<p>This page describes how <code class="docutils literal notranslate"><span class="pre">TextNodeRenderer</span></code> turns a parsed
+<a class="reference internal" href="../reference/rich-text.html#_CPPv4N8erbsland5cterm4text8TextNodeE" title="erbsland::cterm::text::TextNode"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">TextNode</span></code></a> tree into either:</p>
+<ul class="simple">
+<li><p>a human-readable <a class="reference internal" href="../reference/text.html#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">String</span></code></a> via
+<code class="docutils literal notranslate"><span class="pre">renderString()</span></code></p></li>
+<li><p>streamed terminal output via <code class="docutils literal notranslate"><span class="pre">renderTo(CursorWriter)</span></code></p></li>
+</ul>
+<p>The implementation uses a single streaming pipeline.
+The tree is walked once, physical <code class="docutils literal notranslate"><span class="pre">RenderBlock</span></code> values are emitted as
+they are discovered, and the selected output target consumes those
+blocks immediately.</p>
+<p>No normal rendering path builds a complete block vector before output.
+The only retained block is the newest pending block inside
+<code class="docutils literal notranslate"><span class="pre">BlockStream</span></code> so closing container scopes can still apply bottom
+margins to the last descendant.</p>
+<section id="relevant-source-files">
+<h2>Relevant Source Files<a class="headerlink" href="#relevant-source-files" title="Link to this heading"></a></h2>
+<p>The public renderer entry point lives in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/text/impl/TextNodeRenderer.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/text/impl/TextNodeRenderer.cpp</span></code></p></li>
+</ul>
+<p>The internal streaming renderer lives in
+<code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/text/impl/text_node_renderer/</span></code>:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">BlockTarget.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">BlockStream.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">CursorBlockTarget.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">CursorBlockTarget.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">InlineTextRenderer.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">InlineTextRenderer.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">ListItemLayout.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">ListItemLayout.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">ListPrefix.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">RenderBlock.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">RenderBlock.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">RenderContext.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">RenderContext.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">StringBuilderWithWhitespaceState.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">StringBuilderWithWhitespaceState.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">StringBlockTarget.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">StyleResolver.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">StyleResolver.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">TreeRenderer.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">TreeRenderer.cpp</span></code></p></li>
+</ul>
+</section>
+<section id="high-level-architecture">
+<h2>High-Level Architecture<a class="headerlink" href="#high-level-architecture" title="Link to this heading"></a></h2>
+<p>At a high level the subsystem looks like this:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    entry["TextNodeRenderer"] --&gt; target{"output mode"}
+    target --&gt; stringTarget["StringBlockTarget"]
+    target --&gt; cursorTarget["CursorBlockTarget"]
+    stringTarget --&gt; treeString["TreeRenderer"]
+    cursorTarget --&gt; treeCursor["TreeRenderer"]
+    treeString --&gt; streamString["BlockStream"]
+    treeCursor --&gt; streamCursor["BlockStream"]
+    streamString --&gt; stringOut["String"]
+    streamCursor --&gt; terminalOut["CursorWriter"]
+</div><p><code class="docutils literal notranslate"><span class="pre">TextNodeRenderer</span></code> is intentionally thin.
+It stores the document pointer and the style pointer, creates the
+appropriate target, and asks <code class="docutils literal notranslate"><span class="pre">TreeRenderer</span></code> to render the document.</p>
+<p>The renderer has four main collaborators:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type / file</p></th>
+<th class="head"><p>Responsibility</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TreeRenderer</span></code></p></td>
+<td><p>Walk the <code class="docutils literal notranslate"><span class="pre">TextNode</span></code> tree, resolve block shapes, manage scopes, and emit <code class="docutils literal notranslate"><span class="pre">RenderBlock</span></code> values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">StyleResolver</span></code></p></td>
+<td><p>Resolve style rules for block roles, inline roles, list kinds, levels, and style-token selectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">InlineTextRenderer</span></code></p></td>
+<td><p>Render inline subtrees into styled <code class="docutils literal notranslate"><span class="pre">String</span></code> values using whitespace-aware string building.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BlockStream</span></code></p></td>
+<td><p>Hold one pending block, flush older blocks to the selected target, and keep the pending block patchable.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The target side is deliberately small:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type / file</p></th>
+<th class="head"><p>Responsibility</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BlockTarget</span></code></p></td>
+<td><p>Abstract sink for streamed render blocks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">StringBlockTarget</span></code></p></td>
+<td><p>Build the plain string representation used by <code class="docutils literal notranslate"><span class="pre">renderString()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CursorBlockTarget</span></code></p></td>
+<td><p>Write the terminal representation to a <a class="reference internal" href="../reference/cursor-output.html#_CPPv4N8erbsland5cterm12CursorWriterE" title="erbsland::cterm::CursorWriter"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter</span></code></a>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="streaming-pipeline">
+<h2>Streaming Pipeline<a class="headerlink" href="#streaming-pipeline" title="Link to this heading"></a></h2>
+<p>The active rendering path is:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    nodeTree["TextNode tree"] --&gt; tree["TreeRenderer::render()"]
+    tree --&gt; resolver["StyleResolver"]
+    tree --&gt; inline["InlineTextRenderer"]
+    tree --&gt; context["RenderContext"]
+    tree --&gt; scopes["open BlockScope stack"]
+    inline --&gt; block["RenderBlock"]
+    resolver --&gt; block
+    context --&gt; block
+    scopes --&gt; block
+    block --&gt; stream["BlockStream"]
+    stream --&gt; target["BlockTarget"]
+</div><p><code class="docutils literal notranslate"><span class="pre">TreeRenderer::appendNode()</span></code> dispatches each node by type:</p>
+<ul class="simple">
+<li><p>semantic containers open a scope and render block-emitting children</p></li>
+<li><p>bullet and numbered lists stream their list items directly</p></li>
+<li><p>paragraph-like nodes render inline text and emit one paragraph block</p></li>
+<li><p>headings emit either a paragraph block or a filled-line block</p></li>
+<li><p>horizontal rules emit a horizontal-rule block</p></li>
+<li><p>inline nodes render as paragraph-like content only when the current
+tree position allows that behavior</p></li>
+</ul>
+<p>Direct inline and empty children of document, section, blockquote, and
+definition-list containers are ignored.
+This preserves the renderer contract that these containers only expose
+block-level children.
+List items are different: inline and text children of a list item are
+valid item content and become paragraph-like blocks.</p>
+</section>
+<section id="render-context">
+<h2>Render Context<a class="headerlink" href="#render-context" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">RenderContext</span></code> carries inherited state that descendants need:</p>
+<ul class="simple">
+<li><p>the inherited text-style overlay</p></li>
+<li><p>accumulated horizontal margins from ancestor containers</p></li>
+</ul>
+<p>It does not own vertical edge-margin decisions.
+Top and bottom margins are scope behavior in <code class="docutils literal notranslate"><span class="pre">TreeRenderer</span></code> because
+they depend on which descendant becomes the first or last emitted block.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RenderContext</span></code> creates derived contexts for:</p>
+<ul class="simple">
+<li><p>semantic containers</p></li>
+<li><p>horizontal-margin inheritance</p></li>
+<li><p>list-item bodies</p></li>
+</ul>
+<p>It also resolves the final text style and final block style for a
+<code class="docutils literal notranslate"><span class="pre">RenderBlock</span></code>.</p>
+</section>
+<section id="style-resolution">
+<h2>Style Resolution<a class="headerlink" href="#style-resolution" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">StyleResolver</span></code> owns all renderer-facing style lookup.
+It stores the <a class="reference internal" href="../reference/rich-text.html#_CPPv4N8erbsland5cterm4text5StyleE" title="erbsland::cterm::text::Style"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Style</span></code></a> pointer by
+value, so the resolver does not depend on an external reference staying
+alive.</p>
+<p>It resolves:</p>
+<ul class="simple">
+<li><p>base text style</p></li>
+<li><p>block rules for semantic roles</p></li>
+<li><p>heading and list levels</p></li>
+<li><p>bullet versus numbered list rules</p></li>
+<li><p>horizontal-rule style</p></li>
+<li><p>node-local style-token selectors</p></li>
+</ul>
+<p>Rules without node-local style tokens are cached.
+Nodes with style tokens are resolved directly from normalized tokens.
+Token splitting trims whitespace, removes duplicates, and sorts tokens
+so selector matching stays deterministic.</p>
+</section>
+<section id="inline-rendering">
+<h2>Inline Rendering<a class="headerlink" href="#inline-rendering" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">InlineTextRenderer</span></code> renders inline node subtrees into styled
+<code class="docutils literal notranslate"><span class="pre">String</span></code> values.</p>
+<p>Its responsibilities are:</p>
+<ul class="simple">
+<li><p>append literal text, error, and unsupported nodes</p></li>
+<li><p>preserve explicit line breaks as newline characters</p></li>
+<li><p>apply inline style overlays for emphasis, strong text, underline,
+links, inline code, and styled spans</p></li>
+<li><p>respect the selected whitespace mode</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">StringBuilderWithWhitespaceState</span></code> keeps whitespace handling local to
+inline rendering.
+The tree renderer only asks for a final styled string and does not know
+how inline whitespace was normalized.</p>
+</section>
+<section id="render-blocks">
+<h2>Render Blocks<a class="headerlink" href="#render-blocks" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">RenderBlock</span></code> is the single value type passed through the block
+stream.
+It represents one physical block in one of these shapes:</p>
+<ul class="simple">
+<li><p>paragraph-like text</p></li>
+<li><p>filled-line text, used by filled headings</p></li>
+<li><p>horizontal rule</p></li>
+</ul>
+<p>The block owns its resolved <code class="docutils literal notranslate"><span class="pre">StyleRule</span></code>.
+That rule includes inherited horizontal margins and all block-level
+indentation needed by the output target.</p>
+<p>List prefixes are stored as optional <code class="docutils literal notranslate"><span class="pre">ListPrefix</span></code> data on the first
+block of a list item.
+The prefix is not copied into both the block text and an additional
+terminal-text field.
+<code class="docutils literal notranslate"><span class="pre">CursorBlockTarget</span></code> combines the terminal prefix with the block text
+only when it writes the paragraph.
+<code class="docutils literal notranslate"><span class="pre">RenderBlock::renderString()</span></code> uses the same prefix information for the
+plain-string representation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RenderBlock</span></code> also keeps string-only indentation fields.
+These preserve the current <code class="docutils literal notranslate"><span class="pre">renderString()</span></code> behavior without forcing
+terminal output to carry duplicate text.</p>
+</section>
+<section id="block-scopes">
+<h2>Block Scopes<a class="headerlink" href="#block-scopes" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">TreeRenderer</span></code> keeps a stack of open <code class="docutils literal notranslate"><span class="pre">BlockScope</span></code> values.
+Each scope stores:</p>
+<ul class="simple">
+<li><p>vertical margins for the container or list item</p></li>
+<li><p>optional <code class="docutils literal notranslate"><span class="pre">ListItemLayout</span></code> information</p></li>
+<li><p>whether the scope has already emitted a block</p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">TreeRenderer</span></code> emits a block, every open scope sees that block.
+For the first emitted block in a scope, the scope contributes its top
+margin.
+For a list-item scope, the first emitted block also receives the list
+prefix layout.
+Later blocks in the same list item receive continuation indentation.</p>
+<p>When a scope closes, the scope patches the currently pending block in
+<code class="docutils literal notranslate"><span class="pre">BlockStream</span></code> with its bottom margin.
+That pending block is the last emitted descendant of the scope.
+This is why the stream keeps one block back before flushing it to the
+target.</p>
+</section>
+<section id="list-rendering">
+<h2>List Rendering<a class="headerlink" href="#list-rendering" title="Link to this heading"></a></h2>
+<p>Lists are rendered directly while the tree is walked.
+There is no temporary vector of blocks for each list item.</p>
+<p>For each list item:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TreeRenderer</span></code> resolves the item rule and creates a
+<code class="docutils literal notranslate"><span class="pre">ListItemLayout</span></code>.</p></li>
+<li><p>A list-item scope opens with that layout.</p></li>
+<li><p>Child nodes stream normally.</p></li>
+<li><p>The first emitted child block receives the marker prefix.</p></li>
+<li><p>Later emitted child blocks receive continuation indentation.</p></li>
+<li><p>The scope closes and applies the item bottom margin to the last
+emitted child block.</p></li>
+</ol>
+<p>If a list item starts with a nested list, the renderer first emits an
+empty paragraph-like block for the item itself.
+This keeps the marker visible on its own line before the nested list.</p>
+<p>If a list item emits no content at all, the renderer emits one empty
+list-item paragraph before closing the item scope.</p>
+</section>
+<section id="output-targets">
+<h2>Output Targets<a class="headerlink" href="#output-targets" title="Link to this heading"></a></h2>
+<section id="renderstring">
+<h3><code class="docutils literal notranslate"><span class="pre">renderString()</span></code><a class="headerlink" href="#renderstring" title="Link to this heading"></a></h3>
+<p>The plain-string path creates a <code class="docutils literal notranslate"><span class="pre">StringBlockTarget</span></code> and streams the
+tree into it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">StringBlockTarget</span></code>:</p>
+<ul class="simple">
+<li><p>appends one newline between streamed blocks</p></li>
+<li><p>delegates each block to <code class="docutils literal notranslate"><span class="pre">RenderBlock::renderString()</span></code></p></li>
+<li><p>trims outer newline-like separators from the final result</p></li>
+</ul>
+<p>This remains a semantic string renderer.
+It does not simulate terminal width, wrapping, or cursor movement.</p>
+</section>
+<section id="renderto-cursorwriter">
+<h3><code class="docutils literal notranslate"><span class="pre">renderTo(CursorWriter)</span></code><a class="headerlink" href="#renderto-cursorwriter" title="Link to this heading"></a></h3>
+<p>The terminal path creates a <code class="docutils literal notranslate"><span class="pre">CursorBlockTarget</span></code> and streams the tree
+into it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CursorBlockTarget</span></code> owns physical terminal emission:</p>
+<ul class="simple">
+<li><p>vertical margin collapse</p></li>
+<li><p>conversion from block styles to <code class="docutils literal notranslate"><span class="pre">ParagraphOptions</span></code></p></li>
+<li><p>paragraph writing</p></li>
+<li><p>filled-line painting</p></li>
+<li><p>horizontal-rule painting</p></li>
+</ul>
+<p>The tree renderer never writes directly to the terminal.</p>
+</section>
+</section>
+<section id="allocation-notes">
+<h2>Allocation Notes<a class="headerlink" href="#allocation-notes" title="Link to this heading"></a></h2>
+<p>Allocation discipline in this subsystem comes from the shape of the
+pipeline:</p>
+<ul class="simple">
+<li><p>there is no full <code class="docutils literal notranslate"><span class="pre">RenderBlock</span></code> list for normal output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BlockStream</span></code> buffers only the newest block</p></li>
+<li><p>inline rendering reserves from the node’s estimated inline capacity</p></li>
+<li><p>no-style selector lookups are cached in <code class="docutils literal notranslate"><span class="pre">StyleResolver</span></code></p></li>
+<li><p>list prefixes are stored separately and combined only by the target
+that needs the combined text</p></li>
+<li><p>list items stream directly instead of first collecting all descendant
+blocks</p></li>
+</ul>
+<p>The design favors readable ownership over micro-optimization, but the
+main avoidable allocations from the previous collect-then-emit model are
+removed from the hot path.</p>
+</section>
+<section id="where-to-change-what">
+<h2>Where to Change What<a class="headerlink" href="#where-to-change-what" title="Link to this heading"></a></h2>
+<p>When extending the renderer, start in the component that owns the
+relevant behavior.</p>
+<section id="adding-a-new-block-emitting-textnode-type">
+<h3>Adding a new block-emitting <code class="docutils literal notranslate"><span class="pre">TextNode::Type</span></code><a class="headerlink" href="#adding-a-new-block-emitting-textnode-type" title="Link to this heading"></a></h3>
+<p>Start in <code class="docutils literal notranslate"><span class="pre">TreeRenderer::appendNode()</span></code>.
+Then choose the matching helper:</p>
+<ul class="simple">
+<li><p>semantic container</p></li>
+<li><p>list node</p></li>
+<li><p>paragraph-like block</p></li>
+<li><p>heading</p></li>
+<li><p>horizontal rule</p></li>
+</ul>
+</section>
+<section id="changing-inherited-text-style-or-horizontal-margins">
+<h3>Changing inherited text style or horizontal margins<a class="headerlink" href="#changing-inherited-text-style-or-horizontal-margins" title="Link to this heading"></a></h3>
+<p>Start in <code class="docutils literal notranslate"><span class="pre">RenderContext</span></code>.</p>
+</section>
+<section id="changing-vertical-edge-margin-behavior">
+<h3>Changing vertical edge-margin behavior<a class="headerlink" href="#changing-vertical-edge-margin-behavior" title="Link to this heading"></a></h3>
+<p>Start in the <code class="docutils literal notranslate"><span class="pre">BlockScope</span></code> handling in <code class="docutils literal notranslate"><span class="pre">TreeRenderer</span></code> and the
+one-block buffering behavior in <code class="docutils literal notranslate"><span class="pre">BlockStream</span></code>.</p>
+</section>
+<section id="changing-selector-matching-or-node-token-handling">
+<h3>Changing selector matching or node token handling<a class="headerlink" href="#changing-selector-matching-or-node-token-handling" title="Link to this heading"></a></h3>
+<p>Start in <code class="docutils literal notranslate"><span class="pre">StyleResolver</span></code>.</p>
+</section>
+<section id="changing-inline-rendering-behavior">
+<h3>Changing inline rendering behavior<a class="headerlink" href="#changing-inline-rendering-behavior" title="Link to this heading"></a></h3>
+<p>Start in <code class="docutils literal notranslate"><span class="pre">InlineTextRenderer</span></code> and
+<code class="docutils literal notranslate"><span class="pre">StringBuilderWithWhitespaceState</span></code>.</p>
+</section>
+<section id="changing-list-prefix-placement-or-continuation-layout">
+<h3>Changing list prefix placement or continuation layout<a class="headerlink" href="#changing-list-prefix-placement-or-continuation-layout" title="Link to this heading"></a></h3>
+<p>Start in:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TreeRenderer::appendListItem()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TreeRenderer::emitBlock()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ListItemLayout</span></code></p></li>
+</ul>
+</section>
+<section id="changing-block-string-projection">
+<h3>Changing block string projection<a class="headerlink" href="#changing-block-string-projection" title="Link to this heading"></a></h3>
+<p>Start in <code class="docutils literal notranslate"><span class="pre">RenderBlock::renderString()</span></code>.</p>
+</section>
+<section id="changing-plain-string-collection">
+<h3>Changing plain-string collection<a class="headerlink" href="#changing-plain-string-collection" title="Link to this heading"></a></h3>
+<p>Start in <code class="docutils literal notranslate"><span class="pre">StringBlockTarget</span></code>.</p>
+</section>
+<section id="changing-terminal-only-emission-behavior">
+<h3>Changing terminal-only emission behavior<a class="headerlink" href="#changing-terminal-only-emission-behavior" title="Link to this heading"></a></h3>
+<p>Start in <code class="docutils literal notranslate"><span class="pre">CursorBlockTarget</span></code>.</p>
+</section>
+</section>
+<section id="testing-strategy">
+<h2>Testing Strategy<a class="headerlink" href="#testing-strategy" title="Link to this heading"></a></h2>
+<p>The primary semantic coverage lives in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/impl/text/render/HtmlRendererTest.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/impl/text/render/TextNodeRendererTest.cpp</span></code></p></li>
+</ul>
+<p>These tests exercise the public rendering behavior through
+<code class="docutils literal notranslate"><span class="pre">HtmlRenderer</span></code> and <code class="docutils literal notranslate"><span class="pre">TextNodeRenderer</span></code>.</p>
+<p>Focused internal tests cover the streaming collaborators:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/impl/text/text-node/InlineTextRendererTest.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/impl/text/text-node/RenderContextTest.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/impl/text/text-node/StyleResolverTest.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/impl/text/text-node/TreeRendererTest.cpp</span></code></p></li>
+</ul>
+<p>Use both levels:</p>
+<ul class="simple">
+<li><p>end-to-end tests for user-visible rendering behavior</p></li>
+<li><p>focused component tests for subtle internal invariants</p></li>
+</ul>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>The renderer now follows this high-level ownership model:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TextNodeRenderer</span></code> selects the target</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TreeRenderer</span></code> walks the tree and streams blocks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StyleResolver</span></code> owns style lookup</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InlineTextRenderer</span></code> owns inline text construction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RenderContext</span></code> carries inherited text style and horizontal margins</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BlockStream</span></code> keeps one pending block for scope finalization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StringBlockTarget</span></code> and <code class="docutils literal notranslate"><span class="pre">CursorBlockTarget</span></code> own the output format</p></li>
+</ul>
+<p>The important structural rule is that tree walking, style lookup,
+inline text construction, scope handling, and output emission each have
+one clear owner.
+That keeps the renderer easier to read, easier to extend, and cheaper to
+run than a separate collection phase followed by a second output phase.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="string-sharing.html" class="btn btn-neutral float-left" title="String Sharing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="unicode-width-system.html" class="btn btn-neutral float-right" title="Unicode Width System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

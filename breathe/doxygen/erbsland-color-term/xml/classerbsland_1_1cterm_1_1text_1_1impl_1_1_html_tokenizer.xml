@@ -1,0 +1,547 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::text::impl::HtmlTokenizer</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" prot="public" virt="non-virtual">erbsland::cterm::text::impl::BufferedTokenizer</basecompoundref>
+    <includes refid="_html_tokenizer_8hpp" local="no">erbsland/cterm/text/impl/HtmlTokenizer.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1_1_html_token_ref" prot="private">erbsland::cterm::text::impl::HtmlTokenizer::HtmlTokenRef</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a3b003836dfdebabcc1a16f0598bf0ffd" prot="public" static="no">
+        <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref></type>
+        <definition>using erbsland::cterm::text::impl::HtmlTokenizer::Token =  HtmlToken</definition>
+        <argsstring></argsstring>
+        <name>Token</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::Token</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="20" column="5" bodyfile="erbsland/cterm/text/impl/HtmlTokenizer.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a8f5bbd0480313314461ff264f27ea17b" prot="public" static="no">
+        <type>HtmlTokenType</type>
+        <definition>using erbsland::cterm::text::impl::HtmlTokenizer::TokenType =  HtmlTokenType</definition>
+        <argsstring></argsstring>
+        <name>TokenType</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::TokenType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="21" column="5" bodyfile="erbsland/cterm/text/impl/HtmlTokenizer.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a26167f20fcfd57adaaba0632064e6ab6" prot="public" static="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_generator" kindref="compound">Generator</ref>&lt; <ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::impl::HtmlTokenizer::TokenGenerator =  Generator&lt;HtmlToken&gt;</definition>
+        <argsstring></argsstring>
+        <name>TokenGenerator</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::TokenGenerator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="22" column="5" bodyfile="erbsland/cterm/text/impl/HtmlTokenizer.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a6b52cf6aa2fb6b9637ee37d79056544a" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlTokenizer::HtmlTokenizer</definition>
+        <argsstring>(std::string_view text)</argsstring>
+        <name>HtmlTokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::HtmlTokenizer</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Create a tokenizer for the given HTML source text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded HTML fragment to tokenize. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1aea009435d630ee0764472fe6b8aa9050" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlTokenizer::~HtmlTokenizer</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~HtmlTokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::~HtmlTokenizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a91d010079c6597e57d83b737e9be2772" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlTokenizer::HtmlTokenizer</definition>
+        <argsstring>(const HtmlTokenizer &amp;)=delete</argsstring>
+        <name>HtmlTokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::HtmlTokenizer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" kindref="compound">HtmlTokenizer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="31" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a68f810c4904d434b6b7ec82004ff6f39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlTokenizer::HtmlTokenizer</definition>
+        <argsstring>(HtmlTokenizer &amp;&amp;)=delete</argsstring>
+        <name>HtmlTokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::HtmlTokenizer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" kindref="compound">HtmlTokenizer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a04ac941b511a1985521bf7df3567bc2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" kindref="compound">HtmlTokenizer</ref> &amp;</type>
+        <definition>HtmlTokenizer &amp; erbsland::cterm::text::impl::HtmlTokenizer::operator=</definition>
+        <argsstring>(const HtmlTokenizer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" kindref="compound">HtmlTokenizer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="33" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a560b4a2d4884155d35fe1639a22e693c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" kindref="compound">HtmlTokenizer</ref> &amp;</type>
+        <definition>HtmlTokenizer &amp; erbsland::cterm::text::impl::HtmlTokenizer::operator=</definition>
+        <argsstring>(HtmlTokenizer &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" kindref="compound">HtmlTokenizer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="34" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a0ca7e74bfce8b0a74b22ab250d9afbbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_generator" kindref="compound">TokenGenerator</ref></type>
+        <definition>TokenGenerator erbsland::cterm::text::impl::HtmlTokenizer::tokenize</definition>
+        <argsstring>()</argsstring>
+        <name>tokenize</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenize</qualifiedname>
+        <briefdescription>
+<para>Tokenize the configured HTML input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Malformed markup is returned as plain text tokens instead of causing an error. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="39" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1ac66135498ae677f073bc745779ffe74c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlTokenizer::tokenizeTag</definition>
+        <argsstring>(std::vector&lt; HtmlTokenRef &gt; &amp;tokens)</argsstring>
+        <name>tokenizeTag</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenizeTag</qualifiedname>
+        <param>
+          <type>std::vector&lt; HtmlTokenRef &gt; &amp;</type>
+          <declname>tokens</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="49" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a792320e812b6c49429c4c900818c3317" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlTokenizer::tokenizeDeclaration</definition>
+        <argsstring>(std::vector&lt; HtmlTokenRef &gt; &amp;tokens)</argsstring>
+        <name>tokenizeDeclaration</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenizeDeclaration</qualifiedname>
+        <param>
+          <type>std::vector&lt; HtmlTokenRef &gt; &amp;</type>
+          <declname>tokens</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="50" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1af7d01248cec8f6ad8232d44c788334c4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlTokenizer::tokenizeClosingTag</definition>
+        <argsstring>(std::vector&lt; HtmlTokenRef &gt; &amp;tokens)</argsstring>
+        <name>tokenizeClosingTag</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenizeClosingTag</qualifiedname>
+        <param>
+          <type>std::vector&lt; HtmlTokenRef &gt; &amp;</type>
+          <declname>tokens</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="51" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a50e578de0d86f79268506755b79739e1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlTokenizer::tokenizeOpeningTag</definition>
+        <argsstring>(std::vector&lt; HtmlTokenRef &gt; &amp;tokens)</argsstring>
+        <name>tokenizeOpeningTag</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenizeOpeningTag</qualifiedname>
+        <param>
+          <type>std::vector&lt; HtmlTokenRef &gt; &amp;</type>
+          <declname>tokens</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="52" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a9f1f2d9aefab3ee1a72abed3219f2a77" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref></type>
+        <definition>HtmlToken erbsland::cterm::text::impl::HtmlTokenizer::tokenizeText</definition>
+        <argsstring>()</argsstring>
+        <name>tokenizeText</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenizeText</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="53" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a7b2f3638377c41fc30406d575d0c6483" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref></type>
+        <definition>HtmlToken erbsland::cterm::text::impl::HtmlTokenizer::tokenizeBufferedLiteralTagText</definition>
+        <argsstring>()</argsstring>
+        <name>tokenizeBufferedLiteralTagText</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenizeBufferedLiteralTagText</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="54" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a3f5709e1d958d30e33062bc5b13a4326" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlTokenizer::tokenizeComment</definition>
+        <argsstring>()</argsstring>
+        <name>tokenizeComment</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenizeComment</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="55" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1ad5d1aa484f19d69744947bee2af36b2f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlTokenizer::tokenizeDocType</definition>
+        <argsstring>(std::vector&lt; HtmlTokenRef &gt; &amp;tokens)</argsstring>
+        <name>tokenizeDocType</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::tokenizeDocType</qualifiedname>
+        <param>
+          <type>std::vector&lt; HtmlTokenRef &gt; &amp;</type>
+          <declname>tokens</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="56" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a4944b8252f6f9cad174e00c3275625d3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlTokenizer::decodeEntity</definition>
+        <argsstring>(char32_t &amp;decodedCharacter)</argsstring>
+        <name>decodeEntity</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::decodeEntity</qualifiedname>
+        <param>
+          <type>char32_t &amp;</type>
+          <declname>decodedCharacter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="57" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a9806e5dbe8d26d4c19a4fe4f3fb075b1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlTokenizer::parseAttributeValue</definition>
+        <argsstring>(IndexRange &amp;value)</argsstring>
+        <name>parseAttributeValue</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::parseAttributeValue</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="58" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1ac88ece7d4b4eb755373ad299fdb1e445" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref> &gt;</type>
+        <definition>std::optional&lt; IndexRange &gt; erbsland::cterm::text::impl::HtmlTokenizer::parseName</definition>
+        <argsstring>()</argsstring>
+        <name>parseName</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::parseName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="59" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1ae4f3b625c6552c54dcdcbb70b99f4318" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlTokenizer::skipWhitespace</definition>
+        <argsstring>()</argsstring>
+        <name>skipWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::skipWhitespace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="60" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a16440be2b8407a1731422749e63b80c7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref></type>
+        <definition>HtmlToken erbsland::cterm::text::impl::HtmlTokenizer::materializeToken</definition>
+        <argsstring>(const HtmlTokenRef &amp;token) const</argsstring>
+        <name>materializeToken</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::materializeToken</qualifiedname>
+        <param>
+          <type>const HtmlTokenRef &amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="61" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a84a67d31ffdd47296420c2363b6c6891" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref></type>
+        <definition>HtmlToken erbsland::cterm::text::impl::HtmlTokenizer::bufferTextToken</definition>
+        <argsstring>() const</argsstring>
+        <name>bufferTextToken</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::bufferTextToken</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="62" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a2658b3e7d141bcd3431f791c454c8ab3" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool erbsland::cterm::text::impl::HtmlTokenizer::isNameTerminator</definition>
+        <argsstring>(char32_t character) noexcept</argsstring>
+        <name>isNameTerminator</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::isNameTerminator</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="64" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a8dbb520631068fe706aec9a16a08f977" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool erbsland::cterm::text::impl::HtmlTokenizer::isAttributeValueTerminator</definition>
+        <argsstring>(char32_t character) noexcept</argsstring>
+        <name>isAttributeValueTerminator</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenizer::isAttributeValueTerminator</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="65" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A basic HTML tokenizer for parsing HTML text. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This tokenizer gracefully ignores any malformed HTML and provides a stream of tokens. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::text::impl::BufferedTokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::text::impl::HtmlTokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::text::impl::Tokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>erbsland::cterm::text::impl::BufferedTokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::text::impl::HtmlTokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::text::impl::Tokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/text/impl/HtmlTokenizer.hpp" line="18" column="1" bodyfile="erbsland/cterm/text/impl/HtmlTokenizer.hpp" bodystart="18" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a98131b7f287e5d1cc4b98fee9fb4d473" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>_buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a92ccfac479c5cbf1648fb9100f3c0104" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>append</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ad0ea3677312252f8545964698d46a85b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>appendCurrentAndAdvance</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ac424cd4e88eba032301f22a04e35971e" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>BufferedTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a87ca01a95366b8abe160b3d252804e9f" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>BufferedTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a859219f7ba55243ddd37e2a13ae08880" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>BufferedTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a84a67d31ffdd47296420c2363b6c6891" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>bufferTextToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a4428e9b88a5fc3dfb9e2c4fe24e8293f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>consumeBufferedIf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1ac22199704316bebacb3d752fc8e16bde" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>consumeIf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a457583c2c6825223b78e33d3550f19bc" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>current</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a4944b8252f6f9cad174e00c3275625d3" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>decodeEntity</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a6b52cf6aa2fb6b9637ee37d79056544a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>HtmlTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a91d010079c6597e57d83b737e9be2772" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>HtmlTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a68f810c4904d434b6b7ec82004ff6f39" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>HtmlTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1aed9551b402267143df335819705cdeab" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>isAtEnd</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a8dbb520631068fe706aec9a16a08f977" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>isAttributeValueTerminator</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a2658b3e7d141bcd3431f791c454c8ab3" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>isNameTerminator</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1ad3dc9b42920045e6b242fffd0c49214b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>load</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a6e8d14e5eec2e70d7d3a589dcf4b27d7" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>makeRange</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a16440be2b8407a1731422749e63b80c7" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>materializeToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a42ee62f1def2560cb511e6af288803b3" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>next</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a04ac941b511a1985521bf7df3567bc2a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a560b4a2d4884155d35fe1639a22e693c" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a4d9e657b2f52c81caf6c2755f1f505d8" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::text::impl::BufferedTokenizer::"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ad345bb4f7217680fdeb960913b3382f1" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::text::impl::BufferedTokenizer::"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a9eef5afbd70fcb510085f2702f768223" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::text::impl::Tokenizer::"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a74495e9a17b0df8f4f107b0518c48ba4" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::text::impl::Tokenizer::"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a9806e5dbe8d26d4c19a4fe4f3fb075b1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>parseAttributeValue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1ac88ece7d4b4eb755373ad299fdb1e445" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>parseName</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a399c3505d266b4e162a527c1e8c3d4f4" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>peek</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1adb7bbdf3ee3e4b46ee78f860ec8de9ac" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>resetBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a5d3c2a23805250f6db5cfdd8da64660c" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>save</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1ae4f3b625c6552c54dcdcbb70b99f4318" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>skipWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a3b003836dfdebabcc1a16f0598bf0ffd" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>Token</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a26167f20fcfd57adaaba0632064e6ab6" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>TokenGenerator</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a0ca7e74bfce8b0a74b22ab250d9afbbc" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a7b2f3638377c41fc30406d575d0c6483" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenizeBufferedLiteralTagText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1af7d01248cec8f6ad8232d44c788334c4" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenizeClosingTag</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a3f5709e1d958d30e33062bc5b13a4326" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenizeComment</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a792320e812b6c49429c4c900818c3317" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenizeDeclaration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1ad5d1aa484f19d69744947bee2af36b2f" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenizeDocType</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a50e578de0d86f79268506755b79739e1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenizeOpeningTag</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1abb6648d21ce9c2aaed5003706985777d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>Tokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1ab8877bc48d846b8dbc4808b9ef44b46a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>Tokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a8c6ed8bd5190b2915fdd84764e7770a7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>Tokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1ac66135498ae677f073bc745779ffe74c" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenizeTag</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a9f1f2d9aefab3ee1a72abed3219f2a77" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>tokenizeText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1a8f5bbd0480313314461ff264f27ea17b" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>TokenType</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a20079c336b39e06a3e697db26bc5ded7" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>trimRange</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1abafe256501a218f954e43eb7a7f6f2fd" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>~BufferedTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer_1aea009435d630ee0764472fe6b8aa9050" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>~HtmlTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1aed357f4e459f2be29947b5e253ef59c7" prot="public" virt="virtual"><scope>erbsland::cterm::text::impl::HtmlTokenizer</scope><name>~Tokenizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

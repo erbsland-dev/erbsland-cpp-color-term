@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POSIX Backend &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Action Scheduling" href="action-scheduling.html" />
+    <link rel="prev" title="Windows Backend" href="windows-backend.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Implementation Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="windows-backend.html">Windows Backend</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">POSIX Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#relevant-source-files">Relevant Source Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization-and-restore">Initialization and Restore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-keys-from-the-console">Reading Keys from the Console</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detecting-terminal-size-and-interactive-terminal-availability">Detecting Terminal Size and Interactive Terminal Availability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#signal-based-termination-and-screen-restore">Signal-Based Termination and Screen Restore</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-the-signal-handler-must-stay-tiny">Why the Signal Handler Must Stay Tiny</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-the-pipe-based-handoff-works">How the Pipe-Based Handoff Works</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-happens-after-the-signal-reaches-the-watcher-thread">What Happens After the Signal Reaches the Watcher Thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#normal-shutdown-of-the-dispatcher">Normal Shutdown of the Dispatcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action-scheduling.html">Action Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation-and-event-threads.html">Invocation and Event Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-paint-system.html">UI Paint System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-scrollable-areas.html">UI Scrollable Areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-layout-and-painting.html">Paragraph Layout and Painting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remapped-buffer.html">RemappedBuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack-layout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string-sharing.html">String Sharing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text-node-renderer.html">TextNodeRenderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode-width-system.html">Unicode Width System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementation Notes</a></li>
+      <li class="breadcrumb-item active">POSIX Backend</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/implementation/posix-backend.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="posix-backend">
+<span id="index-0"></span><h1>POSIX Backend<a class="headerlink" href="#posix-backend" title="Link to this heading"></a></h1>
+<p>This page documents the internal POSIX backend used on Linux, macOS, and similar systems.
+It explains how the backend configures the terminal, reads key input, detects terminal size, and restores the screen when the process is terminated by a signal.</p>
+<p>For the public backend API contract that this implementation satisfies,
+see <a class="reference internal" href="../reference/backend.html"><span class="doc">Backend</span></a>.</p>
+<section id="relevant-source-files">
+<h2>Relevant Source Files<a class="headerlink" href="#relevant-source-files" title="Link to this heading"></a></h2>
+<p>You will find the implementation primarily in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/PosixBackend.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/PosixBackend.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/PosixSignalDispatcher.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/PosixSignalDispatcher.cpp</span></code></p></li>
+</ul>
+</section>
+<section id="initialization-and-restore">
+<h2>Initialization and Restore<a class="headerlink" href="#initialization-and-restore" title="Link to this heading"></a></h2>
+<p>The POSIX backend is implemented by <code class="docutils literal notranslate"><span class="pre">erbsland::cterm::impl::PosixBackend</span></code>.
+As on Windows, the library expects exactly one active backend instance and stores it in a global pointer protected by a mutex.</p>
+<p>The constructor stores the global instance and, unless
+<a class="reference internal" href="../reference/terminal.html#_CPPv4N8erbsland5cterm12TerminalFlag16NoSignalHandlingE" title="erbsland::cterm::TerminalFlag::NoSignalHandling"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">TerminalFlag::NoSignalHandling</span></code></a> is set,
+creates a <code class="docutils literal notranslate"><span class="pre">PosixSignalDispatcher</span></code> that forwards termination signals out of the raw signal-handler context.</p>
+<p><code class="docutils literal notranslate"><span class="pre">initializePlatform()</span></code> is intentionally lightweight.
+It does not switch the terminal into raw mode immediately.
+Instead, it resets the backend state used for screen-size detection:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_firstScreenSizeDetection</span></code> is set so that the next size probe performs the extended startup check.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_hasNoTerminalAttached</span></code> is cleared.</p></li>
+<li><p>The cached last size is cleared.</p></li>
+<li><p>The repeated-failure counter is reset.</p></li>
+<li><p>The backend is marked as initialized.</p></li>
+</ol>
+<p>The actual terminal-mode change for interactive key input happens later, when the input mode switches to <code class="docutils literal notranslate"><span class="pre">Input::Mode::Key</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">restorePlatform()</span></code> performs cleanup in this order:</p>
+<ol class="arabic simple">
+<li><p>It closes any cached TTY file descriptor used for screen-size detection.</p></li>
+<li><p>If the backend has not concluded that no terminal is attached, it emits <code class="docutils literal notranslate"><span class="pre">ESC[?1049l</span></code> when the alternate screen is active, then emits <code class="docutils literal notranslate"><span class="pre">ESC[0m</span></code> and <code class="docutils literal notranslate"><span class="pre">ESC[?25h</span></code>.</p></li>
+<li><p>It writes a trailing newline and flushes <code class="docutils literal notranslate"><span class="pre">std::cout</span></code>.</p></li>
+<li><p>If a raw key-input session is active, it restores the saved <code class="docutils literal notranslate"><span class="pre">termios</span></code> state with <code class="docutils literal notranslate"><span class="pre">tcsetattr(STDIN_FILENO,</span> <span class="pre">TCSANOW,</span> <span class="pre">&amp;_originalState)</span></code>.</p></li>
+</ol>
+<p>This separation is important:</p>
+<ul class="simple">
+<li><p>Terminal escape-sequence cleanup is skipped once the backend knows that no terminal is attached.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">termios</span></code> restoration is still attempted when a key-input session is active.</p></li>
+<li><p>The cached <code class="docutils literal notranslate"><span class="pre">/dev/tty</span></code> descriptor is always closed so it cannot leak across the lifetime of the process.</p></li>
+</ul>
+</section>
+<section id="reading-keys-from-the-console">
+<h2>Reading Keys from the Console<a class="headerlink" href="#reading-keys-from-the-console" title="Link to this heading"></a></h2>
+<p>The POSIX backend supports two input paths.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">Input::Mode::ReadLine</span></code>, both <code class="docutils literal notranslate"><span class="pre">readKey()</span></code> and <code class="docutils literal notranslate"><span class="pre">waitForKey()</span></code> delegate to <code class="docutils literal notranslate"><span class="pre">readLine()</span></code>, and <code class="docutils literal notranslate"><span class="pre">readLine()</span></code>
+uses <code class="docutils literal notranslate"><span class="pre">std::getline(std::cin,</span> <span class="pre">input)</span></code>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">Input::Mode::Key</span></code>, the backend switches standard input into a non-canonical, no-echo mode.
+That setup happens in <code class="docutils literal notranslate"><span class="pre">initializeKeyInputSession()</span></code>:</p>
+<ol class="arabic simple">
+<li><p>It calls <code class="docutils literal notranslate"><span class="pre">tcgetattr(STDIN_FILENO,</span> <span class="pre">&amp;_originalState)</span></code> and stores the original terminal state.</p></li>
+<li><p>It copies that state and clears <code class="docutils literal notranslate"><span class="pre">ICANON</span></code> and <code class="docutils literal notranslate"><span class="pre">ECHO</span></code> in <code class="docutils literal notranslate"><span class="pre">c_lflag</span></code>.</p></li>
+<li><p>It sets <code class="docutils literal notranslate"><span class="pre">VMIN</span> <span class="pre">=</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">VTIME</span> <span class="pre">=</span> <span class="pre">0</span></code> so reads do not block while waiting for a complete cooked line.</p></li>
+<li><p>It applies the modified state immediately with <code class="docutils literal notranslate"><span class="pre">tcsetattr(STDIN_FILENO,</span> <span class="pre">TCSANOW,</span> <span class="pre">&amp;rawState)</span></code>.</p></li>
+<li><p>Only after that succeeds does it mark the key-input session as active.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">restoreKeyInputSession()</span></code> restores the original <code class="docutils literal notranslate"><span class="pre">termios</span></code> state and clears the session flag.</p>
+<p>Once key mode is active, <code class="docutils literal notranslate"><span class="pre">readKey()</span></code> works as follows:</p>
+<ol class="arabic simple">
+<li><p>It prepares a <code class="docutils literal notranslate"><span class="pre">select()</span></code> call for <code class="docutils literal notranslate"><span class="pre">STDIN_FILENO</span></code>.</p></li>
+<li><p>If the requested timeout is greater than zero, it converts that timeout into <code class="docutils literal notranslate"><span class="pre">timeval</span></code> and passes it to
+<code class="docutils literal notranslate"><span class="pre">select()</span></code>.</p></li>
+<li><p>If the timeout is zero or negative, it normalizes it to zero and performs a non-blocking <code class="docutils literal notranslate"><span class="pre">select()</span></code> poll.</p></li>
+<li><p>When data becomes available, it reads up to 64 bytes from standard input with <code class="docutils literal notranslate"><span class="pre">read()</span></code>.</p></li>
+<li><p>If the first byte is <code class="docutils literal notranslate"><span class="pre">ESC</span></code>, it performs additional 1 ms <code class="docutils literal notranslate"><span class="pre">select()</span></code> polls and appends more bytes as long as more data arrives immediately.</p></li>
+<li><p>It passes the complete byte sequence to <a class="reference internal" href="../reference/input.html#_CPPv4N8erbsland5cterm3Key16fromConsoleInputERKNSt6stringE" title="erbsland::cterm::Key::fromConsoleInput"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Key::fromConsoleInput()</span></code></a>.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">waitForKey()</span></code> uses the same decode path but passes no timeout to <code class="docutils literal notranslate"><span class="pre">select()</span></code>, so it blocks until input becomes
+available.</p>
+<p>This short polling phase after <code class="docutils literal notranslate"><span class="pre">ESC</span></code> is important because cursor keys and function keys usually arrive as multi-byte ANSI escape sequences.
+Without it, the parser would often see only the leading <code class="docutils literal notranslate"><span class="pre">ESC</span></code> and could not reliably distinguish a plain Escape key from a longer control sequence.</p>
+</section>
+<section id="detecting-terminal-size-and-interactive-terminal-availability">
+<h2>Detecting Terminal Size and Interactive Terminal Availability<a class="headerlink" href="#detecting-terminal-size-and-interactive-terminal-availability" title="Link to this heading"></a></h2>
+<p>The POSIX backend exposes this state through <code class="docutils literal notranslate"><span class="pre">isInteractive()</span></code>.
+Internally, it derives the answer from screen-size probing instead of maintaining a separate detection path.</p>
+<p>The first call to <code class="docutils literal notranslate"><span class="pre">detectScreenSize()</span></code> is more aggressive than later calls:</p>
+<ol class="arabic simple">
+<li><p>It records the time of the attempt.</p></li>
+<li><p>It retries up to ten times.</p></li>
+<li><p>It sleeps for 100 ms between retries.</p></li>
+<li><p>If any attempt succeeds, it caches the size and returns it immediately.</p></li>
+<li><p>If an attempt proves that no terminal is attached, it sets <code class="docutils literal notranslate"><span class="pre">_hasNoTerminalAttached</span></code> and stops trying.</p></li>
+</ol>
+<p>Later calls are rate-limited to one real probe every 100 ms.
+If a call arrives sooner, the backend simply returns the last cached size.</p>
+<p>The actual probe is implemented in <code class="docutils literal notranslate"><span class="pre">getScreenSize()</span></code>:</p>
+<ol class="arabic simple">
+<li><p>If the backend already has a file descriptor that worked before, it tries that descriptor first.</p></li>
+<li><p>If the cached descriptor no longer works, it closes it and falls back to full detection.</p></li>
+<li><p>It then tries <code class="docutils literal notranslate"><span class="pre">STDOUT_FILENO</span></code>, <code class="docutils literal notranslate"><span class="pre">STDERR_FILENO</span></code>, and <code class="docutils literal notranslate"><span class="pre">STDIN_FILENO</span></code>.</p></li>
+<li><p>If none of those succeed, it tries to open <code class="docutils literal notranslate"><span class="pre">/dev/tty</span></code> and probe that descriptor.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">/dev/tty</span></code> succeeds, the backend keeps that descriptor open and caches it for later probes.</p></li>
+</ol>
+<p>Each candidate descriptor is checked by <code class="docutils literal notranslate"><span class="pre">getScreenSizeForFd()</span></code>:</p>
+<ol class="arabic simple">
+<li><p>Invalid descriptors, and descriptors for which <code class="docutils literal notranslate"><span class="pre">isatty(fd)</span> <span class="pre">==</span> <span class="pre">0</span></code>, are classified as <code class="docutils literal notranslate"><span class="pre">NoTerminalAttached</span></code>.</p></li>
+<li><p>Otherwise, the backend calls <code class="docutils literal notranslate"><span class="pre">ioctl(fd,</span> <span class="pre">TIOCGWINSZ,</span> <span class="pre">&amp;ws)</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">ioctl()</span></code> fails, or the returned row or column count is not positive, the result is <code class="docutils literal notranslate"><span class="pre">NoTerminalSize</span></code>.</p></li>
+<li><p>Only positive <code class="docutils literal notranslate"><span class="pre">ws_col</span></code> and <code class="docutils literal notranslate"><span class="pre">ws_row</span></code> values are accepted as success.</p></li>
+</ol>
+<p>This produces three logical outcomes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Success</span></code> means that a TTY exists and returned a usable size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NoTerminalSize</span></code> means that a TTY may exist, but the backend could not retrieve a usable window size from it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NoTerminalAttached</span></code> means that none of the checked descriptors behaved like a TTY at all.</p></li>
+</ul>
+<p>If all checked candidates behave like <code class="docutils literal notranslate"><span class="pre">NoTerminalAttached</span></code>, the backend remembers that no terminal is present, <code class="docutils literal notranslate"><span class="pre">isInteractive()</span></code> starts returning <code class="docutils literal notranslate"><span class="pre">false</span></code>, and later terminal-specific cleanup is skipped.
+If later incremental probes fail repeatedly without proving success, the backend increments <code class="docutils literal notranslate"><span class="pre">_noSizeFailureCount</span></code> and, after more than 100 such failures, also gives up and marks the environment as having no terminal attached.</p>
+</section>
+<section id="signal-based-termination-and-screen-restore">
+<h2>Signal-Based Termination and Screen Restore<a class="headerlink" href="#signal-based-termination-and-screen-restore" title="Link to this heading"></a></h2>
+<p>The POSIX backend handles <code class="docutils literal notranslate"><span class="pre">SIGINT</span></code>, <code class="docutils literal notranslate"><span class="pre">SIGTERM</span></code>, <code class="docutils literal notranslate"><span class="pre">SIGHUP</span></code>, and <code class="docutils literal notranslate"><span class="pre">SIGQUIT</span></code> through <code class="docutils literal notranslate"><span class="pre">PosixSignalDispatcher</span></code>.
+The key design rule is that the actual terminal restore must never run inside the raw POSIX signal handler.</p>
+<section id="why-the-signal-handler-must-stay-tiny">
+<h3>Why the Signal Handler Must Stay Tiny<a class="headerlink" href="#why-the-signal-handler-must-stay-tiny" title="Link to this heading"></a></h3>
+<p>POSIX signal handlers run in an asynchronous context.
+At that point, the interrupted thread may already hold locks, may be in the middle of a C++ library call, or may be using memory-allocation internals.
+For that reason, most normal C and C++ operations are unsafe inside a signal handler.</p>
+<p>In particular, the backend restore path is not signal-handler-safe because it uses:</p>
+<ul class="simple">
+<li><p>mutexes in <code class="docutils literal notranslate"><span class="pre">restoreGlobalPlatform()</span></code></p></li>
+<li><p>iostream operations such as <code class="docutils literal notranslate"><span class="pre">std::cout</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tcsetattr()</span></code></p></li>
+<li><p>normal C++ object state</p></li>
+<li><p>code paths that are not documented as async-signal-safe</p></li>
+</ul>
+<p>Running terminal cleanup directly inside <code class="docutils literal notranslate"><span class="pre">onSignal()</span></code> would therefore risk deadlocks, reentrancy bugs, or only partially restored terminal state.</p>
+<p>The signal handler is intentionally reduced to the smallest practical operation:</p>
+<ul class="simple">
+<li><p>read the pre-published write end of a pipe from a <code class="docutils literal notranslate"><span class="pre">volatile</span> <span class="pre">sig_atomic_t</span></code></p></li>
+<li><p>call <code class="docutils literal notranslate"><span class="pre">write()</span></code> to forward the received signal number</p></li>
+</ul>
+<p>That is the main reason the dispatcher exists at all.</p>
+</section>
+<section id="how-the-pipe-based-handoff-works">
+<h3>How the Pipe-Based Handoff Works<a class="headerlink" href="#how-the-pipe-based-handoff-works" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">PosixSignalDispatcher</span></code> decouples the asynchronous signal context from normal backend code by using a unidirectional pipe and a dedicated watcher thread.</p>
+<p>The full mechanism works like this:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">openSignalPipe()</span></code> creates a pipe.</p></li>
+<li><p>The dispatcher switches the write end to non-blocking mode with <code class="docutils literal notranslate"><span class="pre">fcntl(...,</span> <span class="pre">F_SETFL,</span> <span class="pre">...</span> <span class="pre">|</span> <span class="pre">O_NONBLOCK)</span></code>.</p></li>
+<li><p>It publishes that write descriptor through the static <code class="docutils literal notranslate"><span class="pre">_signalWriteFd</span></code> so the signal handler can access it without touching object state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startWatcher()</span></code> launches a thread that blocks in <code class="docutils literal notranslate"><span class="pre">read()</span></code> on the read end of the pipe.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">registerHandlers()</span></code> installs <code class="docutils literal notranslate"><span class="pre">PosixSignalDispatcher::onSignal()</span></code> for <code class="docutils literal notranslate"><span class="pre">SIGINT</span></code>, <code class="docutils literal notranslate"><span class="pre">SIGTERM</span></code>, <code class="docutils literal notranslate"><span class="pre">SIGHUP</span></code>, and <code class="docutils literal notranslate"><span class="pre">SIGQUIT</span></code>, while preserving previously installed handlers in <code class="docutils literal notranslate"><span class="pre">_previousSignalActions</span></code>.</p></li>
+<li><p>When a signal arrives, <code class="docutils literal notranslate"><span class="pre">onSignal()</span></code> writes the signal number as an <code class="docutils literal notranslate"><span class="pre">int</span></code> into the pipe and returns immediately.</p></li>
+<li><p>The watcher thread wakes up, reads exactly one forwarded integer, and invokes the configured callback on a normal thread.</p></li>
+<li><p>That callback is <code class="docutils literal notranslate"><span class="pre">PosixBackend::handleProcessSignal()</span></code>.</p></li>
+</ol>
+<p>Two subtle details matter here:</p>
+<ul class="simple">
+<li><p>The forwarded payload is only one <code class="docutils literal notranslate"><span class="pre">int</span></code>, which is comfortably smaller than <code class="docutils literal notranslate"><span class="pre">PIPE_BUF</span></code>.
+On POSIX systems, that means the pipe write is atomic, so the watcher never has to reconstruct messages from partial interleaving with other writes.</p></li>
+<li><p>Because the write end is non-blocking, a full pipe does not deadlock the signal handler.
+The write can fail and the signal may be dropped.
+The implementation intentionally accepts that trade-off because the alternative would be unsafe blocking behavior inside the signal handler.</p></li>
+</ul>
+<p>The watcher thread itself remains simple:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">read()</span> <span class="pre">==</span> <span class="pre">0</span></code> means the pipe was closed, so the watcher exits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read()</span> <span class="pre">&lt;</span> <span class="pre">0</span></code> with <code class="docutils literal notranslate"><span class="pre">errno</span> <span class="pre">==</span> <span class="pre">EINTR</span></code> causes a retry.</p></li>
+<li><p>Any short read is ignored.</p></li>
+<li><p>The first valid forwarded signal triggers the callback, and then the watcher exits.</p></li>
+</ul>
+<p>This “first signal wins” behavior matches the intended process-lifetime model:
+once a termination signal is received, the backend restores the terminal and the process is expected to end immediately afterward.</p>
+</section>
+<section id="what-happens-after-the-signal-reaches-the-watcher-thread">
+<h3>What Happens After the Signal Reaches the Watcher Thread<a class="headerlink" href="#what-happens-after-the-signal-reaches-the-watcher-thread" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">PosixBackend::handleProcessSignal()</span></code> runs in normal thread context, not in the signal handler.
+That makes it safe to execute the normal restore logic.</p>
+<p>The method performs these steps:</p>
+<ol class="arabic simple">
+<li><p>It calls <code class="docutils literal notranslate"><span class="pre">restoreGlobalPlatform()</span></code> to restore the screen, cursor, colors, and any active raw-input session.</p></li>
+<li><p>It installs the default disposition for the received signal with <code class="docutils literal notranslate"><span class="pre">sigaction(signalNumber,</span> <span class="pre">SIG_DFL,</span> <span class="pre">...)</span></code>.</p></li>
+<li><p>It sends the same signal to the current process with <code class="docutils literal notranslate"><span class="pre">kill(getpid(),</span> <span class="pre">signalNumber)</span></code>.</p></li>
+<li><p>If process termination does not happen immediately for some reason, it falls back to <code class="docutils literal notranslate"><span class="pre">std::_Exit(128</span> <span class="pre">+</span> <span class="pre">signalNumber)</span></code>.</p></li>
+</ol>
+<p>Re-raising the original signal is important because it preserves the normal process semantics that shells, parent processes, and debuggers expect.
+The fallback <code class="docutils literal notranslate"><span class="pre">_Exit</span></code> call exists only to ensure that the process still terminates even if signal re-delivery unexpectedly does not finish the job.</p>
+</section>
+<section id="normal-shutdown-of-the-dispatcher">
+<h3>Normal Shutdown of the Dispatcher<a class="headerlink" href="#normal-shutdown-of-the-dispatcher" title="Link to this heading"></a></h3>
+<p>When the backend is destroyed during a normal, non-signal shutdown, the dispatcher tears itself down carefully:</p>
+<ol class="arabic simple">
+<li><p>It restores the previously installed handlers with <code class="docutils literal notranslate"><span class="pre">unregisterHandlers()</span></code>.</p></li>
+<li><p>It writes a dedicated shutdown token <code class="docutils literal notranslate"><span class="pre">-1</span></code> into the pipe.</p></li>
+<li><p>The watcher thread wakes up, sees that token, and exits without calling the signal callback.</p></li>
+<li><p>The destructor joins the watcher thread.</p></li>
+<li><p>It clears <code class="docutils literal notranslate"><span class="pre">_signalWriteFd</span></code> and closes both ends of the pipe.</p></li>
+</ol>
+<p>This shutdown path uses the same wake-up mechanism as real signals.
+That keeps the watcher logic compact and avoids the need for a separate cancellation mechanism.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="windows-backend.html" class="btn btn-neutral float-left" title="Windows Backend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="action-scheduling.html" class="btn btn-neutral float-right" title="Action Scheduling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

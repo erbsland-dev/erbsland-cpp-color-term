@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::impl::LineBuffer</compoundname>
+    <includes refid="_line_buffer_8hpp" local="no">erbsland/cterm/impl/LineBuffer.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1_line_buffer_1_1_emit_lock" prot="private">erbsland::cterm::impl::LineBuffer::EmitLock</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1_1_emit_lock_guard" prot="public">erbsland::cterm::impl::LineBuffer::EmitLockGuard</innerclass>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a2732aa49ecefe1f0de936255dae239a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class EmitLockGuard</definition>
+        <argsstring></argsstring>
+        <name>EmitLockGuard</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::EmitLockGuard</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1_1_emit_lock_guard" kindref="compound">EmitLockGuard</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="17" column="18" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1afc42c2a44aebf093ea3da09625ca9c79" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::impl::LineBuffer::cDisabledSize</definition>
+        <argsstring></argsstring>
+        <name>cDisabledSize</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::cDisabledSize</qualifiedname>
+        <initializer>= 1024</initializer>
+        <briefdescription>
+<para>A minimum buffer size reserved for low-level operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="21" column="34" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ad1334832fd45bcbb3c92e7a4f5ff895e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::impl::LineBuffer::cEnabledSize</definition>
+        <argsstring></argsstring>
+        <name>cEnabledSize</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::cEnabledSize</qualifiedname>
+        <initializer>= 4096</initializer>
+        <briefdescription>
+<para>A minimum buffer size reserver if the line buffer is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="23" column="34" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1aa1bc597a4eec6d9dffd5d87b26a99430" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::impl::LineBuffer::cMaxSize</definition>
+        <argsstring></argsstring>
+        <name>cMaxSize</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::cMaxSize</qualifiedname>
+        <initializer>= 1023 * 1024</initializer>
+        <briefdescription>
+<para>The maximum size of the line buffer before it is force-emitted. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="25" column="34" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ac62abdaa2fc7422868460de06821b766" prot="private" static="no" mutable="no">
+        <type>BackendPtr</type>
+        <definition>BackendPtr erbsland::cterm::impl::LineBuffer::_backend</definition>
+        <argsstring></argsstring>
+        <name>_backend</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::_backend</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>The backend to emit to. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="120" column="16" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a92903837d909bd105456a39cd1380729" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::LineBuffer::_cachingEnabled</definition>
+        <argsstring></argsstring>
+        <name>_cachingEnabled</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::_cachingEnabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>If line buffering is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="121" column="10" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1abb2cf70f0886f214a9db3132b50c35c4" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string erbsland::cterm::impl::LineBuffer::_buffer</definition>
+        <argsstring></argsstring>
+        <name>_buffer</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::_buffer</qualifiedname>
+        <briefdescription>
+<para>The text buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="122" column="17" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a063d13f0c26ce6da893ea4600ac52457" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::LineBuffer::_hasNewLine</definition>
+        <argsstring></argsstring>
+        <name>_hasNewLine</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::_hasNewLine</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>A flag if there is a NL in the line buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="123" column="10" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1aac86b6b5fbf30db12097d71f970be799" prot="private" static="no" mutable="no">
+        <type>EmitLock</type>
+        <definition>EmitLock erbsland::cterm::impl::LineBuffer::_emitLock</definition>
+        <argsstring></argsstring>
+        <name>_emitLock</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::_emitLock</qualifiedname>
+        <briefdescription>
+<para>The emit lock. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="124" column="14" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1af8937fc2d1c9bce08b94c830f852d359" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::LineBuffer::LineBuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>LineBuffer</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::LineBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="28" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ac76896d6b4d67da357c6b1b5352c8635" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::LineBuffer::setBackend</definition>
+        <argsstring>(const BackendPtr &amp;backend) noexcept</argsstring>
+        <name>setBackend</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::setBackend</qualifiedname>
+        <param>
+          <type>const BackendPtr &amp;</type>
+          <declname>backend</declname>
+        </param>
+        <briefdescription>
+<para>Set the backend. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="32" column="10" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a7d436f94e3b2d7968286bc356dc78aae" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::LineBuffer::setCachingEnabled</definition>
+        <argsstring>(bool enabled) noexcept</argsstring>
+        <name>setCachingEnabled</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::setCachingEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Enable or disable line caching. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true to enable caching, false to disable </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="36" column="10" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="36" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a44b8b1b8105f4d7f508dd578a96e80db" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::LineBuffer::cachingEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cachingEnabled</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::cachingEnabled</qualifiedname>
+        <briefdescription>
+<para>Test if caching is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="48" column="11" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1aedc9676a4b312ba6adaed7e23c353bef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::LineBuffer::write</definition>
+        <argsstring>(const std::string_view text) noexcept</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::write</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Write the given text to the line buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function scans each added text segment for a NL, and sets the newline flag. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="52" column="10" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="52" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ad8a4005616238bed87c0c92bd19fa2e7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::LineBuffer::write</definition>
+        <argsstring>(const Char character) noexcept</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::write</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Append the given character to the line buffer (not the colors). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is an optimization, avoiding allocation of temporary memory for the UTF-8 encoding. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="61" column="10" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="61" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ab8daa37080e0468ae11fe80e803ada7e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::LineBuffer::handleEmit</definition>
+        <argsstring>(const bool forceEmit=false) noexcept</argsstring>
+        <name>handleEmit</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::handleEmit</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>forceEmit</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Test if we have line buffering enabled and emit its contents. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the line buffer is disabled, this method will emit its contents at every call. If the line buffer is enabled, this method will emit its contents when there is a NL in the buffer. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>forceEmit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, the line buffer will be emitted regardless of the buffer content. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="72" column="10" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="72" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a9e3be705832aa3d863f6896c8cfdf8b4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::LineBuffer::shutdown</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>shutdown</name>
+        <qualifiedname>erbsland::cterm::impl::LineBuffer::shutdown</qualifiedname>
+        <briefdescription>
+<para>Free allocated memory and emit remaining contents. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/LineBuffer.hpp" line="99" column="10" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="99" bodyend="103"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A smart line buffer. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/LineBuffer.hpp" line="14" column="1" bodyfile="erbsland/cterm/impl/LineBuffer.hpp" bodystart="14" bodyend="125"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ac62abdaa2fc7422868460de06821b766" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>_backend</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1abb2cf70f0886f214a9db3132b50c35c4" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>_buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a92903837d909bd105456a39cd1380729" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>_cachingEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1aac86b6b5fbf30db12097d71f970be799" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>_emitLock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a063d13f0c26ce6da893ea4600ac52457" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>_hasNewLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a44b8b1b8105f4d7f508dd578a96e80db" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>cachingEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1afc42c2a44aebf093ea3da09625ca9c79" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>cDisabledSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ad1334832fd45bcbb3c92e7a4f5ff895e" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>cEnabledSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1aa1bc597a4eec6d9dffd5d87b26a99430" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>cMaxSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a2732aa49ecefe1f0de936255dae239a0" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>EmitLockGuard</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ab8daa37080e0468ae11fe80e803ada7e" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>handleEmit</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1af8937fc2d1c9bce08b94c830f852d359" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>LineBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ac76896d6b4d67da357c6b1b5352c8635" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>setBackend</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a7d436f94e3b2d7968286bc356dc78aae" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>setCachingEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1a9e3be705832aa3d863f6896c8cfdf8b4" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>shutdown</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1aedc9676a4b312ba6adaed7e23c353bef" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer_1ad8a4005616238bed87c0c92bd19fa2e7" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::LineBuffer</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

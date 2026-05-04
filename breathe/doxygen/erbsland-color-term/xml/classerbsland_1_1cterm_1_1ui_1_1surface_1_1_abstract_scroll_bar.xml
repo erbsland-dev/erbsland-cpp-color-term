@@ -1,0 +1,793 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::surface::AbstractScrollBar</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_surface" prot="public" virt="non-virtual">erbsland::cterm::ui::Surface</basecompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_horizontal_scroll_bar" prot="public" virt="non-virtual">erbsland::cterm::ui::surface::HorizontalScrollBar</derivedcompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_vertical_scroll_bar" prot="public" virt="non-virtual">erbsland::cterm::ui::surface::VerticalScrollBar</derivedcompoundref>
+    <includes refid="_abstract_scroll_bar_8hpp" local="no">erbsland/cterm/ui/surface/AbstractScrollBar.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1_1_handle_span" prot="private">erbsland::cterm::ui::surface::AbstractScrollBar::HandleSpan</innerclass>
+    <sectiondef kind="protected-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad3d5043d450160bdd6c1ea76c2721308" prot="protected" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>Orientation</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::Orientation</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad3d5043d450160bdd6c1ea76c2721308ac1b5fa03ecdb95d4a45dd1c40b02527f" prot="protected">
+          <name>Horizontal</name>
+          <briefdescription>
+<para>A left-to-right scroll bar. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad3d5043d450160bdd6c1ea76c2721308a06ce2a25e5d12c166a36f654dbea6012" prot="protected">
+          <name>Vertical</name>
+          <briefdescription>
+<para>A top-to-bottom scroll bar. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The supported scroll bar orientations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="19" column="5" bodyfile="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" bodystart="19" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a0f543abecb2cb5a7a9cd9e6701f5a425" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad3d5043d450160bdd6c1ea76c2721308" kindref="member">Orientation</ref></type>
+        <definition>Orientation erbsland::cterm::ui::surface::AbstractScrollBar::_orientation</definition>
+        <argsstring></argsstring>
+        <name>_orientation</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::_orientation</qualifiedname>
+        <briefdescription>
+<para>The scroll bar orientation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="103" column="17" bodyfile="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a24418e533126a88e9f42a7bf16ff3aab" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::ui::surface::AbstractScrollBar::_scrollRegion</definition>
+        <argsstring></argsstring>
+        <name>_scrollRegion</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::_scrollRegion</qualifiedname>
+        <briefdescription>
+<para>The total scrollable region. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="104" column="16" bodyfile="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a123fc80756913415ba09e667cf60670a" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::ui::surface::AbstractScrollBar::_visibleRegion</definition>
+        <argsstring></argsstring>
+        <name>_visibleRegion</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::_visibleRegion</qualifiedname>
+        <briefdescription>
+<para>The currently visible region. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="105" column="16" bodyfile="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1aac56be920ee6ca45758a16c4a138a4ef" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::surface::AbstractScrollBar::AbstractScrollBar</definition>
+        <argsstring>(Orientation orientation, const LayoutMetrics &amp;layoutSize, ProtectedTag) noexcept</argsstring>
+        <name>AbstractScrollBar</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::AbstractScrollBar</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad3d5043d450160bdd6c1ea76c2721308" kindref="member">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics" kindref="compound">LayoutMetrics</ref> &amp;</type>
+          <declname>layoutSize</declname>
+        </param>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_surface_1_1_protected_tag" kindref="compound">ProtectedTag</ref></type>
+        </param>
+        <briefdescription>
+<para>Create a scroll bar with explicit layout metrics and orientation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scroll bar orientation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>layoutSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial layout metrics. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1afa04dac6d7bcbf2963fe293b9aeac65a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::surface::AbstractScrollBar::~AbstractScrollBar</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~AbstractScrollBar</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::~AbstractScrollBar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="29" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1adc7ad78d4ac1f562f016424e31a71869" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::ui::surface::AbstractScrollBar::scrollRegion</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>scrollRegion</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::scrollRegion</qualifiedname>
+        <briefdescription>
+<para>Get the total scrollable region. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The configured scroll region. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="34" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ab5ad0c85a93341298e3dc0881b1c32f4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::AbstractScrollBar::setScrollRegion</definition>
+        <argsstring>(IndexRange scrollRegion) noexcept</argsstring>
+        <name>setScrollRegion</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::setScrollRegion</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+          <declname>scrollRegion</declname>
+        </param>
+        <briefdescription>
+<para>Replace the total scrollable region. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scrollRegion</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new scroll region. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="37" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ac391d6bafcb92c6ad753e324ef60ca12" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::ui::surface::AbstractScrollBar::visibleRegion</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>visibleRegion</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::visibleRegion</qualifiedname>
+        <briefdescription>
+<para>Get the currently visible region. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The configured visible region. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="40" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1aed5647a78febe001ab177c61e7e43589" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::AbstractScrollBar::setVisibleRegion</definition>
+        <argsstring>(IndexRange visibleRegion) noexcept</argsstring>
+        <name>setVisibleRegion</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::setVisibleRegion</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+          <declname>visibleRegion</declname>
+        </param>
+        <briefdescription>
+<para>Replace the currently visible region. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>visibleRegion</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new visible region. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="43" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ab2e41a485df32b4baea2b05ed849a49f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::surface::AbstractScrollBar::isOpaque</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>isOpaque</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::isOpaque</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a95e5424ead0b6cc74db8b7130d1633a3">isOpaque</reimplements>
+        <briefdescription>
+<para>Test if this surface paints every cell in its rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if the surface is opaque. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="46" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1adabf61a9af79d43120456d6761b1eec4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::AbstractScrollBar::onPaint</definition>
+        <argsstring>(WritableBuffer &amp;buffer, const PaintContext &amp;context) noexcept override</argsstring>
+        <name>onPaint</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::onPaint</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ebde9b30a900ad9dcfb69d451826d13">onPaint</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_writable_buffer" kindref="compound">WritableBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_paint_context" kindref="compound">PaintContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Paint this surface into the target buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The paint context for the current paint pass. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="47" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a0134addbe10f4bb43451a2f7ae650ca0" prot="protected" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad3d5043d450160bdd6c1ea76c2721308" kindref="member">Orientation</ref></type>
+        <definition>Orientation erbsland::cterm::ui::surface::AbstractScrollBar::orientation</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>orientation</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::orientation</qualifiedname>
+        <briefdescription>
+<para>Get the configured orientation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The orientation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="52" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a280212c4d6cfaf34904691da5d677f60" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>static Coordinate erbsland::cterm::ui::surface::AbstractScrollBar::toCoordinate</definition>
+        <argsstring>(std::size_t value) noexcept</argsstring>
+        <name>toCoordinate</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::toCoordinate</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Convert one <computeroutput>std::size_t</computeroutput> length into a coordinate with saturation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The saturated coordinate value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="67" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a53d6a978600053ab177c51e8067de0d0" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>static Coordinate erbsland::cterm::ui::surface::AbstractScrollBar::minimumHandleLength</definition>
+        <argsstring>(Coordinate trackLength) noexcept</argsstring>
+        <name>minimumHandleLength</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::minimumHandleLength</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>trackLength</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the minimum rendered handle length for the given track length. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>trackLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The available track length. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The minimum handle length. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="85" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a22c56c8da4f41545669ef784552861c9" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>HandleSpan</type>
+        <definition>static HandleSpan erbsland::cterm::ui::surface::AbstractScrollBar::expandedHandleSpan</definition>
+        <argsstring>(HandleSpan span, Coordinate trackLength, Coordinate desiredLength) noexcept</argsstring>
+        <name>expandedHandleSpan</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::expandedHandleSpan</qualifiedname>
+        <param>
+          <type>HandleSpan</type>
+          <declname>span</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>trackLength</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>desiredLength</declname>
+        </param>
+        <briefdescription>
+<para>Expand one projected handle span to the required minimum length. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>span</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The projected span. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>trackLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The available track length. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>desiredLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired handle length. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The expanded handle span. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="91" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ab2c874f79650c53d0d8429f8a3fa5f49" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::ui::surface::AbstractScrollBar::normalizedScrollRegion</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>normalizedScrollRegion</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::normalizedScrollRegion</qualifiedname>
+        <briefdescription>
+<para>Normalize the configured scroll region into a finite range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The normalized scroll region, or an empty range if projection is not possible. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="70" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a7af729fa7310e05e4f1117b98ffe78e1" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::ui::surface::AbstractScrollBar::normalizedVisibleRegion</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>normalizedVisibleRegion</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::normalizedVisibleRegion</qualifiedname>
+        <briefdescription>
+<para>Clamp the visible region to the current scroll region. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The clamped visible region. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="73" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a00c5df572e763cc8f21fb36aa86342a1" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>Coordinate erbsland::cterm::ui::surface::AbstractScrollBar::mainAxisLength</definition>
+        <argsstring>(const Rectangle &amp;rect) const noexcept</argsstring>
+        <name>mainAxisLength</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::mainAxisLength</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref> &amp;</type>
+          <declname>rect</declname>
+        </param>
+        <briefdescription>
+<para>Get the painted length along the main axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target rectangle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The width for horizontal bars or height for vertical bars. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="77" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad73501cfb0fef1ca530cd8f71f210406" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>HandleSpan</type>
+        <definition>HandleSpan erbsland::cterm::ui::surface::AbstractScrollBar::projectHandle</definition>
+        <argsstring>(Coordinate trackLength) const noexcept</argsstring>
+        <name>projectHandle</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::projectHandle</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>trackLength</declname>
+        </param>
+        <briefdescription>
+<para>Project the visible region into the track. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>trackLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The available track length. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The projected handle span. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="81" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a813a0b248d721a5fbb6589c8d8b12bb9" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::AbstractScrollBar::paintThemed</definition>
+        <argsstring>(WritableBuffer &amp;buffer, const PaintContext &amp;context) noexcept</argsstring>
+        <name>paintThemed</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::paintThemed</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_writable_buffer" kindref="compound">WritableBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_paint_context" kindref="compound">PaintContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Paint the scroll bar with the active theme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The paint context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="95" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1af7cf79a990dbdea4bcda7826a90c7d7d" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+        <definition>Rectangle erbsland::cterm::ui::surface::AbstractScrollBar::handleRectForSpan</definition>
+        <argsstring>(Rectangle contentRect, const HandleSpan &amp;handleSpan) const noexcept</argsstring>
+        <name>handleRectForSpan</name>
+        <qualifiedname>erbsland::cterm::ui::surface::AbstractScrollBar::handleRectForSpan</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>contentRect</declname>
+        </param>
+        <param>
+          <type>const HandleSpan &amp;</type>
+          <declname>handleSpan</declname>
+        </param>
+        <briefdescription>
+<para>Convert a projected handle span into a rectangle inside the themed track content area. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>contentRect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The usable track content area. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handleSpan</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The projected handle span. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The handle rectangle. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="100" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Shared base class for one-dimensional scroll bar surfaces. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The scroll bar is a purely visual indicator for a visible region inside a larger scroll region. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::surface::AbstractScrollBar</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::ui::surface::HorizontalScrollBar</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_horizontal_scroll_bar"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::surface::VerticalScrollBar</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_vertical_scroll_bar"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="7">
+        <label>erbsland::cterm::Rectangle</label>
+        <link refid="classerbsland_1_1cterm_1_1_rectangle"/>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="8">
+        <label>erbsland::cterm::ui::LayoutMetrics</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>_surfaces</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>_flags</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_rectangle</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_layoutMetrics</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>_themeAttributes</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::SurfaceFlags</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_flags"/>
+      </node>
+      <node id="9">
+        <label>erbsland::cterm::ui::SurfaceThemeAttributes</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_theme_attributes"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::surface::AbstractScrollBar</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" line="16" column="1" bodyfile="erbsland/cterm/ui/surface/AbstractScrollBar.hpp" bodystart="16" bodyend="106"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a67caf5a45f3afcf394d04b6a811fb019" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>_flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5e98ac945443673593de934b8e5a6c82" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>_layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a0f543abecb2cb5a7a9cd9e6701f5a425" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>_orientation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9ded519b8019bf6a0379b4807842db02" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>_rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a24418e533126a88e9f42a7bf16ff3aab" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>_scrollRegion</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adebfc77d073fdbec83278119180d2641" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>_surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a3495ef389b8d8ba1623a671bdbe0a96f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>_themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a123fc80756913415ba09e667cf60670a" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>_visibleRegion</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1aac56be920ee6ca45758a16c4a138a4ef" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>AbstractScrollBar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d68b998618a891511dee33516b51268" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac3b1bb4dd817e95e8a35841cf96b48a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>actionsPtr</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9822c7ffb68730aea7ba35147f48f418" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>addSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0abe7d82b04e8ab6336b069f5cc8582" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>childLayoutContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1abaddf3eeea6f7644b5c60ff68d2de36b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0523529e715f39f711cc5d96ac3c44d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ed84aa3c6e6d970d42b64c83b46573d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>editLayoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a22c56c8da4f41545669ef784552861c9" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>expandedHandleSpan</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaf52c2f637ff1260e089e66443b07531" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a89aeb65892433da9fcac35928db00810" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1af7cf79a990dbdea4bcda7826a90c7d7d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>handleRectForSpan</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad58106a9586de9d0ad45c4da90bdb528" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>initializeUi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1acc65b744f0701f00597e4c89d6241239" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>isAncestorOrSame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ab2e41a485df32b4baea2b05ed849a49f" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>isOpaque</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a967203e56c68deb9f759c9a6f4f8d8d4" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>isPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1afb8f08ad9f89178255cdda7cf8ac450f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad34c082f4cb962dabd803d02895a9902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaa6aedebddacbcb54d637ab7dc763317" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>localSurfaceRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a73838b048c6c2e0a456eb2776a11c459" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>localToScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a00c5df572e763cc8f21fb36aa86342a1" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>mainAxisLength</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a53d6a978600053ab177c51e8067de0d0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>minimumHandleLength</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a827a5338cd11a1ac0f82d8beae54c1f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>nearestOpaqueSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a50e8ebc2c27eaa297c1b6df62176a9de" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>nearestPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ab2c874f79650c53d0d8429f8a3fa5f49" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>normalizedScrollRegion</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a7af729fa7310e05e4f1117b98ffe78e1" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>normalizedVisibleRegion</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1908b92a2163d514b9dec6b29e18c13b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>onFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac5de18b08b9c414b0bcfe38fa801d367" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a931eb7df2cba0068a95ef28af0cdc2b4" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>onLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a970401f71d513138ee3de0e51004f759" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>onMeasure</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1adabf61a9af79d43120456d6761b1eec4" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>onPaint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1af4b08bc02b3b7e8e6cf6cf5822645470" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1db7d7cb9f30ee4c5b4242473de6fe33" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad3d5043d450160bdd6c1ea76c2721308" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>Orientation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a0134addbe10f4bb43451a2f7ae650ca0" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>orientation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a813a0b248d721a5fbb6589c8d8b12bb9" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>paintThemed</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a57ed2140168f6fad97796cbc98b876f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ad73501cfb0fef1ca530cd8f71f210406" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>projectHandle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1a2f2168434fcf663bccb768dfa8cba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6691b41ed4a62a31aff2393c131ab2f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>requestFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a484e22bcc258d2b36992ff91e6cc4c0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c4a3823f5477de8879ebd80c043abe6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>screenToLocal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1adc7ad78d4ac1f562f016424e31a71869" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>scrollRegion</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad190a0f521f4abb34c9a5fe9e8cdba40" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>setRectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ab5ad0c85a93341298e3dc0881b1c32f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>setScrollRegion</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1aed5647a78febe001ab177c61e7e43589" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>setVisibleRegion</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae70aa6dae2d6df94fbb2f6f6b5226daa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5cb74a7a34e1b983c592e6f7f6aeca96" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d00cfd2476c5d44de898c00f29fc90a" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a4623853a42b6ae3683027cb10e3fef65" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aea9e1412522664de3fbfa01435f9bacf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae95b294bf3fad17469266a725bb69ff7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c6f25c89ecf460580ae03db5573b9ba" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ade89cf3d7830659bfa54ed703bdc3d14" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1add04ac6c18ebbcb1dc835a4da635d58d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adb6bc351b2e411bfdc50f26867d31df9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a02f5c3f2df31839ad57c7dd3e442bdc6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>themeContextFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1a280212c4d6cfaf34904691da5d677f60" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>toCoordinate</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1ac391d6bafcb92c6ad753e324ef60ca12" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>visibleRegion</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a0cff8325b685e12268b2a8136d6c47f2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>visibleScreenRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_bar_1afa04dac6d7bcbf2963fe293b9aeac65a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>~AbstractScrollBar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d29bb69da75140fb230c6edd80bd9e7" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::AbstractScrollBar</scope><name>~Surface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,784 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_cursor_writer_8hpp" kind="file" language="C++">
+    <compoundname>CursorWriter.hpp</compoundname>
+    <includes refid="_move_mode_8hpp" local="yes">MoveMode.hpp</includes>
+    <includes refid="_paragraph_options_8hpp" local="yes">ParagraphOptions.hpp</includes>
+    <includes refid="_string_view_8hpp" local="yes">StringView.hpp</includes>
+    <includes refid="_position_8hpp" local="yes">geometry/Position.hpp</includes>
+    <includes refid="_size_8hpp" local="yes">geometry/Size.hpp</includes>
+    <includes refid="_type_traits_8hpp" local="yes">impl/TypeTraits.hpp</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">optional</includes>
+    <includes local="no">string</includes>
+    <includes local="no">string_view</includes>
+    <includes local="no">type_traits</includes>
+    <includes local="no">utility</includes>
+    <includedby refid="_cursor_buffer_8hpp" local="yes">erbsland/cterm/CursorBuffer.hpp</includedby>
+    <includedby refid="_terminal_8hpp" local="yes">erbsland/cterm/Terminal.hpp</includedby>
+    <includedby refid="all_8hpp" local="yes">erbsland/cterm/all.hpp</includedby>
+    <includedby refid="_printer_8hpp" local="yes">erbsland/cterm/impl/paragraph/Printer.hpp</includedby>
+    <includedby refid="_html_renderer_8hpp" local="yes">erbsland/cterm/text/HtmlRenderer.hpp</includedby>
+    <includedby refid="_text_node_renderer_8hpp" local="yes">erbsland/cterm/text/impl/TextNodeRenderer.hpp</includedby>
+    <includedby refid="_cursor_block_target_8hpp" local="yes">erbsland/cterm/text/impl/text_node_renderer/CursorBlockTarget.hpp</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>Char.hpp</label>
+        <link refid="_char_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>CharAttributes.hpp</label>
+        <link refid="_char_attributes_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>CharStyle.hpp</label>
+        <link refid="_char_style_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Color.hpp</label>
+        <link refid="_color_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>ColorPart.hpp</label>
+        <link refid="_color_part_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>ColorRole.hpp</label>
+        <link refid="_color_role_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/CursorWriter.hpp</label>
+        <link refid="_cursor_writer_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>EncodingErrors.hpp</label>
+        <link refid="_encoding_errors_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>FastCharSet.hpp</label>
+        <link refid="_fast_char_set_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>IndexRange.hpp</label>
+        <link refid="_index_range_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>MoveMode.hpp</label>
+        <link refid="_move_mode_8hpp_source"/>
+      </node>
+      <node id="32">
+        <label>ParagraphBackgroundMode.hpp</label>
+        <link refid="_paragraph_background_mode_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>ParagraphIndents.hpp</label>
+        <link refid="_paragraph_indents_8hpp_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>ParagraphOnError.hpp</label>
+        <link refid="_paragraph_on_error_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ParagraphOptions.hpp</label>
+        <link refid="_paragraph_options_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>ParagraphSpacing.hpp</label>
+        <link refid="_paragraph_spacing_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>String.hpp</label>
+        <link refid="_string_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>StringView.hpp</label>
+        <link refid="_string_view_8hpp_source"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>TabOverflowBehavior.hpp</label>
+        <link refid="_tab_overflow_behavior_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Alignment.hpp</label>
+        <link refid="_alignment_8hpp_source"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>Anchor.hpp</label>
+        <link refid="_anchor_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Coordinate.hpp</label>
+        <link refid="_coordinate_8hpp_source"/>
+      </node>
+      <node id="34">
+        <label>geometry/Margins.hpp</label>
+        <link refid="_margins_8hpp_source"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>Orientation.hpp</label>
+        <link refid="_orientation_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Position.hpp</label>
+        <link refid="_position_8hpp_source"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>Size.hpp</label>
+        <link refid="_size_8hpp_source"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>impl/CombinedChar.hpp</label>
+        <link refid="_combined_char_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>impl/HashHelper.hpp</label>
+        <link refid="_hash_helper_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>../impl/SaturatingMath.hpp</label>
+        <link refid="_saturating_math_8hpp_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>impl/TextUtil.hpp</label>
+        <link refid="_text_util_8hpp_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>impl/TypeTraits.hpp</label>
+        <link refid="_type_traits_8hpp_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>UnicodeWidth.hpp</label>
+        <link refid="_unicode_width_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>algorithm</label>
+      </node>
+      <node id="15">
+        <label>array</label>
+      </node>
+      <node id="26">
+        <label>cctype</label>
+      </node>
+      <node id="28">
+        <label>concepts</label>
+      </node>
+      <node id="8">
+        <label>cstddef</label>
+      </node>
+      <node id="9">
+        <label>cstdint</label>
+      </node>
+      <node id="42">
+        <label>cstdlib</label>
+      </node>
+      <node id="47">
+        <label>exception</label>
+      </node>
+      <node id="43">
+        <label>format</label>
+      </node>
+      <node id="11">
+        <label>functional</label>
+      </node>
+      <node id="23">
+        <label>limits</label>
+      </node>
+      <node id="30">
+        <label>memory</label>
+      </node>
+      <node id="44">
+        <label>numeric</label>
+      </node>
+      <node id="24">
+        <label>optional</label>
+      </node>
+      <node id="22">
+        <label>span</label>
+      </node>
+      <node id="53">
+        <label>stdexcept</label>
+      </node>
+      <node id="16">
+        <label>string</label>
+      </node>
+      <node id="17">
+        <label>string_view</label>
+      </node>
+      <node id="10">
+        <label>type_traits</label>
+      </node>
+      <node id="45">
+        <label>utility</label>
+      </node>
+      <node id="31">
+        <label>variant</label>
+      </node>
+      <node id="18">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>erbsland/cterm/CursorBuffer.hpp</label>
+        <link refid="_cursor_buffer_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/CursorWriter.hpp</label>
+        <link refid="_cursor_writer_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>erbsland/cterm/Terminal.hpp</label>
+        <link refid="_terminal_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>erbsland/cterm/TerminalSession.hpp</label>
+        <link refid="_terminal_session_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland/cterm/all.hpp</label>
+        <link refid="all_8hpp_source"/>
+      </node>
+      <node id="12">
+        <label>erbsland/cterm/impl/paragraph/Printer.hpp</label>
+        <link refid="_printer_8hpp_source"/>
+      </node>
+      <node id="13">
+        <label>erbsland/cterm/text/HtmlRenderer.hpp</label>
+        <link refid="_html_renderer_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>erbsland/cterm/text/all.hpp</label>
+        <link refid="text_2all_8hpp_source"/>
+      </node>
+      <node id="15">
+        <label>erbsland/cterm/text/impl/TextNodeRenderer.hpp</label>
+        <link refid="_text_node_renderer_8hpp_source"/>
+      </node>
+      <node id="16">
+        <label>erbsland/cterm/text/impl/text_node_renderer/CursorBlockTarget.hpp</label>
+        <link refid="_cursor_block_target_8hpp_source"/>
+      </node>
+      <node id="10">
+        <label>erbsland/cterm/ui/Application.hpp</label>
+        <link refid="_application_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>erbsland/cterm/ui/Display.hpp</label>
+        <link refid="_display_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland/cterm/ui/all.hpp</label>
+        <link refid="ui_2all_8hpp_source"/>
+      </node>
+      <node id="6">
+        <label>erbsland/cterm/ui/surface/ActionHelpSection.hpp</label>
+        <link refid="_action_help_section_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland/cterm/ui/surface/HtmlHelpSection.hpp</label>
+        <link refid="_html_help_section_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland/cterm/ui/surface/all.hpp</label>
+        <link refid="ui_2surface_2all_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1_cursor_writer" prot="public">erbsland::cterm::CursorWriter</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;MoveMode.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ParagraphOptions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;StringView.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry/Position.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry/Size.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;impl/TypeTraits.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;optional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string_view&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;type_traits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CursorWriter;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CursorWriterPtr<sp/>=<sp/>std::shared_ptr&lt;CursorWriter&gt;;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ReadableBuffer;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="classerbsland_1_1cterm_1_1_cursor_writer" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_cursor_writer" kindref="compound">CursorWriter</ref><sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer" kindref="compound">~CursorWriter</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>cursor<sp/>state</highlight></codeline>
+<codeline lineno="35" refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="38" refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>virtual<sp/><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="41" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" kindref="member">style</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref>{<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>(),<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>()};<sp/>}</highlight></codeline>
+<codeline lineno="45" refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702" kindref="member">setColor</ref>(<ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="49" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/>attributes)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="53" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a98d37e3ae370e3adc52a3f2ed2526ef9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a98d37e3ae370e3adc52a3f2ed2526ef9" kindref="member">setStyle</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" kindref="member">style</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702" kindref="member">setColor</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" kindref="member">style</ref>.<ref refid="classerbsland_1_1cterm_1_1_char_style_1af632a6f8f54f4c36d3ef8b85f17473c7" kindref="member">color</ref>());</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" kindref="member">style</ref>.<ref refid="classerbsland_1_1cterm_1_1_char_style_1a94d5a6ea23d71a91a5127e1666820e0a" kindref="member">attributes</ref>());</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a2bd8a714866940fcc6f24215f0bedb39" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a2bd8a714866940fcc6f24215f0bedb39" kindref="member">setColor</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref><sp/>foregroundColor,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref><sp/>backgroundColor)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702" kindref="member">setColor</ref>(<ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref>{foregroundColor,<sp/>backgroundColor});</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a80ab7a71572e68e73d0856bf296b1572" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a80ab7a71572e68e73d0856bf296b1572" kindref="member">setForeground</ref>(<ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="71" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3011a45c3040e38db4e61d827f6fc2e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3011a45c3040e38db4e61d827f6fc2e7" kindref="member">setBackground</ref>(<ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="73" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1f67dc83abc2ea900e436bbc62e65ca7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1f67dc83abc2ea900e436bbc62e65ca7" kindref="member">setDefaultColor</ref>()<sp/>noexcept<sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702" kindref="member">setColor</ref>(<ref refid="classerbsland_1_1cterm_1_1_color_1a96cc1f83f4869d13a63bb0bf3ffabb83" kindref="member">Color::reset</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="76" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae298bea88947ac9e93f48fe2bf5211e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae298bea88947ac9e93f48fe2bf5211e9" kindref="member">supportedCharAttributes</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="79" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a436b9bdf4db4f77583914ea26ea0b4b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a436b9bdf4db4f77583914ea26ea0b4b5" kindref="member">setBold</ref>(const<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>().withFlag(<ref refid="classerbsland_1_1cterm_1_1_char_attributes_1a9dafa3ff6bb6018766707b8e901786e6" kindref="member">CharAttributes::Bold</ref>,<sp/>enabled));</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="84" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a49064e11b53ea2374ef6c47fa2eb45d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a49064e11b53ea2374ef6c47fa2eb45d9" kindref="member">setDim</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>().withFlag(<ref refid="classerbsland_1_1cterm_1_1_char_attributes_1a764a21ba020dd858d59c0b5ef6917f3d" kindref="member">CharAttributes::Dim</ref>,<sp/>enabled));</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a6ca58fac20c7ae2750be72c09bf0af20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a6ca58fac20c7ae2750be72c09bf0af20" kindref="member">setItalic</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>().withFlag(<ref refid="classerbsland_1_1cterm_1_1_char_attributes_1a1bc4b8b21389e3abd942d060c7e0df7c" kindref="member">CharAttributes::Italic</ref>,<sp/>enabled));</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a64ce8cfdbc726c31e6b6163d3d49813f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a64ce8cfdbc726c31e6b6163d3d49813f" kindref="member">setUnderline</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>().withFlag(<ref refid="classerbsland_1_1cterm_1_1_char_attributes_1ac4f1f9e96adc58643afd1aa2a133a049" kindref="member">CharAttributes::Underline</ref>,<sp/>enabled));</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a125e536edc0227514dfc96a87f155b4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a125e536edc0227514dfc96a87f155b4c" kindref="member">setBlink</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>().withFlag(<ref refid="classerbsland_1_1cterm_1_1_char_attributes_1a0ace313bbb721e6fb0defb5015aa1cdc" kindref="member">CharAttributes::Blink</ref>,<sp/>enabled));</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a9ac2f80dac193ce1a1192716b1827963" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a9ac2f80dac193ce1a1192716b1827963" kindref="member">setReverse</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>().withFlag(<ref refid="classerbsland_1_1cterm_1_1_char_attributes_1a2d340affe4fda1026c7dfd077f4cd3e1" kindref="member">CharAttributes::Reverse</ref>,<sp/>enabled));</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a5e42ae22bf38db387c95e14dd36b22cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a5e42ae22bf38db387c95e14dd36b22cf" kindref="member">setHidden</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>().withFlag(<ref refid="classerbsland_1_1cterm_1_1_char_attributes_1a2adf536081fdee9e07555d2876519656" kindref="member">CharAttributes::Hidden</ref>,<sp/>enabled));</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="114" refid="classerbsland_1_1cterm_1_1_cursor_writer_1afaac6d5bb731887997eca415bd0c9e22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afaac6d5bb731887997eca415bd0c9e22" kindref="member">setStrikethrough</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>().withFlag(<ref refid="classerbsland_1_1cterm_1_1_char_attributes_1ae1021cd7bac1956ed937a46125682737" kindref="member">CharAttributes::Strikethrough</ref>,<sp/>enabled));</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3d24c8fb35ce9d678fa8d21edbcee67d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3d24c8fb35ce9d678fa8d21edbcee67d" kindref="member">moveLeft</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Coordinate<sp/>count)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4" kindref="member">moveCursor</ref>(<ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref>{-count,<sp/>0},<sp/>MoveMode::Relative);<sp/>}</highlight></codeline>
+<codeline lineno="124" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a38d18452318d722963cba824532fb672" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a38d18452318d722963cba824532fb672" kindref="member">moveRight</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Coordinate<sp/>count)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4" kindref="member">moveCursor</ref>(<ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref>{count,<sp/>0},<sp/>MoveMode::Relative);<sp/>}</highlight></codeline>
+<codeline lineno="128" refid="classerbsland_1_1cterm_1_1_cursor_writer_1af554daa3b9a850c6de535203f57b3594" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1af554daa3b9a850c6de535203f57b3594" kindref="member">moveUp</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Coordinate<sp/>count)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4" kindref="member">moveCursor</ref>(<ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref>{0,<sp/>-count},<sp/>MoveMode::Relative);<sp/>}</highlight></codeline>
+<codeline lineno="132" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac38cced8875f86d30e0da3f72eba14d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac38cced8875f86d30e0da3f72eba14d2" kindref="member">moveDown</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Coordinate<sp/>count)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4" kindref="member">moveCursor</ref>(<ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref>{0,<sp/>count},<sp/>MoveMode::Relative);<sp/>}</highlight></codeline>
+<codeline lineno="136" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a2bbe77ca72a5fecdbbef999a73125dba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a2bbe77ca72a5fecdbbef999a73125dba" kindref="member">moveTo</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref><sp/>pos)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4" kindref="member">moveCursor</ref>(pos,<sp/>MoveMode::Absolute);<sp/>}</highlight></codeline>
+<codeline lineno="138" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a0a1f22f286d1c56e43c82314a7fc9998" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a0a1f22f286d1c56e43c82314a7fc9998" kindref="member">moveHome</ref>()<sp/>noexcept<sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4" kindref="member">moveCursor</ref>(<ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref>{0,<sp/>0},<sp/>MoveMode::Absolute);<sp/>}</highlight></codeline>
+<codeline lineno="143" refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4" kindref="member">moveCursor</ref>(<ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref><sp/>posOrDelta,<sp/>MoveMode<sp/>mode)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="147" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a292f0a2751b24b8a159f538a245b8ac7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>std::optional&lt;Position&gt;<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a292f0a2751b24b8a159f538a245b8ac7" kindref="member">cursorPosition</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::nullopt;<sp/>}</highlight></codeline>
+<codeline lineno="153" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae5c76766115e583b26a74be3baebe1ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae5c76766115e583b26a74be3baebe1ae" kindref="member">setAutoWrap</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="157" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a877d573f647ecd3b3a12754ba37e8632" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a877d573f647ecd3b3a12754ba37e8632" kindref="member">setCursorVisible</ref>([[maybe_unused]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>screen<sp/>handling</highlight></codeline>
+<codeline lineno="161" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ad8e0d59c060dfdfd7a27c977d2134917" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ad8e0d59c060dfdfd7a27c977d2134917" kindref="member">size</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="163" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1da916b199e92862d7c8fcd6714d126f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>virtual<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1da916b199e92862d7c8fcd6714d126f" kindref="member">clearScreen</ref>()<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal">public:<sp/></highlight><highlight class="comment">//<sp/>write</highlight></codeline>
+<codeline lineno="170" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>virtual<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref><sp/>&amp;character)<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="175" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac735c1a208ef73231243d4dbee90b167" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>virtual<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;str)<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="179" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae22c11cc4449a2e7b391da2be73323e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>virtual<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae22c11cc4449a2e7b391da2be73323e7" kindref="member">writeResolved</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;str)<sp/>noexcept<sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(str);<sp/>}</highlight></codeline>
+<codeline lineno="183" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3b00911d0378755d19b63befd7bf2ddf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3b00911d0378755d19b63befd7bf2ddf" kindref="member">writeResolved</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref><sp/>&amp;character)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(character);<sp/>}</highlight></codeline>
+<codeline lineno="189" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a95bf900ecc739b1dba363ac98513b546" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a95bf900ecc739b1dba363ac98513b546" kindref="member">writeRepeated</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref><sp/>&amp;character,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;<sp/>index<sp/>&lt;<sp/>count;<sp/>++index)<sp/>{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(character);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="199" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a47d395be06cdfcb719ea168f39622072" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a47d395be06cdfcb719ea168f39622072" kindref="member">writeRepeatedResolved</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref><sp/>&amp;character,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;<sp/>index<sp/>&lt;<sp/>count;<sp/>++index)<sp/>{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae22c11cc4449a2e7b391da2be73323e7" kindref="member">writeResolved</ref>(character);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="206" refid="classerbsland_1_1cterm_1_1_cursor_writer_1aaea5185fd1449b059cf27c435617b448" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aaea5185fd1449b059cf27c435617b448" kindref="member">write</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string_view<sp/>text)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aaea5185fd1449b059cf27c435617b448" kindref="member">write</ref>(<ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref>{text,<sp/>EncodingErrors::Replace});<sp/>}</highlight></codeline>
+<codeline lineno="208" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac2479e24561ba2e43d69ec926f5c592c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac2479e24561ba2e43d69ec926f5c592c" kindref="member">write</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::u32string_view<sp/>text)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac2479e24561ba2e43d69ec926f5c592c" kindref="member">write</ref>(<ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref>{text});<sp/>}</highlight></codeline>
+<codeline lineno="213" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac1fbb841ee2b8ad50b0bc8935cab8185" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac1fbb841ee2b8ad50b0bc8935cab8185" kindref="member">write</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;buffer)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="216" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a76b3ade50d3ef471afe6d7b3f1c1b282" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a76b3ade50d3ef471afe6d7b3f1c1b282" kindref="member">writeLineBreak</ref>()<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;<ref refid="concepterbsland_1_1cterm_1_1_printable_arg" kindref="compound">PrintableArg</ref>...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="220" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a8d7298784ee51b8e5d049c57ff2265ed" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a8d7298784ee51b8e5d049c57ff2265ed" kindref="member">print</ref>(Args...<sp/>args)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a26e5b8b4bc4cd6e690f996be59ff9f82" kindref="member">printLinePart</ref>(args),<sp/>...);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;<ref refid="concepterbsland_1_1cterm_1_1_printable_arg" kindref="compound">PrintableArg</ref>...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="226" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a43c9c317f4e6fc22a9c047c8021f14cc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a43c9c317f4e6fc22a9c047c8021f14cc" kindref="member">printLine</ref>(Args...<sp/>args)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a26e5b8b4bc4cd6e690f996be59ff9f82" kindref="member">printLinePart</ref>(args),<sp/>...);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a76b3ade50d3ef471afe6d7b3f1c1b282" kindref="member">writeLineBreak</ref>();</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="234" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9" kindref="member">printParagraph</ref>(</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;paragraph,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options" kindref="compound">ParagraphOptions</ref><sp/>&amp;options<sp/>=<sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options_1a3cf294e184b0f8d4659ceb93aae6d992" kindref="member">ParagraphOptions::defaultOptions</ref>())<sp/>noexcept</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a463ce06dcdf93b1a269d13823444d462" kindref="member">printParagraphImpl</ref>(paragraph,<sp/>options);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="241" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a87a904b3b866fab26d3eb9fa1d1963c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a87a904b3b866fab26d3eb9fa1d1963c5" kindref="member">printParagraph</ref>(</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string_view<sp/>paragraph,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options" kindref="compound">ParagraphOptions</ref><sp/>&amp;options<sp/>=<sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options_1a3cf294e184b0f8d4659ceb93aae6d992" kindref="member">ParagraphOptions::defaultOptions</ref>())<sp/>noexcept</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a463ce06dcdf93b1a269d13823444d462" kindref="member">printParagraphImpl</ref>(<ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref>{paragraph,<sp/>EncodingErrors::Replace},<sp/>options);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="247" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a63cb7babba8c08196ce029e839aec980" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a63cb7babba8c08196ce029e839aec980" kindref="member">printParagraph</ref>(</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::u32string_view<sp/>paragraph,</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options" kindref="compound">ParagraphOptions</ref><sp/>&amp;options<sp/>=<sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options_1a3cf294e184b0f8d4659ceb93aae6d992" kindref="member">ParagraphOptions::defaultOptions</ref>())<sp/>noexcept<sp/>-&gt;<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a463ce06dcdf93b1a269d13823444d462" kindref="member">printParagraphImpl</ref>(<ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref>{paragraph},<sp/>options);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="259" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a463ce06dcdf93b1a269d13823444d462" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a463ce06dcdf93b1a269d13823444d462" kindref="member">printParagraphImpl</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;paragraph,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options" kindref="compound">ParagraphOptions</ref><sp/>&amp;options)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a26e5b8b4bc4cd6e690f996be59ff9f82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a26e5b8b4bc4cd6e690f996be59ff9f82" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702" kindref="member">setColor</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="264" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a52ce9fdb92cd68a6374c107328117de4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a52ce9fdb92cd68a6374c107328117de4" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a80ab7a71572e68e73d0856bf296b1572" kindref="member">setForeground</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="266" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a20e7da6be2e04d987432c0dcb6fdfd35" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a20e7da6be2e04d987432c0dcb6fdfd35" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Foreground::Hue<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a80ab7a71572e68e73d0856bf296b1572" kindref="member">setForeground</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="268" refid="classerbsland_1_1cterm_1_1_cursor_writer_1afca74acce55ce91aa03f07201b47f37e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afca74acce55ce91aa03f07201b47f37e" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3011a45c3040e38db4e61d827f6fc2e7" kindref="member">setBackground</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="270" refid="classerbsland_1_1cterm_1_1_cursor_writer_1abbcc75f4e7ede79b9ba6049e89313c9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1abbcc75f4e7ede79b9ba6049e89313c9e" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Background::Hue<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3011a45c3040e38db4e61d827f6fc2e7" kindref="member">setBackground</ref>(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13" kindref="member">color</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="272" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a14e13de306c97ba2c7829737337d2db3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a14e13de306c97ba2c7829737337d2db3" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" kindref="member">style</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a98d37e3ae370e3adc52a3f2ed2526ef9" kindref="member">setStyle</ref>(this-&gt;<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" kindref="member">style</ref>().withOverlay(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" kindref="member">style</ref>));<sp/>}</highlight></codeline>
+<codeline lineno="274" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a439a66adaf14ed4ff2f0a40cae5513ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a439a66adaf14ed4ff2f0a40cae5513ac" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/>attributes)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b" kindref="member">setCharAttributes</ref>(attributes.withBase(<ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5" kindref="member">charAttributes</ref>()));</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="278" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a9a524d086a757a43adcd79edc74c9cc7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a9a524d086a757a43adcd79edc74c9cc7" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref><sp/>&amp;charStr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(charStr);<sp/>}</highlight></codeline>
+<codeline lineno="280" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab989dfa38de29c9fe30a29941743a29c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab989dfa38de29c9fe30a29941743a29c" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref><sp/>&amp;str)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(str);<sp/>}</highlight></codeline>
+<codeline lineno="282" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a270472c1b5db19a3e550ff09c97143c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a270472c1b5db19a3e550ff09c97143c8" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;str)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(str);<sp/>}</highlight></codeline>
+<codeline lineno="284" refid="classerbsland_1_1cterm_1_1_cursor_writer_1abc8f5ce7073f6d0fc79ff5730abfe693" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1abc8f5ce7073f6d0fc79ff5730abfe693" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;text)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(text);<sp/>}</highlight></codeline>
+<codeline lineno="286" refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae36fa25c1a0401732d5e6ce0ea4d40ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae36fa25c1a0401732d5e6ce0ea4d40ef" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string_view<sp/>text)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(text);<sp/>}</highlight></codeline>
+<codeline lineno="288" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a885c7734ac27a19bf2e2365e2c245ce5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a885c7734ac27a19bf2e2365e2c245ce5" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::u32string<sp/>&amp;text)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(std::u32string_view{text});<sp/>}</highlight></codeline>
+<codeline lineno="290" refid="classerbsland_1_1cterm_1_1_cursor_writer_1a947c9a426da962c9f8dc63a7bbfb2e25" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a947c9a426da962c9f8dc63a7bbfb2e25" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::u32string_view<sp/>text)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(text);<sp/>}</highlight></codeline>
+<codeline lineno="292" refid="classerbsland_1_1cterm_1_1_cursor_writer_1af2e033e492ef52f67104aa75281c3775" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1af2e033e492ef52f67104aa75281c3775" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>text[])<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(text);<sp/>}</highlight></codeline>
+<codeline lineno="294" refid="classerbsland_1_1cterm_1_1_cursor_writer_1aa815c43bc4d857672bf58b2ef721459b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aa815c43bc4d857672bf58b2ef721459b" kindref="member">printLinePart</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char32_t</highlight><highlight class="normal"><sp/>text[])<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">write</ref>(std::u32string_view{text});<sp/>}</highlight></codeline>
+<codeline lineno="295"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/CursorWriter.hpp"/>
+  </compounddef>
+</doxygen>

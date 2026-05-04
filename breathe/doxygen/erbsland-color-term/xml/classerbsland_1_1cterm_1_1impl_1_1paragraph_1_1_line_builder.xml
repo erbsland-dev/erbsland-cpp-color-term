@@ -1,0 +1,446 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::paragraph::LineBuilder</compoundname>
+    <includes refid="_line_builder_8hpp" local="no">erbsland/cterm/impl/paragraph/LineBuilder.hpp</includes>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_build_result" prot="private">erbsland::cterm::impl::paragraph::LineBuilder::BuildResult</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run" prot="private">erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_state" prot="private">erbsland::cterm::impl::paragraph::LineBuilder::State</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1ae2648e1c3da40a98777c4b390099a18f" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_context" kindref="compound">LayoutContext</ref> &amp;</type>
+        <definition>const LayoutContext&amp; erbsland::cterm::impl::paragraph::LineBuilder::_context</definition>
+        <argsstring></argsstring>
+        <name>_context</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::_context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="114" column="25" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a40088630cc351920df269e307a955fd7" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_prepared_source_line" kindref="compound">LayoutPreparedSourceLine</ref> &amp;</type>
+        <definition>const LayoutPreparedSourceLine&amp; erbsland::cterm::impl::paragraph::LineBuilder::_preparedSourceLine</definition>
+        <argsstring></argsstring>
+        <name>_preparedSourceLine</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::_preparedSourceLine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="115" column="36" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a6a09d6230dc5971d5ace83b22dd31f4a" prot="private" static="no" mutable="no">
+        <type>State</type>
+        <definition>State erbsland::cterm::impl::paragraph::LineBuilder::_state</definition>
+        <argsstring></argsstring>
+        <name>_state</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::_state</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="116" column="11" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1ac195d3bd5e02c28a77568a4ef5ca2c0e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::impl::paragraph::LineBuilder::_wrappedLineCount</definition>
+        <argsstring></argsstring>
+        <name>_wrappedLineCount</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::_wrappedLineCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="117" column="9" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a03dc6d91ff7fb1e6eefebce47df3ac90" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::paragraph::LineBuilder::_isFirstPhysicalLine</definition>
+        <argsstring></argsstring>
+        <name>_isFirstPhysicalLine</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::_isFirstPhysicalLine</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="118" column="10" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aa44f05141054f43ea321c05bb33c17b7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::LineBuilder::LineBuilder</definition>
+        <argsstring>(const LayoutContext &amp;context, const LayoutPreparedSourceLine &amp;preparedSourceLine) noexcept</argsstring>
+        <name>LineBuilder</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::LineBuilder</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_context" kindref="compound">LayoutContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_prepared_source_line" kindref="compound">LayoutPreparedSourceLine</ref> &amp;</type>
+          <declname>preparedSourceLine</declname>
+        </param>
+        <briefdescription>
+<para>Create a line builder for one prepared source line. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The immutable line-build context. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>preparedSourceLine</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The prepared source line to render. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aa0424da2e709bee14547be8833c1fbc4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::LineBuilder::~LineBuilder</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LineBuilder</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::~LineBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="76" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a770e97319638ef495ec23657ba43e8d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::LineBuilder::LineBuilder</definition>
+        <argsstring>(const LineBuilder &amp;)=delete</argsstring>
+        <name>LineBuilder</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::LineBuilder</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder" kindref="compound">LineBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="77" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a24b6eb424ac42d2fbcdc2a37463d8097" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::LineBuilder::LineBuilder</definition>
+        <argsstring>(LineBuilder &amp;&amp;)=delete</argsstring>
+        <name>LineBuilder</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::LineBuilder</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder" kindref="compound">LineBuilder</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="78" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a43455791767c9dcd5f766621ba3c1b8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder" kindref="compound">LineBuilder</ref> &amp;</type>
+        <definition>LineBuilder &amp; erbsland::cterm::impl::paragraph::LineBuilder::operator=</definition>
+        <argsstring>(const LineBuilder &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder" kindref="compound">LineBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="79" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aa914e18998086e1bdd66e01c26f06f15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder" kindref="compound">LineBuilder</ref> &amp;</type>
+        <definition>LineBuilder &amp; erbsland::cterm::impl::paragraph::LineBuilder::operator=</definition>
+        <argsstring>(LineBuilder &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder" kindref="compound">LineBuilder</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="80" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1ac61d30c0087ba8d78aaf2d3a1148cdf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::paragraph::LineBuilder::appendLinesTo</definition>
+        <argsstring>(std::vector&lt; LayoutLine &gt; &amp;lines)</argsstring>
+        <name>appendLinesTo</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::appendLinesTo</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line" kindref="compound">LayoutLine</ref> &gt; &amp;</type>
+          <declname>lines</declname>
+        </param>
+        <briefdescription>
+<para>Build and append all physical lines for the prepared source line. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The destination vector that receives the produced physical lines. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> on success, <computeroutput>false</computeroutput> if line construction fails. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="86" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aec247ba70bf38429fdbd263ab93fd5a0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; BuildResult &gt;</type>
+        <definition>std::optional&lt; BuildResult &gt; erbsland::cterm::impl::paragraph::LineBuilder::tryBuildLastLine</definition>
+        <argsstring>() const</argsstring>
+        <name>tryBuildLastLine</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::tryBuildLastLine</qualifiedname>
+        <briefdescription>
+<para>Try to build the final physical line for the current builder state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The built line and next state, or <computeroutput>std::nullopt</computeroutput> if more than one physical line is still required. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="91" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aab6d452ce7037adb134fbbc05631895f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; BuildResult &gt;</type>
+        <definition>std::optional&lt; BuildResult &gt; erbsland::cterm::impl::paragraph::LineBuilder::buildWrappedLine</definition>
+        <argsstring>() const</argsstring>
+        <name>buildWrappedLine</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::buildWrappedLine</qualifiedname>
+        <briefdescription>
+<para>Build a wrapped physical line for the current builder state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The built line and next state, or <computeroutput>std::nullopt</computeroutput> if no wrapped line can be built. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="94" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a6b9c13b948d63cd1d161cc811a05570c" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; BuildResult &gt;</type>
+        <definition>std::optional&lt; BuildResult &gt; erbsland::cterm::impl::paragraph::LineBuilder::buildTruncatedLine</definition>
+        <argsstring>() const</argsstring>
+        <name>buildTruncatedLine</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::buildTruncatedLine</qualifiedname>
+        <briefdescription>
+<para>Build a truncated physical line for the current builder state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The built truncated line and next state, or <computeroutput>std::nullopt</computeroutput> if no truncated line can be built. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="97" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a64f9e6881516b0d837f8abd0f8ded80f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; BuildResult &gt;</type>
+        <definition>std::optional&lt; BuildResult &gt; erbsland::cterm::impl::paragraph::LineBuilder::buildLine</definition>
+        <argsstring>(int reservedSuffixWidth, bool addEndMark, bool addEllipsis) const</argsstring>
+        <name>buildLine</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::buildLine</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>reservedSuffixWidth</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>addEndMark</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>addEllipsis</declname>
+        </param>
+        <briefdescription>
+<para>Build one physical line for the current builder state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>reservedSuffixWidth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width reserved for a trailing mark aligned to the right edge. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>addEndMark</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> if the line should be marked as wrapping to the next line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>addEllipsis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> if the paragraph ellipsis should be appended. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The built physical line, or <computeroutput>std::nullopt</computeroutput> if the line cannot be built. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="103" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1ae678686e5fd8b9e13ceed78fa854781a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SpacingRun</type>
+        <definition>SpacingRun erbsland::cterm::impl::paragraph::LineBuilder::evaluateSpacingRun</definition>
+        <argsstring>(std::size_t tokenIndex, std::size_t tabStopIndex, int currentColumn, bool isLineStart) const</argsstring>
+        <name>evaluateSpacingRun</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::evaluateSpacingRun</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>tokenIndex</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>tabStopIndex</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>currentColumn</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isLineStart</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="104" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a16da1363a9630b4fb72d631ab5d431e4" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::paragraph::LineBuilder::appendSpacingRun</definition>
+        <argsstring>(LayoutFragments &amp;fragments, std::size_t startTokenIndex, std::size_t endTokenIndex, std::size_t tabStopIndex, int currentColumn, bool isLineStart) const</argsstring>
+        <name>appendSpacingRun</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::appendSpacingRun</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_fragments" kindref="compound">LayoutFragments</ref> &amp;</type>
+          <declname>fragments</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>startTokenIndex</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>endTokenIndex</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>tabStopIndex</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>currentColumn</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isLineStart</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="105" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Builds one physical line from a prepared source line and the current layout state. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="14" column="1" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="14" bodyend="119"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1ae2648e1c3da40a98777c4b390099a18f" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>_context</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a03dc6d91ff7fb1e6eefebce47df3ac90" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>_isFirstPhysicalLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a40088630cc351920df269e307a955fd7" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>_preparedSourceLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a6a09d6230dc5971d5ace83b22dd31f4a" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>_state</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1ac195d3bd5e02c28a77568a4ef5ca2c0e" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>_wrappedLineCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1ac61d30c0087ba8d78aaf2d3a1148cdf3" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>appendLinesTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a16da1363a9630b4fb72d631ab5d431e4" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>appendSpacingRun</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a64f9e6881516b0d837f8abd0f8ded80f" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>buildLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a6b9c13b948d63cd1d161cc811a05570c" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>buildTruncatedLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aab6d452ce7037adb134fbbc05631895f" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>buildWrappedLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1ae678686e5fd8b9e13ceed78fa854781a" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>evaluateSpacingRun</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aa44f05141054f43ea321c05bb33c17b7" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>LineBuilder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a770e97319638ef495ec23657ba43e8d7" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>LineBuilder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a24b6eb424ac42d2fbcdc2a37463d8097" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>LineBuilder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1a43455791767c9dcd5f766621ba3c1b8b" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aa914e18998086e1bdd66e01c26f06f15" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aec247ba70bf38429fdbd263ab93fd5a0" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>tryBuildLastLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1aa0424da2e709bee14547be8833c1fbc4" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder</scope><name>~LineBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

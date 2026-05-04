@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_event_driver_8hpp" kind="file" language="C++">
+    <compoundname>EventDriver.hpp</compoundname>
+    <includes refid="_event_8hpp" local="yes">Event.hpp</includes>
+    <includes local="no">atomic</includes>
+    <includes local="no">chrono</includes>
+    <includes local="no">deque</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">mutex</includes>
+    <includedby refid="ui_2all_8hpp" local="yes">erbsland/cterm/ui/all.hpp</includedby>
+    <includedby refid="_event_scheduler_8hpp" local="yes">erbsland/cterm/ui/event/EventScheduler.hpp</includedby>
+    <includedby refid="_event_thread_8hpp" local="yes">erbsland/cterm/ui/event/EventThread.hpp</includedby>
+    <includedby refid="ui_2event_2all_8hpp" local="yes">erbsland/cterm/ui/event/all.hpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>Event.hpp</label>
+        <link refid="_event_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>EventData.hpp</label>
+        <link refid="_event_data_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/ui/event/EventDriver.hpp</label>
+        <link refid="_event_driver_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>EventType.hpp</label>
+        <link refid="_event_type_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>atomic</label>
+      </node>
+      <node id="7">
+        <label>chrono</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="9">
+        <label>deque</label>
+      </node>
+      <node id="10">
+        <label>functional</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+      <node id="11">
+        <label>mutex</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>erbsland/cterm/ui/all.hpp</label>
+        <link refid="ui_2all_8hpp_source"/>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/ui/event/EventDriver.hpp</label>
+        <link refid="_event_driver_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland/cterm/ui/event/EventScheduler.hpp</label>
+        <link refid="_event_scheduler_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland/cterm/ui/event/EventThread.hpp</label>
+        <link refid="_event_thread_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland/cterm/ui/event/all.hpp</label>
+        <link refid="ui_2event_2all_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" prot="public">erbsland::cterm::ui::EventDriver</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" prot="public">erbsland::cterm::ui::EventDriver::ProcessResult</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1ui">erbsland::cterm::ui</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Event.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;atomic&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;chrono&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;deque&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm::ui<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">EventDriver;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">EventDriverPtr<sp/>=<sp/>std::unique_ptr&lt;EventDriver&gt;;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="23" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dc" kindref="member">State</ref><sp/>:<sp/>uint8_t<sp/>{<sp/>Running,<sp/>Quit<sp/>};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" kindref="compound">ProcessResult</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7" kindref="member">Status</ref><sp/>:<sp/>uint8_t<sp/>{<sp/>Idle,<sp/>Processed,<sp/>Timeout,<sp/>Quit<sp/>};</highlight></codeline>
+<codeline lineno="33" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ae736043ce84f557782f76846947bddfc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ae736043ce84f557782f76846947bddfc" kindref="member">ProcessResult</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7" kindref="member">Status</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ac41857a914e2b7f680c5a20ba91f0aa9" kindref="member">status</ref><sp/>=<sp/>Idle,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a23e045669a42214b0d49cc74681bf938" kindref="member">exitCode</ref><sp/>=<sp/>0)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_status{<ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ac41857a914e2b7f680c5a20ba91f0aa9" kindref="member">status</ref>},<sp/>_exitCode{<ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a23e045669a42214b0d49cc74681bf938" kindref="member">exitCode</ref>}<sp/>{}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ac41857a914e2b7f680c5a20ba91f0aa9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7" kindref="member">Status</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1ac41857a914e2b7f680c5a20ba91f0aa9" kindref="member">status</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_status;<sp/>}</highlight></codeline>
+<codeline lineno="40" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a23e045669a42214b0d49cc74681bf938" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a23e045669a42214b0d49cc74681bf938" kindref="member">exitCode</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_exitCode;<sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result_1a5df76d45a53d5458c038bcd6cc4eb8e7" kindref="member">Status</ref><sp/>_status{Idle};<sp/></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_exitCode{0};<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>EventDriver()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>~EventDriver()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>EventDriver(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>EventDriver<sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>EventDriver(EventDriver<sp/>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>EventDriver<sp/>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>EventDriver<sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>EventDriver<sp/>&amp;<sp/>operator=(EventDriver<sp/>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="57" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a0f50f3fb45500aa017c12555800c3f62" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a0f50f3fb45500aa017c12555800c3f62" kindref="member">addEvent</ref>(EventType<sp/>eventType,<sp/>EventDataUniquePtr<sp/>&amp;&amp;eventData);</highlight></codeline>
+<codeline lineno="59" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a4648141208a516c07a35581e5e18190d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a4648141208a516c07a35581e5e18190d" kindref="member">addEvent</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref><sp/>&amp;&amp;event);</highlight></codeline>
+<codeline lineno="62" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a7bdc21c3cfd62207af3f5172f285c20e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a7bdc21c3cfd62207af3f5172f285c20e" kindref="member">setEventHandler</ref>(std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref><sp/>&amp;)&gt;<sp/>eventHandler);</highlight></codeline>
+<codeline lineno="65" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ae044b07d4a1396d6618f4750f57af8f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ae044b07d4a1396d6618f4750f57af8f1" kindref="member">hasPendingEvents</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad3c1ff7aac54c370d2e86ce83c036497" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" kindref="compound">ProcessResult</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad3c1ff7aac54c370d2e86ce83c036497" kindref="member">run</ref>()<sp/>;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a82e1bc5512a262e064bd53a83265c3de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" kindref="compound">ProcessResult</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a82e1bc5512a262e064bd53a83265c3de" kindref="member">processEvents</ref>(std::chrono::milliseconds<sp/>timeout)<sp/>;</highlight></codeline>
+<codeline lineno="80" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1af427922b0138a44b65d18ac9ff8c40cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" kindref="compound">ProcessResult</ref><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1af427922b0138a44b65d18ac9ff8c40cb" kindref="member">processOneEvent</ref>()<sp/>;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a1b540317e6a9bb8a874a1becbe78cf65" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a1b540317e6a9bb8a874a1becbe78cf65" kindref="member">processEvent</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref><sp/>&amp;event);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86" refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a879d19a9b0fd281490ba625bd83f8226" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a879d19a9b0fd281490ba625bd83f8226" kindref="member">quit</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>exitCode<sp/>=<sp/>0);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>std::mutex<sp/>_mutex;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>std::atomic&lt;State&gt;<sp/>_state{State::Running};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>std::deque&lt;Event&gt;<sp/>_eventQueue;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_exitCode{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>std::function&lt;void(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Event<sp/>&amp;)&gt;<sp/>_eventHandler;<sp/></highlight></codeline>
+<codeline lineno="94"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/ui/event/EventDriver.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::layout::impl::StackLayoutItems</compoundname>
+    <includes refid="_stack_layout_items_8hpp" local="no">erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1aea1c1c81d37dc90fad31221e4ee3d256" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+        <definition>Orientation erbsland::cterm::ui::layout::impl::StackLayoutItems::_orientation</definition>
+        <argsstring></argsstring>
+        <name>_orientation</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::_orientation</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1_orientation_1a7a1d316b5cc591a01c325617901a251ea0563c5054524eab0715a7fa0b4e538d4" kindref="member">Orientation::Vertical</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="68" column="17" bodyfile="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a3e454f2337eb738d49297adc77488325" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_item" kindref="compound">StackLayoutItem</ref> &gt;</type>
+        <definition>std::vector&lt;StackLayoutItem&gt; erbsland::cterm::ui::layout::impl::StackLayoutItems::_items</definition>
+        <argsstring></argsstring>
+        <name>_items</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::_items</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="69" column="17" bodyfile="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a86cc6705ecd67a20fa6482d5bd82af8a" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto erbsland::cterm::ui::layout::impl::StackLayoutItems::fromSurfaces</definition>
+        <argsstring>(const AbstractSurfaceContainer &amp;surfaces, Orientation orientation, Size availableSize, LayoutScope &amp;scope) noexcept -&gt; StackLayoutItems</argsstring>
+        <name>fromSurfaces</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::fromSurfaces</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container" kindref="compound">AbstractSurfaceContainer</ref> &amp;</type>
+          <declname>surfaces</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>availableSize</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_scope" kindref="compound">LayoutScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para>Create layout items for the given stack surfaces. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surfaces</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stack child surfaces. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stack orientation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>availableSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The available stack size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent layout scope. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The initialized item collection. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="22" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a769e5068cbcf92de50b41d57ad0ad0ab" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::impl::StackLayoutItems::resolveMainSizes</definition>
+        <argsstring>(Coordinate availableMainSize) noexcept</argsstring>
+        <name>resolveMainSizes</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::resolveMainSizes</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>availableMainSize</declname>
+        </param>
+        <briefdescription>
+<para>Adjust all main-axis sizes to fit the available size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>availableMainSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The available size on the main axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="31" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1aa67e6c4f5fbb13226bee0bd2c774c7ea" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_item" kindref="compound">StackLayoutItem</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt; StackLayoutItem &gt; &amp; erbsland::cterm::ui::layout::impl::StackLayoutItems::items</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>items</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::items</qualifiedname>
+        <briefdescription>
+<para>Access the resolved items. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The resolved layout items. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="35" column="25" bodyfile="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a87ed789f014a4a5b88d334ed58dd0ac2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::impl::StackLayoutItems::applyLayout</definition>
+        <argsstring>(Orientation orientation, LayoutScope &amp;scope) const noexcept</argsstring>
+        <name>applyLayout</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::applyLayout</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_scope" kindref="compound">LayoutScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para>Apply the resolved rectangles to all items. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stack orientation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent layout scope. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="40" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a7850b2a0ff04f6a4586b99f6ad9b99d4" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::layout::impl::StackLayoutItems::StackLayoutItems</definition>
+        <argsstring>(Orientation orientation, std::vector&lt; StackLayoutItem &gt; items) noexcept</argsstring>
+        <name>StackLayoutItems</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::StackLayoutItems</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_item" kindref="compound">StackLayoutItem</ref> &gt;</type>
+          <declname>items</declname>
+        </param>
+        <briefdescription>
+<para>Create a new item collection. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="44" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a06e77e976966fd84e8e43e03a0c44483" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>Coordinate erbsland::cterm::ui::layout::impl::StackLayoutItems::totalMainSize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>totalMainSize</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::totalMainSize</qualifiedname>
+        <briefdescription>
+<para>Get the currently assigned total size on the main axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="47" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a29f6ac91d9bc51e9f84c6d56cd95197b" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::impl::StackLayoutItems::distributeExtraSpace</definition>
+        <argsstring>(Coordinate remainingSpace) noexcept</argsstring>
+        <name>distributeExtraSpace</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::distributeExtraSpace</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>remainingSpace</declname>
+        </param>
+        <briefdescription>
+<para>Distribute free space to growing items. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>remainingSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The remaining free space. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="51" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a551127611a59151002bb4d3c520a2019" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::impl::StackLayoutItems::shrinkOverflow</definition>
+        <argsstring>(Coordinate availableMainSize) noexcept</argsstring>
+        <name>shrinkOverflow</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::shrinkOverflow</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>availableMainSize</declname>
+        </param>
+        <briefdescription>
+<para>Shrink items to fit the available main size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>availableMainSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The available main size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a3bf73c92c56b61938cbd1801cf1fb026" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::impl::StackLayoutItems::shrinkSpacing</definition>
+        <argsstring>(Coordinate &amp;overflow) noexcept</argsstring>
+        <name>shrinkSpacing</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::shrinkSpacing</qualifiedname>
+        <param>
+          <type>Coordinate &amp;</type>
+          <declname>overflow</declname>
+        </param>
+        <briefdescription>
+<para>Shrink internal margin spacing before reducing child sizes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>overflow</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The remaining overflow. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="59" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a3a609f182ca45e2255450252a073bedf" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::impl::StackLayoutItems::shrinkPolicyGroup</definition>
+        <argsstring>(Coordinate &amp;overflow, DimensionPolicy::Type policyType, bool shrinkBelowMinimum) noexcept</argsstring>
+        <name>shrinkPolicyGroup</name>
+        <qualifiedname>erbsland::cterm::ui::layout::impl::StackLayoutItems::shrinkPolicyGroup</qualifiedname>
+        <param>
+          <type>Coordinate &amp;</type>
+          <declname>overflow</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_dimension_policy_1a992c40d55b433492210d2547e0828168" kindref="member">DimensionPolicy::Type</ref></type>
+          <declname>policyType</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>shrinkBelowMinimum</declname>
+        </param>
+        <briefdescription>
+<para>Shrink one policy group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>overflow</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The remaining overflow. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>policyType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selected policy group. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>shrinkBelowMinimum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>true</computeroutput>, shrinking may continue down to zero. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="65" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Ordered list of stack layout items with main-axis sizing logic. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" line="14" column="1" bodyfile="erbsland/cterm/ui/layout/impl/StackLayoutItems.hpp" bodystart="14" bodyend="70"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a3e454f2337eb738d49297adc77488325" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>_items</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1aea1c1c81d37dc90fad31221e4ee3d256" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>_orientation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a87ed789f014a4a5b88d334ed58dd0ac2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>applyLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a29f6ac91d9bc51e9f84c6d56cd95197b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>distributeExtraSpace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a86cc6705ecd67a20fa6482d5bd82af8a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>fromSurfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1aa67e6c4f5fbb13226bee0bd2c774c7ea" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>items</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a769e5068cbcf92de50b41d57ad0ad0ab" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>resolveMainSizes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a551127611a59151002bb4d3c520a2019" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>shrinkOverflow</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a3a609f182ca45e2255450252a073bedf" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>shrinkPolicyGroup</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a3bf73c92c56b61938cbd1801cf1fb026" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>shrinkSpacing</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a7850b2a0ff04f6a4586b99f6ad9b99d4" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>StackLayoutItems</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1impl_1_1_stack_layout_items_1a06e77e976966fd84e8e43e03a0c44483" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::impl::StackLayoutItems</scope><name>totalMainSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

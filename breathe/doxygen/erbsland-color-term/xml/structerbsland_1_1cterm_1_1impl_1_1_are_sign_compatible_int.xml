@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structerbsland_1_1cterm_1_1impl_1_1_are_sign_compatible_int" kind="struct" language="C++" prot="public">
+    <compoundname>erbsland::cterm::impl::AreSignCompatibleInt</compoundname>
+    <includes refid="_saturating_math_8hpp" local="no">erbsland/cterm/impl/SaturatingMath.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename A</type>
+      </param>
+      <param>
+        <type>typename B</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structerbsland_1_1cterm_1_1impl_1_1_are_sign_compatible_int_1abbbef3147c528a609d30979391405ded" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::AreSignCompatibleInt&lt; A, B &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>erbsland::cterm::impl::AreSignCompatibleInt::value</qualifiedname>
+        <initializer>= (AreBothIntegralV&lt;A, B&gt; &amp;&amp; (std::is_signed_v&lt;A&gt; == std::is_signed_v&lt;B&gt;))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="41" column="27" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Check if both types are integer and are both either signed or unsigned. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para>signed, signed =&gt; true</para>
+</listitem><listitem><para>unsigned, unsigned =&gt; true</para>
+</listitem><listitem><para>signed, unsigned =&gt; false</para>
+</listitem><listitem><para>unsigned, signed =&gt; false</para>
+</listitem><listitem><para>???, ??? =&gt; false <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first type to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second type to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="40" column="1" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="40" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structerbsland_1_1cterm_1_1impl_1_1_are_sign_compatible_int_1abbbef3147c528a609d30979391405ded" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::AreSignCompatibleInt</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

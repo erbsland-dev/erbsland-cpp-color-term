@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer" kind="namespace" language="C++">
+    <compoundname>erbsland::cterm::text::impl::text_node_renderer</compoundname>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_block_stream" prot="public">erbsland::cterm::text::impl::text_node_renderer::BlockStream</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_block_target" prot="public">erbsland::cterm::text::impl::text_node_renderer::BlockTarget</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_cursor_block_target" prot="public">erbsland::cterm::text::impl::text_node_renderer::CursorBlockTarget</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_inline_text_renderer" prot="public">erbsland::cterm::text::impl::text_node_renderer::InlineTextRenderer</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_list_item_layout" prot="public">erbsland::cterm::text::impl::text_node_renderer::ListItemLayout</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_list_prefix" prot="public">erbsland::cterm::text::impl::text_node_renderer::ListPrefix</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" prot="public">erbsland::cterm::text::impl::text_node_renderer::RenderBlock</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" prot="public">erbsland::cterm::text::impl::text_node_renderer::RenderContext</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_to_state" prot="public">erbsland::cterm::text::impl::text_node_renderer::RenderToState</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_block_target" prot="public">erbsland::cterm::text::impl::text_node_renderer::StringBlockTarget</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state" prot="public">erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" prot="public">erbsland::cterm::text::impl::text_node_renderer::StyleResolver</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer" prot="public">erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="_block_kind_8hpp_1aacfb1ae07fef4e5711c889a59347e158" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>BlockKind</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::BlockKind</qualifiedname>
+        <enumvalue id="_block_kind_8hpp_1aacfb1ae07fef4e5711c889a59347e158afeaf0a320c3d678ad30dd179b7d21584" prot="public">
+          <name>Paragraph</name>
+          <briefdescription>
+<para>A regular paragraph-like text block. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_block_kind_8hpp_1aacfb1ae07fef4e5711c889a59347e158afb71f68ab367f94ee748de27506278af" prot="public">
+          <name>HorizontalRule</name>
+          <briefdescription>
+<para>A horizontal separator line. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_block_kind_8hpp_1aacfb1ae07fef4e5711c889a59347e158a6b4e9c75bafb6009a28ec36ac9439e51" prot="public">
+          <name>FilledLine</name>
+          <briefdescription>
+<para>A line filled with a character and optional overlay text. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The supported physical block kinds emitted by the planner. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/BlockKind.hpp" line="10" column="1" bodyfile="erbsland/cterm/text/impl/text_node_renderer/BlockKind.hpp" bodystart="10" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="enum" id="_whitespace_mode_8hpp_1a03ec5e59a5c534fcce29dc8fda15d2f7" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>WhitespaceMode</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::WhitespaceMode</qualifiedname>
+        <enumvalue id="_whitespace_mode_8hpp_1a03ec5e59a5c534fcce29dc8fda15d2f7a6d2a1af98f2cad1e5ec2dd0a75953919" prot="public">
+          <name>Preserve</name>
+          <briefdescription>
+<para>Keep rendered inline whitespace unchanged. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_whitespace_mode_8hpp_1a03ec5e59a5c534fcce29dc8fda15d2f7a2293283ae91d2f802a99871153cc86a7" prot="public">
+          <name>TrimOuter</name>
+          <briefdescription>
+<para>Trim leading and trailing collapsible inline whitespace once while rendering. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Whitespace handling strategy for one render pass. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/WhitespaceMode.hpp" line="10" column="1" bodyfile="erbsland/cterm/text/impl/text_node_renderer/WhitespaceMode.hpp" bodystart="10" bodyend="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/impl/text_node_renderer/BlockKind.hpp" line="7" column="1"/>
+  </compounddef>
+</doxygen>

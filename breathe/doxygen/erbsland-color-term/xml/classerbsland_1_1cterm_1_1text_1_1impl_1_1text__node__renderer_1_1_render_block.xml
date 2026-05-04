@@ -1,0 +1,666 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</compoundname>
+    <includes refid="_render_block_8hpp" local="no">erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a28c0f12b62492cb8d39f5a7407f624a1" prot="private" static="no" mutable="no">
+        <type>BlockKind</type>
+        <definition>BlockKind erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_kind</definition>
+        <argsstring></argsstring>
+        <name>_kind</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_kind</qualifiedname>
+        <initializer>{BlockKind::Paragraph}</initializer>
+        <briefdescription>
+<para>The concrete block kind to render. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="90" column="15" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ace8dfedb326ca2bf66be2af6ff4a41ec" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+        <definition>String erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_text</definition>
+        <argsstring></argsstring>
+        <name>_text</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_text</qualifiedname>
+        <briefdescription>
+<para>The styled text payload for paragraph and filled-line blocks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="91" column="12" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a9ef4e99cc53cdeee9289cb9323855219" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt;</type>
+        <definition>std::optional&lt;String&gt; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_leadingText</definition>
+        <argsstring></argsstring>
+        <name>_leadingText</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_leadingText</qualifiedname>
+        <briefdescription>
+<para>Optional text anchored at the start of a horizontal rule. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="92" column="19" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ad908676bfd5b087a5f7c2a1e13fe49c7" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt;</type>
+        <definition>std::optional&lt;String&gt; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_trailingText</definition>
+        <argsstring></argsstring>
+        <name>_trailingText</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_trailingText</qualifiedname>
+        <briefdescription>
+<para>Optional text anchored at the end of a horizontal rule. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="93" column="19" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a1c8a9e69f3123808304a763d857ad8d1" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_list_prefix" kindref="compound">ListPrefix</ref> &gt;</type>
+        <definition>std::optional&lt;ListPrefix&gt; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_listPrefix</definition>
+        <argsstring></argsstring>
+        <name>_listPrefix</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_listPrefix</qualifiedname>
+        <briefdescription>
+<para>Optional prefix for the first block of a list item. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="94" column="19" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a08fcc78dd8e847b96969e5535a204ec1" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+        <definition>StyleRule erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_style</definition>
+        <argsstring></argsstring>
+        <name>_style</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_style</qualifiedname>
+        <briefdescription>
+<para>The resolved block rule, including inherited margins. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="95" column="15" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a854c128c0d4a9062b7131c512a69fbce" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt;</type>
+        <definition>std::optional&lt;Char&gt; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_fillCharacter</definition>
+        <argsstring></argsstring>
+        <name>_fillCharacter</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_fillCharacter</qualifiedname>
+        <briefdescription>
+<para>Optional fill character for horizontal rules and headings. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="96" column="19" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a7ec1bafc3f5aff97213292e9578797d5" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_stringFirstLineIndent</definition>
+        <argsstring></argsstring>
+        <name>_stringFirstLineIndent</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_stringFirstLineIndent</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Additional plain-text indentation used only by <computeroutput><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a2109aa0b365e775498d1d0dcd8749fab" kindref="member">renderString()</ref></computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="97" column="9" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a2f9ee6f40028436ae2132d3fd9b8c98b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_stringWrappedLineIndent</definition>
+        <argsstring></argsstring>
+        <name>_stringWrappedLineIndent</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::_stringWrappedLineIndent</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Additional plain-text indentation for wrapped lines. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="98" column="9" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1adb2ef87109aeccbbd56535f08196a7b8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::RenderBlock</definition>
+        <argsstring>(const BlockKind kind, String text, StyleRule style)</argsstring>
+        <name>RenderBlock</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::RenderBlock</qualifiedname>
+        <param>
+          <type>const BlockKind</type>
+          <declname>kind</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Create one paragraph-like render block. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>kind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The physical block kind to emit. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The styled text payload for the block. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resolved block rule, including inherited margins. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="24" column="5" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="24" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ae1ee63ee068b439352709cf6a3f8d0a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::RenderBlock</definition>
+        <argsstring>(const BlockKind kind, String text, StyleRule style, Char fillCharacter)</argsstring>
+        <name>RenderBlock</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::RenderBlock</qualifiedname>
+        <param>
+          <type>const BlockKind</type>
+          <declname>kind</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillCharacter</declname>
+        </param>
+        <briefdescription>
+<para>Create one filled paragraph-like render block. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>kind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The physical block kind to emit. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The styled text payload for the block. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resolved block rule, including inherited margins. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillCharacter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fill character used for the line. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="32" column="5" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="32" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1af3459afe36a901a4eeac98451895bb73" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::RenderBlock</definition>
+        <argsstring>(std::optional&lt; String &gt; leadingText, std::optional&lt; String &gt; trailingText, StyleRule style, Char fillCharacter)</argsstring>
+        <name>RenderBlock</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::RenderBlock</qualifiedname>
+        <param>
+          <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt;</type>
+          <declname>leadingText</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt;</type>
+          <declname>trailingText</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillCharacter</declname>
+        </param>
+        <briefdescription>
+<para>Create one horizontal rule render block. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>leadingText</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional text anchored at the start of the rule. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>trailingText</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional text anchored at the end of the rule. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resolved block rule, including inherited margins. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillCharacter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fill character used for the rule body. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="40" column="5" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="40" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a5484292e8e4db2e7dbcfe77d0d575673" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::RenderBlock</definition>
+        <argsstring>()=default</argsstring>
+        <name>RenderBlock</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::RenderBlock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="48" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a32a9490085cd6a725975797b70a302b9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>BlockKind</type>
+        <definition>BlockKind erbsland::cterm::text::impl::text_node_renderer::RenderBlock::kind</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>kind</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::kind</qualifiedname>
+        <briefdescription>
+<para>Access the concrete block kind to render. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="52" column="16" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ade63d6676c96e55727173d7fc7129719" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+        <definition>const String &amp; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::text</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>text</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::text</qualifiedname>
+        <briefdescription>
+<para>Access the styled text payload for paragraph and filled-line blocks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="54" column="20" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ad2d54c2ea96cd03825c5cbe917603b59" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt; &amp;</type>
+        <definition>const std::optional&lt; String &gt; &amp; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::leadingText</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>leadingText</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::leadingText</qualifiedname>
+        <briefdescription>
+<para>Access optional text anchored at the start of a horizontal rule. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="56" column="27" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1acbfd16fd2c7da1d244c7058d3ce168bf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt; &amp;</type>
+        <definition>const std::optional&lt; String &gt; &amp; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::trailingText</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>trailingText</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::trailingText</qualifiedname>
+        <briefdescription>
+<para>Access optional text anchored at the end of a horizontal rule. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="58" column="27" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ab72c38dee22fb398b6d8df5ff4bc6f39" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_list_prefix" kindref="compound">ListPrefix</ref> &gt; &amp;</type>
+        <definition>const std::optional&lt; ListPrefix &gt; &amp; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::listPrefix</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>listPrefix</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::listPrefix</qualifiedname>
+        <briefdescription>
+<para>Access the optional list prefix attached to the first block of a list item. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="60" column="27" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ad30d8edfbae6595c05e9b10d5d9dbd89" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref> &amp;</type>
+        <definition>const StyleRule &amp; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::style</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>style</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::style</qualifiedname>
+        <briefdescription>
+<para>Access the resolved block rule, including inherited margins. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="62" column="23" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a33b2890a24d8af3edc05313304eb09b9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref> &amp;</type>
+        <definition>StyleRule &amp; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::style</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>style</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::style</qualifiedname>
+        <briefdescription>
+<para>Access the resolved block rule, including inherited margins. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="64" column="17" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1aa840290066bd01882d4a066209bfd3ad" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt; &amp;</type>
+        <definition>const std::optional&lt; Char &gt; &amp; erbsland::cterm::text::impl::text_node_renderer::RenderBlock::fillCharacter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>fillCharacter</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::fillCharacter</qualifiedname>
+        <briefdescription>
+<para>Access the optional fill character for horizontal rules and filled headings. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="66" column="27" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ade4ca5e909fb5d0aa5dddbf7349d71bd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::text::impl::text_node_renderer::RenderBlock::stringFirstLineIndent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stringFirstLineIndent</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::stringFirstLineIndent</qualifiedname>
+        <briefdescription>
+<para>Access the additional plain-text indentation used only by <computeroutput><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a2109aa0b365e775498d1d0dcd8749fab" kindref="member">renderString()</ref></computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="68" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a41a33b2a067d1603f9c53d9f46216289" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::text::impl::text_node_renderer::RenderBlock::stringWrappedLineIndent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stringWrappedLineIndent</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::stringWrappedLineIndent</qualifiedname>
+        <briefdescription>
+<para>Access the additional plain-text indentation for wrapped or continuation lines. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="70" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a616b1fe348b470e51e00be0188fd3860" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::RenderBlock::setText</definition>
+        <argsstring>(String text)</argsstring>
+        <name>setText</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::setText</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Replace the styled text payload for paragraph and filled-line blocks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new styled text payload. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="74" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a6fd51386850aaaaa1594a1d0502dae52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::RenderBlock::setListPrefix</definition>
+        <argsstring>(ListPrefix listPrefix)</argsstring>
+        <name>setListPrefix</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::setListPrefix</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_list_prefix" kindref="compound">ListPrefix</ref></type>
+          <declname>listPrefix</declname>
+        </param>
+        <briefdescription>
+<para>Attach a list prefix to this block. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>listPrefix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list prefix to attach. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="77" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ade925085bb75fa659bd6bdea09ca9185" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::RenderBlock::addStringFirstLineIndent</definition>
+        <argsstring>(const int indent) noexcept</argsstring>
+        <name>addStringFirstLineIndent</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::addStringFirstLineIndent</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>indent</declname>
+        </param>
+        <briefdescription>
+<para>Increase the plain-text first-line indentation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The additional indentation to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="80" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a9c1a9a7e3cae7ca143f0166c06916e55" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::RenderBlock::addStringWrappedLineIndent</definition>
+        <argsstring>(const int indent) noexcept</argsstring>
+        <name>addStringWrappedLineIndent</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::addStringWrappedLineIndent</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>indent</declname>
+        </param>
+        <briefdescription>
+<para>Increase the plain-text wrapped-line indentation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The additional indentation to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="83" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a2109aa0b365e775498d1d0dcd8749fab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+        <definition>String erbsland::cterm::text::impl::text_node_renderer::RenderBlock::renderString</definition>
+        <argsstring>() const</argsstring>
+        <name>renderString</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::RenderBlock::renderString</qualifiedname>
+        <briefdescription>
+<para>Render this block into plain text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The plain-text representation of the block. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="87" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A fully planned render block shared by string and terminal output. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" line="18" column="1" bodyfile="erbsland/cterm/text/impl/text_node_renderer/RenderBlock.hpp" bodystart="18" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a854c128c0d4a9062b7131c512a69fbce" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_fillCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a28c0f12b62492cb8d39f5a7407f624a1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_kind</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a9ef4e99cc53cdeee9289cb9323855219" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_leadingText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a1c8a9e69f3123808304a763d857ad8d1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_listPrefix</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a7ec1bafc3f5aff97213292e9578797d5" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_stringFirstLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a2f9ee6f40028436ae2132d3fd9b8c98b" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_stringWrappedLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a08fcc78dd8e847b96969e5535a204ec1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ace8dfedb326ca2bf66be2af6ff4a41ec" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ad908676bfd5b087a5f7c2a1e13fe49c7" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>_trailingText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ade925085bb75fa659bd6bdea09ca9185" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>addStringFirstLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a9c1a9a7e3cae7ca143f0166c06916e55" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>addStringWrappedLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1aa840290066bd01882d4a066209bfd3ad" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>fillCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a32a9490085cd6a725975797b70a302b9" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>kind</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ad2d54c2ea96cd03825c5cbe917603b59" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>leadingText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ab72c38dee22fb398b6d8df5ff4bc6f39" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>listPrefix</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1adb2ef87109aeccbbd56535f08196a7b8" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>RenderBlock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ae1ee63ee068b439352709cf6a3f8d0a0" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>RenderBlock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1af3459afe36a901a4eeac98451895bb73" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>RenderBlock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a5484292e8e4db2e7dbcfe77d0d575673" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>RenderBlock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a2109aa0b365e775498d1d0dcd8749fab" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>renderString</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a6fd51386850aaaaa1594a1d0502dae52" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>setListPrefix</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a616b1fe348b470e51e00be0188fd3860" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>setText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ade4ca5e909fb5d0aa5dddbf7349d71bd" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>stringFirstLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a41a33b2a067d1603f9c53d9f46216289" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>stringWrappedLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ad30d8edfbae6595c05e9b10d5d9dbd89" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1a33b2890a24d8af3edc05313304eb09b9" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1ade63d6676c96e55727173d7fc7129719" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block_1acbfd16fd2c7da1d244c7058d3ce168bf" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::RenderBlock</scope><name>trailingText</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

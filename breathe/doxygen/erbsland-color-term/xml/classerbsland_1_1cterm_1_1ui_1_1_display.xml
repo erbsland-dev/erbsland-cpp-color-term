@@ -1,0 +1,1170 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_display" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::Display</compoundname>
+    <includes refid="_display_8hpp" local="no">erbsland/cterm/ui/Display.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1_display_1_1_paint_request" prot="private">erbsland::cterm::ui::Display::PaintRequest</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1_display_1_1_size_limits" prot="public">erbsland::cterm::ui::Display::SizeLimits</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_display_1abd01f130e191e81427383e9a3240eab8" prot="private" static="no">
+        <type>std::vector&lt; PagePtr &gt;</type>
+        <definition>using erbsland::cterm::ui::Display::PageStack =  std::vector&lt;PagePtr&gt;</definition>
+        <argsstring></argsstring>
+        <name>PageStack</name>
+        <qualifiedname>erbsland::cterm::ui::Display::PageStack</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="27" column="5" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a6300c3824859e4a498bf60847cc14cae" prot="private" static="no">
+        <type>std::vector&lt; PaintRequest &gt;</type>
+        <definition>using erbsland::cterm::ui::Display::PaintRequestList =  std::vector&lt;PaintRequest&gt;</definition>
+        <argsstring></argsstring>
+        <name>PaintRequestList</name>
+        <qualifiedname>erbsland::cterm::ui::Display::PaintRequestList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="34" column="5" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ad262e169fb23f8a22b34aca3ac6c175f" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Display::cTerminalSizePollInterval</definition>
+        <argsstring></argsstring>
+        <name>cTerminalSizePollInterval</name>
+        <qualifiedname>erbsland::cterm::ui::Display::cTerminalSizePollInterval</qualifiedname>
+        <initializer>= std::chrono::milliseconds{100}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="22" column="27" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a590f106199cc68893af7b45c9733dd89" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Display::cMinimumRenderInterval</definition>
+        <argsstring></argsstring>
+        <name>cMinimumRenderInterval</name>
+        <qualifiedname>erbsland::cterm::ui::Display::cMinimumRenderInterval</qualifiedname>
+        <initializer>= std::chrono::milliseconds{50}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="23" column="27" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1abaed9e7b15a142fed987feff0ee11a75" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Display::cMaximumPages</definition>
+        <argsstring></argsstring>
+        <name>cMaximumPages</name>
+        <qualifiedname>erbsland::cterm::ui::Display::cMaximumPages</qualifiedname>
+        <initializer>= std::size_t{20}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="24" column="27" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a2545df5d7802306201c9f863e1204890" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Display::cMinimumDisplaySize</definition>
+        <argsstring></argsstring>
+        <name>cMinimumDisplaySize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::cMinimumDisplaySize</qualifiedname>
+        <initializer>= <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>{40, 20}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="25" column="27" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a6b4c350b4f036d9df76ed4f23571927a" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Display::cHardMinimumDisplaySize</definition>
+        <argsstring></argsstring>
+        <name>cHardMinimumDisplaySize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::cHardMinimumDisplaySize</qualifiedname>
+        <initializer>= <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>{32, 12}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="26" column="27" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="26" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a9305afa45cd91fd0cb319c8b992981c7" prot="private" static="no" mutable="no">
+        <type>TerminalPtr</type>
+        <definition>TerminalPtr erbsland::cterm::ui::Display::_terminal</definition>
+        <argsstring></argsstring>
+        <name>_terminal</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_terminal</qualifiedname>
+        <briefdescription>
+<para>The terminal to display on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="138" column="17" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a36c8446d4a5dc7377930ee2634475053" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref></type>
+        <definition>UpdateSettings erbsland::cterm::ui::Display::_updateSettings</definition>
+        <argsstring></argsstring>
+        <name>_updateSettings</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_updateSettings</qualifiedname>
+        <briefdescription>
+<para>The update settings. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="139" column="20" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ae36e4655d59fcc77569a7089c1d2bc24" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref></type>
+        <definition>Buffer erbsland::cterm::ui::Display::_displayBuffer</definition>
+        <argsstring></argsstring>
+        <name>_displayBuffer</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_displayBuffer</qualifiedname>
+        <briefdescription>
+<para>The buffer to render to the terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="140" column="12" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a598621838b7df1d5a3c1c0dfe7d18ba1" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::ui::Display::_terminalSize</definition>
+        <argsstring></argsstring>
+        <name>_terminalSize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_terminalSize</qualifiedname>
+        <briefdescription>
+<para>The last terminal size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="141" column="10" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1af103691cb7f526d5d5768b8ba161a096" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::ui::Display::_minimumDisplaySize</definition>
+        <argsstring></argsstring>
+        <name>_minimumDisplaySize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_minimumDisplaySize</qualifiedname>
+        <briefdescription>
+<para>The minimum size for the UI display (starts cropping) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="142" column="10" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ae5952373f00ae99841ca6126424afcea" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::ui::Display::_hardMinimumDisplaySize</definition>
+        <argsstring></argsstring>
+        <name>_hardMinimumDisplaySize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_hardMinimumDisplaySize</qualifiedname>
+        <briefdescription>
+<para>The hard minimum size for the UI display (no display, warning) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="143" column="10" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1aef23227ccfad3f49905bae4895e64634" prot="private" static="no" mutable="no">
+        <type>EventTime</type>
+        <definition>EventTime erbsland::cterm::ui::Display::_nextTerminalSizePollTime</definition>
+        <argsstring></argsstring>
+        <name>_nextTerminalSizePollTime</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_nextTerminalSizePollTime</qualifiedname>
+        <briefdescription>
+<para>The earliest next time the terminal size is tested. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="144" column="15" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ac5d1b5f1b95b0e8e915463a640c2fa2f" prot="private" static="no" mutable="no">
+        <type>PageStack</type>
+        <definition>PageStack erbsland::cterm::ui::Display::_pageStack</definition>
+        <argsstring></argsstring>
+        <name>_pageStack</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_pageStack</qualifiedname>
+        <briefdescription>
+<para>The stack with all pages. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="145" column="15" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a281597d62a70a66dd60ffd1535cbfc85" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Display::_hasPendingResize</definition>
+        <argsstring></argsstring>
+        <name>_hasPendingResize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_hasPendingResize</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>The terminal size has changed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="146" column="10" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="146" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a413232a4fc1911eff20bf31dbdbf93ac" prot="private" static="no" mutable="no">
+        <type>EventTime</type>
+        <definition>EventTime erbsland::cterm::ui::Display::_nextRenderTime</definition>
+        <argsstring></argsstring>
+        <name>_nextRenderTime</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_nextRenderTime</qualifiedname>
+        <briefdescription>
+<para>The earliest next time a render is triggered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="147" column="15" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a1e8b3577eb6b2f5d6ce24d43c33cf029" prot="private" static="no" mutable="no">
+        <type>theme::ThemeConstPtr</type>
+        <definition>theme::ThemeConstPtr erbsland::cterm::ui::Display::_theme</definition>
+        <argsstring></argsstring>
+        <name>_theme</name>
+        <qualifiedname>erbsland::cterm::ui::Display::_theme</qualifiedname>
+        <briefdescription>
+<para>The display theme. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="148" column="26" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="148" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a5f8f40d1b7f254c9213c846e5b7b1682" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Display::Display</definition>
+        <argsstring>(TerminalPtr terminal, PagePtr mainPage)</argsstring>
+        <name>Display</name>
+        <qualifiedname>erbsland::cterm::ui::Display::Display</qualifiedname>
+        <param>
+          <type>TerminalPtr</type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>PagePtr</type>
+          <declname>mainPage</declname>
+        </param>
+        <briefdescription>
+<para>Create a new display instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The terminal to use. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mainPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The main page to show initially. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a07b9b4b7c4208ef5df0fff0a95704175" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Display::Display</definition>
+        <argsstring>(TerminalPtr terminal, PagePtr mainPage, SizeLimits sizeLimits)</argsstring>
+        <name>Display</name>
+        <qualifiedname>erbsland::cterm::ui::Display::Display</qualifiedname>
+        <param>
+          <type>TerminalPtr</type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>PagePtr</type>
+          <declname>mainPage</declname>
+        </param>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_display_1_1_size_limits" kindref="compound">SizeLimits</ref></type>
+          <declname>sizeLimits</declname>
+        </param>
+        <briefdescription>
+<para>Create a new display instance with explicit size limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The terminal to use. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mainPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The main page to show initially. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sizeLimits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size limits for this display. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a4f32770bb0cdca7d30bde518516309c6" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Display::Display</definition>
+        <argsstring>(TerminalPtr terminal, PagePtr mainPage, theme::ThemeConstPtr theme)</argsstring>
+        <name>Display</name>
+        <qualifiedname>erbsland::cterm::ui::Display::Display</qualifiedname>
+        <param>
+          <type>TerminalPtr</type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>PagePtr</type>
+          <declname>mainPage</declname>
+        </param>
+        <param>
+          <type>theme::ThemeConstPtr</type>
+          <declname>theme</declname>
+        </param>
+        <briefdescription>
+<para>Create a new display instance with an explicit theme scope. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The terminal to use. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mainPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The main page to show initially. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>theme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The application theme. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="57" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a5f874505da60d7fba686959f046a24d4" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Display::Display</definition>
+        <argsstring>(TerminalPtr terminal, PagePtr mainPage, theme::ThemeConstPtr theme, SizeLimits sizeLimits)</argsstring>
+        <name>Display</name>
+        <qualifiedname>erbsland::cterm::ui::Display::Display</qualifiedname>
+        <param>
+          <type>TerminalPtr</type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>PagePtr</type>
+          <declname>mainPage</declname>
+        </param>
+        <param>
+          <type>theme::ThemeConstPtr</type>
+          <declname>theme</declname>
+        </param>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_display_1_1_size_limits" kindref="compound">SizeLimits</ref></type>
+          <declname>sizeLimits</declname>
+        </param>
+        <briefdescription>
+<para>Create a new display instance with an explicit theme scope and size limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The terminal to use. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mainPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The main page to show initially. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>theme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The application theme. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sizeLimits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size limits for this display. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="63" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a8f2c0d194205304a9f3aa5ef38083025" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Display::~Display</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Display</name>
+        <qualifiedname>erbsland::cterm::ui::Display::~Display</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="66" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ab689251ca2efc572c7605389bfd767b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Display::Display</definition>
+        <argsstring>(const Display &amp;)=delete</argsstring>
+        <name>Display</name>
+        <qualifiedname>erbsland::cterm::ui::Display::Display</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="67" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1add0e19309d8ba82b7a77a566577cc1ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Display::Display</definition>
+        <argsstring>(Display &amp;&amp;)=delete</argsstring>
+        <name>Display</name>
+        <qualifiedname>erbsland::cterm::ui::Display::Display</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="68" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ad499bc8f9f7947a9ea7cc54581e2a9bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> &amp;</type>
+        <definition>Display &amp; erbsland::cterm::ui::Display::operator=</definition>
+        <argsstring>(const Display &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::Display::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="69" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a70a992c788b57670df94b2ea6e6185c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> &amp;</type>
+        <definition>Display &amp; erbsland::cterm::ui::Display::operator=</definition>
+        <argsstring>(Display &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::Display::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="70" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a09196501504a9157d50aff78e006319d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::pushPage</definition>
+        <argsstring>(PagePtr page)</argsstring>
+        <name>pushPage</name>
+        <qualifiedname>erbsland::cterm::ui::Display::pushPage</qualifiedname>
+        <param>
+          <type>PagePtr</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Push a new page to the page stack. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If you push more than 20 pages or a duplicate page to the stack. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="75" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ad1b7d805d424c90118ec1ef42502dd84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::popPage</definition>
+        <argsstring>()</argsstring>
+        <name>popPage</name>
+        <qualifiedname>erbsland::cterm::ui::Display::popPage</qualifiedname>
+        <briefdescription>
+<para>Pop the top page from the page stack. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If you try to pop the main page from the stack. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="78" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a7b721fe6713cd543a0ff78efb2b6f615" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::pollTerminalResize</definition>
+        <argsstring>()</argsstring>
+        <name>pollTerminalResize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::pollTerminalResize</qualifiedname>
+        <briefdescription>
+<para>Poll for terminal size changes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="80" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a25f8d2ea9b77c0e2273d370d9c701ebf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::pollRender</definition>
+        <argsstring>()</argsstring>
+        <name>pollRender</name>
+        <qualifiedname>erbsland::cterm::ui::Display::pollRender</qualifiedname>
+        <briefdescription>
+<para>Poll for render work. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This triggers a render for visible dirty pages as soon as the minimum render interval allows it. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="83" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a4dfd4e8834417c95e69f0d677ef94066" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>EventTime</type>
+        <definition>EventTime erbsland::cterm::ui::Display::nextWakeTime</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>nextWakeTime</name>
+        <qualifiedname>erbsland::cterm::ui::Display::nextWakeTime</qualifiedname>
+        <briefdescription>
+<para>Get the earliest next wake-up time required by the display. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The earliest wake-up time. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="86" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a6f23a3b465e310dd28104581288eca49" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::onKeyPress</definition>
+        <argsstring>(KeyPressEvent &amp;keyPressEvent) noexcept</argsstring>
+        <name>onKeyPress</name>
+        <qualifiedname>erbsland::cterm::ui::Display::onKeyPress</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_key_press_event" kindref="compound">KeyPressEvent</ref> &amp;</type>
+          <declname>keyPressEvent</declname>
+        </param>
+        <briefdescription>
+<para>Forward a key press to the active page. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>keyPressEvent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key press event to forward. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="89" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1aad70811cd7ed646975837fe4bd4d9301" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::setTheme</definition>
+        <argsstring>(const theme::ThemeConstPtr &amp;theme)</argsstring>
+        <name>setTheme</name>
+        <qualifiedname>erbsland::cterm::ui::Display::setTheme</qualifiedname>
+        <param>
+          <type>const theme::ThemeConstPtr &amp;</type>
+          <declname>theme</declname>
+        </param>
+        <briefdescription>
+<para>Replace the display theme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>theme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new theme. A null pointer restores the default dark theme. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="92" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a0103e79479497a576a82d592f51696e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::setMinimumDisplaySize</definition>
+        <argsstring>(Size minimumDisplaySize)</argsstring>
+        <name>setMinimumDisplaySize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::setMinimumDisplaySize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>minimumDisplaySize</declname>
+        </param>
+        <briefdescription>
+<para>Set the minimum display size for the application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the terminal size is smaller, the display is cropped and crop marks indicate to increase the terminal size. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ad05e24fd98c8b874fb512b29a7c60b84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::setHardMinimumDisplaySize</definition>
+        <argsstring>(Size hardMinimumDisplaySize)</argsstring>
+        <name>setHardMinimumDisplaySize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::setHardMinimumDisplaySize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>hardMinimumDisplaySize</declname>
+        </param>
+        <briefdescription>
+<para>Set the hard minimum display size for the application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the terminal size is smaller than this hard limit, no UI is displayed - just a warning. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="99" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a54829e26c5aebd4bd3378f0a80e7fb15" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Display::hasVisibleDirtyPage</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hasVisibleDirtyPage</name>
+        <qualifiedname>erbsland::cterm::ui::Display::hasVisibleDirtyPage</qualifiedname>
+        <briefdescription>
+<para>Test if any currently visible page needs a render pass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if a visible page needs layout or paint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="104" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1afd91f1b83dec9825d323a2ced8d08bf3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::calculateLayout</definition>
+        <argsstring>()</argsstring>
+        <name>calculateLayout</name>
+        <qualifiedname>erbsland::cterm::ui::Display::calculateLayout</qualifiedname>
+        <briefdescription>
+<para>Calculate the layout of all displayed pages. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="106" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1aa82f0805939036e449cf564276237755" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics" kindref="compound">LayoutMetrics</ref></type>
+        <definition>LayoutMetrics erbsland::cterm::ui::Display::measureSurface</definition>
+        <argsstring>(const SurfacePtr &amp;surface, const LayoutProposal &amp;proposal, const LayoutContext &amp;context) noexcept</argsstring>
+        <name>measureSurface</name>
+        <qualifiedname>erbsland::cterm::ui::Display::measureSurface</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_proposal" kindref="compound">LayoutProposal</ref> &amp;</type>
+          <declname>proposal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_context" kindref="compound">LayoutContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Measure one surface with the given proposal. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="108" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a4f7379bea7b924948478ef3c45e88eff" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::layoutSurfaceSubtree</definition>
+        <argsstring>(const SurfacePtr &amp;surface, const LayoutContext &amp;context) noexcept</argsstring>
+        <name>layoutSurfaceSubtree</name>
+        <qualifiedname>erbsland::cterm::ui::Display::layoutSurfaceSubtree</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_context" kindref="compound">LayoutContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> a visible surface and then continue through its visible children. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="110" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a8f71dd8438a468ce3bc522b2ff813f8f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::render</definition>
+        <argsstring>()</argsstring>
+        <name>render</name>
+        <qualifiedname>erbsland::cterm::ui::Display::render</qualifiedname>
+        <briefdescription>
+<para>Render the current page to the terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="113" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1afef3da739de6a06e57e12409511748be" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::renderVisiblePageStack</definition>
+        <argsstring>()</argsstring>
+        <name>renderVisiblePageStack</name>
+        <qualifiedname>erbsland::cterm::ui::Display::renderVisiblePageStack</qualifiedname>
+        <briefdescription>
+<para>Render all visible pages from the nearest opaque base page upward. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="115" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ad544996522ffd58fe3b5f6fd714170ca" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::collectPaintRequests</definition>
+        <argsstring>(const SurfacePtr &amp;surface, Rectangle parentVisibleRect, PaintRequestList &amp;requests) const</argsstring>
+        <name>collectPaintRequests</name>
+        <qualifiedname>erbsland::cterm::ui::Display::collectPaintRequests</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>parentVisibleRect</declname>
+        </param>
+        <param>
+          <type>PaintRequestList &amp;</type>
+          <declname>requests</declname>
+        </param>
+        <briefdescription>
+<para>Collect visible paint requests from a page. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="117" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a7ebd7e406f10f54591c3c7ad7833c354" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::addPaintRequest</definition>
+        <argsstring>(PaintRequestList &amp;requests, PaintRequest request) const</argsstring>
+        <name>addPaintRequest</name>
+        <qualifiedname>erbsland::cterm::ui::Display::addPaintRequest</qualifiedname>
+        <param>
+          <type>PaintRequestList &amp;</type>
+          <declname>requests</declname>
+        </param>
+        <param>
+          <type>PaintRequest</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+<para>Add a paint request while coalescing covered requests. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="119" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a27f9d0fed0b5c56343705a1d0fbd2b65" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::paintRequest</definition>
+        <argsstring>(const PaintRequest &amp;request)</argsstring>
+        <name>paintRequest</name>
+        <qualifiedname>erbsland::cterm::ui::Display::paintRequest</qualifiedname>
+        <param>
+          <type>const PaintRequest &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+<para>Paint one request into the display buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="121" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a4579d7aa8abcc37aef5113af9c152603" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::paintSurfaceSubtree</definition>
+        <argsstring>(const SurfacePtr &amp;surface, Rectangle damagedScreenRect, Rectangle visibleScreenRect)</argsstring>
+        <name>paintSurfaceSubtree</name>
+        <qualifiedname>erbsland::cterm::ui::Display::paintSurfaceSubtree</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>damagedScreenRect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>visibleScreenRect</declname>
+        </param>
+        <briefdescription>
+<para>Paint a surface and all intersecting child surfaces. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="123" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ae2ddbb7645c42640df9a03cee706b499" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::paintLaterSiblings</definition>
+        <argsstring>(const SurfacePtr &amp;surface, Rectangle damagedScreenRect)</argsstring>
+        <name>paintLaterSiblings</name>
+        <qualifiedname>erbsland::cterm::ui::Display::paintLaterSiblings</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>damagedScreenRect</declname>
+        </param>
+        <briefdescription>
+<para>Paint later siblings of a surface on the path back to the page. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="125" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1aa632f37797d88e4f7d1ff60c2330325e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::paintSurface</definition>
+        <argsstring>(const SurfacePtr &amp;surface, Rectangle damagedScreenRect, Rectangle visibleScreenRect)</argsstring>
+        <name>paintSurface</name>
+        <qualifiedname>erbsland::cterm::ui::Display::paintSurface</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>damagedScreenRect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>visibleScreenRect</declname>
+        </param>
+        <briefdescription>
+<para>Paint one surface into the display buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="127" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1ad9547df51495345165c347f587e48bd0" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Display::hasVisibleDirtySurface</definition>
+        <argsstring>(const SurfacePtr &amp;surface, Rectangle parentVisibleRect) const noexcept</argsstring>
+        <name>hasVisibleDirtySurface</name>
+        <qualifiedname>erbsland::cterm::ui::Display::hasVisibleDirtySurface</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>parentVisibleRect</declname>
+        </param>
+        <briefdescription>
+<para>Test if a visible surface in a tree requires layout or paint work. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="129" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1a10395fe4e2c3eadd7c870303c518fed4" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_theme_context" kindref="compound">ThemeContext</ref></type>
+        <definition>ThemeContext erbsland::cterm::ui::Display::themeContextForSurface</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const</argsstring>
+        <name>themeContextForSurface</name>
+        <qualifiedname>erbsland::cterm::ui::Display::themeContextForSurface</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Create the resolved theme context for one surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to resolve. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The resolved theme context. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="133" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_display_1aafa4438b1971831f9ae9d682a1515198" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Display::refreshTerminalSize</definition>
+        <argsstring>()</argsstring>
+        <name>refreshTerminalSize</name>
+        <qualifiedname>erbsland::cterm::ui::Display::refreshTerminalSize</qualifiedname>
+        <briefdescription>
+<para>Refresh the effective terminal size after terminal or display-size limit changes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Display.hpp" line="135" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A display is a way to show pages on a terminal. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/Display.hpp" line="21" column="1" bodyfile="erbsland/cterm/ui/Display.hpp" bodystart="21" bodyend="149"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ae36e4655d59fcc77569a7089c1d2bc24" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_displayBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ae5952373f00ae99841ca6126424afcea" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_hardMinimumDisplaySize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a281597d62a70a66dd60ffd1535cbfc85" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_hasPendingResize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1af103691cb7f526d5d5768b8ba161a096" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_minimumDisplaySize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a413232a4fc1911eff20bf31dbdbf93ac" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_nextRenderTime</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1aef23227ccfad3f49905bae4895e64634" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_nextTerminalSizePollTime</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ac5d1b5f1b95b0e8e915463a640c2fa2f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_pageStack</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a9305afa45cd91fd0cb319c8b992981c7" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_terminal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a598621838b7df1d5a3c1c0dfe7d18ba1" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_terminalSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a1e8b3577eb6b2f5d6ce24d43c33cf029" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_theme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a36c8446d4a5dc7377930ee2634475053" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>_updateSettings</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a7ebd7e406f10f54591c3c7ad7833c354" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>addPaintRequest</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1afd91f1b83dec9825d323a2ced8d08bf3" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>calculateLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a6b4c350b4f036d9df76ed4f23571927a" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>cHardMinimumDisplaySize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1abaed9e7b15a142fed987feff0ee11a75" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>cMaximumPages</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a2545df5d7802306201c9f863e1204890" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>cMinimumDisplaySize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a590f106199cc68893af7b45c9733dd89" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>cMinimumRenderInterval</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ad544996522ffd58fe3b5f6fd714170ca" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>collectPaintRequests</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ad262e169fb23f8a22b34aca3ac6c175f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>cTerminalSizePollInterval</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a5f8f40d1b7f254c9213c846e5b7b1682" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>Display</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a07b9b4b7c4208ef5df0fff0a95704175" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>Display</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a4f32770bb0cdca7d30bde518516309c6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>Display</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a5f874505da60d7fba686959f046a24d4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>Display</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ab689251ca2efc572c7605389bfd767b1" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>Display</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1add0e19309d8ba82b7a77a566577cc1ab" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>Display</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a54829e26c5aebd4bd3378f0a80e7fb15" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>hasVisibleDirtyPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ad9547df51495345165c347f587e48bd0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>hasVisibleDirtySurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a4f7379bea7b924948478ef3c45e88eff" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>layoutSurfaceSubtree</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1aa82f0805939036e449cf564276237755" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>measureSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a4dfd4e8834417c95e69f0d677ef94066" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>nextWakeTime</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a6f23a3b465e310dd28104581288eca49" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ad499bc8f9f7947a9ea7cc54581e2a9bf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a70a992c788b57670df94b2ea6e6185c6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1abd01f130e191e81427383e9a3240eab8" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>PageStack</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ae2ddbb7645c42640df9a03cee706b499" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>paintLaterSiblings</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a27f9d0fed0b5c56343705a1d0fbd2b65" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>paintRequest</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a6300c3824859e4a498bf60847cc14cae" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>PaintRequestList</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1aa632f37797d88e4f7d1ff60c2330325e" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>paintSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a4579d7aa8abcc37aef5113af9c152603" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>paintSurfaceSubtree</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a25f8d2ea9b77c0e2273d370d9c701ebf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>pollRender</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a7b721fe6713cd543a0ff78efb2b6f615" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>pollTerminalResize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ad1b7d805d424c90118ec1ef42502dd84" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>popPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a09196501504a9157d50aff78e006319d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>pushPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1aafa4438b1971831f9ae9d682a1515198" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>refreshTerminalSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a8f71dd8438a468ce3bc522b2ff813f8f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>render</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1afef3da739de6a06e57e12409511748be" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>renderVisiblePageStack</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1ad05e24fd98c8b874fb512b29a7c60b84" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>setHardMinimumDisplaySize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a0103e79479497a576a82d592f51696e1" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>setMinimumDisplaySize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1aad70811cd7ed646975837fe4bd4d9301" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>setTheme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a10395fe4e2c3eadd7c870303c518fed4" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>themeContextForSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_display_1a8f2c0d194205304a9f3aa5ef38083025" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Display</scope><name>~Display</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_buffered_tokenizer_8hpp" kind="file" language="C++">
+    <compoundname>BufferedTokenizer.hpp</compoundname>
+    <includes refid="_tokenizer_8hpp" local="yes">Tokenizer.hpp</includes>
+    <includes refid="_index_range_8hpp" local="yes">../../IndexRange.hpp</includes>
+    <includes local="no">cstddef</includes>
+    <includes local="no">string</includes>
+    <includes local="no">string_view</includes>
+    <includedby refid="_html_tokenizer_8hpp" local="yes">erbsland/cterm/text/impl/HtmlTokenizer.hpp</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>../../IndexRange.hpp</label>
+        <link refid="_index_range_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/text/impl/BufferedTokenizer.hpp</label>
+        <link refid="_buffered_tokenizer_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Tokenizer.hpp</label>
+        <link refid="_tokenizer_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cstddef</label>
+      </node>
+      <node id="6">
+        <label>limits</label>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>string_view</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>erbsland/cterm/text/impl/BufferedTokenizer.hpp</label>
+        <link refid="_buffered_tokenizer_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland/cterm/text/impl/HtmlParser.hpp</label>
+        <link refid="_html_parser_8hpp_source"/>
+      </node>
+      <node id="2">
+        <label>erbsland/cterm/text/impl/HtmlTokenizer.hpp</label>
+        <link refid="_html_tokenizer_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" prot="public">erbsland::cterm::text::impl::BufferedTokenizer</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1text">erbsland::cterm::text</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1text_1_1impl">erbsland::cterm::text::impl</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Tokenizer.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../IndexRange.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstddef&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string_view&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm::text::impl<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer" kindref="compound">Tokenizer</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="21" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ac424cd4e88eba032301f22a04e35971e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ac424cd4e88eba032301f22a04e35971e" kindref="member">BufferedTokenizer</ref>(std::string_view<sp/>text,<sp/>std::size_t<sp/>initialBufferCapacity<sp/>=<sp/>0);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">~BufferedTokenizer</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref><sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref>(<ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref><sp/>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref><sp/>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref><sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref><sp/>&amp;<sp/>operator=(<ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref><sp/>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="35" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a4428e9b88a5fc3dfb9e2c4fe24e8293f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a4428e9b88a5fc3dfb9e2c4fe24e8293f" kindref="member">consumeBufferedIf</ref>(</highlight><highlight class="keywordtype">char32_t</highlight><highlight class="normal"><sp/>expected)<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="37" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1adb7bbdf3ee3e4b46ee78f860ec8de9ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1adb7bbdf3ee3e4b46ee78f860ec8de9ac" kindref="member">resetBuffer</ref>();</highlight></codeline>
+<codeline lineno="40" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a92ccfac479c5cbf1648fb9100f3c0104" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a92ccfac479c5cbf1648fb9100f3c0104" kindref="member">append</ref>(</highlight><highlight class="keywordtype">char32_t</highlight><highlight class="normal"><sp/>character);</highlight></codeline>
+<codeline lineno="42" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ad0ea3677312252f8545964698d46a85b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ad0ea3677312252f8545964698d46a85b" kindref="member">appendCurrentAndAdvance</ref>();</highlight></codeline>
+<codeline lineno="46" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a6e8d14e5eec2e70d7d3a589dcf4b27d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a6e8d14e5eec2e70d7d3a589dcf4b27d7" kindref="member">makeRange</ref>(std::size_t<sp/>start)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="50" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a20079c336b39e06a3e697db26bc5ded7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref><sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a20079c336b39e06a3e697db26bc5ded7" kindref="member">trimRange</ref>(<ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref><sp/>range)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="53" refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a98131b7f287e5d1cc4b98fee9fb4d473" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::u32string<sp/><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a98131b7f287e5d1cc4b98fee9fb4d473" kindref="member">_buffer</ref>;<sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp"/>
+  </compounddef>
+</doxygen>

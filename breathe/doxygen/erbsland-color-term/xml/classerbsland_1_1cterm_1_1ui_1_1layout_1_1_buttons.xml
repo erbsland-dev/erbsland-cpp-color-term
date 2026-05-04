@@ -1,0 +1,904 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::layout::Buttons</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" prot="public" virt="non-virtual">erbsland::cterm::ui::Layout</basecompoundref>
+    <includes refid="_buttons_8hpp" local="no">erbsland/cterm/ui/layout/Buttons.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1_1_layout_button" prot="private">erbsland::cterm::ui::layout::Buttons::LayoutButton</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1_1_layout_row" prot="private">erbsland::cterm::ui::layout::Buttons::LayoutRow</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1aa4c0a2ca1171dd7daf71f3c1581a8c54" prot="private" static="no">
+        <type>std::function&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics" kindref="compound">LayoutMetrics</ref>(const surface::ButtonPtr &amp;, const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_proposal" kindref="compound">LayoutProposal</ref> &amp;)&gt;</type>
+        <definition>using erbsland::cterm::ui::layout::Buttons::MeasureButtonFunction =  std::function&lt;LayoutMetrics(const surface::ButtonPtr &amp;, const LayoutProposal &amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>MeasureButtonFunction</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::MeasureButtonFunction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="85" column="5" bodyfile="erbsland/cterm/ui/layout/Buttons.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a4d2b0abe653d8e0f27594880c23b9d27" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::layout::Buttons::Buttons</definition>
+        <argsstring>(ProtectedTag) noexcept</argsstring>
+        <name>Buttons</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::Buttons</qualifiedname>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_surface_1_1_protected_tag" kindref="compound">ProtectedTag</ref></type>
+        </param>
+        <briefdescription>
+<para>Create a button layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="21" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a523ba54e6b47d107c64fec028953d345" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::layout::Buttons::~Buttons</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Buttons</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::~Buttons</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="22" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a1188260f7ac3946e5dccd972e5342bb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>surface::ButtonPtr</type>
+        <definition>surface::ButtonPtr erbsland::cterm::ui::layout::Buttons::addAction</definition>
+        <argsstring>(ButtonActionPtr action)</argsstring>
+        <name>addAction</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::addAction</qualifiedname>
+        <param>
+          <type>ButtonActionPtr</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+<para>Add an action-backed button. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action represented by the new button. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created button surface. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="33" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1aae7b5396309a2681667504c8b7944c59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::addButton</definition>
+        <argsstring>(surface::ButtonPtr button)</argsstring>
+        <name>addButton</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::addButton</qualifiedname>
+        <param>
+          <type>surface::ButtonPtr</type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+<para>Add an existing button. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>button</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The button to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="36" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a4f525b5f8a3db726a595ba99841e109c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::insertButton</definition>
+        <argsstring>(std::size_t index, surface::ButtonPtr button)</argsstring>
+        <name>insertButton</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::insertButton</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>surface::ButtonPtr</type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+<para>Insert an existing button. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The insertion index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>button</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The button to insert. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="40" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1ac76d71f882292dcaa8d9f34b425bf015" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ui::layout::Buttons::buttonCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>buttonCount</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::buttonCount</qualifiedname>
+        <briefdescription>
+<para>Get the number of buttons in this layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="42" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1ae4f939f6d6a434c3efcce49bd11b3091" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>surface::ButtonPtr</type>
+        <definition>surface::ButtonPtr erbsland::cterm::ui::layout::Buttons::button</definition>
+        <argsstring>(std::size_t index) const</argsstring>
+        <name>button</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::button</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Access one button. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The button index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="45" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a89ee38fde33cf7710da40f7f8c78f0e7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics" kindref="compound">LayoutMetrics</ref></type>
+        <definition>LayoutMetrics erbsland::cterm::ui::layout::Buttons::onMeasure</definition>
+        <argsstring>(MeasureScope &amp;scope, const LayoutProposal &amp;proposal) noexcept override</argsstring>
+        <name>onMeasure</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::onMeasure</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a970401f71d513138ee3de0e51004f759">onMeasure</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_measure_scope" kindref="compound">MeasureScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_proposal" kindref="compound">LayoutProposal</ref> &amp;</type>
+          <declname>proposal</declname>
+        </param>
+        <briefdescription>
+<para>Measure this surface for a proposed size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The returned layout sizes describe the margin-free content rectangle. The optional margins in the returned metrics are recommendations for the parent layout and are not included in these sizes. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Measurement access for child surfaces. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>proposal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The proposed size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The measured layout metrics. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="48" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1abc64bcaefcaf39e609599b543312899d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::onLayout</definition>
+        <argsstring>(LayoutScope &amp;scope) noexcept override</argsstring>
+        <name>onLayout</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::onLayout</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a931eb7df2cba0068a95ef28af0cdc2b4">onLayout</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_scope" kindref="compound">LayoutScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> direct children within this surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> access for measuring and placing child surfaces. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="49" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a988b6ddcc08f05644816979f015ee82e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::onKeyPress</definition>
+        <argsstring>(KeyPressEvent &amp;keyPressEvent) noexcept override</argsstring>
+        <name>onKeyPress</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::onKeyPress</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac5de18b08b9c414b0bcfe38fa801d367">onKeyPress</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_key_press_event" kindref="compound">KeyPressEvent</ref> &amp;</type>
+          <declname>keyPressEvent</declname>
+        </param>
+        <briefdescription>
+<para>Handle a key press event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the low-level event handler for key press events. If a surface handles a key press event, it should mark it as handled. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>keyPressEvent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key press event to handle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="50" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a2c9d0e20b81cc945276e35b456c3ded2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ButtonsPtr</type>
+        <definition>static ButtonsPtr erbsland::cterm::ui::layout::Buttons::create</definition>
+        <argsstring>()</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::create</qualifiedname>
+        <briefdescription>
+<para>Create a button layout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The new button layout. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="27" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a86fe969602a64feb0222318997a409ee" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::willAdd</definition>
+        <argsstring>(const SurfacePtr &amp;surface, std::size_t index, const LayoutDataPtr &amp;data) override</argsstring>
+        <name>willAdd</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::willAdd</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1adba852391b32cf0f5235d2d06a45dce7">willAdd</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const LayoutDataPtr &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Called before a child surface is added. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="53" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a4560e42dca9d55c43b1fae9bc330354e" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::didAdd</definition>
+        <argsstring>(const SurfacePtr &amp;surface, std::size_t index, const LayoutDataPtr &amp;data) noexcept override</argsstring>
+        <name>didAdd</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::didAdd</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1ad8f8e37fbd7a5eedbe9108da062e8cbe">didAdd</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const LayoutDataPtr &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Called after a child surface was added. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="54" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a1c8d107c44f88fb23760fd56dea8d361" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::didRemove</definition>
+        <argsstring>(const SurfacePtr &amp;surface, std::size_t index, const LayoutDataPtr &amp;data) noexcept override</argsstring>
+        <name>didRemove</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::didRemove</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1adaed814b6fe3fbe781b5c54cea9ba26b">didRemove</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const LayoutDataPtr &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Called after a child surface was removed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a5d1791f5350a8c8e497e639a701d25ae" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::willReplace</definition>
+        <argsstring>(const SurfacePtr &amp;oldSurface, const SurfacePtr &amp;newSurface, std::size_t index, const LayoutDataPtr &amp;oldData, const LayoutDataPtr &amp;newData) override</argsstring>
+        <name>willReplace</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::willReplace</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a5dc4201e45a6a4d3ff43dfcf6b4f258c">willReplace</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>oldSurface</declname>
+        </param>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>newSurface</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const LayoutDataPtr &amp;</type>
+          <declname>oldData</declname>
+        </param>
+        <param>
+          <type>const LayoutDataPtr &amp;</type>
+          <declname>newData</declname>
+        </param>
+        <briefdescription>
+<para>Called before a child surface is replaced. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="56" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a357603a7db1173e4efaccd9537f53cdb" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::didReplace</definition>
+        <argsstring>(const SurfacePtr &amp;oldSurface, const SurfacePtr &amp;newSurface, std::size_t index, const LayoutDataPtr &amp;oldData, const LayoutDataPtr &amp;newData) noexcept override</argsstring>
+        <name>didReplace</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::didReplace</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1abc5c1cbf21bc4a8efbc1312cef59e70a">didReplace</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>oldSurface</declname>
+        </param>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>newSurface</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const LayoutDataPtr &amp;</type>
+          <declname>oldData</declname>
+        </param>
+        <param>
+          <type>const LayoutDataPtr &amp;</type>
+          <declname>newData</declname>
+        </param>
+        <briefdescription>
+<para>Called after a child surface was replaced. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="62" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a90b71196c44058545a3697642d996c64" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::initializeUi</definition>
+        <argsstring>() override</argsstring>
+        <name>initializeUi</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::initializeUi</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad58106a9586de9d0ad45c4da90bdb528">initializeUi</reimplements>
+        <briefdescription>
+<para>Initialize theme attributes after construction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="71" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a5f5efc5944effd4b9b8987560710fa34" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; surface::ButtonPtr &gt;</type>
+        <definition>std::vector&lt; surface::ButtonPtr &gt; erbsland::cterm::ui::layout::Buttons::visibleButtons</definition>
+        <argsstring>() const</argsstring>
+        <name>visibleButtons</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::visibleButtons</qualifiedname>
+        <briefdescription>
+<para>Return all visible buttons in insertion order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="89" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a991fbde3d3d5a341776a4b9ac91aaa10" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; surface::ButtonPtr &gt;</type>
+        <definition>std::vector&lt; surface::ButtonPtr &gt; erbsland::cterm::ui::layout::Buttons::focusableButtons</definition>
+        <argsstring>() const</argsstring>
+        <name>focusableButtons</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::focusableButtons</qualifiedname>
+        <briefdescription>
+<para>Return all visible and enabled buttons in insertion order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="91" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a041454de631ad1260b7d489887bad640" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; LayoutRow &gt;</type>
+        <definition>std::vector&lt; LayoutRow &gt; erbsland::cterm::ui::layout::Buttons::buildRows</definition>
+        <argsstring>(Size size, Size spacing, const MeasureButtonFunction &amp;measureButton) const</argsstring>
+        <name>buildRows</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::buildRows</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>spacing</declname>
+        </param>
+        <param>
+          <type>const MeasureButtonFunction &amp;</type>
+          <declname>measureButton</declname>
+        </param>
+        <briefdescription>
+<para>Build centered layout rows for a size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="93" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a97d8c87be9b6f70a530c8b6bd3f204d0" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::layout::Buttons::isButtonFullyVisible</definition>
+        <argsstring>(const surface::ButtonPtr &amp;button) const noexcept</argsstring>
+        <name>isButtonFullyVisible</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::isButtonFullyVisible</qualifiedname>
+        <param>
+          <type>const surface::ButtonPtr &amp;</type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+<para>Test if a button is fully inside the current local surface rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="101" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1ad35f861ef6f4ffa20d7814d27a2cd9bd" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::layout::Buttons::moveFocus</definition>
+        <argsstring>(bool forward) noexcept</argsstring>
+        <name>moveFocus</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::moveFocus</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>forward</declname>
+        </param>
+        <briefdescription>
+<para>Move focus in a direction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="103" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a9924314cd29c17464e0bc228ea960fff" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::attachAction</definition>
+        <argsstring>(const ActionPtr &amp;action)</argsstring>
+        <name>attachAction</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::attachAction</qualifiedname>
+        <param>
+          <type>const ActionPtr &amp;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+<para>Add the represented action to this layout&apos;s dispatch container. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="105" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1afae63411e415d9c03b9a0ff51c13ee04" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::layout::Buttons::detachActionIfUnused</definition>
+        <argsstring>(const ActionPtr &amp;action)</argsstring>
+        <name>detachActionIfUnused</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::detachActionIfUnused</qualifiedname>
+        <param>
+          <type>const ActionPtr &amp;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+<para>Remove an action when no remaining button uses it. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="107" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1aac08c700dfdad83b290745336019e214" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>static Coordinate erbsland::cterm::ui::layout::Buttons::collapsedSpacing</definition>
+        <argsstring>(Coordinate minimum, Coordinate trailing, Coordinate leading) noexcept</argsstring>
+        <name>collapsedSpacing</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::collapsedSpacing</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>minimum</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>trailing</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>leading</declname>
+        </param>
+        <briefdescription>
+<para>Collapse two adjacent margins with a minimum spacing. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="95" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a0dc646a37c22ee2ecde6a9a0de55638a" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>static Coordinate erbsland::cterm::ui::layout::Buttons::requiredHeight</definition>
+        <argsstring>(const std::vector&lt; LayoutRow &gt; &amp;rows, Size spacing) noexcept</argsstring>
+        <name>requiredHeight</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::requiredHeight</qualifiedname>
+        <param>
+          <type>const std::vector&lt; LayoutRow &gt; &amp;</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>spacing</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the height required to show the prepared rows. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="97" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a417f33a22c9b53b519577b9b53e4f317" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>static Coordinate erbsland::cterm::ui::layout::Buttons::requiredMinimumHeight</definition>
+        <argsstring>(const std::vector&lt; LayoutRow &gt; &amp;rows, Size spacing) noexcept</argsstring>
+        <name>requiredMinimumHeight</name>
+        <qualifiedname>erbsland::cterm::ui::layout::Buttons::requiredMinimumHeight</qualifiedname>
+        <param>
+          <type>const std::vector&lt; LayoutRow &gt; &amp;</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>spacing</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the minimum height required to show the prepared rows. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="99" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A horizontal button layout that centers rows and wraps when needed. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::ui::Layout</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::SurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::layout::Buttons</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="8">
+        <label>erbsland::cterm::Rectangle</label>
+        <link refid="classerbsland_1_1cterm_1_1_rectangle"/>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::Layout</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>erbsland::cterm::ui::LayoutMetrics</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics"/>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_surfaces</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_flags</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_rectangle</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>_layoutMetrics</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>_themeAttributes</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland::cterm::ui::SurfaceFlags</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_flags"/>
+      </node>
+      <node id="11">
+        <label>erbsland::cterm::ui::SurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager"/>
+      </node>
+      <node id="10">
+        <label>erbsland::cterm::ui::SurfaceThemeAttributes</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_theme_attributes"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::layout::Buttons</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/layout/Buttons.hpp" line="18" column="1" bodyfile="erbsland/cterm/ui/layout/Buttons.hpp" bodystart="18" bodyend="110"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a67caf5a45f3afcf394d04b6a811fb019" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>_flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5e98ac945443673593de934b8e5a6c82" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>_layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9ded519b8019bf6a0379b4807842db02" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>_rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adebfc77d073fdbec83278119180d2641" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>_surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a3495ef389b8d8ba1623a671bdbe0a96f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>_themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d68b998618a891511dee33516b51268" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac3b1bb4dd817e95e8a35841cf96b48a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>actionsPtr</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a1188260f7ac3946e5dccd972e5342bb9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>addAction</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1aae7b5396309a2681667504c8b7944c59" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>addButton</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9822c7ffb68730aea7ba35147f48f418" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>addSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a9924314cd29c17464e0bc228ea960fff" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>attachAction</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a041454de631ad1260b7d489887bad640" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>buildRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1ae4f939f6d6a434c3efcce49bd11b3091" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>button</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1ac76d71f882292dcaa8d9f34b425bf015" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>buttonCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a4d2b0abe653d8e0f27594880c23b9d27" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>Buttons</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0abe7d82b04e8ab6336b069f5cc8582" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>childLayoutContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1abaddf3eeea6f7644b5c60ff68d2de36b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0523529e715f39f711cc5d96ac3c44d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1aac08c700dfdad83b290745336019e214" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>collapsedSpacing</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a2c9d0e20b81cc945276e35b456c3ded2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a4ba81826cb8d3bef2f28a65888c955d1" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>defaultLayoutData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1afae63411e415d9c03b9a0ff51c13ee04" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>detachActionIfUnused</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a4560e42dca9d55c43b1fae9bc330354e" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>didAdd</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a615754f01e2b19eb2f3144563e44e028" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>didMove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a1c8d107c44f88fb23760fd56dea8d361" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>didRemove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a02ff00d670efea42235403e0ae9948a1" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>didRemoveAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a357603a7db1173e4efaccd9537f53cdb" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>didReplace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ed84aa3c6e6d970d42b64c83b46573d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>editLayoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaf52c2f637ff1260e089e66443b07531" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a89aeb65892433da9fcac35928db00810" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a991fbde3d3d5a341776a4b9ac91aaa10" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>focusableButtons</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a90b71196c44058545a3697642d996c64" prot="private" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>initializeUi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a4f525b5f8a3db726a595ba99841e109c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>insertButton</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1acc65b744f0701f00597e4c89d6241239" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>isAncestorOrSame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a97d8c87be9b6f70a530c8b6bd3f204d0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>isButtonFullyVisible</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_layout_1a371c650f44292b0631953d19d502e049" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>isOpaque</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a967203e56c68deb9f759c9a6f4f8d8d4" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>isPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1afb8f08ad9f89178255cdda7cf8ac450f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_layout_1a64ed351061ac71698d6c54b091413adf" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>Layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad34c082f4cb962dabd803d02895a9902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaa6aedebddacbcb54d637ab7dc763317" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>localSurfaceRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a73838b048c6c2e0a456eb2776a11c459" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>localToScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a487c26497f003630d51662a03a0f0d7e" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>maximumSurfaceCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1aa4c0a2ca1171dd7daf71f3c1581a8c54" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>MeasureButtonFunction</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1ad35f861ef6f4ffa20d7814d27a2cd9bd" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>moveFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a827a5338cd11a1ac0f82d8beae54c1f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>nearestOpaqueSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a50e8ebc2c27eaa297c1b6df62176a9de" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>nearestPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1908b92a2163d514b9dec6b29e18c13b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>onFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a988b6ddcc08f05644816979f015ee82e" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1abc64bcaefcaf39e609599b543312899d" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>onLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a89ee38fde33cf7710da40f7f8c78f0e7" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>onMeasure</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_layout_1a51a42c683021aebc484b04d9786dac9a" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>onPaint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1af4b08bc02b3b7e8e6cf6cf5822645470" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1db7d7cb9f30ee4c5b4242473de6fe33" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a57ed2140168f6fad97796cbc98b876f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1a2f2168434fcf663bccb768dfa8cba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6691b41ed4a62a31aff2393c131ab2f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>requestFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a0dc646a37c22ee2ecde6a9a0de55638a" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>requiredHeight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a417f33a22c9b53b519577b9b53e4f317" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>requiredMinimumHeight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a484e22bcc258d2b36992ff91e6cc4c0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c4a3823f5477de8879ebd80c043abe6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>screenToLocal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad190a0f521f4abb34c9a5fe9e8cdba40" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>setRectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae70aa6dae2d6df94fbb2f6f6b5226daa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5cb74a7a34e1b983c592e6f7f6aeca96" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d00cfd2476c5d44de898c00f29fc90a" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a4623853a42b6ae3683027cb10e3fef65" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aea9e1412522664de3fbfa01435f9bacf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae95b294bf3fad17469266a725bb69ff7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c6f25c89ecf460580ae03db5573b9ba" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ade89cf3d7830659bfa54ed703bdc3d14" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1add04ac6c18ebbcb1dc835a4da635d58d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adb6bc351b2e411bfdc50f26867d31df9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a02f5c3f2df31839ad57c7dd3e442bdc6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>themeContextFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a5f5efc5944effd4b9b8987560710fa34" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>visibleButtons</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a0cff8325b685e12268b2a8136d6c47f2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>visibleScreenRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a86fe969602a64feb0222318997a409ee" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>willAdd</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a8760aa6e9b12ee7501d0dcfc79900418" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>willMove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a4561bec5b2bb144e8648ce3ae849d1b8" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>willRemove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a6287668f0ba9f3092e4f2b8460ffcb19" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>willRemoveAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a5d1791f5350a8c8e497e639a701d25ae" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>willReplace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a523ba54e6b47d107c64fec028953d345" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>~Buttons</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_layout_1aa853f17cf52af6f40a5f12007009bddf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>~Layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d29bb69da75140fb230c6edd80bd9e7" prot="public" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>~Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a90eedce321946f6d07da935234975e06" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::layout::Buttons</scope><name>~SurfaceManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

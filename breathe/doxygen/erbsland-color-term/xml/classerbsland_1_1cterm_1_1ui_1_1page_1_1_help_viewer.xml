@@ -1,0 +1,623 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::page::HelpViewer</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_page" prot="public" virt="non-virtual">erbsland::cterm::ui::Page</basecompoundref>
+    <includes refid="_help_viewer_8hpp" local="no">erbsland/cterm/ui/page/HelpViewer.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a06c5950ac2fccf52e3856da9ffcdc904" prot="private" static="no" mutable="no">
+        <type>layout::StackPtr</type>
+        <definition>layout::StackPtr erbsland::cterm::ui::page::HelpViewer::_root</definition>
+        <argsstring></argsstring>
+        <name>_root</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::_root</qualifiedname>
+        <briefdescription>
+<para>Root vertical layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="74" column="22" bodyfile="erbsland/cterm/ui/page/HelpViewer.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a05df81783c0441d52bfacf7a230c6408" prot="private" static="no" mutable="no">
+        <type>surface::HeaderLinePtr</type>
+        <definition>surface::HeaderLinePtr erbsland::cterm::ui::page::HelpViewer::_header</definition>
+        <argsstring></argsstring>
+        <name>_header</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::_header</qualifiedname>
+        <briefdescription>
+<para>Section title header. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="75" column="28" bodyfile="erbsland/cterm/ui/page/HelpViewer.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ac5b52780652f34546a7151f643c3c999" prot="private" static="no" mutable="no">
+        <type>layout::PagesPtr</type>
+        <definition>layout::PagesPtr erbsland::cterm::ui::page::HelpViewer::_pages</definition>
+        <argsstring></argsstring>
+        <name>_pages</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::_pages</qualifiedname>
+        <briefdescription>
+<para>Help-section page layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="76" column="22" bodyfile="erbsland/cterm/ui/page/HelpViewer.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1adf5731464ce608d3634952fe216ef7a6" prot="private" static="no" mutable="no">
+        <type>surface::FooterLinePtr</type>
+        <definition>surface::FooterLinePtr erbsland::cterm::ui::page::HelpViewer::_footer</definition>
+        <argsstring></argsstring>
+        <name>_footer</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::_footer</qualifiedname>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_page" kindref="compound">Page</ref> counter and key help footer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="77" column="28" bodyfile="erbsland/cterm/ui/page/HelpViewer.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1adb22817c1c89e908c04547129cceef02" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; surface::AbstractHelpSectionPtr &gt;</type>
+        <definition>std::vector&lt;surface::AbstractHelpSectionPtr&gt; erbsland::cterm::ui::page::HelpViewer::_sections</definition>
+        <argsstring></argsstring>
+        <name>_sections</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::_sections</qualifiedname>
+        <briefdescription>
+<para>Configured help sections. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="78" column="17" bodyfile="erbsland/cterm/ui/page/HelpViewer.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1aeada5bae5bc8be044acb9453243167ee" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::page::HelpViewer::HelpViewer</definition>
+        <argsstring>(ProtectedTag)</argsstring>
+        <name>HelpViewer</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::HelpViewer</qualifiedname>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_surface_1_1_protected_tag" kindref="compound">ProtectedTag</ref></type>
+        </param>
+        <briefdescription>
+<para>Create a help viewer page. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="23" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a6f0d4c2ee37082e086795036d1495928" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::page::HelpViewer::~HelpViewer</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~HelpViewer</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::~HelpViewer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="24" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ad09bff8b2346a8a536fab138c23d2534" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::addSection</definition>
+        <argsstring>(surface::AbstractHelpSectionPtr section)</argsstring>
+        <name>addSection</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::addSection</qualifiedname>
+        <param>
+          <type>surface::AbstractHelpSectionPtr</type>
+          <declname>section</declname>
+        </param>
+        <briefdescription>
+<para>Add one help section. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The section to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="34" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1acfe0f005cc050f3b5d6d16a91c122d25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::clearSections</definition>
+        <argsstring>()</argsstring>
+        <name>clearSections</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::clearSections</qualifiedname>
+        <briefdescription>
+<para>Remove all help sections. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="36" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ac9f0574c7ac7275a0d7b66ff5b444389" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::show</definition>
+        <argsstring>()</argsstring>
+        <name>show</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::show</qualifiedname>
+        <briefdescription>
+<para>Show this help viewer on the application display. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="38" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ac54b8e82642f1dbe04eafabd012d4fbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::close</qualifiedname>
+        <briefdescription>
+<para>Close this help viewer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="40" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a6118cbfd30eb6bef4e3e3d8dc44bf08a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const layout::PagesPtr &amp;</type>
+        <definition>const layout::PagesPtr &amp; erbsland::cterm::ui::page::HelpViewer::pages</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>pages</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::pages</qualifiedname>
+        <briefdescription>
+<para>Access the page-switching layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="42" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a11508fd4c54e17f1cea9aa411ea27795" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>surface::AbstractHelpSectionPtr</type>
+        <definition>surface::AbstractHelpSectionPtr erbsland::cterm::ui::page::HelpViewer::currentSection</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>currentSection</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::currentSection</qualifiedname>
+        <briefdescription>
+<para>Access the current help section. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="44" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ab2f057a35560fedd4ce3e6e96871b577" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const surface::HeaderLinePtr &amp;</type>
+        <definition>const surface::HeaderLinePtr &amp; erbsland::cterm::ui::page::HelpViewer::header</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>header</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::header</qualifiedname>
+        <briefdescription>
+<para>Access the header line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="46" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a11e3e3bf2c20799d679066690320d36c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const surface::FooterLinePtr &amp;</type>
+        <definition>const surface::FooterLinePtr &amp; erbsland::cterm::ui::page::HelpViewer::footer</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>footer</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::footer</qualifiedname>
+        <briefdescription>
+<para>Access the footer line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="48" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a18ac3526e8c6bb6d57414c5de5d0d674" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::onLayout</definition>
+        <argsstring>(LayoutScope &amp;scope) noexcept override</argsstring>
+        <name>onLayout</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::onLayout</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a931eb7df2cba0068a95ef28af0cdc2b4">onLayout</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_scope" kindref="compound">LayoutScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> direct children within this surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> access for measuring and placing child surfaces. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="51" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a2b127c52eb738381e8e16f4d5f5e27f6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HelpViewerPtr</type>
+        <definition>static HelpViewerPtr erbsland::cterm::ui::page::HelpViewer::create</definition>
+        <argsstring>()</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::create</qualifiedname>
+        <briefdescription>
+<para>Create a help viewer page. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The new help viewer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="29" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ae5cf2cdc9058947479b103d42679f311" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::initializeUi</definition>
+        <argsstring>() override</argsstring>
+        <name>initializeUi</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::initializeUi</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad58106a9586de9d0ad45c4da90bdb528">initializeUi</reimplements>
+        <briefdescription>
+<para>Create the static child tree and page actions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a7fc54043f7ac0974c1bd7d9fba4c84bf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::initializeActions</definition>
+        <argsstring>()</argsstring>
+        <name>initializeActions</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::initializeActions</qualifiedname>
+        <briefdescription>
+<para>Create actions for the help viewer page. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="57" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a014dc5a680aedcfd5294c5ad2d49548f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::previousSection</definition>
+        <argsstring>()</argsstring>
+        <name>previousSection</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::previousSection</qualifiedname>
+        <briefdescription>
+<para>Move to the previous section. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="59" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a2f36aace8031e1f2d8216ac85b0c9eeb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::nextSection</definition>
+        <argsstring>()</argsstring>
+        <name>nextSection</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::nextSection</qualifiedname>
+        <briefdescription>
+<para>Move to the next section. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="61" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a38c4fa024df6132e2744fdf1c7286522" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::scrollCurrentSection</definition>
+        <argsstring>(const Key &amp;key) noexcept</argsstring>
+        <name>scrollCurrentSection</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::scrollCurrentSection</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Scroll the current section for a key. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="63" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a3cadc71f71bc63d228f74cad32b29404" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::page::HelpViewer::updateStatus</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>updateStatus</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::updateStatus</qualifiedname>
+        <briefdescription>
+<para>Refresh header and footer status text. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="65" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a1a94ae33bb4fffe3f8a2bdab0671a483" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; surface::AbstractHelpSectionPtr &gt;</type>
+        <definition>std::vector&lt; surface::AbstractHelpSectionPtr &gt; erbsland::cterm::ui::page::HelpViewer::visibleSections</definition>
+        <argsstring>() const</argsstring>
+        <name>visibleSections</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::visibleSections</qualifiedname>
+        <briefdescription>
+<para>Get the visible sections in configured order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="67" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1aa0d477df29d601febb1c5b08e5a10461" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+        <definition>String erbsland::cterm::ui::page::HelpViewer::currentTitle</definition>
+        <argsstring>() const</argsstring>
+        <name>currentTitle</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::currentTitle</qualifiedname>
+        <briefdescription>
+<para>Get the display title for the current section. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="69" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a40b742a769dbc6d06a5c154448957b08" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+        <definition>String erbsland::cterm::ui::page::HelpViewer::pageCounterText</definition>
+        <argsstring>() const</argsstring>
+        <name>pageCounterText</name>
+        <qualifiedname>erbsland::cterm::ui::page::HelpViewer::pageCounterText</qualifiedname>
+        <briefdescription>
+<para>Get the display page counter for the footer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="71" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A full-screen help viewer page with titled, scrollable help sections. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::ui::Page</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_page"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::page::HelpViewer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="8">
+        <label>erbsland::cterm::Rectangle</label>
+        <link refid="classerbsland_1_1cterm_1_1_rectangle"/>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="9">
+        <label>erbsland::cterm::ui::LayoutMetrics</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::Page</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_page"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_surfaces</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_flags</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_rectangle</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>_layoutMetrics</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>_themeAttributes</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland::cterm::ui::SurfaceFlags</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_flags"/>
+      </node>
+      <node id="10">
+        <label>erbsland::cterm::ui::SurfaceThemeAttributes</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_theme_attributes"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::page::HelpViewer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/page/HelpViewer.hpp" line="20" column="1" bodyfile="erbsland/cterm/ui/page/HelpViewer.hpp" bodystart="20" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a67caf5a45f3afcf394d04b6a811fb019" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1adf5731464ce608d3634952fe216ef7a6" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_footer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a05df81783c0441d52bfacf7a230c6408" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_header</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5e98ac945443673593de934b8e5a6c82" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ac5b52780652f34546a7151f643c3c999" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_pages</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9ded519b8019bf6a0379b4807842db02" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a06c5950ac2fccf52e3856da9ffcdc904" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_root</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1adb22817c1c89e908c04547129cceef02" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_sections</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adebfc77d073fdbec83278119180d2641" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a3495ef389b8d8ba1623a671bdbe0a96f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>_themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d68b998618a891511dee33516b51268" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac3b1bb4dd817e95e8a35841cf96b48a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>actionsPtr</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ad09bff8b2346a8a536fab138c23d2534" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>addSection</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9822c7ffb68730aea7ba35147f48f418" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>addSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0abe7d82b04e8ab6336b069f5cc8582" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>childLayoutContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1abaddf3eeea6f7644b5c60ff68d2de36b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0523529e715f39f711cc5d96ac3c44d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aeb2a9a20d1f4660f51d8319e10785e84" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>clearFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1acfe0f005cc050f3b5d6d16a91c122d25" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>clearSections</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a7647a0a4b8c354a9d16b991ac69c5e2a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>clearTheme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ac54b8e82642f1dbe04eafabd012d4fbf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>close</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a2b127c52eb738381e8e16f4d5f5e27f6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a11508fd4c54e17f1cea9aa411ea27795" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>currentSection</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1aa0d477df29d601febb1c5b08e5a10461" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>currentTitle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ed84aa3c6e6d970d42b64c83b46573d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>editLayoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaf52c2f637ff1260e089e66443b07531" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a89aeb65892433da9fcac35928db00810" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a1eb1c0c96ac28d970d692e20906b1d1c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>focusSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a250d857dc1df98dee9d276602f4e95d6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>focusTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a11e3e3bf2c20799d679066690320d36c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>footer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aad434f9aac7b4da5dc28a644f14ac887" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>hasFocusSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ab2f057a35560fedd4ce3e6e96871b577" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>header</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1aeada5bae5bc8be044acb9453243167ee" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>HelpViewer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a7fc54043f7ac0974c1bd7d9fba4c84bf" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>initializeActions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ae5cf2cdc9058947479b103d42679f311" prot="private" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>initializeUi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1acc65b744f0701f00597e4c89d6241239" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>isAncestorOrSame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a6034171b4786f2360937a40530e8c1f1" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>isOpaque</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1ab15f5aa4e53b8f3687eddff4f100fe86" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>isPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1afb8f08ad9f89178255cdda7cf8ac450f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad34c082f4cb962dabd803d02895a9902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaa6aedebddacbcb54d637ab7dc763317" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>localSurfaceRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a73838b048c6c2e0a456eb2776a11c459" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>localToScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a827a5338cd11a1ac0f82d8beae54c1f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>nearestOpaqueSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a50e8ebc2c27eaa297c1b6df62176a9de" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>nearestPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a2f36aace8031e1f2d8216ac85b0c9eeb" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>nextSection</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1908b92a2163d514b9dec6b29e18c13b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>onFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aa2c3501327d704abfec1a54441efc805" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a18ac3526e8c6bb6d57414c5de5d0d674" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>onLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a970401f71d513138ee3de0e51004f759" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>onMeasure</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1acdae32d8805c0c03d8a05c911afadcca" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>onPaint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1af4b08bc02b3b7e8e6cf6cf5822645470" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1db7d7cb9f30ee4c5b4242473de6fe33" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a03b392013b20696c2af18ffa1a791902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>Page</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a40b742a769dbc6d06a5c154448957b08" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>pageCounterText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a6118cbfd30eb6bef4e3e3d8dc44bf08a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>pages</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a57ed2140168f6fad97796cbc98b876f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a014dc5a680aedcfd5294c5ad2d49548f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>previousSection</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1a2f2168434fcf663bccb768dfa8cba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6691b41ed4a62a31aff2393c131ab2f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>requestFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a484e22bcc258d2b36992ff91e6cc4c0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c4a3823f5477de8879ebd80c043abe6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>screenToLocal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a38c4fa024df6132e2744fdf1c7286522" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>scrollCurrentSection</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad190a0f521f4abb34c9a5fe9e8cdba40" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>setRectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a9bb714de24d436f24edb1b8c93902889" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>setTheme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1ac9f0574c7ac7275a0d7b66ff5b444389" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>show</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae70aa6dae2d6df94fbb2f6f6b5226daa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5cb74a7a34e1b983c592e6f7f6aeca96" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d00cfd2476c5d44de898c00f29fc90a" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a4623853a42b6ae3683027cb10e3fef65" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aea9e1412522664de3fbfa01435f9bacf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae95b294bf3fad17469266a725bb69ff7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c6f25c89ecf460580ae03db5573b9ba" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ade89cf3d7830659bfa54ed703bdc3d14" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1add04ac6c18ebbcb1dc835a4da635d58d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adb6bc351b2e411bfdc50f26867d31df9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a02f5c3f2df31839ad57c7dd3e442bdc6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>themeContextFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1a385e3fc91364c8c7cbae6fbeb61bba1d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>themeOverride</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a3cadc71f71bc63d228f74cad32b29404" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>updateStatus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a0cff8325b685e12268b2a8136d6c47f2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>visibleScreenRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a1a94ae33bb4fffe3f8a2bdab0671a483" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>visibleSections</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1page_1_1_help_viewer_1a6f0d4c2ee37082e086795036d1495928" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>~HelpViewer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_page_1aef96abb0e968f08238b2de773c0044d0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>~Page</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d29bb69da75140fb230c6edd80bd9e7" prot="public" virt="virtual"><scope>erbsland::cterm::ui::page::HelpViewer</scope><name>~Surface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

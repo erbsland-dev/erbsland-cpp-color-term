@@ -1,0 +1,346 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder" prot="public" virt="non-virtual">erbsland::cterm::impl::StringBuilder</basecompoundref>
+    <includes refid="_string_builder_with_whitespace_state_8hpp" local="no">erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1ade3e4382b916d90fb7b49880f1f12512" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt;</type>
+        <definition>std::vector&lt;Char&gt; erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::_pendingWhitespace</definition>
+        <argsstring></argsstring>
+        <name>_pendingWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::_pendingWhitespace</qualifiedname>
+        <briefdescription>
+<para>Collapsible whitespace waiting for following content. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="61" column="17" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a5aa105f2abd9b6cd90c7a5f632dbe330" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::_atLineStart</definition>
+        <argsstring></argsstring>
+        <name>_atLineStart</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::_atLineStart</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para><computeroutput>true</computeroutput> at the start of the block and after explicit line breaks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="62" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a35105869eb53e9f83486dd859ecdfc6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::StringBuilderWithWhitespaceState</definition>
+        <argsstring>()=default</argsstring>
+        <name>StringBuilderWithWhitespaceState</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::StringBuilderWithWhitespaceState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="13" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a3811b9717942cd111cc7f16bc3aa6695" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::~StringBuilderWithWhitespaceState</definition>
+        <argsstring>()=default</argsstring>
+        <name>~StringBuilderWithWhitespaceState</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::~StringBuilderWithWhitespaceState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="14" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a730ae7f05e2cc6baff6f50088786c7dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendDecoration</definition>
+        <argsstring>(const std::optional&lt; String &gt; &amp;decoration, const CharStyle &amp;style)</argsstring>
+        <name>appendDecoration</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendDecoration</qualifiedname>
+        <param>
+          <type>const std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt; &amp;</type>
+          <declname>decoration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="17" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="17" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1add7f96e3e4833aa66ff62dfd7d7c4e19" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendDecorationTrimmed</definition>
+        <argsstring>(const std::optional&lt; String &gt; &amp;decoration, const CharStyle &amp;style)</argsstring>
+        <name>appendDecorationTrimmed</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendDecorationTrimmed</qualifiedname>
+        <param>
+          <type>const std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt; &amp;</type>
+          <declname>decoration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="23" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="23" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a15b6db6727d10f84ef0d61cb37ad5888" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendTrimmed</definition>
+        <argsstring>(std::u32string_view textValue, const CharStyle &amp;style) noexcept</argsstring>
+        <name>appendTrimmed</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendTrimmed</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>textValue</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="29" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a42536a12c42f8b407a6cdc5e4fde5c91" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendTrimmedView</definition>
+        <argsstring>(const StringView &amp;view, const CharStyle &amp;style) noexcept</argsstring>
+        <name>appendTrimmedView</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendTrimmedView</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>view</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="30" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a888ae7336b974926fc53f68f16251cc6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::atLineStart</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>atLineStart</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::atLineStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="33" column="11" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1ad49ab609095b128fde3219c1b9768034" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::hasPendingWhitespace</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hasPendingWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::hasPendingWhitespace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="34" column="11" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a3c63029b12e8a19bc51a70ac0ebf996c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::resetLineStart</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>resetLineStart</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::resetLineStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="35" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="35" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1ac6dbba5727f47b15fe420baa9f37d0b7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendPendingWhitespace</definition>
+        <argsstring>(const StringView &amp;view, const CharStyle &amp;style) noexcept</argsstring>
+        <name>appendPendingWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendPendingWhitespace</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>view</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="39" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="39" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1adcae7bfe8d3aa97b1dcf11a723cc6f1c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendPendingWhitespace</definition>
+        <argsstring>(const std::u32string_view text, const CharStyle &amp;style) noexcept</argsstring>
+        <name>appendPendingWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::appendPendingWhitespace</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="44" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="44" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a7d95a566343bbf779c9065f4f8c2e29d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::flushPendingWhitespace</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>flushPendingWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::flushPendingWhitespace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="49" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="49" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a459580dc8aae2fc7393912843d6b66ff" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::markContentWritten</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>markContentWritten</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState::markContentWritten</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="58" column="10" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A string builder that handles whitespace state and trimming. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::impl::StringBuilder</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>erbsland::cterm::impl::StringBuilder</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::impl::StringData</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1_string_data"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" line="11" column="1" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StringBuilderWithWhitespaceState.hpp" bodystart="11" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a5aa105f2abd9b6cd90c7a5f632dbe330" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>_atLineStart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1ae83bcc98dc522cecf386914f73b0cb83" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>_data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1ade3e4382b916d90fb7b49880f1f12512" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>_pendingWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1acb8055a42bc06339d3ee0ad604bac244" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>append</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a7144c85c2e40c5db2d0757b4cb89a31b" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>append</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a730ae7f05e2cc6baff6f50088786c7dc" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendDecoration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1add7f96e3e4833aa66ff62dfd7d7c4e19" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendDecorationTrimmed</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1ac6dbba5727f47b15fe420baa9f37d0b7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendPendingWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1adcae7bfe8d3aa97b1dcf11a723cc6f1c" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendPendingWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a0f61788720b9b27c7ccc61eb1f29c159" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendStyled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a593e7946499a92c5286f607b673114d7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendStyled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a15b6db6727d10f84ef0d61cb37ad5888" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendTrimmed</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a42536a12c42f8b407a6cdc5e4fde5c91" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendTrimmedView</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a7901215c4b04553c9f505183ee31a91f" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>appendWithBaseStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a888ae7336b974926fc53f68f16251cc6" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>atLineStart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1af2d2986f02288fff6b211f6ee4e8e2c4" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>clear</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1abe303fa67fad7d748da46f609bacba46" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>displayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1af63927a427a34df4e4d810515f5663ef" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>empty</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a7d95a566343bbf779c9065f4f8c2e29d" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>flushPendingWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1ad49ab609095b128fde3219c1b9768034" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>hasPendingWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a459580dc8aae2fc7393912843d6b66ff" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>markContentWritten</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1ab5d9f77f7942160551b8d31072f229cc" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1ad1c06f8967089bb947d62cfa57391c67" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a659cb09af621ed29353fa440f8faf1c2" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>reserve</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a3c63029b12e8a19bc51a70ac0ebf996c" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>resetLineStart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a9e0a21dbc5eedfd7802b110eb7ab7e82" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a549e8a025436271911adb8ab7065ce34" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>StringBuilder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a2c09224b33a4536db76156dd164918ed" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>StringBuilder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a4d4b7258d313cfaee604b5b9f8ceef68" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>StringBuilder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a35105869eb53e9f83486dd859ecdfc6d" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>StringBuilderWithWhitespaceState</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1ad1404252d89a1c070d2692b0d06ba4a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>takeString</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a5f4e88716f85c4d0be91c26e500f91e8" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>toString</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder_1a7ab155629d945211d8f1dca721c84a17" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>~StringBuilder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_string_builder_with_whitespace_state_1a3811b9717942cd111cc7f16bc3aa6695" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StringBuilderWithWhitespaceState</scope><name>~StringBuilderWithWhitespaceState</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

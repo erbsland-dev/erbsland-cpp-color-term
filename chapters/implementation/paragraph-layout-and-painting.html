@@ -1,0 +1,670 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paragraph Layout and Painting &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RemappedBuffer" href="remapped-buffer.html" />
+    <link rel="prev" title="UI Scrollable Areas" href="ui-scrollable-areas.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Implementation Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="windows-backend.html">Windows Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="posix-backend.html">POSIX Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action-scheduling.html">Action Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation-and-event-threads.html">Invocation and Event Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-paint-system.html">UI Paint System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-scrollable-areas.html">UI Scrollable Areas</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Paragraph Layout and Painting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pipeline-at-a-glance">Pipeline at a Glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#relevant-source-files">Relevant Source Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#one-example-through-the-pipeline">One Example Through the Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-the-pipeline-is-split">Why the Pipeline Is Split</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#where-the-pipeline-is-used">Where the Pipeline Is Used</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-layout-result-data-model">The Layout Result Data Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-input-is-split-into-source-lines">How Input Is Split into Source Lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-a-source-line">Preparing a Source Line</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visual-example-of-token-preparation">Visual Example of Token Preparation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-empty-source-lines-are-preserved">Why Empty Source Lines Are Preserved</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#building-physical-lines">Building Physical Lines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-buildline-algorithm">The <code class="docutils literal notranslate"><span class="pre">buildLine()</span></code> Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spacing-runs-tabs-and-separators">Spacing Runs, Tabs, and Separators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#word-splitting">Word Splitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#truncation-and-wrap-limits">Truncation and Wrap Limits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rendering-the-layout">Rendering the Layout</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#shared-placement-rules">Shared Placement Rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#painting-into-buffers">Painting into Buffers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#printing-through-cursorwriter">Printing through CursorWriter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#background-extension-modes">Background Extension Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visual-example-of-wrappedboth">Visual Example of <code class="docutils literal notranslate"><span class="pre">WrappedBoth</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="remapped-buffer.html">RemappedBuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack-layout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string-sharing.html">String Sharing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text-node-renderer.html">TextNodeRenderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode-width-system.html">Unicode Width System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementation Notes</a></li>
+      <li class="breadcrumb-item active">Paragraph Layout and Painting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/implementation/paragraph-layout-and-painting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="paragraph-layout-and-painting">
+<span id="index-0"></span><h1>Paragraph Layout and Painting<a class="headerlink" href="#paragraph-layout-and-painting" title="Link to this heading"></a></h1>
+<p>This page explains the wrapped-paragraph pipeline in
+<code class="docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph</span></code>.</p>
+<p>The implementation is split into three main parts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">impl::paragraph::Layout</span></code> builds a reusable width-aware layout.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impl::paragraph::Painter</span></code> paints that layout into a
+<a class="reference internal" href="../reference/buffer.html#_CPPv4N8erbsland5cterm14WritableBufferE" title="erbsland::cterm::WritableBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">WritableBuffer</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impl::paragraph::Printer</span></code> streams the same layout through a
+<a class="reference internal" href="../reference/cursor-output.html#_CPPv4N8erbsland5cterm12CursorWriterE" title="erbsland::cterm::CursorWriter"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter</span></code></a>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">RendererBase</span></code> provides the shared placement and background-fill rules for the
+two renderers.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">How to read the visuals on this page</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The visuals on this page are intentionally schematic.
+Plain-text diagrams show control flow and internal data structures.
+ANSI blocks show the final visible cells, with gray background cells used to
+expose spacing, indentation, and reserved areas that would otherwise be
+invisible.</p>
+</div>
+</details><section id="pipeline-at-a-glance">
+<h2>Pipeline at a Glance<a class="headerlink" href="#pipeline-at-a-glance" title="Link to this heading"></a></h2>
+<p>The current rendering path looks like this:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    input["text + width + ParagraphOptions"] --&gt; build["Layout::build()"]
+    build --&gt; split["splitIntoSourceLines()&lt;br/&gt;newline interpretation"]
+    build --&gt; prepare["prepareSourceLine()&lt;br/&gt;LayoutLineToken{Word|SeparatorSpace|Tab}"]
+    split --&gt; source["layoutSourceLine()"]
+    prepare --&gt; source
+    source --&gt; builder["LineBuilder"]
+    builder --&gt; line["buildLine()&lt;br/&gt;tryBuildLastLine()&lt;br/&gt;buildWrappedLine()&lt;br/&gt;buildTruncatedLine()"]
+    line --&gt; result["LayoutResult&lt;br/&gt;LayoutLine + LayoutFragment"]
+    result --&gt; painter["Painter::paint()"]
+    result --&gt; printer["Printer::print()"]
+    painter --&gt; buffer["WritableBuffer cells"]
+    printer --&gt; writer["CursorWriter output"]
+</div></section>
+<section id="relevant-source-files">
+<h2>Relevant Source Files<a class="headerlink" href="#relevant-source-files" title="Link to this heading"></a></h2>
+<p>You will find the implementation primarily in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/Layout.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/Layout.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/LineBuilder.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/LineBuilder.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/LayoutPreparedSourceLine.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/LayoutLineToken.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/RendererBase.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/Painter.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/Painter.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/Printer.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/paragraph/Printer.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/Terminal.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/CursorBuffer.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/TextPainter.cpp</span></code></p></li>
+</ul>
+</section>
+<section id="one-example-through-the-pipeline">
+<h2>One Example Through the Pipeline<a class="headerlink" href="#one-example-through-the-pipeline" title="Link to this heading"></a></h2>
+<p>The following simplified example is reused across several visuals below.
+It keeps the moving parts small enough to inspect:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>source line
+    &quot;Signal lanterns sailors home&quot;
+
+width
+    20 columns
+
+selected options
+    wrappedLineIndent = 3
+    lineBreakStartMark = &quot;» &quot;
+    lineBreakEndMark = &quot; ↩&quot;
+</pre></div>
+</div>
+<p>At the token and layout level, the data model looks like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>prepared tokens
+    [0] Word(&quot;Signal&quot;)
+    [1] SeparatorSpace(&quot; &quot;)
+    [2] Word(&quot;lanterns&quot;)
+    [3] SeparatorSpace(&quot; &quot;)
+    [4] Word(&quot;sailors&quot;)
+    [5] SeparatorSpace(&quot; &quot;)
+    [6] Word(&quot;home&quot;)
+
+physical lines
+    line 0:
+        indentWidth = 0
+        wrapsToNext = true
+        fragments = [SourceRange(&quot;Signal&quot;), Spaces(1), SourceRange(&quot;lanterns&quot;)]
+
+    line 1:
+        indentWidth = 3
+        wrapsToNext = false
+        fragments = [LineBreakStartMark(&quot;» &quot;), SourceRange(&quot;sailors&quot;), Spaces(1), SourceRange(&quot;home&quot;)]
+</pre></div>
+</div>
+<p>The wrap-end marker is not stored as a fragment inside <code class="docutils literal notranslate"><span class="pre">LayoutLine</span></code>.
+Instead, renderers derive it from <code class="docutils literal notranslate"><span class="pre">wrapsToNext</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ParagraphOptions::lineBreakEndMark()</span></code> so it can stay anchored to the right
+edge of the paragraph area.</p>
+<p>After rendering, those two lines occupy the 20-cell grid like this:</p>
+<pre class="ela-term-block literal-block"><span class="ela-term-bright-black">01234567890123456789</span>
+<span class="ela-term-bright-white">Signal lanterns</span><span class="ela-term-bright-white ela-term-background-bright-black">   </span><span class="ela-term-bright-cyan ela-term-background-bright-black"> ↩</span>
+<span class="ela-term-background-bright-black">   </span><span class="ela-term-background-bright-black ela-term-bright-cyan">» </span><span class="ela-term-background-bright-black ela-term-bright-white">sailors home</span></pre>
+</section>
+<section id="why-the-pipeline-is-split">
+<h2>Why the Pipeline Is Split<a class="headerlink" href="#why-the-pipeline-is-split" title="Link to this heading"></a></h2>
+<p>The library deliberately separates paragraph work into layout plus rendering:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Layout</span></code> turns source text and
+<a class="reference internal" href="../reference/paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptionsE" title="erbsland::cterm::ParagraphOptions"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ParagraphOptions</span></code></a> into a
+neutral <code class="docutils literal notranslate"><span class="pre">LayoutResult</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Painter</span></code> renders that result into an existing buffer and can use a color
+resolver for animated or context-sensitive colors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Printer</span></code> renders the same result as streamed cursor-writer output.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RendererBase</span></code> keeps alignment and background-fill behavior identical
+between both rendering paths.</p></li>
+</ul>
+<p>This split matters because the entry points have different output models while
+sharing the same wrap rules:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal::printParagraph()</span></code>
+and <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorBuffer::printParagraph()</span></code>
+use <code class="docutils literal notranslate"><span class="pre">Layout</span></code> plus <code class="docutils literal notranslate"><span class="pre">Printer</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TextPainter::drawText()</span></code> uses <code class="docutils literal notranslate"><span class="pre">Layout</span></code> plus <code class="docutils literal notranslate"><span class="pre">Painter</span></code>.</p></li>
+<li><p>Layout failure is detected before any drawing occurs, so the caller can apply
+<a class="reference internal" href="../reference/paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOnErrorE" title="erbsland::cterm::ParagraphOnError"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ParagraphOnError</span></code></a> consistently.</p></li>
+</ul>
+</section>
+<section id="where-the-pipeline-is-used">
+<h2>Where the Pipeline Is Used<a class="headerlink" href="#where-the-pipeline-is-used" title="Link to this heading"></a></h2>
+<p>The layout engine supports two newline modes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LayoutNewlineMode::HardLineBreak</span></code>:
+each newline starts a new source line inside one printed paragraph.
+This is used for terminal and cursor-writer style output.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LayoutNewlineMode::ParagraphBreak</span></code>:
+each newline starts a new paragraph.
+This is used when text is rendered inside a rectangle.</p></li>
+</ul>
+<p>That means:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal::printParagraph()</span></code>
+and <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorBuffer::printParagraph()</span></code>
+treat embedded newlines as hard line breaks and append
+<a class="reference internal" href="../reference/paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphSpacingE" title="erbsland::cterm::ParagraphSpacing"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ParagraphSpacing</span></code></a> only after the
+whole call finishes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TextPainter::drawText()</span></code> treats embedded newlines as paragraph boundaries,
+so paragraph spacing is inserted between the resulting paragraphs.</p></li>
+</ul>
+</section>
+<section id="the-layout-result-data-model">
+<h2>The Layout Result Data Model<a class="headerlink" href="#the-layout-result-data-model" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Layout::build()</span></code> produces a <code class="docutils literal notranslate"><span class="pre">LayoutResult</span></code> with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">valid</span></code> – <code class="docutils literal notranslate"><span class="pre">false</span></code> if the chosen width and paragraph settings cannot
+produce any visible layout</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sourceText</span></code> – the original string used by source-range fragments</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code> – the paragraph options used for the build</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lines</span></code> – the rendered physical lines</p></li>
+</ul>
+<p>Each <code class="docutils literal notranslate"><span class="pre">LayoutLine</span></code> stores:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">indentWidth</span></code> – the width reserved before the first visible fragment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wrappedFromPrevious</span></code> – whether this line continues a previous physical line</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wrapsToNext</span></code> – whether the renderer must add the configured wrap-end marker</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fragments</span></code> – an ordered sequence of:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">SourceRange</span></code> fragments that point back into the original text</p></li>
+<li><p>generated <code class="docutils literal notranslate"><span class="pre">Spaces</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LineBreakStartMark</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WordBreakMark</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ParagraphEllipsis</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>This is enough for renderers to position text, keep the wrap-end marker aligned
+to the right edge, and apply background-fill rules without re-running layout.</p>
+</section>
+<section id="how-input-is-split-into-source-lines">
+<h2>How Input Is Split into Source Lines<a class="headerlink" href="#how-input-is-split-into-source-lines" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Layout::build()</span></code> starts with two structural steps:</p>
+<ol class="arabic simple">
+<li><p>Widths less than or equal to zero immediately produce <code class="docutils literal notranslate"><span class="pre">valid</span> <span class="pre">=</span> <span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">splitIntoSourceLines()</span></code> splits the input on newline characters.</p></li>
+</ol>
+<p>The resulting source-line ranges are then interpreted differently depending on
+the newline mode:</p>
+<ul class="simple">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">HardLineBreak</span></code> mode, all source lines belong to one rendered paragraph.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">ParagraphBreak</span></code> mode, each source line is laid out as its own paragraph.</p></li>
+</ul>
+<p>Two details are easy to miss:</p>
+<ul class="simple">
+<li><p>Interior empty source lines are preserved, so explicit blank lines stay
+visible.</p></li>
+<li><p>A trailing newline does not create an extra trailing source line because
+<code class="docutils literal notranslate"><span class="pre">splitIntoSourceLines()</span></code> only appends the final range when it still contains
+characters.</p></li>
+</ul>
+<p>When paragraph-break mode is active and
+<a class="reference internal" href="../reference/paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphSpacing10DoubleLineE" title="erbsland::cterm::ParagraphSpacing::DoubleLine"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ParagraphSpacing::DoubleLine</span></code></a>
+is enabled, <code class="docutils literal notranslate"><span class="pre">build()</span></code> inserts one empty physical line between paragraphs.</p>
+</section>
+<section id="preparing-a-source-line">
+<h2>Preparing a Source Line<a class="headerlink" href="#preparing-a-source-line" title="Link to this heading"></a></h2>
+<p>Each source line is normalized by <code class="docutils literal notranslate"><span class="pre">prepareSourceLine()</span></code> into a
+<code class="docutils literal notranslate"><span class="pre">LayoutPreparedSourceLine</span></code>. This step keeps enough structure for the later
+line builder to handle separators, tabs, colors, and indentation correctly.</p>
+<p>The prepared token stream uses three token kinds:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Word</span></code> – a contiguous source word plus its cached display width</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SeparatorSpace</span></code> – one collapsed separator run that later becomes one
+rendered space</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Tab</span></code> – a left-aligned tab that will be resolved later from the current
+column and the configured tab stops</p></li>
+</ul>
+<p>Tokenization depends on alignment:</p>
+<ul class="simple">
+<li><p>For left-aligned paragraphs, TAB characters become dedicated <code class="docutils literal notranslate"><span class="pre">Tab</span></code> tokens.</p></li>
+<li><p>For centered or right-aligned paragraphs, tabs are only separators if they are
+contained in <code class="docutils literal notranslate"><span class="pre">ParagraphOptions::wordSeparators()</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">LayoutPreparedSourceLine</span></code> also keeps pending spacing tokens until the next
+word is known. That gives the implementation two useful behaviors:</p>
+<ul class="simple">
+<li><p>leading separator runs are dropped entirely</p></li>
+<li><p>leading tabs are preserved for left-aligned paragraphs and resolved later from
+tab-stop settings</p></li>
+</ul>
+<section id="visual-example-of-token-preparation">
+<h3>Visual Example of Token Preparation<a class="headerlink" href="#visual-example-of-token-preparation" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>source line
+    &quot;  title:\talpha,,,beta&quot;
+
+separators include &#39;,&#39;
+
+prepared tokens
+    [0] Word(&quot;title:&quot;)
+    [1] Tab
+    [2] Word(&quot;alpha&quot;)
+    [3] SeparatorSpace(&quot;,,,&quot;)
+    [4] Word(&quot;beta&quot;)
+</pre></div>
+</div>
+<p>The important detail is that the three commas do not survive as three rendered
+cells. They collapse into one logical separator token that later becomes one
+generated space with the separator run’s color.</p>
+</section>
+<section id="why-empty-source-lines-are-preserved">
+<h3>Why Empty Source Lines Are Preserved<a class="headerlink" href="#why-empty-source-lines-are-preserved" title="Link to this heading"></a></h3>
+<p>If <code class="docutils literal notranslate"><span class="pre">prepareSourceLine()</span></code> produces no tokens, <code class="docutils literal notranslate"><span class="pre">layoutSourceLine()</span></code> appends
+an empty <code class="docutils literal notranslate"><span class="pre">LayoutLine</span></code> immediately.</p>
+<p>That keeps explicit blank input lines visible in both newline modes. In
+paragraph-break mode, the configured paragraph spacing is then applied around
+those empty paragraphs in exactly the same way as for non-empty ones.</p>
+</section>
+</section>
+<section id="building-physical-lines">
+<h2>Building Physical Lines<a class="headerlink" href="#building-physical-lines" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">layoutSourceLine()</span></code> turns one prepared source line into one or more physical
+lines by creating a <code class="docutils literal notranslate"><span class="pre">LineBuilder</span></code>.</p>
+<p>The builder tracks:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tokenIndex</span></code> – the next token in the prepared source line</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wordOffset</span></code> – the current offset inside a split word token</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabStopIndex</span></code> – the next configured tab stop to consume</p></li>
+</ul>
+<p>For one source line, the control flow is:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    start["layoutSourceLine()"] --&gt; prepare["prepareSourceLine()"]
+    prepare --&gt; empty{"tokens.empty()?"}
+    empty --&gt;|yes| blank["append empty LayoutLine"]
+    empty --&gt;|no| loop["LineBuilder loop"]
+    loop --&gt; last["tryBuildLastLine()"]
+    last --&gt; lastOk{"all remaining content fits?"}
+    lastOk --&gt;|yes| appendLast["append final line"]
+    lastOk --&gt;|no| limit{"wrap limit reached?"}
+    limit --&gt;|yes| truncate["buildTruncatedLine()"]
+    limit --&gt;|no| wrapped["buildWrappedLine()"]
+    truncate --&gt; appendTruncated["append truncated line"]
+    wrapped --&gt; appendWrapped["append wrapped line and continue"]
+</div><p>This keeps the last line, wrapped lines, and truncated lines on the same
+<code class="docutils literal notranslate"><span class="pre">buildLine()</span></code> foundation instead of maintaining three unrelated code paths.</p>
+<section id="the-buildline-algorithm">
+<h3>The <code class="docutils literal notranslate"><span class="pre">buildLine()</span></code> Algorithm<a class="headerlink" href="#the-buildline-algorithm" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">buildLine()</span></code> is the core routine behind:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tryBuildLastLine()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buildWrappedLine()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buildTruncatedLine()</span></code></p></li>
+</ul>
+<p>Its steps are:</p>
+<ol class="arabic simple">
+<li><p>Reserve suffix width for either the wrap-end marker or the paragraph
+ellipsis.</p></li>
+<li><p>Build the prefix from <code class="docutils literal notranslate"><span class="pre">indentWidth</span></code> plus an optional start mark on wrapped
+continuation lines.</p></li>
+<li><p>Evaluate the next spacing run until the next word token is reached.</p></li>
+<li><p>If the next whole word fits, append the spacing run and the word.</p></li>
+<li><p>If the word does not fit but the line already contains visible content, stop
+and let the caller emit a wrapped or truncated continuation line.</p></li>
+<li><p>If the word does not fit and the line is still empty, try splitting the word.</p></li>
+<li><p>If even that cannot place any visible content, return <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> so the
+whole layout becomes invalid.</p></li>
+</ol>
+<p>Two details matter here:</p>
+<ul class="simple">
+<li><p>The optional wrap-start mark is only added for wrapped continuation lines in
+left-aligned paragraphs.</p></li>
+<li><p>The line builder counts automatic wraps per source line. A new source line
+creates a new <code class="docutils literal notranslate"><span class="pre">LineBuilder</span></code>, which is why hard line breaks reset the wrap
+counter.</p></li>
+</ul>
+</section>
+<section id="spacing-runs-tabs-and-separators">
+<h3>Spacing Runs, Tabs, and Separators<a class="headerlink" href="#spacing-runs-tabs-and-separators" title="Link to this heading"></a></h3>
+<p>Spacing is processed as a run before the next word, not as isolated tokens.
+That is why multiple separators still collapse cleanly and tabs can force a
+line break before the next visible word is emitted.</p>
+<p>Rules for separator tokens:</p>
+<ul class="simple">
+<li><p>leading separator runs are ignored</p></li>
+<li><p>once visible content exists on the line, a separator run contributes exactly
+one generated space</p></li>
+</ul>
+<p>Rules for tabs in left-aligned paragraphs:</p>
+<ul class="simple">
+<li><p>each tab consumes the next entry from <code class="docutils literal notranslate"><span class="pre">ParagraphOptions::tabStops()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resolveTabStop()</span></code> resolves
+<a class="reference internal" href="../reference/paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptions21cTabWrappedLineIndentE" title="erbsland::cterm::ParagraphOptions::cTabWrappedLineIndent"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">cTabWrappedLineIndent</span></code></a>
+to the configured wrapped-line indent</p></li>
+<li><p>if the resolved tab stop is ahead of the current column, the tab expands into
+that many spaces</p></li>
+</ul>
+<p>If the resolved stop does not advance the current column, or if no further stop
+exists, <code class="docutils literal notranslate"><span class="pre">tabOverflowBehavior()</span></code> decides what happens next:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AddSpace</span></code> inserts one space and continues</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LineBreak</span></code> consumes the tab and continues on the next physical line</p></li>
+</ul>
+<p>The implementation also includes one safeguard for <code class="docutils literal notranslate"><span class="pre">LineBreak</span></code>:
+if the tab appears at the start of a line and would not add any visible content,
+the tab is consumed and dropped instead of producing an endless stream of empty
+wrapped lines.</p>
+</section>
+<section id="word-splitting">
+<h3>Word Splitting<a class="headerlink" href="#word-splitting" title="Link to this heading"></a></h3>
+<p>Splitting is handled by <code class="docutils literal notranslate"><span class="pre">LayoutLineToken::split()</span></code> and is only attempted when
+a word does not fit and the current physical line still contains no visible
+text.</p>
+<p>The split logic:</p>
+<ul class="simple">
+<li><p>reserves room for <code class="docutils literal notranslate"><span class="pre">wordBreakMark()</span></code> when a wrapped line is being built</p></li>
+<li><p>walks the word character by character</p></li>
+<li><p>counts visible width using each <code class="docutils literal notranslate"><span class="pre">Char</span></code>’s display width</p></li>
+<li><p>skips zero-width characters when calculating the consumed width</p></li>
+<li><p>stops before overflow</p></li>
+<li><p>adds the break mark only when there is still source text left for later lines</p></li>
+</ul>
+<p>Because the split works on <code class="docutils literal notranslate"><span class="pre">Char</span></code> display widths, it stays consistent with the
+library’s Unicode width system.</p>
+</section>
+<section id="truncation-and-wrap-limits">
+<h3>Truncation and Wrap Limits<a class="headerlink" href="#truncation-and-wrap-limits" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">maximumLineWraps()</span></code> limits the number of automatic wraps produced while
+laying out one source line.</p>
+<p>When the limit is reached, <code class="docutils literal notranslate"><span class="pre">buildTruncatedLine()</span></code> rebuilds the current line
+with width reserved for <code class="docutils literal notranslate"><span class="pre">paragraphEllipsisMark()</span></code>.</p>
+<p>Important consequences:</p>
+<ul class="simple">
+<li><p>hard line breaks and paragraph breaks reset the wrap counter because they
+start a new source line</p></li>
+<li><p>the ellipsis consumes real width and can itself make the layout invalid</p></li>
+<li><p>truncation still respects indentation, start marks, tabs, and Unicode width</p></li>
+</ul>
+</section>
+</section>
+<section id="rendering-the-layout">
+<h2>Rendering the Layout<a class="headerlink" href="#rendering-the-layout" title="Link to this heading"></a></h2>
+<p>Once a <code class="docutils literal notranslate"><span class="pre">LayoutResult</span></code> exists, rendering is handled by <code class="docutils literal notranslate"><span class="pre">Painter</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Printer</span></code>. Neither renderer performs line breaking; they only consume the
+precomputed layout.</p>
+<section id="shared-placement-rules">
+<h3>Shared Placement Rules<a class="headerlink" href="#shared-placement-rules" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">RendererBase::linePlacement()</span></code> computes three values for every physical line:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">textX</span></code> – where the text and non-end-mark fragments begin</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">textWidth</span></code> – the width of <code class="docutils literal notranslate"><span class="pre">indentWidth</span></code> plus all fragments</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">endMarkX</span></code> – where the wrap-end marker begins if <code class="docutils literal notranslate"><span class="pre">wrapsToNext</span></code> is true</p></li>
+</ul>
+<p>The end-mark width is removed from the available alignment width first.
+This keeps the configured wrap-end marker anchored to the right edge of the
+paragraph area even when the text itself is centered or right-aligned.</p>
+<p>Schematic placement example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>paragraph width  = 24
+endMark width    = 2
+text width space = 22
+
+012345678901234567890123
+    Harbor reports     ↩
+    ^                  ^
+    textX              endMarkX
+</pre></div>
+</div>
+</section>
+<section id="painting-into-buffers">
+<h3>Painting into Buffers<a class="headerlink" href="#painting-into-buffers" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Painter::paint()</span></code> determines how many layout lines fit into the target
+rectangle, applies vertical alignment, and then draws each line into the buffer.</p>
+<p>For each visible line it:</p>
+<ol class="arabic simple">
+<li><p>computes the final placement with <code class="docutils literal notranslate"><span class="pre">linePlacement()</span></code></p></li>
+<li><p>draws the line fragments starting at <code class="docutils literal notranslate"><span class="pre">textX</span> <span class="pre">+</span> <span class="pre">indentWidth</span></code></p></li>
+<li><p>draws the wrap-end marker at <code class="docutils literal notranslate"><span class="pre">endMarkX</span></code> when <code class="docutils literal notranslate"><span class="pre">wrapsToNext</span></code> is set</p></li>
+<li><p>applies left and right background fill according to
+<a class="reference internal" href="../reference/paragraph-options.html#_CPPv4N8erbsland5cterm23ParagraphBackgroundModeE" title="erbsland::cterm::ParagraphBackgroundMode"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ParagraphBackgroundMode</span></code></a></p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">Painter</span></code> uses an optional color resolver. When present, each character color
+is resolved against the current position before it is merged with the buffer’s
+existing base color.</p>
+</section>
+<section id="printing-through-cursorwriter">
+<h3>Printing through CursorWriter<a class="headerlink" href="#printing-through-cursorwriter" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Printer::print()</span></code> uses the same placement rules, but because it streams text
+instead of mutating an existing buffer, it must materialize indentation and
+padding as spaces.</p>
+<p>That leads to two practical differences from <code class="docutils literal notranslate"><span class="pre">Painter</span></code>:</p>
+<ul class="simple">
+<li><p>left padding, indentation, gaps before the end mark, and trailing fill are all
+written explicitly as spaces</p></li>
+<li><p>spaces not covered by wrapped-text background use the writer’s current
+background color</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Printer</span></code> resolves each emitted character against the writer’s current base
+style before sending it to <code class="docutils literal notranslate"><span class="pre">CursorWriter</span></code>.</p>
+</section>
+</section>
+<section id="background-extension-modes">
+<h2>Background Extension Modes<a class="headerlink" href="#background-extension-modes" title="Link to this heading"></a></h2>
+<p>Background fill is controlled by
+<a class="reference internal" href="../reference/paragraph-options.html#_CPPv4N8erbsland5cterm23ParagraphBackgroundModeE" title="erbsland::cterm::ParagraphBackgroundMode"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ParagraphBackgroundMode</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RendererBase</span></code> splits the logic into three decisions:</p>
+<ul class="simple">
+<li><p>whether continuation indents use left fill</p></li>
+<li><p>whether wrapped lines use right fill</p></li>
+<li><p>whether the final physical line also uses right fill</p></li>
+</ul>
+<p>Left fill:</p>
+<ul class="simple">
+<li><p>uses the last visible color from the previous wrapped line</p></li>
+<li><p>applies only to the continuation indent of the next line</p></li>
+<li><p>is enabled by <code class="docutils literal notranslate"><span class="pre">WrappedLeft</span></code>, <code class="docutils literal notranslate"><span class="pre">WrappedBoth</span></code>, and <code class="docutils literal notranslate"><span class="pre">FullBoth</span></code></p></li>
+</ul>
+<p>Right fill:</p>
+<ul class="simple">
+<li><p>uses the last visible color on the current physical line</p></li>
+<li><p>fills either up to the wrap-end marker or, for <code class="docutils literal notranslate"><span class="pre">FullRight</span></code> / <code class="docutils literal notranslate"><span class="pre">FullBoth</span></code>,
+to the right edge of the paragraph area</p></li>
+</ul>
+<p>Two rendering paths expose the same modes differently:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Painter</span></code> preserves the surrounding buffer content wherever the selected
+mode does not paint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Printer</span></code> must emit spaces, so non-filled padding uses the current
+cursor-writer background instead.</p></li>
+</ul>
+<section id="visual-example-of-wrappedboth">
+<h3>Visual Example of <code class="docutils literal notranslate"><span class="pre">WrappedBoth</span></code><a class="headerlink" href="#visual-example-of-wrappedboth" title="Link to this heading"></a></h3>
+<p>The following block shows both fill directions at once:</p>
+<ul class="simple">
+<li><p>right fill continues the wrapped line’s background up to the end mark</p></li>
+<li><p>left fill carries that background into the continuation indent</p></li>
+</ul>
+<pre class="ela-term-block literal-block"><span class="ela-term-bright-black">01234567890123456789</span>
+<span class="ela-term-bright-white ela-term-background-blue">Signal lanterns</span><span class="ela-term-bright-white ela-term-background-blue">   </span><span class="ela-term-bright-cyan ela-term-background-blue"> ↩</span>
+<span class="ela-term-background-blue">   </span><span class="ela-term-background-blue ela-term-bright-cyan">» </span><span class="ela-term-background-blue ela-term-bright-white">sailors home</span></pre>
+<p><code class="docutils literal notranslate"><span class="pre">FullRight</span></code> and <code class="docutils literal notranslate"><span class="pre">FullBoth</span></code> keep going one step further: their final line
+also fills to the right edge of the paragraph area even when it no longer
+wraps.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ui-scrollable-areas.html" class="btn btn-neutral float-left" title="UI Scrollable Areas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="remapped-buffer.html" class="btn btn-neutral float-right" title="RemappedBuffer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

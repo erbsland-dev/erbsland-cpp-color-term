@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backend &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Buffer" href="buffer.html" />
+    <link rel="prev" title="Bitmap" href="bitmap.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#choosing-when-to-use-a-custom-backend">Choosing When to Use a Custom Backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-terminal-uses-backend-capabilities">How Terminal Uses Backend Capabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementing-a-recording-backend">Implementing a Recording Backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#screen-size-and-input-responsibilities">Screen Size and Input Responsibilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#public-api-and-internal-implementations">Public API and Internal Implementations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm7BackendE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::Backend</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackendPtrE"><code class="docutils literal notranslate"><span class="pre">BackendPtr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="buffer.html">Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer-view.html">Buffer Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cursor-output.html">Cursor Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing.html">Frames, Borders, Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing-text.html">Text Rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-options.html">Paragraph Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rich-text.html">Rich Text and HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal.html">Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Strings and Chars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theme.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">UI Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-core.html">UI Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-layouts.html">UI Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-input.html">UI Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-surfaces.html">UI Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-events.html">UI Events and Scheduling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Backend</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/backend.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="backend">
+<h1>Backend<a class="headerlink" href="#backend" title="Link to this heading"></a></h1>
+<p>The backend classes connect <a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a>
+to the actual console, host environment, or test harness that emits text
+and receives input.</p>
+<p>Most applications should use the built-in platform backend. Reach for
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7BackendE" title="erbsland::cterm::Backend"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend</span></code></a> only when you need to embed
+the library into another console abstraction, capture terminal output
+for tests, or adapt terminal behavior to a non-standard runtime.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="choosing-when-to-use-a-custom-backend">
+<h3>Choosing When to Use a Custom Backend<a class="headerlink" href="#choosing-when-to-use-a-custom-backend" title="Link to this heading"></a></h3>
+<p>The default backend already handles normal terminal work on POSIX and
+Windows systems. A custom backend is usually only worth the extra code
+in three situations:</p>
+<ul class="simple">
+<li><p>You want to integrate the library into an existing UI or console host.</p></li>
+<li><p>You need a deterministic recording backend for tests or demos.</p></li>
+<li><p>You are targeting a platform where terminal access is provided through
+a different abstraction layer.</p></li>
+</ul>
+<p>The simplest way to install a backend is to pass it to the terminal
+constructor before calling
+<a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8Terminal16initializeScreenEv" title="erbsland::cterm::Terminal::initializeScreen"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal::initializeScreen()</span></code></a>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MyBackend</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Terminal</span><span class="p">{</span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="n">Size</span><span class="p">{</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">}};</span>
+
+<span class="n">terminal</span><span class="p">.</span><span class="n">initializeScreen</span><span class="p">();</span>
+<span class="c1">// ...</span>
+<span class="n">terminal</span><span class="p">.</span><span class="n">restoreScreen</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>You can also swap the backend later with
+<a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8Terminal10setBackendE10BackendPtr" title="erbsland::cterm::Terminal::setBackend"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal::setBackend()</span></code></a>,
+but configuring the terminal once up front is usually easier to follow.</p>
+<p>As a general application-level rule, keep exactly one
+<a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a> instance alive for the
+process lifetime. The built-in platform backends maintain shared
+process-wide state, so a single terminal instance is the safest default
+design.</p>
+</section>
+<section id="how-terminal-uses-backend-capabilities">
+<h3>How Terminal Uses Backend Capabilities<a class="headerlink" href="#how-terminal-uses-backend-capabilities" title="Link to this heading"></a></h3>
+<p>The backend API is capability-based. <a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a>
+checks what the backend supports and then chooses between direct ANSI
+output and backend callbacks.</p>
+<p>The most important capability methods are:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4NK8erbsland5cterm7Backend18supportsColorCodesEv" title="erbsland::cterm::Backend::supportsColorCodes"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::supportsColorCodes()</span></code></a>
+controls whether <a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a>
+emits ANSI color sequences itself. If it returns <code class="docutils literal notranslate"><span class="pre">false</span></code>, the
+terminal calls
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend9emitColorE5Color" title="erbsland::cterm::Backend::emitColor"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::emitColor()</span></code></a>
+instead.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4NK8erbsland5cterm7Backend19supportsCursorCodesEv" title="erbsland::cterm::Backend::supportsCursorCodes"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::supportsCursorCodes()</span></code></a>
+controls whether cursor movement and screen clearing use ANSI escape
+sequences or backend hooks such as
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend10moveCursorE8Position8MoveMode" title="erbsland::cterm::Backend::moveCursor"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::moveCursor()</span></code></a>
+and <a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend11clearScreenEv" title="erbsland::cterm::Backend::clearScreen"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::clearScreen()</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4NK8erbsland5cterm7Backend29supportsCursorVisibilityCodesEv" title="erbsland::cterm::Backend::supportsCursorVisibilityCodes"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::supportsCursorVisibilityCodes()</span></code></a>
+decides whether cursor visibility uses ANSI <code class="docutils literal notranslate"><span class="pre">ESC[?25h</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ESC[?25l</span></code> or
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend16setCursorVisibleEb" title="erbsland::cterm::Backend::setCursorVisible"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::setCursorVisible()</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4NK8erbsland5cterm7Backend34supportsAlternateScreenBufferCodesEv" title="erbsland::cterm::Backend::supportsAlternateScreenBufferCodes"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::supportsAlternateScreenBufferCodes()</span></code></a>
+decides whether alternate-screen switching uses ANSI <code class="docutils literal notranslate"><span class="pre">ESC[?1049h</span></code>
+and <code class="docutils literal notranslate"><span class="pre">ESC[?1049l</span></code> in addition to
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend24setAlternateScreenBufferEb" title="erbsland::cterm::Backend::setAlternateScreenBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::setAlternateScreenBuffer()</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4NK8erbsland5cterm7Backend23supportedCharAttributesEv" title="erbsland::cterm::Backend::supportedCharAttributes"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::supportedCharAttributes()</span></code></a>
+reports which character attributes the backend can represent at all.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4NK8erbsland5cterm7Backend27supportedCharAttributeCodesEv" title="erbsland::cterm::Backend::supportedCharAttributeCodes"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::supportedCharAttributeCodes()</span></code></a>
+tells <a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a> which of those
+attributes can be emitted directly as ANSI SGR codes. If a supported
+attribute is missing here, the terminal flushes pending text and calls
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend18emitCharAttributesE14CharAttributes" title="erbsland::cterm::Backend::emitCharAttributes"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::emitCharAttributes()</span></code></a>
+instead.</p></li>
+</ul>
+<p>Two details are easy to overlook:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend8emitTextENSt11string_viewE" title="erbsland::cterm::Backend::emitText"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::emitText()</span></code></a>
+always receives UTF-8 text. When ANSI is enabled, escape sequences are
+passed through as text as well, and each call contains complete UTF-8
+and ANSI sequences.</p></li>
+<li><p>Line buffering is only available when color codes, cursor codes, and
+character-attribute codes can all stay in sync through ANSI. If a
+backend requires callback-based attribute updates, the terminal
+disables that optimization automatically.</p></li>
+</ul>
+</section>
+<section id="implementing-a-recording-backend">
+<h3>Implementing a Recording Backend<a class="headerlink" href="#implementing-a-recording-backend" title="Link to this heading"></a></h3>
+<p>This example shows a small backend that records emitted text and tracks
+the cursor through backend callbacks instead of ANSI cursor codes.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RecordingBackend</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Backend</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">initializePlatform</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">restorePlatform</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">supportsColorCodes</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">supportsCursorCodes</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">isInteractive</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">detectScreenSize</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Size</span><span class="o">&gt;</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Size</span><span class="p">{</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">};</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">emitColor</span><span class="p">(</span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_lastColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">moveCursor</span><span class="p">(</span><span class="n">Position</span><span class="w"> </span><span class="n">posOrDelta</span><span class="p">,</span><span class="w"> </span><span class="n">MoveMode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MoveMode</span><span class="o">::</span><span class="n">Absolute</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_cursor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posOrDelta</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_cursor</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">posOrDelta</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">clearScreen</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_cursor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Position</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">emitText</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_log</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">text</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">emitFlush</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">inputMode</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Input</span><span class="o">::</span><span class="n">Mode</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">_inputMode</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">setInputMode</span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">Mode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_inputMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">readKey</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">waitForKey</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">readLine</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">log</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">_log</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Position</span><span class="w"> </span><span class="n">_cursor</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">_lastColor</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Input</span><span class="o">::</span><span class="n">Mode</span><span class="w"> </span><span class="n">_inputMode</span><span class="p">{</span><span class="n">Input</span><span class="o">::</span><span class="n">Mode</span><span class="o">::</span><span class="n">ReadLine</span><span class="p">};</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">_log</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This style of backend is especially useful for integration tests that
+need to inspect what the terminal would have emitted without depending
+on a real terminal session.</p>
+</section>
+<section id="screen-size-and-input-responsibilities">
+<h3>Screen Size and Input Responsibilities<a class="headerlink" href="#screen-size-and-input-responsibilities" title="Link to this heading"></a></h3>
+<p>Backends are also responsible for the low-level parts of interactivity:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend16detectScreenSizeEv" title="erbsland::cterm::Backend::detectScreenSize"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::detectScreenSize()</span></code></a>
+reports the visible terminal size or <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> if the host
+cannot provide one.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4NK8erbsland5cterm7Backend13isInteractiveEv" title="erbsland::cterm::Backend::isInteractive"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::isInteractive()</span></code></a>
+tells <a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a> whether a real,
+interactive console is attached.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4NK8erbsland5cterm7Backend9inputModeEv" title="erbsland::cterm::Backend::inputMode"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::inputMode()</span></code></a>,
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend12setInputModeEN5Input4ModeE" title="erbsland::cterm::Backend::setInputMode"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::setInputMode()</span></code></a>,
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend7readKeyENSt6chrono12millisecondsE" title="erbsland::cterm::Backend::readKey"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::readKey()</span></code></a>,
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend10waitForKeyEv" title="erbsland::cterm::Backend::waitForKey"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::waitForKey()</span></code></a>,
+and <a class="reference internal" href="#_CPPv4N8erbsland5cterm7Backend8readLineEv" title="erbsland::cterm::Backend::readLine"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Backend::readLine()</span></code></a>
+power the public <a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm5InputE" title="erbsland::cterm::Input"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Input</span></code></a> API.</p></li>
+</ul>
+<p>For backend authors, the important contract is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">readKey(timeout)</span></code> must normalize negative timeouts to zero.</p></li>
+<li><p>In key mode, any timeout less than or equal to zero must be non-blocking.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">waitForKey()</span></code> is the dedicated blocking key-input path.</p></li>
+</ul>
+<p>The terminal applies its own one-column and one-row safe margin on top
+of the detected screen size. Backend implementations should therefore
+return the real visible terminal dimensions instead of subtracting that
+margin themselves.</p>
+</section>
+<section id="public-api-and-internal-implementations">
+<h3>Public API and Internal Implementations<a class="headerlink" href="#public-api-and-internal-implementations" title="Link to this heading"></a></h3>
+<p>This page describes the stable public contract. The built-in backend
+implementations are documented separately in the implementation notes:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../implementation/posix-backend.html"><span class="doc">POSIX Backend</span></a></p></li>
+<li><p><a class="reference internal" href="../implementation/windows-backend.html"><span class="doc">Windows Backend</span></a></p></li>
+<li><p><a class="reference internal" href="../implementation/index.html"><span class="doc">Implementation Notes</span></a></p></li>
+</ul>
+<p>These pages explain how the shipped backends satisfy this contract on
+their respective platforms, including size detection, raw key handling,
+and shutdown cleanup.</p>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7BackendE">
+<span id="_CPPv3N8erbsland5cterm7BackendE"></span><span id="_CPPv2N8erbsland5cterm7BackendE"></span><span id="erbsland::cterm::Backend"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Backend</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_shared_from_this</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm7BackendE" title="erbsland::cterm::Backend"><span class="n"><span class="pre">Backend</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7BackendE" title="Link to this definition"></a><br /></dt>
+<dd><p>The interface to the underlying platform. </p>
+<p>This library expects that the platform implementation correctly handles UTF-8 encoding and VT100 ANSI control codes. </p>
+<p>Subclassed by erbsland::cterm::impl::PosixBackend, erbsland::cterm::impl::WindowsBackend</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend18initializePlatformEv">
+<span id="_CPPv3N8erbsland5cterm7Backend18initializePlatformEv"></span><span id="_CPPv2N8erbsland5cterm7Backend18initializePlatformEv"></span><span id="erbsland::cterm::Backend::initializePlatform"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a76c0176ca7e7cb076b68f45ef04e94e1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">initializePlatform</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend18initializePlatformEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Initialize the platform. </p>
+<p>This method is called from <code class="docutils literal notranslate"><a class="reference internal" href="terminal.html#classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881"><span class="std std-ref"><span class="pre">Terminal::initializeScreen()</span></span></a></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend15restorePlatformEv">
+<span id="_CPPv3N8erbsland5cterm7Backend15restorePlatformEv"></span><span id="_CPPv2N8erbsland5cterm7Backend15restorePlatformEv"></span><span id="erbsland::cterm::Backend::restorePlatform"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a07264906f0afa36fb7b4c70869c3e59d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">restorePlatform</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend15restorePlatformEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Restore the platform. </p>
+<p>This method is called from <code class="docutils literal notranslate"><span class="pre">Termina::restoreScreen()</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Backend18supportsColorCodesEv">
+<span id="_CPPv3NK8erbsland5cterm7Backend18supportsColorCodesEv"></span><span id="_CPPv2NK8erbsland5cterm7Backend18supportsColorCodesEv"></span><span id="erbsland::cterm::Backend::supportsColorCodesC"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a348e86314174b0ac2e5b1868a383a82f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportsColorCodes</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Backend18supportsColorCodesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the platform supports color output. </p>
+<p>This just tests for color support, not cursor movement. If you return <code class="docutils literal notranslate"><span class="pre">false</span></code>, no ANSI color codes are emitted and the line buffer is disabled. Instead, the <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a0202db87d6861a746a06033643a74ebd"><span class="std std-ref"><span class="pre">emitColor()</span></span></a></code> method is called on the backend. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before each call to <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a0202db87d6861a746a06033643a74ebd"><span class="std std-ref"><span class="pre">emitColor()</span></span></a></code>, the text from the line buffer is emitted. </p>
+</div>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Backend19supportsCursorCodesEv">
+<span id="_CPPv3NK8erbsland5cterm7Backend19supportsCursorCodesEv"></span><span id="_CPPv2NK8erbsland5cterm7Backend19supportsCursorCodesEv"></span><span id="erbsland::cterm::Backend::supportsCursorCodesC"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a1c7caf47021fec3c4567a5c1d5337f72"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportsCursorCodes</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Backend19supportsCursorCodesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the platform supports cursor movement. </p>
+<p>This includes cursor position, clearing the terminal and other cursor-related operations. If you return <code class="docutils literal notranslate"><span class="pre">false</span></code>, no cursor movement commands are emitted and the line buffer is disabled. Instead, the <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a194b248af8770f340c2f659bb9d6e0e3"><span class="std std-ref"><span class="pre">moveCursor()</span></span></a></code> etc. methods are called on the backend. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before each call of the cursor methods, the text from the line buffer is emitted. </p>
+</div>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Backend29supportsCursorVisibilityCodesEv">
+<span id="_CPPv3NK8erbsland5cterm7Backend29supportsCursorVisibilityCodesEv"></span><span id="_CPPv2NK8erbsland5cterm7Backend29supportsCursorVisibilityCodesEv"></span><span id="erbsland::cterm::Backend::supportsCursorVisibilityCodesC"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a6a15edbbb817f510533399b0f6bdf9a0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportsCursorVisibilityCodes</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Backend29supportsCursorVisibilityCodesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the backend supports cursor visible/invisible ANSI sequences. </p>
+<p>If this method returns <code class="docutils literal notranslate"><span class="pre">true</span></code>, the ANSI codes <code class="docutils literal notranslate"><span class="pre">ESC[?25l</span></code> and <code class="docutils literal notranslate"><span class="pre">ESC[?25h</span></code> to control the cursor visibility. If it returns <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><a class="reference internal" href="terminal.html#classerbsland_1_1cterm_1_1_terminal"><span class="std std-ref"><span class="pre">Terminal</span></span></a></code> calls <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a7682184af920d295c639bf1fb7d0b288"><span class="std std-ref"><span class="pre">setCursorVisible()</span></span></a></code> instead. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Backend34supportsAlternateScreenBufferCodesEv">
+<span id="_CPPv3NK8erbsland5cterm7Backend34supportsAlternateScreenBufferCodesEv"></span><span id="_CPPv2NK8erbsland5cterm7Backend34supportsAlternateScreenBufferCodesEv"></span><span id="erbsland::cterm::Backend::supportsAlternateScreenBufferCodesC"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a3013a5ebf053abd1885caea606f1e1c9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportsAlternateScreenBufferCodes</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Backend34supportsAlternateScreenBufferCodesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the backend supports alternate screen buffer codes. </p>
+<p>If this method returns <code class="docutils literal notranslate"><span class="pre">true</span></code>, the ANSI codes <code class="docutils literal notranslate"><span class="pre">ESC[?1049h</span></code> and <code class="docutils literal notranslate"><span class="pre">ESC[?1049l</span></code> are sent to the backend to switch to the alternate screen buffer. <em>Additionally</em> <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a36c61941344560b8dfa1ec97ae216cad"><span class="std std-ref"><span class="pre">setAlternateScreenBuffer()</span></span></a></code> is called to notify the backend about the change. If this method returns <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><a class="reference internal" href="terminal.html#classerbsland_1_1cterm_1_1_terminal"><span class="std std-ref"><span class="pre">Terminal</span></span></a></code> <em>only</em> calls <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a36c61941344560b8dfa1ec97ae216cad"><span class="std std-ref"><span class="pre">setAlternateScreenBuffer()</span></span></a></code> instead. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Backend13isInteractiveEv">
+<span id="_CPPv3NK8erbsland5cterm7Backend13isInteractiveEv"></span><span id="_CPPv2NK8erbsland5cterm7Backend13isInteractiveEv"></span><span id="erbsland::cterm::Backend::isInteractiveC"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a4617f27039776149370875e80cd86ac8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isInteractive</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Backend13isInteractiveEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Check if an interactive terminal is attached to the process. </p>
+<p>This state is typically established during <code class="docutils literal notranslate"><a class="reference internal" href="terminal.html#classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881"><span class="std std-ref"><span class="pre">Terminal::initializeScreen()</span></span></a></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if interactive terminal features such as resize and cursor control are available. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend16detectScreenSizeEv">
+<span id="_CPPv3N8erbsland5cterm7Backend16detectScreenSizeEv"></span><span id="_CPPv2N8erbsland5cterm7Backend16detectScreenSizeEv"></span><span id="erbsland::cterm::Backend::detectScreenSize"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a708eff4eb4bc6a0130d87b7f07e90fb1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">detectScreenSize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend16detectScreenSizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Detect the current terminal screen size. </p>
+<p>This method is invoked by <code class="docutils literal notranslate"><a class="reference internal" href="terminal.html#classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881"><span class="std std-ref"><span class="pre">Terminal::initializeScreen()</span></span></a></code> and <code class="docutils literal notranslate"><a class="reference internal" href="terminal.html#classerbsland_1_1cterm_1_1_terminal_1a18d1cc547fd39f055b4d6d66566e0f6d"><span class="std std-ref"><span class="pre">Terminal::testScreenSize()</span></span></a></code> when size detection is enabled. Interactive applications may call <code class="docutils literal notranslate"><span class="pre">testScreenSize()</span></code> before every screen update, so implementations should be efficient or perform updates asynchronously in the background.</p>
+<p>The returned size should represent the visible terminal area available for output. A safety margin of one column and one row is applied by <code class="docutils literal notranslate"><a class="reference internal" href="terminal.html#classerbsland_1_1cterm_1_1_terminal"><span class="std std-ref"><span class="pre">Terminal</span></span></a></code> automatically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The detected screen size, or <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> if detection failed. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend9emitColorE5Color">
+<span id="_CPPv3N8erbsland5cterm7Backend9emitColorE5Color"></span><span id="_CPPv2N8erbsland5cterm7Backend9emitColorE5Color"></span><span id="erbsland::cterm::Backend::emitColor__Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a0202db87d6861a746a06033643a74ebd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emitColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend9emitColorE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Change the current color. </p>
+<p>Only called if <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a348e86314174b0ac2e5b1868a383a82f"><span class="std std-ref"><span class="pre">supportsColorCodes()</span></span></a></code> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The new color to set. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Backend23supportedCharAttributesEv">
+<span id="_CPPv3NK8erbsland5cterm7Backend23supportedCharAttributesEv"></span><span id="_CPPv2NK8erbsland5cterm7Backend23supportedCharAttributesEv"></span><span id="erbsland::cterm::Backend::supportedCharAttributesC"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a6b29bd94109d64c691100372be429564"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm14CharAttributesE" title="erbsland::cterm::CharAttributes"><span class="n"><span class="pre">CharAttributes</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportedCharAttributes</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Backend23supportedCharAttributesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the character attributes supported by this backend. </p>
+<p>The returned value is a fully specified bit mask. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The supported character attributes. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Backend27supportedCharAttributeCodesEv">
+<span id="_CPPv3NK8erbsland5cterm7Backend27supportedCharAttributeCodesEv"></span><span id="_CPPv2NK8erbsland5cterm7Backend27supportedCharAttributeCodesEv"></span><span id="erbsland::cterm::Backend::supportedCharAttributeCodesC"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a38702b23aab21c2b16f273eb0006b0fe"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm14CharAttributesE" title="erbsland::cterm::CharAttributes"><span class="n"><span class="pre">CharAttributes</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportedCharAttributeCodes</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Backend27supportedCharAttributeCodesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the character attributes that can be emitted directly via ANSI codes. </p>
+<p>The returned value is a fully specified bit mask. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The character attributes supported through ANSI codes. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend18emitCharAttributesE14CharAttributes">
+<span id="_CPPv3N8erbsland5cterm7Backend18emitCharAttributesE14CharAttributes"></span><span id="_CPPv2N8erbsland5cterm7Backend18emitCharAttributesE14CharAttributes"></span><span id="erbsland::cterm::Backend::emitCharAttributes__CharAttributes"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a2fe495c3b3eda18eadb7627fc7632880"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emitCharAttributes</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm14CharAttributesE" title="erbsland::cterm::CharAttributes"><span class="n"><span class="pre">CharAttributes</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">attributes</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend18emitCharAttributesE14CharAttributes" title="Link to this definition"></a><br /></dt>
+<dd><p>Change the current character attributes. </p>
+<p>Only called if one or more supported attributes cannot be emitted through ANSI codes. The backend receives the current supported attribute state and can diff it against its own local state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>attributes</strong> – The current supported attribute state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend10moveCursorE8Position8MoveMode">
+<span id="_CPPv3N8erbsland5cterm7Backend10moveCursorE8Position8MoveMode"></span><span id="_CPPv2N8erbsland5cterm7Backend10moveCursorE8Position8MoveMode"></span><span id="erbsland::cterm::Backend::moveCursor__Position.MoveMode"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a194b248af8770f340c2f659bb9d6e0e3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveCursor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">posOrDelta</span></span>, <a class="reference internal" href="cursor-output.html#_CPPv4N8erbsland5cterm8MoveModeE" title="erbsland::cterm::MoveMode"><span class="n"><span class="pre">MoveMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend10moveCursorE8Position8MoveMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Move the cursor. </p>
+<p>Only called if <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a1c7caf47021fec3c4567a5c1d5337f72"><span class="std std-ref"><span class="pre">supportsCursorCodes()</span></span></a></code> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>posOrDelta</strong> – The absolute or relative movement for the cursor. (0,0) = top-left corner. </p></li>
+<li><p><strong>mode</strong> – The move mode, either absolute or relative. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend11clearScreenEv">
+<span id="_CPPv3N8erbsland5cterm7Backend11clearScreenEv"></span><span id="_CPPv2N8erbsland5cterm7Backend11clearScreenEv"></span><span id="erbsland::cterm::Backend::clearScreen"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a4676eabf2ba93c6d8f0a62aa0b4188de"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clearScreen</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend11clearScreenEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Clear the screen and move the cursor to (0,0). </p>
+<p>Only called if <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a1c7caf47021fec3c4567a5c1d5337f72"><span class="std std-ref"><span class="pre">supportsCursorCodes()</span></span></a></code> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend16setCursorVisibleEb">
+<span id="_CPPv3N8erbsland5cterm7Backend16setCursorVisibleEb"></span><span id="_CPPv2N8erbsland5cterm7Backend16setCursorVisibleEb"></span><span id="erbsland::cterm::Backend::setCursorVisible__b"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a7682184af920d295c639bf1fb7d0b288"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCursorVisible</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">visible</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend16setCursorVisibleEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Control if the cursor is visible on the terminal. </p>
+<p>If <code class="docutils literal notranslate"><a class="reference internal" href="#classerbsland_1_1cterm_1_1_backend_1a6a15edbbb817f510533399b0f6bdf9a0"><span class="std std-ref"><span class="pre">supportsCursorVisibilityCodes()</span></span></a></code> returns <code class="docutils literal notranslate"><span class="pre">false</span></code>, this method is called to control the cursor visibility. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend24setAlternateScreenBufferEb">
+<span id="_CPPv3N8erbsland5cterm7Backend24setAlternateScreenBufferEb"></span><span id="_CPPv2N8erbsland5cterm7Backend24setAlternateScreenBufferEb"></span><span id="erbsland::cterm::Backend::setAlternateScreenBuffer__b"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a36c61941344560b8dfa1ec97ae216cad"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setAlternateScreenBuffer</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend24setAlternateScreenBufferEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enables/disables the alternate screen buffer or notifies the backend about the change. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend8emitTextENSt11string_viewE">
+<span id="_CPPv3N8erbsland5cterm7Backend8emitTextENSt11string_viewE"></span><span id="_CPPv2N8erbsland5cterm7Backend8emitTextENSt11string_viewE"></span><span id="erbsland::cterm::Backend::emitText__std::string_view"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a1c45ca170549cd400269f5616ea4b2df"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emitText</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend8emitTextENSt11string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>Emit the given UTF-8 encoded text. </p>
+<p>If the backend does not support UTF-8, you are responsible to convert the text to the expected encoding. Line breaks are usually just NL and not CRLF. UTF-8 sequences, and ANSI sequences are always complete in one call of this method. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – The UTF-8 encoded text to emit. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend9emitFlushEv">
+<span id="_CPPv3N8erbsland5cterm7Backend9emitFlushEv"></span><span id="_CPPv2N8erbsland5cterm7Backend9emitFlushEv"></span><span id="erbsland::cterm::Backend::emitFlush"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a10961a1ba4be8d8ce563d57bcb75c199"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emitFlush</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend9emitFlushEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Flush the output buffer. </p>
+<p>After a call of this method, the backend must flush all previously emitted text and control sequences to the terminal. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm7Backend9inputModeEv">
+<span id="_CPPv3NK8erbsland5cterm7Backend9inputModeEv"></span><span id="_CPPv2NK8erbsland5cterm7Backend9inputModeEv"></span><span id="erbsland::cterm::Backend::inputModeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a47ddeab6716274b0ed90bf0b78b4cab1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm5InputE" title="erbsland::cterm::Input"><span class="n"><span class="pre">Input</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm5Input4ModeE" title="erbsland::cterm::Input::Mode"><span class="n"><span class="pre">Mode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inputMode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm7Backend9inputModeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current input mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend12setInputModeEN5Input4ModeE">
+<span id="_CPPv3N8erbsland5cterm7Backend12setInputModeEN5Input4ModeE"></span><span id="_CPPv2N8erbsland5cterm7Backend12setInputModeEN5Input4ModeE"></span><span id="erbsland::cterm::Backend::setInputMode__Input::Mode"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1ac07c78018f6ea589b88e0cd01b4e645d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setInputMode</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm5InputE" title="erbsland::cterm::Input"><span class="n"><span class="pre">Input</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm5Input4ModeE" title="erbsland::cterm::Input::Mode"><span class="n"><span class="pre">Mode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mode</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend12setInputModeEN5Input4ModeE" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the current input mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> – The new input mode. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend7readKeyENSt6chrono12millisecondsE">
+<span id="_CPPv3N8erbsland5cterm7Backend7readKeyENSt6chrono12millisecondsE"></span><span id="_CPPv2N8erbsland5cterm7Backend7readKeyENSt6chrono12millisecondsE"></span><span id="erbsland::cterm::Backend::readKey__std::chrono::milliseconds"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1abb1484dd7307460577faf1a050d9b21a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">readKey</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">milliseconds</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend7readKeyENSt6chrono12millisecondsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Read one key event without blocking longer than the given timeout. </p>
+<p>In <code class="docutils literal notranslate"><a class="reference internal" href="input.html#classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a897356954c2cd3d41b221e3f24f99bba"><span class="std std-ref"><span class="pre">Input::Mode::Key</span></span></a></code>, negative timeouts must be normalized to zero and any timeout less than or equal to zero must perform a non-blocking poll. In <code class="docutils literal notranslate"><a class="reference internal" href="input.html#classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a299040a8206f805f0a777fc25b6df6a9"><span class="std std-ref"><span class="pre">Input::Mode::ReadLine</span></span></a></code>, the timeout is ignored and this call may block until a line was entered. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> – Maximum wait time in <code class="docutils literal notranslate"><span class="pre">Mode::Key</span></code>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parsed key event, or an invalid key if no supported input was read before the timeout expired. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend10waitForKeyEv">
+<span id="_CPPv3N8erbsland5cterm7Backend10waitForKeyEv"></span><span id="_CPPv2N8erbsland5cterm7Backend10waitForKeyEv"></span><span id="erbsland::cterm::Backend::waitForKey"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1ac0f87f6af6c07d9d0cb4b32313359865"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForKey</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend10waitForKeyEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Wait until one key event is available. </p>
+<p>In <code class="docutils literal notranslate"><a class="reference internal" href="input.html#classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a299040a8206f805f0a777fc25b6df6a9"><span class="std std-ref"><span class="pre">Input::Mode::ReadLine</span></span></a></code>, this call blocks until a line was entered and returns the converted key. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The parsed key event. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend8readLineEv">
+<span id="_CPPv3N8erbsland5cterm7Backend8readLineEv"></span><span id="_CPPv2N8erbsland5cterm7Backend8readLineEv"></span><span id="erbsland::cterm::Backend::readLine"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1ab6f3979137ea63130ce21209da0a9b5d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">readLine</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend8readLineEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Read text input in the terminal. </p>
+<p>Can be ignored in <code class="docutils literal notranslate"><a class="reference internal" href="input.html#classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a897356954c2cd3d41b221e3f24f99bba"><span class="std std-ref"><span class="pre">Input::Mode::Key</span></span></a></code> mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The read text, without line breaks. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm7Backend21createPlatformDefaultE13TerminalFlags">
+<span id="_CPPv3N8erbsland5cterm7Backend21createPlatformDefaultE13TerminalFlags"></span><span id="_CPPv2N8erbsland5cterm7Backend21createPlatformDefaultE13TerminalFlags"></span><span id="erbsland::cterm::Backend::createPlatformDefault__TerminalFlags"></span><span class="target" id="classerbsland_1_1cterm_1_1_backend_1a8a45120d8dec8530acdeccf1292522fb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BackendPtrE" title="erbsland::cterm::BackendPtr"><span class="n"><span class="pre">BackendPtr</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createPlatformDefault</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm13TerminalFlagsE" title="erbsland::cterm::TerminalFlags"><span class="n"><span class="pre">TerminalFlags</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">terminalFlags</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm7Backend21createPlatformDefaultE13TerminalFlags" title="Link to this definition"></a><br /></dt>
+<dd><p>Create the default backend for this platform. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10BackendPtrE">
+<span id="_CPPv3N8erbsland5cterm10BackendPtrE"></span><span id="_CPPv2N8erbsland5cterm10BackendPtrE"></span><span class="target" id="_backend_8hpp_1a04bb27447c0210e4a661f065bb8ef21f"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">BackendPtr</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm7BackendE" title="erbsland::cterm::Backend"><span class="n"><span class="pre">Backend</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm10BackendPtrE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bitmap.html" class="btn btn-neutral float-left" title="Bitmap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="buffer.html" class="btn btn-neutral float-right" title="Buffer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

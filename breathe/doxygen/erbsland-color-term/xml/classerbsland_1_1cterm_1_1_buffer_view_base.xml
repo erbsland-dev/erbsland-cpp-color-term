@@ -1,0 +1,485 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_buffer_view_base" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::BufferViewBase</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1_readable_buffer" prot="public" virt="non-virtual">erbsland::cterm::ReadableBuffer</basecompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1_buffer_const_ref_view" prot="public" virt="non-virtual">erbsland::cterm::BufferConstRefView</derivedcompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1_buffer_view" prot="public" virt="non-virtual">erbsland::cterm::BufferView</derivedcompoundref>
+    <includes refid="_buffer_view_8hpp" local="no">erbsland/cterm/BufferView.hpp</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_buffer_view_base_1ad1bfc32782ea3f97d298ca7b73a340ea" prot="protected" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+        <definition>Rectangle erbsland::cterm::BufferViewBase::_viewRect</definition>
+        <argsstring></argsstring>
+        <name>_viewRect</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::_viewRect</qualifiedname>
+        <initializer>{0, 0, 1, 1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="54" column="15" bodyfile="erbsland/cterm/BufferView.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a29f92e0b9e92945c01902c862588c7c3" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::BufferViewBase::_showCropCharacters</definition>
+        <argsstring></argsstring>
+        <name>_showCropCharacters</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::_showCropCharacters</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="55" column="10" bodyfile="erbsland/cterm/BufferView.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a5063d41d304f17421dacb3ef0b7314b8" prot="protected" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>, <ref refid="classerbsland_1_1cterm_1_1_direction_1afc8e9b4379f035ce773da01f15b8ead8" kindref="member">Direction::cCount</ref> &gt;</type>
+        <definition>std::array&lt;Char, Direction::cCount&gt; erbsland::cterm::BufferViewBase::_cropCharacters</definition>
+        <argsstring></argsstring>
+        <name>_cropCharacters</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::_cropCharacters</qualifiedname>
+        <initializer>{
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos; &apos;},
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos;▲&apos;},
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos;◥&apos;},
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos;▶&apos;},
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos;◢&apos;},
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos;▼&apos;},
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos;◣&apos;},
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos;◀&apos;},
+        <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref>{U&apos;◤&apos;},
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="56" column="16" bodyfile="erbsland/cterm/BufferView.hpp" bodystart="56" bodyend="66"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a8b957ba6fd2bb3e3b7af9907795bd731" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::BufferViewBase::BufferViewBase</definition>
+        <argsstring>(const Rectangle viewRectangle) noexcept</argsstring>
+        <name>BufferViewBase</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::BufferViewBase</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>viewRectangle</declname>
+        </param>
+        <briefdescription>
+<para>Create a buffer view with the given visible rectangle in the source buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>viewRectangle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rectangle of the underlying content that shall be exposed through the view. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="18" column="14" bodyfile="erbsland/cterm/BufferView.hpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a63e5dbf23e4ec0af454dc498fc245f05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::BufferViewBase::BufferViewBase</definition>
+        <argsstring>()=default</argsstring>
+        <name>BufferViewBase</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::BufferViewBase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="21" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1afe1663b71194c038b65de5443f53d867" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::BufferViewBase::~BufferViewBase</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~BufferViewBase</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::~BufferViewBase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="22" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a272fd79b98477b87d111a00d96397cd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::BufferViewBase::BufferViewBase</definition>
+        <argsstring>(const BufferViewBase &amp;)=default</argsstring>
+        <name>BufferViewBase</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::BufferViewBase</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer_view_base" kindref="compound">BufferViewBase</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="23" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1ae252de63958f375ee908d0f5420d84d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::BufferViewBase::BufferViewBase</definition>
+        <argsstring>(BufferViewBase &amp;&amp;)=default</argsstring>
+        <name>BufferViewBase</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::BufferViewBase</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_buffer_view_base" kindref="compound">BufferViewBase</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="24" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a520fe62e96c6ce631440563450c48732" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_buffer_view_base" kindref="compound">BufferViewBase</ref> &amp;</type>
+        <definition>BufferViewBase &amp; erbsland::cterm::BufferViewBase::operator=</definition>
+        <argsstring>(const BufferViewBase &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_buffer_view_base" kindref="compound">BufferViewBase</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="25" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a778ab468f33b52d2bfa0cdbf8952c220" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_buffer_view_base" kindref="compound">BufferViewBase</ref> &amp;</type>
+        <definition>BufferViewBase &amp; erbsland::cterm::BufferViewBase::operator=</definition>
+        <argsstring>(BufferViewBase &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_buffer_view_base" kindref="compound">BufferViewBase</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="26" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a534275ef5860bb9bb1280a755fd46fe9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::BufferViewBase::size</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::size</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_readable_buffer_1acc3cc67ae50d0f17fdf88011dfb9abfc">size</reimplements>
+        <briefdescription>
+<para>Get the configured size of the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The width and height of the buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="29" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1af64d1173843c0547d555f11a614bfade" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+        <definition>Rectangle erbsland::cterm::BufferViewBase::rect</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>rect</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::rect</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_readable_buffer_1af39a3f4e7e7e7412d5289c641a7fc2dc">rect</reimplements>
+        <briefdescription>
+<para>Get a rectangle representing this buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The rectangle for this buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="30" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a12b8bd76f7fdb8927eb46bd2f8cf02e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>WritableBufferPtr</type>
+        <definition>WritableBufferPtr erbsland::cterm::BufferViewBase::clone</definition>
+        <argsstring>() const override</argsstring>
+        <name>clone</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::clone</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_readable_buffer_1aef93bfbaa3832be639c9f975c79355c2">clone</reimplements>
+        <briefdescription>
+<para>Create a writeable copy of this buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will copy every block from this buffer into a new independent instance. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="31" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a4fd6517f1a0e70eca40d68fe30549060" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref> &amp;</type>
+        <definition>const Rectangle &amp; erbsland::cterm::BufferViewBase::viewRect</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>viewRect</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::viewRect</qualifiedname>
+        <briefdescription>
+<para>Get the rectangle in the underlying content that is currently visible through this view. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="35" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a8692bba78af8d48ff68fe04cae932f57" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::BufferViewBase::setViewRect</definition>
+        <argsstring>(Rectangle rect) noexcept</argsstring>
+        <name>setViewRect</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::setViewRect</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <briefdescription>
+<para>Set the rectangle in the underlying content that shall be visible through this view. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new source rectangle for the view. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="38" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a7fe7465cb911fcf61aafe407743dbdbd" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::BufferViewBase::showCropCharacters</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>showCropCharacters</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::showCropCharacters</qualifiedname>
+        <briefdescription>
+<para>Test whether crop indicator characters are shown when the view is clipped by the source buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="40" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1add9ffa80a480daf1b2ce1ecc082c14b1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::BufferViewBase::setShowCropCharacters</definition>
+        <argsstring>(bool show) noexcept</argsstring>
+        <name>setShowCropCharacters</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::setShowCropCharacters</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>show</declname>
+        </param>
+        <briefdescription>
+<para>Enable or disable crop indicator characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>show</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> to render crop indicators inside the view. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="43" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a02c419d5bc5cc6b836b2c4caaf89b979" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::BufferViewBase::cropCharacter</definition>
+        <argsstring>(Direction direction) const noexcept</argsstring>
+        <name>cropCharacter</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::cropCharacter</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_direction" kindref="compound">Direction</ref></type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+<para>Get the crop indicator character for one direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The direction for which to retrieve the crop indicator. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The configured crop character, or an empty character for an invalid direction. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="47" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a06408dc1a31d51c49fee752f5e3b7df3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::BufferViewBase::setCropCharacter</definition>
+        <argsstring>(Direction direction, Char character) noexcept</argsstring>
+        <name>setCropCharacter</name>
+        <qualifiedname>erbsland::cterm::BufferViewBase::setCropCharacter</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_direction" kindref="compound">Direction</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Set the crop indicator character for one direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The direction to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new crop indicator character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/BufferView.hpp" line="51" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>The base class for all buffer views. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>erbsland::cterm::BufferConstRefView</label>
+        <link refid="classerbsland_1_1cterm_1_1_buffer_const_ref_view"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::BufferView</label>
+        <link refid="classerbsland_1_1cterm_1_1_buffer_view"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::BufferViewBase</label>
+        <link refid="classerbsland_1_1cterm_1_1_buffer_view_base"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ReadableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_readable_buffer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::BufferViewBase</label>
+        <link refid="classerbsland_1_1cterm_1_1_buffer_view_base"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_viewRect</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ReadableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_readable_buffer"/>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::Rectangle</label>
+        <link refid="classerbsland_1_1cterm_1_1_rectangle"/>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/BufferView.hpp" line="14" column="1" bodyfile="erbsland/cterm/BufferView.hpp" bodystart="14" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a5063d41d304f17421dacb3ef0b7314b8" prot="protected" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>_cropCharacters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a29f92e0b9e92945c01902c862588c7c3" prot="protected" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>_showCropCharacters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1ad1bfc32782ea3f97d298ca7b73a340ea" prot="protected" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>_viewRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a8b957ba6fd2bb3e3b7af9907795bd731" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>BufferViewBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a63e5dbf23e4ec0af454dc498fc245f05" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>BufferViewBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a272fd79b98477b87d111a00d96397cd0" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>BufferViewBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1ae252de63958f375ee908d0f5420d84d3" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>BufferViewBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a12b8bd76f7fdb8927eb46bd2f8cf02e9" prot="public" virt="virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>clone</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a47805b5bbbcc7f2b0bea4f579e74b1fd" prot="public" virt="virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>countDifferencesTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a02c419d5bc5cc6b836b2c4caaf89b979" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>cropCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a2d3c1eb0ea610fe78b4db45b5589a5f3" prot="public" virt="pure-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>get</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a520fe62e96c6ce631440563450c48732" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a778ab468f33b52d2bfa0cdbf8952c220" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1af64d1173843c0547d555f11a614bfade" prot="public" virt="virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>rect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a06408dc1a31d51c49fee752f5e3b7df3" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>setCropCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1add9ffa80a480daf1b2ce1ecc082c14b1" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>setShowCropCharacters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a8692bba78af8d48ff68fe04cae932f57" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>setViewRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a7fe7465cb911fcf61aafe407743dbdbd" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>showCropCharacters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a534275ef5860bb9bb1280a755fd46fe9" prot="public" virt="virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a3e63939232e2ce14710ab28c0fc34820" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>toMask</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a1183374b9e612d0461c72deccb4c428a" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>toMask</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a9cc60dd001042108d8c3dae15b4c1ec7" prot="protected" virt="virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>toMaskImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1a4fd6517f1a0e70eca40d68fe30549060" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>viewRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_buffer_view_base_1afe1663b71194c038b65de5443f53d867" prot="public" virt="non-virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>~BufferViewBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a1efdd8fc23622c9ad07cf2772b088400" prot="public" virt="virtual"><scope>erbsland::cterm::BufferViewBase</scope><name>~ReadableBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

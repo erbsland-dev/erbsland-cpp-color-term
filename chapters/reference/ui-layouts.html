@@ -1,0 +1,1356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Layouts &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="UI Input" href="ui-input.html" />
+    <link rel="prev" title="UI Core" href="ui-core.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer.html">Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer-view.html">Buffer Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cursor-output.html">Cursor Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing.html">Frames, Borders, Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing-text.html">Text Rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-options.html">Paragraph Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rich-text.html">Rich Text and HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal.html">Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Strings and Chars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theme.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">UI Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-core.html">UI Core</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">UI Layouts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#building-header-body-and-footer-layouts">Building Header, Body, and Footer Layouts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-columns">Building Columns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hiding-layout-children">Hiding Layout Children</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-layout-margins-work">How Layout Margins Work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clipping-one-content-surface-with-viewport">Clipping One Content Surface with Viewport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-classic-overflow-areas">Building Classic Overflow Areas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centering-and-framing-one-child">Centering and Framing One Child</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-titled-sections">Building Titled Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#laying-out-buttons">Laying Out Buttons</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout5StackE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::layout::Stack</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8CenteredE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::layout::Centered</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout5FrameE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::layout::Frame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout19SingleContentLayoutE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::layout::SingleContentLayout</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8ViewportE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::layout::Viewport</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollAreaE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::layout::ScrollArea</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8SectionsE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::layout::Sections</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout7ButtonsE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::layout::Buttons</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ui-input.html">UI Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-surfaces.html">UI Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-events.html">UI Events and Scheduling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">UI Layouts</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/ui-layouts.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ui-layouts">
+<h1>UI Layouts<a class="headerlink" href="#ui-layouts" title="Link to this heading"></a></h1>
+<p>The built-in layout layer is intentionally small. It focuses on
+high-value primitives that compose cleanly with layout-size policies:
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout5StackE" title="erbsland::cterm::ui::layout::Stack"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Stack</span></code></a> for ordered
+composition, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8CenteredE" title="erbsland::cterm::ui::layout::Centered"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Centered</span></code></a>
+and <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout5FrameE" title="erbsland::cterm::ui::layout::Frame"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Frame</span></code></a> for compact
+one-child composition, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8ViewportE" title="erbsland::cterm::ui::layout::Viewport"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Viewport</span></code></a>
+for clipped one-surface content, and
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollAreaE" title="erbsland::cterm::ui::layout::ScrollArea"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ScrollArea</span></code></a> for
+classic overflow-style scrolling with optional scroll bars. Use
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8SectionsE" title="erbsland::cterm::ui::layout::Sections"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Sections</span></code></a> for titled
+vertical regions, and
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout7ButtonsE" title="erbsland::cterm::ui::layout::Buttons"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Buttons</span></code></a> for centered
+action-button rows.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The UI Framework is currently in beta, and parts of the API may
+change in future releases.</p>
+</div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="building-header-body-and-footer-layouts">
+<h3>Building Header, Body, and Footer Layouts<a class="headerlink" href="#building-header-body-and-footer-layouts" title="Link to this heading"></a></h3>
+<p>Use a vertical stack when you want fixed top or bottom rows around one
+growing center area.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Stack</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">Orientation</span><span class="o">::</span><span class="n">Vertical</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">TextBox</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Demo&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">Center</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Panel</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">footer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">TextBox</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Press Q to quit&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">CenterLeft</span><span class="p">);</span>
+
+<span class="n">header</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">footer</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">content</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">ui</span><span class="o">::</span><span class="n">SizePolicy</span><span class="p">{</span><span class="n">ui</span><span class="o">::</span><span class="n">SizePolicy</span><span class="o">::</span><span class="n">Grow</span><span class="p">});</span>
+
+<span class="n">root</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">header</span><span class="p">);</span>
+<span class="n">root</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
+<span class="n">root</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">footer</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="building-columns">
+<h3>Building Columns<a class="headerlink" href="#building-columns" title="Link to this heading"></a></h3>
+<p>Use a horizontal stack to place multiple surfaces next to each other.
+Each child keeps its own size policy, so fixed-width sidebars and one
+growing main area are easy to express.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Stack</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">Orientation</span><span class="o">::</span><span class="n">Horizontal</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">sidebar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Panel</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">mainView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Panel</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+
+<span class="n">sidebar</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setPreferredSize</span><span class="p">(</span><span class="n">Size</span><span class="p">{</span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">});</span>
+<span class="n">mainView</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">ui</span><span class="o">::</span><span class="n">SizePolicy</span><span class="p">{</span><span class="n">ui</span><span class="o">::</span><span class="n">SizePolicy</span><span class="o">::</span><span class="n">Grow</span><span class="p">});</span>
+
+<span class="n">columns</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">sidebar</span><span class="p">);</span>
+<span class="n">columns</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">mainView</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="hiding-layout-children">
+<h3>Hiding Layout Children<a class="headerlink" href="#hiding-layout-children" title="Link to this heading"></a></h3>
+<p>Layouts only allocate space for visible children. Hidden children keep
+their last rectangle and are ignored until they are shown again. This
+lets applications keep optional panels in the tree without constantly
+removing and re-adding them.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Stack</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">Orientation</span><span class="o">::</span><span class="n">Vertical</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">TextBox</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Title&quot;</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Panel</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Panel</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+
+<span class="n">header</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">details</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="n">body</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">ui</span><span class="o">::</span><span class="n">SizePolicy</span><span class="p">{</span><span class="n">ui</span><span class="o">::</span><span class="n">SizePolicy</span><span class="o">::</span><span class="n">Grow</span><span class="p">});</span>
+
+<span class="n">stack</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">header</span><span class="p">);</span>
+<span class="n">stack</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">details</span><span class="p">);</span>
+<span class="n">stack</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">body</span><span class="p">);</span>
+
+<span class="n">details</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">().</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w"> </span><span class="c1">// body now receives the space details would have used</span>
+</pre></div>
+</div>
+</section>
+<section id="how-layout-margins-work">
+<h3>How Layout Margins Work<a class="headerlink" href="#how-layout-margins-work" title="Link to this heading"></a></h3>
+<p>Margins in <code class="docutils literal notranslate"><span class="pre">LayoutMetrics</span></code> are recommendations to the parent layout.
+They are different from padding: a surface owns its content and its own
+padding, while the parent that arranges child surfaces owns the spacing
+between those children. Metric sizes always describe the child content
+rectangle without margins.</p>
+<p>When a layout places adjacent child surfaces, it collapses the two
+touching margins. The larger value wins and becomes spacing owned by the
+layouting parent. In a vertical stack, the previous child’s bottom
+margin collapses with the next child’s top margin. In a horizontal stack,
+the previous child’s right margin collapses with the next child’s left
+margin.</p>
+<p>Margins around the outside of a layout depend on the role of that
+layout:</p>
+<ul class="simple">
+<li><p>Pure layouts arrange peer surfaces. <code class="docutils literal notranslate"><span class="pre">Stack</span></code> and <code class="docutils literal notranslate"><span class="pre">Buttons</span></code> are pure
+layouts. They consume only the margins between children and propagate
+surrounding child margins through their own <code class="docutils literal notranslate"><span class="pre">LayoutMetrics</span></code>. This is
+what lets nested layouts collapse margins at the level where siblings
+actually meet.</p></li>
+<li><p>Enclosing layouts place one selected or contained surface inside an
+area they own. <code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">Pages</span></code>, and <code class="docutils literal notranslate"><span class="pre">Viewport</span></code> are enclosing
+layouts. They collapse their own padding or inset with the enclosed
+child’s margins and place the child inside the reduced rectangle. The
+enclosed child’s margins are not propagated further.</p></li>
+</ul>
+<p>For example, in a horizontal stack of vertical stacks, the vertical
+stacks propagate their left and right child margins. The horizontal
+stack then collapses the margins between columns. If the vertical stacks
+consumed those margins themselves, the column spacing would be added
+instead of collapsed.</p>
+</section>
+<section id="clipping-one-content-surface-with-viewport">
+<h3>Clipping One Content Surface with Viewport<a class="headerlink" href="#clipping-one-content-surface-with-viewport" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8ViewportE" title="erbsland::cterm::ui::layout::Viewport"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Viewport</span></code></a> manages one
+content surface. The clearest API is <code class="docutils literal notranslate"><span class="pre">setContentSurface()</span></code>, but the
+generic child container works too as long as the layout still has at most
+one child. Removing the content is valid and leaves the viewport empty.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">viewport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Viewport</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Panel</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+
+<span class="n">map</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setFixedSize</span><span class="p">(</span><span class="n">Size</span><span class="p">{</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">});</span>
+<span class="n">viewport</span><span class="o">-&gt;</span><span class="n">setContentSurface</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+<span class="n">viewport</span><span class="o">-&gt;</span><span class="n">setScrollOffset</span><span class="p">(</span><span class="n">Position</span><span class="p">{</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">});</span>
+<span class="n">viewport</span><span class="o">-&gt;</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Alignment</span><span class="o">::</span><span class="n">Center</span><span class="p">);</span>
+
+<span class="n">viewport</span><span class="o">-&gt;</span><span class="n">surfaces</span><span class="p">().</span><span class="n">remove</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+<span class="n">viewport</span><span class="o">-&gt;</span><span class="n">surfaces</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the content is smaller than the viewport on an axis, the alignment
+anchors it inside the viewport. If the content is larger, the
+<code class="docutils literal notranslate"><span class="pre">scrollOffset</span></code> moves it relative to that regular placement. The offset
+is always clamped to the valid range.</p>
+<p>Use the common scroll helpers from actions:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">upAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;up&quot;</span><span class="p">);</span>
+<span class="n">upAction</span><span class="o">-&gt;</span><span class="n">addKey</span><span class="p">(</span><span class="n">Key</span><span class="o">::</span><span class="n">Up</span><span class="p">);</span>
+<span class="n">upAction</span><span class="o">-&gt;</span><span class="n">setTriggerFn</span><span class="p">([</span><span class="n">viewport</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewport</span><span class="o">-&gt;</span><span class="n">scrollUp</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
+<span class="n">page</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">upAction</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">pageDownAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;page down&quot;</span><span class="p">);</span>
+<span class="n">pageDownAction</span><span class="o">-&gt;</span><span class="n">addKey</span><span class="p">(</span><span class="n">Key</span><span class="o">::</span><span class="n">PageDown</span><span class="p">);</span>
+<span class="n">pageDownAction</span><span class="o">-&gt;</span><span class="n">setTriggerFn</span><span class="p">([</span><span class="n">viewport</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewport</span><span class="o">-&gt;</span><span class="n">pageDown</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
+<span class="n">page</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">pageDownAction</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">topAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;top&quot;</span><span class="p">);</span>
+<span class="n">topAction</span><span class="o">-&gt;</span><span class="n">addKey</span><span class="p">(</span><span class="n">Key</span><span class="o">::</span><span class="n">Home</span><span class="p">);</span>
+<span class="n">topAction</span><span class="o">-&gt;</span><span class="n">setTriggerFn</span><span class="p">([</span><span class="n">viewport</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewport</span><span class="o">-&gt;</span><span class="n">scrollToTop</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
+<span class="n">page</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">topAction</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="building-classic-overflow-areas">
+<h3>Building Classic Overflow Areas<a class="headerlink" href="#building-classic-overflow-areas" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollAreaE" title="erbsland::cterm::ui::layout::ScrollArea"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ScrollArea</span></code></a> is the
+high-level layout for a scrollable child surface. It expands by default,
+owns a viewport, owns persistent scroll bar surfaces, and forwards the
+same scroll API as the viewport.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">scrollArea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">ScrollArea</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Panel</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+
+<span class="n">document</span><span class="o">-&gt;</span><span class="n">editLayoutMetrics</span><span class="p">().</span><span class="n">setFixedSize</span><span class="p">(</span><span class="n">Size</span><span class="p">{</span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">});</span>
+<span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">setContentSurface</span><span class="p">(</span><span class="n">document</span><span class="p">);</span>
+<span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Alignment</span><span class="o">::</span><span class="n">TopLeft</span><span class="p">);</span>
+<span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">setScrollBarMode</span><span class="p">(</span><span class="n">Orientation</span><span class="o">::</span><span class="n">Vertical</span><span class="p">,</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">ScrollBarMode</span><span class="o">::</span><span class="n">Automatic</span><span class="p">);</span>
+<span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">setScrollBarMode</span><span class="p">(</span><span class="n">Orientation</span><span class="o">::</span><span class="n">Horizontal</span><span class="p">,</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">ScrollBarMode</span><span class="o">::</span><span class="n">Hidden</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">downAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;down&quot;</span><span class="p">);</span>
+<span class="n">downAction</span><span class="o">-&gt;</span><span class="n">addKey</span><span class="p">(</span><span class="n">Key</span><span class="o">::</span><span class="n">Down</span><span class="p">);</span>
+<span class="n">downAction</span><span class="o">-&gt;</span><span class="n">setTriggerFn</span><span class="p">([</span><span class="n">scrollArea</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">scrollDown</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
+<span class="n">page</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">downAction</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ScrollBarMode::Hidden</span></code> hides a bar and reserves no space.
+<code class="docutils literal notranslate"><span class="pre">ScrollBarMode::Automatic</span></code> shows a bar only when content overflows on
+that axis. <code class="docutils literal notranslate"><span class="pre">ScrollBarMode::Visible</span></code> reserves a bar whenever the
+scroll area’s size permits it. Automatic mode uses a stable pass because
+one axis can force the other; for example, a vertical bar consumes one
+column and may make horizontal overflow appear.</p>
+<p>The scroll bars and corner are persistent child surfaces. They are shown
+and hidden with the surface visibility flag instead of being recreated
+when the scroll area resizes. Access them for styling through
+<code class="docutils literal notranslate"><span class="pre">horizontalScrollBar()</span></code>, <code class="docutils literal notranslate"><span class="pre">verticalScrollBar()</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">scrollCorner()</span></code>. These implementation children are protected from
+generic public mutation, so use <code class="docutils literal notranslate"><span class="pre">setContentSurface()</span></code> for the user
+content and leave the scroll area structure intact.</p>
+</section>
+<section id="centering-and-framing-one-child">
+<h3>Centering and Framing One Child<a class="headerlink" href="#centering-and-framing-one-child" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8CenteredE" title="erbsland::cterm::ui::layout::Centered"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Centered</span></code></a> manages one
+content surface, leaves configurable padding around it, and centers the
+child in the remaining area. It is useful for dialogs and empty-state
+views.</p>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout5FrameE" title="erbsland::cterm::ui::layout::Frame"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Frame</span></code></a> also manages one
+content surface. It paints a themed border and optional title, then lays
+the child into the inner rectangle after border and padding have been
+removed.</p>
+<p>Both layouts inherit the same single-content behavior as <code class="docutils literal notranslate"><span class="pre">Viewport</span></code>:
+they tolerate zero children, accept one child through either
+<code class="docutils literal notranslate"><span class="pre">setContentSurface()</span></code> or <code class="docutils literal notranslate"><span class="pre">surfaces().add()</span></code>, and reject a second
+child with an exception.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">centered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Centered</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Frame</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Stack</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">Orientation</span><span class="o">::</span><span class="n">Vertical</span><span class="p">);</span>
+
+<span class="n">centered</span><span class="o">-&gt;</span><span class="n">setPadding</span><span class="p">(</span><span class="n">Margins</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">});</span>
+<span class="n">centered</span><span class="o">-&gt;</span><span class="n">setContentSurface</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+<span class="n">frame</span><span class="o">-&gt;</span><span class="n">setTitle</span><span class="p">(</span><span class="n">String</span><span class="p">{</span><span class="s">&quot;Prompt&quot;</span><span class="p">});</span>
+<span class="n">frame</span><span class="o">-&gt;</span><span class="n">setPadding</span><span class="p">(</span><span class="n">Margins</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">});</span>
+<span class="n">frame</span><span class="o">-&gt;</span><span class="n">setContentSurface</span><span class="p">(</span><span class="n">body</span><span class="p">);</span>
+
+<span class="c1">// Equivalent when the layout is empty:</span>
+<span class="c1">// frame-&gt;surfaces().add(body);</span>
+</pre></div>
+</div>
+</section>
+<section id="building-titled-sections">
+<h3>Building Titled Sections<a class="headerlink" href="#building-titled-sections" title="Link to this heading"></a></h3>
+<p>Use <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8SectionsE" title="erbsland::cterm::ui::layout::Sections"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Sections</span></code></a> when a
+vertical area should read as named blocks. Section metadata belongs to
+the layout, not to the child surface, so the same surface can stay simple
+and reusable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">sections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Sections</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="n">sections</span><span class="o">-&gt;</span><span class="n">addSection</span><span class="p">(</span>
+<span class="w">    </span><span class="n">ui</span><span class="o">::</span><span class="n">TextBox</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Licensed to.........: Example GmbH&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">ui</span><span class="o">::</span><span class="n">Sections</span><span class="o">::</span><span class="n">SectionOptions</span><span class="p">{</span><span class="n">String</span><span class="p">{</span><span class="s">&quot;License Info&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">String</span><span class="p">{</span><span class="s">&quot;[h]&quot;</span><span class="p">}});</span>
+</pre></div>
+</div>
+<p>Section options are stored as layout data on the parent-child relation.
+If you add a child through <code class="docutils literal notranslate"><span class="pre">sections-&gt;surfaces().add(surface)</span></code>, the
+layout creates default empty options for it. You can update them later
+with <code class="docutils literal notranslate"><span class="pre">setSectionOptions()</span></code>.</p>
+<p>The default theme draws <code class="docutils literal notranslate"><span class="pre">─⟨</span> <span class="pre">title</span> <span class="pre">⟩────</span></code>. Customize the separator
+through the <code class="docutils literal notranslate"><span class="pre">Sections</span></code> theme element: <code class="docutils literal notranslate"><span class="pre">Border</span></code> defines the separator
+line and title/right insets, <code class="docutils literal notranslate"><span class="pre">Title</span></code> defines the title style and
+padding, and <code class="docutils literal notranslate"><span class="pre">TitleBracket</span></code> defines the bracket style and bracket
+glyphs. Title padding is painted as part of the title, while title
+margins collapse with adjacent one-line text parts. Use theme tags when
+only selected section groups should use a different decoration.</p>
+</section>
+<section id="laying-out-buttons">
+<h3>Laying Out Buttons<a class="headerlink" href="#laying-out-buttons" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout7ButtonsE" title="erbsland::cterm::ui::layout::Buttons"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Buttons</span></code></a> centers
+button actions and wraps them to additional rows when the available
+width is too small. Arrow keys, <code class="docutils literal notranslate"><span class="pre">Tab</span></code>, and <code class="docutils literal notranslate"><span class="pre">BackTab</span></code> move focus
+between enabled buttons.</p>
+<p>Buttons require
+<a class="reference internal" href="ui-input.html#_CPPv4N8erbsland5cterm2ui12ButtonActionE" title="erbsland::cterm::ui::ButtonAction"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ButtonAction</span></code></a> so the
+action and button surface can keep their enabled state synchronized.
+Generic <a class="reference internal" href="ui-input.html#_CPPv4N8erbsland5cterm2ui6ActionE" title="erbsland::cterm::ui::Action"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Action</span></code></a> remains the right
+choice for page actions, surface key bindings, help entries, and
+scheduled or non-button commands.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">buttons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Buttons</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">openAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">ButtonAction</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Open&quot;</span><span class="p">);</span>
+<span class="n">openAction</span><span class="o">-&gt;</span><span class="n">addKey</span><span class="p">(</span><span class="sa">U</span><span class="sc">&#39;o&#39;</span><span class="p">);</span>
+<span class="n">openAction</span><span class="o">-&gt;</span><span class="n">setTriggerFn</span><span class="p">([]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">openDocument</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
+
+<span class="n">buttons</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">openAction</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Button spacing is resolved from <code class="docutils literal notranslate"><span class="pre">theme::Element::Buttons</span></code> and
+<code class="docutils literal notranslate"><span class="pre">theme::Part::Spacing</span></code>. The spacing part uses block-style content
+margins: left/right configure horizontal spacing between buttons, and
+top/bottom configure vertical spacing between wrapped rows.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Buttons</span></code> also supports generic child mutation for actual
+<code class="docutils literal notranslate"><span class="pre">surface::Button</span></code> instances. Non-button children are rejected, and the
+layout keeps the represented actions synchronized as buttons are added,
+replaced, or removed.</p>
+</section>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5StackE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5StackE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5StackE"></span><span id="erbsland::cterm::ui::layout::Stack"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_stack"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Stack</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui6LayoutE" title="erbsland::cterm::ui::Layout"><span class="n"><span class="pre">Layout</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5StackE" title="Link to this definition"></a><br /></dt>
+<dd><p>A layout that stacks surfaces vertically or horizontally. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Stack5StackE11Orientation12ProtectedTag">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Stack5StackE11Orientation12ProtectedTag"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Stack5StackE11Orientation12ProtectedTag"></span><span id="erbsland::cterm::ui::layout::Stack::Stack__Orientation.ProtectedTag"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_stack_1aa69048450fd66b14284b74d6f84e010b"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Stack</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm11OrientationE" title="erbsland::cterm::Orientation"><span class="n"><span class="pre">Orientation</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">orientation</span></span>, <span class="n"><span class="pre">ProtectedTag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Stack5StackE11Orientation12ProtectedTag" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a stack layout with the given orientation. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orientation</strong> – The stacking direction for child surfaces. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Stack9onMeasureER12MeasureScopeRK14LayoutProposal">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Stack9onMeasureER12MeasureScopeRK14LayoutProposal"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Stack9onMeasureER12MeasureScopeRK14LayoutProposal"></span><span id="erbsland::cterm::ui::layout::Stack::onMeasure__MeasureScopeR.LayoutProposalCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_stack_1a8008228e1a6e4570525364482b976f1f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui13LayoutMetricsE" title="erbsland::cterm::ui::LayoutMetrics"><span class="n"><span class="pre">LayoutMetrics</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onMeasure</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui12MeasureScopeE" title="erbsland::cterm::ui::MeasureScope"><span class="n"><span class="pre">MeasureScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui14LayoutProposalE" title="erbsland::cterm::ui::LayoutProposal"><span class="n"><span class="pre">LayoutProposal</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">proposal</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Stack9onMeasureER12MeasureScopeRK14LayoutProposal" title="Link to this definition"></a><br /></dt>
+<dd><p>Measure this stack from its visible children. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – Measurement access. </p></li>
+<li><p><strong>proposal</strong> – The proposed stack size. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Stack8onLayoutER11LayoutScope">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Stack8onLayoutER11LayoutScope"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Stack8onLayoutER11LayoutScope"></span><span id="erbsland::cterm::ui::layout::Stack::onLayout__LayoutScopeR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_stack_1a212764d0c961d47d9b469b4f6d02b309"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onLayout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11LayoutScopeE" title="erbsland::cterm::ui::LayoutScope"><span class="n"><span class="pre">LayoutScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Stack8onLayoutER11LayoutScope" title="Link to this definition"></a><br /></dt>
+<dd><p>Recalculate all child rectangles inside this stack. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scope</strong> – The layout scope. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Stack6createE11Orientation">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Stack6createE11Orientation"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Stack6createE11Orientation"></span><span id="erbsland::cterm::ui::layout::Stack::create__Orientation"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_stack_1a03501b0d9460c31a093db059179483dd"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">StackPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm11OrientationE" title="erbsland::cterm::Orientation"><span class="n"><span class="pre">Orientation</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">orientation</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Stack6createE11Orientation" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a new stack layout. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orientation</strong> – The stacking direction for child surfaces. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The new stack layout instance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8CenteredE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8CenteredE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8CenteredE"></span><span id="erbsland::cterm::ui::layout::Centered"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_centered"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Centered</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout19SingleContentLayoutE" title="erbsland::cterm::ui::layout::SingleContentLayout"><span class="n"><span class="pre">SingleContentLayout</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8CenteredE" title="Link to this definition"></a><br /></dt>
+<dd><p>A one-child layout that centers its content inside padded available space. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Centered8CenteredE12ProtectedTag">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Centered8CenteredE12ProtectedTag"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Centered8CenteredE12ProtectedTag"></span><span id="erbsland::cterm::ui::layout::Centered::Centered__ProtectedTag"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_centered_1a0d36e9aa3e3a7feaf571d0c119a00206"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Centered</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ProtectedTag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Centered8CenteredE12ProtectedTag" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a centered layout. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout8Centered7paddingEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout8Centered7paddingEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout8Centered7paddingEv"></span><span id="erbsland::cterm::ui::layout::Centered::paddingC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_centered_1a1807efec18c23f17a7dc88232c52f279"></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">padding</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout8Centered7paddingEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the padding around the centered content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The padding. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Centered10setPaddingE7Margins">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Centered10setPaddingE7Margins"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Centered10setPaddingE7Margins"></span><span id="erbsland::cterm::ui::layout::Centered::setPadding__Margins"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_centered_1ad219e2612b326a2e4990e88e5fe16552"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setPadding</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">padding</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Centered10setPaddingE7Margins" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the padding around the centered content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>padding</strong> – The new padding. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Centered9onMeasureER12MeasureScopeRK14LayoutProposal">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Centered9onMeasureER12MeasureScopeRK14LayoutProposal"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Centered9onMeasureER12MeasureScopeRK14LayoutProposal"></span><span id="erbsland::cterm::ui::layout::Centered::onMeasure__MeasureScopeR.LayoutProposalCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_centered_1a9a47b5cd367dfee2d1c0ba8edd2c4d17"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui13LayoutMetricsE" title="erbsland::cterm::ui::LayoutMetrics"><span class="n"><span class="pre">LayoutMetrics</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onMeasure</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui12MeasureScopeE" title="erbsland::cterm::ui::MeasureScope"><span class="n"><span class="pre">MeasureScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui14LayoutProposalE" title="erbsland::cterm::ui::LayoutProposal"><span class="n"><span class="pre">LayoutProposal</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">proposal</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Centered9onMeasureER12MeasureScopeRK14LayoutProposal" title="Link to this definition"></a><br /></dt>
+<dd><p>Measure this surface for a proposed size. </p>
+<p>The returned layout sizes describe the margin-free content rectangle. The optional margins in the returned metrics are recommendations for the parent layout and are not included in these sizes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – Measurement access for child surfaces. </p></li>
+<li><p><strong>proposal</strong> – The proposed size. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The measured layout metrics. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Centered8onLayoutER11LayoutScope">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Centered8onLayoutER11LayoutScope"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Centered8onLayoutER11LayoutScope"></span><span id="erbsland::cterm::ui::layout::Centered::onLayout__LayoutScopeR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_centered_1a7b6fe26b7a2ce2f46c682edee834ec02"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onLayout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11LayoutScopeE" title="erbsland::cterm::ui::LayoutScope"><span class="n"><span class="pre">LayoutScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Centered8onLayoutER11LayoutScope" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> direct children within this surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scope</strong> – <a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> access for measuring and placing child surfaces. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Centered6createEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Centered6createEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Centered6createEv"></span><span id="erbsland::cterm::ui::layout::Centered::create"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_centered_1acc09a0bf605ffc35ab85fb51f6954eeb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">CenteredPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Centered6createEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a centered layout. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The new centered layout. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5FrameE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5FrameE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5FrameE"></span><span id="erbsland::cterm::ui::layout::Frame"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Frame</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout19SingleContentLayoutE" title="erbsland::cterm::ui::layout::SingleContentLayout"><span class="n"><span class="pre">SingleContentLayout</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5FrameE" title="Link to this definition"></a><br /></dt>
+<dd><p>A one-child layout that surrounds its content with a themed frame and optional title. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Frame5FrameE12ProtectedTag">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Frame5FrameE12ProtectedTag"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Frame5FrameE12ProtectedTag"></span><span id="erbsland::cterm::ui::layout::Frame::Frame__ProtectedTag"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a5c69613136fa467f1b167c4c5b8945fd"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ProtectedTag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Frame5FrameE12ProtectedTag" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a frame layout. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout5Frame5titleEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout5Frame5titleEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout5Frame5titleEv"></span><span id="erbsland::cterm::ui::layout::Frame::titleC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a5d1c289099ce0f11720c50c412eb1da2"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">title</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout5Frame5titleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the frame title. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current frame title. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Frame8setTitleE6String">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Frame8setTitleE6String"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Frame8setTitleE6String"></span><span id="erbsland::cterm::ui::layout::Frame::setTitle__String"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a8db420d749decdb32ab9268ea1ef107c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setTitle</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm6StringE" title="erbsland::cterm::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">title</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Frame8setTitleE6String" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the frame title. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>title</strong> – The new title. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout5Frame7paddingEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout5Frame7paddingEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout5Frame7paddingEv"></span><span id="erbsland::cterm::ui::layout::Frame::paddingC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a1b3f8c8d52776c30ca398d1bbef4092e"></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">padding</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout5Frame7paddingEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the padding between frame and content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The padding. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Frame10setPaddingE7Margins">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Frame10setPaddingE7Margins"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Frame10setPaddingE7Margins"></span><span id="erbsland::cterm::ui::layout::Frame::setPadding__Margins"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a33ad9c249d8a3bd06ccdc809d3f698bb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setPadding</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm7MarginsE" title="erbsland::cterm::Margins"><span class="n"><span class="pre">Margins</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">padding</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Frame10setPaddingE7Margins" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the padding between frame and content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>padding</strong> – The new padding. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Frame9onMeasureER12MeasureScopeRK14LayoutProposal">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Frame9onMeasureER12MeasureScopeRK14LayoutProposal"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Frame9onMeasureER12MeasureScopeRK14LayoutProposal"></span><span id="erbsland::cterm::ui::layout::Frame::onMeasure__MeasureScopeR.LayoutProposalCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a7ed0dca109afde0ca9a4aa96eb130b8b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui13LayoutMetricsE" title="erbsland::cterm::ui::LayoutMetrics"><span class="n"><span class="pre">LayoutMetrics</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onMeasure</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui12MeasureScopeE" title="erbsland::cterm::ui::MeasureScope"><span class="n"><span class="pre">MeasureScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui14LayoutProposalE" title="erbsland::cterm::ui::LayoutProposal"><span class="n"><span class="pre">LayoutProposal</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">proposal</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Frame9onMeasureER12MeasureScopeRK14LayoutProposal" title="Link to this definition"></a><br /></dt>
+<dd><p>Measure this surface for a proposed size. </p>
+<p>The returned layout sizes describe the margin-free content rectangle. The optional margins in the returned metrics are recommendations for the parent layout and are not included in these sizes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – Measurement access for child surfaces. </p></li>
+<li><p><strong>proposal</strong> – The proposed size. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The measured layout metrics. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Frame8onLayoutER11LayoutScope">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Frame8onLayoutER11LayoutScope"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Frame8onLayoutER11LayoutScope"></span><span id="erbsland::cterm::ui::layout::Frame::onLayout__LayoutScopeR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a7518c7e29090bf26e8e2503248e6830f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onLayout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11LayoutScopeE" title="erbsland::cterm::ui::LayoutScope"><span class="n"><span class="pre">LayoutScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Frame8onLayoutER11LayoutScope" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> direct children within this surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scope</strong> – <a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> access for measuring and placing child surfaces. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout5Frame8isOpaqueEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout5Frame8isOpaqueEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout5Frame8isOpaqueEv"></span><span id="erbsland::cterm::ui::layout::Frame::isOpaqueC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a12ea5631d9f0ab81b6a5ef3004d68193"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isOpaque</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout5Frame8isOpaqueEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this surface paints every cell in its rectangle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the surface is opaque. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Frame7onPaintER14WritableBufferRK12PaintContext">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Frame7onPaintER14WritableBufferRK12PaintContext"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Frame7onPaintER14WritableBufferRK12PaintContext"></span><span id="erbsland::cterm::ui::layout::Frame::onPaint__WritableBufferR.PaintContextCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a582c3fb3292839cafc2b7c74a90430a3"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onPaint</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm14WritableBufferE" title="erbsland::cterm::WritableBuffer"><span class="n"><span class="pre">WritableBuffer</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">buffer</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui12PaintContextE" title="erbsland::cterm::ui::PaintContext"><span class="n"><span class="pre">PaintContext</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">context</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Frame7onPaintER14WritableBufferRK12PaintContext" title="Link to this definition"></a><br /></dt>
+<dd><p>Paint this surface into the target buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buffer</strong> – The target buffer. </p></li>
+<li><p><strong>context</strong> – The paint context for the current paint pass. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout5Frame6createEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout5Frame6createEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout5Frame6createEv"></span><span id="erbsland::cterm::ui::layout::Frame::create"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame_1a22b44d9a75fba17a57394afd81f15d01"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">FramePtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout5Frame6createEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a frame layout. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The new frame layout. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout19SingleContentLayoutE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout19SingleContentLayoutE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout19SingleContentLayoutE"></span><span id="erbsland::cterm::ui::layout::SingleContentLayout"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_single_content_layout"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SingleContentLayout</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui6LayoutE" title="erbsland::cterm::ui::Layout"><span class="n"><span class="pre">Layout</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout19SingleContentLayoutE" title="Link to this definition"></a><br /></dt>
+<dd><p>Base class for layouts that manage one optional content surface. </p>
+<p>Subclassed by <a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1layout_1_1_centered"><span class="std std-ref">erbsland::cterm::ui::layout::Centered</span></a>, <a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1layout_1_1_frame"><span class="std std-ref">erbsland::cterm::ui::layout::Frame</span></a>, <a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport"><span class="std std-ref">erbsland::cterm::ui::layout::Viewport</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout19SingleContentLayout17setContentSurfaceE10SurfacePtr">
+<span id="_CPPv3N8erbsland5cterm2ui6layout19SingleContentLayout17setContentSurfaceE10SurfacePtr"></span><span id="_CPPv2N8erbsland5cterm2ui6layout19SingleContentLayout17setContentSurfaceE10SurfacePtr"></span><span id="erbsland::cterm::ui::layout::SingleContentLayout::setContentSurface__SurfacePtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_single_content_layout_1a68000a64108b7d8701d77bcc00527f11"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setContentSurface</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SurfacePtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">contentSurface</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout19SingleContentLayout17setContentSurfaceE10SurfacePtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the content surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>contentSurface</strong> – The new content surface, or an empty pointer to clear it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout19SingleContentLayout14contentSurfaceEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout19SingleContentLayout14contentSurfaceEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout19SingleContentLayout14contentSurfaceEv"></span><span id="erbsland::cterm::ui::layout::SingleContentLayout::contentSurfaceC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_single_content_layout_1a412140232463e367c7636192a0233996"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SurfacePtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">contentSurface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout19SingleContentLayout14contentSurfaceEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the current content surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current content surface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8ViewportE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8ViewportE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8ViewportE"></span><span id="erbsland::cterm::ui::layout::Viewport"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Viewport</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout19SingleContentLayoutE" title="erbsland::cterm::ui::layout::SingleContentLayout"><span class="n"><span class="pre">SingleContentLayout</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8ViewportE" title="Link to this definition"></a><br /></dt>
+<dd><p>A layout surface that clips, positions, and scrolls one content surface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport8ViewportE12ProtectedTag">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport8ViewportE12ProtectedTag"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport8ViewportE12ProtectedTag"></span><span id="erbsland::cterm::ui::layout::Viewport::Viewport__ProtectedTag"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1aa0f6b12c94b3213dafd2f100e1d730d0"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Viewport</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ProtectedTag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport8ViewportE12ProtectedTag" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a viewport. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout8Viewport9alignmentEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout8Viewport9alignmentEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout8Viewport9alignmentEv"></span><span id="erbsland::cterm::ui::layout::Viewport::alignmentC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a0e2295599035783b18687e51a8cbd67c"></span><span class="n"><span class="pre">Alignment</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alignment</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout8Viewport9alignmentEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the content alignment for undersized content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The content alignment. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport12setAlignmentE9Alignment">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport12setAlignmentE9Alignment"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport12setAlignmentE9Alignment"></span><span id="erbsland::cterm::ui::layout::Viewport::setAlignment__Alignment"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1adfd7cd7236d5de6e1e7c1f65bb7dbb00"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setAlignment</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Alignment</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">alignment</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport12setAlignmentE9Alignment" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the content alignment for undersized content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>alignment</strong> – The new alignment. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout8Viewport12scrollOffsetEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout8Viewport12scrollOffsetEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout8Viewport12scrollOffsetEv"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollOffsetC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1af6f992a8a2a07f1fd1d3c69e46f0a0d7"></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollOffset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout8Viewport12scrollOffsetEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current scroll offset. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The clamped scroll offset. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport15setScrollOffsetE8Position">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport15setScrollOffsetE8Position"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport15setScrollOffsetE8Position"></span><span id="erbsland::cterm::ui::layout::Viewport::setScrollOffset__Position"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a1f244132d491e8898f3cd013200f5dc7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setScrollOffset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">scrollOffset</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport15setScrollOffsetE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the scroll offset. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scrollOffset</strong> – The new scroll offset. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport8scrollByE8Position">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport8scrollByE8Position"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport8scrollByE8Position"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollBy__Position"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a9340232c6bdc7e91adec4e29fb2e30a4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollBy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">delta</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport8scrollByE8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll by the given delta. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>delta</strong> – The scroll delta. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport8scrollUpE10Coordinate">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport8scrollUpE10Coordinate"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport8scrollUpE10Coordinate"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollUp__Coordinate"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a8a7c99191213dcfd3ad6f3d472499ce4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollUp</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm10CoordinateE" title="erbsland::cterm::Coordinate"><span class="n"><span class="pre">Coordinate</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport8scrollUpE10Coordinate" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll one or more rows up. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> – The number of rows. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport10scrollDownE10Coordinate">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport10scrollDownE10Coordinate"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport10scrollDownE10Coordinate"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollDown__Coordinate"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1abdd8dea0fdd6fa94858ac230fc14ea24"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollDown</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm10CoordinateE" title="erbsland::cterm::Coordinate"><span class="n"><span class="pre">Coordinate</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport10scrollDownE10Coordinate" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll one or more rows down. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> – The number of rows. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport10scrollLeftE10Coordinate">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport10scrollLeftE10Coordinate"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport10scrollLeftE10Coordinate"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollLeft__Coordinate"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1af7b5d04bef5c46ab3565598d7562d26c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollLeft</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm10CoordinateE" title="erbsland::cterm::Coordinate"><span class="n"><span class="pre">Coordinate</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport10scrollLeftE10Coordinate" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll one or more columns left. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> – The number of columns. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport11scrollRightE10Coordinate">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport11scrollRightE10Coordinate"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport11scrollRightE10Coordinate"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollRight__Coordinate"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a14a35b35c2448f31773bef3bec6e45c5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollRight</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm10CoordinateE" title="erbsland::cterm::Coordinate"><span class="n"><span class="pre">Coordinate</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport11scrollRightE10Coordinate" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll one or more columns right. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> – The number of columns. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport6pageUpEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport6pageUpEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport6pageUpEv"></span><span id="erbsland::cterm::ui::layout::Viewport::pageUp"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a418d5f10e6d10c38299218eb1e279673"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pageUp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport6pageUpEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll one page up. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport8pageDownEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport8pageDownEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport8pageDownEv"></span><span id="erbsland::cterm::ui::layout::Viewport::pageDown"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a0ce1498b1029c7fb6a9707a224635104"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pageDown</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport8pageDownEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll one page down. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport8pageLeftEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport8pageLeftEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport8pageLeftEv"></span><span id="erbsland::cterm::ui::layout::Viewport::pageLeft"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a4fa60f521315815c5e84aa32d3363b35"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pageLeft</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport8pageLeftEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll one page left. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport9pageRightEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport9pageRightEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport9pageRightEv"></span><span id="erbsland::cterm::ui::layout::Viewport::pageRight"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a8c31f332d15d3108c78c4fd38b8b2730"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pageRight</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport9pageRightEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll one page right. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport11scrollToTopEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport11scrollToTopEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport11scrollToTopEv"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollToTop"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1aea2100e473f2cc8b0d831055c5cbf230"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollToTop</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport11scrollToTopEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll to the top edge. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport14scrollToBottomEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport14scrollToBottomEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport14scrollToBottomEv"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollToBottom"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a3d4b2d3812c036b739280318abe5356e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollToBottom</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport14scrollToBottomEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll to the bottom edge. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport16scrollToLeftEdgeEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport16scrollToLeftEdgeEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport16scrollToLeftEdgeEv"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollToLeftEdge"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a1a6433ffef002b3e8a1048c1dd149ca1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollToLeftEdge</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport16scrollToLeftEdgeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll to the left edge. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport17scrollToRightEdgeEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport17scrollToRightEdgeEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport17scrollToRightEdgeEv"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollToRightEdge"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a31292355e13b8ad11009da76a982c74b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollToRightEdge</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport17scrollToRightEdgeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll to the right edge. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport14scrollIntoViewE9Rectangle">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport14scrollIntoViewE9Rectangle"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport14scrollIntoViewE9Rectangle"></span><span id="erbsland::cterm::ui::layout::Viewport::scrollIntoView__Rectangle"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a37a78572cda6bb53d2b01314fd4fe90c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scrollIntoView</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">contentRect</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport14scrollIntoViewE9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Scroll by the smallest amount needed to make a content rectangle visible. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>contentRect</strong> – The rectangle in content coordinates. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout8Viewport22contentSizeForViewportE4Size">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout8Viewport22contentSizeForViewportE4Size"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout8Viewport22contentSizeForViewportE4Size"></span><span id="erbsland::cterm::ui::layout::Viewport::contentSizeForViewport__SizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1ab84b92d418db3f282418cb63ab65ad53"></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contentSizeForViewport</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewportSize</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout8Viewport22contentSizeForViewportE4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Resolve the content size for a candidate viewport. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>viewportSize</strong> – The candidate viewport size. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The content size. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport22contentSizeForViewportE4SizeR11LayoutScope">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport22contentSizeForViewportE4SizeR11LayoutScope"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport22contentSizeForViewportE4SizeR11LayoutScope"></span><span id="erbsland::cterm::ui::layout::Viewport::contentSizeForViewport__Size.LayoutScopeR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a19196b6080bc79baca624069912e4a8b"></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contentSizeForViewport</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewportSize</span></span>, <a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11LayoutScopeE" title="erbsland::cterm::ui::LayoutScope"><span class="n"><span class="pre">LayoutScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport22contentSizeForViewportE4SizeR11LayoutScope" title="Link to this definition"></a><br /></dt>
+<dd><p>Resolve the content size for a candidate viewport using measurement. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>viewportSize</strong> – The candidate viewport size. </p></li>
+<li><p><strong>scope</strong> – The measurement scope. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The content size. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout8Viewport11contentSizeEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout8Viewport11contentSizeEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout8Viewport11contentSizeEv"></span><span id="erbsland::cterm::ui::layout::Viewport::contentSizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a298b1231bfbed8696b3042776eed9d57"></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contentSize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout8Viewport11contentSizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current content size. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current content size. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport8onLayoutER11LayoutScope">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport8onLayoutER11LayoutScope"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport8onLayoutER11LayoutScope"></span><span id="erbsland::cterm::ui::layout::Viewport::onLayout__LayoutScopeR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1ad7bec5ec9293605c8f7a82cac6a74438"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onLayout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11LayoutScopeE" title="erbsland::cterm::ui::LayoutScope"><span class="n"><span class="pre">LayoutScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport8onLayoutER11LayoutScope" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> direct children within this surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scope</strong> – <a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> access for measuring and placing child surfaces. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Viewport6createEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Viewport6createEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Viewport6createEv"></span><span id="erbsland::cterm::ui::layout::Viewport::create"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_viewport_1a7e267e3e73171a1cc78a7cc2c4528f8c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">ViewportPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Viewport6createEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a viewport. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The new viewport. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout10ScrollAreaE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout10ScrollAreaE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout10ScrollAreaE"></span><span id="erbsland::cterm::ui::layout::ScrollArea"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ScrollArea</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">surface</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="ui-surfaces.html#_CPPv4N8erbsland5cterm2ui7surface18AbstractScrollAreaE" title="erbsland::cterm::ui::surface::AbstractScrollArea"><span class="n"><span class="pre">AbstractScrollArea</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollAreaE" title="Link to this definition"></a><br /></dt>
+<dd><p>A scroll area layout that displays one content surface with optional scroll bars. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout10ScrollArea10ScrollAreaE12ProtectedTag">
+<span id="_CPPv3N8erbsland5cterm2ui6layout10ScrollArea10ScrollAreaE12ProtectedTag"></span><span id="_CPPv2N8erbsland5cterm2ui6layout10ScrollArea10ScrollAreaE12ProtectedTag"></span><span id="erbsland::cterm::ui::layout::ScrollArea::ScrollArea__ProtectedTag"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area_1a71d41d17e8a7e9e59b48e2c6e6f31767"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ScrollArea</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ProtectedTag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollArea10ScrollAreaE12ProtectedTag" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a scroll area. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout10ScrollArea17setContentSurfaceE10SurfacePtr">
+<span id="_CPPv3N8erbsland5cterm2ui6layout10ScrollArea17setContentSurfaceE10SurfacePtr"></span><span id="_CPPv2N8erbsland5cterm2ui6layout10ScrollArea17setContentSurfaceE10SurfacePtr"></span><span id="erbsland::cterm::ui::layout::ScrollArea::setContentSurface__SurfacePtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area_1a6982785cfb79a4cef96cbe7aae3a184d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setContentSurface</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SurfacePtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">contentSurface</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollArea17setContentSurfaceE10SurfacePtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the content surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>contentSurface</strong> – The new content surface, or an empty pointer to clear it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout10ScrollArea14contentSurfaceEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout10ScrollArea14contentSurfaceEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout10ScrollArea14contentSurfaceEv"></span><span id="erbsland::cterm::ui::layout::ScrollArea::contentSurfaceC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area_1a1210811f70323d71a53a2105c691cea8"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SurfacePtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">contentSurface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout10ScrollArea14contentSurfaceEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the current content surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current content surface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout10ScrollArea8viewportEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout10ScrollArea8viewportEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout10ScrollArea8viewportEv"></span><span id="erbsland::cterm::ui::layout::ScrollArea::viewportC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area_1a7e259199cec43990daf7d9c5f13dbe13"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ViewportPtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">viewport</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout10ScrollArea8viewportEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the viewport. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The viewport. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout10ScrollArea9alignmentEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout10ScrollArea9alignmentEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout10ScrollArea9alignmentEv"></span><span id="erbsland::cterm::ui::layout::ScrollArea::alignmentC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area_1a63cec647cc488469d862fbf26b5ce12d"></span><span class="n"><span class="pre">Alignment</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alignment</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout10ScrollArea9alignmentEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the content alignment for undersized content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The content alignment. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout10ScrollArea12setAlignmentE9Alignment">
+<span id="_CPPv3N8erbsland5cterm2ui6layout10ScrollArea12setAlignmentE9Alignment"></span><span id="_CPPv2N8erbsland5cterm2ui6layout10ScrollArea12setAlignmentE9Alignment"></span><span id="erbsland::cterm::ui::layout::ScrollArea::setAlignment__Alignment"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area_1a8ce10914d6d011356f29c542eb2a964b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setAlignment</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Alignment</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">alignment</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollArea12setAlignmentE9Alignment" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the content alignment for undersized content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>alignment</strong> – The new alignment. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout10ScrollArea8onLayoutER11LayoutScope">
+<span id="_CPPv3N8erbsland5cterm2ui6layout10ScrollArea8onLayoutER11LayoutScope"></span><span id="_CPPv2N8erbsland5cterm2ui6layout10ScrollArea8onLayoutER11LayoutScope"></span><span id="erbsland::cterm::ui::layout::ScrollArea::onLayout__LayoutScopeR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area_1a8fc26e4697e469b65c4e98504e8ef3eb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onLayout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11LayoutScopeE" title="erbsland::cterm::ui::LayoutScope"><span class="n"><span class="pre">LayoutScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollArea8onLayoutER11LayoutScope" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> direct children within this surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scope</strong> – <a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> access for measuring and placing child surfaces. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout10ScrollArea6createEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout10ScrollArea6createEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout10ScrollArea6createEv"></span><span id="erbsland::cterm::ui::layout::ScrollArea::create"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_scroll_area_1af69c7567532179f3691f17aca075eb03"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">ScrollAreaPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout10ScrollArea6createEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a scroll area. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The new scroll area. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8SectionsE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8SectionsE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8SectionsE"></span><span id="erbsland::cterm::ui::layout::Sections"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Sections</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui6LayoutE" title="erbsland::cterm::ui::Layout"><span class="n"><span class="pre">Layout</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8SectionsE" title="Link to this definition"></a><br /></dt>
+<dd><p>A vertical layout that separates child surfaces with themed title lines. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections14SectionOptionsE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections14SectionOptionsE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections14SectionOptionsE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a1a09388cf879f0fc4f1a30c878b03f52"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SectionOptions</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">SectionOptions</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections14SectionOptionsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Section options type, kept here for source compatibility. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections8SectionsE12ProtectedTag">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections8SectionsE12ProtectedTag"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections8SectionsE12ProtectedTag"></span><span id="erbsland::cterm::ui::layout::Sections::Sections__ProtectedTag"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1abd38a1ff594cdb577481d6b75b621b2b"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Sections</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ProtectedTag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections8SectionsE12ProtectedTag" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a sections layout. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections10addSectionE10SurfacePtr">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections10addSectionE10SurfacePtr"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections10addSectionE10SurfacePtr"></span><span id="erbsland::cterm::ui::layout::Sections::addSection__SurfacePtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1adb1ed59376cc478be60e6a82cf40ed83"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addSection</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SurfacePtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">surface</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections10addSectionE10SurfacePtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Add one surface as a section. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>surface</strong> – The section body surface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections10addSectionE10SurfacePtr14SectionOptions">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections10addSectionE10SurfacePtr14SectionOptions"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections10addSectionE10SurfacePtr14SectionOptions"></span><span id="erbsland::cterm::ui::layout::Sections::addSection__SurfacePtr.SectionOptions"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a4dcddef60523051df5258eb6345f9454"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addSection</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SurfacePtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">surface</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections14SectionOptionsE" title="erbsland::cterm::ui::layout::Sections::SectionOptions"><span class="n"><span class="pre">SectionOptions</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">options</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections10addSectionE10SurfacePtr14SectionOptions" title="Link to this definition"></a><br /></dt>
+<dd><p>Add one surface as a section. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>surface</strong> – The section body surface. </p></li>
+<li><p><strong>options</strong> – The section metadata. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout8Sections12sectionCountEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout8Sections12sectionCountEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout8Sections12sectionCountEv"></span><span id="erbsland::cterm::ui::layout::Sections::sectionCountC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a85850d1d9e9f2b2e1014c2ac7aff9e8e"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sectionCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout8Sections12sectionCountEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the number of configured sections. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout8Sections14sectionOptionsENSt6size_tE">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout8Sections14sectionOptionsENSt6size_tE"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout8Sections14sectionOptionsENSt6size_tE"></span><span id="erbsland::cterm::ui::layout::Sections::sectionOptions__std::sC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1ab6250c90c7d3658df8796e7633b8d0c7"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections14SectionOptionsE" title="erbsland::cterm::ui::layout::Sections::SectionOptions"><span class="n"><span class="pre">SectionOptions</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">sectionOptions</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout8Sections14sectionOptionsENSt6size_tE" title="Link to this definition"></a><br /></dt>
+<dd><p>Access options for one section. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The section index. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The section options. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections17setSectionOptionsENSt6size_tE14SectionOptions">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections17setSectionOptionsENSt6size_tE14SectionOptions"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections17setSectionOptionsENSt6size_tE14SectionOptions"></span><span id="erbsland::cterm::ui::layout::Sections::setSectionOptions__std::s.SectionOptions"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a91fe30953cc3be462be9c8188ec8c4c1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setSectionOptions</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections14SectionOptionsE" title="erbsland::cterm::ui::layout::Sections::SectionOptions"><span class="n"><span class="pre">SectionOptions</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">options</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections17setSectionOptionsENSt6size_tE14SectionOptions" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace options for one section. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> – The section index. </p></li>
+<li><p><strong>options</strong> – The new section options. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout8Sections26isTrailingSeparatorVisibleEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout8Sections26isTrailingSeparatorVisibleEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout8Sections26isTrailingSeparatorVisibleEv"></span><span id="erbsland::cterm::ui::layout::Sections::isTrailingSeparatorVisibleC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a312d1f5a3a36c5c5429b5ac79a3b1c12"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isTrailingSeparatorVisible</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout8Sections26isTrailingSeparatorVisibleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if a trailing separator is drawn after the last section. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections27setTrailingSeparatorVisibleEb">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections27setTrailingSeparatorVisibleEb"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections27setTrailingSeparatorVisibleEb"></span><span id="erbsland::cterm::ui::layout::Sections::setTrailingSeparatorVisible__b"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a1c3106ca19053de598685c84beb52938"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setTrailingSeparatorVisible</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">visible</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections27setTrailingSeparatorVisibleEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Change whether a trailing separator is drawn after the last section. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>visible</strong> – The new visibility state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections8onLayoutER11LayoutScope">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections8onLayoutER11LayoutScope"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections8onLayoutER11LayoutScope"></span><span id="erbsland::cterm::ui::layout::Sections::onLayout__LayoutScopeR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a818dcfb9ec15858f1b8ebcc19f494cb4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onLayout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11LayoutScopeE" title="erbsland::cterm::ui::LayoutScope"><span class="n"><span class="pre">LayoutScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections8onLayoutER11LayoutScope" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> direct children within this surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scope</strong> – <a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> access for measuring and placing child surfaces. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections7onPaintER14WritableBufferRK12PaintContext">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections7onPaintER14WritableBufferRK12PaintContext"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections7onPaintER14WritableBufferRK12PaintContext"></span><span id="erbsland::cterm::ui::layout::Sections::onPaint__WritableBufferR.PaintContextCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a56d5ede4e28389df62d35c37dfc587df"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onPaint</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm14WritableBufferE" title="erbsland::cterm::WritableBuffer"><span class="n"><span class="pre">WritableBuffer</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">buffer</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui12PaintContextE" title="erbsland::cterm::ui::PaintContext"><span class="n"><span class="pre">PaintContext</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">context</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections7onPaintER14WritableBufferRK12PaintContext" title="Link to this definition"></a><br /></dt>
+<dd><p>Paint this surface into the target buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buffer</strong> – The target buffer. </p></li>
+<li><p><strong>context</strong> – The paint context for the current paint pass. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout8Sections6createEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout8Sections6createEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout8Sections6createEv"></span><span id="erbsland::cterm::ui::layout::Sections::create"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_sections_1a6ae59c299b71d378e5841fcb654700cc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">SectionsPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout8Sections6createEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a sections layout. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The new sections layout. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7ButtonsE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7ButtonsE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7ButtonsE"></span><span id="erbsland::cterm::ui::layout::Buttons"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Buttons</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui6LayoutE" title="erbsland::cterm::ui::Layout"><span class="n"><span class="pre">Layout</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7ButtonsE" title="Link to this definition"></a><br /></dt>
+<dd><p>A horizontal button layout that centers rows and wraps when needed. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7Buttons7ButtonsE12ProtectedTag">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7Buttons7ButtonsE12ProtectedTag"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7Buttons7ButtonsE12ProtectedTag"></span><span id="erbsland::cterm::ui::layout::Buttons::Buttons__ProtectedTag"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a4d2b0abe653d8e0f27594880c23b9d27"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Buttons</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ProtectedTag</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7Buttons7ButtonsE12ProtectedTag" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a button layout. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7Buttons9addActionE15ButtonActionPtr">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7Buttons9addActionE15ButtonActionPtr"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7Buttons9addActionE15ButtonActionPtr"></span><span id="erbsland::cterm::ui::layout::Buttons::addAction__ButtonActionPtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a1188260f7ac3946e5dccd972e5342bb9"></span><span class="n"><span class="pre">surface</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ButtonPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addAction</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ButtonActionPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">action</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7Buttons9addActionE15ButtonActionPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Add an action-backed button. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action</strong> – The action represented by the new button. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created button surface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7Buttons9addButtonEN7surface9ButtonPtrE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7Buttons9addButtonEN7surface9ButtonPtrE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7Buttons9addButtonEN7surface9ButtonPtrE"></span><span id="erbsland::cterm::ui::layout::Buttons::addButton__surface::ButtonPtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1aae7b5396309a2681667504c8b7944c59"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addButton</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">surface</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ButtonPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">button</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7Buttons9addButtonEN7surface9ButtonPtrE" title="Link to this definition"></a><br /></dt>
+<dd><p>Add an existing button. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>button</strong> – The button to add. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7Buttons12insertButtonENSt6size_tEN7surface9ButtonPtrE">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7Buttons12insertButtonENSt6size_tEN7surface9ButtonPtrE"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7Buttons12insertButtonENSt6size_tEN7surface9ButtonPtrE"></span><span id="erbsland::cterm::ui::layout::Buttons::insertButton__std::s.surface::ButtonPtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a4f525b5f8a3db726a595ba99841e109c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">insertButton</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span>, <span class="n"><span class="pre">surface</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ButtonPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">button</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7Buttons12insertButtonENSt6size_tEN7surface9ButtonPtrE" title="Link to this definition"></a><br /></dt>
+<dd><p>Insert an existing button. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> – The insertion index. </p></li>
+<li><p><strong>button</strong> – The button to insert. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout7Buttons11buttonCountEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout7Buttons11buttonCountEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout7Buttons11buttonCountEv"></span><span id="erbsland::cterm::ui::layout::Buttons::buttonCountC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1ac76d71f882292dcaa8d9f34b425bf015"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">buttonCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout7Buttons11buttonCountEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the number of buttons in this layout. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6layout7Buttons6buttonENSt6size_tE">
+<span id="_CPPv3NK8erbsland5cterm2ui6layout7Buttons6buttonENSt6size_tE"></span><span id="_CPPv2NK8erbsland5cterm2ui6layout7Buttons6buttonENSt6size_tE"></span><span id="erbsland::cterm::ui::layout::Buttons::button__std::sC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1ae4f939f6d6a434c3efcce49bd11b3091"></span><span class="n"><span class="pre">surface</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ButtonPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">button</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6layout7Buttons6buttonENSt6size_tE" title="Link to this definition"></a><br /></dt>
+<dd><p>Access one button. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The button index. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7Buttons9onMeasureER12MeasureScopeRK14LayoutProposal">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7Buttons9onMeasureER12MeasureScopeRK14LayoutProposal"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7Buttons9onMeasureER12MeasureScopeRK14LayoutProposal"></span><span id="erbsland::cterm::ui::layout::Buttons::onMeasure__MeasureScopeR.LayoutProposalCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a89ee38fde33cf7710da40f7f8c78f0e7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui13LayoutMetricsE" title="erbsland::cterm::ui::LayoutMetrics"><span class="n"><span class="pre">LayoutMetrics</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onMeasure</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui12MeasureScopeE" title="erbsland::cterm::ui::MeasureScope"><span class="n"><span class="pre">MeasureScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui14LayoutProposalE" title="erbsland::cterm::ui::LayoutProposal"><span class="n"><span class="pre">LayoutProposal</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">proposal</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7Buttons9onMeasureER12MeasureScopeRK14LayoutProposal" title="Link to this definition"></a><br /></dt>
+<dd><p>Measure this surface for a proposed size. </p>
+<p>The returned layout sizes describe the margin-free content rectangle. The optional margins in the returned metrics are recommendations for the parent layout and are not included in these sizes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – Measurement access for child surfaces. </p></li>
+<li><p><strong>proposal</strong> – The proposed size. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The measured layout metrics. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7Buttons8onLayoutER11LayoutScope">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7Buttons8onLayoutER11LayoutScope"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7Buttons8onLayoutER11LayoutScope"></span><span id="erbsland::cterm::ui::layout::Buttons::onLayout__LayoutScopeR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1abc64bcaefcaf39e609599b543312899d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onLayout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui11LayoutScopeE" title="erbsland::cterm::ui::LayoutScope"><span class="n"><span class="pre">LayoutScope</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scope</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7Buttons8onLayoutER11LayoutScope" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> direct children within this surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scope</strong> – <a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_layout"><span class="std std-ref">Layout</span></a> access for measuring and placing child surfaces. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7Buttons10onKeyPressER13KeyPressEvent">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7Buttons10onKeyPressER13KeyPressEvent"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7Buttons10onKeyPressER13KeyPressEvent"></span><span id="erbsland::cterm::ui::layout::Buttons::onKeyPress__KeyPressEventR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a988b6ddcc08f05644816979f015ee82e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onKeyPress</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-events.html#_CPPv4N8erbsland5cterm2ui13KeyPressEventE" title="erbsland::cterm::ui::KeyPressEvent"><span class="n"><span class="pre">KeyPressEvent</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">keyPressEvent</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7Buttons10onKeyPressER13KeyPressEvent" title="Link to this definition"></a><br /></dt>
+<dd><p>Handle a key press event. </p>
+<p>This is the low-level event handler for key press events. If a surface handles a key press event, it should mark it as handled. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keyPressEvent</strong> – The key press event to handle. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6layout7Buttons6createEv">
+<span id="_CPPv3N8erbsland5cterm2ui6layout7Buttons6createEv"></span><span id="_CPPv2N8erbsland5cterm2ui6layout7Buttons6createEv"></span><span id="erbsland::cterm::ui::layout::Buttons::create"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1layout_1_1_buttons_1a2c9d0e20b81cc945276e35b456c3ded2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">ButtonsPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6layout7Buttons6createEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a button layout. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The new button layout. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ui-core.html" class="btn btn-neutral float-left" title="UI Core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ui-input.html" class="btn btn-neutral float-right" title="UI Input" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,630 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_backend" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>erbsland::cterm::Backend</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::enable_shared_from_this&lt; Backend &gt;</basecompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" prot="public" virt="non-virtual">erbsland::cterm::impl::PosixBackend</derivedcompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend" prot="public" virt="non-virtual">erbsland::cterm::impl::WindowsBackend</derivedcompoundref>
+    <includes refid="_backend_8hpp" local="no">erbsland/cterm/Backend.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a53bd463512463bcc05edde73c4fa0326" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual erbsland::cterm::Backend::~Backend</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Backend</name>
+        <qualifiedname>erbsland::cterm::Backend::~Backend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="27" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a76c0176ca7e7cb076b68f45ef04e94e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::initializePlatform</definition>
+        <argsstring>()=0</argsstring>
+        <name>initializePlatform</name>
+        <qualifiedname>erbsland::cterm::Backend::initializePlatform</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8a0ca1efddd54d31e1d95fcd80085611">initializePlatform</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a9e34f16f291a5f93e80c8a81680bc45f">initializePlatform</reimplementedby>
+        <briefdescription>
+<para>Initialize the platform. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method is called from <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" kindref="member">Terminal::initializeScreen()</ref></computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="32" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a07264906f0afa36fb7b4c70869c3e59d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::restorePlatform</definition>
+        <argsstring>()=0</argsstring>
+        <name>restorePlatform</name>
+        <qualifiedname>erbsland::cterm::Backend::restorePlatform</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a73baf1856a6b69b1a1978cb18f8dfc74">restorePlatform</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1acdf07fcb2d82871a0cda0f13e10941dc">restorePlatform</reimplementedby>
+        <briefdescription>
+<para>Restore the platform. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method is called from <computeroutput>Termina::restoreScreen()</computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="36" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a348e86314174b0ac2e5b1868a383a82f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool erbsland::cterm::Backend::supportsColorCodes</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>supportsColorCodes</name>
+        <qualifiedname>erbsland::cterm::Backend::supportsColorCodes</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a1537b671c97e60b665c4fce97453038e">supportsColorCodes</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a3c38735f22bc28542f4ebab2b1d65b48">supportsColorCodes</reimplementedby>
+        <briefdescription>
+<para>Test if the platform supports color output. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This just tests for color support, not cursor movement. If you return <computeroutput>false</computeroutput>, no ANSI color codes are emitted and the line buffer is disabled. Instead, the <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a0202db87d6861a746a06033643a74ebd" kindref="member">emitColor()</ref></computeroutput> method is called on the backend. <simplesect kind="note"><para>Before each call to <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a0202db87d6861a746a06033643a74ebd" kindref="member">emitColor()</ref></computeroutput>, the text from the line buffer is emitted. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="43" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a1c7caf47021fec3c4567a5c1d5337f72" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool erbsland::cterm::Backend::supportsCursorCodes</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>supportsCursorCodes</name>
+        <qualifiedname>erbsland::cterm::Backend::supportsCursorCodes</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1aff36f86190df079d1826ba6e41fb0057">supportsCursorCodes</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a2aa7f13bb8b435b412961c1418765ba7">supportsCursorCodes</reimplementedby>
+        <briefdescription>
+<para>Test if the platform supports cursor movement. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This includes cursor position, clearing the terminal and other cursor-related operations. If you return <computeroutput>false</computeroutput>, no cursor movement commands are emitted and the line buffer is disabled. Instead, the <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a194b248af8770f340c2f659bb9d6e0e3" kindref="member">moveCursor()</ref></computeroutput> etc. methods are called on the backend. <simplesect kind="note"><para>Before each call of the cursor methods, the text from the line buffer is emitted. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="50" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a6a15edbbb817f510533399b0f6bdf9a0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool erbsland::cterm::Backend::supportsCursorVisibilityCodes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>supportsCursorVisibilityCodes</name>
+        <qualifiedname>erbsland::cterm::Backend::supportsCursorVisibilityCodes</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a4330216fe576180aa2fa77fbba721e6c">supportsCursorVisibilityCodes</reimplementedby>
+        <briefdescription>
+<para>Test if the backend supports cursor visible/invisible ANSI sequences. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If this method returns <computeroutput>true</computeroutput>, the ANSI codes <computeroutput>ESC[?25l</computeroutput> and <computeroutput>ESC[?25h</computeroutput> to control the cursor visibility. If it returns <computeroutput>false</computeroutput>, <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref></computeroutput> calls <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a7682184af920d295c639bf1fb7d0b288" kindref="member">setCursorVisible()</ref></computeroutput> instead. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="55" column="19" bodyfile="erbsland/cterm/Backend.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a3013a5ebf053abd1885caea606f1e1c9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool erbsland::cterm::Backend::supportsAlternateScreenBufferCodes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>supportsAlternateScreenBufferCodes</name>
+        <qualifiedname>erbsland::cterm::Backend::supportsAlternateScreenBufferCodes</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a3763d4b43615e25eae4e19ec1e866e2c">supportsAlternateScreenBufferCodes</reimplementedby>
+        <briefdescription>
+<para>Test if the backend supports alternate screen buffer codes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If this method returns <computeroutput>true</computeroutput>, the ANSI codes <computeroutput>ESC[?1049h</computeroutput> and <computeroutput>ESC[?1049l</computeroutput> are sent to the backend to switch to the alternate screen buffer. <emphasis>Additionally</emphasis> <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a36c61941344560b8dfa1ec97ae216cad" kindref="member">setAlternateScreenBuffer()</ref></computeroutput> is called to notify the backend about the change. If this method returns <computeroutput>false</computeroutput>, <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref></computeroutput> <emphasis>only</emphasis> calls <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a36c61941344560b8dfa1ec97ae216cad" kindref="member">setAlternateScreenBuffer()</ref></computeroutput> instead. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="62" column="19" bodyfile="erbsland/cterm/Backend.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a4617f27039776149370875e80cd86ac8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool erbsland::cterm::Backend::isInteractive</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>isInteractive</name>
+        <qualifiedname>erbsland::cterm::Backend::isInteractive</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1af5b590c1495dd57493b1735770402185">isInteractive</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1af348bfe6da7cbf3a6fc82921faad3b30">isInteractive</reimplementedby>
+        <briefdescription>
+<para>Check if an interactive terminal is attached to the process. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This state is typically established during <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" kindref="member">Terminal::initializeScreen()</ref></computeroutput>. <simplesect kind="return"><para><computeroutput>true</computeroutput> if interactive terminal features such as resize and cursor control are available. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="67" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a708eff4eb4bc6a0130d87b7f07e90fb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &gt;</type>
+        <definition>virtual std::optional&lt; Size &gt; erbsland::cterm::Backend::detectScreenSize</definition>
+        <argsstring>()=0</argsstring>
+        <name>detectScreenSize</name>
+        <qualifiedname>erbsland::cterm::Backend::detectScreenSize</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8b4380dc037fd276a11a891888d03461">detectScreenSize</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a531a06f2fce209b1f5b01df91090ebf1">detectScreenSize</reimplementedby>
+        <briefdescription>
+<para>Detect the current terminal screen size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method is invoked by <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" kindref="member">Terminal::initializeScreen()</ref></computeroutput> and <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal_1a18d1cc547fd39f055b4d6d66566e0f6d" kindref="member">Terminal::testScreenSize()</ref></computeroutput> when size detection is enabled. Interactive applications may call <computeroutput>testScreenSize()</computeroutput> before every screen update, so implementations should be efficient or perform updates asynchronously in the background.</para>
+<para>The returned size should represent the visible terminal area available for output. A safety margin of one column and one row is applied by <computeroutput><ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref></computeroutput> automatically.</para>
+<para><simplesect kind="return"><para>The detected screen size, or <computeroutput>std::nullopt</computeroutput> if detection failed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="80" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a0202db87d6861a746a06033643a74ebd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::emitColor</definition>
+        <argsstring>(Color color)</argsstring>
+        <name>emitColor</name>
+        <qualifiedname>erbsland::cterm::Backend::emitColor</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Change the current color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only called if <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a348e86314174b0ac2e5b1868a383a82f" kindref="member">supportsColorCodes()</ref></computeroutput> returns <computeroutput>false</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new color to set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="85" column="18" bodyfile="erbsland/cterm/Backend.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a6b29bd94109d64c691100372be429564" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+        <definition>virtual CharAttributes erbsland::cterm::Backend::supportedCharAttributes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>supportedCharAttributes</name>
+        <qualifiedname>erbsland::cterm::Backend::supportedCharAttributes</qualifiedname>
+        <briefdescription>
+<para>Get the character attributes supported by this backend. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The returned value is a fully specified bit mask. <simplesect kind="return"><para>The supported character attributes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="89" column="29" bodyfile="erbsland/cterm/Backend.hpp" bodystart="89" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a38702b23aab21c2b16f273eb0006b0fe" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+        <definition>virtual CharAttributes erbsland::cterm::Backend::supportedCharAttributeCodes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>supportedCharAttributeCodes</name>
+        <qualifiedname>erbsland::cterm::Backend::supportedCharAttributeCodes</qualifiedname>
+        <briefdescription>
+<para>Get the character attributes that can be emitted directly via ANSI codes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The returned value is a fully specified bit mask. <simplesect kind="return"><para>The character attributes supported through ANSI codes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="95" column="29" bodyfile="erbsland/cterm/Backend.hpp" bodystart="95" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a2fe495c3b3eda18eadb7627fc7632880" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::emitCharAttributes</definition>
+        <argsstring>(CharAttributes attributes)</argsstring>
+        <name>emitCharAttributes</name>
+        <qualifiedname>erbsland::cterm::Backend::emitCharAttributes</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Change the current character attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only called if one or more supported attributes cannot be emitted through ANSI codes. The backend receives the current supported attribute state and can diff it against its own local state. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current supported attribute state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="102" column="18" bodyfile="erbsland/cterm/Backend.hpp" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a194b248af8770f340c2f659bb9d6e0e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::moveCursor</definition>
+        <argsstring>(Position posOrDelta, MoveMode mode)</argsstring>
+        <name>moveCursor</name>
+        <qualifiedname>erbsland::cterm::Backend::moveCursor</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>posOrDelta</declname>
+        </param>
+        <param>
+          <type>MoveMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>Move the cursor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only called if <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a1c7caf47021fec3c4567a5c1d5337f72" kindref="member">supportsCursorCodes()</ref></computeroutput> returns <computeroutput>false</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>posOrDelta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The absolute or relative movement for the cursor. (0,0) = top-left corner. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The move mode, either absolute or relative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="108" column="18" bodyfile="erbsland/cterm/Backend.hpp" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a4676eabf2ba93c6d8f0a62aa0b4188de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::clearScreen</definition>
+        <argsstring>()</argsstring>
+        <name>clearScreen</name>
+        <qualifiedname>erbsland::cterm::Backend::clearScreen</qualifiedname>
+        <briefdescription>
+<para>Clear the screen and move the cursor to (0,0). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only called if <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a1c7caf47021fec3c4567a5c1d5337f72" kindref="member">supportsCursorCodes()</ref></computeroutput> returns <computeroutput>false</computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="112" column="18" bodyfile="erbsland/cterm/Backend.hpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a7682184af920d295c639bf1fb7d0b288" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::setCursorVisible</definition>
+        <argsstring>(bool visible)</argsstring>
+        <name>setCursorVisible</name>
+        <qualifiedname>erbsland::cterm::Backend::setCursorVisible</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a2a35602bd89f18433575f054433bf5aa">setCursorVisible</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>visible</declname>
+        </param>
+        <briefdescription>
+<para>Control if the cursor is visible on the terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If <computeroutput><ref refid="classerbsland_1_1cterm_1_1_backend_1a6a15edbbb817f510533399b0f6bdf9a0" kindref="member">supportsCursorVisibilityCodes()</ref></computeroutput> returns <computeroutput>false</computeroutput>, this method is called to control the cursor visibility. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="116" column="18" bodyfile="erbsland/cterm/Backend.hpp" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a36c61941344560b8dfa1ec97ae216cad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::setAlternateScreenBuffer</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>setAlternateScreenBuffer</name>
+        <qualifiedname>erbsland::cterm::Backend::setAlternateScreenBuffer</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a52ef1df2414d67c9e8b736d47e4279be">setAlternateScreenBuffer</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a6286ca054ef4f664843bbd480817bc12">setAlternateScreenBuffer</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Enables/disables the alternate screen buffer or notifies the backend about the change. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="119" column="18" bodyfile="erbsland/cterm/Backend.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a1c45ca170549cd400269f5616ea4b2df" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::emitText</definition>
+        <argsstring>(std::string_view text)=0</argsstring>
+        <name>emitText</name>
+        <qualifiedname>erbsland::cterm::Backend::emitText</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1aaa86cd4a85808d34833c99a950b6d094">emitText</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a1d907f89fa98bfe3f2c4b7bb41d5831c">emitText</reimplementedby>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Emit the given UTF-8 encoded text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the backend does not support UTF-8, you are responsible to convert the text to the expected encoding. Line breaks are usually just NL and not CRLF. UTF-8 sequences, and ANSI sequences are always complete in one call of this method. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded text to emit. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="126" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a10961a1ba4be8d8ce563d57bcb75c199" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::emitFlush</definition>
+        <argsstring>()=0</argsstring>
+        <name>emitFlush</name>
+        <qualifiedname>erbsland::cterm::Backend::emitFlush</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1ae3c66671d59416f4fc7cf7b9cbb59493">emitFlush</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a44e3ecd1670c92c4811580f7ae8f5be1">emitFlush</reimplementedby>
+        <briefdescription>
+<para>Flush the output buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>After a call of this method, the backend must flush all previously emitted text and control sequences to the terminal. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="131" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a47ddeab6716274b0ed90bf0b78b4cab1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816" kindref="member">Input::Mode</ref></type>
+        <definition>virtual Input::Mode erbsland::cterm::Backend::inputMode</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>inputMode</name>
+        <qualifiedname>erbsland::cterm::Backend::inputMode</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a5be61296c5a218d5e488e23242099ecd">inputMode</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a85aab965f50420ad36f66bf2269a9cbc">inputMode</reimplementedby>
+        <briefdescription>
+<para>Get the current input mode. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="135" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1ac07c78018f6ea589b88e0cd01b4e645d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::Backend::setInputMode</definition>
+        <argsstring>(Input::Mode mode)=0</argsstring>
+        <name>setInputMode</name>
+        <qualifiedname>erbsland::cterm::Backend::setInputMode</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a1b1a72da971ca33e8e964eaccd1d769e">setInputMode</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a870e7b24d177fad78324ca7fa6c5e9a0">setInputMode</reimplementedby>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816" kindref="member">Input::Mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>Set the current input mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new input mode. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="138" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1abb1484dd7307460577faf1a050d9b21a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref></type>
+        <definition>virtual Key erbsland::cterm::Backend::readKey</definition>
+        <argsstring>(std::chrono::milliseconds timeout)=0</argsstring>
+        <name>readKey</name>
+        <qualifiedname>erbsland::cterm::Backend::readKey</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a6af035e8b17fb83b0e303baea5cf7942">readKey</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a14b60a3a1f74df57b63504edb3fbc0a3">readKey</reimplementedby>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Read one key event without blocking longer than the given timeout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In <computeroutput><ref refid="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a897356954c2cd3d41b221e3f24f99bba" kindref="member">Input::Mode::Key</ref></computeroutput>, negative timeouts must be normalized to zero and any timeout less than or equal to zero must perform a non-blocking poll. In <computeroutput><ref refid="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a299040a8206f805f0a777fc25b6df6a9" kindref="member">Input::Mode::ReadLine</ref></computeroutput>, the timeout is ignored and this call may block until a line was entered. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum wait time in <computeroutput>Mode::Key</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The parsed key event, or an invalid key if no supported input was read before the timeout expired. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="145" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1ac0f87f6af6c07d9d0cb4b32313359865" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref></type>
+        <definition>virtual Key erbsland::cterm::Backend::waitForKey</definition>
+        <argsstring>()=0</argsstring>
+        <name>waitForKey</name>
+        <qualifiedname>erbsland::cterm::Backend::waitForKey</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a018b376cfaea0ed500e1a0ca7ef4d6d1">waitForKey</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1a1596490da51b07ca9f06f580e40f77e6">waitForKey</reimplementedby>
+        <briefdescription>
+<para>Wait until one key event is available. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In <computeroutput><ref refid="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a299040a8206f805f0a777fc25b6df6a9" kindref="member">Input::Mode::ReadLine</ref></computeroutput>, this call blocks until a line was entered and returns the converted key. <simplesect kind="return"><para>The parsed key event. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="149" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1ab6f3979137ea63130ce21209da0a9b5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string erbsland::cterm::Backend::readLine</definition>
+        <argsstring>()=0</argsstring>
+        <name>readLine</name>
+        <qualifiedname>erbsland::cterm::Backend::readLine</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend_1a8565f0c6f3048e005b8e8bd09adbd6bf">readLine</reimplementedby>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend_1aca2ee57453a9c3639f5e264f40ea0f9b">readLine</reimplementedby>
+        <briefdescription>
+<para>Read text input in the terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Can be ignored in <computeroutput><ref refid="classerbsland_1_1cterm_1_1_input_1ac97391a4c58205cba04e026ee29a4816a897356954c2cd3d41b221e3f24f99bba" kindref="member">Input::Mode::Key</ref></computeroutput> mode. <simplesect kind="return"><para>The read text, without line breaks. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="153" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_backend_1a8a45120d8dec8530acdeccf1292522fb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>BackendPtr</type>
+        <definition>static BackendPtr erbsland::cterm::Backend::createPlatformDefault</definition>
+        <argsstring>(TerminalFlags terminalFlags)</argsstring>
+        <name>createPlatformDefault</name>
+        <qualifiedname>erbsland::cterm::Backend::createPlatformDefault</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref></type>
+          <declname>terminalFlags</declname>
+        </param>
+        <briefdescription>
+<para>Create the default backend for this platform. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Backend.hpp" line="157" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>The interface to the underlying platform. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This library expects that the platform implementation correctly handles UTF-8 encoding and VT100 ANSI control codes. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::Backend</label>
+        <link refid="classerbsland_1_1cterm_1_1_backend"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::impl::PosixBackend</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::impl::WindowsBackend</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; Backend &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::Backend</label>
+        <link refid="classerbsland_1_1cterm_1_1_backend"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; Backend &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/Backend.hpp" line="25" column="1" bodyfile="erbsland/cterm/Backend.hpp" bodystart="25" bodyend="158"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a4676eabf2ba93c6d8f0a62aa0b4188de" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>clearScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a8a45120d8dec8530acdeccf1292522fb" prot="public" virt="non-virtual"><scope>erbsland::cterm::Backend</scope><name>createPlatformDefault</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a708eff4eb4bc6a0130d87b7f07e90fb1" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>detectScreenSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a2fe495c3b3eda18eadb7627fc7632880" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>emitCharAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a0202db87d6861a746a06033643a74ebd" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>emitColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a10961a1ba4be8d8ce563d57bcb75c199" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>emitFlush</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a1c45ca170549cd400269f5616ea4b2df" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>emitText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a76c0176ca7e7cb076b68f45ef04e94e1" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>initializePlatform</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a47ddeab6716274b0ed90bf0b78b4cab1" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>inputMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a4617f27039776149370875e80cd86ac8" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>isInteractive</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a194b248af8770f340c2f659bb9d6e0e3" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>moveCursor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1abb1484dd7307460577faf1a050d9b21a" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>readKey</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1ab6f3979137ea63130ce21209da0a9b5d" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>readLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a07264906f0afa36fb7b4c70869c3e59d" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>restorePlatform</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a36c61941344560b8dfa1ec97ae216cad" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>setAlternateScreenBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a7682184af920d295c639bf1fb7d0b288" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>setCursorVisible</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1ac07c78018f6ea589b88e0cd01b4e645d" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>setInputMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a38702b23aab21c2b16f273eb0006b0fe" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>supportedCharAttributeCodes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a6b29bd94109d64c691100372be429564" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>supportedCharAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a3013a5ebf053abd1885caea606f1e1c9" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>supportsAlternateScreenBufferCodes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a348e86314174b0ac2e5b1868a383a82f" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>supportsColorCodes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a1c7caf47021fec3c4567a5c1d5337f72" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>supportsCursorCodes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a6a15edbbb817f510533399b0f6bdf9a0" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>supportsCursorVisibilityCodes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1ac0f87f6af6c07d9d0cb4b32313359865" prot="public" virt="pure-virtual"><scope>erbsland::cterm::Backend</scope><name>waitForKey</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_backend_1a53bd463512463bcc05edde73c4fa0326" prot="public" virt="virtual"><scope>erbsland::cterm::Backend</scope><name>~Backend</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

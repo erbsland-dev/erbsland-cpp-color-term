@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="concepterbsland_1_1cterm_1_1_printable_arg" kind="concept">
+    <compoundname>erbsland::cterm::PrintableArg</compoundname>
+    <includes refid="_type_traits_8hpp" local="no">erbsland/cterm/impl/TypeTraits.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepterbsland_1_1cterm_1_1_printable_arg" kindref="compound">erbsland::cterm::PrintableArg</ref> =  std::constructible_from&lt;Foreground, T&gt; || std::constructible_from&lt;Background, T&gt; ||
+    std::same_as&lt;Color, T&gt; || std::same_as&lt;CharAttributes, T&gt; || std::same_as&lt;CharStyle, T&gt; || std::same_as&lt;Char, T&gt; ||
+    std::same_as&lt;String, T&gt; || std::same_as&lt;StringView, T&gt; || std::same_as&lt;std::decay_t&lt;T&gt;, std::string&gt; ||
+    std::same_as&lt;std::decay_t&lt;T&gt;, std::string_view&gt; || std::same_as&lt;std::decay_t&lt;T&gt;, std::u32string&gt; ||
+    std::same_as&lt;std::decay_t&lt;T&gt;, std::u32string_view&gt; || std::same_as&lt;T, const char *&gt; ||
+    std::same_as&lt;T, const char32_t *&gt;    </initializer>
+    <briefdescription>
+<para>A value accepted by <computeroutput>Terminal::print()</computeroutput> and <computeroutput>Terminal::printLine()</computeroutput> or <computeroutput>String::append()</computeroutput>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/TypeTraits.hpp" line="20" column="1"/>
+  </compounddef>
+</doxygen>

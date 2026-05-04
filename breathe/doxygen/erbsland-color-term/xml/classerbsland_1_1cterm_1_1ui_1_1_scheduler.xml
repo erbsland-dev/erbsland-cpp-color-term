@@ -1,0 +1,811 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_scheduler" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::Scheduler</compoundname>
+    <includes refid="_scheduler_8hpp" local="no">erbsland/cterm/ui/event/Scheduler.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1_scheduler_1_1_action_entry" prot="private">erbsland::cterm::ui::Scheduler::ActionEntry</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1aae8923c8790efab4783c73be5eef3e09" prot="private" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>Mode</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::Mode</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1aae8923c8790efab4783c73be5eef3e09ac65ff9bc152122c76b6f5fbb742ed27e" prot="private">
+          <name>SingleShot</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1aae8923c8790efab4783c73be5eef3e09aece811c1c51ed3c4d0d8c8d0439d7d1a" prot="private">
+          <name>Repeating</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The execution mode of a scheduled action. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="34" column="5" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" prot="public" static="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>using erbsland::cterm::ui::Scheduler::milliseconds =  std::chrono::milliseconds</definition>
+        <argsstring></argsstring>
+        <name>milliseconds</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::milliseconds</qualifiedname>
+        <briefdescription>
+<para>Duration type used for delays and repeat intervals. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="26" column="5" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" prot="public" static="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>using erbsland::cterm::ui::Scheduler::ActionFn =  std::function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>ActionFn</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::ActionFn</qualifiedname>
+        <briefdescription>
+<para>Callback type executed on the application UI thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="28" column="5" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a23f25bcc02a0e94c2f5a4188496b04d0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Application</definition>
+        <argsstring></argsstring>
+        <name>Application</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::Application</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="31" column="18" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ac4b4f4b6e70845a69e1a519c39903fe4" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Scheduler::cMaximumScheduledActions</definition>
+        <argsstring></argsstring>
+        <name>cMaximumScheduledActions</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::cMaximumScheduledActions</qualifiedname>
+        <initializer>= std::size_t{1000}</initializer>
+        <briefdescription>
+<para>Maximum number of scheduled actions tracked at once. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="47" column="27" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9b2d999cea3fb047c2cb91e65f6b14d6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Scheduler::cMinimumInterval</definition>
+        <argsstring></argsstring>
+        <name>cMinimumInterval</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::cMinimumInterval</qualifiedname>
+        <initializer>= <ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref>{10}</initializer>
+        <briefdescription>
+<para>Minimum supported delay or repeat interval. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="49" column="27" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a330a27cf36bad8cab42618fd6058dc2a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Scheduler::cMaximumInterval</definition>
+        <argsstring></argsstring>
+        <name>cMaximumInterval</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::cMaximumInterval</qualifiedname>
+        <initializer>= std::chrono::duration_cast&lt;<ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref>&gt;(std::chrono::hours{12})</initializer>
+        <briefdescription>
+<para>Maximum supported delay or repeat interval. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="51" column="27" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a42f9888365c4c8b9052b49c856ebc6df" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex erbsland::cterm::ui::Scheduler::_mutex</definition>
+        <argsstring></argsstring>
+        <name>_mutex</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::_mutex</qualifiedname>
+        <briefdescription>
+<para>Protects the scheduled actions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="126" column="24" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1aadc8795dc1c0563e0a7e57605c2897d7" prot="private" static="no" mutable="no">
+        <type>SurfaceWeakPtr</type>
+        <definition>SurfaceWeakPtr erbsland::cterm::ui::Scheduler::_surface</definition>
+        <argsstring></argsstring>
+        <name>_surface</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::_surface</qualifiedname>
+        <briefdescription>
+<para>The owning surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="127" column="20" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1adad66ee38f722ee9226d910a31530e15" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref>, ActionEntry &gt;</type>
+        <definition>std::unordered_map&lt;ScheduledActionRef, ActionEntry&gt; erbsland::cterm::ui::Scheduler::_actions</definition>
+        <argsstring></argsstring>
+        <name>_actions</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::_actions</qualifiedname>
+        <briefdescription>
+<para>The scheduled actions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="128" column="24" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ab6c7ee5a4989b3ccb32cd46d0aad64dd" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t erbsland::cterm::ui::Scheduler::_nextActionId</definition>
+        <argsstring></argsstring>
+        <name>_nextActionId</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::_nextActionId</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>The next action identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="129" column="14" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ab411655e3066cc403415573763c90bf5" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Scheduler::Scheduler</definition>
+        <argsstring>(SurfaceWeakPtr surface)</argsstring>
+        <name>Scheduler</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::Scheduler</qualifiedname>
+        <param>
+          <type>SurfaceWeakPtr</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Create a scheduler for one surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The owning surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1aed7fab0beb9bab975c270854c56d54e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Scheduler::~Scheduler</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Scheduler</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::~Scheduler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="57" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a588da59b185c2542621d2e085a4a0587" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+        <definition>ScheduledActionRef erbsland::cterm::ui::Scheduler::addSingleShot</definition>
+        <argsstring>(ActionFn &amp;&amp;action, milliseconds delay)</argsstring>
+        <name>addSingleShot</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::addSingleShot</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref> &amp;&amp;</type>
+          <declname>action</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref></type>
+          <declname>delay</declname>
+        </param>
+        <briefdescription>
+<para>Schedules a single action with a delay. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action to schedule. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The delay before the action is executed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The reference of the scheduled action. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="64" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1abad1906460c9052254a1e9aadac7d453" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+        <definition>ScheduledActionRef erbsland::cterm::ui::Scheduler::addSingleShot</definition>
+        <argsstring>(ActionFn &amp;&amp;action, ScheduledActionRef actionRef, milliseconds delay)</argsstring>
+        <name>addSingleShot</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::addSingleShot</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref> &amp;&amp;</type>
+          <declname>action</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+          <declname>actionRef</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref></type>
+          <declname>delay</declname>
+        </param>
+        <briefdescription>
+<para>Schedules a single action with a delay. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is either schedule a new action or move the execution time of an existing action. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action to schedule. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>actionRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The reference of the action to reschedule if it exists. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The delay before the action is executed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The reference of the scheduled action. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="71" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a2f7a27109e9f01028b437c6b3148a530" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+        <definition>ScheduledActionRef erbsland::cterm::ui::Scheduler::addRepeated</definition>
+        <argsstring>(ActionFn &amp;&amp;action, milliseconds interval)</argsstring>
+        <name>addRepeated</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::addRepeated</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref> &amp;&amp;</type>
+          <declname>action</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref></type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+<para>Add a repeating action to the scheduler. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action to schedule. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interval between executions. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The reference of the scheduled action. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="76" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a86141eaf2e6f6c53437458bd7bfde534" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Scheduler::setDelayOrInterval</definition>
+        <argsstring>(ScheduledActionRef actionRef, milliseconds delayOrInterval)</argsstring>
+        <name>setDelayOrInterval</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::setDelayOrInterval</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+          <declname>actionRef</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref></type>
+          <declname>delayOrInterval</declname>
+        </param>
+        <briefdescription>
+<para>Change the interval or delay of a scheduled action. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This resets the due time relative to the current time. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>actionRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The reference to the action. If the action does not exist, this call is ignored. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delayOrInterval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new delay or interval for the action. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a12ea7423d711970cb6b53c07a363539a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Scheduler::remove</definition>
+        <argsstring>(ScheduledActionRef actionRef)</argsstring>
+        <name>remove</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::remove</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+          <declname>actionRef</declname>
+        </param>
+        <briefdescription>
+<para>Stop/Remove a scheduled action. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the given reference does not exist, this call is ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>actionRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The reference of the action to remove. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="85" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a7f4040e9e758429b9e97d9a8cd37699a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Scheduler::removeAll</definition>
+        <argsstring>()</argsstring>
+        <name>removeAll</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::removeAll</qualifiedname>
+        <briefdescription>
+<para>Remove all scheduled actions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="87" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a837fbc310608f651c833a9adf5cd5f40" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Scheduler::executeAction</definition>
+        <argsstring>(ScheduledActionRef actionRef, uint64_t generation)</argsstring>
+        <name>executeAction</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::executeAction</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+          <declname>actionRef</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>generation</declname>
+        </param>
+        <briefdescription>
+<para>Execute one scheduled action from a scheduled action event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>actionRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>generation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action generation carried by the scheduled action event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="93" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a4cd7f1f79df3effb4a6c1bd0b39e2faa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Scheduler::armAllActions</definition>
+        <argsstring>()</argsstring>
+        <name>armAllActions</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::armAllActions</qualifiedname>
+        <briefdescription>
+<para>Arm all currently scheduled actions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="95" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a2fc682bd17589d6b272d0d652b2ea02c" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Scheduler::hasGeneration</definition>
+        <argsstring>(ScheduledActionRef actionRef, uint64_t generation) const</argsstring>
+        <name>hasGeneration</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::hasGeneration</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+          <declname>actionRef</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>generation</declname>
+        </param>
+        <briefdescription>
+<para>Test if the scheduler contains the given action generation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>actionRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>generation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The generation to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the action still exists with the given generation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="100" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a1c3d1e101d6936e71d3d627bd88c3232" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+        <definition>ScheduledActionRef erbsland::cterm::ui::Scheduler::scheduleAction</definition>
+        <argsstring>(ActionFn &amp;&amp;action, ScheduledActionRef actionRef, Mode mode, milliseconds delayOrInterval)</argsstring>
+        <name>scheduleAction</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::scheduleAction</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" kindref="member">ActionFn</ref> &amp;&amp;</type>
+          <declname>action</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+          <declname>actionRef</declname>
+        </param>
+        <param>
+          <type>Mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref></type>
+          <declname>delayOrInterval</declname>
+        </param>
+        <briefdescription>
+<para>Create or replace an action entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to schedule. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>actionRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action reference to reuse, or an invalid reference to allocate a new one. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scheduling mode. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delayOrInterval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The delay or interval. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The final action reference. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="107" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad486bf75dd7215e5eee6eb0c9db873e0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Scheduler::armAction</definition>
+        <argsstring>(ScheduledActionRef actionRef, uint64_t generation, EventTime eventTime)</argsstring>
+        <name>armAction</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::armAction</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+          <declname>actionRef</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>generation</declname>
+        </param>
+        <param>
+          <type>EventTime</type>
+          <declname>eventTime</declname>
+        </param>
+        <briefdescription>
+<para>Schedule the given action in the global event scheduler. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>actionRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>generation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current action generation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eventTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The due time for the scheduled action event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="112" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a62a3f6185e38f74c5576a6228c9aa81c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+        <definition>ScheduledActionRef erbsland::cterm::ui::Scheduler::allocateActionRef</definition>
+        <argsstring>()</argsstring>
+        <name>allocateActionRef</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::allocateActionRef</qualifiedname>
+        <briefdescription>
+<para>Allocate the next action reference. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The next action reference. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="123" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad874a15783e0764ad5d850fab00a46ff" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref></type>
+        <definition>static milliseconds erbsland::cterm::ui::Scheduler::clampDelayOrInterval</definition>
+        <argsstring>(milliseconds delayOrInterval)</argsstring>
+        <name>clampDelayOrInterval</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::clampDelayOrInterval</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" kindref="member">milliseconds</ref></type>
+          <declname>delayOrInterval</declname>
+        </param>
+        <briefdescription>
+<para>Clamp a delay or interval into the supported range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delayOrInterval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The requested delay or interval. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The clamped delay or interval. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="116" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a61de1717d3bf8cc02d67ba1d4640f6fc" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>static uint64_t erbsland::cterm::ui::Scheduler::nextGeneration</definition>
+        <argsstring>(uint64_t generation)</argsstring>
+        <name>nextGeneration</name>
+        <qualifiedname>erbsland::cterm::ui::Scheduler::nextGeneration</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>generation</declname>
+        </param>
+        <briefdescription>
+<para>Increment the generation counter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>generation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current generation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The next generation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="120" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A scheduler for UI actions. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler" kindref="compound">Scheduler</ref> management methods are thread-safe. Scheduled callbacks are always executed on the application UI thread. </para>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/event/Scheduler.hpp" line="23" column="1" bodyfile="erbsland/cterm/ui/event/Scheduler.hpp" bodystart="23" bodyend="130"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1adad66ee38f722ee9226d910a31530e15" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>_actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a42f9888365c4c8b9052b49c856ebc6df" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>_mutex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ab6c7ee5a4989b3ccb32cd46d0aad64dd" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>_nextActionId</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1aadc8795dc1c0563e0a7e57605c2897d7" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>_surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad51c3cc3a5f62843f5ffd7727bc9ce93" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>ActionFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a2f7a27109e9f01028b437c6b3148a530" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>addRepeated</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a588da59b185c2542621d2e085a4a0587" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>addSingleShot</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1abad1906460c9052254a1e9aadac7d453" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>addSingleShot</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a62a3f6185e38f74c5576a6228c9aa81c" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>allocateActionRef</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a23f25bcc02a0e94c2f5a4188496b04d0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>Application</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad486bf75dd7215e5eee6eb0c9db873e0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>armAction</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a4cd7f1f79df3effb4a6c1bd0b39e2faa" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>armAllActions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ad874a15783e0764ad5d850fab00a46ff" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>clampDelayOrInterval</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a330a27cf36bad8cab42618fd6058dc2a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>cMaximumInterval</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ac4b4f4b6e70845a69e1a519c39903fe4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>cMaximumScheduledActions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9b2d999cea3fb047c2cb91e65f6b14d6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>cMinimumInterval</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a837fbc310608f651c833a9adf5cd5f40" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>executeAction</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a2fc682bd17589d6b272d0d652b2ea02c" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>hasGeneration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a9074b21d570705cb993b7f15a49b95e3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>milliseconds</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1aae8923c8790efab4783c73be5eef3e09" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>Mode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a61de1717d3bf8cc02d67ba1d4640f6fc" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>nextGeneration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a12ea7423d711970cb6b53c07a363539a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>remove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a7f4040e9e758429b9e97d9a8cd37699a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>removeAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a1c3d1e101d6936e71d3d627bd88c3232" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>scheduleAction</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1ab411655e3066cc403415573763c90bf5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>Scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1a86141eaf2e6f6c53437458bd7bfde534" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>setDelayOrInterval</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler_1aed7fab0beb9bab975c270854c56d54e3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Scheduler</scope><name>~Scheduler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

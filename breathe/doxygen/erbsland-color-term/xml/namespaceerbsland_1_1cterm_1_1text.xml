@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceerbsland_1_1cterm_1_1text" kind="namespace" language="C++">
+    <compoundname>erbsland::cterm::text</compoundname>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1_html_renderer" prot="public">erbsland::cterm::text::HtmlRenderer</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1_style" prot="public">erbsland::cterm::text::Style</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1_style_marker" prot="public">erbsland::cterm::text::StyleMarker</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context" prot="public">erbsland::cterm::text::StyleMatchContext</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" prot="public">erbsland::cterm::text::StyleRule</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" prot="public">erbsland::cterm::text::StyleSelector</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1_text_node" prot="public">erbsland::cterm::text::TextNode</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1_text_node_type" prot="public">erbsland::cterm::text::TextNodeType</innerclass>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1text_1_1impl">erbsland::cterm::text::impl</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="_style_list_kind_8hpp_1aa9e4d105bedbdf24b4b2dcdb97a7bae7" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>StyleListKind</name>
+        <qualifiedname>erbsland::cterm::text::StyleListKind</qualifiedname>
+        <enumvalue id="_style_list_kind_8hpp_1aa9e4d105bedbdf24b4b2dcdb97a7bae7aed36a1ef76a59ee3f15180e0441188ad" prot="public">
+          <name>Any</name>
+          <briefdescription>
+<para>Match any list kind or non-list roles. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_list_kind_8hpp_1aa9e4d105bedbdf24b4b2dcdb97a7bae7a7533f96ec01fd81438833f71539c7d4e" prot="public">
+          <name>Bullet</name>
+          <briefdescription>
+<para>Match bullet lists and bullet list items. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_list_kind_8hpp_1aa9e4d105bedbdf24b4b2dcdb97a7bae7a2dc448ca9b2be4c365097ce6e788c45e" prot="public">
+          <name>Numbered</name>
+          <briefdescription>
+<para>Match numbered lists and numbered list items. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The list kind for list-specific selectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleListKind.hpp" line="10" column="1" bodyfile="erbsland/cterm/text/StyleListKind.hpp" bodystart="10" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="enum" id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417c" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>StyleRole</name>
+        <qualifiedname>erbsland::cterm::text::StyleRole</qualifiedname>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca0945359809dad1fbf3dea1c95a0da951" prot="public">
+          <name>Document</name>
+          <briefdescription>
+<para>The root document container. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417cad2c24d59e0baff4d0155fbdf62590867" prot="public">
+          <name>Section</name>
+          <briefdescription>
+<para>Generic block container such as <computeroutput>section</computeroutput> or <computeroutput>div</computeroutput>. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417cafeaf0a320c3d678ad30dd179b7d21584" prot="public">
+          <name>Paragraph</name>
+          <briefdescription>
+<para>Regular paragraph blocks. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca0101316665d4f82adaa26d86fbbb2d6e" prot="public">
+          <name>Heading</name>
+          <briefdescription>
+<para>Heading blocks. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca453d019d133a6359d3a6f585ad0878e8" prot="public">
+          <name>ListContainer</name>
+          <briefdescription>
+<para>Bullet or numbered list containers. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417cab332941182f94d378ce2013a80c61075" prot="public">
+          <name>ListItem</name>
+          <briefdescription>
+<para>List item content boxes. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417cac10614c0b9ea848275a6425b41cc1f62" prot="public">
+          <name>DefinitionList</name>
+          <briefdescription>
+<para>Definition list containers. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca88c8101fadb22d5c3ad165b7155dee27" prot="public">
+          <name>DefinitionTerm</name>
+          <briefdescription>
+<para>Definition terms. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417cabea59ff2c99f73d740e2c2d176cff282" prot="public">
+          <name>DefinitionDescription</name>
+          <briefdescription>
+<para>Definition descriptions. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca146aaf1333c7e82829fe9c5c52340b56" prot="public">
+          <name>Blockquote</name>
+          <briefdescription>
+<para>Blockquote containers. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca0047b9e5bb22cee8044a75daf772e131" prot="public">
+          <name>CodeBlock</name>
+          <briefdescription>
+<para>Code blocks. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417cafb71f68ab367f94ee748de27506278af" prot="public">
+          <name>HorizontalRule</name>
+          <briefdescription>
+<para>Horizontal separators. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca43268d52aef2fbd0ba6661b51da1001a" prot="public">
+          <name>Emphasis</name>
+          <briefdescription>
+<para>Emphasized or italic inline content. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417cac43e0fd449c758dab8f891d8e19eb1a9" prot="public">
+          <name>Strong</name>
+          <briefdescription>
+<para>Strong or bold inline content. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca852721aa5fc738dfedff2945d71da439" prot="public">
+          <name>Underline</name>
+          <briefdescription>
+<para>Underlined inline content. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca9ce62112cff8eb735d9270c2e285b000" prot="public">
+          <name>Span</name>
+          <briefdescription>
+<para>Generic inline span containers. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417ca97e7c9a7d06eac006a28bf05467fcc8b" prot="public">
+          <name>Link</name>
+          <briefdescription>
+<para>Links or active references. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_style_role_8hpp_1a10363e64097d22f4fa4b6f86de1a417caca0dbad92a874b2f69b549293387925e" prot="public">
+          <name>Code</name>
+          <briefdescription>
+<para>Inline code. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Semantic roles that can be styled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleRole.hpp" line="10" column="1" bodyfile="erbsland/cterm/text/StyleRole.hpp" bodystart="10" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_style_8hpp_1a6e388cb35aee9f3338e5fa0afbf44d27" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classerbsland_1_1cterm_1_1text_1_1_style" kindref="compound">Style</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::StylePtr = typedef std::shared_ptr&lt;Style&gt;</definition>
+        <argsstring></argsstring>
+        <name>StylePtr</name>
+        <qualifiedname>erbsland::cterm::text::StylePtr</qualifiedname>
+        <briefdescription>
+<para>Shared pointer to a mutable text style. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="23" column="1" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_style_8hpp_1af63b7478e00d935f3720bd112f89ba1a" prot="public" static="no">
+        <type>std::shared_ptr&lt; const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style" kindref="compound">Style</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::StyleConstPtr = typedef std::shared_ptr&lt;const Style&gt;</definition>
+        <argsstring></argsstring>
+        <name>StyleConstPtr</name>
+        <qualifiedname>erbsland::cterm::text::StyleConstPtr</qualifiedname>
+        <briefdescription>
+<para>Shared pointer to an immutable text style. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="25" column="1" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_text_node_8hpp_1a9487ace39bca8e6250833c3570d48c65" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::TextNodePtr = typedef std::shared_ptr&lt;TextNode&gt;</definition>
+        <argsstring></argsstring>
+        <name>TextNodePtr</name>
+        <qualifiedname>erbsland::cterm::text::TextNodePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="20" column="1" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_text_node_8hpp_1a36877ff24c3a2ff3e1ba334829eb4d5e" prot="public" static="no">
+        <type>std::shared_ptr&lt; const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::TextNodeConstPtr = typedef std::shared_ptr&lt;const TextNode&gt;</definition>
+        <argsstring></argsstring>
+        <name>TextNodeConstPtr</name>
+        <qualifiedname>erbsland::cterm::text::TextNodeConstPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="21" column="1" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_text_node_8hpp_1a4c0ebf87ba03147b757325ed9e2822d8" prot="public" static="no">
+        <type>std::weak_ptr&lt; <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::TextNodeWeakPtr = typedef std::weak_ptr&lt;TextNode&gt;</definition>
+        <argsstring></argsstring>
+        <name>TextNodeWeakPtr</name>
+        <qualifiedname>erbsland::cterm::text::TextNodeWeakPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="22" column="1" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/HtmlRenderer.hpp" line="14" column="1"/>
+  </compounddef>
+</doxygen>

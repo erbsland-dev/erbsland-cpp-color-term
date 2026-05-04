@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_axis_mapper" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::AxisMapper</compoundname>
+    <includes refid="_axis_mapper_8hpp" local="no">erbsland/cterm/geometry/AxisMapper.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_axis_mapper_1aafa3c71e0af39830c7b72dc5a61f1035" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+        <definition>Orientation erbsland::cterm::AxisMapper::_orientation</definition>
+        <argsstring></argsstring>
+        <name>_orientation</name>
+        <qualifiedname>erbsland::cterm::AxisMapper::_orientation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/AxisMapper.hpp" line="51" column="17" bodyfile="erbsland/cterm/geometry/AxisMapper.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_axis_mapper_1a32a741cde6040f79385df4f869f99763" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::AxisMapper::AxisMapper</definition>
+        <argsstring>(const Orientation orientation) noexcept</argsstring>
+        <name>AxisMapper</name>
+        <qualifiedname>erbsland::cterm::AxisMapper::AxisMapper</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Create a mapper for the given orientation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The main axis orientation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/AxisMapper.hpp" line="16" column="24" bodyfile="erbsland/cterm/geometry/AxisMapper.hpp" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_axis_mapper_1a87c778175fc6cad5cbddc2b1bd7a31aa" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>constexpr Size erbsland::cterm::AxisMapper::size</definition>
+        <argsstring>(const Coordinate main, const Coordinate cross) const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::AxisMapper::size</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>main</declname>
+        </param>
+        <param>
+          <type>const Coordinate</type>
+          <declname>cross</declname>
+        </param>
+        <briefdescription>
+<para>Create a size from main and cross-axis extents. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>main</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size along the main axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cross</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size along the cross axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding width and height. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/AxisMapper.hpp" line="23" column="21" bodyfile="erbsland/cterm/geometry/AxisMapper.hpp" bodystart="23" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_axis_mapper_1a6ea2c3c3d3bd3af1f17d946be0d769b9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>constexpr Position erbsland::cterm::AxisMapper::position</definition>
+        <argsstring>(const Coordinate main, const Coordinate cross=0) const noexcept</argsstring>
+        <name>position</name>
+        <qualifiedname>erbsland::cterm::AxisMapper::position</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>main</declname>
+        </param>
+        <param>
+          <type>const Coordinate</type>
+          <declname>cross</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Create a position from main and cross-axis coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>main</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate along the main axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cross</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate along the cross axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding x and y position. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/AxisMapper.hpp" line="30" column="25" bodyfile="erbsland/cterm/geometry/AxisMapper.hpp" bodystart="30" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_axis_mapper_1a4bdbb3e32f89c0e7d81ee7ec5e8e8ec2" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Value</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr Value</type>
+        <definition>constexpr Value erbsland::cterm::AxisMapper::horizontalValue</definition>
+        <argsstring>(Value main, Value cross) const noexcept</argsstring>
+        <name>horizontalValue</name>
+        <qualifiedname>erbsland::cterm::AxisMapper::horizontalValue</qualifiedname>
+        <param>
+          <type>Value</type>
+          <declname>main</declname>
+        </param>
+        <param>
+          <type>Value</type>
+          <declname>cross</declname>
+        </param>
+        <briefdescription>
+<para>Select the horizontal value from a main/cross pair. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>main</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value for the main axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cross</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value for the cross axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>main</computeroutput> for horizontal orientation, otherwise <computeroutput>cross</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/AxisMapper.hpp" line="38" column="22" bodyfile="erbsland/cterm/geometry/AxisMapper.hpp" bodystart="38" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_axis_mapper_1a986ef447c829379ef5b9877b39febb39" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Value</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr Value</type>
+        <definition>constexpr Value erbsland::cterm::AxisMapper::verticalValue</definition>
+        <argsstring>(Value main, Value cross) const noexcept</argsstring>
+        <name>verticalValue</name>
+        <qualifiedname>erbsland::cterm::AxisMapper::verticalValue</qualifiedname>
+        <param>
+          <type>Value</type>
+          <declname>main</declname>
+        </param>
+        <param>
+          <type>Value</type>
+          <declname>cross</declname>
+        </param>
+        <briefdescription>
+<para>Select the vertical value from a main/cross pair. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>main</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value for the main axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cross</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value for the cross axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>cross</computeroutput> for horizontal orientation, otherwise <computeroutput>main</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/AxisMapper.hpp" line="46" column="22" bodyfile="erbsland/cterm/geometry/AxisMapper.hpp" bodystart="46" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Maps main/cross-axis values to horizontal/vertical geometry values. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/geometry/AxisMapper.hpp" line="12" column="1" bodyfile="erbsland/cterm/geometry/AxisMapper.hpp" bodystart="12" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_axis_mapper_1aafa3c71e0af39830c7b72dc5a61f1035" prot="private" virt="non-virtual"><scope>erbsland::cterm::AxisMapper</scope><name>_orientation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_axis_mapper_1a32a741cde6040f79385df4f869f99763" prot="public" virt="non-virtual"><scope>erbsland::cterm::AxisMapper</scope><name>AxisMapper</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_axis_mapper_1a4bdbb3e32f89c0e7d81ee7ec5e8e8ec2" prot="public" virt="non-virtual"><scope>erbsland::cterm::AxisMapper</scope><name>horizontalValue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_axis_mapper_1a6ea2c3c3d3bd3af1f17d946be0d769b9" prot="public" virt="non-virtual"><scope>erbsland::cterm::AxisMapper</scope><name>position</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_axis_mapper_1a87c778175fc6cad5cbddc2b1bd7a31aa" prot="public" virt="non-virtual"><scope>erbsland::cterm::AxisMapper</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_axis_mapper_1a986ef447c829379ef5b9877b39febb39" prot="public" virt="non-virtual"><scope>erbsland::cterm::AxisMapper</scope><name>verticalValue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

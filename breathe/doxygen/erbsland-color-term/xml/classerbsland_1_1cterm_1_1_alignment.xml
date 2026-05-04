@@ -1,0 +1,955 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_alignment" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::Alignment</compoundname>
+    <includes refid="_alignment_8hpp" local="no">erbsland/cterm/geometry/Alignment.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961dea" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>Enum</name>
+        <qualifiedname>erbsland::cterm::Alignment::Enum</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa945d5e233cf7d6240f6b783b36a374ff" prot="public">
+          <name>Left</name>
+          <initializer>= 1U &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>Aligned to the left edge of the box. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaac71c5820d2d850cc208d3b4f6bb2e4eb" prot="public">
+          <name>HCenter</name>
+          <initializer>= 1U &lt;&lt; 1</initializer>
+          <briefdescription>
+<para>Aligned to the horizontal center of the box. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa92b09c7c48c520c3c55e497875da437c" prot="public">
+          <name>Right</name>
+          <initializer>= 1U &lt;&lt; 2</initializer>
+          <briefdescription>
+<para>Aligned to the right edge of the box. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaaa4ffdcf0dc1f31b9acaf295d75b51d00" prot="public">
+          <name>Top</name>
+          <initializer>= 1U &lt;&lt; 4</initializer>
+          <briefdescription>
+<para>Aligned to the top edge of the box. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa0c008dad767075dab996c133e44d5d2f" prot="public">
+          <name>VCenter</name>
+          <initializer>= 1U &lt;&lt; 5</initializer>
+          <briefdescription>
+<para>Aligned to the vertical center of the box. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa2ad9d63b69c4a10a5cc9cad923133bc4" prot="public">
+          <name>Bottom</name>
+          <initializer>= 1U &lt;&lt; 6</initializer>
+          <briefdescription>
+<para>Aligned to the bottom edge of the box. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaab32beb056fbfe36afbabc6c88c81ab36" prot="public">
+          <name>TopLeft</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(Top) | static_cast&lt;uint8_t&gt;(Left)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa91b8ede24b7f93a98ae4dcaade15d468" prot="public">
+          <name>TopCenter</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(Top) | static_cast&lt;uint8_t&gt;(HCenter)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa1d85a557894c340c318493f33bfa8efb" prot="public">
+          <name>TopRight</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(Top) | static_cast&lt;uint8_t&gt;(Right)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa9f44821a7b58abb265709f49e54ef8ca" prot="public">
+          <name>CenterLeft</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(VCenter) | static_cast&lt;uint8_t&gt;(Left)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa4f1f6016fc9f3f2353c0cc7c67b292bd" prot="public">
+          <name>Center</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(VCenter) | static_cast&lt;uint8_t&gt;(HCenter)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaaa538ef718186c9e0967239bb60043d1f" prot="public">
+          <name>CenterRight</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(VCenter) | static_cast&lt;uint8_t&gt;(Right)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa98e5a1c44509157ebcaf46c515c78875" prot="public">
+          <name>BottomLeft</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(Bottom) | static_cast&lt;uint8_t&gt;(Left)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaabf7d9c8ad2f89a37cf5378b5fec0b420" prot="public">
+          <name>BottomCenter</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(Bottom) | static_cast&lt;uint8_t&gt;(HCenter)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa9146bfc669fddc88db2c4d89297d0e9a" prot="public">
+          <name>BottomRight</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(Bottom) | static_cast&lt;uint8_t&gt;(Right)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaacfa70f03270dcc2bfc0634c716ab45fc" prot="public">
+          <name>HorizontalMask</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(Left) | static_cast&lt;uint8_t&gt;(HCenter) | static_cast&lt;uint8_t&gt;(Right)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961deaa3ad195164a96b004121f484dd12c21aa" prot="public">
+          <name>VerticalMask</name>
+          <initializer>= static_cast&lt;uint8_t&gt;(Top) | static_cast&lt;uint8_t&gt;(VCenter) | static_cast&lt;uint8_t&gt;(Bottom)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The enum values for alignment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="19" column="5" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="19" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1abb2c95247faf6d7b8d1df0a132b926e0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::Left</definition>
+        <argsstring></argsstring>
+        <name>Left</name>
+        <qualifiedname>erbsland::cterm::Alignment::Left</qualifiedname>
+        <initializer>{Alignment::Enum::Left}</initializer>
+        <briefdescription>
+<para>Aligned to the left edge of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="40" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a82ac67bca61012eee3aa37eff159b750" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::HCenter</definition>
+        <argsstring></argsstring>
+        <name>HCenter</name>
+        <qualifiedname>erbsland::cterm::Alignment::HCenter</qualifiedname>
+        <initializer>{Alignment::Enum::HCenter}</initializer>
+        <briefdescription>
+<para>Aligned to the horizontal center of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="41" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a3d7dc317f9797ee81b4c0546a49a38c3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::Right</definition>
+        <argsstring></argsstring>
+        <name>Right</name>
+        <qualifiedname>erbsland::cterm::Alignment::Right</qualifiedname>
+        <initializer>{Alignment::Enum::Right}</initializer>
+        <briefdescription>
+<para>Aligned to the right edge of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="42" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a52e95fd946a05d7653e082dd8dc53578" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::Top</definition>
+        <argsstring></argsstring>
+        <name>Top</name>
+        <qualifiedname>erbsland::cterm::Alignment::Top</qualifiedname>
+        <initializer>{Alignment::Enum::Top}</initializer>
+        <briefdescription>
+<para>Aligned to the top edge of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="43" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a05c4a44f607f6df8b23f4fa7bc3c58b8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::VCenter</definition>
+        <argsstring></argsstring>
+        <name>VCenter</name>
+        <qualifiedname>erbsland::cterm::Alignment::VCenter</qualifiedname>
+        <initializer>{Alignment::Enum::VCenter}</initializer>
+        <briefdescription>
+<para>Aligned to the vertical center of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="44" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1ad53ddf77a0b58e9bc43ad635e4a2f9ca" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::Bottom</definition>
+        <argsstring></argsstring>
+        <name>Bottom</name>
+        <qualifiedname>erbsland::cterm::Alignment::Bottom</qualifiedname>
+        <initializer>{Alignment::Enum::Bottom}</initializer>
+        <briefdescription>
+<para>Aligned to the bottom edge of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="45" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1ad6602abbf18253c439c6d478aad363c1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::TopLeft</definition>
+        <argsstring></argsstring>
+        <name>TopLeft</name>
+        <qualifiedname>erbsland::cterm::Alignment::TopLeft</qualifiedname>
+        <initializer>{Alignment::Enum::TopLeft}</initializer>
+        <briefdescription>
+<para>Aligned to the top-left corner of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="46" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a56f1ae43d53c2e0a840341dc0a7b485a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::TopCenter</definition>
+        <argsstring></argsstring>
+        <name>TopCenter</name>
+        <qualifiedname>erbsland::cterm::Alignment::TopCenter</qualifiedname>
+        <initializer>{Alignment::Enum::TopCenter}</initializer>
+        <briefdescription>
+<para>Aligned to the top-center of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="47" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a23033043e71110c1a4b0c2c7ff69db51" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::TopRight</definition>
+        <argsstring></argsstring>
+        <name>TopRight</name>
+        <qualifiedname>erbsland::cterm::Alignment::TopRight</qualifiedname>
+        <initializer>{Alignment::Enum::TopRight}</initializer>
+        <briefdescription>
+<para>Aligned to the top-right corner of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="48" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a1dfb5cb3dc858a4183468f1792b6567b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::CenterLeft</definition>
+        <argsstring></argsstring>
+        <name>CenterLeft</name>
+        <qualifiedname>erbsland::cterm::Alignment::CenterLeft</qualifiedname>
+        <initializer>{Alignment::Enum::CenterLeft}</initializer>
+        <briefdescription>
+<para>Aligned to the center-left of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="49" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a2e7c8486344b23912f380f17689ab38d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::Center</definition>
+        <argsstring></argsstring>
+        <name>Center</name>
+        <qualifiedname>erbsland::cterm::Alignment::Center</qualifiedname>
+        <initializer>{Alignment::Enum::Center}</initializer>
+        <briefdescription>
+<para>Aligned to the center of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="50" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a2b79937a33c4dfc8afd873e1067d9e80" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::CenterRight</definition>
+        <argsstring></argsstring>
+        <name>CenterRight</name>
+        <qualifiedname>erbsland::cterm::Alignment::CenterRight</qualifiedname>
+        <initializer>{Alignment::Enum::CenterRight}</initializer>
+        <briefdescription>
+<para>Aligned to the center-right of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="51" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1ae4c558eaa7bbc20d64fbf908359bd636" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::BottomLeft</definition>
+        <argsstring></argsstring>
+        <name>BottomLeft</name>
+        <qualifiedname>erbsland::cterm::Alignment::BottomLeft</qualifiedname>
+        <initializer>{Alignment::Enum::BottomLeft}</initializer>
+        <briefdescription>
+<para>Aligned to the bottom-left corner of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="52" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a1dc2ace6e80ff31e96e37462e5dd1c96" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::BottomCenter</definition>
+        <argsstring></argsstring>
+        <name>BottomCenter</name>
+        <qualifiedname>erbsland::cterm::Alignment::BottomCenter</qualifiedname>
+        <initializer>{Alignment::Enum::BottomCenter}</initializer>
+        <briefdescription>
+<para>Aligned to the bottom-center of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="53" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a1067d78e833cc30a698f599004a31077" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::BottomRight</definition>
+        <argsstring></argsstring>
+        <name>BottomRight</name>
+        <qualifiedname>erbsland::cterm::Alignment::BottomRight</qualifiedname>
+        <initializer>{Alignment::Enum::BottomRight}</initializer>
+        <briefdescription>
+<para>Aligned to the bottom-right corner of the box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="54" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a5d5ff2c85eeddb980f11297fe1b90d87" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::HorizontalMask</definition>
+        <argsstring></argsstring>
+        <name>HorizontalMask</name>
+        <qualifiedname>erbsland::cterm::Alignment::HorizontalMask</qualifiedname>
+        <initializer>{Alignment::Enum::HorizontalMask}</initializer>
+        <briefdescription>
+<para>Mask for extracting the horizontal component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="55" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a57252e3f658618273053412fa15e3cc5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::VerticalMask</definition>
+        <argsstring></argsstring>
+        <name>VerticalMask</name>
+        <qualifiedname>erbsland::cterm::Alignment::VerticalMask</qualifiedname>
+        <initializer>{Alignment::Enum::VerticalMask}</initializer>
+        <briefdescription>
+<para>Mask for extracting the vertical component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="56" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_alignment_1a400e9744ca564893f8d7b6d21c6c2202" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961dea" kindref="member">Enum</ref></type>
+        <definition>Enum erbsland::cterm::Alignment::_value</definition>
+        <argsstring></argsstring>
+        <name>_value</name>
+        <qualifiedname>erbsland::cterm::Alignment::_value</qualifiedname>
+        <initializer>{Enum::TopLeft}</initializer>
+        <briefdescription>
+<para>The internal enum value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="154" column="10" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="154" bodyend="154"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a318e0e5eff8903cf77812d024e1271db" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Alignment::Alignment</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>Alignment</name>
+        <qualifiedname>erbsland::cterm::Alignment::Alignment</qualifiedname>
+        <briefdescription>
+<para>Create a top-left alignment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="60" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a5bd05ac2c14928c896dc2eba4d9fb2b5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Alignment::Alignment</definition>
+        <argsstring>(const Enum value) noexcept</argsstring>
+        <name>Alignment</name>
+        <qualifiedname>erbsland::cterm::Alignment::Alignment</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961dea" kindref="member">Enum</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Create an alignment from an enum value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="63" column="15" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a8b805edf72e55fd940f394abb855f8d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Alignment::~Alignment</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Alignment</name>
+        <qualifiedname>erbsland::cterm::Alignment::~Alignment</qualifiedname>
+        <briefdescription>
+<para>Default destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="66" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a5dbccf94d09db03415685ea29a25c2c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Alignment::Alignment</definition>
+        <argsstring>(const Alignment &amp;)=default</argsstring>
+        <name>Alignment</name>
+        <qualifiedname>erbsland::cterm::Alignment::Alignment</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Default copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="68" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1ab8fe0a9c074cc654a407449c327c75ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref> &amp;</type>
+        <definition>Alignment &amp; erbsland::cterm::Alignment::operator=</definition>
+        <argsstring>(const Alignment &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::Alignment::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Default copy assignment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="70" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1ab2baae9f6c8a3eac47b7d2dd3ce83921" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref> &amp;</type>
+        <definition>Alignment &amp; erbsland::cterm::Alignment::operator=</definition>
+        <argsstring>(const Enum value) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::Alignment::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961dea" kindref="member">Enum</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Assign an enum value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="74" column="16" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="74" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a8d8794d3bfd48efb6d0d265715000ade" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Alignment::operator Enum</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator Enum</name>
+        <qualifiedname>erbsland::cterm::Alignment::operator Enum</qualifiedname>
+        <briefdescription>
+<para>Convert to the enum value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="79" column="15" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a68de6c12398f02c14689f1a3132d02a0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Alignment::operator==</definition>
+        <argsstring>(const Alignment &amp;) const noexcept=default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::Alignment::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Compare two alignments. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="81" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a3198b7af282d0063e4ef1caf2b041b1e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Alignment::operator==</definition>
+        <argsstring>(const Enum value) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::Alignment::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961dea" kindref="member">Enum</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Compare with an enum value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="83" column="21" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1ac0dd913779ce4f16fc4eda15a6ed4b2d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Alignment::isLeft</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isLeft</name>
+        <qualifiedname>erbsland::cterm::Alignment::isLeft</qualifiedname>
+        <briefdescription>
+<para>Test if this alignment is on the left side. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="101" column="21" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a05f71aa47356c5d9e1f06c0a4bac5674" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Alignment::isHorizontalCenter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isHorizontalCenter</name>
+        <qualifiedname>erbsland::cterm::Alignment::isHorizontalCenter</qualifiedname>
+        <briefdescription>
+<para>Test if this alignment is horizontally centered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="103" column="21" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a02f618be5a2054ad4eecb06b285b7f18" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Alignment::isRight</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isRight</name>
+        <qualifiedname>erbsland::cterm::Alignment::isRight</qualifiedname>
+        <briefdescription>
+<para>Test if this alignment is on the right side. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="105" column="21" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1ab5523b78607b5936f4c61f825385a6ac" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Alignment::isTop</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isTop</name>
+        <qualifiedname>erbsland::cterm::Alignment::isTop</qualifiedname>
+        <briefdescription>
+<para>Test if this alignment is at the top. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="107" column="21" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a885bc62febb259faf68e42f17effd108" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Alignment::isVerticalCenter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isVerticalCenter</name>
+        <qualifiedname>erbsland::cterm::Alignment::isVerticalCenter</qualifiedname>
+        <briefdescription>
+<para>Test if this alignment is vertically centered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="109" column="21" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="109" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a7ca74e74491fe328247cfdf351473db4" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Alignment::isBottom</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isBottom</name>
+        <qualifiedname>erbsland::cterm::Alignment::isBottom</qualifiedname>
+        <briefdescription>
+<para>Test if this alignment is at the bottom. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="111" column="21" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="111" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a283174551b03f3307a4fcf812c058dc9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::horizontal</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>horizontal</name>
+        <qualifiedname>erbsland::cterm::Alignment::horizontal</qualifiedname>
+        <briefdescription>
+<para>Extract the horizontal alignment component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="115" column="26" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="115" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a3d32e2fa8265fd815579948a6c6a0314" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment erbsland::cterm::Alignment::vertical</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>vertical</name>
+        <qualifiedname>erbsland::cterm::Alignment::vertical</qualifiedname>
+        <briefdescription>
+<para>Extract the vertical alignment component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="119" column="26" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="119" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1ab16ce3ee298bc5efc495666b573cb176" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Alignment::horizontalOffset</definition>
+        <argsstring>(const Coordinate availableWidth, const Coordinate contentWidth) const noexcept</argsstring>
+        <name>horizontalOffset</name>
+        <qualifiedname>erbsland::cterm::Alignment::horizontalOffset</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>availableWidth</declname>
+        </param>
+        <param>
+          <type>const Coordinate</type>
+          <declname>contentWidth</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the horizontal offset for content aligned in an available width. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="123" column="27" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="123" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1a5333d85090458cc1bc127f4e7a0ddf04" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Alignment::verticalOffset</definition>
+        <argsstring>(const Coordinate availableHeight, const Coordinate contentHeight) const noexcept</argsstring>
+        <name>verticalOffset</name>
+        <qualifiedname>erbsland::cterm::Alignment::verticalOffset</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>availableHeight</declname>
+        </param>
+        <param>
+          <type>const Coordinate</type>
+          <declname>contentHeight</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the vertical offset for content aligned in an available height. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="134" column="27" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="134" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1afa75321b6269475a5151e2cc16268f73" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::Alignment::hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hash</name>
+        <qualifiedname>erbsland::cterm::Alignment::hash</qualifiedname>
+        <briefdescription>
+<para>Get a hash for this alignment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="145" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="145" bodyend="147"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classerbsland_1_1cterm_1_1_alignment_1a3840315f1da7c47e3ec0307df56250da" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool operator==</definition>
+        <argsstring>(const Enum value, const Alignment &amp;alignment) noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::Alignment::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961dea" kindref="member">Enum</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref> &amp;</type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+<para>Compare an enum value with an alignment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="85" column="28" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="85" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="friend" id="classerbsland_1_1cterm_1_1_alignment_1a3df63132e5e7caa96506d324e87bb680" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment operator|</definition>
+        <argsstring>(const Alignment lhs, const Alignment rhs) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>erbsland::cterm::Alignment::operator|</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>Bitwise OR for combining alignments. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Example: <ref refid="classerbsland_1_1cterm_1_1_alignment_1a52e95fd946a05d7653e082dd8dc53578" kindref="member">Alignment::Top</ref> | <ref refid="classerbsland_1_1cterm_1_1_alignment_1a82ac67bca61012eee3aa37eff159b750" kindref="member">Alignment::HCenter</ref> -&gt; TopCenter </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="90" column="33" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="90" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="friend" id="classerbsland_1_1cterm_1_1_alignment_1a9ed40f078bb4308c55280a502cfbfcdd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>constexpr Alignment operator&amp;</definition>
+        <argsstring>(const Alignment lhs, const Alignment rhs) noexcept</argsstring>
+        <name>operator&amp;</name>
+        <qualifiedname>erbsland::cterm::Alignment::operator&amp;</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>Bitwise AND for masking/extracting components of an alignment. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Example: (alignment &amp; <ref refid="classerbsland_1_1cterm_1_1_alignment_1a57252e3f658618273053412fa15e3cc5" kindref="member">Alignment::VerticalMask</ref>) yields the vertical component. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="95" column="33" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="95" bodyend="97"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_alignment_1ac97aaf70b4039142ce279ce77ce54093" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr uint8_t</type>
+        <definition>constexpr uint8_t erbsland::cterm::Alignment::value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>value</name>
+        <qualifiedname>erbsland::cterm::Alignment::value</qualifiedname>
+        <briefdescription>
+<para>Get the raw enum value as integer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Alignment.hpp" line="151" column="24" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="151" bodyend="151"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref> of text or graphics in a box. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::Alignment</label>
+        <link refid="classerbsland_1_1cterm_1_1_alignment"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>Bottom</edgelabel>
+          <edgelabel>BottomCenter</edgelabel>
+          <edgelabel>BottomLeft</edgelabel>
+          <edgelabel>BottomRight</edgelabel>
+          <edgelabel>Center</edgelabel>
+          <edgelabel>CenterLeft</edgelabel>
+          <edgelabel>CenterRight</edgelabel>
+          <edgelabel>HCenter</edgelabel>
+          <edgelabel>HorizontalMask</edgelabel>
+          <edgelabel>Left</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/geometry/Alignment.hpp" line="16" column="1" bodyfile="erbsland/cterm/geometry/Alignment.hpp" bodystart="16" bodyend="155"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a400e9744ca564893f8d7b6d21c6c2202" prot="private" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>_value</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a318e0e5eff8903cf77812d024e1271db" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Alignment</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a5bd05ac2c14928c896dc2eba4d9fb2b5" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Alignment</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a5dbccf94d09db03415685ea29a25c2c6" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Alignment</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ad53ddf77a0b58e9bc43ad635e4a2f9ca" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Bottom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a1dc2ace6e80ff31e96e37462e5dd1c96" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>BottomCenter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ae4c558eaa7bbc20d64fbf908359bd636" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>BottomLeft</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a1067d78e833cc30a698f599004a31077" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>BottomRight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a2e7c8486344b23912f380f17689ab38d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Center</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a1dfb5cb3dc858a4183468f1792b6567b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>CenterLeft</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a2b79937a33c4dfc8afd873e1067d9e80" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>CenterRight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1aa87729b2b8e0dfa75d11a9c521961dea" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Enum</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1afa75321b6269475a5151e2cc16268f73" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>hash</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a82ac67bca61012eee3aa37eff159b750" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>HCenter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a283174551b03f3307a4fcf812c058dc9" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>horizontal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a5d5ff2c85eeddb980f11297fe1b90d87" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>HorizontalMask</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ab16ce3ee298bc5efc495666b573cb176" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>horizontalOffset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a7ca74e74491fe328247cfdf351473db4" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>isBottom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a05f71aa47356c5d9e1f06c0a4bac5674" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>isHorizontalCenter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ac0dd913779ce4f16fc4eda15a6ed4b2d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>isLeft</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a02f618be5a2054ad4eecb06b285b7f18" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>isRight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ab5523b78607b5936f4c61f825385a6ac" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>isTop</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a885bc62febb259faf68e42f17effd108" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>isVerticalCenter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1abb2c95247faf6d7b8d1df0a132b926e0" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Left</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a8d8794d3bfd48efb6d0d265715000ade" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>operator Enum</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a9ed40f078bb4308c55280a502cfbfcdd" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>operator&amp;</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ab8fe0a9c074cc654a407449c327c75ef" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ab2baae9f6c8a3eac47b7d2dd3ce83921" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a68de6c12398f02c14689f1a3132d02a0" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a3198b7af282d0063e4ef1caf2b041b1e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a3840315f1da7c47e3ec0307df56250da" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a3df63132e5e7caa96506d324e87bb680" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>operator|</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a3d7dc317f9797ee81b4c0546a49a38c3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Right</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a52e95fd946a05d7653e082dd8dc53578" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>Top</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a56f1ae43d53c2e0a840341dc0a7b485a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>TopCenter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ad6602abbf18253c439c6d478aad363c1" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>TopLeft</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a23033043e71110c1a4b0c2c7ff69db51" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>TopRight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1ac97aaf70b4039142ce279ce77ce54093" prot="private" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>value</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a05c4a44f607f6df8b23f4fa7bc3c58b8" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>VCenter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a3d32e2fa8265fd815579948a6c6a0314" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>vertical</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a57252e3f658618273053412fa15e3cc5" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>VerticalMask</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a5333d85090458cc1bc127f4e7a0ddf04" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>verticalOffset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_alignment_1a8b805edf72e55fd940f394abb855f8d5" prot="public" virt="non-virtual"><scope>erbsland::cterm::Alignment</scope><name>~Alignment</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

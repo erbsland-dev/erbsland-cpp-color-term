@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceerbsland_1_1cterm_1_1ui_1_1impl" kind="namespace" language="C++">
+    <compoundname>erbsland::cterm::ui::impl</compoundname>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access" prot="public">erbsland::cterm::ui::impl::EventClockAccess</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event" prot="public">erbsland::cterm::ui::impl::InvocationEvent</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scheduled_action_event" prot="public">erbsland::cterm::ui::impl::ScheduledActionEvent</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" prot="public">erbsland::cterm::ui::impl::ScopedEventClockOverride</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_stop_state" prot="public">erbsland::cterm::ui::impl::StopState</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="_scroll_metrics_8hpp_1a06b0f7a8763206c83f1f166a27218fcd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::ui::impl::resolveScrollContentSize</definition>
+        <argsstring>(const LayoutMetrics &amp;metrics, Size viewportSize) noexcept</argsstring>
+        <name>resolveScrollContentSize</name>
+        <qualifiedname>erbsland::cterm::ui::impl::resolveScrollContentSize</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics" kindref="compound">LayoutMetrics</ref> &amp;</type>
+          <declname>metrics</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>viewportSize</declname>
+        </param>
+        <briefdescription>
+<para>Resolve a scroll content size from one surface layout metrics and viewport size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/impl/ScrollMetrics.hpp" line="12" column="7" declfile="erbsland/cterm/ui/impl/ScrollMetrics.hpp" declline="12" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="_scroll_metrics_8hpp_1a1a31d39d7581df1577b002ecdb877017" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::ui::impl::maximumScrollOffset</definition>
+        <argsstring>(Size contentSize, Size viewportSize) noexcept</argsstring>
+        <name>maximumScrollOffset</name>
+        <qualifiedname>erbsland::cterm::ui::impl::maximumScrollOffset</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>contentSize</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>viewportSize</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the largest valid scroll offset for the given content and viewport sizes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/impl/ScrollMetrics.hpp" line="14" column="11" declfile="erbsland/cterm/ui/impl/ScrollMetrics.hpp" declline="14" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="_scroll_metrics_8hpp_1a67b4e1506654e155696e186fae1f0e14" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::ui::impl::clampedScrollOffset</definition>
+        <argsstring>(Position offset, Size contentSize, Size viewportSize) noexcept</argsstring>
+        <name>clampedScrollOffset</name>
+        <qualifiedname>erbsland::cterm::ui::impl::clampedScrollOffset</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>contentSize</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>viewportSize</declname>
+        </param>
+        <briefdescription>
+<para>Clamp a scroll offset to the valid range for the given content and viewport sizes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/impl/ScrollMetrics.hpp" line="16" column="11" declfile="erbsland/cterm/ui/impl/ScrollMetrics.hpp" declline="16" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="_scroll_metrics_8hpp_1a539df76dcac9b1755c04efc2dd2a797f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::ui::impl::alignedContentOrigin</definition>
+        <argsstring>(Rectangle viewportRect, Size contentSize, Position scrollOffset, Alignment alignment) noexcept</argsstring>
+        <name>alignedContentOrigin</name>
+        <qualifiedname>erbsland::cterm::ui::impl::alignedContentOrigin</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>viewportRect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>contentSize</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>scrollOffset</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the content origin inside one viewport. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/impl/ScrollMetrics.hpp" line="18" column="11" declfile="erbsland/cterm/ui/impl/ScrollMetrics.hpp" declline="18" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="_scroll_metrics_8hpp_1a1df3b235657d4b291c4d04f75a4739cc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::ui::impl::scrollRegion</definition>
+        <argsstring>(Coordinate contentExtent) noexcept</argsstring>
+        <name>scrollRegion</name>
+        <qualifiedname>erbsland::cterm::ui::impl::scrollRegion</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>contentExtent</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the total scroll region for one axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/impl/ScrollMetrics.hpp" line="20" column="13" declfile="erbsland/cterm/ui/impl/ScrollMetrics.hpp" declline="20" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="_scroll_metrics_8hpp_1a7d36eb2e28000896efc76a428a4f3a76" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::ui::impl::visibleRegion</definition>
+        <argsstring>(Coordinate offset, Coordinate viewportExtent, Coordinate contentExtent) noexcept</argsstring>
+        <name>visibleRegion</name>
+        <qualifiedname>erbsland::cterm::ui::impl::visibleRegion</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>viewportExtent</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>contentExtent</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the visible scroll region for one axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/impl/ScrollMetrics.hpp" line="22" column="13" declfile="erbsland/cterm/ui/impl/ScrollMetrics.hpp" declline="22" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="_scroll_metrics_8hpp_1a786b27d65dad25f68636cd87340747ab" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::ui::impl::scrollOffsetForVisibleRect</definition>
+        <argsstring>(Position offset, Rectangle contentRect, Size contentSize, Size viewportSize) noexcept</argsstring>
+        <name>scrollOffsetForVisibleRect</name>
+        <qualifiedname>erbsland::cterm::ui::impl::scrollOffsetForVisibleRect</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>contentRect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>contentSize</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>viewportSize</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the smallest scroll offset change needed to make a content rectangle visible. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/impl/ScrollMetrics.hpp" line="24" column="11" declfile="erbsland/cterm/ui/impl/ScrollMetrics.hpp" declline="24" declcolumn="11"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" line="10" column="1"/>
+  </compounddef>
+</doxygen>

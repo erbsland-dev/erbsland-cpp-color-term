@@ -1,0 +1,370 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::text::impl::BufferedTokenizer</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer" prot="public" virt="non-virtual">erbsland::cterm::text::impl::Tokenizer</basecompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" prot="public" virt="non-virtual">erbsland::cterm::text::impl::HtmlTokenizer</derivedcompoundref>
+    <includes refid="_buffered_tokenizer_8hpp" local="no">erbsland/cterm/text/impl/BufferedTokenizer.hpp</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a98131b7f287e5d1cc4b98fee9fb4d473" prot="protected" static="no" mutable="no">
+        <type>std::u32string</type>
+        <definition>std::u32string erbsland::cterm::text::impl::BufferedTokenizer::_buffer</definition>
+        <argsstring></argsstring>
+        <name>_buffer</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::_buffer</qualifiedname>
+        <briefdescription>
+<para>Reusable decode buffer for buffered tokenizers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="53" column="20" bodyfile="erbsland/cterm/text/impl/BufferedTokenizer.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ac424cd4e88eba032301f22a04e35971e" prot="protected" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::BufferedTokenizer::BufferedTokenizer</definition>
+        <argsstring>(std::string_view text, std::size_t initialBufferCapacity=0)</argsstring>
+        <name>BufferedTokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::BufferedTokenizer</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>initialBufferCapacity</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Create a buffered tokenizer for the given text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded source text. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>initialBufferCapacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The optional initial capacity reserved for <computeroutput>_buffer</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="21" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a4428e9b88a5fc3dfb9e2c4fe24e8293f" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::BufferedTokenizer::consumeBufferedIf</definition>
+        <argsstring>(char32_t expected) noexcept</argsstring>
+        <name>consumeBufferedIf</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::consumeBufferedIf</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>expected</declname>
+        </param>
+        <briefdescription>
+<para>Consume the current character if it matches and append it to <computeroutput>_buffer</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The expected character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the character matched and was consumed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="35" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1adb7bbdf3ee3e4b46ee78f860ec8de9ac" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::BufferedTokenizer::resetBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>resetBuffer</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::resetBuffer</qualifiedname>
+        <briefdescription>
+<para>Clear <computeroutput>_buffer</computeroutput> so it can be reused. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="37" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a92ccfac479c5cbf1648fb9100f3c0104" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::BufferedTokenizer::append</definition>
+        <argsstring>(char32_t character)</argsstring>
+        <name>append</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::append</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Append one character to <computeroutput>_buffer</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to append. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="40" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ad0ea3677312252f8545964698d46a85b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::BufferedTokenizer::appendCurrentAndAdvance</definition>
+        <argsstring>()</argsstring>
+        <name>appendCurrentAndAdvance</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::appendCurrentAndAdvance</qualifiedname>
+        <briefdescription>
+<para>Append the current character to <computeroutput>_buffer</computeroutput> and advance the tokenizer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="42" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a6e8d14e5eec2e70d7d3a589dcf4b27d7" prot="protected" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::text::impl::BufferedTokenizer::makeRange</definition>
+        <argsstring>(std::size_t start) const noexcept</argsstring>
+        <name>makeRange</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::makeRange</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>start</declname>
+        </param>
+        <briefdescription>
+<para>Create a range from <computeroutput>start</computeroutput> to the current end of <computeroutput>_buffer</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The range start inside <computeroutput>_buffer</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="46" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a20079c336b39e06a3e697db26bc5ded7" prot="protected" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange erbsland::cterm::text::impl::BufferedTokenizer::trimRange</definition>
+        <argsstring>(IndexRange range) const noexcept</argsstring>
+        <name>trimRange</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::trimRange</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+<para>Trim ASCII whitespace at both ends of a <computeroutput>_buffer</computeroutput> range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The range to trim. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The trimmed range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="50" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1abafe256501a218f954e43eb7a7f6f2fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::BufferedTokenizer::~BufferedTokenizer</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~BufferedTokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::~BufferedTokenizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="25" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a87ca01a95366b8abe160b3d252804e9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::BufferedTokenizer::BufferedTokenizer</definition>
+        <argsstring>(const BufferedTokenizer &amp;)=delete</argsstring>
+        <name>BufferedTokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::BufferedTokenizer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="26" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a859219f7ba55243ddd37e2a13ae08880" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::BufferedTokenizer::BufferedTokenizer</definition>
+        <argsstring>(BufferedTokenizer &amp;&amp;)=delete</argsstring>
+        <name>BufferedTokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::BufferedTokenizer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="27" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a4d9e657b2f52c81caf6c2755f1f505d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref> &amp;</type>
+        <definition>BufferedTokenizer &amp; erbsland::cterm::text::impl::BufferedTokenizer::operator=</definition>
+        <argsstring>(const BufferedTokenizer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="28" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ad345bb4f7217680fdeb960913b3382f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref> &amp;</type>
+        <definition>BufferedTokenizer &amp; erbsland::cterm::text::impl::BufferedTokenizer::operator=</definition>
+        <argsstring>(BufferedTokenizer &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::BufferedTokenizer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" kindref="compound">BufferedTokenizer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="29" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A tokenizer base class with a reusable UTF-32 buffer for decoded content. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::text::impl::BufferedTokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::text::impl::HtmlTokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::text::impl::Tokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::text::impl::BufferedTokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::text::impl::Tokenizer</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="16" column="1" bodyfile="erbsland/cterm/text/impl/BufferedTokenizer.hpp" bodystart="16" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a98131b7f287e5d1cc4b98fee9fb4d473" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>_buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a92ccfac479c5cbf1648fb9100f3c0104" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>append</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ad0ea3677312252f8545964698d46a85b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>appendCurrentAndAdvance</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ac424cd4e88eba032301f22a04e35971e" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>BufferedTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a87ca01a95366b8abe160b3d252804e9f" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>BufferedTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a859219f7ba55243ddd37e2a13ae08880" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>BufferedTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a4428e9b88a5fc3dfb9e2c4fe24e8293f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>consumeBufferedIf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1ac22199704316bebacb3d752fc8e16bde" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>consumeIf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a457583c2c6825223b78e33d3550f19bc" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>current</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1aed9551b402267143df335819705cdeab" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>isAtEnd</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1ad3dc9b42920045e6b242fffd0c49214b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>load</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a6e8d14e5eec2e70d7d3a589dcf4b27d7" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>makeRange</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a42ee62f1def2560cb511e6af288803b3" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>next</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a4d9e657b2f52c81caf6c2755f1f505d8" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1ad345bb4f7217680fdeb960913b3382f1" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a9eef5afbd70fcb510085f2702f768223" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::text::impl::Tokenizer::"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a74495e9a17b0df8f4f107b0518c48ba4" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::text::impl::Tokenizer::"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a399c3505d266b4e162a527c1e8c3d4f4" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>peek</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1adb7bbdf3ee3e4b46ee78f860ec8de9ac" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>resetBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a5d3c2a23805250f6db5cfdd8da64660c" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>save</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1abb6648d21ce9c2aaed5003706985777d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>Tokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1ab8877bc48d846b8dbc4808b9ef44b46a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>Tokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1a8c6ed8bd5190b2915fdd84764e7770a7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>Tokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1a20079c336b39e06a3e697db26bc5ded7" prot="protected" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>trimRange</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer_1abafe256501a218f954e43eb7a7f6f2fd" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>~BufferedTokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer_1aed357f4e459f2be29947b5e253ef59c7" prot="public" virt="virtual"><scope>erbsland::cterm::text::impl::BufferedTokenizer</scope><name>~Tokenizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

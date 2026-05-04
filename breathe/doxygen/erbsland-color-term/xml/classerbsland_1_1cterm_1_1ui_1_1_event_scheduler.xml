@@ -1,0 +1,350 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::EventScheduler</compoundname>
+    <includes refid="_event_scheduler_8hpp" local="no">erbsland/cterm/ui/event/EventScheduler.hpp</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a7669d15648b396835b6d0c6d4798d2b8" prot="private" static="no">
+        <type>std::multimap&lt; EventTime, <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> &gt;</type>
+        <definition>using erbsland::cterm::ui::EventScheduler::SchedulingMap =  std::multimap&lt;EventTime, Event&gt;</definition>
+        <argsstring></argsstring>
+        <name>SchedulingMap</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::SchedulingMap</qualifiedname>
+        <briefdescription>
+<para>The map type for storing events with their scheduled time. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="30" column="5" bodyfile="erbsland/cterm/ui/event/EventScheduler.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a4568ff1061f2bd9d5545877dcbf544eb" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::ui::EventScheduler::cMaximumEvents</definition>
+        <argsstring></argsstring>
+        <name>cMaximumEvents</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::cMaximumEvents</qualifiedname>
+        <initializer>= 10&apos;000</initializer>
+        <briefdescription>
+<para>The maximum number of scheduled events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="26" column="34" bodyfile="erbsland/cterm/ui/event/EventScheduler.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a14b7178c0905ae8cd670c6bdfc81cf39" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::EventScheduler::cMaximumTime</definition>
+        <argsstring></argsstring>
+        <name>cMaximumTime</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::cMaximumTime</qualifiedname>
+        <initializer>= std::chrono::hours{12}</initializer>
+        <briefdescription>
+<para>The maximum scheduling time. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="28" column="27" bodyfile="erbsland/cterm/ui/event/EventScheduler.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a55fba5df7335aa074789b7040a51d0eb" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref> &amp;</type>
+        <definition>EventDriver&amp; erbsland::cterm::ui::EventScheduler::_driver</definition>
+        <argsstring></argsstring>
+        <name>_driver</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::_driver</qualifiedname>
+        <briefdescription>
+<para>The event driver to add events to. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="61" column="17" bodyfile="erbsland/cterm/ui/event/EventScheduler.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1ab674a80c64067ddd2b56ce68039aeb7b" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex erbsland::cterm::ui::EventScheduler::_mutex</definition>
+        <argsstring></argsstring>
+        <name>_mutex</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::_mutex</qualifiedname>
+        <briefdescription>
+<para>The mutex to protect the scheduler. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="62" column="24" bodyfile="erbsland/cterm/ui/event/EventScheduler.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a5b6086e6e6658c04bd10594ab30ab39b" prot="private" static="no" mutable="no">
+        <type>SchedulingMap</type>
+        <definition>SchedulingMap erbsland::cterm::ui::EventScheduler::_events</definition>
+        <argsstring></argsstring>
+        <name>_events</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::_events</qualifiedname>
+        <briefdescription>
+<para>The map with all scheduled events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="63" column="19" bodyfile="erbsland/cterm/ui/event/EventScheduler.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1aebf447c24ffa73e154d773a038f82f8c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventScheduler::EventScheduler</definition>
+        <argsstring>(EventDriver &amp;driver)</argsstring>
+        <name>EventScheduler</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::EventScheduler</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref> &amp;</type>
+          <declname>driver</declname>
+        </param>
+        <briefdescription>
+<para>Create a new scheduler using the given driver. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>driver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event driver to add events to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="35" column="14" bodyfile="erbsland/cterm/ui/event/EventScheduler.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a73e8c262da7b50a10e8c8b78b472c1c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventScheduler::~EventScheduler</definition>
+        <argsstring>()=default</argsstring>
+        <name>~EventScheduler</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::~EventScheduler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a8e29b8122926ea56ec146708b1820b12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventScheduler::EventScheduler</definition>
+        <argsstring>(const EventScheduler &amp;)=delete</argsstring>
+        <name>EventScheduler</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::EventScheduler</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler" kindref="compound">EventScheduler</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a141cfdc9a648ef7c7740c80f1bb4a1d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventScheduler::EventScheduler</definition>
+        <argsstring>(EventScheduler &amp;&amp;)=delete</argsstring>
+        <name>EventScheduler</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::EventScheduler</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler" kindref="compound">EventScheduler</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a69884f60e674b2d34502db37d0c6dc19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler" kindref="compound">EventScheduler</ref> &amp;</type>
+        <definition>EventScheduler &amp; erbsland::cterm::ui::EventScheduler::operator=</definition>
+        <argsstring>(const EventScheduler &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler" kindref="compound">EventScheduler</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="41" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a74b715107508656c4bbbf262254fec86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler" kindref="compound">EventScheduler</ref> &amp;</type>
+        <definition>EventScheduler &amp; erbsland::cterm::ui::EventScheduler::operator=</definition>
+        <argsstring>(EventScheduler &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler" kindref="compound">EventScheduler</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="42" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1ab884398766071cb3fa835992a8fde814" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventScheduler::schedule</definition>
+        <argsstring>(EventType eventType, EventDataUniquePtr &amp;&amp;data, EventTime eventTime)</argsstring>
+        <name>schedule</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::schedule</qualifiedname>
+        <param>
+          <type>EventType</type>
+          <declname>eventType</declname>
+        </param>
+        <param>
+          <type>EventDataUniquePtr &amp;&amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>EventTime</type>
+          <declname>eventTime</declname>
+        </param>
+        <briefdescription>
+<para>Schedule an event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>eventType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eventTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time when the event should be scheduled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="49" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a422c99d8b1cf51770264e8402ac5d719" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventScheduler::poll</definition>
+        <argsstring>()</argsstring>
+        <name>poll</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::poll</qualifiedname>
+        <briefdescription>
+<para>Poll the scheduler. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If an event is ready, it is removed from the scheduler and passed to the event driver. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="53" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a675edb99545dc80b7eaa22a451ef079d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventScheduler::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::clear</qualifiedname>
+        <briefdescription>
+<para>Remove all scheduled events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1abe4b67443e2e84b325ffbf55ec488187" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; EventTime &gt;</type>
+        <definition>std::optional&lt; EventTime &gt; erbsland::cterm::ui::EventScheduler::nextEventTime</definition>
+        <argsstring>() const</argsstring>
+        <name>nextEventTime</name>
+        <qualifiedname>erbsland::cterm::ui::EventScheduler::nextEventTime</qualifiedname>
+        <briefdescription>
+<para>Get the time of the next scheduled event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The next scheduled event time, or an empty optional if no events are pending. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="58" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A scheduler for events. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Stores events until a given time and add them to the event driver.<itemizedlist>
+<listitem><para>thread-safe.</para>
+</listitem><listitem><para>limited to a maximum of 10&apos;000 scheduled events. If more events are added, they are discarded.</para>
+</listitem><listitem><para>limited to a scheduling time of 0-12h. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/event/EventScheduler.hpp" line="24" column="1" bodyfile="erbsland/cterm/ui/event/EventScheduler.hpp" bodystart="24" bodyend="64"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a55fba5df7335aa074789b7040a51d0eb" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>_driver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a5b6086e6e6658c04bd10594ab30ab39b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>_events</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1ab674a80c64067ddd2b56ce68039aeb7b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>_mutex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a675edb99545dc80b7eaa22a451ef079d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>clear</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a4568ff1061f2bd9d5545877dcbf544eb" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>cMaximumEvents</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a14b7178c0905ae8cd670c6bdfc81cf39" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>cMaximumTime</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1aebf447c24ffa73e154d773a038f82f8c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>EventScheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a8e29b8122926ea56ec146708b1820b12" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>EventScheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a141cfdc9a648ef7c7740c80f1bb4a1d8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>EventScheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1abe4b67443e2e84b325ffbf55ec488187" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>nextEventTime</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a69884f60e674b2d34502db37d0c6dc19" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a74b715107508656c4bbbf262254fec86" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a422c99d8b1cf51770264e8402ac5d719" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>poll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1ab884398766071cb3fa835992a8fde814" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>schedule</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a7669d15648b396835b6d0c6d4798d2b8" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>SchedulingMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler_1a73e8c262da7b50a10e8c8b78b472c1c6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventScheduler</scope><name>~EventScheduler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

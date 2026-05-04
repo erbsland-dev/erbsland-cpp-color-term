@@ -1,0 +1,1471 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_size" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::Size</compoundname>
+    <includes refid="_size_8hpp" local="no">erbsland/cterm/geometry/Size.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_size_1a87edce56e1dd20771dba3e2a2d504d1b" prot="private" static="no" mutable="no">
+        <type>Coordinate</type>
+        <definition>Coordinate erbsland::cterm::Size::_width</definition>
+        <argsstring></argsstring>
+        <name>_width</name>
+        <qualifiedname>erbsland::cterm::Size::_width</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="307" column="16" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="307" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_size_1ad39c52f97db7c8a710de1706abeb4791" prot="private" static="no" mutable="no">
+        <type>Coordinate</type>
+        <definition>Coordinate erbsland::cterm::Size::_height</definition>
+        <argsstring></argsstring>
+        <name>_height</name>
+        <qualifiedname>erbsland::cterm::Size::_height</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="308" column="16" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="308" bodyend="308"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a31972f4a2ddcf98062b91def18c922c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Size::Size</definition>
+        <argsstring>()=default</argsstring>
+        <name>Size</name>
+        <qualifiedname>erbsland::cterm::Size::Size</qualifiedname>
+        <briefdescription>
+<para>Construct a zero size (0 × 0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="24" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ae5d80a6d1d43fbe5f19cf02b35b06641" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Size::Size</definition>
+        <argsstring>(Coordinate width, Coordinate height) noexcept</argsstring>
+        <name>Size</name>
+        <qualifiedname>erbsland::cterm::Size::Size</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Construct a size from explicit width and height. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Negative inputs are clamped to 0. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired width (clamped to &gt;= 0). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired height (clamped to &gt;= 0). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="29" column="15" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="29" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ab5b2a30c76e43aed023f308c2f75e992" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Size::Size</definition>
+        <argsstring>(Position pos1, Position pos2) noexcept</argsstring>
+        <name>Size</name>
+        <qualifiedname>erbsland::cterm::Size::Size</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos1</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos2</declname>
+        </param>
+        <briefdescription>
+<para>Construct a size from the axis-aligned distance between two positions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second position. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The order of the positions does not matter; absolute differences are used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="35" column="15" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="35" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a3b470121ca64fd2edeaf1631837c0fb3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Size::operator==</definition>
+        <argsstring>(const Size &amp;other) const noexcept=default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::Size::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Equality comparison on width and height. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="40" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a625ff846717be99a46cc8363c53b181b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Size::operator!=</definition>
+        <argsstring>(const Size &amp;other) const noexcept=default</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>erbsland::cterm::Size::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Inequality comparison on width and height. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="42" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a2358dcbd6aec350e6e13314c39f76692" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::operator+</definition>
+        <argsstring>(const Size &amp;other) const noexcept</argsstring>
+        <name>operator+</name>
+        <qualifiedname>erbsland::cterm::Size::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Add two sizes using saturated arithmetic. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The component-wise sum, capped at the maximum coordinate value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="46" column="10" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="46" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ab7786b5f30bd6c6ac8c78b590820a77c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::operator-</definition>
+        <argsstring>(const Size &amp;other) const noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>erbsland::cterm::Size::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Subtract two sizes using saturated arithmetic. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to subtract. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The component-wise difference, clamped to non-negative values. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="54" column="10" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="54" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1af0728acc64ce77279010181293c707ff" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::operator+=</definition>
+        <argsstring>(const Size &amp;other) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>erbsland::cterm::Size::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Add a size using saturated arithmetic. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="62" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a4e8f152878ffc99b25be5d483a4111d1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::operator-=</definition>
+        <argsstring>(const Size &amp;other) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>erbsland::cterm::Size::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Subtract a size using saturated arithmetic. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to subtract. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="66" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a893803e0ab2f268542c64b2356f7fbac" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Size::width</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>width</name>
+        <qualifiedname>erbsland::cterm::Size::width</qualifiedname>
+        <briefdescription>
+<para>Get the width (&gt;= 0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="70" column="27" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a1187629a2cd8914b8fc9918876d95a9a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Size::setWidth</definition>
+        <argsstring>(Coordinate width) noexcept</argsstring>
+        <name>setWidth</name>
+        <qualifiedname>erbsland::cterm::Size::setWidth</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>width</declname>
+        </param>
+        <briefdescription>
+<para>Set the width. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Negative values are clamped to 0. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New width (clamped to &gt;= 0). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="73" column="10" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1aae9e36ec3ec5018c1ec885c77015a2cb" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Size::height</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>height</name>
+        <qualifiedname>erbsland::cterm::Size::height</qualifiedname>
+        <briefdescription>
+<para>Get the height (&gt;= 0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="75" column="27" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a73ee93dafcc620035e6383373c9d3727" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Size::setHeight</definition>
+        <argsstring>(Coordinate height) noexcept</argsstring>
+        <name>setHeight</name>
+        <qualifiedname>erbsland::cterm::Size::setHeight</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Set the height. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Negative values are clamped to 0. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New height (clamped to &gt;= 0). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="78" column="10" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a64de0e95f0e1566a234b2ebedd718f8b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Size::coordinate</definition>
+        <argsstring>(const Orientation orientation) const noexcept</argsstring>
+        <name>coordinate</name>
+        <qualifiedname>erbsland::cterm::Size::coordinate</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Get the size component for the selected orientation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The orientation that selects width or height. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput><ref refid="classerbsland_1_1cterm_1_1_size_1a893803e0ab2f268542c64b2356f7fbac" kindref="member">width()</ref></computeroutput> for <computeroutput><ref refid="classerbsland_1_1cterm_1_1_orientation_1a7a1d316b5cc591a01c325617901a251ea625e9c70a0d9d9529a3c89848d525676" kindref="member">Orientation::Horizontal</ref></computeroutput>, otherwise <computeroutput><ref refid="classerbsland_1_1cterm_1_1_size_1aae9e36ec3ec5018c1ec885c77015a2cb" kindref="member">height()</ref></computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="82" column="27" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1aec774ad3780aa13b979551a4865917d2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::Size::anchor</definition>
+        <argsstring>(Anchor anchor) const noexcept</argsstring>
+        <name>anchor</name>
+        <qualifiedname>erbsland::cterm::Size::anchor</qualifiedname>
+        <param>
+          <type>Anchor</type>
+          <declname>anchor</declname>
+        </param>
+        <briefdescription>
+<para>Compute a position inside the rectangle defined by this size for a given anchor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Bottom-right resolves to (width-1, height-1), top-left to (0,0), etc. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>anchor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The anchor describing the target corner/edge/center. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The position inside the [0,width-1]×[0,height-1] grid (or (0,0) for empty dimensions). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="89" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a48d1c464ce5adb25b1d06bb1bba295b7" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::Size::alignmentOffset</definition>
+        <argsstring>(Size contentSize, Alignment alignment) const noexcept</argsstring>
+        <name>alignmentOffset</name>
+        <qualifiedname>erbsland::cterm::Size::alignmentOffset</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>contentSize</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+<para>Compute the offset for content aligned inside this size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If <computeroutput>contentSize</computeroutput> is larger than this size on an axis, the returned offset on that axis is negative. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>contentSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The aligned content size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alignment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The alignment for the content. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The zero-based offset for placing the content inside this size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="95" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a4ec3af7fd88aae308335a9ef706377ed" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Size::isZero</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isZero</name>
+        <qualifiedname>erbsland::cterm::Size::isZero</qualifiedname>
+        <briefdescription>
+<para>Test if this size is zero. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="99" column="21" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a16ad189f1da80b2009bdded06495cec0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Size::fitsInto</definition>
+        <argsstring>(const Size other) const noexcept</argsstring>
+        <name>fitsInto</name>
+        <qualifiedname>erbsland::cterm::Size::fitsInto</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Check if this size fits completely into another size (component-wise &lt;=). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The candidate container size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if width &lt;= other.width and height &lt;= other.height. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="103" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="103" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ac8544fa0077f3d4ff749c07abb451884" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Size::isInRange</definition>
+        <argsstring>(const Size minimum, const Size maximum) const noexcept</argsstring>
+        <name>isInRange</name>
+        <qualifiedname>erbsland::cterm::Size::isInRange</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>minimum</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>maximum</declname>
+        </param>
+        <briefdescription>
+<para>Test if the width and height of this size is in the given range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>minimum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The minimum size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maximum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true If this size is in the range <computeroutput>minimum</computeroutput>-<computeroutput>maximum</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="110" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="110" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a77bd8c25ec0bf2e5fe019b173bcb617b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Size::contains</definition>
+        <argsstring>(const Position &amp;pos) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>erbsland::cterm::Size::contains</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref> &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Check if a position lies strictly inside the bounds [0,width) × [0,height). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if 0 &lt;= x &lt; width and 0 &lt;= y &lt; height. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="117" column="21" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="117" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a14ed7746f55256b6ee80af10e6084b0d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::add</definition>
+        <argsstring>(const Size other) noexcept</argsstring>
+        <name>add</name>
+        <qualifiedname>erbsland::cterm::Size::add</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Add another size using saturated arithmetic. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="125" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="125" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1aa9620b5371730c2916e3e858f3b5a9ec" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::add</definition>
+        <argsstring>(const Size other, const Orientation orientation) noexcept</argsstring>
+        <name>add</name>
+        <qualifiedname>erbsland::cterm::Size::add</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Add another size only on the selected axis using saturated arithmetic. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to add. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The axis to modify. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="134" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="134" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1af2a08b5f512bd62a1445e3f8a7a66bb8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::subtract</definition>
+        <argsstring>(const Size other) noexcept</argsstring>
+        <name>subtract</name>
+        <qualifiedname>erbsland::cterm::Size::subtract</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Subtract another size using saturated arithmetic and clamp the result to zero. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to subtract. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="145" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="145" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1aaac3203a50c62888791504551d1fb55e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::subtract</definition>
+        <argsstring>(const Size other, const Orientation orientation) noexcept</argsstring>
+        <name>subtract</name>
+        <qualifiedname>erbsland::cterm::Size::subtract</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Subtract another size only on the selected axis using saturated arithmetic and clamp the result to zero. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size to subtract. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The axis to modify. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="154" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="154" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ac43d6d3be23c5ef2a65487c2ec689ba7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::expandTo</definition>
+        <argsstring>(const Size other) noexcept</argsstring>
+        <name>expandTo</name>
+        <qualifiedname>erbsland::cterm::Size::expandTo</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Expand this size so it is at least the given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The minimum size to cover. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="165" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="165" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ae160b334f94b7cc87079b71d8648324b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::expandTo</definition>
+        <argsstring>(const Size other, const Orientation orientation) noexcept</argsstring>
+        <name>expandTo</name>
+        <qualifiedname>erbsland::cterm::Size::expandTo</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Expand this size so it is at least the given size on the selected axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The minimum size to cover. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The axis to modify. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="174" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="174" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1aa507fe4c0381b5d977446e23b4f961d8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::limitTo</definition>
+        <argsstring>(const Size other) noexcept</argsstring>
+        <name>limitTo</name>
+        <qualifiedname>erbsland::cterm::Size::limitTo</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Limit this size so it is at most the given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum size to respect. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="185" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="185" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a112ff52ab57cc4f7fd8f9ba4e2530742" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> &amp;</type>
+        <definition>Size &amp; erbsland::cterm::Size::limitTo</definition>
+        <argsstring>(const Size other, const Orientation orientation) noexcept</argsstring>
+        <name>limitTo</name>
+        <qualifiedname>erbsland::cterm::Size::limitTo</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Limit this size so it is at most the given size on the selected axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum size to respect. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The axis to modify. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="194" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="194" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a12c036ff5d1aab0ad5092feb06198fbf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::expandedWith</definition>
+        <argsstring>(const Size other) const noexcept</argsstring>
+        <name>expandedWith</name>
+        <qualifiedname>erbsland::cterm::Size::expandedWith</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Create a copy expanded so it is at least the given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The minimum size to cover. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The expanded size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="205" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="205" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a1ba2a50b0a2c19c826767f9753d48c8f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::expandedWith</definition>
+        <argsstring>(const Size other, const Orientation orientation) const noexcept</argsstring>
+        <name>expandedWith</name>
+        <qualifiedname>erbsland::cterm::Size::expandedWith</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Create a copy expanded so it is at least the given size on the selected axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The minimum size to cover. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The axis to modify. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The expanded size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="214" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="214" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1aeb6ca566caeb0616e23fd41819e2a22b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::limitedWith</definition>
+        <argsstring>(const Size other) const noexcept</argsstring>
+        <name>limitedWith</name>
+        <qualifiedname>erbsland::cterm::Size::limitedWith</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Create a copy limited so it is at most the given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum size to respect. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The limited size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="222" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="222" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a67fdbdf7f840a49d5b546f19d06bd935" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::limitedWith</definition>
+        <argsstring>(const Size other, const Orientation orientation) const noexcept</argsstring>
+        <name>limitedWith</name>
+        <qualifiedname>erbsland::cterm::Size::limitedWith</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Create a copy limited so it is at most the given size on the selected axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum size to respect. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The axis to modify. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The limited size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="231" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="231" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a33d8ec6b44fe855e760676139f9d2035" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::clampTo</definition>
+        <argsstring>(const Size minimum, const Size maximum) const noexcept</argsstring>
+        <name>clampTo</name>
+        <qualifiedname>erbsland::cterm::Size::clampTo</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>minimum</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>maximum</declname>
+        </param>
+        <briefdescription>
+<para>Component-wise clamp with a minimum and maximum size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>If minimum.width &gt; maximum.width or minimum.height &gt; maximum.height, the behavior is <emphasis>undefined</emphasis>. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>minimum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The minimum size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maximum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a size (min.width &lt;= width &lt;= max.width, min.height &lt;= height &lt;= max.height) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="241" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="241" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a7986bad5bad5a22661fb6396c7122cb0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::Size::clamp</definition>
+        <argsstring>(Position position) const noexcept</argsstring>
+        <name>clamp</name>
+        <qualifiedname>erbsland::cterm::Size::clamp</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>Clamp a position <emphasis>inside</emphasis> this size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The resulting position is <emphasis>at least</emphasis> (0, 0) and <emphasis>less than</emphasis> (width, height). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="247" column="15" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="247" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a759e8e0fead0181ebe9caf8bd1b2236b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::Size::area</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>area</name>
+        <qualifiedname>erbsland::cterm::Size::area</qualifiedname>
+        <briefdescription>
+<para>Compute the area (width * height). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The area. Note: returns 0 if either dimension is 0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="254" column="10" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="254" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a2f5fd3e49741cf0a6d47fcdc76dad41e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::Size::index</definition>
+        <argsstring>(const Position &amp;pos) const noexcept</argsstring>
+        <name>index</name>
+        <qualifiedname>erbsland::cterm::Size::index</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref> &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Convert a 2D position to a row-major linear index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position. Behavior is undefined if not contained by this size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>y * width + x. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="258" column="28" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="258" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a5e9259d8e36a6d653790f51526049044" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Fn</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::Size::forEach</definition>
+        <argsstring>(Fn fn) const</argsstring>
+        <name>forEach</name>
+        <qualifiedname>erbsland::cterm::Size::forEach</qualifiedname>
+        <param>
+          <type>Fn</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Visit all positions inside the size in row-major order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A callable taking <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function to invoke for each <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref> (x from 0..width-1, y from 0..height-1). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="267" column="10" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="312" bodyend="318"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a6f46189e7ef3022d87b0fad922efa1b4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::componentMax</definition>
+        <argsstring>(const Size other) const noexcept</argsstring>
+        <name>componentMax</name>
+        <qualifiedname>erbsland::cterm::Size::componentMax</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="278" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="278" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a8d7df2caae976a159edb8afb519967ba" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::componentMin</definition>
+        <argsstring>(const Size other) const noexcept</argsstring>
+        <name>componentMin</name>
+        <qualifiedname>erbsland::cterm::Size::componentMin</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="279" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="279" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a784142201b7830c50844177f577121e7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::Size::componentClamp</definition>
+        <argsstring>(const Size minimum, const Size maximum) const noexcept</argsstring>
+        <name>componentClamp</name>
+        <qualifiedname>erbsland::cterm::Size::componentClamp</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>minimum</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>maximum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="280" column="11" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="280" bodyend="282"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a9ea939c06b96d231c4e1873ce0253cbc" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>static constexpr Size erbsland::cterm::Size::maximum</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>maximum</name>
+        <qualifiedname>erbsland::cterm::Size::maximum</qualifiedname>
+        <briefdescription>
+<para>Get the maximum size that can be represented by this type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="269" column="28" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="269" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a68a80a241abd7652547a7ec267933cc7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>static constexpr Size erbsland::cterm::Size::minimum</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>minimum</name>
+        <qualifiedname>erbsland::cterm::Size::minimum</qualifiedname>
+        <briefdescription>
+<para>Get the minimum size that can be represented by this type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="273" column="28" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="273" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ae919b8fe7f3dfc77511cbf90e59666c8" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>static constexpr Size erbsland::cterm::Size::zero</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>zero</name>
+        <qualifiedname>erbsland::cterm::Size::zero</qualifiedname>
+        <briefdescription>
+<para>Get a size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="275" column="28" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="275" bodyend="275"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1ab298426f30be7dcf89fcef13d5660fbc" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>static constexpr Coordinate erbsland::cterm::Size::absoluteDifference</definition>
+        <argsstring>(Coordinate value1, Coordinate value2) noexcept</argsstring>
+        <name>absoluteDifference</name>
+        <qualifiedname>erbsland::cterm::Size::absoluteDifference</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>value1</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>value2</declname>
+        </param>
+        <briefdescription>
+<para>Compute the absolute difference between two integer values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="286" column="34" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="286" bodyend="288"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1aab82e26438658c27b1ede5d978ffa12f" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Size::widthForPosition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>widthForPosition</name>
+        <qualifiedname>erbsland::cterm::Size::widthForPosition</qualifiedname>
+        <briefdescription>
+<para>The maximum valid x coordinate inside the size, or 0 if width == 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="292" column="27" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="292" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a86ed2a3491d6a2cd28a1bfdae46114e6" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Size::halfWidthForPosition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>halfWidthForPosition</name>
+        <qualifiedname>erbsland::cterm::Size::halfWidthForPosition</qualifiedname>
+        <briefdescription>
+<para>Half of the valid x range endpoint used for horizontal center positioning. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="296" column="27" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="296" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a935a51a068e4146174f9202084f37657" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Size::heightForPosition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>heightForPosition</name>
+        <qualifiedname>erbsland::cterm::Size::heightForPosition</qualifiedname>
+        <briefdescription>
+<para>The maximum valid y coordinate inside the size, or 0 if height == 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="298" column="27" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="298" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_size_1a1a923859da0acbfe9deb7cb356fde477" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr Coordinate</type>
+        <definition>constexpr Coordinate erbsland::cterm::Size::halfHeightForPosition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>halfHeightForPosition</name>
+        <qualifiedname>erbsland::cterm::Size::halfHeightForPosition</qualifiedname>
+        <briefdescription>
+<para>Half of the valid y range endpoint used for vertical center positioning. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/geometry/Size.hpp" line="302" column="27" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="302" bodyend="304"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A non-negative 2D size (width × height). </para>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para>Width and height are clamped to be &gt;= 0.</para>
+</listitem><listitem><para>Many operations assume a grid indexed from (0,0) to (width-1,height-1). </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="erbsland/cterm/geometry/Size.hpp" line="21" column="1" bodyfile="erbsland/cterm/geometry/Size.hpp" bodystart="21" bodyend="309"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ad39c52f97db7c8a710de1706abeb4791" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>_height</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a87edce56e1dd20771dba3e2a2d504d1b" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>_width</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ab298426f30be7dcf89fcef13d5660fbc" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>absoluteDifference</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a14ed7746f55256b6ee80af10e6084b0d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>add</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1aa9620b5371730c2916e3e858f3b5a9ec" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>add</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a48d1c464ce5adb25b1d06bb1bba295b7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>alignmentOffset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1aec774ad3780aa13b979551a4865917d2" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>anchor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a759e8e0fead0181ebe9caf8bd1b2236b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>area</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a7986bad5bad5a22661fb6396c7122cb0" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>clamp</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a33d8ec6b44fe855e760676139f9d2035" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>clampTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a784142201b7830c50844177f577121e7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>componentClamp</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a6f46189e7ef3022d87b0fad922efa1b4" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>componentMax</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a8d7df2caae976a159edb8afb519967ba" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>componentMin</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a77bd8c25ec0bf2e5fe019b173bcb617b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>contains</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a64de0e95f0e1566a234b2ebedd718f8b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>coordinate</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a12c036ff5d1aab0ad5092feb06198fbf" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>expandedWith</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a1ba2a50b0a2c19c826767f9753d48c8f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>expandedWith</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ac43d6d3be23c5ef2a65487c2ec689ba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>expandTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ae160b334f94b7cc87079b71d8648324b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>expandTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a16ad189f1da80b2009bdded06495cec0" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>fitsInto</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a5e9259d8e36a6d653790f51526049044" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>forEach</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a1a923859da0acbfe9deb7cb356fde477" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>halfHeightForPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a86ed2a3491d6a2cd28a1bfdae46114e6" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>halfWidthForPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1aae9e36ec3ec5018c1ec885c77015a2cb" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>height</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a935a51a068e4146174f9202084f37657" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>heightForPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a2f5fd3e49741cf0a6d47fcdc76dad41e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>index</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ac8544fa0077f3d4ff749c07abb451884" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>isInRange</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a4ec3af7fd88aae308335a9ef706377ed" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>isZero</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1aeb6ca566caeb0616e23fd41819e2a22b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>limitedWith</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a67fdbdf7f840a49d5b546f19d06bd935" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>limitedWith</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1aa507fe4c0381b5d977446e23b4f961d8" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>limitTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a112ff52ab57cc4f7fd8f9ba4e2530742" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>limitTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a9ea939c06b96d231c4e1873ce0253cbc" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>maximum</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a68a80a241abd7652547a7ec267933cc7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>minimum</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a625ff846717be99a46cc8363c53b181b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator!=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a2358dcbd6aec350e6e13314c39f76692" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator+</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1af0728acc64ce77279010181293c707ff" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator+=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ab7786b5f30bd6c6ac8c78b590820a77c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator-</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a4e8f152878ffc99b25be5d483a4111d1" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator-=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a3b470121ca64fd2edeaf1631837c0fb3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a73ee93dafcc620035e6383373c9d3727" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>setHeight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a1187629a2cd8914b8fc9918876d95a9a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>setWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a31972f4a2ddcf98062b91def18c922c8" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>Size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ae5d80a6d1d43fbe5f19cf02b35b06641" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>Size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ab5b2a30c76e43aed023f308c2f75e992" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>Size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1af2a08b5f512bd62a1445e3f8a7a66bb8" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>subtract</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1aaac3203a50c62888791504551d1fb55e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>subtract</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1a893803e0ab2f268542c64b2356f7fbac" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>width</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1aab82e26438658c27b1ede5d978ffa12f" prot="private" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>widthForPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_size_1ae919b8fe7f3dfc77511cbf90e59666c8" prot="public" virt="non-virtual"><scope>erbsland::cterm::Size</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

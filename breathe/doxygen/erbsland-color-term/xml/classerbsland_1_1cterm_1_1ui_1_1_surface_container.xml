@@ -1,0 +1,1632 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_surface_container" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::SurfaceContainer</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container" prot="public" virt="non-virtual">erbsland::cterm::ui::AbstractSurfaceContainer</basecompoundref>
+    <includes refid="_surface_container_8hpp" local="no">erbsland/cterm/ui/SurfaceContainer.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1_surface_container_1_1_item" prot="public">erbsland::cterm::ui::SurfaceContainer::Item</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad938f5afc7dd47d675e0e179dc9010ec" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="structerbsland_1_1cterm_1_1ui_1_1_surface_container_1_1_item" kindref="compound">Item</ref> &gt;</type>
+        <definition>using erbsland::cterm::ui::SurfaceContainer::Container =  std::vector&lt;Item&gt;</definition>
+        <argsstring></argsstring>
+        <name>Container</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::Container</qualifiedname>
+        <briefdescription>
+<para>The underlying ordered item container. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="26" column="5" bodyfile="erbsland/cterm/ui/SurfaceContainer.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a6e1cdf21712c79dd913a894e47bc2139" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::SurfaceContainer::cInvalidIndex</definition>
+        <argsstring></argsstring>
+        <name>cInvalidIndex</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::cInvalidIndex</qualifiedname>
+        <initializer>= std::numeric_limits&lt;std::size_t&gt;::max()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="186" column="27" bodyfile="erbsland/cterm/ui/SurfaceContainer.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a8a5ae4b9fbc48e000e76f76011aa34dd" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface" kindref="compound">Surface</ref> &amp;</type>
+        <definition>Surface&amp; erbsland::cterm::ui::SurfaceContainer::_owner</definition>
+        <argsstring></argsstring>
+        <name>_owner</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::_owner</qualifiedname>
+        <briefdescription>
+<para>The owning surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="189" column="13" bodyfile="erbsland/cterm/ui/SurfaceContainer.hpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a89c89a57b1e833752c69be4ac614d6ec" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad938f5afc7dd47d675e0e179dc9010ec" kindref="member">Container</ref></type>
+        <definition>Container erbsland::cterm::ui::SurfaceContainer::_surfaces</definition>
+        <argsstring></argsstring>
+        <name>_surfaces</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::_surfaces</qualifiedname>
+        <briefdescription>
+<para>The ordered child surfaces. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="190" column="15" bodyfile="erbsland/cterm/ui/SurfaceContainer.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a6aafbfc0854adc8540ebd25da6c0c7fc" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager" kindref="compound">SurfaceManager</ref> *</type>
+        <definition>SurfaceManager* erbsland::cterm::ui::SurfaceContainer::_manager</definition>
+        <argsstring></argsstring>
+        <name>_manager</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::_manager</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>Optional surface manager. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="191" column="20" bodyfile="erbsland/cterm/ui/SurfaceContainer.hpp" bodystart="191" bodyend="191"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a2c6dc3f45f2b0e675306605c81a147fa" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::SurfaceContainer::SurfaceContainer</definition>
+        <argsstring>(Surface &amp;owner) noexcept</argsstring>
+        <name>SurfaceContainer</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::SurfaceContainer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface" kindref="compound">Surface</ref> &amp;</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+<para>Create a child surface container for the given owner surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>owner</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The owning surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="31" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad09614552c594139c52f8571094a7eb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::SurfaceContainer::~SurfaceContainer</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~SurfaceContainer</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::~SurfaceContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a90e448c0c29e402b5f2505ad3578a19a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::SurfaceContainer::SurfaceContainer</definition>
+        <argsstring>(const SurfaceContainer &amp;)=delete</argsstring>
+        <name>SurfaceContainer</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::SurfaceContainer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container" kindref="compound">SurfaceContainer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="35" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a9eeb7eda95a8f01ea690e2f227177fca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::SurfaceContainer::SurfaceContainer</definition>
+        <argsstring>(SurfaceContainer &amp;&amp;)=delete</argsstring>
+        <name>SurfaceContainer</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::SurfaceContainer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container" kindref="compound">SurfaceContainer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="36" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a15b36c2145d67fee8b4a03eb7482d8ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container" kindref="compound">SurfaceContainer</ref> &amp;</type>
+        <definition>SurfaceContainer &amp; erbsland::cterm::ui::SurfaceContainer::operator=</definition>
+        <argsstring>(const SurfaceContainer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container" kindref="compound">SurfaceContainer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="37" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a52c05b7f5765c827ca79fe6b60ad6123" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container" kindref="compound">SurfaceContainer</ref> &amp;</type>
+        <definition>SurfaceContainer &amp; erbsland::cterm::ui::SurfaceContainer::operator=</definition>
+        <argsstring>(SurfaceContainer &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container" kindref="compound">SurfaceContainer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="38" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ae41c042e1d4c469ef76fdc772890973b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::setManager</definition>
+        <argsstring>(SurfaceManager &amp;manager) noexcept</argsstring>
+        <name>setManager</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::setManager</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager" kindref="compound">SurfaceManager</ref> &amp;</type>
+          <declname>manager</declname>
+        </param>
+        <briefdescription>
+<para>Attach a manager for child-surface policy and notifications. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The manager to attach. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="43" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a4b14bf3a18c42a61db3ddac69f2ba059" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::clearManager</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clearManager</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::clearManager</qualifiedname>
+        <briefdescription>
+<para>Clear the attached surface manager. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="45" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a0c38f2a8b2298fc4275865e9e56803a9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::SurfaceContainer::empty</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>empty</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::empty</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a33389061067b7fa3e73bb5212b4439f8">empty</reimplements>
+        <briefdescription>
+<para>Test if there are no child surfaces. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="49" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a2f477f67b46eab12ff8278874777d81b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ui::SurfaceContainer::size</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::size</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a5fb41d863984ab77a6086cba04df33c8">size</reimplements>
+        <briefdescription>
+<para>Get the number of child surfaces. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="51" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a023098e57f5c8cd38ce21c38983605bb" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>const SurfacePtr &amp;</type>
+        <definition>const SurfacePtr &amp; erbsland::cterm::ui::SurfaceContainer::operator[]</definition>
+        <argsstring>(std::size_t index) const noexcept override</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::operator[]</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1ad96b8d2f28074588b76f38e4f13102db">operator[]</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get a child surface by index without bounds checks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="53" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a28749bf30e9906300f57349f0bee545b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const SurfacePtr &amp;</type>
+        <definition>const SurfacePtr &amp; erbsland::cterm::ui::SurfaceContainer::at</definition>
+        <argsstring>(std::size_t index) const override</argsstring>
+        <name>at</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::at</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a7497908c639dc9508da82aa5dfb1e02c">at</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get a child surface by index with bounds checks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the index is outside the child list. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="56" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a3f621ce49279d1c3e185af0994570595" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LayoutDataPtr</type>
+        <definition>LayoutDataPtr erbsland::cterm::ui::SurfaceContainer::layoutData</definition>
+        <argsstring>(std::size_t index) const override</argsstring>
+        <name>layoutData</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::layoutData</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1aba89d1f27b8703a7d2edfff3f372a080">layoutData</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get layout data for the child surface at the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the index is outside the child list. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="59" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ae3d7ce4e46b4ebcf6c74ec4f760f5aaf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LayoutDataPtr</type>
+        <definition>LayoutDataPtr erbsland::cterm::ui::SurfaceContainer::layoutData</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const override</argsstring>
+        <name>layoutData</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::layoutData</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a342100343f4ede9bdbf66cfddfba451f">layoutData</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Get layout data for the given child surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The layout data, or an empty pointer if the surface is not a child. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="62" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad661dc5e5e07659e5a9e19fca943968d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::setLayoutData</definition>
+        <argsstring>(std::size_t index, LayoutDataPtr data)</argsstring>
+        <name>setLayoutData</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::setLayoutData</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>LayoutDataPtr</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Replace layout data for the child surface at the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The child surface index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new layout data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a22354f5f5881cea5380d3563130fcc54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::setLayoutData</definition>
+        <argsstring>(const SurfacePtr &amp;surface, LayoutDataPtr data)</argsstring>
+        <name>setLayoutData</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::setLayoutData</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>LayoutDataPtr</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Replace layout data for the given child surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The child surface. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new layout data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="70" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1abb35ac44fc39fb3a56ef232b6abbf45e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::add</definition>
+        <argsstring>(SurfacePtr surface) override</argsstring>
+        <name>add</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::add</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a74f18ecc5934f7e788d4bb82fe23acd5">add</reimplements>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Add a child surface at the end. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the surface is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="76" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a849e1b47afd106dc3073240a49ae3522" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::add</definition>
+        <argsstring>(SurfacePtr surface, LayoutDataPtr data) override</argsstring>
+        <name>add</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::add</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a57915b7c6dbc5a87b7142d014b42109e">add</reimplements>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>LayoutDataPtr</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Add a child surface with layout data at the end. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to add. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout data for the parent-child relation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the surface is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a7c3902d087b539653d718c00fd5fd155" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::remove</definition>
+        <argsstring>(std::size_t index) override</argsstring>
+        <name>remove</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::remove</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a2adef97fe9d4c08638637451536fa470">remove</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Remove the child surface at the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index to remove. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the index is outside the child list. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="85" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a7e0fdf1613d1a29629656ac786d469f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::remove</definition>
+        <argsstring>(const SurfacePtr &amp;surface) override</argsstring>
+        <name>remove</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::remove</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1ae8e16738ad4b9c4dabb5636ec244f800">remove</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Remove the given child surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The child surface to remove. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="88" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1abae5bf29e3474c51fc16d71fd8a69e62" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::removeAll</definition>
+        <argsstring>() override</argsstring>
+        <name>removeAll</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::removeAll</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a20327b635cc3d2c341ec4ed44c38cbfb">removeAll</reimplements>
+        <briefdescription>
+<para>Remove all child surfaces. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="90" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a4c573aa6eec213a0483ab30b72ea16be" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::insert</definition>
+        <argsstring>(std::size_t index, SurfacePtr surface) override</argsstring>
+        <name>insert</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::insert</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1ae7c36f0f6cfaced966eb90a2632e7a1d">insert</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Insert a child surface before the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The insertion index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to insert. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the surface is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the index is outside the valid insertion range. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a911a72e39cf30d4b377d8c5d6524ad32" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::insert</definition>
+        <argsstring>(std::size_t index, SurfacePtr surface, LayoutDataPtr data) override</argsstring>
+        <name>insert</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::insert</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1ac679408bda85f6cefab8214911cca7e2">insert</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>LayoutDataPtr</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Insert a child surface with layout data before the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The insertion index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to insert. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout data for the parent-child relation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the surface is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the index is outside the valid insertion range. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="103" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a7a8b2fbadd86bdec8152f09123172705" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::insertAfter</definition>
+        <argsstring>(const SurfacePtr &amp;anchor, SurfacePtr surface) override</argsstring>
+        <name>insertAfter</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::insertAfter</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a889441fcff10d15b58ecbd8c540a68d9">insertAfter</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>anchor</declname>
+        </param>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Insert a child surface after the given anchor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>anchor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The existing child surface after which the new surface is inserted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to insert. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the surface is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the anchor is not a child surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="109" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1adca53ef363bd51a2eff54c6fee84686d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::insertBefore</definition>
+        <argsstring>(const SurfacePtr &amp;anchor, SurfacePtr surface) override</argsstring>
+        <name>insertBefore</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::insertBefore</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a4603517fc334ed3e857e7b3cfd71716a">insertBefore</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>anchor</declname>
+        </param>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Insert a child surface before the given anchor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>anchor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The existing child surface before which the new surface is inserted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface to insert. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the surface is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the anchor is not a child surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="115" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ac6416f44b493c4ddc2adafdfa7621ae0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::replace</definition>
+        <argsstring>(const SurfacePtr &amp;oldSurface, SurfacePtr newSurface) override</argsstring>
+        <name>replace</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::replace</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1ac4d428f7c0dd7a60ec6e2d8af09edebf">replace</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>oldSurface</declname>
+        </param>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>newSurface</declname>
+        </param>
+        <briefdescription>
+<para>Replace an existing child surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>oldSurface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The existing child surface. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>newSurface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the replacement is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the old surface is not a child surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="121" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a2b022d7950fb2222fb602213317b9172" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::replace</definition>
+        <argsstring>(const SurfacePtr &amp;oldSurface, SurfacePtr newSurface, LayoutDataPtr data) override</argsstring>
+        <name>replace</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::replace</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a47298af3530bf8ff291eaceea8117f97">replace</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>oldSurface</declname>
+        </param>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>newSurface</declname>
+        </param>
+        <param>
+          <type>LayoutDataPtr</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Replace an existing child surface and layout data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>oldSurface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The existing child surface. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>newSurface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement surface. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout data for the replacement surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the replacement is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the old surface is not a child surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="128" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a98ac26613d33034fb980d79b32130363" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::replace</definition>
+        <argsstring>(std::size_t index, SurfacePtr surface) override</argsstring>
+        <name>replace</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::replace</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a34bca3cd04bd7a2e4b39446be2330c15">replace</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Replace the child surface at the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the replacement is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the index is outside the child list. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="134" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1afcfa361afd62da3f056b1fb0b1c0dbff" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::replace</definition>
+        <argsstring>(std::size_t index, SurfacePtr surface, LayoutDataPtr data) override</argsstring>
+        <name>replace</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::replace</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a6d71dec2ede8066acb5f57dd2036f492">replace</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>SurfacePtr</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>LayoutDataPtr</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Replace the child surface and layout data at the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement surface. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout data for the replacement surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the replacement is null, already present, or would create a cycle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the index is outside the child list. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="141" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1afbb3677c1fa4126336dceb275ea1bf49" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::move</definition>
+        <argsstring>(std::size_t fromIndex, std::size_t toIndex) override</argsstring>
+        <name>move</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::move</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a73d77ea75a54fccc787357ce1f8a9b78">move</reimplements>
+        <param>
+          <type>std::size_t</type>
+          <declname>fromIndex</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>toIndex</declname>
+        </param>
+        <briefdescription>
+<para>Move a child surface to a new index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fromIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current child index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>toIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new child index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If either index is outside the child list. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="146" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a8a27530653963e8cc96b19b2c9154db4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::move</definition>
+        <argsstring>(const SurfacePtr &amp;surface, std::size_t toIndex) override</argsstring>
+        <name>move</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::move</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a48eccc6fc1ec0cb8fb2fdba5f5ecca78">move</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>toIndex</declname>
+        </param>
+        <briefdescription>
+<para>Move a child surface to a new index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The child surface to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>toIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new child index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the surface is not a child or the index is outside the child list. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="151" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1abb80589dcf1267a59884aa6153da0f06" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::moveAfter</definition>
+        <argsstring>(const SurfacePtr &amp;surface, const SurfacePtr &amp;anchor) override</argsstring>
+        <name>moveAfter</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::moveAfter</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1ac7db88b33ee36bf52240e12630012605">moveAfter</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>anchor</declname>
+        </param>
+        <briefdescription>
+<para>Move a child surface after the given anchor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The child surface to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>anchor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The anchor after which the surface is moved. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If either surface is not a child surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="156" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ae72808edb2e8efc2f76a89b053f8ec66" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::moveBefore</definition>
+        <argsstring>(const SurfacePtr &amp;surface, const SurfacePtr &amp;anchor) override</argsstring>
+        <name>moveBefore</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::moveBefore</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1af470868b454ef3e52e38616c6735cd3a">moveBefore</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>anchor</declname>
+        </param>
+        <briefdescription>
+<para>Move a child surface before the given anchor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The child surface to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>anchor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The anchor before which the surface is moved. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If either surface is not a child surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="161" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a529778f43505cb0ded63d506f7307572" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ui::SurfaceContainer::requireIndexOf</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const</argsstring>
+        <name>requireIndexOf</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::requireIndexOf</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Find the index of a child surface or throw if it is not present. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="165" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a576ee407a0f1ef42e2d4608f7e9cb732" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ui::SurfaceContainer::indexOf</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const noexcept</argsstring>
+        <name>indexOf</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::indexOf</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Find the index of a child surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="167" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ac9e8df6db5e11fe9bf2563b1151d6806" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::SurfaceContainer::isInOwnerParentChain</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const noexcept</argsstring>
+        <name>isInOwnerParentChain</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::isInOwnerParentChain</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Test if the given surface is in the parent chain of the owner surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="169" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1acd558a085ea92e0525d934a8bda4c221" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::validateNewChild</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const</argsstring>
+        <name>validateNewChild</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::validateNewChild</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Validate a new child surface before insertion. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="171" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a65b309faf6ccd07ba1e499ecb79e139e" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LayoutDataPtr</type>
+        <definition>LayoutDataPtr erbsland::cterm::ui::SurfaceContainer::dataOrDefault</definition>
+        <argsstring>(const SurfacePtr &amp;surface, LayoutDataPtr data) const</argsstring>
+        <name>dataOrDefault</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::dataOrDefault</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>LayoutDataPtr</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Create default layout data when none was supplied. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="173" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a98d34489f751aaf134eacbfa1e0b77ab" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::validateMaximumCount</definition>
+        <argsstring>(std::size_t count) const</argsstring>
+        <name>validateMaximumCount</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::validateMaximumCount</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Enforce the attached manager&apos;s maximum child count. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="175" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a2dc30fb66228dfe1198113c7788d7ea0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::detachFromCurrentParent</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const</argsstring>
+        <name>detachFromCurrentParent</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::detachFromCurrentParent</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Detach the child surface from a different current parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="177" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad501edde278adc99f91ff4136b611de0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::attachToOwner</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const</argsstring>
+        <name>attachToOwner</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::attachToOwner</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Set this container as the parent for the given surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="179" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a136d678d0401cc43d2c750598875e237" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::detachFromOwner</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const noexcept</argsstring>
+        <name>detachFromOwner</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::detachFromOwner</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Clear this container as the parent for the given surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="181" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a8d924650c01067f88183dba78be63618" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::SurfaceContainer::invalidateLayout</definition>
+        <argsstring>()</argsstring>
+        <name>invalidateLayout</name>
+        <qualifiedname>erbsland::cterm::ui::SurfaceContainer::invalidateLayout</qualifiedname>
+        <briefdescription>
+<para>Mark the owner surface as requiring layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="183" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Ordered child surface collection for one surface. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/SurfaceContainer.hpp" line="18" column="1" bodyfile="erbsland/cterm/ui/SurfaceContainer.hpp" bodystart="18" bodyend="192"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a6aafbfc0854adc8540ebd25da6c0c7fc" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>_manager</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a8a5ae4b9fbc48e000e76f76011aa34dd" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>_owner</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a89c89a57b1e833752c69be4ac614d6ec" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>_surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1abfa55342e154cfa1342d36e822eea6a5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>AbstractSurfaceContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a5157e2099b6f61453615286efa3ec6a8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>AbstractSurfaceContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1ab97d60e7c41d875051765914e403d295" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>AbstractSurfaceContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1abb35ac44fc39fb3a56ef232b6abbf45e" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>add</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a849e1b47afd106dc3073240a49ae3522" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>add</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a28749bf30e9906300f57349f0bee545b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>at</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad501edde278adc99f91ff4136b611de0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>attachToOwner</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a5c23b6f4b21ee481675186da40b4a20b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>begin</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a6e1cdf21712c79dd913a894e47bc2139" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>cInvalidIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a4b14bf3a18c42a61db3ddac69f2ba059" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>clearManager</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad938f5afc7dd47d675e0e179dc9010ec" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>Container</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a65b309faf6ccd07ba1e499ecb79e139e" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>dataOrDefault</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a2dc30fb66228dfe1198113c7788d7ea0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>detachFromCurrentParent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a136d678d0401cc43d2c750598875e237" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>detachFromOwner</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a0c38f2a8b2298fc4275865e9e56803a9" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>empty</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a1d1faa4604034d15a7bbdeddd03a56dd" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>end</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a576ee407a0f1ef42e2d4608f7e9cb732" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>indexOf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a4c573aa6eec213a0483ab30b72ea16be" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>insert</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a911a72e39cf30d4b377d8c5d6524ad32" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>insert</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a7a8b2fbadd86bdec8152f09123172705" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>insertAfter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1adca53ef363bd51a2eff54c6fee84686d" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>insertBefore</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a8d924650c01067f88183dba78be63618" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>invalidateLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ac9e8df6db5e11fe9bf2563b1151d6806" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>isInOwnerParentChain</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a3f621ce49279d1c3e185af0994570595" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>layoutData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ae3d7ce4e46b4ebcf6c74ec4f760f5aaf" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>layoutData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1afbb3677c1fa4126336dceb275ea1bf49" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>move</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a8a27530653963e8cc96b19b2c9154db4" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>move</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1abb80589dcf1267a59884aa6153da0f06" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>moveAfter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ae72808edb2e8efc2f76a89b053f8ec66" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>moveBefore</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a15b36c2145d67fee8b4a03eb7482d8ca" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a52c05b7f5765c827ca79fe6b60ad6123" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a2d7f1a12920d34f7e9ca455bb31b364c" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::ui::AbstractSurfaceContainer::"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1ad83669c546a4ec3cdeb6daf517764200" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::ui::AbstractSurfaceContainer::"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a023098e57f5c8cd38ce21c38983605bb" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>operator[]</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a7c3902d087b539653d718c00fd5fd155" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>remove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a7e0fdf1613d1a29629656ac786d469f1" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>remove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1abae5bf29e3474c51fc16d71fd8a69e62" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>removeAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ac6416f44b493c4ddc2adafdfa7621ae0" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>replace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a2b022d7950fb2222fb602213317b9172" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>replace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a98ac26613d33034fb980d79b32130363" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>replace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1afcfa361afd62da3f056b1fb0b1c0dbff" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>replace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a529778f43505cb0ded63d506f7307572" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>requireIndexOf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad661dc5e5e07659e5a9e19fca943968d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>setLayoutData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a22354f5f5881cea5380d3563130fcc54" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>setLayoutData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ae41c042e1d4c469ef76fdc772890973b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>setManager</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a2f477f67b46eab12ff8278874777d81b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a2c6dc3f45f2b0e675306605c81a147fa" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>SurfaceContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a90e448c0c29e402b5f2505ad3578a19a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>SurfaceContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a9eeb7eda95a8f01ea690e2f227177fca" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>SurfaceContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1a98d34489f751aaf134eacbfa1e0b77ab" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>validateMaximumCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1acd558a085ea92e0525d934a8bda4c221" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>validateNewChild</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container_1a8feaec8fa02e481c078eb25c266a78dd" prot="public" virt="virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>~AbstractSurfaceContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container_1ad09614552c594139c52f8571094a7eb0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::SurfaceContainer</scope><name>~SurfaceContainer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1745 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1_text_node" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::text::TextNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::enable_shared_from_this&lt; TextNode &gt;</basecompoundref>
+    <includes refid="_text_node_8hpp" local="no">erbsland/cterm/text/TextNode.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aea4b7ee0eaa68ee69044198d1a567457" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>WalkResult</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::WalkResult</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aea4b7ee0eaa68ee69044198d1a567457aa0bfb8e59e6c13fc8d990781f77694fe" prot="public">
+          <name>Continue</name>
+          <briefdescription>
+<para>Continue. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aea4b7ee0eaa68ee69044198d1a567457a11a755d598c0c417f9a36758c3da7481" prot="public">
+          <name>Stop</name>
+          <briefdescription>
+<para>Stop and return. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The result for the walk function call. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="219" column="5" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="219" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" prot="public" static="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_type" kindref="compound">TextNodeType</ref></type>
+        <definition>using erbsland::cterm::text::TextNode::Type =  TextNodeType</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::Type</qualifiedname>
+        <briefdescription>
+<para>The node type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="28" column="5" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" prot="public" static="no">
+        <type>int</type>
+        <definition>using erbsland::cterm::text::TextNode::Level =  int</definition>
+        <argsstring></argsstring>
+        <name>Level</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::Level</qualifiedname>
+        <briefdescription>
+<para>The nesting or heading level used by structural nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="31" column="5" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa07c2651d7cd5c240cb5ff38210e57ba" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+        <definition>Type erbsland::cterm::text::TextNode::_type</definition>
+        <argsstring></argsstring>
+        <name>_type</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::_type</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_type_1ae417c707a4c78299b96c37f296e6817eafbc54dc0badb7be695cb900cd0dc9967" kindref="member">Type::Text</ref>}</initializer>
+        <briefdescription>
+<para>The node type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="262" column="10" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="262" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7416ab60457b9fb4dc121872e86bf8d5" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; std::vector&lt; TextNodePtr &gt; &gt;</type>
+        <definition>std::optional&lt;std::vector&lt;TextNodePtr&gt; &gt; erbsland::cterm::text::TextNode::_children</definition>
+        <argsstring></argsstring>
+        <name>_children</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::_children</qualifiedname>
+        <briefdescription>
+<para>Child nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="263" column="19" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ab2642cf20fd7161555d07d02f63d9c35" prot="private" static="no" mutable="no">
+        <type>TextNodeWeakPtr</type>
+        <definition>TextNodeWeakPtr erbsland::cterm::text::TextNode::_parent</definition>
+        <argsstring></argsstring>
+        <name>_parent</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::_parent</qualifiedname>
+        <briefdescription>
+<para>The parent node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="264" column="21" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a810cd3920c89f63b5fc2d42e455e9d17" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; std::u32string &gt;</type>
+        <definition>std::optional&lt;std::u32string&gt; erbsland::cterm::text::TextNode::_text</definition>
+        <argsstring></argsstring>
+        <name>_text</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::_text</qualifiedname>
+        <briefdescription>
+<para>The UTF-32 text content. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="265" column="19" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a595829e300bd611f047c0335563f9fa1" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; std::string &gt;</type>
+        <definition>std::optional&lt;std::string&gt; erbsland::cterm::text::TextNode::_identifier</definition>
+        <argsstring></argsstring>
+        <name>_identifier</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::_identifier</qualifiedname>
+        <briefdescription>
+<para>Optional identifier/anchor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="266" column="19" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a12b35e09c1c831e22d0f12659c84f6be" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; std::string &gt;</type>
+        <definition>std::optional&lt;std::string&gt; erbsland::cterm::text::TextNode::_style</definition>
+        <argsstring></argsstring>
+        <name>_style</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::_style</qualifiedname>
+        <briefdescription>
+<para>Optional style/class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="267" column="19" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ac284478494d39518e688dd271de77193" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; std::string &gt;</type>
+        <definition>std::optional&lt;std::string&gt; erbsland::cterm::text::TextNode::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::_data</qualifiedname>
+        <briefdescription>
+<para>Target URL for links/code language/etc. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="268" column="19" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ae6cf1787db37f51ce1546b37a7b58eb1" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+        <definition>Level erbsland::cterm::text::TextNode::_level</definition>
+        <argsstring></argsstring>
+        <name>_level</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::_level</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Level of a heading/list. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="269" column="11" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="269" bodyend="269"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa0bd9884a6ef02ba34b92562d90fd069" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::TextNode::TextNode</definition>
+        <argsstring>(Type type, std::optional&lt; std::u32string &gt; text, std::optional&lt; std::string &gt; identifier, std::optional&lt; std::string &gt; style, std::optional&lt; std::string &gt; data, Level level) noexcept</argsstring>
+        <name>TextNode</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::TextNode</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::u32string &gt;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::string &gt;</type>
+          <declname>identifier</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::string &gt;</type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::string &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Create a node with explicit metadata. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional UTF-32 text content. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>identifier</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional identifier or anchor. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional style or class information. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional node-specific payload such as a link target or language. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The heading or nesting level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a583fc1190a31b309f9fefbf9ae5a6806" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::TextNode::TextNode</definition>
+        <argsstring>(const Type type) noexcept</argsstring>
+        <name>TextNode</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::TextNode</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Create a node with a type and otherwise empty metadata. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="50" column="14" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="50" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a842d6b835af8cdebb20652fa58067a58" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::TextNode::TextNode</definition>
+        <argsstring>(const Type type, std::u32string text, const Level level=0) noexcept</argsstring>
+        <name>TextNode</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::TextNode</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>std::u32string</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+          <declname>level</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Create a node with inline text content. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 text content. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The heading or nesting level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="56" column="5" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="56" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1abc2d975fb38d4286af80f20468841f41" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::TextNode::TextNode</definition>
+        <argsstring>(const Type type, const Level level) noexcept</argsstring>
+        <name>TextNode</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::TextNode</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Create a node with a type and explicit level. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The heading or nesting level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="61" column="5" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="61" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a0e24ed399b7ac8069fef7a99dee59c62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::TextNode::~TextNode</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TextNode</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::~TextNode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="65" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a44a31d43195c900150447b67dd5dfba7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::TextNode::TextNode</definition>
+        <argsstring>(const TextNode &amp;)=delete</argsstring>
+        <name>TextNode</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::TextNode</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="66" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a093f56c6a5212ac9c50fbdf8b5b77938" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::TextNode::TextNode</definition>
+        <argsstring>(TextNode &amp;&amp;)=delete</argsstring>
+        <name>TextNode</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::TextNode</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="67" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ace8d364a73e426c195b587021f9b5f23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+        <definition>TextNode &amp; erbsland::cterm::text::TextNode::operator=</definition>
+        <argsstring>(const TextNode &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="68" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7f285f898fcf8b34a31d1e0460d92c03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+        <definition>TextNode &amp; erbsland::cterm::text::TextNode::operator=</definition>
+        <argsstring>(TextNode &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="69" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a1297341426a6c927dfc76e33aacbe938" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; erbsland::cterm::text::TextNode::toDiagnosticTree</definition>
+        <argsstring>(std::size_t indent=4) const noexcept</argsstring>
+        <name>toDiagnosticTree</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::toDiagnosticTree</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>indent</declname>
+          <defval>4</defval>
+        </param>
+        <briefdescription>
+<para>Render this node tree into a human-readable diagnostic tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each entry contains one node with metadata, indented by the given number of spaces per depth level. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of spaces for each nesting level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The rendered diagnostic lines. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="165" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa964c18b126776241ac8f803b125a7db" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+        <definition>Type erbsland::cterm::text::TextNode::type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>type</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::type</qualifiedname>
+        <briefdescription>
+<para>Get the node type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The node type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="170" column="11" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="170" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a4cd17d0a24fe2a6cf2035ca7bc7e43c4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::TextNode::hasChildren</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hasChildren</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::hasChildren</qualifiedname>
+        <briefdescription>
+<para>Test if this node currently owns child nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if child nodes are present. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="173" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a1b02b61c32d06d5e2dc25f201d5c01f9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; TextNodePtr &gt; &amp;</type>
+        <definition>const std::vector&lt; TextNodePtr &gt; &amp; erbsland::cterm::text::TextNode::children</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>children</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::children</qualifiedname>
+        <briefdescription>
+<para>Access the child nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The child node list. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="176" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ae5db79f2f5851b0f7bcb8e5d3bf031b0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::TextNode::hasParent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hasParent</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::hasParent</qualifiedname>
+        <briefdescription>
+<para>Test if this node has a parent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if a parent node is set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="179" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a497e52cc6f63de80180a8aa4d11f0c6a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>TextNodePtr erbsland::cterm::text::TextNode::parent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>parent</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::parent</qualifiedname>
+        <briefdescription>
+<para>Access the parent node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The parent node, or <computeroutput>nullptr</computeroutput> if there is none. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="182" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a31889d6f9688e9d95523e4b2b99d60b0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::TextNode::setParent</definition>
+        <argsstring>(const TextNodePtr &amp;parent) noexcept</argsstring>
+        <name>setParent</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::setParent</qualifiedname>
+        <param>
+          <type>const TextNodePtr &amp;</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Set the parent node reference. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new parent node. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="185" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a298b19fb5a98fe84884d7bb2ab0ca91a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::TextNode::addChild</definition>
+        <argsstring>(TextNodePtr child) noexcept</argsstring>
+        <name>addChild</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::addChild</qualifiedname>
+        <param>
+          <type>TextNodePtr</type>
+          <declname>child</declname>
+        </param>
+        <briefdescription>
+<para>Append one child node and update its parent reference. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>child</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The child node to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="188" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7d3ff06605065722c495beec8c550c28" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::u32string &amp;</type>
+        <definition>const std::u32string &amp; erbsland::cterm::text::TextNode::text</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>text</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::text</qualifiedname>
+        <briefdescription>
+<para>Access the stored text payload. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The UTF-32 text content, or an empty string if none is stored. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="191" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ae6ff001ef5e5c483071aed96c596df48" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::optional&lt; std::string &gt; &amp;</type>
+        <definition>const std::optional&lt; std::string &gt; &amp; erbsland::cterm::text::TextNode::identifier</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>identifier</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::identifier</qualifiedname>
+        <briefdescription>
+<para>Access the optional identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The identifier, if set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="194" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a3ad3711b74181f358f6a11cf09624b27" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::TextNode::setIdentifier</definition>
+        <argsstring>(std::string identifier) noexcept</argsstring>
+        <name>setIdentifier</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::setIdentifier</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>identifier</declname>
+        </param>
+        <briefdescription>
+<para>Replace the identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>identifier</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new identifier. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="197" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a21a11c9ef9ffadc8f73fdd6d9f6f2a99" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::optional&lt; std::string &gt; &amp;</type>
+        <definition>const std::optional&lt; std::string &gt; &amp; erbsland::cterm::text::TextNode::style</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>style</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::style</qualifiedname>
+        <briefdescription>
+<para>Access the optional style information. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The style or class value, if set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="200" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ab5e990db70177e652f6f4d4a4fbbac23" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::TextNode::setStyle</definition>
+        <argsstring>(std::string style) noexcept</argsstring>
+        <name>setStyle</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::setStyle</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Replace the optional style information. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new style or class value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="203" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ac05b654d52552ed0b74054c563017a8c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::optional&lt; std::string &gt; &amp;</type>
+        <definition>const std::optional&lt; std::string &gt; &amp; erbsland::cterm::text::TextNode::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::data</qualifiedname>
+        <briefdescription>
+<para>Access the optional node-specific data payload. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The data payload, if set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="206" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a10c28a03bb61168c71250dde10e392b9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::TextNode::setData</definition>
+        <argsstring>(std::string data) noexcept</argsstring>
+        <name>setData</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::setData</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Replace the optional node-specific data payload. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new data payload. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="209" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a81506c317c1689d3311fb190dc958048" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+        <definition>Level erbsland::cterm::text::TextNode::level</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>level</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::level</qualifiedname>
+        <briefdescription>
+<para>Get the heading or nesting level. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current level. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="212" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a1e0417a230a22e8033ef22e9737230d3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::TextNode::setLevel</definition>
+        <argsstring>(Level level) noexcept</argsstring>
+        <name>setLevel</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::setLevel</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Set the heading or nesting level. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="215" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a5b1733fc051c1cfcbdc5def8163a4c3a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Fn</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aea4b7ee0eaa68ee69044198d1a567457" kindref="member">WalkResult</ref></type>
+        <definition>WalkResult erbsland::cterm::text::TextNode::walk</definition>
+        <argsstring>(Fn nodeFn) const</argsstring>
+        <name>walk</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::walk</qualifiedname>
+        <param>
+          <type>Fn</type>
+          <declname>nodeFn</declname>
+        </param>
+        <briefdescription>
+<para>Recursively walk the node tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the called function returns <computeroutput><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aea4b7ee0eaa68ee69044198d1a567457a11a755d598c0c417f9a36758c3da7481" kindref="member">WalkResult::Stop</ref></computeroutput>, the walk will stop and return immediately. <simplesect kind="return"><para><computeroutput>Continue</computeroutput> if the walk completed, <computeroutput>Stop</computeroutput> if the walk was stopped by the function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="227" column="16" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="227" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a19a53d30933d1c7de9efe9f01e16ab91" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Fn</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::TextNode::anyOf</definition>
+        <argsstring>(Fn nodeFn) const</argsstring>
+        <name>anyOf</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::anyOf</qualifiedname>
+        <param>
+          <type>Fn</type>
+          <declname>nodeFn</declname>
+        </param>
+        <briefdescription>
+<para>Recursively walk the node tree and return true if <emphasis>one</emphasis> <computeroutput>fn(node)</computeroutput> call returns true. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nodeFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A function with the signature <computeroutput>fn(const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;node) -&gt; bool</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if any node matches the predicate, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="247" column="11" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="247" bodyend="252"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a92582cf91c856cbef2124bc111760e9b" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::create</definition>
+        <argsstring>(Type type) noexcept</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::create</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Create a node with the given type using default metadata, empty text, and level <computeroutput>0</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node type to create. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="75" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a5a88402d7cf436fe7f1302c71f2b0a8d" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createDocument</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createDocument</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createDocument</qualifiedname>
+        <briefdescription>
+<para>Create a document root node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="78" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa747b1f7e81dfe539ac33e152f8d0d77" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createParagraph</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createParagraph</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createParagraph</qualifiedname>
+        <briefdescription>
+<para>Create a paragraph node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="81" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a6a6584db205d950dcd45860ddfb45740" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createSection</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createSection</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createSection</qualifiedname>
+        <briefdescription>
+<para>Create a section node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="84" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a5d47a8c275ad73f573f3ffa539079bc9" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createBlockquote</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createBlockquote</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createBlockquote</qualifiedname>
+        <briefdescription>
+<para>Create a blockquote node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="87" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ac7582a1954751c1a5e36010887777207" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createLineBreak</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createLineBreak</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createLineBreak</qualifiedname>
+        <briefdescription>
+<para>Create an explicit line-break node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="90" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1acdd41a7b28d98d976699024e295c4c68" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createHeading</definition>
+        <argsstring>(Level level) noexcept</argsstring>
+        <name>createHeading</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createHeading</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Create a heading node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The heading level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="94" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7d554369c6716e7e0b6c89b316e11c98" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createBulletList</definition>
+        <argsstring>(Level level) noexcept</argsstring>
+        <name>createBulletList</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createBulletList</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Create a bullet list node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nesting level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="98" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a9537788926af7db43d772de7e3c66c0d" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createNumberedList</definition>
+        <argsstring>(Level level) noexcept</argsstring>
+        <name>createNumberedList</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createNumberedList</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">Level</ref></type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Create a numbered list node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nesting level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="102" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa788685db92b165ce396d0f0f33125c0" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createListItem</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createListItem</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createListItem</qualifiedname>
+        <briefdescription>
+<para>Create a list item node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="105" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ace2ce53a2f1f8028c9b13176011b5d47" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createDefinitionList</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createDefinitionList</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createDefinitionList</qualifiedname>
+        <briefdescription>
+<para>Create a definition list node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="108" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a5dc7444314366a8be92c7b2351e82a22" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createDefinitionTerm</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createDefinitionTerm</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createDefinitionTerm</qualifiedname>
+        <briefdescription>
+<para>Create a definition term node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="111" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a467518dfaf627f1a14331108005ea8aa" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createDefinitionDescription</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createDefinitionDescription</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createDefinitionDescription</qualifiedname>
+        <briefdescription>
+<para>Create a definition description node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="114" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a56672245845b21ca92c64d71d707cbe7" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createCodeBlock</definition>
+        <argsstring>(std::string language) noexcept</argsstring>
+        <name>createCodeBlock</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createCodeBlock</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>language</declname>
+        </param>
+        <briefdescription>
+<para>Create a code block node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>language</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The optional language identifier. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="118" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ad389326dec0cdc73b490f3765378a107" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createHorizontalLine</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createHorizontalLine</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createHorizontalLine</qualifiedname>
+        <briefdescription>
+<para>Create a horizontal rule node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="121" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a8fa5a2ac93a9efedb93e099cd621dd0e" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createText</definition>
+        <argsstring>(std::u32string text) noexcept</argsstring>
+        <name>createText</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createText</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Create a plain text node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 text content. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="125" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a177f4700aa29713354a0e86547fd3536" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createEmphasis</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createEmphasis</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createEmphasis</qualifiedname>
+        <briefdescription>
+<para>Create an emphasis node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="128" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a8688485da87c6630baea341e91402988" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createStrong</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createStrong</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createStrong</qualifiedname>
+        <briefdescription>
+<para>Create a strong-emphasis node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="131" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1afe9b8e00f34e4ab22d4181a8254bcf80" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createUnderline</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createUnderline</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createUnderline</qualifiedname>
+        <briefdescription>
+<para>Create an underline node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="134" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a0b83e2253199d009caf7f32b32170696" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createSpan</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createSpan</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createSpan</qualifiedname>
+        <briefdescription>
+<para>Create a generic span node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="137" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a79a356a698cdf1114b9f7882a869e4d2" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createLink</definition>
+        <argsstring>(std::string url) noexcept</argsstring>
+        <name>createLink</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createLink</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>url</declname>
+        </param>
+        <briefdescription>
+<para>Create a link node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>url</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The link target. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="141" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ad6d5162fed3f9f869b591144e08b56a0" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createCode</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>createCode</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createCode</qualifiedname>
+        <briefdescription>
+<para>Create an inline code node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The created node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="144" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a632b301be3e6de718f3b297a298d6725" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::TextNode::createUnsupported</definition>
+        <argsstring>(std::u32string text) noexcept</argsstring>
+        <name>createUnsupported</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::createUnsupported</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Create a placeholder node for unsupported content. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The placeholder text to render. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The created unsupported node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="148" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7d3dd2e3ea96e23e6bf0c3a725a0f2eb" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool erbsland::cterm::text::TextNode::isInlineNodeType</definition>
+        <argsstring>(Type type) noexcept</argsstring>
+        <name>isInlineNodeType</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::isInlineNodeType</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Test if the given node type is an inline container node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> for inline container nodes, otherwise <computeroutput>false</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="152" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a8d13c14ce64151b9c975cead85b0c5e6" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool erbsland::cterm::text::TextNode::isTextContainerType</definition>
+        <argsstring>(Type type) noexcept</argsstring>
+        <name>isTextContainerType</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::isTextContainerType</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Test if the given node type can directly contain parsed text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if parsed text can be appended directly, otherwise <computeroutput>false</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="156" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa0903e45dd21486c6c14e31e9d175938" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool erbsland::cterm::text::TextNode::isListNodeType</definition>
+        <argsstring>(Type type) noexcept</argsstring>
+        <name>isListNodeType</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::isListNodeType</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Test if the given node type is a list container. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> for bullet or numbered lists, otherwise <computeroutput>false</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="160" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a9cb51f30828acdb180eedd992c9de059" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::text::TextNode::appendDiagnosticTree</definition>
+        <argsstring>(std::vector&lt; std::string &gt; &amp;lines, const TextNode &amp;node, std::size_t depth, std::size_t indent) noexcept</argsstring>
+        <name>appendDiagnosticTree</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::appendDiagnosticTree</qualifiedname>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>lines</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>depth</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>indent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="255" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a681352f15c87f00e9576565a3d712cd7" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string erbsland::cterm::text::TextNode::renderDiagnosticLine</definition>
+        <argsstring>(const TextNode &amp;node, std::size_t depth, std::size_t indent) noexcept</argsstring>
+        <name>renderDiagnosticLine</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::renderDiagnosticLine</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>depth</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>indent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="257" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1ad68d8474632a73a997b194851afa8fb5" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string erbsland::cterm::text::TextNode::renderTextValue</definition>
+        <argsstring>(std::u32string_view text) noexcept</argsstring>
+        <name>renderTextValue</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::renderTextValue</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="258" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_text_node_1a86af50fb698b96240a49836a4e027240" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string erbsland::cterm::text::TextNode::escapeText</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>escapeText</name>
+        <qualifiedname>erbsland::cterm::text::TextNode::escapeText</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/TextNode.hpp" line="259" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A node in the text tree. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::text::TextNode</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1_text_node"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; TextNode &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::text::TextNode</label>
+        <link refid="classerbsland_1_1cterm_1_1text_1_1_text_node"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; TextNode &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/text/TextNode.hpp" line="25" column="1" bodyfile="erbsland/cterm/text/TextNode.hpp" bodystart="25" bodyend="270"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7416ab60457b9fb4dc121872e86bf8d5" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>_children</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ac284478494d39518e688dd271de77193" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>_data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a595829e300bd611f047c0335563f9fa1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>_identifier</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ae6cf1787db37f51ce1546b37a7b58eb1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>_level</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ab2642cf20fd7161555d07d02f63d9c35" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>_parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a12b35e09c1c831e22d0f12659c84f6be" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>_style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a810cd3920c89f63b5fc2d42e455e9d17" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>_text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa07c2651d7cd5c240cb5ff38210e57ba" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>_type</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a298b19fb5a98fe84884d7bb2ab0ca91a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>addChild</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a19a53d30933d1c7de9efe9f01e16ab91" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>anyOf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a9cb51f30828acdb180eedd992c9de059" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>appendDiagnosticTree</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a1b02b61c32d06d5e2dc25f201d5c01f9" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>children</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a92582cf91c856cbef2124bc111760e9b" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a5d47a8c275ad73f573f3ffa539079bc9" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createBlockquote</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7d554369c6716e7e0b6c89b316e11c98" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createBulletList</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ad6d5162fed3f9f869b591144e08b56a0" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createCode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a56672245845b21ca92c64d71d707cbe7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createCodeBlock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a467518dfaf627f1a14331108005ea8aa" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createDefinitionDescription</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ace2ce53a2f1f8028c9b13176011b5d47" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createDefinitionList</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a5dc7444314366a8be92c7b2351e82a22" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createDefinitionTerm</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a5a88402d7cf436fe7f1302c71f2b0a8d" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createDocument</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a177f4700aa29713354a0e86547fd3536" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createEmphasis</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1acdd41a7b28d98d976699024e295c4c68" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createHeading</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ad389326dec0cdc73b490f3765378a107" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createHorizontalLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ac7582a1954751c1a5e36010887777207" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createLineBreak</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a79a356a698cdf1114b9f7882a869e4d2" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createLink</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa788685db92b165ce396d0f0f33125c0" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createListItem</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a9537788926af7db43d772de7e3c66c0d" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createNumberedList</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa747b1f7e81dfe539ac33e152f8d0d77" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createParagraph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a6a6584db205d950dcd45860ddfb45740" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createSection</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a0b83e2253199d009caf7f32b32170696" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createSpan</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a8688485da87c6630baea341e91402988" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createStrong</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a8fa5a2ac93a9efedb93e099cd621dd0e" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1afe9b8e00f34e4ab22d4181a8254bcf80" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createUnderline</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a632b301be3e6de718f3b297a298d6725" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>createUnsupported</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ac05b654d52552ed0b74054c563017a8c" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>data</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a86af50fb698b96240a49836a4e027240" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>escapeText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a4cd17d0a24fe2a6cf2035ca7bc7e43c4" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>hasChildren</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ae5db79f2f5851b0f7bcb8e5d3bf031b0" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>hasParent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ae6ff001ef5e5c483071aed96c596df48" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>identifier</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7d3dd2e3ea96e23e6bf0c3a725a0f2eb" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>isInlineNodeType</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa0903e45dd21486c6c14e31e9d175938" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>isListNodeType</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a8d13c14ce64151b9c975cead85b0c5e6" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>isTextContainerType</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>Level</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a81506c317c1689d3311fb190dc958048" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>level</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ace8d364a73e426c195b587021f9b5f23" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7f285f898fcf8b34a31d1e0460d92c03" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a497e52cc6f63de80180a8aa4d11f0c6a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a681352f15c87f00e9576565a3d712cd7" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>renderDiagnosticLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ad68d8474632a73a997b194851afa8fb5" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>renderTextValue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a10c28a03bb61168c71250dde10e392b9" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>setData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a3ad3711b74181f358f6a11cf09624b27" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>setIdentifier</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a1e0417a230a22e8033ef22e9737230d3" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>setLevel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a31889d6f9688e9d95523e4b2b99d60b0" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>setParent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1ab5e990db70177e652f6f4d4a4fbbac23" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>setStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a21a11c9ef9ffadc8f73fdd6d9f6f2a99" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a7d3ff06605065722c495beec8c550c28" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa0bd9884a6ef02ba34b92562d90fd069" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>TextNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a583fc1190a31b309f9fefbf9ae5a6806" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>TextNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a842d6b835af8cdebb20652fa58067a58" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>TextNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1abc2d975fb38d4286af80f20468841f41" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>TextNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a44a31d43195c900150447b67dd5dfba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>TextNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a093f56c6a5212ac9c50fbdf8b5b77938" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>TextNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a1297341426a6c927dfc76e33aacbe938" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>toDiagnosticTree</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>Type</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aa964c18b126776241ac8f803b125a7db" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>type</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a5b1733fc051c1cfcbdc5def8163a4c3a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>walk</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1aea4b7ee0eaa68ee69044198d1a567457" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>WalkResult</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a0e24ed399b7ac8069fef7a99dee59c62" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::TextNode</scope><name>~TextNode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

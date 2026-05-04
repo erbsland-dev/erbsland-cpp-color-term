@@ -1,0 +1,412 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceerbsland_1_1cterm_1_1theme_1_1layout" kind="namespace" language="C++">
+    <compoundname>erbsland::cterm::theme::layout</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="_layout_helper_8hpp_1a03406b7b0e8aed6ecc309abd62ede2c2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::theme::layout::stylePaddingAndMargins</definition>
+        <argsstring>(const StringView &amp;text, const ThemeAccessor &amp;themeAccessor, Part textPart=Part::None) noexcept -&gt; StringWithMargins</argsstring>
+        <name>stylePaddingAndMargins</name>
+        <qualifiedname>erbsland::cterm::theme::layout::stylePaddingAndMargins</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part_1a6369213480b27645a87ad845afa3280d" kindref="member">Part::None</ref></defval>
+        </param>
+        <briefdescription>
+<para>Apply padding and margins to a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to style and surround with padding. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>themeAccessor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The theme accessor to use for styling (selects element, states, and tags). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>textPart</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional part to use for the text styling, padding, and margins. If <ref refid="classerbsland_1_1cterm_1_1theme_1_1_part_1a6369213480b27645a87ad845afa3280d" kindref="member">Part::None</ref> is passed, the themeAccessor is used as part theme. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The styled text with padding applied, and margins returned. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="16" column="6" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="16" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="_layout_helper_8hpp_1a8768611cd558c8d80bac3ecbafe231ff" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::theme::layout::stylePaddingAndMargins</definition>
+        <argsstring>(const std::string &amp;text, const ThemeAccessor &amp;themeAccessor, Part textPart=Part::None) noexcept -&gt; StringWithMargins</argsstring>
+        <name>stylePaddingAndMargins</name>
+        <qualifiedname>erbsland::cterm::theme::layout::stylePaddingAndMargins</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part_1a6369213480b27645a87ad845afa3280d" kindref="member">Part::None</ref></defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="20" column="6" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="20" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="_layout_helper_8hpp_1abd28c2f83ae31a4571ead8908ddb6a59" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::theme::layout::stylePaddingCropAndMargins</definition>
+        <argsstring>(const StringView &amp;text, Coordinate displayWidth, const ThemeAccessor &amp;themeAccessor, Part textPart=Part::Text, Part ellipsisPart=Part::Ellipsis, Alignment textAlignmentForEllipsis=Alignment::Left) noexcept -&gt; StringWithMargins</argsstring>
+        <name>stylePaddingCropAndMargins</name>
+        <qualifiedname>erbsland::cterm::theme::layout::stylePaddingCropAndMargins</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>displayWidth</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part_1a82a9ca74ba9eef83bf9961dc5f4033fa" kindref="member">Part::Text</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>ellipsisPart</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part_1ac0614399733444e66bc879481ffafa3b" kindref="member">Part::Ellipsis</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>textAlignmentForEllipsis</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_alignment_1abb2c95247faf6d7b8d1df0a132b926e0" kindref="member">Alignment::Left</ref></defval>
+        </param>
+        <briefdescription>
+<para>Apply style, padding, margins, and crop to fit to a given width. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to style and surround with padding. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>displayWidth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum width the text, including the ellipsis, will be cropped to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>themeAccessor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The theme accessor to use for styling (selects element, states, and tags). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>textPart</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref> to use for the text styling, padding, and margins. If <ref refid="classerbsland_1_1cterm_1_1theme_1_1_part_1a6369213480b27645a87ad845afa3280d" kindref="member">Part::None</ref> is passed, the themeAccessor is used as part theme. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ellipsisPart</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref> to use for the ellipsis block. If <ref refid="classerbsland_1_1cterm_1_1theme_1_1_part_1a6369213480b27645a87ad845afa3280d" kindref="member">Part::None</ref> is passed, the themeAccessor is used as part theme. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>textAlignmentForEllipsis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text alignment for the ellipsis block. If the text is left aligned, the ellipsis will be placed at the end of the text. If the text is right aligned, the ellipsis will be placed at the beginning of the text. If the text is center aligned, the ellipsis will be placed in the middle of the text. Only the <computeroutput>Left</computeroutput>, <computeroutput>HCenter</computeroutput>, and <computeroutput>Right</computeroutput> alignments are tested. Vertical alignments are ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="37" column="6" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="37" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="_layout_helper_8hpp_1ad5f5289478cf29a285b5b8409a5ea025" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::theme::layout::encloseInBrackets</definition>
+        <argsstring>(std::span&lt; String &gt; texts, const ThemeAccessor &amp;themeAccessor, Part bracketPart, Part textPart) noexcept -&gt; StringWithMargins</argsstring>
+        <name>encloseInBrackets</name>
+        <qualifiedname>erbsland::cterm::theme::layout::encloseInBrackets</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt;</type>
+          <declname>texts</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>bracketPart</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+        </param>
+        <briefdescription>
+<para>Enclose a sequence of text parts in brackets using the specified theme accessors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will create a string using this structure: <computeroutput> Elements: LB: left bracket MB: middle bracket (separator) RB: right bracket <ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref>: one of the text elements Attributes: LM: left margin RM: right margin LP: left padding RP: right padding (padding always rendered as spaces in the given theme char style) <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme" kindref="compound">Theme</ref> style: [B: ...] bracketPart [T: ...] textPart</computeroutput></para>
+<para><computeroutput>[B:LM] collapsed with [T:LM] -&gt; returned as left margin [B: LB + LP] [T: LP + <ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> + RP] [B: RP + MB + LP] [T: LP + <ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> + RP] [B: RP + RB] [B:RM] collapsed with [T:RM] -&gt; returned as right margin </computeroutput> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>texts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to join with surrounding brackets. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>themeAccessor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The theme accessor to use for styling (selects element, states and tags). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bracketPart</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The part to use for the bracket styling. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>textPart</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The part to use for the text styling. If set to <ref refid="classerbsland_1_1cterm_1_1theme_1_1_part_1a6369213480b27645a87ad845afa3280d" kindref="member">Part::None</ref>, no text styling is applied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The joined text with surrounding brackets, styled according to the theme accessor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="74" column="6" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="74" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="_layout_helper_8hpp_1a1430417347ed123744bc68be04b2fb74" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::theme::layout::encloseInBrackets</definition>
+        <argsstring>(std::span&lt; StringView &gt; texts, const ThemeAccessor &amp;themeAccessor, Part bracketPart, Part textPart) noexcept -&gt; StringWithMargins</argsstring>
+        <name>encloseInBrackets</name>
+        <qualifiedname>erbsland::cterm::theme::layout::encloseInBrackets</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &gt;</type>
+          <declname>texts</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>bracketPart</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="78" column="6" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="78" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="_layout_helper_8hpp_1ac5503de02cad29cd7630c3b6ec48c4d5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::theme::layout::encloseInBrackets</definition>
+        <argsstring>(std::span&lt; std::string &gt; texts, const ThemeAccessor &amp;themeAccessor, Part bracketPart, Part textPart) noexcept -&gt; StringWithMargins</argsstring>
+        <name>encloseInBrackets</name>
+        <qualifiedname>erbsland::cterm::theme::layout::encloseInBrackets</qualifiedname>
+        <param>
+          <type>std::span&lt; std::string &gt;</type>
+          <declname>texts</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>bracketPart</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="82" column="6" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="82" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="_layout_helper_8hpp_1a9999fb363be56710e12c5a772c87d78c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::theme::layout::encloseInBrackets</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;texts, const ThemeAccessor &amp;themeAccessor, Part bracketPart, Part textPart) noexcept -&gt; StringWithMargins</argsstring>
+        <name>encloseInBrackets</name>
+        <qualifiedname>erbsland::cterm::theme::layout::encloseInBrackets</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>texts</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>bracketPart</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="86" column="6" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="86" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="_layout_helper_8hpp_1a27b882a43a2ae0ed0ca0378ecd6a931b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::theme::layout::encloseInBrackets</definition>
+        <argsstring>(const StringView &amp;text, const ThemeAccessor &amp;themeAccessor, Part bracketPart, Part textPart) noexcept -&gt; StringWithMargins</argsstring>
+        <name>encloseInBrackets</name>
+        <qualifiedname>erbsland::cterm::theme::layout::encloseInBrackets</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>bracketPart</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="90" column="6" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="90" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="_layout_helper_8hpp_1a1fd988d8283184b5ec5c3d56b4cc2605" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_string_with_margins" kindref="compound">StringWithMargins</ref></type>
+        <definition>StringWithMargins erbsland::cterm::theme::layout::encloseInBrackets</definition>
+        <argsstring>(std::string text, const ThemeAccessor &amp;themeAccessor, Part bracketPart, Part textPart) noexcept</argsstring>
+        <name>encloseInBrackets</name>
+        <qualifiedname>erbsland::cterm::theme::layout::encloseInBrackets</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_accessor" kindref="compound">ThemeAccessor</ref> &amp;</type>
+          <declname>themeAccessor</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>bracketPart</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_part" kindref="compound">Part</ref></type>
+          <declname>textPart</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="94" column="19" declfile="erbsland/cterm/theme/LayoutHelper.hpp" declline="94" declcolumn="19"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/theme/LayoutHelper.hpp" line="8" column="1"/>
+  </compounddef>
+</doxygen>

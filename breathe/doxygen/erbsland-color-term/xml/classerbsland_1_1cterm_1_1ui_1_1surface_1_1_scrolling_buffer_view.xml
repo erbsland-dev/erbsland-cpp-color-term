@@ -1,0 +1,657 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::surface::ScrollingBufferView</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area" prot="public" virt="non-virtual">erbsland::cterm::ui::surface::AbstractScrollArea</basecompoundref>
+    <includes refid="_scrolling_buffer_view_8hpp" local="no">erbsland/cterm/ui/surface/ScrollingBufferView.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1aca4e19a6d794ded862f546396a952750" prot="private" static="no" mutable="no">
+        <type>ReadableBufferPtr</type>
+        <definition>ReadableBufferPtr erbsland::cterm::ui::surface::ScrollingBufferView::_source</definition>
+        <argsstring></argsstring>
+        <name>_source</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::_source</qualifiedname>
+        <briefdescription>
+<para>The source buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="62" column="23" bodyfile="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a2d87bde16456c616e841e895170499f0" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_buffer_view" kindref="compound">BufferView</ref></type>
+        <definition>BufferView erbsland::cterm::ui::surface::ScrollingBufferView::_view</definition>
+        <argsstring></argsstring>
+        <name>_view</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::_view</qualifiedname>
+        <briefdescription>
+<para>The cached source-buffer view. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="63" column="16" bodyfile="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a8b0b2d8ce80273ae00268427d7670dc0" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::surface::ScrollingBufferView::ScrollingBufferView</definition>
+        <argsstring>(ReadableBufferPtr source, ProtectedTag) noexcept</argsstring>
+        <name>ScrollingBufferView</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::ScrollingBufferView</qualifiedname>
+        <param>
+          <type>ReadableBufferPtr</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_surface_1_1_protected_tag" kindref="compound">ProtectedTag</ref></type>
+        </param>
+        <briefdescription>
+<para>Create a scrolling buffer view. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The optional source buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="21" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a7c9fc1efa448e6e689b1a4daa7d5f6a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::surface::ScrollingBufferView::~ScrollingBufferView</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~ScrollingBufferView</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::~ScrollingBufferView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="22" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1ab64cc40f692dbf11daf89eece1c1b955" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const ReadableBufferPtr &amp;</type>
+        <definition>const ReadableBufferPtr &amp; erbsland::cterm::ui::surface::ScrollingBufferView::source</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>source</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::source</qualifiedname>
+        <briefdescription>
+<para>Access the source buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current source buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="33" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1aaa40c4526e7e24cff6d4232f7612550c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::ScrollingBufferView::setSource</definition>
+        <argsstring>(ReadableBufferPtr source) noexcept</argsstring>
+        <name>setSource</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::setSource</qualifiedname>
+        <param>
+          <type>ReadableBufferPtr</type>
+          <declname>source</declname>
+        </param>
+        <briefdescription>
+<para>Replace the source buffer and clamp the stored view offset to the new content. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new source buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="36" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a8335ab429a6cbeed9f2d19955c79a90c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::surface::ScrollingBufferView::showCropCharacters</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>showCropCharacters</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::showCropCharacters</qualifiedname>
+        <briefdescription>
+<para>Test whether crop indicator characters are shown. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if crop indicator characters are shown. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="39" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1ab264a2e6a1052b56affe2301db70d3c5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::ScrollingBufferView::setShowCropCharacters</definition>
+        <argsstring>(bool show) noexcept</argsstring>
+        <name>setShowCropCharacters</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::setShowCropCharacters</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>show</declname>
+        </param>
+        <briefdescription>
+<para>Enable or disable crop indicator characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>show</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> to show crop indicator characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="42" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1afdae2c6d133a05c7b309f6364419de5e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::ui::surface::ScrollingBufferView::cropCharacter</definition>
+        <argsstring>(Direction direction) const noexcept</argsstring>
+        <name>cropCharacter</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::cropCharacter</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_direction" kindref="compound">Direction</ref></type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+<para>Get one crop indicator character. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The crop direction to query. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The configured crop indicator character. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="46" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1ab1867a0b9e38d51153bde8082b5fc26e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::ScrollingBufferView::setCropCharacter</definition>
+        <argsstring>(Direction direction, Char character) noexcept</argsstring>
+        <name>setCropCharacter</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::setCropCharacter</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_direction" kindref="compound">Direction</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Replace one crop indicator character. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The crop direction to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new crop indicator character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="50" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a851156f3340c42bbac129b70ed25ebd8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ScrollingBufferViewPtr</type>
+        <definition>static ScrollingBufferViewPtr erbsland::cterm::ui::surface::ScrollingBufferView::create</definition>
+        <argsstring>(ReadableBufferPtr source={})</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::create</qualifiedname>
+        <param>
+          <type>ReadableBufferPtr</type>
+          <declname>source</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Create a scrolling buffer view for one source buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The optional source buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new scrolling buffer view. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="28" column="36"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1af2bca4f12b238daf93ca22bbbdd14aaf" prot="protected" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::ui::surface::ScrollingBufferView::contentSizeForViewport</definition>
+        <argsstring>(Size viewportSize) const noexcept override</argsstring>
+        <name>contentSizeForViewport</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::contentSizeForViewport</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a57bd6f6b6e2612870998677d20b1edb0">contentSizeForViewport</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>viewportSize</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the content size for one viewport size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>viewportSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The candidate viewport size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The resulting content size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="53" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a9e50b422ae9f26039990a8154f571945" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::ui::surface::ScrollingBufferView::measureContentSizeForViewport</definition>
+        <argsstring>(Size viewportSize, LayoutScope &amp;scope) noexcept override</argsstring>
+        <name>measureContentSizeForViewport</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::measureContentSizeForViewport</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a93aa143ae5cfe7c622e67f8b275392d9">measureContentSizeForViewport</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>viewportSize</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_scope" kindref="compound">LayoutScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para>Measure the content size for one viewport size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>viewportSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The candidate viewport size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout scope. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The resulting content size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="54" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1ab94a3c18f477948012db9549a57e7fda" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::ScrollingBufferView::onPaintArea</definition>
+        <argsstring>(Position scrollOffset, Rectangle targetRect, WritableBuffer &amp;buffer, const PaintContext &amp;context) noexcept override</argsstring>
+        <name>onPaintArea</name>
+        <qualifiedname>erbsland::cterm::ui::surface::ScrollingBufferView::onPaintArea</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1afec168c174b44e0f4367f44ebbeac3b2">onPaintArea</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>scrollOffset</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>targetRect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_writable_buffer" kindref="compound">WritableBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_paint_context" kindref="compound">PaintContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Paint the custom scrollable area. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scrollOffset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current scroll offset. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetRect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target viewport rectangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The paint context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="55" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A surface that renders a scrollable viewport into one readable buffer. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>erbsland::cterm::ui::ExclusiveSurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::SurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::surface::AbstractScrollArea</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::surface::ScrollingBufferView</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="8">
+        <label>erbsland::cterm::Rectangle</label>
+        <link refid="classerbsland_1_1cterm_1_1_rectangle"/>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="11">
+        <label>erbsland::cterm::ui::ExclusiveSurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>erbsland::cterm::ui::LayoutMetrics</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics"/>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_surfaces</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_flags</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_rectangle</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>_layoutMetrics</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>_themeAttributes</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland::cterm::ui::SurfaceFlags</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_flags"/>
+      </node>
+      <node id="12">
+        <label>erbsland::cterm::ui::SurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager"/>
+      </node>
+      <node id="10">
+        <label>erbsland::cterm::ui::SurfaceThemeAttributes</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_theme_attributes"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::surface::AbstractScrollArea</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::surface::ScrollingBufferView</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" line="17" column="1" bodyfile="erbsland/cterm/ui/surface/ScrollingBufferView.hpp" bodystart="17" bodyend="64"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a67caf5a45f3afcf394d04b6a811fb019" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>_flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5e98ac945443673593de934b8e5a6c82" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>_layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9ded519b8019bf6a0379b4807842db02" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>_rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1aca4e19a6d794ded862f546396a952750" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>_source</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adebfc77d073fdbec83278119180d2641" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>_surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a3495ef389b8d8ba1623a671bdbe0a96f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>_themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a2d87bde16456c616e841e895170499f0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>_view</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a796f1ae0df91876f779b9dbd14471e38" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>AbstractScrollArea</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d68b998618a891511dee33516b51268" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac3b1bb4dd817e95e8a35841cf96b48a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>actionsPtr</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9822c7ffb68730aea7ba35147f48f418" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>addSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0abe7d82b04e8ab6336b069f5cc8582" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>childLayoutContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1abaddf3eeea6f7644b5c60ff68d2de36b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0523529e715f39f711cc5d96ac3c44d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1ae71cc8a1cd72733b5abc368e78ddeedc" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>contentSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1af2bca4f12b238daf93ca22bbbdd14aaf" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>contentSizeForViewport</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a851156f3340c42bbac129b70ed25ebd8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1afdae2c6d133a05c7b309f6364419de5e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>cropCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a4ba81826cb8d3bef2f28a65888c955d1" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>defaultLayoutData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1ad8f8e37fbd7a5eedbe9108da062e8cbe" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>didAdd</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a615754f01e2b19eb2f3144563e44e028" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>didMove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1adaed814b6fe3fbe781b5c54cea9ba26b" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>didRemove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a02ff00d670efea42235403e0ae9948a1" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>didRemoveAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1abc5c1cbf21bc4a8efbc1312cef59e70a" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>didReplace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ed84aa3c6e6d970d42b64c83b46573d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>editLayoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaf52c2f637ff1260e089e66443b07531" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a89aeb65892433da9fcac35928db00810" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a6d9918f31eceb20db8ece82d7400dc11" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>horizontalScrollBar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a37f4300256c9e19955c4674d47c12717" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>initializeUi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1acc65b744f0701f00597e4c89d6241239" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>isAncestorOrSame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1acb7879611be412ed5dd7f1941827636a" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>isManagedChild</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a95e5424ead0b6cc74db8b7130d1633a3" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>isOpaque</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a967203e56c68deb9f759c9a6f4f8d8d4" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>isPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1afb8f08ad9f89178255cdda7cf8ac450f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad34c082f4cb962dabd803d02895a9902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaa6aedebddacbcb54d637ab7dc763317" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>localSurfaceRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a73838b048c6c2e0a456eb2776a11c459" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>localToScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a487c26497f003630d51662a03a0f0d7e" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>maximumSurfaceCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a9e50b422ae9f26039990a8154f571945" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>measureContentSizeForViewport</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a827a5338cd11a1ac0f82d8beae54c1f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>nearestOpaqueSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a50e8ebc2c27eaa297c1b6df62176a9de" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>nearestPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1908b92a2163d514b9dec6b29e18c13b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>onFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac5de18b08b9c414b0bcfe38fa801d367" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1afd923778edaa728c9f5528a30c99a38e" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>onLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a970401f71d513138ee3de0e51004f759" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>onMeasure</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a99340a83620016752b23b34a091c531b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>onPaint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1ab94a3c18f477948012db9549a57e7fda" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>onPaintArea</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1ab9a217603e6f330a5eb449dfd99007d8" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>onScrollOffsetChanged</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1af4b08bc02b3b7e8e6cf6cf5822645470" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1db7d7cb9f30ee4c5b4242473de6fe33" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1ad0bb3cdbc0f13405b74a324668fe42ac" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>pageDown</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a9ab44a39befbca49441948e87f21b198" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>pageLeft</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1aad58eb60e0f5c8aff626c03871089c29" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>pageRight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a35a2a3129b223dbda79952bc8cb6d935" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>pageUp</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a57ed2140168f6fad97796cbc98b876f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1a2f2168434fcf663bccb768dfa8cba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6691b41ed4a62a31aff2393c131ab2f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>requestFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a484e22bcc258d2b36992ff91e6cc4c0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c4a3823f5477de8879ebd80c043abe6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>screenToLocal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1aa135e05ec47365df644bf3d64e63a56c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollBarMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a03f25d752dac82bec85ce11125d563fb" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollBy</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a68fc74cd1785aa4f546cac6cfc174cdb" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollCorner</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a5400f3b8e54609b6d9cb4aae773cdd15" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollDown</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a8b0b2d8ce80273ae00268427d7670dc0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>ScrollingBufferView</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a149a3ebbffb46ed69615e512163698da" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollIntoView</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1ad3f8bee9cc856b02c791c5f96fbfed1e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollLeft</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1ab972d324146570ad4840319d554ebcb8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollOffset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a632e10e615b940615dc33894bc1e95c9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollRight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a88bb6e8608f086b5466a9ca6193650fb" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollToBottom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a53a1257bff1764ba01f8107eda71b32b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollToLeftEdge</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a76c167dacb68cc898619c29aea573495" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollToRightEdge</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a0d32284f862a0744a007e4f12dd78ca0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollToTop</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a9fd8325e4b4fa4a07aa1d008dfc5eda1" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>scrollUp</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1ab1867a0b9e38d51153bde8082b5fc26e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>setCropCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad190a0f521f4abb34c9a5fe9e8cdba40" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>setRectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1ade16d21b7ecc7e22084ce32d7cd4dae3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>setScrollBarMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1ad3b28e3afee9991c5aa24140d3f85f47" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>setScrollOffset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1ab264a2e6a1052b56affe2301db70d3c5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>setShowCropCharacters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1aaa40c4526e7e24cff6d4232f7612550c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>setSource</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a8335ab429a6cbeed9f2d19955c79a90c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>showCropCharacters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1ab64cc40f692dbf11daf89eece1c1b955" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>source</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae70aa6dae2d6df94fbb2f6f6b5226daa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5cb74a7a34e1b983c592e6f7f6aeca96" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d00cfd2476c5d44de898c00f29fc90a" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a4623853a42b6ae3683027cb10e3fef65" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aea9e1412522664de3fbfa01435f9bacf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae95b294bf3fad17469266a725bb69ff7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c6f25c89ecf460580ae03db5573b9ba" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ade89cf3d7830659bfa54ed703bdc3d14" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1add04ac6c18ebbcb1dc835a4da635d58d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adb6bc351b2e411bfdc50f26867d31df9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a02f5c3f2df31839ad57c7dd3e442bdc6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>themeContextFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a5663b14c1de959752b5a9c82d2b40118" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>verticalScrollBar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a206d70ea97d5f0f4261ed6508a39b463" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>viewportRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1a9366107709d14f22062be289113e68e3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>visibleContentRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a0cff8325b685e12268b2a8136d6c47f2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>visibleScreenRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1afa3f0f6082390ec37b2fa4ed19b097e3" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>willAdd</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a7e08863737407cfcb3b23e24b4cd8a1c" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>willMove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a692b97eb3fcba6c91b983bd591cce8fe" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>willRemove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a259e149dc9b54ae46f1fd065b97e00c9" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>willRemoveAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a075e2787e5827538a7f165950ede0a06" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>willReplace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_abstract_scroll_area_1ac91343b5742eb66a21556222dc77e3ca" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>~AbstractScrollArea</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a49c857a32a87962433332ba98de92638" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>~ExclusiveSurfaceManager</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_scrolling_buffer_view_1a7c9fc1efa448e6e689b1a4daa7d5f6a4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>~ScrollingBufferView</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d29bb69da75140fb230c6edd80bd9e7" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>~Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a90eedce321946f6d07da935234975e06" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::ScrollingBufferView</scope><name>~SurfaceManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

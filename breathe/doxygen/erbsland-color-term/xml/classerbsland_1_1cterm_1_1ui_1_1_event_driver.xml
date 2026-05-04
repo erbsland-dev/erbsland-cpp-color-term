@@ -1,0 +1,444 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::EventDriver</compoundname>
+    <includes refid="_event_driver_8hpp" local="no">erbsland/cterm/ui/event/EventDriver.hpp</includes>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" prot="public">erbsland::cterm::ui::EventDriver::ProcessResult</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dc" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>State</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::State</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dca5bda814c4aedb126839228f1a3d92f09" prot="public">
+          <name>Running</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dca0d82790b0612935992bd564a17ce37d6" prot="public">
+          <name>Quit</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The state of the event driver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="23" column="5" bodyfile="erbsland/cterm/ui/event/EventDriver.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad4c8eec8a1aaba48343122a83bf0d105" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex erbsland::cterm::ui::EventDriver::_mutex</definition>
+        <argsstring></argsstring>
+        <name>_mutex</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::_mutex</qualifiedname>
+        <briefdescription>
+<para>The mutex for the event queue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="89" column="24" bodyfile="erbsland/cterm/ui/event/EventDriver.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a1ef74a60623934cb4ee9f038f2164f4c" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dc" kindref="member">State</ref> &gt;</type>
+        <definition>std::atomic&lt;State&gt; erbsland::cterm::ui::EventDriver::_state</definition>
+        <argsstring></argsstring>
+        <name>_state</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::_state</qualifiedname>
+        <initializer>{State::Running}</initializer>
+        <briefdescription>
+<para>The state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="90" column="17" bodyfile="erbsland/cterm/ui/event/EventDriver.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a7c053230f0a5af31f1c47b267ac62b3e" prot="private" static="no" mutable="no">
+        <type>std::deque&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> &gt;</type>
+        <definition>std::deque&lt;Event&gt; erbsland::cterm::ui::EventDriver::_eventQueue</definition>
+        <argsstring></argsstring>
+        <name>_eventQueue</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::_eventQueue</qualifiedname>
+        <briefdescription>
+<para>The event queue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="91" column="16" bodyfile="erbsland/cterm/ui/event/EventDriver.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad6d752a3457b2409d2ade7a645608756" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::ui::EventDriver::_exitCode</definition>
+        <argsstring></argsstring>
+        <name>_exitCode</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::_exitCode</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>The exit code of the quit event. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="92" column="9" bodyfile="erbsland/cterm/ui/event/EventDriver.hpp" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a9fb75a6778c632bd47fceccd68085855" prot="private" static="no" mutable="no">
+        <type>std::function&lt; void(const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(const Event &amp;)&gt; erbsland::cterm::ui::EventDriver::_eventHandler</definition>
+        <argsstring></argsstring>
+        <name>_eventHandler</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::_eventHandler</qualifiedname>
+        <briefdescription>
+<para>The callback for non-control events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="93" column="19" bodyfile="erbsland/cterm/ui/event/EventDriver.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a4be651a71a48afe1c368811c667d304d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventDriver::EventDriver</definition>
+        <argsstring>()=default</argsstring>
+        <name>EventDriver</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::EventDriver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="48" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a077dc73f961d708504a4f7ce1d866f3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventDriver::~EventDriver</definition>
+        <argsstring>()=default</argsstring>
+        <name>~EventDriver</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::~EventDriver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="49" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a5ba953230cda35e80b86bdfe73051a5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventDriver::EventDriver</definition>
+        <argsstring>(const EventDriver &amp;)=delete</argsstring>
+        <name>EventDriver</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::EventDriver</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="50" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ab6bcd2a99c1cc64b16b65836aa203943" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventDriver::EventDriver</definition>
+        <argsstring>(EventDriver &amp;&amp;)=delete</argsstring>
+        <name>EventDriver</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::EventDriver</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="51" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39614d472e0d4ad5402ed556c59ce73e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref> &amp;</type>
+        <definition>EventDriver &amp; erbsland::cterm::ui::EventDriver::operator=</definition>
+        <argsstring>(const EventDriver &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="52" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ae0038a2f28704d8ee1a4c1573a8af1f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref> &amp;</type>
+        <definition>EventDriver &amp; erbsland::cterm::ui::EventDriver::operator=</definition>
+        <argsstring>(EventDriver &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="53" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a0f50f3fb45500aa017c12555800c3f62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventDriver::addEvent</definition>
+        <argsstring>(EventType eventType, EventDataUniquePtr &amp;&amp;eventData)</argsstring>
+        <name>addEvent</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::addEvent</qualifiedname>
+        <param>
+          <type>EventType</type>
+          <declname>eventType</declname>
+        </param>
+        <param>
+          <type>EventDataUniquePtr &amp;&amp;</type>
+          <declname>eventData</declname>
+        </param>
+        <briefdescription>
+<para>Add an event to the event loop. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="57" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a4648141208a516c07a35581e5e18190d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventDriver::addEvent</definition>
+        <argsstring>(Event &amp;&amp;event)</argsstring>
+        <name>addEvent</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::addEvent</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> &amp;&amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="59" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a7bdc21c3cfd62207af3f5172f285c20e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventDriver::setEventHandler</definition>
+        <argsstring>(std::function&lt; void(const Event &amp;)&gt; eventHandler)</argsstring>
+        <name>setEventHandler</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::setEventHandler</qualifiedname>
+        <param>
+          <type>std::function&lt; void(const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> &amp;)&gt;</type>
+          <declname>eventHandler</declname>
+        </param>
+        <briefdescription>
+<para>Set the callback for queued non-control events. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>eventHandler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handler that receives all non-quit events. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ae044b07d4a1396d6618f4750f57af8f1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventDriver::hasPendingEvents</definition>
+        <argsstring>() const</argsstring>
+        <name>hasPendingEvents</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::hasPendingEvents</qualifiedname>
+        <briefdescription>
+<para>Test if events are pending in the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if at least one event is queued. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="65" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad3c1ff7aac54c370d2e86ce83c036497" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" kindref="compound">ProcessResult</ref></type>
+        <definition>ProcessResult erbsland::cterm::ui::EventDriver::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::run</qualifiedname>
+        <briefdescription>
+<para>Run this event loop continuously. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This runs the event loop continuously until a quit event is received. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="69" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a82e1bc5512a262e064bd53a83265c3de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" kindref="compound">ProcessResult</ref></type>
+        <definition>ProcessResult erbsland::cterm::ui::EventDriver::processEvents</definition>
+        <argsstring>(std::chrono::milliseconds timeout)</argsstring>
+        <name>processEvents</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::processEvents</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Manually process events with a timeout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A call of this method will process events in the event queue until the queue is empty or <computeroutput>timeout</computeroutput> is reached; whatever happens first. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timeout for polling events. Zero = no timeout (not recommended). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::excepton</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an event throws an exception, the exception is rethrown. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="76" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1af427922b0138a44b65d18ac9ff8c40cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1_1_process_result" kindref="compound">ProcessResult</ref></type>
+        <definition>ProcessResult erbsland::cterm::ui::EventDriver::processOneEvent</definition>
+        <argsstring>()</argsstring>
+        <name>processOneEvent</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::processOneEvent</qualifiedname>
+        <briefdescription>
+<para>Process at most one queued event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>Processed</computeroutput> if one regular event was handled, <computeroutput>Idle</computeroutput> if no event was queued, or <computeroutput>Quit</computeroutput> if the driver stopped. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="80" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a1b540317e6a9bb8a874a1becbe78cf65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventDriver::processEvent</definition>
+        <argsstring>(const Event &amp;event)</argsstring>
+        <name>processEvent</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::processEvent</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Process a single event. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="83" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a879d19a9b0fd281490ba625bd83f8226" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventDriver::quit</definition>
+        <argsstring>(int exitCode=0)</argsstring>
+        <name>quit</name>
+        <qualifiedname>erbsland::cterm::ui::EventDriver::quit</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>exitCode</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Quit this event loop with the given exit code. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="86" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> driver for creating event-driven applications. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>All methods in the event driver are thread-safe. </para>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/event/EventDriver.hpp" line="20" column="1" bodyfile="erbsland/cterm/ui/event/EventDriver.hpp" bodystart="20" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a9fb75a6778c632bd47fceccd68085855" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>_eventHandler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a7c053230f0a5af31f1c47b267ac62b3e" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>_eventQueue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad6d752a3457b2409d2ade7a645608756" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>_exitCode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad4c8eec8a1aaba48343122a83bf0d105" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>_mutex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a1ef74a60623934cb4ee9f038f2164f4c" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>_state</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a0f50f3fb45500aa017c12555800c3f62" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>addEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a4648141208a516c07a35581e5e18190d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>addEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a4be651a71a48afe1c368811c667d304d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>EventDriver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a5ba953230cda35e80b86bdfe73051a5e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>EventDriver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ab6bcd2a99c1cc64b16b65836aa203943" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>EventDriver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ae044b07d4a1396d6618f4750f57af8f1" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>hasPendingEvents</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39614d472e0d4ad5402ed556c59ce73e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ae0038a2f28704d8ee1a4c1573a8af1f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a1b540317e6a9bb8a874a1becbe78cf65" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>processEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a82e1bc5512a262e064bd53a83265c3de" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>processEvents</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1af427922b0138a44b65d18ac9ff8c40cb" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>processOneEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a879d19a9b0fd281490ba625bd83f8226" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>quit</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1ad3c1ff7aac54c370d2e86ce83c036497" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>run</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a7bdc21c3cfd62207af3f5172f285c20e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>setEventHandler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a39ed191ad3a5a92db9722022f45697dc" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>State</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver_1a077dc73f961d708504a4f7ce1d866f3c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventDriver</scope><name>~EventDriver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

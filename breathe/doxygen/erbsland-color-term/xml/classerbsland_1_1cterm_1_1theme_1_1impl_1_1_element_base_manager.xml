@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::theme::impl::ElementBaseManager</compoundname>
+    <includes refid="_element_base_manager_8hpp" local="no">erbsland/cterm/theme/impl/ElementBaseManager.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager_1a8ad499dac8e8638feb9a7780015205ad" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref>, <ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref> &gt;</type>
+        <definition>std::unordered_map&lt;Element, Element&gt; erbsland::cterm::theme::impl::ElementBaseManager::_baseElements</definition>
+        <argsstring></argsstring>
+        <name>_baseElements</name>
+        <qualifiedname>erbsland::cterm::theme::impl::ElementBaseManager::_baseElements</qualifiedname>
+        <briefdescription>
+<para>User-defined direct base elements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/impl/ElementBaseManager.hpp" line="30" column="24" bodyfile="erbsland/cterm/theme/impl/ElementBaseManager.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager_1a18922c4e96a3a8f0f87b412004f367e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::theme::impl::ElementBaseManager::registerElement</definition>
+        <argsstring>(Element element, Element base)</argsstring>
+        <name>registerElement</name>
+        <qualifiedname>erbsland::cterm::theme::impl::ElementBaseManager::registerElement</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref></type>
+          <declname>element</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref></type>
+          <declname>base</declname>
+        </param>
+        <briefdescription>
+<para>Register a user-defined element base. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The custom element to register. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The direct base element. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>element</computeroutput> or <computeroutput>base</computeroutput> is invalid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>element</computeroutput> is built-in or already registered with a different base. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/impl/ElementBaseManager.hpp" line="19" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager_1ac058f201e02b344bf925c225a831c40f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref></type>
+        <definition>Element erbsland::cterm::theme::impl::ElementBaseManager::baseElementFor</definition>
+        <argsstring>(Element element) const</argsstring>
+        <name>baseElementFor</name>
+        <qualifiedname>erbsland::cterm::theme::impl::ElementBaseManager::baseElementFor</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+<para>Get the direct base element for an element. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The element to query. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The direct base element, or <computeroutput><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element_1aea4aaf42b2681ce31b05820a198c18a9" kindref="member">Element::None</ref></computeroutput> if there is none. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/impl/ElementBaseManager.hpp" line="23" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager_1a6a14fce258585259291bdbc6436b2ecd" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref></type>
+        <definition>static Element erbsland::cterm::theme::impl::ElementBaseManager::builtInBaseElementFor</definition>
+        <argsstring>(Element element) noexcept</argsstring>
+        <name>builtInBaseElementFor</name>
+        <qualifiedname>erbsland::cterm::theme::impl::ElementBaseManager::builtInBaseElementFor</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+<para>Get the base for built-in elements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/impl/ElementBaseManager.hpp" line="27" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Stores user-defined theme element base relationships. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/theme/impl/ElementBaseManager.hpp" line="12" column="1" bodyfile="erbsland/cterm/theme/impl/ElementBaseManager.hpp" bodystart="12" bodyend="31"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager_1a8ad499dac8e8638feb9a7780015205ad" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::impl::ElementBaseManager</scope><name>_baseElements</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager_1ac058f201e02b344bf925c225a831c40f" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::impl::ElementBaseManager</scope><name>baseElementFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager_1a6a14fce258585259291bdbc6436b2ecd" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::impl::ElementBaseManager</scope><name>builtInBaseElementFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager_1a18922c4e96a3a8f0f87b412004f367e4" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::impl::ElementBaseManager</scope><name>registerElement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

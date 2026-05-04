@@ -1,0 +1,742 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reference &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bitmap" href="bitmap.html" />
+    <link rel="prev" title="How to Run the Unit Tests" href="../usage/run-unit-tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer.html">Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer-view.html">Buffer Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cursor-output.html">Cursor Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing.html">Frames, Borders, Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing-text.html">Text Rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-options.html">Paragraph Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rich-text.html">Rich Text and HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal.html">Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Strings and Chars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theme.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">UI Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-core.html">UI Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-layouts.html">UI Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-input.html">UI Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-surfaces.html">UI Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-events.html">UI Events and Scheduling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h1>
+<p class="rubric">Alphabetical</p>
+<table class="docutils align-default" style="width: 100%">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Alignment</span></a></p></td>
+<td><p>Alignment of text or graphics in a box.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Anchor</span></a></p></td>
+<td><p>Anchor describes a location inside a rectangular area using a combination of a vertical and a horizontal component.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer.html"><span class="doc">BufferDrawOptions</span></a></p></td>
+<td><p>Options for drawing a buffer onto another buffer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer.html"><span class="doc">BufferResizeMode</span></a></p></td>
+<td><p>Describes how a buffer resize should handle existing content.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="backend.html"><span class="doc">Backend</span></a></p></td>
+<td><p>The interface to the underlying platform.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="backend.html"><span class="doc">BackendPtr</span></a></p></td>
+<td><p>Shared pointer to a backend instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="color.html"><span class="doc">Background</span></a></p></td>
+<td><p>The background color.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bitmap.html"><span class="doc">Bitmap</span></a></p></td>
+<td><p>A mutable bitmap storing boolean pixels in row-major order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bitmap.html"><span class="doc">BitmapColorMode</span></a></p></td>
+<td><p>The mode how color is applied to the bitmap.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bitmap.html"><span class="doc">BitmapDrawOptions</span></a></p></td>
+<td><p>The options to draw a bitmap.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bitmap.html"><span class="doc">BitmapScaleMode</span></a></p></td>
+<td><p>The mode how the bitmap is scaled.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer.html"><span class="doc">Buffer</span></a></p></td>
+<td><p>A mutable 2D buffer storing characters and colors for rendering.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer-view.html"><span class="doc">BufferConstRefView</span></a></p></td>
+<td><p>A view that uses a reference to the content.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer-view.html"><span class="doc">BufferView</span></a></p></td>
+<td><p>A view that uses a shared pointer to the content.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer-view.html"><span class="doc">BufferViewBase</span></a></p></td>
+<td><p>The base class for all buffer views.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="text.html"><span class="doc">Char</span></a></p></td>
+<td><p>Represents a character string with foreground and background colors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="text.html"><span class="doc">CharAttributes</span></a></p></td>
+<td><p>Represents optional ANSI text attributes such as bold, underline, or strikethrough.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="text.html"><span class="doc">CharStyle</span></a></p></td>
+<td><p>Combines a Color value with CharAttributes into one reusable text style.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="drawing.html"><span class="doc">Char16Style</span></a></p></td>
+<td><p>Defines a style for drawing tiles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="drawing.html"><span class="doc">Char16StylePtr</span></a></p></td>
+<td><p>Shared pointer for Char16Style</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="drawing.html"><span class="doc">CharCombinationStyle</span></a></p></td>
+<td><p>A style how two characters are visually combined to a new one.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="drawing.html"><span class="doc">CharCombinationStylePtr</span></a></p></td>
+<td><p>Shared pointer for CharCombinationStyle</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer.html"><span class="doc">WriteClippedBuffer</span></a></p></td>
+<td><p>A write-clipped buffer that owns a shared pointer to the wrapped buffer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer.html"><span class="doc">WriteClippedBufferBase</span></a></p></td>
+<td><p>The shared base for writable buffer clipping wrappers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer.html"><span class="doc">WriteClippedBufferRef</span></a></p></td>
+<td><p>A write-clipped buffer that stores a reference to the wrapped buffer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="color.html"><span class="doc">Color</span></a></p></td>
+<td><p>A foreground/background color pair for terminal rendering.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="color.html"><span class="doc">ColorBase</span></a></p></td>
+<td><p>Shared implementation for foreground and background color values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="color.html"><span class="doc">ColorBase::Value</span></a></p></td>
+<td><p>Internal color identifiers used for ANSI conversion and parsing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="color.html"><span class="doc">ColorList</span></a></p></td>
+<td><p>A list of terminal colors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="color.html"><span class="doc">ColorPart</span></a></p></td>
+<td><p>A foreground or background color.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="color.html"><span class="doc">ColorRole</span></a></p></td>
+<td><p>The type color.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="color.html"><span class="doc">ColorSequence</span></a></p></td>
+<td><p>A configurable sequence of complete Color values with run-length style counts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer-view.html"><span class="doc">CropEdges</span></a></p></td>
+<td><p>Flags for crop edges and corners.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Coordinate</span></a></p></td>
+<td><p>Signed integer coordinate value used by the geometry classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer.html"><span class="doc">CursorBuffer</span></a></p></td>
+<td><p>A remapped buffer with cursor-style writing, wrapping, and scrollback behavior.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer.html"><span class="doc">CursorBuffer::OverflowMode</span></a></p></td>
+<td><p>Controls whether cursor writes wrap, scroll, or grow the buffer at the bottom edge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cursor-output.html"><span class="doc">CursorWriter</span></a></p></td>
+<td><p>The shared interface for buffers and terminals that support cursor-based output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Direction</span></a></p></td>
+<td><p>A direction in a 2D grid.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Direction::Enum</span></a></p></td>
+<td><p>The canonical enum values used by Direction.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="text.html"><span class="doc">EncodingErrors</span></a></p></td>
+<td><p>How to handle encoding or Unicode normalization errors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">FastCharSet</span></a></p></td>
+<td><p>Shared immutable character set with optimized lookup for common separator patterns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">FastCharSet::FastTrack</span></a></p></td>
+<td><p>Fast-track mode for common separator patterns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">FastCharSetPtr</span></a></p></td>
+<td><p>Shared pointer for FastCharSet.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="font.html"><span class="doc">Font</span></a></p></td>
+<td><p>A bitmap font used to render stylized terminal text.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="font.html"><span class="doc">FontGlyph</span></a></p></td>
+<td><p>A bitmap glyph that can be used by a terminal text font.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="font.html"><span class="doc">FontPtr</span></a></p></td>
+<td><p>Shared pointer to a terminal font.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="color.html"><span class="doc">Foreground</span></a></p></td>
+<td><p>The foreground color.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="drawing.html"><span class="doc">FrameColorMode</span></a></p></td>
+<td><p>The mode how animated colors are applied to frames.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="drawing.html"><span class="doc">FrameDrawOptions</span></a></p></td>
+<td><p>The options to draw a frame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="drawing.html"><span class="doc">FrameStyle</span></a></p></td>
+<td><p>Various box styles</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">HtmlRenderer</span></a></p></td>
+<td><p>A renderer for HTML content to strings or cursor writer targets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="input.html"><span class="doc">Input</span></a></p></td>
+<td><p>Reads key presses from the console depending on the configured mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="input.html"><span class="doc">Input::Mode</span></a></p></td>
+<td><p>Supported reading modes for the input backend.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="input.html"><span class="doc">InputDefinition</span></a></p></td>
+<td><p>Definition of a single key mapping for a specific input mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="input.html"><span class="doc">InputDefinition::ForMode</span></a></p></td>
+<td><p>The input modes to which a key definition can apply.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="input.html"><span class="doc">InputDefinitionList</span></a></p></td>
+<td><p>A list of input definitions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Orientation</span></a></p></td>
+<td><p>Represents the orientation of a layout or a direction.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="input.html"><span class="doc">Key</span></a></p></td>
+<td><p>A simple representation of a key press.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="input.html"><span class="doc">Key::Type</span></a></p></td>
+<td><p>Supported key kinds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="input.html"><span class="doc">Keys</span></a></p></td>
+<td><p>An ordered set of unique key presses for key bindings.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Margins</span></a></p></td>
+<td><p>Represents margins (top, right, bottom, left) around a rectangle.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="drawing.html"><span class="doc">MatrixCombinationStyle</span></a></p></td>
+<td><p>A class that combines characters through an indexed result matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cursor-output.html"><span class="doc">MoveMode</span></a></p></td>
+<td><p>The cursor move mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">ParagraphBackgroundMode</span></a></p></td>
+<td><p>How paragraph rendering extends the background color beyond the visible text.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">ParagraphIndents</span></a></p></td>
+<td><p>Shared indentation and margin settings for paragraph-like text rendering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">ParagraphOnError</span></a></p></td>
+<td><p>The fallback to use when paragraph layout becomes impossible.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">ParagraphOptions</span></a></p></td>
+<td><p>Options that control paragraph wrapping, indentation, tab handling, and fallback behavior.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">ParagraphSpacing</span></a></p></td>
+<td><p>The spacing between explicit newline-separated paragraphs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Position</span></a></p></td>
+<td><p>Represents a 2D integer position or vector (x, y).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer.html"><span class="doc">ReadableBuffer</span></a></p></td>
+<td><p>A readable buffer.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer.html"><span class="doc">RemappedBuffer</span></a></p></td>
+<td><p>A buffer optimized for row and column remapping operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Rectangle</span></a></p></td>
+<td><p>Axis-aligned rectangle represented by a top-left position and size.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="drawing.html"><span class="doc">SimpleCharCombinationStyle</span></a></p></td>
+<td><p>A class to use a simple map to combine styles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Size</span></a></p></td>
+<td><p>A non-negative 2D size (width × height).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="text.html"><span class="doc">String</span></a></p></td>
+<td><p>A terminal string represented as a sequence of Char values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="text.html"><span class="doc">StringLines</span></a></p></td>
+<td><p>A sequence of wrapped terminal text lines.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">TabOverflowBehavior</span></a></p></td>
+<td><p>The handling for tabs whose configured tab stop does not advance the current line.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="terminal.html"><span class="doc">Terminal</span></a></p></td>
+<td><p>High-level terminal interface for screen control, color output, and key input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="terminal.html"><span class="doc">TerminalFlag</span></a></p></td>
+<td><p>A terminal flag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="terminal.html"><span class="doc">TerminalFlags</span></a></p></td>
+<td><p>A set of terminal flags.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="terminal.html"><span class="doc">Terminal::OutputMode</span></a></p></td>
+<td><p>The output mode for the terminal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="terminal.html"><span class="doc">Terminal::RefreshMode</span></a></p></td>
+<td><p>Screen clearing strategy used between rendered frames.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="terminal.html"><span class="doc">TerminalPtr</span></a></p></td>
+<td><p>Shared pointer to a terminal instance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="drawing-text.html"><span class="doc">Text</span></a></p></td>
+<td><p>Describes a text block to render into a Buffer.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="drawing-text.html"><span class="doc">TextOptions</span></a></p></td>
+<td><p>Options for text rendering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="drawing-text.html"><span class="doc">TextAnimation</span></a></p></td>
+<td><p>Supported text animation styles used by Buffer::drawText().</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="terminal.html"><span class="doc">TerminalSession</span></a></p></td>
+<td><p>A scoped terminal session.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="drawing.html"><span class="doc">Tile9Style</span></a></p></td>
+<td><p>Defines a style for repeating a 3x3 tile pattern across a rectangle.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="drawing.html"><span class="doc">Tile9StylePtr</span></a></p></td>
+<td><p>Shared pointer for Tile9Style</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">text::Style</span></a></p></td>
+<td><p>A style for text formatting.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">text::StyleListKind</span></a></p></td>
+<td><p>Qualifies list-specific style selectors for bullet and numbered lists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">text::StyleRole</span></a></p></td>
+<td><p>Semantic roles used by rich-text selectors such as paragraph, heading, span, or link.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">text::StyleMarker</span></a></p></td>
+<td><p>The visible marker configuration used for bullet and numbered list items.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">text::StyleSelector</span></a></p></td>
+<td><p>A selector that targets semantic roles, levels, list kinds, and style tokens.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">text::StyleRule</span></a></p></td>
+<td><p>One resolved or stored rich-text style rule.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::BlockRole</span></a></p></td>
+<td><p>Named roles for the sixteen themed block code points.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::Element</span></a></p></td>
+<td><p>A fast theme element identifier.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::Identifier</span></a></p></td>
+<td><p>A strongly typed numeric theme identifier.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::IdentifierType</span></a></p></td>
+<td><p>The logical kind of a theme identifier.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::Part</span></a></p></td>
+<td><p>A fast theme part identifier.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::Properties</span></a></p></td>
+<td><p>Authoring values for one theme property sheet.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::PropertyEditor</span></a></p></td>
+<td><p>Mutable editor for one property sheet while a theme is being built.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::PropertySheet</span></a></p></td>
+<td><p>Effective values for one resolved theme selector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::Selector</span></a></p></td>
+<td><p>A compiled selector for one themed element part with required states and tags.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::State</span></a></p></td>
+<td><p>A single UI state flag used in theme selectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::States</span></a></p></td>
+<td><p>A compact set of UI state flags used in theme selector matching.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::Tag</span></a></p></td>
+<td><p>A theme tag bit assigned by a theme builder.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::Tags</span></a></p></td>
+<td><p>A compact set of theme tags.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::Theme</span></a></p></td>
+<td><p>Immutable theme built from hierarchical property sheets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::ThemeAccessor</span></a></p></td>
+<td><p>Read-only theme accessor for the current selector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::ThemeBuilder</span></a></p></td>
+<td><p>Builder for immutable themes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">theme::ThemePainter</span></a></p></td>
+<td><p>Thin convenience painter for rendering themed blocks into a writable buffer.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">text::TextNode</span></a></p></td>
+<td><p>A node in the text tree.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">text::TextNode::Type</span></a></p></td>
+<td><p>The node type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::Application</span></a></p></td>
+<td><p>UI Application instance for event-driven UI applications.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::AbstractSurfaceContainer</span></a></p></td>
+<td><p>Abstract interface for surface child containers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::DimensionPolicy</span></a></p></td>
+<td><p>The size policy of a single surface dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::Display</span></a></p></td>
+<td><p>A display is a way to show pages on a terminal.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-layouts.html"><span class="doc">ui::Centered</span></a></p></td>
+<td><p>A one-child layout that centers its content inside padded available space.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::Event</span></a></p></td>
+<td><p>A single event.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::EventData</span></a></p></td>
+<td><p>The base class for event data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::EventDriver</span></a></p></td>
+<td><p>Event driver for creating event-driven applications.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::EventScheduler</span></a></p></td>
+<td><p>A scheduler for events.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::EventThread</span></a></p></td>
+<td><p>A thread that executes queued invocations via the UI event system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::EventType</span></a></p></td>
+<td><p>The event type</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-layouts.html"><span class="doc">ui::Frame</span></a></p></td>
+<td><p>A one-child layout that surrounds its content with a themed frame and optional title.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::LayoutMetrics</span></a></p></td>
+<td><p>The measured and configured layout metrics of a surface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::LayoutMetricsEditor</span></a></p></td>
+<td><p>An editor for changing surface layout metrics with layout invalidation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-input.html"><span class="doc">ui::Action</span></a></p></td>
+<td><p>A shared UI action with keys, help metadata, enablement, and a trigger callback.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-input.html"><span class="doc">ui::Actions</span></a></p></td>
+<td><p>Ordered action container attached to a surface or page.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-input.html"><span class="doc">ui::ActionTriggerContext</span></a></p></td>
+<td><p>Context passed to an action callback when it is triggered.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-input.html"><span class="doc">ui::HelpData</span></a></p></td>
+<td><p>Display metadata for a user-interface action.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::KeyPressEvent</span></a></p></td>
+<td><p>A key press event.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::Layout</span></a></p></td>
+<td><p>A layout is a surface that arranges other surfaces in a specific way.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::Page</span></a></p></td>
+<td><p>A single page on the screen.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::PaintContext</span></a></p></td>
+<td><p>The paint context for the onPaint method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::ThemeContext</span></a></p></td>
+<td><p>The resolved theme scope used during layout and painting.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::Panel</span></a></p></td>
+<td><p>A fill surface that paints an optional background behind its child surfaces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::QuitEvent</span></a></p></td>
+<td><p>The data for a quit event.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::ScheduledActionRef</span></a></p></td>
+<td><p>Represents a scheduled action.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::Scheduler</span></a></p></td>
+<td><p>A scheduler for UI actions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-layouts.html"><span class="doc">ui::ScrollArea</span></a></p></td>
+<td><p>A scroll area layout that displays one content surface with optional scroll bars.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::ScrollBarMode</span></a></p></td>
+<td><p>Visibility mode for scroll bars in scrollable surfaces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::ScrollCorner</span></a></p></td>
+<td><p>The one-cell fill surface where horizontal and vertical scroll bars meet.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::ScrollingBufferView</span></a></p></td>
+<td><p>A surface that shows and scrolls a viewport onto a readable buffer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::SizePolicy</span></a></p></td>
+<td><p>The size policy for both width and height of a surface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-layouts.html"><span class="doc">ui::Stack</span></a></p></td>
+<td><p>A layout that stacks surfaces vertically or horizontally.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::SurfaceContainer</span></a></p></td>
+<td><p>Ordered child surface collection for one surface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::DynamicTextLine</span></a></p></td>
+<td><p>A composed one-line surface with managed dynamic text sections.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::DynamicTextLine::Section</span></a></p></td>
+<td><p>The three logical sections of a line.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::DynamicTextLine::SpacePriority</span></a></p></td>
+<td><p>Layout priority used when a line section does not fit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::AbstractScrollBar</span></a></p></td>
+<td><p>The shared base for visual scroll bar surfaces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::AbstractScrollArea</span></a></p></td>
+<td><p>Shared base for scrollable surfaces that paint custom content into a viewport.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::HorizontalScrollBar</span></a></p></td>
+<td><p>A one-row horizontal scroll bar that grows in width.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::ActionHelp</span></a></p></td>
+<td><p>A compact keyboard-help surface generated from currently available actions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::DynamicText</span></a></p></td>
+<td><p>A one-line text surface with static, resize, and repaint update modes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::FooterLine</span></a></p></td>
+<td><p>A footer with dynamic text, automatic action help, and queued message overlays.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::HeaderLine</span></a></p></td>
+<td><p>A field-based one-line header with its own theme element.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::StopSource</span></a></p></td>
+<td><p>Stop source used by the event system to request a cooperative shutdown.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">ui::StopToken</span></a></p></td>
+<td><p>Cooperative stop token passed to stoppable UI callbacks.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-core.html"><span class="doc">ui::Surface</span></a></p></td>
+<td><p>A surface is a rectangular area on a page.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::TextBox</span></a></p></td>
+<td><p>A surface that renders one string using TextOptions-derived alignment and wrapping rules.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-surfaces.html"><span class="doc">ui::VerticalScrollBar</span></a></p></td>
+<td><p>A one-column vertical scroll bar that grows in height.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui-layouts.html"><span class="doc">ui::Viewport</span></a></p></td>
+<td><p>A layout surface that clips, positions, and scrolls one content surface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="terminal.html"><span class="doc">UpdateSettings</span></a></p></td>
+<td><p>Settings controlling how Terminal::updateScreen() renders a buffer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer.html"><span class="doc">WritableBuffer</span></a></p></td>
+<td><p>Abstract writable terminal buffer interface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="color.html"><span class="doc">bg</span></a></p></td>
+<td><p>Short alias for Background.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="color.html"><span class="doc">fg</span></a></p></td>
+<td><p>Short alias for Foreground.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">By Topic</p>
+<table class="docutils align-default" style="width: 100%">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="bitmap.html"><span class="doc">Bitmap</span></a></p></td>
+<td><p>Bitmap is the low-level pixel container used by the library whenever a boolean mask needs to be rendered, copied, or transformed. A bitmap stores only on/off pixels; the actual terminal representation is chosen later by Buffer::drawBitmap() and BitmapDrawOptions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer-view.html"><span class="doc">Buffer Views</span></a></p></td>
+<td><p>Buffer views expose a rectangular window onto a larger readable buffer. They are useful whenever the logical content is bigger than the visible terminal area, for example in scrollable panels, minimaps, editors, and diagnostic tools.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="backend.html"><span class="doc">Backend</span></a></p></td>
+<td><p>The backend classes connect Terminal to the actual console, host environment, or test harness. Most applications use the built-in backend, while advanced integrations can inject a custom implementation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="buffer.html"><span class="doc">Buffer</span></a></p></td>
+<td><p>The buffer classes represent rendered terminal content in memory before it is written to the screen. ReadableBuffer provides the inspection API, WritableBuffer adds mutation and drawing operations, Buffer is the concrete 2D storage type used in most applications, and CursorBuffer adds cursor-based streaming output.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="color.html"><span class="doc">Color</span></a></p></td>
+<td><p>The color classes provide access to the standard 16 terminal colors and their combinations. They are used to style terminal output, buffer cells, and text elements throughout the library.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cursor-output.html"><span class="doc">Cursor Output</span></a></p></td>
+<td><p>CursorWriter defines the shared streaming API used by Terminal and CursorBuffer. It focuses on incremental output, active color and attribute state, cursor movement, and wrapped paragraph printing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="drawing.html"><span class="doc">Frames, Borders, and Tiles</span></a></p></td>
+<td><p>The drawing types define how frames, borders, filled areas, and character combinations are rendered into writable buffers. They are the main building blocks for boxes, panels, decorative borders, tiled fills, and line-art style layouts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="font.html"><span class="doc">Font</span></a></p></td>
+<td><p>The font classes allow you to render large bitmap-based text directly in the terminal. Fonts are primarily used for titles, banners, and other decorative elements in terminal interfaces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="text.html"><span class="doc">Strings and Chars</span></a></p></td>
+<td><p>Char, CharAttributes, CharStyle, and String are the reusable terminal-text value types used to store styled characters, measure Unicode-aware width, and split or wrap terminal text before rendering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="geometry.html"><span class="doc">Geometry</span></a></p></td>
+<td><p>The geometry classes provide the building blocks for positioning and layout inside a terminal buffer. They describe sizes, positions, rectangles, and directions, and allow you to derive new regions from existing ones.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="input.html"><span class="doc">Input</span></a></p></td>
+<td><p>The input classes provide access to keyboard input from the terminal. They are designed for interactive applications such as dashboards, tools, and terminal games that need immediate key handling.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="paragraph-options.html"><span class="doc">Paragraph Options</span></a></p></td>
+<td><p>ParagraphOptions collects the low-level layout rules for wrapped terminal paragraphs. The same object model is used by Terminal::printParagraph(), TextOptions, and Text, so one paragraph configuration can be reused for direct terminal output and buffer-based text rendering.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rich-text.html"><span class="doc">Rich Text and HTML</span></a></p></td>
+<td><p>The rich-text helpers parse a focused HTML subset into TextNode trees and render it either into String values or directly to CursorWriter targets. Style lets you tune headings, lists, code blocks, block margins, and inline emphasis without inventing a separate markup pipeline for terminal output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="terminal.html"><span class="doc">Terminal</span></a></p></td>
+<td><p>The terminal classes provide the runtime connection between your rendered content and the real console. Terminal manages initialization, refresh strategy, full-screen updates, input access, and direct output for interactive applications.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="drawing-text.html"><span class="doc">Text Rendering</span></a></p></td>
+<td><p>Text, TextOptions, and TextAnimation render strings into rectangles, wrapped paragraphs, animated labels, and reusable text presets inside writable buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="theme.html"><span class="doc">Themes</span></a></p></td>
+<td><p>Themes centralize the colors, text attributes, block shapes, and content margins used by the UI framework. They let applications switch visual styles at runtime while keeping paint loops fast and control APIs small.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ui-events.html"><span class="doc">UI Events and Scheduling</span></a></p></td>
+<td><p>The UI event classes provide the queues, timers, cooperative-stop signals, and worker-thread building blocks behind Application. Most apps use them indirectly, but advanced integrations can drive EventDriver, EventScheduler, Scheduler, or EventThread directly when they need custom orchestration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ui.html"><span class="doc">UI Framework</span></a></p></td>
+<td><p>The UI framework builds terminal applications from a surface tree with pages, layouts, geometry policies, focus routing, and paint invalidation. It provides the high-level structure for interactive full-screen apps that should feel more like a widget system than hand-written buffer math.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../usage/run-unit-tests.html" class="btn btn-neutral float-left" title="How to Run the Unit Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bitmap.html" class="btn btn-neutral float-right" title="Bitmap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unicode Width System &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contributing Guidelines" href="../contribute/index.html" />
+    <link rel="prev" title="TextNodeRenderer" href="text-node-renderer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Implementation Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="windows-backend.html">Windows Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="posix-backend.html">POSIX Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action-scheduling.html">Action Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation-and-event-threads.html">Invocation and Event Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-paint-system.html">UI Paint System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-scrollable-areas.html">UI Scrollable Areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-layout-and-painting.html">Paragraph Layout and Painting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remapped-buffer.html">RemappedBuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack-layout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string-sharing.html">String Sharing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text-node-renderer.html">TextNodeRenderer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Unicode Width System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#relevant-source-files">Relevant Source Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-the-library-uses-its-own-width-system">Why the Library Uses Its Own Width System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#where-width-information-is-used">Where Width Information Is Used</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-runtime-lookup-format">The Runtime Lookup Format</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-lookup-works">How Lookup Works</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-the-table-is-built">How the Table Is Built</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-start-with-width-1-everywhere">Step 1: Start with Width 1 Everywhere</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-apply-east-asian-wide-and-full-width-ranges">Step 2: Apply East Asian Wide and Full-Width Ranges</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-apply-zero-width-general-categories">Step 3: Apply Zero-Width General Categories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-compress-into-contiguous-ranges">Step 4: Compress into Contiguous Ranges</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-5-emit-the-generated-c-table">Step 5: Emit the Generated C++ Table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-this-integrates-with-char-and-string">How This Integrates with <code class="docutils literal notranslate"><span class="pre">Char</span></code> and <code class="docutils literal notranslate"><span class="pre">String</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#string-construction"><code class="docutils literal notranslate"><span class="pre">String</span></code> Construction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#char-width-calculation"><code class="docutils literal notranslate"><span class="pre">Char</span></code> Width Calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#calculatedisplaywidth"><code class="docutils literal notranslate"><span class="pre">calculateDisplayWidth()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#design-rationales">Design Rationales</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#only-three-width-classes">Only Three Width Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ambiguous-width-defaults-to-narrow">Ambiguous Width Defaults to Narrow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#no-runtime-terminal-probing">No Runtime Terminal Probing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zero-width-format-characters-are-treated-as-non-rendering">Zero-Width Format Characters Are Treated as Non-Rendering</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#no-full-grapheme-cluster-engine">No Full Grapheme-Cluster Engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#leading-combining-marks-are-dropped">Leading Combining Marks Are Dropped</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unassigned-code-points-default-to-width-1">Unassigned Code Points Default to Width 1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-the-table">Updating the Table</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementation Notes</a></li>
+      <li class="breadcrumb-item active">Unicode Width System</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/implementation/unicode-width-system.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unicode-width-system">
+<span id="index-0"></span><h1>Unicode Width System<a class="headerlink" href="#unicode-width-system" title="Link to this heading"></a></h1>
+<p>This page explains how the library determines whether a Unicode code point occupies
+zero, one, or two terminal cells.
+It covers the generated lookup table, the generator script, and the design tradeoffs behind the current model.</p>
+<section id="relevant-source-files">
+<h2>Relevant Source Files<a class="headerlink" href="#relevant-source-files" title="Link to this heading"></a></h2>
+<p>You will find the implementation primarily in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/UnicodeWidth.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/UnicodeWidth.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/UnicodeWidthTable.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">utilities/generate_unicode_width_table.py</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">utilities/data/unicode/EastAsianWidth.txt</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">utilities/data/unicode/UnicodeData.txt</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/Char.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/String.cpp</span></code></p></li>
+</ul>
+</section>
+<section id="why-the-library-uses-its-own-width-system">
+<h2>Why the Library Uses Its Own Width System<a class="headerlink" href="#why-the-library-uses-its-own-width-system" title="Link to this heading"></a></h2>
+<p>Terminal layout depends on cell width, not on byte count and not on Unicode code-point count.
+You will notice that immediately when text contains:</p>
+<ul class="simple">
+<li><p>East Asian wide characters</p></li>
+<li><p>combining marks</p></li>
+<li><p>zero-width format characters</p></li>
+<li><p>mixed scripts within the same paragraph</p></li>
+</ul>
+<p>The library therefore does not rely on simple ASCII assumptions when wrapping text,
+placing the cursor, or calculating buffer sizes.</p>
+<p>Instead, it uses an internal width model with three explicit values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> for zero-width code points</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> for ordinary narrow characters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> for wide or full-width characters</p></li>
+</ul>
+<p>The main reasons for implementing this internally are:</p>
+<ul class="simple">
+<li><p>reproducible behavior across supported platforms</p></li>
+<li><p>no dependence on platform-specific <code class="docutils literal notranslate"><span class="pre">wcwidth()</span></code> behavior</p></li>
+<li><p>no need for runtime Unicode database parsing</p></li>
+<li><p>fast lookup during rendering</p></li>
+</ul>
+</section>
+<section id="where-width-information-is-used">
+<h2>Where Width Information Is Used<a class="headerlink" href="#where-width-information-is-used" title="Link to this heading"></a></h2>
+<p>The width system is not an isolated utility.
+It directly affects higher-level behavior throughout the library:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Char::displayWidth()</span></code> sums the width of the stored base code point and any attached combining marks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">String::displayWidth()</span></code> sums the width of all <code class="docutils literal notranslate"><span class="pre">Char</span></code> values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">String::splitCharacters()</span></code> decides whether a code point becomes its own <code class="docutils literal notranslate"><span class="pre">Char</span></code>,
+attaches to the previous character as a combining mark, or is dropped.</p></li>
+<li><p>Paragraph wrapping, buffer painting, cursor movement, and text alignment all depend on these widths.</p></li>
+</ul>
+<p>If the width table changes, a significant part of the visible terminal layout changes with it.</p>
+</section>
+<section id="the-runtime-lookup-format">
+<h2>The Runtime Lookup Format<a class="headerlink" href="#the-runtime-lookup-format" title="Link to this heading"></a></h2>
+<p>At runtime, the library uses <code class="docutils literal notranslate"><span class="pre">CharWidth</span></code> entries with these fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">begin</span></code>: the first code point in the range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: the last code point in the range</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">width</span></code>: the terminal-cell width for the whole inclusive range</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">charWidthTable()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">std::span&lt;const</span> <span class="pre">CharWidth&gt;</span></code> over a generated static array.
+The generated file currently contains 925 contiguous ranges.</p>
+<p>The table is intentionally stored as ranges rather than one entry per code point:</p>
+<ul class="simple">
+<li><p>the Unicode scalar space contains 1,114,112 possible values</p></li>
+<li><p>most adjacent code points share the same width</p></li>
+<li><p>a range table is much smaller while still allowing fast lookup</p></li>
+</ul>
+<section id="how-lookup-works">
+<h3>How Lookup Works<a class="headerlink" href="#how-lookup-works" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">consoleCharacterWidth()</span></code> performs a binary search with <code class="docutils literal notranslate"><span class="pre">std::ranges::lower_bound()</span></code>,
+using the <code class="docutils literal notranslate"><span class="pre">end</span></code> field of each range as the search key.</p>
+<p>The lookup logic is:</p>
+<ol class="arabic simple">
+<li><p>Find the first range whose <code class="docutils literal notranslate"><span class="pre">end</span></code> is not smaller than the requested code point.</p></li>
+<li><p>Check whether the code point is also greater than or equal to that range’s <code class="docutils literal notranslate"><span class="pre">begin</span></code>.</p></li>
+<li><p>If yes, return that range’s width.</p></li>
+<li><p>Otherwise, return <code class="docutils literal notranslate"><span class="pre">1</span></code> as a defensive fallback.</p></li>
+</ol>
+<p>In practice, the generated table covers the full Unicode range,
+so the fallback should normally never be used.
+It exists to keep the lookup function safe if table generation ever changes unexpectedly.</p>
+</section>
+</section>
+<section id="how-the-table-is-built">
+<h2>How the Table Is Built<a class="headerlink" href="#how-the-table-is-built" title="Link to this heading"></a></h2>
+<p>The table is generated by <code class="file docutils literal notranslate"><span class="pre">utilities/generate_unicode_width_table.py</span></code>.
+The script does not download data at build time.
+Instead, it uses checked-in Unicode Character Database snapshots from <code class="file docutils literal notranslate"><span class="pre">utilities/data/unicode</span></code>.</p>
+<p>This is an intentional design choice:</p>
+<ul class="simple">
+<li><p>builds remain reproducible</p></li>
+<li><p>contributors can review data updates in version control</p></li>
+<li><p>packaging the library does not depend on network access</p></li>
+</ul>
+<section id="step-1-start-with-width-1-everywhere">
+<h3>Step 1: Start with Width 1 Everywhere<a class="headerlink" href="#step-1-start-with-width-1-everywhere" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">load_widths()</span></code> begins with a <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> of length <code class="docutils literal notranslate"><span class="pre">0x110000</span></code>.
+Every entry is initialized to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>That means:</p>
+<ul class="simple">
+<li><p>every Unicode scalar value from <code class="docutils literal notranslate"><span class="pre">U+0000</span></code> through <code class="docutils literal notranslate"><span class="pre">U+10FFFF</span></code> has an explicit slot</p></li>
+<li><p>unassigned code points default to narrow width</p></li>
+<li><p>later passes only need to overwrite exceptional cases</p></li>
+</ul>
+</section>
+<section id="step-2-apply-east-asian-wide-and-full-width-ranges">
+<h3>Step 2: Apply East Asian Wide and Full-Width Ranges<a class="headerlink" href="#step-2-apply-east-asian-wide-and-full-width-ranges" title="Link to this heading"></a></h3>
+<p>The script reads <code class="file docutils literal notranslate"><span class="pre">EastAsianWidth.txt</span></code> and only reacts to the classes <code class="docutils literal notranslate"><span class="pre">W</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code>.</p>
+<p>For each matching entry:</p>
+<ul class="simple">
+<li><p>the script parses either a single code point or a <code class="docutils literal notranslate"><span class="pre">begin..end</span></code> range</p></li>
+<li><p>it overwrites those slots with width <code class="docutils literal notranslate"><span class="pre">2</span></code></p></li>
+</ul>
+<p>This means the library intentionally treats:</p>
+<ul class="simple">
+<li><p>East Asian wide characters as double-width</p></li>
+<li><p>East Asian full-width characters as double-width</p></li>
+<li><p>everything else as not wide unless a later pass changes it to zero-width</p></li>
+</ul>
+<p>Notably, the script does <strong>not</strong> special-case the ambiguous <code class="docutils literal notranslate"><span class="pre">A</span></code> class.
+Those code points remain at width <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</section>
+<section id="step-3-apply-zero-width-general-categories">
+<h3>Step 3: Apply Zero-Width General Categories<a class="headerlink" href="#step-3-apply-zero-width-general-categories" title="Link to this heading"></a></h3>
+<p>The script then reads <code class="file docutils literal notranslate"><span class="pre">UnicodeData.txt</span></code> and inspects the general category of each code point.</p>
+<p>It sets width <code class="docutils literal notranslate"><span class="pre">0</span></code> for:</p>
+<ul class="simple">
+<li><p>all mark categories whose category string starts with <code class="docutils literal notranslate"><span class="pre">M</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cc</span></code> control characters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cf</span></code> format characters</p></li>
+</ul>
+<p>This second pass overrides earlier assignments.
+That override is important because a code point classified as a mark or formatting character
+must remain zero-width even if another dataset would otherwise suggest a visible width.</p>
+</section>
+<section id="step-4-compress-into-contiguous-ranges">
+<h3>Step 4: Compress into Contiguous Ranges<a class="headerlink" href="#step-4-compress-into-contiguous-ranges" title="Link to this heading"></a></h3>
+<p>After the per-code-point byte array is complete,
+<code class="docutils literal notranslate"><span class="pre">compress_widths()</span></code> scans it from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">0x10FFFF</span></code> and groups adjacent entries
+that share the same width.</p>
+<p>Each output tuple contains:</p>
+<ul class="simple">
+<li><p>the begin code point</p></li>
+<li><p>the end code point</p></li>
+<li><p>the width</p></li>
+</ul>
+<p>This turns the dense byte array into a compact range representation.</p>
+</section>
+<section id="step-5-emit-the-generated-c-table">
+<h3>Step 5: Emit the Generated C++ Table<a class="headerlink" href="#step-5-emit-the-generated-c-table" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">write_output()</span></code> writes <code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/UnicodeWidthTable.cpp</span></code>.
+The generated file contains:</p>
+<ul class="simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">constexpr</span> <span class="pre">std::array&lt;CharWidth,</span> <span class="pre">N&gt;</span></code></p></li>
+<li><p>one <code class="docutils literal notranslate"><span class="pre">CharWidth{begin,</span> <span class="pre">end,</span> <span class="pre">width}</span></code> entry per compressed range</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">charWidthTable()</span></code> accessor returning the array as a span</p></li>
+</ul>
+<p>Because the generator emits ordinary C++ source,
+the runtime code has no parser, allocator, or file-I/O dependency for width lookup.</p>
+</section>
+</section>
+<section id="how-this-integrates-with-char-and-string">
+<h2>How This Integrates with <code class="docutils literal notranslate"><span class="pre">Char</span></code> and <code class="docutils literal notranslate"><span class="pre">String</span></code><a class="headerlink" href="#how-this-integrates-with-char-and-string" title="Link to this heading"></a></h2>
+<p>The width table is only useful because the higher-level text types are built around it.</p>
+<section id="string-construction">
+<h3><code class="docutils literal notranslate"><span class="pre">String</span></code> Construction<a class="headerlink" href="#string-construction" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">String::appendCodePoint()</span></code> uses the width system when raw Unicode input is converted into terminal characters.</p>
+<p>The rules are:</p>
+<ul class="simple">
+<li><p>TAB and newline remain standalone <code class="docutils literal notranslate"><span class="pre">Char</span></code> values.</p></li>
+<li><p>Other control characters are ignored.</p></li>
+<li><p>Width-0 code points are attached to the previous <code class="docutils literal notranslate"><span class="pre">Char</span></code> via <code class="docutils literal notranslate"><span class="pre">withCombining()</span></code> if one exists.</p></li>
+<li><p>A leading width-0 code point is dropped because there is no base character it could modify.</p></li>
+<li><p>Width-1 and width-2 code points become their own <code class="docutils literal notranslate"><span class="pre">Char</span></code>.</p></li>
+</ul>
+<p>This design means <code class="docutils literal notranslate"><span class="pre">String</span></code> is already normalized into renderable terminal cells before the layout code sees it.</p>
+</section>
+<section id="char-width-calculation">
+<h3><code class="docutils literal notranslate"><span class="pre">Char</span></code> Width Calculation<a class="headerlink" href="#char-width-calculation" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Char</span></code> stores up to three code points:</p>
+<ul class="simple">
+<li><p>one base code point</p></li>
+<li><p>up to two attached combining code points</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Char::displayWidth()</span></code> sums the width of those stored code points and caches the result.
+In the normal case, that produces:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> for an ordinary character</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> for a wide character</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">2</span></code> for a base character with attached combining marks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> only for explicitly constructed zero-width characters</p></li>
+</ul>
+<p>Since combining marks are expected to have width <code class="docutils literal notranslate"><span class="pre">0</span></code>,
+attaching them normally does not change the width of the base character.</p>
+</section>
+<section id="calculatedisplaywidth">
+<h3><code class="docutils literal notranslate"><span class="pre">calculateDisplayWidth()</span></code><a class="headerlink" href="#calculatedisplaywidth" title="Link to this heading"></a></h3>
+<p>The helper <code class="docutils literal notranslate"><span class="pre">calculateDisplayWidth(std::string_view)</span></code> provides a lower-level UTF-8 path.
+It decodes raw UTF-8 with <code class="docutils literal notranslate"><span class="pre">U8Buffer</span></code> and sums <code class="docutils literal notranslate"><span class="pre">consoleCharacterWidth()</span></code> for each decoded code point directly.</p>
+<p>This function is useful when you need width information for raw text
+without first constructing a full <code class="docutils literal notranslate"><span class="pre">String</span></code> object.</p>
+</section>
+</section>
+<section id="design-rationales">
+<h2>Design Rationales<a class="headerlink" href="#design-rationales" title="Link to this heading"></a></h2>
+<p>Several aspects of the current system are deliberate simplifications.</p>
+<section id="only-three-width-classes">
+<h3>Only Three Width Classes<a class="headerlink" href="#only-three-width-classes" title="Link to this heading"></a></h3>
+<p>The terminal model used here only distinguishes widths <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, and <code class="docutils literal notranslate"><span class="pre">2</span></code>.
+That matches the practical needs of terminal-cell layout.</p>
+<p>The implementation does not attempt to model:</p>
+<ul class="simple">
+<li><p>fractional widths</p></li>
+<li><p>fonts with unusual glyph metrics</p></li>
+<li><p>terminal-specific rendering quirks beyond the basic narrow-versus-wide distinction</p></li>
+</ul>
+</section>
+<section id="ambiguous-width-defaults-to-narrow">
+<h3>Ambiguous Width Defaults to Narrow<a class="headerlink" href="#ambiguous-width-defaults-to-narrow" title="Link to this heading"></a></h3>
+<p>Only East Asian width classes <code class="docutils literal notranslate"><span class="pre">W</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code> become width <code class="docutils literal notranslate"><span class="pre">2</span></code>.
+Ambiguous characters remain width <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>This keeps behavior stable across non-CJK terminals and avoids locale-dependent layout changes.
+The tradeoff is that some terminals configured for East Asian ambiguous-width behavior may render a few characters
+wider than the library predicts.</p>
+</section>
+<section id="no-runtime-terminal-probing">
+<h3>No Runtime Terminal Probing<a class="headerlink" href="#no-runtime-terminal-probing" title="Link to this heading"></a></h3>
+<p>The library does not ask the terminal emulator which Unicode version or width rules it uses.
+That would make rendering behavior highly host-dependent and would complicate reproducibility.</p>
+<p>Instead, the library chooses a fixed, reviewed width table and applies it consistently.</p>
+</section>
+<section id="zero-width-format-characters-are-treated-as-non-rendering">
+<h3>Zero-Width Format Characters Are Treated as Non-Rendering<a class="headerlink" href="#zero-width-format-characters-are-treated-as-non-rendering" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cf</span></code> category is forced to width <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+That includes characters such as zero-width joiners and variation selectors.</p>
+<p>The rationale is straightforward: formatting code points should not consume visible columns in terminal layout.
+The tradeoff is that some terminal emulators interpret certain format characters as part of emoji shaping
+or other grapheme-cluster behavior that this library does not model fully.</p>
+</section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>If you work on advanced Unicode behavior, keep these current limits in mind.</p>
+<section id="no-full-grapheme-cluster-engine">
+<h3>No Full Grapheme-Cluster Engine<a class="headerlink" href="#no-full-grapheme-cluster-engine" title="Link to this heading"></a></h3>
+<p>The library does not implement Unicode grapheme-cluster segmentation.
+It uses a simpler model based on one base character plus up to two zero-width followers.</p>
+<p>Consequences include:</p>
+<ul class="simple">
+<li><p>some complex emoji sequences are not treated as one visual unit</p></li>
+<li><p>zero-width joiner sequences are not shaped as a single cluster by the layout code</p></li>
+<li><p>characters requiring more than three code points cannot be stored in one <code class="docutils literal notranslate"><span class="pre">Char</span></code></p></li>
+</ul>
+<p>This is a conscious tradeoff in favor of predictable, lightweight terminal rendering.</p>
+</section>
+<section id="leading-combining-marks-are-dropped">
+<h3>Leading Combining Marks Are Dropped<a class="headerlink" href="#leading-combining-marks-are-dropped" title="Link to this heading"></a></h3>
+<p>When a width-0 code point appears at the beginning of a string,
+<code class="docutils literal notranslate"><span class="pre">String::appendCodePoint()</span></code> drops it instead of storing a detached combining mark.</p>
+<p>That keeps the internal text model renderable in cell terms,
+but it also means malformed or intentionally unusual Unicode sequences are normalized aggressively.</p>
+</section>
+<section id="unassigned-code-points-default-to-width-1">
+<h3>Unassigned Code Points Default to Width 1<a class="headerlink" href="#unassigned-code-points-default-to-width-1" title="Link to this heading"></a></h3>
+<p>Because the generator starts with width <code class="docutils literal notranslate"><span class="pre">1</span></code> everywhere,
+currently unassigned code points are treated as narrow by default.</p>
+<p>This is pragmatic:</p>
+<ul class="simple">
+<li><p>it keeps the table complete and explicit</p></li>
+<li><p>it avoids a separate “unknown width” state</p></li>
+<li><p>it keeps the runtime code simple</p></li>
+</ul>
+<p>The tradeoff is that future Unicode assignments are only reflected after updating the checked-in data files
+and regenerating the table.</p>
+</section>
+</section>
+<section id="updating-the-table">
+<h2>Updating the Table<a class="headerlink" href="#updating-the-table" title="Link to this heading"></a></h2>
+<p>When you want to refresh the Unicode data,
+the intended workflow is:</p>
+<ol class="arabic simple">
+<li><p>Replace the checked-in UCD snapshot files in <code class="file docutils literal notranslate"><span class="pre">utilities/data/unicode</span></code>.</p></li>
+<li><p>Run <code class="file docutils literal notranslate"><span class="pre">utilities/generate_unicode_width_table.py</span></code>.</p></li>
+<li><p>Review the generated changes in <code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/impl/UnicodeWidthTable.cpp</span></code>.</p></li>
+<li><p>Re-run the relevant tests and documentation checks.</p></li>
+</ol>
+<p>Keeping the generator simple and the inputs checked in makes this update path easy to audit.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="text-node-renderer.html" class="btn btn-neutral float-left" title="TextNodeRenderer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../contribute/index.html" class="btn btn-neutral float-right" title="Contributing Guidelines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,3428 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_remapped_buffer" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::RemappedBuffer</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1_writable_buffer" prot="public" virt="non-virtual">erbsland::cterm::WritableBuffer</basecompoundref>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1_cursor_buffer" prot="public" virt="non-virtual">erbsland::cterm::CursorBuffer</derivedcompoundref>
+    <includes refid="_remapped_buffer_8hpp" local="no">erbsland/cterm/RemappedBuffer.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" prot="public" static="no">
+        <type>std::vector&lt; Coordinate &gt;</type>
+        <definition>using erbsland::cterm::RemappedBuffer::CoordinateMap =  std::vector&lt;Coordinate&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordinateMap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::CoordinateMap</qualifiedname>
+        <briefdescription>
+<para>A vector mapping one coordinate to another. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="37" column="5" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_remapped_buffer_1aa5ad3bf7e62b9788f914cf8fea9c3a41" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::RemappedBuffer::cMaximumSize</definition>
+        <argsstring></argsstring>
+        <name>cMaximumSize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::cMaximumSize</qualifiedname>
+        <initializer>= <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>{10&apos;000, 10&apos;000}</initializer>
+        <briefdescription>
+<para>Largest buffer size accepted for this buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="32" column="27" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a608ce8d4a2277c397f1e08a4ae88ac5f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::RemappedBuffer::cMinimumSize</definition>
+        <argsstring></argsstring>
+        <name>cMinimumSize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::cMinimumSize</qualifiedname>
+        <initializer>= <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>{1, 1}</initializer>
+        <briefdescription>
+<para>Smallest valid buffer size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="34" column="27" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ab7339184476a8e1e8c26ba684d0c989e" prot="protected" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::RemappedBuffer::_size</definition>
+        <argsstring></argsstring>
+        <name>_size</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::_size</qualifiedname>
+        <briefdescription>
+<para>The current size of the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="340" column="10" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="340" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a493b9ce9393c55263507b4b6e1fb8275" prot="protected" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+        <definition>Orientation erbsland::cterm::RemappedBuffer::_orientation</definition>
+        <argsstring></argsstring>
+        <name>_orientation</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::_orientation</qualifiedname>
+        <briefdescription>
+<para>The orientation of the buffer layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="341" column="17" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="341" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a15082389ef922f21e61d6e21b907c0f9" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt;</type>
+        <definition>std::vector&lt;Char&gt; erbsland::cterm::RemappedBuffer::_buffer</definition>
+        <argsstring></argsstring>
+        <name>_buffer</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::_buffer</qualifiedname>
+        <briefdescription>
+<para>The characters in the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="342" column="17" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="342" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ac7ea20a7b4d4687cfc1a336ebe034c41" prot="protected" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref></type>
+        <definition>CoordinateMap erbsland::cterm::RemappedBuffer::_rowRemap</definition>
+        <argsstring></argsstring>
+        <name>_rowRemap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::_rowRemap</qualifiedname>
+        <briefdescription>
+<para>A map, <computeroutput>_rowRemap[addressed row] -&gt; stored row</computeroutput> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="343" column="19" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="343" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_remapped_buffer_1abbe8eb70ebe5a8f99aa47d9daa855e40" prot="protected" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref></type>
+        <definition>CoordinateMap erbsland::cterm::RemappedBuffer::_columnRemap</definition>
+        <argsstring></argsstring>
+        <name>_columnRemap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::_columnRemap</qualifiedname>
+        <briefdescription>
+<para>A map, <computeroutput>_columnRemap[addressed column] -&gt; stored column</computeroutput> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="344" column="19" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="344" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1afe0e90523915b68ecc5fd468e0816de7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::RemappedBuffer::RemappedBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>RemappedBuffer</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::RemappedBuffer</qualifiedname>
+        <briefdescription>
+<para>Creates a 1x1 vertical buffer filled with a space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Usually only used as a placeholder until resized. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="49" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1adca3c5a9effc04973bd954e10d844d12" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::RemappedBuffer::RemappedBuffer</definition>
+        <argsstring>(Size size, Orientation orientation=Orientation::Vertical, Char fillChar=Char::space())</argsstring>
+        <name>RemappedBuffer</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::RemappedBuffer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_orientation_1a7a1d316b5cc591a01c325617901a251ea0563c5054524eab0715a7fa0b4e538d4" kindref="member">Orientation::Vertical</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_char_1a7be1dcb2bc77e87446443b04a1c41b44" kindref="member">Char::space</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Construct a buffer with the given size and fill it with an initial block. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions of the buffer. <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref> must be at least 1x1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The orientation of the buffer. Cannot be changed after creation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The optional fill character for the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if size is invalid </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a651e4e12850d4d9954542833f792a42c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::RemappedBuffer::~RemappedBuffer</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~RemappedBuffer</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::~RemappedBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="59" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1aa63f7ecd2a817de2c31954a2e6eac341" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::RemappedBuffer::RemappedBuffer</definition>
+        <argsstring>(const RemappedBuffer &amp;)=default</argsstring>
+        <name>RemappedBuffer</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::RemappedBuffer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_remapped_buffer" kindref="compound">RemappedBuffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="60" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a626159e8593c58d5eb4516ffe9d88939" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::RemappedBuffer::RemappedBuffer</definition>
+        <argsstring>(RemappedBuffer &amp;&amp;)=default</argsstring>
+        <name>RemappedBuffer</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::RemappedBuffer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer" kindref="compound">RemappedBuffer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="61" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a5c08398a4aae84fdfb157fd603647c54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer" kindref="compound">RemappedBuffer</ref> &amp;</type>
+        <definition>RemappedBuffer &amp; erbsland::cterm::RemappedBuffer::operator=</definition>
+        <argsstring>(const RemappedBuffer &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_remapped_buffer" kindref="compound">RemappedBuffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="62" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a3d07d98c1d93ab11b1e4d2e5650d53ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer" kindref="compound">RemappedBuffer</ref> &amp;</type>
+        <definition>RemappedBuffer &amp; erbsland::cterm::RemappedBuffer::operator=</definition>
+        <argsstring>(RemappedBuffer &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer" kindref="compound">RemappedBuffer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="63" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ad9b7dac641c7beaa3e52fe292ec0c51f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::RemappedBuffer::size</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::size</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_readable_buffer_1acc3cc67ae50d0f17fdf88011dfb9abfc">size</reimplements>
+        <briefdescription>
+<para>Get the current size of the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The configured width and height. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="68" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1accea0715c6bc99af0455184473a7e623" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+        <definition>Rectangle erbsland::cterm::RemappedBuffer::rect</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>rect</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::rect</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_readable_buffer_1af39a3f4e7e7e7412d5289c641a7fc2dc">rect</reimplements>
+        <briefdescription>
+<para>Get the rectangle covering the whole buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A rectangle with origin <computeroutput>(0,0)</computeroutput> and the current size. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="71" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a62959002cf7fb97af26449cd95c8b993" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        <definition>const Char &amp; erbsland::cterm::RemappedBuffer::get</definition>
+        <argsstring>(Position pos) const noexcept override</argsstring>
+        <name>get</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::get</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_readable_buffer_1a2d3c1eb0ea610fe78b4db45b5589a5f3">get</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Read the block stored at the given logical position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logical coordinates inside the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the stored block, or a shared space block for invalid positions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="75" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a51729436cce87c14b54a47e83a1ed8ba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>WritableBufferPtr</type>
+        <definition>WritableBufferPtr erbsland::cterm::RemappedBuffer::clone</definition>
+        <argsstring>() const override</argsstring>
+        <name>clone</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::clone</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_readable_buffer_1aef93bfbaa3832be639c9f975c79355c2">clone</reimplements>
+        <briefdescription>
+<para>Create an independent writable copy of this buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A shared pointer to the cloned buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="78" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a5fe34aabc693d284dae20c8b29b81a0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::resize</definition>
+        <argsstring>(Size newSize) override</argsstring>
+        <name>resize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::resize</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1aa709880e0df8a7fffd00331a6496e157">resize</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>newSize</declname>
+        </param>
+        <briefdescription>
+<para>Resize this buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the fast resize path. The internal mapping is rebuilt and the visible content order is undefined after the operation. Use <computeroutput>resize(size, BufferResizeMode::PreserveContent, fillChar)</computeroutput> if you need to preserve the visible order. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new size of the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>newSize</computeroutput> is invalid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="88" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1af1db224f1b258dbaac3768df6d4f99cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::resize</definition>
+        <argsstring>(Size size, BufferResizeMode mode, Char fillChar) override</argsstring>
+        <name>resize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::resize</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1acf73d62e2278e93b13e8df2a3909aa6c">resize</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>BufferResizeMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Resize this buffer and optionally keep the visible content order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A preserve-content resize is fast when only the primary orientation axis changes. If the secondary axis changes, preserving content requires rebuilding the logical content and is expensive. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>BufferResizeMode::PreserveContent</computeroutput> keeps the visible order and fills new cells with <computeroutput>fillChar</computeroutput>. <computeroutput>BufferResizeMode::Fast</computeroutput> resizes using the fastest path and leaves the visible order undefined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fill character for newly created cells in preserve-content mode. In fast mode it is only used to initialize newly appended storage cells. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>size</computeroutput> is invalid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="98" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1acb5c23769b89061c8dfd728d5ec5715c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::set</definition>
+        <argsstring>(Position pos, const Char &amp;block) noexcept override</argsstring>
+        <name>set</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::set</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1acb0b8c926b1e1d3dec806ae1ba4560aa">set</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+<para>Write a block at the given logical position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This mirrors the wide-character handling from <computeroutput><ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref></computeroutput>: zero-width blocks are ignored, width-2 blocks occupy the next logical cell as an empty continuation cell, and width-2 blocks at the right edge are ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logical coordinates within the buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The block to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="104" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1af0e5fcc03a4bec5fce678e22514cb778" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::reserve</definition>
+        <argsstring>(Size size) noexcept</argsstring>
+        <name>reserve</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::reserve</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Reserve memory for the given buffer size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size whose capacity should be reserved. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="109" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1aa185dd7dc802a3788d26e7939a7734ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::shift</definition>
+        <argsstring>(Direction direction, Char fillChar, int count=1)</argsstring>
+        <name>shift</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::shift</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_direction" kindref="compound">Direction</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Shift the buffer in the given direction, fill new cells with a given character. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The direction of the shift. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to fill new cells with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of cells to shift. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>count</computeroutput> is negative or exceeds buffer size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="117" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ad28f75031a6ef9dbcddcbd607ff72581" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::shift</definition>
+        <argsstring>(const Direction direction, const int count=1)</argsstring>
+        <name>shift</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::shift</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_direction" kindref="compound">Direction</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="119" column="10" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a740fad9983db5406188415749b5e9d16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::rotate</definition>
+        <argsstring>(Direction direction, int count=1)</argsstring>
+        <name>rotate</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::rotate</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_direction" kindref="compound">Direction</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Rotate the buffer in the given direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Cells are shifted in a circular manner, wrapping around to the other end of the buffer. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The direction in which to rotate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of cells to rotate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>count</computeroutput> is negative or exceeds buffer size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="125" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1abe85dd3c59bd4e517a626c19f62a365a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::eraseRows</definition>
+        <argsstring>(Coordinate startRow, Char fillChar, int count=1)</argsstring>
+        <name>eraseRows</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::eraseRows</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>startRow</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Erase rows in the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will erase <computeroutput>count</computeroutput> rows, starting from <computeroutput>startRow</computeroutput>, and insert empty ones at the end. If you like to actually shrink the buffer, use <computeroutput>resize</computeroutput> <emphasis>after</emphasis> this call. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>startRow</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first row to delete. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to fill new cells with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of rows to delete. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>startRow</computeroutput> is out of bounds or <computeroutput>count</computeroutput> is negative or exceeds buffer size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="133" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a141057a36b9906258eafc00de9c85eb8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::eraseRows</definition>
+        <argsstring>(const Coordinate startRow, const int count=1)</argsstring>
+        <name>eraseRows</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::eraseRows</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>startRow</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="135" column="10" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a1ba7895f739c2330e8349f709bf969ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::eraseColumns</definition>
+        <argsstring>(Coordinate startColumn, Char fillChar, int count=1)</argsstring>
+        <name>eraseColumns</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::eraseColumns</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>startColumn</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Erase columns in the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will erase <computeroutput>count</computeroutput> columns, starting from <computeroutput>startColumn</computeroutput>, and insert empty ones at the end. If you like to actually shrink the buffer, use <computeroutput>resize</computeroutput> <emphasis>after</emphasis> this call. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>startColumn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first column to delete. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to fill new cells with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of columns to delete. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>startColumn</computeroutput> is out of bounds or <computeroutput>count</computeroutput> is negative or exceeds buffer size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="143" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a0bd63d67d621c159e6dc116016006a95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::eraseColumns</definition>
+        <argsstring>(const Coordinate startColumn, const int count=1)</argsstring>
+        <name>eraseColumns</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::eraseColumns</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>startColumn</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="145" column="10" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="145" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ab78b4e96e7ef46d203416bc64722136b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::insertRows</definition>
+        <argsstring>(Coordinate startRow, Char fillChar, int count=1)</argsstring>
+        <name>insertRows</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::insertRows</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>startRow</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Insert rows in the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The rows at the bottom of the buffer will be erased to make room for the new rows. If you like to actually grow the buffer, use <computeroutput>resize</computeroutput> <emphasis>before</emphasis> this call. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>startRow</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first row to insert. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to fill the new rows with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of rows to insert. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>startRow</computeroutput> is out of bounds or <computeroutput>count</computeroutput> is negative or exceeds buffer size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="155" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ac0a1e89219f0adf2b7bc78a0837e67e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::insertRows</definition>
+        <argsstring>(const Coordinate startRow, const int count=1)</argsstring>
+        <name>insertRows</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::insertRows</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>startRow</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="157" column="10" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="157" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a21893a4938e6b96d237fb700e79fd1fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::insertColumns</definition>
+        <argsstring>(Coordinate startColumn, Char fillChar, int count=1)</argsstring>
+        <name>insertColumns</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::insertColumns</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>startColumn</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Insert columns in the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The columns on the right side of the buffer will be erased to make room for the new columns. If you like to actually grow the buffer, use <computeroutput>resize</computeroutput> <emphasis>before</emphasis> this call. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>startColumn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first column to insert. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to fill the new columns with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of columns to insert. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>startColumn</computeroutput> is out of bounds or <computeroutput>count</computeroutput> is negative or exceeds buffer size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="165" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a08c3b1784d3855ab59ae2999d5519b02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::insertColumns</definition>
+        <argsstring>(const Coordinate startColumn, const int count=1)</argsstring>
+        <name>insertColumns</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::insertColumns</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>startColumn</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="167" column="10" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="167" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ad2ad518ee848059098c76594ba8fb6ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::moveRows</definition>
+        <argsstring>(Coordinate startRow, int count, Coordinate delta, Char fillChar)</argsstring>
+        <name>moveRows</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::moveRows</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>startRow</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>delta</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Move rows in the buffer by a given delta. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A positive delta moves rows down, a negative delta moves rows up. This reshuffles the moved rows, but rows that get moved out of the buffer area are deleted and replaced by empty cells using the <computeroutput>fillChar</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>startRow</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first row to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of rows to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of positions to move (positive = down, negative = up). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to fill vacated cells with. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>startRow</computeroutput> is out of bounds or <computeroutput>count</computeroutput> is negative or exceeds buffer size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="179" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a51bba94a937b029c460945f92563b237" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::moveRows</definition>
+        <argsstring>(const Coordinate startRow, const int count, const Coordinate delta)</argsstring>
+        <name>moveRows</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::moveRows</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>startRow</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const Coordinate</type>
+          <declname>delta</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="181" column="10" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="181" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1aeba84135d2b2a8665ad5efc174ae9e85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::moveColumns</definition>
+        <argsstring>(Coordinate startColumn, int count, Coordinate delta, Char fillChar)</argsstring>
+        <name>moveColumns</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::moveColumns</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>startColumn</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>delta</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Move columns in the buffer by a given delta. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A positive delta moves columns right, a negative delta moves columns left. This reshuffles the moved columns, but columns that get moved out of the buffer area are deleted and replaced by empty cells using the <computeroutput>fillChar</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>startColumn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first column to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of columns to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of positions to move (positive = right, negative = left). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to fill vacated cells with. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>startColumn</computeroutput> is out of bounds or <computeroutput>count</computeroutput> is negative or exceeds buffer size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="193" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a104be5c4efae4d19e762866d552cd2cc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::moveColumns</definition>
+        <argsstring>(const Coordinate startColumn, const int count, const Coordinate delta)</argsstring>
+        <name>moveColumns</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::moveColumns</qualifiedname>
+        <param>
+          <type>const Coordinate</type>
+          <declname>startColumn</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const Coordinate</type>
+          <declname>delta</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="195" column="10" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="195" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a8a974d3e71a452c14cec1ca68f38066c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::fill</definition>
+        <argsstring>(const Char &amp;fillBlock) noexcept override</argsstring>
+        <name>fill</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::fill</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1a9c8369377b274479c11ab6fd12b803c8">fill</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillBlock</declname>
+        </param>
+        <briefdescription>
+<para>Fill/clear the buffer with the given character. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This will also reset the internal remapping indexes. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fillBlock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The block to use to fill the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="203" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1aee23adf122a981c025404411d7fb8294" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::drawBitmap</definition>
+        <argsstring>(const Bitmap &amp;bitmap, Position pos, const BitmapDrawOptions &amp;options=BitmapDrawOptions::defaultOptions(), std::size_t animationCycle=0) noexcept</argsstring>
+        <name>drawBitmap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::drawBitmap</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_bitmap" kindref="compound">Bitmap</ref> &amp;</type>
+          <declname>bitmap</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_bitmap_draw_options" kindref="compound">BitmapDrawOptions</ref> &amp;</type>
+          <declname>options</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a0d68b97069862387e08c59eb651a4469" kindref="member">BitmapDrawOptions::defaultOptions</ref>()</defval>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>animationCycle</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Draw a bitmap at a given position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The bitmap is rendered according to <computeroutput>options.scaleMode()</computeroutput>. If <computeroutput>options.char16Style()</computeroutput> is set, it overrides the scale mode and renders one terminal cell per bitmap pixel. Pixels or rendered cells outside the buffer are ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bitmap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bitmap to draw. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position of the top left corner. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1_bitmap" kindref="compound">Bitmap</ref> drawing options. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>animationCycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Animation cycle for color animations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a51a1ec3d619d448816598985efa950f1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::drawBitmap</definition>
+        <argsstring>(const Bitmap &amp;bitmap, Rectangle rect, Alignment alignment=Alignment::TopLeft, const BitmapDrawOptions &amp;options=BitmapDrawOptions::defaultOptions(), std::size_t animationCycle=0) noexcept</argsstring>
+        <name>drawBitmap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::drawBitmap</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_bitmap" kindref="compound">Bitmap</ref> &amp;</type>
+          <declname>bitmap</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_alignment_1ad6602abbf18253c439c6d478aad363c1" kindref="member">Alignment::TopLeft</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_bitmap_draw_options" kindref="compound">BitmapDrawOptions</ref> &amp;</type>
+          <declname>options</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_bitmap_draw_options_1a0d68b97069862387e08c59eb651a4469" kindref="member">BitmapDrawOptions::defaultOptions</ref>()</defval>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>animationCycle</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Draw a bitmap into the given rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The rendered bitmap is aligned inside <computeroutput>rect</computeroutput>. If it is larger than <computeroutput>rect</computeroutput>, it is cropped according to the alignment. <simplesect kind="note"><para>For half-block drawing mode, alignment and cropping happen at rendered cell boundaries, not per pixel. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bitmap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bitmap to draw. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rectangle to draw the bitmap into. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alignment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref> of the bitmap within the rectangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1_bitmap" kindref="compound">Bitmap</ref> drawing options. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>animationCycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Animation cycle for color animations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ac4b8a282ba2ce375ef41dbd739723f09" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::WritableBuffer::drawText</definition>
+        <argsstring>(Position pos, const StringView &amp;str)</argsstring>
+        <name>drawText</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::drawText</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1ac4b8a282ba2ce375ef41dbd739723f09">drawText</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Draw a text without warping from the given position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A newline breaks to the next line, starting at <computeroutput>pos.x</computeroutput>. Characters outside this buffer are cut off. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The start position (top-left corner). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to draw on this buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ab4cbd4ec57ac2dd2a4b99a6aac632783" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::drawText</definition>
+        <argsstring>(const Text &amp;text, std::size_t animationCycle=0)</argsstring>
+        <name>drawText</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::drawText</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>animationCycle</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>If fg or bg is set to <computeroutput>Inherited</computeroutput>, the current color from the buffer is used. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Draw simple text into a rectangle. If fg or bg is set to <computeroutput>Inherited</computeroutput>, the current color from the buffer is used. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text description. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>animationCycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Animation cycle for animated text. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ad0c346f341e6011aaa888faecf6ad300" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::drawText</definition>
+        <argsstring>(std::string_view text, Rectangle rect, Alignment alignment=Alignment::TopLeft, CharStyle style={}, std::size_t animationCycle=0)</argsstring>
+        <name>drawText</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::drawText</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_alignment_1ad6602abbf18253c439c6d478aad363c1" kindref="member">Alignment::TopLeft</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>animationCycle</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Draw simple text into a rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If fg or bg is set to <computeroutput>Inherited</computeroutput>, the current color from the buffer is used. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to render. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target rectangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alignment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The alignment inside the rectangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base text style. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>animationCycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Animation cycle for animated text. Invalid UTF-8 bytes are replaced with the Unicode replacement character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a71eed3885088bdeb1396cf4c0910ce8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::drawText</definition>
+        <argsstring>(std::u32string_view text, Rectangle rect, Alignment alignment=Alignment::TopLeft, CharStyle style={}, std::size_t animationCycle=0)</argsstring>
+        <name>drawText</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::drawText</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_alignment_1ad6602abbf18253c439c6d478aad363c1" kindref="member">Alignment::TopLeft</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>animationCycle</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1acbead99f83335031e5f5a68a9abc6110" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::drawText</definition>
+        <argsstring>(const StringView &amp;text, Rectangle rect, Alignment alignment=Alignment::TopLeft, CharStyle style={}, std::size_t animationCycle=0)</argsstring>
+        <name>drawText</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::drawText</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_alignment_1ad6602abbf18253c439c6d478aad363c1" kindref="member">Alignment::TopLeft</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>animationCycle</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a578c6df6cddfc79eda60ae743145602f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::drawText</definition>
+        <argsstring>(const StringView &amp;text, Rectangle rect, const TextOptions &amp;options, std::size_t animationCycle=0)</argsstring>
+        <name>drawText</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::drawText</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_text_options" kindref="compound">TextOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>animationCycle</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a9c8369377b274479c11ab6fd12b803c8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::WritableBuffer::fill</definition>
+        <argsstring>(const Char &amp;fillBlock) noexcept</argsstring>
+        <name>fill</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::fill</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1a9c8369377b274479c11ab6fd12b803c8">fill</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillBlock</declname>
+        </param>
+        <briefdescription>
+<para>Fill/clear the buffer with the given character. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fillBlock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The block to use to fill the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ab00a8b79bc52853d6e8b11088672b1bd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::fill</definition>
+        <argsstring>(Rectangle rect, const Char &amp;fillBlock, const CharCombinationStylePtr &amp;combinationStyle={}) noexcept</argsstring>
+        <name>fill</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::fill</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillBlock</declname>
+        </param>
+        <param>
+          <type>const CharCombinationStylePtr &amp;</type>
+          <declname>combinationStyle</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Fill the given rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Positions outside the buffer are ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rectangle to be filled. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillBlock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The block for filling. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>combinationStyle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The combination style for overwriting existing characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1abf9f60df7596960eafc708a075ae3fab" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::fill</definition>
+        <argsstring>(Rectangle rect, const Tile9StylePtr &amp;style, Color baseColor={}, const CharCombinationStylePtr &amp;combinationStyle={}) noexcept</argsstring>
+        <name>fill</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::fill</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type>const Tile9StylePtr &amp;</type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>baseColor</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>const CharCombinationStylePtr &amp;</type>
+          <declname>combinationStyle</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Fill the given rectangle using a repeating 9-tile style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Positions outside the buffer are ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rectangle to be filled. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tile style to repeat across the rectangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>baseColor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base color underneath the tile style. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>combinationStyle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The combination style for overwriting existing characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1afeff66e76e2e63e1374e146cb240156c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::WritableBuffer::fill</definition>
+        <argsstring>(Rectangle rect, const Tile9StylePtr &amp;style, CharStyle baseStyle, const CharCombinationStylePtr &amp;combinationStyle={}) noexcept</argsstring>
+        <name>fill</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::fill</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type>const Tile9StylePtr &amp;</type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>baseStyle</declname>
+        </param>
+        <param>
+          <type>const CharCombinationStylePtr &amp;</type>
+          <declname>combinationStyle</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Fill the given rectangle using a repeating 9-tile style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Positions outside the buffer are ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rectangle to be filled. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tile style to repeat across the rectangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>baseStyle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base style underneath the tile style. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>combinationStyle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The combination style for overwriting existing characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1aa709880e0df8a7fffd00331a6496e157" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::WritableBuffer::resize</definition>
+        <argsstring>(Size newSize)=0</argsstring>
+        <name>resize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::resize</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1aa709880e0df8a7fffd00331a6496e157">resize</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>newSize</declname>
+        </param>
+        <briefdescription>
+<para>Resize this buffer in a memory-efficient way. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The content of the resized buffer is undefined and must be filled with new content. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new size for the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="43" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1acf73d62e2278e93b13e8df2a3909aa6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::WritableBuffer::resize</definition>
+        <argsstring>(Size size, BufferResizeMode mode, Char fillChar)</argsstring>
+        <name>resize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::resize</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1acf73d62e2278e93b13e8df2a3909aa6c">resize</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>BufferResizeMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Resize this buffer and optionally preserve visible content. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default implementation calls <computeroutput><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a5fe34aabc693d284dae20c8b29b81a0a" kindref="member">resize(Size)</ref></computeroutput> for <computeroutput>BufferResizeMode::Fast</computeroutput>. For <computeroutput>BufferResizeMode::PreserveContent</computeroutput>, it clones the current buffer, resizes it using <computeroutput><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a5fe34aabc693d284dae20c8b29b81a0a" kindref="member">resize(Size)</ref></computeroutput>, and restores the visible content with <computeroutput><ref refid="classerbsland_1_1cterm_1_1_writable_buffer_1a5e8e2f84d7c13451ff03421905d73fd4" kindref="member">setFrom()</ref></computeroutput>. Implementations can override this when they provide a faster preserve-content path. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new size for the buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How existing content should be handled during resizing. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to fill newly visible cells with in preserve-content mode. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="43" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1acb0b8c926b1e1d3dec806ae1ba4560aa" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::WritableBuffer::set</definition>
+        <argsstring>(Position pos, const Char &amp;block) noexcept=0</argsstring>
+        <name>set</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::set</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1acb0b8c926b1e1d3dec806ae1ba4560aa">set</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+<para>Write a block at the given position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates within the buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The block value to store. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Writes outside the buffer are ignored. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="44" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a6a36c8a7e222bba56f1afb78e3fe3038" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::WritableBuffer::set</definition>
+        <argsstring>(Position pos, const Char &amp;block, const CharCombinationStylePtr &amp;combinationStyle) noexcept</argsstring>
+        <name>set</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::set</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1a6a36c8a7e222bba56f1afb78e3fe3038">set</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>const CharCombinationStylePtr &amp;</type>
+          <declname>combinationStyle</declname>
+        </param>
+        <briefdescription>
+<para>Write a block at the given position using a combination style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates within the buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The block value to store. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>combinationStyle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The combination style for overwriting existing characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Writes outside the buffer are ignored. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="44" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a8acd69cd1eac4c5e35d88b0a2cee48cb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::WritableBuffer::set</definition>
+        <argsstring>(Position pos, const StringView &amp;str) noexcept</argsstring>
+        <name>set</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::set</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_writable_buffer_1a8acd69cd1eac4c5e35d88b0a2cee48cb">set</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Write a string at the given position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>NL jumps to the next row. Other control and zero-width characters are ignored. <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> (even inherited) overwrites the existing characters. Use <computeroutput>drawText(pos, text)</computeroutput> for a color overlay. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates within the buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="44" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1afe526182ff7033b0698cd86e0f774ce3" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>static Size erbsland::cterm::RemappedBuffer::validatedBufferSize</definition>
+        <argsstring>(Size size)</argsstring>
+        <name>validatedBufferSize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::validatedBufferSize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Validate the buffer size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if size is invalid </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="208" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a7a55c20dab5a73118bd293ffb641ed1e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref></type>
+        <definition>static CoordinateMap erbsland::cterm::RemappedBuffer::linearIndex</definition>
+        <argsstring>(std::size_t size)</argsstring>
+        <name>linearIndex</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::linearIndex</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Create a linear index map for the given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The linear index map. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="212" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a87fe4baf9fc9816215cd730ac12571e1" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::RemappedBuffer::validateCount</definition>
+        <argsstring>(int count, int maximum, std::string_view parameterName)</argsstring>
+        <name>validateCount</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::validateCount</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maximum</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>parameterName</declname>
+        </param>
+        <briefdescription>
+<para>Validate a count-only argument. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The count to validate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maximum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum accepted count. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>parameterName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parameter name for error reporting. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the count is invalid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="218" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d3dfeeae43fac46bf86caed0b79d8c1" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::RemappedBuffer::validateExistingSpan</definition>
+        <argsstring>(Coordinate start, int count, int limit, std::string_view startName, std::string_view countName)</argsstring>
+        <name>validateExistingSpan</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::validateExistingSpan</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>limit</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>startName</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>countName</declname>
+        </param>
+        <briefdescription>
+<para>Validate a span inside the currently visible range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first coordinate in the span. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of elements in the span. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>limit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the addressable axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>startName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parameter name for the start coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>countName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parameter name for the count. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the span is invalid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="226" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1ae0b9ef6a8be8644eb42aa26e93e2569d" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::RemappedBuffer::validateInsertArguments</definition>
+        <argsstring>(Coordinate start, int count, int limit, std::string_view startName, std::string_view countName)</argsstring>
+        <name>validateInsertArguments</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::validateInsertArguments</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>limit</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>startName</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>countName</declname>
+        </param>
+        <briefdescription>
+<para>Validate an insert-style operation on an axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The insertion coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of inserted elements. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>limit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the addressable axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>startName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parameter name for the start coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>countName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parameter name for the count. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the arguments are invalid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="235" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a278b6ea1ac610cdec4a95e813371fd15" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>static std::size_t erbsland::cterm::RemappedBuffer::bufferIndex</definition>
+        <argsstring>(Position pos, Size size, Orientation orientation) noexcept</argsstring>
+        <name>bufferIndex</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::bufferIndex</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_orientation" kindref="compound">Orientation</ref></type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+<para>Get the buffer index for the given orientation and size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stored position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size used to linearize the position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orientation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The storage orientation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The storage index for <computeroutput>pos</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="274" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a704c2c4b5c69edcf7b7e4698a46fd7a2" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::RemappedBuffer::rotateMap</definition>
+        <argsstring>(CoordinateMap &amp;map, int count, bool towardFront) noexcept</argsstring>
+        <name>rotateMap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::rotateMap</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref> &amp;</type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>towardFront</declname>
+        </param>
+        <briefdescription>
+<para>Rotate a coordinate map to the logical front or back. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The map to rotate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of elements to rotate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>towardFront</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>true</computeroutput>, rotate toward index <computeroutput>0</computeroutput>, otherwise toward the logical end. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="285" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1abbb7556f61a6216ce25eb9b344dbf4a8" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::span&lt; const Coordinate &gt;</type>
+        <definition>static std::span&lt; const Coordinate &gt; erbsland::cterm::RemappedBuffer::eraseFromMap</definition>
+        <argsstring>(CoordinateMap &amp;map, Coordinate start, int count)</argsstring>
+        <name>eraseFromMap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::eraseFromMap</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref> &amp;</type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Erase a span from a coordinate map and append the recycled coordinates at the end. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The map to modify. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first element to erase. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of elements to erase. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The recycled coordinates that must be refilled. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="291" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a1d5841296c51a74135231d4f69dd042c" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::span&lt; const Coordinate &gt;</type>
+        <definition>static std::span&lt; const Coordinate &gt; erbsland::cterm::RemappedBuffer::insertIntoMap</definition>
+        <argsstring>(CoordinateMap &amp;map, Coordinate start, int count)</argsstring>
+        <name>insertIntoMap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::insertIntoMap</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref> &amp;</type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Insert a span into a coordinate map using recycled coordinates from the end. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The map to modify. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The insertion coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of elements to insert. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The recycled coordinates that must be refilled. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="297" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a45bf08232815a4265b6c31ff404a344e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::span&lt; const Coordinate &gt;</type>
+        <definition>static std::span&lt; const Coordinate &gt; erbsland::cterm::RemappedBuffer::moveInMap</definition>
+        <argsstring>(CoordinateMap &amp;map, Coordinate start, int count, Coordinate delta)</argsstring>
+        <name>moveInMap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::moveInMap</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref> &amp;</type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>delta</declname>
+        </param>
+        <briefdescription>
+<para>Move a span inside a coordinate map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The map to transform in place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first element to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of elements to move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The movement delta. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The recycled coordinates that must be refilled. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="304" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a440b9e20dd1b2d3b6f43376d6024f3bc" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::validateDirectionalCount</definition>
+        <argsstring>(Direction direction, int count) const</argsstring>
+        <name>validateDirectionalCount</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::validateDirectionalCount</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_direction" kindref="compound">Direction</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Validate a directional count for shift and rotate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The direction to validate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of cells to move. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the count does not fit the addressed axis. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="241" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1abf659cb11a76e844ba5a8e345ecf3a94" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::RemappedBuffer::remapPosition</definition>
+        <argsstring>(Position pos) const noexcept</argsstring>
+        <name>remapPosition</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::remapPosition</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Remap the position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position to remap. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The remapped position. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="245" column="15" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="245" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a7085340445f2566254ec005fd6702f39" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::RemappedBuffer::storedBufferIndex</definition>
+        <argsstring>(Coordinate storedX, Coordinate storedY) const noexcept</argsstring>
+        <name>storedBufferIndex</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::storedBufferIndex</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>storedX</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>storedY</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the storage index for a stored coordinate pair. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>storedX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stored x coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>storedY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stored y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The linear storage index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="254" column="18" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="254" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1aca4720550bca4b04f0ed4d946f4dc8c7" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::RemappedBuffer::bufferIndex</definition>
+        <argsstring>(Coordinate x, Coordinate y) const noexcept</argsstring>
+        <name>bufferIndex</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::bufferIndex</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the storage index for a logical coordinate pair. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logical x coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logical y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The linear storage index after remapping. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="266" column="18" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="266" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a2885b06a64c6f269690186e128a020f7" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::RemappedBuffer::bufferIndex</definition>
+        <argsstring>(Position pos) const noexcept</argsstring>
+        <name>bufferIndex</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::bufferIndex</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Get the storage index for the current size and orientation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position for the index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The buffer index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="278" column="18" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="278" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1af30b28dff8c47357cd6815567f09f011" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::fillStoredRows</definition>
+        <argsstring>(std::span&lt; const Coordinate &gt; rows, const Char &amp;fillChar) noexcept</argsstring>
+        <name>fillStoredRows</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::fillStoredRows</qualifiedname>
+        <param>
+          <type>std::span&lt; const Coordinate &gt;</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Fill the given stored rows. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rows</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stored row coordinates to fill. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fill character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="308" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a4caee7b8a2de214b6913ef1f6dc647b0" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::fillStoredColumns</definition>
+        <argsstring>(std::span&lt; const Coordinate &gt; columns, const Char &amp;fillChar) noexcept</argsstring>
+        <name>fillStoredColumns</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::fillStoredColumns</qualifiedname>
+        <param>
+          <type>std::span&lt; const Coordinate &gt;</type>
+          <declname>columns</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Fill the given stored columns. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>columns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stored column coordinates to fill. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fill character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="312" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a82f47581ec5da37036d00eb51d4d32bf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::fastResize</definition>
+        <argsstring>(Size newSize, const Char &amp;fillChar)</argsstring>
+        <name>fastResize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::fastResize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>newSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Execute the fast resize path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The validated new size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fill character for newly appended storage cells. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="316" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a7fe8b6c8a3075005035db5a9b0440261" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::primaryAxisResize</definition>
+        <argsstring>(Size newSize, const Char &amp;fillChar)</argsstring>
+        <name>primaryAxisResize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::primaryAxisResize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>newSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Execute the fast preserve-content path for primary-axis-only resizes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The validated new size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fill character for newly created logical cells. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="320" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a2fa446837c2a62a33b58ba4b3daceb95" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::reorderedResize</definition>
+        <argsstring>(Size newSize, const Char &amp;fillChar)</argsstring>
+        <name>reorderedResize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::reorderedResize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>newSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Execute the ordered resize path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The validated new size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fill character for newly created logical cells. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="324" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1aa91459fffa73ed26d60a416324610f60" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::RemappedBuffer::isPrimaryAxisOnlyResize</definition>
+        <argsstring>(Size newSize) const noexcept</argsstring>
+        <name>isPrimaryAxisOnlyResize</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::isPrimaryAxisOnlyResize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>newSize</declname>
+        </param>
+        <briefdescription>
+<para>Check whether the resize changes only the primary axis of the buffer orientation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The validated new size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if only the orientation axis changes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="328" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a463a9dbeecc3829c57f4ac9e485607f0" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref> &amp;</type>
+        <definition>CoordinateMap &amp; erbsland::cterm::RemappedBuffer::primaryMap</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>primaryMap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::primaryMap</qualifiedname>
+        <briefdescription>
+<para>Access the remap for the orientation axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The row map for vertical buffers or the column map for horizontal buffers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="331" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a88a6dff102353ac8f4307447ecb9fb73" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" kindref="member">CoordinateMap</ref> &amp;</type>
+        <definition>const CoordinateMap &amp; erbsland::cterm::RemappedBuffer::primaryMap</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>primaryMap</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::primaryMap</qualifiedname>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="333" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_remapped_buffer_1a5d0392ef64c10a6e050e1e10efcc1b3f" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::RemappedBuffer::copyStoredPrimaryLine</definition>
+        <argsstring>(Coordinate source, Coordinate destination) noexcept</argsstring>
+        <name>copyStoredPrimaryLine</name>
+        <qualifiedname>erbsland::cterm::RemappedBuffer::copyStoredPrimaryLine</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>destination</declname>
+        </param>
+        <briefdescription>
+<para>Copy one stored primary line to another stored primary line. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stored source row/column coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>destination</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stored destination row/column coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/RemappedBuffer.hpp" line="337" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A buffer that allows fast remapping/shifting/inserting/deleting of rows and columns. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This buffer is useful if you have a large buffer that requires frequent row- or column-based manipulations. It is designed for fast insert/delete/move and shift operations.</para>
+<para>This buffer also knows two orientations: vertical and horizontal.</para>
+<para><itemizedlist>
+<listitem><para>In the vertical orientation, the buffer can efficiently grow vertically, keeping the existing data intact.</para>
+</listitem><listitem><para>In the horizontal orientation, the buffer can efficiently grow horizontally, keeping the existing data intact.</para>
+</listitem><listitem><para>When growing the buffer, memory reallocation may be necessary. Use <computeroutput>reserve</computeroutput> to reserve enough memory to avoid frequent reallocations.</para>
+</listitem><listitem><para>Use <computeroutput>resize(size, BufferResizeMode::PreserveContent, fillChar)</computeroutput> when you need to preserve the visible content.</para>
+</listitem><listitem><para>A preserve-content resize that changes only the primary orientation axis is optimized and fast.</para>
+</listitem><listitem><para>A preserve-content resize that changes the secondary axis must rebuild the logical content and can be expensive. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>erbsland::cterm::CursorBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_cursor_buffer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ReadableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_readable_buffer"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::RemappedBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_remapped_buffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::WritableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_writable_buffer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>erbsland::cterm::Orientation</label>
+        <link refid="classerbsland_1_1cterm_1_1_orientation"/>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ReadableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_readable_buffer"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::RemappedBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_remapped_buffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>_size</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_orientation</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::Size</label>
+        <link refid="classerbsland_1_1cterm_1_1_size"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::WritableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_writable_buffer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/RemappedBuffer.hpp" line="29" column="1" bodyfile="erbsland/cterm/RemappedBuffer.hpp" bodystart="29" bodyend="345"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a15082389ef922f21e61d6e21b907c0f9" prot="protected" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>_buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1abbe8eb70ebe5a8f99aa47d9daa855e40" prot="protected" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>_columnRemap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a493b9ce9393c55263507b4b6e1fb8275" prot="protected" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>_orientation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ac7ea20a7b4d4687cfc1a336ebe034c41" prot="protected" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>_rowRemap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ab7339184476a8e1e8c26ba684d0c989e" prot="protected" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>_size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aca4720550bca4b04f0ed4d946f4dc8c7" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>bufferIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a278b6ea1ac610cdec4a95e813371fd15" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>bufferIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a2885b06a64c6f269690186e128a020f7" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>bufferIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a51729436cce87c14b54a47e83a1ed8ba" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>clone</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa5ad3bf7e62b9788f914cf8fea9c3a41" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>cMaximumSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a608ce8d4a2277c397f1e08a4ae88ac5f" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>cMinimumSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>CoordinateMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a5d0392ef64c10a6e050e1e10efcc1b3f" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>copyStoredPrimaryLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a47805b5bbbcc7f2b0bea4f579e74b1fd" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>countDifferencesTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aee23adf122a981c025404411d7fb8294" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawBitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a51a1ec3d619d448816598985efa950f1" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawBitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1aacc32b53ee9fffb4f49c30c09429351f" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawBitmapImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1abb4407527842b221f76615f3a3871579" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawBitmapImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a91c034cc926b157f3e194f21cfc5fccd" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1af3e8b56fcc4e09a6c57210d7f2b55a50" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1ad556a7c0d1a730766f13f5de5d4df81c" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a4c859454fab094d15eeceea1ee466476" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFilledFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a3b8073deb61a0e3a8acfd7e53c64a9aa" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFilledFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1ad6d5cda6cf207618dcd42cf0481b367a" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFilledFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a611f40ae67db9447684a419c2bb1ee7d" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFilledFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a11f9a4356727b696dbbefa13dcf6f47e" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a4c1a59cd0d3d6a147492c491748b0b43" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1af88e9e3b768a5d82d866b5b179dc7c30" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a7984bcad04fe1aef70d98822646b74e8" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a83f8a89110809ef6aa043b59681793fd" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a21ba7011a4c2b75ac0ebb8ca5a6c4cce" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrameImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a0bf001dc0ffa4929e46cf8d65aa02b25" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrameImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1ac005434c03a1dff09d5d6a4b567cfc24" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrameImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a8b655c13f24a831c548925916b774fb8" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawFrameImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1acbf07dce2b2e7074f989cda9b83443a7" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawGridLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1aa8fd542814ba3a3b650ee72f738ac289" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawGridLayoutImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ac4b8a282ba2ce375ef41dbd739723f09" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ab4cbd4ec57ac2dd2a4b99a6aac632783" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ad0c346f341e6011aaa888faecf6ad300" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a71eed3885088bdeb1396cf4c0910ce8e" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1acbead99f83335031e5f5a68a9abc6110" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a578c6df6cddfc79eda60ae743145602f" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1af69c13171db9f0c77514cadee7e806af" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawTextImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a121390d5d33ebf8dc1cb5e090fc96598" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawTextImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a42d21c78460bb910929882dca0ba77a0" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>drawTextImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a1ba7895f739c2330e8349f709bf969ad" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>eraseColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a0bd63d67d621c159e6dc116016006a95" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>eraseColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1abbb7556f61a6216ce25eb9b344dbf4a8" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>eraseFromMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1abe85dd3c59bd4e517a626c19f62a365a" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>eraseRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a141057a36b9906258eafc00de9c85eb8" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>eraseRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a82f47581ec5da37036d00eb51d4d32bf" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fastResize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a8a974d3e71a452c14cec1ca68f38066c" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a9c8369377b274479c11ab6fd12b803c8" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ab00a8b79bc52853d6e8b11088672b1bd" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1abf9f60df7596960eafc708a075ae3fab" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1afeff66e76e2e63e1374e146cb240156c" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a1099a87ddf2973b2cf692b2683d61b45" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fillImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a53349376dcec58d26353b43b13d44e21" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fillImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a4caee7b8a2de214b6913ef1f6dc647b0" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fillStoredColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1af30b28dff8c47357cd6815567f09f011" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>fillStoredRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a62959002cf7fb97af26449cd95c8b993" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>get</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a21893a4938e6b96d237fb700e79fd1fa" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>insertColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a08c3b1784d3855ab59ae2999d5519b02" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>insertColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a1d5841296c51a74135231d4f69dd042c" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>insertIntoMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ab78b4e96e7ef46d203416bc64722136b" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>insertRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ac0a1e89219f0adf2b7bc78a0837e67e1" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>insertRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa91459fffa73ed26d60a416324610f60" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>isPrimaryAxisOnlyResize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a7a55c20dab5a73118bd293ffb641ed1e" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>linearIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aeba84135d2b2a8665ad5efc174ae9e85" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>moveColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a104be5c4efae4d19e762866d552cd2cc" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>moveColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a45bf08232815a4265b6c31ff404a344e" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>moveInMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ad2ad518ee848059098c76594ba8fb6ce" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>moveRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a51bba94a937b029c460945f92563b237" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>moveRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a5c08398a4aae84fdfb157fd603647c54" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a3d07d98c1d93ab11b1e4d2e5650d53ac" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a7fe8b6c8a3075005035db5a9b0440261" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>primaryAxisResize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a463a9dbeecc3829c57f4ac9e485607f0" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>primaryMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a88a6dff102353ac8f4307447ecb9fb73" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>primaryMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1accea0715c6bc99af0455184473a7e623" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>rect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1afe0e90523915b68ecc5fd468e0816de7" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1adca3c5a9effc04973bd954e10d844d12" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa63f7ecd2a817de2c31954a2e6eac341" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a626159e8593c58d5eb4516ffe9d88939" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1abf659cb11a76e844ba5a8e345ecf3a94" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>remapPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a2fa446837c2a62a33b58ba4b3daceb95" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>reorderedResize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1af0e5fcc03a4bec5fce678e22514cb778" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>reserve</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a5fe34aabc693d284dae20c8b29b81a0a" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>resize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1af1db224f1b258dbaac3768df6d4f99cc" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>resize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa709880e0df8a7fffd00331a6496e157" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>resize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1acf73d62e2278e93b13e8df2a3909aa6c" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>resize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a740fad9983db5406188415749b5e9d16" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>rotate</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a704c2c4b5c69edcf7b7e4698a46fd7a2" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>rotateMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1acb5c23769b89061c8dfd728d5ec5715c" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>set</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1acb0b8c926b1e1d3dec806ae1ba4560aa" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>set</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6a36c8a7e222bba56f1afb78e3fe3038" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>set</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a8acd69cd1eac4c5e35d88b0a2cee48cb" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>set</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1af4221b2a8f07e29898a09d4bfbda627d" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>setAndResizeFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a5e8e2f84d7c13451ff03421905d73fd4" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>setFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1aba315cfa3b869cf04f089a0beb28f456" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>setFromImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa185dd7dc802a3788d26e7939a7734ed" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>shift</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ad28f75031a6ef9dbcddcbd607ff72581" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>shift</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ad9b7dac641c7beaa3e52fe292ec0c51f" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a7085340445f2566254ec005fd6702f39" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>storedBufferIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a75233fa158f6f09b63ced1e1225b270d" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>textHeightForWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a3e63939232e2ce14710ab28c0fc34820" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>toMask</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a1183374b9e612d0461c72deccb4c428a" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>toMask</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a9cc60dd001042108d8c3dae15b4c1ec7" prot="protected" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>toMaskImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a87fe4baf9fc9816215cd730ac12571e1" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>validateCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1afe526182ff7033b0698cd86e0f774ce3" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>validatedBufferSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a440b9e20dd1b2d3b6f43376d6024f3bc" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>validateDirectionalCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d3dfeeae43fac46bf86caed0b79d8c1" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>validateExistingSpan</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ae0b9ef6a8be8644eb42aa26e93e2569d" prot="private" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>validateInsertArguments</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a1efdd8fc23622c9ad07cf2772b088400" prot="public" virt="virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>~ReadableBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a651e4e12850d4d9954542833f792a42c" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>~RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a1f88a404889187926b72937a15886314" prot="public" virt="non-virtual"><scope>erbsland::cterm::RemappedBuffer</scope><name>~WritableBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

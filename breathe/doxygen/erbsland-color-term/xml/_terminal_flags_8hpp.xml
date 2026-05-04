@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_terminal_flags_8hpp" kind="file" language="C++">
+    <compoundname>TerminalFlags.hpp</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes local="no">type_traits</includes>
+    <includedby refid="_backend_8hpp" local="yes">erbsland/cterm/Backend.hpp</includedby>
+    <includedby refid="_terminal_8hpp" local="yes">erbsland/cterm/Terminal.hpp</includedby>
+    <includedby refid="all_8hpp" local="yes">erbsland/cterm/all.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>erbsland/cterm/TerminalFlags.hpp</label>
+        <link refid="_terminal_flags_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="3">
+        <label>type_traits</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>erbsland/cterm/Backend.hpp</label>
+        <link refid="_backend_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland/cterm/Terminal.hpp</label>
+        <link refid="_terminal_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/TerminalFlags.hpp</label>
+        <link refid="_terminal_flags_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>erbsland/cterm/TerminalSession.hpp</label>
+        <link refid="_terminal_session_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland/cterm/all.hpp</label>
+        <link refid="all_8hpp_source"/>
+      </node>
+      <node id="9">
+        <label>erbsland/cterm/impl/InputBackend.hpp</label>
+        <link refid="_input_backend_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>erbsland/cterm/impl/LineBuffer.hpp</label>
+        <link refid="_line_buffer_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>erbsland/cterm/impl/PosixBackend.hpp</label>
+        <link refid="_posix_backend_8hpp_source"/>
+      </node>
+      <node id="12">
+        <label>erbsland/cterm/impl/WindowsBackend.hpp</label>
+        <link refid="_windows_backend_8hpp_source"/>
+      </node>
+      <node id="6">
+        <label>erbsland/cterm/ui/Application.hpp</label>
+        <link refid="_application_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>erbsland/cterm/ui/Display.hpp</label>
+        <link refid="_display_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland/cterm/ui/all.hpp</label>
+        <link refid="ui_2all_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1_terminal_flags" prot="public">erbsland::cterm::TerminalFlags</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;type_traits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>TerminalFlag<sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>NoSignalHandling<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="classerbsland_1_1cterm_1_1_terminal_flags" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24" refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref><sp/>=<sp/>uint8_t;</highlight></codeline>
+<codeline lineno="26" refid="classerbsland_1_1cterm_1_1_terminal_flags_1ab76f9f15057a2f0a320c9952a373b9cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Enum<sp/>=<sp/>TerminalFlag;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>tFlags&gt;</highlight><highlight class="comment">/*<sp/>requires<sp/>removed<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="classerbsland_1_1cterm_1_1_terminal_flags_1a9f926b45fc464ddd1543f44fcd33c636" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a9f926b45fc464ddd1543f44fcd33c636" kindref="member">TerminalFlags</ref>(tFlags...<sp/>flags)<sp/>:<sp/></highlight><highlight class="comment">//<sp/>NOLINT(*-explicit-constructor)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_flags{static_cast&lt;<ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref>&gt;((static_cast&lt;<ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref>&gt;(flags)<sp/>|<sp/>...))}<sp/>{}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43" refid="classerbsland_1_1cterm_1_1_terminal_flags_1aff2149fc2ce5707cbe9e3b66333b9e44" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1aff2149fc2ce5707cbe9e3b66333b9e44" kindref="member">operator|</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TerminalFlag<sp/>flag)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref>{</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(_flags<sp/>|<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(flag))};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50" refid="classerbsland_1_1cterm_1_1_terminal_flags_1aae64bad3886bfcfb5906b09b684974da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1aae64bad3886bfcfb5906b09b684974da" kindref="member">operator|</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TerminalFlag<sp/>flag,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>flags)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref>{</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(flags._flags<sp/>|<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(flag))};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57" refid="classerbsland_1_1cterm_1_1_terminal_flags_1a6b8d27f94d640d5e29a2fc488f64c69e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a6b8d27f94d640d5e29a2fc488f64c69e" kindref="member">operator|</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>flags1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>flags2)<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref>{</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(flags1._flags<sp/>|<sp/>flags2._flags)};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="63" refid="classerbsland_1_1cterm_1_1_terminal_flags_1a04502285e65c3bfb6b6942baf393120a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a04502285e65c3bfb6b6942baf393120a" kindref="member">has</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TerminalFlag<sp/>flag)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(_flags<sp/>&amp;<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(flag))<sp/>!=<sp/>0;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67" refid="classerbsland_1_1cterm_1_1_terminal_flags_1aa92a04b67aafc5f877d315687c344dcd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1aa92a04b67aafc5f877d315687c344dcd" kindref="member">set</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TerminalFlag<sp/>flag,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(enabled)<sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_flags<sp/>|=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(flag);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_flags<sp/>&amp;=<sp/>~static_cast&lt;Mask&gt;(flag);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75" refid="classerbsland_1_1cterm_1_1_terminal_flags_1a565a429b63cd904828edd51c02be4262" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a565a429b63cd904828edd51c02be4262" kindref="member">clear</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TerminalFlag<sp/>flag)<sp/>{<sp/>_flags<sp/>&amp;=<sp/>~static_cast&lt;Mask&gt;(flag);<sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref><sp/>flags)<sp/>:<sp/>_flags(flags)<sp/>{}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags_1a4575dd0b9b35ea76506c6d61e2c776f3" kindref="member">Mask</ref><sp/>_flags{0};</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>TerminalFlags<sp/>operator|(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TerminalFlag<sp/>flag1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TerminalFlag<sp/>flag2)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>TerminalFlags{flag1,<sp/>flag2};</highlight></codeline>
+<codeline lineno="90"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/TerminalFlags.hpp"/>
+  </compounddef>
+</doxygen>

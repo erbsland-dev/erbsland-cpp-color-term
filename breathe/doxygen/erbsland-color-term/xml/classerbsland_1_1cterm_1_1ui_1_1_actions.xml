@@ -1,0 +1,458 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_actions" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::Actions</compoundname>
+    <includes refid="_actions_8hpp" local="no">erbsland/cterm/ui/Actions.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a9fb0258d82d28f800413a29716854c34" prot="public" static="no">
+        <type>std::vector&lt; ActionPtr &gt;</type>
+        <definition>using erbsland::cterm::ui::Actions::Container =  std::vector&lt;ActionPtr&gt;</definition>
+        <argsstring></argsstring>
+        <name>Container</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::Container</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="19" column="5" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a0f94b1572ef7d9e89185645a2e972913" prot="public" static="no">
+        <type>Container::iterator</type>
+        <definition>using erbsland::cterm::ui::Actions::iterator =  Container::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="20" column="5" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1ae9ed1dcc6d81ad9b94adc10f129a6dc8" prot="public" static="no">
+        <type>Container::const_iterator</type>
+        <definition>using erbsland::cterm::ui::Actions::const_iterator =  Container::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::const_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="21" column="5" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a9cb15ef1a455fc5e06530dd8ec40960f" prot="private" static="no" mutable="no">
+        <type>SurfaceWeakPtr</type>
+        <definition>SurfaceWeakPtr erbsland::cterm::ui::Actions::_owner</definition>
+        <argsstring></argsstring>
+        <name>_owner</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::_owner</qualifiedname>
+        <briefdescription>
+<para>The owning surface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="64" column="20" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1ad5c9ebed955d56eea8badc95529a1d7f" prot="private" static="no" mutable="no">
+        <type>Container</type>
+        <definition>Container erbsland::cterm::ui::Actions::_actions</definition>
+        <argsstring></argsstring>
+        <name>_actions</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::_actions</qualifiedname>
+        <briefdescription>
+<para>The actions in dispatch order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="65" column="15" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a524a8ea6de321820b78c793b485ae2df" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Actions::Actions</definition>
+        <argsstring>(SurfaceWeakPtr owner) noexcept</argsstring>
+        <name>Actions</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::Actions</qualifiedname>
+        <param>
+          <type>SurfaceWeakPtr</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+<para>Create an action container for a surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>owner</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The surface that owns this container. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a5944f0fffb18e540a92dfb4e4278e2e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Actions::~Actions</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Actions</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::~Actions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="27" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1af27a881ee436bf319aacfe5906bb8161" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Actions::Actions</definition>
+        <argsstring>(const Actions &amp;)=delete</argsstring>
+        <name>Actions</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::Actions</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_actions" kindref="compound">Actions</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1abbfaee3c949e92bb897c07d6761b2918" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Actions::Actions</definition>
+        <argsstring>(Actions &amp;&amp;)=delete</argsstring>
+        <name>Actions</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::Actions</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_actions" kindref="compound">Actions</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="31" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a5b6ecd1ea9f88ba18b36d7ad6ec5f5c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_actions" kindref="compound">Actions</ref> &amp;</type>
+        <definition>Actions &amp; erbsland::cterm::ui::Actions::operator=</definition>
+        <argsstring>(const Actions &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_actions" kindref="compound">Actions</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="32" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a3834cee81ce531b26437fd2e9fb59a11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_actions" kindref="compound">Actions</ref> &amp;</type>
+        <definition>Actions &amp; erbsland::cterm::ui::Actions::operator=</definition>
+        <argsstring>(Actions &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_actions" kindref="compound">Actions</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1aaf31d06492e64bc96036ff03569547b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Actions::add</definition>
+        <argsstring>(ActionPtr action)</argsstring>
+        <name>add</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::add</qualifiedname>
+        <param>
+          <type>ActionPtr</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+<para>Add an action to this container. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action to attach. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the action is null or already attached here. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="39" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1aa59c287f36bf4efc80ba39d8434e2e1f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Actions::remove</definition>
+        <argsstring>(const ActionPtr &amp;action) noexcept</argsstring>
+        <name>remove</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::remove</qualifiedname>
+        <param>
+          <type>const ActionPtr &amp;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+<para>Remove an action from this container. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action to remove. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="42" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a27ffb53d087094fb29dd2f5ac676bf58" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Actions::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::clear</qualifiedname>
+        <briefdescription>
+<para>Remove all actions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="44" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a77b7e58593304a704ea141f3f0f9f3a6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Actions::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::empty</qualifiedname>
+        <briefdescription>
+<para>Test if this container has no actions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="46" column="11" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1ae7f994ca11b152d7fcacc08d828ab64d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ui::Actions::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::size</qualifiedname>
+        <briefdescription>
+<para>Get the number of actions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="48" column="18" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1ab59f1c9384686386a694cfddeb6b1e4c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Actions::contains</definition>
+        <argsstring>(const ActionPtr &amp;action) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::contains</qualifiedname>
+        <param>
+          <type>const ActionPtr &amp;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+<para>Test if an action is already attached to this container. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="50" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a7389a4cd6a3f15bcd7bac965d8fa6be1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Actions::onKeyPress</definition>
+        <argsstring>(KeyPressEvent &amp;keyPressEvent)</argsstring>
+        <name>onKeyPress</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::onKeyPress</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_key_press_event" kindref="compound">KeyPressEvent</ref> &amp;</type>
+          <declname>keyPressEvent</declname>
+        </param>
+        <briefdescription>
+<para>Handle a key press event using the first enabled matching action. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>keyPressEvent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key press event to handle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="53" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1ab18b76bb6bd5602dd2d3da3450efef00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Actions::refreshForRepaint</definition>
+        <argsstring>()</argsstring>
+        <name>refreshForRepaint</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::refreshForRepaint</qualifiedname>
+        <briefdescription>
+<para>Refresh repaint-driven action enablement. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1aa1ba142e8de6b358e1c9367a4d817a00" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator erbsland::cterm::ui::Actions::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="58" column="15" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a17baa57f19bd21a54e633b686ca7e5af" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator erbsland::cterm::ui::Actions::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="59" column="15" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1aba8775139df524c576e6665e65d4c9a0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const_iterator</type>
+        <definition>const_iterator erbsland::cterm::ui::Actions::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="60" column="21" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a3777403c4eca67c6f19fae6aa5f3c0ce" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const_iterator</type>
+        <definition>const_iterator erbsland::cterm::ui::Actions::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>erbsland::cterm::ui::Actions::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Actions.hpp" line="61" column="21" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Ordered action container attached to a surface or page. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/Actions.hpp" line="17" column="1" bodyfile="erbsland/cterm/ui/Actions.hpp" bodystart="17" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1ad5c9ebed955d56eea8badc95529a1d7f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>_actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a9cb15ef1a455fc5e06530dd8ec40960f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>_owner</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a524a8ea6de321820b78c793b485ae2df" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>Actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1af27a881ee436bf319aacfe5906bb8161" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>Actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1abbfaee3c949e92bb897c07d6761b2918" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>Actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1aaf31d06492e64bc96036ff03569547b1" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>add</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1aa1ba142e8de6b358e1c9367a4d817a00" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>begin</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1aba8775139df524c576e6665e65d4c9a0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>begin</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a27ffb53d087094fb29dd2f5ac676bf58" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>clear</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1ae9ed1dcc6d81ad9b94adc10f129a6dc8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>const_iterator</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a9fb0258d82d28f800413a29716854c34" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>Container</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1ab59f1c9384686386a694cfddeb6b1e4c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>contains</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a77b7e58593304a704ea141f3f0f9f3a6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>empty</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a17baa57f19bd21a54e633b686ca7e5af" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>end</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a3777403c4eca67c6f19fae6aa5f3c0ce" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>end</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a0f94b1572ef7d9e89185645a2e972913" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>iterator</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a7389a4cd6a3f15bcd7bac965d8fa6be1" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a5b6ecd1ea9f88ba18b36d7ad6ec5f5c6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a3834cee81ce531b26437fd2e9fb59a11" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1ab18b76bb6bd5602dd2d3da3450efef00" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>refreshForRepaint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1aa59c287f36bf4efc80ba39d8434e2e1f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>remove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1ae7f994ca11b152d7fcacc08d828ab64d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_actions_1a5944f0fffb18e540a92dfb4e4278e2e9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Actions</scope><name>~Actions</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

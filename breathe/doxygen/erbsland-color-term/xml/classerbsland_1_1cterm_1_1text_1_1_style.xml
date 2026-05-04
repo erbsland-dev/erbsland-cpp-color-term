@@ -1,0 +1,793 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1_style" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::text::Style</compoundname>
+    <includes refid="_style_8hpp" local="no">erbsland/cterm/text/Style.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1text_1_1_style_1_1_entry" prot="private">erbsland::cterm::text::Style::Entry</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1text_1_1_style_1af55619c4e5170eb9e02c1de9d12781af" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>Predefined</name>
+        <qualifiedname>erbsland::cterm::text::Style::Predefined</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1text_1_1_style_1af55619c4e5170eb9e02c1de9d12781afa4cd8413207629a963225f4314b53adcd" prot="public">
+          <name>Plain</name>
+          <briefdescription>
+<para>The plain built-in rich-text style. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1text_1_1_style_1af55619c4e5170eb9e02c1de9d12781afa1fbb1e3943c2c6c560247ac8f9289780" prot="public">
+          <name>Simple</name>
+          <briefdescription>
+<para>A compact style inspired by the HTML viewer demo. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1text_1_1_style_1af55619c4e5170eb9e02c1de9d12781afa6c266e814137aa71f8580c4e9af7a3aa" prot="public">
+          <name>Styled</name>
+          <briefdescription>
+<para>An extended decorative style inspired by the HTML viewer demo. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Shared predefined style variants. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="31" column="5" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="31" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1_style_1a54e5dbec9e5cf2a6c900b8dea2ad5571" prot="public" static="no">
+        <type>StyleRole</type>
+        <definition>using erbsland::cterm::text::Style::Role =  StyleRole</definition>
+        <argsstring></argsstring>
+        <name>Role</name>
+        <qualifiedname>erbsland::cterm::text::Style::Role</qualifiedname>
+        <briefdescription>
+<para>Alias for the standalone style role type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="37" column="5" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1_style_1a288fb822c0ae1a4eff2d2f64e9344eaa" prot="public" static="no">
+        <type>StyleListKind</type>
+        <definition>using erbsland::cterm::text::Style::ListKind =  StyleListKind</definition>
+        <argsstring></argsstring>
+        <name>ListKind</name>
+        <qualifiedname>erbsland::cterm::text::Style::ListKind</qualifiedname>
+        <briefdescription>
+<para>Alias for the standalone list-kind type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="38" column="5" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1_style_1aa691eff834c8da421db6c0d696864a79" prot="public" static="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context" kindref="compound">StyleMatchContext</ref></type>
+        <definition>using erbsland::cterm::text::Style::MatchContext =  StyleMatchContext</definition>
+        <argsstring></argsstring>
+        <name>MatchContext</name>
+        <qualifiedname>erbsland::cterm::text::Style::MatchContext</qualifiedname>
+        <briefdescription>
+<para>Alias for the standalone match-context type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="39" column="5" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_style_1aab9628fb131dd79626f58bd7061771db" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+        <definition>CharStyle erbsland::cterm::text::Style::_baseTextStyle</definition>
+        <argsstring></argsstring>
+        <name>_baseTextStyle</name>
+        <qualifiedname>erbsland::cterm::text::Style::_baseTextStyle</qualifiedname>
+        <briefdescription>
+<para>Base text style. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="120" column="15" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_style_1a1b09aafbcc325b9ccd2b288a38b08f55" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_paragraph_indents" kindref="compound">ParagraphIndents</ref></type>
+        <definition>ParagraphIndents erbsland::cterm::text::Style::_baseBlockLayout</definition>
+        <argsstring></argsstring>
+        <name>_baseBlockLayout</name>
+        <qualifiedname>erbsland::cterm::text::Style::_baseBlockLayout</qualifiedname>
+        <briefdescription>
+<para>Base block layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="121" column="22" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_style_1a02fc754909e945d50514b6619087e449" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Entry &gt;</type>
+        <definition>std::vector&lt;Entry&gt; erbsland::cterm::text::Style::_definitions</definition>
+        <argsstring></argsstring>
+        <name>_definitions</name>
+        <qualifiedname>erbsland::cterm::text::Style::_definitions</qualifiedname>
+        <briefdescription>
+<para>Explicit selector definitions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="122" column="17" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1ae5aa2bfab7628733b751415c39b63046" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::Style::Style</definition>
+        <argsstring>()</argsstring>
+        <name>Style</name>
+        <qualifiedname>erbsland::cterm::text::Style::Style</qualifiedname>
+        <briefdescription>
+<para>Create the default rich-text style. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="43" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a073783b9b335fa9c824e7adbff686d46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::Style::~Style</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Style</name>
+        <qualifiedname>erbsland::cterm::text::Style::~Style</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1af97864c4c9880c4e90d0b6b7ccf5fa4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::Style::Style</definition>
+        <argsstring>(const Style &amp;)=default</argsstring>
+        <name>Style</name>
+        <qualifiedname>erbsland::cterm::text::Style::Style</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style" kindref="compound">Style</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a68ef067ac3f665b3260616f0d79b23c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::Style::Style</definition>
+        <argsstring>(Style &amp;&amp;)=default</argsstring>
+        <name>Style</name>
+        <qualifiedname>erbsland::cterm::text::Style::Style</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style" kindref="compound">Style</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="48" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a01c319739ca6e77b7001678fac21744c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style" kindref="compound">Style</ref> &amp;</type>
+        <definition>Style &amp; erbsland::cterm::text::Style::operator=</definition>
+        <argsstring>(const Style &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::Style::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style" kindref="compound">Style</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="49" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a7c822b5c816a3ca840489d95480a0bfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style" kindref="compound">Style</ref> &amp;</type>
+        <definition>Style &amp; erbsland::cterm::text::Style::operator=</definition>
+        <argsstring>(Style &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::Style::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style" kindref="compound">Style</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="50" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a2a2cd8491ff816185bc0b410e10ad463" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>StylePtr</type>
+        <definition>StylePtr erbsland::cterm::text::Style::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <qualifiedname>erbsland::cterm::text::Style::clone</qualifiedname>
+        <briefdescription>
+<para>Create a mutable copy of this style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A shared pointer to a cloned style instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="55" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a23bfc6c5976575e2b2565e1b54bfe148" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        <definition>const CharStyle &amp; erbsland::cterm::text::Style::baseTextStyle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>baseTextStyle</name>
+        <qualifiedname>erbsland::cterm::text::Style::baseTextStyle</qualifiedname>
+        <briefdescription>
+<para>Access the base text style used before selector-specific overlays. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The configured base text style. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="59" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1abdf15d3e4b01921f1f3d6d049cb95ae1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::Style::setBaseTextStyle</definition>
+        <argsstring>(const CharStyle &amp;style) noexcept</argsstring>
+        <name>setBaseTextStyle</name>
+        <qualifiedname>erbsland::cterm::text::Style::setBaseTextStyle</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Replace the base text style used before selector-specific overlays. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new base text style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1af542bc0d668546d097484d4c54556914" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_paragraph_indents" kindref="compound">ParagraphIndents</ref> &amp;</type>
+        <definition>const ParagraphIndents &amp; erbsland::cterm::text::Style::baseBlockLayout</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>baseBlockLayout</name>
+        <qualifiedname>erbsland::cterm::text::Style::baseBlockLayout</qualifiedname>
+        <briefdescription>
+<para>Access the base block layout used before selector-specific overrides. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The configured base block layout. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="66" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1ab0924e40c6d08ac668f6785b74b2a2e9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::Style::setBaseBlockLayout</definition>
+        <argsstring>(const ParagraphIndents &amp;layout) noexcept</argsstring>
+        <name>setBaseBlockLayout</name>
+        <qualifiedname>erbsland::cterm::text::Style::setBaseBlockLayout</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_paragraph_indents" kindref="compound">ParagraphIndents</ref> &amp;</type>
+          <declname>layout</declname>
+        </param>
+        <briefdescription>
+<para>Replace the base block layout used before selector-specific overrides. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>layout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new base block layout. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="69" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a4d74d1233d032765c7bbfe878dfe15b6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; std::reference_wrapper&lt; const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref> &gt; &gt;</type>
+        <definition>std::optional&lt; std::reference_wrapper&lt; const StyleRule &gt; &gt; erbsland::cterm::text::Style::definition</definition>
+        <argsstring>(const StyleSelector &amp;selector) const noexcept</argsstring>
+        <name>definition</name>
+        <qualifiedname>erbsland::cterm::text::Style::definition</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Access one exact stored rule definition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>selector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selector to query. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The stored rule, if present. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="74" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1ab34086b9b9a6db06f8a927d5427d2aa0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref> &amp;</type>
+        <definition>StyleRule &amp; erbsland::cterm::text::Style::edit</definition>
+        <argsstring>(const StyleSelector &amp;selector)</argsstring>
+        <name>edit</name>
+        <qualifiedname>erbsland::cterm::text::Style::edit</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Create or access one exact stored rule definition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>New definitions are initialized from the currently resolved rule for the same selector. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>selector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selector to edit. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A mutable reference to the stored rule. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="79" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a2636e149eaece7ceb085e7bff7f39da7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::Style::erase</definition>
+        <argsstring>(const StyleSelector &amp;selector) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>erbsland::cterm::text::Style::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Remove one exact stored rule definition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>selector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selector to erase. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="82" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a6949d794d38e90d2d8c93344eb9d49d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+        <definition>StyleRule erbsland::cterm::text::Style::resolve</definition>
+        <argsstring>(const StyleSelector &amp;selector, const StyleMatchContext &amp;context) const</argsstring>
+        <name>resolve</name>
+        <qualifiedname>erbsland::cterm::text::Style::resolve</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context" kindref="compound">StyleMatchContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Resolve the best matching rule for one selector and match context. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>selector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The requested selector. Explicit selector fields override the context. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current node context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The resolved rule. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="87" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1aef18ddb36ce72df9a1ff4c94c29a7b8c" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const StyleConstPtr &amp;</type>
+        <definition>static const StyleConstPtr &amp; erbsland::cterm::text::Style::defaultStyle</definition>
+        <argsstring>(Predefined predefined=Predefined::Plain) noexcept</argsstring>
+        <name>defaultStyle</name>
+        <qualifiedname>erbsland::cterm::text::Style::defaultStyle</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_1af55619c4e5170eb9e02c1de9d12781af" kindref="member">Predefined</ref></type>
+          <declname>predefined</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_1af55619c4e5170eb9e02c1de9d12781afa4cd8413207629a963225f4314b53adcd" kindref="member">Predefined::Plain</ref></defval>
+        </param>
+        <briefdescription>
+<para>Access one shared predefined default style instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>predefined</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The predefined style variant to return. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The lazily constructed shared style instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="92" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a2655dabf417165104fff1765c423add1" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const StyleConstPtr &amp;</type>
+        <definition>static const StyleConstPtr &amp; erbsland::cterm::text::Style::defaultPlain</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>defaultPlain</name>
+        <qualifiedname>erbsland::cterm::text::Style::defaultPlain</qualifiedname>
+        <briefdescription>
+<para>Access the shared plain default style instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The lazily constructed shared plain style instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="95" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a1dd740a258c0164fa5eb355caf855b36" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const StyleConstPtr &amp;</type>
+        <definition>static const StyleConstPtr &amp; erbsland::cterm::text::Style::defaultSimple</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>defaultSimple</name>
+        <qualifiedname>erbsland::cterm::text::Style::defaultSimple</qualifiedname>
+        <briefdescription>
+<para>Access the shared simple default style instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The lazily constructed shared simple style instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="98" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1ad4f0a7b51294a88568c4549784220a04" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const StyleConstPtr &amp;</type>
+        <definition>static const StyleConstPtr &amp; erbsland::cterm::text::Style::defaultStyled</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>defaultStyled</name>
+        <qualifiedname>erbsland::cterm::text::Style::defaultStyled</qualifiedname>
+        <briefdescription>
+<para>Access the shared styled default style instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The lazily constructed shared styled style instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="101" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a3d70540f19347d8081aa8ff0d773602e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>StyleConstPtr</type>
+        <definition>static StyleConstPtr erbsland::cterm::text::Style::createSimpleDefaultStyle</definition>
+        <argsstring>()</argsstring>
+        <name>createSimpleDefaultStyle</name>
+        <qualifiedname>erbsland::cterm::text::Style::createSimpleDefaultStyle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="109" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a567dc75e3f511fd553f004f37aa450ae" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>StyleConstPtr</type>
+        <definition>static StyleConstPtr erbsland::cterm::text::Style::createStyledDefaultStyle</definition>
+        <argsstring>()</argsstring>
+        <name>createStyledDefaultStyle</name>
+        <qualifiedname>erbsland::cterm::text::Style::createStyledDefaultStyle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="110" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a099665f59a6bdfd9c56afacce0b3bd17" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref></type>
+        <definition>static StyleSelector erbsland::cterm::text::Style::normalizedSelector</definition>
+        <argsstring>(StyleSelector selector)</argsstring>
+        <name>normalizedSelector</name>
+        <qualifiedname>erbsland::cterm::text::Style::normalizedSelector</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref></type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="111" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a7f1a8d290007c5c0a2b6c8d0aa7ad1e5" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context" kindref="compound">StyleMatchContext</ref></type>
+        <definition>static StyleMatchContext erbsland::cterm::text::Style::mergeSelectorIntoContext</definition>
+        <argsstring>(const StyleSelector &amp;selector, const StyleMatchContext &amp;context)</argsstring>
+        <name>mergeSelectorIntoContext</name>
+        <qualifiedname>erbsland::cterm::text::Style::mergeSelectorIntoContext</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context" kindref="compound">StyleMatchContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="113" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1ab69b1302fa35923dab76f1f5bb91cbf4" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>static std::vector&lt; std::string &gt; erbsland::cterm::text::Style::combineSelectorAndContextTokens</definition>
+        <argsstring>(const StyleSelector &amp;selector, std::span&lt; const std::string &gt; contextTokens)</argsstring>
+        <name>combineSelectorAndContextTokens</name>
+        <qualifiedname>erbsland::cterm::text::Style::combineSelectorAndContextTokens</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const std::string &gt;</type>
+          <declname>contextTokens</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="114" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a5e0a94a52d92fe41c265742388f626c3" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool erbsland::cterm::text::Style::tokensMatch</definition>
+        <argsstring>(std::span&lt; const std::string &gt; requiredTokens, std::span&lt; const std::string &gt; contextTokens) noexcept</argsstring>
+        <name>tokensMatch</name>
+        <qualifiedname>erbsland::cterm::text::Style::tokensMatch</qualifiedname>
+        <param>
+          <type>std::span&lt; const std::string &gt;</type>
+          <declname>requiredTokens</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const std::string &gt;</type>
+          <declname>contextTokens</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="115" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1abd8d400f66f495343398732e444a56cb" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+        <definition>StyleRule erbsland::cterm::text::Style::defaultRuleFor</definition>
+        <argsstring>(Role role, ListKind listKind, std::optional&lt; int &gt; level) const noexcept</argsstring>
+        <name>defaultRuleFor</name>
+        <qualifiedname>erbsland::cterm::text::Style::defaultRuleFor</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_1a54e5dbec9e5cf2a6c900b8dea2ad5571" kindref="member">Role</ref></type>
+          <declname>role</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_1a288fb822c0ae1a4eff2d2f64e9344eaa" kindref="member">ListKind</ref></type>
+          <declname>listKind</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; int &gt;</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="112" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1ab95dd2b89ad848dc3b2e35ac98c089cb" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::vector&lt; Entry &gt;::iterator</type>
+        <definition>std::vector&lt; Entry &gt;::iterator erbsland::cterm::text::Style::findEntry</definition>
+        <argsstring>(const StyleSelector &amp;selector) noexcept</argsstring>
+        <name>findEntry</name>
+        <qualifiedname>erbsland::cterm::text::Style::findEntry</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="116" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_1a54739d128055e589a38f83b7560d9819" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::vector&lt; Entry &gt;::const_iterator</type>
+        <definition>std::vector&lt; Entry &gt;::const_iterator erbsland::cterm::text::Style::findEntry</definition>
+        <argsstring>(const StyleSelector &amp;selector) const noexcept</argsstring>
+        <name>findEntry</name>
+        <qualifiedname>erbsland::cterm::text::Style::findEntry</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_selector" kindref="compound">StyleSelector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/Style.hpp" line="117" column="35"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A selector-driven style configuration for rich text rendering. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/Style.hpp" line="28" column="1" bodyfile="erbsland/cterm/text/Style.hpp" bodystart="28" bodyend="123"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a1b09aafbcc325b9ccd2b288a38b08f55" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>_baseBlockLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1aab9628fb131dd79626f58bd7061771db" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>_baseTextStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a02fc754909e945d50514b6619087e449" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>_definitions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1af542bc0d668546d097484d4c54556914" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>baseBlockLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a23bfc6c5976575e2b2565e1b54bfe148" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>baseTextStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a2a2cd8491ff816185bc0b410e10ad463" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>clone</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1ab69b1302fa35923dab76f1f5bb91cbf4" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>combineSelectorAndContextTokens</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a3d70540f19347d8081aa8ff0d773602e" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>createSimpleDefaultStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a567dc75e3f511fd553f004f37aa450ae" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>createStyledDefaultStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a2655dabf417165104fff1765c423add1" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>defaultPlain</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1abd8d400f66f495343398732e444a56cb" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>defaultRuleFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a1dd740a258c0164fa5eb355caf855b36" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>defaultSimple</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1aef18ddb36ce72df9a1ff4c94c29a7b8c" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>defaultStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1ad4f0a7b51294a88568c4549784220a04" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>defaultStyled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a4d74d1233d032765c7bbfe878dfe15b6" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>definition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1ab34086b9b9a6db06f8a927d5427d2aa0" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>edit</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a2636e149eaece7ceb085e7bff7f39da7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>erase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1ab95dd2b89ad848dc3b2e35ac98c089cb" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>findEntry</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a54739d128055e589a38f83b7560d9819" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>findEntry</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a288fb822c0ae1a4eff2d2f64e9344eaa" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>ListKind</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1aa691eff834c8da421db6c0d696864a79" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>MatchContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a7f1a8d290007c5c0a2b6c8d0aa7ad1e5" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>mergeSelectorIntoContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a099665f59a6bdfd9c56afacce0b3bd17" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>normalizedSelector</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a01c319739ca6e77b7001678fac21744c" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a7c822b5c816a3ca840489d95480a0bfb" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1af55619c4e5170eb9e02c1de9d12781af" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>Predefined</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a6949d794d38e90d2d8c93344eb9d49d9" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>resolve</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a54e5dbec9e5cf2a6c900b8dea2ad5571" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>Role</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1ab0924e40c6d08ac668f6785b74b2a2e9" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>setBaseBlockLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1abdf15d3e4b01921f1f3d6d049cb95ae1" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>setBaseTextStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1ae5aa2bfab7628733b751415c39b63046" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>Style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1af97864c4c9880c4e90d0b6b7ccf5fa4f" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>Style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a68ef067ac3f665b3260616f0d79b23c7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>Style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a5e0a94a52d92fe41c265742388f626c3" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>tokensMatch</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_1a073783b9b335fa9c824e7adbff686d46" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::Style</scope><name>~Style</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

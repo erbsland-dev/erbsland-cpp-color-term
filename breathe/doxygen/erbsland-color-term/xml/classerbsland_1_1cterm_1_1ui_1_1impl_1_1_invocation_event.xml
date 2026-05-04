@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::impl::InvocationEvent</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_event_data" prot="public" virt="non-virtual">erbsland::cterm::ui::EventData</basecompoundref>
+    <includes refid="_invocation_event_8hpp" local="no">erbsland/cterm/ui/event/impl/InvocationEvent.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event_1a1fd8c143c85a4cee88e05122083d6ab0" prot="public" static="no">
+        <type>std::function&lt; void(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref>)&gt;</type>
+        <definition>using erbsland::cterm::ui::impl::InvocationEvent::InvocationFn =  std::function&lt;void(StopToken)&gt;</definition>
+        <argsstring></argsstring>
+        <name>InvocationFn</name>
+        <qualifiedname>erbsland::cterm::ui::impl::InvocationEvent::InvocationFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" line="16" column="5" bodyfile="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event_1a98ae8721a7cdd1eeacd195d81cb1fab6" prot="private" static="no" mutable="no">
+        <type>InvocationFn</type>
+        <definition>InvocationFn erbsland::cterm::ui::impl::InvocationEvent::_invocation</definition>
+        <argsstring></argsstring>
+        <name>_invocation</name>
+        <qualifiedname>erbsland::cterm::ui::impl::InvocationEvent::_invocation</qualifiedname>
+        <briefdescription>
+<para>The callback to execute. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" line="33" column="18" bodyfile="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event_1aa3a34b4686bbe51f1dcb087f91ce4e3a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::impl::InvocationEvent::InvocationEvent</definition>
+        <argsstring>(InvocationFn invocation)</argsstring>
+        <name>InvocationEvent</name>
+        <qualifiedname>erbsland::cterm::ui::impl::InvocationEvent::InvocationEvent</qualifiedname>
+        <param>
+          <type>InvocationFn</type>
+          <declname>invocation</declname>
+        </param>
+        <briefdescription>
+<para>Create an invocation event for the given callback. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>invocation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to execute. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" line="21" column="14" bodyfile="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event_1a7f2e937d98135712c5e8b19ae3bd0b96" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::impl::InvocationEvent::invoke</definition>
+        <argsstring>(const StopToken stopToken) const</argsstring>
+        <name>invoke</name>
+        <qualifiedname>erbsland::cterm::ui::impl::InvocationEvent::invoke</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref></type>
+          <declname>stopToken</declname>
+        </param>
+        <briefdescription>
+<para>Execute the stored callback. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stopToken</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The cooperative stop token for this invocation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" line="26" column="10" bodyfile="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" bodystart="26" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Internal event payload for invoked functions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>erbsland::cterm::ui::EventData</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_event_data"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::impl::InvocationEvent</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>erbsland::cterm::ui::EventData</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_event_data"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::impl::InvocationEvent</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" line="14" column="1" bodyfile="erbsland/cterm/ui/event/impl/InvocationEvent.hpp" bodystart="14" bodyend="34"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event_1a98ae8721a7cdd1eeacd195d81cb1fab6" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::impl::InvocationEvent</scope><name>_invocation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event_1aa3a34b4686bbe51f1dcb087f91ce4e3a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::impl::InvocationEvent</scope><name>InvocationEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event_1a1fd8c143c85a4cee88e05122083d6ab0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::impl::InvocationEvent</scope><name>InvocationFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_invocation_event_1a7f2e937d98135712c5e8b19ae3bd0b96" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::impl::InvocationEvent</scope><name>invoke</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_data_1af3213c238e1bd6ea9f5f6f2da1a80036" prot="public" virt="virtual"><scope>erbsland::cterm::ui::impl::InvocationEvent</scope><name>isHandled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_data_1a9cb7da4b9454468729344895a4f47364" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::impl::InvocationEvent</scope><name>setHandled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_data_1a6cb330f389a7da58dde9ea871dae8680" prot="public" virt="virtual"><scope>erbsland::cterm::ui::impl::InvocationEvent</scope><name>~EventData</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

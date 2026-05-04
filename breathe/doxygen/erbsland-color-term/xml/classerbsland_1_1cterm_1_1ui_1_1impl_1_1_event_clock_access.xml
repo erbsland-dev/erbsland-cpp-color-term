@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::impl::EventClockAccess</compoundname>
+    <includes refid="_event_clock_access_8hpp" local="no">erbsland/cterm/ui/event/impl/EventClockAccess.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a340093e85f1f85526fe0b47511628d4b" prot="public" static="no">
+        <type>std::function&lt; EventTime()&gt;</type>
+        <definition>using erbsland::cterm::ui::impl::EventClockAccess::NowFn =  std::function&lt;EventTime()&gt;</definition>
+        <argsstring></argsstring>
+        <name>NowFn</name>
+        <qualifiedname>erbsland::cterm::ui::impl::EventClockAccess::NowFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" line="15" column="5" bodyfile="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a6533b464780412f09d03906059ffa56b" prot="private" static="yes" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex erbsland::cterm::ui::impl::EventClockAccess::_mutex</definition>
+        <argsstring></argsstring>
+        <name>_mutex</name>
+        <qualifiedname>erbsland::cterm::ui::impl::EventClockAccess::_mutex</qualifiedname>
+        <briefdescription>
+<para>Protects the clock override function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" line="32" column="23" bodyfile="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a08aae1bfc11c796c5175168d6715ad8e" prot="private" static="yes" mutable="no">
+        <type>NowFn</type>
+        <definition>NowFn erbsland::cterm::ui::impl::EventClockAccess::_nowFn</definition>
+        <argsstring></argsstring>
+        <name>_nowFn</name>
+        <qualifiedname>erbsland::cterm::ui::impl::EventClockAccess::_nowFn</qualifiedname>
+        <briefdescription>
+<para>Optional override clock for tests. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" line="33" column="18" bodyfile="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a1ed951ba845c74117864fa7f1cd15b2c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EventTime</type>
+        <definition>static EventTime erbsland::cterm::ui::impl::EventClockAccess::now</definition>
+        <argsstring>()</argsstring>
+        <name>now</name>
+        <qualifiedname>erbsland::cterm::ui::impl::EventClockAccess::now</qualifiedname>
+        <briefdescription>
+<para>Read the current event time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current time. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" line="20" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1ad41895999f4ed8fe7e11a874a7cbe318" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NowFn</type>
+        <definition>static NowFn erbsland::cterm::ui::impl::EventClockAccess::swapNowFnForTest</definition>
+        <argsstring>(NowFn nowFn)</argsstring>
+        <name>swapNowFnForTest</name>
+        <qualifiedname>erbsland::cterm::ui::impl::EventClockAccess::swapNowFnForTest</qualifiedname>
+        <param>
+          <type>NowFn</type>
+          <declname>nowFn</declname>
+        </param>
+        <briefdescription>
+<para>Swap the clock function used by <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a1ed951ba845c74117864fa7f1cd15b2c" kindref="member">now()</ref></computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nowFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement clock function. An empty function restores the default clock. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The previously active clock function. An empty function indicates the default clock. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" line="24" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a815d02a4e35be09cd969684ca810cf3a" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EventTime</type>
+        <definition>static EventTime erbsland::cterm::ui::impl::EventClockAccess::defaultNow</definition>
+        <argsstring>()</argsstring>
+        <name>defaultNow</name>
+        <qualifiedname>erbsland::cterm::ui::impl::EventClockAccess::defaultNow</qualifiedname>
+        <briefdescription>
+<para>The default clock function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current steady-clock time. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" line="29" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Internal access wrapper around the UI event clock. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" line="13" column="1" bodyfile="erbsland/cterm/ui/event/impl/EventClockAccess.hpp" bodystart="13" bodyend="34"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a6533b464780412f09d03906059ffa56b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::impl::EventClockAccess</scope><name>_mutex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a08aae1bfc11c796c5175168d6715ad8e" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::impl::EventClockAccess</scope><name>_nowFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a815d02a4e35be09cd969684ca810cf3a" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::impl::EventClockAccess</scope><name>defaultNow</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a1ed951ba845c74117864fa7f1cd15b2c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::impl::EventClockAccess</scope><name>now</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a340093e85f1f85526fe0b47511628d4b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::impl::EventClockAccess</scope><name>NowFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1ad41895999f4ed8fe7e11a874a7cbe318" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::impl::EventClockAccess</scope><name>swapNowFnForTest</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

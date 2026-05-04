@@ -1,0 +1,657 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_char_style" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::CharStyle</compoundname>
+    <includes refid="_char_style_8hpp" local="no">erbsland/cterm/CharStyle.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_char_style_1a67dcc62d6eb63f04319cb630a3c0b3b6" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::CharStyle::_color</definition>
+        <argsstring></argsstring>
+        <name>_color</name>
+        <qualifiedname>erbsland::cterm::CharStyle::_color</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>The foreground/background colors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="100" column="11" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_char_style_1a10df72ef6c6ef1fd7eab4f93abbc4c29" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+        <definition>CharAttributes erbsland::cterm::CharStyle::_attributes</definition>
+        <argsstring></argsstring>
+        <name>_attributes</name>
+        <qualifiedname>erbsland::cterm::CharStyle::_attributes</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>The character attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="101" column="20" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a7c48f3453896060b7514e95fc4befb0c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::CharStyle::CharStyle</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::CharStyle</qualifiedname>
+        <briefdescription>
+<para>Create a style with inherited color and attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="16" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a3045d3551a41888ed20f4a5619646a88" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename tColor</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::CharStyle::CharStyle</definition>
+        <argsstring>(const tColor color, const CharAttributes attributes={}) noexcept</argsstring>
+        <name>CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::CharStyle</qualifiedname>
+        <param>
+          <type>const tColor</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+          <defval>{}</defval>
+        </param>
+    <requiresclause>std::is_constructible_v&lt;Color, tColor&gt;    </requiresclause>
+        <briefdescription>
+<para>Create a style from color and attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color for the style. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character attributes for the style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="22" column="15" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="22" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1af62bb20a6020e758e37ea014abc5a58e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::CharStyle::CharStyle</definition>
+        <argsstring>(const CharAttributes attributes) noexcept</argsstring>
+        <name>CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::CharStyle</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Create a style from character attributes and inherited color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character attributes for the style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="26" column="15" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1acb0276f75feacda4ce0f44de8b8777c9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::CharStyle::CharStyle</definition>
+        <argsstring>(const Foreground fg) noexcept</argsstring>
+        <name>CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::CharStyle</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>fg</declname>
+        </param>
+        <briefdescription>
+<para>Create a style with the given foreground color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The foreground color for the style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="29" column="15" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a535e2eafca38ef287a5afc0bab930766" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::CharStyle::CharStyle</definition>
+        <argsstring>(const Background bg) noexcept</argsstring>
+        <name>CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::CharStyle</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>bg</declname>
+        </param>
+        <briefdescription>
+<para>Create a style with the given background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The background color for the style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="32" column="15" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a8df7568325a41ee4b46f2dca16891bbe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::CharStyle::CharStyle</definition>
+        <argsstring>(const Foreground fg, const Background bg) noexcept</argsstring>
+        <name>CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::CharStyle</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>fg</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>bg</declname>
+        </param>
+        <briefdescription>
+<para>Create a style with the given foreground and background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The foreground color for the style. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The background color for the style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="36" column="15" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a94b07c0cd449c45dad89534899689b55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::CharStyle::~CharStyle</definition>
+        <argsstring>()=default</argsstring>
+        <name>~CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::~CharStyle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a8c849c0b6adf0c749f181865e5e0e164" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::CharStyle::CharStyle</definition>
+        <argsstring>(const CharStyle &amp;)=default</argsstring>
+        <name>CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::CharStyle</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1accc31e2da4ad83f6ef4b933e6244cb6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::CharStyle::CharStyle</definition>
+        <argsstring>(CharStyle &amp;&amp;)=default</argsstring>
+        <name>CharStyle</name>
+        <qualifiedname>erbsland::cterm::CharStyle::CharStyle</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1ad75bf010063eb4d43c1b0683ded21ec1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        <definition>CharStyle &amp; erbsland::cterm::CharStyle::operator=</definition>
+        <argsstring>(const CharStyle &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::CharStyle::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="42" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a00caa442245163d38d3bc3e4a1d6b15e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        <definition>CharStyle &amp; erbsland::cterm::CharStyle::operator=</definition>
+        <argsstring>(CharStyle &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::CharStyle::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="43" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a874287d252abb50dbc2495615546db58" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::CharStyle::operator==</definition>
+        <argsstring>(const CharStyle &amp;) const noexcept=default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::CharStyle::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Compare two character styles for equality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="47" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a755dd7ff384e5971bda28a5b0eb8952c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::CharStyle::operator!=</definition>
+        <argsstring>(const CharStyle &amp;) const noexcept=default</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>erbsland::cterm::CharStyle::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Compare two character styles for inequality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="49" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1af632a6f8f54f4c36d3ef8b85f17473c7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::CharStyle::color</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>color</name>
+        <qualifiedname>erbsland::cterm::CharStyle::color</qualifiedname>
+        <briefdescription>
+<para>Get the color part of the style. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="53" column="12" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a3093a7941d55a8d5bf67aea83e938ef8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CharStyle::setColor</definition>
+        <argsstring>(const Color color) noexcept</argsstring>
+        <name>setColor</name>
+        <qualifiedname>erbsland::cterm::CharStyle::setColor</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set the color part of the style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="56" column="10" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1aeb6819c10690d19c1e786dd0cd551bc3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+        <definition>Foreground erbsland::cterm::CharStyle::fg</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>fg</name>
+        <qualifiedname>erbsland::cterm::CharStyle::fg</qualifiedname>
+        <briefdescription>
+<para>Get the foreground color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="58" column="17" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a282fcfdcb2b1bf6014c66a78fbbaf194" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CharStyle::setFg</definition>
+        <argsstring>(const Foreground foreground) noexcept</argsstring>
+        <name>setFg</name>
+        <qualifiedname>erbsland::cterm::CharStyle::setFg</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>foreground</declname>
+        </param>
+        <briefdescription>
+<para>Set the foreground color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>foreground</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new foreground color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="61" column="10" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1ad0c25d5b24c805058ea316a22f6fd4fb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+        <definition>Background erbsland::cterm::CharStyle::bg</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bg</name>
+        <qualifiedname>erbsland::cterm::CharStyle::bg</qualifiedname>
+        <briefdescription>
+<para>Get the background color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="63" column="17" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a1d1443a56d51e35717ef37539fc1d844" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CharStyle::setBg</definition>
+        <argsstring>(const Background background) noexcept</argsstring>
+        <name>setBg</name>
+        <qualifiedname>erbsland::cterm::CharStyle::setBg</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>background</declname>
+        </param>
+        <briefdescription>
+<para>Set the background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>background</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="66" column="10" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a94d5a6ea23d71a91a5127e1666820e0a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+        <definition>CharAttributes erbsland::cterm::CharStyle::attributes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>attributes</name>
+        <qualifiedname>erbsland::cterm::CharStyle::attributes</qualifiedname>
+        <briefdescription>
+<para>Get the character attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="68" column="21" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1aa4dc2655eb173de3ad968d3cf87a32d6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CharStyle::setAttributes</definition>
+        <argsstring>(const CharAttributes attributes) noexcept</argsstring>
+        <name>setAttributes</name>
+        <qualifiedname>erbsland::cterm::CharStyle::setAttributes</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Set the character attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new character attributes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="71" column="10" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a3c235a4c3d3ed156059bc89949aeb480" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+        <definition>CharStyle erbsland::cterm::CharStyle::withOverlay</definition>
+        <argsstring>(const CharStyle overlay) const noexcept</argsstring>
+        <name>withOverlay</name>
+        <qualifiedname>erbsland::cterm::CharStyle::withOverlay</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>overlay</declname>
+        </param>
+        <briefdescription>
+<para>Create a new style by overlaying another style onto this one. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Inherited color components keep the existing color, and unspecified attributes keep the existing attributes. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>overlay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The overlay style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The combined style. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="78" column="16" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="78" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1ab20ad0d90e43f1308e9d7d742c7026fc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+        <definition>CharStyle erbsland::cterm::CharStyle::withBase</definition>
+        <argsstring>(const CharStyle base) const noexcept</argsstring>
+        <name>withBase</name>
+        <qualifiedname>erbsland::cterm::CharStyle::withBase</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>base</declname>
+        </param>
+        <briefdescription>
+<para>Create a new style by placing a base style underneath this one. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The current style overwrites inherited or unspecified parts from the base style. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The resolved style. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="85" column="16" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="85" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a0a3bef15b1e4897908d9cf958e20cd1d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::CharStyle::hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hash</name>
+        <qualifiedname>erbsland::cterm::CharStyle::hash</qualifiedname>
+        <briefdescription>
+<para>Get a stable hash for the character style. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="89" column="28" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="89" bodyend="91"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_style_1a5c505a9f0110c891a0006212c89e22ca" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+        <definition>static constexpr CharStyle erbsland::cterm::CharStyle::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>erbsland::cterm::CharStyle::reset</qualifiedname>
+        <briefdescription>
+<para>Get a character style with default colors and default attributes set. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CharStyle.hpp" line="95" column="33" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="95" bodyend="97"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A combined terminal text style with color and character attributes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/CharStyle.hpp" line="13" column="1" bodyfile="erbsland/cterm/CharStyle.hpp" bodystart="13" bodyend="102"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a10df72ef6c6ef1fd7eab4f93abbc4c29" prot="private" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>_attributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a67dcc62d6eb63f04319cb630a3c0b3b6" prot="private" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>_color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a94d5a6ea23d71a91a5127e1666820e0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>attributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1ad0c25d5b24c805058ea316a22f6fd4fb" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>bg</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a7c48f3453896060b7514e95fc4befb0c" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>CharStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a3045d3551a41888ed20f4a5619646a88" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>CharStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1af62bb20a6020e758e37ea014abc5a58e" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>CharStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1acb0276f75feacda4ce0f44de8b8777c9" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>CharStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a535e2eafca38ef287a5afc0bab930766" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>CharStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a8df7568325a41ee4b46f2dca16891bbe" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>CharStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a8c849c0b6adf0c749f181865e5e0e164" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>CharStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1accc31e2da4ad83f6ef4b933e6244cb6a" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>CharStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1af632a6f8f54f4c36d3ef8b85f17473c7" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1aeb6819c10690d19c1e786dd0cd551bc3" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>fg</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a0a3bef15b1e4897908d9cf958e20cd1d" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>hash</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a755dd7ff384e5971bda28a5b0eb8952c" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>operator!=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1ad75bf010063eb4d43c1b0683ded21ec1" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a00caa442245163d38d3bc3e4a1d6b15e" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a874287d252abb50dbc2495615546db58" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a5c505a9f0110c891a0006212c89e22ca" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>reset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1aa4dc2655eb173de3ad968d3cf87a32d6" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>setAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a1d1443a56d51e35717ef37539fc1d844" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>setBg</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a3093a7941d55a8d5bf67aea83e938ef8" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>setColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a282fcfdcb2b1bf6014c66a78fbbaf194" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>setFg</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1ab20ad0d90e43f1308e9d7d742c7026fc" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>withBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a3c235a4c3d3ed156059bc89949aeb480" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>withOverlay</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_style_1a94b07c0cd449c45dad89534899689b55" prot="public" virt="non-virtual"><scope>erbsland::cterm::CharStyle</scope><name>~CharStyle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,437 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1theme_1_1_theme" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::theme::Theme</compoundname>
+    <includes refid="_theme_8hpp" local="no">erbsland/cterm/theme/Theme.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1theme_1_1_theme_1_1_definition" prot="public">erbsland::cterm::theme::Theme::Definition</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1aaec17e15cd88104635559c8dd679c015" prot="public" static="no">
+        <type>std::optional&lt; std::reference_wrapper&lt; const <ref refid="structerbsland_1_1cterm_1_1theme_1_1_theme_1_1_definition" kindref="compound">Definition</ref> &gt; &gt;</type>
+        <definition>using erbsland::cterm::theme::Theme::OptionalDefinition =  std::optional&lt;std::reference_wrapper&lt;const Definition&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>OptionalDefinition</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::OptionalDefinition</qualifiedname>
+        <briefdescription>
+<para>An optional definition. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="33" column="5" bodyfile="erbsland/cterm/theme/Theme.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a06c35a695f8bed2d3f3de8a7c4733413" prot="public" static="no">
+        <type>std::unordered_map&lt; <ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref>, <ref refid="structerbsland_1_1cterm_1_1theme_1_1_theme_1_1_definition" kindref="compound">Definition</ref> &gt;</type>
+        <definition>using erbsland::cterm::theme::Theme::Definitions =  std::unordered_map&lt;Selector, Definition&gt;</definition>
+        <argsstring></argsstring>
+        <name>Definitions</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::Definitions</qualifiedname>
+        <briefdescription>
+<para>The authored property sheet definitions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="35" column="5" bodyfile="erbsland/cterm/theme/Theme.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a8924c9380b8ffa1c4df07ed69cc9502b" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a06c35a695f8bed2d3f3de8a7c4733413" kindref="member">Definitions</ref></type>
+        <definition>Definitions erbsland::cterm::theme::Theme::_definitions</definition>
+        <argsstring></argsstring>
+        <name>_definitions</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::_definitions</qualifiedname>
+        <briefdescription>
+<para>Authored property sheets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="83" column="17" bodyfile="erbsland/cterm/theme/Theme.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1ac48592ad709adfde6fff2041be457eaf" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t erbsland::cterm::theme::Theme::_registeredTagCount</definition>
+        <argsstring></argsstring>
+        <name>_registeredTagCount</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::_registeredTagCount</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Number of registered tag bits. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="84" column="13" bodyfile="erbsland/cterm/theme/Theme.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a14134494d4466c44b66da2d9109daf85" prot="private" static="no" mutable="yes">
+        <type>std::unordered_map&lt; <ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref>, PropertySheetConstPtr &gt;</type>
+        <definition>std::unordered_map&lt;Selector, PropertySheetConstPtr&gt; erbsland::cterm::theme::Theme::_cache</definition>
+        <argsstring></argsstring>
+        <name>_cache</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::_cache</qualifiedname>
+        <briefdescription>
+<para>Effective sheet cache. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="85" column="32" bodyfile="erbsland/cterm/theme/Theme.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a8f467b0adeb4cbac847d802d1129ba90" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::theme::Theme::Theme</definition>
+        <argsstring>(Definitions definitions, uint8_t registeredTagCount=0)</argsstring>
+        <name>Theme</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::Theme</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a06c35a695f8bed2d3f3de8a7c4733413" kindref="member">Definitions</ref></type>
+          <declname>definitions</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>registeredTagCount</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Create a theme from authored property sheet definitions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>definitions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The authored property sheet definitions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>registeredTagCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of registered tags. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="41" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1ab139f2ddf10eb3e09ddac9ca2e87d116" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>PropertySheetConstPtr</type>
+        <definition>PropertySheetConstPtr erbsland::cterm::theme::Theme::propertySheet</definition>
+        <argsstring>(Selector selector) const</argsstring>
+        <name>propertySheet</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::propertySheet</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref></type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Resolve an effective property sheet for a selector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>selector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selector to resolve. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="46" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1ae062d7cb813a9ceae3794343e0964707" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t erbsland::cterm::theme::Theme::registeredTagCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>registeredTagCount</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::registeredTagCount</qualifiedname>
+        <briefdescription>
+<para>Get the number of registered tags. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="48" column="14" bodyfile="erbsland/cterm/theme/Theme.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a6941ee3092f02f564622a0b520b46413" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a06c35a695f8bed2d3f3de8a7c4733413" kindref="member">Definitions</ref> &amp;</type>
+        <definition>const Definitions &amp; erbsland::cterm::theme::Theme::definitions</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>definitions</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::definitions</qualifiedname>
+        <briefdescription>
+<para>Access the authored definitions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="50" column="25" bodyfile="erbsland/cterm/theme/Theme.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a147715f597801e4c605eacf580d22e63" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::theme::Theme::registerElement</definition>
+        <argsstring>(Element element, Element base)</argsstring>
+        <name>registerElement</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::registerElement</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref></type>
+          <declname>element</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_element" kindref="compound">Element</ref></type>
+          <declname>base</declname>
+        </param>
+        <briefdescription>
+<para>Register a user-defined element base relationship. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The user-defined element. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The direct base element. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="56" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1ae5ba4631166daa265e45f811ea3bcf8b" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const ThemeConstPtr &amp;</type>
+        <definition>static const ThemeConstPtr &amp; erbsland::cterm::theme::Theme::dark</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>dark</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::dark</qualifiedname>
+        <briefdescription>
+<para>Access the predefined dark theme. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="58" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a0967af2e91f87f845bb7afa11a889848" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const ThemeConstPtr &amp;</type>
+        <definition>static const ThemeConstPtr &amp; erbsland::cterm::theme::Theme::light</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>light</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::light</qualifiedname>
+        <briefdescription>
+<para>Access the predefined light theme. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="60" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1ae8541707ba1417df525d67c17c86557c" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const ThemeConstPtr &amp;</type>
+        <definition>static const ThemeConstPtr &amp; erbsland::cterm::theme::Theme::monochrome</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>monochrome</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::monochrome</qualifiedname>
+        <briefdescription>
+<para>Access the predefined monochrome theme. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="62" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1aa3c764a9e085089779a3d7cdba5e3353" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const ThemeConstPtr &amp;</type>
+        <definition>static const ThemeConstPtr &amp; erbsland::cterm::theme::Theme::zero</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>zero</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::zero</qualifiedname>
+        <briefdescription>
+<para>Access the predefined zero theme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The zero theme does not define any elements or styles. Use this theme for your unit tests or when you want to start from a clean slate. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="66" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a87db04493159f42f33cea610ec5bf5be" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref></type>
+        <definition>static Selector erbsland::cterm::theme::Theme::normalized</definition>
+        <argsstring>(Selector selector) noexcept</argsstring>
+        <name>normalized</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::normalized</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref></type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Normalize empty selectors to the root selector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="70" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a68e3ddeb547c794b9880e439f436481c" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1impl_1_1_element_base_manager" kindref="compound">impl::ElementBaseManager</ref> &amp;</type>
+        <definition>static impl::ElementBaseManager &amp; erbsland::cterm::theme::Theme::elementBaseManager</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>elementBaseManager</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::elementBaseManager</qualifiedname>
+        <briefdescription>
+<para>Access the global element base manager. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="80" column="39"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1af1db60d43175cd31a55d6d0ab8920aba" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1aaec17e15cd88104635559c8dd679c015" kindref="member">OptionalDefinition</ref></type>
+        <definition>OptionalDefinition erbsland::cterm::theme::Theme::definitionFor</definition>
+        <argsstring>(const Selector &amp;selector) const noexcept</argsstring>
+        <name>definitionFor</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::definitionFor</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Find an authored definition. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="72" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a60477eb17b666203102dadd770a48bcb" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref></type>
+        <definition>Selector erbsland::cterm::theme::Theme::baseSelectorFor</definition>
+        <argsstring>(const Selector &amp;selector) const noexcept</argsstring>
+        <name>baseSelectorFor</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::baseSelectorFor</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Find the selector for the nearest base sheet. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="74" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a4faf76ed591f269890d3975da81dbc97" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref> &gt;</type>
+        <definition>std::optional&lt; Selector &gt; erbsland::cterm::theme::Theme::bestTagSubset</definition>
+        <argsstring>(const Selector &amp;selector) const noexcept</argsstring>
+        <name>bestTagSubset</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::bestTagSubset</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Find the best authored tag subset. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="76" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_1a432b373a443eff02e887ff69111e2bb3" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref> &gt;</type>
+        <definition>std::optional&lt; Selector &gt; erbsland::cterm::theme::Theme::bestStateSubset</definition>
+        <argsstring>(const Selector &amp;selector) const noexcept</argsstring>
+        <name>bestStateSubset</name>
+        <qualifiedname>erbsland::cterm::theme::Theme::bestStateSubset</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref> &amp;</type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Find the best authored state subset. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/Theme.hpp" line="78" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Immutable theme built from hierarchical property sheets. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/theme/Theme.hpp" line="25" column="1" bodyfile="erbsland/cterm/theme/Theme.hpp" bodystart="25" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a14134494d4466c44b66da2d9109daf85" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>_cache</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a8924c9380b8ffa1c4df07ed69cc9502b" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>_definitions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1ac48592ad709adfde6fff2041be457eaf" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>_registeredTagCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a60477eb17b666203102dadd770a48bcb" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>baseSelectorFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a432b373a443eff02e887ff69111e2bb3" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>bestStateSubset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a4faf76ed591f269890d3975da81dbc97" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>bestTagSubset</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1ae5ba4631166daa265e45f811ea3bcf8b" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>dark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1af1db60d43175cd31a55d6d0ab8920aba" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>definitionFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a06c35a695f8bed2d3f3de8a7c4733413" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>Definitions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a6941ee3092f02f564622a0b520b46413" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>definitions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a68e3ddeb547c794b9880e439f436481c" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>elementBaseManager</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a0967af2e91f87f845bb7afa11a889848" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>light</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1ae8541707ba1417df525d67c17c86557c" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>monochrome</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a87db04493159f42f33cea610ec5bf5be" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>normalized</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1aaec17e15cd88104635559c8dd679c015" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>OptionalDefinition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1ab139f2ddf10eb3e09ddac9ca2e87d116" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>propertySheet</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1ae062d7cb813a9ceae3794343e0964707" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>registeredTagCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a147715f597801e4c605eacf580d22e63" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>registerElement</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a8f467b0adeb4cbac847d802d1129ba90" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>Theme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1aa3c764a9e085089779a3d7cdba5e3353" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::Theme</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

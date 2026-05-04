@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::theme::ThemeBuilder</compoundname>
+    <includes refid="_theme_builder_8hpp" local="no">erbsland/cterm/theme/ThemeBuilder.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1acb3c62fcc37dd358980c302f6c6e430c" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1a06c35a695f8bed2d3f3de8a7c4733413" kindref="member">Theme::Definitions</ref></type>
+        <definition>Theme::Definitions erbsland::cterm::theme::ThemeBuilder::_definitions</definition>
+        <argsstring></argsstring>
+        <name>_definitions</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::_definitions</qualifiedname>
+        <briefdescription>
+<para>Authored definitions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="47" column="24" bodyfile="erbsland/cterm/theme/ThemeBuilder.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a2c4c81fd367e3463536c156b814fd76c" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t erbsland::cterm::theme::ThemeBuilder::_nextOrder</definition>
+        <argsstring></argsstring>
+        <name>_nextOrder</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::_nextOrder</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Next insertion order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="48" column="14" bodyfile="erbsland/cterm/theme/ThemeBuilder.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ae45773ebfebb22eebd66e70ee21070d1" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t erbsland::cterm::theme::ThemeBuilder::_nextTagBit</definition>
+        <argsstring></argsstring>
+        <name>_nextTagBit</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::_nextTagBit</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Next tag bit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="49" column="13" bodyfile="erbsland/cterm/theme/ThemeBuilder.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a16b3b6fc305b237e18b0845348d4d342" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::theme::ThemeBuilder::ThemeBuilder</definition>
+        <argsstring>()=default</argsstring>
+        <name>ThemeBuilder</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::ThemeBuilder</qualifiedname>
+        <briefdescription>
+<para>Create an empty theme builder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="14" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ab3bb307f780248216b6cd12a7d08883f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_tag" kindref="compound">Tag</ref></type>
+        <definition>Tag erbsland::cterm::theme::ThemeBuilder::registerTag</definition>
+        <argsstring>()</argsstring>
+        <name>registerTag</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::registerTag</qualifiedname>
+        <briefdescription>
+<para>Register a new theme tag. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>After 64 tags. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="19" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a6baf57dd64ae0a77482581807da504c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_property_editor" kindref="compound">PropertyEditor</ref></type>
+        <definition>PropertyEditor erbsland::cterm::theme::ThemeBuilder::edit</definition>
+        <argsstring>(Selector selector)</argsstring>
+        <name>edit</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::edit</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref></type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Edit one property sheet. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>selector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selector for the sheet. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="22" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ab69338d6d4b578cdf8f763d9fcf73b92" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ThemeConstPtr</type>
+        <definition>ThemeConstPtr erbsland::cterm::theme::ThemeBuilder::build</definition>
+        <argsstring>() const</argsstring>
+        <name>build</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::build</qualifiedname>
+        <briefdescription>
+<para>Build an immutable theme. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="24" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a0298c021442e3d3e7d46a148fd41e84a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder" kindref="compound">ThemeBuilder</ref></type>
+        <definition>static ThemeBuilder erbsland::cterm::theme::ThemeBuilder::from</definition>
+        <argsstring>(const ThemeConstPtr &amp;theme)</argsstring>
+        <name>from</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::from</qualifiedname>
+        <param>
+          <type>const ThemeConstPtr &amp;</type>
+          <declname>theme</declname>
+        </param>
+        <briefdescription>
+<para>Create a builder from an existing theme. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="28" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a5a29d3a9bc0918f8697f4b33261490db" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder" kindref="compound">ThemeBuilder</ref></type>
+        <definition>static ThemeBuilder erbsland::cterm::theme::ThemeBuilder::dark</definition>
+        <argsstring>()</argsstring>
+        <name>dark</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::dark</qualifiedname>
+        <briefdescription>
+<para>Create the dark default theme builder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="30" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a076a2cb9f01f68bb2b1be91ffef70126" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder" kindref="compound">ThemeBuilder</ref></type>
+        <definition>static ThemeBuilder erbsland::cterm::theme::ThemeBuilder::light</definition>
+        <argsstring>()</argsstring>
+        <name>light</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::light</qualifiedname>
+        <briefdescription>
+<para>Create the light default theme builder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="32" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a576390cd205ba6f54831416aefbb53f6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder" kindref="compound">ThemeBuilder</ref></type>
+        <definition>static ThemeBuilder erbsland::cterm::theme::ThemeBuilder::monochrome</definition>
+        <argsstring>()</argsstring>
+        <name>monochrome</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::monochrome</qualifiedname>
+        <briefdescription>
+<para>Create the monochrome default theme builder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="34" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ae5f553b4685ecd04356ac77f569df75e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder" kindref="compound">ThemeBuilder</ref></type>
+        <definition>static ThemeBuilder erbsland::cterm::theme::ThemeBuilder::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::zero</qualifiedname>
+        <briefdescription>
+<para>Create the zero theme builder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="36" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a7c8030ecf59f1f765b6218fb41cf6301" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structerbsland_1_1cterm_1_1theme_1_1_theme_1_1_definition" kindref="compound">Theme::Definition</ref> &amp;</type>
+        <definition>Theme::Definition &amp; erbsland::cterm::theme::ThemeBuilder::definitionFor</definition>
+        <argsstring>(Selector selector)</argsstring>
+        <name>definitionFor</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::definitionFor</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1theme_1_1_selector" kindref="compound">Selector</ref></type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>Edit a definition and preserve insertion order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="40" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ae10cf6ea5694b55b0158de305ae3f142" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::theme::ThemeBuilder::addClassicBlocks</definition>
+        <argsstring>()</argsstring>
+        <name>addClassicBlocks</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::addClassicBlocks</qualifiedname>
+        <briefdescription>
+<para>Install common structural blocks and margins. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="42" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a0712abc3f9ae9521877a2012a227f05d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::theme::ThemeBuilder::addPlainBlocks</definition>
+        <argsstring>()</argsstring>
+        <name>addPlainBlocks</name>
+        <qualifiedname>erbsland::cterm::theme::ThemeBuilder::addPlainBlocks</qualifiedname>
+        <briefdescription>
+<para>Install plain structural blocks and margins. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="44" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Builder for immutable themes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/theme/ThemeBuilder.hpp" line="11" column="1" bodyfile="erbsland/cterm/theme/ThemeBuilder.hpp" bodystart="11" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1acb3c62fcc37dd358980c302f6c6e430c" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>_definitions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a2c4c81fd367e3463536c156b814fd76c" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>_nextOrder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ae45773ebfebb22eebd66e70ee21070d1" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>_nextTagBit</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ae10cf6ea5694b55b0158de305ae3f142" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>addClassicBlocks</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a0712abc3f9ae9521877a2012a227f05d" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>addPlainBlocks</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ab69338d6d4b578cdf8f763d9fcf73b92" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>build</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a5a29d3a9bc0918f8697f4b33261490db" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>dark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a7c8030ecf59f1f765b6218fb41cf6301" prot="private" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>definitionFor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a6baf57dd64ae0a77482581807da504c7" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>edit</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a0298c021442e3d3e7d46a148fd41e84a" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>from</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a076a2cb9f01f68bb2b1be91ffef70126" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>light</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a576390cd205ba6f54831416aefbb53f6" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>monochrome</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ab3bb307f780248216b6cd12a7d08883f" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>registerTag</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1a16b3b6fc305b237e18b0845348d4d342" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>ThemeBuilder</name></member>
+      <member refid="classerbsland_1_1cterm_1_1theme_1_1_theme_builder_1ae5f553b4685ecd04356ac77f569df75e" prot="public" virt="non-virtual"><scope>erbsland::cterm::theme::ThemeBuilder</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

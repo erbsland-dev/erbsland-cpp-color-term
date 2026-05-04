@@ -1,0 +1,1243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_text" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::Text</compoundname>
+    <includes refid="_text_8hpp" local="no">erbsland/cterm/Text.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_text_1a406c66aab1396bf0085cbfd5280a267b" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+        <definition>String erbsland::cterm::Text::_text</definition>
+        <argsstring></argsstring>
+        <name>_text</name>
+        <qualifiedname>erbsland::cterm::Text::_text</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="150" column="12" bodyfile="erbsland/cterm/Text.hpp" bodystart="150" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_text_1adaaa7bbc463e3d4a1e290fd94b0e49b8" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+        <definition>Rectangle erbsland::cterm::Text::_rectangle</definition>
+        <argsstring></argsstring>
+        <name>_rectangle</name>
+        <qualifiedname>erbsland::cterm::Text::_rectangle</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="151" column="15" bodyfile="erbsland/cterm/Text.hpp" bodystart="151" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_text_1a28de9390f225d934b16279955ef84edf" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_text_options" kindref="compound">TextOptions</ref></type>
+        <definition>TextOptions erbsland::cterm::Text::_textOptions</definition>
+        <argsstring></argsstring>
+        <name>_textOptions</name>
+        <qualifiedname>erbsland::cterm::Text::_textOptions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="152" column="17" bodyfile="erbsland/cterm/Text.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1af801bbc27a3964eca61488e3a013052a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Text::Text</definition>
+        <argsstring>()=default</argsstring>
+        <name>Text</name>
+        <qualifiedname>erbsland::cterm::Text::Text</qualifiedname>
+        <briefdescription>
+<para>Create an empty text description. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="18" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a1f83253e384afcb8e2e1bffb96be138c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Text::Text</definition>
+        <argsstring>(String text, Rectangle rect, const Alignment alignment=Alignment::TopLeft) noexcept</argsstring>
+        <name>Text</name>
+        <qualifiedname>erbsland::cterm::Text::Text</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_alignment_1ad6602abbf18253c439c6d478aad363c1" kindref="member">Alignment::TopLeft</ref></defval>
+        </param>
+        <briefdescription>
+<para>Create a text description for the given content and target rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text content to render. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target rectangle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alignment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text alignment inside the rectangle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="23" column="5" bodyfile="erbsland/cterm/Text.hpp" bodystart="23" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a1306d8742314ad97516882de560a9cc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Text::~Text</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Text</name>
+        <qualifiedname>erbsland::cterm::Text::~Text</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="27" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a0c0a7d0952ba6c364e87ade57af98dd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Text::Text</definition>
+        <argsstring>(const Text &amp;)=default</argsstring>
+        <name>Text</name>
+        <qualifiedname>erbsland::cterm::Text::Text</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="28" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1adaaa6161aff8a03f3953243775e1ecb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Text::Text</definition>
+        <argsstring>(Text &amp;&amp;)=default</argsstring>
+        <name>Text</name>
+        <qualifiedname>erbsland::cterm::Text::Text</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="29" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1af17dde3e855caa8a459cc054f192f711" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> &amp;</type>
+        <definition>Text &amp; erbsland::cterm::Text::operator=</definition>
+        <argsstring>(const Text &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::Text::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="30" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a7affc17de13183d83b3dd00aeb7c804d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> &amp;</type>
+        <definition>Text &amp; erbsland::cterm::Text::operator=</definition>
+        <argsstring>(Text &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::Text::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="31" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1aed23057e3ea4d95c403b82ea6e86cfc1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+        <definition>const String &amp; erbsland::cterm::Text::text</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>text</name>
+        <qualifiedname>erbsland::cterm::Text::text</qualifiedname>
+        <briefdescription>
+<para>Get the text content. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="35" column="20" bodyfile="erbsland/cterm/Text.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a3d679867867f75324f30fd722cb6be7e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setText</definition>
+        <argsstring>(String text) noexcept</argsstring>
+        <name>setText</name>
+        <qualifiedname>erbsland::cterm::Text::setText</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Set the text content. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="37" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1aae9953b3c3b5557a8695cfbf2b157a5f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref> &amp;</type>
+        <definition>const Rectangle &amp; erbsland::cterm::Text::rectangle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rectangle</name>
+        <qualifiedname>erbsland::cterm::Text::rectangle</qualifiedname>
+        <briefdescription>
+<para>Get the target rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="39" column="23" bodyfile="erbsland/cterm/Text.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a680b08ef7ad967d5c50b99b2818e6c9a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setRectangle</definition>
+        <argsstring>(const Rectangle rect) noexcept</argsstring>
+        <name>setRectangle</name>
+        <qualifiedname>erbsland::cterm::Text::setRectangle</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <briefdescription>
+<para>Set the target rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="41" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1af86d50327c1d6c02811b220ae00f345b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_text_options" kindref="compound">TextOptions</ref> &amp;</type>
+        <definition>const TextOptions &amp; erbsland::cterm::Text::textOptions</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>textOptions</name>
+        <qualifiedname>erbsland::cterm::Text::textOptions</qualifiedname>
+        <briefdescription>
+<para>Get the text options. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="43" column="25" bodyfile="erbsland/cterm/Text.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a5a9a299409ddc7130f44e9b99ad7efca" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setTextOptions</definition>
+        <argsstring>(const TextOptions &amp;options) noexcept</argsstring>
+        <name>setTextOptions</name>
+        <qualifiedname>erbsland::cterm::Text::setTextOptions</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_text_options" kindref="compound">TextOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>Set the text options. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="45" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a1cd37ea334f475f60f24adb3ae6e3aba" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_color_sequence" kindref="compound">ColorSequence</ref> &amp;</type>
+        <definition>const ColorSequence &amp; erbsland::cterm::Text::colorSequence</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>colorSequence</name>
+        <qualifiedname>erbsland::cterm::Text::colorSequence</qualifiedname>
+        <briefdescription>
+<para>Get the optional text color sequence.   </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="49" column="27" bodyfile="erbsland/cterm/Text.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a7030ec16f902e3d8e1846dccf746296c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setColorSequence</definition>
+        <argsstring>(ColorSequence colorSequence) noexcept</argsstring>
+        <name>setColorSequence</name>
+        <qualifiedname>erbsland::cterm::Text::setColorSequence</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color_sequence" kindref="compound">ColorSequence</ref></type>
+          <declname>colorSequence</declname>
+        </param>
+        <briefdescription>
+<para>Set the text color sequence.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>colorSequence</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sequence of colors to apply while rendering the text.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="51" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="51" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a7e28e338e8a3207fac0811f8a5b6be25" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::Text::color</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>color</name>
+        <qualifiedname>erbsland::cterm::Text::color</qualifiedname>
+        <briefdescription>
+<para>Get the first text color from the configured sequence.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The first sequence color, or the inherited color if no sequence is configured.   </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="55" column="12" bodyfile="erbsland/cterm/Text.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a7d3dbb905de375605146c9edc390d4ba" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setColor</definition>
+        <argsstring>(const Color color) noexcept</argsstring>
+        <name>setColor</name>
+        <qualifiedname>erbsland::cterm::Text::setColor</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set a single text color.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The single base color to use for the rendered text.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="57" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a0bc6469300a5289322ff82377010091b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const FontPtr &amp;</type>
+        <definition>const FontPtr &amp; erbsland::cterm::Text::font</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>font</name>
+        <qualifiedname>erbsland::cterm::Text::font</qualifiedname>
+        <briefdescription>
+<para>Get the optional font. If this is empty, regular text rendering is used.   </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="59" column="21" bodyfile="erbsland/cterm/Text.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a604041d4dbb1055a4190112ae2183223" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setFont</definition>
+        <argsstring>(const FontPtr &amp;font) noexcept</argsstring>
+        <name>setFont</name>
+        <qualifiedname>erbsland::cterm::Text::setFont</qualifiedname>
+        <param>
+          <type>const FontPtr &amp;</type>
+          <declname>font</declname>
+        </param>
+        <briefdescription>
+<para>Set the font.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>font</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The font to use, or an empty pointer for regular terminal text rendering.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="61" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1ac4438e30e084ce0be4205fa905276367" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>TextAnimation</type>
+        <definition>TextAnimation erbsland::cterm::Text::animation</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>animation</name>
+        <qualifiedname>erbsland::cterm::Text::animation</qualifiedname>
+        <briefdescription>
+<para>Get the animation mode.   </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="63" column="20" bodyfile="erbsland/cterm/Text.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1ab5f59b090d0e9b3db8fa9b08c8fadf00" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setAnimation</definition>
+        <argsstring>(const TextAnimation animation) noexcept</argsstring>
+        <name>setAnimation</name>
+        <qualifiedname>erbsland::cterm::Text::setAnimation</qualifiedname>
+        <param>
+          <type>const TextAnimation</type>
+          <declname>animation</declname>
+        </param>
+        <briefdescription>
+<para>Set the animation mode.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>animation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The animation mode to apply while rendering the text.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="65" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a7a75dda2dbd58fc6105dc20d167f1b19" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+        <definition>Alignment erbsland::cterm::Text::alignment</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>alignment</name>
+        <qualifiedname>erbsland::cterm::Text::alignment</qualifiedname>
+        <briefdescription>
+<para>The alignment of the paragraph.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For the <computeroutput><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9" kindref="member">Terminal::printParagraph</ref></computeroutput> calls, vertical alignment is ignored. For the <computeroutput>drawText(Text)</computeroutput> calls, the vertical alignment is used to align the text in the given rectangle.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="69" column="16" bodyfile="erbsland/cterm/Text.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a51a660c9dff8e39e1010b07a5a0704a3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setAlignment</definition>
+        <argsstring>(const Alignment alignment) noexcept</argsstring>
+        <name>setAlignment</name>
+        <qualifiedname>erbsland::cterm::Text::setAlignment</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+<para>Set the alignment of the paragraph.   </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="71" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a377a4ff24f8832ac7123ce170ce34547" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::Text::lineIndent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>lineIndent</name>
+        <qualifiedname>erbsland::cterm::Text::lineIndent</qualifiedname>
+        <briefdescription>
+<para>The line indent for all lines.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only valid if the alignment is set to <computeroutput><ref refid="classerbsland_1_1cterm_1_1_alignment_1abb2c95247faf6d7b8d1df0a132b926e0" kindref="member">Alignment::Left</ref></computeroutput>. This indent can be overridden by <computeroutput>firstLineIndent</computeroutput> and <computeroutput>wrappedLineIndent</computeroutput>.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="73" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1adff85b62c095bb3d310fd22eca1c5c1c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setLineIndent</definition>
+        <argsstring>(const int indent) noexcept</argsstring>
+        <name>setLineIndent</name>
+        <qualifiedname>erbsland::cterm::Text::setLineIndent</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>indent</declname>
+        </param>
+        <briefdescription>
+<para>Set the line indent for all lines.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new indent value. <computeroutput>&gt;=0</computeroutput>   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="75" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a53280ca610d574cf27b704427041e648" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::Text::firstLineIndent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>firstLineIndent</name>
+        <qualifiedname>erbsland::cterm::Text::firstLineIndent</qualifiedname>
+        <briefdescription>
+<para>Get the first line indent.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the indent for the first line of the paragraph. Only valid if the alignment is set to <computeroutput><ref refid="classerbsland_1_1cterm_1_1_alignment_1abb2c95247faf6d7b8d1df0a132b926e0" kindref="member">Alignment::Left</ref></computeroutput>. <programlisting><codeline><highlight class="normal">1:|<sp/>&lt;first<sp/>indent&gt;<sp/>A<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_text_1aed23057e3ea4d95c403b82ea6e86cfc1" kindref="member">text</ref><sp/>that<sp/>is<sp/>broken<sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal">2:|<sp/>into<sp/>multiple<sp/>lines.<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+</programlisting>   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="77" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a553b409365df5f6b047130179cd8cd3b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setFirstLineIndent</definition>
+        <argsstring>(const int indent) noexcept</argsstring>
+        <name>setFirstLineIndent</name>
+        <qualifiedname>erbsland::cterm::Text::setFirstLineIndent</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>indent</declname>
+        </param>
+        <briefdescription>
+<para>Set the first line indent.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new indent value. <computeroutput>&gt;=0</computeroutput> or <computeroutput>cUseLineIndent</computeroutput> to use <computeroutput>lineIndent</computeroutput>   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="79" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1abd85e105726a0a3b1722e71863fd8075" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::Text::wrappedLineIndent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>wrappedLineIndent</name>
+        <qualifiedname>erbsland::cterm::Text::wrappedLineIndent</qualifiedname>
+        <briefdescription>
+<para>Get the indent for wrapped lines.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the indent for all lines that are wrapped at the terminal width. Only valid if the alignment is set to <computeroutput><ref refid="classerbsland_1_1cterm_1_1_alignment_1abb2c95247faf6d7b8d1df0a132b926e0" kindref="member">Alignment::Left</ref></computeroutput>. <programlisting><codeline><highlight class="normal">1:|<sp/>&lt;first<sp/>indent&gt;<sp/>A<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_text_1aed23057e3ea4d95c403b82ea6e86cfc1" kindref="member">text</ref><sp/>that<sp/>is<sp/>broken<sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal">2:|<sp/>into<sp/>multiple<sp/>lines.<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+</programlisting>   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="81" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1acd4fa819eb1ed57b54266f9b1d74da85" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setWrappedLineIndent</definition>
+        <argsstring>(const int indent) noexcept</argsstring>
+        <name>setWrappedLineIndent</name>
+        <qualifiedname>erbsland::cterm::Text::setWrappedLineIndent</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>indent</declname>
+        </param>
+        <briefdescription>
+<para>Set the indent for wrapped lines.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new indent value. <computeroutput>&gt;=0</computeroutput> or <computeroutput>cUseLineIndent</computeroutput> to use <computeroutput>lineIndent</computeroutput>   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="83" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1ae9b795db245adb49492de5bcb377c81c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref> &amp;</type>
+        <definition>const Margins &amp; erbsland::cterm::Text::margins</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>margins</name>
+        <qualifiedname>erbsland::cterm::Text::margins</qualifiedname>
+        <briefdescription>
+<para>Get the margins around the paragraph.   </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="85" column="21" bodyfile="erbsland/cterm/Text.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1af269e82a35b507ac057be257fc11b483" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setMargins</definition>
+        <argsstring>(const Margins margins) noexcept</argsstring>
+        <name>setMargins</name>
+        <qualifiedname>erbsland::cterm::Text::setMargins</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref></type>
+          <declname>margins</declname>
+        </param>
+        <briefdescription>
+<para>Set the margins around the paragraph.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>margins</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The margins around the paragraph area.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="87" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a424639d65245e91194153e77ce1e6823" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>ParagraphBackgroundMode</type>
+        <definition>ParagraphBackgroundMode erbsland::cterm::Text::backgroundMode</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>backgroundMode</name>
+        <qualifiedname>erbsland::cterm::Text::backgroundMode</qualifiedname>
+        <briefdescription>
+<para>Get the background mode.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The background mode determines how the background of the paragraph is handled when lines are wrapped. It also controls how the background is extended for the last line in the paragraph.</para>
+<para>With <computeroutput><ref refid="classerbsland_1_1cterm_1_1_text" kindref="compound">Text</ref></computeroutput> / <computeroutput>drawText(...)</computeroutput>, cells outside the wrapped text keep the existing buffer background unless the selected mode fills them from the wrapped text. With <computeroutput><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9" kindref="member">CursorWriter::printParagraph()</ref></computeroutput>, indentation and padding are written as spaces, so cells not covered by wrapped-text background use the writer&apos;s current background.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="89" column="30" bodyfile="erbsland/cterm/Text.hpp" bodystart="89" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a96df5952b23f3d82c11dee802b91edb3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setBackgroundMode</definition>
+        <argsstring>(const ParagraphBackgroundMode backgroundMode) noexcept</argsstring>
+        <name>setBackgroundMode</name>
+        <qualifiedname>erbsland::cterm::Text::setBackgroundMode</qualifiedname>
+        <param>
+          <type>const ParagraphBackgroundMode</type>
+          <declname>backgroundMode</declname>
+        </param>
+        <briefdescription>
+<para>Set the background mode.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When using <computeroutput><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9" kindref="member">CursorWriter::printParagraph()</ref></computeroutput>, configure the writer background before printing if indentation or trailing padding should visually match a surrounding panel.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="93" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="93" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1ac94c962f607328cfe9152e7b018e5217" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+        <definition>const String &amp; erbsland::cterm::Text::lineBreakEndMark</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>lineBreakEndMark</name>
+        <qualifiedname>erbsland::cterm::Text::lineBreakEndMark</qualifiedname>
+        <briefdescription>
+<para>Get the line break end mark.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The line break end mark is appended to wrapped physical lines. The mark is aligned to the right edge of the available paragraph area. If the mark contains color information, it will override the background color. <programlisting><codeline><highlight class="normal">1:|<sp/>A<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_text_1aed23057e3ea4d95c403b82ea6e86cfc1" kindref="member">text</ref><sp/>that<sp/>is<sp/>broken<sp/><sp/>&lt;end<sp/>mark&gt;<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">2:|<sp/>into<sp/>multiple<sp/>lines.<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+</programlisting> <simplesect kind="return"><para>The current line break end mark. Empty for no line break end mark.   </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="97" column="20" bodyfile="erbsland/cterm/Text.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a312f4a44bf73a5f64e675d6246e12d88" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setLineBreakEndMark</definition>
+        <argsstring>(String mark)</argsstring>
+        <name>setLineBreakEndMark</name>
+        <qualifiedname>erbsland::cterm::Text::setLineBreakEndMark</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>mark</declname>
+        </param>
+        <briefdescription>
+<para>Set the line break end mark.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mark</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new line break end mark. Must not exceed two characters.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="99" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a1e6671e5ee7b581fce7994a114f5116b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+        <definition>const String &amp; erbsland::cterm::Text::lineBreakStartMark</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>lineBreakStartMark</name>
+        <qualifiedname>erbsland::cterm::Text::lineBreakStartMark</qualifiedname>
+        <briefdescription>
+<para>Get the line break start mark.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The line break start mark prepends wrapped continuation lines in left-aligned paragraphs. The mark is inserted after the continuation indentation. If the mark contains color information, it will override the background color. <programlisting><codeline><highlight class="normal">1:|<sp/>A<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_text_1aed23057e3ea4d95c403b82ea6e86cfc1" kindref="member">text</ref><sp/>that<sp/>is<sp/>broken<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal">2:|<sp/>&lt;start<sp/>mark&gt;<sp/>into<sp/>multiple<sp/>lines.<sp/><sp/><sp/><sp/>|</highlight></codeline>
+</programlisting> <simplesect kind="return"><para>The current line break start mark. Empty for no line break start mark.   </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="101" column="20" bodyfile="erbsland/cterm/Text.hpp" bodystart="101" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a7099aeb8c6735b767e138e2c8a3a3b4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setLineBreakStartMark</definition>
+        <argsstring>(String mark)</argsstring>
+        <name>setLineBreakStartMark</name>
+        <qualifiedname>erbsland::cterm::Text::setLineBreakStartMark</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>mark</declname>
+        </param>
+        <briefdescription>
+<para>Set the line break start mark.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mark</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new line break start mark. Must not exceed two characters.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="105" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a2119e5d456648569bb1027ca4e038f83" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>ParagraphSpacing</type>
+        <definition>ParagraphSpacing erbsland::cterm::Text::paragraphSpacing</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>paragraphSpacing</name>
+        <qualifiedname>erbsland::cterm::Text::paragraphSpacing</qualifiedname>
+        <briefdescription>
+<para>The spacing between paragraphs.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The behavior of the paragraph spacing depends on the used interface. For <computeroutput><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9" kindref="member">Terminal::printParagraph()</ref></computeroutput> and <computeroutput><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9" kindref="member">CursorBuffer::printParagraph()</ref></computeroutput>, embedded newlines are hard line breaks inside one printed paragraph, and the configured spacing is appended once after the whole call. For <computeroutput>drawText(Text)</computeroutput> calls, each newline starts a new paragraph and spacing is inserted between paragraphs.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="107" column="23" bodyfile="erbsland/cterm/Text.hpp" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1af3b638b39ea907a6ec24b98350ba69da" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setParagraphSpacing</definition>
+        <argsstring>(const ParagraphSpacing spacing) noexcept</argsstring>
+        <name>setParagraphSpacing</name>
+        <qualifiedname>erbsland::cterm::Text::setParagraphSpacing</qualifiedname>
+        <param>
+          <type>const ParagraphSpacing</type>
+          <declname>spacing</declname>
+        </param>
+        <briefdescription>
+<para>Set the paragraph spacing.   </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="109" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="109" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a8f2a548824f46d3dc18b9d2a29e432d3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::u32string &amp;</type>
+        <definition>const std::u32string &amp; erbsland::cterm::Text::wordSeparators</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>wordSeparators</name>
+        <qualifiedname>erbsland::cterm::Text::wordSeparators</qualifiedname>
+        <briefdescription>
+<para>Get the configured word separators as a canonicalized character string.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Word separators split a source line into words. Consecutive separators are rendered as a single space between words. Tabs use special tab-stop handling in left-aligned paragraphs before separator handling is applied. The returned string is duplicate-free and normalized for comparison and display.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="111" column="28" bodyfile="erbsland/cterm/Text.hpp" bodystart="111" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a5c603846c928704057ec38d7d096de1d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setWordSeparators</definition>
+        <argsstring>(std::u32string separators) noexcept</argsstring>
+        <name>setWordSeparators</name>
+        <qualifiedname>erbsland::cterm::Text::setWordSeparators</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>separators</declname>
+        </param>
+        <briefdescription>
+<para>Set the word separators.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Tabs remain special tab stops in left-aligned paragraphs and act as regular word separators in other alignments when included here. The provided string is canonicalized automatically and mapped to shared defaults for common patterns. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>separators</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A string of Unicode characters that are used to split words.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="115" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="115" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a252fbb5cbc2cba861e720f01b4cc4040" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        <definition>const Char &amp; erbsland::cterm::Text::wordBreakMark</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>wordBreakMark</name>
+        <qualifiedname>erbsland::cterm::Text::wordBreakMark</qualifiedname>
+        <briefdescription>
+<para>Get the word break mark.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The word break mark is used when a long word had to be split in a paragraph.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="119" column="18" bodyfile="erbsland/cterm/Text.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a48139f0f147309fb88b24666125e1d66" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setWordBreakMark</definition>
+        <argsstring>(Char mark) noexcept</argsstring>
+        <name>setWordBreakMark</name>
+        <qualifiedname>erbsland::cterm::Text::setWordBreakMark</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>mark</declname>
+        </param>
+        <briefdescription>
+<para>Set the word break mark.   </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="121" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a67e414040507cc289c0ece94ec809032" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::Text::maximumLineWraps</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>maximumLineWraps</name>
+        <qualifiedname>erbsland::cterm::Text::maximumLineWraps</qualifiedname>
+        <briefdescription>
+<para>Get the maximum line wraps.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A value &gt;0 limits the automatic wraps for one source line. Once the limit is reached, the current source line is truncated and <computeroutput><ref refid="classerbsland_1_1cterm_1_1_text_1a1f1cf50e7ba0521240982b670107dc72" kindref="member">paragraphEllipsisMark()</ref></computeroutput> is appended if configured. Embedded line breaks start a new source line and therefore reset the wrap counter. <simplesect kind="return"><para>The maximum number of line wraps, or zero for unlimited line wraps.   </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="123" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1ab80c86fb8753a6f2bd0efaa339b2a631" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setMaximumLineWraps</definition>
+        <argsstring>(const int lines) noexcept</argsstring>
+        <name>setMaximumLineWraps</name>
+        <qualifiedname>erbsland::cterm::Text::setMaximumLineWraps</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>lines</declname>
+        </param>
+        <briefdescription>
+<para>Set the maximum number of line wraps.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum number of line wraps, or zero for unlimited line wraps.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="125" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="125" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a1f1cf50e7ba0521240982b670107dc72" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &amp;</type>
+        <definition>const String &amp; erbsland::cterm::Text::paragraphEllipsisMark</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>paragraphEllipsisMark</name>
+        <qualifiedname>erbsland::cterm::Text::paragraphEllipsisMark</qualifiedname>
+        <briefdescription>
+<para>Get the paragraph ellipsis mark.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This string is used to indicate that a paragraph would have to be wrapped over even more lines to be displayed completely. A single character can be used, but a short text like <computeroutput>(more…)</computeroutput> works as well. Please note that the width of this mark further reduces the available space for the paragraph text. <simplesect kind="return"><para>The paragraph ellipsis mark or an empty string if no ellipsis mark shall be used.   </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="127" column="20" bodyfile="erbsland/cterm/Text.hpp" bodystart="127" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a799bcb0c72195856e071e12c5f5390d7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setParagraphEllipsisMark</definition>
+        <argsstring>(String mark) noexcept</argsstring>
+        <name>setParagraphEllipsisMark</name>
+        <qualifiedname>erbsland::cterm::Text::setParagraphEllipsisMark</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>mark</declname>
+        </param>
+        <briefdescription>
+<para>Set the paragraph ellipsis mark.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>We recommend using a single character or a very short text. Longer texts quickly make paragraph rendering impossible. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mark</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The paragraph ellipsis mark. If empty, no ellipsis mark will be used.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="131" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="131" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1af49ba6c6323379ec630a0282fa7ec826" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; int &gt; &amp;</type>
+        <definition>const std::vector&lt; int &gt; &amp; erbsland::cterm::Text::tabStops</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>tabStops</name>
+        <qualifiedname>erbsland::cterm::Text::tabStops</qualifiedname>
+        <briefdescription>
+<para>Get the tab stops for the paragraph.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only valid if the alignment is set to <computeroutput><ref refid="classerbsland_1_1cterm_1_1_alignment_1abb2c95247faf6d7b8d1df0a132b926e0" kindref="member">Alignment::Left</ref></computeroutput>. If a line (text up to a newline character) contains TAB characters, each tab character will pick the next tab-stop columns value from this array. If the column is larger than the current column, spacing is inserted until the cursor reaches the tab-stop column. If the tab column is smaller, or there is no further tab stop in the sequence, <computeroutput><ref refid="classerbsland_1_1cterm_1_1_text_1a8f3cdd7acfd690d7c2c83a47ccf2d717" kindref="member">tabOverflowBehavior()</ref></computeroutput> is used to decide whether the tab becomes a single space or starts a wrapped continuation line. In centered or right-aligned paragraphs, tabs use <computeroutput>wordSeparators</computeroutput> instead of these tab stops. The special value <computeroutput>cTabWrappedLineIndent</computeroutput> can be used to use the same indent as for wrapped lines.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="133" column="25" bodyfile="erbsland/cterm/Text.hpp" bodystart="133" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a23c6fa7814a5acca96c4730c0f479e33" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setTabStops</definition>
+        <argsstring>(std::vector&lt; int &gt; tabStops) noexcept</argsstring>
+        <name>setTabStops</name>
+        <qualifiedname>erbsland::cterm::Text::setTabStops</qualifiedname>
+        <param>
+          <type>std::vector&lt; int &gt;</type>
+          <declname>tabStops</declname>
+        </param>
+        <briefdescription>
+<para>Set the tab stops.   </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="135" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a8f3cdd7acfd690d7c2c83a47ccf2d717" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>TabOverflowBehavior</type>
+        <definition>TabOverflowBehavior erbsland::cterm::Text::tabOverflowBehavior</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>tabOverflowBehavior</name>
+        <qualifiedname>erbsland::cterm::Text::tabOverflowBehavior</qualifiedname>
+        <briefdescription>
+<para>Get the overflow handling for non-advancing tab stops.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This mode is used if a TAB resolves to a tab-stop column that is not larger than the current column, or if there is no further configured tab stop.   </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="137" column="26" bodyfile="erbsland/cterm/Text.hpp" bodystart="137" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a01f7d2dedc2b132f273fd31ad70de60f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setTabOverflowBehavior</definition>
+        <argsstring>(const TabOverflowBehavior behavior) noexcept</argsstring>
+        <name>setTabOverflowBehavior</name>
+        <qualifiedname>erbsland::cterm::Text::setTabOverflowBehavior</qualifiedname>
+        <param>
+          <type>const TabOverflowBehavior</type>
+          <declname>behavior</declname>
+        </param>
+        <briefdescription>
+<para>Set the overflow handling for non-advancing tab stops.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>behavior</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The behavior to use for tabs that do not advance the current line.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="141" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="141" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a713bac14205e1ab85b1589b8a7e9f0e6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>ParagraphOnError</type>
+        <definition>ParagraphOnError erbsland::cterm::Text::onError</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>onError</name>
+        <qualifiedname>erbsland::cterm::Text::onError</qualifiedname>
+        <briefdescription>
+<para>Get the error resolution if a paragraph cannot be rendered with the given settings.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the screen layout and the given parameters do not allow the paragraph to be rendered properly, this error resolution is used. <simplesect kind="return"><para>The error resolution to use when a paragraph cannot be rendered.   </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="145" column="23" bodyfile="erbsland/cterm/Text.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_text_1a537a3877d7ec8951cc936980c9ad8cf4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Text::setOnError</definition>
+        <argsstring>(const ParagraphOnError onError) noexcept</argsstring>
+        <name>setOnError</name>
+        <qualifiedname>erbsland::cterm::Text::setOnError</qualifiedname>
+        <param>
+          <type>const ParagraphOnError</type>
+          <declname>onError</declname>
+        </param>
+        <briefdescription>
+<para>Set the error resolution.   </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>onError</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The error resolution to use when a paragraph cannot be rendered.   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Text.hpp" line="147" column="10" bodyfile="erbsland/cterm/Text.hpp" bodystart="147" bodyend="147"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Describes a text block to render into a <computeroutput><ref refid="classerbsland_1_1cterm_1_1_buffer" kindref="compound">Buffer</ref></computeroutput>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="note"><para>Creating and copying text instances is expensive. Please keep and reuse created instances. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="erbsland/cterm/Text.hpp" line="15" column="1" bodyfile="erbsland/cterm/Text.hpp" bodystart="15" bodyend="153"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_text_1adaaa7bbc463e3d4a1e290fd94b0e49b8" prot="private" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>_rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a406c66aab1396bf0085cbfd5280a267b" prot="private" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>_text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a28de9390f225d934b16279955ef84edf" prot="private" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>_textOptions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a7a75dda2dbd58fc6105dc20d167f1b19" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>alignment</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1ac4438e30e084ce0be4205fa905276367" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>animation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a424639d65245e91194153e77ce1e6823" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>backgroundMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a7e28e338e8a3207fac0811f8a5b6be25" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a1cd37ea334f475f60f24adb3ae6e3aba" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>colorSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a53280ca610d574cf27b704427041e648" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>firstLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a0bc6469300a5289322ff82377010091b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>font</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1ac94c962f607328cfe9152e7b018e5217" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>lineBreakEndMark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a1e6671e5ee7b581fce7994a114f5116b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>lineBreakStartMark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a377a4ff24f8832ac7123ce170ce34547" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>lineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1ae9b795db245adb49492de5bcb377c81c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>margins</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a67e414040507cc289c0ece94ec809032" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>maximumLineWraps</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a713bac14205e1ab85b1589b8a7e9f0e6" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>onError</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1af17dde3e855caa8a459cc054f192f711" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a7affc17de13183d83b3dd00aeb7c804d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a1f1cf50e7ba0521240982b670107dc72" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>paragraphEllipsisMark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a2119e5d456648569bb1027ca4e038f83" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>paragraphSpacing</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1aae9953b3c3b5557a8695cfbf2b157a5f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a51a660c9dff8e39e1010b07a5a0704a3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setAlignment</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1ab5f59b090d0e9b3db8fa9b08c8fadf00" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setAnimation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a96df5952b23f3d82c11dee802b91edb3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setBackgroundMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a7d3dbb905de375605146c9edc390d4ba" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a7030ec16f902e3d8e1846dccf746296c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setColorSequence</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a553b409365df5f6b047130179cd8cd3b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setFirstLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a604041d4dbb1055a4190112ae2183223" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setFont</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a312f4a44bf73a5f64e675d6246e12d88" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setLineBreakEndMark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a7099aeb8c6735b767e138e2c8a3a3b4f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setLineBreakStartMark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1adff85b62c095bb3d310fd22eca1c5c1c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1af269e82a35b507ac057be257fc11b483" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setMargins</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1ab80c86fb8753a6f2bd0efaa339b2a631" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setMaximumLineWraps</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a537a3877d7ec8951cc936980c9ad8cf4" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setOnError</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a799bcb0c72195856e071e12c5f5390d7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setParagraphEllipsisMark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1af3b638b39ea907a6ec24b98350ba69da" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setParagraphSpacing</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a680b08ef7ad967d5c50b99b2818e6c9a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setRectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a01f7d2dedc2b132f273fd31ad70de60f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setTabOverflowBehavior</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a23c6fa7814a5acca96c4730c0f479e33" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setTabStops</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a3d679867867f75324f30fd722cb6be7e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a5a9a299409ddc7130f44e9b99ad7efca" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setTextOptions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a48139f0f147309fb88b24666125e1d66" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setWordBreakMark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a5c603846c928704057ec38d7d096de1d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setWordSeparators</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1acd4fa819eb1ed57b54266f9b1d74da85" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>setWrappedLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a8f3cdd7acfd690d7c2c83a47ccf2d717" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>tabOverflowBehavior</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1af49ba6c6323379ec630a0282fa7ec826" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>tabStops</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1af801bbc27a3964eca61488e3a013052a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>Text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a1f83253e384afcb8e2e1bffb96be138c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>Text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a0c0a7d0952ba6c364e87ade57af98dd9" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>Text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1adaaa6161aff8a03f3953243775e1ecb1" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>Text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1aed23057e3ea4d95c403b82ea6e86cfc1" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>text</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1af86d50327c1d6c02811b220ae00f345b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>textOptions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a252fbb5cbc2cba861e720f01b4cc4040" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>wordBreakMark</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a8f2a548824f46d3dc18b9d2a29e432d3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>wordSeparators</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1abd85e105726a0a3b1722e71863fd8075" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>wrappedLineIndent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_text_1a1306d8742314ad97516882de560a9cc5" prot="public" virt="non-virtual"><scope>erbsland::cterm::Text</scope><name>~Text</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

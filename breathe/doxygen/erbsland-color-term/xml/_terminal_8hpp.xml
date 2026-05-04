@@ -1,0 +1,1220 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_terminal_8hpp" kind="file" language="C++">
+    <compoundname>Terminal.hpp</compoundname>
+    <includes refid="_backend_8hpp" local="yes">Backend.hpp</includes>
+    <includes refid="_char_8hpp" local="yes">Char.hpp</includes>
+    <includes refid="_color_8hpp" local="yes">Color.hpp</includes>
+    <includes refid="_cursor_writer_8hpp" local="yes">CursorWriter.hpp</includes>
+    <includes refid="_move_mode_8hpp" local="yes">MoveMode.hpp</includes>
+    <includes refid="_paragraph_options_8hpp" local="yes">ParagraphOptions.hpp</includes>
+    <includes refid="_string_8hpp" local="yes">String.hpp</includes>
+    <includes refid="_terminal_flags_8hpp" local="yes">TerminalFlags.hpp</includes>
+    <includes refid="_update_settings_8hpp" local="yes">UpdateSettings.hpp</includes>
+    <includes refid="_writable_buffer_8hpp" local="yes">WritableBuffer.hpp</includes>
+    <includes refid="_size_8hpp" local="yes">geometry/Size.hpp</includes>
+    <includes refid="_input_backend_8hpp" local="yes">impl/InputBackend.hpp</includes>
+    <includes refid="_line_buffer_8hpp" local="yes">impl/LineBuffer.hpp</includes>
+    <includes refid="_type_traits_8hpp" local="yes">impl/TypeTraits.hpp</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">memory</includes>
+    <includedby refid="_terminal_session_8hpp" local="yes">erbsland/cterm/TerminalSession.hpp</includedby>
+    <includedby refid="all_8hpp" local="yes">erbsland/cterm/all.hpp</includedby>
+    <includedby refid="_application_8hpp" local="yes">erbsland/cterm/ui/Application.hpp</includedby>
+    <includedby refid="_display_8hpp" local="yes">erbsland/cterm/ui/Display.hpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>Backend.hpp</label>
+        <link refid="_backend_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>Bitmap.hpp</label>
+        <link refid="_bitmap_8hpp_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>BitmapDrawOptions.hpp</label>
+        <link refid="_bitmap_draw_options_8hpp_source"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>BufferDrawOptions.hpp</label>
+        <link refid="_buffer_draw_options_8hpp_source"/>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>BufferResizeMode.hpp</label>
+        <link refid="_buffer_resize_mode_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>Char.hpp</label>
+        <link refid="_char_8hpp_source"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>Char16Style.hpp</label>
+        <link refid="_char16_style_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>CharAttributes.hpp</label>
+        <link refid="_char_attributes_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>CharCombinationStyle.hpp</label>
+        <link refid="_char_combination_style_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>CharStyle.hpp</label>
+        <link refid="_char_style_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Color.hpp</label>
+        <link refid="_color_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ColorPart.hpp</label>
+        <link refid="_color_part_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>ColorRole.hpp</label>
+        <link refid="_color_role_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>ColorSequence.hpp</label>
+        <link refid="_color_sequence_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>CursorWriter.hpp</label>
+        <link refid="_cursor_writer_8hpp_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>../EncodingErrors.hpp</label>
+        <link refid="_encoding_errors_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>FastCharSet.hpp</label>
+        <link refid="_fast_char_set_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>Font.hpp</label>
+        <link refid="_font_8hpp_source"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>FontGlyph.hpp</label>
+        <link refid="_font_glyph_8hpp_source"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>FrameBorder.hpp</label>
+        <link refid="_frame_border_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>FrameBorderElement.hpp</label>
+        <link refid="_frame_border_element_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>FrameDrawOptions.hpp</label>
+        <link refid="_frame_draw_options_8hpp_source"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>FrameStyle.hpp</label>
+        <link refid="_frame_style_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>GridLayout.hpp</label>
+        <link refid="_grid_layout_8hpp_source"/>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>IndexRange.hpp</label>
+        <link refid="_index_range_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Input.hpp</label>
+        <link refid="_input_8hpp_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Key.hpp</label>
+        <link refid="_key_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>KeyModifiers.hpp</label>
+        <link refid="_key_modifiers_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>MoveMode.hpp</label>
+        <link refid="_move_mode_8hpp_source"/>
+      </node>
+      <node id="52">
+        <label>ParagraphBackgroundMode.hpp</label>
+        <link refid="_paragraph_background_mode_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>ParagraphIndents.hpp</label>
+        <link refid="_paragraph_indents_8hpp_source"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>ParagraphOnError.hpp</label>
+        <link refid="_paragraph_on_error_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>ParagraphOptions.hpp</label>
+        <link refid="_paragraph_options_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>ParagraphSpacing.hpp</label>
+        <link refid="_paragraph_spacing_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>ReadableBuffer.hpp</label>
+        <link refid="_readable_buffer_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>String.hpp</label>
+        <link refid="_string_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>StringView.hpp</label>
+        <link refid="_string_view_8hpp_source"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>TabOverflowBehavior.hpp</label>
+        <link refid="_tab_overflow_behavior_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/Terminal.hpp</label>
+        <link refid="_terminal_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>TerminalFlags.hpp</label>
+        <link refid="_terminal_flags_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>Text.hpp</label>
+        <link refid="_text_8hpp_source"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>TextAnimation.hpp</label>
+        <link refid="_text_animation_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>TextOptions.hpp</label>
+        <link refid="_text_options_8hpp_source"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>Tile9Style.hpp</label>
+        <link refid="_tile9_style_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>UpdateSettings.hpp</label>
+        <link refid="_update_settings_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>WritableBuffer.hpp</label>
+        <link refid="_writable_buffer_8hpp_source"/>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Alignment.hpp</label>
+        <link refid="_alignment_8hpp_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>Anchor.hpp</label>
+        <link refid="_anchor_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>Coordinate.hpp</label>
+        <link refid="_coordinate_8hpp_source"/>
+      </node>
+      <node id="73">
+        <label>Direction.hpp</label>
+        <link refid="_direction_8hpp_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>geometry/Margins.hpp</label>
+        <link refid="_margins_8hpp_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>Orientation.hpp</label>
+        <link refid="_orientation_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>Position.hpp</label>
+        <link refid="_position_8hpp_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>geometry/Rectangle.hpp</label>
+        <link refid="_rectangle_8hpp_source"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>geometry/Size.hpp</label>
+        <link refid="_size_8hpp_source"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>impl/CombinedChar.hpp</label>
+        <link refid="_combined_char_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>impl/HashHelper.hpp</label>
+        <link refid="_hash_helper_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>impl/InputBackend.hpp</label>
+        <link refid="_input_backend_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>impl/LineBuffer.hpp</label>
+        <link refid="_line_buffer_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>../impl/SaturatingMath.hpp</label>
+        <link refid="_saturating_math_8hpp_source"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>impl/TextUtil.hpp</label>
+        <link refid="_text_util_8hpp_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>impl/TypeTraits.hpp</label>
+        <link refid="_type_traits_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>UnicodeWidth.hpp</label>
+        <link refid="_unicode_width_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>algorithm</label>
+      </node>
+      <node id="12">
+        <label>array</label>
+      </node>
+      <node id="92">
+        <label>atomic</label>
+      </node>
+      <node id="86">
+        <label>bit</label>
+      </node>
+      <node id="87">
+        <label>bitset</label>
+      </node>
+      <node id="93">
+        <label>cassert</label>
+      </node>
+      <node id="46">
+        <label>cctype</label>
+      </node>
+      <node id="25">
+        <label>chrono</label>
+      </node>
+      <node id="41">
+        <label>concepts</label>
+      </node>
+      <node id="5">
+        <label>cstddef</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="36">
+        <label>cstdlib</label>
+      </node>
+      <node id="42">
+        <label>exception</label>
+      </node>
+      <node id="37">
+        <label>format</label>
+      </node>
+      <node id="8">
+        <label>functional</label>
+      </node>
+      <node id="70">
+        <label>initializer_list</label>
+      </node>
+      <node id="23">
+        <label>limits</label>
+      </node>
+      <node id="68">
+        <label>map</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="38">
+        <label>numeric</label>
+      </node>
+      <node id="24">
+        <label>optional</label>
+      </node>
+      <node id="21">
+        <label>span</label>
+      </node>
+      <node id="60">
+        <label>stdexcept</label>
+      </node>
+      <node id="13">
+        <label>string</label>
+      </node>
+      <node id="14">
+        <label>string_view</label>
+      </node>
+      <node id="7">
+        <label>type_traits</label>
+      </node>
+      <node id="88">
+        <label>unordered_map</label>
+      </node>
+      <node id="39">
+        <label>utility</label>
+      </node>
+      <node id="51">
+        <label>variant</label>
+      </node>
+      <node id="15">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>erbsland/cterm/Terminal.hpp</label>
+        <link refid="_terminal_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland/cterm/TerminalSession.hpp</label>
+        <link refid="_terminal_session_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland/cterm/all.hpp</label>
+        <link refid="all_8hpp_source"/>
+      </node>
+      <node id="4">
+        <label>erbsland/cterm/ui/Application.hpp</label>
+        <link refid="_application_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>erbsland/cterm/ui/Display.hpp</label>
+        <link refid="_display_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland/cterm/ui/all.hpp</label>
+        <link refid="ui_2all_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1_terminal" prot="public">erbsland::cterm::Terminal</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Backend.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Char.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Color.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;CursorWriter.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;MoveMode.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ParagraphOptions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;String.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;TerminalFlags.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;UpdateSettings.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;WritableBuffer.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry/Size.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;impl/InputBackend.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;impl/LineBuffer.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;impl/TypeTraits.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Terminal;</highlight></codeline>
+<codeline lineno="28"><highlight class="keyword">using<sp/></highlight><highlight class="normal">TerminalPtr<sp/>=<sp/>std::shared_ptr&lt;Terminal&gt;;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="classerbsland_1_1cterm_1_1_terminal" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_cursor_writer" kindref="compound">CursorWriter</ref><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cMinimumSize<sp/>=<sp/><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>{1,<sp/>1};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cMaximumSize<sp/>=<sp/><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>{2048,<sp/>2048};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39" refid="classerbsland_1_1cterm_1_1_terminal_1a6093fdfb9a01d70783e99b24063a1969" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_terminal_1a6093fdfb9a01d70783e99b24063a1969" kindref="member">ScreenSizeChangedCallback</ref><sp/>=<sp/>std::function&lt;void(<ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>)&gt;;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" kindref="member">RefreshMode</ref><sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687a02bce93bff905887ad2233110bf9c49e" kindref="member">Keep</ref>,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687adc30bc0c7914db5918da4263fce93ad2" kindref="member">Clear</ref>,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687ada364eb37e143f6b2b5559aa03f5913a" kindref="member">Overwrite</ref>,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875d" kindref="member">OutputMode</ref><sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875da9dffbf69ffba8bc38bc4e01abf4b1675" kindref="member">Text</ref>,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875da8a1db58568147877ebe2c30e1a822b8d" kindref="member">FullControl</ref>,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="61" refid="classerbsland_1_1cterm_1_1_terminal_1abe616e0230832b00fd6ca95124557cb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abe616e0230832b00fd6ca95124557cb0" kindref="member">Terminal</ref>();</highlight></codeline>
+<codeline lineno="64" refid="classerbsland_1_1cterm_1_1_terminal_1ae854a331658e16376e71b4e5162444d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ae854a331658e16376e71b4e5162444d4" kindref="member">Terminal</ref>(<ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>flags);</highlight></codeline>
+<codeline lineno="69" refid="classerbsland_1_1cterm_1_1_terminal_1a20af14615d22d0832c8bd1ee99f81c04" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a20af14615d22d0832c8bd1ee99f81c04" kindref="member">Terminal</ref>(<ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1add193fbb85100dcb4805fda3ffac04c1" kindref="member">size</ref>,<sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>flags<sp/>=<sp/>{});</highlight></codeline>
+<codeline lineno="74" refid="classerbsland_1_1cterm_1_1_terminal_1a2849cacf3c52d9359ad5ef56a023b6e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a2849cacf3c52d9359ad5ef56a023b6e3" kindref="member">Terminal</ref>(BackendPtr<sp/>backend,<sp/><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1add193fbb85100dcb4805fda3ffac04c1" kindref="member">size</ref><sp/>=<sp/>{80,<sp/>25});</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>implement<sp/>CursorWriter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702" kindref="member">CursorWriter::setColor</ref>;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8" kindref="member">CursorWriter::write</ref>;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1_cursor_writer_1a76b3ade50d3ef471afe6d7b3f1c1b282" kindref="member">CursorWriter::writeLineBreak</ref>;</highlight></codeline>
+<codeline lineno="80" refid="classerbsland_1_1cterm_1_1_terminal_1add193fbb85100dcb4805fda3ffac04c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1add193fbb85100dcb4805fda3ffac04c1" kindref="member">size</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_size;<sp/>}</highlight></codeline>
+<codeline lineno="81" refid="classerbsland_1_1cterm_1_1_terminal_1ae24208f46ae39ccc14d76e10694f51b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ae24208f46ae39ccc14d76e10694f51b4" kindref="member">color</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="82" refid="classerbsland_1_1cterm_1_1_terminal_1ad4ee33aeae2de25334b43a179cc93702" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad4ee33aeae2de25334b43a179cc93702" kindref="member">charAttributes</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="83" refid="classerbsland_1_1cterm_1_1_terminal_1aa96637f3e0c43adfed0bad5e276fc080" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1aa96637f3e0c43adfed0bad5e276fc080" kindref="member">setColor</ref>(<ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ae24208f46ae39ccc14d76e10694f51b4" kindref="member">color</ref>)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="84" refid="classerbsland_1_1cterm_1_1_terminal_1a2541901f51be60ea84ad52d36df034e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a2541901f51be60ea84ad52d36df034e1" kindref="member">setCharAttributes</ref>(<ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/>attributes)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="85" refid="classerbsland_1_1cterm_1_1_terminal_1af519a5db88e25a6c4a60910b67c1e48f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1af519a5db88e25a6c4a60910b67c1e48f" kindref="member">setForeground</ref>(<ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ae24208f46ae39ccc14d76e10694f51b4" kindref="member">color</ref>)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="86" refid="classerbsland_1_1cterm_1_1_terminal_1a7d6ce6f9cfe84df6368d3866ccffdadd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a7d6ce6f9cfe84df6368d3866ccffdadd" kindref="member">setBackground</ref>(<ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ae24208f46ae39ccc14d76e10694f51b4" kindref="member">color</ref>)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="87" refid="classerbsland_1_1cterm_1_1_terminal_1a8f2d8ef9f6565f1fb7a9097df5d0514e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a8f2d8ef9f6565f1fb7a9097df5d0514e" kindref="member">supportedCharAttributes</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="88" refid="classerbsland_1_1cterm_1_1_terminal_1a57e6475f81ef10774b8de6ff0c5d9649" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a57e6475f81ef10774b8de6ff0c5d9649" kindref="member">moveLeft</ref>(Coordinate<sp/>count)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="89" refid="classerbsland_1_1cterm_1_1_terminal_1a3b2f44b4a41731374321eb83f41de7d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a3b2f44b4a41731374321eb83f41de7d0" kindref="member">moveRight</ref>(Coordinate<sp/>count)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="90" refid="classerbsland_1_1cterm_1_1_terminal_1ae76146e7322abd54ccd4ccb5d671420a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ae76146e7322abd54ccd4ccb5d671420a" kindref="member">moveUp</ref>(Coordinate<sp/>count)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="91" refid="classerbsland_1_1cterm_1_1_terminal_1aefdf80a9b8ceac2c59df776a407d6ab4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1aefdf80a9b8ceac2c59df776a407d6ab4" kindref="member">moveDown</ref>(Coordinate<sp/>count)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="92" refid="classerbsland_1_1cterm_1_1_terminal_1ad3bbc6a246afd163a216fc2933a47a6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3bbc6a246afd163a216fc2933a47a6c" kindref="member">moveTo</ref>(<ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref><sp/>pos)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="93" refid="classerbsland_1_1cterm_1_1_terminal_1a90f1e9c959a6f8a183ce6143d4b4e960" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a90f1e9c959a6f8a183ce6143d4b4e960" kindref="member">moveHome</ref>()<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="94" refid="classerbsland_1_1cterm_1_1_terminal_1a3988a6b4ef4d8fc99ec2912e74963f9c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a3988a6b4ef4d8fc99ec2912e74963f9c" kindref="member">moveCursor</ref>(<ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref><sp/>posOrDelta,<sp/>MoveMode<sp/>mode)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="95" refid="classerbsland_1_1cterm_1_1_terminal_1ac05d4307cf0e0d7a13af162d3750a96b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac05d4307cf0e0d7a13af162d3750a96b" kindref="member">setAutoWrap</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="96" refid="classerbsland_1_1cterm_1_1_terminal_1a5c47b29cdb65160e0c616ba67fa3feff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a5c47b29cdb65160e0c616ba67fa3feff" kindref="member">setCursorVisible</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="97" refid="classerbsland_1_1cterm_1_1_terminal_1a0dce4b6d6b1e933f51d9d4128cf6147e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a0dce4b6d6b1e933f51d9d4128cf6147e" kindref="member">write</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref><sp/>&amp;character)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="98" refid="classerbsland_1_1cterm_1_1_terminal_1a5d70f852495fca259526d8b8675ac636" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a0dce4b6d6b1e933f51d9d4128cf6147e" kindref="member">write</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;str)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="99" refid="classerbsland_1_1cterm_1_1_terminal_1a56d780aed34b53b5201bbff228bdc111" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a56d780aed34b53b5201bbff228bdc111" kindref="member">writeResolved</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref><sp/>&amp;character)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="100" refid="classerbsland_1_1cterm_1_1_terminal_1acabc5eac63b19b95feed4d9b3fa9b70b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a56d780aed34b53b5201bbff228bdc111" kindref="member">writeResolved</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;str)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="101" refid="classerbsland_1_1cterm_1_1_terminal_1a668f9851f80a0f52b1a8c2b7d18bf8f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a0dce4b6d6b1e933f51d9d4128cf6147e" kindref="member">write</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;buffer)<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="102" refid="classerbsland_1_1cterm_1_1_terminal_1a44a40f5c6c64de69361cb160f606259a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a44a40f5c6c64de69361cb160f606259a" kindref="member">writeLineBreak</ref>()<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal">public:<sp/></highlight><highlight class="comment">//<sp/>settings</highlight></codeline>
+<codeline lineno="109" refid="classerbsland_1_1cterm_1_1_terminal_1a27434165d629851f23558fefbf8264bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a27434165d629851f23558fefbf8264bd" kindref="member">setSize</ref>(<ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1add193fbb85100dcb4805fda3ffac04c1" kindref="member">size</ref>)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="111" refid="classerbsland_1_1cterm_1_1_terminal_1a98c3bda51bd68e067e40db00eaaa19b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" kindref="member">RefreshMode</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a98c3bda51bd68e067e40db00eaaa19b3" kindref="member">refreshMode</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_refreshMode;<sp/>}</highlight></codeline>
+<codeline lineno="114" refid="classerbsland_1_1cterm_1_1_terminal_1a49f4db63181b66fed8f99fbafa5f2471" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a49f4db63181b66fed8f99fbafa5f2471" kindref="member">setRefreshMode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" kindref="member">RefreshMode</ref><sp/>mode)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>_refreshMode<sp/>=<sp/>mode;<sp/>}</highlight></codeline>
+<codeline lineno="116" refid="classerbsland_1_1cterm_1_1_terminal_1a916d616240efde87e2d83d3423fd6db3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875d" kindref="member">OutputMode</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a916d616240efde87e2d83d3423fd6db3" kindref="member">outputMode</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_outputMode;<sp/>}</highlight></codeline>
+<codeline lineno="120" refid="classerbsland_1_1cterm_1_1_terminal_1ac627e9fe3d91dd87cf4a12289377ac40" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac627e9fe3d91dd87cf4a12289377ac40" kindref="member">setOutputMode</ref>(<ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875d" kindref="member">OutputMode</ref><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a916d616240efde87e2d83d3423fd6db3" kindref="member">outputMode</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="122" refid="classerbsland_1_1cterm_1_1_terminal_1a0cbfce3a3a7917a463ea48758d7deb59" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a0cbfce3a3a7917a463ea48758d7deb59" kindref="member">sizeDetectionEnabled</ref>()<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="126" refid="classerbsland_1_1cterm_1_1_terminal_1a570607bfa2b1f95af2c42c1237e63a2e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a570607bfa2b1f95af2c42c1237e63a2e" kindref="member">setSizeDetectionEnabled</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="129" refid="classerbsland_1_1cterm_1_1_terminal_1ac722c25ead843a60a21615777dc7f8d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac722c25ead843a60a21615777dc7f8d2" kindref="member">lineBufferEnabled</ref>()<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="134" refid="classerbsland_1_1cterm_1_1_terminal_1acbefd7c17222a6515ed4eb1003a6db46" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1acbefd7c17222a6515ed4eb1003a6db46" kindref="member">setLineBufferEnabled</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="137" refid="classerbsland_1_1cterm_1_1_terminal_1aaf5a413bc975b22982fce306b7e39e25" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1aaf5a413bc975b22982fce306b7e39e25" kindref="member">safeMarginEnabled</ref>()<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="142" refid="classerbsland_1_1cterm_1_1_terminal_1a0578b42d68b973cb5aedc9cce53d274b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a0578b42d68b973cb5aedc9cce53d274b" kindref="member">setSafeMarginEnabled</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="145" refid="classerbsland_1_1cterm_1_1_terminal_1abc1e974d4c21909b6539ee7fe5cac905" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abc1e974d4c21909b6539ee7fe5cac905" kindref="member">backBufferEnabled</ref>()<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="150" refid="classerbsland_1_1cterm_1_1_terminal_1af3eeaacc7fc291593466e3d5e15c2291" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1af3eeaacc7fc291593466e3d5e15c2291" kindref="member">setBackBufferEnabled</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="153" refid="classerbsland_1_1cterm_1_1_terminal_1a8bba21c49b9b76f0a86f9addbb5b7edf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a8bba21c49b9b76f0a86f9addbb5b7edf" kindref="member">setBackend</ref>(BackendPtr<sp/>backend)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal">public:<sp/></highlight><highlight class="comment">//<sp/>input<sp/>handling.</highlight></codeline>
+<codeline lineno="158" refid="classerbsland_1_1cterm_1_1_terminal_1ab27d72b5a55ae5842a2e915094a632d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_input" kindref="compound">Input</ref><sp/>&amp;<sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ab27d72b5a55ae5842a2e915094a632d7" kindref="member">input</ref>()<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal">public:<sp/></highlight><highlight class="comment">//<sp/>initialization</highlight></codeline>
+<codeline lineno="165" refid="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ac2ab9d4146963758a93dbf0fef2d3881" kindref="member">initializeScreen</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="169" refid="classerbsland_1_1cterm_1_1_terminal_1ad0c1bf834c38adbab57e8f7985de6fb2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad0c1bf834c38adbab57e8f7985de6fb2" kindref="member">isInteractive</ref>()<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="172" refid="classerbsland_1_1cterm_1_1_terminal_1a18d1cc547fd39f055b4d6d66566e0f6d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a18d1cc547fd39f055b4d6d66566e0f6d" kindref="member">testScreenSize</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="177" refid="classerbsland_1_1cterm_1_1_terminal_1a9a7e105284fe7fc7c9f0331358541ce4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a9a7e105284fe7fc7c9f0331358541ce4" kindref="member">restoreScreen</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal">public:<sp/></highlight><highlight class="comment">//<sp/>screen<sp/>handling</highlight></codeline>
+<codeline lineno="183" refid="classerbsland_1_1cterm_1_1_terminal_1a75396af1726390b5b4e2f5fe497abb31" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a75396af1726390b5b4e2f5fe497abb31" kindref="member">clearScreen</ref>()<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="186" refid="classerbsland_1_1cterm_1_1_terminal_1ae1500628c3aa6c895f06e7c6932bec1c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ae1500628c3aa6c895f06e7c6932bec1c" kindref="member">isAlternateScreenActive</ref>()<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="189" refid="classerbsland_1_1cterm_1_1_terminal_1a315e1ea992c200b7396c7e7e9a5c21eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a315e1ea992c200b7396c7e7e9a5c21eb" kindref="member">setAlternateScreen</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="197" refid="classerbsland_1_1cterm_1_1_terminal_1ae9652cd6c86e0cfe1ae4a636201630a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ae9652cd6c86e0cfe1ae4a636201630a8" kindref="member">updateScreen</ref>(const<sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;buffer,<sp/>const<sp/><ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref><sp/>&amp;settings<sp/>=<sp/>{})<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="199" refid="classerbsland_1_1cterm_1_1_terminal_1a72dacb1271a728ecb8cb385acbc0efe2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a72dacb1271a728ecb8cb385acbc0efe2" kindref="member">flush</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal">public:<sp/></highlight><highlight class="comment">//<sp/>backward<sp/>compatibility.</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/>[[deprecated(&quot;use<sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a44a40f5c6c64de69361cb160f606259a" kindref="member">writeLineBreak</ref>()&quot;)]]</highlight></codeline>
+<codeline lineno="205" refid="classerbsland_1_1cterm_1_1_terminal_1a8969616674e67efc8967336e1cd82f46" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a8969616674e67efc8967336e1cd82f46" kindref="member">lineBreak</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a44a40f5c6c64de69361cb160f606259a" kindref="member">writeLineBreak</ref>();</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="211" refid="classerbsland_1_1cterm_1_1_terminal_1abc89cabe726677b2e451ee054b23244b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[deprecated(</highlight><highlight class="stringliteral">&quot;use<sp/>outputMode()&quot;</highlight><highlight class="normal">)]]<sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abc89cabe726677b2e451ee054b23244b" kindref="member">colorEnabled</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_outputMode<sp/>!=<sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875da9dffbf69ffba8bc38bc4e01abf4b1675" kindref="member">OutputMode::Text</ref>;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>[[deprecated(</highlight><highlight class="stringliteral">&quot;use<sp/>setOutputMode()&quot;</highlight><highlight class="normal">)]]</highlight></codeline>
+<codeline lineno="218" refid="classerbsland_1_1cterm_1_1_terminal_1a2f041a8dc5fb6eb03a350a044d1a2b33" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1a2f041a8dc5fb6eb03a350a044d1a2b33" kindref="member">setColorEnabled</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>implement<sp/>CursorWriter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221" refid="classerbsland_1_1cterm_1_1_terminal_1afd31a1d0cc66f131fba444333e958fe4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1afd31a1d0cc66f131fba444333e958fe4" kindref="member">printParagraphImpl</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;paragraph,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options" kindref="compound">ParagraphOptions</ref><sp/>&amp;options)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>canUseLineBuffer()<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/>normalizedSupportedAttributes(<ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/>attributes)<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>emitCharAttributeCodes(<ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/>previousAttributes,<sp/><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref><sp/>newAttributes)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>refreshScreen()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>updateScreenWithBackBuffer(const<sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;buffer,<sp/>const<sp/><ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref><sp/>&amp;settings);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>updateScreenAndCreateNewBackBuffer(const<sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;buffer,<sp/>const<sp/><ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref><sp/>&amp;settings);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>updateScreenAndResizeBackBuffer(const<sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;buffer,<sp/>const<sp/><ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref><sp/>&amp;settings);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>updateScreenPartialWithBackBuffer(const<sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;view);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>updateScreenWithoutBackBuffer(const<sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;buffer,<sp/>const<sp/><ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref><sp/>&amp;settings);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>updateSizeTooSmallBuffer(const<sp/><ref refid="classerbsland_1_1cterm_1_1_update_settings" kindref="compound">UpdateSettings</ref><sp/>&amp;settings)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>writeImpl(const<sp/><ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref><sp/>&amp;buffer,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>withRowMove)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>printParagraphPlainOutput(const<sp/><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref><sp/>&amp;paragraph,<sp/>const<sp/><ref refid="classerbsland_1_1cterm_1_1_paragraph_options" kindref="compound">ParagraphOptions</ref><sp/>&amp;options)<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>finishParagraphWithExplicitLineBreaks(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>renderedLines,<sp/>ParagraphSpacing<sp/>paragraphSpacing)<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref><sp/>applySafeMargin(<ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref><sp/>terminalSize)<sp/>const<sp/>noexcept<sp/>;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal">private:</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_flags" kindref="compound">TerminalFlags</ref><sp/>_flags;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>BackendPtr<sp/>_backend;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875d" kindref="member">OutputMode</ref><sp/>_outputMode{<ref refid="classerbsland_1_1cterm_1_1_terminal_1ad3d07742921f1cf90b3681fb5d87875da8a1db58568147877ebe2c30e1a822b8d" kindref="member">OutputMode::FullControl</ref>};<sp/><sp/></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_sizeDetectionEnabled{</highlight><highlight class="keyword">true</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_safeMarginEnabled{</highlight><highlight class="keyword">true</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_afterResize{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687" kindref="member">RefreshMode</ref><sp/>_refreshMode{<ref refid="classerbsland_1_1cterm_1_1_terminal_1abbb09da6a3b025e51b063df7af617687ada364eb37e143f6b2b5559aa03f5913a" kindref="member">RefreshMode::Overwrite</ref>};<sp/></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>Size<sp/>_size;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>Size<sp/>_terminalSize;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/>CharStyle<sp/>_style{<ref refid="classerbsland_1_1cterm_1_1_char_style_1a5c505a9f0110c891a0006212c89e22ca" kindref="member">CharStyle::reset</ref>()};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_backBufferEnabled{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_isAlternateScreenActive{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/>WritableBufferPtr<sp/>_sizeTooSmallBuffer;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/>WritableBufferPtr<sp/>_backBuffer;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>impl::InputBackend<sp/>_input;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/>impl::LineBuffer<sp/>_lineBuffer;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="282"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/Terminal.hpp"/>
+  </compounddef>
+</doxygen>

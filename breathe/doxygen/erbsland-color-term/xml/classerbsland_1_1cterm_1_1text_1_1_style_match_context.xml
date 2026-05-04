@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1_style_match_context" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::text::StyleMatchContext</compoundname>
+    <includes refid="_style_match_context_8hpp" local="no">erbsland/cterm/text/StyleMatchContext.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a245c63db6d6ce86258a3e214e54d5ec7" prot="private" static="no" mutable="no">
+        <type>StyleRole</type>
+        <definition>StyleRole erbsland::cterm::text::StyleMatchContext::_role</definition>
+        <argsstring></argsstring>
+        <name>_role</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::_role</qualifiedname>
+        <initializer>{StyleRole::Paragraph}</initializer>
+        <briefdescription>
+<para>The semantic role of the current node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="50" column="15" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a0d150020df2b5ffbfdb0058226d9963d" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; int &gt;</type>
+        <definition>std::optional&lt;int&gt; erbsland::cterm::text::StyleMatchContext::_level</definition>
+        <argsstring></argsstring>
+        <name>_level</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::_level</qualifiedname>
+        <briefdescription>
+<para>The optional heading or list nesting level. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="51" column="19" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a890f8ba0cae0684d5dfd486de0c851f8" prot="private" static="no" mutable="no">
+        <type>StyleListKind</type>
+        <definition>StyleListKind erbsland::cterm::text::StyleMatchContext::_listKind</definition>
+        <argsstring></argsstring>
+        <name>_listKind</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::_listKind</qualifiedname>
+        <initializer>{StyleListKind::Any}</initializer>
+        <briefdescription>
+<para>The list kind of the current node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="52" column="19" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a1b35cad81eeae8dcac222b83145a1b02" prot="private" static="no" mutable="no">
+        <type>std::span&lt; const std::string &gt;</type>
+        <definition>std::span&lt;const std::string&gt; erbsland::cterm::text::StyleMatchContext::_styleTokens</definition>
+        <argsstring></argsstring>
+        <name>_styleTokens</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::_styleTokens</qualifiedname>
+        <briefdescription>
+<para>Parsed style tokens from <computeroutput><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a21a11c9ef9ffadc8f73fdd6d9f6f2a99" kindref="member">TextNode::style()</ref></computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="53" column="15" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1aab36839fb0ed450971b1689b4ecde3af" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::StyleMatchContext::StyleMatchContext</definition>
+        <argsstring>(const StyleRole role=StyleRole::Paragraph, const std::optional&lt; int &gt; level=std::nullopt, const StyleListKind listKind=StyleListKind::Any, const std::span&lt; const std::string &gt; styleTokens={}) noexcept</argsstring>
+        <name>StyleMatchContext</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::StyleMatchContext</qualifiedname>
+        <param>
+          <type>const StyleRole</type>
+          <declname>role</declname>
+          <defval>StyleRole::Paragraph</defval>
+        </param>
+        <param>
+          <type>const std::optional&lt; int &gt;</type>
+          <declname>level</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <param>
+          <type>const StyleListKind</type>
+          <declname>listKind</declname>
+          <defval>StyleListKind::Any</defval>
+        </param>
+        <param>
+          <type>const std::span&lt; const std::string &gt;</type>
+          <declname>styleTokens</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Create one match context for selector resolution. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>role</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The semantic role of the current node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The optional heading or list nesting level of the current node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>listKind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list kind of the current node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>styleTokens</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parsed style tokens from <computeroutput><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a21a11c9ef9ffadc8f73fdd6d9f6f2a99" kindref="member">TextNode::style()</ref></computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="22" column="14" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="22" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a2569572787dfe5f8b1a705f355e7bbf9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>StyleRole</type>
+        <definition>StyleRole erbsland::cterm::text::StyleMatchContext::role</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>role</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::role</qualifiedname>
+        <briefdescription>
+<para>Access the semantic role of the current node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="31" column="16" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a954e1d441f1ee0f1bf936365a5793088" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::optional&lt; int &gt; &amp;</type>
+        <definition>const std::optional&lt; int &gt; &amp; erbsland::cterm::text::StyleMatchContext::level</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>level</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::level</qualifiedname>
+        <briefdescription>
+<para>Access the optional heading or list nesting level of the current node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="33" column="27" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1abeaa95d40b6e8ba11c6bebb61d4b4895" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>StyleListKind</type>
+        <definition>StyleListKind erbsland::cterm::text::StyleMatchContext::listKind</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>listKind</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::listKind</qualifiedname>
+        <briefdescription>
+<para>Access the list kind of the current node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="35" column="20" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a003d89deaf58ed6b9fc8328064403352" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const std::string &gt;</type>
+        <definition>std::span&lt; const std::string &gt; erbsland::cterm::text::StyleMatchContext::styleTokens</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>styleTokens</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::styleTokens</qualifiedname>
+        <briefdescription>
+<para>Access the parsed style tokens from <computeroutput><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a21a11c9ef9ffadc8f73fdd6d9f6f2a99" kindref="member">TextNode::style()</ref></computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="37" column="16" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1aeda7554bf6c09b74431f79caa4b7dcbe" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::StyleMatchContext::setRole</definition>
+        <argsstring>(const StyleRole role) noexcept</argsstring>
+        <name>setRole</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::setRole</qualifiedname>
+        <param>
+          <type>const StyleRole</type>
+          <declname>role</declname>
+        </param>
+        <briefdescription>
+<para>Replace the semantic role of the current node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>role</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new semantic role. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="41" column="10" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1aa9f4f5cb5d60e3080605fd05915c0f56" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::StyleMatchContext::setLevel</definition>
+        <argsstring>(std::optional&lt; int &gt; level) noexcept</argsstring>
+        <name>setLevel</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::setLevel</qualifiedname>
+        <param>
+          <type>std::optional&lt; int &gt;</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Replace the optional heading or list nesting level of the current node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new optional level. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="44" column="10" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a0e8e178ef44a43c155bb798b1dd1427a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::StyleMatchContext::setListKind</definition>
+        <argsstring>(const StyleListKind listKind) noexcept</argsstring>
+        <name>setListKind</name>
+        <qualifiedname>erbsland::cterm::text::StyleMatchContext::setListKind</qualifiedname>
+        <param>
+          <type>const StyleListKind</type>
+          <declname>listKind</declname>
+        </param>
+        <briefdescription>
+<para>Replace the list kind of the current node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>listKind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new list kind. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="47" column="10" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Additional node metadata used while resolving selectors. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/StyleMatchContext.hpp" line="15" column="1" bodyfile="erbsland/cterm/text/StyleMatchContext.hpp" bodystart="15" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a0d150020df2b5ffbfdb0058226d9963d" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>_level</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a890f8ba0cae0684d5dfd486de0c851f8" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>_listKind</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a245c63db6d6ce86258a3e214e54d5ec7" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>_role</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a1b35cad81eeae8dcac222b83145a1b02" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>_styleTokens</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a954e1d441f1ee0f1bf936365a5793088" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>level</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1abeaa95d40b6e8ba11c6bebb61d4b4895" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>listKind</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a2569572787dfe5f8b1a705f355e7bbf9" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>role</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1aa9f4f5cb5d60e3080605fd05915c0f56" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>setLevel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a0e8e178ef44a43c155bb798b1dd1427a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>setListKind</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1aeda7554bf6c09b74431f79caa4b7dcbe" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>setRole</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1aab36839fb0ed450971b1689b4ecde3af" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>StyleMatchContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1_style_match_context_1a003d89deaf58ed6b9fc8328064403352" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::StyleMatchContext</scope><name>styleTokens</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

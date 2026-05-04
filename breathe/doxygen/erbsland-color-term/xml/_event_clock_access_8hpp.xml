@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="_event_clock_access_8hpp" kind="file" language="C++">
+    <compoundname>EventClockAccess.hpp</compoundname>
+    <includes refid="_event_8hpp" local="yes">../Event.hpp</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">mutex</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>../Event.hpp</label>
+        <link refid="_event_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>EventData.hpp</label>
+        <link refid="_event_data_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>EventType.hpp</label>
+        <link refid="_event_type_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>erbsland/cterm/ui/event/impl/EventClockAccess.hpp</label>
+        <link refid="_event_clock_access_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>chrono</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="8">
+        <label>functional</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+      <node id="9">
+        <label>mutex</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access" prot="public">erbsland::cterm::ui::impl::EventClockAccess</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" prot="public">erbsland::cterm::ui::impl::ScopedEventClockOverride</innerclass>
+    <innernamespace refid="namespaceerbsland">erbsland</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm">erbsland::cterm</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1ui">erbsland::cterm::ui</innernamespace>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1ui_1_1impl">erbsland::cterm::ui::impl</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Tobias<sp/>Erbsland<sp/>-<sp/>https://erbsland.dev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../Event.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">erbsland::cterm::ui::impl<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access" kindref="compound">EventClockAccess</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">NowFn<sp/>=<sp/>std::function&lt;EventTime()&gt;;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="20" refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a1ed951ba845c74117864fa7f1cd15b2c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>EventTime<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1a1ed951ba845c74117864fa7f1cd15b2c" kindref="member">now</ref>()<sp/>;</highlight></codeline>
+<codeline lineno="24" refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1ad41895999f4ed8fe7e11a874a7cbe318" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>NowFn<sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_event_clock_access_1ad41895999f4ed8fe7e11a874a7cbe318" kindref="member">swapNowFnForTest</ref>(NowFn<sp/>nowFn)<sp/>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>EventTime<sp/>defaultNow()<sp/>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::mutex<sp/>_mutex;<sp/></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>NowFn<sp/>_nowFn;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="41" refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override_1a9d8135c465b36e7d7e786b708db55d6b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override_1a9d8135c465b36e7d7e786b708db55d6b" kindref="member">ScopedEventClockOverride</ref>(EventTime<sp/>now);</highlight></codeline>
+<codeline lineno="44" refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override_1a54757d758c693bf6a3f1eb3634922d8a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override_1a54757d758c693bf6a3f1eb3634922d8a" kindref="member">ScopedEventClockOverride</ref>(EventClockAccess::NowFn<sp/>nowFn);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">~ScopedEventClockOverride</ref>();</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref><sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref>(<ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref><sp/>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref><sp/>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref><sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref><sp/>&amp;<sp/>operator=(<ref refid="classerbsland_1_1cterm_1_1ui_1_1impl_1_1_scoped_event_clock_override" kindref="compound">ScopedEventClockOverride</ref><sp/>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>EventClockAccess::NowFn<sp/>_previousNowFn;<sp/></highlight></codeline>
+<codeline lineno="55"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="erbsland/cterm/ui/event/impl/EventClockAccess.hpp"/>
+  </compounddef>
+</doxygen>

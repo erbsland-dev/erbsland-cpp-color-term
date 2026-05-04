@@ -1,0 +1,563 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_grid_layout" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::GridLayout</compoundname>
+    <includes refid="_grid_layout_8hpp" local="no">erbsland/cterm/GridLayout.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_grid_layout_1a12326e2815731a88afc12d473e35a5c1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Coordinate &gt;</type>
+        <definition>std::vector&lt;Coordinate&gt; erbsland::cterm::GridLayout::_columnWidths</definition>
+        <argsstring></argsstring>
+        <name>_columnWidths</name>
+        <qualifiedname>erbsland::cterm::GridLayout::_columnWidths</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="84" column="17" bodyfile="erbsland/cterm/GridLayout.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_grid_layout_1ac61f755bbe933a6c2c5f3b524b7caacd" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Coordinate &gt;</type>
+        <definition>std::vector&lt;Coordinate&gt; erbsland::cterm::GridLayout::_rowHeights</definition>
+        <argsstring></argsstring>
+        <name>_rowHeights</name>
+        <qualifiedname>erbsland::cterm::GridLayout::_rowHeights</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="85" column="17" bodyfile="erbsland/cterm/GridLayout.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1ab9478c12802948cf797c6562920a40d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::GridLayout::GridLayout</definition>
+        <argsstring>(std::vector&lt; Coordinate &gt; columnWidths, std::vector&lt; Coordinate &gt; rowHeights)</argsstring>
+        <name>GridLayout</name>
+        <qualifiedname>erbsland::cterm::GridLayout::GridLayout</qualifiedname>
+        <param>
+          <type>std::vector&lt; Coordinate &gt;</type>
+          <declname>columnWidths</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; Coordinate &gt;</type>
+          <declname>rowHeights</declname>
+        </param>
+        <briefdescription>
+<para>Create a grid layout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>columnWidths</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The content width of each column. Each value must be positive. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rowHeights</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The content height of each row. Each value must be positive. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if either list is empty or contains a non-positive size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="28" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a2b1a25a93bc81d1e89d7bfa5a2b5dcd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::GridLayout::GridLayout</definition>
+        <argsstring>(std::initializer_list&lt; Coordinate &gt; columnWidths, std::initializer_list&lt; Coordinate &gt; rowHeights)</argsstring>
+        <name>GridLayout</name>
+        <qualifiedname>erbsland::cterm::GridLayout::GridLayout</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; Coordinate &gt;</type>
+          <declname>columnWidths</declname>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; Coordinate &gt;</type>
+          <declname>rowHeights</declname>
+        </param>
+        <briefdescription>
+<para>Create a grid layout from initializer lists. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>columnWidths</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The content width of each column. Each value must be positive. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rowHeights</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The content height of each row. Each value must be positive. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if either list is empty or contains a non-positive size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="33" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a69ac6129311d6bd88e712df4e8a0f10c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::GridLayout::~GridLayout</definition>
+        <argsstring>()=default</argsstring>
+        <name>~GridLayout</name>
+        <qualifiedname>erbsland::cterm::GridLayout::~GridLayout</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="36" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1aabe4e7ecc7d52e3fbba63a6136beac2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::GridLayout::GridLayout</definition>
+        <argsstring>(const GridLayout &amp;)=default</argsstring>
+        <name>GridLayout</name>
+        <qualifiedname>erbsland::cterm::GridLayout::GridLayout</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_grid_layout" kindref="compound">GridLayout</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="37" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1aaf5df5a956c31988bd4dba2a7b051a85" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::GridLayout::GridLayout</definition>
+        <argsstring>(GridLayout &amp;&amp;) noexcept=default</argsstring>
+        <name>GridLayout</name>
+        <qualifiedname>erbsland::cterm::GridLayout::GridLayout</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_grid_layout" kindref="compound">GridLayout</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1ac757c7e28130aabc3e75779f2e5ca8b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_grid_layout" kindref="compound">GridLayout</ref> &amp;</type>
+        <definition>GridLayout &amp; erbsland::cterm::GridLayout::operator=</definition>
+        <argsstring>(const GridLayout &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::GridLayout::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_grid_layout" kindref="compound">GridLayout</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="39" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a65c9800b525e9cff1b3dd989c12380e2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_grid_layout" kindref="compound">GridLayout</ref> &amp;</type>
+        <definition>GridLayout &amp; erbsland::cterm::GridLayout::operator=</definition>
+        <argsstring>(GridLayout &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::GridLayout::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_grid_layout" kindref="compound">GridLayout</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="40" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a8391224988af3854fe25bdd979108c84" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::GridLayout::operator==</definition>
+        <argsstring>(const GridLayout &amp;other) const noexcept=default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::GridLayout::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_grid_layout" kindref="compound">GridLayout</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="43" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1ab9bce42a61a10290e0e6173410826fe7" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::GridLayout::rowCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rowCount</name>
+        <qualifiedname>erbsland::cterm::GridLayout::rowCount</qualifiedname>
+        <briefdescription>
+<para>Number of rows in the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="47" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a6c2e0b7ffab837a092bb6c91decda1f9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::GridLayout::columnCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>columnCount</name>
+        <qualifiedname>erbsland::cterm::GridLayout::columnCount</qualifiedname>
+        <briefdescription>
+<para>Number of columns in the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="49" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1aa44b91f34f6f0c2ff1487169a10265f3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>Coordinate erbsland::cterm::GridLayout::rowHeight</definition>
+        <argsstring>(std::size_t row) const</argsstring>
+        <name>rowHeight</name>
+        <qualifiedname>erbsland::cterm::GridLayout::rowHeight</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <briefdescription>
+<para>Access one row height. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The row index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The row content height. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>row</computeroutput> is outside the layout. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="54" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a5028def4d2368b0a7ca9778da3c31015" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>Coordinate erbsland::cterm::GridLayout::columnWidth</definition>
+        <argsstring>(std::size_t column) const</argsstring>
+        <name>columnWidth</name>
+        <qualifiedname>erbsland::cterm::GridLayout::columnWidth</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>column</declname>
+        </param>
+        <briefdescription>
+<para>Access one column width. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>column</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The column index. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The column content width. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>column</computeroutput> is outside the layout. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="59" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1ac06f4a6e8eb650036747a629bc92ee58" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; Coordinate &gt; &amp;</type>
+        <definition>const std::vector&lt; Coordinate &gt; &amp; erbsland::cterm::GridLayout::rowHeights</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rowHeights</name>
+        <qualifiedname>erbsland::cterm::GridLayout::rowHeights</qualifiedname>
+        <briefdescription>
+<para>Access all row heights. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="61" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1abe372cca6f7e2204d6b0c0550eafa5e0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; Coordinate &gt; &amp;</type>
+        <definition>const std::vector&lt; Coordinate &gt; &amp; erbsland::cterm::GridLayout::columnWidths</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>columnWidths</name>
+        <qualifiedname>erbsland::cterm::GridLayout::columnWidths</qualifiedname>
+        <briefdescription>
+<para>Access all column widths. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="63" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a69ffb2dec64d9ec3e7228d62b81b5f0c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::GridLayout::size</definition>
+        <argsstring>(const FrameBorder &amp;border) const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::GridLayout::size</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_frame_border" kindref="compound">FrameBorder</ref> &amp;</type>
+          <declname>border</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the complete size of this layout for the given border. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>border</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Border styles that decide which frame lines occupy cells. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The total grid size including active frame lines. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="69" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a4cb540d26cb88a2a46f28cadd458cafb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+        <definition>Rectangle erbsland::cterm::GridLayout::cellRect</definition>
+        <argsstring>(std::size_t row, std::size_t column, Position origin, const FrameBorder &amp;border) const</argsstring>
+        <name>cellRect</name>
+        <qualifiedname>erbsland::cterm::GridLayout::cellRect</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>column</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_frame_border" kindref="compound">FrameBorder</ref> &amp;</type>
+          <declname>border</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the content rectangle for one cell. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The row index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>column</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The column index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>origin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The top-left position of the full grid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>border</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Border styles that decide which frame lines occupy cells. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The cell content rectangle. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::out_of_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>row</computeroutput> or <computeroutput>column</computeroutput> is outside the layout. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="77" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a97a7b6e0caf707cc1783650c7e907b3a" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>static Coordinate erbsland::cterm::GridLayout::borderSize</definition>
+        <argsstring>(const FrameBorder &amp;border, FrameBorder::Element element) noexcept</argsstring>
+        <name>borderSize</name>
+        <qualifiedname>erbsland::cterm::GridLayout::borderSize</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_frame_border" kindref="compound">FrameBorder</ref> &amp;</type>
+          <declname>border</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_frame_border_1ac3eead21e2b516d5c57e73a38e9a4aec" kindref="member">FrameBorder::Element</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="80" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_grid_layout_1a250e75749bfe8559f276f46e01b13ee1" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::GridLayout::validateSizes</definition>
+        <argsstring>(const std::vector&lt; Coordinate &gt; &amp;sizes, std::string_view name)</argsstring>
+        <name>validateSizes</name>
+        <qualifiedname>erbsland::cterm::GridLayout::validateSizes</qualifiedname>
+        <param>
+          <type>const std::vector&lt; Coordinate &gt; &amp;</type>
+          <declname>sizes</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/GridLayout.hpp" line="81" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Geometry for a grid of content cells. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class stores only content sizes. <simplesect kind="par"><title>Tested:</title><para><computeroutput>GridLayoutTest</computeroutput> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="erbsland/cterm/GridLayout.hpp" line="22" column="1" bodyfile="erbsland/cterm/GridLayout.hpp" bodystart="22" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a12326e2815731a88afc12d473e35a5c1" prot="private" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>_columnWidths</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1ac61f755bbe933a6c2c5f3b524b7caacd" prot="private" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>_rowHeights</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a97a7b6e0caf707cc1783650c7e907b3a" prot="private" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>borderSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a4cb540d26cb88a2a46f28cadd458cafb" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>cellRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a6c2e0b7ffab837a092bb6c91decda1f9" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>columnCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a5028def4d2368b0a7ca9778da3c31015" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>columnWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1abe372cca6f7e2204d6b0c0550eafa5e0" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>columnWidths</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1ab9478c12802948cf797c6562920a40d7" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>GridLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a2b1a25a93bc81d1e89d7bfa5a2b5dcd8" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>GridLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1aabe4e7ecc7d52e3fbba63a6136beac2c" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>GridLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1aaf5df5a956c31988bd4dba2a7b051a85" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>GridLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1ac757c7e28130aabc3e75779f2e5ca8b1" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a65c9800b525e9cff1b3dd989c12380e2" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a8391224988af3854fe25bdd979108c84" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1ab9bce42a61a10290e0e6173410826fe7" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>rowCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1aa44b91f34f6f0c2ff1487169a10265f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>rowHeight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1ac06f4a6e8eb650036747a629bc92ee58" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>rowHeights</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a69ffb2dec64d9ec3e7228d62b81b5f0c" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a250e75749bfe8559f276f46e01b13ee1" prot="private" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>validateSizes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_grid_layout_1a69ac6129311d6bd88e712df4e8a0f10c" prot="public" virt="non-virtual"><scope>erbsland::cterm::GridLayout</scope><name>~GridLayout</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,371 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</compoundname>
+    <includes refid="_style_resolver_8hpp" local="no">erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1_1_cache_entry" prot="private">erbsland::cterm::text::impl::text_node_renderer::StyleResolver::CacheEntry</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a0eef79b6f3a33b340dab12f133048e0c" prot="private" static="no" mutable="no">
+        <type>StyleConstPtr</type>
+        <definition>StyleConstPtr erbsland::cterm::text::impl::text_node_renderer::StyleResolver::_style</definition>
+        <argsstring></argsstring>
+        <name>_style</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::_style</qualifiedname>
+        <briefdescription>
+<para>The style used for all selector resolution. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="67" column="19" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1af22448e2d4b8742856a874b099941ba4" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; CacheEntry &gt;</type>
+        <definition>std::vector&lt;CacheEntry&gt; erbsland::cterm::text::impl::text_node_renderer::StyleResolver::_ruleCache</definition>
+        <argsstring></argsstring>
+        <name>_ruleCache</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::_ruleCache</qualifiedname>
+        <briefdescription>
+<para>Cached rules for selector-only lookups. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="68" column="17" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1af7b45bab84e4f7d0b3478007f4c4530a" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::StyleResolver</definition>
+        <argsstring>(StyleConstPtr style)</argsstring>
+        <name>StyleResolver</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::StyleResolver</qualifiedname>
+        <param>
+          <type>StyleConstPtr</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Create a resolver for the given style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The style used during rendering. <computeroutput>nullptr</computeroutput> falls back to the default style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="19" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1aef9f7dc363303d0b3e8eaeb77823f637" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::~StyleResolver</definition>
+        <argsstring>()=default</argsstring>
+        <name>~StyleResolver</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::~StyleResolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="22" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a584f7c828e0c04d6ec447615b1090576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::StyleResolver</definition>
+        <argsstring>(const StyleResolver &amp;)=delete</argsstring>
+        <name>StyleResolver</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::StyleResolver</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" kindref="compound">StyleResolver</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="23" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a7b3bcd72d4f9d400e10af14d6f0d1403" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::StyleResolver</definition>
+        <argsstring>(StyleResolver &amp;&amp;)=delete</argsstring>
+        <name>StyleResolver</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::StyleResolver</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" kindref="compound">StyleResolver</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="24" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a43ae803bddc26eac8d30c6b740fa6516" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" kindref="compound">StyleResolver</ref> &amp;</type>
+        <definition>StyleResolver &amp; erbsland::cterm::text::impl::text_node_renderer::StyleResolver::operator=</definition>
+        <argsstring>(const StyleResolver &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" kindref="compound">StyleResolver</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="25" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a558d1dc443463b1183858f0ac28b6640" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" kindref="compound">StyleResolver</ref> &amp;</type>
+        <definition>StyleResolver &amp; erbsland::cterm::text::impl::text_node_renderer::StyleResolver::operator=</definition>
+        <argsstring>(StyleResolver &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" kindref="compound">StyleResolver</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="26" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a87d60b6cd1808b537277636c9744a1e1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        <definition>const CharStyle &amp; erbsland::cterm::text::impl::text_node_renderer::StyleResolver::baseTextStyle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>baseTextStyle</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::baseTextStyle</qualifiedname>
+        <briefdescription>
+<para>Access the base text style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The configured base text style. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="31" column="23" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a6009f27bb8f46f5f5261fc4558833b40" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::text::impl::text_node_renderer::StyleResolver::blockRule</definition>
+        <argsstring>(const TextNode &amp;node, StyleRole role, StyleListKind listKind=StyleListKind::Any, std::optional&lt; int &gt; levelOverride=std::nullopt) -&gt; StyleRule</argsstring>
+        <name>blockRule</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::blockRule</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>StyleRole</type>
+          <declname>role</declname>
+        </param>
+        <param>
+          <type>StyleListKind</type>
+          <declname>listKind</declname>
+          <defval>StyleListKind::Any</defval>
+        </param>
+        <param>
+          <type>std::optional&lt; int &gt;</type>
+          <declname>levelOverride</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+<para>Resolve the block rule for one text node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The node to resolve. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>role</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The semantic role. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>listKind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional list kind qualifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>levelOverride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional explicit level override. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The resolved rule. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="38" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1acad2073ee8f098de57285a36783ff5fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+        <definition>StyleRule erbsland::cterm::text::impl::text_node_renderer::StyleResolver::horizontalRuleRule</definition>
+        <argsstring>()</argsstring>
+        <name>horizontalRuleRule</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::horizontalRuleRule</qualifiedname>
+        <briefdescription>
+<para>Resolve the horizontal-rule style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The resolved rule. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="45" column="16" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" bodystart="45" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1ab9298defef896a8189ce53ddef673e62" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>static std::vector&lt; std::string &gt; erbsland::cterm::text::impl::text_node_renderer::StyleResolver::splitStyleTokens</definition>
+        <argsstring>(std::string_view value)</argsstring>
+        <name>splitStyleTokens</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::splitStyleTokens</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Split and normalize style tokens. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The raw style value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The unique sorted tokens. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="51" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1ad415a6a9366aa941e5aa2b6861809e71" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+        <definition>StyleRule erbsland::cterm::text::impl::text_node_renderer::StyleResolver::resolveNoStyle</definition>
+        <argsstring>(StyleRole role, std::optional&lt; int &gt; level, StyleListKind listKind)</argsstring>
+        <name>resolveNoStyle</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::resolveNoStyle</qualifiedname>
+        <param>
+          <type>StyleRole</type>
+          <declname>role</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; int &gt;</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>StyleListKind</type>
+          <declname>listKind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="61" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a4eb1c24143c1300939f7eb549d61c52e" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto erbsland::cterm::text::impl::text_node_renderer::StyleResolver::resolveWithStyleTokens</definition>
+        <argsstring>(StyleRole role, std::optional&lt; int &gt; level, StyleListKind listKind, std::string_view styleValue) const -&gt; StyleRule</argsstring>
+        <name>resolveWithStyleTokens</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::StyleResolver::resolveWithStyleTokens</qualifiedname>
+        <param>
+          <type>StyleRole</type>
+          <declname>role</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; int &gt;</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>StyleListKind</type>
+          <declname>listKind</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>styleValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="62" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Resolves renderer-facing style rules for text nodes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" line="15" column="1" bodyfile="erbsland/cterm/text/impl/text_node_renderer/StyleResolver.hpp" bodystart="15" bodyend="69"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1af22448e2d4b8742856a874b099941ba4" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>_ruleCache</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a0eef79b6f3a33b340dab12f133048e0c" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>_style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a87d60b6cd1808b537277636c9744a1e1" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>baseTextStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a6009f27bb8f46f5f5261fc4558833b40" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>blockRule</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1acad2073ee8f098de57285a36783ff5fe" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>horizontalRuleRule</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a43ae803bddc26eac8d30c6b740fa6516" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a558d1dc443463b1183858f0ac28b6640" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1ad415a6a9366aa941e5aa2b6861809e71" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>resolveNoStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a4eb1c24143c1300939f7eb549d61c52e" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>resolveWithStyleTokens</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1ab9298defef896a8189ce53ddef673e62" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>splitStyleTokens</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1af7b45bab84e4f7d0b3478007f4c4530a" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>StyleResolver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a584f7c828e0c04d6ec447615b1090576" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>StyleResolver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1a7b3bcd72d4f9d400e10af14d6f0d1403" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>StyleResolver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver_1aef9f7dc363303d0b3e8eaeb77823f637" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::StyleResolver</scope><name>~StyleResolver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1061 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::U8Buffer</compoundname>
+    <includes refid="_u8_buffer_8hpp" local="no">erbsland/cterm/impl/U8Buffer.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a8f4adc3412bdcceb7cbf830dd43ba69c" prot="private" static="no">
+        <type>uint8_t</type>
+        <definition>using erbsland::cterm::impl::U8Buffer&lt; T &gt;::Byte =  uint8_t</definition>
+        <argsstring></argsstring>
+        <name>Byte</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::Byte</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="63" column="5" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ae0f198234383efd2e3028140f0b9bce7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::impl::U8Buffer&lt; T &gt;::cReplacementCharacter</definition>
+        <argsstring></argsstring>
+        <name>cReplacementCharacter</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::cReplacementCharacter</qualifiedname>
+        <initializer>= char32_t{0xFFFDU}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="66" column="27" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ab90fa87dcef730ef9e175b09f12dee43" prot="private" static="no" mutable="no">
+        <type>std::span&lt; T &gt;</type>
+        <definition>std::span&lt;T&gt; erbsland::cterm::impl::U8Buffer&lt; T &gt;::_buffer</definition>
+        <argsstring></argsstring>
+        <name>_buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::_buffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="471" column="15" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="471" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1af3042fab1ba1e18f9a6054527ae846df" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer&lt; T &gt;::U8Buffer</definition>
+        <argsstring>(const std::span&lt; T &gt; buffer)</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::U8Buffer</qualifiedname>
+        <param>
+          <type>const std::span&lt; T &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="68" column="14" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a64ffc70a5726c56dece0c40a65dbcdca" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer&lt; T &gt;::U8Buffer</definition>
+        <argsstring>(const std::basic_string&lt; Char &gt; &amp;text)</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::U8Buffer</qualifiedname>
+        <param>
+          <type>const std::basic_string&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt; &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="70" column="14" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1acdb0b3b03ccf30c9579a1bb3f53c453c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer&lt; T &gt;::U8Buffer</definition>
+        <argsstring>(const std::basic_string_view&lt; Char &gt; text)</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::U8Buffer</qualifiedname>
+        <param>
+          <type>const std::basic_string_view&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="72" column="14" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a05479c788bb8e3dbbceb6916b93e4771" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer&lt; T &gt;::U8Buffer</definition>
+        <argsstring>(std::basic_string&lt; Char &gt; &amp;&amp;text)=delete</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::U8Buffer</qualifiedname>
+        <param>
+          <type>std::basic_string&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt; &amp;&amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="76" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a734f06da22587bbe7d2d29600f7f08bd" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer&lt; T &gt;::U8Buffer</definition>
+        <argsstring>(std::basic_string_view&lt; Char &gt; &amp;&amp;text)=delete</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::U8Buffer</qualifiedname>
+        <param>
+          <type>std::basic_string_view&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt; &amp;&amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="78" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a5c26b6def253faf93b1166f07db691a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer&lt; T &gt;::U8Buffer</definition>
+        <argsstring>(const U8Buffer &amp;)=delete</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::U8Buffer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer" kindref="compound">U8Buffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="81" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1abcf07afe50795b1d897f4af7f0cb0e65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer&lt; T &gt;::U8Buffer</definition>
+        <argsstring>(U8Buffer &amp;&amp;)=delete</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::U8Buffer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer" kindref="compound">U8Buffer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="82" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a8f3bba1fdcfcc8642e8269666cfd39ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer" kindref="compound">U8Buffer</ref> &amp;</type>
+        <definition>U8Buffer &amp; erbsland::cterm::impl::U8Buffer&lt; T &gt;::operator=</definition>
+        <argsstring>(const U8Buffer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer" kindref="compound">U8Buffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="83" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ad0c095850690d8e9119dd58f7ab215e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer" kindref="compound">U8Buffer</ref> &amp;</type>
+        <definition>U8Buffer &amp; erbsland::cterm::impl::U8Buffer&lt; T &gt;::operator=</definition>
+        <argsstring>(U8Buffer &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer" kindref="compound">U8Buffer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="84" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a0ff3b1d3ae14726be82e18e96f3c3294" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::span&lt; T &gt; &amp;</type>
+        <definition>const std::span&lt; T &gt; &amp; erbsland::cterm::impl::U8Buffer&lt; T &gt;::buffer</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::buffer</qualifiedname>
+        <briefdescription>
+<para>Access the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="88" column="23" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a222d4b7e0329133ce7714e333d184b8e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeAll</definition>
+        <argsstring>(Function &amp;&amp;decodeFn, const EncodingErrors encodingErrors=EncodingErrors::Replace) const</argsstring>
+        <name>decodeAll</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeAll</qualifiedname>
+        <param>
+          <type>Function &amp;&amp;</type>
+          <declname>decodeFn</declname>
+        </param>
+        <param>
+          <type>const EncodingErrors</type>
+          <declname>encodingErrors</declname>
+          <defval>EncodingErrors::Replace</defval>
+        </param>
+    <requiresclause>std::invocable&lt;Function, char32_t&gt;    </requiresclause>
+        <briefdescription>
+<para>Decode all characters using a custom function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>decodeFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function that receives each decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>encodingErrors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How UTF-8 decoding errors are handled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>encodingErrors</computeroutput> is <computeroutput>EncodingErrors::Throw</computeroutput> and the data is invalid UTF-8. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="97" column="10" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="97" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a65a419f4ce9b3588992c3980a47f6548" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeAllOrThrow</definition>
+        <argsstring>(Function &amp;&amp;decodeFn) const</argsstring>
+        <name>decodeAllOrThrow</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeAllOrThrow</qualifiedname>
+        <param>
+          <type>Function &amp;&amp;</type>
+          <declname>decodeFn</declname>
+        </param>
+    <requiresclause>std::invocable&lt;Function, char32_t&gt;    </requiresclause>
+        <briefdescription>
+<para>Decode all characters and throw on malformed UTF-8. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>decodeFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function that receives each decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="116" column="10" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="116" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a6d515f7d26364d21cdaabe62e35c98c1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeAllIgnoringErrors</definition>
+        <argsstring>(Function &amp;&amp;decodeFn) const noexcept(noexcept(std::declval&lt; Function &amp; &gt;()(char32_t{})))</argsstring>
+        <name>decodeAllIgnoringErrors</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeAllIgnoringErrors</qualifiedname>
+        <param>
+          <type>Function &amp;&amp;</type>
+          <declname>decodeFn</declname>
+        </param>
+    <requiresclause>std::invocable&lt;Function, char32_t&gt;    </requiresclause>
+        <briefdescription>
+<para>Decode all characters and skip malformed UTF-8 bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>decodeFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function that receives each decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="124" column="10" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="124" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a0f8f1c37d231c8ef16e10e41aa4100d0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeAllReplacingErrors</definition>
+        <argsstring>(Function &amp;&amp;decodeFn) const noexcept(noexcept(std::declval&lt; Function &amp; &gt;()(char32_t{})))</argsstring>
+        <name>decodeAllReplacingErrors</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeAllReplacingErrors</qualifiedname>
+        <param>
+          <type>Function &amp;&amp;</type>
+          <declname>decodeFn</declname>
+        </param>
+    <requiresclause>std::invocable&lt;Function, char32_t&gt;    </requiresclause>
+        <briefdescription>
+<para>Decode all characters and replace each malformed UTF-8 byte with <computeroutput>U+FFFD</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>decodeFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function that receives each decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="132" column="10" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="132" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ac267b9071d464095763e85b33abb0ae8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeOneChar</definition>
+        <argsstring>(const EncodingErrors encodingErrors=EncodingErrors::Replace) const</argsstring>
+        <name>decodeOneChar</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeOneChar</qualifiedname>
+        <param>
+          <type>const EncodingErrors</type>
+          <declname>encodingErrors</declname>
+          <defval>EncodingErrors::Replace</defval>
+        </param>
+        <briefdescription>
+<para>Decode one code point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Expects that the given view contains exactly one UTF-8 encoded code point. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>encodingErrors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How UTF-8 decoding errors are handled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The decoded code point. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the view does not contain exactly one decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="142" column="15" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="142" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a3697d831d4c8124201fc86d107350124" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeOneCharOrThrow</definition>
+        <argsstring>() const</argsstring>
+        <name>decodeOneCharOrThrow</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeOneCharOrThrow</qualifiedname>
+        <briefdescription>
+<para>Decode one code point and throw on malformed UTF-8. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The decoded code point. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the view does not contain exactly one decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="157" column="15" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="157" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ab393bcce892363b322b44aefea36250c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeOneCharIgnoringErrors</definition>
+        <argsstring>() const</argsstring>
+        <name>decodeOneCharIgnoringErrors</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeOneCharIgnoringErrors</qualifiedname>
+        <briefdescription>
+<para>Decode one code point and skip malformed UTF-8 bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The decoded code point. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the view does not contain exactly one decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="162" column="15" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="162" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a245408d77214e73090682893a897e79f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeOneCharReplacingErrors</definition>
+        <argsstring>() const</argsstring>
+        <name>decodeOneCharReplacingErrors</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeOneCharReplacingErrors</qualifiedname>
+        <briefdescription>
+<para>Decode one code point and replace malformed UTF-8 bytes with <computeroutput>U+FFFD</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The decoded code point. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the view does not contain exactly one decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="169" column="15" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="169" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a662bfc9c506fa8d8e56683aedc80b1fd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result" kindref="compound">U8ParseResult</ref></type>
+        <definition>U8ParseResult erbsland::cterm::impl::U8Buffer&lt; T &gt;::parseCodePointPrefix</definition>
+        <argsstring>(const std::size_t offset=0) const noexcept</argsstring>
+        <name>parseCodePointPrefix</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::parseCodePointPrefix</qualifiedname>
+        <param>
+          <type>const std::size_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Parse one UTF-8 code point from the buffer at the given byte offset. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The byte offset into the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The parsing status, code point, and consumed byte count. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="176" column="20" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="176" bodyend="196"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a749a7df463b58aa909feea37cc03e7b4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::impl::U8Buffer&lt; T &gt;::throwEncodingError</definition>
+        <argsstring>(const char *message)</argsstring>
+        <name>throwEncodingError</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::throwEncodingError</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Throw an encoding error. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The diagnostic text. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Always thrown. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="201" column="17" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="201" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1afe025869acd1f789de3e5538beb1c338" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::encodedByteCount</definition>
+        <argsstring>(const char32_t unicode) noexcept</argsstring>
+        <name>encodedByteCount</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::encodedByteCount</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>unicode</declname>
+        </param>
+        <briefdescription>
+<para>Get the number of UTF-8 bytes required to encode a Unicode code point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>unicode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Unicode code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The encoded byte count. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="206" column="35" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="206" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a07defaf9c46f41387ecaf47f3af72505" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::expectedByteCount</definition>
+        <argsstring>(const Byte firstByte) noexcept</argsstring>
+        <name>expectedByteCount</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::expectedByteCount</qualifiedname>
+        <param>
+          <type>const Byte</type>
+          <declname>firstByte</declname>
+        </param>
+        <briefdescription>
+<para>Get the number of bytes expected for a UTF-8 sequence from its first byte. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>firstByte</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The leading byte of the sequence. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The expected byte count, or <computeroutput>0</computeroutput> for an invalid leading byte. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="223" column="35" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="223" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a6044f0e1eecb6ad1f3c3dfa439dcb6d7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>static char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeChar</definition>
+        <argsstring>(std::span&lt; T &gt; buffer, std::size_t &amp;position, const EncodingErrors encodingErrors)</argsstring>
+        <name>decodeChar</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeChar</qualifiedname>
+        <param>
+          <type>std::span&lt; T &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::size_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const EncodingErrors</type>
+          <declname>encodingErrors</declname>
+        </param>
+        <briefdescription>
+<para>Decode a single UTF-8 character in the buffer and advance the position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The byte buffer to decode. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The read position that is advanced after a successful read. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>encodingErrors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How malformed UTF-8 is handled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The decoded code point. For <computeroutput>Ignore</computeroutput>, returns <computeroutput>0</computeroutput> with an unchanged position if no further code point can be decoded. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>encodingErrors</computeroutput> is <computeroutput>EncodingErrors::Throw</computeroutput> and the data is invalid UTF-8. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="246" column="22" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="246" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a069dd5c0ed458214780c5f140cf0dc76" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>static char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeCharOrThrow</definition>
+        <argsstring>(std::span&lt; T &gt; buffer, std::size_t &amp;position)</argsstring>
+        <name>decodeCharOrThrow</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeCharOrThrow</qualifiedname>
+        <param>
+          <type>std::span&lt; T &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::size_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>Decode one UTF-8 code point and throw on malformed UTF-8. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The byte buffer to decode. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The read position that is advanced after a successful read. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The decoded code point. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the data is invalid UTF-8. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="263" column="22" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="263" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a95f0d25c74baac2f96368c043cb584e3" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>static char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeCharIgnoringErrors</definition>
+        <argsstring>(std::span&lt; T &gt; buffer, std::size_t &amp;position) noexcept</argsstring>
+        <name>decodeCharIgnoringErrors</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeCharIgnoringErrors</qualifiedname>
+        <param>
+          <type>std::span&lt; T &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::size_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>Decode one UTF-8 code point and skip malformed UTF-8 bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The byte buffer to decode. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The read position that is advanced after a successful read. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The decoded code point. Returns <computeroutput>0</computeroutput> with an unchanged position if no further code point can be decoded. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="271" column="22" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="271" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a8d660aebde2f2209ad8118a82aee9005" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>static char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeCharReplacingErrors</definition>
+        <argsstring>(std::span&lt; T &gt; buffer, std::size_t &amp;position) noexcept</argsstring>
+        <name>decodeCharReplacingErrors</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeCharReplacingErrors</qualifiedname>
+        <param>
+          <type>std::span&lt; T &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::size_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>Decode one UTF-8 code point and replace malformed UTF-8 bytes with <computeroutput>U+FFFD</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The byte buffer to decode. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The read position that is advanced after a successful read. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The decoded code point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="279" column="22" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="279" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ac04ef7ab3c79334daf3c7e417929dc6d" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename tStr</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void erbsland::cterm::impl::U8Buffer&lt; T &gt;::encodeChar</definition>
+        <argsstring>(tStr &amp;str, const char32_t unicode) noexcept</argsstring>
+        <name>encodeChar</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::encodeChar</qualifiedname>
+        <param>
+          <type>tStr &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const char32_t</type>
+          <declname>unicode</declname>
+        </param>
+    <requiresclause>std::is_convertible_v&lt;T, typename tStr::value_type&gt;    </requiresclause>
+        <briefdescription>
+<para>Encode a Unicode character into UTF-8 format and append it to the string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="286" column="17" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="286" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ab9e6830b5b19092fe9aac8001678fc1f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::basic_string&lt; std::remove_const_t&lt; T &gt; &gt;</type>
+        <definition>static std::basic_string&lt; std::remove_const_t&lt; T &gt; &gt; erbsland::cterm::impl::U8Buffer&lt; T &gt;::encodeString</definition>
+        <argsstring>(const std::u32string_view text)</argsstring>
+        <name>encodeString</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::encodeString</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Encode a UTF-32 string as UTF-8. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Invalid code points are replaced with <computeroutput>U+FFFD</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 text to encode. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The encoded UTF-8 string. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="320" column="31" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="320" bodyend="331"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a62ac7c85af99cf23c89bd4e1abaabbbf" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>EncodingErrors</type>
+            <declname>tEncodingErrors</declname>
+            <defname>tEncodingErrors</defname>
+          </param>
+          <param>
+            <type>typename Function</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeAllImpl</definition>
+        <argsstring>(Function &amp;&amp;decodeFn) const noexcept(tEncodingErrors !=EncodingErrors::Throw &amp;&amp;noexcept(std::declval&lt; Function &amp; &gt;()(char32_t{})))</argsstring>
+        <name>decodeAllImpl</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeAllImpl</qualifiedname>
+        <param>
+          <type>Function &amp;&amp;</type>
+          <declname>decodeFn</declname>
+        </param>
+    <requiresclause>std::invocable&lt;Function, char32_t&gt;    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="336" column="10" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="336" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ab1e1d32ee1e6e70c1dd6c82a9cd702fd" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>EncodingErrors</type>
+            <declname>tEncodingErrors</declname>
+            <defname>tEncodingErrors</defname>
+          </param>
+        </templateparamlist>
+        <type>char32_t</type>
+        <definition>char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeOneCharImpl</definition>
+        <argsstring>() const</argsstring>
+        <name>decodeOneCharImpl</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeOneCharImpl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="352" column="15" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="352" bodyend="372"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1afca88bd7f37babf64534fa5c06b0bb67" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>EncodingErrors</type>
+            <declname>tEncodingErrors</declname>
+            <defname>tEncodingErrors</defname>
+          </param>
+        </templateparamlist>
+        <type>char32_t</type>
+        <definition>static char32_t erbsland::cterm::impl::U8Buffer&lt; T &gt;::decodeCharImpl</definition>
+        <argsstring>(std::span&lt; T &gt; buffer, std::size_t &amp;position) noexcept(tEncodingErrors !=EncodingErrors::Throw)</argsstring>
+        <name>decodeCharImpl</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer::decodeCharImpl</qualifiedname>
+        <param>
+          <type>std::span&lt; T &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::size_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="375" column="22" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="375" bodyend="469"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A safe and reliable UTF-8 decoder/encoder. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/U8Buffer.hpp" line="62" column="1" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="62" bodyend="472"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ab90fa87dcef730ef9e175b09f12dee43" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>_buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a0ff3b1d3ae14726be82e18e96f3c3294" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a8f4adc3412bdcceb7cbf830dd43ba69c" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>Byte</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ae0f198234383efd2e3028140f0b9bce7" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>cReplacementCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a222d4b7e0329133ce7714e333d184b8e" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a6d515f7d26364d21cdaabe62e35c98c1" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeAllIgnoringErrors</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a62ac7c85af99cf23c89bd4e1abaabbbf" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeAllImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a65a419f4ce9b3588992c3980a47f6548" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeAllOrThrow</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a0f8f1c37d231c8ef16e10e41aa4100d0" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeAllReplacingErrors</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a6044f0e1eecb6ad1f3c3dfa439dcb6d7" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a95f0d25c74baac2f96368c043cb584e3" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeCharIgnoringErrors</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1afca88bd7f37babf64534fa5c06b0bb67" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeCharImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a069dd5c0ed458214780c5f140cf0dc76" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeCharOrThrow</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a8d660aebde2f2209ad8118a82aee9005" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeCharReplacingErrors</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ac267b9071d464095763e85b33abb0ae8" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeOneChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ab393bcce892363b322b44aefea36250c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeOneCharIgnoringErrors</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ab1e1d32ee1e6e70c1dd6c82a9cd702fd" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeOneCharImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a3697d831d4c8124201fc86d107350124" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeOneCharOrThrow</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a245408d77214e73090682893a897e79f" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>decodeOneCharReplacingErrors</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ac04ef7ab3c79334daf3c7e417929dc6d" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>encodeChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1afe025869acd1f789de3e5538beb1c338" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>encodedByteCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ab9e6830b5b19092fe9aac8001678fc1f" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>encodeString</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a07defaf9c46f41387ecaf47f3af72505" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>expectedByteCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a8f3bba1fdcfcc8642e8269666cfd39ea" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1ad0c095850690d8e9119dd58f7ab215e8" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a662bfc9c506fa8d8e56683aedc80b1fd" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>parseCodePointPrefix</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a749a7df463b58aa909feea37cc03e7b4" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>throwEncodingError</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1af3042fab1ba1e18f9a6054527ae846df" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>U8Buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a64ffc70a5726c56dece0c40a65dbcdca" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>U8Buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1acdb0b3b03ccf30c9579a1bb3f53c453c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>U8Buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a05479c788bb8e3dbbceb6916b93e4771" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>U8Buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a734f06da22587bbe7d2d29600f7f08bd" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>U8Buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1a5c26b6def253faf93b1166f07db691a0" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>U8Buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer_1abcf07afe50795b1d897f4af7f0cb0e65" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8Buffer</scope><name>U8Buffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

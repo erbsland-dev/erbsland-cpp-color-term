@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceerbsland_1_1cterm_1_1text_1_1impl" kind="namespace" language="C++">
+    <compoundname>erbsland::cterm::text::impl</compoundname>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_buffered_tokenizer" prot="public">erbsland::cterm::text::impl::BufferedTokenizer</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_generator" prot="public">erbsland::cterm::text::impl::Generator</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_attribute" prot="public">erbsland::cterm::text::impl::HtmlAttribute</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser" prot="public">erbsland::cterm::text::impl::HtmlParser</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame" prot="public">erbsland::cterm::text::impl::HtmlParserFrame</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tag_info" prot="public">erbsland::cterm::text::impl::HtmlTagInfo</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" prot="public">erbsland::cterm::text::impl::HtmlToken</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" prot="public">erbsland::cterm::text::impl::HtmlTokenizer</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_text_node_renderer" prot="public">erbsland::cterm::text::impl::TextNodeRenderer</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_tokenizer" prot="public">erbsland::cterm::text::impl::Tokenizer</innerclass>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer">erbsland::cterm::text::impl::text_node_renderer</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="_html_token_type_8hpp_1a10f0590c91b38f2a5ef38e88a01b78f5" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>HtmlTokenType</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlTokenType</qualifiedname>
+        <enumvalue id="_html_token_type_8hpp_1a10f0590c91b38f2a5ef38e88a01b78f5a87557f11575c0ad78e4e28abedc13b6e" prot="public">
+          <name>End</name>
+          <briefdescription>
+<para>Sentinel token that marks the end of the token stream. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_html_token_type_8hpp_1a10f0590c91b38f2a5ef38e88a01b78f5a9dffbf69ffba8bc38bc4e01abf4b1675" prot="public">
+          <name>Text</name>
+          <briefdescription>
+<para>Plain text content. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_html_token_type_8hpp_1a10f0590c91b38f2a5ef38e88a01b78f5a0eb3adf9eb4a4adbae0655b390b8ac2a" prot="public">
+          <name>TagOpen</name>
+          <briefdescription>
+<para>An opening tag name like <computeroutput>strong</computeroutput>. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_html_token_type_8hpp_1a10f0590c91b38f2a5ef38e88a01b78f5a961c0ac36b064b16ba9bd3b317a995b3" prot="public">
+          <name>TagClose</name>
+          <briefdescription>
+<para>A closing tag name like <computeroutput>strong</computeroutput>. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_html_token_type_8hpp_1a10f0590c91b38f2a5ef38e88a01b78f5abd453e1e7f1543a7133d7fb1ded4afea" prot="public">
+          <name>AttributeName</name>
+          <briefdescription>
+<para>An attribute name like <computeroutput>class</computeroutput>. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_html_token_type_8hpp_1a10f0590c91b38f2a5ef38e88a01b78f5a7d442b1c42ed58d30444895a45e31c0f" prot="public">
+          <name>AttributeValue</name>
+          <briefdescription>
+<para>A decoded attribute value. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_html_token_type_8hpp_1a10f0590c91b38f2a5ef38e88a01b78f5a3085cf24f11d1fad4ed362923385e786" prot="public">
+          <name>DocType</name>
+          <briefdescription>
+<para>A doctype declaration without the <computeroutput>&lt;!DOCTYPE</computeroutput> prefix. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlTokenType.hpp" line="9" column="1" bodyfile="erbsland/cterm/text/impl/HtmlTokenType.hpp" bodystart="9" bodyend="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="_html_token_8hpp_1ab1417c3b07f78dc618003f2a2e47e121" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::swap</definition>
+        <argsstring>(HtmlToken &amp;left, HtmlToken &amp;right) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>erbsland::cterm::text::impl::swap</qualifiedname>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref> &amp;</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref> &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+<para>Swap two tokens without copying their payload. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlToken.hpp" line="19" column="13" bodyfile="erbsland/cterm/text/impl/HtmlToken.hpp" bodystart="19" bodyend="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/impl/BufferedTokenizer.hpp" line="13" column="1"/>
+  </compounddef>
+</doxygen>

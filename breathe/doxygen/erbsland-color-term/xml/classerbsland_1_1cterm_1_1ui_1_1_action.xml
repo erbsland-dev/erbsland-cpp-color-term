@@ -1,0 +1,921 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_action" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::Action</compoundname>
+    <derivedcompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_button_action" prot="public" virt="non-virtual">erbsland::cterm::ui::ButtonAction</derivedcompoundref>
+    <includes refid="_action_8hpp" local="no">erbsland/cterm/ui/Action.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>EnabledUpdateMode</name>
+        <qualifiedname>erbsland::cterm::ui::Action::EnabledUpdateMode</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9ae1ba155a9f2e8c3be94020eef32a0301" prot="public">
+          <name>Manual</name>
+          <briefdescription>
+<para>Only update when explicitly requested or before triggering. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9a108e4f3031a7d37dc4fb9916aed658ff" prot="public">
+          <name>BeforeTriggered</name>
+          <briefdescription>
+<para>Update before key/manual triggering. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9a246a0bc4df276630a74ffe95f45e7e0d" prot="public">
+          <name>BeforeRepaint</name>
+          <briefdescription>
+<para>Update before repaint-driven action help collection. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9a589932e6fd92020ac452e9030475f780" prot="public">
+          <name>Polled100ms</name>
+          <briefdescription>
+<para>Update at most every 100ms when action help is refreshed. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>When a callback-backed enabled state is refreshed automatically. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="28" column="5" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="28" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>EnabledRefreshReason</name>
+        <qualifiedname>erbsland::cterm::ui::Action::EnabledRefreshReason</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8ae1ba155a9f2e8c3be94020eef32a0301" prot="public">
+          <name>Manual</name>
+          <briefdescription>
+<para>Explicit refresh. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8a108e4f3031a7d37dc4fb9916aed658ff" prot="public">
+          <name>BeforeTriggered</name>
+          <briefdescription>
+<para>A trigger is about to be attempted. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8a246a0bc4df276630a74ffe95f45e7e0d" prot="public">
+          <name>BeforeRepaint</name>
+          <briefdescription>
+<para>A repaint is about to display the action. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8a589932e6fd92020ac452e9030475f780" prot="public">
+          <name>Polled100ms</name>
+          <briefdescription>
+<para>The 100ms polling interval elapsed. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Why the enabled callback is being refreshed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="36" column="5" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="36" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_action_1afeadceeb061296b8aa688322bea6171a" prot="public" static="no">
+        <type>std::function&lt; bool()&gt;</type>
+        <definition>using erbsland::cterm::ui::Action::EnabledFn =  std::function&lt;bool()&gt;</definition>
+        <argsstring></argsstring>
+        <name>EnabledFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::EnabledFn</qualifiedname>
+        <briefdescription>
+<para>Callback used to update the enabled state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="44" column="5" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a0103657256d6cfd708a8fbc04a58088a" prot="public" static="no">
+        <type>std::function&lt; void(const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_trigger_context" kindref="compound">ActionTriggerContext</ref> &amp;)&gt;</type>
+        <definition>using erbsland::cterm::ui::Action::TriggerFn =  std::function&lt;void(const ActionTriggerContext &amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>TriggerFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::TriggerFn</qualifiedname>
+        <briefdescription>
+<para>Callback invoked when the action is triggered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="46" column="5" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_action_1aad3dd601235183d859e7358b27e211ca" prot="public" static="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>using erbsland::cterm::ui::Action::SimpleTriggerFn =  std::function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>SimpleTriggerFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::SimpleTriggerFn</qualifiedname>
+        <briefdescription>
+<para>Simple callback invoked when the action is triggered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="48" column="5" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a97e8c68424d1026b05cbcf6554f0919a" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_keys" kindref="compound">Keys</ref></type>
+        <definition>Keys erbsland::cterm::ui::Action::_keys</definition>
+        <argsstring></argsstring>
+        <name>_keys</name>
+        <qualifiedname>erbsland::cterm::ui::Action::_keys</qualifiedname>
+        <briefdescription>
+<para>The trigger keys. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="131" column="10" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_action_1abb110ee0b8ab7230e950291b1d77cdb5" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_help_data" kindref="compound">HelpData</ref></type>
+        <definition>HelpData erbsland::cterm::ui::Action::_help</definition>
+        <argsstring></argsstring>
+        <name>_help</name>
+        <qualifiedname>erbsland::cterm::ui::Action::_help</qualifiedname>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> help metadata. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="132" column="14" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a90bd1e6c021e37c4a9b3290aa025c68e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Action::_enabled</definition>
+        <argsstring></argsstring>
+        <name>_enabled</name>
+        <qualifiedname>erbsland::cterm::ui::Action::_enabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>The current enabled state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="133" column="10" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="133" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a8ccad047fc2535fa4e6b06073fe5c687" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1afeadceeb061296b8aa688322bea6171a" kindref="member">EnabledFn</ref></type>
+        <definition>EnabledFn erbsland::cterm::ui::Action::_enabledFn</definition>
+        <argsstring></argsstring>
+        <name>_enabledFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::_enabledFn</qualifiedname>
+        <briefdescription>
+<para>Optional enabled callback. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="134" column="15" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a7f9cd88b9b5d8aa3c09d3dd53c16c395" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9" kindref="member">EnabledUpdateMode</ref></type>
+        <definition>EnabledUpdateMode erbsland::cterm::ui::Action::_enabledUpdateMode</definition>
+        <argsstring></argsstring>
+        <name>_enabledUpdateMode</name>
+        <qualifiedname>erbsland::cterm::ui::Action::_enabledUpdateMode</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9ae1ba155a9f2e8c3be94020eef32a0301" kindref="member">EnabledUpdateMode::Manual</ref>}</initializer>
+        <briefdescription>
+<para>Enabled refresh mode. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="135" column="23" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_action_1aba9e4538001036cb05d4ab6bfaea1954" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a0103657256d6cfd708a8fbc04a58088a" kindref="member">TriggerFn</ref></type>
+        <definition>TriggerFn erbsland::cterm::ui::Action::_triggerFn</definition>
+        <argsstring></argsstring>
+        <name>_triggerFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::_triggerFn</qualifiedname>
+        <briefdescription>
+<para>Trigger callback. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="136" column="15" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a9aa93c4bba8cdef96cd4c3c7c6221a5b" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; EventTime &gt;</type>
+        <definition>std::optional&lt;EventTime&gt; erbsland::cterm::ui::Action::_lastPollingRefresh</definition>
+        <argsstring></argsstring>
+        <name>_lastPollingRefresh</name>
+        <qualifiedname>erbsland::cterm::ui::Action::_lastPollingRefresh</qualifiedname>
+        <briefdescription>
+<para>Last 100ms polling refresh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="137" column="19" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1aa683d09719f7464838a6b78960c5ea84" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Action::Action</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>Action</name>
+        <qualifiedname>erbsland::cterm::ui::Action::Action</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Create an action with a short help name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The short action name used in generated help. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a55dff9af8453296ffe69acab62547488" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual erbsland::cterm::ui::Action::~Action</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Action</name>
+        <qualifiedname>erbsland::cterm::ui::Action::~Action</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="54" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a2cf4b173f233ccf72ea9daefc9226c3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Action::Action</definition>
+        <argsstring>(const Action &amp;)=delete</argsstring>
+        <name>Action</name>
+        <qualifiedname>erbsland::cterm::ui::Action::Action</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_action" kindref="compound">Action</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="57" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a26fd1be9c65884b16046401b2fda8231" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Action::Action</definition>
+        <argsstring>(Action &amp;&amp;)=delete</argsstring>
+        <name>Action</name>
+        <qualifiedname>erbsland::cterm::ui::Action::Action</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action" kindref="compound">Action</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="58" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a7c906bda279bda66e8d6eed0ea98583f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action" kindref="compound">Action</ref> &amp;</type>
+        <definition>Action &amp; erbsland::cterm::ui::Action::operator=</definition>
+        <argsstring>(const Action &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::Action::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_action" kindref="compound">Action</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="59" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1abe3468829b61cb3fd761cbb8a43472b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action" kindref="compound">Action</ref> &amp;</type>
+        <definition>Action &amp; erbsland::cterm::ui::Action::operator=</definition>
+        <argsstring>(Action &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::Action::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action" kindref="compound">Action</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="60" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a43fffe5e0ddd339462e744ec86601915" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_help_data" kindref="compound">HelpData</ref> &amp;</type>
+        <definition>HelpData &amp; erbsland::cterm::ui::Action::help</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>help</name>
+        <qualifiedname>erbsland::cterm::ui::Action::help</qualifiedname>
+        <briefdescription>
+<para>Get mutable help metadata. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="70" column="16" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a8052d6769731c967228c6073de468fb2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_help_data" kindref="compound">HelpData</ref> &amp;</type>
+        <definition>const HelpData &amp; erbsland::cterm::ui::Action::help</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>help</name>
+        <qualifiedname>erbsland::cterm::ui::Action::help</qualifiedname>
+        <briefdescription>
+<para>Get immutable help metadata. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="72" column="22" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae6aa63cecd9c98b8185e3973e0610dbf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Action::isEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isEnabled</name>
+        <qualifiedname>erbsland::cterm::ui::Action::isEnabled</qualifiedname>
+        <briefdescription>
+<para>Test if this action is currently enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="74" column="11" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ac08a9650e4f3b325af2ca7cae0846e7a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::setEnabled</definition>
+        <argsstring>(bool enabled) noexcept</argsstring>
+        <name>setEnabled</name>
+        <qualifiedname>erbsland::cterm::ui::Action::setEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Manually set the enabled state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new enabled state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="77" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a8d190eb31edecd5373a217c9df99fcdf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::setEnabledFn</definition>
+        <argsstring>(EnabledFn enabledFn, EnabledUpdateMode updateMode=EnabledUpdateMode::BeforeTriggered)</argsstring>
+        <name>setEnabledFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::setEnabledFn</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1afeadceeb061296b8aa688322bea6171a" kindref="member">EnabledFn</ref></type>
+          <declname>enabledFn</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9" kindref="member">EnabledUpdateMode</ref></type>
+          <declname>updateMode</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9a108e4f3031a7d37dc4fb9916aed658ff" kindref="member">EnabledUpdateMode::BeforeTriggered</ref></defval>
+        </param>
+        <briefdescription>
+<para>Replace the enabled callback and update mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabledFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback that returns the current enabled state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateMode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The automatic update mode for the callback. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a73e57ff12ae5fca3366bf4222ecb0b39" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::clearEnabledFn</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clearEnabledFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::clearEnabledFn</qualifiedname>
+        <briefdescription>
+<para>Remove the enabled callback and return to manual enabled state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="83" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1af15381a6a6c941b8eb5d8c88dd0ea122" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9" kindref="member">EnabledUpdateMode</ref></type>
+        <definition>EnabledUpdateMode erbsland::cterm::ui::Action::enabledUpdateMode</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>enabledUpdateMode</name>
+        <qualifiedname>erbsland::cterm::ui::Action::enabledUpdateMode</qualifiedname>
+        <briefdescription>
+<para>Get the enabled update mode. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="85" column="24" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a355bbd3e82306fcf0977f85e388ea2cf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::setEnabledUpdateMode</definition>
+        <argsstring>(EnabledUpdateMode updateMode) noexcept</argsstring>
+        <name>setEnabledUpdateMode</name>
+        <qualifiedname>erbsland::cterm::ui::Action::setEnabledUpdateMode</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9" kindref="member">EnabledUpdateMode</ref></type>
+          <declname>updateMode</declname>
+        </param>
+        <briefdescription>
+<para>Replace the enabled update mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateMode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new update mode. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="88" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1aa2acacf02e972bdc907131a3622e74e3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_keys" kindref="compound">Keys</ref> &amp;</type>
+        <definition>const Keys &amp; erbsland::cterm::ui::Action::keys</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>keys</name>
+        <qualifiedname>erbsland::cterm::ui::Action::keys</qualifiedname>
+        <briefdescription>
+<para>Get the trigger keys. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="90" column="18" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a389d15e5e953cf657fca27fc4fce5501" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::setKeys</definition>
+        <argsstring>(Keys keys)</argsstring>
+        <name>setKeys</name>
+        <qualifiedname>erbsland::cterm::ui::Action::setKeys</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_keys" kindref="compound">Keys</ref></type>
+          <declname>keys</declname>
+        </param>
+        <briefdescription>
+<para>Replace all trigger keys. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>keys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new trigger keys. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="93" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1af36601043b081d5a2a9a0b66fdb27da2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::setTriggerFn</definition>
+        <argsstring>(TriggerFn triggerFn)</argsstring>
+        <name>setTriggerFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::setTriggerFn</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a0103657256d6cfd708a8fbc04a58088a" kindref="member">TriggerFn</ref></type>
+          <declname>triggerFn</declname>
+        </param>
+        <briefdescription>
+<para>Replace the trigger callback. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>triggerFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new callback. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a5f3e1ef177b347b04e6b88bb9d75422a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::setTriggerFn</definition>
+        <argsstring>(SimpleTriggerFn triggerFn)</argsstring>
+        <name>setTriggerFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::setTriggerFn</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1aad3dd601235183d859e7358b27e211ca" kindref="member">SimpleTriggerFn</ref></type>
+          <declname>triggerFn</declname>
+        </param>
+        <briefdescription>
+<para>Replace the trigger callback with a simple no-argument callback. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>triggerFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new callback. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="99" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a9c99dea1c378cf60d3556f50a3c66bf0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::clearTriggerFn</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clearTriggerFn</name>
+        <qualifiedname>erbsland::cterm::ui::Action::clearTriggerFn</qualifiedname>
+        <briefdescription>
+<para>Remove the trigger callback. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="101" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a2e0cfa79c0130a39f3913a5d68dadf85" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Action::matchesKey</definition>
+        <argsstring>(const Key &amp;key) const noexcept</argsstring>
+        <name>matchesKey</name>
+        <qualifiedname>erbsland::cterm::ui::Action::matchesKey</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_key" kindref="compound">Key</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Test if the action is triggered by a key. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the key is assigned to the action. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="107" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a1e1a2c71b402e65d30a681e964bc38a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Action::refreshEnabled</definition>
+        <argsstring>(EnabledRefreshReason reason)</argsstring>
+        <name>refreshEnabled</name>
+        <qualifiedname>erbsland::cterm::ui::Action::refreshEnabled</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8" kindref="member">EnabledRefreshReason</ref></type>
+          <declname>reason</declname>
+        </param>
+        <briefdescription>
+<para>Refresh the enabled state if the callback and update mode require it. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>reason</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The reason for the refresh. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the enabled callback was evaluated. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="111" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a569d1e8569c2e6e0a0e4de882dd64923" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Action::trigger</definition>
+        <argsstring>(const ActionTriggerContext &amp;context)</argsstring>
+        <name>trigger</name>
+        <qualifiedname>erbsland::cterm::ui::Action::trigger</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_action_trigger_context" kindref="compound">ActionTriggerContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Trigger this action manually. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The enabled callback is always evaluated before triggering when present. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The trigger context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the action was enabled and was accepted as triggered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="116" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a9d13a513e26d105cf0f24959b4622da2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ActionPtr</type>
+        <definition>static ActionPtr erbsland::cterm::ui::Action::create</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::Action::create</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Create an action with a short help name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The short action name used in generated help. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new action. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="66" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a907fa8e907baaa0e717da4bc0554f22c" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::ui::Action::onEnabledChanged</definition>
+        <argsstring>(bool enabled) noexcept</argsstring>
+        <name>onEnabledChanged</name>
+        <qualifiedname>erbsland::cterm::ui::Action::onEnabledChanged</qualifiedname>
+        <reimplementedby refid="classerbsland_1_1cterm_1_1ui_1_1_button_action_1ad8d8f4781c6274f97374e73db50110fd">onEnabledChanged</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Called after the enabled state changed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new enabled state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="121" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a629e800b7bd8da4be5106594043dd06d" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Action::setEnabledState</definition>
+        <argsstring>(bool enabled) noexcept</argsstring>
+        <name>setEnabledState</name>
+        <qualifiedname>erbsland::cterm::ui::Action::setEnabledState</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Replace the enabled state and notify subclasses when it changes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new enabled state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="126" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a8b6a7e4941c97b465e5013b6d9b47480" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Action::isPollingRefreshDue</definition>
+        <argsstring>() const</argsstring>
+        <name>isPollingRefreshDue</name>
+        <qualifiedname>erbsland::cterm::ui::Action::isPollingRefreshDue</qualifiedname>
+        <briefdescription>
+<para>Test if a 100ms polling refresh is due. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Action.hpp" line="128" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A shared user-interface action with key triggers, help metadata, and enablement state. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::ui::Action</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_action"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::ButtonAction</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_button_action"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="erbsland/cterm/ui/Action.hpp" line="25" column="1" bodyfile="erbsland/cterm/ui/Action.hpp" bodystart="25" bodyend="138"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a90bd1e6c021e37c4a9b3290aa025c68e" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>_enabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a8ccad047fc2535fa4e6b06073fe5c687" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>_enabledFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a7f9cd88b9b5d8aa3c09d3dd53c16c395" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>_enabledUpdateMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1abb110ee0b8ab7230e950291b1d77cdb5" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>_help</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a97e8c68424d1026b05cbcf6554f0919a" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>_keys</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a9aa93c4bba8cdef96cd4c3c7c6221a5b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>_lastPollingRefresh</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1aba9e4538001036cb05d4ab6bfaea1954" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>_triggerFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1aa683d09719f7464838a6b78960c5ea84" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>Action</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a2cf4b173f233ccf72ea9daefc9226c3c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>Action</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a26fd1be9c65884b16046401b2fda8231" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>Action</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a73e57ff12ae5fca3366bf4222ecb0b39" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>clearEnabledFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a9c99dea1c378cf60d3556f50a3c66bf0" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>clearTriggerFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a9d13a513e26d105cf0f24959b4622da2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1afeadceeb061296b8aa688322bea6171a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>EnabledFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>EnabledRefreshReason</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1af15381a6a6c941b8eb5d8c88dd0ea122" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>enabledUpdateMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>EnabledUpdateMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a43fffe5e0ddd339462e744ec86601915" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>help</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a8052d6769731c967228c6073de468fb2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>help</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ae6aa63cecd9c98b8185e3973e0610dbf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>isEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a8b6a7e4941c97b465e5013b6d9b47480" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>isPollingRefreshDue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1aa2acacf02e972bdc907131a3622e74e3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>keys</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a2e0cfa79c0130a39f3913a5d68dadf85" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>matchesKey</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a907fa8e907baaa0e717da4bc0554f22c" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Action</scope><name>onEnabledChanged</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a7c906bda279bda66e8d6eed0ea98583f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1abe3468829b61cb3fd761cbb8a43472b7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a1e1a2c71b402e65d30a681e964bc38a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>refreshEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1ac08a9650e4f3b325af2ca7cae0846e7a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>setEnabled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a8d190eb31edecd5373a217c9df99fcdf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>setEnabledFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a629e800b7bd8da4be5106594043dd06d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>setEnabledState</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a355bbd3e82306fcf0977f85e388ea2cf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>setEnabledUpdateMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a389d15e5e953cf657fca27fc4fce5501" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>setKeys</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1af36601043b081d5a2a9a0b66fdb27da2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>setTriggerFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a5f3e1ef177b347b04e6b88bb9d75422a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>setTriggerFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1aad3dd601235183d859e7358b27e211ca" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>SimpleTriggerFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a569d1e8569c2e6e0a0e4de882dd64923" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>trigger</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a0103657256d6cfd708a8fbc04a58088a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Action</scope><name>TriggerFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_action_1a55dff9af8453296ffe69acab62547488" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Action</scope><name>~Action</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

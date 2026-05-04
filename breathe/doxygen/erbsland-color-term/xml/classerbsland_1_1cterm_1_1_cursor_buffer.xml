@@ -1,0 +1,1510 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_cursor_buffer" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::CursorBuffer</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1_remapped_buffer" prot="public" virt="non-virtual">erbsland::cterm::RemappedBuffer</basecompoundref>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1_cursor_writer" prot="public" virt="non-virtual">erbsland::cterm::CursorWriter</basecompoundref>
+    <includes refid="_cursor_buffer_8hpp" local="no">erbsland/cterm/CursorBuffer.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5f" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>OverflowMode</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::OverflowMode</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5fa825a3d98017bab11815ad2817201324c" prot="public">
+          <name>Shift</name>
+          <briefdescription>
+<para>Shift the buffer content one line up, exposing a new blank line at the bottom. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5faa212b19ef5f2fb30acf92e6cbccc1f2d" prot="public">
+          <name>Wrap</name>
+          <briefdescription>
+<para>The cursor wraps back to the first line of the buffer. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5fa902ffc616534ea0fd0c736573d465e4a" prot="public">
+          <name>ExpandThenShift</name>
+          <briefdescription>
+<para>Expand the buffer by one line, keeping the content. Up to <ref refid="classerbsland_1_1cterm_1_1_cursor_buffer_1acbd90ce1e85cba24e99bce27747da537" kindref="member">maximumSize()</ref>, then scroll. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5fa54661fe5c9965a3f34859f39bc74e081" prot="public">
+          <name>ExpandThenWrap</name>
+          <briefdescription>
+<para>Expand the buffer by one line, keeping the content. Up to <ref refid="classerbsland_1_1cterm_1_1_cursor_buffer_1acbd90ce1e85cba24e99bce27747da537" kindref="member">maximumSize()</ref>, then wrap. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The overflow mode determines what happens when the cursor gets a line-break in the last line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="27" column="5" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="27" bodyend="32"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a6447543e7ee9e4500203e80d660f62da" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5f" kindref="member">OverflowMode</ref></type>
+        <definition>OverflowMode erbsland::cterm::CursorBuffer::_overflowMode</definition>
+        <argsstring></argsstring>
+        <name>_overflowMode</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::_overflowMode</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5fa825a3d98017bab11815ad2817201324c" kindref="member">OverflowMode::Shift</ref>}</initializer>
+        <briefdescription>
+<para>The overflow mode of the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="114" column="18" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="114" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a749ae733068a82db3ee7aa6c0f962278" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::CursorBuffer::_maximumSize</definition>
+        <argsstring></argsstring>
+        <name>_maximumSize</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::_maximumSize</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref>{0, 0}}</initializer>
+        <briefdescription>
+<para>The maximum size of the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="115" column="10" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="115" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a1f542fa146a6d18952ce2b758926a20d" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::CursorBuffer::_fillChar</definition>
+        <argsstring></argsstring>
+        <name>_fillChar</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::_fillChar</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1_char_1a7be1dcb2bc77e87446443b04a1c41b44" kindref="member">Char::space</ref>()}</initializer>
+        <briefdescription>
+<para>The character used for empty cells. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="116" column="10" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a4725d070e31592483777964b1d12de85" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+        <definition>Position erbsland::cterm::CursorBuffer::_cursorPosition</definition>
+        <argsstring></argsstring>
+        <name>_cursorPosition</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::_cursorPosition</qualifiedname>
+        <initializer>{0, 0}</initializer>
+        <briefdescription>
+<para>The current position of the cursor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="117" column="14" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="117" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a313b0132bffbc9c727a41d025cae66b3" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+        <definition>CharStyle erbsland::cterm::CursorBuffer::_currentStyle</definition>
+        <argsstring></argsstring>
+        <name>_currentStyle</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::_currentStyle</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1_char_style_1a5c505a9f0110c891a0006212c89e22ca" kindref="member">CharStyle::reset</ref>()}</initializer>
+        <briefdescription>
+<para>The current character style. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="118" column="15" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a44714aece83ff5203de2b81a08273a3b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::CursorBuffer::_autoWrap</definition>
+        <argsstring></argsstring>
+        <name>_autoWrap</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::_autoWrap</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>If auto-wrap is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="119" column="10" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a8e690581bc8b0a6f462836d1c4039efa" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::CursorBuffer::_wrapOnNextChar</definition>
+        <argsstring></argsstring>
+        <name>_wrapOnNextChar</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::_wrapOnNextChar</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>If the next character should be wrapped to the next line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="120" column="10" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="120" bodyend="120"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ad2d0e7b967cf2a632352757cb621d396" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::CursorBuffer::CursorBuffer</definition>
+        <argsstring>(const Size startSize, const OverflowMode overflowMode=OverflowMode::Shift, const Size maximumSize=cMaximumSize, const Char fillChar=Char::space())</argsstring>
+        <name>CursorBuffer</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::CursorBuffer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>startSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5f" kindref="member">OverflowMode</ref></type>
+          <declname>overflowMode</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5fa825a3d98017bab11815ad2817201324c" kindref="member">OverflowMode::Shift</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>maximumSize</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa5ad3bf7e62b9788f914cf8fea9c3a41" kindref="member">cMaximumSize</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+          <defval><ref refid="classerbsland_1_1cterm_1_1_char_1a7be1dcb2bc77e87446443b04a1c41b44" kindref="member">Char::space</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Create a new cursor buffer with the given startSize. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>startSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The start size of the buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>overflowMode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The overflow mode of the buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maximumSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum size of the buffer. Only <computeroutput>height</computeroutput> is used. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character used to initialize and refill empty cells. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if startSize exceeds the maximum or fillChar is not a single-width character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="41" column="14" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="41" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a7544a9f29f306ab78607dfd675c94699" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::CursorBuffer::CursorBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>CursorBuffer</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::CursorBuffer</qualifiedname>
+        <briefdescription>
+<para>Create a new cursor buffer with a default size of 80x25 and overflow mode <computeroutput>Shift</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="53" column="5" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a91f3e8ba6036a5d3dd75678c998651df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::CursorBuffer::~CursorBuffer</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~CursorBuffer</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::~CursorBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="56" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a1aebfe7ac465909b3dc87b7133287bea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::CursorBuffer::CursorBuffer</definition>
+        <argsstring>(const CursorBuffer &amp;)=default</argsstring>
+        <name>CursorBuffer</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::CursorBuffer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_cursor_buffer" kindref="compound">CursorBuffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="57" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a80725070f57b1aae724ea2c5d40a3dff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::CursorBuffer::CursorBuffer</definition>
+        <argsstring>(CursorBuffer &amp;&amp;)=default</argsstring>
+        <name>CursorBuffer</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::CursorBuffer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_cursor_buffer" kindref="compound">CursorBuffer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="58" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1abcaf145f674b8167ab83fdf4c0380e80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_cursor_buffer" kindref="compound">CursorBuffer</ref> &amp;</type>
+        <definition>CursorBuffer &amp; erbsland::cterm::CursorBuffer::operator=</definition>
+        <argsstring>(const CursorBuffer &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_cursor_buffer" kindref="compound">CursorBuffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="59" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a1dd1dfbcbd440371c730786a71d6ad7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_cursor_buffer" kindref="compound">CursorBuffer</ref> &amp;</type>
+        <definition>CursorBuffer &amp; erbsland::cterm::CursorBuffer::operator=</definition>
+        <argsstring>(CursorBuffer &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_cursor_buffer" kindref="compound">CursorBuffer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="60" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1acbd90ce1e85cba24e99bce27747da537" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::CursorBuffer::maximumSize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>maximumSize</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::maximumSize</qualifiedname>
+        <briefdescription>
+<para>Get the maximum size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="64" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ac2940dd03aabfee15a1a9dde97105e9e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::setMaximumSize</definition>
+        <argsstring>(Size maximumSize) noexcept</argsstring>
+        <name>setMaximumSize</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setMaximumSize</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+          <declname>maximumSize</declname>
+        </param>
+        <briefdescription>
+<para>Change the maximum size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Changing the maximum size will not affect the current content. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>maximumSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new maximum size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="68" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a0acbdece9db215c3ff74321152351920" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5f" kindref="member">OverflowMode</ref></type>
+        <definition>OverflowMode erbsland::cterm::CursorBuffer::overflowMode</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>overflowMode</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::overflowMode</qualifiedname>
+        <briefdescription>
+<para>Get the overflow mode for this buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="70" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a8c3fc3d8c54c624352a9124aee824074" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::setOverflowMode</definition>
+        <argsstring>(OverflowMode mode) noexcept</argsstring>
+        <name>setOverflowMode</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setOverflowMode</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5f" kindref="member">OverflowMode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>Set the overflow mode for this buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new overflow mode. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="73" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a2b48d3245d65e938ee284d16b764ace8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        <definition>const Char &amp; erbsland::cterm::CursorBuffer::fillChar</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>fillChar</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::fillChar</qualifiedname>
+        <briefdescription>
+<para>Get the character used for newly exposed or empty cells. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current fill character. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="76" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1aa472f5f607723393ffb75717c1d6f2d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::setFillChar</definition>
+        <argsstring>(Char fillChar)</argsstring>
+        <name>setFillChar</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setFillChar</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+<para>Set the character used for newly exposed or empty cells. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The character should have a display width of one cell. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fillChar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new fill character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if fillChar is not a single-width character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a9dd5093ce153a74372ad71de50d37912" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_size" kindref="compound">Size</ref></type>
+        <definition>Size erbsland::cterm::CursorBuffer::size</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::size</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_readable_buffer_1acc3cc67ae50d0f17fdf88011dfb9abfc">size</reimplements>
+        <briefdescription>
+<para>Get the configured size of the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The width and height of the buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="87" column="11" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1aa51d6b8aa278df6541eb761cc73c651d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::CursorBuffer::color</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>color</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::color</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13">color</reimplements>
+        <briefdescription>
+<para>Get the current color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The currently tracked terminal color state. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="88" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a9c92e3186df2b6b485b126f81859526e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+        <definition>CharAttributes erbsland::cterm::CursorBuffer::charAttributes</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>charAttributes</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::charAttributes</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5">charAttributes</reimplements>
+        <briefdescription>
+<para>Get the current character attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The currently tracked character attribute state. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="89" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1abb7f8096d0b13388c56096ee9f2fe572" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::setColor</definition>
+        <argsstring>(Color color) noexcept override</argsstring>
+        <name>setColor</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setColor</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702">setColor</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set foreground and background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new combined color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="90" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ad539679567c49e6ec2970cd3dfb05806" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::setCharAttributes</definition>
+        <argsstring>(CharAttributes attributes) noexcept override</argsstring>
+        <name>setCharAttributes</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setCharAttributes</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b">setCharAttributes</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Set all character attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Unspecified attributes are treated as disabled. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new character attributes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="91" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a06a2c4b94b76d1af31d4245e43017475" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::setForeground</definition>
+        <argsstring>(Foreground color) noexcept override</argsstring>
+        <name>setForeground</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setForeground</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1a80ab7a71572e68e73d0856bf296b1572">setForeground</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set the foreground color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new foreground color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="92" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a68898b59ad75634014466b08e9345beb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::setBackground</definition>
+        <argsstring>(Background color) noexcept override</argsstring>
+        <name>setBackground</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setBackground</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3011a45c3040e38db4e61d827f6fc2e7">setBackground</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set the background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="93" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a69263f01c93d0a8dcb8d7bb8b54da27e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+        <definition>CharAttributes erbsland::cterm::CursorBuffer::supportedCharAttributes</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>supportedCharAttributes</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::supportedCharAttributes</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae298bea88947ac9e93f48fe2bf5211e9">supportedCharAttributes</reimplements>
+        <briefdescription>
+<para>Get the character attributes supported by this writer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The supported character attributes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="94" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a2734430920563a255ebe27e8549ba2f9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::moveCursor</definition>
+        <argsstring>(Position posOrDelta, MoveMode mode) noexcept override</argsstring>
+        <name>moveCursor</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::moveCursor</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4">moveCursor</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>posOrDelta</declname>
+        </param>
+        <param>
+          <type>MoveMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>Move the cursor absolute or relative. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the resulting position is out of bounds, the result is undefined. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>posOrDelta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The absolute position or delta for the move. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The move mode, either absolute or relative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="95" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1aa16ba41d0813bdabd80ddb93cf9d6a22" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::setAutoWrap</definition>
+        <argsstring>(bool enabled) noexcept override</argsstring>
+        <name>setAutoWrap</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setAutoWrap</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae5c76766115e583b26a74be3baebe1ae">setAutoWrap</reimplements>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Enabled/disable auto-wrap. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Auto wrap controls if the cursor automatically wraps to the next line when reaching the right margin. This is a feature that can be enabled or disabled. Do not confuse this with line wrapping, which is a different feature. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to enable or disable auto-wrap. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a9afdb8eb52b9f3efdb28a0e3d5ba2dd2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::clearScreen</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>clearScreen</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::clearScreen</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1da916b199e92862d7c8fcd6714d126f">clearScreen</reimplements>
+        <briefdescription>
+<para>Clears the screen/writing area. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="97" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ad9263021ab994e5ca721874c794b66c9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::write</definition>
+        <argsstring>(const Char &amp;character) noexcept override</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::write</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8">write</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Write a character at the current cursor position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Inherited color components resolve against the currently active color. Overwrites the character under the cursor. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="98" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1af2ef7dcdd0a20b8696396287dd1a1ec9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::write</definition>
+        <argsstring>(const StringView &amp;str) noexcept override</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::write</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac735c1a208ef73231243d4dbee90b167">write</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Write a string at the current cursor position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Inherited color components in each character resolve against the currently active color. Overwrites the characters under the cursor. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="99" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a5085a00902d25f8793d2984051892d59" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::writeResolved</definition>
+        <argsstring>(const Char &amp;character) noexcept override</argsstring>
+        <name>writeResolved</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::writeResolved</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3b00911d0378755d19b63befd7bf2ddf">writeResolved</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Write a character that is already fully resolved against the writer state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This bypasses any additional inherited-style resolution in implementations that can optimize for it. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The already resolved character to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="100" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a7c0bc2157ed8cdb4daf805d2ef30b761" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::writeResolved</definition>
+        <argsstring>(const StringView &amp;str) noexcept override</argsstring>
+        <name>writeResolved</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::writeResolved</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae22c11cc4449a2e7b391da2be73323e7">writeResolved</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Write a string whose characters are already fully resolved against the writer state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This bypasses any additional inherited-style resolution in implementations that can optimize for it. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The already resolved string to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="101" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a5f3b859ac7a42ea405498a23d46e66bd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::write</definition>
+        <argsstring>(const ReadableBuffer &amp;buffer) noexcept override</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::write</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac1fbb841ee2b8ad50b0bc8935cab8185">write</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Write a buffer at the current cursor position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will not perform any additional formatting, clipping, or processing. Each line of the buffer will be written, and a line-break added after each line. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="102" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a9d333acced49c55fdf03f086cb7c3e1d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::writeLineBreak</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>writeLineBreak</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::writeLineBreak</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1a76b3ade50d3ef471afe6d7b3f1c1b282">writeLineBreak</reimplements>
+        <briefdescription>
+<para>Write a line-break. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will move the cursor to the beginning of the next line. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="103" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1aafd1c36b8d86890459b3bb5d9e481702" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::CursorWriter::setColor</definition>
+        <argsstring>(Color color) noexcept=0</argsstring>
+        <name>setColor</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setColor</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702">setColor</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set foreground and background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new combined color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="84" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a2bd8a714866940fcc6f24215f0bedb39" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorWriter::setColor</definition>
+        <argsstring>(const Foreground foregroundColor, const Background backgroundColor) noexcept</argsstring>
+        <name>setColor</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::setColor</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Foreground</ref></type>
+          <declname>foregroundColor</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color_part" kindref="compound">Background</ref></type>
+          <declname>backgroundColor</declname>
+        </param>
+        <briefdescription>
+<para>Set foreground and background color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para><computeroutput>Inherited</computeroutput> colors are converted to <computeroutput>Default</computeroutput> colors. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>foregroundColor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new foreground color. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>backgroundColor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new background color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="84" column="5" bodyfile="erbsland/cterm/CursorWriter.hpp" bodystart="61" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ac77ed94801339bb8598ef50fc4de6cf8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::CursorWriter::write</definition>
+        <argsstring>(const Char &amp;character) noexcept=0</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::write</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8">write</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Write a character at the current cursor position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Inherited color components resolve against the currently active color. Overwrites the character under the cursor. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="85" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ac735c1a208ef73231243d4dbee90b167" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::CursorWriter::write</definition>
+        <argsstring>(const StringView &amp;str) noexcept=0</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::write</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac735c1a208ef73231243d4dbee90b167">write</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Write a string at the current cursor position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Inherited color components in each character resolve against the currently active color. Overwrites the characters under the cursor. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="85" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1aaea5185fd1449b059cf27c435617b448" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorWriter::write</definition>
+        <argsstring>(const std::string_view text) noexcept</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::write</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Invalid UTF-8 bytes are replaced with the Unicode replacement character. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="85" column="5" bodyfile="erbsland/cterm/CursorWriter.hpp" bodystart="206" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ac2479e24561ba2e43d69ec926f5c592c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorWriter::write</definition>
+        <argsstring>(const std::u32string_view text) noexcept</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::write</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="85" column="5" bodyfile="erbsland/cterm/CursorWriter.hpp" bodystart="208" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ac1fbb841ee2b8ad50b0bc8935cab8185" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::CursorWriter::write</definition>
+        <argsstring>(const ReadableBuffer &amp;buffer) noexcept=0</argsstring>
+        <name>write</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::write</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac1fbb841ee2b8ad50b0bc8935cab8185">write</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_readable_buffer" kindref="compound">ReadableBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Write a buffer at the current cursor position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will not perform any additional formatting, clipping, or processing. Each line of the buffer will be written, and a line-break added after each line. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="85" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a76b3ade50d3ef471afe6d7b3f1c1b282" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::CursorWriter::writeLineBreak</definition>
+        <argsstring>() noexcept=0</argsstring>
+        <name>writeLineBreak</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::writeLineBreak</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1a76b3ade50d3ef471afe6d7b3f1c1b282">writeLineBreak</reimplements>
+        <briefdescription>
+<para>Write a line-break. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will move the cursor to the beginning of the next line. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="86" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1a80e60230ad4fc8ce3c664b69e9d420ed" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::CursorBuffer::printParagraphImpl</definition>
+        <argsstring>(const StringView &amp;paragraph, const ParagraphOptions &amp;options) noexcept override</argsstring>
+        <name>printParagraphImpl</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::printParagraphImpl</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1_cursor_writer_1a463ce06dcdf93b1a269d13823444d462">printParagraphImpl</reimplements>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>paragraph</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_paragraph_options" kindref="compound">ParagraphOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>Print a paragraph using the cursor-aware buffer output. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="107" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ab0047acf1d3e8a32c6d38c7e36348b32" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::CursorBuffer::validateFillChar</definition>
+        <argsstring>(const Char &amp;fillChar)</argsstring>
+        <name>validateFillChar</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::validateFillChar</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>fillChar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="110" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_cursor_buffer_1ae674595048f75ed3e0e9bbfe079e5e13" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::CursorBuffer::writeResolvedCharacter</definition>
+        <argsstring>(const Char &amp;character) noexcept</argsstring>
+        <name>writeResolvedCharacter</name>
+        <qualifiedname>erbsland::cterm::CursorBuffer::writeResolvedCharacter</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/CursorBuffer.hpp" line="111" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A buffer that can be used to write text using a cursor. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Cursor movement emulates VT100 terminals:<itemizedlist>
+<listitem><para>Cursor movements are bound to the buffer (they do not wrap around).</para>
+</listitem><listitem><para>Printing characters do wrap around if wrap mode is enabled (it&apos;s enabled by default.)</para>
+</listitem><listitem><para>Printing a character in the last column is special:<itemizedlist>
+<listitem><para>A 1-width character is printed in the last column, but the cursor isn&apos;t moved yet. A <computeroutput>wrapOnNextChar</computeroutput> is set instead of the cursor movement.</para>
+</listitem><listitem><para>As soon as the next character is printed, the cursor is moved to the next line first; then the character is printed.</para>
+</listitem><listitem><para>When a 2-width character is printed in the last column, the cursor is moved to the next line first; then the character is printed (not VT100, it didn&apos;t have 2-width characters).</para>
+</listitem><listitem><para>If the <computeroutput>wrapOnNextChar</computeroutput> is set, and the cursor is moved, the flag is cleared.</para>
+</listitem><listitem><para>If the <computeroutput>wrapOnNextChar</computeroutput> is set, and a line-break is printed, the flag is cleared first before moving the cursor to the next line. </para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::CursorBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_cursor_buffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::CursorWriter</label>
+        <link refid="classerbsland_1_1cterm_1_1_cursor_writer"/>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::ReadableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_readable_buffer"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::RemappedBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_remapped_buffer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::WritableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_writable_buffer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::CursorBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_cursor_buffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland::cterm::CursorWriter</label>
+        <link refid="classerbsland_1_1cterm_1_1_cursor_writer"/>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::Orientation</label>
+        <link refid="classerbsland_1_1cterm_1_1_orientation"/>
+      </node>
+      <node id="4">
+        <label>erbsland::cterm::ReadableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_readable_buffer"/>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::RemappedBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_remapped_buffer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_size</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>_orientation</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::Size</label>
+        <link refid="classerbsland_1_1cterm_1_1_size"/>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::WritableBuffer</label>
+        <link refid="classerbsland_1_1cterm_1_1_writable_buffer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/CursorBuffer.hpp" line="24" column="1" bodyfile="erbsland/cterm/CursorBuffer.hpp" bodystart="24" bodyend="121"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a44714aece83ff5203de2b81a08273a3b" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_autoWrap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a15082389ef922f21e61d6e21b907c0f9" prot="protected" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1abbe8eb70ebe5a8f99aa47d9daa855e40" prot="protected" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_columnRemap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a313b0132bffbc9c727a41d025cae66b3" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_currentStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a4725d070e31592483777964b1d12de85" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_cursorPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a1f542fa146a6d18952ce2b758926a20d" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_fillChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a749ae733068a82db3ee7aa6c0f962278" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_maximumSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a493b9ce9393c55263507b4b6e1fb8275" prot="protected" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_orientation</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a6447543e7ee9e4500203e80d660f62da" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_overflowMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ac7ea20a7b4d4687cfc1a336ebe034c41" prot="protected" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_rowRemap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ab7339184476a8e1e8c26ba684d0c989e" prot="protected" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8e690581bc8b0a6f462836d1c4039efa" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>_wrapOnNextChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a9c92e3186df2b6b485b126f81859526e" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>charAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a9afdb8eb52b9f3efdb28a0e3d5ba2dd2" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>clearScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a51729436cce87c14b54a47e83a1ed8ba" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>clone</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa5ad3bf7e62b9788f914cf8fea9c3a41" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>cMaximumSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a608ce8d4a2277c397f1e08a4ae88ac5f" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>cMinimumSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1aa51d6b8aa278df6541eb761cc73c651d" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6d2a2a64f571d8d7eb81488c7c0d02de" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>CoordinateMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a47805b5bbbcc7f2b0bea4f579e74b1fd" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>countDifferencesTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ad2d0e7b967cf2a632352757cb621d396" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>CursorBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a7544a9f29f306ab78607dfd675c94699" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>CursorBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a1aebfe7ac465909b3dc87b7133287bea" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>CursorBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a80725070f57b1aae724ea2c5d40a3dff" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>CursorBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a292f0a2751b24b8a159f538a245b8ac7" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>cursorPosition</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aee23adf122a981c025404411d7fb8294" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawBitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a51a1ec3d619d448816598985efa950f1" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawBitmap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1aacc32b53ee9fffb4f49c30c09429351f" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawBitmapImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1abb4407527842b221f76615f3a3871579" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawBitmapImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a91c034cc926b157f3e194f21cfc5fccd" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1af3e8b56fcc4e09a6c57210d7f2b55a50" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1ad556a7c0d1a730766f13f5de5d4df81c" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a4c859454fab094d15eeceea1ee466476" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFilledFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a3b8073deb61a0e3a8acfd7e53c64a9aa" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFilledFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1ad6d5cda6cf207618dcd42cf0481b367a" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFilledFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a611f40ae67db9447684a419c2bb1ee7d" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFilledFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a11f9a4356727b696dbbefa13dcf6f47e" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a4c1a59cd0d3d6a147492c491748b0b43" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1af88e9e3b768a5d82d866b5b179dc7c30" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a7984bcad04fe1aef70d98822646b74e8" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a83f8a89110809ef6aa043b59681793fd" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a21ba7011a4c2b75ac0ebb8ca5a6c4cce" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrameImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a0bf001dc0ffa4929e46cf8d65aa02b25" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrameImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1ac005434c03a1dff09d5d6a4b567cfc24" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrameImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a8b655c13f24a831c548925916b774fb8" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawFrameImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1acbf07dce2b2e7074f989cda9b83443a7" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawGridLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1aa8fd542814ba3a3b650ee72f738ac289" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawGridLayoutImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ac4b8a282ba2ce375ef41dbd739723f09" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ab4cbd4ec57ac2dd2a4b99a6aac632783" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ad0c346f341e6011aaa888faecf6ad300" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a71eed3885088bdeb1396cf4c0910ce8e" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1acbead99f83335031e5f5a68a9abc6110" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a578c6df6cddfc79eda60ae743145602f" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1af69c13171db9f0c77514cadee7e806af" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawTextImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a121390d5d33ebf8dc1cb5e090fc96598" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawTextImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a42d21c78460bb910929882dca0ba77a0" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>drawTextImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a1ba7895f739c2330e8349f709bf969ad" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>eraseColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a0bd63d67d621c159e6dc116016006a95" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>eraseColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1abe85dd3c59bd4e517a626c19f62a365a" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>eraseRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a141057a36b9906258eafc00de9c85eb8" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>eraseRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a8a974d3e71a452c14cec1ca68f38066c" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a9c8369377b274479c11ab6fd12b803c8" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ab00a8b79bc52853d6e8b11088672b1bd" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1abf9f60df7596960eafc708a075ae3fab" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1afeff66e76e2e63e1374e146cb240156c" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>fill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a2b48d3245d65e938ee284d16b764ace8" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>fillChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a1099a87ddf2973b2cf692b2683d61b45" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>fillImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a53349376dcec58d26353b43b13d44e21" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>fillImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a62959002cf7fb97af26449cd95c8b993" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>get</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a21893a4938e6b96d237fb700e79fd1fa" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>insertColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a08c3b1784d3855ab59ae2999d5519b02" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>insertColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ab78b4e96e7ef46d203416bc64722136b" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>insertRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ac0a1e89219f0adf2b7bc78a0837e67e1" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>insertRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1acbd90ce1e85cba24e99bce27747da537" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>maximumSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aeba84135d2b2a8665ad5efc174ae9e85" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a104be5c4efae4d19e762866d552cd2cc" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveColumns</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a2734430920563a255ebe27e8549ba2f9" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveCursor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1ac38cced8875f86d30e0da3f72eba14d2" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveDown</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a0a1f22f286d1c56e43c82314a7fc9998" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveHome</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a3d24c8fb35ce9d678fa8d21edbcee67d" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveLeft</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a38d18452318d722963cba824532fb672" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveRight</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ad2ad518ee848059098c76594ba8fb6ce" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a51bba94a937b029c460945f92563b237" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveRows</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a2bbe77ca72a5fecdbbef999a73125dba" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1af554daa3b9a850c6de535203f57b3594" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>moveUp</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1abcaf145f674b8167ab83fdf4c0380e80" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a1dd1dfbcbd440371c730786a71d6ad7f" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a5c08398a4aae84fdfb157fd603647c54" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::RemappedBuffer::"><scope>erbsland::cterm::CursorBuffer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a3d07d98c1d93ab11b1e4d2e5650d53ac" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::RemappedBuffer::"><scope>erbsland::cterm::CursorBuffer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8bb6ac89955d30c63ef67c6c63618a5f" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>OverflowMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a0acbdece9db215c3ff74321152351920" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>overflowMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a8d7298784ee51b8e5d049c57ff2265ed" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>print</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a43c9c317f4e6fc22a9c047c8021f14cc" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a26e5b8b4bc4cd6e690f996be59ff9f82" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a52ce9fdb92cd68a6374c107328117de4" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a20e7da6be2e04d987432c0dcb6fdfd35" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1afca74acce55ce91aa03f07201b47f37e" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1abbcc75f4e7ede79b9ba6049e89313c9e" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a14e13de306c97ba2c7829737337d2db3" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a439a66adaf14ed4ff2f0a40cae5513ac" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a9a524d086a757a43adcd79edc74c9cc7" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1ab989dfa38de29c9fe30a29941743a29c" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a270472c1b5db19a3e550ff09c97143c8" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1abc8f5ce7073f6d0fc79ff5730abfe693" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1ae36fa25c1a0401732d5e6ce0ea4d40ef" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a885c7734ac27a19bf2e2365e2c245ce5" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a947c9a426da962c9f8dc63a7bbfb2e25" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1af2e033e492ef52f67104aa75281c3775" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1aa815c43bc4d857672bf58b2ef721459b" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printLinePart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printParagraph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a87a904b3b866fab26d3eb9fa1d1963c5" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printParagraph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a63cb7babba8c08196ce029e839aec980" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printParagraph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a80e60230ad4fc8ce3c664b69e9d420ed" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>printParagraphImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1accea0715c6bc99af0455184473a7e623" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>rect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1afe0e90523915b68ecc5fd468e0816de7" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1adca3c5a9effc04973bd954e10d844d12" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa63f7ecd2a817de2c31954a2e6eac341" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a626159e8593c58d5eb4516ffe9d88939" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1af0e5fcc03a4bec5fce678e22514cb778" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>reserve</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a5fe34aabc693d284dae20c8b29b81a0a" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>resize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1af1db224f1b258dbaac3768df6d4f99cc" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>resize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa709880e0df8a7fffd00331a6496e157" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>resize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1acf73d62e2278e93b13e8df2a3909aa6c" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>resize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a740fad9983db5406188415749b5e9d16" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>rotate</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1acb5c23769b89061c8dfd728d5ec5715c" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>set</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1acb0b8c926b1e1d3dec806ae1ba4560aa" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>set</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a6a36c8a7e222bba56f1afb78e3fe3038" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>set</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a8acd69cd1eac4c5e35d88b0a2cee48cb" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>set</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1af4221b2a8f07e29898a09d4bfbda627d" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setAndResizeFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1aa16ba41d0813bdabd80ddb93cf9d6a22" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setAutoWrap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a68898b59ad75634014466b08e9345beb" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setBackground</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a125e536edc0227514dfc96a87f155b4c" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setBlink</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a436b9bdf4db4f77583914ea26ea0b4b5" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setBold</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ad539679567c49e6ec2970cd3dfb05806" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setCharAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1abb7f8096d0b13388c56096ee9f2fe572" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1aafd1c36b8d86890459b3bb5d9e481702" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a2bd8a714866940fcc6f24215f0bedb39" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a877d573f647ecd3b3a12754ba37e8632" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setCursorVisible</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1f67dc83abc2ea900e436bbc62e65ca7" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setDefaultColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a49064e11b53ea2374ef6c47fa2eb45d9" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setDim</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1aa472f5f607723393ffb75717c1d6f2d0" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setFillChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a06a2c4b94b76d1af31d4245e43017475" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setForeground</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a5e8e2f84d7c13451ff03421905d73fd4" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1aba315cfa3b869cf04f089a0beb28f456" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setFromImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a5e42ae22bf38db387c95e14dd36b22cf" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setHidden</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a6ca58fac20c7ae2750be72c09bf0af20" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setItalic</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ac2940dd03aabfee15a1a9dde97105e9e" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setMaximumSize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a8c3fc3d8c54c624352a9124aee824074" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setOverflowMode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a9ac2f80dac193ce1a1192716b1827963" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setReverse</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1afaac6d5bb731887997eca415bd0c9e22" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setStrikethrough</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a98d37e3ae370e3adc52a3f2ed2526ef9" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a64ce8cfdbc726c31e6b6163d3d49813f" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>setUnderline</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1aa185dd7dc802a3788d26e7939a7734ed" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>shift</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1ad28f75031a6ef9dbcddcbd607ff72581" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>shift</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a9dd5093ce153a74372ad71de50d37912" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a69263f01c93d0a8dcb8d7bb8b54da27e" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>supportedCharAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a75233fa158f6f09b63ced1e1225b270d" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>textHeightForWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a3e63939232e2ce14710ab28c0fc34820" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>toMask</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a1183374b9e612d0461c72deccb4c428a" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>toMask</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a9cc60dd001042108d8c3dae15b4c1ec7" prot="protected" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>toMaskImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ab0047acf1d3e8a32c6d38c7e36348b32" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>validateFillChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ad9263021ab994e5ca721874c794b66c9" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1af2ef7dcdd0a20b8696396287dd1a1ec9" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a5f3b859ac7a42ea405498a23d46e66bd" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ac77ed94801339bb8598ef50fc4de6cf8" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ac735c1a208ef73231243d4dbee90b167" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1aaea5185fd1449b059cf27c435617b448" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ac2479e24561ba2e43d69ec926f5c592c" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ac1fbb841ee2b8ad50b0bc8935cab8185" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>write</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a9d333acced49c55fdf03f086cb7c3e1d" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>writeLineBreak</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a76b3ade50d3ef471afe6d7b3f1c1b282" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>writeLineBreak</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a95bf900ecc739b1dba363ac98513b546" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>writeRepeated</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a47d395be06cdfcb719ea168f39622072" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>writeRepeatedResolved</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a5085a00902d25f8793d2984051892d59" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>writeResolved</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a7c0bc2157ed8cdb4daf805d2ef30b761" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>writeResolved</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1ae674595048f75ed3e0e9bbfe079e5e13" prot="private" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>writeResolvedCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_buffer_1a91f3e8ba6036a5d3dd75678c998651df" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>~CursorBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_cursor_writer_1a1205f7b6aad1dcd1f0a1b0b8e504203e" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>~CursorWriter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_readable_buffer_1a1efdd8fc23622c9ad07cf2772b088400" prot="public" virt="virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>~ReadableBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_remapped_buffer_1a651e4e12850d4d9954542833f792a42c" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>~RemappedBuffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_writable_buffer_1a1f88a404889187926b72937a15886314" prot="public" virt="non-virtual"><scope>erbsland::cterm::CursorBuffer</scope><name>~WritableBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1584 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_application" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::ui::Application</compoundname>
+    <includes refid="_application_8hpp" local="no">erbsland/cterm/ui/Application.hpp</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a1578199a409ff2a1b8be16138e075ec3" prot="private" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>State</name>
+        <qualifiedname>erbsland::cterm::ui::Application::State</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_application_1a1578199a409ff2a1b8be16138e075ec3a38c743fa2bc6ccb5012aa671da7b73e7" prot="private">
+          <name>Constructing</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_application_1a1578199a409ff2a1b8be16138e075ec3a5bda814c4aedb126839228f1a3d92f09" prot="private">
+          <name>Running</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_application_1a1578199a409ff2a1b8be16138e075ec3a7b7ecb39b9e110c2a31409a1672bad23" prot="private">
+          <name>Stopping</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1ui_1_1_application_1a1578199a409ff2a1b8be16138e075ec3aaefbd0597f1bc2493bbc18898243513b" prot="private">
+          <name>Destroyed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="36" column="5" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a66e3a33f72bfa47c84c16cb75b315f2a" prot="private" static="no">
+        <type>std::vector&lt; std::weak_ptr&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread" kindref="compound">EventThread</ref> &gt; &gt;</type>
+        <definition>using erbsland::cterm::ui::Application::ManagedEventThreads =  std::vector&lt;std::weak_ptr&lt;EventThread&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>ManagedEventThreads</name>
+        <qualifiedname>erbsland::cterm::ui::Application::ManagedEventThreads</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="37" column="5" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ad4d115cea20a11764f3fdc29a9983636" prot="private" static="no">
+        <type>std::shared_ptr&lt; int &gt;</type>
+        <definition>using erbsland::cterm::ui::Application::CleanUpToken =  std::shared_ptr&lt;int&gt;</definition>
+        <argsstring></argsstring>
+        <name>CleanUpToken</name>
+        <qualifiedname>erbsland::cterm::ui::Application::CleanUpToken</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="38" column="5" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" prot="public" static="no">
+        <type>int</type>
+        <definition>using erbsland::cterm::ui::Application::ExitCode =  int</definition>
+        <argsstring></argsstring>
+        <name>ExitCode</name>
+        <qualifiedname>erbsland::cterm::ui::Application::ExitCode</qualifiedname>
+        <briefdescription>
+<para>The type for the exit code. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="42" column="5" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ad21f52871490a55c85596c346612e44b" prot="public" static="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>using erbsland::cterm::ui::Application::CommandLineArgs =  std::vector&lt;std::string&gt;</definition>
+        <argsstring></argsstring>
+        <name>CommandLineArgs</name>
+        <qualifiedname>erbsland::cterm::ui::Application::CommandLineArgs</qualifiedname>
+        <briefdescription>
+<para>A list of command line arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="46" column="5" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classerbsland_1_1cterm_1_1ui_1_1_application_1afb88c77ea5daaefa6c8fa6bc5b9aa5c1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Scheduler</definition>
+        <argsstring></argsstring>
+        <name>Scheduler</name>
+        <qualifiedname>erbsland::cterm::ui::Application::Scheduler</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduler" kindref="compound">Scheduler</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="35" column="18" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a9607209cf41b82ce474d03bdefb56930" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> &amp;</type>
+        <definition>Application &amp; getApplication</definition>
+        <argsstring>()</argsstring>
+        <name>getApplication</name>
+        <qualifiedname>erbsland::cterm::ui::Application::getApplication</qualifiedname>
+        <briefdescription>
+<para>Access the global application instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calling this method is thread-safe and can be used to post events from other threads. <simplesect kind="warning"><para>If you make calls from other threads, ensure that the application has been constructed and is not shutting down. You <bold>must make sure</bold> that your threads are terminated, <emphasis>before</emphasis> the application instance is destroyed. Do this by adding <computeroutput>wait</computeroutput> or <computeroutput>join</computeroutput> at the end of <computeroutput>main</computeroutput> or similar functions. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if no application instance exists. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="34" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1acbbab7d1dcadd201715710af66ba5c25" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::Application::cExitCodeContinue</definition>
+        <argsstring></argsstring>
+        <name>cExitCodeContinue</name>
+        <qualifiedname>erbsland::cterm::ui::Application::cExitCodeContinue</qualifiedname>
+        <initializer>= std::numeric_limits&lt;<ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" kindref="member">ExitCode</ref>&gt;::min() + 2</initializer>
+        <briefdescription>
+<para>Special value to indicate that the event loop shall continue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="44" column="27" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a4e2889a9b6bf8e21dbafa0da81843bf9" prot="private" static="yes" mutable="no">
+        <type>std::atomic&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> * &gt;</type>
+        <definition>std::atomic&lt;Application *&gt; erbsland::cterm::ui::Application::_instance</definition>
+        <argsstring></argsstring>
+        <name>_instance</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_instance</qualifiedname>
+        <briefdescription>
+<para>The global application instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="239" column="24" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="239" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ad987e448f64e0712b7e07f6725035796" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; State &gt;</type>
+        <definition>std::atomic&lt;State&gt; erbsland::cterm::ui::Application::_state</definition>
+        <argsstring></argsstring>
+        <name>_state</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_state</qualifiedname>
+        <initializer>{State::Constructing}</initializer>
+        <briefdescription>
+<para>The application state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="240" column="17" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="240" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1add7ac3e890e10bd4801d833a4edf480e" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ad21f52871490a55c85596c346612e44b" kindref="member">CommandLineArgs</ref></type>
+        <definition>CommandLineArgs erbsland::cterm::ui::Application::_commandLineArgs</definition>
+        <argsstring></argsstring>
+        <name>_commandLineArgs</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_commandLineArgs</qualifiedname>
+        <briefdescription>
+<para>A snapshot of the command line arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="241" column="21" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1aeb22606f4b0933ca7b054548d73e5e37" prot="private" static="no" mutable="no">
+        <type>TerminalPtr</type>
+        <definition>TerminalPtr erbsland::cterm::ui::Application::_terminal</definition>
+        <argsstring></argsstring>
+        <name>_terminal</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_terminal</qualifiedname>
+        <briefdescription>
+<para>The global terminal instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="242" column="17" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1acb36f9b4f61b5a8a93fd22b8e4eaced8" prot="private" static="no" mutable="no">
+        <type>EventDriverPtr</type>
+        <definition>EventDriverPtr erbsland::cterm::ui::Application::_eventDriver</definition>
+        <argsstring></argsstring>
+        <name>_eventDriver</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_eventDriver</qualifiedname>
+        <briefdescription>
+<para>The global event driver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="243" column="20" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ab5b47ffe30cc14d1ac3df178bd5e1c15" prot="private" static="no" mutable="no">
+        <type>EventSchedulerPtr</type>
+        <definition>EventSchedulerPtr erbsland::cterm::ui::Application::_eventScheduler</definition>
+        <argsstring></argsstring>
+        <name>_eventScheduler</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_eventScheduler</qualifiedname>
+        <briefdescription>
+<para>The event scheduler. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="244" column="23" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a4ea1fe7d3fcb48fbc083c4439a69e780" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; erbsland::cterm::ui::Application::_abortRequested</definition>
+        <argsstring></argsstring>
+        <name>_abortRequested</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_abortRequested</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>The abort flag. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="245" column="17" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="245" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a7c493adcbff8a35f8530e45c166311ef" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; erbsland::cterm::ui::Application::_quitRequested</definition>
+        <argsstring></argsstring>
+        <name>_quitRequested</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_quitRequested</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>A graceful shutdown was requested. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="246" column="17" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="246" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a0610cbfb13f68e645a2adbf88491897a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Application::_appMethodWasCalled</definition>
+        <argsstring></argsstring>
+        <name>_appMethodWasCalled</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_appMethodWasCalled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Sanity flag, to check if init/... methods were called. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="247" column="10" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ae6ed88486d17b9733f890f9a0aa875f6" prot="private" static="no" mutable="no">
+        <type>PagePtr</type>
+        <definition>PagePtr erbsland::cterm::ui::Application::_mainPage</definition>
+        <argsstring></argsstring>
+        <name>_mainPage</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_mainPage</qualifiedname>
+        <briefdescription>
+<para>The main page for this application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="248" column="13" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a52278d9ca5a4d110a9464bb30d2eafe8" prot="private" static="no" mutable="no">
+        <type>DisplayPtr</type>
+        <definition>DisplayPtr erbsland::cterm::ui::Application::_display</definition>
+        <argsstring></argsstring>
+        <name>_display</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_display</qualifiedname>
+        <briefdescription>
+<para>The display instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="249" column="16" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a6e3845f25a5d842156a0d4df8da2f9ec" prot="private" static="no" mutable="no">
+        <type>theme::ThemeConstPtr</type>
+        <definition>theme::ThemeConstPtr erbsland::cterm::ui::Application::_theme</definition>
+        <argsstring></argsstring>
+        <name>_theme</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_theme</qualifiedname>
+        <initializer>{<ref refid="classerbsland_1_1cterm_1_1theme_1_1_theme_1ae5ba4631166daa265e45f811ea3bcf8b" kindref="member">theme::Theme::dark</ref>()}</initializer>
+        <briefdescription>
+<para>The application theme. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="250" column="26" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="250" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a9c19b2b76fd494f1b04673398b0ecaad" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex erbsland::cterm::ui::Application::_managedEventThreadsMutex</definition>
+        <argsstring></argsstring>
+        <name>_managedEventThreadsMutex</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_managedEventThreadsMutex</qualifiedname>
+        <briefdescription>
+<para>Protects the managed event threads. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="251" column="24" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a76ca7dfbcac45334a6630a5b4e658e6f" prot="private" static="no" mutable="no">
+        <type>ManagedEventThreads</type>
+        <definition>ManagedEventThreads erbsland::cterm::ui::Application::_managedEventThreads</definition>
+        <argsstring></argsstring>
+        <name>_managedEventThreads</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_managedEventThreads</qualifiedname>
+        <briefdescription>
+<para>The managed event threads. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="252" column="25" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a0ce4b05bbc4eb3dca13512c74a2007ea" prot="private" static="no" mutable="no">
+        <type>CleanUpToken</type>
+        <definition>CleanUpToken erbsland::cterm::ui::Application::_managedEventThreadsCleanupToken</definition>
+        <argsstring></argsstring>
+        <name>_managedEventThreadsCleanupToken</name>
+        <qualifiedname>erbsland::cterm::ui::Application::_managedEventThreadsCleanupToken</qualifiedname>
+        <initializer>{std::make_shared&lt;int&gt;(0)}</initializer>
+        <briefdescription>
+<para>Safe cleanup token. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="253" column="18" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="253" bodyend="253"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a37804f8be4ab245d4d9b556e1d094bf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Application::Application</definition>
+        <argsstring>()</argsstring>
+        <name>Application</name>
+        <qualifiedname>erbsland::cterm::ui::Application::Application</qualifiedname>
+        <briefdescription>
+<para>Create a new UI application using the default <ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref> backend. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="50" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a6663bf6fbd2ac3d7a3ba8311d238a0f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Application::Application</definition>
+        <argsstring>(int argc, char *argv[])</argsstring>
+        <name>Application</name>
+        <qualifiedname>erbsland::cterm::ui::Application::Application</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Create a new UI application using the default <ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref> backend. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores the command line arguments. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of command line arguments </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command line arguments </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="55" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a65e7217a19e3e39c94ee6056657eba59" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Application::Application</definition>
+        <argsstring>(TerminalPtr terminal)</argsstring>
+        <name>Application</name>
+        <qualifiedname>erbsland::cterm::ui::Application::Application</qualifiedname>
+        <param>
+          <type>TerminalPtr</type>
+          <declname>terminal</declname>
+        </param>
+        <briefdescription>
+<para>Create a new UI application using a custom <ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref> backend. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The terminal backend to use. Must not be null. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="58" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a852b5f31cbdb30076b038f9da594dd90" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Application::Application</definition>
+        <argsstring>(int argc, char *argv[], TerminalPtr terminal)</argsstring>
+        <name>Application</name>
+        <qualifiedname>erbsland::cterm::ui::Application::Application</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>TerminalPtr</type>
+          <declname>terminal</declname>
+        </param>
+        <briefdescription>
+<para>Create a new UI application using a custom <ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref> backend. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores the command line arguments. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of command line arguments </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command line arguments </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The terminal backend to use. Must not be null. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a994d7a70342cfe7aa4f0130d0d3b0645" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual erbsland::cterm::ui::Application::~Application</definition>
+        <argsstring>()</argsstring>
+        <name>~Application</name>
+        <qualifiedname>erbsland::cterm::ui::Application::~Application</qualifiedname>
+        <briefdescription>
+<para>dtor </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="67" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ab18e671fa798272b1a8216848c5228b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Application::Application</definition>
+        <argsstring>(const Application &amp;)=delete</argsstring>
+        <name>Application</name>
+        <qualifiedname>erbsland::cterm::ui::Application::Application</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="70" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1aeafcb23f333d38dac546a52345a7b208" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::Application::Application</definition>
+        <argsstring>(Application &amp;&amp;)=delete</argsstring>
+        <name>Application</name>
+        <qualifiedname>erbsland::cterm::ui::Application::Application</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="71" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ade0cfc4b8db828bc716e5bddef99027c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> &amp;</type>
+        <definition>Application &amp; erbsland::cterm::ui::Application::operator=</definition>
+        <argsstring>(const Application &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::Application::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="72" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a5f35982ad46e5490d24b5d5a92cfa690" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> &amp;</type>
+        <definition>Application &amp; erbsland::cterm::ui::Application::operator=</definition>
+        <argsstring>(Application &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::Application::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="73" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ab88fbd09e4f6ef50f72392be3ff113e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::setMainPage</definition>
+        <argsstring>(PagePtr page)</argsstring>
+        <name>setMainPage</name>
+        <qualifiedname>erbsland::cterm::ui::Application::setMainPage</qualifiedname>
+        <param>
+          <type>PagePtr</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Set the main page for this application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The main page is automatically registered as the initial page in the display, just before the event loop starts. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="78" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ae9de06c8b0a770b52e532b6dcc75ea0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::setTheme</definition>
+        <argsstring>(const theme::ThemeConstPtr &amp;theme)</argsstring>
+        <name>setTheme</name>
+        <qualifiedname>erbsland::cterm::ui::Application::setTheme</qualifiedname>
+        <param>
+          <type>const theme::ThemeConstPtr &amp;</type>
+          <declname>theme</declname>
+        </param>
+        <briefdescription>
+<para>Replace the application theme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>theme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new theme. A null pointer restores the default dark theme. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a5b235f5a7ab158839084e14bea2d49e8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const theme::ThemeConstPtr &amp;</type>
+        <definition>const theme::ThemeConstPtr &amp; erbsland::cterm::ui::Application::theme</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>theme</name>
+        <qualifiedname>erbsland::cterm::ui::Application::theme</qualifiedname>
+        <briefdescription>
+<para>Access the application theme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The active application theme. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="84" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a66d3496be28f28322abf15bca3e811ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ad21f52871490a55c85596c346612e44b" kindref="member">CommandLineArgs</ref> &amp;</type>
+        <definition>const CommandLineArgs &amp; erbsland::cterm::ui::Application::commandLineArgs</definition>
+        <argsstring>() const</argsstring>
+        <name>commandLineArgs</name>
+        <qualifiedname>erbsland::cterm::ui::Application::commandLineArgs</qualifiedname>
+        <briefdescription>
+<para>Access the command line arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="86" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a431745e37744c678416171d314e3cf2b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_terminal" kindref="compound">Terminal</ref> &amp;</type>
+        <definition>Terminal &amp; erbsland::cterm::ui::Application::terminal</definition>
+        <argsstring>() const</argsstring>
+        <name>terminal</name>
+        <qualifiedname>erbsland::cterm::ui::Application::terminal</qualifiedname>
+        <briefdescription>
+<para>Access the terminal instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Only access and manipulate the terminal from the main thread that owns this application. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="89" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a92a6fd97db285ea5ac6b231732fddcf8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> &amp;</type>
+        <definition>Display &amp; erbsland::cterm::ui::Application::display</definition>
+        <argsstring>() const</argsstring>
+        <name>display</name>
+        <qualifiedname>erbsland::cterm::ui::Application::display</qualifiedname>
+        <briefdescription>
+<para>Access the display instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Only access and manipulate the display from events! </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="92" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a0d05bcd7d02d3c8547085421d80b9c72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" kindref="member">ExitCode</ref></type>
+        <definition>ExitCode erbsland::cterm::ui::Application::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <qualifiedname>erbsland::cterm::ui::Application::run</qualifiedname>
+        <briefdescription>
+<para>Run the application event loop. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will initialize the terminal and start the event loop. If the event loop exits, the screen is restored. Any exception from the event loop will be propagated.</para>
+<para><simplesect kind="return"><para>The exit code of the application. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="100" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1adc27fbf894f5de583c17e3de8935fddb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::Application::isShuttingDown</definition>
+        <argsstring>() const</argsstring>
+        <name>isShuttingDown</name>
+        <qualifiedname>erbsland::cterm::ui::Application::isShuttingDown</qualifiedname>
+        <briefdescription>
+<para>Test if this application is shutting down. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="102" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ac2191144a147ec3b424eb7e641e5185e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::addEvent</definition>
+        <argsstring>(EventType eventType, EventDataUniquePtr &amp;&amp;eventData)</argsstring>
+        <name>addEvent</name>
+        <qualifiedname>erbsland::cterm::ui::Application::addEvent</qualifiedname>
+        <param>
+          <type>EventType</type>
+          <declname>eventType</declname>
+        </param>
+        <param>
+          <type>EventDataUniquePtr &amp;&amp;</type>
+          <declname>eventData</declname>
+        </param>
+        <briefdescription>
+<para>Add an event to the event loop. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the application is shutting down, this call is ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>eventType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eventData</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="107" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a2b103e6005f673b724887afc12fc4a66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::invoke</definition>
+        <argsstring>(std::function&lt; void()&gt; invokedFn)</argsstring>
+        <name>invoke</name>
+        <qualifiedname>erbsland::cterm::ui::Application::invoke</qualifiedname>
+        <param>
+          <type>std::function&lt; void()&gt;</type>
+          <declname>invokedFn</declname>
+        </param>
+        <briefdescription>
+<para>Queue one callback on the application UI thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>invokedFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to execute on the UI thread. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the application event system is not active anymore. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="111" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a45ff117f6651ff6d68f1d5d77778eb4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EventThreadPtr</type>
+        <definition>EventThreadPtr erbsland::cterm::ui::Application::createEventThread</definition>
+        <argsstring>()</argsstring>
+        <name>createEventThread</name>
+        <qualifiedname>erbsland::cterm::ui::Application::createEventThread</qualifiedname>
+        <briefdescription>
+<para>Create one managed background event thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The application automatically stops managed event threads during shutdown. <simplesect kind="return"><para>The started event thread. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the application event system is not active anymore. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="116" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a846e4bc1037a11b2c9b7da28eeb853c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::quit</definition>
+        <argsstring>(ExitCode exitCode=0)</argsstring>
+        <name>quit</name>
+        <qualifiedname>erbsland::cterm::ui::Application::quit</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" kindref="member">ExitCode</ref></type>
+          <declname>exitCode</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Quit the application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will schedule a quit event and exit the event loop as soon as all scheduled events up to this quit event are processed. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="120" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ab3c38af704b900662dd019378f9880ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::abort</definition>
+        <argsstring>()</argsstring>
+        <name>abort</name>
+        <qualifiedname>erbsland::cterm::ui::Application::abort</qualifiedname>
+        <briefdescription>
+<para>Abort the application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This aborts the application as soon as possible. Events in the event loop are not processed. <simplesect kind="note"><para>Use <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a846e4bc1037a11b2c9b7da28eeb853c2" kindref="member">quit()</ref></computeroutput> to exit the application gracefully. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="124" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ab70bd93544ad9706c5b9e9786031f79e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" kindref="member">ExitCode</ref></type>
+        <definition>ExitCode erbsland::cterm::ui::Application::manualInitialize</definition>
+        <argsstring>()</argsstring>
+        <name>manualInitialize</name>
+        <qualifiedname>erbsland::cterm::ui::Application::manualInitialize</qualifiedname>
+        <briefdescription>
+<para>Initialize the application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Only use this method if you need to drive the event loop manually. </para>
+</simplesect>
+<simplesect kind="return"><para><computeroutput>cExitCodeContinue</computeroutput> if everything is ok and the application shall go into the event loop. Any other value is a return value to use when exiting the application. Before exiting the application, <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a490db972244646f1caeae0383f0c6e93" kindref="member">manualShutdown()</ref></computeroutput> must be called. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>Any</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>exception that may occur during initialization. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="133" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a6dd8c233b5a3251452e65f1a0be06b52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" kindref="member">ExitCode</ref></type>
+        <definition>ExitCode erbsland::cterm::ui::Application::manualProcessEvents</definition>
+        <argsstring>()</argsstring>
+        <name>manualProcessEvents</name>
+        <qualifiedname>erbsland::cterm::ui::Application::manualProcessEvents</qualifiedname>
+        <briefdescription>
+<para>Refresh the <ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref>, read input and process events. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Only use this method if you need to drive the event loop manually. </para>
+</simplesect>
+<simplesect kind="return"><para><computeroutput>cExitCodeContinue</computeroutput> if everything is ok and the loop shall continue. Any other value is a return value to use when exiting the application. Before exiting the application, <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a490db972244646f1caeae0383f0c6e93" kindref="member">manualShutdown()</ref></computeroutput> must be called. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any exception that may occur during run. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="140" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a490db972244646f1caeae0383f0c6e93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::manualShutdown</definition>
+        <argsstring>()</argsstring>
+        <name>manualShutdown</name>
+        <qualifiedname>erbsland::cterm::ui::Application::manualShutdown</qualifiedname>
+        <briefdescription>
+<para>Shutdown the application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Only use this method if you need to drive the event loop manually. This method <bold>must</bold> be called before exiting the application in <bold>every</bold> case. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="144" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a07e6b6e1e59eb1bcf6158b45b0825527" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::ui::Application::setupUi</definition>
+        <argsstring>()</argsstring>
+        <name>setupUi</name>
+        <qualifiedname>erbsland::cterm::ui::Application::setupUi</qualifiedname>
+        <briefdescription>
+<para>Set up the main page of your user interface, Overwrite this class to set up your UI before the application is initialized. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>At this point, nothing is initialized. Your implementation must call <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab88fbd09e4f6ef50f72392be3ff113e3" kindref="member">setMainPage()</ref></computeroutput> to set the main page of the application. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="151" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1aeb5873d1bd97e19c777392e9be2f1a3b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::ui::Application::initialize</definition>
+        <argsstring>()</argsstring>
+        <name>initialize</name>
+        <qualifiedname>erbsland::cterm::ui::Application::initialize</qualifiedname>
+        <briefdescription>
+<para>Initializes the UI system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><emphasis>Extend</emphasis> this method to perform additional initialization steps after command line arguments are processed. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="154" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1acea5143c205d11431070be402c7176f0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::ui::Application::initializeTerminal</definition>
+        <argsstring>()</argsstring>
+        <name>initializeTerminal</name>
+        <qualifiedname>erbsland::cterm::ui::Application::initializeTerminal</qualifiedname>
+        <briefdescription>
+<para>Initialize the terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>You can extend/overwrite this method to perform additional terminal initialization steps or change the terminal initialization behavior. You <bold>must make sure</bold> the base implementation is called once. By default, this method initializes the screen and configures key input mode. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="160" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a6725e3b83e3588faa912f99539cc0045" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>virtual int erbsland::cterm::ui::Application::processCommandLineArguments</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;args)</argsstring>
+        <name>processCommandLineArguments</name>
+        <qualifiedname>erbsland::cterm::ui::Application::processCommandLineArguments</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Process command line arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Overwrite this method to parse the command line arguments at the start of the application. Return <computeroutput>cExitCodeContinue</computeroutput> if everything is fine and the application should continue to start. Any other value returned will cause the application to exit with that value. At this point, <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a07e6b6e1e59eb1bcf6158b45b0825527" kindref="member">setupUi()</ref></computeroutput> has built the surface tree and the terminal is initialized, but the UI event system is not active yet. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command line arguments. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The exit code to use when exiting the application or <computeroutput>cExitCodeContinue</computeroutput> if everything is fine. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="169" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a6d6d0ce4d73d817aacc964f7ce3176d7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>virtual int erbsland::cterm::ui::Application::runEventLoop</definition>
+        <argsstring>()</argsstring>
+        <name>runEventLoop</name>
+        <qualifiedname>erbsland::cterm::ui::Application::runEventLoop</qualifiedname>
+        <briefdescription>
+<para>Running the event loop. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only extend this method if you need to change the event loop behavior or have to perform work just before or after running the event loop. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="173" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ab46a6dfb2b1866b0e5b05017225d6510" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::ui::Application::restoreTerminal</definition>
+        <argsstring>()</argsstring>
+        <name>restoreTerminal</name>
+        <qualifiedname>erbsland::cterm::ui::Application::restoreTerminal</qualifiedname>
+        <briefdescription>
+<para>Restore the terminal to its original state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>By default, this method only calls <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab46a6dfb2b1866b0e5b05017225d6510" kindref="member">restoreTerminal()</ref></computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="176" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1abf6957da0edd45fbb6da1220d155919d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void erbsland::cterm::ui::Application::shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>shutdown</name>
+        <qualifiedname>erbsland::cterm::ui::Application::shutdown</qualifiedname>
+        <briefdescription>
+<para>Shutdown the application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>You can <emphasis>extend</emphasis> this method to perform additional shutdown steps. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="179" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a00f1e87e0b1ea5bdfb8ae177a4e1094b" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::chrono::milliseconds</type>
+        <definition>virtual std::chrono::milliseconds erbsland::cterm::ui::Application::managedEventThreadShutdownTimeout</definition>
+        <argsstring>() const</argsstring>
+        <name>managedEventThreadShutdownTimeout</name>
+        <qualifiedname>erbsland::cterm::ui::Application::managedEventThreadShutdownTimeout</qualifiedname>
+        <briefdescription>
+<para>Get the shutdown timeout for managed event threads. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The total shutdown timeout. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="182" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a8ffa7d0ded7ef9bfc48fb7377f7312eb" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::ui::Application::managedEventThreadCount</definition>
+        <argsstring>() const</argsstring>
+        <name>managedEventThreadCount</name>
+        <qualifiedname>erbsland::cterm::ui::Application::managedEventThreadCount</qualifiedname>
+        <briefdescription>
+<para>Get the current number of managed event threads. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Primarily useful for tests and diagnostics in derived classes. <simplesect kind="return"><para>The number of currently tracked managed event threads. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="186" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ae687eba7954913cfaba2cc9b327c62ef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" kindref="member">ExitCode</ref></type>
+        <definition>ExitCode erbsland::cterm::ui::Application::initializeImpl</definition>
+        <argsstring>()</argsstring>
+        <name>initializeImpl</name>
+        <qualifiedname>erbsland::cterm::ui::Application::initializeImpl</qualifiedname>
+        <briefdescription>
+<para>Initialize the UI application. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>cExitCodeContinue</computeroutput> if initialization was successful, otherwise an error code. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="191" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a2e728b889648e3366282bc6996383527" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" kindref="member">ExitCode</ref></type>
+        <definition>ExitCode erbsland::cterm::ui::Application::processEventsImpl</definition>
+        <argsstring>()</argsstring>
+        <name>processEventsImpl</name>
+        <qualifiedname>erbsland::cterm::ui::Application::processEventsImpl</qualifiedname>
+        <briefdescription>
+<para>Process events. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>cExitCodeContinue</computeroutput> if events were processed successfully, otherwise an error code. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="194" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1aaabc48b9769a0adafcf38d3fd9929dd4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::shutdownImpl</definition>
+        <argsstring>()</argsstring>
+        <name>shutdownImpl</name>
+        <qualifiedname>erbsland::cterm::ui::Application::shutdownImpl</qualifiedname>
+        <briefdescription>
+<para>Shutdown the application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="196" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a464eed45f0c2efcc260f7c0a12a88d97" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::handleEvent</definition>
+        <argsstring>(const Event &amp;event)</argsstring>
+        <name>handleEvent</name>
+        <qualifiedname>erbsland::cterm::ui::Application::handleEvent</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Handle one queued non-control event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event to process. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="199" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a59f6abfc188bdf837851817b56b49026" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::handleKeyPress</definition>
+        <argsstring>(KeyPressEvent &amp;keyPressEvent) const noexcept</argsstring>
+        <name>handleKeyPress</name>
+        <qualifiedname>erbsland::cterm::ui::Application::handleKeyPress</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_key_press_event" kindref="compound">KeyPressEvent</ref> &amp;</type>
+          <declname>keyPressEvent</declname>
+        </param>
+        <briefdescription>
+<para>Forward a key press event to the display. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>keyPressEvent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key press event to forward. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="202" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a829226e3eed59436c35d096226d79771" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::setState</definition>
+        <argsstring>(State state)</argsstring>
+        <name>setState</name>
+        <qualifiedname>erbsland::cterm::ui::Application::setState</qualifiedname>
+        <param>
+          <type>State</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Set this application into a new state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="204" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a149e733ea35986008c15f1feeb7ee550" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::scheduleAction</definition>
+        <argsstring>(const SurfaceWeakPtr &amp;surface, ScheduledActionRef actionRef, uint64_t generation, EventDataUniquePtr &amp;&amp;eventData, EventTime eventTime)</argsstring>
+        <name>scheduleAction</name>
+        <qualifiedname>erbsland::cterm::ui::Application::scheduleAction</qualifiedname>
+        <param>
+          <type>const SurfaceWeakPtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_scheduled_action_ref" kindref="compound">ScheduledActionRef</ref></type>
+          <declname>actionRef</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>generation</declname>
+        </param>
+        <param>
+          <type>EventDataUniquePtr &amp;&amp;</type>
+          <declname>eventData</declname>
+        </param>
+        <param>
+          <type>EventTime</type>
+          <declname>eventTime</declname>
+        </param>
+        <briefdescription>
+<para>Schedule one scheduled action event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target surface. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>actionRef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The action reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>generation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current action generation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eventData</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scheduled action event payload. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eventTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The due time for the scheduled action event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="211" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ab2d13e0bb244d890270030aac4272121" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::armSurfaceSchedulers</definition>
+        <argsstring>(const SurfacePtr &amp;surface)</argsstring>
+        <name>armSurfaceSchedulers</name>
+        <qualifiedname>erbsland::cterm::ui::Application::armSurfaceSchedulers</qualifiedname>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Arm all existing surface schedulers in the given subtree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>surface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The root surface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="219" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a6321bf29e7978811edc3acd974adc6a5" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::chrono::milliseconds</type>
+        <definition>std::chrono::milliseconds erbsland::cterm::ui::Application::calculateInputTimeout</definition>
+        <argsstring>() const</argsstring>
+        <name>calculateInputTimeout</name>
+        <qualifiedname>erbsland::cterm::ui::Application::calculateInputTimeout</qualifiedname>
+        <briefdescription>
+<para>Calculate the next timeout for terminal input polling. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A return value of zero causes <computeroutput><ref refid="classerbsland_1_1cterm_1_1_input_1af98bbe2b91e21553f4b9d3d4cece15c2" kindref="member">Input::readKey()</ref></computeroutput> to perform a non-blocking poll. <simplesect kind="return"><para>The timeout for <computeroutput><ref refid="classerbsland_1_1cterm_1_1_input_1af98bbe2b91e21553f4b9d3d4cece15c2" kindref="member">Input::readKey()</ref></computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="223" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a884d4d96087f7a0fce7e3cd9843cad3d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::verifyEventSystemIsActive</definition>
+        <argsstring>() const</argsstring>
+        <name>verifyEventSystemIsActive</name>
+        <qualifiedname>erbsland::cterm::ui::Application::verifyEventSystemIsActive</qualifiedname>
+        <briefdescription>
+<para>Verify that the event system is active and still accepts new work. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="225" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a28b772daf15a6596fbad4cfd4f46eba9" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::shutdownManagedEventThreads</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>shutdownManagedEventThreads</name>
+        <qualifiedname>erbsland::cterm::ui::Application::shutdownManagedEventThreads</qualifiedname>
+        <briefdescription>
+<para>Stop all managed event threads and wait for them to end. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="227" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a5e2d7c63481334c9b9d3a27f3f28d286" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::pruneManagedEventThreads</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>pruneManagedEventThreads</name>
+        <qualifiedname>erbsland::cterm::ui::Application::pruneManagedEventThreads</qualifiedname>
+        <briefdescription>
+<para>Remove finished or expired managed event threads from the tracking list. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="229" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1a248944aa41619d40559f9eeb5441e1fc" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::Application::pruneManagedEventThreadsLocked</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>pruneManagedEventThreadsLocked</name>
+        <qualifiedname>erbsland::cterm::ui::Application::pruneManagedEventThreadsLocked</qualifiedname>
+        <briefdescription>
+<para>Remove finished or expired managed event threads from the tracking list. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="231" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_application_1ae97627ce6947e9fc197aec1640f715dc" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> *</type>
+        <definition>static Application * erbsland::cterm::ui::Application::instanceIfAvailable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>instanceIfAvailable</name>
+        <qualifiedname>erbsland::cterm::ui::Application::instanceIfAvailable</qualifiedname>
+        <briefdescription>
+<para>Try to access the active application instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The active application instance, or <computeroutput>nullptr</computeroutput> if no application exists. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/Application.hpp" line="236" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>UI <ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref> instance for event-driven UI applications. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/ui/Application.hpp" line="33" column="1" bodyfile="erbsland/cterm/ui/Application.hpp" bodystart="33" bodyend="254"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a4ea1fe7d3fcb48fbc083c4439a69e780" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_abortRequested</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a0610cbfb13f68e645a2adbf88491897a" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_appMethodWasCalled</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1add7ac3e890e10bd4801d833a4edf480e" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_commandLineArgs</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a52278d9ca5a4d110a9464bb30d2eafe8" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_display</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1acb36f9b4f61b5a8a93fd22b8e4eaced8" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_eventDriver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab5b47ffe30cc14d1ac3df178bd5e1c15" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_eventScheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a4e2889a9b6bf8e21dbafa0da81843bf9" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_instance</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ae6ed88486d17b9733f890f9a0aa875f6" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_mainPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a76ca7dfbcac45334a6630a5b4e658e6f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_managedEventThreads</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a0ce4b05bbc4eb3dca13512c74a2007ea" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_managedEventThreadsCleanupToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a9c19b2b76fd494f1b04673398b0ecaad" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_managedEventThreadsMutex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a7c493adcbff8a35f8530e45c166311ef" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_quitRequested</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ad987e448f64e0712b7e07f6725035796" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_state</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1aeb22606f4b0933ca7b054548d73e5e37" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_terminal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a6e3845f25a5d842156a0d4df8da2f9ec" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>_theme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab3c38af704b900662dd019378f9880ac" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>abort</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ac2191144a147ec3b424eb7e641e5185e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>addEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a37804f8be4ab245d4d9b556e1d094bf2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>Application</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a6663bf6fbd2ac3d7a3ba8311d238a0f2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>Application</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a65e7217a19e3e39c94ee6056657eba59" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>Application</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a852b5f31cbdb30076b038f9da594dd90" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>Application</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab18e671fa798272b1a8216848c5228b2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>Application</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1aeafcb23f333d38dac546a52345a7b208" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>Application</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab2d13e0bb244d890270030aac4272121" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>armSurfaceSchedulers</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a6321bf29e7978811edc3acd974adc6a5" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>calculateInputTimeout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1acbbab7d1dcadd201715710af66ba5c25" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>cExitCodeContinue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ad4d115cea20a11764f3fdc29a9983636" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>CleanUpToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ad21f52871490a55c85596c346612e44b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>CommandLineArgs</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a66d3496be28f28322abf15bca3e811ad" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>commandLineArgs</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a45ff117f6651ff6d68f1d5d77778eb4b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>createEventThread</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a92a6fd97db285ea5ac6b231732fddcf8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>display</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adb4557ddb572dc0a677c4b99adc58e8b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>ExitCode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a9607209cf41b82ce474d03bdefb56930" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>getApplication</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a464eed45f0c2efcc260f7c0a12a88d97" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>handleEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a59f6abfc188bdf837851817b56b49026" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>handleKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1aeb5873d1bd97e19c777392e9be2f1a3b" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>initialize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ae687eba7954913cfaba2cc9b327c62ef" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>initializeImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1acea5143c205d11431070be402c7176f0" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>initializeTerminal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ae97627ce6947e9fc197aec1640f715dc" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>instanceIfAvailable</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a2b103e6005f673b724887afc12fc4a66" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>invoke</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1adc27fbf894f5de583c17e3de8935fddb" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>isShuttingDown</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a8ffa7d0ded7ef9bfc48fb7377f7312eb" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>managedEventThreadCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a66e3a33f72bfa47c84c16cb75b315f2a" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>ManagedEventThreads</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a00f1e87e0b1ea5bdfb8ae177a4e1094b" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>managedEventThreadShutdownTimeout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab70bd93544ad9706c5b9e9786031f79e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>manualInitialize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a6dd8c233b5a3251452e65f1a0be06b52" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>manualProcessEvents</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a490db972244646f1caeae0383f0c6e93" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>manualShutdown</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ade0cfc4b8db828bc716e5bddef99027c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a5f35982ad46e5490d24b5d5a92cfa690" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a6725e3b83e3588faa912f99539cc0045" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>processCommandLineArguments</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a2e728b889648e3366282bc6996383527" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>processEventsImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a5e2d7c63481334c9b9d3a27f3f28d286" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>pruneManagedEventThreads</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a248944aa41619d40559f9eeb5441e1fc" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>pruneManagedEventThreadsLocked</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a846e4bc1037a11b2c9b7da28eeb853c2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>quit</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab46a6dfb2b1866b0e5b05017225d6510" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>restoreTerminal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a0d05bcd7d02d3c8547085421d80b9c72" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>run</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a6d6d0ce4d73d817aacc964f7ce3176d7" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>runEventLoop</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a149e733ea35986008c15f1feeb7ee550" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>scheduleAction</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1afb88c77ea5daaefa6c8fa6bc5b9aa5c1" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>Scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ab88fbd09e4f6ef50f72392be3ff113e3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>setMainPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a829226e3eed59436c35d096226d79771" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>setState</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1ae9de06c8b0a770b52e532b6dcc75ea0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>setTheme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a07e6b6e1e59eb1bcf6158b45b0825527" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>setupUi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1abf6957da0edd45fbb6da1220d155919d" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>shutdown</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1aaabc48b9769a0adafcf38d3fd9929dd4" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>shutdownImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a28b772daf15a6596fbad4cfd4f46eba9" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>shutdownManagedEventThreads</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a1578199a409ff2a1b8be16138e075ec3" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>State</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a431745e37744c678416171d314e3cf2b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>terminal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a5b235f5a7ab158839084e14bea2d49e8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>theme</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a884d4d96087f7a0fce7e3cd9843cad3d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::Application</scope><name>verifyEventSystemIsActive</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_application_1a994d7a70342cfe7aa4f0130d0d3b0645" prot="public" virt="virtual"><scope>erbsland::cterm::ui::Application</scope><name>~Application</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

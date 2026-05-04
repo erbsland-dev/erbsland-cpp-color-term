@@ -1,0 +1,460 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::WindowsSignalDispatcher</compoundname>
+    <includes refid="_windows_signal_dispatcher_8hpp" local="no">erbsland/cterm/impl/WindowsSignalDispatcher.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a7a26e975532a411898c534fc5d0a4cbb" prot="public" static="no">
+        <type>std::function&lt; void(int)&gt;</type>
+        <definition>using erbsland::cterm::impl::WindowsSignalDispatcher::SignalCallback =  std::function&lt;void(int)&gt;</definition>
+        <argsstring></argsstring>
+        <name>SignalCallback</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::SignalCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="28" column="5" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a9b828b1829ccc44557043dd3126ed59c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::impl::WindowsSignalDispatcher::cCtrlCExitCode</definition>
+        <argsstring></argsstring>
+        <name>cCtrlCExitCode</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::cCtrlCExitCode</qualifiedname>
+        <initializer>= 130</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="23" column="26" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1aa42b69fba4df9c99c4b51503e13d87a5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::impl::WindowsSignalDispatcher::cCtrlBreakExitCode</definition>
+        <argsstring></argsstring>
+        <name>cCtrlBreakExitCode</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::cCtrlBreakExitCode</qualifiedname>
+        <initializer>= 131</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="24" column="26" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a33e8511ddab74f746f1d86cf7e802f2f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int erbsland::cterm::impl::WindowsSignalDispatcher::cCloseExitCode</definition>
+        <argsstring></argsstring>
+        <name>cCloseExitCode</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::cCloseExitCode</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="25" column="26" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1ab709f55f94800ef39f30a05e1750d23b" prot="private" static="yes" mutable="no">
+        <type>std::atomic&lt; <ref refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" kindref="compound">WindowsSignalDispatcher</ref> * &gt;</type>
+        <definition>std::atomic&lt;WindowsSignalDispatcher *&gt; erbsland::cterm::impl::WindowsSignalDispatcher::_instance</definition>
+        <argsstring></argsstring>
+        <name>_instance</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::_instance</qualifiedname>
+        <briefdescription>
+<para>The globally active Windows signal forwarder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="59" column="24" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a0ec2ada97fd780948c45fd91a5bb1b98" prot="private" static="no" mutable="no">
+        <type>SignalCallback</type>
+        <definition>SignalCallback erbsland::cterm::impl::WindowsSignalDispatcher::_onSignal</definition>
+        <argsstring></argsstring>
+        <name>_onSignal</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::_onSignal</qualifiedname>
+        <briefdescription>
+<para>Callback executed on the watcher thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="61" column="20" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a39323a544ac95ff63bfde9c949b83929" prot="private" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex erbsland::cterm::impl::WindowsSignalDispatcher::_queueMutex</definition>
+        <argsstring></argsstring>
+        <name>_queueMutex</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::_queueMutex</qualifiedname>
+        <briefdescription>
+<para>Protects the queued forwarded events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="62" column="16" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1aa4771ac00b03bc067e97d3e0736f3e8c" prot="private" static="no" mutable="no">
+        <type>std::condition_variable</type>
+        <definition>std::condition_variable erbsland::cterm::impl::WindowsSignalDispatcher::_queueCv</definition>
+        <argsstring></argsstring>
+        <name>_queueCv</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::_queueCv</qualifiedname>
+        <briefdescription>
+<para>Notifies the watcher about queued events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="63" column="29" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1af615557a3aa4022851d7460f549df6d6" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; int &gt;</type>
+        <definition>std::optional&lt;int&gt; erbsland::cterm::impl::WindowsSignalDispatcher::_pendingExitCode</definition>
+        <argsstring></argsstring>
+        <name>_pendingExitCode</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::_pendingExitCode</qualifiedname>
+        <briefdescription>
+<para>The first exit code for the signal handler. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="64" column="19" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a617d58752880bae6e04f8a63d22a657e" prot="private" static="no" mutable="no">
+        <type>std::thread</type>
+        <definition>std::thread erbsland::cterm::impl::WindowsSignalDispatcher::_watcher</definition>
+        <argsstring></argsstring>
+        <name>_watcher</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::_watcher</qualifiedname>
+        <briefdescription>
+<para>Dedicated watcher thread for forwarded events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="65" column="17" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a7ced6943e6e47c0f89137e4a7f4e2a66" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::WindowsSignalDispatcher::_stopped</definition>
+        <argsstring></argsstring>
+        <name>_stopped</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::_stopped</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>Stops the watcher thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="66" column="10" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1afd1a67c9b6c2587ce3c08f933ee94eaa" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::WindowsSignalDispatcher::_consoleHandlerActive</definition>
+        <argsstring></argsstring>
+        <name>_consoleHandlerActive</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::_consoleHandlerActive</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>If the console control handler was successfully registered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="67" column="10" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a8ec45f1304f368ac7f127dca497e34a4" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::WindowsSignalDispatcher::WindowsSignalDispatcher</definition>
+        <argsstring>(SignalCallback onSignal)</argsstring>
+        <name>WindowsSignalDispatcher</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::WindowsSignalDispatcher</qualifiedname>
+        <param>
+          <type>SignalCallback</type>
+          <declname>onSignal</declname>
+        </param>
+        <briefdescription>
+<para>Create and activate the signal-forwarding helper. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>onSignal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Callback invoked on the watcher thread for a received event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a6f98d261b22e3476b1e11ca7e39c186a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::WindowsSignalDispatcher::~WindowsSignalDispatcher</definition>
+        <argsstring>()</argsstring>
+        <name>~WindowsSignalDispatcher</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::~WindowsSignalDispatcher</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="34" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a7c76467f8afcd55cf84339f8cd0a9a71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::WindowsSignalDispatcher::WindowsSignalDispatcher</definition>
+        <argsstring>(const WindowsSignalDispatcher &amp;)=delete</argsstring>
+        <name>WindowsSignalDispatcher</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::WindowsSignalDispatcher</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" kindref="compound">WindowsSignalDispatcher</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="36" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a521a7edbca693e690ba603429e1cd6bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" kindref="compound">WindowsSignalDispatcher</ref> &amp;</type>
+        <definition>WindowsSignalDispatcher &amp; erbsland::cterm::impl::WindowsSignalDispatcher::operator=</definition>
+        <argsstring>(const WindowsSignalDispatcher &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" kindref="compound">WindowsSignalDispatcher</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="37" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1aafa31834ce6d10ec7ed27ec2644f83b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::WindowsSignalDispatcher::WindowsSignalDispatcher</definition>
+        <argsstring>(WindowsSignalDispatcher &amp;&amp;)=delete</argsstring>
+        <name>WindowsSignalDispatcher</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::WindowsSignalDispatcher</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" kindref="compound">WindowsSignalDispatcher</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1afec527cc95c8a07bc388ab1c66bae313" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" kindref="compound">WindowsSignalDispatcher</ref> &amp;</type>
+        <definition>WindowsSignalDispatcher &amp; erbsland::cterm::impl::WindowsSignalDispatcher::operator=</definition>
+        <argsstring>(WindowsSignalDispatcher &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" kindref="compound">WindowsSignalDispatcher</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="39" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a5c1cfeecab57dd08b6ba3a083780244e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::WindowsSignalDispatcher::registerHandler</definition>
+        <argsstring>()</argsstring>
+        <name>registerHandler</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::registerHandler</qualifiedname>
+        <briefdescription>
+<para>Register our control handler. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="43" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1ab43b84830e690ae4468b11c66ebe02d5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::WindowsSignalDispatcher::startWatcher</definition>
+        <argsstring>()</argsstring>
+        <name>startWatcher</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::startWatcher</qualifiedname>
+        <briefdescription>
+<para>Start the watcher. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="45" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a181ba68d2d258dc58301bbbee18888fe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::WindowsSignalDispatcher::stopWatcher</definition>
+        <argsstring>()</argsstring>
+        <name>stopWatcher</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::stopWatcher</qualifiedname>
+        <briefdescription>
+<para>Stop the watcher. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="47" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a284aef705295093079889effa31448dd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::WindowsSignalDispatcher::unregisterHandler</definition>
+        <argsstring>()</argsstring>
+        <name>unregisterHandler</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::unregisterHandler</qualifiedname>
+        <briefdescription>
+<para>Restore the previously installed handler. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="49" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a446ea5b2d07fce8db5a9a1621fe2392c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::WindowsSignalDispatcher::runWatcher</definition>
+        <argsstring>()</argsstring>
+        <name>runWatcher</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::runWatcher</qualifiedname>
+        <briefdescription>
+<para>Wait for queued events on the watcher thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="51" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a5376490477241f78a6df999aeed010f4" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::WindowsSignalDispatcher::pushSignal</definition>
+        <argsstring>(int exitCode) noexcept</argsstring>
+        <name>pushSignal</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::pushSignal</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>exitCode</declname>
+        </param>
+        <briefdescription>
+<para>Add the exit code of a signal to the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="53" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1aa9e38d8bd63d85712af0b0dbf595d0fd" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>BOOL</type>
+        <definition>static BOOL erbsland::cterm::impl::WindowsSignalDispatcher::onConsoleControl</definition>
+        <argsstring>(DWORD controlType) noexcept</argsstring>
+        <name>onConsoleControl</name>
+        <qualifiedname>erbsland::cterm::impl::WindowsSignalDispatcher::onConsoleControl</qualifiedname>
+        <param>
+          <type>DWORD</type>
+          <declname>controlType</declname>
+        </param>
+        <briefdescription>
+<para>Registered Windows console control callback. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="56" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Forward Windows termination events to a regular worker thread. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Console-control callbacks only enqueue a lightweight event. A watcher thread invokes the configured callback in a normal thread context, where terminal cleanup can safely use locks and iostreams. </para>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" line="21" column="1" bodyfile="erbsland/cterm/impl/WindowsSignalDispatcher.hpp" bodystart="21" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1afd1a67c9b6c2587ce3c08f933ee94eaa" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>_consoleHandlerActive</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1ab709f55f94800ef39f30a05e1750d23b" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>_instance</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a0ec2ada97fd780948c45fd91a5bb1b98" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>_onSignal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1af615557a3aa4022851d7460f549df6d6" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>_pendingExitCode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1aa4771ac00b03bc067e97d3e0736f3e8c" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>_queueCv</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a39323a544ac95ff63bfde9c949b83929" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>_queueMutex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a7ced6943e6e47c0f89137e4a7f4e2a66" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>_stopped</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a617d58752880bae6e04f8a63d22a657e" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>_watcher</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a33e8511ddab74f746f1d86cf7e802f2f" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>cCloseExitCode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1aa42b69fba4df9c99c4b51503e13d87a5" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>cCtrlBreakExitCode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a9b828b1829ccc44557043dd3126ed59c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>cCtrlCExitCode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1aa9e38d8bd63d85712af0b0dbf595d0fd" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>onConsoleControl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a521a7edbca693e690ba603429e1cd6bf" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1afec527cc95c8a07bc388ab1c66bae313" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a5376490477241f78a6df999aeed010f4" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>pushSignal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a5c1cfeecab57dd08b6ba3a083780244e" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>registerHandler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a446ea5b2d07fce8db5a9a1621fe2392c" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>runWatcher</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a7a26e975532a411898c534fc5d0a4cbb" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>SignalCallback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1ab43b84830e690ae4468b11c66ebe02d5" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>startWatcher</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a181ba68d2d258dc58301bbbee18888fe" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>stopWatcher</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a284aef705295093079889effa31448dd" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>unregisterHandler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a8ec45f1304f368ac7f127dca497e34a4" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>WindowsSignalDispatcher</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a7c76467f8afcd55cf84339f8cd0a9a71" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>WindowsSignalDispatcher</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1aafa31834ce6d10ec7ed27ec2644f83b7" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>WindowsSignalDispatcher</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher_1a6f98d261b22e3476b1e11ca7e39c186a" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::WindowsSignalDispatcher</scope><name>~WindowsSignalDispatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

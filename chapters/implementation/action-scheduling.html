@@ -1,0 +1,887 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Action Scheduling &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Invocation and Event Threads" href="invocation-and-event-threads.html" />
+    <link rel="prev" title="POSIX Backend" href="posix-backend.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Implementation Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="windows-backend.html">Windows Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="posix-backend.html">POSIX Backend</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Action Scheduling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#relevant-source-files">Relevant Source Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-the-system-exists">Why the System Exists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-architecture">High-Level Architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#layer-1-surface-scheduler">Layer 1: <code class="docutils literal notranslate"><span class="pre">Surface::scheduler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#layer-2-ui-scheduler">Layer 2: <code class="docutils literal notranslate"><span class="pre">ui::Scheduler</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#layer-3-ui-eventscheduler">Layer 3: <code class="docutils literal notranslate"><span class="pre">ui::EventScheduler</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#layer-4-application-and-the-event-loop">Layer 4: <code class="docutils literal notranslate"><span class="pre">Application</span></code> and the event loop</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#responsibility-split">Responsibility Split</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-model">Data Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scheduledactionref"><code class="docutils literal notranslate"><span class="pre">ScheduledActionRef</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#actionentry"><code class="docutils literal notranslate"><span class="pre">ActionEntry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generation"><code class="docutils literal notranslate"><span class="pre">generation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-the-system-needs-both-ids">Why the System Needs Both IDs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lifecycle-from-api-call-to-callback">Lifecycle: From API Call to Callback</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-a-surface-creates-or-updates-an-action">Step 1: A surface creates or updates an action</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-scheduler-arms-a-future-scheduled-action-event">Step 2: <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> arms a future scheduled action event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-eventscheduler-stores-the-future-event">Step 3: <code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> stores the future event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-the-application-loop-wakes-up">Step 4: The application loop wakes up</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-5-due-scheduled-action-events-enter-the-normal-event-queue">Step 5: Due scheduled action events enter the normal event queue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-6-application-handleevent-validates-and-executes">Step 6: <code class="docutils literal notranslate"><span class="pre">Application::handleEvent()</span></code> validates and executes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#end-to-end-flow-diagram">End-to-End Flow Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cancellation-and-stale-event-handling">Cancellation and Stale Event Handling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#when-an-event-becomes-stale">When an event becomes stale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-ignoring-stale-events-is-better-than-trying-to-retract-them">Why ignoring stale events is better than trying to retract them</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#single-shot-actions">Single-Shot Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repeating-actions">Repeating Actions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-fixed-rate-was-chosen">Why fixed-rate was chosen</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lifetime-and-visibility">Lifetime and Visibility</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#surface-lifetime">Surface lifetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visibility">Visibility</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rendering-and-dirty-driven-wakeups">Rendering and Dirty-Driven Wakeups</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-counts-as-a-render-reason">What counts as a render reason</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#render-throttling">Render throttling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typical-scheduled-callback-behavior">Typical scheduled callback behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#threading-model">Threading Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scheduler-management">Scheduler management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#callback-execution">Callback execution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#time-source-and-testability">Time Source and Testability</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-the-seam-matters">Why the seam matters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-the-scheduler-tests-cover">What the scheduler tests cover</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#common-extension-points">Common Extension Points</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#change-public-scheduling-behavior">Change public scheduling behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#change-event-transport-behavior">Change event transport behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#change-render-wake-up-behavior">Change render wake-up behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-checklist">Debugging Checklist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-order-for-contributors">Reading Order for Contributors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demo-anchor">Demo Anchor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="invocation-and-event-threads.html">Invocation and Event Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-paint-system.html">UI Paint System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-scrollable-areas.html">UI Scrollable Areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-layout-and-painting.html">Paragraph Layout and Painting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remapped-buffer.html">RemappedBuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack-layout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string-sharing.html">String Sharing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text-node-renderer.html">TextNodeRenderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode-width-system.html">Unicode Width System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementation Notes</a></li>
+      <li class="breadcrumb-item active">Action Scheduling</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/implementation/action-scheduling.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="action-scheduling">
+<span id="index-0"></span><h1>Action Scheduling<a class="headerlink" href="#action-scheduling" title="Link to this heading"></a></h1>
+<p>This page explains the full action scheduling system used by the UI layer.
+It covers the public surface-level API, the internal event transport,
+the application loop integration, and the render wake-up behavior.</p>
+<p>The goal of this note is practical understanding.
+After reading it, a contributor should be able to answer:</p>
+<ul class="simple">
+<li><p>what <code class="docutils literal notranslate"><span class="pre">Surface::scheduler()</span></code> really owns</p></li>
+<li><p>how a scheduled action travels from API call to callback execution</p></li>
+<li><p>why the system uses both an action reference and an action generation</p></li>
+<li><p>how stale scheduled action events are ignored safely</p></li>
+<li><p>why hidden pages can keep scheduled actions without forcing redraws</p></li>
+<li><p>where to start when debugging or extending the scheduling system</p></li>
+</ul>
+<section id="relevant-source-files">
+<h2>Relevant Source Files<a class="headerlink" href="#relevant-source-files" title="Link to this heading"></a></h2>
+<p>You will find the implementation primarily in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Surface.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Surface.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Application.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Application.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Display.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Display.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/Scheduler.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/Scheduler.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/ScheduledActionRef.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventScheduler.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventScheduler.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventDriver.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventDriver.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventType.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/impl/ScheduledActionEvent.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/impl/EventClockAccess.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/impl/EventClockAccess.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/ui/surface/UiSchedulerTest.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">demo/ui-hello-world/src/UiHelloWorldApp.cpp</span></code></p></li>
+</ul>
+</section>
+<section id="why-the-system-exists">
+<h2>Why the System Exists<a class="headerlink" href="#why-the-system-exists" title="Link to this heading"></a></h2>
+<p>At the UI level, surfaces often need delayed or repeated work:</p>
+<ul class="simple">
+<li><p>animations</p></li>
+<li><p>blinking or ticking status elements</p></li>
+<li><p>deferred state updates</p></li>
+<li><p>polling-style refreshes that must still run on the UI thread</p></li>
+</ul>
+<p>The implementation deliberately does <strong>not</strong> run these callbacks directly from a background timer.
+Instead, scheduled work is funneled back into the normal UI event loop.</p>
+<p>That gives the system several important properties:</p>
+<ul class="simple">
+<li><p>scheduled callbacks always run on the application UI thread</p></li>
+<li><p>scheduled work is serialized with key handling and other UI events</p></li>
+<li><p>surfaces do not need their own threads</p></li>
+<li><p>stale or cancelled actions can be ignored at event-delivery time</p></li>
+<li><p>the rendering system can stay dirty-driven instead of repainting on a blind interval</p></li>
+</ul>
+<p>In short:</p>
+<p>The scheduler is not a standalone timer subsystem.
+It is a UI-thread callback delivery system that happens to use time-based wakeups.</p>
+</section>
+<section id="high-level-architecture">
+<h2>High-Level Architecture<a class="headerlink" href="#high-level-architecture" title="Link to this heading"></a></h2>
+<p>The scheduling system is split into four layers:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Surface::scheduler()
+    |
+    v
+ui::Scheduler
+    |
+    v
+ui::EventScheduler
+    |
+    v
+EventType::ScheduledAction in Application::handleEvent()
+    |
+    v
+callback executes on the UI thread
+</pre></div>
+</div>
+<p>Each layer has one clear responsibility.</p>
+<section id="layer-1-surface-scheduler">
+<h3>Layer 1: <code class="docutils literal notranslate"><span class="pre">Surface::scheduler()</span></code><a class="headerlink" href="#layer-1-surface-scheduler" title="Link to this heading"></a></h3>
+<p>This is the public entry point.</p>
+<p>From the outside, users see a surface-local API:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addSingleShot(...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addSingleShot(...,</span> <span class="pre">existingRef,</span> <span class="pre">...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addRepeated(...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setDelayOrInterval(...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove(...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">removeAll()</span></code></p></li>
+</ul>
+<p>This API is intentionally bound to a surface, because scheduled work is usually part of that surface’s state.</p>
+</section>
+<section id="layer-2-ui-scheduler">
+<h3>Layer 2: <code class="docutils literal notranslate"><span class="pre">ui::Scheduler</span></code><a class="headerlink" href="#layer-2-ui-scheduler" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> is the surface-owned action registry.
+It stores:</p>
+<ul class="simple">
+<li><p>the callback</p></li>
+<li><p>the scheduling mode</p></li>
+<li><p>the delay or repeat interval</p></li>
+<li><p>the next execution time</p></li>
+<li><p>the current generation</p></li>
+</ul>
+<p>It does <strong>not</strong> execute callbacks itself.
+Its job is to manage action state and turn that state into scheduled UI events.</p>
+</section>
+<section id="layer-3-ui-eventscheduler">
+<h3>Layer 3: <code class="docutils literal notranslate"><span class="pre">ui::EventScheduler</span></code><a class="headerlink" href="#layer-3-ui-eventscheduler" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> is the global time-based holding area for future events.
+It does not know anything about surfaces or callbacks.
+It simply stores <code class="docutils literal notranslate"><span class="pre">Event</span></code> objects until their due time arrives, then forwards them into the event queue.</p>
+</section>
+<section id="layer-4-application-and-the-event-loop">
+<h3>Layer 4: <code class="docutils literal notranslate"><span class="pre">Application</span></code> and the event loop<a class="headerlink" href="#layer-4-application-and-the-event-loop" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Application::handleEvent()</span></code> receives <code class="docutils literal notranslate"><span class="pre">EventType::ScheduledAction</span></code> events,
+resolves the target surface, validates the action generation,
+and finally executes the callback on the UI thread.</p>
+<p>This keeps scheduled actions aligned with the rest of the UI system:</p>
+<ul class="simple">
+<li><p>key presses</p></li>
+<li><p>display updates</p></li>
+<li><p>resize polling</p></li>
+<li><p>graceful shutdown</p></li>
+</ul>
+</section>
+</section>
+<section id="responsibility-split">
+<h2>Responsibility Split<a class="headerlink" href="#responsibility-split" title="Link to this heading"></a></h2>
+<p>The most important design rule is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> owns action state.
+<code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> owns time-based event release.
+<code class="docutils literal notranslate"><span class="pre">Application</span></code> owns callback execution.</p>
+<p>This split avoids a long list of problems:</p>
+<ul class="simple">
+<li><p>no callback execution while holding the scheduler mutex</p></li>
+<li><p>no direct callback execution from a background thread</p></li>
+<li><p>no duplicate timing logic inside both scheduler layers</p></li>
+<li><p>no need for <code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> to understand surface lifetime</p></li>
+<li><p>no need for <code class="docutils literal notranslate"><span class="pre">Display</span></code> to understand scheduler internals</p></li>
+</ul>
+</section>
+<section id="data-model">
+<h2>Data Model<a class="headerlink" href="#data-model" title="Link to this heading"></a></h2>
+<section id="scheduledactionref">
+<h3><code class="docutils literal notranslate"><span class="pre">ScheduledActionRef</span></code><a class="headerlink" href="#scheduledactionref" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ScheduledActionRef</span></code> is the stable identity of one logical action slot.
+It is returned to the caller and reused for:</p>
+<ul class="simple">
+<li><p>explicit removal</p></li>
+<li><p>delay changes</p></li>
+<li><p>rescheduling an existing single-shot action</p></li>
+</ul>
+<p>It is allocated from an incrementing counter inside <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code>.</p>
+<p>Think of it as:</p>
+<p>Which scheduled action are we talking about?</p>
+</section>
+<section id="actionentry">
+<h3><code class="docutils literal notranslate"><span class="pre">ActionEntry</span></code><a class="headerlink" href="#actionentry" title="Link to this heading"></a></h3>
+<p>Each action stored inside <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> is represented by one <code class="docutils literal notranslate"><span class="pre">ActionEntry</span></code>.</p>
+<p>It stores:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">action</span></code> – the callback to run</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mode</span></code> – <code class="docutils literal notranslate"><span class="pre">SingleShot</span></code> or <code class="docutils literal notranslate"><span class="pre">Repeating</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delayOrInterval</span></code> – the active timing configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nextExecutionTime</span></code> – the current due time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">generation</span></code> – the current version of this action slot</p></li>
+</ul>
+</section>
+<section id="generation">
+<h3><code class="docutils literal notranslate"><span class="pre">generation</span></code><a class="headerlink" href="#generation" title="Link to this heading"></a></h3>
+<p>The generation is the most important safety mechanism in the system.</p>
+<p>It changes whenever an action is re-armed:</p>
+<ul class="simple">
+<li><p>first schedule</p></li>
+<li><p>reschedule of an existing action reference</p></li>
+<li><p>explicit delay change</p></li>
+<li><p>re-arm of a repeating action after execution</p></li>
+</ul>
+<p>Think of it as:</p>
+<p>Which <em>version</em> of this scheduled action is still current?</p>
+</section>
+<section id="why-the-system-needs-both-ids">
+<h3>Why the System Needs Both IDs<a class="headerlink" href="#why-the-system-needs-both-ids" title="Link to this heading"></a></h3>
+<p>The action reference and generation answer different questions.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Why it exists</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ScheduledActionRef</span></code></p></td>
+<td><p>Stable logical identity</p></td>
+<td><p>Lets callers remove or update a specific action</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">generation</span></code></p></td>
+<td><p>Version of that logical action</p></td>
+<td><p>Lets the system ignore stale scheduled action events</p></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>actionRef = 17
+
+generation 1:
+    due at 100 ms
+
+reschedule same actionRef:
+    generation 2
+    due at 300 ms
+
+old event arrives:
+    (actionRef = 17, generation = 1)
+    -&gt; ignored
+</pre></div>
+</div>
+<p>Without generations, the old <code class="docutils literal notranslate"><span class="pre">100</span> <span class="pre">ms</span></code> event could still execute after the action had been moved.</p>
+</section>
+</section>
+<section id="lifecycle-from-api-call-to-callback">
+<h2>Lifecycle: From API Call to Callback<a class="headerlink" href="#lifecycle-from-api-call-to-callback" title="Link to this heading"></a></h2>
+<p>The simplest way to understand the system is to trace one action from creation to delivery.</p>
+<section id="step-1-a-surface-creates-or-updates-an-action">
+<h3>Step 1: A surface creates or updates an action<a class="headerlink" href="#step-1-a-surface-creates-or-updates-an-action" title="Link to this heading"></a></h3>
+<p>Example public call:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">surface</span><span class="o">-&gt;</span><span class="n">scheduler</span><span class="p">().</span><span class="n">addRepeated</span><span class="p">(</span>
+<span class="w">    </span><span class="p">[</span><span class="n">surface</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">surface</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">().</span><span class="n">setPaintOutdated</span><span class="p">();</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="p">{</span><span class="mi">1</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>Inside <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code>:</p>
+<ol class="arabic simple">
+<li><p>the delay or interval is clamped to the supported range</p></li>
+<li><p>a new or existing action slot is selected</p></li>
+<li><p>the callback and timing fields are updated</p></li>
+<li><p>the generation is incremented</p></li>
+<li><p>the next execution time is computed</p></li>
+<li><p>a scheduled action event is armed in the application</p></li>
+</ol>
+</section>
+<section id="step-2-scheduler-arms-a-future-scheduled-action-event">
+<h3>Step 2: <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> arms a future scheduled action event<a class="headerlink" href="#step-2-scheduler-arms-a-future-scheduled-action-event" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Scheduler::armAction()</span></code> does not enqueue a callback directly.
+Instead it asks the application to schedule an internal event payload:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SurfaceWeakPtr</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ScheduledActionRef</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">generation</span></code></p></li>
+</ul>
+<p>This payload is stored as <code class="docutils literal notranslate"><span class="pre">impl::ScheduledActionEvent</span></code>.</p>
+<p>Why a weak surface pointer is used:</p>
+<ul class="simple">
+<li><p>the scheduler must not keep destroyed surfaces alive accidentally</p></li>
+<li><p>already queued events must become harmless if the surface disappears</p></li>
+</ul>
+</section>
+<section id="step-3-eventscheduler-stores-the-future-event">
+<h3>Step 3: <code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> stores the future event<a class="headerlink" href="#step-3-eventscheduler-stores-the-future-event" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> stores the event in a time-ordered multimap.</p>
+<p>It knows:</p>
+<ul class="simple">
+<li><p>when the event should become active</p></li>
+<li><p>which <code class="docutils literal notranslate"><span class="pre">EventType</span></code> it belongs to</p></li>
+<li><p>the event payload object</p></li>
+</ul>
+<p>It does <strong>not</strong> know:</p>
+<ul class="simple">
+<li><p>whether the surface still exists later</p></li>
+<li><p>whether the action has been removed or rescheduled</p></li>
+<li><p>whether the event is already stale</p></li>
+</ul>
+<p>That validation is intentionally deferred until delivery.</p>
+</section>
+<section id="step-4-the-application-loop-wakes-up">
+<h3>Step 4: The application loop wakes up<a class="headerlink" href="#step-4-the-application-loop-wakes-up" title="Link to this heading"></a></h3>
+<p>The application loop combines three wake-up sources:</p>
+<ul class="simple">
+<li><p>keyboard input</p></li>
+<li><p>the next due scheduled event in <code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code></p></li>
+<li><p>the next display wake-up required by resize polling or dirty rendering</p></li>
+</ul>
+<p>The important consequence is:</p>
+<p>The UI loop sleeps until the next relevant reason to wake up.</p>
+</section>
+<section id="step-5-due-scheduled-action-events-enter-the-normal-event-queue">
+<h3>Step 5: Due scheduled action events enter the normal event queue<a class="headerlink" href="#step-5-due-scheduled-action-events-enter-the-normal-event-queue" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">EventScheduler::poll()</span></code> moves all due events into <code class="docutils literal notranslate"><span class="pre">EventDriver</span></code>.</p>
+<p>From this point onward, scheduled actions are normal queued UI events.</p>
+<p>This is the key architectural boundary:</p>
+<p>Time-based release happens in <code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code>.
+Actual UI execution happens in <code class="docutils literal notranslate"><span class="pre">Application::handleEvent()</span></code>.</p>
+</section>
+<section id="step-6-application-handleevent-validates-and-executes">
+<h3>Step 6: <code class="docutils literal notranslate"><span class="pre">Application::handleEvent()</span></code> validates and executes<a class="headerlink" href="#step-6-application-handleevent-validates-and-executes" title="Link to this heading"></a></h3>
+<p>When the event type is <code class="docutils literal notranslate"><span class="pre">EventType::ScheduledAction</span></code>, the application:</p>
+<ol class="arabic simple">
+<li><p>extracts the <code class="docutils literal notranslate"><span class="pre">ScheduledActionEvent</span></code></p></li>
+<li><p>tries to lock the <code class="docutils literal notranslate"><span class="pre">SurfaceWeakPtr</span></code></p></li>
+<li><p>checks whether the surface still has a scheduler</p></li>
+<li><p>asks the scheduler to execute the action using <code class="docutils literal notranslate"><span class="pre">actionRef</span></code> and <code class="docutils literal notranslate"><span class="pre">generation</span></code></p></li>
+</ol>
+<p>Then <code class="docutils literal notranslate"><span class="pre">Scheduler::executeAction()</span></code> performs the final safety check:</p>
+<ul class="simple">
+<li><p>if the action ref no longer exists, ignore the event</p></li>
+<li><p>if the generation no longer matches, ignore the event</p></li>
+<li><p>otherwise copy the callback out and execute it on the UI thread</p></li>
+</ul>
+</section>
+<section id="end-to-end-flow-diagram">
+<h3>End-to-End Flow Diagram<a class="headerlink" href="#end-to-end-flow-diagram" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>caller
+  |
+  | addSingleShot / addRepeated / reschedule
+  v
+Surface::scheduler()
+  |
+  v
+Scheduler
+  |
+  | create or update ActionEntry
+  | increment generation
+  | compute nextExecutionTime
+  v
+Application::scheduleScheduledAction()
+  |
+  v
+EventScheduler
+  |
+  | wait until due time
+  v
+EventDriver queue
+  |
+  v
+Application::handleEvent()
+  |
+  | resolve surface
+  | validate ref + generation
+  v
+Scheduler::executeAction()
+  |
+  v
+callback on UI thread
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cancellation-and-stale-event-handling">
+<h2>Cancellation and Stale Event Handling<a class="headerlink" href="#cancellation-and-stale-event-handling" title="Link to this heading"></a></h2>
+<p>This system assumes that scheduled action events may already be in flight when the logical action changes.</p>
+<p>That is not a corner case.
+It is the normal design.</p>
+<section id="when-an-event-becomes-stale">
+<h3>When an event becomes stale<a class="headerlink" href="#when-an-event-becomes-stale" title="Link to this heading"></a></h3>
+<p>A scheduled action event is considered stale if any of the following is true:</p>
+<ul class="simple">
+<li><p>the target surface no longer exists</p></li>
+<li><p>the surface no longer has a scheduler</p></li>
+<li><p>the action reference no longer exists in the scheduler</p></li>
+<li><p>the generation stored in the event no longer matches the current action generation</p></li>
+</ul>
+<p>The system does not try to remove these events from every queue retroactively.
+Instead it makes them cheap and safe to ignore.</p>
+</section>
+<section id="why-ignoring-stale-events-is-better-than-trying-to-retract-them">
+<h3>Why ignoring stale events is better than trying to retract them<a class="headerlink" href="#why-ignoring-stale-events-is-better-than-trying-to-retract-them" title="Link to this heading"></a></h3>
+<p>Once an event has been handed to <code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> or <code class="docutils literal notranslate"><span class="pre">EventDriver</span></code>,
+it may already be queued in multiple internal structures.
+Trying to walk back through all of those structures would make the design
+much more complex and much more fragile.</p>
+<p>Generation-based invalidation is simpler:</p>
+<ul class="simple">
+<li><p>rescheduling only updates current action state</p></li>
+<li><p>removal only erases current action state</p></li>
+<li><p>old events can still arrive</p></li>
+<li><p>old events fail validation and become no-ops</p></li>
+</ul>
+<p>This is one of the core design decisions of the implementation.</p>
+</section>
+</section>
+<section id="single-shot-actions">
+<h2>Single-Shot Actions<a class="headerlink" href="#single-shot-actions" title="Link to this heading"></a></h2>
+<p>Single-shot actions execute at most once.</p>
+<p>Delivery behavior:</p>
+<ol class="arabic simple">
+<li><p>validate action reference and generation</p></li>
+<li><p>copy out the callback</p></li>
+<li><p>execute it</p></li>
+<li><p>remove the action if it still has the same generation</p></li>
+</ol>
+<p>That final condition matters.
+If the callback itself reschedules the same action reference,
+the generation will have changed and the old post-callback cleanup must not erase the new version.</p>
+</section>
+<section id="repeating-actions">
+<h2>Repeating Actions<a class="headerlink" href="#repeating-actions" title="Link to this heading"></a></h2>
+<p>Repeating actions use <strong>fixed-rate</strong> semantics.</p>
+<p>That means:</p>
+<p>The next due time is based on the previous target time, not on callback completion time.</p>
+<p>If an action with a <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">s</span></code> interval was due at:</p>
+<ul class="simple">
+<li><p>10 s</p></li>
+<li><p>11 s</p></li>
+<li><p>12 s</p></li>
+</ul>
+<p>and the loop wakes up late at <code class="docutils literal notranslate"><span class="pre">12.8</span> <span class="pre">s</span></code>,
+the system may process multiple due scheduled action events in quick succession until the schedule catches up.</p>
+<section id="why-fixed-rate-was-chosen">
+<h3>Why fixed-rate was chosen<a class="headerlink" href="#why-fixed-rate-was-chosen" title="Link to this heading"></a></h3>
+<p>Fixed-rate behavior is better for:</p>
+<ul class="simple">
+<li><p>ticking clocks</p></li>
+<li><p>periodic polling</p></li>
+<li><p>animation phases</p></li>
+<li><p>anything that should track wall time rather than callback duration</p></li>
+</ul>
+<p>It avoids silent drift.</p>
+<p>Pseudo code for repeating re-arm:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>execute callback
+
+nextExecutionTime = previousNextExecutionTime + interval
+generation += 1
+arm new scheduled action event
+</pre></div>
+</div>
+<p>That <code class="docutils literal notranslate"><span class="pre">previousNextExecutionTime</span></code> detail is what makes the behavior fixed-rate.</p>
+</section>
+</section>
+<section id="lifetime-and-visibility">
+<h2>Lifetime and Visibility<a class="headerlink" href="#lifetime-and-visibility" title="Link to this heading"></a></h2>
+<p>Surface lifetime and surface visibility are separate concerns.</p>
+<section id="surface-lifetime">
+<h3>Surface lifetime<a class="headerlink" href="#surface-lifetime" title="Link to this heading"></a></h3>
+<p>Scheduled actions belong to a surface object.
+If the surface is destroyed, future scheduled action events must do nothing.</p>
+<p>This is handled by:</p>
+<ul class="simple">
+<li><p>storing <code class="docutils literal notranslate"><span class="pre">SurfaceWeakPtr</span></code> in the event payload</p></li>
+<li><p>not keeping strong ownership in the event system</p></li>
+<li><p>re-validating the surface on delivery</p></li>
+</ul>
+</section>
+<section id="visibility">
+<h3>Visibility<a class="headerlink" href="#visibility" title="Link to this heading"></a></h3>
+<p>A surface may remain alive while being:</p>
+<ul class="simple">
+<li><p>covered by an opaque page</p></li>
+<li><p>detached from the active top page</p></li>
+<li><p>logically inactive from the user’s point of view</p></li>
+</ul>
+<p>The design intentionally lets scheduled actions keep running in that state.</p>
+<p>Reason:</p>
+<p>Scheduling is tied to object lifetime, not page visibility.</p>
+<p>This allows hidden surfaces to maintain internal state without reactivation code.</p>
+<p>However, hidden surfaces must <strong>not</strong> force pointless redraws.
+That is handled by the display layer, not the scheduler.</p>
+</section>
+</section>
+<section id="rendering-and-dirty-driven-wakeups">
+<h2>Rendering and Dirty-Driven Wakeups<a class="headerlink" href="#rendering-and-dirty-driven-wakeups" title="Link to this heading"></a></h2>
+<p>The display is dirty-driven and only wakes for rendering when it has a reason.</p>
+<section id="what-counts-as-a-render-reason">
+<h3>What counts as a render reason<a class="headerlink" href="#what-counts-as-a-render-reason" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Display</span></code> wakes for render work when one of these is true:</p>
+<ul class="simple">
+<li><p>a resize is pending</p></li>
+<li><p>a visible page has outdated layout</p></li>
+<li><p>a visible page has outdated paint</p></li>
+</ul>
+<p>The check is visibility-aware:</p>
+<ul class="simple">
+<li><p>pages are inspected from top to bottom</p></li>
+<li><p>once an opaque page is reached, deeper pages are ignored</p></li>
+</ul>
+<p>This means:</p>
+<ul class="simple">
+<li><p>hidden pages can keep scheduled actions</p></li>
+<li><p>hidden pages can mutate state</p></li>
+<li><p>hidden pages do not force redraws until they become visible again</p></li>
+</ul>
+</section>
+<section id="render-throttling">
+<h3>Render throttling<a class="headerlink" href="#render-throttling" title="Link to this heading"></a></h3>
+<p>Rendering is still throttled by <code class="docutils literal notranslate"><span class="pre">Display::cMinimumRenderInterval</span></code>.
+So the system is:</p>
+<ul class="simple">
+<li><p>prompt when the UI becomes dirty</p></li>
+<li><p>but not unbounded in redraw frequency</p></li>
+</ul>
+</section>
+<section id="typical-scheduled-callback-behavior">
+<h3>Typical scheduled callback behavior<a class="headerlink" href="#typical-scheduled-callback-behavior" title="Link to this heading"></a></h3>
+<p>Scheduled callbacks do <strong>not</strong> automatically invalidate surfaces.</p>
+<p>That choice is deliberate.
+The callback must explicitly call:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">surface-&gt;flags().setPaintOutdated()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">surface-&gt;flags().setLayoutOutdated()</span></code></p></li>
+</ul>
+<p>when it changes visible state.</p>
+<p>Why the framework does not auto-invalidate every callback:</p>
+<ul class="simple">
+<li><p>some callbacks may update non-visual state only</p></li>
+<li><p>some callbacks may decide conditionally whether anything changed</p></li>
+<li><p>explicit invalidation matches the rest of the UI design</p></li>
+</ul>
+</section>
+</section>
+<section id="threading-model">
+<h2>Threading Model<a class="headerlink" href="#threading-model" title="Link to this heading"></a></h2>
+<p>There are two separate thread-safety stories.</p>
+<section id="scheduler-management">
+<h3>Scheduler management<a class="headerlink" href="#scheduler-management" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> management methods are thread-safe.</p>
+<p>This includes:</p>
+<ul class="simple">
+<li><p>adding actions</p></li>
+<li><p>rescheduling actions</p></li>
+<li><p>removing actions</p></li>
+<li><p>clearing all actions</p></li>
+</ul>
+<p>These operations are protected by the scheduler mutex.</p>
+</section>
+<section id="callback-execution">
+<h3>Callback execution<a class="headerlink" href="#callback-execution" title="Link to this heading"></a></h3>
+<p>Callbacks are <strong>not</strong> executed concurrently by the scheduler.
+They are executed on the application UI thread via the normal event loop.</p>
+<p>So the safe mental model is:</p>
+<ul class="simple">
+<li><p>many threads may request changes to the schedule</p></li>
+<li><p>exactly one UI thread executes callbacks</p></li>
+</ul>
+<p>This gives background threads a safe way to marshal delayed work back into the UI layer.</p>
+</section>
+</section>
+<section id="time-source-and-testability">
+<h2>Time Source and Testability<a class="headerlink" href="#time-source-and-testability" title="Link to this heading"></a></h2>
+<p>The implementation uses <code class="docutils literal notranslate"><span class="pre">impl::EventClockAccess</span></code> instead of directly calling <code class="docutils literal notranslate"><span class="pre">EventClock::now()</span></code> everywhere.</p>
+<p>This exists purely to make the system testable.</p>
+<section id="why-the-seam-matters">
+<h3>Why the seam matters<a class="headerlink" href="#why-the-seam-matters" title="Link to this heading"></a></h3>
+<p>Without a clock seam, scheduler tests would need:</p>
+<ul class="simple">
+<li><p>real sleeping</p></li>
+<li><p>wide timeouts</p></li>
+<li><p>timing-sensitive assertions</p></li>
+</ul>
+<p>That would make the test suite slower and more fragile.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">EventClockAccess</span></code>:</p>
+<ul class="simple">
+<li><p>unit tests can use deterministic virtual time</p></li>
+<li><p>scheduled action delivery can be tested without wall-clock waiting</p></li>
+<li><p>repeat catch-up behavior can be checked precisely</p></li>
+</ul>
+</section>
+<section id="what-the-scheduler-tests-cover">
+<h3>What the scheduler tests cover<a class="headerlink" href="#what-the-scheduler-tests-cover" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">UiSchedulerTest</span></code> currently verifies:</p>
+<ul class="simple">
+<li><p>single-shot execution on the UI thread</p></li>
+<li><p>suppression of stale scheduled action events after rescheduling</p></li>
+<li><p>fixed-rate repeat catch-up</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">removeAll()</span></code> cancellation</p></li>
+<li><p>surface destruction cancellation</p></li>
+<li><p>cross-thread scheduling with UI-thread callback delivery</p></li>
+<li><p>prompt redraw for visible scheduled-action changes</p></li>
+<li><p>lack of redraw for hidden-page scheduled actions</p></li>
+</ul>
+<p>These tests are the best executable specification of the design.</p>
+</section>
+</section>
+<section id="common-extension-points">
+<h2>Common Extension Points<a class="headerlink" href="#common-extension-points" title="Link to this heading"></a></h2>
+<p>If you need to change behavior, these are the usual entry points.</p>
+<section id="change-public-scheduling-behavior">
+<h3>Change public scheduling behavior<a class="headerlink" href="#change-public-scheduling-behavior" title="Link to this heading"></a></h3>
+<p>Start in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/Scheduler.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/Scheduler.cpp</span></code></p></li>
+</ul>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>add pause or resume behavior</p></li>
+<li><p>introduce different repeat policies</p></li>
+<li><p>extend action metadata</p></li>
+</ul>
+</section>
+<section id="change-event-transport-behavior">
+<h3>Change event transport behavior<a class="headerlink" href="#change-event-transport-behavior" title="Link to this heading"></a></h3>
+<p>Start in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventScheduler.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventScheduler.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Application.cpp</span></code></p></li>
+</ul>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>change event wake-up strategy</p></li>
+<li><p>add more time-aware event types</p></li>
+<li><p>change event-loop scheduling policy</p></li>
+</ul>
+</section>
+<section id="change-render-wake-up-behavior">
+<h3>Change render wake-up behavior<a class="headerlink" href="#change-render-wake-up-behavior" title="Link to this heading"></a></h3>
+<p>Start in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Display.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Display.cpp</span></code></p></li>
+</ul>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>alter visible-page dirty detection</p></li>
+<li><p>change minimum render interval semantics</p></li>
+<li><p>introduce additional wake-up conditions</p></li>
+</ul>
+</section>
+</section>
+<section id="debugging-checklist">
+<h2>Debugging Checklist<a class="headerlink" href="#debugging-checklist" title="Link to this heading"></a></h2>
+<p>When a scheduled action does not run:</p>
+<ul class="simple">
+<li><p>Was the application already active when the action was armed?</p></li>
+<li><p>Was the action removed or rescheduled, causing a generation mismatch?</p></li>
+<li><p>Was the surface destroyed before delivery?</p></li>
+<li><p>Is the callback waiting on a wake-up that never arrives because nothing is polling the application loop?</p></li>
+</ul>
+<p>When a scheduled action runs but nothing repaints:</p>
+<ul class="simple">
+<li><p>Did the callback call <code class="docutils literal notranslate"><span class="pre">surface-&gt;flags().setPaintOutdated()</span></code> or <code class="docutils literal notranslate"><span class="pre">surface-&gt;flags().setLayoutOutdated()</span></code>?</p></li>
+<li><p>Is the surface currently hidden behind an opaque page?</p></li>
+<li><p>Is the display still inside the minimum render interval?</p></li>
+</ul>
+<p>When an action appears to run more than once:</p>
+<ul class="simple">
+<li><p>Is it repeating rather than single-shot?</p></li>
+<li><p>Did the callback reschedule itself explicitly?</p></li>
+<li><p>Is the observed burst actually fixed-rate catch-up after a delayed loop iteration?</p></li>
+</ul>
+</section>
+<section id="reading-order-for-contributors">
+<h2>Reading Order for Contributors<a class="headerlink" href="#reading-order-for-contributors" title="Link to this heading"></a></h2>
+<p>If you want the fastest path to understanding the implementation, read in this order:</p>
+<ol class="arabic simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Surface.hpp</span></code>
+to see the public entry point.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/Scheduler.hpp</span></code>
+to understand the stored action model.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/Scheduler.cpp</span></code>
+to see scheduling, validation, and repeat re-arming.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/impl/ScheduledActionEvent.hpp</span></code>
+to see what is actually transported through the event system.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Application.cpp</span></code>
+to see the event-loop integration and callback delivery.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Display.cpp</span></code>
+to understand redraw wake-ups and visibility-aware dirtiness.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/ui/surface/UiSchedulerTest.cpp</span></code>
+to confirm the intended behavior in executable form.</p></li>
+</ol>
+<p>That path mirrors the real data flow from user API to callback execution.</p>
+</section>
+<section id="demo-anchor">
+<h2>Demo Anchor<a class="headerlink" href="#demo-anchor" title="Link to this heading"></a></h2>
+<p>The simplest live example is the clock in the UI hello-world demo:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">demo/ui-hello-world/src/UiHelloWorldApp.cpp</span></code></p></li>
+</ul>
+<p>It uses a repeating scheduled action to update the center header text once per second.
+That demo is intentionally small and is a good first stop when you want to see the public API in use
+without the complexity of the lower-level implementation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="posix-backend.html" class="btn btn-neutral float-left" title="POSIX Backend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="invocation-and-event-threads.html" class="btn btn-neutral float-right" title="Invocation and Event Threads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

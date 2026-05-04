@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::U8ParseResult</compoundname>
+    <includes refid="_u8_buffer_8hpp" local="no">erbsland/cterm/impl/U8Buffer.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a22a5639e218d2eeef42f3d3aa3c90fac" prot="private" static="no" mutable="no">
+        <type>U8ParseStatus</type>
+        <definition>U8ParseStatus erbsland::cterm::impl::U8ParseResult::_status</definition>
+        <argsstring></argsstring>
+        <name>_status</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseResult::_status</qualifiedname>
+        <initializer>{U8ParseStatus::Invalid}</initializer>
+        <briefdescription>
+<para>The parsing status. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="55" column="19" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1aa62f27947c0078e35ba532f2a3e6cbcc" prot="private" static="no" mutable="no">
+        <type>char32_t</type>
+        <definition>char32_t erbsland::cterm::impl::U8ParseResult::_codePoint</definition>
+        <argsstring></argsstring>
+        <name>_codePoint</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseResult::_codePoint</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>The parsed code point for <computeroutput>Parsed</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="56" column="14" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a9e1b61fa73777a75950afc6395c11b3f" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::U8ParseResult::_consumedByteCount</definition>
+        <argsstring></argsstring>
+        <name>_consumedByteCount</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseResult::_consumedByteCount</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Number of bytes consumed or rejected. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="57" column="17" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1aafad9d0b6b2c4678040035847496b2ef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8ParseResult::U8ParseResult</definition>
+        <argsstring>(const U8ParseStatus status=U8ParseStatus::Invalid, const std::size_t consumedByteCount=0) noexcept</argsstring>
+        <name>U8ParseResult</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseResult::U8ParseResult</qualifiedname>
+        <param>
+          <type>const U8ParseStatus</type>
+          <declname>status</declname>
+          <defval>U8ParseStatus::Invalid</defval>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>consumedByteCount</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Create one parse result without a decoded code point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parsing status. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>consumedByteCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of bytes consumed or rejected. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="35" column="5" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="35" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a8dbd26b2a5136ed1c7ca2936bd22b3b8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8ParseResult::U8ParseResult</definition>
+        <argsstring>(const U8ParseStatus status, const char32_t codePoint, const std::size_t consumedByteCount) noexcept</argsstring>
+        <name>U8ParseResult</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseResult::U8ParseResult</qualifiedname>
+        <param>
+          <type>const U8ParseStatus</type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>consumedByteCount</declname>
+        </param>
+        <briefdescription>
+<para>Create one parse result with a decoded code point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parsing status. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>consumedByteCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of bytes consumed or rejected. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="43" column="5" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="43" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a4ae699775237aecc1d6d02be44415982" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>U8ParseStatus</type>
+        <definition>U8ParseStatus erbsland::cterm::impl::U8ParseResult::status</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>status</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseResult::status</qualifiedname>
+        <briefdescription>
+<para>Access the parsing status. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="48" column="20" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a997d8c91597528df3fb347135778d703" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>char32_t erbsland::cterm::impl::U8ParseResult::codePoint</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>codePoint</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseResult::codePoint</qualifiedname>
+        <briefdescription>
+<para>Access the parsed code point for <computeroutput>Parsed</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="50" column="15" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a90ff3fdf65b5640b8a72036bd384fdb7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::U8ParseResult::consumedByteCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>consumedByteCount</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseResult::consumedByteCount</qualifiedname>
+        <briefdescription>
+<para>Access the number of bytes consumed or rejected. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="52" column="18" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Result of parsing one UTF-8 code point from a byte buffer. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/U8Buffer.hpp" line="30" column="1" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="30" bodyend="58"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1aa62f27947c0078e35ba532f2a3e6cbcc" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::U8ParseResult</scope><name>_codePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a9e1b61fa73777a75950afc6395c11b3f" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::U8ParseResult</scope><name>_consumedByteCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a22a5639e218d2eeef42f3d3aa3c90fac" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::U8ParseResult</scope><name>_status</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a997d8c91597528df3fb347135778d703" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8ParseResult</scope><name>codePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a90ff3fdf65b5640b8a72036bd384fdb7" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8ParseResult</scope><name>consumedByteCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a4ae699775237aecc1d6d02be44415982" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8ParseResult</scope><name>status</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1aafad9d0b6b2c4678040035847496b2ef" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8ParseResult</scope><name>U8ParseResult</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result_1a8dbd26b2a5136ed1c7ca2936bd22b3b8" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::U8ParseResult</scope><name>U8ParseResult</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

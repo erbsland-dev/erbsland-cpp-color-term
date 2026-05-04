@@ -1,0 +1,765 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1_string_data" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::StringData</compoundname>
+    <includes refid="_string_data_8hpp" local="no">erbsland/cterm/impl/StringData.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a065166c044cad032a39e960ad32d32f8" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &gt;</type>
+        <definition>using erbsland::cterm::impl::StringData::Storage =  std::vector&lt;Char&gt;</definition>
+        <argsstring></argsstring>
+        <name>Storage</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::Storage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="18" column="5" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a4b96c59da5858549068c9f1af288abdb" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::impl::StringData::cNoCachedValue</definition>
+        <argsstring></argsstring>
+        <name>cNoCachedValue</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::cNoCachedValue</qualifiedname>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="19" column="27" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1abd79aacd8bd589339b36758f1c467d67" prot="private" static="no" mutable="no">
+        <type>Storage</type>
+        <definition>Storage erbsland::cterm::impl::StringData::_chars</definition>
+        <argsstring></argsstring>
+        <name>_chars</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::_chars</qualifiedname>
+        <briefdescription>
+<para>The stored characters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="99" column="13" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a19b651376e0db49edae61118d4667587" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::impl::StringData::_displayWidth</definition>
+        <argsstring></argsstring>
+        <name>_displayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::_displayWidth</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Cached display width for the full stored buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="100" column="9" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a7423b1bc8f799c8a384aa9e411188a27" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::StringData::StringData</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>StringData</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::StringData</qualifiedname>
+        <briefdescription>
+<para>Create one empty storage object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="23" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aa56ec8ba57bed9269e2f6bcdfaadd2d3" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::StringData::StringData</definition>
+        <argsstring>(Storage chars) noexcept</argsstring>
+        <name>StringData</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::StringData</qualifiedname>
+        <param>
+          <type>Storage</type>
+          <declname>chars</declname>
+        </param>
+        <briefdescription>
+<para>Create one shared storage object from a character buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>chars</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The characters to store. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ad416175f9a997559adb933cf74415eef" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::StringData::StringData</definition>
+        <argsstring>(Storage chars, int displayWidth) noexcept</argsstring>
+        <name>StringData</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::StringData</qualifiedname>
+        <param>
+          <type>Storage</type>
+          <declname>chars</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>displayWidth</declname>
+        </param>
+        <briefdescription>
+<para>Create one shared storage object with an already known display width. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>chars</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The characters to store. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>displayWidth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The cached display width for the full storage buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ad8a8a6e406be4d7f45e4570c1f815c8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::StringData::~StringData</definition>
+        <argsstring>()=default</argsstring>
+        <name>~StringData</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::~StringData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="33" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aa946c5e2b25a04e2598230052f2c056b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::StringData::StringData</definition>
+        <argsstring>(const StringData &amp;)=default</argsstring>
+        <name>StringData</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::StringData</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_string_data" kindref="compound">StringData</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="34" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1abeff671650684af1433448b4b633529e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::StringData::StringData</definition>
+        <argsstring>(StringData &amp;&amp;)=default</argsstring>
+        <name>StringData</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::StringData</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_string_data" kindref="compound">StringData</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="35" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a6f66f46e2ab55645b674c7c68b30907c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_string_data" kindref="compound">StringData</ref> &amp;</type>
+        <definition>StringData &amp; erbsland::cterm::impl::StringData::operator=</definition>
+        <argsstring>(const StringData &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_string_data" kindref="compound">StringData</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="36" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ad86bd91a5f946be24a34af535432103b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_string_data" kindref="compound">StringData</ref> &amp;</type>
+        <definition>StringData &amp; erbsland::cterm::impl::StringData::operator=</definition>
+        <argsstring>(StringData &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_string_data" kindref="compound">StringData</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="37" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aa87441620d7e6596b240acb2bbba9e39" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const Storage &amp;</type>
+        <definition>const Storage &amp; erbsland::cterm::impl::StringData::chars</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>chars</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::chars</qualifiedname>
+        <briefdescription>
+<para>Access the stored characters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="41" column="21" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a2547978b6590bd1d3c2cd0f69148365c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Storage &amp;</type>
+        <definition>Storage &amp; erbsland::cterm::impl::StringData::chars</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>chars</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::chars</qualifiedname>
+        <briefdescription>
+<para>Access the stored characters for a unique mutable owner. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="43" column="15" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a3f535585bb1f299b7055862525662dd8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::StringData::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::size</qualifiedname>
+        <briefdescription>
+<para>Get the number of stored characters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="45" column="18" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a6c24c8c9c4ce9ce49adefaf7452d0885" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::impl::StringData::displayWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>displayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::displayWidth</qualifiedname>
+        <briefdescription>
+<para>Get the cached display width for the full stored buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="47" column="10" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a9c3d8e322c16c311ea8a072d66197061" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::StringData::hasDisplayWidthCache</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hasDisplayWidthCache</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::hasDisplayWidthCache</qualifiedname>
+        <briefdescription>
+<para>Test if the cached display width is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="49" column="11" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aaf1e5633e8ec614db10716db63b573de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::StringData::reserve</definition>
+        <argsstring>(std::size_t size)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::reserve</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Reserve storage for at least the given number of characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The requested capacity. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="52" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a5878e4e34d7a4bf044f83f9b8692dcd8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::StringData::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::clear</qualifiedname>
+        <briefdescription>
+<para>Clear the stored characters and reset the cached display width. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="54" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aa92266e1ec3d6e9088e47a0b4a5fe20f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::StringData::append</definition>
+        <argsstring>(const Char &amp;character) noexcept</argsstring>
+        <name>append</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::append</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Append one terminal character and update the cached display width. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to append. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="57" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ae3bed4d0090620884fae20a06f7137af" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::StringData::addDisplayWidth</definition>
+        <argsstring>(int displayWidth) noexcept</argsstring>
+        <name>addDisplayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::addDisplayWidth</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>displayWidth</declname>
+        </param>
+        <briefdescription>
+<para>Add one known display width contribution to the cached full-buffer width. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>displayWidth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The width contribution to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="60" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1abd2c088fa3b1225d48848a7b06b26763" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::StringData::invalidateDisplayWidth</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>invalidateDisplayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::invalidateDisplayWidth</qualifiedname>
+        <briefdescription>
+<para>Mark the cached display width as invalid after mutable element access. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="62" column="10" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a586ce3231d16aba84129dfcb747f545c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Storage</type>
+        <definition>Storage erbsland::cterm::impl::StringData::copyChars</definition>
+        <argsstring>(IndexRange range) const</argsstring>
+        <name>copyChars</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::copyChars</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_index_range" kindref="compound">IndexRange</ref></type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+<para>Materialize one character range into a new contiguous buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The range to copy from the stored data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The copied characters. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a8ceffe0652aa2236a55e08b71a82680c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::StringData::appendCodePoint</definition>
+        <argsstring>(char32_t codePoint, Color color, CharAttributes attributes)</argsstring>
+        <name>appendCodePoint</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::appendCodePoint</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Append one decoded code point to the storage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The decoded code point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base color for newly appended characters. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base attributes for newly appended characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="71" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ad27eaf2684f118ba51e586afd7ee2a6a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::StringData::appendCharacters</definition>
+        <argsstring>(std::u32string_view text, Color color, CharAttributes attributes) noexcept</argsstring>
+        <name>appendCharacters</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::appendCharacters</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Append UTF-32 text to the storage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 source text. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base color for newly appended characters. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base attributes for newly appended characters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="76" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ac8dc0fc4b7a8cc66f70b2e6de3a776cf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::StringData::appendCharacters</definition>
+        <argsstring>(std::string_view text, Color color, CharAttributes attributes, EncodingErrors encodingErrors) noexcept</argsstring>
+        <name>appendCharacters</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::appendCharacters</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <param>
+          <type>EncodingErrors</type>
+          <declname>encodingErrors</declname>
+        </param>
+        <briefdescription>
+<para>Append UTF-8 text to the storage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 source text. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base color for newly appended characters. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base attributes for newly appended characters. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>encodingErrors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How malformed UTF-8 is handled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="82" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ace84a7b97740a96534c90ee3b1e42335" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::shared_ptr&lt; <ref refid="classerbsland_1_1cterm_1_1impl_1_1_string_data" kindref="compound">StringData</ref> &gt; &amp;</type>
+        <definition>static const std::shared_ptr&lt; StringData &gt; &amp; erbsland::cterm::impl::StringData::sharedEmpty</definition>
+        <argsstring>()</argsstring>
+        <name>sharedEmpty</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::sharedEmpty</qualifiedname>
+        <briefdescription>
+<para>Create a shared immutable empty backing store. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="87" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ac06aaabdf5d6d5fa95280dbac5d11a9d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int erbsland::cterm::impl::StringData::measureDisplayWidth</definition>
+        <argsstring>(std::string_view text, EncodingErrors encodingErrors=EncodingErrors::Replace)</argsstring>
+        <name>measureDisplayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::measureDisplayWidth</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>EncodingErrors</type>
+          <declname>encodingErrors</declname>
+          <defval>EncodingErrors::Replace</defval>
+        </param>
+        <briefdescription>
+<para>Measure the terminal display width produced by UTF-8 text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 source text. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>encodingErrors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How malformed UTF-8 is handled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The display width of the accepted terminal characters. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="92" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_string_data_1abd2adc57f2a4898031d1f3fe732df711" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int erbsland::cterm::impl::StringData::measureDisplayWidth</definition>
+        <argsstring>(std::u32string_view text)</argsstring>
+        <name>measureDisplayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::StringData::measureDisplayWidth</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Measure the terminal display width produced by UTF-32 text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 source text. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The display width of the accepted terminal characters. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/StringData.hpp" line="96" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Shared immutable backing storage for <computeroutput><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></computeroutput> and <computeroutput><ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref></computeroutput>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/StringData.hpp" line="16" column="1" bodyfile="erbsland/cterm/impl/StringData.hpp" bodystart="16" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1abd79aacd8bd589339b36758f1c467d67" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>_chars</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a19b651376e0db49edae61118d4667587" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>_displayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ae3bed4d0090620884fae20a06f7137af" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>addDisplayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aa92266e1ec3d6e9088e47a0b4a5fe20f" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>append</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ad27eaf2684f118ba51e586afd7ee2a6a" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>appendCharacters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ac8dc0fc4b7a8cc66f70b2e6de3a776cf" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>appendCharacters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a8ceffe0652aa2236a55e08b71a82680c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>appendCodePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aa87441620d7e6596b240acb2bbba9e39" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>chars</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a2547978b6590bd1d3c2cd0f69148365c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>chars</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a5878e4e34d7a4bf044f83f9b8692dcd8" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>clear</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a4b96c59da5858549068c9f1af288abdb" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>cNoCachedValue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a586ce3231d16aba84129dfcb747f545c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>copyChars</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a6c24c8c9c4ce9ce49adefaf7452d0885" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>displayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a9c3d8e322c16c311ea8a072d66197061" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>hasDisplayWidthCache</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1abd2c088fa3b1225d48848a7b06b26763" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>invalidateDisplayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ac06aaabdf5d6d5fa95280dbac5d11a9d" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>measureDisplayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1abd2adc57f2a4898031d1f3fe732df711" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>measureDisplayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a6f66f46e2ab55645b674c7c68b30907c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ad86bd91a5f946be24a34af535432103b" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aaf1e5633e8ec614db10716db63b573de" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>reserve</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ace84a7b97740a96534c90ee3b1e42335" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>sharedEmpty</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a3f535585bb1f299b7055862525662dd8" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>size</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a065166c044cad032a39e960ad32d32f8" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>Storage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1a7423b1bc8f799c8a384aa9e411188a27" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>StringData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aa56ec8ba57bed9269e2f6bcdfaadd2d3" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>StringData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ad416175f9a997559adb933cf74415eef" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>StringData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1aa946c5e2b25a04e2598230052f2c056b" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>StringData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1abeff671650684af1433448b4b633529e" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>StringData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_string_data_1ad8a8a6e406be4d7f45e4570c1f815c8c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::StringData</scope><name>~StringData</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

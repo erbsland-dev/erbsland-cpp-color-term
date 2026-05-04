@@ -1,0 +1,990 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::text::impl::HtmlParser</compoundname>
+    <includes refid="_html_parser_8hpp" local="no">erbsland/cterm/text/impl/HtmlParser.hpp</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a0ed1087525794436f15b160590e01717" prot="private" static="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_attribute" kindref="compound">HtmlAttribute</ref></type>
+        <definition>using erbsland::cterm::text::impl::HtmlParser::Attribute =  HtmlAttribute</definition>
+        <argsstring></argsstring>
+        <name>Attribute</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::Attribute</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="78" column="5" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a10823ba08041283977435d7da0cba6aa" prot="private" static="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame" kindref="compound">HtmlParserFrame</ref></type>
+        <definition>using erbsland::cterm::text::impl::HtmlParser::Frame =  HtmlParserFrame</definition>
+        <argsstring></argsstring>
+        <name>Frame</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::Frame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="79" column="5" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a795c7d016fc332d8c4e950c1432f94b8" prot="private" static="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tag_info" kindref="compound">HtmlTagInfo</ref></type>
+        <definition>using erbsland::cterm::text::impl::HtmlParser::TagInfo =  HtmlTagInfo</definition>
+        <argsstring></argsstring>
+        <name>TagInfo</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::TagInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="80" column="5" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a1d6a1e6c51e8a54598fee94ef951d858" prot="private" static="no">
+        <type>std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_attribute" kindref="compound">Attribute</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::impl::HtmlParser::Attributes =  std::vector&lt;Attribute&gt;</definition>
+        <argsstring></argsstring>
+        <name>Attributes</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::Attributes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="81" column="5" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a1257618033b109e714c9dd5c870848c7" prot="private" static="no">
+        <type>std::vector&lt; <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame" kindref="compound">Frame</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::impl::HtmlParser::FrameList =  std::vector&lt;Frame&gt;</definition>
+        <argsstring></argsstring>
+        <name>FrameList</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::FrameList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="82" column="5" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a670b9408edb5d5119069671ce433db14" prot="private" static="no">
+        <type>std::unordered_map&lt; std::u32string_view, <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tag_info" kindref="compound">TagInfo</ref> &gt;</type>
+        <definition>using erbsland::cterm::text::impl::HtmlParser::TagInfoMap =  std::unordered_map&lt;std::u32string_view, TagInfo&gt;</definition>
+        <argsstring></argsstring>
+        <name>TagInfoMap</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::TagInfoMap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="83" column="5" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a13656b91e6d0a309ec5be5793c9fa3ab" prot="private" static="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_generator" kindref="compound">HtmlTokenizer::TokenGenerator</ref></type>
+        <definition>using erbsland::cterm::text::impl::HtmlParser::TokenGenerator =  HtmlTokenizer::TokenGenerator</definition>
+        <argsstring></argsstring>
+        <name>TokenGenerator</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::TokenGenerator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="84" column="5" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a6111a61a6b758dc118087ac13c668408" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tokenizer" kindref="compound">HtmlTokenizer</ref></type>
+        <definition>HtmlTokenizer erbsland::cterm::text::impl::HtmlParser::_tokenizer</definition>
+        <argsstring></argsstring>
+        <name>_tokenizer</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_tokenizer</qualifiedname>
+        <briefdescription>
+<para>The used tokenizer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="120" column="19" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ababa1a9bd25e77b31d0d8b6973f41cdf" prot="private" static="no" mutable="no">
+        <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref></type>
+        <definition>HtmlToken erbsland::cterm::text::impl::HtmlParser::_currentToken</definition>
+        <argsstring></argsstring>
+        <name>_currentToken</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_currentToken</qualifiedname>
+        <briefdescription>
+<para>The current token being processed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="121" column="15" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aba886da22f8da537c46a399ece6f5a37" prot="private" static="no" mutable="no">
+        <type><ref refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1_html_token" kindref="compound">HtmlToken</ref></type>
+        <definition>HtmlToken erbsland::cterm::text::impl::HtmlParser::_nextToken</definition>
+        <argsstring></argsstring>
+        <name>_nextToken</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_nextToken</qualifiedname>
+        <briefdescription>
+<para>The next token used for lookahead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="122" column="15" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a710a7fcf05ab8e244f106251404685f2" prot="private" static="no" mutable="no">
+        <type>TextNodePtr</type>
+        <definition>TextNodePtr erbsland::cterm::text::impl::HtmlParser::_root</definition>
+        <argsstring></argsstring>
+        <name>_root</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_root</qualifiedname>
+        <briefdescription>
+<para>The root document node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="123" column="17" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ab5ab799f771cdef73ab064f65e79415a" prot="private" static="no" mutable="no">
+        <type>TextNodePtr</type>
+        <definition>TextNodePtr erbsland::cterm::text::impl::HtmlParser::_current</definition>
+        <argsstring></argsstring>
+        <name>_current</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_current</qualifiedname>
+        <briefdescription>
+<para>The current node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="124" column="17" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a547232c5e8099d6a3a8901ce3b5313ba" prot="private" static="no" mutable="no">
+        <type>FrameList</type>
+        <definition>FrameList erbsland::cterm::text::impl::HtmlParser::_frames</definition>
+        <argsstring></argsstring>
+        <name>_frames</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_frames</qualifiedname>
+        <briefdescription>
+<para>The open HTML element frames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="125" column="15" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a45b4859d631cc117a382586bb1204d55" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::text::impl::HtmlParser::_suppressedFrameDepth</definition>
+        <argsstring></argsstring>
+        <name>_suppressedFrameDepth</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_suppressedFrameDepth</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The number of frames that suppress their subtree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="126" column="9" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a062a9a3a60e5999bceca864b23c20ef1" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::text::impl::HtmlParser::_preservedWhitespaceFrameDepth</definition>
+        <argsstring></argsstring>
+        <name>_preservedWhitespaceFrameDepth</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_preservedWhitespaceFrameDepth</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The number of frames that preserve whitespace. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="127" column="9" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1adcdbed6adc1ce35434b6280e40634696" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">TextNode::Level</ref></type>
+        <definition>TextNode::Level erbsland::cterm::text::impl::HtmlParser::_openListLevel</definition>
+        <argsstring></argsstring>
+        <name>_openListLevel</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::_openListLevel</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The number of open list container frames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="128" column="21" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ac28b864d8e36de1d6c3a21b98e8f6bd4" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlParser::HtmlParser</definition>
+        <argsstring>(std::string_view html)</argsstring>
+        <name>HtmlParser</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::HtmlParser</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>html</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aae43308244f1c496b60e967f4ad68993" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlParser::~HtmlParser</definition>
+        <argsstring>()=default</argsstring>
+        <name>~HtmlParser</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::~HtmlParser</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="67" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a8bd527e4c0ee5073484b43adc2bebef7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlParser::HtmlParser</definition>
+        <argsstring>(const HtmlParser &amp;)=delete</argsstring>
+        <name>HtmlParser</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::HtmlParser</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser" kindref="compound">HtmlParser</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="68" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a18e01df430dde2f0c543a14117c854d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlParser::HtmlParser</definition>
+        <argsstring>(HtmlParser &amp;&amp;)=delete</argsstring>
+        <name>HtmlParser</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::HtmlParser</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser" kindref="compound">HtmlParser</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="69" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a602daf2881096e0f331bc7044d61530c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser" kindref="compound">HtmlParser</ref> &amp;</type>
+        <definition>HtmlParser &amp; erbsland::cterm::text::impl::HtmlParser::operator=</definition>
+        <argsstring>(const HtmlParser &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser" kindref="compound">HtmlParser</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="70" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aec12fce71adc03a1496174c12f024ab4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser" kindref="compound">HtmlParser</ref> &amp;</type>
+        <definition>HtmlParser &amp; erbsland::cterm::text::impl::HtmlParser::operator=</definition>
+        <argsstring>(HtmlParser &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser" kindref="compound">HtmlParser</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="71" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a7b78c04057946573ed4b6fad594c6b45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>TextNodePtr erbsland::cterm::text::impl::HtmlParser::parse</definition>
+        <argsstring>()</argsstring>
+        <name>parse</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::parse</qualifiedname>
+        <briefdescription>
+<para>Parse the given HTML into a text node tree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="75" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a4551237a4c06256b11e744d567c72fba" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::updateFrameStateForPush</definition>
+        <argsstring>(const Frame &amp;frame) noexcept</argsstring>
+        <name>updateFrameStateForPush</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::updateFrameStateForPush</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame" kindref="compound">Frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="87" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a1d6c2a1d44d441da64832ace50888522" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::updateFrameStateForPop</definition>
+        <argsstring>(const Frame &amp;frame) noexcept</argsstring>
+        <name>updateFrameStateForPop</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::updateFrameStateForPop</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame" kindref="compound">Frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="88" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aaaa1ef6e6968a8b06785c422280d5748" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::loadNextToken</definition>
+        <argsstring>(TokenGenerator &amp;generator)</argsstring>
+        <name>loadNextToken</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::loadNextToken</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_generator" kindref="compound">TokenGenerator</ref> &amp;</type>
+          <declname>generator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="89" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1abe3cd0296e3adba718ec99da44dee6f7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::advanceToken</definition>
+        <argsstring>(TokenGenerator &amp;generator)</argsstring>
+        <name>advanceToken</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::advanceToken</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_generator" kindref="compound">TokenGenerator</ref> &amp;</type>
+          <declname>generator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="90" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1adf94fd07d10843fb02ba14f5cb5e7fef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Attributes</type>
+        <definition>Attributes erbsland::cterm::text::impl::HtmlParser::parseAttributes</definition>
+        <argsstring>(TokenGenerator &amp;generator)</argsstring>
+        <name>parseAttributes</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::parseAttributes</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_generator" kindref="compound">TokenGenerator</ref> &amp;</type>
+          <declname>generator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="91" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1af05f1c6005bad462648d0ff0542801c7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::handleText</definition>
+        <argsstring>(std::u32string text)</argsstring>
+        <name>handleText</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::handleText</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="92" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a8f6fa891c40b202d3e0c5bcbf5f30012" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::handleOpenTag</definition>
+        <argsstring>(std::u32string tagName, const Attributes &amp;attributes)</argsstring>
+        <name>handleOpenTag</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::handleOpenTag</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>tagName</declname>
+        </param>
+        <param>
+          <type>const Attributes &amp;</type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="93" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a099d6ed7f8a3d298a01af1f43bdd3472" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::handleCloseTag</definition>
+        <argsstring>(std::u32string_view tagName)</argsstring>
+        <name>handleCloseTag</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::handleCloseTag</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>tagName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="94" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a0b7abd1a97a9cb8aed040bdb708e8139" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::addNode</definition>
+        <argsstring>(const TextNodePtr &amp;node)</argsstring>
+        <name>addNode</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::addNode</qualifiedname>
+        <param>
+          <type>const TextNodePtr &amp;</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="95" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a0b0c4c58e1dd48499830d502e1b75190" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::pushNodeFrame</definition>
+        <argsstring>(std::u32string tagName, TextNodePtr node, bool preserveWhitespace=false)</argsstring>
+        <name>pushNodeFrame</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::pushNodeFrame</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>tagName</declname>
+        </param>
+        <param>
+          <type>TextNodePtr</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>preserveWhitespace</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a84d3fcfd6abab2adfc47d41a11b08831" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::pushTransparentFrame</definition>
+        <argsstring>(std::u32string tagName, bool suppressSubtree=false, bool preserveWhitespace=false)</argsstring>
+        <name>pushTransparentFrame</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::pushTransparentFrame</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>tagName</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>suppressSubtree</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>preserveWhitespace</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="97" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a38d455fd86255072aa30e255bcb2c9c2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::closeFramesTo</definition>
+        <argsstring>(std::size_t targetSize)</argsstring>
+        <name>closeFramesTo</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::closeFramesTo</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>targetSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="98" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ad9fbdc0fd98528b0819d2c747aa59615" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::refreshCurrent</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>refreshCurrent</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::refreshCurrent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="99" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aad9fd44584e576f35642bfc9214a9d1e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::closeInlineFrames</definition>
+        <argsstring>()</argsstring>
+        <name>closeInlineFrames</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::closeInlineFrames</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="100" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aa718750e9c1da4b65b4c1c0b66964efb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::closeParagraphFrame</definition>
+        <argsstring>()</argsstring>
+        <name>closeParagraphFrame</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::closeParagraphFrame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="101" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aeec1e1791e509895593e8688a399ca99" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::closeCurrentListItem</definition>
+        <argsstring>()</argsstring>
+        <name>closeCurrentListItem</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::closeCurrentListItem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="102" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a5a409f2e9eb1f33c8a5109f8765888fa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::closeCurrentDefinitionEntry</definition>
+        <argsstring>()</argsstring>
+        <name>closeCurrentDefinitionEntry</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::closeCurrentDefinitionEntry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="103" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ae47add2e21e7efc6e3bf9dab859d9346" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::closeForBlockStart</definition>
+        <argsstring>()</argsstring>
+        <name>closeForBlockStart</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::closeForBlockStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="104" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ada69810cd2145cdebbf7988e51fb432c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::ensureImplicitListForItem</definition>
+        <argsstring>()</argsstring>
+        <name>ensureImplicitListForItem</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::ensureImplicitListForItem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="105" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a44e9d4e4260a76bbf6adba546d027dbf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::ensureImplicitDefinitionList</definition>
+        <argsstring>()</argsstring>
+        <name>ensureImplicitDefinitionList</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::ensureImplicitDefinitionList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="106" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a1f2772aac23e959da16d322d92236231" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::ensureTextContainer</definition>
+        <argsstring>()</argsstring>
+        <name>ensureTextContainer</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::ensureTextContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="107" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a6e22b3ca192e2cee9f02c442faeb1afc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::HtmlParser::applyAttributes</definition>
+        <argsstring>(const TextNodePtr &amp;node, std::u32string_view tagName, const Attributes &amp;attributes)</argsstring>
+        <name>applyAttributes</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::applyAttributes</qualifiedname>
+        <param>
+          <type>const TextNodePtr &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>tagName</declname>
+        </param>
+        <param>
+          <type>const Attributes &amp;</type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="108" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a52249ab4cde5fa5fe16de92ba9cf8520" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParser::isSuppressed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isSuppressed</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::isSuppressed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="109" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a25213700b9e5bd50b1337d48c0471e58" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParser::isPreservingWhitespace</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isPreservingWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::isPreservingWhitespace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="110" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a4b4590cec927ebf815bfc6ec58a2dcb2" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a2c222032e80c242f3157ae0193b356a4" kindref="member">TextNode::Type</ref></type>
+        <definition>TextNode::Type erbsland::cterm::text::impl::HtmlParser::currentNodeType</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>currentNodeType</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::currentNodeType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="111" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a73918ecb947fa49841431002c76ccb7b" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParser::currentNodeHasChildren</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>currentNodeHasChildren</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::currentNodeHasChildren</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="112" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ae0dd6f77416c08a31755406e9a2165c9" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">TextNode::Level</ref></type>
+        <definition>TextNode::Level erbsland::cterm::text::impl::HtmlParser::countOpenListLevels</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>countOpenListLevels</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::countOpenListLevels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="113" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aa5bdbd551367f10764b096866525ce7e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>TextNodePtr</type>
+        <definition>static TextNodePtr erbsland::cterm::text::impl::HtmlParser::createNodeForTag</definition>
+        <argsstring>(std::u32string_view tagName, TextNode::Level listLevel)</argsstring>
+        <name>createNodeForTag</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::createNodeForTag</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>tagName</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node_1a33038606a414cb184aa1bb6210f82646" kindref="member">TextNode::Level</ref></type>
+          <declname>listLevel</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="115" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a35ea224ae6fab2ddbb04ed02728a9702" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_tag_info" kindref="compound">TagInfo</ref> *</type>
+        <definition>static const TagInfo * erbsland::cterm::text::impl::HtmlParser::findTagInfo</definition>
+        <argsstring>(std::u32string_view tagName)</argsstring>
+        <name>findTagInfo</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::findTagInfo</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>tagName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="116" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a3283cdf4a8d9f4bde240a1d4a9621f24" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const TagInfoMap &amp;</type>
+        <definition>static const TagInfoMap &amp; erbsland::cterm::text::impl::HtmlParser::tagInfoMap</definition>
+        <argsstring>()</argsstring>
+        <name>tagInfoMap</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParser::tagInfoMap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="117" column="31"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A simple HTML parser to convert a text into a <computeroutput><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref></computeroutput> tree. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para>Supports a very limited subset of HTML and happily accepts HTML fragments.</para>
+</listitem><listitem><para>If &quot;&lt;!doctype...&gt;&quot;, &quot;&lt;html&gt;&quot;, &quot;&lt;body&gt;&quot;, or &quot;&lt;head&gt;&quot; are present, they are ignored.</para>
+</listitem><listitem><para>Whitespace is normalized to a single space character.</para>
+</listitem><listitem><para>Tag and attribute names are parsed case-insensitive.</para>
+</listitem><listitem><para>Supports these tags: &quot;section&quot;, &quot;p&quot;, &quot;div&quot;, &quot;span&quot;, &quot;br&quot;, &quot;hr&quot;, &quot;ul&quot;, &quot;ol&quot;, &quot;li&quot;, &quot;a&quot;, &quot;b&quot;, &quot;i&quot;, &quot;u&quot;, &quot;em&quot;, &quot;strong&quot;, &quot;code&quot;, &quot;pre&quot;, &quot;blockquote&quot;, &quot;h1&quot;, &quot;h2&quot;, &quot;h3&quot;, &quot;h4&quot;, &quot;h5&quot;, &quot;h6&quot;, &quot;dl&quot;, &quot;dt&quot;, &quot;dd&quot;.</para>
+</listitem><listitem><para>Node Mappings:<itemizedlist>
+<listitem><para>&quot;section&quot;, &quot;div&quot; -&gt; <computeroutput>Section</computeroutput></para>
+</listitem><listitem><para>&quot;blockquote&quot; -&gt; <computeroutput>Blockquote</computeroutput></para>
+</listitem><listitem><para>&quot;p&quot; -&gt; <computeroutput>Paragraph</computeroutput></para>
+</listitem><listitem><para>&quot;span&quot; -&gt; <computeroutput>Span</computeroutput></para>
+</listitem><listitem><para>&quot;br&quot; -&gt; <computeroutput>LineBreak</computeroutput></para>
+</listitem><listitem><para>&quot;hr&quot; -&gt; <computeroutput>HorizontalLine</computeroutput></para>
+</listitem><listitem><para>&quot;ul&quot; -&gt; <computeroutput>BulletList</computeroutput></para>
+</listitem><listitem><para>&quot;ol&quot; -&gt; <computeroutput>NumberedList</computeroutput></para>
+</listitem><listitem><para>&quot;li&quot; -&gt; <computeroutput>ListItem</computeroutput></para>
+</listitem><listitem><para>&quot;a&quot; -&gt; <computeroutput>Link</computeroutput></para>
+</listitem><listitem><para>&quot;b&quot;, &quot;strong&quot; -&gt; <computeroutput>Strong</computeroutput></para>
+</listitem><listitem><para>&quot;i&quot;, &quot;em&quot; -&gt; <computeroutput>Emphasis</computeroutput></para>
+</listitem><listitem><para>&quot;u&quot; -&gt; <computeroutput>Underline</computeroutput></para>
+</listitem><listitem><para>&quot;code&quot; -&gt; <computeroutput>Code</computeroutput></para>
+</listitem><listitem><para>&quot;pre&quot; -&gt; <computeroutput>CodeBlock</computeroutput></para>
+</listitem><listitem><para>&quot;h1&quot;, &quot;h2&quot;, &quot;h3&quot;, &quot;h4&quot;, &quot;h5&quot;, &quot;h6&quot; -&gt; <computeroutput>Heading</computeroutput></para>
+</listitem><listitem><para>&quot;dl&quot; -&gt; <computeroutput>DefinitionList</computeroutput></para>
+</listitem><listitem><para>&quot;dt&quot; -&gt; <computeroutput>DefinitionTerm</computeroutput></para>
+</listitem><listitem><para>&quot;dd&quot; -&gt; <computeroutput>DefinitionDescription</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>Unsupported but mentioned: &quot;img&quot;, &quot;table&quot;, &quot;form&quot;, &quot;svg&quot;<itemizedlist>
+<listitem><para>Insert an <computeroutput>Unsupported</computeroutput> placeholder like <computeroutput>image</computeroutput> as text node.</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>Unsupported ignored tags: &quot;tr&quot;, &quot;td&quot;, &quot;th&quot;, &quot;thead&quot;, &quot;tbody&quot;, &quot;tfoot&quot;, &quot;caption&quot;, &quot;col&quot;, &quot;colgroup&quot;, &quot;input&quot;, &quot;label&quot;, &quot;select&quot;, &quot;option&quot;, &quot;textarea&quot;, &quot;button&quot;, &quot;fieldset&quot;, &quot;legend&quot;, &quot;optgroup&quot;, &quot;details&quot;, &quot;summary&quot;, &quot;figure&quot;, &quot;figcaption&quot;, &quot;mark&quot;, &quot;ruby&quot;, &quot;rt&quot;, &quot;rp&quot;, &quot;time&quot;, &quot;meter&quot;, &quot;progress&quot;, &quot;canvas&quot;, &quot;math&quot;, &quot;iframe&quot;, &quot;embed&quot;, &quot;object&quot;, &quot;video&quot;, &quot;audio&quot;, &quot;source&quot;, &quot;track&quot;, &quot;canvas&quot;, &quot;noscript&quot;, &quot;script&quot;, &quot;style&quot;, &quot;link&quot;, &quot;meta&quot;, &quot;base&quot;, &quot;head&quot;, &quot;title&quot;, &quot;body&quot;, &quot;html&quot;, &quot;doctype&quot;.<itemizedlist>
+<listitem><para>Unsupported tags are ignored.</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>Comments <computeroutput>&lt;!-- ... --&gt;</computeroutput> are ignored.</para>
+</listitem><listitem><para>Parsed attributes:<itemizedlist>
+<listitem><para>&quot;id&quot; (any tag) -&gt; <computeroutput>identifier</computeroutput></para>
+</listitem><listitem><para>&quot;href&quot; (&quot;a&quot; tag) -&gt; <computeroutput>data</computeroutput></para>
+</listitem><listitem><para>&quot;class&quot; (any tag) -&gt; <computeroutput>style</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>No errors are generated, or only as a last resort. Erroneous content is gracefully resolved. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/impl/HtmlParser.hpp" line="62" column="1" bodyfile="erbsland/cterm/text/impl/HtmlParser.hpp" bodystart="62" bodyend="129"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ab5ab799f771cdef73ab064f65e79415a" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_current</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ababa1a9bd25e77b31d0d8b6973f41cdf" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_currentToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a547232c5e8099d6a3a8901ce3b5313ba" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_frames</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aba886da22f8da537c46a399ece6f5a37" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_nextToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1adcdbed6adc1ce35434b6280e40634696" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_openListLevel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a062a9a3a60e5999bceca864b23c20ef1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_preservedWhitespaceFrameDepth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a710a7fcf05ab8e244f106251404685f2" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_root</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a45b4859d631cc117a382586bb1204d55" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_suppressedFrameDepth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a6111a61a6b758dc118087ac13c668408" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>_tokenizer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a0b7abd1a97a9cb8aed040bdb708e8139" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>addNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1abe3cd0296e3adba718ec99da44dee6f7" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>advanceToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a6e22b3ca192e2cee9f02c442faeb1afc" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>applyAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a0ed1087525794436f15b160590e01717" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>Attribute</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a1d6a1e6c51e8a54598fee94ef951d858" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>Attributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a5a409f2e9eb1f33c8a5109f8765888fa" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>closeCurrentDefinitionEntry</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aeec1e1791e509895593e8688a399ca99" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>closeCurrentListItem</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ae47add2e21e7efc6e3bf9dab859d9346" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>closeForBlockStart</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a38d455fd86255072aa30e255bcb2c9c2" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>closeFramesTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aad9fd44584e576f35642bfc9214a9d1e" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>closeInlineFrames</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aa718750e9c1da4b65b4c1c0b66964efb" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>closeParagraphFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ae0dd6f77416c08a31755406e9a2165c9" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>countOpenListLevels</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aa5bdbd551367f10764b096866525ce7e" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>createNodeForTag</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a73918ecb947fa49841431002c76ccb7b" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>currentNodeHasChildren</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a4b4590cec927ebf815bfc6ec58a2dcb2" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>currentNodeType</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a44e9d4e4260a76bbf6adba546d027dbf" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>ensureImplicitDefinitionList</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ada69810cd2145cdebbf7988e51fb432c" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>ensureImplicitListForItem</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a1f2772aac23e959da16d322d92236231" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>ensureTextContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a35ea224ae6fab2ddbb04ed02728a9702" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>findTagInfo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a10823ba08041283977435d7da0cba6aa" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>Frame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a1257618033b109e714c9dd5c870848c7" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>FrameList</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a099d6ed7f8a3d298a01af1f43bdd3472" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>handleCloseTag</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a8f6fa891c40b202d3e0c5bcbf5f30012" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>handleOpenTag</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1af05f1c6005bad462648d0ff0542801c7" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>handleText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ac28b864d8e36de1d6c3a21b98e8f6bd4" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>HtmlParser</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a8bd527e4c0ee5073484b43adc2bebef7" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>HtmlParser</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a18e01df430dde2f0c543a14117c854d8" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>HtmlParser</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a25213700b9e5bd50b1337d48c0471e58" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>isPreservingWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a52249ab4cde5fa5fe16de92ba9cf8520" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>isSuppressed</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aaaa1ef6e6968a8b06785c422280d5748" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>loadNextToken</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a602daf2881096e0f331bc7044d61530c" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aec12fce71adc03a1496174c12f024ab4" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a7b78c04057946573ed4b6fad594c6b45" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>parse</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1adf94fd07d10843fb02ba14f5cb5e7fef" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>parseAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a0b0c4c58e1dd48499830d502e1b75190" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>pushNodeFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a84d3fcfd6abab2adfc47d41a11b08831" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>pushTransparentFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1ad9fbdc0fd98528b0819d2c747aa59615" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>refreshCurrent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a795c7d016fc332d8c4e950c1432f94b8" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>TagInfo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a670b9408edb5d5119069671ce433db14" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>TagInfoMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a3283cdf4a8d9f4bde240a1d4a9621f24" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>tagInfoMap</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a13656b91e6d0a309ec5be5793c9fa3ab" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>TokenGenerator</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a1d6c2a1d44d441da64832ace50888522" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>updateFrameStateForPop</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1a4551237a4c06256b11e744d567c72fba" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>updateFrameStateForPush</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_1aae43308244f1c496b60e967f4ad68993" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParser</scope><name>~HtmlParser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

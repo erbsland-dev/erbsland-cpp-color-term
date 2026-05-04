@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run" kind="class" language="C++" prot="private" final="yes">
+    <compoundname>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1aa0e664c0afd18c946f717c8ba7cc3762" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>Action</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::Action</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1aa0e664c0afd18c946f717c8ba7cc3762aa0bfb8e59e6c13fc8d990781f77694fe" prot="public">
+          <name>Continue</name>
+          <briefdescription>
+<para>Continue with the next word token. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1aa0e664c0afd18c946f717c8ba7cc3762afced549b9e8e487f42d2bcb5bb63616c" prot="public">
+          <name>LineBreak</name>
+          <briefdescription>
+<para>Break before the next word token. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1aa0e664c0afd18c946f717c8ba7cc3762ad77419a42cb22b475d7d266882a9975d" prot="public">
+          <name>EndOfTokens</name>
+          <briefdescription>
+<para>No word token follows the spacing run. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The action to take after evaluating the spacing tokens. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="26" column="9" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="26" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1ad4e0d08703b621b1aaa9531fb5b2b6cc" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::width</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The rendered width of the spacing run on this line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="45" column="13" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1ab946582b75d226e1935eedb746bdfafe" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::nextTokenIndex</definition>
+        <argsstring></argsstring>
+        <name>nextTokenIndex</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::nextTokenIndex</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The next word token, or the next token after a forced break. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="46" column="21" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1a27b939b54027680203533420c4e4f6af" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::nextTabStopIndex</definition>
+        <argsstring></argsstring>
+        <name>nextTabStopIndex</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::nextTabStopIndex</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The next tab stop index after consuming the run. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="47" column="21" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1a9513a9aded7b4714cec10b23951e241e" prot="public" static="no" mutable="no">
+        <type>Action</type>
+        <definition>Action erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::action</definition>
+        <argsstring></argsstring>
+        <name>action</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::action</qualifiedname>
+        <initializer>= Action::Continue</initializer>
+        <briefdescription>
+<para>The selected action for the run. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="48" column="16" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1a48f053b822b4e4cb14ce53c035e823f1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::SpacingRun</definition>
+        <argsstring>(const int width=0, const std::size_t nextTokenIndex=0, const std::size_t nextTabStopIndex=0, const Action action=Action::Continue) noexcept</argsstring>
+        <name>SpacingRun</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun::SpacingRun</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>width</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>nextTokenIndex</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>nextTabStopIndex</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const Action</type>
+          <declname>action</declname>
+          <defval>Action::Continue</defval>
+        </param>
+        <briefdescription>
+<para>Create one evaluated spacing run. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rendered width of the spacing run on this line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nextTokenIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The next word token, or the next token after a forced break. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nextTabStopIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The next tab stop index after consuming the run. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selected action for the run. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="37" column="9" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="37" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>The evaluated spacing run before the next word token. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/paragraph/LineBuilder.hpp" line="23" column="5" bodyfile="erbsland/cterm/impl/paragraph/LineBuilder.hpp" bodystart="23" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1aa0e664c0afd18c946f717c8ba7cc3762" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun</scope><name>Action</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1a9513a9aded7b4714cec10b23951e241e" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun</scope><name>action</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1a27b939b54027680203533420c4e4f6af" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun</scope><name>nextTabStopIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1ab946582b75d226e1935eedb746bdfafe" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun</scope><name>nextTokenIndex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1a48f053b822b4e4cb14ce53c035e823f1" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun</scope><name>SpacingRun</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_line_builder_1_1_spacing_run_1ad4e0d08703b621b1aaa9531fb5b2b6cc" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::LineBuilder::SpacingRun</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

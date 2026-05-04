@@ -1,0 +1,2681 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceerbsland_1_1cterm_1_1impl" kind="namespace" language="C++">
+    <compoundname>erbsland::cterm::impl</compoundname>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1_are_both_integral" prot="public">erbsland::cterm::impl::AreBothIntegral</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1_are_sign_compatible_int" prot="public">erbsland::cterm::impl::AreSignCompatibleInt</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_bitmap_painter" prot="public">erbsland::cterm::impl::BitmapPainter</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1_char_width" prot="public">erbsland::cterm::impl::CharWidth</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" prot="public">erbsland::cterm::impl::CombinedChar</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1_common_int" prot="public">erbsland::cterm::impl::CommonInt</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_frame_painter" prot="public">erbsland::cterm::impl::FramePainter</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1_get_larger_int" prot="public">erbsland::cterm::impl::GetLargerInt</innerclass>
+    <innerclass refid="structerbsland_1_1cterm_1_1impl_1_1_has_larger_absolute_int" prot="public">erbsland::cterm::impl::HasLargerAbsoluteInt</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_input_backend" prot="public">erbsland::cterm::impl::InputBackend</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_key_decoder" prot="public">erbsland::cterm::impl::KeyDecoder</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_line_buffer" prot="public">erbsland::cterm::impl::LineBuffer</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_posix_backend" prot="public">erbsland::cterm::impl::PosixBackend</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_posix_signal_dispatcher" prot="public">erbsland::cterm::impl::PosixSignalDispatcher</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder" prot="public">erbsland::cterm::impl::StringBuilder</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_string_data" prot="public">erbsland::cterm::impl::StringData</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_string_range_view" prot="public">erbsland::cterm::impl::StringRangeView</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_string_wrapper" prot="public">erbsland::cterm::impl::StringWrapper</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_text_painter" prot="public">erbsland::cterm::impl::TextPainter</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_u8_buffer" prot="public">erbsland::cterm::impl::U8Buffer</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_u8_parse_result" prot="public">erbsland::cterm::impl::U8ParseResult</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_windows_backend" prot="public">erbsland::cterm::impl::WindowsBackend</innerclass>
+    <innerclass refid="classerbsland_1_1cterm_1_1impl_1_1_windows_signal_dispatcher" prot="public">erbsland::cterm::impl::WindowsSignalDispatcher</innerclass>
+    <innernamespace refid="namespaceerbsland_1_1cterm_1_1impl_1_1paragraph">erbsland::cterm::impl::paragraph</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="_u8_buffer_8hpp_1ac7ed3c074a8ab62233cab8b13238ca49" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>U8ParseStatus</name>
+        <qualifiedname>erbsland::cterm::impl::U8ParseStatus</qualifiedname>
+        <enumvalue id="_u8_buffer_8hpp_1ac7ed3c074a8ab62233cab8b13238ca49aaaa4968be664d00365ca44b0bf2eaf9c" prot="public">
+          <name>Parsed</name>
+          <briefdescription>
+<para>A full code point was parsed successfully. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_u8_buffer_8hpp_1ac7ed3c074a8ab62233cab8b13238ca49ad18cc8933052b7595886de81ec4b1dac" prot="public">
+          <name>NeedMoreData</name>
+          <briefdescription>
+<para>More bytes are required to decide. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_u8_buffer_8hpp_1ac7ed3c074a8ab62233cab8b13238ca49a4bbb8f967da6d1a610596d7257179c2b" prot="public">
+          <name>Invalid</name>
+          <briefdescription>
+<para>The leading bytes are invalid or unsupported. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Status for parsing one UTF-8 code point from the front of a byte buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="20" column="1" bodyfile="erbsland/cterm/impl/U8Buffer.hpp" bodystart="20" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_saturating_math_8hpp_1a2fb5254cc72fd97d1b2fccc893f47580" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structerbsland_1_1cterm_1_1impl_1_1_get_larger_int" kindref="compound">GetLargerInt</ref>&lt; A, B &gt;::type</type>
+        <definition>using erbsland::cterm::impl::GetLargerIntT = typedef typename GetLargerInt&lt;A, B&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>GetLargerIntT</name>
+        <qualifiedname>erbsland::cterm::impl::GetLargerIntT</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="structerbsland_1_1cterm_1_1impl_1_1_get_larger_int" kindref="compound">GetLargerInt</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="57" column="1" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_saturating_math_8hpp_1aebc101cc43f00f785b9826bac5406c87" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structerbsland_1_1cterm_1_1impl_1_1_common_int" kindref="compound">CommonInt</ref>&lt; A, B &gt;::type</type>
+        <definition>using erbsland::cterm::impl::CommonIntT = typedef typename CommonInt&lt;A, B&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>CommonIntT</name>
+        <qualifiedname>erbsland::cterm::impl::CommonIntT</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="structerbsland_1_1cterm_1_1impl_1_1_common_int" kindref="compound">CommonInt</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="86" column="1" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="_frame_border__data_8hpp_1a71427d479abe43128f5098b46932ca42" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::impl::cFrameBorderJointStyleCount</definition>
+        <argsstring></argsstring>
+        <name>cFrameBorderJointStyleCount</name>
+        <qualifiedname>erbsland::cterm::impl::cFrameBorderJointStyleCount</qualifiedname>
+        <initializer>= std::size_t{5}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/FrameBorder_data.hpp" line="16" column="23" bodyfile="erbsland/cterm/impl/FrameBorder_data.hpp" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="variable" id="_frame_border__data_8hpp_1a743d2e059cf33d4f327a85ee3fa828ec" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::impl::cFrameBorderJointTableSize</definition>
+        <argsstring></argsstring>
+        <name>cFrameBorderJointTableSize</name>
+        <qualifiedname>erbsland::cterm::impl::cFrameBorderJointTableSize</qualifiedname>
+        <initializer>= std::size_t{625}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/FrameBorder_data.hpp" line="17" column="23" bodyfile="erbsland/cterm/impl/FrameBorder_data.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="_frame_border__data_8hpp_1ab054465c9b8a394b8da50e9096f5bd3e" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::impl::cFrameBorderJointCharacters</definition>
+        <argsstring></argsstring>
+        <name>cFrameBorderJointCharacters</name>
+        <qualifiedname>erbsland::cterm::impl::cFrameBorderJointCharacters</qualifiedname>
+        <initializer>=
+    U&quot; ╵╹╙╴┘┚╜╸┙┛╕╛╝╯╷│╿║┐┤┦╢┑┥┩╡╻╽┃┒┧┨┓┪┫╓╖╗╣╮╶└┖─┴┸╨╾┵┹═╧╩┌├┞╟┬┼╀╫┭┽╃╤╪┎┟┠┰╁╂┱╅╉╥╦╬╺┕┗╼┶┺━┷┻┍┝┡┮┾╄┯┿&quot;
+    U&quot;╇┏┢┣┲╆╊┳╈╋╒╘╚╞╔╠╰╭&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/FrameBorder_data.hpp" line="18" column="23" bodyfile="erbsland/cterm/impl/FrameBorder_data.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_frame_border__data_8hpp_1a4b23ea2397b3ce90e90176a8ddf804df" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::impl::cFrameBorderJointCharacterIndexes</definition>
+        <argsstring></argsstring>
+        <name>cFrameBorderJointCharacterIndexes</name>
+        <qualifiedname>erbsland::cterm::impl::cFrameBorderJointCharacterIndexes</qualifiedname>
+        <initializer>= std::string_view{
+    &quot;\x00\x01\x02\x03\x01\x04\x05\x06\x07\x05\x08\x09\x0A\x0A\x09\x0B\x0C\x0A\x0D\x0C\x04\x05\x06\x07\x0E\x0F\x10\x11\x12\x10\x13\x14\x15\x16\x14\x17\x18\x19\x18\x18\x0B\x1A\x19\x1A\x1A\x13\x14\x15\x16\x14\x1B\x1C\x1D\x1C\x1C\x1E\x1F\x20\x20\x1F\x21\x22\x23\x23&quot;
+    &quot;\x22\x21\x1F\x23\x23\x1F\x1E\x1F\x20\x20\x1F\x24\x12\x11\x12\x12\x25\x16\x20\x16\x16\x21\x18\x23\x23\x18\x26\x1A\x23\x27\x1A\x25\x16\x20\x16\x16\x0F\x10\x11\x12\x10\x13\x14\x15\x16\x14\x17\x18\x19\x18\x18\x0B\x1A\x19\x1A\x1A\x28\x14\x15\x16\x14\x29\x2A\x2B&quot;
+    &quot;\x03\x2A\x2C\x2D\x2E\x2F\x2D\x30\x31\x32\x32\x31\x33\x34\x2E\x35\x34\x2C\x2D\x2E\x2F\x2D\x36\x37\x38\x39\x37\x3A\x3B\x3C\x3D\x3B\x3E\x3F\x40\x3F\x3F\x41\x42\x3C\x42\x42\x3A\x3B\x3C\x3D\x3B\x43\x44\x45\x45\x44\x46\x47\x48\x48\x47\x49\x4A\x4B\x4A\x4A\x46\x47&quot;
+    &quot;\x48\x48\x47\x46\x47\x48\x48\x47\x24\x39\x45\x39\x39\x4C\x3D\x48\x3D\x3D\x49\x3F\x4B\x3F\x3F\x4D\x42\x48\x4E\x42\x4C\x3D\x48\x3D\x3D\x36\x37\x38\x39\x37\x3A\x3B\x3C\x3D\x3B\x3E\x3F\x40\x3F\x3F\x41\x42\x3C\x42\x42\x3A\x3B\x3C\x3D\x3B\x4F\x50\x51\x51\x50\x52&quot;
+    &quot;\x53\x54\x53\x53\x55\x56\x57\x57\x56\x52\x56\x57\x57\x56\x52\x53\x54\x53\x53\x58\x59\x5A\x59\x59\x5B\x5C\x5D\x5C\x5C\x5E\x5F\x60\x5F\x5F\x5E\x5F\x60\x5F\x5F\x5B\x5C\x5D\x5C\x5C\x61\x62\x63\x63\x62\x64\x65\x66\x65\x65\x67\x68\x69\x69\x68\x67\x65\x69\x69\x65&quot;
+    &quot;\x64\x65\x66\x65\x65\x61\x59\x63\x63\x59\x5B\x5C\x5D\x5C\x5C\x67\x5F\x69\x69\x5F\x67\x5F\x69\x4E\x5F\x5B\x5C\x5D\x5C\x5C\x58\x59\x5A\x59\x59\x5B\x5C\x5D\x5C\x5C\x5E\x5F\x60\x5F\x5F\x5E\x5F\x60\x5F\x5F\x5B\x5C\x5D\x5C\x5C\x6A\x6B\x51\x6C\x6B\x33\x34\x2E\x35&quot;
+    &quot;\x34\x30\x56\x57\x57\x56\x33\x34\x57\x35\x34\x33\x34\x2E\x35\x34\x6A\x6D\x5A\x6D\x6D\x41\x42\x3C\x42\x42\x5E\x5F\x60\x5F\x5F\x41\x42\x3C\x42\x42\x41\x42\x3C\x42\x42\x61\x44\x63\x63\x44\x46\x47\x48\x48\x47\x67\x68\x69\x69\x68\x67\x47\x69\x4E\x47\x46\x47\x48&quot;
+    &quot;\x48\x47\x6E\x6D\x63\x6F\x6D\x4D\x42\x48\x4E\x42\x67\x5F\x69\x4E\x5F\x4D\x42\x4E\x4E\x42\x4D\x42\x48\x4E\x42\x6A\x6D\x5A\x6D\x6D\x41\x42\x3C\x42\x42\x5E\x5F\x60\x5F\x5F\x41\x42\x3C\x42\x42\x41\x42\x3C\x42\x42\x29\x2A\x2B\x03\x70\x2C\x2D\x2E\x2F\x2D\x30\x31&quot;
+    &quot;\x32\x32\x31\x33\x34\x2E\x35\x34\x2C\x2D\x2E\x2F\x2D\x36\x37\x38\x39\x37\x3A\x3B\x3C\x3D\x3B\x3E\x3F\x40\x3F\x3F\x41\x42\x3C\x42\x42\x3A\x3B\x3C\x3D\x3B\x43\x44\x45\x45\x44\x46\x47\x48\x48\x47\x49\x4A\x4B\x4A\x4A\x46\x47\x48\x48\x47\x46\x47\x48\x48\x47\x24&quot;
+    &quot;\x39\x45\x39\x39\x4C\x3D\x48\x3D\x3D\x49\x3F\x4B\x3F\x3F\x4D\x42\x48\x4E\x42\x4C\x3D\x48\x3D\x3D\x71\x37\x38\x39\x37\x3A\x3B\x3C\x3D\x3B\x3E\x3F\x40\x3F\x3F\x41\x42\x3C\x42\x42\x3A\x3B\x3C\x3D\x3B&quot;
+    , cFrameBorderJointTableSize}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/FrameBorder_data.hpp" line="21" column="23" bodyfile="erbsland/cterm/impl/FrameBorder_data.hpp" bodystart="21" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="variable" id="_saturating_math_8hpp_1a801c68366ef271afc706dc57ba2384c9" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename A</type>
+          </param>
+          <param>
+            <type>typename B</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::AreBothIntegralV</definition>
+        <argsstring></argsstring>
+        <name>AreBothIntegralV</name>
+        <qualifiedname>erbsland::cterm::impl::AreBothIntegralV</qualifiedname>
+        <initializer>= <ref refid="structerbsland_1_1cterm_1_1impl_1_1_are_both_integral" kindref="compound">AreBothIntegral</ref>&lt;A, B&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="structerbsland_1_1cterm_1_1impl_1_1_are_both_integral" kindref="compound">AreBothIntegral</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="29" column="16" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_saturating_math_8hpp_1a70fbf57be0abbc81aecfa2bb5b0028ac" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename A</type>
+          </param>
+          <param>
+            <type>typename B</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::AreSignCompatibleIntV</definition>
+        <argsstring></argsstring>
+        <name>AreSignCompatibleIntV</name>
+        <qualifiedname>erbsland::cterm::impl::AreSignCompatibleIntV</qualifiedname>
+        <initializer>= <ref refid="structerbsland_1_1cterm_1_1impl_1_1_are_sign_compatible_int" kindref="compound">AreSignCompatibleInt</ref>&lt;A, B&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="structerbsland_1_1cterm_1_1impl_1_1_are_sign_compatible_int" kindref="compound">AreSignCompatibleInt</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="46" column="16" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_saturating_math_8hpp_1aecb14c8feafa35f3e9afe5f20b77980f" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::HasLargerAbsoluteIntV</definition>
+        <argsstring></argsstring>
+        <name>HasLargerAbsoluteIntV</name>
+        <qualifiedname>erbsland::cterm::impl::HasLargerAbsoluteIntV</qualifiedname>
+        <initializer>= <ref refid="structerbsland_1_1cterm_1_1impl_1_1_has_larger_absolute_int" kindref="compound">HasLargerAbsoluteInt</ref>&lt;A, B&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="structerbsland_1_1cterm_1_1impl_1_1_has_larger_absolute_int" kindref="compound">HasLargerAbsoluteInt</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="69" column="16" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="_hash_helper_8hpp_1abfa2c656ab48150fd18bc24b33965aac" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputValue</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t erbsland::cterm::impl::hashCombineInput32</definition>
+        <argsstring>(const uint32_t hash, const InputValue inputValue) noexcept</argsstring>
+        <name>hashCombineInput32</name>
+        <qualifiedname>erbsland::cterm::impl::hashCombineInput32</qualifiedname>
+        <param>
+          <type>const uint32_t</type>
+          <declname>hash</declname>
+        </param>
+        <param>
+          <type>const InputValue</type>
+          <declname>inputValue</declname>
+        </param>
+        <briefdescription>
+<para>Combine an existing hash with a new input value with 32bit precision. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hash</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The existing hash. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>inputValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new input value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The combined hash. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/HashHelper.hpp" line="16" column="21" bodyfile="erbsland/cterm/impl/HashHelper.hpp" bodystart="16" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="_hash_helper_8hpp_1a12736cd0a94389917e913355466d089d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>InputValues</declname>
+            <defname>InputValues</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t erbsland::cterm::impl::hashCreate32</definition>
+        <argsstring>(InputValues... inputValues) noexcept</argsstring>
+        <name>hashCreate32</name>
+        <qualifiedname>erbsland::cterm::impl::hashCreate32</qualifiedname>
+        <param>
+          <type>InputValues...</type>
+          <declname>inputValues</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32bit hash for one or more integral values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input values. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The combined hash. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/HashHelper.hpp" line="24" column="21" bodyfile="erbsland/cterm/impl/HashHelper.hpp" bodystart="24" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="_hash_helper_8hpp_1a6a33903e2b26d573900a3aeb4d4e6c28" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputValue</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr uint64_t</type>
+        <definition>constexpr uint64_t erbsland::cterm::impl::hashCombineInput64</definition>
+        <argsstring>(const uint64_t hash, const InputValue inputValue) noexcept</argsstring>
+        <name>hashCombineInput64</name>
+        <qualifiedname>erbsland::cterm::impl::hashCombineInput64</qualifiedname>
+        <param>
+          <type>const uint64_t</type>
+          <declname>hash</declname>
+        </param>
+        <param>
+          <type>const InputValue</type>
+          <declname>inputValue</declname>
+        </param>
+        <briefdescription>
+<para>Combine an existing hash with a new input value with 64bit precision. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hash</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The existing hash. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>inputValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new input value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The combined hash. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/HashHelper.hpp" line="38" column="21" bodyfile="erbsland/cterm/impl/HashHelper.hpp" bodystart="38" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="_hash_helper_8hpp_1a62b0f432e74db4ec7c27a016cb041527" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>InputValues</declname>
+            <defname>InputValues</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr uint64_t</type>
+        <definition>constexpr uint64_t erbsland::cterm::impl::hashCreate64</definition>
+        <argsstring>(InputValues... inputValues) noexcept</argsstring>
+        <name>hashCreate64</name>
+        <qualifiedname>erbsland::cterm::impl::hashCreate64</qualifiedname>
+        <param>
+          <type>InputValues...</type>
+          <declname>inputValues</declname>
+        </param>
+        <briefdescription>
+<para>Create a 64bit hash for one or more integral values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input values. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The combined hash. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/HashHelper.hpp" line="46" column="21" bodyfile="erbsland/cterm/impl/HashHelper.hpp" bodystart="46" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="_hash_helper_8hpp_1ad05854c2ce5ff06f0d9a6fed348ffa5b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>InputValues</declname>
+            <defname>InputValues</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::impl::hashCreate</definition>
+        <argsstring>(InputValues... inputValues) noexcept</argsstring>
+        <name>hashCreate</name>
+        <qualifiedname>erbsland::cterm::impl::hashCreate</qualifiedname>
+        <param>
+          <type>InputValues...</type>
+          <declname>inputValues</declname>
+        </param>
+        <briefdescription>
+<para>Create an <computeroutput>std::size_t</computeroutput> hash for one or more integral values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This automatically chooses <computeroutput>hash32</computeroutput> or <computeroutput>hash64</computeroutput> depending on the platform. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/HashHelper.hpp" line="60" column="24" bodyfile="erbsland/cterm/impl/HashHelper.hpp" bodystart="60" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1ac28a57bfe45a5af3884ec0a6a6ddc0f0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::isNegative</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>isNegative</name>
+        <qualifiedname>erbsland::cterm::impl::isNegative</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Test if an integer value is negative. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This helper is safe to use with unsigned integers, where it always returns <computeroutput>false</computeroutput>. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any signed or unsigned integer type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the value is signed and below zero. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="94" column="16" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="94" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a9aaa8b84d97f7e20c620b942ef4e7217" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr std::make_unsigned_t&lt; T &gt;</type>
+        <definition>constexpr std::make_unsigned_t&lt; T &gt; erbsland::cterm::impl::unsignedIntAbs</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>unsignedIntAbs</name>
+        <qualifiedname>erbsland::cterm::impl::unsignedIntAbs</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Get the absolute value of an integer as an unsigned integer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This helper avoids undefined behavior for the minimum value of signed integer types. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any signed or unsigned integer type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to convert. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The absolute value represented as the matching unsigned integer type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="108" column="32" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="108" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a3afa72abd5f9e7b55169203dcfce2be8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr A</type>
+        <definition>constexpr A erbsland::cterm::impl::extremeIntFromMultiplication</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>extremeIntFromMultiplication</name>
+        <qualifiedname>erbsland::cterm::impl::extremeIntFromMultiplication</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Get the saturated extreme value for a multiplication overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The returned value is the minimum of <computeroutput>A</computeroutput> for a negative signed product, and the maximum of <computeroutput>A</computeroutput> otherwise. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target integer type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second operand integer type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first multiplication operand. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second multiplication operand. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The saturated extreme value for the product sign. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="125" column="13" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="125" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a02125a7038c506f32dfe4d404c9502cd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T erbsland::cterm::impl::saturatingAdd</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>saturatingAdd</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingAdd</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Add two integers but limit the result to the maximum possible values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any signed or unsigned integer type </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The addition result, limited to the used type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="139" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="139" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1ad04e24d75f97cbc905d01d7c47710e9f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T erbsland::cterm::impl::saturatingSubtract</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>saturatingSubtract</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingSubtract</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Subtract two integers but limit the result to the maximum possible values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any signed or unsigned integer type </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The subtraction result, limited to the used type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="176" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="176" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1ae91ded90c4cfa640f25aec76d69dbd72" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T erbsland::cterm::impl::saturatingMultiply</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>saturatingMultiply</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingMultiply</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Multiply two integers but limit the result to the maximum possible values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any signed or unsigned integer type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first multiplier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second multiplier. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The product, limited to the used type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="205" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="205" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a1dff7362fb6e2f250403d3dd827c813c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T erbsland::cterm::impl::saturatingDivide</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>saturatingDivide</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingDivide</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Divide integers but limit the result to the maximum possible values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any signed or unsigned integer type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>dividend. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>divisor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the division, limited to the used type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="242" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="242" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a3b69799d937cc6feb58b1297fced6152" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T erbsland::cterm::impl::saturatingModulo</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>saturatingModulo</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingModulo</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Get the remainder of a division between integers but limit the result to the maximum possible values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any signed or unsigned integer type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>dividend. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>divisor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the division, limited to the used type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="262" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="262" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1aaf3584c59cadb77ca8526e890bd85336" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willAddOverflow</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>willAddOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willAddOverflow</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if an addition will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type for the operands. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="281" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="281" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a59ed8dc06600384e3c9ad12cd892deb2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willSubtractOverflow</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>willSubtractOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willSubtractOverflow</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if a subtraction will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type for the operands. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="304" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="304" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a01e10060a5fa652188d7cd7942b7c6eb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willMultiplyOverflow</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>willMultiplyOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willMultiplyOverflow</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if a multiplication will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type for the operands. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="327" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="327" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a63dc24e34806d21a089b0602f6b9a747" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willDivideOverflow</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>willDivideOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willDivideOverflow</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if a division will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type for the operands. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="350" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="350" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a851866f6df6f65341abf2849cd3f2b94" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willModuloOverflow</definition>
+        <argsstring>(T a, T b) noexcept</argsstring>
+        <name>willModuloOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willModuloOverflow</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if a modulo will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type for the operands. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="363" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="363" bodyend="368"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1ac383ad721d223e4d037308b406f1668d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>TargetType</declname>
+            <defname>TargetType</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>SourceType</declname>
+            <defname>SourceType</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr TargetType</type>
+        <definition>constexpr TargetType erbsland::cterm::impl::saturatingCast</definition>
+        <argsstring>(SourceType value) noexcept</argsstring>
+        <name>saturatingCast</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingCast</qualifiedname>
+        <param>
+          <type>SourceType</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Convert an integer type into another one, but make sure the result will not overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If e.g. the unsigned 16bit value 0x2000 is casted to a unsigned 8bit value, the result is 0xff, which is the maximum possible for the target type. If a signed 8bit value -10 is cases to a unsigned 8bit value, the result is zero, because this is the smallest possible value for the type. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TargetType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type for the cast. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>SourceType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source type to cast. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source value to cast. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A value as target type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="379" column="22" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="379" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1ad049727f8cb29d0be3563220e56fa174" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>TargetType</declname>
+            <defname>TargetType</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>SourceType</declname>
+            <defname>SourceType</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::willSaturatingCastOverflow</definition>
+        <argsstring>(SourceType value) noexcept</argsstring>
+        <name>willSaturatingCastOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willSaturatingCastOverflow</qualifiedname>
+        <param>
+          <type>SourceType</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Check if a saturating cast will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TargetType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type for the cast. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>SourceType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source type to cast. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source value to check for an overflow. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the case would overflow and change <computeroutput>value</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="432" column="16" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="432" bodyend="459"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a7c56742f2f0232b0a1ac888a7aec44bf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::saturatingIncrement</definition>
+        <argsstring>(T &amp;value) noexcept</argsstring>
+        <name>saturatingIncrement</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingIncrement</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Increment a value but never overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to increment. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="465" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="465" bodyend="469"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a1c3d7b703688e0158ab0df3f69cad2f6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::saturatingDecrement</definition>
+        <argsstring>(T &amp;value) noexcept</argsstring>
+        <name>saturatingDecrement</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingDecrement</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Increment a value but never overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to decrement. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="475" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="475" bodyend="479"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1afb0e3cf15f7948e1a7386796498130dc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>A</type>
+        <definition>A erbsland::cterm::impl::saturatingAdd</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>saturatingAdd</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingAdd</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Saturated add with any integer type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will allow to use any integer type as second operand for a saturated addition. The result type will be the type of the first operand. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type for the operation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the second summand. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to change. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="490" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="490" bodyend="504"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1ac8c06a40d50910b391b65004710585c4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>A</type>
+        <definition>A erbsland::cterm::impl::saturatingSubtract</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>saturatingSubtract</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingSubtract</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Saturated subtract with any integer type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will allow to use any integer type as second operand for a saturated subtraction. The result type will be the type of the first operand. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type for the operation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the subtrahend. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to change. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to subtract. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="515" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="515" bodyend="529"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1af6e7325d895411d578d9531deca39051" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>A</type>
+        <definition>A erbsland::cterm::impl::saturatingMultiply</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>saturatingMultiply</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingMultiply</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Saturated multiply with any compatible integer type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will allow to use (almost) any integer type as second operand. The result type will be the type of the first operand. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type for the operation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the factor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to change. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The factor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="540" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="540" bodyend="550"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a60c25c576971095b7277193a21c0adde" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>A</type>
+        <definition>A erbsland::cterm::impl::saturatingDivide</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>saturatingDivide</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingDivide</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Saturated division with any compatible integer type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will allow to use any integer type as second operand. The result type will be the type of the first operand.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type for the operation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the divisor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to change. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The divisor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="564" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="564" bodyend="582"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a59f7c77cbb8c61f3a3a587a65d83ff13" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>A</type>
+        <definition>A erbsland::cterm::impl::saturatingModulo</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>saturatingModulo</name>
+        <qualifiedname>erbsland::cterm::impl::saturatingModulo</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Saturated modulo with any compatible integer type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will allow to use any integer type as second operand. The result type will be the type of the first operand. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type for the operation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the divisor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to change. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The divisor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="594" column="3" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="594" bodyend="628"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1aff7603379b3cc48204cec9dfb9b219f8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willAddOverflow</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>willAddOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willAddOverflow</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if an addition will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type of the operation to test for the overflow. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator type with no influence to the result type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="637" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="637" bodyend="675"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a79d7d34e0aa0c644bc95946af9b5fbbb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willSubtractOverflow</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>willSubtractOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willSubtractOverflow</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if a subtraction will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type of the operation to test for the overflow. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator type with no influence to the result type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="684" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="684" bodyend="722"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a56d5532a75b217d02bcafd526a337fef" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willMultiplyOverflow</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>willMultiplyOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willMultiplyOverflow</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if a multiplication will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type of the operation to test for the overflow. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator type with no influence to the result type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="731" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="731" bodyend="751"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1ad5036e02356044c796761f87bbf76c0d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willDivideOverflow</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>willDivideOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willDivideOverflow</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if a division will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type of the operation to test for the overflow. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator type with no influence to the result type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="760" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="760" bodyend="774"/>
+      </memberdef>
+      <memberdef kind="function" id="_saturating_math_8hpp_1a5c078c0c33c4d4088cff637f5adb1e96" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::integral</type>
+            <declname>A</declname>
+            <defname>A</defname>
+          </param>
+          <param>
+            <type>std::integral</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::willModuloOverflow</definition>
+        <argsstring>(A a, B b) noexcept</argsstring>
+        <name>willModuloOverflow</name>
+        <qualifiedname>erbsland::cterm::impl::willModuloOverflow</qualifiedname>
+        <param>
+          <type>A</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>B</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Test if a modulo operation will overflow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target type of the operation to test for the overflow. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator type with no influence to the result type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second value of the operation to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if an overflow will occur, <computeroutput>false</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/SaturatingMath.hpp" line="783" column="6" bodyfile="erbsland/cterm/impl/SaturatingMath.hpp" bodystart="783" bodyend="788"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a72206e38bab33f08b81b7f2592bc0e8c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr char32_t</type>
+        <definition>constexpr char32_t erbsland::cterm::impl::toLowerAscii</definition>
+        <argsstring>(const char32_t character) noexcept</argsstring>
+        <name>toLowerAscii</name>
+        <qualifiedname>erbsland::cterm::impl::toLowerAscii</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Convert one ASCII uppercase character to lowercase. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to normalize. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The lowercase ASCII character, or the original character. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="17" column="21" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="17" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a8df96fa9034561eb2bab6008fe1ad5e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::u32string</type>
+        <definition>std::u32string erbsland::cterm::impl::toLowerAscii</definition>
+        <argsstring>(const std::u32string_view text)</argsstring>
+        <name>toLowerAscii</name>
+        <qualifiedname>erbsland::cterm::impl::toLowerAscii</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Convert ASCII uppercase characters in a UTF-32 string to lowercase. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to normalize. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The lower-case ASCII copy of the text. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="27" column="24" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="27" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a4e497d9f3a4e45ab01c529158c14bd58" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::isValidUnicode</definition>
+        <argsstring>(const char32_t unicode) noexcept</argsstring>
+        <name>isValidUnicode</name>
+        <qualifiedname>erbsland::cterm::impl::isValidUnicode</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>unicode</declname>
+        </param>
+        <briefdescription>
+<para>Test if one code point is in the valid Unicode range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="37" column="17" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="37" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1ae97ba8a8d1068e79f6da7c1ec280bc91" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::isControlCode</definition>
+        <argsstring>(const char32_t codePoint) noexcept</argsstring>
+        <name>isControlCode</name>
+        <qualifiedname>erbsland::cterm::impl::isControlCode</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Test if one code point is an ISO control code. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The code point to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the code point is a control code. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="44" column="17" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="44" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1ab093df2afe039931cef6720b3405e91d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::isSafeCodePoint</definition>
+        <argsstring>(const char32_t codePoint) noexcept</argsstring>
+        <name>isSafeCodePoint</name>
+        <qualifiedname>erbsland::cterm::impl::isSafeCodePoint</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Test if one code point is safe for <computeroutput><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></computeroutput> construction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This accepts any valid Unicode code point except control characters. New-line and tabs are allowed control-characters. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="51" column="17" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="51" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a52c0eda32c43f3327bf932b52e34d8e4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr char32_t</type>
+        <definition>constexpr char32_t erbsland::cterm::impl::safeCodePointReplacement</definition>
+        <argsstring>(const char32_t codePoint) noexcept</argsstring>
+        <name>safeCodePointReplacement</name>
+        <qualifiedname>erbsland::cterm::impl::safeCodePointReplacement</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Return a safe replacement for invalid code-points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Space for all valid Unicode code points, otherwise the Unicode replacement character. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="58" column="21" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="58" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1ad862b85c2b99dd79389db47864a6da43" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr char32_t</type>
+        <definition>constexpr char32_t erbsland::cterm::impl::safeCodePoint</definition>
+        <argsstring>(const char32_t codePoint) noexcept</argsstring>
+        <name>safeCodePoint</name>
+        <qualifiedname>erbsland::cterm::impl::safeCodePoint</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Return a safe code point for <computeroutput><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Valid Unicode code points are preserved, control codes are replaced with a space - to represent an &quot;invisible&quot; character. Invalid Unicode code points are replaced with the Unicode replacement character. New-line and tabs are allowed control-characters. <simplesect kind="return"><para>The safe code point for use in terminal strings. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="67" column="21" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="67" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1ac701b7449cd8ebab7f46624010d42c32" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::isStringCharacter</definition>
+        <argsstring>(const char32_t codePoint) noexcept</argsstring>
+        <name>isStringCharacter</name>
+        <qualifiedname>erbsland::cterm::impl::isStringCharacter</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Test whether one code point is accepted as a visible string character. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The code point to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the code point is preserved in a terminal string. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="74" column="14" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="74" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a4fc1f28683d74a63b976cceda8fb0732" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::isAsciiWhitespace</definition>
+        <argsstring>(const char32_t character) noexcept</argsstring>
+        <name>isAsciiWhitespace</name>
+        <qualifiedname>erbsland::cterm::impl::isAsciiWhitespace</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="79" column="17" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="79" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a4bacd1d89804e2fb831394fadf1818a4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::u32string</type>
+        <definition>std::u32string erbsland::cterm::impl::trimWhitespace</definition>
+        <argsstring>(std::u32string text)</argsstring>
+        <name>trimWhitespace</name>
+        <qualifiedname>erbsland::cterm::impl::trimWhitespace</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="83" column="24" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="83" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a668d0b92b13efc50ade8fb10fa8b3fb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::u32string</type>
+        <definition>std::u32string erbsland::cterm::impl::normalizeWhitespace</definition>
+        <argsstring>(const std::u32string_view text)</argsstring>
+        <name>normalizeWhitespace</name>
+        <qualifiedname>erbsland::cterm::impl::normalizeWhitespace</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Normalize ASCII whitespace runs to single spaces. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to normalize. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The text with collapsed ASCII whitespace. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="96" column="24" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="96" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a480748ae952d2a9250df5721383e6444" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::normalizeWhitespaceInPlace</definition>
+        <argsstring>(std::u32string &amp;text)</argsstring>
+        <name>normalizeWhitespaceInPlace</name>
+        <qualifiedname>erbsland::cterm::impl::normalizeWhitespaceInPlace</qualifiedname>
+        <param>
+          <type>std::u32string &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Normalize ASCII whitespace runs to single spaces in-place. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to normalize. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the original text contained only ASCII whitespace, otherwise <computeroutput>false</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="120" column="14" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="120" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a44934faa9bc8480cb5d5c6c1d0930781" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::isWhitespaceOnly</definition>
+        <argsstring>(const std::u32string_view text) noexcept</argsstring>
+        <name>isWhitespaceOnly</name>
+        <qualifiedname>erbsland::cterm::impl::isWhitespaceOnly</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Test if the given UTF-32 string contains only ASCII whitespace. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to examine. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the text contains only ASCII whitespace. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="149" column="14" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="149" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="_text_util_8hpp_1a88b1723e4a93946d4fc9d095d5057915" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string erbsland::cterm::impl::toNormalizedIdentifier</definition>
+        <argsstring>(const std::string_view text)</argsstring>
+        <name>toNormalizedIdentifier</name>
+        <qualifiedname>erbsland::cterm::impl::toNormalizedIdentifier</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/TextUtil.hpp" line="158" column="21" bodyfile="erbsland/cterm/impl/TextUtil.hpp" bodystart="158" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="_u8_buffer_8hpp_1a181640e166f079739ac13e9a6cdbea5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer</definition>
+        <argsstring>(const std::u8string &amp;) -&gt; U8Buffer&lt; const char8_t &gt;</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer</qualifiedname>
+        <param>
+          <type>const std::u8string &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="474" column="1" declfile="erbsland/cterm/impl/U8Buffer.hpp" declline="474" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_u8_buffer_8hpp_1a031f81ece4abcc1448ef9ec682dd0c88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer</definition>
+        <argsstring>(std::u8string_view) -&gt; U8Buffer&lt; const char8_t &gt;</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer</qualifiedname>
+        <param>
+          <type>std::u8string_view</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="475" column="1" declfile="erbsland/cterm/impl/U8Buffer.hpp" declline="475" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_u8_buffer_8hpp_1ad0cf28dca7effbce4eb5f4e32cb80c1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer</definition>
+        <argsstring>(const std::string &amp;) -&gt; U8Buffer&lt; const char &gt;</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="476" column="1" declfile="erbsland/cterm/impl/U8Buffer.hpp" declline="476" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_u8_buffer_8hpp_1a4822c9c61594bf67ac820f84c6e24c71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::U8Buffer</definition>
+        <argsstring>(std::string_view) -&gt; U8Buffer&lt; const char &gt;</argsstring>
+        <name>U8Buffer</name>
+        <qualifiedname>erbsland::cterm::impl::U8Buffer</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/U8Buffer.hpp" line="477" column="1" declfile="erbsland/cterm/impl/U8Buffer.hpp" declline="477" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_unicode_width_8hpp_1a534307c7a9fd0e3b29ca1bf08cfdbc74" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const <ref refid="structerbsland_1_1cterm_1_1impl_1_1_char_width" kindref="compound">CharWidth</ref> &gt;</type>
+        <definition>std::span&lt; const CharWidth &gt; erbsland::cterm::impl::charWidthTable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>charWidthTable</name>
+        <qualifiedname>erbsland::cterm::impl::charWidthTable</qualifiedname>
+        <briefdescription>
+<para>Get the generated Unicode width table. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A sorted table of contiguous Unicode ranges with console widths. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/UnicodeWidth.hpp" line="20" column="12" declfile="erbsland/cterm/impl/UnicodeWidth.hpp" declline="20" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="_unicode_width_8hpp_1a070ec80dfb9c0c38e48818b8c057c811" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t erbsland::cterm::impl::consoleCharacterWidth</definition>
+        <argsstring>(char32_t codePoint) noexcept</argsstring>
+        <name>consoleCharacterWidth</name>
+        <qualifiedname>erbsland::cterm::impl::consoleCharacterWidth</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Get the terminal cell width for a single Unicode code-point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Unicode code-point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The width in console cells: <computeroutput>0</computeroutput>, <computeroutput>1</computeroutput> or <computeroutput>2</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/UnicodeWidth.hpp" line="25" column="10" declfile="erbsland/cterm/impl/UnicodeWidth.hpp" declline="25" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="_unicode_width_8hpp_1aa35aff1c3b22962269e0ad214ab8df50" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t erbsland::cterm::impl::calculateDisplayWidth</definition>
+        <argsstring>(std::string_view charStr) noexcept</argsstring>
+        <name>calculateDisplayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::calculateDisplayWidth</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the display width of the given string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to calculate the display width for. Invalid UTF-8 bytes are replaced with the Unicode replacement character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of &quot;blocks&quot; on the terminal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/UnicodeWidth.hpp" line="31" column="11" declfile="erbsland/cterm/impl/UnicodeWidth.hpp" declline="31" declcolumn="11"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/BitmapPainter.hpp" line="7" column="1"/>
+  </compounddef>
+</doxygen>

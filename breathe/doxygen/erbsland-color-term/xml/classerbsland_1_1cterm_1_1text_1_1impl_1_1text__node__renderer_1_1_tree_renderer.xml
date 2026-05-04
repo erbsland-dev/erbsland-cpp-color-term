@@ -1,0 +1,750 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</compoundname>
+    <includes refid="_tree_renderer_8hpp" local="no">erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1_1_block_scope" prot="private">erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::BlockScope</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a7390141c5478f939d7b6353de476966e" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_style_resolver" kindref="compound">StyleResolver</ref></type>
+        <definition>StyleResolver erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::_styleResolver</definition>
+        <argsstring></argsstring>
+        <name>_styleResolver</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::_styleResolver</qualifiedname>
+        <briefdescription>
+<para>Resolves all block and inline style rules. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="78" column="19" bodyfile="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a4912f7bbb0e82bfd52dd37f1febc13e9" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_inline_text_renderer" kindref="compound">InlineTextRenderer</ref></type>
+        <definition>InlineTextRenderer erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::_inlineTextRenderer</definition>
+        <argsstring></argsstring>
+        <name>_inlineTextRenderer</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::_inlineTextRenderer</qualifiedname>
+        <briefdescription>
+<para>Renders inline text subtrees. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="79" column="24" bodyfile="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a3525ff2feea79ab98734f7509e340728" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_block_stream" kindref="compound">BlockStream</ref></type>
+        <definition>BlockStream erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::_stream</definition>
+        <argsstring></argsstring>
+        <name>_stream</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::_stream</qualifiedname>
+        <briefdescription>
+<para>Streams blocks to the target. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="80" column="17" bodyfile="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aee24c63ac236d0a1f7c842f58082a1a5" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; BlockScope &gt;</type>
+        <definition>std::vector&lt;BlockScope&gt; erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::_scopes</definition>
+        <argsstring></argsstring>
+        <name>_scopes</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::_scopes</qualifiedname>
+        <briefdescription>
+<para>Open container and list-item scopes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="81" column="17" bodyfile="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aa284ae4c3115e215e00cbed7f54915a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::TreeRenderer</definition>
+        <argsstring>(StyleConstPtr style, BlockTarget &amp;target)</argsstring>
+        <name>TreeRenderer</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::TreeRenderer</qualifiedname>
+        <param>
+          <type>StyleConstPtr</type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_block_target" kindref="compound">BlockTarget</ref> &amp;</type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+<para>Create a tree renderer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The style to use for selector resolution. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>target</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The block target to write to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="25" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a01bb2bca457dd2aff0282f8cbcf3ffa0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::~TreeRenderer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TreeRenderer</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::~TreeRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="28" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a5c11d435330b59316c26882ffbbf2e3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::TreeRenderer</definition>
+        <argsstring>(const TreeRenderer &amp;)=delete</argsstring>
+        <name>TreeRenderer</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::TreeRenderer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer" kindref="compound">TreeRenderer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="29" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1ad17e31c5d9514cc7f0cf30e0320f1583" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::TreeRenderer</definition>
+        <argsstring>(TreeRenderer &amp;&amp;)=delete</argsstring>
+        <name>TreeRenderer</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::TreeRenderer</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer" kindref="compound">TreeRenderer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a18a0c699087910322665a80aabefee68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer" kindref="compound">TreeRenderer</ref> &amp;</type>
+        <definition>TreeRenderer &amp; erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::operator=</definition>
+        <argsstring>(const TreeRenderer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer" kindref="compound">TreeRenderer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="31" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a731f5a616cf5841996ae58065c53e404" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer" kindref="compound">TreeRenderer</ref> &amp;</type>
+        <definition>TreeRenderer &amp; erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::operator=</definition>
+        <argsstring>(TreeRenderer &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer" kindref="compound">TreeRenderer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="32" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a77165a0502a0879eceeff6b06ce9a372" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::render</definition>
+        <argsstring>(const TextNodeConstPtr &amp;document)</argsstring>
+        <name>render</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::render</qualifiedname>
+        <param>
+          <type>const TextNodeConstPtr &amp;</type>
+          <declname>document</declname>
+        </param>
+        <briefdescription>
+<para>Render one document tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>document</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The document node to render. <computeroutput>nullptr</computeroutput> produces empty output. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="37" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aeb1bbe22eeb0df8252ef5148f400affa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendNode</definition>
+        <argsstring>(const TextNode &amp;node, const RenderContext &amp;context)</argsstring>
+        <name>appendNode</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendNode</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="47" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aa2cb882c6bd105ff76d1cd340cab7ebc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendContainer</definition>
+        <argsstring>(const TextNode &amp;node, StyleRole role, const RenderContext &amp;context)</argsstring>
+        <name>appendContainer</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendContainer</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>StyleRole</type>
+          <declname>role</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="48" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a2f4d63def7229bd1b70824cdcff57ccd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendList</definition>
+        <argsstring>(const TextNode &amp;node, bool numbered, const RenderContext &amp;context)</argsstring>
+        <name>appendList</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendList</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>numbered</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="49" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a2d231fea7a2e58e915bd97937f3336df" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendListItem</definition>
+        <argsstring>(const TextNode &amp;node, const StyleRule &amp;listItemRule, const ListItemLayout &amp;listItemLayout, const RenderContext &amp;context)</argsstring>
+        <name>appendListItem</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendListItem</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref> &amp;</type>
+          <declname>listItemRule</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_list_item_layout" kindref="compound">ListItemLayout</ref> &amp;</type>
+          <declname>listItemLayout</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="50" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1ac80ab6ca539d0b23834927e285e1e98f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendListItemChild</definition>
+        <argsstring>(const TextNode &amp;node, const RenderContext &amp;context)</argsstring>
+        <name>appendListItemChild</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendListItemChild</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1ae9e7cd39f22c9963d3b45c7013b16e34" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendParagraphLikeNode</definition>
+        <argsstring>(const TextNode &amp;node, StyleRole role, const RenderContext &amp;context)</argsstring>
+        <name>appendParagraphLikeNode</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendParagraphLikeNode</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>StyleRole</type>
+          <declname>role</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="56" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aadc95d11bf30dbda82c7d2d445791b84" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" kindref="compound">RenderBlock</ref></type>
+        <definition>RenderBlock erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::paragraph</definition>
+        <argsstring>(const TextNode &amp;node, const StyleRule &amp;blockRule, const RenderContext &amp;context)</argsstring>
+        <name>paragraph</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::paragraph</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref> &amp;</type>
+          <declname>blockRule</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="58" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a5d8ba57ab386307701199d9103992129" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" kindref="compound">RenderBlock</ref></type>
+        <definition>RenderBlock erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::paragraph</definition>
+        <argsstring>(String text, const StyleRule &amp;blockRule, const RenderContext &amp;context)</argsstring>
+        <name>paragraph</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::paragraph</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref> &amp;</type>
+          <declname>blockRule</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="59" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a8fbd76b87a08c1969c169c297360a02a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" kindref="compound">RenderBlock</ref></type>
+        <definition>RenderBlock erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::heading</definition>
+        <argsstring>(const TextNode &amp;node, const RenderContext &amp;context)</argsstring>
+        <name>heading</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::heading</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="60" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aaf58f77bbb276c781d4b7519c8473dfc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" kindref="compound">RenderBlock</ref></type>
+        <definition>RenderBlock erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::horizontalRule</definition>
+        <argsstring>(const RenderContext &amp;context)</argsstring>
+        <name>horizontalRule</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::horizontalRule</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="61" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a7e38fb1ce4557d4b139550d7c892366d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" kindref="compound">RenderBlock</ref></type>
+        <definition>RenderBlock erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::emptyListItemBlock</definition>
+        <argsstring>(const RenderContext &amp;context)</argsstring>
+        <name>emptyListItemBlock</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::emptyListItemBlock</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="62" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a980aed036391af7e36377f5d0951494e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_list_item_layout" kindref="compound">ListItemLayout</ref></type>
+        <definition>ListItemLayout erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::makeListItemLayout</definition>
+        <argsstring>(const StyleRule &amp;listItemRule, const RenderContext &amp;context, std::size_t number)</argsstring>
+        <name>makeListItemLayout</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::makeListItemLayout</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref> &amp;</type>
+          <declname>listItemRule</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_context" kindref="compound">RenderContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>number</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="63" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a0fba3a6c9414d6571a6e6ee16e55b9db" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::emitBlock</definition>
+        <argsstring>(RenderBlock &amp;&amp;block)</argsstring>
+        <name>emitBlock</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::emitBlock</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" kindref="compound">RenderBlock</ref> &amp;&amp;</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="65" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aa1d74aa79f331ff6070882c07231aaf1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::openScope</definition>
+        <argsstring>(const Margins &amp;verticalMargins, std::optional&lt; ListItemLayout &gt; listItemLayout=std::nullopt)</argsstring>
+        <name>openScope</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::openScope</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_margins" kindref="compound">Margins</ref> &amp;</type>
+          <declname>verticalMargins</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_list_item_layout" kindref="compound">ListItemLayout</ref> &gt;</type>
+          <declname>listItemLayout</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a6423d2700211ea2047de2310294fdd57" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::closeScope</definition>
+        <argsstring>()</argsstring>
+        <name>closeScope</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::closeScope</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="67" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a4c2cd39f199a500f050cb696db5acc20" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::currentListItemHasBlocks</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>currentListItemHasBlocks</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::currentListItemHasBlocks</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="68" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a2093d0cbee277c8ee9d3ce212fad9113" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::collapseVerticalMargin</definition>
+        <argsstring>(RenderBlock &amp;block, Margins::Side side, Coordinate margin)</argsstring>
+        <name>collapseVerticalMargin</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::collapseVerticalMargin</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_render_block" kindref="compound">RenderBlock</ref> &amp;</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_margins_1a366d4f86695715066822a4e71dceeb81" kindref="member">Margins::Side</ref></type>
+          <declname>side</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>margin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="69" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aa2ffa24efa5c7c9e022907f89459a7e1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendResolvedDecoration</definition>
+        <argsstring>(cterm::impl::StringBuilder &amp;builder, const std::optional&lt; String &gt; &amp;decoration, const CharStyle &amp;textStyle)</argsstring>
+        <name>appendResolvedDecoration</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::appendResolvedDecoration</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_string_builder" kindref="compound">cterm::impl::StringBuilder</ref> &amp;</type>
+          <declname>builder</declname>
+        </param>
+        <param>
+          <type>const std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt; &amp;</type>
+          <declname>decoration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>textStyle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="70" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1ad8a2756ab55989c234de6582c7a4719f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt;</type>
+        <definition>std::optional&lt; String &gt; erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::resolvedDecoration</definition>
+        <argsstring>(const std::optional&lt; String &gt; &amp;decoration, const CharStyle &amp;textStyle)</argsstring>
+        <name>resolvedDecoration</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::resolvedDecoration</qualifiedname>
+        <param>
+          <type>const std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref> &gt; &amp;</type>
+          <declname>decoration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+          <declname>textStyle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="72" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a56ecbe7f98eff99599ced32695aa3af1" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Coordinate</type>
+        <definition>static Coordinate erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::collapsedVerticalMarginValue</definition>
+        <argsstring>(Coordinate first, Coordinate second) noexcept</argsstring>
+        <name>collapsedVerticalMarginValue</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::collapsedVerticalMarginValue</qualifiedname>
+        <param>
+          <type>Coordinate</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Coordinate</type>
+          <declname>second</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="73" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a15df0536f55065501ef0dbf0e198e808" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+        <definition>static StyleRule erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::listItemParagraphRule</definition>
+        <argsstring>()</argsstring>
+        <name>listItemParagraphRule</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::listItemParagraphRule</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="74" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a531a105f20f4fe546080b289fbb1f530" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1text_1_1_style_rule" kindref="compound">StyleRule</ref></type>
+        <definition>static StyleRule erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::emptyListItemRule</definition>
+        <argsstring>()</argsstring>
+        <name>emptyListItemRule</name>
+        <qualifiedname>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer::emptyListItemRule</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="75" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Streams a <computeroutput><ref refid="classerbsland_1_1cterm_1_1text_1_1_text_node" kindref="compound">TextNode</ref></computeroutput> tree into render blocks. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" line="20" column="1" bodyfile="erbsland/cterm/text/impl/text_node_renderer/TreeRenderer.hpp" bodystart="20" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a4912f7bbb0e82bfd52dd37f1febc13e9" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>_inlineTextRenderer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aee24c63ac236d0a1f7c842f58082a1a5" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>_scopes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a3525ff2feea79ab98734f7509e340728" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>_stream</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a7390141c5478f939d7b6353de476966e" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>_styleResolver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aa2cb882c6bd105ff76d1cd340cab7ebc" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>appendContainer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a2f4d63def7229bd1b70824cdcff57ccd" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>appendList</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a2d231fea7a2e58e915bd97937f3336df" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>appendListItem</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1ac80ab6ca539d0b23834927e285e1e98f" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>appendListItemChild</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aeb1bbe22eeb0df8252ef5148f400affa" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>appendNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1ae9e7cd39f22c9963d3b45c7013b16e34" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>appendParagraphLikeNode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aa2ffa24efa5c7c9e022907f89459a7e1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>appendResolvedDecoration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a6423d2700211ea2047de2310294fdd57" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>closeScope</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a56ecbe7f98eff99599ced32695aa3af1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>collapsedVerticalMarginValue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a2093d0cbee277c8ee9d3ce212fad9113" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>collapseVerticalMargin</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a4c2cd39f199a500f050cb696db5acc20" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>currentListItemHasBlocks</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a0fba3a6c9414d6571a6e6ee16e55b9db" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>emitBlock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a7e38fb1ce4557d4b139550d7c892366d" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>emptyListItemBlock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a531a105f20f4fe546080b289fbb1f530" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>emptyListItemRule</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a8fbd76b87a08c1969c169c297360a02a" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>heading</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aaf58f77bbb276c781d4b7519c8473dfc" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>horizontalRule</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a15df0536f55065501ef0dbf0e198e808" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>listItemParagraphRule</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a980aed036391af7e36377f5d0951494e" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>makeListItemLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aa1d74aa79f331ff6070882c07231aaf1" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>openScope</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a18a0c699087910322665a80aabefee68" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a731f5a616cf5841996ae58065c53e404" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aadc95d11bf30dbda82c7d2d445791b84" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>paragraph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a5d8ba57ab386307701199d9103992129" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>paragraph</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a77165a0502a0879eceeff6b06ce9a372" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>render</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1ad8a2756ab55989c234de6582c7a4719f" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>resolvedDecoration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1aa284ae4c3115e215e00cbed7f54915a5" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>TreeRenderer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a5c11d435330b59316c26882ffbbf2e3b" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>TreeRenderer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1ad17e31c5d9514cc7f0cf30e0320f1583" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>TreeRenderer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1text__node__renderer_1_1_tree_renderer_1a01bb2bca457dd2aff0282f8cbcf3ffa0" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::text_node_renderer::TreeRenderer</scope><name>~TreeRenderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

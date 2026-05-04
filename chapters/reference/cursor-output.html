@@ -1,0 +1,860 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cursor Output &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Frames, Borders, Tiles" href="drawing.html" />
+    <link rel="prev" title="Color" href="color.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer.html">Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer-view.html">Buffer Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cursor Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#printing-mixed-arguments">Printing Mixed Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#moving-the-cursor-explicitly">Moving the Cursor Explicitly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vt100-compatible-line-wrapping">VT100-Compatible Line Wrapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#printing-wrapped-paragraphs">Printing Wrapped Paragraphs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#choosing-between-terminal-and-cursorbuffer">Choosing Between Terminal and CursorBuffer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm12CursorWriterE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::CursorWriter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm8MoveModeE"><code class="docutils literal notranslate"><span class="pre">MoveMode</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="drawing.html">Frames, Borders, Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing-text.html">Text Rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-options.html">Paragraph Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rich-text.html">Rich Text and HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal.html">Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Strings and Chars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theme.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">UI Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-core.html">UI Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-layouts.html">UI Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-input.html">UI Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-surfaces.html">UI Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-events.html">UI Events and Scheduling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Cursor Output</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/cursor-output.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cursor-output">
+<h1>Cursor Output<a class="headerlink" href="#cursor-output" title="Link to this heading"></a></h1>
+<p>Cursor output is the shared streaming API used by
+<a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a> and
+<a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm12CursorBufferE" title="erbsland::cterm::CursorBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorBuffer</span></code></a>.</p>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm12CursorWriterE" title="erbsland::cterm::CursorWriter"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter</span></code></a> combines cursor movement, active color state,
+active character attributes, plain text output, and paragraph printing into a single, consistent interface.
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm8MoveModeE" title="erbsland::cterm::MoveMode"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">MoveMode</span></code></a> distinguishes between absolute and relative cursor movement.</p>
+<p>Use this API when you want to print mixed text and color arguments, write
+terminal-style output into a <a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm12CursorBufferE" title="erbsland::cterm::CursorBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorBuffer</span></code></a>, or precisely control cursor
+positioning.</p>
+<p>This page documents the shared output model only. Screen lifecycle,
+full-screen rendering, refresh settings, and backend ownership remain on
+<a class="reference internal" href="terminal.html"><span class="doc">Terminal</span></a>.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="printing-mixed-arguments">
+<h3>Printing Mixed Arguments<a class="headerlink" href="#printing-mixed-arguments" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm12CursorWriterE" title="erbsland::cterm::CursorWriter"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter</span></code></a> is designed for fluent, terminal-style output.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">print()</span></code> and <code class="docutils literal notranslate"><span class="pre">printLine()</span></code> functions accept a mix of colors,
+character styles, character attributes, terminal strings, and plain text
+in a single call. As arguments are processed, the active color and
+attribute state is updated automatically.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">terminal</span><span class="p">.</span><span class="n">printLine</span><span class="p">(</span>
+<span class="w">    </span><span class="n">fg</span><span class="o">::</span><span class="n">BrightGreen</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;Service started at &quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">fg</span><span class="o">::</span><span class="n">BrightWhite</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;09:42&quot;</span><span class="p">);</span>
+
+<span class="n">terminal</span><span class="p">.</span><span class="n">print</span><span class="p">(</span>
+<span class="w">    </span><span class="n">bg</span><span class="o">::</span><span class="n">BrightBlack</span><span class="p">,</span>
+<span class="w">    </span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;[Q] &quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">fg</span><span class="o">::</span><span class="n">BrightWhite</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;quit&quot;</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">emphasis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CharAttributes</span><span class="p">{};</span>
+<span class="n">emphasis</span><span class="p">.</span><span class="n">setBold</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="n">emphasis</span><span class="p">.</span><span class="n">setUnderline</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">headingStyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CharStyle</span><span class="p">{</span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">BrightWhite</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Inherited</span><span class="p">},</span><span class="w"> </span><span class="n">emphasis</span><span class="p">};</span>
+
+<span class="n">terminal</span><span class="p">.</span><span class="n">printLine</span><span class="p">(</span>
+<span class="w">    </span><span class="n">headingStyle</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;Important&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CharAttributes</span><span class="o">::</span><span class="n">reset</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">fg</span><span class="o">::</span><span class="n">BrightBlack</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot; uses both bold and underline.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Because the active color and attribute state is part of the writer,
+subsequent output continues using the most recently selected values
+until you change them again or call
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm12CursorWriter15setDefaultColorEv" title="erbsland::cterm::CursorWriter::setDefaultColor"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter::setDefaultColor()</span></code></a>.
+Use <a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm14CharAttributes5resetEv" title="erbsland::cterm::CharAttributes::reset"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CharAttributes::reset()</span></code></a>
+when you want to explicitly turn all attributes back off.
+Use <a class="reference internal" href="#_CPPv4NK8erbsland5cterm12CursorWriter5styleEv" title="erbsland::cterm::CursorWriter::style"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter::style()</span></code></a>
+and <a class="reference internal" href="#_CPPv4N8erbsland5cterm12CursorWriter8setStyleEK9CharStyle" title="erbsland::cterm::CursorWriter::setStyle"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter::setStyle()</span></code></a>
+when you want to read or update the combined style in one step.</p>
+</section>
+<section id="moving-the-cursor-explicitly">
+<h3>Moving the Cursor Explicitly<a class="headerlink" href="#moving-the-cursor-explicitly" title="Link to this heading"></a></h3>
+<p>Use <a class="reference internal" href="#_CPPv4N8erbsland5cterm8MoveModeE" title="erbsland::cterm::MoveMode"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">MoveMode</span></code></a> when you need to control whether a movement is
+relative to the current cursor position or absolute within the writable area.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">cursorBuffer</span><span class="p">.</span><span class="n">moveCursor</span><span class="p">(</span><span class="n">Position</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="n">MoveMode</span><span class="o">::</span><span class="n">Absolute</span><span class="p">);</span>
+<span class="n">cursorBuffer</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Header&quot;</span><span class="p">);</span>
+
+<span class="n">cursorBuffer</span><span class="p">.</span><span class="n">moveCursor</span><span class="p">(</span><span class="n">Position</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">MoveMode</span><span class="o">::</span><span class="n">Relative</span><span class="p">);</span>
+<span class="n">cursorBuffer</span><span class="p">.</span><span class="n">printLine</span><span class="p">(</span><span class="s">&quot;First entry&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>All convenience functions—such as <code class="docutils literal notranslate"><span class="pre">moveLeft()</span></code>, <code class="docutils literal notranslate"><span class="pre">moveRight()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">moveUp()</span></code>, <code class="docutils literal notranslate"><span class="pre">moveDown()</span></code>, <code class="docutils literal notranslate"><span class="pre">moveTo()</span></code>, and <code class="docutils literal notranslate"><span class="pre">moveHome()</span></code>—are built
+on top of this same distinction.</p>
+</section>
+<section id="vt100-compatible-line-wrapping">
+<h3>VT100-Compatible Line Wrapping<a class="headerlink" href="#vt100-compatible-line-wrapping" title="Link to this heading"></a></h3>
+<p>The cursor writer follows a wrapping model compatible with traditional
+VT100-style terminals. This behavior is slightly different from a naïve
+“wrap immediately at the edge” approach.</p>
+<p>When writing characters near the right edge of the buffer:</p>
+<ul class="simple">
+<li><p>A character written into the <strong>last column</strong> does <em>not</em> immediately
+move the cursor to the next line.</p></li>
+<li><p>Instead, a <em>pending wrap</em> is recorded internally.</p></li>
+<li><p>The actual line break only happens <strong>when the next character is written</strong>.</p></li>
+</ul>
+<p>This means:</p>
+<ul class="simple">
+<li><p>The last column can be filled without triggering an immediate line break.</p></li>
+<li><p>The next character causes the cursor to move to the beginning of the
+next line (if auto-wrap is enabled).</p></li>
+</ul>
+<p>Wide characters (display width <code class="docutils literal notranslate"><span class="pre">2</span></code>) are handled carefully:</p>
+<ul class="simple">
+<li><p>If a wide character would not fully fit at the end of the line:</p>
+<ul>
+<li><p>With auto-wrap enabled, a line break occurs first.</p></li>
+<li><p>With auto-wrap disabled, the character is ignored.</p></li>
+</ul>
+</li>
+</ul>
+<p>Additional details to keep in mind:</p>
+<ul class="simple">
+<li><p>If auto-wrap is disabled, writing at the right edge keeps the cursor
+pinned to the last column.</p></li>
+<li><p>Explicit cursor movement (e.g. <code class="docutils literal notranslate"><span class="pre">moveCursor()</span></code>) clears any pending wrap.</p></li>
+<li><p>Line breaks triggered by wrapping use the configured overflow mode
+(wrap, shift, or expand).</p></li>
+</ul>
+<p>This behavior ensures compatibility with terminal output expectations and
+avoids subtle off-by-one rendering issues when mixing manual positioning
+and streaming text.</p>
+</section>
+<section id="printing-wrapped-paragraphs">
+<h3>Printing Wrapped Paragraphs<a class="headerlink" href="#printing-wrapped-paragraphs" title="Link to this heading"></a></h3>
+<p>Both <a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a> and
+<a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm12CursorBufferE" title="erbsland::cterm::CursorBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorBuffer</span></code></a> implement the same
+paragraph-printing workflow via <a class="reference internal" href="#_CPPv4N8erbsland5cterm12CursorWriterE" title="erbsland::cterm::CursorWriter"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter</span></code></a>.</p>
+<p>This allows you to reuse one paragraph configuration for direct terminal
+output and for buffered, scrollable content.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ParagraphOptions</span><span class="o">::</span><span class="n">defaultOptions</span><span class="p">();</span>
+<span class="n">options</span><span class="p">.</span><span class="n">setMaximumLineWraps</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">options</span><span class="p">.</span><span class="n">setParagraphSpacing</span><span class="p">(</span><span class="n">ParagraphSpacing</span><span class="o">::</span><span class="n">DoubleLine</span><span class="p">);</span>
+
+<span class="n">logBuffer</span><span class="p">.</span><span class="n">printParagraph</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;The same paragraph API works for live terminal output and for buffered history views.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When writing to a <a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a>, output is sent immediately to the active backend.</p>
+<p>When writing to a <a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm12CursorBufferE" title="erbsland::cterm::CursorBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorBuffer</span></code></a>, the output becomes part of the buffer
+content and can later be rendered using
+<a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8Terminal12updateScreenERK14ReadableBufferRK14UpdateSettings" title="erbsland::cterm::Terminal::updateScreen"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal::updateScreen()</span></code></a> or displayed through a buffer view.</p>
+<p><cite>printParagraph()</cite> uses the current writer style as the base for any indentation or trailing padding that must be
+materialized as spaces. If the wrapped paragraph should visually sit on a colored panel, set the writer background
+before printing.</p>
+</section>
+<section id="choosing-between-terminal-and-cursorbuffer">
+<h3>Choosing Between Terminal and CursorBuffer<a class="headerlink" href="#choosing-between-terminal-and-cursorbuffer" title="Link to this heading"></a></h3>
+<p>Use <a class="reference internal" href="terminal.html#_CPPv4N8erbsland5cterm8TerminalE" title="erbsland::cterm::Terminal"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Terminal</span></code></a> when output should be written directly to the real console.</p>
+<p>Use <a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm12CursorBufferE" title="erbsland::cterm::CursorBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorBuffer</span></code></a> when you want to keep the same streaming API, but retain
+the output for scrolling, clipping, copying, or re-rendering.</p>
+<p>In practice, <a class="reference internal" href="#_CPPv4N8erbsland5cterm12CursorWriterE" title="erbsland::cterm::CursorWriter"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CursorWriter</span></code></a> acts as the bridge between immediate output
+and retained, in-memory rendering.</p>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriterE">
+<span id="_CPPv3N8erbsland5cterm12CursorWriterE"></span><span id="_CPPv2N8erbsland5cterm12CursorWriterE"></span><span id="erbsland::cterm::CursorWriter"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CursorWriter</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriterE" title="Link to this definition"></a><br /></dt>
+<dd><p>The shared interface for buffers/terminals that support cursor-based output. </p>
+<p>Subclassed by <a class="reference internal" href="buffer.html#classerbsland_1_1cterm_1_1_cursor_buffer"><span class="std std-ref">erbsland::cterm::CursorBuffer</span></a>, <a class="reference internal" href="terminal.html#classerbsland_1_1cterm_1_1_terminal"><span class="std std-ref">erbsland::cterm::Terminal</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm12CursorWriter5colorEv">
+<span id="_CPPv3NK8erbsland5cterm12CursorWriter5colorEv"></span><span id="_CPPv2NK8erbsland5cterm12CursorWriter5colorEv"></span><span id="erbsland::cterm::CursorWriter::colorC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1aefd050b2d1dba091be061f78b8d5da13"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm12CursorWriter5colorEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current color. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The currently tracked terminal color state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm12CursorWriter14charAttributesEv">
+<span id="_CPPv3NK8erbsland5cterm12CursorWriter14charAttributesEv"></span><span id="_CPPv2NK8erbsland5cterm12CursorWriter14charAttributesEv"></span><span id="erbsland::cterm::CursorWriter::charAttributesC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1afd32c08a38a4eb5c43ee885c9d9f26b5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm14CharAttributesE" title="erbsland::cterm::CharAttributes"><span class="n"><span class="pre">CharAttributes</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">charAttributes</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm12CursorWriter14charAttributesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current character attributes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The currently tracked character attribute state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm12CursorWriter5styleEv">
+<span id="_CPPv3NK8erbsland5cterm12CursorWriter5styleEv"></span><span id="_CPPv2NK8erbsland5cterm12CursorWriter5styleEv"></span><span id="erbsland::cterm::CursorWriter::styleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a4194b1ab75bf423b0a3457cebc503d10"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm9CharStyleE" title="erbsland::cterm::CharStyle"><span class="n"><span class="pre">CharStyle</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">style</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm12CursorWriter5styleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current combined text style. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The currently tracked terminal style. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter8setColorE5Color">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter8setColorE5Color"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter8setColorE5Color"></span><span id="erbsland::cterm::CursorWriter::setColor__Color"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1aafd1c36b8d86890459b3bb5d9e481702"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm5ColorE" title="erbsland::cterm::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter8setColorE5Color" title="Link to this definition"></a><br /></dt>
+<dd><p>Set foreground and background color. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">Inherited</span></code> colors are converted to <code class="docutils literal notranslate"><span class="pre">Default</span></code> colors. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The new combined color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter17setCharAttributesE14CharAttributes">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter17setCharAttributesE14CharAttributes"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter17setCharAttributesE14CharAttributes"></span><span id="erbsland::cterm::CursorWriter::setCharAttributes__CharAttributes"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ab671ed810d18f47083209002a86d4f0b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCharAttributes</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm14CharAttributesE" title="erbsland::cterm::CharAttributes"><span class="n"><span class="pre">CharAttributes</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">attributes</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter17setCharAttributesE14CharAttributes" title="Link to this definition"></a><br /></dt>
+<dd><p>Set all character attributes. </p>
+<p>Unspecified attributes are treated as disabled. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>attributes</strong> – The new character attributes. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter8setStyleEK9CharStyle">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter8setStyleEK9CharStyle"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter8setStyleEK9CharStyle"></span><span id="erbsland::cterm::CursorWriter::setStyle__CharStyleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a98d37e3ae370e3adc52a3f2ed2526ef9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setStyle</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm9CharStyleE" title="erbsland::cterm::CharStyle"><span class="n"><span class="pre">CharStyle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">style</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter8setStyleEK9CharStyle" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the full terminal style. </p>
+<p>Inherited colors are converted to defaults and unspecified attributes are treated as disabled. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>style</strong> – The new combined style. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter8setColorEK10ForegroundK10Background">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter8setColorEK10ForegroundK10Background"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter8setColorEK10ForegroundK10Background"></span><span id="erbsland::cterm::CursorWriter::setColor__ForegroundC.BackgroundC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a2bd8a714866940fcc6f24215f0bedb39"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setColor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">foregroundColor</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">backgroundColor</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter8setColorEK10ForegroundK10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Set foreground and background color. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">Inherited</span></code> colors are converted to <code class="docutils literal notranslate"><span class="pre">Default</span></code> colors. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>foregroundColor</strong> – The new foreground color. </p></li>
+<li><p><strong>backgroundColor</strong> – The new background color. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter13setForegroundE10Foreground">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter13setForegroundE10Foreground"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter13setForegroundE10Foreground"></span><span id="erbsland::cterm::CursorWriter::setForeground__Foreground"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a80ab7a71572e68e73d0856bf296b1572"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setForeground</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10ForegroundE" title="erbsland::cterm::Foreground"><span class="n"><span class="pre">Foreground</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter13setForegroundE10Foreground" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the foreground color. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">Inherited</span></code> colors are converted to <code class="docutils literal notranslate"><span class="pre">Default</span></code> colors. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The new foreground color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter13setBackgroundE10Background">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter13setBackgroundE10Background"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter13setBackgroundE10Background"></span><span id="erbsland::cterm::CursorWriter::setBackground__Background"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a3011a45c3040e38db4e61d827f6fc2e7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setBackground</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="color.html#_CPPv4N8erbsland5cterm10BackgroundE" title="erbsland::cterm::Background"><span class="n"><span class="pre">Background</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter13setBackgroundE10Background" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the background color. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">Inherited</span></code> colors are converted to <code class="docutils literal notranslate"><span class="pre">Default</span></code> colors. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> – The new background color. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter15setDefaultColorEv">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter15setDefaultColorEv"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter15setDefaultColorEv"></span><span id="erbsland::cterm::CursorWriter::setDefaultColor"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a1f67dc83abc2ea900e436bbc62e65ca7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setDefaultColor</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter15setDefaultColorEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the terminal default foreground and background colors. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm12CursorWriter23supportedCharAttributesEv">
+<span id="_CPPv3NK8erbsland5cterm12CursorWriter23supportedCharAttributesEv"></span><span id="_CPPv2NK8erbsland5cterm12CursorWriter23supportedCharAttributesEv"></span><span id="erbsland::cterm::CursorWriter::supportedCharAttributesC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ae298bea88947ac9e93f48fe2bf5211e9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm14CharAttributesE" title="erbsland::cterm::CharAttributes"><span class="n"><span class="pre">CharAttributes</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportedCharAttributes</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm12CursorWriter23supportedCharAttributesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the character attributes supported by this writer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The supported character attributes. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter7setBoldEKb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter7setBoldEKb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter7setBoldEKb"></span><span id="erbsland::cterm::CursorWriter::setBold__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a436b9bdf4db4f77583914ea26ea0b4b5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setBold</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter7setBoldEKb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable the bold attribute. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable bold, <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter6setDimEKb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter6setDimEKb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter6setDimEKb"></span><span id="erbsland::cterm::CursorWriter::setDim__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a49064e11b53ea2374ef6c47fa2eb45d9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setDim</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter6setDimEKb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable the dim attribute. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable dim, <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter9setItalicEKb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter9setItalicEKb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter9setItalicEKb"></span><span id="erbsland::cterm::CursorWriter::setItalic__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a6ca58fac20c7ae2750be72c09bf0af20"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setItalic</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter9setItalicEKb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable the italic attribute. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable italic, <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter12setUnderlineEKb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter12setUnderlineEKb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter12setUnderlineEKb"></span><span id="erbsland::cterm::CursorWriter::setUnderline__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a64ce8cfdbc726c31e6b6163d3d49813f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setUnderline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter12setUnderlineEKb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable the underline attribute. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable underline, <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter8setBlinkEKb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter8setBlinkEKb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter8setBlinkEKb"></span><span id="erbsland::cterm::CursorWriter::setBlink__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a125e536edc0227514dfc96a87f155b4c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setBlink</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter8setBlinkEKb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable the blink attribute. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable blink, <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter10setReverseEKb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter10setReverseEKb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter10setReverseEKb"></span><span id="erbsland::cterm::CursorWriter::setReverse__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a9ac2f80dac193ce1a1192716b1827963"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setReverse</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter10setReverseEKb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable the reverse attribute. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable reverse, <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter9setHiddenEKb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter9setHiddenEKb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter9setHiddenEKb"></span><span id="erbsland::cterm::CursorWriter::setHidden__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a5e42ae22bf38db387c95e14dd36b22cf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setHidden</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter9setHiddenEKb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable the hidden attribute. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable hidden, <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter16setStrikethroughEKb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter16setStrikethroughEKb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter16setStrikethroughEKb"></span><span id="erbsland::cterm::CursorWriter::setStrikethrough__bC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1afaac6d5bb731887997eca415bd0c9e22"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setStrikethrough</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter16setStrikethroughEKb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable the strikethrough attribute. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable strikethrough, <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter8moveLeftEK10Coordinate">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter8moveLeftEK10Coordinate"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter8moveLeftEK10Coordinate"></span><span id="erbsland::cterm::CursorWriter::moveLeft__CoordinateC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a3d24c8fb35ce9d678fa8d21edbcee67d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveLeft</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm10CoordinateE" title="erbsland::cterm::Coordinate"><span class="n"><span class="pre">Coordinate</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter8moveLeftEK10Coordinate" title="Link to this definition"></a><br /></dt>
+<dd><p>Move the cursor to the left. </p>
+<p>If the resulting position is out of bounds, the result is undefined. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> – The number of terminal cells to move. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter9moveRightEK10Coordinate">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter9moveRightEK10Coordinate"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter9moveRightEK10Coordinate"></span><span id="erbsland::cterm::CursorWriter::moveRight__CoordinateC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a38d18452318d722963cba824532fb672"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveRight</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm10CoordinateE" title="erbsland::cterm::Coordinate"><span class="n"><span class="pre">Coordinate</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter9moveRightEK10Coordinate" title="Link to this definition"></a><br /></dt>
+<dd><p>Move the cursor to the right. </p>
+<p>If the resulting position is out of bounds, the result is undefined. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> – The number of terminal cells to move. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter6moveUpEK10Coordinate">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter6moveUpEK10Coordinate"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter6moveUpEK10Coordinate"></span><span id="erbsland::cterm::CursorWriter::moveUp__CoordinateC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1af554daa3b9a850c6de535203f57b3594"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveUp</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm10CoordinateE" title="erbsland::cterm::Coordinate"><span class="n"><span class="pre">Coordinate</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter6moveUpEK10Coordinate" title="Link to this definition"></a><br /></dt>
+<dd><p>Move the cursor up. </p>
+<p>If the resulting position is out of bounds, the result is undefined. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> – The number of terminal cells to move. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter8moveDownEK10Coordinate">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter8moveDownEK10Coordinate"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter8moveDownEK10Coordinate"></span><span id="erbsland::cterm::CursorWriter::moveDown__CoordinateC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ac38cced8875f86d30e0da3f72eba14d2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveDown</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm10CoordinateE" title="erbsland::cterm::Coordinate"><span class="n"><span class="pre">Coordinate</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter8moveDownEK10Coordinate" title="Link to this definition"></a><br /></dt>
+<dd><p>Move the cursor down. </p>
+<p>If the resulting position is out of bounds, the result is undefined. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> – The number of terminal cells to move. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter6moveToEK8Position">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter6moveToEK8Position"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter6moveToEK8Position"></span><span id="erbsland::cterm::CursorWriter::moveTo__PositionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a2bbe77ca72a5fecdbbef999a73125dba"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveTo</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter6moveToEK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Move the cursor to the given position. </p>
+<p>If the resulting position is out of bounds, the result is undefined. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pos</strong> – The position to move the cursor to. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter8moveHomeEv">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter8moveHomeEv"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter8moveHomeEv"></span><span id="erbsland::cterm::CursorWriter::moveHome"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a0a1f22f286d1c56e43c82314a7fc9998"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveHome</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter8moveHomeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Moves the cursor to the home position. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter10moveCursorE8Position8MoveMode">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter10moveCursorE8Position8MoveMode"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter10moveCursorE8Position8MoveMode"></span><span id="erbsland::cterm::CursorWriter::moveCursor__Position.MoveMode"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1acf0d7ec8bd0da4b0321c2b17e8e97ee4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moveCursor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">posOrDelta</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm8MoveModeE" title="erbsland::cterm::MoveMode"><span class="n"><span class="pre">MoveMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mode</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter10moveCursorE8Position8MoveMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Move the cursor absolute or relative. </p>
+<p>If the resulting position is out of bounds, the result is undefined. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>posOrDelta</strong> – The absolute position or delta for the move. </p></li>
+<li><p><strong>mode</strong> – The move mode, either absolute or relative. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter14cursorPositionEv">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter14cursorPositionEv"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter14cursorPositionEv"></span><span id="erbsland::cterm::CursorWriter::cursorPosition"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a292f0a2751b24b8a159f538a245b8ac7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cursorPosition</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter14cursorPositionEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Try to get the current cursor position. </p>
+<p>Not all implementations support retrieving the cursor position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current cursor position, or <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> if it cannot be determined. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter11setAutoWrapEb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter11setAutoWrapEb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter11setAutoWrapEb"></span><span id="erbsland::cterm::CursorWriter::setAutoWrap__b"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ae5c76766115e583b26a74be3baebe1ae"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setAutoWrap</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter11setAutoWrapEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enabled/disable auto-wrap. </p>
+<p>Auto wrap controls if the cursor automatically wraps to the next line when reaching the right margin. This is a feature that can be enabled or disabled. Do not confuse this with line wrapping, which is a different feature. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – Whether to enable or disable auto-wrap. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter16setCursorVisibleEb">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter16setCursorVisibleEb"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter16setCursorVisibleEb"></span><span id="erbsland::cterm::CursorWriter::setCursorVisible__b"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a877d573f647ecd3b3a12754ba37e8632"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCursorVisible</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">visible</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter16setCursorVisibleEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Make the cursor visible/invisible. </p>
+<p>Not all implementations support changing the cursor visibility. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>visible</strong> – Whether to make the cursor visible or invisible. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm12CursorWriter4sizeEv">
+<span id="_CPPv3NK8erbsland5cterm12CursorWriter4sizeEv"></span><span id="_CPPv2NK8erbsland5cterm12CursorWriter4sizeEv"></span><span id="erbsland::cterm::CursorWriter::sizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ad8e0d59c060dfdfd7a27c977d2134917"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm12CursorWriter4sizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the size of the screen/writing area. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter11clearScreenEv">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter11clearScreenEv"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter11clearScreenEv"></span><span id="erbsland::cterm::CursorWriter::clearScreen"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a1da916b199e92862d7c8fcd6714d126f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clearScreen</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter11clearScreenEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Clears the screen/writing area. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter5writeERK4Char">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter5writeERK4Char"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter5writeERK4Char"></span><span id="erbsland::cterm::CursorWriter::write__CharCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ac77ed94801339bb8598ef50fc4de6cf8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">character</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter5writeERK4Char" title="Link to this definition"></a><br /></dt>
+<dd><p>Write a character at the current cursor position. </p>
+<p>Inherited color components resolve against the currently active color. Overwrites the character under the cursor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>character</strong> – The character to write. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter5writeERK10StringView">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter5writeERK10StringView"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter5writeERK10StringView"></span><span id="erbsland::cterm::CursorWriter::write__StringViewCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ac735c1a208ef73231243d4dbee90b167"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm10StringViewE" title="erbsland::cterm::StringView"><span class="n"><span class="pre">StringView</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter5writeERK10StringView" title="Link to this definition"></a><br /></dt>
+<dd><p>Write a string at the current cursor position. </p>
+<p>Inherited color components in each character resolve against the currently active color. Overwrites the characters under the cursor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>str</strong> – The string to write. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter13writeResolvedERK10StringView">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter13writeResolvedERK10StringView"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter13writeResolvedERK10StringView"></span><span id="erbsland::cterm::CursorWriter::writeResolved__StringViewCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ae22c11cc4449a2e7b391da2be73323e7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">writeResolved</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm10StringViewE" title="erbsland::cterm::StringView"><span class="n"><span class="pre">StringView</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter13writeResolvedERK10StringView" title="Link to this definition"></a><br /></dt>
+<dd><p>Write a string whose characters are already fully resolved against the writer state. </p>
+<p>This bypasses any additional inherited-style resolution in implementations that can optimize for it. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>str</strong> – The already resolved string to write. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter13writeResolvedERK4Char">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter13writeResolvedERK4Char"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter13writeResolvedERK4Char"></span><span id="erbsland::cterm::CursorWriter::writeResolved__CharCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a3b00911d0378755d19b63befd7bf2ddf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">writeResolved</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">character</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter13writeResolvedERK4Char" title="Link to this definition"></a><br /></dt>
+<dd><p>Write a character that is already fully resolved against the writer state. </p>
+<p>This bypasses any additional inherited-style resolution in implementations that can optimize for it. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>character</strong> – The already resolved character to write. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter13writeRepeatedERK4CharKi">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter13writeRepeatedERK4CharKi"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter13writeRepeatedERK4CharKi"></span><span id="erbsland::cterm::CursorWriter::writeRepeated__CharCR.iC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a95bf900ecc739b1dba363ac98513b546"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">writeRepeated</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">character</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter13writeRepeatedERK4CharKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Write the same character multiple times at the current cursor position. </p>
+<p>Inherited color components resolve against the currently active color for each repetition. A non-positive count is ignored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>character</strong> – The character to repeat. </p></li>
+<li><p><strong>count</strong> – The number of repetitions. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter21writeRepeatedResolvedERK4CharKi">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter21writeRepeatedResolvedERK4CharKi"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter21writeRepeatedResolvedERK4CharKi"></span><span id="erbsland::cterm::CursorWriter::writeRepeatedResolved__CharCR.iC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a47d395be06cdfcb719ea168f39622072"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">writeRepeatedResolved</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">character</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter21writeRepeatedResolvedERK4CharKi" title="Link to this definition"></a><br /></dt>
+<dd><p>Write the same fully resolved character multiple times at the current cursor position. </p>
+<p>This bypasses any additional inherited-style resolution in implementations that can optimize for it. A non-positive count is ignored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>character</strong> – The already resolved character to repeat. </p></li>
+<li><p><strong>count</strong> – The number of repetitions. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter5writeEKNSt11string_viewE">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter5writeEKNSt11string_viewE"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter5writeEKNSt11string_viewE"></span><span id="erbsland::cterm::CursorWriter::write__std::string_viewC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1aaea5185fd1449b059cf27c435617b448"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter5writeEKNSt11string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Invalid UTF-8 bytes are replaced with the Unicode replacement character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter5writeEKNSt14u32string_viewE">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter5writeEKNSt14u32string_viewE"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter5writeEKNSt14u32string_viewE"></span><span id="erbsland::cterm::CursorWriter::write__std::u32string_viewC"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ac2479e24561ba2e43d69ec926f5c592c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter5writeEKNSt14u32string_viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter5writeERK14ReadableBuffer">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter5writeERK14ReadableBuffer"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter5writeERK14ReadableBuffer"></span><span id="erbsland::cterm::CursorWriter::write__ReadableBufferCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1ac1fbb841ee2b8ad50b0bc8935cab8185"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm14ReadableBufferE" title="erbsland::cterm::ReadableBuffer"><span class="n"><span class="pre">ReadableBuffer</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">buffer</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter5writeERK14ReadableBuffer" title="Link to this definition"></a><br /></dt>
+<dd><p>Write a buffer at the current cursor position. </p>
+<p>This will not perform any additional formatting, clipping, or processing. Each line of the buffer will be written, and a line-break added after each line. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>buffer</strong> – The buffer to write. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter14writeLineBreakEv">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter14writeLineBreakEv"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter14writeLineBreakEv"></span><span id="erbsland::cterm::CursorWriter::writeLineBreak"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a76b3ade50d3ef471afe6d7b3f1c1b282"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">writeLineBreak</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter14writeLineBreakEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Write a line-break. </p>
+<p>This will move the cursor to the beginning of the next line. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter5printEvDp4Args">
+<span id="_CPPv3I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter5printEDp4Args"></span><span id="_CPPv2I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter5printEDp4Args"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">PrintableArg</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a8d7298784ee51b8e5d049c57ff2265ed"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter5printEvDp4Args" title="erbsland::cterm::CursorWriter::print::Args"><span class="n"><span class="pre">Args</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter5printEvDp4Args" title="Link to this definition"></a><br /></dt>
+<dd><p>Print elements at the cursor position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – The arguments to print. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter9printLineEvDp4Args">
+<span id="_CPPv3I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter9printLineEDp4Args"></span><span id="_CPPv2I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter9printLineEDp4Args"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">PrintableArg</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a43c9c317f4e6fc22a9c047c8021f14cc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">printLine</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter9printLineEvDp4Args" title="erbsland::cterm::CursorWriter::printLine::Args"><span class="n"><span class="pre">Args</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4I_Dp12PrintableArgEN8erbsland5cterm12CursorWriter9printLineEvDp4Args" title="Link to this definition"></a><br /></dt>
+<dd><p>Print elements at the cursor position and add a line break. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – The arguments to print. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter14printParagraphERK10StringViewRK16ParagraphOptions">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter14printParagraphERK10StringViewRK16ParagraphOptions"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter14printParagraphERK10StringViewRK16ParagraphOptions"></span><span id="erbsland::cterm::CursorWriter::printParagraph__StringViewCR.ParagraphOptionsCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a1acf7ab939a218fba5e00b62ab2c1bf9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">printParagraph</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm10StringViewE" title="erbsland::cterm::StringView"><span class="n"><span class="pre">StringView</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">paragraph</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptionsE" title="erbsland::cterm::ParagraphOptions"><span class="n"><span class="pre">ParagraphOptions</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">options</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptionsE" title="erbsland::cterm::ParagraphOptions"><span class="n"><span class="pre">ParagraphOptions</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptions14defaultOptionsEv" title="erbsland::cterm::ParagraphOptions::defaultOptions"><span class="n"><span class="pre">defaultOptions</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter14printParagraphERK10StringViewRK16ParagraphOptions" title="Link to this definition"></a><br /></dt>
+<dd><p>Print a word-wrapped paragraph at the cursor position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paragraph</strong> – The paragraph text to write. Can use line breaks and tabs, see documentation. </p></li>
+<li><p><strong>options</strong> – The paragraph options to use. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of lines written (including empty lines). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter14printParagraphEKNSt11string_viewERK16ParagraphOptions">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter14printParagraphEKNSt11string_viewERK16ParagraphOptions"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter14printParagraphEKNSt11string_viewERK16ParagraphOptions"></span><span id="erbsland::cterm::CursorWriter::printParagraph__std::string_viewC.ParagraphOptionsCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a87a904b3b866fab26d3eb9fa1d1963c5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">printParagraph</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">paragraph</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptionsE" title="erbsland::cterm::ParagraphOptions"><span class="n"><span class="pre">ParagraphOptions</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">options</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptionsE" title="erbsland::cterm::ParagraphOptions"><span class="n"><span class="pre">ParagraphOptions</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptions14defaultOptionsEv" title="erbsland::cterm::ParagraphOptions::defaultOptions"><span class="n"><span class="pre">defaultOptions</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter14printParagraphEKNSt11string_viewERK16ParagraphOptions" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Invalid UTF-8 bytes are replaced with the Unicode replacement character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm12CursorWriter14printParagraphEKNSt14u32string_viewERK16ParagraphOptions">
+<span id="_CPPv3N8erbsland5cterm12CursorWriter14printParagraphEKNSt14u32string_viewERK16ParagraphOptions"></span><span id="_CPPv2N8erbsland5cterm12CursorWriter14printParagraphEKNSt14u32string_viewERK16ParagraphOptions"></span><span id="erbsland::cterm::CursorWriter::printParagraph__std::u32string_viewC.ParagraphOptionsCR"></span><span class="target" id="classerbsland_1_1cterm_1_1_cursor_writer_1a63cb7babba8c08196ce029e839aec980"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">printParagraph</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">u32string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">paragraph</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptionsE" title="erbsland::cterm::ParagraphOptions"><span class="n"><span class="pre">ParagraphOptions</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">options</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptionsE" title="erbsland::cterm::ParagraphOptions"><span class="n"><span class="pre">ParagraphOptions</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="paragraph-options.html#_CPPv4N8erbsland5cterm16ParagraphOptions14defaultOptionsEv" title="erbsland::cterm::ParagraphOptions::defaultOptions"><span class="n"><span class="pre">defaultOptions</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm12CursorWriter14printParagraphEKNSt14u32string_viewERK16ParagraphOptions" title="Link to this definition"></a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8MoveModeE">
+<span id="_CPPv3N8erbsland5cterm8MoveModeE"></span><span id="_CPPv2N8erbsland5cterm8MoveModeE"></span><span class="target" id="_move_mode_8hpp_1aad7388e333d3ecd4dd8a1d06f8b083e3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">MoveMode</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8MoveModeE" title="Link to this definition"></a><br /></dt>
+<dd><p>The cursor move mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8MoveMode8AbsoluteE">
+<span id="_CPPv3N8erbsland5cterm8MoveMode8AbsoluteE"></span><span id="_CPPv2N8erbsland5cterm8MoveMode8AbsoluteE"></span><span class="target" id="_move_mode_8hpp_1aad7388e333d3ecd4dd8a1d06f8b083e3ab51ca26c6c89cfc9bec338f7a0d3e0c8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Absolute</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8MoveMode8AbsoluteE" title="Link to this definition"></a><br /></dt>
+<dd><p>Absolute move. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm8MoveMode8RelativeE">
+<span id="_CPPv3N8erbsland5cterm8MoveMode8RelativeE"></span><span id="_CPPv2N8erbsland5cterm8MoveMode8RelativeE"></span><span class="target" id="_move_mode_8hpp_1aad7388e333d3ecd4dd8a1d06f8b083e3a2ca9469819fb0fb61ff98e914a7ccca0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Relative</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm8MoveMode8RelativeE" title="Link to this definition"></a><br /></dt>
+<dd><p>Relative move. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="color.html" class="btn btn-neutral float-left" title="Color" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="drawing.html" class="btn btn-neutral float-right" title="Frames, Borders, Tiles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

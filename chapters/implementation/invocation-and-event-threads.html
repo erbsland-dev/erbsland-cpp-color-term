@@ -1,0 +1,828 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invocation and Event Threads &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="UI Paint System" href="ui-paint-system.html" />
+    <link rel="prev" title="Action Scheduling" href="action-scheduling.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Implementation Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="windows-backend.html">Windows Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="posix-backend.html">POSIX Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action-scheduling.html">Action Scheduling</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Invocation and Event Threads</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#relevant-source-files">Relevant Source Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-this-system-exists">Why This System Exists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-picture">High-Level Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shared-building-blocks">Shared Building Blocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#eventtype-invocation"><code class="docutils literal notranslate"><span class="pre">EventType::Invocation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#impl-invocationevent"><code class="docutils literal notranslate"><span class="pre">impl::InvocationEvent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eventdriver"><code class="docutils literal notranslate"><span class="pre">EventDriver</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eventscheduler"><code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#application-invoke">Application::invoke()</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-it-promises">What It Promises</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-that-restriction-exists">Why That Restriction Exists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#execution-path">Execution Path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-event-loop-integration">Application Event Loop Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visual-timeline">Visual Timeline</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#eventthread">EventThread</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-it-is">What It Is</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-it-is-not">What It Is Not</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#construction-model">Construction Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#worker-loop">Worker Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-it-processes-one-event-at-a-time">Why It Processes One Event at a Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delayed-invocations">Delayed Invocations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wait-slicing">Wait Slicing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#stop-tokens">Stop Tokens</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#per-invocation-stop-source">Per-Invocation Stop Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-quit-does">What <code class="docutils literal notranslate"><span class="pre">quit()</span></code> Does</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-abort-does">What <code class="docutils literal notranslate"><span class="pre">abort()</span></code> Does</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comparison-table">Comparison Table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#failure-handling">Failure Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#application-managed-event-threads">Application-Managed Event Threads</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-createeventthread-adds">What <code class="docutils literal notranslate"><span class="pre">createEventThread()</span></code> Adds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-weak-references-are-enough">Why Weak References Are Enough</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visual-lifecycle">Visual Lifecycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#managed-shutdown">Managed Shutdown</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#warnings">Warnings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-this-relates-to-surface-scheduling">How This Relates to Surface Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-checklist">Debugging Checklist</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#callback-never-runs">Callback never runs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#callback-runs-on-the-wrong-thread">Callback runs on the wrong thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#waitforquit-throws"><code class="docutils literal notranslate"><span class="pre">waitForQuit()</span></code> throws</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shutdown-warning-appears">Shutdown warning appears</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#worker-seems-idle-but-delayed-work-does-not-fire">Worker seems idle but delayed work does not fire</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ui-paint-system.html">UI Paint System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-scrollable-areas.html">UI Scrollable Areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-layout-and-painting.html">Paragraph Layout and Painting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remapped-buffer.html">RemappedBuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack-layout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string-sharing.html">String Sharing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text-node-renderer.html">TextNodeRenderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode-width-system.html">Unicode Width System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementation Notes</a></li>
+      <li class="breadcrumb-item active">Invocation and Event Threads</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/implementation/invocation-and-event-threads.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="invocation-and-event-threads">
+<span id="index-0"></span><h1>Invocation and Event Threads<a class="headerlink" href="#invocation-and-event-threads" title="Link to this heading"></a></h1>
+<p>This page explains the invocation system in the UI layer and the
+<a class="reference internal" href="../reference/ui-events.html#_CPPv4N8erbsland5cterm2ui11EventThreadE" title="erbsland::cterm::ui::EventThread"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">EventThread</span></code></a> helper.</p>
+<p>It is written for contributors who need to extend, debug, or reason about
+cross-thread work delivery in the UI system without reverse-engineering the
+code from scratch.</p>
+<p>After reading this page, you should be able to answer:</p>
+<ul class="simple">
+<li><p>how <a class="reference internal" href="../reference/ui-core.html#_CPPv4N8erbsland5cterm2ui11Application6invokeENSt8functionIFvvEEE" title="erbsland::cterm::ui::Application::invoke"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Application::invoke()</span></code></a> reaches the UI thread</p></li>
+<li><p>how <a class="reference internal" href="../reference/ui-events.html#_CPPv4N8erbsland5cterm2ui11EventThreadE" title="erbsland::cterm::ui::EventThread"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">EventThread</span></code></a> reuses the same event transport</p></li>
+<li><p>what the difference is between <code class="docutils literal notranslate"><span class="pre">quit()</span></code> and <code class="docutils literal notranslate"><span class="pre">abort()</span></code></p></li>
+<li><p>how delayed invocations are stored and cancelled</p></li>
+<li><p>how cooperative stop tokens are installed and requested</p></li>
+<li><p>how <a class="reference internal" href="../reference/ui-core.html#_CPPv4N8erbsland5cterm2ui11Application17createEventThreadEv" title="erbsland::cterm::ui::Application::createEventThread"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Application::createEventThread()</span></code></a>
+tracks, prunes, and shuts down managed worker threads</p></li>
+</ul>
+<p>This page complements <a class="reference internal" href="action-scheduling.html"><span class="doc">Action Scheduling</span></a>.
+That page explains surface-local scheduled UI callbacks.
+This page explains generic invocation delivery and reusable background event loops.</p>
+<section id="relevant-source-files">
+<h2>Relevant Source Files<a class="headerlink" href="#relevant-source-files" title="Link to this heading"></a></h2>
+<p>You will find the implementation primarily in:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Application.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/Application.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventThread.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventThread.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventDriver.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventDriver.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventScheduler.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventScheduler.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/EventType.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">src/erbsland/cterm/ui/event/impl/InvocationEvent.hpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/ui/event/UiApplicationInvokeTest.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/ui/event/EventThreadTest.cpp</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">test/unittest/src/ui/surface/UiSchedulerTest.cpp</span></code></p></li>
+</ul>
+</section>
+<section id="why-this-system-exists">
+<h2>Why This System Exists<a class="headerlink" href="#why-this-system-exists" title="Link to this heading"></a></h2>
+<p>The UI layer already had one important rule:</p>
+<p>All UI work must be serialized on the application thread.</p>
+<p>That rule is easy to keep for:</p>
+<ul class="simple">
+<li><p>key input</p></li>
+<li><p>surface-local scheduled actions</p></li>
+<li><p>display updates</p></li>
+</ul>
+<p>but it becomes harder once background work enters the picture.</p>
+<p>Typical needs are:</p>
+<ul class="simple">
+<li><p>a worker thread wants to hand a finished result back to the UI</p></li>
+<li><p>a helper thread wants its own tiny event loop without exposing raw threading mechanics</p></li>
+<li><p>application shutdown must stop these background workers in a predictable way</p></li>
+<li><p>long-running worker callbacks should be able to stop cooperatively</p></li>
+</ul>
+<p>The design goal was therefore:</p>
+<p>Do not invent a second callback-delivery model.
+Reuse the existing event infrastructure and make background work feel like a natural extension of it.</p>
+</section>
+<section id="high-level-picture">
+<h2>High-Level Picture<a class="headerlink" href="#high-level-picture" title="Link to this heading"></a></h2>
+<p>There are two public entry points into the invocation system:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Application::invoke(fn)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EventThread::invoke(fn)</span></code> and <code class="docutils literal notranslate"><span class="pre">EventThread::invokeDelayed(fn,</span> <span class="pre">delay)</span></code></p></li>
+</ul>
+<p>Both use the same event type and the same internal payload,
+but they do <strong>not</strong> share one physical queue.
+Each owner feeds its own event loop.</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TB
+    subgraph applicationPath["Application path"]
+        direction TB
+        appInvoke["Application::invoke(fn)"] --&gt; appDriver["Application EventDriver"]
+        appDriver --&gt; appEvent["EventType::Invocation + InvocationEvent"]
+        appEvent --&gt; appHandle["Application::handleEvent()"]
+        appHandle --&gt; appFn["fn() on the UI thread"]
+    end
+    subgraph workerPath["Worker path"]
+        direction TB
+        workerInvoke["EventThread::invoke(fn)"] --&gt; workerDriver["EventThread EventDriver"]
+        workerDriver --&gt; workerEvent["EventType::Invocation + InvocationEvent"]
+        workerEvent --&gt; workerHandle["EventThread::handleEvent()"]
+        workerHandle --&gt; workerFn["fn(stop_token) on the worker thread"]
+    end
+    subgraph delayedPath["Delayed worker path"]
+        direction TB
+        delayedInvoke["EventThread::invokeDelayed(fn, delay)"] --&gt; delayedScheduler["EventThread EventScheduler"]
+        delayedScheduler --&gt; delayedDriver["EventThread EventDriver"]
+        delayedDriver --&gt; delayedEvent["EventType::Invocation + InvocationEvent"]
+        delayedEvent --&gt; delayedHandle["EventThread::handleEvent()"]
+        delayedHandle --&gt; delayedFn["fn(stop_token) on the worker thread"]
+    end
+</div><p>The shared transport matters because it gives all three entry paths the same core behavior:</p>
+<ul class="simple">
+<li><p>work is queued as an event, not executed directly by the caller</p></li>
+<li><p>delivery is serialized by one event loop</p></li>
+<li><p>delayed work is handled by <a class="reference internal" href="../reference/ui-events.html#_CPPv4N8erbsland5cterm2ui14EventSchedulerE" title="erbsland::cterm::ui::EventScheduler"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">EventScheduler</span></code></a></p></li>
+<li><p>shutdown can be expressed as event-loop control rather than as ad-hoc thread interruption</p></li>
+</ul>
+</section>
+<section id="shared-building-blocks">
+<h2>Shared Building Blocks<a class="headerlink" href="#shared-building-blocks" title="Link to this heading"></a></h2>
+<section id="eventtype-invocation">
+<h3><code class="docutils literal notranslate"><span class="pre">EventType::Invocation</span></code><a class="headerlink" href="#eventtype-invocation" title="Link to this heading"></a></h3>
+<p>This is the common transport label for invoked callbacks.</p>
+<p>There is intentionally only one generic invocation event type.
+The code does not distinguish between:</p>
+<ul class="simple">
+<li><p>UI-thread invocation</p></li>
+<li><p>background-thread invocation</p></li>
+<li><p>immediate invocation</p></li>
+<li><p>delayed invocation</p></li>
+</ul>
+<p>Those differences are handled by the owner of the event loop, not by the event type itself.</p>
+</section>
+<section id="impl-invocationevent">
+<h3><code class="docutils literal notranslate"><span class="pre">impl::InvocationEvent</span></code><a class="headerlink" href="#impl-invocationevent" title="Link to this heading"></a></h3>
+<p>The payload stores one callable shape:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">stop_token</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>That choice solves two problems at once:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">EventThread</span></code> can pass a real cooperative stop token to worker callbacks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Application</span></code> can reuse the same payload by simply invoking it with a default, never-requested token</p></li>
+</ul>
+<p>Plain <code class="docutils literal notranslate"><span class="pre">void()</span></code> callbacks are wrapped into a token-ignoring adapter.</p>
+</section>
+<section id="eventdriver">
+<h3><code class="docutils literal notranslate"><span class="pre">EventDriver</span></code><a class="headerlink" href="#eventdriver" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">EventDriver</span></code> is the immediate event queue.
+For this system, the relevant operation is <code class="docutils literal notranslate"><span class="pre">processOneEvent()</span></code>,
+which lets <code class="docutils literal notranslate"><span class="pre">EventThread</span></code> stop between individual queued callbacks.</p>
+<p>That is important for <code class="docutils literal notranslate"><span class="pre">abort()</span></code>.
+If the worker loop drained the entire queue in one call, an abort request would have to wait
+until every queued callback had already run.</p>
+</section>
+<section id="eventscheduler">
+<h3><code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code><a class="headerlink" href="#eventscheduler" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> stores future events and releases them into an <code class="docutils literal notranslate"><span class="pre">EventDriver</span></code> once they are due.</p>
+<p>For the invocation system, the important behavior is <code class="docutils literal notranslate"><span class="pre">clear()</span></code>.
+It lets <code class="docutils literal notranslate"><span class="pre">EventThread::quit()</span></code> and <code class="docutils literal notranslate"><span class="pre">EventThread::abort()</span></code> cancel delayed-not-yet-due work immediately.</p>
+<p>Think of the two layers like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EventScheduler = &quot;hold this until later&quot;
+EventDriver    = &quot;deliver this as soon as possible&quot;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="application-invoke">
+<h2>Application::invoke()<a class="headerlink" href="#application-invoke" title="Link to this heading"></a></h2>
+<section id="what-it-promises">
+<h3>What It Promises<a class="headerlink" href="#what-it-promises" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Application::invoke(fn)</span></code> is the generic way to marshal arbitrary work back onto the UI thread.</p>
+<p>It is valid only while the application event system is active:</p>
+<ul class="simple">
+<li><p>the application must already be running</p></li>
+<li><p>shutdown must not have been requested</p></li>
+<li><p>the event driver and scheduler must still exist</p></li>
+</ul>
+<p>Outside that window it throws <code class="docutils literal notranslate"><span class="pre">std::logic_error</span></code>.</p>
+</section>
+<section id="why-that-restriction-exists">
+<h3>Why That Restriction Exists<a class="headerlink" href="#why-that-restriction-exists" title="Link to this heading"></a></h3>
+<p>The method is intentionally strict because a queued callback is only meaningful while the UI event loop still exists.</p>
+<p>If the application already requested shutdown:</p>
+<ul class="simple">
+<li><p>a newly queued callback might land behind the queued quit event</p></li>
+<li><p>it would then never be executed</p></li>
+<li><p>silently accepting it would create confusing race-dependent behavior</p></li>
+</ul>
+<p>The implementation therefore treats this as programmer error instead of best-effort work submission.</p>
+</section>
+<section id="execution-path">
+<h3>Execution Path<a class="headerlink" href="#execution-path" title="Link to this heading"></a></h3>
+<p>The full delivery path is:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    source["background thread or helper code"] --&gt; invoke["Application::invoke(fn)"]
+    invoke --&gt; addEvent["EventDriver::addEvent(EventType::Invocation, InvocationEvent)"]
+    addEvent --&gt; loop["Application::runEventLoop()"]
+    loop --&gt; process["EventDriver::processEvents(0ms)"]
+    process --&gt; handle["Application::handleEvent()"]
+    handle --&gt; eventInvoke["InvocationEvent::invoke({})"]
+    eventInvoke --&gt; fn["fn() runs on the UI thread"]
+</div><p>There is no extra dispatcher layer beyond the normal event loop.</p>
+</section>
+<section id="application-event-loop-integration">
+<h3>Application Event Loop Integration<a class="headerlink" href="#application-event-loop-integration" title="Link to this heading"></a></h3>
+<p>The application loop follows this shape:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>while not abort requested:
+    poll terminal resize
+    poll scheduled UI events
+    drain queued events
+    poll render work
+    timeout = calculateInputTimeout()
+    key = readKey(timeout)
+    if key is valid:
+        queue KeyPress event
+</pre></div>
+</div>
+<p>Two details matter here:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calculateInputTimeout()</span></code> returns <code class="docutils literal notranslate"><span class="pre">0ms</span></code> when work is already due</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readKey(0ms)</span></code> is used directly as the non-blocking poll</p></li>
+</ul>
+</section>
+<section id="visual-timeline">
+<h3>Visual Timeline<a class="headerlink" href="#visual-timeline" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t0: background thread queues Application::invoke(...)
+t1: application loop reaches EventDriver::processEvents(0ms)
+t2: invocation event is dispatched
+t3: callback runs on the UI thread
+</pre></div>
+</div>
+<p>The key point is:</p>
+<p>The callback is not run “from the posting thread”.
+It is run at the point where the application loop reaches queued event dispatch.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">readKey(0ms)</span></code> made the loop logic simpler and more explicit.
+It did <strong>not</strong> add an operating-system level wake-up primitive for a <code class="docutils literal notranslate"><span class="pre">readKey(timeout)</span></code>
+call that is already waiting with a non-zero timeout.
+In practice, a newly posted application invocation is still observed on the next loop cycle.</p>
+</div>
+</section>
+</section>
+<section id="eventthread">
+<h2>EventThread<a class="headerlink" href="#eventthread" title="Link to this heading"></a></h2>
+<section id="what-it-is">
+<h3>What It Is<a class="headerlink" href="#what-it-is" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">EventThread</span></code> is a small convenience wrapper around:</p>
+<ul class="simple">
+<li><p>one <a class="reference internal" href="../reference/ui-events.html#_CPPv4N8erbsland5cterm2ui11EventDriverE" title="erbsland::cterm::ui::EventDriver"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">EventDriver</span></code></a></p></li>
+<li><p>one <a class="reference internal" href="../reference/ui-events.html#_CPPv4N8erbsland5cterm2ui14EventSchedulerE" title="erbsland::cterm::ui::EventScheduler"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">EventScheduler</span></code></a></p></li>
+<li><p>one detached worker thread</p></li>
+<li><p>one stop token for the currently running callback</p></li>
+</ul>
+<p>The intention is:</p>
+<p>Give library users a ready-to-use worker event loop without making them build queueing,
+delayed delivery, stop-token handling, and shutdown coordination themselves.</p>
+</section>
+<section id="what-it-is-not">
+<h3>What It Is Not<a class="headerlink" href="#what-it-is-not" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">EventThread</span></code> is not:</p>
+<ul class="simple">
+<li><p>a general-purpose thread pool</p></li>
+<li><p>a preemptive interruption mechanism</p></li>
+<li><p>a timer wheel with arbitrary cancellation handles</p></li>
+<li><p>a second UI thread</p></li>
+</ul>
+<p>It is a single-threaded event loop with one queue and a small delayed-event scheduler.</p>
+</section>
+<section id="construction-model">
+<h3>Construction Model<a class="headerlink" href="#construction-model" title="Link to this heading"></a></h3>
+<p>Instances are created with <code class="docutils literal notranslate"><span class="pre">EventThread::create()</span></code>.</p>
+<p>Internally, the object is started like this:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    createPtr["make shared_ptr&lt;EventThread&gt;"] --&gt; startThread["start detached std::thread"]
+    startThread --&gt; capture["detached lambda captures the shared_ptr"]
+</div><p>That last step is important.
+It means the worker object stays alive even if the caller drops its last external <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code>
+while the worker loop is still running.</p>
+</section>
+<section id="worker-loop">
+<h3>Worker Loop<a class="headerlink" href="#worker-loop" title="Link to this heading"></a></h3>
+<p>The worker loop is intentionally small:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>poll delayed events into EventDriver
+process queued events one by one
+if abort requested:
+    stop immediately
+otherwise:
+    wait for wake-up or next delayed event
+</pre></div>
+</div>
+<p>In slightly more detail:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    poll["EventScheduler::poll()"] --&gt; queued{"queued events exist?"}
+    queued --&gt;|yes| process["EventDriver::processOneEvent()"]
+    process --&gt; quit{"quit event was processed?"}
+    quit --&gt;|yes| stop["stop loop"]
+    quit --&gt;|no| abort{"abort requested?"}
+    abort --&gt;|yes| stop
+    abort --&gt;|no| queued
+    queued --&gt;|no| wait["compute next wait duration"]
+    wait --&gt; sleep["sleep on condition variable"]
+</div></section>
+<section id="why-it-processes-one-event-at-a-time">
+<h3>Why It Processes One Event at a Time<a class="headerlink" href="#why-it-processes-one-event-at-a-time" title="Link to this heading"></a></h3>
+<p>This is one of the most important design choices in the whole class.</p>
+<p><code class="docutils literal notranslate"><span class="pre">EventThread</span></code> does <strong>not</strong> drain the entire queue in one go.
+It processes one queued event, then checks again whether it should continue.</p>
+<p>That is what makes this possible:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>callback A is running
+callback B is already queued
+abort() is called
+callback A returns
+callback B is skipped
+</pre></div>
+</div>
+<p>Without single-event stepping, <code class="docutils literal notranslate"><span class="pre">abort()</span></code> would only be able to stop between large queue-drain batches.</p>
+</section>
+<section id="delayed-invocations">
+<h3>Delayed Invocations<a class="headerlink" href="#delayed-invocations" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">invokeDelayed(...)</span></code> stores an <code class="docutils literal notranslate"><span class="pre">Invocation</span></code> event in <code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code>.</p>
+<p>The event does not enter the immediate queue until its due time arrives:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    delayed["invokeDelayed(fn, 50ms)"] --&gt; scheduled["EventScheduler stores:&lt;br/&gt;time -&gt; InvocationEvent"]
+    scheduled --&gt; poll["worker loop polls scheduler"]
+    poll --&gt; due["due event is moved into EventDriver"]
+    due --&gt; normal["normal invocation handling"]
+</div><p>This is deliberately the same model used by surface action scheduling.</p>
+</section>
+<section id="wait-slicing">
+<h3>Wait Slicing<a class="headerlink" href="#wait-slicing" title="Link to this heading"></a></h3>
+<p>The worker loop does not sleep for the full remaining delayed interval in one go.
+It clamps each wait slice to a short maximum interval.</p>
+<p>That helps in two ways:</p>
+<ul class="simple">
+<li><p>a newly queued earlier event is noticed promptly</p></li>
+<li><p>tests that override the internal event clock can still advance time deterministically</p></li>
+</ul>
+<p>The slice limit is <code class="docutils literal notranslate"><span class="pre">5ms</span></code>.</p>
+</section>
+</section>
+<section id="stop-tokens">
+<h2>Stop Tokens<a class="headerlink" href="#stop-tokens" title="Link to this heading"></a></h2>
+<section id="per-invocation-stop-source">
+<h3>Per-Invocation Stop Source<a class="headerlink" href="#per-invocation-stop-source" title="Link to this heading"></a></h3>
+<p>Before each callback is executed, <code class="docutils literal notranslate"><span class="pre">EventThread</span></code> creates a fresh <code class="docutils literal notranslate"><span class="pre">std::stop_source</span></code>:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    callback["callback about to run"] --&gt; source["create fresh stop_source"]
+    source --&gt; publish["publish it as the active stop source"]
+    publish --&gt; invoke["invoke callback with stop_source.get_token()"]
+    invoke --&gt; clear["clear the active stop source afterwards"]
+</div><p>That means stop requests are scoped to the currently executing callback.</p>
+<p>They are <strong>not</strong> a permanent thread-global cancellation state.</p>
+</section>
+<section id="what-quit-does">
+<h3>What <code class="docutils literal notranslate"><span class="pre">quit()</span></code> Does<a class="headerlink" href="#what-quit-does" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">quit()</span></code> requests graceful shutdown.</p>
+<p>Its steps are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mark quit requested
+cancel all delayed future work
+request stop on the active callback
+enqueue a Quit event at the tail of the immediate queue
+wake the worker
+</pre></div>
+</div>
+<p>The result is:</p>
+<ul class="simple">
+<li><p>the current callback may finish cooperatively</p></li>
+<li><p>already queued immediate callbacks before the quit event are still processed</p></li>
+<li><p>delayed callbacks that were still waiting in <code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> are discarded</p></li>
+</ul>
+<p>This is the key graceful-shutdown guarantee:</p>
+<p>Drain work that is already in the immediate queue.
+Do not keep waiting for work that has not become due yet.</p>
+</section>
+<section id="what-abort-does">
+<h3>What <code class="docutils literal notranslate"><span class="pre">abort()</span></code> Does<a class="headerlink" href="#what-abort-does" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">abort()</span></code> requests immediate shutdown.</p>
+<p>Its steps are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mark abort requested
+cancel all delayed future work
+request stop on the active callback
+wake the worker
+</pre></div>
+</div>
+<p>The important difference is:</p>
+<p>There is no queued quit event.</p>
+<p>Instead, the loop stops as soon as it notices the abort flag.
+That means queued callbacks that have not started yet are skipped.</p>
+</section>
+<section id="comparison-table">
+<h3>Comparison Table<a class="headerlink" href="#comparison-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Active callback</p></th>
+<th class="head"><p>Immediate queued callbacks</p></th>
+<th class="head"><p>Delayed not-yet-due callbacks</p></th>
+<th class="head"><p>Exit style</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">quit()</span></code></p></td>
+<td><p>Asked to stop cooperatively</p></td>
+<td><p>Drained until queued quit event is reached</p></td>
+<td><p>Cancelled</p></td>
+<td><p>graceful</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">abort()</span></code></p></td>
+<td><p>Asked to stop cooperatively</p></td>
+<td><p>skipped after the current callback returns</p></td>
+<td><p>Cancelled</p></td>
+<td><p>immediate-best-effort</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Neither <code class="docutils literal notranslate"><span class="pre">quit()</span></code> nor <code class="docutils literal notranslate"><span class="pre">abort()</span></code> can forcibly terminate arbitrary C++ code in the middle of execution.
+A long-running callback must check its stop token if it wants to react quickly.</p>
+</div>
+</section>
+</section>
+<section id="failure-handling">
+<h2>Failure Handling<a class="headerlink" href="#failure-handling" title="Link to this heading"></a></h2>
+<p>If a worker callback throws:</p>
+<ul class="simple">
+<li><p>the exception escapes normal event dispatch</p></li>
+<li><p>the worker loop catches it</p></li>
+<li><p>the first <code class="docutils literal notranslate"><span class="pre">std::exception_ptr</span></code> is stored</p></li>
+<li><p>the thread stops processing further work</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">waitForQuit()</span></code> and <code class="docutils literal notranslate"><span class="pre">quitAndWait()</span></code> rethrow that stored exception once the worker has finished</p></li>
+</ul>
+<p>That gives contributors and users one clear rule:</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">waitForQuit()</span></code> throws, the worker callback failed.</p>
+<p>This is intentionally stricter than printing and continuing.
+Once a callback threw, the worker thread is considered failed.</p>
+</section>
+<section id="application-managed-event-threads">
+<h2>Application-Managed Event Threads<a class="headerlink" href="#application-managed-event-threads" title="Link to this heading"></a></h2>
+<section id="what-createeventthread-adds">
+<h3>What <code class="docutils literal notranslate"><span class="pre">createEventThread()</span></code> Adds<a class="headerlink" href="#what-createeventthread-adds" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Application::createEventThread()</span></code> is more than a convenience factory.
+It adds lifecycle management on top of <code class="docutils literal notranslate"><span class="pre">EventThread::create()</span></code>.</p>
+<p>The application:</p>
+<ul class="simple">
+<li><p>creates the thread</p></li>
+<li><p>registers a finished callback that prunes the management list</p></li>
+<li><p>stores a weak reference in the managed-thread registry</p></li>
+</ul>
+</section>
+<section id="why-weak-references-are-enough">
+<h3>Why Weak References Are Enough<a class="headerlink" href="#why-weak-references-are-enough" title="Link to this heading"></a></h3>
+<p>The registry stores <code class="docutils literal notranslate"><span class="pre">weak_ptr&lt;EventThread&gt;</span></code> entries, not owning <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code> entries.</p>
+<p>That works because the detached worker thread already keeps the object alive through the startup <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code> capture.</p>
+<p>This gives the registry two nice properties:</p>
+<ul class="simple">
+<li><p>it can still lock and stop live workers during shutdown</p></li>
+<li><p>finished workers naturally disappear once no strong reference remains</p></li>
+</ul>
+<p>The finished callback then removes stale entries promptly so short-lived workers do not accumulate in the registry.</p>
+</section>
+<section id="visual-lifecycle">
+<h3>Visual Lifecycle<a class="headerlink" href="#visual-lifecycle" title="Link to this heading"></a></h3>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    create["Application::createEventThread()"] --&gt; worker["EventThread::create()"]
+    worker --&gt; callback["install finished callback:&lt;br/&gt;prune managed thread list"]
+    callback --&gt; registry["store weak_ptr in registry"]
+    registry --&gt; result["caller receives EventThreadPtr"]
+</div></section>
+<section id="managed-shutdown">
+<h3>Managed Shutdown<a class="headerlink" href="#managed-shutdown" title="Link to this heading"></a></h3>
+<p>During <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Application::shutdown()</span></code>,
+the application performs this sequence:</p>
+<div class="mermaid">
+---
+config:
+    theme: default
+    fontFamily: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif
+---
+flowchart TD
+    prune["prune finished entries"] --&gt; collect["collect all still-live managed threads"]
+    collect --&gt; quit["call quit() on all of them"]
+    quit --&gt; wait["wait until one shared shutdown deadline expires"]
+    wait --&gt; warn["print warning for threads that did not stop in time"]
+    warn --&gt; pruneAgain["prune the registry again"]
+</div><p>The shutdown timeout is intentionally shared across the whole group.
+It is not “timeout per thread”.</p>
+<p>That keeps shutdown bounded even if many managed threads exist.</p>
+</section>
+<section id="warnings">
+<h3>Warnings<a class="headerlink" href="#warnings" title="Link to this heading"></a></h3>
+<p>Two situations generate developer-facing warnings on <code class="docutils literal notranslate"><span class="pre">std::cerr</span></code>:</p>
+<ul class="simple">
+<li><p>a managed thread does not finish before the deadline</p></li>
+<li><p>a managed thread already failed and rethrows during <code class="docutils literal notranslate"><span class="pre">waitForQuit()</span></code></p></li>
+</ul>
+<p>This is not meant to recover silently.
+It is a signal to the developer that the worker callback ignored cooperative shutdown
+or that worker code failed outright.</p>
+</section>
+</section>
+<section id="how-this-relates-to-surface-scheduling">
+<h2>How This Relates to Surface Scheduling<a class="headerlink" href="#how-this-relates-to-surface-scheduling" title="Link to this heading"></a></h2>
+<p>It is useful to compare the two systems side by side:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Surface scheduling</p></th>
+<th class="head"><p>Invocation / EventThread</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Public owner</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Surface::scheduler()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code> or <code class="docutils literal notranslate"><span class="pre">EventThread</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Typical use</p></td>
+<td><p>UI-local delayed or repeated work</p></td>
+<td><p>generic cross-thread work delivery</p></td>
+</tr>
+<tr class="row-even"><td><p>Execution thread</p></td>
+<td><p>application UI thread</p></td>
+<td><p>UI thread or dedicated worker thread</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cancellation model</p></td>
+<td><p>action refs + generations</p></td>
+<td><p>thread-level <code class="docutils literal notranslate"><span class="pre">quit()</span></code> / <code class="docutils literal notranslate"><span class="pre">abort()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Delayed transport</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>This is why both pages belong in the same chapter:</p>
+<p>They are two related applications of the same core event infrastructure.</p>
+</section>
+<section id="debugging-checklist">
+<h2>Debugging Checklist<a class="headerlink" href="#debugging-checklist" title="Link to this heading"></a></h2>
+<p>If you need to debug this system, start with these questions:</p>
+<section id="callback-never-runs">
+<h3>Callback never runs<a class="headerlink" href="#callback-never-runs" title="Link to this heading"></a></h3>
+<p>Check:</p>
+<ul class="simple">
+<li><p>was the application or event thread already stopping when the work was queued?</p></li>
+<li><p>for delayed work: was it cleared by <code class="docutils literal notranslate"><span class="pre">quit()</span></code> or <code class="docutils literal notranslate"><span class="pre">abort()</span></code> before it became due?</p></li>
+<li><p>for application work: is the UI event loop still running?</p></li>
+</ul>
+</section>
+<section id="callback-runs-on-the-wrong-thread">
+<h3>Callback runs on the wrong thread<a class="headerlink" href="#callback-runs-on-the-wrong-thread" title="Link to this heading"></a></h3>
+<p>Check:</p>
+<ul class="simple">
+<li><p>did the code call the callback directly instead of using <code class="docutils literal notranslate"><span class="pre">invoke(...)</span></code>?</p></li>
+<li><p>is the observed path <code class="docutils literal notranslate"><span class="pre">Application::invoke()</span></code> or <code class="docutils literal notranslate"><span class="pre">EventThread::invoke()</span></code>?</p></li>
+</ul>
+</section>
+<section id="waitforquit-throws">
+<h3><code class="docutils literal notranslate"><span class="pre">waitForQuit()</span></code> throws<a class="headerlink" href="#waitforquit-throws" title="Link to this heading"></a></h3>
+<p>Check:</p>
+<ul class="simple">
+<li><p>which callback threw?</p></li>
+<li><p>did the exception happen in the currently running invocation rather than in shutdown logic?</p></li>
+</ul>
+</section>
+<section id="shutdown-warning-appears">
+<h3>Shutdown warning appears<a class="headerlink" href="#shutdown-warning-appears" title="Link to this heading"></a></h3>
+<p>Check:</p>
+<ul class="simple">
+<li><p>did the callback ignore <code class="docutils literal notranslate"><span class="pre">stop_token.stop_requested()</span></code>?</p></li>
+<li><p>did it block in external code without any cooperative exit path?</p></li>
+<li><p>did it enqueue delayed work and expect that work to survive <code class="docutils literal notranslate"><span class="pre">quit()</span></code>?</p></li>
+</ul>
+</section>
+<section id="worker-seems-idle-but-delayed-work-does-not-fire">
+<h3>Worker seems idle but delayed work does not fire<a class="headerlink" href="#worker-seems-idle-but-delayed-work-does-not-fire" title="Link to this heading"></a></h3>
+<p>Check:</p>
+<ul class="simple">
+<li><p>was the event scheduled beyond the scheduler limits?</p></li>
+<li><p>is the internal event clock overridden in tests?</p></li>
+<li><p>if you are debugging tests, remember that the worker loop waits in short slices rather than one long blocking wait</p></li>
+</ul>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>The main design idea is simple:</p>
+<p>Use one event transport model for both UI-thread invocation and background worker loops.</p>
+<p>Everything else follows from that choice:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Application::invoke()</span></code> marshals work back onto the UI thread</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EventThread</span></code> provides a reusable worker event loop</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EventScheduler</span></code> handles delayed delivery in both systems</p></li>
+<li><p>stop tokens provide cooperative early exit for running worker callbacks</p></li>
+<li><p>managed worker threads integrate into application shutdown instead of floating outside it</p></li>
+</ul>
+<p>If you keep that picture in mind, the code becomes much easier to navigate:</p>
+<p>events carry work,
+owners decide where the work runs,
+and shutdown is expressed as event-loop control instead of ad-hoc thread tricks.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="action-scheduling.html" class="btn btn-neutral float-left" title="Action Scheduling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ui-paint-system.html" class="btn btn-neutral float-right" title="UI Paint System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

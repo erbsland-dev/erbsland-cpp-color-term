@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::text::impl::HtmlParserFrame</compoundname>
+    <includes refid="_html_parser_frame_8hpp" local="no">erbsland/cterm/text/impl/HtmlParserFrame.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a37fb0742240a84c5d90bca25b56b3861" prot="private" static="no" mutable="no">
+        <type>std::u32string</type>
+        <definition>std::u32string erbsland::cterm::text::impl::HtmlParserFrame::_tagName</definition>
+        <argsstring></argsstring>
+        <name>_tagName</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::_tagName</qualifiedname>
+        <briefdescription>
+<para>The lower-case ASCII tag name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="48" column="20" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1adda7f0dd4e17ddf7364720ecc4a1575c" prot="private" static="no" mutable="no">
+        <type>TextNodePtr</type>
+        <definition>TextNodePtr erbsland::cterm::text::impl::HtmlParserFrame::_node</definition>
+        <argsstring></argsstring>
+        <name>_node</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::_node</qualifiedname>
+        <briefdescription>
+<para>The created node, if this frame owns one. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="49" column="17" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a0eeaa0615727af3415e20ef85d26f74e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParserFrame::_transparent</definition>
+        <argsstring></argsstring>
+        <name>_transparent</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::_transparent</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para><computeroutput>true</computeroutput> if the tag itself has no matching node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="50" column="10" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a60f5dbb1eeabc7e4c1cf48dccf43a666" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParserFrame::_suppressSubtree</definition>
+        <argsstring></argsstring>
+        <name>_suppressSubtree</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::_suppressSubtree</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para><computeroutput>true</computeroutput> if all content below this frame is ignored. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="51" column="10" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a99587261766f5d91003f66f255ba5416" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParserFrame::_preserveWhitespace</definition>
+        <argsstring></argsstring>
+        <name>_preserveWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::_preserveWhitespace</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para><computeroutput>true</computeroutput> if text below this frame is parsed verbatim. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="52" column="10" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a84cf627bd062d300529f2848c5d284f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::text::impl::HtmlParserFrame::HtmlParserFrame</definition>
+        <argsstring>(std::u32string tagName={}, TextNodePtr node={}, const bool transparent=false, const bool suppressSubtree=false, const bool preserveWhitespace=false)</argsstring>
+        <name>HtmlParserFrame</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::HtmlParserFrame</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>tagName</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>TextNodePtr</type>
+          <declname>node</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>transparent</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>suppressSubtree</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>preserveWhitespace</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Create one parser frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tagName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lower-case ASCII tag name. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The created node, if this frame owns one. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>transparent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> if the tag itself has no matching node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>suppressSubtree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> if all content below this frame is ignored. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>preserveWhitespace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> if text below this frame is parsed verbatim. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="21" column="5" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="21" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a812476b0160ed9389135fbfb3294346b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::u32string &amp;</type>
+        <definition>const std::u32string &amp; erbsland::cterm::text::impl::HtmlParserFrame::tagName</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>tagName</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::tagName</qualifiedname>
+        <briefdescription>
+<para>Access the lower-case ASCII tag name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="35" column="28" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a784a5bc1cdb4849abebb28a10c60e8e2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const TextNodePtr &amp;</type>
+        <definition>const TextNodePtr &amp; erbsland::cterm::text::impl::HtmlParserFrame::node</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>node</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::node</qualifiedname>
+        <briefdescription>
+<para>Access the created node, if this frame owns one. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="37" column="25" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1aa8b1b782ce87bd78e62930e3357d3be6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>TextNodePtr &amp;</type>
+        <definition>TextNodePtr &amp; erbsland::cterm::text::impl::HtmlParserFrame::node</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>node</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::node</qualifiedname>
+        <briefdescription>
+<para>Access the created node, if this frame owns one. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="39" column="19" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1aec35d18a4d787d020f3b0c3ee72c9a7f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParserFrame::transparent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>transparent</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::transparent</qualifiedname>
+        <briefdescription>
+<para>Test if the tag itself has no matching node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="41" column="11" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a5ad9678e35844f3d8d072b3058f780e5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParserFrame::suppressSubtree</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>suppressSubtree</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::suppressSubtree</qualifiedname>
+        <briefdescription>
+<para>Test if all content below this frame is ignored. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="43" column="11" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a4e42f5e4a5cf4460206db0a8ea6b1494" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::text::impl::HtmlParserFrame::preserveWhitespace</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>preserveWhitespace</name>
+        <qualifiedname>erbsland::cterm::text::impl::HtmlParserFrame::preserveWhitespace</qualifiedname>
+        <briefdescription>
+<para>Test if text below this frame is parsed verbatim. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="45" column="11" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>One frame on the HTML parser element stack. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/text/impl/HtmlParserFrame.hpp" line="13" column="1" bodyfile="erbsland/cterm/text/impl/HtmlParserFrame.hpp" bodystart="13" bodyend="53"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1adda7f0dd4e17ddf7364720ecc4a1575c" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>_node</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a99587261766f5d91003f66f255ba5416" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>_preserveWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a60f5dbb1eeabc7e4c1cf48dccf43a666" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>_suppressSubtree</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a37fb0742240a84c5d90bca25b56b3861" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>_tagName</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a0eeaa0615727af3415e20ef85d26f74e" prot="private" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>_transparent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a84cf627bd062d300529f2848c5d284f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>HtmlParserFrame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a784a5bc1cdb4849abebb28a10c60e8e2" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>node</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1aa8b1b782ce87bd78e62930e3357d3be6" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>node</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a4e42f5e4a5cf4460206db0a8ea6b1494" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>preserveWhitespace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a5ad9678e35844f3d8d072b3058f780e5" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>suppressSubtree</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1a812476b0160ed9389135fbfb3294346b" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>tagName</name></member>
+      <member refid="classerbsland_1_1cterm_1_1text_1_1impl_1_1_html_parser_frame_1aec35d18a4d787d020f3b0c3ee72c9a7f" prot="public" virt="non-virtual"><scope>erbsland::cterm::text::impl::HtmlParserFrame</scope><name>transparent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

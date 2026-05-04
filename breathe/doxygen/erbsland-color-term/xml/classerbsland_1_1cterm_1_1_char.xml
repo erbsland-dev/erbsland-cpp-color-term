@@ -1,0 +1,1590 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_char" kind="class" language="C++" prot="public">
+    <compoundname>erbsland::cterm::Char</compoundname>
+    <includes refid="_char_8hpp" local="no">erbsland/cterm/Char.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_char_1a7e6b18df96ea00e7451b9ba7eb773000" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">impl::CombinedChar</ref></type>
+        <definition>impl::CombinedChar erbsland::cterm::Char::_character</definition>
+        <argsstring></argsstring>
+        <name>_character</name>
+        <qualifiedname>erbsland::cterm::Char::_character</qualifiedname>
+        <briefdescription>
+<para>The Unicode character and combining code points. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="274" column="24" bodyfile="erbsland/cterm/Char.hpp" bodystart="274" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_char_1a803d7510e7440e0e94ff9894a4731b4d" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+        <definition>CharStyle erbsland::cterm::Char::_style</definition>
+        <argsstring></argsstring>
+        <name>_style</name>
+        <qualifiedname>erbsland::cterm::Char::_style</qualifiedname>
+        <briefdescription>
+<para>The style for this character. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="275" column="15" bodyfile="erbsland/cterm/Char.hpp" bodystart="275" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1aea52be2d8edc9d4805683e8ab043a8a7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Char::Char</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <briefdescription>
+<para>Construct an empty block character using inherited colors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="24" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ac47a8b5b012ae46f0234e763b1b3ad3f" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Char::Char</definition>
+        <argsstring>(const char32_t codePoint) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character from a single Unicode code point using inherited colors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Control codes (except new-line and tab) are replaced with a space - to represent an &quot;invisible&quot; character. Invalid Unicode code points are replaced with the Unicode replacement character. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base Unicode code point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="29" column="24" bodyfile="erbsland/cterm/Char.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ae37e1351ee2864055626db1983d3fcfb" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(const std::string_view charStr) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character with inherited colors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded text to display. Invalid or unsupported text normalizes deterministically to a single renderable character. Empty input, control codes, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="35" column="14" bodyfile="erbsland/cterm/Char.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a458db954795c6a01cf923198550215a0" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(const std::u32string_view charStr) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character with inherited colors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 encoded text to display. Invalid or unsupported text normalizes deterministically to a single renderable character. Empty input, control codes, invalid Unicode scalar values, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="42" column="14" bodyfile="erbsland/cterm/Char.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a360b9a6ed35f2c5c337cb3033db7bd7e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Char::Char</definition>
+        <argsstring>(const char32_t codePoint, const CharStyle style) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character from a single Unicode code point with explicit style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base Unicode code point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The style for the character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="46" column="15" bodyfile="erbsland/cterm/Char.hpp" bodystart="46" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a820b1e6f465dc5dfb8647ea8df868873" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Char::Char</definition>
+        <argsstring>(const char32_t codePoint, const Color color, const CharAttributes attributes) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character from a single Unicode code point with explicit color and attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base Unicode code point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color for the character. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character attributes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="52" column="15" bodyfile="erbsland/cterm/Char.hpp" bodystart="52" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a69ceb6bffd60acf6736730e3f88d932a" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(std::string_view charStr, CharStyle style) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character with explicit text and style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded text to display. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The style for the character. Invalid or unsupported text normalizes deterministically to a single renderable character. Empty input, control codes, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="60" column="14" bodyfile="erbsland/cterm/Char.hpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ac3f01d3787aeee9fc745994643f4f2a8" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(const std::string_view charStr, const Color color, const CharAttributes attributes) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character with explicit text, color, and attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded text to display. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color for the character. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character attributes. Invalid or unsupported text normalizes deterministically to a single renderable character. Empty input, control codes, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="68" column="14" bodyfile="erbsland/cterm/Char.hpp" bodystart="68" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a2f524f7bbcd956b42ab5f998bb503012" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(std::u32string_view charStr, CharStyle style) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character with explicit text and style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 encoded text to display. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The style for the character. Invalid or unsupported text normalizes deterministically to a single renderable character. Empty input, control codes, invalid Unicode scalar values, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="77" column="14" bodyfile="erbsland/cterm/Char.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a50323971a169cc5eb643388ad9130114" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(const std::u32string_view charStr, const Color color, const CharAttributes attributes) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Construct a block character with explicit text, color, and attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 encoded text to display. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color for the character. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character attributes. Invalid or unsupported text normalizes deterministically to a single renderable character. Empty input, control codes, invalid Unicode scalar values, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="86" column="14" bodyfile="erbsland/cterm/Char.hpp" bodystart="86" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ad6c6708d78f5a948e39b42f1fbfa1d4c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>tColorArgs</declname>
+            <defname>tColorArgs</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::Char::Char</definition>
+        <argsstring>(const char32_t codePoint, tColorArgs... color) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <param>
+          <type>tColorArgs...</type>
+          <declname>color</declname>
+        </param>
+    <requiresclause>CharColorConstructorArgs&lt;tColorArgs...&gt;    </requiresclause>
+        <briefdescription>
+<para>Construct a block character from a single Unicode code point and a color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base Unicode code point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color for the character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="93" column="15" bodyfile="erbsland/cterm/Char.hpp" bodystart="93" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ad6f90b555d5f963b950fd4407ac65ae3" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>tColorArgs</declname>
+            <defname>tColorArgs</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(const std::string_view charStr, tColorArgs... color) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <param>
+          <type>tColorArgs...</type>
+          <declname>color</declname>
+        </param>
+    <requiresclause>CharColorConstructorArgs&lt;tColorArgs...&gt;    </requiresclause>
+        <briefdescription>
+<para>Construct a block character with explicit text and colors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 encoded text to display. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color for the character. Invalid or unsupported text normalizes deterministically to a single renderable character. Empty input, control codes, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="103" column="14" bodyfile="erbsland/cterm/Char.hpp" bodystart="103" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a64c6cf432113c20474be128f0dceb4be" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>tColorArgs</declname>
+            <defname>tColorArgs</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(const std::u32string_view charStr, tColorArgs... color) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const std::u32string_view</type>
+          <declname>charStr</declname>
+        </param>
+        <param>
+          <type>tColorArgs...</type>
+          <declname>color</declname>
+        </param>
+    <requiresclause>CharColorConstructorArgs&lt;tColorArgs...&gt;    </requiresclause>
+        <briefdescription>
+<para>Construct a block character with explicit text and colors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>charStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 encoded text to display. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color for the character. Invalid or unsupported text normalizes deterministically to a single renderable character. Empty input, control codes, invalid Unicode scalar values, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="114" column="14" bodyfile="erbsland/cterm/Char.hpp" bodystart="114" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ad2dce2d63dcf968a25c32f43cff3ba08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(const Char &amp;)=default</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="118" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ad13799b4a21ce68021c99da13e4d7340" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(Char &amp;&amp;)=default</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="119" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a0068c9b9d0c83bf59ada4a571d215b5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        <definition>Char &amp; erbsland::cterm::Char::operator=</definition>
+        <argsstring>(const Char &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::Char::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="120" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a7ea17288c58a38f1519cc495975c40f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        <definition>Char &amp; erbsland::cterm::Char::operator=</definition>
+        <argsstring>(Char &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::Char::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="121" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a4691b2c2d7a59553d887f028eb82ce02" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::operator==</definition>
+        <argsstring>(const Char &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::Char::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare two terminal characters for equality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="125" column="11" bodyfile="erbsland/cterm/Char.hpp" bodystart="125" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1afed3e3301eef4e4b312d0a496136dd25" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::operator!=</definition>
+        <argsstring>(const Char &amp;other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>erbsland::cterm::Char::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare two terminal characters for inequality. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="129" column="11" bodyfile="erbsland/cterm/Char.hpp" bodystart="129" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a869122fe5feab013342731139764c220" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::operator==</definition>
+        <argsstring>(char32_t other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::Char::operator==</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare just a single-code point character, without the color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="131" column="11" bodyfile="erbsland/cterm/Char.hpp" bodystart="131" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a070c972b1951bea47b8eb74d81ed9a23" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::operator!=</definition>
+        <argsstring>(char32_t other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>erbsland::cterm::Char::operator!=</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare just a single-code point character, without the color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="133" column="11" bodyfile="erbsland/cterm/Char.hpp" bodystart="133" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a2c7d711fc1a6bc2d4445e82070c7055e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string erbsland::cterm::Char::charStr</definition>
+        <argsstring>() const</argsstring>
+        <name>charStr</name>
+        <qualifiedname>erbsland::cterm::Char::charStr</qualifiedname>
+        <briefdescription>
+<para>Get the character string as UTF-8 text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A UTF-8 encoded copy of the stored character sequence. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="138" column="18" bodyfile="erbsland/cterm/Char.hpp" bodystart="138" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1af37bf19e71fe57102ff04edf2d98d430" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr char32_t</type>
+        <definition>constexpr char32_t erbsland::cterm::Char::mainCodePoint</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>mainCodePoint</name>
+        <qualifiedname>erbsland::cterm::Char::mainCodePoint</qualifiedname>
+        <briefdescription>
+<para>Get the leading Unicode code point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The base code point, or <computeroutput>0</computeroutput> if this character is empty. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="141" column="25" bodyfile="erbsland/cterm/Char.hpp" bodystart="141" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ac3eb99f68822ed48bf2ee1abc9dcb5cd" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr char32_t</type>
+        <definition>constexpr char32_t erbsland::cterm::Char::singleCodePoint</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>singleCodePoint</name>
+        <qualifiedname>erbsland::cterm::Char::singleCodePoint</qualifiedname>
+        <briefdescription>
+<para>Get a single Unicode code point or zero for combined or empty characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a fast-path method for comparing a single-code point character, without the color. <simplesect kind="return"><para>The single code point, or <computeroutput>0</computeroutput> if this character is combined or empty. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="145" column="25" bodyfile="erbsland/cterm/Char.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a111ef88a78d1b3e9dc7cc37579ba950d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">impl::CombinedChar::Storage</ref> &amp;</type>
+        <definition>constexpr const impl::CombinedChar::Storage &amp; erbsland::cterm::Char::codePoints</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>codePoints</name>
+        <qualifiedname>erbsland::cterm::Char::codePoints</qualifiedname>
+        <briefdescription>
+<para>Get the stored Unicode code points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Unused entries are set to <computeroutput>0</computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="148" column="51" bodyfile="erbsland/cterm/Char.hpp" bodystart="148" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a11599cf483aac668c3939d2e72a99e5d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::Char::codePointCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>codePointCount</name>
+        <qualifiedname>erbsland::cterm::Char::codePointCount</qualifiedname>
+        <briefdescription>
+<para>Get the number of stored Unicode code points. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="152" column="28" bodyfile="erbsland/cterm/Char.hpp" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a4875dd40ff247bd6ba0d59cefbd3a173" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color erbsland::cterm::Char::color</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>color</name>
+        <qualifiedname>erbsland::cterm::Char::color</qualifiedname>
+        <briefdescription>
+<para>Get the character color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="154" column="12" bodyfile="erbsland/cterm/Char.hpp" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1af35f7c4a63eebe8abd8c89d726676862" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+        <definition>CharAttributes erbsland::cterm::Char::attributes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>attributes</name>
+        <qualifiedname>erbsland::cterm::Char::attributes</qualifiedname>
+        <briefdescription>
+<para>Get the character attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="156" column="21" bodyfile="erbsland/cterm/Char.hpp" bodystart="156" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a1e4b0da193a8f781f9e947cc83a5c1da" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref> &amp;</type>
+        <definition>const CharStyle &amp; erbsland::cterm::Char::style</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>style</name>
+        <qualifiedname>erbsland::cterm::Char::style</qualifiedname>
+        <briefdescription>
+<para>Get the combined character style. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="158" column="23" bodyfile="erbsland/cterm/Char.hpp" bodystart="158" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a8fc070dfe541072e64d673afd868a55b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::Char::displayWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>displayWidth</name>
+        <qualifiedname>erbsland::cterm::Char::displayWidth</qualifiedname>
+        <briefdescription>
+<para>Get the display width on a terminal in cells. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="160" column="10" bodyfile="erbsland/cterm/Char.hpp" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a98891d6a1c88e6d3588dc7ca170bbddd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::Char::byteCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>byteCount</name>
+        <qualifiedname>erbsland::cterm::Char::byteCount</qualifiedname>
+        <briefdescription>
+<para>Get the number of UTF-8 bytes needed to encode this character. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="162" column="18" bodyfile="erbsland/cterm/Char.hpp" bodystart="162" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1af31a07c96b6cf85e2103ec757ddcf89a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Char::appendTo</definition>
+        <argsstring>(std::string &amp;buffer) const noexcept</argsstring>
+        <name>appendTo</name>
+        <qualifiedname>erbsland::cterm::Char::appendTo</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Append the UTF-8 representation to an existing buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The destination buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="165" column="10" bodyfile="erbsland/cterm/Char.hpp" bodystart="165" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ad51a3051a1d41729b1214aedbd6ce9de" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::Char::setStyle</definition>
+        <argsstring>(const CharStyle style) noexcept</argsstring>
+        <name>setStyle</name>
+        <qualifiedname>erbsland::cterm::Char::setStyle</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Replace the full style of this character. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="170" column="10" bodyfile="erbsland/cterm/Char.hpp" bodystart="170" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1aece04f8332438fa9505a644aec67f424" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withCombining</definition>
+        <argsstring>(char32_t codePoint, EncodingErrors encodingErrors=EncodingErrors::Replace) const</argsstring>
+        <name>withCombining</name>
+        <qualifiedname>erbsland::cterm::Char::withCombining</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <param>
+          <type>EncodingErrors</type>
+          <declname>encodingErrors</declname>
+          <defval>EncodingErrors::Replace</defval>
+        </param>
+        <briefdescription>
+<para>Create a character with an additional combining code point appended. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The combining code point to append. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>encodingErrors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How invalid combining code points are handled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A copy of this character with the combining code point appended. <computeroutput>EncodingErrors::Replace</computeroutput> and <computeroutput>EncodingErrors::Ignore</computeroutput> keep the original character unchanged for invalid combining code points or when the storage is already full. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>encodingErrors</computeroutput> is <computeroutput>Throw</computeroutput> and the code point is unsupported. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="178" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a3ac4e7ac6c59e3ddf6d1cd7388274875" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withOverlay</definition>
+        <argsstring>(CharStyle style) const noexcept</argsstring>
+        <name>withOverlay</name>
+        <qualifiedname>erbsland::cterm::Char::withOverlay</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Create a character with style applied on top of the stored style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><computeroutput>Inherited</computeroutput> color components keep the current color component, and unspecified attributes keep the current attribute state. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The style override to apply. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A copy of this character with the overlaid style. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="184" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1aedf2af37808a43632b396220d64d7a15" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withColorReplaced</definition>
+        <argsstring>(Color color) const noexcept</argsstring>
+        <name>withColorReplaced</name>
+        <qualifiedname>erbsland::cterm::Char::withColorReplaced</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Create a character with the given color replacing the stored color. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A copy of this character with exactly <computeroutput>color</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="188" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a15109cf8e80c4eb66dfad96d7e130a60" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withStyleReplaced</definition>
+        <argsstring>(CharStyle style) const noexcept</argsstring>
+        <name>withStyleReplaced</name>
+        <qualifiedname>erbsland::cterm::Char::withStyleReplaced</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Create a character with the given character style replaced. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A copy of this character with exactly <computeroutput>style</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="192" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ad729441febb5f5d9ac38b61c3e29c98b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withAttributes</definition>
+        <argsstring>(CharAttributes attributes) const noexcept</argsstring>
+        <name>withAttributes</name>
+        <qualifiedname>erbsland::cterm::Char::withAttributes</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Create a character with the given attributes replacing the stored attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The replacement attributes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A copy of this character with exactly <computeroutput>attributes</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="196" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1af7c0eec6b770eebbb1636547e68a9f31" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withBase</definition>
+        <argsstring>(CharStyle style) const noexcept</argsstring>
+        <name>withBase</name>
+        <qualifiedname>erbsland::cterm::Char::withBase</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Create a character with style used as the base underneath the stored style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The stored color and stored attributes overwrite the base style. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base style. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A copy of this character resolved against the base style. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="201" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a655599d540e66d4942cf5e172626550b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withBase</definition>
+        <argsstring>(const Char &amp;base) const noexcept</argsstring>
+        <name>withBase</name>
+        <qualifiedname>erbsland::cterm::Char::withBase</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>base</declname>
+        </param>
+        <briefdescription>
+<para>Create a character with another character used as the style base. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only the style is used from <computeroutput>base</computeroutput>; the stored Unicode character is preserved. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character providing the base color and attributes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A copy of this character resolved against <computeroutput>base</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="206" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1ab24bd009fafc5e39b52468c725706f96" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::Char::isEmpty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isEmpty</name>
+        <qualifiedname>erbsland::cterm::Char::isEmpty</qualifiedname>
+        <briefdescription>
+<para>Test if this character is empty (has no code-point). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="210" column="21" bodyfile="erbsland/cterm/Char.hpp" bodystart="210" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a15c71490e0f24817058a8a915806afa6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::isSpacing</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isSpacing</name>
+        <qualifiedname>erbsland::cterm::Char::isSpacing</qualifiedname>
+        <briefdescription>
+<para>Test if this character is spacing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Tests for space, tab, newline, and CR. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="213" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a8569525a39de355ebf47ac5d930d4039" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::isControl</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isControl</name>
+        <qualifiedname>erbsland::cterm::Char::isControl</qualifiedname>
+        <briefdescription>
+<para>Test if this character is a control character. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="215" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a9209282c117704e791f275334bfd234a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::isOneOf</definition>
+        <argsstring>(std::u32string_view characters) const noexcept</argsstring>
+        <name>isOneOf</name>
+        <qualifiedname>erbsland::cterm::Char::isOneOf</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+<para>Test if this character is one of the given characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Tests only the character, not the color. Only tests one code-point characters. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="218" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a7eda9de7940bf06b108e88d162f4bd15" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::isOneOf</definition>
+        <argsstring>(std::initializer_list&lt; char32_t &gt; characters) const noexcept</argsstring>
+        <name>isOneOf</name>
+        <qualifiedname>erbsland::cterm::Char::isOneOf</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; char32_t &gt;</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="220" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a60c16583678069c588075e7dc7c5131c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>tCharacters</declname>
+            <defname>tCharacters</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::isOneOf</definition>
+        <argsstring>(tCharacters... characters) const noexcept</argsstring>
+        <name>isOneOf</name>
+        <qualifiedname>erbsland::cterm::Char::isOneOf</qualifiedname>
+        <param>
+          <type>tCharacters...</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="223" column="11" bodyfile="erbsland/cterm/Char.hpp" bodystart="223" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a37cf13f5d831e6971c8b385994218961" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::Char::renderedEquals</definition>
+        <argsstring>(const Char &amp;other, bool colorEnabled=true, bool attributeEnabled=true) const noexcept</argsstring>
+        <name>renderedEquals</name>
+        <qualifiedname>erbsland::cterm::Char::renderedEquals</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>colorEnabled</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>attributeEnabled</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Compare how two characters would appear on screen. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Code points must match exactly. When <computeroutput>colorEnabled</computeroutput> is <computeroutput>true</computeroutput>, inherited color components are treated as the terminal default color before comparing. When <computeroutput>attributeEnabled</computeroutput> is <computeroutput>true</computeroutput>, inherited attributes are treated as disabled before comparing. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to compare with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>colorEnabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> to include colors in the comparison. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributeEnabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>true</computeroutput> to include character attributes in the comparison. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if both characters render identically. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="234" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a47d91f8bcff19e03ccbce46e4b0cf60e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::Char::hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hash</name>
+        <qualifiedname>erbsland::cterm::Char::hash</qualifiedname>
+        <briefdescription>
+<para>Get a hash for this character and its color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="236" column="28" bodyfile="erbsland/cterm/Char.hpp" bodystart="236" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a2a7e024242b3b80203d3a56a9b651fc8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withColorOverlay</definition>
+        <argsstring>(const Color color) const</argsstring>
+        <name>withColorOverlay</name>
+        <qualifiedname>erbsland::cterm::Char::withColorOverlay</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="254" column="10" bodyfile="erbsland/cterm/Char.hpp" bodystart="254" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a207d0154de70f351f942de01613aeeca" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withOverlay</definition>
+        <argsstring>(const Color color, const CharAttributes attributes) const noexcept</argsstring>
+        <name>withOverlay</name>
+        <qualifiedname>erbsland::cterm::Char::withOverlay</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="258" column="10" bodyfile="erbsland/cterm/Char.hpp" bodystart="258" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a9e9dc7fce8630d54ebf59e9d532715f5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withBaseColor</definition>
+        <argsstring>(const Color color) const noexcept</argsstring>
+        <name>withBaseColor</name>
+        <qualifiedname>erbsland::cterm::Char::withBaseColor</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="262" column="10" bodyfile="erbsland/cterm/Char.hpp" bodystart="262" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1aab4c7a19450cd10942d4967ede9f5142" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>Char erbsland::cterm::Char::withBase</definition>
+        <argsstring>(const Color color, const CharAttributes attributes) const noexcept</argsstring>
+        <name>withBase</name>
+        <qualifiedname>erbsland::cterm::Char::withBase</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_attributes" kindref="compound">CharAttributes</ref></type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="266" column="10" bodyfile="erbsland/cterm/Char.hpp" bodystart="266" bodyend="268"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a7be1dcb2bc77e87446443b04a1c41b44" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        <definition>static const Char &amp; erbsland::cterm::Char::space</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>space</name>
+        <qualifiedname>erbsland::cterm::Char::space</qualifiedname>
+        <briefdescription>
+<para>A space with inherited colors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="242" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a7bd032b6d40202c1b36705f8d53e38c5" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+        <definition>static const Char &amp; erbsland::cterm::Char::empty</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>erbsland::cterm::Char::empty</qualifiedname>
+        <briefdescription>
+<para>A shared empty character with inherited colors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="244" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a2d0e3648ffc9c079bc9944659effbd6a" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref></type>
+        <definition>static Char erbsland::cterm::Char::emptyBlock</definition>
+        <argsstring>(CharStyle style) noexcept</argsstring>
+        <name>emptyBlock</name>
+        <qualifiedname>erbsland::cterm::Char::emptyBlock</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>Create an empty render cell that carries only the given style. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is mainly used for wide-character continuation cells, which must stay logically empty while preserving the visible style of the leading cell. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The style to store on the empty block. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An empty block with <computeroutput>style</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="250" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_char_1a15b3968f5ed2c6b03e975bbce0928c06" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::Char::Char</definition>
+        <argsstring>(const impl::CombinedChar character, const CharStyle style) noexcept</argsstring>
+        <name>Char</name>
+        <qualifiedname>erbsland::cterm::Char::Char</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">impl::CombinedChar</ref></type>
+          <declname>character</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/Char.hpp" line="271" column="5" bodyfile="erbsland/cterm/Char.hpp" bodystart="271" bodyend="271"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Represents a character string with combined terminal style information. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Used by the UI code to render colored text blocks on the console. </para>
+    </detaileddescription>
+    <location file="erbsland/cterm/Char.hpp" line="21" column="1" bodyfile="erbsland/cterm/Char.hpp" bodystart="21" bodyend="276"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a7e6b18df96ea00e7451b9ba7eb773000" prot="private" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>_character</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a803d7510e7440e0e94ff9894a4731b4d" prot="private" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>_style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1af31a07c96b6cf85e2103ec757ddcf89a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>appendTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1af35f7c4a63eebe8abd8c89d726676862" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>attributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a98891d6a1c88e6d3588dc7ca170bbddd" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>byteCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1aea52be2d8edc9d4805683e8ab043a8a7" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ac47a8b5b012ae46f0234e763b1b3ad3f" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ae37e1351ee2864055626db1983d3fcfb" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a458db954795c6a01cf923198550215a0" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a360b9a6ed35f2c5c337cb3033db7bd7e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a820b1e6f465dc5dfb8647ea8df868873" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a69ceb6bffd60acf6736730e3f88d932a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ac3f01d3787aeee9fc745994643f4f2a8" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a2f524f7bbcd956b42ab5f998bb503012" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a50323971a169cc5eb643388ad9130114" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ad6c6708d78f5a948e39b42f1fbfa1d4c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ad6f90b555d5f963b950fd4407ac65ae3" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a64c6cf432113c20474be128f0dceb4be" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ad2dce2d63dcf968a25c32f43cff3ba08" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ad13799b4a21ce68021c99da13e4d7340" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a15b3968f5ed2c6b03e975bbce0928c06" prot="private" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>Char</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a2c7d711fc1a6bc2d4445e82070c7055e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>charStr</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a11599cf483aac668c3939d2e72a99e5d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>codePointCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a111ef88a78d1b3e9dc7cc37579ba950d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>codePoints</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a4875dd40ff247bd6ba0d59cefbd3a173" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>color</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a8fc070dfe541072e64d673afd868a55b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>displayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a7bd032b6d40202c1b36705f8d53e38c5" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>empty</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a2d0e3648ffc9c079bc9944659effbd6a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>emptyBlock</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a47d91f8bcff19e03ccbce46e4b0cf60e" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>hash</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a8569525a39de355ebf47ac5d930d4039" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>isControl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ab24bd009fafc5e39b52468c725706f96" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>isEmpty</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a9209282c117704e791f275334bfd234a" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>isOneOf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a7eda9de7940bf06b108e88d162f4bd15" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>isOneOf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a60c16583678069c588075e7dc7c5131c" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>isOneOf</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a15c71490e0f24817058a8a915806afa6" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>isSpacing</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1af37bf19e71fe57102ff04edf2d98d430" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>mainCodePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1afed3e3301eef4e4b312d0a496136dd25" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>operator!=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a070c972b1951bea47b8eb74d81ed9a23" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>operator!=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a0068c9b9d0c83bf59ada4a571d215b5d" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a7ea17288c58a38f1519cc495975c40f6" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a4691b2c2d7a59553d887f028eb82ce02" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a869122fe5feab013342731139764c220" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a37cf13f5d831e6971c8b385994218961" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>renderedEquals</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ad51a3051a1d41729b1214aedbd6ce9de" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>setStyle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ac3eb99f68822ed48bf2ee1abc9dcb5cd" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>singleCodePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a7be1dcb2bc77e87446443b04a1c41b44" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>space</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a1e4b0da193a8f781f9e947cc83a5c1da" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>style</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1ad729441febb5f5d9ac38b61c3e29c98b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1af7c0eec6b770eebbb1636547e68a9f31" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a655599d540e66d4942cf5e172626550b" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1aab4c7a19450cd10942d4967ede9f5142" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a9e9dc7fce8630d54ebf59e9d532715f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withBaseColor</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a2a7e024242b3b80203d3a56a9b651fc8" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withColorOverlay</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1aedf2af37808a43632b396220d64d7a15" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withColorReplaced</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1aece04f8332438fa9505a644aec67f424" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withCombining</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a3ac4e7ac6c59e3ddf6d1cd7388274875" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withOverlay</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a207d0154de70f351f942de01613aeeca" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withOverlay</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_char_1a15109cf8e80c4eb66dfad96d7e130a60" prot="public" virt="non-virtual"><scope>erbsland::cterm::Char</scope><name>withStyleReplaced</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

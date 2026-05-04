@@ -1,0 +1,927 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Input &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="UI Surfaces" href="ui-surfaces.html" />
+    <link rel="prev" title="UI Layouts" href="ui-layouts.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer.html">Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer-view.html">Buffer Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cursor-output.html">Cursor Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing.html">Frames, Borders, Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing-text.html">Text Rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-options.html">Paragraph Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rich-text.html">Rich Text and HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal.html">Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Strings and Chars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theme.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">UI Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-core.html">UI Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-layouts.html">UI Layouts</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">UI Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-shared-actions">Creating Shared Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#focused-dispatch">Focused Dispatch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#main-and-alternative-keys">Main and Alternative Keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#capturing-text-input">Capturing Text Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-key-actions">Multi-Key Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#footer-help">Footer Help</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6ActionE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::Action</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui12ButtonActionE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::ButtonAction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::HelpData</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui14HelpVisibilityE"><code class="docutils literal notranslate"><span class="pre">HelpVisibility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui7ActionsE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::Actions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui20ActionTriggerContextE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::ui::ActionTriggerContext</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ui-surfaces.html">UI Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-events.html">UI Events and Scheduling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">UI Input</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/ui-input.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ui-input">
+<h1>UI Input<a class="headerlink" href="#ui-input" title="Link to this heading"></a></h1>
+<p>The UI framework routes key presses through shared
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6ActionE" title="erbsland::cterm::ui::Action"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Action</span></code></a> objects. An action owns
+trigger keys, enablement rules, and the callback that runs when the
+action is accepted. Its user-facing name, detailed description,
+visibility, and display priority live in
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE" title="erbsland::cterm::ui::HelpData"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">HelpData</span></code></a>, which you access
+through <code class="docutils literal notranslate"><span class="pre">action-&gt;help()</span></code>.</p>
+<p>Actions are attached to surfaces and pages through
+<a class="reference internal" href="ui-core.html#_CPPv4N8erbsland5cterm2ui7Surface7actionsEv" title="erbsland::cterm::ui::Surface::actions"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Surface::actions()</span></code></a>.
+The same <code class="docutils literal notranslate"><span class="pre">ActionPtr</span></code> can be attached to many surfaces, so application
+commands such as quit, save, or toggle-help can be implemented once and
+reused wherever they make sense.</p>
+<p>Button surfaces use <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui12ButtonActionE" title="erbsland::cterm::ui::ButtonAction"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ButtonAction</span></code></a> instead. A <code class="docutils literal notranslate"><span class="pre">ButtonAction</span></code> is owned
+by one live button and synchronizes its enabled state into that button’s
+<code class="docutils literal notranslate"><span class="pre">SurfaceFlags</span></code>. Create a separate <code class="docutils literal notranslate"><span class="pre">ButtonAction</span></code> for each button,
+even when several buttons call the same callback.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The UI Framework is currently in beta, and parts of the API may
+change in future releases.</p>
+</div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="creating-shared-actions">
+<h3>Creating Shared Actions<a class="headerlink" href="#creating-shared-actions" title="Link to this heading"></a></h3>
+<p>Create an action, assign one or more keys, and attach it to a page or
+surface.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">quitAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;quit&quot;</span><span class="p">);</span>
+<span class="n">quitAction</span><span class="o">-&gt;</span><span class="n">setKeys</span><span class="p">({</span><span class="n">Key</span><span class="o">::</span><span class="n">Escape</span><span class="p">,</span><span class="w"> </span><span class="sa">U</span><span class="sc">&#39;q&#39;</span><span class="p">});</span>
+<span class="n">quitAction</span><span class="o">-&gt;</span><span class="n">help</span><span class="p">().</span><span class="n">setDescription</span><span class="p">(</span><span class="s">&quot;Quits the application.&quot;</span><span class="p">).</span><span class="n">setPriority</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">quitAction</span><span class="o">-&gt;</span><span class="n">setTriggerFn</span><span class="p">([]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ui</span><span class="o">::</span><span class="n">getApplication</span><span class="p">().</span><span class="n">quit</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="n">page</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">quitAction</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When a key press reaches a surface, the default
+<code class="docutils literal notranslate"><span class="pre">Surface::onKeyPress()</span></code> asks the local action container to trigger the
+first enabled action that matches the key. If the matching action is
+disabled, dispatch continues so an action on a parent surface or the
+page may still handle the same key.</p>
+</section>
+<section id="focused-dispatch">
+<h3>Focused Dispatch<a class="headerlink" href="#focused-dispatch" title="Link to this heading"></a></h3>
+<p>The active page is the keyboard boundary. It sends a key press to the
+focused surface first, then each parent surface, and finally to the page
+itself. This gives focused controls the first chance to interpret keys
+without letting a transparent page accidentally leak input into the page
+below it.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">saveAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;save&quot;</span><span class="p">);</span>
+<span class="n">saveAction</span><span class="o">-&gt;</span><span class="n">addKey</span><span class="p">(</span><span class="sa">U</span><span class="sc">&#39;s&#39;</span><span class="p">);</span>
+<span class="n">saveAction</span><span class="o">-&gt;</span><span class="n">setEnabledFn</span><span class="p">(</span>
+<span class="w">    </span><span class="p">[</span><span class="n">document</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">document</span><span class="o">-&gt;</span><span class="n">hasUnsavedChanges</span><span class="p">();</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">EnabledUpdateMode</span><span class="o">::</span><span class="n">BeforeRepaint</span><span class="p">);</span>
+<span class="n">saveAction</span><span class="o">-&gt;</span><span class="n">setTriggerFn</span><span class="p">([</span><span class="n">document</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">document</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="n">editorPage</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">quitAction</span><span class="p">);</span>
+<span class="n">editorPage</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">saveAction</span><span class="p">);</span>
+<span class="n">detailsPanel</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">saveAction</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The enabled callback is always refreshed immediately before triggering,
+even when the regular update mode is repaint-driven or polled. This
+avoids stale enabled state when data changes between two paint passes.</p>
+</section>
+<section id="main-and-alternative-keys">
+<h3>Main and Alternative Keys<a class="headerlink" href="#main-and-alternative-keys" title="Link to this heading"></a></h3>
+<p>Use <a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm4KeysE" title="erbsland::cterm::Keys"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">Keys</span></code></a> when an action has several
+accepted keys. The keys are stored once, in priority order. By default
+all keys are shown in compact footer help. When some bindings are only
+alternatives for detailed help, set the number of leading main keys.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">zoomKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Keys</span><span class="p">{</span><span class="sa">U</span><span class="sc">&#39;+&#39;</span><span class="p">,</span><span class="w"> </span><span class="sa">U</span><span class="sc">&#39;]&#39;</span><span class="p">};</span>
+<span class="n">zoomKeys</span><span class="p">.</span><span class="n">setMainKeyCount</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">zoomInAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;zoom in&quot;</span><span class="p">);</span>
+<span class="n">zoomInAction</span><span class="o">-&gt;</span><span class="n">setKeys</span><span class="p">(</span><span class="n">zoomKeys</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The action still accepts both <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code>. The footer displays only
+<code class="docutils literal notranslate"><span class="pre">[+]</span> <span class="pre">zoom</span> <span class="pre">in</span></code> while a future detailed help view can show the
+alternative too.</p>
+</section>
+<section id="capturing-text-input">
+<h3>Capturing Text Input<a class="headerlink" href="#capturing-text-input" title="Link to this heading"></a></h3>
+<p>Text-entry controls should override <code class="docutils literal notranslate"><span class="pre">onKeyPress()</span></code> and mark ordinary
+text keys as handled. Page actions such as <code class="docutils literal notranslate"><span class="pre">quit</span></code> then do not run
+while the focused control is editing text.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">SearchField::onKeyPress</span><span class="p">(</span><span class="n">ui</span><span class="o">::</span><span class="n">KeyPressEvent</span><span class="w"> </span><span class="o">&amp;</span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Key</span><span class="o">::</span><span class="n">Enter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">submit</span><span class="p">();</span>
+<span class="w">        </span><span class="n">event</span><span class="p">.</span><span class="n">setHandled</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Key</span><span class="o">::</span><span class="n">Escape</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cancel</span><span class="p">();</span>
+<span class="w">        </span><span class="n">event</span><span class="p">.</span><span class="n">setHandled</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">().</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Key</span><span class="o">::</span><span class="n">Character</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">().</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Key</span><span class="o">::</span><span class="n">Combined</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">insertText</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">().</span><span class="n">combined</span><span class="p">());</span>
+<span class="w">        </span><span class="n">event</span><span class="p">.</span><span class="n">setHandled</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Surface</span><span class="o">::</span><span class="n">onKeyPress</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-key-actions">
+<h3>Multi-Key Actions<a class="headerlink" href="#multi-key-actions" title="Link to this heading"></a></h3>
+<p>When several keys perform related work, use one action and branch on the
+trigger key in the callback. This keeps dispatch simple and keeps the
+footer help focused on the one command the reader can perform.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">panAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">Action</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;pan&quot;</span><span class="p">);</span>
+<span class="n">panAction</span><span class="o">-&gt;</span><span class="n">setKeys</span><span class="p">({</span><span class="n">Key</span><span class="o">::</span><span class="n">Left</span><span class="p">,</span><span class="w"> </span><span class="n">Key</span><span class="o">::</span><span class="n">Up</span><span class="p">,</span><span class="w"> </span><span class="n">Key</span><span class="o">::</span><span class="n">Down</span><span class="p">,</span><span class="w"> </span><span class="n">Key</span><span class="o">::</span><span class="n">Right</span><span class="p">});</span>
+<span class="n">panAction</span><span class="o">-&gt;</span><span class="n">setTriggerFn</span><span class="p">([</span><span class="n">view</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">ActionTriggerContext</span><span class="w"> </span><span class="o">&amp;</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">key</span><span class="p">().</span><span class="n">type</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Key</span><span class="o">::</span><span class="no">Left</span><span class="p">:</span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">panLeft</span><span class="p">();</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Key</span><span class="o">::</span><span class="no">Right</span><span class="p">:</span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">panRight</span><span class="p">();</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Key</span><span class="o">::</span><span class="no">Up</span><span class="p">:</span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">panUp</span><span class="p">();</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Key</span><span class="o">::</span><span class="no">Down</span><span class="p">:</span>
+<span class="w">        </span><span class="n">view</span><span class="o">-&gt;</span><span class="n">panDown</span><span class="p">();</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="n">mapPage</span><span class="o">-&gt;</span><span class="n">actions</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">panAction</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="footer-help">
+<h3>Footer Help<a class="headerlink" href="#footer-help" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="ui-surfaces.html#_CPPv4N8erbsland5cterm2ui7surface10ActionHelpE" title="erbsland::cterm::ui::surface::ActionHelp"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ActionHelp</span></code></a> renders
+the currently available actions for the focused surface chain.
+<a class="reference internal" href="ui-surfaces.html#_CPPv4N8erbsland5cterm2ui7surface10FooterLineE" title="erbsland::cterm::ui::surface::FooterLine"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">FooterLine</span></code></a> embeds
+it on the right side and leaves a dynamic text area on the left.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">footer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ui</span><span class="o">::</span><span class="n">FooterLine</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+<span class="n">footer</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;Ready&quot;</span><span class="p">);</span>
+<span class="n">rootStack</span><span class="o">-&gt;</span><span class="n">addSurface</span><span class="p">(</span><span class="n">footer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The help surface deduplicates shared actions, skips disabled actions and
+actions hidden from the footer, sorts by help priority, and shows as many
+items as fit. Formatting such as key brackets, separators, and the
+omitted-action marker comes from the active theme.</p>
+</section>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6ActionE">
+<span id="_CPPv3N8erbsland5cterm2ui6ActionE"></span><span id="_CPPv2N8erbsland5cterm2ui6ActionE"></span><span id="erbsland::cterm::ui::Action"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Action</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6ActionE" title="Link to this definition"></a><br /></dt>
+<dd><p>A shared user-interface action with key triggers, help metadata, and enablement state. </p>
+<p>Subclassed by <a class="reference internal" href="#classerbsland_1_1cterm_1_1ui_1_1_button_action"><span class="std std-ref">erbsland::cterm::ui::ButtonAction</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateModeE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action17EnabledUpdateModeE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action17EnabledUpdateModeE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EnabledUpdateMode</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateModeE" title="Link to this definition"></a><br /></dt>
+<dd><p>When a callback-backed enabled state is refreshed automatically. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode6ManualE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action17EnabledUpdateMode6ManualE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action17EnabledUpdateMode6ManualE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9ae1ba155a9f2e8c3be94020eef32a0301"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Manual</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode6ManualE" title="Link to this definition"></a><br /></dt>
+<dd><p>Only update when explicitly requested or before triggering. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode15BeforeTriggeredE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action17EnabledUpdateMode15BeforeTriggeredE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action17EnabledUpdateMode15BeforeTriggeredE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9a108e4f3031a7d37dc4fb9916aed658ff"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BeforeTriggered</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode15BeforeTriggeredE" title="Link to this definition"></a><br /></dt>
+<dd><p>Update before key/manual triggering. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode13BeforeRepaintE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action17EnabledUpdateMode13BeforeRepaintE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action17EnabledUpdateMode13BeforeRepaintE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9a246a0bc4df276630a74ffe95f45e7e0d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BeforeRepaint</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode13BeforeRepaintE" title="Link to this definition"></a><br /></dt>
+<dd><p>Update before repaint-driven action help collection. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode11Polled100msE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action17EnabledUpdateMode11Polled100msE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action17EnabledUpdateMode11Polled100msE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae1c5239d273e46f466a57f54d5ee1df9a589932e6fd92020ac452e9030475f780"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Polled100ms</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode11Polled100msE" title="Link to this definition"></a><br /></dt>
+<dd><p>Update at most every 100ms when action help is refreshed. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReasonE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action20EnabledRefreshReasonE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action20EnabledRefreshReasonE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EnabledRefreshReason</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReasonE" title="Link to this definition"></a><br /></dt>
+<dd><p>Why the enabled callback is being refreshed. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReason6ManualE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action20EnabledRefreshReason6ManualE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action20EnabledRefreshReason6ManualE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8ae1ba155a9f2e8c3be94020eef32a0301"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Manual</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReason6ManualE" title="Link to this definition"></a><br /></dt>
+<dd><p>Explicit refresh. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReason15BeforeTriggeredE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action20EnabledRefreshReason15BeforeTriggeredE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action20EnabledRefreshReason15BeforeTriggeredE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8a108e4f3031a7d37dc4fb9916aed658ff"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BeforeTriggered</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReason15BeforeTriggeredE" title="Link to this definition"></a><br /></dt>
+<dd><p>A trigger is about to be attempted. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReason13BeforeRepaintE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action20EnabledRefreshReason13BeforeRepaintE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action20EnabledRefreshReason13BeforeRepaintE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8a246a0bc4df276630a74ffe95f45e7e0d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BeforeRepaint</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReason13BeforeRepaintE" title="Link to this definition"></a><br /></dt>
+<dd><p>A repaint is about to display the action. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReason11Polled100msE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action20EnabledRefreshReason11Polled100msE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action20EnabledRefreshReason11Polled100msE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a520861fb3807d02cc9b733fe3de823a8a589932e6fd92020ac452e9030475f780"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Polled100ms</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReason11Polled100msE" title="Link to this definition"></a><br /></dt>
+<dd><p>The 100ms polling interval elapsed. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action9EnabledFnE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action9EnabledFnE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action9EnabledFnE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1afeadceeb061296b8aa688322bea6171a"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EnabledFn</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action9EnabledFnE" title="Link to this definition"></a><br /></dt>
+<dd><p>Callback used to update the enabled state. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action9TriggerFnE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action9TriggerFnE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action9TriggerFnE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a0103657256d6cfd708a8fbc04a58088a"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TriggerFn</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui20ActionTriggerContextE" title="erbsland::cterm::ui::ActionTriggerContext"><span class="n"><span class="pre">ActionTriggerContext</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action9TriggerFnE" title="Link to this definition"></a><br /></dt>
+<dd><p>Callback invoked when the action is triggered. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action15SimpleTriggerFnE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action15SimpleTriggerFnE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action15SimpleTriggerFnE"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1aad3dd601235183d859e7358b27e211ca"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimpleTriggerFn</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action15SimpleTriggerFnE" title="Link to this definition"></a><br /></dt>
+<dd><p>Simple callback invoked when the action is triggered. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action6ActionENSt6stringE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action6ActionENSt6stringE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action6ActionENSt6stringE"></span><span id="erbsland::cterm::ui::Action::Action__ss"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1aa683d09719f7464838a6b78960c5ea84"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Action</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action6ActionENSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an action with a short help name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The short action name used in generated help. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action4helpEv">
+<span id="_CPPv3N8erbsland5cterm2ui6Action4helpEv"></span><span id="_CPPv2N8erbsland5cterm2ui6Action4helpEv"></span><span id="erbsland::cterm::ui::Action::help"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a43fffe5e0ddd339462e744ec86601915"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE" title="erbsland::cterm::ui::HelpData"><span class="n"><span class="pre">HelpData</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">help</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action4helpEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get mutable help metadata. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6Action4helpEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6Action4helpEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6Action4helpEv"></span><span id="erbsland::cterm::ui::Action::helpC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a8052d6769731c967228c6073de468fb2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE" title="erbsland::cterm::ui::HelpData"><span class="n"><span class="pre">HelpData</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">help</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6Action4helpEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get immutable help metadata. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6Action9isEnabledEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6Action9isEnabledEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6Action9isEnabledEv"></span><span id="erbsland::cterm::ui::Action::isEnabledC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ae6aa63cecd9c98b8185e3973e0610dbf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isEnabled</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6Action9isEnabledEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this action is currently enabled. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action10setEnabledEb">
+<span id="_CPPv3N8erbsland5cterm2ui6Action10setEnabledEb"></span><span id="_CPPv2N8erbsland5cterm2ui6Action10setEnabledEb"></span><span id="erbsland::cterm::ui::Action::setEnabled__b"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1ac08a9650e4f3b325af2ca7cae0846e7a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setEnabled</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action10setEnabledEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Manually set the enabled state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> – The new enabled state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action12setEnabledFnE9EnabledFn17EnabledUpdateMode">
+<span id="_CPPv3N8erbsland5cterm2ui6Action12setEnabledFnE9EnabledFn17EnabledUpdateMode"></span><span id="_CPPv2N8erbsland5cterm2ui6Action12setEnabledFnE9EnabledFn17EnabledUpdateMode"></span><span id="erbsland::cterm::ui::Action::setEnabledFn__EnabledFn.EnabledUpdateMode"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a8d190eb31edecd5373a217c9df99fcdf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setEnabledFn</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action9EnabledFnE" title="erbsland::cterm::ui::Action::EnabledFn"><span class="n"><span class="pre">EnabledFn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">enabledFn</span></span>, <a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateModeE" title="erbsland::cterm::ui::Action::EnabledUpdateMode"><span class="n"><span class="pre">EnabledUpdateMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">updateMode</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateModeE" title="erbsland::cterm::ui::Action::EnabledUpdateMode"><span class="n"><span class="pre">EnabledUpdateMode</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateMode15BeforeTriggeredE" title="erbsland::cterm::ui::Action::EnabledUpdateMode::BeforeTriggered"><span class="n"><span class="pre">BeforeTriggered</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action12setEnabledFnE9EnabledFn17EnabledUpdateMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the enabled callback and update mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enabledFn</strong> – The callback that returns the current enabled state. </p></li>
+<li><p><strong>updateMode</strong> – The automatic update mode for the callback. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action14clearEnabledFnEv">
+<span id="_CPPv3N8erbsland5cterm2ui6Action14clearEnabledFnEv"></span><span id="_CPPv2N8erbsland5cterm2ui6Action14clearEnabledFnEv"></span><span id="erbsland::cterm::ui::Action::clearEnabledFn"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a73e57ff12ae5fca3366bf4222ecb0b39"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clearEnabledFn</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action14clearEnabledFnEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Remove the enabled callback and return to manual enabled state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6Action17enabledUpdateModeEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6Action17enabledUpdateModeEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6Action17enabledUpdateModeEv"></span><span id="erbsland::cterm::ui::Action::enabledUpdateModeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1af15381a6a6c941b8eb5d8c88dd0ea122"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateModeE" title="erbsland::cterm::ui::Action::EnabledUpdateMode"><span class="n"><span class="pre">EnabledUpdateMode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enabledUpdateMode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6Action17enabledUpdateModeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the enabled update mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action20setEnabledUpdateModeE17EnabledUpdateMode">
+<span id="_CPPv3N8erbsland5cterm2ui6Action20setEnabledUpdateModeE17EnabledUpdateMode"></span><span id="_CPPv2N8erbsland5cterm2ui6Action20setEnabledUpdateModeE17EnabledUpdateMode"></span><span id="erbsland::cterm::ui::Action::setEnabledUpdateMode__EnabledUpdateMode"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a355bbd3e82306fcf0977f85e388ea2cf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setEnabledUpdateMode</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action17EnabledUpdateModeE" title="erbsland::cterm::ui::Action::EnabledUpdateMode"><span class="n"><span class="pre">EnabledUpdateMode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">updateMode</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action20setEnabledUpdateModeE17EnabledUpdateMode" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the enabled update mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>updateMode</strong> – The new update mode. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6Action4keysEv">
+<span id="_CPPv3NK8erbsland5cterm2ui6Action4keysEv"></span><span id="_CPPv2NK8erbsland5cterm2ui6Action4keysEv"></span><span id="erbsland::cterm::ui::Action::keysC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1aa2acacf02e972bdc907131a3622e74e3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm4KeysE" title="erbsland::cterm::Keys"><span class="n"><span class="pre">Keys</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">keys</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6Action4keysEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the trigger keys. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action7setKeysE4Keys">
+<span id="_CPPv3N8erbsland5cterm2ui6Action7setKeysE4Keys"></span><span id="_CPPv2N8erbsland5cterm2ui6Action7setKeysE4Keys"></span><span id="erbsland::cterm::ui::Action::setKeys__Keys"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a389d15e5e953cf657fca27fc4fce5501"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setKeys</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm4KeysE" title="erbsland::cterm::Keys"><span class="n"><span class="pre">Keys</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">keys</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action7setKeysE4Keys" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace all trigger keys. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keys</strong> – The new trigger keys. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action12setTriggerFnE9TriggerFn">
+<span id="_CPPv3N8erbsland5cterm2ui6Action12setTriggerFnE9TriggerFn"></span><span id="_CPPv2N8erbsland5cterm2ui6Action12setTriggerFnE9TriggerFn"></span><span id="erbsland::cterm::ui::Action::setTriggerFn__TriggerFn"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1af36601043b081d5a2a9a0b66fdb27da2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setTriggerFn</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action9TriggerFnE" title="erbsland::cterm::ui::Action::TriggerFn"><span class="n"><span class="pre">TriggerFn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">triggerFn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action12setTriggerFnE9TriggerFn" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the trigger callback. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>triggerFn</strong> – The new callback. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action12setTriggerFnE15SimpleTriggerFn">
+<span id="_CPPv3N8erbsland5cterm2ui6Action12setTriggerFnE15SimpleTriggerFn"></span><span id="_CPPv2N8erbsland5cterm2ui6Action12setTriggerFnE15SimpleTriggerFn"></span><span id="erbsland::cterm::ui::Action::setTriggerFn__SimpleTriggerFn"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a5f3e1ef177b347b04e6b88bb9d75422a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setTriggerFn</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action15SimpleTriggerFnE" title="erbsland::cterm::ui::Action::SimpleTriggerFn"><span class="n"><span class="pre">SimpleTriggerFn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">triggerFn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action12setTriggerFnE15SimpleTriggerFn" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the trigger callback with a simple no-argument callback. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>triggerFn</strong> – The new callback. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action14clearTriggerFnEv">
+<span id="_CPPv3N8erbsland5cterm2ui6Action14clearTriggerFnEv"></span><span id="_CPPv2N8erbsland5cterm2ui6Action14clearTriggerFnEv"></span><span id="erbsland::cterm::ui::Action::clearTriggerFn"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a9c99dea1c378cf60d3556f50a3c66bf0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clearTriggerFn</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action14clearTriggerFnEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Remove the trigger callback. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui6Action10matchesKeyERK3Key">
+<span id="_CPPv3NK8erbsland5cterm2ui6Action10matchesKeyERK3Key"></span><span id="_CPPv2NK8erbsland5cterm2ui6Action10matchesKeyERK3Key"></span><span id="erbsland::cterm::ui::Action::matchesKey__KeyCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a2e0cfa79c0130a39f3913a5d68dadf85"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">matchesKey</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui6Action10matchesKeyERK3Key" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if the action is triggered by a key. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> – The key to test. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the key is assigned to the action. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action14refreshEnabledE20EnabledRefreshReason">
+<span id="_CPPv3N8erbsland5cterm2ui6Action14refreshEnabledE20EnabledRefreshReason"></span><span id="_CPPv2N8erbsland5cterm2ui6Action14refreshEnabledE20EnabledRefreshReason"></span><span id="erbsland::cterm::ui::Action::refreshEnabled__EnabledRefreshReason"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a1e1a2c71b402e65d30a681e964bc38a2"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">refreshEnabled</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6Action20EnabledRefreshReasonE" title="erbsland::cterm::ui::Action::EnabledRefreshReason"><span class="n"><span class="pre">EnabledRefreshReason</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">reason</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action14refreshEnabledE20EnabledRefreshReason" title="Link to this definition"></a><br /></dt>
+<dd><p>Refresh the enabled state if the callback and update mode require it. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> – The reason for the refresh. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the enabled callback was evaluated. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action7triggerERK20ActionTriggerContext">
+<span id="_CPPv3N8erbsland5cterm2ui6Action7triggerERK20ActionTriggerContext"></span><span id="_CPPv2N8erbsland5cterm2ui6Action7triggerERK20ActionTriggerContext"></span><span id="erbsland::cterm::ui::Action::trigger__ActionTriggerContextCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a569d1e8569c2e6e0a0e4de882dd64923"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">trigger</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui20ActionTriggerContextE" title="erbsland::cterm::ui::ActionTriggerContext"><span class="n"><span class="pre">ActionTriggerContext</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">context</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action7triggerERK20ActionTriggerContext" title="Link to this definition"></a><br /></dt>
+<dd><p>Trigger this action manually. </p>
+<p>The enabled callback is always evaluated before triggering when present. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>context</strong> – The trigger context. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the action was enabled and was accepted as triggered. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui6Action6createENSt6stringE">
+<span id="_CPPv3N8erbsland5cterm2ui6Action6createENSt6stringE"></span><span id="_CPPv2N8erbsland5cterm2ui6Action6createENSt6stringE"></span><span id="erbsland::cterm::ui::Action::create__ss"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_1a9d13a513e26d105cf0f24959b4622da2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">ActionPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui6Action6createENSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an action with a short help name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The short action name used in generated help. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The new action. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui12ButtonActionE">
+<span id="_CPPv3N8erbsland5cterm2ui12ButtonActionE"></span><span id="_CPPv2N8erbsland5cterm2ui12ButtonActionE"></span><span id="erbsland::cterm::ui::ButtonAction"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_button_action"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ButtonAction</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui6ActionE" title="erbsland::cterm::ui::Action"><span class="n"><span class="pre">Action</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui12ButtonActionE" title="Link to this definition"></a><br /></dt>
+<dd><p>An action that is owned by one button surface and synchronizes its enabled state. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui12ButtonAction12ButtonActionENSt6stringE">
+<span id="_CPPv3N8erbsland5cterm2ui12ButtonAction12ButtonActionENSt6stringE"></span><span id="_CPPv2N8erbsland5cterm2ui12ButtonAction12ButtonActionENSt6stringE"></span><span id="erbsland::cterm::ui::ButtonAction::ButtonAction__ss"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_button_action_1acb88bc22454647a662505c35c662183e"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ButtonAction</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui12ButtonAction12ButtonActionENSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a button action with a short help name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The short action name used in generated help. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui12ButtonAction6createENSt6stringE">
+<span id="_CPPv3N8erbsland5cterm2ui12ButtonAction6createENSt6stringE"></span><span id="_CPPv2N8erbsland5cterm2ui12ButtonAction6createENSt6stringE"></span><span id="erbsland::cterm::ui::ButtonAction::create__ss"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_button_action_1a58777fb7855149343b1c971f8d7390b2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">ButtonActionPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui12ButtonAction6createENSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a button action with a short help name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The short action name used in generated help. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The new button action. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui8HelpDataE">
+<span id="_CPPv3N8erbsland5cterm2ui8HelpDataE"></span><span id="_CPPv2N8erbsland5cterm2ui8HelpDataE"></span><span id="erbsland::cterm::ui::HelpData"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HelpData</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE" title="Link to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="ui-core.html#classerbsland_1_1cterm_1_1ui_1_1_display"><span class="std std-ref">Display</span></a> metadata for a user-interface action. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui8HelpData8HelpDataEv">
+<span id="_CPPv3N8erbsland5cterm2ui8HelpData8HelpDataEv"></span><span id="_CPPv2N8erbsland5cterm2ui8HelpData8HelpDataEv"></span><span id="erbsland::cterm::ui::HelpData::HelpData"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1a068dea5b69f2e9d562588c09ddd189b4"></span><span class="sig-name descname"><span class="n"><span class="pre">HelpData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui8HelpData8HelpDataEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create empty help data. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui8HelpData8HelpDataENSt6stringE">
+<span id="_CPPv3N8erbsland5cterm2ui8HelpData8HelpDataENSt6stringE"></span><span id="_CPPv2N8erbsland5cterm2ui8HelpData8HelpDataENSt6stringE"></span><span id="erbsland::cterm::ui::HelpData::HelpData__ss"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1a0f51c9e5157a6b4907312a41fb0a24d9"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HelpData</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui8HelpData8HelpDataENSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Create help data with a short display name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The short display name. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui8HelpData4nameEv">
+<span id="_CPPv3NK8erbsland5cterm2ui8HelpData4nameEv"></span><span id="_CPPv2NK8erbsland5cterm2ui8HelpData4nameEv"></span><span id="erbsland::cterm::ui::HelpData::nameC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1abcf65e2103cbadca6556c2f480df9d6e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui8HelpData4nameEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the short display name. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui8HelpData7setNameENSt6stringE">
+<span id="_CPPv3N8erbsland5cterm2ui8HelpData7setNameENSt6stringE"></span><span id="_CPPv2N8erbsland5cterm2ui8HelpData7setNameENSt6stringE"></span><span id="erbsland::cterm::ui::HelpData::setName__ss"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1aa6323a6a7fdbac8f2b52046df3049270"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE" title="erbsland::cterm::ui::HelpData"><span class="n"><span class="pre">HelpData</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">setName</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui8HelpData7setNameENSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the short display name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The short display name. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>This object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui8HelpData11descriptionEv">
+<span id="_CPPv3NK8erbsland5cterm2ui8HelpData11descriptionEv"></span><span id="_CPPv2NK8erbsland5cterm2ui8HelpData11descriptionEv"></span><span id="erbsland::cterm::ui::HelpData::descriptionC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1a7e2324c16b8c33db2ee0f1e537ea4c43"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">description</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui8HelpData11descriptionEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the detailed help description. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui8HelpData17descriptionFormatEv">
+<span id="_CPPv3NK8erbsland5cterm2ui8HelpData17descriptionFormatEv"></span><span id="_CPPv2NK8erbsland5cterm2ui8HelpData17descriptionFormatEv"></span><span id="erbsland::cterm::ui::HelpData::descriptionFormatC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1a430e655480e50d48be56ad5ece0f8a39"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">HelpFormat</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">descriptionFormat</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui8HelpData17descriptionFormatEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the format of the detailed help description. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui8HelpData14setDescriptionENSt6stringE10HelpFormat">
+<span id="_CPPv3N8erbsland5cterm2ui8HelpData14setDescriptionENSt6stringE10HelpFormat"></span><span id="_CPPv2N8erbsland5cterm2ui8HelpData14setDescriptionENSt6stringE10HelpFormat"></span><span id="erbsland::cterm::ui::HelpData::setDescription__ss.HelpFormat"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1ad0ae9de8dc00ba378385143796139d6f"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE" title="erbsland::cterm::ui::HelpData"><span class="n"><span class="pre">HelpData</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">setDescription</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">description</span></span>, <span class="n"><span class="pre">HelpFormat</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">format</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">HelpFormat</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Text</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui8HelpData14setDescriptionENSt6stringE10HelpFormat" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the detailed help description. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>description</strong> – The detailed help description. </p></li>
+<li><p><strong>format</strong> – The format of the detailed help description. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>This object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui8HelpData8priorityEv">
+<span id="_CPPv3NK8erbsland5cterm2ui8HelpData8priorityEv"></span><span id="_CPPv2NK8erbsland5cterm2ui8HelpData8priorityEv"></span><span id="erbsland::cterm::ui::HelpData::priorityC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1a46e7777ac23e55473160ae5be2c02a1d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">priority</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui8HelpData8priorityEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the display priority. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui8HelpData11setPriorityEi">
+<span id="_CPPv3N8erbsland5cterm2ui8HelpData11setPriorityEi"></span><span id="_CPPv2N8erbsland5cterm2ui8HelpData11setPriorityEi"></span><span id="erbsland::cterm::ui::HelpData::setPriority__i"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1a9a30dba4eaef63d1f216731047f87b2f"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE" title="erbsland::cterm::ui::HelpData"><span class="n"><span class="pre">HelpData</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">setPriority</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">priority</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui8HelpData11setPriorityEi" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the display priority. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>priority</strong> – The display priority; larger values are displayed first. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>This object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui8HelpData10visibilityEv">
+<span id="_CPPv3NK8erbsland5cterm2ui8HelpData10visibilityEv"></span><span id="_CPPv2NK8erbsland5cterm2ui8HelpData10visibilityEv"></span><span id="erbsland::cterm::ui::HelpData::visibilityC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1a114944e5ad699b9d9a33959a1b36a647"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui14HelpVisibilityE" title="erbsland::cterm::ui::HelpVisibility"><span class="n"><span class="pre">HelpVisibility</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">visibility</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui8HelpData10visibilityEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the help visibility. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui8HelpData13setVisibilityE14HelpVisibility">
+<span id="_CPPv3N8erbsland5cterm2ui8HelpData13setVisibilityE14HelpVisibility"></span><span id="_CPPv2N8erbsland5cterm2ui8HelpData13setVisibilityE14HelpVisibility"></span><span id="erbsland::cterm::ui::HelpData::setVisibility__HelpVisibility"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1a907570a5d326a461fff124e2a4002e8e"></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui8HelpDataE" title="erbsland::cterm::ui::HelpData"><span class="n"><span class="pre">HelpData</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">setVisibility</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N8erbsland5cterm2ui14HelpVisibilityE" title="erbsland::cterm::ui::HelpVisibility"><span class="n"><span class="pre">HelpVisibility</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">visibility</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui8HelpData13setVisibilityE14HelpVisibility" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the help visibility. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>visibility</strong> – The help visibility. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>This object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui8HelpData17isVisibleInFooterEv">
+<span id="_CPPv3NK8erbsland5cterm2ui8HelpData17isVisibleInFooterEv"></span><span id="_CPPv2NK8erbsland5cterm2ui8HelpData17isVisibleInFooterEv"></span><span id="erbsland::cterm::ui::HelpData::isVisibleInFooterC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1abffc463c88de88f2ab9d5df16ddea22f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isVisibleInFooter</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui8HelpData17isVisibleInFooterEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this metadata shall be shown in compact footer help. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui8HelpData19isVisibleOnHelpPageEv">
+<span id="_CPPv3NK8erbsland5cterm2ui8HelpData19isVisibleOnHelpPageEv"></span><span id="_CPPv2NK8erbsland5cterm2ui8HelpData19isVisibleOnHelpPageEv"></span><span id="erbsland::cterm::ui::HelpData::isVisibleOnHelpPageC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_help_data_1abe5ed017426cc1e5b0b2264226a8ef42"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isVisibleOnHelpPage</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui8HelpData19isVisibleOnHelpPageEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this metadata shall be shown in detailed help. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14HelpVisibilityE">
+<span id="_CPPv3N8erbsland5cterm2ui14HelpVisibilityE"></span><span id="_CPPv2N8erbsland5cterm2ui14HelpVisibilityE"></span><span class="target" id="_help_visibility_8hpp_1aaf700ffd4566a916add297556cfd1e30"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">HelpVisibility</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14HelpVisibilityE" title="Link to this definition"></a><br /></dt>
+<dd><p>Visibility of action help metadata. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14HelpVisibility6HiddenE">
+<span id="_CPPv3N8erbsland5cterm2ui14HelpVisibility6HiddenE"></span><span id="_CPPv2N8erbsland5cterm2ui14HelpVisibility6HiddenE"></span><span class="target" id="_help_visibility_8hpp_1aaf700ffd4566a916add297556cfd1e30a7acdf85c69cc3c5305456a293524386e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Hidden</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14HelpVisibility6HiddenE" title="Link to this definition"></a><br /></dt>
+<dd><p>Hide this action from generated help. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14HelpVisibility6FooterE">
+<span id="_CPPv3N8erbsland5cterm2ui14HelpVisibility6FooterE"></span><span id="_CPPv2N8erbsland5cterm2ui14HelpVisibility6FooterE"></span><span class="target" id="_help_visibility_8hpp_1aaf700ffd4566a916add297556cfd1e30aded40f2a77c30efc6062db0cbd857746"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Footer</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14HelpVisibility6FooterE" title="Link to this definition"></a><br /></dt>
+<dd><p>Show this action only in compact footer help. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14HelpVisibility8HelpPageE">
+<span id="_CPPv3N8erbsland5cterm2ui14HelpVisibility8HelpPageE"></span><span id="_CPPv2N8erbsland5cterm2ui14HelpVisibility8HelpPageE"></span><span class="target" id="_help_visibility_8hpp_1aaf700ffd4566a916add297556cfd1e30a4d76456465489029c44a7533e184cddc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HelpPage</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14HelpVisibility8HelpPageE" title="Link to this definition"></a><br /></dt>
+<dd><p>Show this action only in detailed help. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui14HelpVisibility3AllE">
+<span id="_CPPv3N8erbsland5cterm2ui14HelpVisibility3AllE"></span><span id="_CPPv2N8erbsland5cterm2ui14HelpVisibility3AllE"></span><span class="target" id="_help_visibility_8hpp_1aaf700ffd4566a916add297556cfd1e30ab1c94ca2fbc3e78fc30069c8d0f01680"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">All</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui14HelpVisibility3AllE" title="Link to this definition"></a><br /></dt>
+<dd><p>Show this action in compact footer help and detailed help. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui7ActionsE">
+<span id="_CPPv3N8erbsland5cterm2ui7ActionsE"></span><span id="_CPPv2N8erbsland5cterm2ui7ActionsE"></span><span id="erbsland::cterm::ui::Actions"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Actions</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui7ActionsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Ordered action container attached to a surface or page. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui7Actions7ActionsE14SurfaceWeakPtr">
+<span id="_CPPv3N8erbsland5cterm2ui7Actions7ActionsE14SurfaceWeakPtr"></span><span id="_CPPv2N8erbsland5cterm2ui7Actions7ActionsE14SurfaceWeakPtr"></span><span id="erbsland::cterm::ui::Actions::Actions__SurfaceWeakPtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a524a8ea6de321820b78c793b485ae2df"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Actions</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SurfaceWeakPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">owner</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui7Actions7ActionsE14SurfaceWeakPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an action container for a surface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>owner</strong> – The surface that owns this container. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui7Actions3addE9ActionPtr">
+<span id="_CPPv3N8erbsland5cterm2ui7Actions3addE9ActionPtr"></span><span id="_CPPv2N8erbsland5cterm2ui7Actions3addE9ActionPtr"></span><span id="erbsland::cterm::ui::Actions::add__ActionPtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1aaf31d06492e64bc96036ff03569547b1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ActionPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">action</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui7Actions3addE9ActionPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Add an action to this container. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action</strong> – The action to attach. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – If the action is null or already attached here. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui7Actions6removeERK9ActionPtr">
+<span id="_CPPv3N8erbsland5cterm2ui7Actions6removeERK9ActionPtr"></span><span id="_CPPv2N8erbsland5cterm2ui7Actions6removeERK9ActionPtr"></span><span id="erbsland::cterm::ui::Actions::remove__ActionPtrCR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1aa59c287f36bf4efc80ba39d8434e2e1f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remove</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ActionPtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">action</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui7Actions6removeERK9ActionPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Remove an action from this container. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action</strong> – The action to remove. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui7Actions5clearEv">
+<span id="_CPPv3N8erbsland5cterm2ui7Actions5clearEv"></span><span id="_CPPv2N8erbsland5cterm2ui7Actions5clearEv"></span><span id="erbsland::cterm::ui::Actions::clear"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a27ffb53d087094fb29dd2f5ac676bf58"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui7Actions5clearEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Remove all actions. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui7Actions5emptyEv">
+<span id="_CPPv3NK8erbsland5cterm2ui7Actions5emptyEv"></span><span id="_CPPv2NK8erbsland5cterm2ui7Actions5emptyEv"></span><span id="erbsland::cterm::ui::Actions::emptyC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a77b7e58593304a704ea141f3f0f9f3a6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui7Actions5emptyEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if this container has no actions. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui7Actions4sizeEv">
+<span id="_CPPv3NK8erbsland5cterm2ui7Actions4sizeEv"></span><span id="_CPPv2NK8erbsland5cterm2ui7Actions4sizeEv"></span><span id="erbsland::cterm::ui::Actions::sizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1ae7f994ca11b152d7fcacc08d828ab64d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui7Actions4sizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the number of actions. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui7Actions8containsERK9ActionPtr">
+<span id="_CPPv3NK8erbsland5cterm2ui7Actions8containsERK9ActionPtr"></span><span id="_CPPv2NK8erbsland5cterm2ui7Actions8containsERK9ActionPtr"></span><span id="erbsland::cterm::ui::Actions::contains__ActionPtrCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1ab59f1c9384686386a694cfddeb6b1e4c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contains</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ActionPtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">action</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui7Actions8containsERK9ActionPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if an action is already attached to this container. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui7Actions10onKeyPressER13KeyPressEvent">
+<span id="_CPPv3N8erbsland5cterm2ui7Actions10onKeyPressER13KeyPressEvent"></span><span id="_CPPv2N8erbsland5cterm2ui7Actions10onKeyPressER13KeyPressEvent"></span><span id="erbsland::cterm::ui::Actions::onKeyPress__KeyPressEventR"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1a7389a4cd6a3f15bcd7bac965d8fa6be1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">onKeyPress</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="ui-events.html#_CPPv4N8erbsland5cterm2ui13KeyPressEventE" title="erbsland::cterm::ui::KeyPressEvent"><span class="n"><span class="pre">KeyPressEvent</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">keyPressEvent</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui7Actions10onKeyPressER13KeyPressEvent" title="Link to this definition"></a><br /></dt>
+<dd><p>Handle a key press event using the first enabled matching action. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keyPressEvent</strong> – The key press event to handle. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui7Actions17refreshForRepaintEv">
+<span id="_CPPv3N8erbsland5cterm2ui7Actions17refreshForRepaintEv"></span><span id="_CPPv2N8erbsland5cterm2ui7Actions17refreshForRepaintEv"></span><span id="erbsland::cterm::ui::Actions::refreshForRepaint"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_actions_1ab18b76bb6bd5602dd2d3da3450efef00"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">refreshForRepaint</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui7Actions17refreshForRepaintEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Refresh repaint-driven action enablement. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui20ActionTriggerContextE">
+<span id="_CPPv3N8erbsland5cterm2ui20ActionTriggerContextE"></span><span id="_CPPv2N8erbsland5cterm2ui20ActionTriggerContextE"></span><span id="erbsland::cterm::ui::ActionTriggerContext"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_trigger_context"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ActionTriggerContext</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui20ActionTriggerContextE" title="Link to this definition"></a><br /></dt>
+<dd><p>Context passed to an action when it is triggered. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm2ui20ActionTriggerContext20ActionTriggerContextE3Key14SurfaceWeakPtr">
+<span id="_CPPv3N8erbsland5cterm2ui20ActionTriggerContext20ActionTriggerContextE3Key14SurfaceWeakPtr"></span><span id="_CPPv2N8erbsland5cterm2ui20ActionTriggerContext20ActionTriggerContextE3Key14SurfaceWeakPtr"></span><span id="erbsland::cterm::ui::ActionTriggerContext::ActionTriggerContext__Key.SurfaceWeakPtr"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_trigger_context_1a83818cbbd7cea7101b33173b476909f8"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ActionTriggerContext</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <span class="n"><span class="pre">SurfaceWeakPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sourceSurface</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm2ui20ActionTriggerContext20ActionTriggerContextE3Key14SurfaceWeakPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a trigger context. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – The key that triggered the action. </p></li>
+<li><p><strong>sourceSurface</strong> – The surface whose action container triggered the action. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui20ActionTriggerContext3keyEv">
+<span id="_CPPv3NK8erbsland5cterm2ui20ActionTriggerContext3keyEv"></span><span id="_CPPv2NK8erbsland5cterm2ui20ActionTriggerContext3keyEv"></span><span id="erbsland::cterm::ui::ActionTriggerContext::keyC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_trigger_context_1a886123a144f3919ed09dedad66f07a95"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="input.html#_CPPv4N8erbsland5cterm3KeyE" title="erbsland::cterm::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">key</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui20ActionTriggerContext3keyEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the key that triggered the action. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm2ui20ActionTriggerContext13sourceSurfaceEv">
+<span id="_CPPv3NK8erbsland5cterm2ui20ActionTriggerContext13sourceSurfaceEv"></span><span id="_CPPv2NK8erbsland5cterm2ui20ActionTriggerContext13sourceSurfaceEv"></span><span id="erbsland::cterm::ui::ActionTriggerContext::sourceSurfaceC"></span><span class="target" id="classerbsland_1_1cterm_1_1ui_1_1_action_trigger_context_1a19b33dab764ca1fcdfdbf8e5006547bd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SurfaceWeakPtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">sourceSurface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm2ui20ActionTriggerContext13sourceSurfaceEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the surface whose action container triggered the action. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ui-layouts.html" class="btn btn-neutral float-left" title="UI Layouts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ui-surfaces.html" class="btn btn-neutral float-right" title="UI Surfaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

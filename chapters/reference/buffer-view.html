@@ -1,0 +1,599 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buffer Views &mdash; Erbsland Color Terminal for C++ 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/erbsland-ansi/ansi.css?v=0538bd54" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=45ce2256" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ansi.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/mermaid-init.js?v=b82d1d3a"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="https://erbsland.dev/ext/fa7/js/all.min.js"></script>
+      <script src="https://erbsland.dev/ext/mermaid/11/mermaid.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Color" href="color.html" />
+    <link rel="prev" title="Buffer" href="buffer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Erbsland Color Terminal for C++
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bitmap.html">Bitmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer.html">Buffer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Buffer Views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#viewing-a-portion-of-a-larger-buffer">Viewing a Portion of a Larger Buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scrolling-by-moving-the-view-rectangle">Scrolling by Moving the View Rectangle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#choosing-between-shared-and-referenced-views">Choosing Between Shared and Referenced Views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#showing-cropped-edges-explicitly">Showing Cropped Edges Explicitly</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm14BufferViewBaseE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::BufferViewBase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm10BufferViewE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::BufferView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm18BufferConstRefViewE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::BufferConstRefView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N8erbsland5cterm9CropEdgesE"><code class="docutils literal notranslate"><span class="pre">erbsland::cterm::CropEdges</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="color.html">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cursor-output.html">Cursor Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing.html">Frames, Borders, Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing-text.html">Text Rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="font.html">Font</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paragraph-options.html">Paragraph Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rich-text.html">Rich Text and HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal.html">Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html">Strings and Chars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theme.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">UI Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-core.html">UI Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-layouts.html">UI Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-input.html">UI Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-surfaces.html">UI Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui-events.html">UI Events and Scheduling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation/index.html">Implementation Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Erbsland Color Terminal for C++</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Buffer Views</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/chapters/reference/buffer-view.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="buffer-views">
+<h1>Buffer Views<a class="headerlink" href="#buffer-views" title="Link to this heading"></a></h1>
+<p>Buffer views expose a rectangular window onto a larger readable buffer.</p>
+<p>They are the right tool whenever your logical content is larger than the
+visible terminal area—for example in scrollable panels, editors, minimaps,
+or diagnostic tools.</p>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm14BufferViewBaseE" title="erbsland::cterm::BufferViewBase"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">BufferViewBase</span></code></a> provides the shared view behavior,
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm10BufferViewE" title="erbsland::cterm::BufferView"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">BufferView</span></code></a> owns a shared pointer to the underlying content, and
+<a class="reference internal" href="#_CPPv4N8erbsland5cterm18BufferConstRefViewE" title="erbsland::cterm::BufferConstRefView"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">BufferConstRefView</span></code></a> is the lightweight, stack-friendly variant
+for temporary rendering.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="viewing-a-portion-of-a-larger-buffer">
+<h3>Viewing a Portion of a Larger Buffer<a class="headerlink" href="#viewing-a-portion-of-a-larger-buffer" title="Link to this heading"></a></h3>
+<p>Use a buffer view when you want to render only a specific region of a
+larger logical canvas.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Buffer</span><span class="p">{</span><span class="n">Size</span><span class="p">{</span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">}};</span>
+<span class="n">world</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="n">Char</span><span class="p">{</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="p">{</span><span class="n">fg</span><span class="o">::</span><span class="n">Inherited</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="o">::</span><span class="n">Black</span><span class="p">}});</span>
+<span class="n">world</span><span class="p">.</span><span class="n">drawText</span><span class="p">(</span><span class="s">&quot;Visible window&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="n">Alignment</span><span class="o">::</span><span class="n">Center</span><span class="p">);</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BufferConstRefView</span><span class="p">{</span><span class="n">world</span><span class="p">,</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">}};</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UpdateSettings</span><span class="p">{};</span>
+<span class="n">settings</span><span class="p">.</span><span class="n">setShowCropMarks</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="n">terminal</span><span class="p">.</span><span class="n">updateScreen</span><span class="p">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="n">settings</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The view translates its local coordinates into the corresponding
+positions of the underlying buffer. This allows you to render just the
+visible portion without copying or modifying the original content.</p>
+</section>
+<section id="scrolling-by-moving-the-view-rectangle">
+<h3>Scrolling by Moving the View Rectangle<a class="headerlink" href="#scrolling-by-moving-the-view-rectangle" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm14BufferViewBaseE" title="erbsland::cterm::BufferViewBase"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">BufferViewBase</span></code></a> stores the currently visible rectangle, which you can
+update as the user scrolls or pans through the content.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">sharedWorld</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Buffer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">world</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BufferView</span><span class="p">{</span><span class="n">sharedWorld</span><span class="p">,</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">}};</span>
+
+<span class="n">view</span><span class="p">.</span><span class="n">setViewRect</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">});</span>
+<span class="n">terminal</span><span class="p">.</span><span class="n">updateScreen</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>By moving the view rectangle, you change which part of the content is
+visible—without copying, reallocating, or redrawing the underlying buffer.</p>
+</section>
+<section id="choosing-between-shared-and-referenced-views">
+<h3>Choosing Between Shared and Referenced Views<a class="headerlink" href="#choosing-between-shared-and-referenced-views" title="Link to this heading"></a></h3>
+<p>Choose <a class="reference internal" href="#_CPPv4N8erbsland5cterm10BufferViewE" title="erbsland::cterm::BufferView"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">BufferView</span></code></a> when the view needs to outlive the current scope or be
+stored as part of a larger object.</p>
+<p>Choose <a class="reference internal" href="#_CPPv4N8erbsland5cterm18BufferConstRefViewE" title="erbsland::cterm::BufferConstRefView"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">BufferConstRefView</span></code></a> when you only need a short-lived wrapper
+around an existing buffer.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">sharedBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Buffer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Size</span><span class="p">{</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">});</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">cachedView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BufferView</span><span class="p">{</span><span class="n">sharedBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">}};</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">preview</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BufferConstRefView</span><span class="p">{</span><span class="o">*</span><span class="n">sharedBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">}};</span>
+<span class="n">terminal</span><span class="p">.</span><span class="n">updateScreen</span><span class="p">(</span><span class="n">preview</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Both variants implement <a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm14ReadableBufferE" title="erbsland::cterm::ReadableBuffer"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ReadableBuffer</span></code></a>, so the rest of your rendering
+pipeline can treat them just like any other source of terminal cells.</p>
+</section>
+<section id="showing-cropped-edges-explicitly">
+<h3>Showing Cropped Edges Explicitly<a class="headerlink" href="#showing-cropped-edges-explicitly" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm9CropEdgesE" title="erbsland::cterm::CropEdges"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">CropEdges</span></code></a> describes which sides of a view are clipped by the available
+content.</p>
+<p><a class="reference internal" href="#_CPPv4N8erbsland5cterm14BufferViewBaseE" title="erbsland::cterm::BufferViewBase"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">BufferViewBase</span></code></a> can use this information to render custom crop indicators
+directly inside the view.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">sharedBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Buffer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">world</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BufferView</span><span class="p">{</span><span class="n">sharedBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">}};</span>
+
+<span class="n">view</span><span class="p">.</span><span class="n">setShowCropCharacters</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="n">view</span><span class="p">.</span><span class="n">setCropCharacter</span><span class="p">(</span><span class="n">Direction</span><span class="o">::</span><span class="n">East</span><span class="p">,</span><span class="w"> </span><span class="n">Char</span><span class="p">{</span><span class="sa">U</span><span class="sc">&#39;▶&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">});</span>
+<span class="n">view</span><span class="p">.</span><span class="n">setCropCharacter</span><span class="p">(</span><span class="n">Direction</span><span class="o">::</span><span class="n">South</span><span class="p">,</span><span class="w"> </span><span class="n">Char</span><span class="p">{</span><span class="sa">U</span><span class="sc">&#39;▼&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fg</span><span class="o">::</span><span class="n">BrightYellow</span><span class="p">});</span>
+
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">cropEdges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CropEdges</span><span class="o">::</span><span class="n">fromView</span><span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="n">viewRect</span><span class="p">(),</span><span class="w"> </span><span class="n">sharedBuffer</span><span class="o">-&gt;</span><span class="n">rect</span><span class="p">());</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cropEdges</span><span class="p">.</span><span class="n">isSet</span><span class="p">(</span><span class="n">Direction</span><span class="o">::</span><span class="n">East</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">terminal</span><span class="p">.</span><span class="n">printLine</span><span class="p">(</span><span class="s">&quot;There is more content to the right.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is especially helpful in scrollable views, where users should
+immediately recognize that additional content exists beyond the visible
+window.</p>
+<p>If you are already using the UI framework, see
+<a class="reference internal" href="ui-surfaces.html#_CPPv4N8erbsland5cterm2ui7surface19ScrollingBufferViewE" title="erbsland::cterm::ui::surface::ScrollingBufferView"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">ui::ScrollingBufferView</span></code></a>
+for the same concept packaged as a ready-to-use surface with scroll and
+page navigation helpers.</p>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm14BufferViewBaseE">
+<span id="_CPPv3N8erbsland5cterm14BufferViewBaseE"></span><span id="_CPPv2N8erbsland5cterm14BufferViewBaseE"></span><span id="erbsland::cterm::BufferViewBase"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferViewBase</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm14ReadableBufferE" title="erbsland::cterm::ReadableBuffer"><span class="n"><span class="pre">ReadableBuffer</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm14BufferViewBaseE" title="Link to this definition"></a><br /></dt>
+<dd><p>The base class for all buffer views. </p>
+<p>Subclassed by <a class="reference internal" href="#classerbsland_1_1cterm_1_1_buffer_const_ref_view"><span class="std std-ref">erbsland::cterm::BufferConstRefView</span></a>, <a class="reference internal" href="#classerbsland_1_1cterm_1_1_buffer_view"><span class="std std-ref">erbsland::cterm::BufferView</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm14BufferViewBase14BufferViewBaseEK9Rectangle">
+<span id="_CPPv3N8erbsland5cterm14BufferViewBase14BufferViewBaseEK9Rectangle"></span><span id="_CPPv2N8erbsland5cterm14BufferViewBase14BufferViewBaseEK9Rectangle"></span><span id="erbsland::cterm::BufferViewBase::BufferViewBase__RectangleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a8b957ba6fd2bb3e3b7af9907795bd731"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferViewBase</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewRectangle</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm14BufferViewBase14BufferViewBaseEK9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a buffer view with the given visible rectangle in the source buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>viewRectangle</strong> – The rectangle of the underlying content that shall be exposed through the view. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm14BufferViewBase4sizeEv">
+<span id="_CPPv3NK8erbsland5cterm14BufferViewBase4sizeEv"></span><span id="_CPPv2NK8erbsland5cterm14BufferViewBase4sizeEv"></span><span id="erbsland::cterm::BufferViewBase::sizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a534275ef5860bb9bb1280a755fd46fe9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm14BufferViewBase4sizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the configured size of the buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The width and height of the buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm14BufferViewBase4rectEv">
+<span id="_CPPv3NK8erbsland5cterm14BufferViewBase4rectEv"></span><span id="_CPPv2NK8erbsland5cterm14BufferViewBase4rectEv"></span><span id="erbsland::cterm::BufferViewBase::rectC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1af64d1173843c0547d555f11a614bfade"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rect</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm14BufferViewBase4rectEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a rectangle representing this buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rectangle for this buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm14BufferViewBase5cloneEv">
+<span id="_CPPv3NK8erbsland5cterm14BufferViewBase5cloneEv"></span><span id="_CPPv2NK8erbsland5cterm14BufferViewBase5cloneEv"></span><span id="erbsland::cterm::BufferViewBase::cloneC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a12b8bd76f7fdb8927eb46bd2f8cf02e9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">WritableBufferPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clone</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm14BufferViewBase5cloneEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a writeable copy of this buffer. </p>
+<p>This will copy every block from this buffer into a new independent instance. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm14BufferViewBase8viewRectEv">
+<span id="_CPPv3NK8erbsland5cterm14BufferViewBase8viewRectEv"></span><span id="_CPPv2NK8erbsland5cterm14BufferViewBase8viewRectEv"></span><span id="erbsland::cterm::BufferViewBase::viewRectC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a4fd6517f1a0e70eca40d68fe30549060"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">viewRect</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm14BufferViewBase8viewRectEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the rectangle in the underlying content that is currently visible through this view. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm14BufferViewBase11setViewRectE9Rectangle">
+<span id="_CPPv3N8erbsland5cterm14BufferViewBase11setViewRectE9Rectangle"></span><span id="_CPPv2N8erbsland5cterm14BufferViewBase11setViewRectE9Rectangle"></span><span id="erbsland::cterm::BufferViewBase::setViewRect__Rectangle"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a8692bba78af8d48ff68fe04cae932f57"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setViewRect</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">rect</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm14BufferViewBase11setViewRectE9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the rectangle in the underlying content that shall be visible through this view. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rect</strong> – The new source rectangle for the view. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm14BufferViewBase18showCropCharactersEv">
+<span id="_CPPv3NK8erbsland5cterm14BufferViewBase18showCropCharactersEv"></span><span id="_CPPv2NK8erbsland5cterm14BufferViewBase18showCropCharactersEv"></span><span id="erbsland::cterm::BufferViewBase::showCropCharactersC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a7fe7465cb911fcf61aafe407743dbdbd"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">showCropCharacters</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm14BufferViewBase18showCropCharactersEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Test whether crop indicator characters are shown when the view is clipped by the source buffer. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm14BufferViewBase21setShowCropCharactersEb">
+<span id="_CPPv3N8erbsland5cterm14BufferViewBase21setShowCropCharactersEb"></span><span id="_CPPv2N8erbsland5cterm14BufferViewBase21setShowCropCharactersEb"></span><span id="erbsland::cterm::BufferViewBase::setShowCropCharacters__b"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1add9ffa80a480daf1b2ce1ecc082c14b1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setShowCropCharacters</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">show</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm14BufferViewBase21setShowCropCharactersEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Enable or disable crop indicator characters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>show</strong> – <code class="docutils literal notranslate"><span class="pre">true</span></code> to render crop indicators inside the view. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm14BufferViewBase13cropCharacterE9Direction">
+<span id="_CPPv3NK8erbsland5cterm14BufferViewBase13cropCharacterE9Direction"></span><span id="_CPPv2NK8erbsland5cterm14BufferViewBase13cropCharacterE9Direction"></span><span id="erbsland::cterm::BufferViewBase::cropCharacter__DirectionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a02c419d5bc5cc6b836b2c4caaf89b979"></span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cropCharacter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">direction</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm14BufferViewBase13cropCharacterE9Direction" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the crop indicator character for one direction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>direction</strong> – The direction for which to retrieve the crop indicator. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The configured crop character, or an empty character for an invalid direction. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm14BufferViewBase16setCropCharacterE9Direction4Char">
+<span id="_CPPv3N8erbsland5cterm14BufferViewBase16setCropCharacterE9Direction4Char"></span><span id="_CPPv2N8erbsland5cterm14BufferViewBase16setCropCharacterE9Direction4Char"></span><span id="erbsland::cterm::BufferViewBase::setCropCharacter__Direction.Char"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_base_1a06408dc1a31d51c49fee752f5e3b7df3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCropCharacter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">direction</span></span>, <a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">character</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm14BufferViewBase16setCropCharacterE9Direction4Char" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the crop indicator character for one direction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> – The direction to update. </p></li>
+<li><p><strong>character</strong> – The new crop indicator character. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10BufferViewE">
+<span id="_CPPv3N8erbsland5cterm10BufferViewE"></span><span id="_CPPv2N8erbsland5cterm10BufferViewE"></span><span id="erbsland::cterm::BufferView"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferView</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm14BufferViewBaseE" title="erbsland::cterm::BufferViewBase"><span class="n"><span class="pre">BufferViewBase</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm10BufferViewE" title="Link to this definition"></a><br /></dt>
+<dd><p>A view that uses a shared pointer to the content. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10BufferView10BufferViewEv">
+<span id="_CPPv3N8erbsland5cterm10BufferView10BufferViewEv"></span><span id="_CPPv2N8erbsland5cterm10BufferView10BufferViewEv"></span><span id="erbsland::cterm::BufferView::BufferView"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_1a59ccad3c2f786de90840d3ce8f3be6e6"></span><span class="sig-name descname"><span class="n"><span class="pre">BufferView</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm10BufferView10BufferViewEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty view. </p>
+<p>This creates a 1x1 view that returns the ‘<a class="reference internal" href="geometry.html#classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53baab48d6d6be732434cd8bf5ed670a597f"><span class="std std-ref">Direction::None</span></a>’ character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10BufferView10BufferViewEK4Size">
+<span id="_CPPv3N8erbsland5cterm10BufferView10BufferViewEK4Size"></span><span id="_CPPv2N8erbsland5cterm10BufferView10BufferViewEK4Size"></span><span id="erbsland::cterm::BufferView::BufferView__SizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_1a3cca71464e7c11e56d9b9943aa56f9b7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewSize</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm10BufferView10BufferViewEK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an empty view of a given size. </p>
+<p>This creates a view that returns the ‘<a class="reference internal" href="geometry.html#classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53baab48d6d6be732434cd8bf5ed670a597f"><span class="std std-ref">Direction::None</span></a>’ character. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>viewSize</strong> – The size of the view. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10BufferView10BufferViewE17ReadableBufferPtrK4Size">
+<span id="_CPPv3N8erbsland5cterm10BufferView10BufferViewE17ReadableBufferPtrK4Size"></span><span id="_CPPv2N8erbsland5cterm10BufferView10BufferViewE17ReadableBufferPtrK4Size"></span><span id="erbsland::cterm::BufferView::BufferView__ReadableBufferPtr.SizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_1a20c6c491423c8fd55719686894b8df2c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferView</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ReadableBufferPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">content</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewSize</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm10BufferView10BufferViewE17ReadableBufferPtrK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a view of the given content, with a given size. </p>
+<p>The view shares the top-left corner with the buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> – The buffer to create the view from. </p></li>
+<li><p><strong>viewSize</strong> – The size of the view. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10BufferView10BufferViewE17ReadableBufferPtrK9Rectangle">
+<span id="_CPPv3N8erbsland5cterm10BufferView10BufferViewE17ReadableBufferPtrK9Rectangle"></span><span id="_CPPv2N8erbsland5cterm10BufferView10BufferViewE17ReadableBufferPtrK9Rectangle"></span><span id="erbsland::cterm::BufferView::BufferView__ReadableBufferPtr.RectangleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_1a10918e29429ae3a56bdee3110f0ff9bd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferView</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ReadableBufferPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">content</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewRect</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm10BufferView10BufferViewE17ReadableBufferPtrK9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a view of the given content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> – The buffer to create the view from. </p></li>
+<li><p><strong>viewRect</strong> – The rectangle of the view. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm10BufferView3getEK8Position">
+<span id="_CPPv3NK8erbsland5cterm10BufferView3getEK8Position"></span><span id="_CPPv2NK8erbsland5cterm10BufferView3getEK8Position"></span><span id="erbsland::cterm::BufferView::get__PositionCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_1ace22d2fae93050718176861231818dda"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm10BufferView3getEK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Read the block stored at the given position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pos</strong> – The coordinates within the buffer. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A reference to the stored block. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm10BufferView7contentEv">
+<span id="_CPPv3NK8erbsland5cterm10BufferView7contentEv"></span><span id="_CPPv2NK8erbsland5cterm10BufferView7contentEv"></span><span id="erbsland::cterm::BufferView::contentC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_1aa9b9d88b795c504a4a605b2329f1459d"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ReadableBufferPtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">content</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm10BufferView7contentEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Access the content. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm10BufferView10setContentE17ReadableBufferPtr">
+<span id="_CPPv3N8erbsland5cterm10BufferView10setContentE17ReadableBufferPtr"></span><span id="_CPPv2N8erbsland5cterm10BufferView10setContentE17ReadableBufferPtr"></span><span id="erbsland::cterm::BufferView::setContent__ReadableBufferPtr"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_view_1aa5d58bfeeded835d5990234d84a2711e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setContent</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ReadableBufferPtr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">buffer</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm10BufferView10setContentE17ReadableBufferPtr" title="Link to this definition"></a><br /></dt>
+<dd><p>Replace the content. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm18BufferConstRefViewE">
+<span id="_CPPv3N8erbsland5cterm18BufferConstRefViewE"></span><span id="_CPPv2N8erbsland5cterm18BufferConstRefViewE"></span><span id="erbsland::cterm::BufferConstRefView"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_const_ref_view"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferConstRefView</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">erbsland</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cterm</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N8erbsland5cterm14BufferViewBaseE" title="erbsland::cterm::BufferViewBase"><span class="n"><span class="pre">BufferViewBase</span></span></a><a class="headerlink" href="#_CPPv4N8erbsland5cterm18BufferConstRefViewE" title="Link to this definition"></a><br /></dt>
+<dd><p>A view that uses a reference to the content. </p>
+<p>This view is to use as a thin temporary wrapper on the stack. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm18BufferConstRefView18BufferConstRefViewERK14ReadableBufferK4Size">
+<span id="_CPPv3N8erbsland5cterm18BufferConstRefView18BufferConstRefViewERK14ReadableBufferK4Size"></span><span id="_CPPv2N8erbsland5cterm18BufferConstRefView18BufferConstRefViewERK14ReadableBufferK4Size"></span><span id="erbsland::cterm::BufferConstRefView::BufferConstRefView__ReadableBufferCR.SizeC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_const_ref_view_1a50b1b0930df721d78d05fd98a690658c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferConstRefView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm14ReadableBufferE" title="erbsland::cterm::ReadableBuffer"><span class="n"><span class="pre">ReadableBuffer</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">content</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm4SizeE" title="erbsland::cterm::Size"><span class="n"><span class="pre">Size</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewSize</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm18BufferConstRefView18BufferConstRefViewERK14ReadableBufferK4Size" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a view of the given content, with a given size. </p>
+<p>The view shares the top-left corner with the buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> – A reference to the content buffer. </p></li>
+<li><p><strong>viewSize</strong> – The size of the view. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm18BufferConstRefView18BufferConstRefViewERK14ReadableBufferK9Rectangle">
+<span id="_CPPv3N8erbsland5cterm18BufferConstRefView18BufferConstRefViewERK14ReadableBufferK9Rectangle"></span><span id="_CPPv2N8erbsland5cterm18BufferConstRefView18BufferConstRefViewERK14ReadableBufferK9Rectangle"></span><span id="erbsland::cterm::BufferConstRefView::BufferConstRefView__ReadableBufferCR.RectangleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_const_ref_view_1a963f121ff27f902c350f7d0fb39315ea"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BufferConstRefView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="buffer.html#_CPPv4N8erbsland5cterm14ReadableBufferE" title="erbsland::cterm::ReadableBuffer"><span class="n"><span class="pre">ReadableBuffer</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">content</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewRect</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm18BufferConstRefView18BufferConstRefViewERK14ReadableBufferK9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a view of the given content. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> – A reference to the content buffer. </p></li>
+<li><p><strong>viewRect</strong> – The rectangle of the view. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm18BufferConstRefView3getEK8Position">
+<span id="_CPPv3NK8erbsland5cterm18BufferConstRefView3getEK8Position"></span><span id="_CPPv2NK8erbsland5cterm18BufferConstRefView3getEK8Position"></span><span id="erbsland::cterm::BufferConstRefView::get__PositionCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_buffer_const_ref_view_1a34c4eb784c6f2b2ec0a9d5cf0ebc9ffb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="text.html#_CPPv4N8erbsland5cterm4CharE" title="erbsland::cterm::Char"><span class="n"><span class="pre">Char</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm18BufferConstRefView3getEK8Position" title="Link to this definition"></a><br /></dt>
+<dd><p>Read the block stored at the given position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pos</strong> – The coordinates within the buffer. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A reference to the stored block. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9CropEdgesE">
+<span id="_CPPv3N8erbsland5cterm9CropEdgesE"></span><span id="_CPPv2N8erbsland5cterm9CropEdgesE"></span><span id="erbsland::cterm::CropEdges"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CropEdges</span></span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9CropEdgesE" title="Link to this definition"></a><br /></dt>
+<dd><p>Flags for crop edges and corners. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9CropEdges5FlagsE">
+<span id="_CPPv3N8erbsland5cterm9CropEdges5FlagsE"></span><span id="_CPPv2N8erbsland5cterm9CropEdges5FlagsE"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1a3d87cbb40bf567e100b1af396799c3b3"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Flags</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">bitset</span></span><span class="p"><span class="pre">&lt;</span></span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9CropEdges5FlagsE" title="Link to this definition"></a><br /></dt>
+<dd><p>Bitset type storing the eight crop-edge directions. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9CropEdges9CropEdgesEv">
+<span id="_CPPv3N8erbsland5cterm9CropEdges9CropEdgesEv"></span><span id="_CPPv2N8erbsland5cterm9CropEdges9CropEdgesEv"></span><span id="erbsland::cterm::CropEdges::CropEdges"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1a67d5fbef369dc48b37bbea7c65739258"></span><span class="sig-name descname"><span class="n"><span class="pre">CropEdges</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9CropEdges9CropEdgesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>No crop edges. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9CropEdgeseqERK9CropEdges">
+<span id="_CPPv3NK8erbsland5cterm9CropEdgeseqERK9CropEdges"></span><span id="_CPPv2NK8erbsland5cterm9CropEdgeseqERK9CropEdges"></span><span id="erbsland::cterm::CropEdges::eq-operator__CropEdgesCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1a2aac67630bf16544be65d2f62d6215f7"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9CropEdgesE" title="erbsland::cterm::CropEdges"><span class="n"><span class="pre">CropEdges</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9CropEdgeseqERK9CropEdges" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two crop-edges objects. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9CropEdgesneERK9CropEdges">
+<span id="_CPPv3NK8erbsland5cterm9CropEdgesneERK9CropEdges"></span><span id="_CPPv2NK8erbsland5cterm9CropEdgesneERK9CropEdges"></span><span id="erbsland::cterm::CropEdges::neq-operator__CropEdgesCRC"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1aa875f920e009fa92e1acd72c51466a6a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9CropEdgesE" title="erbsland::cterm::CropEdges"><span class="n"><span class="pre">CropEdges</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9CropEdgesneERK9CropEdges" title="Link to this definition"></a><br /></dt>
+<dd><p>Compare two crop-edges objects. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9CropEdges5flagsEv">
+<span id="_CPPv3NK8erbsland5cterm9CropEdges5flagsEv"></span><span id="_CPPv2NK8erbsland5cterm9CropEdges5flagsEv"></span><span id="erbsland::cterm::CropEdges::flagsC"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1a24dc8454aba82d6f9afeb6f218afd1e0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9CropEdges5FlagsE" title="erbsland::cterm::CropEdges::Flags"><span class="n"><span class="pre">Flags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9CropEdges5flagsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the raw flags. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9CropEdges5isSetEK9Direction">
+<span id="_CPPv3NK8erbsland5cterm9CropEdges5isSetEK9Direction"></span><span id="_CPPv2NK8erbsland5cterm9CropEdges5isSetEK9Direction"></span><span id="erbsland::cterm::CropEdges::isSet__DirectionCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1af9c33c8a73c721f3bc7bfa75c7a37bc5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isSet</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">direction</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9CropEdges5isSetEK9Direction" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if a crop edge is set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9CropEdges3setEK9Directionb">
+<span id="_CPPv3N8erbsland5cterm9CropEdges3setEK9Directionb"></span><span id="_CPPv2N8erbsland5cterm9CropEdges3setEK9Directionb"></span><span id="erbsland::cterm::CropEdges::set__DirectionC.b"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1a565a2b0ea94ce34be33b90a8c8e8fe7b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">direction</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9CropEdges3setEK9Directionb" title="Link to this definition"></a><br /></dt>
+<dd><p>Set a crop edge. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9CropEdges5clearEK9Direction">
+<span id="_CPPv3N8erbsland5cterm9CropEdges5clearEK9Direction"></span><span id="_CPPv2N8erbsland5cterm9CropEdges5clearEK9Direction"></span><span id="erbsland::cterm::CropEdges::clear__DirectionC"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1a8d07c2fadb91fb5e7770adc661cead57"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">direction</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9CropEdges5clearEK9Direction" title="Link to this definition"></a><br /></dt>
+<dd><p>Clear a crop edge. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9CropEdges5resetEv">
+<span id="_CPPv3N8erbsland5cterm9CropEdges5resetEv"></span><span id="_CPPv2N8erbsland5cterm9CropEdges5resetEv"></span><span id="erbsland::cterm::CropEdges::reset"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1ab79cd0259f480df1fcb3f7277530f33a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9CropEdges5resetEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Reset all crop edges. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8erbsland5cterm9CropEdges11edgeForViewEK8PositionK9Rectangle">
+<span id="_CPPv3NK8erbsland5cterm9CropEdges11edgeForViewEK8PositionK9Rectangle"></span><span id="_CPPv2NK8erbsland5cterm9CropEdges11edgeForViewEK8PositionK9Rectangle"></span><span id="erbsland::cterm::CropEdges::edgeForView__PositionC.RectangleCC"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1af336361d22395e743d857f4789ab633f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9DirectionE" title="erbsland::cterm::Direction"><span class="n"><span class="pre">Direction</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">edgeForView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm8PositionE" title="erbsland::cterm::Position"><span class="n"><span class="pre">Position</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewRect</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK8erbsland5cterm9CropEdges11edgeForViewEK8PositionK9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Test if a frame position in a view rectangle matches a given crop direction. </p>
+<p>This function automatically handles the corners of the view rectangle correctly. Corner directions, like <code class="docutils literal notranslate"><a class="reference internal" href="geometry.html#classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53ba93d7f8cafe9836d210dfbfa88379a365"><span class="std std-ref"><span class="pre">Direction::NorthEast</span></span></a></code> are only returned if <code class="docutils literal notranslate"><a class="reference internal" href="geometry.html#classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53bab60ec8e3c72541313e1384c65f0e33bf"><span class="std std-ref"><span class="pre">Direction::North</span></span></a></code> and <code class="docutils literal notranslate"><a class="reference internal" href="geometry.html#classerbsland_1_1cterm_1_1_direction_1a4d671be432ea0c9ebe07933f4dfdb53ba197abfe29bee0011beaed2a0d9bd883c"><span class="std std-ref"><span class="pre">Direction::East</span></span></a></code> are set. Otherwise, the corner direction matches the main direction. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8erbsland5cterm9CropEdges8fromViewEK9RectangleK9Rectangle">
+<span id="_CPPv3N8erbsland5cterm9CropEdges8fromViewEK9RectangleK9Rectangle"></span><span id="_CPPv2N8erbsland5cterm9CropEdges8fromViewEK9RectangleK9Rectangle"></span><span id="erbsland::cterm::CropEdges::fromView__RectangleC.RectangleC"></span><span class="target" id="classerbsland_1_1cterm_1_1_crop_edges_1a6d411472a4ffd4da19f286e9eda5895e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N8erbsland5cterm9CropEdgesE" title="erbsland::cterm::CropEdges"><span class="n"><span class="pre">CropEdges</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">viewRect</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="geometry.html#_CPPv4N8erbsland5cterm9RectangleE" title="erbsland::cterm::Rectangle"><span class="n"><span class="pre">Rectangle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">contentRect</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8erbsland5cterm9CropEdges8fromViewEK9RectangleK9Rectangle" title="Link to this definition"></a><br /></dt>
+<dd><p>Create a crop edge instance for the given view/content situation. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>viewRect</strong> – The view rectangle. </p></li>
+<li><p><strong>contentRect</strong> – The content rectangle. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="buffer.html" class="btn btn-neutral float-left" title="Buffer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="color.html" class="btn btn-neutral float-right" title="Color" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Tobias Erbsland - Erbsland DEV.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

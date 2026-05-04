@@ -1,0 +1,405 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1_fast_char_set" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::FastCharSet</compoundname>
+    <includes refid="_fast_char_set_8hpp" local="no">erbsland/cterm/FastCharSet.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1_fast_char_set_1_1_tables" prot="private">erbsland::cterm::FastCharSet::Tables</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classerbsland_1_1cterm_1_1_fast_char_set_1a1776a394e6e93905c67effd9ced34217" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>FastTrack</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::FastTrack</qualifiedname>
+        <enumvalue id="classerbsland_1_1cterm_1_1_fast_char_set_1a1776a394e6e93905c67effd9ced34217ad511f8439ecde36647437fbba67a4394" prot="public">
+          <name>Space</name>
+          <briefdescription>
+<para>Match only U+0020 SPACE. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classerbsland_1_1cterm_1_1_fast_char_set_1a1776a394e6e93905c67effd9ced34217ab555873590c0974ba984a8b205e22378" prot="public">
+          <name>SpaceTab</name>
+          <briefdescription>
+<para>Match U+0020 SPACE and U+0009 TAB. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Fast-track mode for common separator patterns. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="25" column="5" bodyfile="erbsland/cterm/FastCharSet.hpp" bodystart="25" bodyend="28"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_fast_char_set_1a202bfd5f80d8f4ff8a4516d695e7ac9e" prot="private" static="no" mutable="no">
+        <type>std::variant&lt; <ref refid="classerbsland_1_1cterm_1_1_fast_char_set_1a1776a394e6e93905c67effd9ced34217" kindref="member">FastTrack</ref>, Tables &gt;</type>
+        <definition>std::variant&lt;FastTrack, Tables&gt; erbsland::cterm::FastCharSet::_lookup</definition>
+        <argsstring></argsstring>
+        <name>_lookup</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::_lookup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="81" column="18" bodyfile="erbsland/cterm/FastCharSet.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1_fast_char_set_1aa9131087b1e1245eb99ba0ff9aaeb1cb" prot="private" static="no" mutable="no">
+        <type>std::u32string</type>
+        <definition>std::u32string erbsland::cterm::FastCharSet::_characters</definition>
+        <argsstring></argsstring>
+        <name>_characters</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::_characters</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="82" column="20" bodyfile="erbsland/cterm/FastCharSet.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1aa865bbb62b3e23cd06ffb17438990773" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::FastCharSet::~FastCharSet</definition>
+        <argsstring>()=default</argsstring>
+        <name>~FastCharSet</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::~FastCharSet</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="31" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a8d2e5eef0b5729450ddb06f3513f03bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::FastCharSet::FastCharSet</definition>
+        <argsstring>(const FastCharSet &amp;)=delete</argsstring>
+        <name>FastCharSet</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::FastCharSet</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_fast_char_set" kindref="compound">FastCharSet</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a8351998b80ac382290cc57362455b1ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::FastCharSet::FastCharSet</definition>
+        <argsstring>(FastCharSet &amp;&amp;)=delete</argsstring>
+        <name>FastCharSet</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::FastCharSet</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_fast_char_set" kindref="compound">FastCharSet</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="33" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1aa66c013b792729bd45c8d40803c61dac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_fast_char_set" kindref="compound">FastCharSet</ref> &amp;</type>
+        <definition>FastCharSet &amp; erbsland::cterm::FastCharSet::operator=</definition>
+        <argsstring>(const FastCharSet &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_fast_char_set" kindref="compound">FastCharSet</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="34" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a39582c9cb4ec91a6698e5aeb5044afd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1_fast_char_set" kindref="compound">FastCharSet</ref> &amp;</type>
+        <definition>FastCharSet &amp; erbsland::cterm::FastCharSet::operator=</definition>
+        <argsstring>(FastCharSet &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_fast_char_set" kindref="compound">FastCharSet</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="35" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a845d08db48e2d9f436dba9f0c3b3afb9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::u32string &amp;</type>
+        <definition>const std::u32string &amp; erbsland::cterm::FastCharSet::characters</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>characters</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::characters</qualifiedname>
+        <briefdescription>
+<para>Access the canonicalized characters of this set. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The returned string is duplicate-free and sorted by code point. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="40" column="28" bodyfile="erbsland/cterm/FastCharSet.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1ad2d303bda99f73d56e0e3ad8a5a1674d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::FastCharSet::contains</definition>
+        <argsstring>(char32_t character) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::contains</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Test whether the given character is part of the set. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Unicode code point to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if <computeroutput>character</computeroutput> is contained in this set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="44" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1aa3a2773726f2df7ec0c7c001710ac220" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::FastCharSet::contains</definition>
+        <argsstring>(const Char &amp;character) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::contains</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+<para>Test whether the given terminal character is part of the set. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only single-code-point characters can match. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>character</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The terminal character to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if <computeroutput>character</computeroutput> is a single-code-point member of this set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="49" column="11" bodyfile="erbsland/cterm/FastCharSet.hpp" bodystart="49" bodyend="51"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a27a3cc2568165eb92e57b89fb69aa7ef" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FastCharSetPtr</type>
+        <definition>static FastCharSetPtr erbsland::cterm::FastCharSet::create</definition>
+        <argsstring>(std::u32string characters)</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::create</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+<para>Create a shared immutable character set for the given characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Duplicate characters are removed automatically. If the given characters match a fast-track pattern, a shared instance is returned. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>characters</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The characters to include in the set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A shared immutable character set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="59" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a395b86d940c8008ff0e212a0992d0911" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FastCharSetPtr</type>
+        <definition>static FastCharSetPtr erbsland::cterm::FastCharSet::onlySpace</definition>
+        <argsstring>()</argsstring>
+        <name>onlySpace</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::onlySpace</qualifiedname>
+        <briefdescription>
+<para>Shared set that only contains U+0020 SPACE. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="61" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1ad186178429c038a431d15dd742e18641" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FastCharSetPtr</type>
+        <definition>static FastCharSetPtr erbsland::cterm::FastCharSet::spaceAndTab</definition>
+        <argsstring>()</argsstring>
+        <name>spaceAndTab</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::spaceAndTab</qualifiedname>
+        <briefdescription>
+<para>Shared set that contains U+0020 SPACE and U+0009 TAB. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="63" column="28"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a2c720409a8ec7aee6a0b26df6e636b5e" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::FastCharSet::FastCharSet</definition>
+        <argsstring>(FastTrack fastTrack, std::u32string characters) noexcept</argsstring>
+        <name>FastCharSet</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::FastCharSet</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_fast_char_set_1a1776a394e6e93905c67effd9ced34217" kindref="member">FastTrack</ref></type>
+          <declname>fastTrack</declname>
+        </param>
+        <param>
+          <type>std::u32string</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a080b6e23ea580b27277004f93899e4dc" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::FastCharSet::FastCharSet</definition>
+        <argsstring>(std::u32string characters, Tables tables) noexcept</argsstring>
+        <name>FastCharSet</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::FastCharSet</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>characters</declname>
+        </param>
+        <param>
+          <type>Tables</type>
+          <declname>tables</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="74" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a5982fa1a681e6cef5fb1b363bda7492a" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::u32string</type>
+        <definition>static std::u32string erbsland::cterm::FastCharSet::canonicalize</definition>
+        <argsstring>(std::u32string characters)</argsstring>
+        <name>canonicalize</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::canonicalize</qualifiedname>
+        <param>
+          <type>std::u32string</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="77" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1_fast_char_set_1a5fd099687f34d0fafc3406b66b60cacc" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Tables</type>
+        <definition>static Tables erbsland::cterm::FastCharSet::createCustomTables</definition>
+        <argsstring>(const std::u32string &amp;characters)</argsstring>
+        <name>createCustomTables</name>
+        <qualifiedname>erbsland::cterm::FastCharSet::createCustomTables</qualifiedname>
+        <param>
+          <type>const std::u32string &amp;</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/FastCharSet.hpp" line="78" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Shared immutable character set with optimized lookup for common separator patterns. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Instances are intended to be created once and reused across many paragraph layouts. </para>
+    </detaileddescription>
+    <location file="erbsland/cterm/FastCharSet.hpp" line="22" column="1" bodyfile="erbsland/cterm/FastCharSet.hpp" bodystart="22" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1aa9131087b1e1245eb99ba0ff9aaeb1cb" prot="private" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>_characters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a202bfd5f80d8f4ff8a4516d695e7ac9e" prot="private" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>_lookup</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a5982fa1a681e6cef5fb1b363bda7492a" prot="private" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>canonicalize</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a845d08db48e2d9f436dba9f0c3b3afb9" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>characters</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1ad2d303bda99f73d56e0e3ad8a5a1674d" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>contains</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1aa3a2773726f2df7ec0c7c001710ac220" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>contains</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a27a3cc2568165eb92e57b89fb69aa7ef" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a5fd099687f34d0fafc3406b66b60cacc" prot="private" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>createCustomTables</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a8d2e5eef0b5729450ddb06f3513f03bf" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>FastCharSet</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a8351998b80ac382290cc57362455b1ea" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>FastCharSet</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a2c720409a8ec7aee6a0b26df6e636b5e" prot="private" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>FastCharSet</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a080b6e23ea580b27277004f93899e4dc" prot="private" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>FastCharSet</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a1776a394e6e93905c67effd9ced34217" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>FastTrack</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a395b86d940c8008ff0e212a0992d0911" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>onlySpace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1aa66c013b792729bd45c8d40803c61dac" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1a39582c9cb4ec91a6698e5aeb5044afd3" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1ad186178429c038a431d15dd742e18641" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>spaceAndTab</name></member>
+      <member refid="classerbsland_1_1cterm_1_1_fast_char_set_1aa865bbb62b3e23cd06ffb17438990773" prot="public" virt="non-virtual"><scope>erbsland::cterm::FastCharSet</scope><name>~FastCharSet</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

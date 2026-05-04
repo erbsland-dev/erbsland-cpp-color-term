@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::paragraph::Painter</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base" prot="public" virt="non-virtual">erbsland::cterm::impl::paragraph::RendererBase</basecompoundref>
+    <includes refid="_painter_8hpp" local="no">erbsland/cterm/impl/paragraph/Painter.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a067868db4356010ef881794b3bdf666e" prot="public" static="no">
+        <type>std::function&lt; <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref>(const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;, <ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref>)&gt;</type>
+        <definition>using erbsland::cterm::impl::paragraph::Painter::ColorResolver =  std::function&lt;Color(const Char &amp;, Position)&gt;</definition>
+        <argsstring></argsstring>
+        <name>ColorResolver</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::ColorResolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="18" column="5" bodyfile="erbsland/cterm/impl/paragraph/Painter.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a2299125a262347c656963294fe64927c" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_writable_buffer" kindref="compound">WritableBuffer</ref> &amp;</type>
+        <definition>WritableBuffer&amp; erbsland::cterm::impl::paragraph::Painter::_buffer</definition>
+        <argsstring></argsstring>
+        <name>_buffer</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::_buffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="53" column="20" bodyfile="erbsland/cterm/impl/paragraph/Painter.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a58aa24484288c63c4b79dd4bda5ad0e8" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+        <definition>Rectangle erbsland::cterm::impl::paragraph::Painter::_rect</definition>
+        <argsstring></argsstring>
+        <name>_rect</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::_rect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="54" column="15" bodyfile="erbsland/cterm/impl/paragraph/Painter.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1ae1b3f0003c7de67558ad5a872aaf2bb8" prot="private" static="no" mutable="no">
+        <type>const ColorResolver &amp;</type>
+        <definition>const ColorResolver&amp; erbsland::cterm::impl::paragraph::Painter::_colorResolver</definition>
+        <argsstring></argsstring>
+        <name>_colorResolver</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::_colorResolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="55" column="25" bodyfile="erbsland/cterm/impl/paragraph/Painter.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1afd79e9640c368a27b9ee6229a3900503" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::Painter::Painter</definition>
+        <argsstring>(WritableBuffer &amp;buffer, const Rectangle rect, const Alignment alignment, const LayoutResult &amp;layout, const StringView &amp;sourceText, const ParagraphOptions &amp;options, const ParagraphBackgroundMode backgroundMode, const ColorResolver &amp;colorResolver={}) noexcept</argsstring>
+        <name>Painter</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::Painter</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_writable_buffer" kindref="compound">WritableBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_rectangle" kindref="compound">Rectangle</ref></type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_alignment" kindref="compound">Alignment</ref></type>
+          <declname>alignment</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_result" kindref="compound">LayoutResult</ref> &amp;</type>
+          <declname>layout</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_string_view" kindref="compound">StringView</ref> &amp;</type>
+          <declname>sourceText</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_paragraph_options" kindref="compound">ParagraphOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <param>
+          <type>const ParagraphBackgroundMode</type>
+          <declname>backgroundMode</declname>
+        </param>
+        <param>
+          <type>const ColorResolver &amp;</type>
+          <declname>colorResolver</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="21" column="5" bodyfile="erbsland/cterm/impl/paragraph/Painter.hpp" bodystart="21" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a70e72edb7fcd51cca73c095aa3c635d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::Painter::~Painter</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Painter</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::~Painter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="36" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1adeadc974a3d80b2e2cf856293d4297f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::Painter::Painter</definition>
+        <argsstring>(const Painter &amp;)=delete</argsstring>
+        <name>Painter</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::Painter</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter" kindref="compound">Painter</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="37" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1afe41eb60dfb6be9bc4e88e2e8e14ef08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::paragraph::Painter::Painter</definition>
+        <argsstring>(Painter &amp;&amp;)=delete</argsstring>
+        <name>Painter</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::Painter</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter" kindref="compound">Painter</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a5d73c0fb72b00ab4408c35d52bda5c46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter" kindref="compound">Painter</ref> &amp;</type>
+        <definition>Painter &amp; erbsland::cterm::impl::paragraph::Painter::operator=</definition>
+        <argsstring>(const Painter &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter" kindref="compound">Painter</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a6989ee559660aae5584ef21c509bfb0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter" kindref="compound">Painter</ref> &amp;</type>
+        <definition>Painter &amp; erbsland::cterm::impl::paragraph::Painter::operator=</definition>
+        <argsstring>(Painter &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter" kindref="compound">Painter</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="40" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a335af6b6d62dcae9be5029f64ca170b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::paragraph::Painter::paint</definition>
+        <argsstring>()</argsstring>
+        <name>paint</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::paint</qualifiedname>
+        <briefdescription>
+<para>Paint the given paragraph layout into a rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="44" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a3c5ca105d2d55d1ae0316a9c04b4f0b0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &gt;</type>
+        <definition>std::optional&lt; Color &gt; erbsland::cterm::impl::paragraph::Painter::drawLine</definition>
+        <argsstring>(const LayoutLine &amp;line, Position pos)</argsstring>
+        <name>drawLine</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::drawLine</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_line" kindref="compound">LayoutLine</ref> &amp;</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="47" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1af5ba53f5a26a583205cc5d725ee2e060" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &gt;</type>
+        <definition>std::optional&lt; Color &gt; erbsland::cterm::impl::paragraph::Painter::drawFragment</definition>
+        <argsstring>(const LayoutFragment &amp;fragment, Position &amp;pos)</argsstring>
+        <name>drawFragment</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::drawFragment</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_layout_fragment" kindref="compound">LayoutFragment</ref> &amp;</type>
+          <declname>fragment</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref> &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="48" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a0f0b382ef2602d2868dac98b3810d0e7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref> &gt;</type>
+        <definition>std::optional&lt; Color &gt; erbsland::cterm::impl::paragraph::Painter::drawCharacter</definition>
+        <argsstring>(const Char &amp;character, Position &amp;pos)</argsstring>
+        <name>drawCharacter</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::drawCharacter</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1_char" kindref="compound">Char</ref> &amp;</type>
+          <declname>character</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_position" kindref="compound">Position</ref> &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="49" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1ac7d4ce771d5d28bf49f6f2cae83af6dc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::paragraph::Painter::fillBackgroundRange</definition>
+        <argsstring>(int y, int x1, int x2, Color color)</argsstring>
+        <name>fillBackgroundRange</name>
+        <qualifiedname>erbsland::cterm::impl::paragraph::Painter::fillBackgroundRange</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>x2</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_color" kindref="compound">Color</ref></type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="50" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Paint a shared paragraph layout into a writable buffer. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::impl::paragraph::Painter</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::impl::paragraph::RendererBase</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::impl::paragraph::Painter</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::impl::paragraph::RendererBase</label>
+        <link refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base"/>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/impl/paragraph/Painter.hpp" line="16" column="1" bodyfile="erbsland/cterm/impl/paragraph/Painter.hpp" bodystart="16" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a2299125a262347c656963294fe64927c" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>_buffer</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1ae1b3f0003c7de67558ad5a872aaf2bb8" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>_colorResolver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a58aa24484288c63c4b79dd4bda5ad0e8" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>_rect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1aa7aa427caee5b5daab59cfd8ec7dccb1" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>alignment</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a067868db4356010ef881794b3bdf666e" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>ColorResolver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a0f0b382ef2602d2868dac98b3810d0e7" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>drawCharacter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1af5ba53f5a26a583205cc5d725ee2e060" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>drawFragment</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a3c5ca105d2d55d1ae0316a9c04b4f0b0" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>drawLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1ac7d4ce771d5d28bf49f6f2cae83af6dc" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>fillBackgroundRange</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1a28ea64fb344c4ef467874001296545b0" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1a6b1714d953db46fe373d59f285240501" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>linePlacement</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a5d73c0fb72b00ab4408c35d52bda5c46" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a6989ee559660aae5584ef21c509bfb0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1a1566ba936cb770d5e548eb9cb5b83111" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::impl::paragraph::RendererBase::"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1ad759ff39b06d1bb2f18d46ade8f7b14c" prot="public" virt="non-virtual" ambiguityscope="erbsland::cterm::impl::paragraph::RendererBase::"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1ab3fc6dd0ee8c5a7d6b06f756fcd1d412" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>options</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a335af6b6d62dcae9be5029f64ca170b2" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>paint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1afd79e9640c368a27b9ee6229a3900503" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>Painter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1adeadc974a3d80b2e2cf856293d4297f0" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>Painter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1afe41eb60dfb6be9bc4e88e2e8e14ef08" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>Painter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1afd90e0bb496b0e0fa05ec34fc3844ab2" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>RendererBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1a08750ccc977723ad5f2f8dc7c67159fe" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>RendererBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1af701903c07c073704e021c6965228472" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>RendererBase</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1a7f36b385ec560579da05f0c84191ef50" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>sourceText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1a3d995d9b558b823214227606e2aebd74" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>usesLeftFill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1a8c0f4870179a1ece5b09706ffd08c5af" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>usesRightFill</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1aacacbf837bb78933f5b6d2469671dccd" prot="protected" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>usesRightFillForLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_painter_1a70e72edb7fcd51cca73c095aa3c635d1" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>~Painter</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1paragraph_1_1_renderer_base_1a5a9879f76a02a660faa9597415e6042d" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::paragraph::Painter</scope><name>~RendererBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

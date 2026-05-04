@@ -1,0 +1,1172 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1_event_thread" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::EventThread</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::enable_shared_from_this&lt; EventThread &gt;</basecompoundref>
+    <includes refid="_event_thread_8hpp" local="no">erbsland/cterm/ui/event/EventThread.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1_event_thread_1_1_protected_tag" prot="private">erbsland::cterm::ui::EventThread::ProtectedTag</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" prot="public" static="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>using erbsland::cterm::ui::EventThread::milliseconds =  std::chrono::milliseconds</definition>
+        <argsstring></argsstring>
+        <name>milliseconds</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::milliseconds</qualifiedname>
+        <briefdescription>
+<para>Duration type used by the event thread API. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="30" column="5" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ae1ddcc0645f1eb82cafa1b4337c4f33c" prot="public" static="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>using erbsland::cterm::ui::EventThread::InvocationFn =  std::function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>InvocationFn</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::InvocationFn</qualifiedname>
+        <briefdescription>
+<para>Callback type for invocations without stop support. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="32" column="5" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad994d18c09cbfdbb50644a02fa8d1ce4" prot="public" static="no">
+        <type>std::function&lt; void(<ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_token" kindref="compound">StopToken</ref>)&gt;</type>
+        <definition>using erbsland::cterm::ui::EventThread::StoppableInvocationFn =  std::function&lt;void(StopToken)&gt;</definition>
+        <argsstring></argsstring>
+        <name>StoppableInvocationFn</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::StoppableInvocationFn</qualifiedname>
+        <briefdescription>
+<para>Callback type for invocations that can observe cooperative stop requests. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="34" column="5" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a7b850ca7ac0fc21576d4d1edf6146436" prot="private" static="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>using erbsland::cterm::ui::EventThread::FinishedCallback =  std::function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>FinishedCallback</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::FinishedCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="110" column="5" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a23f25bcc02a0e94c2f5a4188496b04d0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Application</definition>
+        <argsstring></argsstring>
+        <name>Application</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::Application</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_application" kindref="compound">Application</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="26" column="18" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a35239839fc8e3657b5378e8a40f21910" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto erbsland::cterm::ui::EventThread::cMaximumWaitSlice</definition>
+        <argsstring></argsstring>
+        <name>cMaximumWaitSlice</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::cMaximumWaitSlice</qualifiedname>
+        <initializer>= <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" kindref="member">milliseconds</ref>{5}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="150" column="27" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="150" bodyend="150"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ae25e07541d00a6cb1c96b270909ac362" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex erbsland::cterm::ui::EventThread::_mutex</definition>
+        <argsstring></argsstring>
+        <name>_mutex</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_mutex</qualifiedname>
+        <briefdescription>
+<para>Protects the worker state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="153" column="24" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a2081b38ca074c97bea2890436e9e0c87" prot="private" static="no" mutable="no">
+        <type>std::condition_variable</type>
+        <definition>std::condition_variable erbsland::cterm::ui::EventThread::_wakeupCv</definition>
+        <argsstring></argsstring>
+        <name>_wakeupCv</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_wakeupCv</qualifiedname>
+        <briefdescription>
+<para>Wakes the worker loop. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="154" column="29" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1adf9b55e99e01e7a6af40ca60d97be84d" prot="private" static="no" mutable="no">
+        <type>std::condition_variable</type>
+        <definition>std::condition_variable erbsland::cterm::ui::EventThread::_finishedCv</definition>
+        <argsstring></argsstring>
+        <name>_finishedCv</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_finishedCv</qualifiedname>
+        <briefdescription>
+<para>Wakes waiting threads after shutdown. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="155" column="29" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ab97bf5b5af6dceee43c1ee46867d34ef" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_driver" kindref="compound">EventDriver</ref></type>
+        <definition>EventDriver erbsland::cterm::ui::EventThread::_eventDriver</definition>
+        <argsstring></argsstring>
+        <name>_eventDriver</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_eventDriver</qualifiedname>
+        <briefdescription>
+<para>The immediate event queue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="156" column="17" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aa5f45360db1039b4ef2e741cf37e3644" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_scheduler" kindref="compound">EventScheduler</ref></type>
+        <definition>EventScheduler erbsland::cterm::ui::EventThread::_eventScheduler</definition>
+        <argsstring></argsstring>
+        <name>_eventScheduler</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_eventScheduler</qualifiedname>
+        <briefdescription>
+<para>The delayed event queue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="157" column="20" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a479bbb1343c4996e86e6efba1c7d8c9b" prot="private" static="no" mutable="no">
+        <type>std::thread::id</type>
+        <definition>std::thread::id erbsland::cterm::ui::EventThread::_workerThreadId</definition>
+        <argsstring></argsstring>
+        <name>_workerThreadId</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_workerThreadId</qualifiedname>
+        <briefdescription>
+<para>The worker thread id. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="158" column="21" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a4d3f7d83374d2c3e0c3d53a0d97ffd19" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::_quitRequested</definition>
+        <argsstring></argsstring>
+        <name>_quitRequested</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_quitRequested</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>A graceful shutdown was requested. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="159" column="10" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1acdf68f84d407119fe732b7149ab7a3e6" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::_abortRequested</definition>
+        <argsstring></argsstring>
+        <name>_abortRequested</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_abortRequested</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>An immediate shutdown was requested. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="160" column="10" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a77e6ef12953ab632ae4003ed5c0bee2a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::_finished</definition>
+        <argsstring></argsstring>
+        <name>_finished</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_finished</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>The worker thread finished. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="161" column="10" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="161" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a5db7035b66783e917cc5c8b3121aae44" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::_wakeupRequested</definition>
+        <argsstring></argsstring>
+        <name>_wakeupRequested</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_wakeupRequested</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>A wakeup was requested while waiting. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="162" column="10" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="162" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a9990ede97d0094c8d1fac30d269861de" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1_stop_source" kindref="compound">StopSource</ref> &gt;</type>
+        <definition>std::optional&lt;StopSource&gt; erbsland::cterm::ui::EventThread::_activeStopSource</definition>
+        <argsstring></argsstring>
+        <name>_activeStopSource</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_activeStopSource</qualifiedname>
+        <briefdescription>
+<para>The stop source for the active callback. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="163" column="19" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a33b8e56a4bb0a1063df4638a1de61759" prot="private" static="no" mutable="no">
+        <type>std::exception_ptr</type>
+        <definition>std::exception_ptr erbsland::cterm::ui::EventThread::_failure</definition>
+        <argsstring></argsstring>
+        <name>_failure</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_failure</qualifiedname>
+        <briefdescription>
+<para>The first callback failure. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="164" column="24" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a32b1c3e34833a5d0596d65265e892b9d" prot="private" static="no" mutable="no">
+        <type>FinishedCallback</type>
+        <definition>FinishedCallback erbsland::cterm::ui::EventThread::_finishedCallback</definition>
+        <argsstring></argsstring>
+        <name>_finishedCallback</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::_finishedCallback</qualifiedname>
+        <briefdescription>
+<para>Optional callback after shutdown. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="165" column="22" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="165" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a211bee10dd1ed3118845a769290cf89e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EventThreadPtr</type>
+        <definition>static EventThreadPtr erbsland::cterm::ui::EventThread::create</definition>
+        <argsstring>()</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::create</qualifiedname>
+        <briefdescription>
+<para>Create and start a new event thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The started event thread. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="43" column="28"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a929b66515856c05fe0b19f217697df3a" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventThread::EventThread</definition>
+        <argsstring>(ProtectedTag protectedTag) noexcept</argsstring>
+        <name>EventThread</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::EventThread</qualifiedname>
+        <param>
+          <type>ProtectedTag</type>
+          <declname>protectedTag</declname>
+        </param>
+        <briefdescription>
+<para>Create an event thread instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>protectedTag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Internal construction tag. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a16413b2bb4af4d911f723644edbe7cff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventThread::~EventThread</definition>
+        <argsstring>()=default</argsstring>
+        <name>~EventThread</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::~EventThread</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="49" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a5d7622409c3b643d5c6415f444ef725d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventThread::EventThread</definition>
+        <argsstring>(const EventThread &amp;)=delete</argsstring>
+        <name>EventThread</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::EventThread</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread" kindref="compound">EventThread</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="51" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1adea03a15ef4b72fab1858d32b2fe0dc4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::EventThread::EventThread</definition>
+        <argsstring>(EventThread &amp;&amp;)=delete</argsstring>
+        <name>EventThread</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::EventThread</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread" kindref="compound">EventThread</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="52" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a63ee935cc7e4693556d5d5545cf13a9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread" kindref="compound">EventThread</ref> &amp;</type>
+        <definition>EventThread &amp; erbsland::cterm::ui::EventThread::operator=</definition>
+        <argsstring>(const EventThread &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread" kindref="compound">EventThread</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="53" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a9f9d11e660c44c5d20b75e4caf679a0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread" kindref="compound">EventThread</ref> &amp;</type>
+        <definition>EventThread &amp; erbsland::cterm::ui::EventThread::operator=</definition>
+        <argsstring>(EventThread &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread" kindref="compound">EventThread</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="54" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a1d11c70fa4189345a53be64aca4c883e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::invoke</definition>
+        <argsstring>(InvocationFn fn)</argsstring>
+        <name>invoke</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::invoke</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ae1ddcc0645f1eb82cafa1b4337c4f33c" kindref="member">InvocationFn</ref></type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Queue one invocation on the event thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the thread is already stopping or finished, this call is ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to execute. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="60" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a7a6446270901ad9c943c6c8c089575a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::invoke</definition>
+        <argsstring>(StoppableInvocationFn fn)</argsstring>
+        <name>invoke</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::invoke</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad994d18c09cbfdbb50644a02fa8d1ce4" kindref="member">StoppableInvocationFn</ref></type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Queue one stoppable invocation on the event thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the thread is already stopping or finished, this call is ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to execute. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="64" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a06bc05a34b9f468fc46eaa9568914d13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::invokeDelayed</definition>
+        <argsstring>(InvocationFn fn, milliseconds delay)</argsstring>
+        <name>invokeDelayed</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::invokeDelayed</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ae1ddcc0645f1eb82cafa1b4337c4f33c" kindref="member">InvocationFn</ref></type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" kindref="member">milliseconds</ref></type>
+          <declname>delay</declname>
+        </param>
+        <briefdescription>
+<para>Queue one invocation on the event thread after a delay. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the thread is already stopping or finished, this call is ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to execute. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The delay before execution. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="69" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aafc5043bffc60451f2b6902250937c62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::invokeDelayed</definition>
+        <argsstring>(StoppableInvocationFn fn, milliseconds delay)</argsstring>
+        <name>invokeDelayed</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::invokeDelayed</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad994d18c09cbfdbb50644a02fa8d1ce4" kindref="member">StoppableInvocationFn</ref></type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" kindref="member">milliseconds</ref></type>
+          <declname>delay</declname>
+        </param>
+        <briefdescription>
+<para>Queue one stoppable invocation on the event thread after a delay. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the thread is already stopping or finished, this call is ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to execute. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The delay before execution. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="74" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6f2b58dc113dafbc2b6f980a00a81df8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::quit</definition>
+        <argsstring>()</argsstring>
+        <name>quit</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::quit</qualifiedname>
+        <briefdescription>
+<para>Request a graceful shutdown. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Delayed work that is not yet due is cancelled immediately. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="77" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a753fc2415d63976d12fd1618f9669481" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::abort</definition>
+        <argsstring>()</argsstring>
+        <name>abort</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::abort</qualifiedname>
+        <briefdescription>
+<para>Request an immediate shutdown. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Queued work that has not started yet is discarded. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="80" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1af83680c5e495bdc91cb9d3791c2277fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::waitForQuit</definition>
+        <argsstring>(milliseconds timeout)</argsstring>
+        <name>waitForQuit</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::waitForQuit</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" kindref="member">milliseconds</ref></type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Wait for the thread to finish. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum wait time. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the thread finished before the timeout expired. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If called from the event thread itself before it finished. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any stored callback exception after the thread finished. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="86" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a7f0a464198da3a1f2faebff03f176b8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::quitAndWait</definition>
+        <argsstring>(milliseconds timeout)</argsstring>
+        <name>quitAndWait</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::quitAndWait</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" kindref="member">milliseconds</ref></type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Request graceful shutdown and wait for completion. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum wait time. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>true</computeroutput> if the thread finished before the timeout expired. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::logic_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If called from the event thread itself before it finished. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any stored callback exception after the thread finished. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="92" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a25fc06c224a5ad18e2b465d5be2b2dfe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::isRunning</definition>
+        <argsstring>() const</argsstring>
+        <name>isRunning</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::isRunning</qualifiedname>
+        <briefdescription>
+<para>Test if the worker thread is still running. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> while the event loop is active. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="95" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aeddfbb945fe51f642818a081d35c8538" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::isQuitRequested</definition>
+        <argsstring>() const</argsstring>
+        <name>isQuitRequested</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::isQuitRequested</qualifiedname>
+        <briefdescription>
+<para>Test if graceful shutdown was requested. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6f2b58dc113dafbc2b6f980a00a81df8" kindref="member">quit()</ref></computeroutput> was called. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="98" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6cf935a1771b53f884261c232a0cc380" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::isAbortRequested</definition>
+        <argsstring>() const</argsstring>
+        <name>isAbortRequested</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::isAbortRequested</qualifiedname>
+        <briefdescription>
+<para>Test if immediate shutdown was requested. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a753fc2415d63976d12fd1618f9669481" kindref="member">abort()</ref></computeroutput> was called. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="101" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a692f2bc920d5fb7786ab1e18bbe857ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::isFinished</definition>
+        <argsstring>() const</argsstring>
+        <name>isFinished</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::isFinished</qualifiedname>
+        <briefdescription>
+<para>Test if the worker thread finished. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if the worker thread ended. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="104" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6b30329820c3688357c4247751a3ee61" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::hasFailed</definition>
+        <argsstring>() const</argsstring>
+        <name>hasFailed</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::hasFailed</qualifiedname>
+        <briefdescription>
+<para>Test if the worker thread stored a failure. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if one callback threw an exception. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="107" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a35a58b90e7b886dfd7e6b5aa02ce5fe5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::start</definition>
+        <argsstring>()</argsstring>
+        <name>start</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::start</qualifiedname>
+        <briefdescription>
+<para>Start the detached worker thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="114" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a129465680cf716f1b23eac0491c4dc66" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::runWorker</definition>
+        <argsstring>()</argsstring>
+        <name>runWorker</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::runWorker</qualifiedname>
+        <briefdescription>
+<para>Run the worker loop. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="116" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1af8b9dc5675ddacf5c37f6d8ac5869f2f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::EventThread::processLoopIteration</definition>
+        <argsstring>()</argsstring>
+        <name>processLoopIteration</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::processLoopIteration</qualifiedname>
+        <briefdescription>
+<para>Process one event loop iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if the worker thread should continue running. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="119" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a544c74a0bf5c804099107a4251bc8d17" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::handleEvent</definition>
+        <argsstring>(const Event &amp;event)</argsstring>
+        <name>handleEvent</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::handleEvent</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event" kindref="compound">Event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Handle one invocation event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event to process. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="122" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1afa21de359548623be0b5d5e80664def9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::invokeImpl</definition>
+        <argsstring>(StoppableInvocationFn fn)</argsstring>
+        <name>invokeImpl</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::invokeImpl</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad994d18c09cbfdbb50644a02fa8d1ce4" kindref="member">StoppableInvocationFn</ref></type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Queue one stoppable invocation on the event driver. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to execute. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="125" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a1225fa8753fa751d0414374f82940209" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::invokeDelayedImpl</definition>
+        <argsstring>(StoppableInvocationFn fn, milliseconds delay)</argsstring>
+        <name>invokeDelayedImpl</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::invokeDelayedImpl</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad994d18c09cbfdbb50644a02fa8d1ce4" kindref="member">StoppableInvocationFn</ref></type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" kindref="member">milliseconds</ref></type>
+          <declname>delay</declname>
+        </param>
+        <briefdescription>
+<para>Queue one delayed stoppable invocation on the event scheduler. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to execute. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The delay before execution. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="129" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a3fbd595c7073fe627dcb4fb5ea7b9866" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::wakeWorker</definition>
+        <argsstring>()</argsstring>
+        <name>wakeWorker</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::wakeWorker</qualifiedname>
+        <briefdescription>
+<para>Wake the worker loop. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="135" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a3f383a5f6dccb25bc7e1cd0cbd7f2305" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" kindref="member">milliseconds</ref> &gt;</type>
+        <definition>std::optional&lt; milliseconds &gt; erbsland::cterm::ui::EventThread::nextWaitDuration</definition>
+        <argsstring>() const</argsstring>
+        <name>nextWaitDuration</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::nextWaitDuration</qualifiedname>
+        <briefdescription>
+<para>Get the next time slice to wait for. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>std::nullopt</computeroutput> for an indefinite wait, or the maximum wait duration. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="138" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ac3a3b6546eaf86586098af71df5c197d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::requestActiveStop</definition>
+        <argsstring>()</argsstring>
+        <name>requestActiveStop</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::requestActiveStop</qualifiedname>
+        <briefdescription>
+<para>Request stop on the currently running callback, if any. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="140" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad042a777e82581416c37e8a2be25a23b" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::finishWorker</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>finishWorker</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::finishWorker</qualifiedname>
+        <briefdescription>
+<para>Mark the worker thread as finished and notify waiters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="142" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ab3f514a5d84ce8dbac415e6a36e550da" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::rethrowFailureIfNeeded</definition>
+        <argsstring>() const</argsstring>
+        <name>rethrowFailureIfNeeded</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::rethrowFailureIfNeeded</qualifiedname>
+        <briefdescription>
+<para>Rethrow the stored callback exception, if any. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="144" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aa554abedc8833b416ed61adc34e38d10" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::EventThread::setFinishedCallback</definition>
+        <argsstring>(FinishedCallback callback)</argsstring>
+        <name>setFinishedCallback</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::setFinishedCallback</qualifiedname>
+        <param>
+          <type>FinishedCallback</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>Install a callback that runs after the worker thread finished. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to invoke after shutdown. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="147" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a50cf3f34c705855796e04fc050374701" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EventDataUniquePtr</type>
+        <definition>static EventDataUniquePtr erbsland::cterm::ui::EventThread::createInvocationEvent</definition>
+        <argsstring>(StoppableInvocationFn fn)</argsstring>
+        <name>createInvocationEvent</name>
+        <qualifiedname>erbsland::cterm::ui::EventThread::createInvocationEvent</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad994d18c09cbfdbb50644a02fa8d1ce4" kindref="member">StoppableInvocationFn</ref></type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Create one invocation event payload. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback to wrap. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The event payload. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/event/EventThread.hpp" line="133" column="32"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A thread that executes queued invocations via the UI event system. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>All public methods are thread-safe. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>erbsland::cterm::ui::EventThread</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; EventThread &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>erbsland::cterm::ui::EventThread</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; EventThread &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/event/EventThread.hpp" line="25" column="1" bodyfile="erbsland/cterm/ui/event/EventThread.hpp" bodystart="25" bodyend="166"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1acdf68f84d407119fe732b7149ab7a3e6" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_abortRequested</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a9990ede97d0094c8d1fac30d269861de" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_activeStopSource</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ab97bf5b5af6dceee43c1ee46867d34ef" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_eventDriver</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aa5f45360db1039b4ef2e741cf37e3644" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_eventScheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a33b8e56a4bb0a1063df4638a1de61759" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_failure</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a77e6ef12953ab632ae4003ed5c0bee2a" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_finished</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a32b1c3e34833a5d0596d65265e892b9d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_finishedCallback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1adf9b55e99e01e7a6af40ca60d97be84d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_finishedCv</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ae25e07541d00a6cb1c96b270909ac362" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_mutex</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a4d3f7d83374d2c3e0c3d53a0d97ffd19" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_quitRequested</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a2081b38ca074c97bea2890436e9e0c87" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_wakeupCv</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a5db7035b66783e917cc5c8b3121aae44" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_wakeupRequested</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a479bbb1343c4996e86e6efba1c7d8c9b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>_workerThreadId</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a753fc2415d63976d12fd1618f9669481" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>abort</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a23f25bcc02a0e94c2f5a4188496b04d0" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>Application</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a35239839fc8e3657b5378e8a40f21910" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>cMaximumWaitSlice</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a211bee10dd1ed3118845a769290cf89e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a50cf3f34c705855796e04fc050374701" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>createInvocationEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a929b66515856c05fe0b19f217697df3a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>EventThread</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a5d7622409c3b643d5c6415f444ef725d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>EventThread</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1adea03a15ef4b72fab1858d32b2fe0dc4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>EventThread</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a7b850ca7ac0fc21576d4d1edf6146436" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>FinishedCallback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad042a777e82581416c37e8a2be25a23b" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>finishWorker</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a544c74a0bf5c804099107a4251bc8d17" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>handleEvent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6b30329820c3688357c4247751a3ee61" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>hasFailed</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ae1ddcc0645f1eb82cafa1b4337c4f33c" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>InvocationFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a1d11c70fa4189345a53be64aca4c883e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>invoke</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a7a6446270901ad9c943c6c8c089575a6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>invoke</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a06bc05a34b9f468fc46eaa9568914d13" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>invokeDelayed</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aafc5043bffc60451f2b6902250937c62" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>invokeDelayed</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a1225fa8753fa751d0414374f82940209" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>invokeDelayedImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1afa21de359548623be0b5d5e80664def9" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>invokeImpl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6cf935a1771b53f884261c232a0cc380" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>isAbortRequested</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a692f2bc920d5fb7786ab1e18bbe857ad" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>isFinished</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aeddfbb945fe51f642818a081d35c8538" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>isQuitRequested</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a25fc06c224a5ad18e2b465d5be2b2dfe" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>isRunning</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a168f78dcead6b859db9b159487c13a09" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>milliseconds</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a3f383a5f6dccb25bc7e1cd0cbd7f2305" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>nextWaitDuration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a63ee935cc7e4693556d5d5545cf13a9f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a9f9d11e660c44c5d20b75e4caf679a0e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1af8b9dc5675ddacf5c37f6d8ac5869f2f" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>processLoopIteration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a6f2b58dc113dafbc2b6f980a00a81df8" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>quit</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a7f0a464198da3a1f2faebff03f176b8f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>quitAndWait</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ac3a3b6546eaf86586098af71df5c197d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>requestActiveStop</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ab3f514a5d84ce8dbac415e6a36e550da" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>rethrowFailureIfNeeded</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a129465680cf716f1b23eac0491c4dc66" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>runWorker</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1aa554abedc8833b416ed61adc34e38d10" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>setFinishedCallback</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a35a58b90e7b886dfd7e6b5aa02ce5fe5" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>start</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1ad994d18c09cbfdbb50644a02fa8d1ce4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>StoppableInvocationFn</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1af83680c5e495bdc91cb9d3791c2277fc" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>waitForQuit</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a3fbd595c7073fe627dcb4fb5ea7b9866" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>wakeWorker</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_event_thread_1a16413b2bb4af4d911f723644edbe7cff" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::EventThread</scope><name>~EventThread</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

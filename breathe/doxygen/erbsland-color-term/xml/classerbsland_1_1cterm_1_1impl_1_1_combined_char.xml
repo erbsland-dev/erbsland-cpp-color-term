@@ -1,0 +1,859 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::impl::CombinedChar</compoundname>
+    <includes refid="_combined_char_8hpp" local="no">erbsland/cterm/impl/CombinedChar.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" prot="public" static="no">
+        <type>std::array&lt; char32_t, 3 &gt;</type>
+        <definition>using erbsland::cterm::impl::CombinedChar::Storage =  std::array&lt;char32_t, 3&gt;</definition>
+        <argsstring></argsstring>
+        <name>Storage</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::Storage</qualifiedname>
+        <briefdescription>
+<para>Fixed storage for one base code point and up to two combining marks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="23" column="5" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1add2e76fc2be698466dbb2046b847b980" prot="private" static="no" mutable="no">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">Storage</ref></type>
+        <definition>Storage erbsland::cterm::impl::CombinedChar::_codePoints</definition>
+        <argsstring></argsstring>
+        <name>_codePoints</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::_codePoints</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>The stored base and combining code points. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="151" column="13" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="151" bodyend="151"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a85801a66573752b5e3c3a64b2e729bf2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::impl::CombinedChar::CombinedChar</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>CombinedChar</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::CombinedChar</qualifiedname>
+        <briefdescription>
+<para>Construct an empty character. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="27" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1af5e7ff5e114fbab8cbda881707710bf0" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr erbsland::cterm::impl::CombinedChar::CombinedChar</definition>
+        <argsstring>(const char32_t codePoint) noexcept</argsstring>
+        <name>CombinedChar</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::CombinedChar</qualifiedname>
+        <param>
+          <type>const char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Construct a character from a single code point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Unicode code point to store as the base character. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="30" column="24" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a8d92b5f38a50f623c17f4a81142dad2a" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::CombinedChar::CombinedChar</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>CombinedChar</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::CombinedChar</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Construct a character from UTF-8 text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 text for exactly one terminal character. Invalid UTF-8 bytes are replaced per byte, and unsupported text normalizes to <computeroutput>U+FFFD</computeroutput>. Empty input, control codes, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="36" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a4479bee1fea412e35e92750c70501e73" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::CombinedChar::CombinedChar</definition>
+        <argsstring>(std::u32string_view text) noexcept</argsstring>
+        <name>CombinedChar</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::CombinedChar</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Construct a character from UTF-32 text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 text for exactly one terminal character. Invalid Unicode scalar values and unsupported text normalize to <computeroutput>U+FFFD</computeroutput>. Empty input, control codes, and leading zero-width code points normalize to <computeroutput>U+FFFD</computeroutput>. Later visible code points also collapse the result to <computeroutput>U+FFFD</computeroutput>, while a third combining mark is ignored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="42" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a970398c21be3d1e797eae7aee33088c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::CombinedChar::~CombinedChar</definition>
+        <argsstring>()=default</argsstring>
+        <name>~CombinedChar</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::~CombinedChar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="45" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a5dca41081bc7e452dbd84a06f654fba8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::CombinedChar::CombinedChar</definition>
+        <argsstring>(const CombinedChar &amp;)=default</argsstring>
+        <name>CombinedChar</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::CombinedChar</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa588b2f50378f96990d4874ec9a920f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::impl::CombinedChar::CombinedChar</definition>
+        <argsstring>(CombinedChar &amp;&amp;)=default</argsstring>
+        <name>CombinedChar</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::CombinedChar</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a0165bb1b5c31bceaffc7e3e16495b1f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;</type>
+        <definition>CombinedChar &amp; erbsland::cterm::impl::CombinedChar::operator=</definition>
+        <argsstring>(const CombinedChar &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="48" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a2cdd5e4dd1d862a2781e53ee9954d4ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;</type>
+        <definition>CombinedChar &amp; erbsland::cterm::impl::CombinedChar::operator=</definition>
+        <argsstring>(CombinedChar &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="49" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a16776a6b6c071f8694181b45519d8534" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::CombinedChar::operator==</definition>
+        <argsstring>(const CombinedChar &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare two stored character sequences. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="53" column="10" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a34aa8dd58965c61e235df1ab0156b9ff" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::CombinedChar::operator!=</definition>
+        <argsstring>(const CombinedChar &amp;other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare two stored character sequences. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="55" column="10" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a6b5053d1f526c7a81471836dbe74d653" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::CombinedChar::operator==</definition>
+        <argsstring>(char32_t other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::operator==</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare against a single code point. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="57" column="11" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aefa4efee63f7fb525a35c479620fb08c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::CombinedChar::operator!=</definition>
+        <argsstring>(char32_t other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::operator!=</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Compare against a single code point. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="59" column="11" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a25b09a15c454cb42ae8efc379c1ece70" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string erbsland::cterm::impl::CombinedChar::utf8</definition>
+        <argsstring>() const</argsstring>
+        <name>utf8</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::utf8</qualifiedname>
+        <briefdescription>
+<para>Convert the stored sequence to UTF-8. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="63" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a6df968cb335685399967d3c291f161bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::u32string</type>
+        <definition>std::u32string erbsland::cterm::impl::CombinedChar::utf32</definition>
+        <argsstring>() const</argsstring>
+        <name>utf32</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::utf32</qualifiedname>
+        <briefdescription>
+<para>Convert the stored sequence to UTF-32. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="65" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a19a8bca89f28d294d467958d070487c3" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr char32_t</type>
+        <definition>constexpr char32_t erbsland::cterm::impl::CombinedChar::mainCodePoint</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>mainCodePoint</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::mainCodePoint</qualifiedname>
+        <briefdescription>
+<para>Get the leading code point. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="67" column="25" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a9c6cc800bc97ccb101fbcf5cf98e7304" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr char32_t</type>
+        <definition>constexpr char32_t erbsland::cterm::impl::CombinedChar::singleCodePoint</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>singleCodePoint</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::singleCodePoint</qualifiedname>
+        <briefdescription>
+<para>Get a single Unicode code point or zero for combined or empty characters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a fast-path method for comparing a single-code point character, without the color. <simplesect kind="return"><para>The single code point, or <computeroutput>0</computeroutput> if this character is combined or empty. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="71" column="25" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="71" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a5b28f33b7c0a58b98fa85fed8d6a9571" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">Storage</ref> &amp;</type>
+        <definition>constexpr const Storage &amp; erbsland::cterm::impl::CombinedChar::codePoints</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>codePoints</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::codePoints</qualifiedname>
+        <briefdescription>
+<para>Get the raw stored code points. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="75" column="31" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a9729d4707f5ecbcc31b94eb50845ac14" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::impl::CombinedChar::codePointCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>codePointCount</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::codePointCount</qualifiedname>
+        <briefdescription>
+<para>Get the number of stored code points. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="77" column="28" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a6ad5a5062b4797e59fbf17404db46845" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int erbsland::cterm::impl::CombinedChar::displayWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>displayWidth</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::displayWidth</qualifiedname>
+        <briefdescription>
+<para>Get the terminal display width in cells. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="79" column="10" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="79" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a63014cabd86a21b004356a90ad96cade" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t erbsland::cterm::impl::CombinedChar::byteCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>byteCount</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::byteCount</qualifiedname>
+        <briefdescription>
+<para>Get the UTF-8 byte count for this sequence. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="86" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a284fd5b4dba1320b5b84a4e030e7e8cb" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::impl::CombinedChar::appendTo</definition>
+        <argsstring>(std::string &amp;buffer) const noexcept</argsstring>
+        <name>appendTo</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::appendTo</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Append the UTF-8 representation to a buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The destination buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="89" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1ac4a1eafeda3638294bf96349171aa7bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref></type>
+        <definition>CombinedChar erbsland::cterm::impl::CombinedChar::withCombining</definition>
+        <argsstring>(char32_t codePoint, EncodingErrors encodingErrors=EncodingErrors::Replace) const</argsstring>
+        <name>withCombining</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::withCombining</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <param>
+          <type>EncodingErrors</type>
+          <declname>encodingErrors</declname>
+          <defval>EncodingErrors::Replace</defval>
+        </param>
+        <briefdescription>
+<para>Create a copy with one additional combining code point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>codePoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The combining code point to append. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>encodingErrors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How invalid combining code points are handled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The updated character. <computeroutput>EncodingErrors::Replace</computeroutput> and <computeroutput>EncodingErrors::Ignore</computeroutput> keep the original character unchanged for invalid combining code points or when the storage is already full. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>encodingErrors</computeroutput> is <computeroutput>Throw</computeroutput> and the code point is unsupported. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="99" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1abe1ad5a15eb71b817784e618b892aa3f" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::CombinedChar::isEmpty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isEmpty</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::isEmpty</qualifiedname>
+        <briefdescription>
+<para>Test if the character is empty. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="103" column="21" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1abcbe73ec2412c9ef69336e087c3ce587" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::CombinedChar::isSpacing</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isSpacing</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::isSpacing</qualifiedname>
+        <briefdescription>
+<para>Test if the character is spacing. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="105" column="11" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="105" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a57070cd3747e1d0a9563f0f52ecf6be7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::impl::CombinedChar::isControl</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isControl</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::isControl</qualifiedname>
+        <briefdescription>
+<para>Test if the leading code point is a control code. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="112" column="11" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a5dbf9e6db0595b90820e8bf39ad46532" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::impl::CombinedChar::hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hash</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::hash</qualifiedname>
+        <briefdescription>
+<para>Get a stable hash for the stored code points. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="114" column="28" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="114" bodyend="116"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a687e2ba782df88b5a2fd1da673ce7789" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &gt;</type>
+        <definition>static std::optional&lt; CombinedChar &gt; erbsland::cterm::impl::CombinedChar::fromTextUtf8</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>fromTextUtf8</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::fromTextUtf8</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Parse exactly one visible text character from UTF-8 input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Invalid or unsupported input normalizes to <computeroutput>U+FFFD</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-8 text to parse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The parsed character wrapped in <computeroutput>std::optional</computeroutput> for API compatibility. This function currently always returns a value and uses normalization instead of <computeroutput>std::nullopt</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="124" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1af79bd8fdc3474a1b960bd7c130878183" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char" kindref="compound">CombinedChar</ref> &gt;</type>
+        <definition>static std::optional&lt; CombinedChar &gt; erbsland::cterm::impl::CombinedChar::fromTextUtf32</definition>
+        <argsstring>(std::u32string_view text) noexcept</argsstring>
+        <name>fromTextUtf32</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::fromTextUtf32</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Parse exactly one visible text character from UTF-32 input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Invalid or unsupported input normalizes to <computeroutput>U+FFFD</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UTF-32 text to parse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The parsed character wrapped in <computeroutput>std::optional</computeroutput> for API compatibility. This function currently always returns a value and uses normalization instead of <computeroutput>std::nullopt</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="130" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a9d2ca319e7a6e6dfdebd5f7b2baeeabd" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool erbsland::cterm::impl::CombinedChar::isControlCode</definition>
+        <argsstring>(char32_t codePoint) noexcept</argsstring>
+        <name>isControlCode</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::isControlCode</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Test if a code point is a control code. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="132" column="28" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="154" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1ac2711902e75eb0ce8049d4b8e4de5870" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool erbsland::cterm::impl::CombinedChar::isTextCodePoint</definition>
+        <argsstring>(char32_t codePoint) noexcept</argsstring>
+        <name>isTextCodePoint</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::isTextCodePoint</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+<para>Test whether the code point is encoded as a standalone terminal character in text parsing. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="134" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a120fe510fac14662edaa1f679d1005dd" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">Storage</ref></type>
+        <definition>static Storage erbsland::cterm::impl::CombinedChar::decodeUtf8</definition>
+        <argsstring>(std::string_view text) noexcept</argsstring>
+        <name>decodeUtf8</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::decodeUtf8</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="137" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a89220a6b0bd8f66e030e7dba25c47229" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">Storage</ref></type>
+        <definition>static Storage erbsland::cterm::impl::CombinedChar::decodeUtf32</definition>
+        <argsstring>(std::u32string_view text) noexcept</argsstring>
+        <name>decodeUtf32</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::decodeUtf32</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="138" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a090a62639ba3e722be63c8970a49e6a5" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>static char32_t erbsland::cterm::impl::CombinedChar::normalizeTextCodePoint</definition>
+        <argsstring>(char32_t codePoint) noexcept</argsstring>
+        <name>normalizeTextCodePoint</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::normalizeTextCodePoint</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="139" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1adf016767042b724a932b257ee60475fc" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">Storage</ref></type>
+        <definition>static Storage erbsland::cterm::impl::CombinedChar::normalizeDecodedText</definition>
+        <argsstring>(std::u32string_view text) noexcept</argsstring>
+        <name>normalizeDecodedText</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::normalizeDecodedText</qualifiedname>
+        <param>
+          <type>std::u32string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="140" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a65b6d8f92505fe561295a060fbb9f24d" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">Storage</ref></type>
+        <definition>static Storage erbsland::cterm::impl::CombinedChar::replacementStorage</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>replacementStorage</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::replacementStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="141" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a9ce17c01114c91913c93dbfb2af87197" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void erbsland::cterm::impl::CombinedChar::normalizeDecodedTextCodePoint</definition>
+        <argsstring>(Storage &amp;result, std::size_t &amp;combiningCount, bool &amp;hasBaseCodePoint, bool &amp;mustReplace, char32_t codePoint) noexcept</argsstring>
+        <name>normalizeDecodedTextCodePoint</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::normalizeDecodedTextCodePoint</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">Storage</ref> &amp;</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>std::size_t &amp;</type>
+          <declname>combiningCount</declname>
+        </param>
+        <param>
+          <type>bool &amp;</type>
+          <declname>hasBaseCodePoint</declname>
+        </param>
+        <param>
+          <type>bool &amp;</type>
+          <declname>mustReplace</declname>
+        </param>
+        <param>
+          <type>char32_t</type>
+          <declname>codePoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="142" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1ad961cae625189905f06e86f387f5ff03" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t erbsland::cterm::impl::CombinedChar::countCodePoints</definition>
+        <argsstring>(const Storage &amp;codePoints) noexcept</argsstring>
+        <name>countCodePoints</name>
+        <qualifiedname>erbsland::cterm::impl::CombinedChar::countCodePoints</qualifiedname>
+        <param>
+          <type>const <ref refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" kindref="member">Storage</ref> &amp;</type>
+          <declname>codePoints</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/impl/CombinedChar.hpp" line="148" column="35" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="158" bodyend="165"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Internal representation of one terminal character with optional combining marks. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="erbsland/cterm/impl/CombinedChar.hpp" line="21" column="1" bodyfile="erbsland/cterm/impl/CombinedChar.hpp" bodystart="21" bodyend="152"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1add2e76fc2be698466dbb2046b847b980" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>_codePoints</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a284fd5b4dba1320b5b84a4e030e7e8cb" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>appendTo</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a63014cabd86a21b004356a90ad96cade" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>byteCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a9729d4707f5ecbcc31b94eb50845ac14" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>codePointCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a5b28f33b7c0a58b98fa85fed8d6a9571" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>codePoints</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a85801a66573752b5e3c3a64b2e729bf2" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>CombinedChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1af5e7ff5e114fbab8cbda881707710bf0" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>CombinedChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a8d92b5f38a50f623c17f4a81142dad2a" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>CombinedChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a4479bee1fea412e35e92750c70501e73" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>CombinedChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a5dca41081bc7e452dbd84a06f654fba8" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>CombinedChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa588b2f50378f96990d4874ec9a920f0" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>CombinedChar</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1ad961cae625189905f06e86f387f5ff03" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>countCodePoints</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a89220a6b0bd8f66e030e7dba25c47229" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>decodeUtf32</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a120fe510fac14662edaa1f679d1005dd" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>decodeUtf8</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a6ad5a5062b4797e59fbf17404db46845" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>displayWidth</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1af79bd8fdc3474a1b960bd7c130878183" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>fromTextUtf32</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a687e2ba782df88b5a2fd1da673ce7789" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>fromTextUtf8</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a5dbf9e6db0595b90820e8bf39ad46532" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>hash</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a57070cd3747e1d0a9563f0f52ecf6be7" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>isControl</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a9d2ca319e7a6e6dfdebd5f7b2baeeabd" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>isControlCode</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1abe1ad5a15eb71b817784e618b892aa3f" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>isEmpty</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1abcbe73ec2412c9ef69336e087c3ce587" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>isSpacing</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1ac2711902e75eb0ce8049d4b8e4de5870" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>isTextCodePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a19a8bca89f28d294d467958d070487c3" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>mainCodePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1adf016767042b724a932b257ee60475fc" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>normalizeDecodedText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a9ce17c01114c91913c93dbfb2af87197" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>normalizeDecodedTextCodePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a090a62639ba3e722be63c8970a49e6a5" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>normalizeTextCodePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a34aa8dd58965c61e235df1ab0156b9ff" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>operator!=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aefa4efee63f7fb525a35c479620fb08c" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>operator!=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a0165bb1b5c31bceaffc7e3e16495b1f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a2cdd5e4dd1d862a2781e53ee9954d4ff" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a16776a6b6c071f8694181b45519d8534" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a6b5053d1f526c7a81471836dbe74d653" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>operator==</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a65b6d8f92505fe561295a060fbb9f24d" prot="private" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>replacementStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a9c6cc800bc97ccb101fbcf5cf98e7304" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>singleCodePoint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1aa48b839e350cec092be9a493bab956a6" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>Storage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a6df968cb335685399967d3c291f161bd" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>utf32</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a25b09a15c454cb42ae8efc379c1ece70" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>utf8</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1ac4a1eafeda3638294bf96349171aa7bd" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>withCombining</name></member>
+      <member refid="classerbsland_1_1cterm_1_1impl_1_1_combined_char_1a970398c21be3d1e797eae7aee33088c8" prot="public" virt="non-virtual"><scope>erbsland::cterm::impl::CombinedChar</scope><name>~CombinedChar</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

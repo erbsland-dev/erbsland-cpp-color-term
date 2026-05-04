@@ -1,0 +1,679 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>erbsland::cterm::ui::surface::FooterLine</compoundname>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_panel" prot="public" virt="non-virtual">erbsland::cterm::ui::surface::Panel</basecompoundref>
+    <basecompoundref refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager" prot="protected" virt="non-virtual">erbsland::cterm::ui::ExclusiveSurfaceManager</basecompoundref>
+    <includes refid="_footer_line_8hpp" local="no">erbsland/cterm/ui/surface/FooterLine.hpp</includes>
+    <innerclass refid="structerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1_1_message" prot="private">erbsland::cterm::ui::surface::FooterLine::Message</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a7c594de93aa360134a1a05bfdcace00e" prot="public" static="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>using erbsland::cterm::ui::surface::FooterLine::milliseconds =  std::chrono::milliseconds</definition>
+        <argsstring></argsstring>
+        <name>milliseconds</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::milliseconds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="26" column="5" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a44c5b52246c3a0802b14871a76615783" prot="private" static="no" mutable="no">
+        <type>DynamicTextPtr</type>
+        <definition>DynamicTextPtr erbsland::cterm::ui::surface::FooterLine::_leftText</definition>
+        <argsstring></argsstring>
+        <name>_leftText</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::_leftText</qualifiedname>
+        <briefdescription>
+<para>The left-side dynamic text. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="83" column="20" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1aee079d42c5c6308d6623c71c2700c0ec" prot="private" static="no" mutable="no">
+        <type>ActionHelpPtr</type>
+        <definition>ActionHelpPtr erbsland::cterm::ui::surface::FooterLine::_actionHelp</definition>
+        <argsstring></argsstring>
+        <name>_actionHelp</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::_actionHelp</qualifiedname>
+        <briefdescription>
+<para>The right-side action help. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="84" column="19" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1af1d3f22af27b75a67c6a03ac974c832d" prot="private" static="no" mutable="no">
+        <type>LabelPtr</type>
+        <definition>LabelPtr erbsland::cterm::ui::surface::FooterLine::_messageText</definition>
+        <argsstring></argsstring>
+        <name>_messageText</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::_messageText</qualifiedname>
+        <briefdescription>
+<para>The centered message overlay. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="85" column="14" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a43b61d82c8ae1601792a8c1fc72892ba" prot="private" static="no" mutable="no">
+        <type>std::deque&lt; Message &gt;</type>
+        <definition>std::deque&lt;Message&gt; erbsland::cterm::ui::surface::FooterLine::_messageQueue</definition>
+        <argsstring></argsstring>
+        <name>_messageQueue</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::_messageQueue</qualifiedname>
+        <briefdescription>
+<para>Queued overlay messages. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="86" column="16" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a920e2fe2421b131568a57a221ad849df" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::surface::FooterLine::_hasMessage</definition>
+        <argsstring></argsstring>
+        <name>_hasMessage</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::_hasMessage</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>Whether a message is currently visible. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="87" column="10" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="variable" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1af6b2ab29ca57139637bf7efd1530d139" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t erbsland::cterm::ui::surface::FooterLine::_messageGeneration</definition>
+        <argsstring></argsstring>
+        <name>_messageGeneration</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::_messageGeneration</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Increments whenever the visible message changes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="88" column="14" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a02abdc5719d7a7c2e1cf25bf09d69817" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::surface::FooterLine::FooterLine</definition>
+        <argsstring>(ProtectedTag) noexcept</argsstring>
+        <name>FooterLine</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::FooterLine</qualifiedname>
+        <param>
+          <type><ref refid="structerbsland_1_1cterm_1_1ui_1_1_surface_1_1_protected_tag" kindref="compound">ProtectedTag</ref></type>
+        </param>
+        <briefdescription>
+<para>Create a footer line with fixed height <computeroutput>1</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="37" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a2c99010eda4430ebe1adcb09d0919d2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>erbsland::cterm::ui::surface::FooterLine::~FooterLine</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~FooterLine</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::~FooterLine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a5373e2d1042035091489ea94c2fc8617" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const DynamicTextPtr &amp;</type>
+        <definition>const DynamicTextPtr &amp; erbsland::cterm::ui::surface::FooterLine::leftText</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>leftText</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::leftText</qualifiedname>
+        <briefdescription>
+<para>Access the dynamic text surface on the left side. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="47" column="28" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a4bcdcabe22b262a6207d72bb33c6c1cd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const ActionHelpPtr &amp;</type>
+        <definition>const ActionHelpPtr &amp; erbsland::cterm::ui::surface::FooterLine::actionHelp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>actionHelp</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::actionHelp</qualifiedname>
+        <briefdescription>
+<para>Access the action-help surface on the right side. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="49" column="27" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1ae5177bed56ecd57ea820525df394c9ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::FooterLine::setText</definition>
+        <argsstring>(String text)</argsstring>
+        <name>setText</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::setText</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Replace the static/dynamic left-side text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new text. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="52" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1adda0ce48494a7c839216a54528369ee4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::FooterLine::setText</definition>
+        <argsstring>(std::string_view text)</argsstring>
+        <name>setText</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::setText</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Replace the static/dynamic left-side text from UTF-8. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new text. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1aac62214f7e4c38d3ed54618f42fcf06f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::FooterLine::displayMessage</definition>
+        <argsstring>(String message, CharStyle style={}, milliseconds timeout={})</argsstring>
+        <name>displayMessage</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::displayMessage</qualifiedname>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_string" kindref="compound">String</ref></type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>milliseconds</type>
+          <declname>timeout</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> a queued overlay message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A timeout of <computeroutput>0ms</computeroutput> keeps the message visible until <computeroutput><ref refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a500e97f5764df75d978e77f328b22839" kindref="member">hideMessage()</ref></computeroutput> is called. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message text. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message style. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The display timeout. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="61" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a03d5e45900871d045717f1ce54cded56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::FooterLine::displayMessage</definition>
+        <argsstring>(std::string_view message, CharStyle style={}, milliseconds timeout={})</argsstring>
+        <name>displayMessage</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::displayMessage</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1_char_style" kindref="compound">CharStyle</ref></type>
+          <declname>style</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>milliseconds</type>
+          <declname>timeout</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_display" kindref="compound">Display</ref> a queued overlay message from UTF-8 text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message text. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message style. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The display timeout. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a500e97f5764df75d978e77f328b22839" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::FooterLine::hideMessage</definition>
+        <argsstring>()</argsstring>
+        <name>hideMessage</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::hideMessage</qualifiedname>
+        <briefdescription>
+<para>Hide the current overlay message and show the next queued message if present. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="68" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a8e8c8776b7c051461061463d88305bd6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::FooterLine::onLayout</definition>
+        <argsstring>(LayoutScope &amp;scope) noexcept override</argsstring>
+        <name>onLayout</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::onLayout</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a931eb7df2cba0068a95ef28af0cdc2b4">onLayout</reimplements>
+        <param>
+          <type><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout_scope" kindref="compound">LayoutScope</ref> &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> direct children within this surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classerbsland_1_1cterm_1_1ui_1_1_layout" kindref="compound">Layout</ref> access for measuring and placing child surfaces. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="71" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a20e93a6c793d85e7be0fc48af1d07630" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FooterLinePtr</type>
+        <definition>static FooterLinePtr erbsland::cterm::ui::surface::FooterLine::create</definition>
+        <argsstring>()</argsstring>
+        <name>create</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::create</qualifiedname>
+        <briefdescription>
+<para>Create a footer line. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The new footer line. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="43" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1af72452218b173bc950060f7eb2054d8f" prot="protected" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool erbsland::cterm::ui::surface::FooterLine::isManagedChild</definition>
+        <argsstring>(const SurfacePtr &amp;surface) const noexcept override</argsstring>
+        <name>isManagedChild</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::isManagedChild</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1ae81b10c79d08a3cd9f686aea3475c5c8">isManagedChild</reimplements>
+        <param>
+          <type>const SurfacePtr &amp;</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Check if this manager manages the given surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> to accept a surface being added as a child, <computeroutput>false</computeroutput> to throw an exception. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="74" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a78bba96d41ec86eecd43794a9df05ed7" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::FooterLine::initializeUi</definition>
+        <argsstring>() override</argsstring>
+        <name>initializeUi</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::initializeUi</qualifiedname>
+        <reimplements refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad58106a9586de9d0ad45c4da90bdb528">initializeUi</reimplements>
+        <briefdescription>
+<para>Create and attach the owned child surfaces. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="78" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1aaa5f5862fa9dfe0602b51d703592f15d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void erbsland::cterm::ui::surface::FooterLine::showNextMessage</definition>
+        <argsstring>()</argsstring>
+        <name>showNextMessage</name>
+        <qualifiedname>erbsland::cterm::ui::surface::FooterLine::showNextMessage</qualifiedname>
+        <briefdescription>
+<para>Show the next queued message. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="80" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A themed footer line with dynamic text, action help, and queued overlay messages. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>erbsland::cterm::ui::ExclusiveSurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::SurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::surface::FooterLine</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::surface::Panel</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="8">
+        <label>erbsland::cterm::Rectangle</label>
+        <link refid="classerbsland_1_1cterm_1_1_rectangle"/>
+      </node>
+      <node id="6">
+        <label>erbsland::cterm::ui::AbstractSurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_abstract_surface_container"/>
+      </node>
+      <node id="11">
+        <label>erbsland::cterm::ui::ExclusiveSurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>erbsland::cterm::ui::LayoutMetrics</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_layout_metrics"/>
+      </node>
+      <node id="3">
+        <label>erbsland::cterm::ui::Surface</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_surfaces</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>_flags</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>_rectangle</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>_layoutMetrics</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>_themeAttributes</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>erbsland::cterm::ui::SurfaceContainer</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_container"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>erbsland::cterm::ui::SurfaceFlags</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_flags"/>
+      </node>
+      <node id="12">
+        <label>erbsland::cterm::ui::SurfaceManager</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager"/>
+      </node>
+      <node id="10">
+        <label>erbsland::cterm::ui::SurfaceThemeAttributes</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1_surface_theme_attributes"/>
+      </node>
+      <node id="1">
+        <label>erbsland::cterm::ui::surface::FooterLine</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>erbsland::cterm::ui::surface::Panel</label>
+        <link refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Surface &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="erbsland/cterm/ui/surface/FooterLine.hpp" line="24" column="1" bodyfile="erbsland/cterm/ui/surface/FooterLine.hpp" bodystart="24" bodyend="89"/>
+    <listofallmembers>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1aee079d42c5c6308d6623c71c2700c0ec" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_actionHelp</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a67caf5a45f3afcf394d04b6a811fb019" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a920e2fe2421b131568a57a221ad849df" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_hasMessage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5e98ac945443673593de934b8e5a6c82" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a44c5b52246c3a0802b14871a76615783" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_leftText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1af6b2ab29ca57139637bf7efd1530d139" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_messageGeneration</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a43b61d82c8ae1601792a8c1fc72892ba" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_messageQueue</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1af1d3f22af27b75a67c6a03ac974c832d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_messageText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9ded519b8019bf6a0379b4807842db02" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adebfc77d073fdbec83278119180d2641" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a3495ef389b8d8ba1623a671bdbe0a96f" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>_themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a4bcdcabe22b262a6207d72bb33c6c1cd" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>actionHelp</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d68b998618a891511dee33516b51268" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>actions</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac3b1bb4dd817e95e8a35841cf96b48a2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>actionsPtr</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a9822c7ffb68730aea7ba35147f48f418" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>addSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0abe7d82b04e8ab6336b069f5cc8582" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>childLayoutContext</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1abaddf3eeea6f7644b5c60ff68d2de36b" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac0523529e715f39f711cc5d96ac3c44d" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>childStorage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a20e93a6c793d85e7be0fc48af1d07630" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>create</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a4ba81826cb8d3bef2f28a65888c955d1" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>defaultLayoutData</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1ad8f8e37fbd7a5eedbe9108da062e8cbe" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>didAdd</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a615754f01e2b19eb2f3144563e44e028" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>didMove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1adaed814b6fe3fbe781b5c54cea9ba26b" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>didRemove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a02ff00d670efea42235403e0ae9948a1" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>didRemoveAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1abc5c1cbf21bc4a8efbc1312cef59e70a" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>didReplace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1aac62214f7e4c38d3ed54618f42fcf06f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>displayMessage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a03d5e45900871d045717f1ce54cded56" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>displayMessage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1ed84aa3c6e6d970d42b64c83b46573d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>editLayoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaf52c2f637ff1260e089e66443b07531" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a89aeb65892433da9fcac35928db00810" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>flags</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a02abdc5719d7a7c2e1cf25bf09d69817" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>FooterLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a500e97f5764df75d978e77f328b22839" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>hideMessage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a78bba96d41ec86eecd43794a9df05ed7" prot="private" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>initializeUi</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1acc65b744f0701f00597e4c89d6241239" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>isAncestorOrSame</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1af72452218b173bc950060f7eb2054d8f" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>isManagedChild</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_panel_1a842d10c52eca25c0dd81329a603e1ae8" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>isOpaque</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a967203e56c68deb9f759c9a6f4f8d8d4" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>isPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1afb8f08ad9f89178255cdda7cf8ac450f" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>layout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad34c082f4cb962dabd803d02895a9902" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>layoutMetrics</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a5373e2d1042035091489ea94c2fc8617" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>leftText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aaa6aedebddacbcb54d637ab7dc763317" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>localSurfaceRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a73838b048c6c2e0a456eb2776a11c459" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>localToScreen</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a487c26497f003630d51662a03a0f0d7e" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>maximumSurfaceCount</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a7c594de93aa360134a1a05bfdcace00e" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>milliseconds</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a827a5338cd11a1ac0f82d8beae54c1f3" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>nearestOpaqueSurface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a50e8ebc2c27eaa297c1b6df62176a9de" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>nearestPage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1908b92a2163d514b9dec6b29e18c13b" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>onFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ac5de18b08b9c414b0bcfe38fa801d367" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>onKeyPress</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a8e8c8776b7c051461061463d88305bd6" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>onLayout</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a970401f71d513138ee3de0e51004f759" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>onMeasure</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_panel_1a350c9e4b79ad41318edb748384370b02" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>onPaint</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1af4b08bc02b3b7e8e6cf6cf5822645470" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1db7d7cb9f30ee4c5b4242473de6fe33" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>operator=</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_panel_1a213d54ea56606cd026aa49ee12c4a614" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>Panel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a57ed2140168f6fad97796cbc98b876f4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>parent</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a1a2f2168434fcf663bccb768dfa8cba7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>rectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6691b41ed4a62a31aff2393c131ab2f5" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>requestFocus</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a484e22bcc258d2b36992ff91e6cc4c0a" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>scheduler</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c4a3823f5477de8879ebd80c043abe6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>screenToLocal</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ad190a0f521f4abb34c9a5fe9e8cdba40" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>setRectangle</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1ae5177bed56ecd57ea820525df394c9ac" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>setText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1adda0ce48494a7c839216a54528369ee4" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>setText</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1aaa5f5862fa9dfe0602b51d703592f15d" prot="private" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>showNextMessage</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae70aa6dae2d6df94fbb2f6f6b5226daa" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a5cb74a7a34e1b983c592e6f7f6aeca96" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d00cfd2476c5d44de898c00f29fc90a" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a4623853a42b6ae3683027cb10e3fef65" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1aea9e1412522664de3fbfa01435f9bacf" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ae95b294bf3fad17469266a725bb69ff7" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a6c6f25c89ecf460580ae03db5573b9ba" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1ade89cf3d7830659bfa54ed703bdc3d14" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>surfaces</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1add04ac6c18ebbcb1dc835a4da635d58d" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1adb6bc351b2e411bfdc50f26867d31df9" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>themeAttributes</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a02f5c3f2df31839ad57c7dd3e442bdc6" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>themeContextFrom</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a0cff8325b685e12268b2a8136d6c47f2" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>visibleScreenRect</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1afa3f0f6082390ec37b2fa4ed19b097e3" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>willAdd</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a7e08863737407cfcb3b23e24b4cd8a1c" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>willMove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a692b97eb3fcba6c91b983bd591cce8fe" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>willRemove</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a259e149dc9b54ae46f1fd065b97e00c9" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>willRemoveAll</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a075e2787e5827538a7f165950ede0a06" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>willReplace</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_exclusive_surface_manager_1a49c857a32a87962433332ba98de92638" prot="protected" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>~ExclusiveSurfaceManager</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_footer_line_1a2c99010eda4430ebe1adcb09d0919d2b" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>~FooterLine</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1surface_1_1_panel_1afc5d2d14cfc71552f193d44c07ea9e48" prot="public" virt="non-virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>~Panel</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_1a8d29bb69da75140fb230c6edd80bd9e7" prot="public" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>~Surface</name></member>
+      <member refid="classerbsland_1_1cterm_1_1ui_1_1_surface_manager_1a90eedce321946f6d07da935234975e06" prot="protected" virt="virtual"><scope>erbsland::cterm::ui::surface::FooterLine</scope><name>~SurfaceManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
